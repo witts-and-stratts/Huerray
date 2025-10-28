@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import './typography.css';
+
+.footer {
+  @apply bg-burgundy-100 w-full md:grid md:grid-cols-12 px-4 md:px-10 py-8 md:py-20 max-md:-mt-10 md:fixed bottom-0 gap-8 md:min-h-200 pt-30 content-end;
+}
+
+/* CTA Section */
+.footer__cta {
+  @apply md:col-span-5 max-md:mb-12;
+}
+
+.footer__cta-title {
+  @apply text-h3 font-heading mb-8;
+}
+
+/* Links Section */
+.footer__links {
+  @apply flex flex-col gap-12 md:col-span-6 md:col-start-7;
+}
+
+.footer__links-grid {
+  @apply grid md:grid-cols-3 gap-8 text-sm;
+}
+
+.footer__links-column {
+  @apply flex flex-col;
+}
+
+.footer__links-title {
+  @apply text-deep-maroon font-bold mb-1 text-sm md:text-body;
+}
+
+.footer__links-list {
+  @apply flex flex-col gap-2;
+}
+
+.footer__links a {
+  @apply text-deep-maroon hover:text-bright-fuchsia transition-colors text-sm md:text-body;
+}
+
+/* Signup Section */
+.footer__signup-title {
+  @apply text-h6 text-bright-fuchsia mb-4 font-medium;
+}
+
+.footer__signup-form {
+  @apply relative;
+}
+
+.footer__signup-input {
+  @apply bg-white px-6 py-6 text-lg rounded-4xl text-deep-maroon;
+}
+
+.footer__signup-button {
+  @apply absolute right-3 top-1/2 -translate-y-1/2 pointer-events-auto z-10 mr-2;
+}
+
+.footer__signup-button .icon {
+  @apply text-lg text-dark-burgundy;
+}
+
+/* Divider */
+.footer__divider {
+  @apply border-t border-burgundy-200 col-span-12 my-4;
+}
+
+/* Bottom Section */
+.footer__bottom {
+  @apply col-span-12 grid md:grid-cols-12;
+}
+
+.footer__bottom-info {
+  @apply flex md:items-center gap-6 col-span-6 max-md:mt-8 max-md:flex-col;
+}
+
+.footer__logo {
+  @apply max-w-[120px] md:max-w-[180px] h-auto;
+}
+
+.footer__copyright {
+  @apply text-deep-maroon text-sm;
+}
+
+/* Bottom Right Section */
+.footer__bottom-right {
+  @apply flex items-start md:items-center gap-8 col-span-6 md:justify-end max-md:mt-4 max-md:order-first max-md:flex-col;
+}
+
+/* Social Links */
+.footer__social {
+  @apply flex gap-8;
+}
+
+.footer__social-link {
+  @apply hover:opacity-70 transition-opacity;
+}
+
+.footer__social .icon {
+  @apply text-lg md:text-2xl text-dark-burgundy;
+}

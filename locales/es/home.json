@@ -1,0 +1,54 @@
+{
+  "tagline": "Huerray une a creadores y marcas para crear el contenido perfecto para redes sociales, comercio electrónico, anuncios y más",
+  "hero": {
+    "title": "Contenido de Video UGC Auténtico que Convierte",
+    "subtitle": "Colabora con creadores reales verificados que crean videos irresistibles para TikTok, Reels y Anuncios",
+    "description": "Sin suscripciones. Sin costos de plataforma.\nSolo UGC que genera ventas"
+  },
+  "howItWorks": {
+    "step1": {
+      "title": "Encuentra y conéctate con creadores que se ajusten a tu marca",
+      "description": "Personaliza y publica tu briefing, adaptando los detalles como duración, formato y edición de video en el proceso"
+    },
+    "step2": {
+      "title": "Encarga fotos y videos atractivos y originales",
+      "description": "Recibe solicitudes de los mejores creadores. Selecciona tus creadores preferidos según criterios que se ajusten a tu contenido de marca o requisitos de campaña"
+    },
+    "step3": {
+      "title": "Envía y recibe comentarios",
+      "description": "Utiliza la función de comunicación integrada para intercambiar comentarios con tus creadores, hacerles preguntas sobre sus entregables, hacer ajustes donde sea necesario o refinar tus requisitos"
+    },
+    "step4": {
+      "title": "100% derechos de licencia para todo el contenido creado",
+      "description": "Usa tu contenido generado. Tu UGC se entregará en 7 días. Luego puedes comenzar a implementarlo en tu campaña"
+    }
+  },
+  "contentObjectives": {
+    "title": "Contenido para cada objetivo",
+    "subtitle": "Los creadores producen contenido de alta calidad todo el tiempo, desde lo-fi hasta hi-fi. Los creadores tienen versatilidad y adaptan su producción para coincidir con tus objetivos",
+    "categories": {
+      "product_shots": "Fotos de Productos",
+      "testimonial_videos": "Videos de Testimonios",
+      "unboxing_videos": "Videos de Unboxing",
+      "lifestyle_shots": "Fotos de Estilo de Vida",
+      "food_and_beverage": "Comida y Bebidas",
+      "travel_and_hospitality": "Viajes y Hospitalidad"
+    }
+  },
+  "creatorVideos": {
+    "title": "Conecta con creadores experimentados"
+  },
+  "testimonial": {
+    "company": "Intelligencia Media",
+    "quote": "Publicamos inmediatamente las primeras variaciones de anuncios con la estructura recomendada de Billo, no editamos nada y ya funcionó mejor que nuestros anuncios anteriores. Nuestro ROAS mejoró y los costos de adquisición disminuyeron. Pudimos escalar más gracias a eso.",
+    "author": "Jorens, CEO"
+  },
+  "creatorsSection": {
+    "label": "Creadores",
+    "title": "Gana dinero haciendo lo que amas",
+    "description": "Encuentra colaboraciones que te emocionen. Trabaja con marcas que se ajusten a tu estilo de contenido, con autonomía especial sobre cada campaña que produces"
+  },
+  "platformLogos": {
+    "title": "Disponible para usar en"
+  }
+}

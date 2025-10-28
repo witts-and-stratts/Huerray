@@ -1,0 +1,110 @@
+/* ===== FONT FACE DECLARATIONS ===== */
+@font-face {
+  font-family: 'Right Grotesk';
+  src: url('/fonts/RightGrotesk-SpatialBlack.woff2') format('woff2'),
+    url('/fonts/RightGrotesk-SpatialBlack.woff') format('woff'),
+    url('/fonts/RightGrotesk-SpatialBlack.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Right Grotesk';
+  src: url('/fonts/RightGrotesk-SpatialBlackItalic.woff2') format('woff2'),
+    url('/fonts/RightGrotesk-SpatialBlackItalic.woff') format('woff'),
+    url('/fonts/RightGrotesk-SpatialBlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('/fonts/ABCDiatype-Light.woff2') format('woff2'),
+    url('/fonts/ABCDiatype-Light.woff') format('woff'),
+    url('/fonts/ABCDiatype-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('/fonts/ABCDiatype-Regular.woff2') format('woff2'),
+    url('/fonts/ABCDiatype-Regular.woff') format('woff'),
+    url('/fonts/ABCDiatype-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Diatype';
+  src: url('/fonts/ABCDiatype-Medium.woff2') format('woff2'),
+    url('/fonts/ABCDiatype-Medium.woff') format('woff'),
+    url('/fonts/ABCDiatype-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Icomoon fonts */
+@font-face {
+  font-family: 'icomoon';
+  src: url('/fonts/icomoon.eot?f6xsfh');
+  src: url('/fonts/icomoon.eot?f6xsfh#iefix') format('embedded-opentype'),
+    url('/fonts/icomoon.ttf?f6xsfh') format('truetype'),
+    url('/fonts/icomoon.woff?f6xsfh') format('woff'),
+    url('/fonts/icomoon.svg?f6xsfh#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-user:before {
+  content: '\e909';
+}
+.icon-right-arrow:before {
+  content: '\e904';
+}
+.icon-chevron-thin-up:before {
+  content: '\e905';
+}
+.icon-chevron-thin-right:before {
+  content: '\e906';
+}
+.icon-chevron-thin-left:before {
+  content: '\e907';
+}
+.icon-chevron-thin-down:before {
+  content: '\e908';
+}
+.icon-facebook:before {
+  content: '\e900';
+}
+.icon-tiktok:before {
+  content: '\e903';
+}
+.icon-instagram:before {
+  content: '\e901';
+}
+.icon-x:before {
+  content: '\e902';
+}

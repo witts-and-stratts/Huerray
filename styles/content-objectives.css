@@ -1,0 +1,40 @@
+@import 'tailwindcss';
+
+.content-objectives {
+  @apply px-4 md:px-10 py-20 bg-white;
+}
+
+.content-objectives__title {
+  @apply text-center mb-4 text-h3 font-heading;
+}
+
+.content-objectives__subtitle {
+  @apply text-h5 text-center md:max-w-3/4 mx-auto mb-8 text-slate-700;
+}
+
+/* Category Pills */
+.content-objectives__pills {
+  @apply flex flex-wrap gap-4 justify-center mb-16 max-w-[1000px] mx-auto;
+}
+
+.content-objectives__pill {
+  @apply cursor-pointer transition-all;
+}
+
+.content-objectives__pill--active {
+  @apply bg-burgundy-100 border-burgundy-200;
+}
+
+/* Grid */
+.content-objectives__grid {
+  @apply grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4 lg:gap-8 mx-auto justify-center;
+}
+
+
+.content-objectives__item--desktop-only {
+  @apply hidden lg:block;
+}
+
+.content-objectives__item--mobile-desktop {
+  @apply md:hidden lg:block;
+}

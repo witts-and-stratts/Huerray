@@ -1,0 +1,54 @@
+{
+  "tagline": "Huerray bringt Creators und Marken zusammen, um den perfekten Content für soziale Medien, E-Commerce, Anzeigen und mehr zu erstellen",
+  "hero": {
+    "title": "Authentische UGC-Video-Inhalte, die konvertieren",
+    "subtitle": "Arbeiten Sie mit echten geprüften Creators zusammen, die scroll-stopping Videos für TikTok, Reels und Ads erstellen",
+    "description": "Keine Abonnements. Keine Plattformkosten.\nNur UGC, das Verkäufe steigert"
+  },
+  "howItWorks": {
+    "step1": {
+      "title": "Finden Sie Creators, die zu Ihrer Marke passen, und vernetzen Sie sich",
+      "description": "Passen Sie Ihr Briefing an und veröffentlichen Sie es, indem Sie dabei Details wie Länge, Format und Videobearbeitung anpassen"
+    },
+    "step2": {
+      "title": "Beauftragen Sie attraktive, originelle Fotos & Videos",
+      "description": "Erhalten Sie Bewerbungen von Top-Creators. Wählen Sie Ihre bevorzugten Creators nach Kriterien aus, die zu Ihrem Markeninhalt oder Ihren Kampagnenanforderungen passen"
+    },
+    "step3": {
+      "title": "Senden & erhalten Sie Feedback",
+      "description": "Nutzen Sie die integrierte Kommunikationsfunktion, um Feedback mit Ihren Creators auszutauschen, Fragen zu ihren Lieferungen zu stellen, bei Bedarf Anpassungen vorzunehmen oder Ihre Anforderungen zu verfeinern"
+    },
+    "step4": {
+      "title": "100% Lizenzrechte für alle erstellten Inhalte",
+      "description": "Verwenden Sie Ihre generierten Inhalte. Ihr UGC wird innerhalb von 7 Tagen geliefert. Dann können Sie es in Ihre Kampagne implementieren"
+    }
+  },
+  "contentObjectives": {
+    "title": "Content für jedes Ziel",
+    "subtitle": "Creators produzieren ständig hochwertige Inhalte – von lo-fi bis hi-fi. Creators haben Vielseitigkeit und passen ihre Produktion an Ihre Ziele an",
+    "categories": {
+      "product_shots": "Produktfotos",
+      "testimonial_videos": "Testimonial-Videos",
+      "unboxing_videos": "Unboxing-Videos",
+      "lifestyle_shots": "Lifestyle-Fotos",
+      "food_and_beverage": "Essen & Getränke",
+      "travel_and_hospitality": "Reisen & Gastgewerbe"
+    }
+  },
+  "creatorVideos": {
+    "title": "Verbinden Sie sich mit erfahrenen Creators"
+  },
+  "testimonial": {
+    "company": "Intelligencia Media",
+    "quote": "Wir haben sofort die ersten Anzeigenvariationen mit Billos empfohlener Struktur veröffentlicht, wir haben nichts bearbeitet und es funktionierte bereits besser als unsere vorherigen Anzeigen. Unser ROAS war besser und die Akquisitionskosten sanken. Wir konnten dadurch größer skalieren.",
+    "author": "Jorens, CEO"
+  },
+  "creatorsSection": {
+    "label": "Creators",
+    "title": "Werden Sie bezahlt für das, was Sie lieben",
+    "description": "Finden Sie Kooperationen, die Sie begeistern. Arbeiten Sie mit Marken zusammen, die zu Ihrem Content-Stil passen, mit besonderer Autonomie über jede Kampagne, die Sie produzieren"
+  },
+  "platformLogos": {
+    "title": "Verfügbar zur Nutzung auf"
+  }
+}

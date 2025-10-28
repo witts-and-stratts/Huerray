@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+
+.hero {
+  @apply min-h-screen bg-violet-100 max-md:pb-10;
+}
+
+.hero__section {
+  @apply relative md:h-screen overflow-y-clip md:-mt-[6.8rem];
+}
+
+.hero__container {
+  @apply relative px-4 lg:px-10 grid md:grid-cols-12;
+}
+
+/* Content */
+.hero__content {
+  @apply md:col-span-6 max-md:mb-20;
+}
+
+.hero__title {
+  @apply mb-2 pt-10 md:pt-60 text-h1;
+}
+
+.hero__subtitle {
+  @apply mb-6 text-h4 font-regular text-deep-maroon subpixel-antialiased;
+}
+
+.hero__description {
+  @apply mb-4;
+}
+
+/* Image Grid */
+.hero__image-grid {
+  @apply md:col-span-5 md:col-start-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 h-full overflow-clip relative -mx-4 md:mx-0;
+}
+
+.hero__carousel {
+  @apply relative w-full md:h-full overflow-hidden;
+}
+
+.hero__carousel img {
+  @apply md:w-full h-[285px] object-cover rounded-[40px];
+}
+
+.hero__carousel-track {
+  @apply flex md:flex-col gap-4 md:gap-8;
+}
+
+.hero__carousel-track img {
+  @apply shrink-0;
+}
+
+/* Gradient Overlays */
+.hero__gradient-top {
+  @apply hidden md:block absolute top-0 left-0 right-0 h-[300px] pointer-events-none z-10 bg-linear-to-b from-violet-100 to-violet-100/0 from-30%;
+}
+
+.hero__gradient-bottom {
+  @apply hidden md:block absolute bottom-0 left-0 right-0 h-[200px] pointer-events-none z-10;
+  background: linear-gradient(to top, #f4dff6 0%, rgba(244, 223, 246, 0) 100%);
+}
+
+/* Scroll Animations */
+.hero__carousel-track--scroll-1 {
+  animation: scroll-horizontal 20s linear infinite;
+}
+
+.hero__carousel-track--scroll-2 {
+  animation: scroll-horizontal-reverse 20s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .hero__carousel-track--scroll-1 {
+    animation: scroll-up 60s linear infinite;
+  }
+
+  .hero__carousel-track--scroll-2 {
+    animation: scroll-down 60s linear infinite;
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "tagline": "Huerray brings creators and brands together to create the perfect content for social media, ecommerce, ads and more",
+  "hero": {
+    "title": "Authentic UGC Video Content that Converts",
+    "subtitle": "Collaborate with real vetted creators who make scroll-stopping videos for TikTok, Reels, and Ads",
+    "description": "No Subscriptions. No Platform costs.\nJust UGC that drives sales"
+  },
+  "howItWorks": {
+    "step1": {
+      "title": "Find & connect with creators who fit your brand",
+      "description": "Customise and post your brief, tailoring the details such as length, format and video editing along the way"
+    },
+    "step2": {
+      "title": "Commission attractive, original photos & videos",
+      "description": "Receive applications from top creators. Select your preferred creators according to criteria that fits your brand content or campaign requirements"
+    },
+    "step3": {
+      "title": "Send & receive feedback",
+      "description": "Use the in-built communication feature to exchange feedback with your creators, ask them questions about their deliverables, make adjustments where needed or refine your requirements"
+    },
+    "step4": {
+      "title": "100% licensing rights to all content created",
+      "description": "Use your generated content. Your UGC will be delivered within 7 days. You can then start implementing it into your campaign"
+    }
+  },
+  "contentObjectives": {
+    "title": "Content for every objective",
+    "subtitle": "Creators produce high-quality content all the time—from lo-fi to hi-fi. Creators have range, and adapt their production to match your goals",
+    "categories": {
+      "product_shots": "Product Shots",
+      "testimonial_videos": "Testimonial Videos",
+      "unboxing_videos": "Unboxing Videos",
+      "lifestyle_shots": "Lifestyle Shots",
+      "food_and_beverage": "Food & Beverage",
+      "travel_and_hospitality": "Travel & Hospitality"
+    }
+  },
+  "creatorVideos": {
+    "title": "Match with experienced creators"
+  },
+  "testimonial": {
+    "company": "Intelligencia Media",
+    "quote": "We immediately published the first ad variations with Billo's recommended structure, we didn't edit anything, and it already worked better than our previous ads. Our ROAS was better and acquisition costs went down. We were able to scale larger because of that.",
+    "author": "Jorens, CEO"
+  },
+  "creatorsSection": {
+    "label": "Creators",
+    "title": "Get paid to do what you love",
+    "description": "Find collaborations that gets you excited. Work with brands that fit your content style, with special autonomy over every campaign your produce"
+  },
+  "platformLogos": {
+    "title": "Available to be used on"
+  }
+}

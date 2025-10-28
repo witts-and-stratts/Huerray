@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+.creator-videos {
+  @apply py-20 bg-white mt-10;
+}
+
+.creator-videos__title {
+  @apply text-center mb-16 px-4 md:px-10 text-h3 font-heading pb-16;
+}
+
+/* Scroller */
+.creator-videos__scroller {
+  @apply relative overflow-hidden w-full;
+}
+
+.creator-videos__track {
+  @apply flex gap-16;
+}
+
+/* Video Card */
+.creator-videos__card {
+  @apply w-[279px] h-[342px] rounded-[128px] overflow-hidden shrink-0;
+}
+
+.creator-videos__video {
+  @apply w-full h-full object-cover;
+  will-change: auto;
+}

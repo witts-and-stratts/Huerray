@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+@import '../styles/spacing.css';
+@import '../styles/colors.css';
+@import '../styles/typography.css';
+@import '../styles/header.css';
+@import '../styles/footer.css';
+@import '../styles/button.css';
+@import '../styles/hero.css';
+@import '../styles/creator-videos.css';
+@import '../styles/content-objectives.css';
+@import '../styles/creators-section.css';
+@import '../styles/language-selector.css';
+@import '../styles/user-menu.css';
+
+body {
+  background: var(--base-white);
+  color: var(--slate-800);
+  font-family: var(--body-font-family);
+  @apply md:pb-180;
+}
+
+.body-content {
+  @apply relative w-full bg-white z-1 pb-10;
+}
+
+/* Hero scroll animations */
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(-50%));
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(calc(-50%));
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 60s linear infinite;
+}
+
+.animate-scroll-down {
+  animation: scroll-down 60s linear infinite;
+}
+
+.hero-carousel {
+  img {
+    @apply md:w-full h-[285px] object-cover rounded-[40px];
+  }
+}
+
+/* Horizontal scroll animation */
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50%));
+  }
+}
+
+@keyframes scroll-horizontal-reverse {
+  0% {
+    transform: translateX(calc(-50%));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Hero responsive scroll animations */
+.hero-scroll-1 {
+  animation: scroll-horizontal 20s linear infinite;
+}
+
+.hero-scroll-2 {
+  animation: scroll-horizontal-reverse 20s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .hero-scroll-1 {
+    animation: scroll-up 60s linear infinite;
+  }
+
+  .hero-scroll-2 {
+    animation: scroll-down 60s linear infinite;
+  }
+}
+
+.animate-scroll-horizontal {
+  animation: scroll-horizontal 10s linear infinite;
+}
+
+.animate-scroll-horizontal-reverse {
+  animation: scroll-horizontal-reverse 10s linear infinite;
+}
+
+/* Platform logos scroll animation */
+.animate-scroll-platforms {
+  animation: scroll-horizontal 15s linear infinite;
+}

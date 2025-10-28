@@ -1,0 +1,30 @@
+{
+  "cta": {
+    "title": "¿Listo para tu primer vídeo UGC?",
+    "button": "Registrarse ahora"
+  },
+  "sections": {
+    "services": "Servicios",
+    "faq": "Preguntas frecuentes",
+    "platform": "Plataforma"
+  },
+  "links": {
+    "prices": "Precios",
+    "creditPacks": "Paquetes de créditos",
+    "managedService": "Servicio gestionado",
+    "faqBrands": "FAQ Marcas",
+    "faqCreators": "FAQ Creadores",
+    "caseStudies": "Casos de estudio",
+    "helpCenter": "Centro de ayuda",
+    "aboutHuerray": "Acerca de Huerray",
+    "siteNotice": "Aviso legal",
+    "privacyPolicy": "Política de privacidad",
+    "tcCreators": "T&C – Creadores",
+    "tcBrands": "T&C – Marcas"
+  },
+  "signup": {
+    "title": "Suscríbete para recibir actualizaciones",
+    "placeholder": "Correo electrónico"
+  },
+  "copyright": "© 2025 Huerray. Todos los derechos reservados"
+}

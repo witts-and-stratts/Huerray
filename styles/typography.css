@@ -1,0 +1,190 @@
+@import 'tailwindcss';
+@import './fonts.css';
+
+@theme {
+  /* ===== TYPOGRAPHY TOKENS ===== */
+  /* Font Weights */
+  --font-weight-light: 100;
+  --font-weight-regular: 300;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  --font-weight-black: 800;
+
+  /* Font Families */
+  --font-primary: 'Aeonik', sans-serif;
+  --font-secondary: 'ABC Diatype', sans-serif;
+  --font-tertiary: 'ABC Diatype Mono', monospace;
+  --font-heading: 'Right Grotesk', sans-serif;
+  --font-body: var(--font-family-secondary);
+
+  /* Font Styles*/
+  /* --font-style-regular: regular;
+  --font-style-medium: medium;
+  --font-style-bold: bold;
+  --font-style-black: black;
+  --font-style-spatial-black: 'Spatial black';
+  --font-style-wide-medium: 'Wide Medium'; */
+
+  /* Font Sizes - Mobile First */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px mobile */
+  --text-xl: 1.25rem; /* 20px mobile */
+  --text-2xl: 1.5rem; /* 24px mobile */
+  --text-3xl: 1.875rem; /* 30px mobile */
+  --text-4xl: 2.25rem; /* 36px mobile */
+  --text-5xl: 2.5rem; /* 40px mobile */
+  --text-6xl: 3rem; /* 48px mobile */
+  --text-7xl: 3.5rem; /* 56px mobile */
+  --text-8xl: 4rem; /* 64px mobile */
+  --text-9xl: 4.5rem; /* 72px mobile */
+}
+
+@theme inline {
+  --text-h1: var(--text-5xl);
+  --text-h1--font-weight: var(--font-style-spatial-black);
+  --text-h1--line-height: var(--line-height-tight);
+  --text-h1--font-family: var(--font-heading);
+  --text-h1--letter-spacing: -1px;
+
+  --text-h2: var(--text-4xl);
+  --text-h2--line-height: var(--line-height-snug);
+
+  --text-h3: var(--text-3xl);
+  --text-h3--line-height: var(--line-height-snug);
+
+  --text-h4: var(--text-2xl);
+  --text-h4--font-weight: var(--font-regular);
+  --text-h4--line-height: var(--line-height-snug);
+
+  --text-h5: var(--text-xl);
+  --text-h5--font-weight: var(--font-regular);
+  --text-h5--line-height: var(--line-height-normal);
+
+  --text-h6: var(--text-lg);
+  --text-h6--font-family: var(--font-secondary);
+  --text-h6--line-height: var(--line-height-normal);
+
+  --text-body: var(--text-base);
+  --text-body--line-height: var(--line-height-relaxed);
+
+  --text-caption: var(--text-sm);
+  --text-caption--line-height: var(--line-height-normal);
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text bg-linear-to-r from-dark-burgundy to-orange text-transparent;
+  }
+}
+
+@layer base {
+  /* h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  } */
+  h1,
+  .h1 {
+    @apply text-h1 font-heading;
+    font-weight: 900;
+  }
+
+  h2,
+  .h2 {
+    @apply text-h2;
+  }
+
+  h3,
+  .h3 {
+    @apply text-h3 font-heading;
+    font-weight: 900;
+  }
+
+  h4,
+  .h4 {
+    @apply text-h4 font-secondary;
+    font-weight: 300;
+  }
+
+  h5,
+  .h5 {
+    @apply text-h5 font-secondary;
+  }
+
+  h6,
+  .h6 {
+    @apply text-h6 font-secondary;
+  }
+
+  p,
+  .body,
+  .text-m {
+    @apply text-body text-slate-800 font-secondary;
+    font-weight: 400;
+  }
+
+  figcaption,
+  .caption,
+  .text-s {
+    @apply text-caption text-slate-600 font-secondary;
+    font-weight: 400;
+  }
+}
+
+:root {
+  /* ===== TYPOGRAPHY ===== */
+
+  /* Line Heights */
+  --line-height-tight: 1;
+  --line-height-snug: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  /* Font Styles */
+  --font-style-spatial-black: 900;
+  --font-style-bold: 700;
+  --font-style-medium: 500;
+  --font-style-regular: 400;
+  --font-style-light: 300;
+}
+
+/* Responsive Font Sizes - Tablet */
+@media (min-width: 768px) {
+  :root {
+    --text-lg: 1.25rem; /* 20px tablet */
+    --text-xl: 1.5rem; /* 24px tablet */
+    --text-2xl: 1.75rem; /* 28px tablet */
+    --text-3xl: 2.25rem; /* 36px tablet */
+    --text-4xl: 2.75rem; /* 44px tablet */
+    --text-5xl: 3.25rem; /* 52px tablet */
+    --text-6xl: 3.75rem; /* 60px tablet */
+    --text-7xl: 4.25rem; /* 68px tablet */
+    --text-8xl: 4.75rem; /* 76px tablet */
+    --text-9xl: 5.5rem; /* 88px tablet */
+  }
+}
+
+/* Responsive Font Sizes - Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --text-lg: 1.25rem; /* 20px desktop */
+    --text-xl: 1.5rem; /* 24px desktop */
+    --text-2xl: 2rem; /* 32px desktop */
+    --text-3xl: 2.5rem; /* 40px desktop */
+    --text-4xl: 3rem; /* 48px desktop */
+    --text-5xl: 3.5rem; /* 56px desktop */
+    --text-6xl: 4rem; /* 64px desktop */
+    --text-7xl: 4.5rem; /* 72px desktop */
+    --text-8xl: 5rem; /* 80px desktop */
+    --text-9xl: 6rem; /* 96px desktop */
+  }
+}
+@theme inline {
+  --font-sans: var(--font-body);
+}

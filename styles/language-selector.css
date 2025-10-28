@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+
+.language-selector {
+  @apply flex items-center justify-between gap-2 text-deep-maroon hover:text-bright-fuchsia transition-colors cursor-pointer border-none outline-none bg-white py-1 px-2 rounded-2xl;
+}
+
+.footer .language-selector {
+  @apply min-w-50;
+}
+
+.language-selector__flag {
+  @apply shrink-0;
+}
+
+.language-selector__label {
+  @apply text-sm font-medium;
+}
+
+.language-selector__chevron {
+  @apply text-deep-maroon transition-transform text-xs;
+}
+
+.language-selector[data-state='open'] .language-selector__chevron {
+  @apply rotate-180;
+}
+
+/* Dropdown */
+.language-selector__dropdown {
+  @apply w-[200px] p-0 border-0 shadow-lg;
+}
+
+.language-selector__dropdown-item {
+  @apply hover:bg-burgundy-100/60;
+}
+
+.language-selector__option {
+  @apply flex items-center gap-2;
+}

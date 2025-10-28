@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+@import './typography.css';
+
+.header {
+  @apply z-50 relative flex items-center justify-between px-4 py-4 md:px-10 md:py-8;
+
+  .logo {
+    @apply object-contain max-md:w-[140px];
+  }
+
+  .header__nav {
+    @apply hidden md:flex items-center gap-11 text-base font-medium;
+
+    a {
+      @apply text-dark-burgundy hover:opacity-80 transition-opacity duration-200;
+    }
+  }
+
+  .header__actions {
+    @apply flex items-center gap-4;
+  }
+
+  .header__language {
+    @apply block;
+  }
+}

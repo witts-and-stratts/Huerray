@@ -1,0 +1,132 @@
+.button {
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 shrink-0 outline-none relative rounded-full bg-white text-deep-maroon;
+}
+
+.button svg {
+  @apply pointer-events-none shrink-0;
+}
+
+.button svg:not([class*='size-']) {
+  @apply size-4;
+}
+
+.button:focus-visible {
+  @apply ring-[3px] ring-ring/50 border-ring;
+}
+
+.button[aria-invalid='true'] {
+  @apply ring-destructive/20 border-destructive;
+}
+
+.button[aria-invalid='true']:where(.dark, .dark *) {
+  @apply ring-destructive/40;
+}
+
+.button--hero::after {
+  @apply content-[''] absolute -bottom-2 -left-[1%] right-0 top-auto h-full w-[102%] border-b-[3px] border-l-[3px] border-r-[3px] border-transparent pointer-events-none rounded-full;
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 1),
+      #d94b91,
+      rgba(255, 255, 255, 1)
+    )
+    border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.button:active {
+  @apply translate-y-2;
+}
+
+/* Variant: Default */
+.button--default {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+/* Variant: Destructive */
+.button--destructive {
+  @apply bg-destructive text-white hover:bg-destructive/90;
+}
+
+.button--destructive:focus-visible {
+  @apply ring-destructive/20;
+}
+
+.button--destructive:where(.dark, .dark *) {
+  @apply bg-destructive/60;
+}
+
+.button--destructive:focus-visible:where(.dark, .dark *) {
+  @apply ring-destructive/40;
+}
+
+/* Variant: Outline */
+.button--outline {
+  @apply border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground;
+}
+
+.button--outline:where(.dark, .dark *) {
+  @apply bg-input/30 border-input hover:bg-input/50;
+}
+
+/* Variant: Secondary */
+.button--secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+}
+
+/* Variant: Ghost */
+.button--ghost {
+  @apply hover:bg-accent hover:text-accent-foreground;
+}
+
+.button--ghost:where(.dark, .dark *) {
+  @apply hover:bg-accent/50;
+}
+
+/* Variant: Link */
+.button--link {
+  @apply text-primary underline-offset-4 hover:underline;
+}
+
+/* Variant: Hero */
+.button--hero {
+  @apply bg-white text-deep-maroon hover:bg-white/90 font-secondary font-normal text-lg shadow-[0_3px_0_0_rgba(0,0,0,0.1)];
+}
+
+/* Size: Default */
+.button--size-default {
+  @apply h-9 px-4 py-2 has-[>svg]:px-3;
+}
+
+/* Size: Small */
+.button--size-sm {
+  @apply h-8 gap-1.5 px-3 has-[>svg]:px-2.5;
+}
+
+/* Size: Large */
+.button--size-lg {
+  @apply h-10 px-6 has-[>svg]:px-4;
+}
+
+/* Size: Extra Large */
+.button--size-xl {
+  @apply h-11 px-8 text-lg min-w-[200px];
+}
+
+/* Size: Icon */
+.button--size-icon {
+  @apply size-9;
+}
+
+/* Size: Icon Small */
+.button--size-icon-sm {
+  @apply size-8;
+}
+
+/* Size: Icon Large */
+.button--size-icon-lg {
+  @apply size-10;
+}

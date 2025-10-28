@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "forCreators": "Für Creator",
+    "forBrands": "Für Marken",
+    "pricing": "Preise",
+    "resources": "Ressourcen"
+  },
+  "userMenu": {
+    "login": "Anmelden",
+    "signup": "Registrieren"
+  }
+}

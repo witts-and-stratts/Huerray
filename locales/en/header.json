@@ -1,0 +1,12 @@
+{
+  "nav": {
+    "forCreators": "For Creators",
+    "forBrands": "For Brands",
+    "pricing": "Pricing",
+    "resources": "Resources"
+  },
+  "userMenu": {
+    "login": "Login",
+    "signup": "Signup"
+  }
+}
