@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 const videos = [
@@ -31,6 +31,7 @@ export function CreatorVideos() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [isInView, setIsInView] = useState(false);
+  const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -51,8 +52,19 @@ export function CreatorVideos() {
     };
   }, []);
 
+  const setLoadedVideosAsync = useEffectEvent(
+    (newLoadedVideos: Set<number>) => {
+      setLoadedVideos(newLoadedVideos);
+    }
+  );
+
   useEffect(() => {
     if (isInView) {
+      // Load videos when section comes into view
+      setLoadedVideosAsync(
+        new Set(Array.from({ length: videos.length * 3 }, (_, i) => i))
+      );
+
       requestAnimationFrame(() => {
         // Stagger video playback to reduce load
         videoRefs.current.forEach((video, index) => {
@@ -80,9 +92,7 @@ export function CreatorVideos() {
 
   return (
     <section ref={sectionRef} className='creator-videos'>
-      <h2 className='creator-videos__title gradient-text'>
-        {t('title')}
-      </h2>
+      <h2 className='creator-videos__title gradient-text'>{t('title')}</h2>
 
       {/* Horizontal Infinite Scroller */}
       <div className='creator-videos__scroller'>
@@ -100,11 +110,15 @@ export function CreatorVideos() {
                   loop
                   muted
                   playsInline
-                  preload='auto'
+                  preload='none'
                   className='creator-videos__video'
                 >
-                  <source src={video.webm} type='video/webm' />
-                  <source src={video.mp4} type='video/mp4' />
+                  {loadedVideos.has(index) && (
+                    <>
+                      <source src={video.webm} type='video/webm' />
+                      <source src={video.mp4} type='video/mp4' />
+                    </>
+                  )}
                 </video>
               </div>
             ))}

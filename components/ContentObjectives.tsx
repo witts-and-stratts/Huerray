@@ -2,9 +2,9 @@
 
 import { AnimatedSlide } from '@/components/AnimatedSlide';
 import { Badge } from '@/components/ui/badge';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { Activity, useEffect, useEffectEvent, useRef, useState } from 'react';
 
 // Content grid images organized by category
 const imagesByCategory: Record<string, string[]> = {
@@ -178,6 +178,12 @@ export function ContentObjectives() {
     Record<string, number[]>
   >(initializeCategoryImages);
 
+  const setSlides = useEffectEvent(
+    (randomizedImages: Record<string, number[]>) => {
+      setCategorySlides(randomizedImages);
+    }
+  );
+
   // Randomize images on client mount only
   useEffect(() => {
     const maxSlides = 10;
@@ -190,7 +196,7 @@ export function ContentObjectives() {
       );
     });
 
-    setCategorySlides(randomizedImages);
+    setSlides(randomizedImages);
   }, []);
 
   const animatingCount = useRef(0);
@@ -198,9 +204,6 @@ export function ContentObjectives() {
 
   // Track which slides have swiped in the current round
   const swipedInRound = useRef<Set<number>>(new Set());
-
-  const currentImages = imagesByCategory[selectedCategory];
-  const currentSlides = categorySlides[selectedCategory];
 
   const canAnimate = () => {
     return animatingCount.current < maxConcurrentAnimations;
@@ -214,18 +217,19 @@ export function ContentObjectives() {
     animatingCount.current -= 1;
   };
 
-  const handleImageChange = (index: number) => {
+  const handleImageChange = (index: number, category: string) => {
     if (!canAnimate()) return;
 
     // Check if this slide has already swiped in this round
     if (swipedInRound.current.has(index)) return;
 
     setCategorySlides((prev) => {
-      const currentCategorySlides = prev[selectedCategory];
+      const currentCategorySlides = prev[category];
+      const categoryImages = imagesByCategory[category];
 
       // Filter out images already displayed in the grid
       const availableImages = Array.from(
-        { length: currentImages.length },
+        { length: categoryImages.length },
         (_, i) => i
       ).filter((imgIndex) => !currentCategorySlides.includes(imgIndex));
 
@@ -248,7 +252,7 @@ export function ContentObjectives() {
 
       return {
         ...prev,
-        [selectedCategory]: newSlides,
+        [category]: newSlides,
       };
     });
   };
@@ -283,39 +287,51 @@ export function ContentObjectives() {
         ))}
       </div>
 
-      {/* Single grid with responsive visibility */}
-      <AnimatePresence mode='popLayout'>
-        <motion.div
-          key={selectedCategory}
-          variants={gridVariants}
-          initial='hidden'
-          animate='show'
-          exit='hidden'
-          className='content-objectives__grid'
-        >
-          {currentSlides.map((imageIndex, i) => (
+      {/* Grid with all categories loaded but hidden/visible based on selection */}
+      {contentCategories.map((category) => {
+        const slides = categorySlides[category];
+        const images = imagesByCategory[category];
+
+        return (
+          <Activity
+            key={category}
+            mode={selectedCategory === category ? 'visible' : 'hidden'}
+          >
             <motion.div
-              key={`${selectedCategory}-${i}`}
-              variants={itemVariants}
-              className={`content-objectives__item ${
-                i >= 9
-                  ? 'content-objectives__item--desktop-only'
-                  : i === 8
-                  ? 'content-objectives__item--mobile-desktop'
-                  : ''
-              }`}
+              variants={gridVariants}
+              initial='hidden'
+              animate='show'
+              className='content-objectives__grid'
             >
-              <AnimatedSlide
-                images={currentImages}
-                index={i}
-                currentImageIndex={imageIndex}
-                onImageChange={() => handleImageChange(i)}
-                onAnimationEnd={endAnimation}
-              />
+              {slides.map((imageIndex, i) => (
+                <motion.div
+                  key={`${category}-${i}`}
+                  variants={itemVariants}
+                  className={`content-objectives__item ${
+                    i >= 9
+                      ? 'content-objectives__item--desktop-only'
+                      : i === 8
+                      ? 'content-objectives__item--mobile-desktop'
+                      : ''
+                  }`}
+                >
+                  <AnimatedSlide
+                    images={images}
+                    index={i}
+                    currentImageIndex={imageIndex}
+                    onImageChange={() => {
+                      if (category === selectedCategory) {
+                        handleImageChange(i, category);
+                      }
+                    }}
+                    onAnimationEnd={endAnimation}
+                  />
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+          </Activity>
+        );
+      })}
     </section>
   );
 }

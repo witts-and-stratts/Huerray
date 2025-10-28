@@ -94,6 +94,7 @@ export function AnimatedSlide({
               width={229}
               height={285}
               className='w-full h-full object-cover'
+              priority={false}
             />
           </div>
         </motion.div>

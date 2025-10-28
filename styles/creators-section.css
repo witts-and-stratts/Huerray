@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .creators-section {
-  @apply px-4 md:px-10 py-8 md:py-20 text-white bg-orange rounded-4xl md:rounded-[60px] relative z-100 -mt-10;
+  @apply px-4 md:px-10 py-8 md:py-20 text-white bg-orange rounded-4xl md:rounded-[60px] relative z-100 -mt-10 overflow-x-hidden;
 }
 
 .creators-section__container {
