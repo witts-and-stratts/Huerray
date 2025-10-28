@@ -28,6 +28,7 @@ export function Header() {
         src={imgLogo}
         width={160}
         height={45}
+        priority={true}
       />
 
       {/* Desktop Navigation */}
