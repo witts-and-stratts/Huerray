@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "title": "Soyez payé pour faire ce que vous aimez",
+    "subtitle": "Travaillez avec des marques et de vraies entreprises. Commencez à gagner de l'argent pour ce que vous aimez.",
+    "buttonText": "Devenir Créateur",
+    "paymentMade": "Paiement effectué"
+  },
+  "categories": {
+    "fashion": "Mode",
+    "lifestyle": "Style de vie",
+    "beauty": "Beauté",
+    "fitness": "Fitness",
+    "food": "Cuisine",
+    "travel": "Voyage",
+    "tech": "Technologie",
+    "healthWellness": "Santé & Bien-être",
+    "sport": "Sport",
+    "skincare": "Soins de la peau"
+  },
+  "collaborations": {
+    "pill": "Créateurs",
+    "title": "Des collaborations qui correspondent à votre style",
+    "description": "Correspondance de marques basée sur votre style et vos préférences de contenu."
+  },
+  "director": {
+    "pill": "Liberté créative",
+    "title": "Soyez le directeur créatif",
+    "description": "Gagnez en autonomie créative sur vos créations. Soyez au centre du spectacle."
+  },
+  "manage": {
+    "pill": "Support",
+    "title": "Vous créez. Nous gérons tout le reste",
+    "description": "Notre équipe et notre technologie aident à gérer l'expérience avec les marques, afin que vous puissiez vous concentrer sur la création du meilleur contenu."
+  },
+  "paid": {
+    "pill": "Paiements",
+    "title": "Soyez payé à temps, à chaque fois",
+    "description": "Vous recevez des paiements automatiques lorsque les clients approuvent votre création. Sans poser de questions."
+  },
+  "testimonial": {
+    "quote": "Huerray défend ses créateurs...en s'assurant que nous sommes payés équitablement et en nous donnant constamment des opportunités de marques qui correspondent à notre style de vie",
+    "author": "Baron McHennie – @baron_mchennie"
+  },
+  "cta": {
+    "subtitle": "Rejoignez des milliers de créateurs",
+    "title": "Soyez payé pour faire ce que vous aimez"
+  },
+  "benefits": {
+    "heading": "Pourquoi les créateurs aiment Huerray",
+    "authentic": {
+      "title": "Restez authentique",
+      "description": "Créez du contenu qui résonne avec votre public tout en vous associant à des marques qui correspondent à vos valeurs."
+    },
+    "collaboration": {
+      "title": "Collaborez avec les meilleures marques",
+      "description": "Soyez associé à des marques de premier plan à la recherche de partenariats authentiques avec des créateurs."
+    },
+    "monetize": {
+      "title": "Monétisez votre influence",
+      "description": "Transformez votre créativité en revenu avec une rémunération équitable pour chaque collaboration."
+    },
+    "creative": {
+      "title": "Gardez le contrôle créatif",
+      "description": "Maintenez votre voix et votre style uniques tout en créant du contenu sponsorisé."
+    },
+    "support": {
+      "title": "Obtenez du soutien à chaque étape",
+      "description": "Notre équipe est là pour vous aider à réussir avec des conseils et des ressources."
+    },
+    "grow": {
+      "title": "Développez votre audience",
+      "description": "Élargissez votre portée et construisez votre marque personnelle grâce à des partenariats avec des marques."
+    }
+  },
+  "faq": {
+    "heading": "FAQs",
+    "q1": {
+      "question": "Comment puis-je commencer en tant que créateur?",
+      "answer": "Inscrivez-vous simplement, complétez votre profil et commencez à parcourir les collaborations de marque disponibles. Une fois approuvé, vous pouvez commencer à créer du contenu."
+    },
+    "q2": {
+      "question": "Quelles sont les exigences pour rejoindre?",
+      "answer": "Nous accueillons les créateurs de toutes tailles. Vous avez besoin d'une présence active sur les réseaux sociaux et de la capacité de créer du contenu de qualité qui engage votre public."
+    },
+    "q3": {
+      "question": "Combien puis-je gagner?",
+      "answer": "Les gains varient en fonction de la taille de votre public, des taux d'engagement et de la portée de chaque collaboration. Vous verrez les détails de rémunération à l'avance pour chaque opportunité."
+    },
+    "q4": {
+      "question": "Comment fonctionnent les paiements?",
+      "answer": "Vous recevrez le paiement une fois que votre contenu est approuvé par la marque et répond aux exigences de la campagne. Les paiements sont traités en toute sécurité via notre plateforme."
+    },
+    "q5": {
+      "question": "Puis-je choisir avec quelles marques travailler?",
+      "answer": "Absolument! Vous avez le contrôle total sur les collaborations que vous acceptez. Ne travaillez qu'avec des marques qui correspondent à vos valeurs et à votre public."
+    },
+    "q6": {
+      "question": "Quel type de contenu dois-je créer?",
+      "answer": "Les types de contenu varient selon la campagne, mais incluent généralement des photos, des vidéos, des reels ou des stories. Chaque brief fournit des exigences détaillées et des directives créatives."
+    },
+    "q7": {
+      "question": "Combien de temps faut-il pour être payé?",
+      "answer": "Les paiements sont traités automatiquement une fois que la marque approuve votre contenu. Vous recevrez généralement le paiement dans les 3 à 5 jours ouvrables."
+    },
+    "q8": {
+      "question": "Puis-je travailler avec plusieurs marques en même temps?",
+      "answer": "Oui! Vous pouvez collaborer avec autant de marques que vous le souhaitez, tant qu'il n'y a pas de clauses d'exclusivité dans vos accords."
+    },
+    "q9": {
+      "question": "Que se passe-t-il si je ne respecte pas une date limite de campagne?",
+      "answer": "Nous comprenons que les choses arrivent. Communiquez avec nous tôt si vous avez besoin d'une prolongation. Cependant, manquer des délais sans préavis peut affecter les opportunités futures."
+    },
+    "q10": {
+      "question": "Ai-je besoin d'équipement professionnel?",
+      "answer": "Pas nécessairement. De nombreux créateurs à succès utilisent des smartphones. Ce qui compte le plus, c'est de créer un contenu authentique et engageant qui résonne avec votre public."
+    },
+    "q11": {
+      "question": "Comment les correspondances de marques sont-elles déterminées?",
+      "answer": "Notre algorithme de correspondance prend en compte votre style de contenu, les données démographiques de votre public, les taux d'engagement et les préférences de marque pour suggérer les meilleures collaborations pour vous."
+    }
+  }
+}

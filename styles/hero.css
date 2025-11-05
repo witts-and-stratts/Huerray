@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .hero {
-  @apply min-h-screen bg-violet-100 max-md:pb-10;
+  @apply min-h-screen bg-violet-100 max-md:pb-10 rounded-b-[3rem];
 }
 
 .hero__section {

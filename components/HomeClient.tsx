@@ -15,7 +15,7 @@ export function HomeClient() {
 
   return (
     <>
-      <section className='body-content'>
+      <main className='body-content'>
         <Hero />
 
         <section>
@@ -40,7 +40,7 @@ export function HomeClient() {
         <Testimonial />
 
         {/* Creators Section */}
-      </section>
+      </main>
       {/* Footer */}
       <CreatorsSection />
       <Footer />

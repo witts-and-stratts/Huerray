@@ -23,4 +23,32 @@
   .header__language {
     @apply block;
   }
+
+  .header__hamburger {
+    @apply md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center;
+  }
+
+  .header__hamburger-line {
+    @apply block w-6 h-0.5 bg-deep-maroon transition-transform;
+  }
+
+  .header__hamburger-line--top-open {
+    @apply rotate-45 translate-y-2;
+  }
+
+  .header__hamburger-line--middle-open {
+    @apply opacity-0;
+  }
+
+  .header__hamburger-line--bottom-open {
+    @apply -rotate-45 -translate-y-2;
+  }
+
+  .header__mobile-nav {
+    @apply absolute top-full left-0 right-0 bg-violet-100 md:hidden flex flex-col px-4 gap-4 border-t border-deep-maroon/10 shadow-2xl shadow-dark-burgundy/30 overflow-hidden;
+  }
+
+  .header__mobile-nav-link {
+    @apply text-deep-maroon font-secondary text-lg py-2 first-of-type:mt-4 last-of-type:mb-4;
+  }
 }

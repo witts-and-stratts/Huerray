@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+
+.creators-hero {
+  @apply min-h-auto h-auto;
+}
+
+.creators-hero__section {
+  @apply relative h-auto md:pb-[8rem] max-md:-mt-20 max-md:pt-20;
+}
+
+.creators-hero__images {
+  @apply relative md:col-span-5 md:col-start-8 md:mt-50;
+}
+
+.creators-hero__decoration {
+  @apply absolute right-0 w-[130%] max-md:max-w-none md:w-2/3 lg:w-1/2 pointer-events-none z-10 max-md:-bottom-30 md:top-[5%] mix-blend-hard-light select-none;
+}
+
+.creators-hero__main-image {
+  @apply rounded-[6rem] lg:rounded-[8rem] w-9/10 aspect-9/8 overflow-hidden;
+
+  img {
+    @apply w-full h-full object-cover;
+  }
+}
+
+.creators-hero__secondary-image {
+  @apply absolute right-0 top-4/8 -translate-y-16 aspect-6/5 rounded-2xl shadow-lg overflow-hidden z-20;
+
+  img {
+    @apply w-full h-full object-cover;
+  }
+}
+
+.creators-hero__teaser-card {
+  @apply absolute right-0 bottom-4xl max-md:scale-80 max-md:translate-x-6 max-md:translate-y-6;
+}
+
+.creators-hero__payment-card {
+  @apply bg-white relative p-3 pr-8 rounded-3xl w-3/5 -ml-4 md:-ml-10 flex gap-3 -mt-6 max-md:scale-95 z-20;
+}
+
+.creators-hero__payment-avatar {
+  @apply h-full;
+
+  img {
+    @apply rounded-lg w-full aspect-square object-cover;
+  }
+}
+
+.creators-hero__payment-content {
+  @apply -mt-1 w-full flex flex-col gap-2 pb-8;
+}
+
+.creators-hero__payment-bar,
+.creators-hero__payment-bar--short {
+  @apply w-full bg-slate-200 h-2 rounded-full;
+}
+
+.creators-hero__payment-bar--short {
+  @apply w-1/2;
+}
+
+.creators-hero__side-image {
+  @apply absolute top-0 right-0 w-[60%] h-[60%] rounded-[30px] object-cover border-4 border-white shadow-lg;
+}

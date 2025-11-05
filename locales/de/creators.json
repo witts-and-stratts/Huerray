@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "title": "Werden Sie bezahlt für das, was Sie lieben",
+    "subtitle": "Arbeiten Sie mit Marken und echten Unternehmen. Beginnen Sie, Geld zu verdienen für das, was Sie lieben.",
+    "buttonText": "Creator werden",
+    "paymentMade": "Zahlung erfolgt"
+  },
+  "categories": {
+    "fashion": "Mode",
+    "lifestyle": "Lifestyle",
+    "beauty": "Beauty",
+    "fitness": "Fitness",
+    "food": "Essen",
+    "travel": "Reisen",
+    "tech": "Technik",
+    "healthWellness": "Gesundheit & Wellness",
+    "sport": "Sport",
+    "skincare": "Hautpflege"
+  },
+  "collaborations": {
+    "pill": "Creators",
+    "title": "Kooperationen, die zu Ihrem Stil passen",
+    "description": "Marken-Matching basierend auf Ihrem Stil und Ihren Content-Vorlieben."
+  },
+  "director": {
+    "pill": "Kreative Freiheit",
+    "title": "Seien Sie der kreative Direktor",
+    "description": "Gewinnen Sie kreative Autonomie über Ihre Kreationen. Seien Sie im Mittelpunkt der Show."
+  },
+  "manage": {
+    "pill": "Unterstützung",
+    "title": "Sie erstellen. Wir verwalten alles andere",
+    "description": "Unser Team und unsere Technologie helfen, die Erfahrung mit Marken zu verwalten, damit Sie sich auf die Erstellung der besten Inhalte konzentrieren können."
+  },
+  "paid": {
+    "pill": "Zahlungen",
+    "title": "Werden Sie pünktlich bezahlt, jedes Mal",
+    "description": "Sie erhalten automatische Zahlungen, wenn die Kunden Ihre Kreation genehmigen. Keine Fragen gestellt."
+  },
+  "testimonial": {
+    "quote": "Huerray setzt sich für ihre Creators ein...indem sie sicherstellen, dass wir fair bezahlt werden, bis hin dazu, uns ständig Marken-Möglichkeiten zu geben, die zu unserem Lifestyle passen",
+    "author": "Baron McHennie – @baron_mchennie"
+  },
+  "cta": {
+    "subtitle": "Treten Sie Tausenden von Creators bei",
+    "title": "Werden Sie bezahlt für das, was Sie lieben"
+  },
+  "benefits": {
+    "heading": "Warum Creators Huerray lieben",
+    "authentic": {
+      "title": "Bleiben Sie authentisch",
+      "description": "Erstellen Sie Inhalte, die bei Ihrem Publikum ankommen, während Sie mit Marken zusammenarbeiten, die mit Ihren Werten übereinstimmen."
+    },
+    "collaboration": {
+      "title": "Zusammenarbeit mit Top-Marken",
+      "description": "Werden Sie mit führenden Marken zusammengebracht, die nach echten Creator-Partnerschaften suchen."
+    },
+    "monetize": {
+      "title": "Monetarisieren Sie Ihren Einfluss",
+      "description": "Verwandeln Sie Ihre Kreativität in Einkommen mit fairer Vergütung für jede Zusammenarbeit."
+    },
+    "creative": {
+      "title": "Behalten Sie die kreative Kontrolle",
+      "description": "Behalten Sie Ihre einzigartige Stimme und Ihren Stil bei, während Sie gesponserte Inhalte erstellen."
+    },
+    "support": {
+      "title": "Erhalten Sie Unterstützung bei jedem Schritt",
+      "description": "Unser Team ist hier, um Ihnen mit Anleitung und Ressourcen zum Erfolg zu verhelfen."
+    },
+    "grow": {
+      "title": "Vergrößern Sie Ihr Publikum",
+      "description": "Erweitern Sie Ihre Reichweite und bauen Sie Ihre persönliche Marke durch Markenpartnerschaften auf."
+    }
+  },
+  "faq": {
+    "heading": "FAQs",
+    "q1": {
+      "question": "Wie fange ich als Creator an?",
+      "answer": "Melden Sie sich einfach an, vervollständigen Sie Ihr Profil und stöbern Sie in verfügbaren Markenkooperationen. Nach der Genehmigung können Sie mit der Erstellung von Inhalten beginnen."
+    },
+    "q2": {
+      "question": "Was sind die Anforderungen für die Teilnahme?",
+      "answer": "Wir begrüßen Creators aller Größen. Sie benötigen eine aktive Social-Media-Präsenz und die Fähigkeit, qualitativ hochwertige Inhalte zu erstellen, die Ihr Publikum ansprechen."
+    },
+    "q3": {
+      "question": "Wie viel kann ich verdienen?",
+      "answer": "Die Einnahmen variieren je nach Ihrer Publikumsgröße, Engagement-Raten und dem Umfang jeder Zusammenarbeit. Sie sehen die Vergütungsdetails im Voraus für jede Gelegenheit."
+    },
+    "q4": {
+      "question": "Wie funktionieren Zahlungen?",
+      "answer": "Sie erhalten die Zahlung, sobald Ihr Inhalt von der Marke genehmigt wurde und die Kampagnenanforderungen erfüllt. Zahlungen werden sicher über unsere Plattform abgewickelt."
+    },
+    "q5": {
+      "question": "Kann ich wählen, mit welchen Marken ich arbeiten möchte?",
+      "answer": "Absolut! Sie haben volle Kontrolle darüber, welche Kooperationen Sie annehmen. Arbeiten Sie nur mit Marken, die mit Ihren Werten und Ihrem Publikum übereinstimmen."
+    },
+    "q6": {
+      "question": "Welche Art von Inhalten muss ich erstellen?",
+      "answer": "Die Inhaltstypen variieren je nach Kampagne, umfassen aber typischerweise Fotos, Videos, Reels oder Stories. Jedes Briefing bietet detaillierte Anforderungen und kreative Richtlinien."
+    },
+    "q7": {
+      "question": "Wie lange dauert es, bis ich bezahlt werde?",
+      "answer": "Zahlungen werden automatisch verarbeitet, sobald die Marke Ihren Inhalt genehmigt. Sie erhalten die Zahlung in der Regel innerhalb von 3-5 Werktagen."
+    },
+    "q8": {
+      "question": "Kann ich gleichzeitig mit mehreren Marken arbeiten?",
+      "answer": "Ja! Sie können mit so vielen Marken zusammenarbeiten, wie Sie möchten, solange es keine Exklusivitätsklauseln in Ihren Vereinbarungen gibt."
+    },
+    "q9": {
+      "question": "Was passiert, wenn ich eine Kampagnenfrist nicht einhalte?",
+      "answer": "Wir verstehen, dass Dinge passieren. Kommunizieren Sie frühzeitig mit uns, wenn Sie eine Verlängerung benötigen. Das Verpassen von Fristen ohne Benachrichtigung kann jedoch zukünftige Möglichkeiten beeinträchtigen."
+    },
+    "q10": {
+      "question": "Benötige ich professionelle Ausrüstung?",
+      "answer": "Nicht unbedingt. Viele erfolgreiche Creators verwenden Smartphones. Am wichtigsten ist die Erstellung von authentischen, ansprechenden Inhalten, die bei Ihrem Publikum ankommen."
+    },
+    "q11": {
+      "question": "Wie werden Marken-Matches bestimmt?",
+      "answer": "Unser Matching-Algorithmus berücksichtigt Ihren Content-Stil, Ihre Zielgruppen-Demografie, Engagement-Raten und Markenpräferenzen, um die besten Kooperationen für Sie vorzuschlagen."
+    }
+  }
+}

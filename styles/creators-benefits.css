@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+.creators-benefits {
+  @apply py-20 md:py-32 px-4 lg:px-10;
+}
+
+.creators-benefits__container {
+  @apply max-w-7xl mx-auto;
+}
+
+.creators-benefits__heading {
+  @apply text-h2 text-center mb-16;
+}
+
+.creators-benefits__grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.creators-benefits__card {
+  @apply bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300;
+}
+
+.creators-benefits__card-image {
+  @apply relative w-full h-64 overflow-hidden;
+}
+
+.creators-benefits__image {
+  @apply w-full h-full object-cover;
+}
+
+.creators-benefits__card-content {
+  @apply p-6 md:p-8;
+}
+
+.creators-benefits__card-title {
+  @apply text-h4 text-deep-maroon mb-3;
+}
+
+.creators-benefits__card-description {
+  @apply text-slate-700 leading-relaxed;
+}

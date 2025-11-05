@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+
+.creators-testimonial {
+  @apply py-20 md:py-32 px-4 lg:px-10;
+  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+}
+
+.creators-testimonial__container {
+  @apply max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center;
+}
+
+.creators-testimonial__content {
+  @apply space-y-6 text-white;
+}
+
+.creators-testimonial__quote {
+  @apply text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed not-italic;
+}
+
+.creators-testimonial__author {
+  @apply block text-lg md:text-xl font-normal not-italic opacity-90;
+}
+
+.creators-testimonial__image {
+  @apply relative overflow-hidden shadow-2xl;
+  aspect-ratio: 545 / 571;
+  border-radius: 128px;
+}
+
+.creators-testimonial__img {
+  @apply w-full h-full object-cover;
+}

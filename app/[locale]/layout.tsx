@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -21,7 +21,14 @@ export const metadata: Metadata = {
   description: 'Connect with authentic creators for impactful UGC',
 };
 
-export const dynamic = 'force-dynamic';
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ff0000' },
+    { media: '(prefers-color-scheme: dark)', color: '#ff0000' },
+  ],
+};
+
+// export const dynamic = 'force-dynamic';
 
 export default async function LocaleLayout({
   children,

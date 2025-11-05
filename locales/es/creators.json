@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "title": "Comienza a ganar haciendo lo que amas",
+    "subtitle": "Únete a la comunidad de creadores de Huerray y convierte tu pasión en ganancias. Conéctate con marcas que buscan voces auténticas como la tuya."
+  },
+  "benefits": {
+    "heading": "Por qué los creadores aman Huerray",
+    "authentic": {
+      "title": "Mantente auténtico",
+      "description": "Crea contenido que resuene con tu audiencia mientras te asocias con marcas que se alinean con tus valores."
+    },
+    "collaboration": {
+      "title": "Colabora con las mejores marcas",
+      "description": "Conéctate con marcas líderes que buscan asociaciones genuinas con creadores."
+    },
+    "monetize": {
+      "title": "Monetiza tu influencia",
+      "description": "Convierte tu creatividad en ingresos con una compensación justa por cada colaboración."
+    },
+    "creative": {
+      "title": "Mantén el control creativo",
+      "description": "Mantén tu voz y estilo únicos mientras creas contenido patrocinado."
+    },
+    "support": {
+      "title": "Obtén apoyo en cada paso",
+      "description": "Nuestro equipo está aquí para ayudarte a tener éxito con orientación y recursos."
+    },
+    "grow": {
+      "title": "Haz crecer tu audiencia",
+      "description": "Amplía tu alcance y construye tu marca personal a través de asociaciones con marcas."
+    }
+  },
+  "faq": {
+    "heading": "Preguntas frecuentes",
+    "q1": {
+      "question": "¿Cómo empiezo como creador?",
+      "answer": "Simplemente regístrate, completa tu perfil y comienza a explorar las colaboraciones de marca disponibles. Una vez aprobado, puedes comenzar a crear contenido."
+    },
+    "q2": {
+      "question": "¿Cuáles son los requisitos para unirse?",
+      "answer": "Damos la bienvenida a creadores de todos los tamaños. Necesitas una presencia activa en redes sociales y la capacidad de crear contenido de calidad que involucre a tu audiencia."
+    },
+    "q3": {
+      "question": "¿Cuánto puedo ganar?",
+      "answer": "Las ganancias varían según el tamaño de tu audiencia, las tasas de participación y el alcance de cada colaboración. Verás los detalles de compensación por adelantado para cada oportunidad."
+    },
+    "q4": {
+      "question": "¿Cómo funcionan los pagos?",
+      "answer": "Recibirás el pago una vez que tu contenido sea aprobado por la marca y cumpla con los requisitos de la campaña. Los pagos se procesan de forma segura a través de nuestra plataforma."
+    },
+    "q5": {
+      "question": "¿Puedo elegir con qué marcas trabajar?",
+      "answer": "¡Absolutamente! Tienes control total sobre qué colaboraciones aceptas. Solo trabaja con marcas que se alineen con tus valores y tu audiencia."
+    },
+    "q6": {
+      "question": "¿Qué tipo de contenido necesito crear?",
+      "answer": "Los tipos de contenido varían según la campaña, pero generalmente incluyen fotos, videos, reels o historias. Cada briefing proporciona requisitos detallados y pautas creativas."
+    }
+  }
+}

@@ -11,6 +11,12 @@
 @import '../styles/creators-section.css';
 @import '../styles/language-selector.css';
 @import '../styles/user-menu.css';
+@import '../styles/creators-hero.css';
+@import '../styles/creators-scroller.css';
+@import '../styles/creators-benefits.css';
+@import '../styles/creators-testimonial.css';
+@import '../styles/creators-cta.css';
+@import '../styles/creators-faq.css';
 
 body {
   background: var(--base-white);

@@ -13,12 +13,8 @@ export function CreatorsSection() {
       <div className='creators-section__container'>
         <div className='creators-section__content'>
           <h2 className='creators-section__label'>{t('label')}</h2>
-          <h3 className='creators-section__title'>
-            {t('title')}
-          </h3>
-          <p className='creators-section__description'>
-            {t('description')}
-          </p>
+          <h3 className='creators-section__title'>{t('title')}</h3>
+          <p className='creators-section__description'>{t('description')}</p>
           <Button variant='hero' size='lg' className='min-w-80'>
             {tCommon('button.joinForFree')}
           </Button>

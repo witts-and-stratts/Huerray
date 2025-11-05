@@ -1,0 +1,95 @@
+{
+  "hero": {
+    "title": "Get paid for doing what you love",
+    "subtitle": "Work with brands & real companies. Start earning cash for what you love.",
+    "buttonText": "Become a Creator",
+    "paymentMade": "Payment made"
+  },
+  "categories": {
+    "fashion": "Fashion",
+    "lifestyle": "Lifestyle",
+    "beauty": "Beauty",
+    "fitness": "Fitness",
+    "food": "Food",
+    "travel": "Travel",
+    "tech": "Tech",
+    "healthWellness": "Health & Wellness",
+    "sport": "Sport",
+    "skincare": "Skincare"
+  },
+  "collaborations": {
+    "pill": "Creators",
+    "title": "Collaborations that fit your style",
+    "description": "Matching Brands based on your style and content preference."
+  },
+  "director": {
+    "pill": "Creative Freedom",
+    "title": "Be the creative director",
+    "description": "Gain creative autonomy over your creations. Be the centre of the show."
+  },
+  "manage": {
+    "pill": "Support",
+    "title": "You create. We manage everything else",
+    "description": "Our team and technology helps manage the experience with brands, so you can focus on creating the best content."
+  },
+  "paid": {
+    "pill": "Payments",
+    "title": "Get paid on time, everytime",
+    "description": "You get automatic payments when the clients approve your creation. No question asked."
+  },
+  "testimonial": {
+    "quote": "Huerray advocates for their creators...from making sure that we get paid fairly to constantly giving us brand opportunities that matches our lifestyle",
+    "author": "Baron McHennie – @baron_mchennie"
+  },
+  "cta": {
+    "subtitle": "Join thousands of creators",
+    "title": "Get paid to do what you love"
+  },
+  "faq": {
+    "heading": "FAQs",
+    "q1": {
+      "question": "How do I get started as a creator?",
+      "answer": "Simply sign up, complete your profile, and start browsing available brand collaborations. Once approved, you can begin creating content."
+    },
+    "q2": {
+      "question": "What are the requirements to join?",
+      "answer": "We welcome creators of all sizes. You need an active social media presence and the ability to create quality content that engages your audience."
+    },
+    "q3": {
+      "question": "How much can I earn?",
+      "answer": "Earnings vary based on your audience size, engagement rates, and the scope of each collaboration. You'll see compensation details upfront for each opportunity."
+    },
+    "q4": {
+      "question": "How do payments work?",
+      "answer": "You'll receive payment once your content is approved by the brand and meets the campaign requirements. Payments are processed securely through our platform."
+    },
+    "q5": {
+      "question": "Can I choose which brands to work with?",
+      "answer": "Absolutely! You have full control over which collaborations you accept. Only work with brands that align with your values and audience."
+    },
+    "q6": {
+      "question": "What type of content do I need to create?",
+      "answer": "Content types vary by campaign but typically include photos, videos, reels, or stories. Each brief provides detailed requirements and creative guidelines."
+    },
+    "q7": {
+      "question": "How long does it take to get paid?",
+      "answer": "Payments are processed automatically once the brand approves your content. You'll typically receive payment within 3-5 business days."
+    },
+    "q8": {
+      "question": "Can I work with multiple brands at once?",
+      "answer": "Yes! You can collaborate with as many brands as you'd like, as long as there are no exclusivity clauses in your agreements."
+    },
+    "q9": {
+      "question": "What if I don't meet a campaign deadline?",
+      "answer": "We understand things happen. Communicate with us early if you need an extension. However, missing deadlines without notice may affect future opportunities."
+    },
+    "q10": {
+      "question": "Do I need professional equipment?",
+      "answer": "Not necessarily. Many successful creators use smartphones. What matters most is creating authentic, engaging content that resonates with your audience."
+    },
+    "q11": {
+      "question": "How are brand matches determined?",
+      "answer": "Our matching algorithm considers your content style, audience demographics, engagement rates, and brand preferences to suggest the best collaborations for you."
+    }
+  }
+}

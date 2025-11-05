@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+.creators-cta {
+  @apply py-20 md:py-32 px-4 lg:px-10 bg-gradient-to-br from-pink-100 via-pink-50 to-violet-100;
+}
+
+.creators-cta__container {
+  @apply max-w-7xl mx-auto text-center space-y-8;
+}
+
+.creators-cta__subtitle {
+  @apply text-3xl md:text-4xl font-bold text-slate-900;
+}
+
+.creators-cta__title {
+  @apply text-h1 max-w-3xl mx-auto;
+}

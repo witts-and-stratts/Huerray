@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+.creators-scroller {
+  @apply relative py-16 overflow-hidden;
+}
+
+.creators-scroller__track {
+  @apply flex gap-8 items-center;
+  animation: scroll-horizontal 40s linear infinite;
+}
+
+.creators-scroller__item {
+  @apply flex flex-col items-center gap-4 shrink-0;
+}
+
+.creators-scroller__avatar {
+  @apply relative w-[120px] h-[120px] rounded-full overflow-hidden border-4 border-white shadow-lg;
+}
+
+.creators-scroller__image {
+  @apply w-full h-full object-cover;
+}
+
+.creators-scroller__label {
+  @apply text-sm font-medium text-slate-700;
+}
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
