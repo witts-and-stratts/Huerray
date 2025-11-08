@@ -13,7 +13,7 @@
 }
 
 .creators-hero__decoration {
-  @apply absolute right-0 w-[130%] max-md:max-w-none md:w-2/3 lg:w-1/2 pointer-events-none z-10 max-md:-bottom-30 md:top-[5%] mix-blend-hard-light select-none;
+  @apply absolute right-0 w-[130%] max-md:max-w-none md:w-2/3 lg:w-1/2 pointer-events-none z-10 max-md:-bottom-30 md:top-[5%] lg:top-[12%] mix-blend-hard-light select-none;
 }
 
 .creators-hero__main-image {

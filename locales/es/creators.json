@@ -1,7 +1,49 @@
 {
   "hero": {
     "title": "Comienza a ganar haciendo lo que amas",
-    "subtitle": "Únete a la comunidad de creadores de Huerray y convierte tu pasión en ganancias. Conéctate con marcas que buscan voces auténticas como la tuya."
+    "subtitle": "Trabaja con marcas y empresas reales. Comienza a ganar dinero por lo que amas.",
+    "buttonText": "Convertirse en Creador",
+    "paymentMade": "Pago realizado"
+  },
+  "categories": {
+    "fashion": "Moda",
+    "lifestyle": "Estilo de vida",
+    "beauty": "Belleza",
+    "fitness": "Fitness",
+    "food": "Comida",
+    "travel": "Viajes",
+    "tech": "Tecnología",
+    "healthWellness": "Salud y Bienestar",
+    "sport": "Deporte",
+    "skincare": "Cuidado de la piel"
+  },
+  "collaborations": {
+    "pill": "Creadores",
+    "title": "Colaboraciones que se ajustan a tu estilo",
+    "description": "Emparejamiento de marcas basado en tu estilo y preferencia de contenido."
+  },
+  "director": {
+    "pill": "Libertad Creativa",
+    "title": "Sé el director creativo",
+    "description": "Obtén autonomía creativa sobre tus creaciones. Sé el centro del espectáculo."
+  },
+  "manage": {
+    "pill": "Apoyo",
+    "title": "Tú creas. Nosotros gestionamos todo lo demás",
+    "description": "Nuestro equipo y tecnología ayudan a gestionar la experiencia con las marcas, para que puedas concentrarte en crear el mejor contenido."
+  },
+  "paid": {
+    "pill": "Pagos",
+    "title": "Recibe el pago a tiempo, siempre",
+    "description": "Recibes pagos automáticos cuando los clientes aprueban tu creación. Sin preguntas."
+  },
+  "testimonial": {
+    "quote": "Huerray defiende a sus creadores...desde asegurarse de que nos paguen justamente hasta darnos constantemente oportunidades de marca que coincidan con nuestro estilo de vida",
+    "author": "Baron McHennie – @baron_mchennie"
+  },
+  "cta": {
+    "subtitle": "Únete a miles de creadores",
+    "title": "Recibe pago por hacer lo que amas"
   },
   "benefits": {
     "heading": "Por qué los creadores aman Huerray",
@@ -55,6 +97,26 @@
     "q6": {
       "question": "¿Qué tipo de contenido necesito crear?",
       "answer": "Los tipos de contenido varían según la campaña, pero generalmente incluyen fotos, videos, reels o historias. Cada briefing proporciona requisitos detallados y pautas creativas."
+    },
+    "q7": {
+      "question": "¿Cuánto tiempo tarda en recibirse el pago?",
+      "answer": "Los pagos se procesan automáticamente una vez que la marca aprueba tu contenido. Normalmente recibirás el pago dentro de 3 a 5 días hábiles."
+    },
+    "q8": {
+      "question": "¿Puedo trabajar con varias marcas al mismo tiempo?",
+      "answer": "¡Sí! Puedes colaborar con tantas marcas como desees, siempre que no haya cláusulas de exclusividad en tus acuerdos."
+    },
+    "q9": {
+      "question": "¿Qué pasa si no cumplo con una fecha límite de campaña?",
+      "answer": "Entendemos que las cosas pasan. Comunícate con nosotros temprano si necesitas una extensión. Sin embargo, no cumplir con las fechas límite sin previo aviso puede afectar las oportunidades futuras."
+    },
+    "q10": {
+      "question": "¿Necesito equipo profesional?",
+      "answer": "No necesariamente. Muchos creadores exitosos usan teléfonos inteligentes. Lo que más importa es crear contenido auténtico y atractivo que resuene con tu audiencia."
+    },
+    "q11": {
+      "question": "¿Cómo se determinan las coincidencias de marca?",
+      "answer": "Nuestro algoritmo de coincidencia considera tu estilo de contenido, la demografía de tu audiencia, las tasas de participación y las preferencias de marca para sugerir las mejores colaboraciones para ti."
     }
   }
 }

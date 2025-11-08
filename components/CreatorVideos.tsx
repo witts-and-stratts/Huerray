@@ -1,7 +1,10 @@
 'use client';
 
-import { useEffect, useEffectEvent, useRef, useState } from 'react';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import { useTranslations } from 'next-intl';
+import { useRef, useEffect, useState } from 'react';
 
 const videos = [
   {
@@ -31,7 +34,6 @@ export function CreatorVideos() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [isInView, setIsInView] = useState(false);
-  const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set());
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,40 +54,24 @@ export function CreatorVideos() {
     };
   }, []);
 
-  const setLoadedVideosAsync = useEffectEvent(
-    (newLoadedVideos: Set<number>) => {
-      setLoadedVideos(newLoadedVideos);
-    }
-  );
-
   useEffect(() => {
     if (isInView) {
-      // Load videos when section comes into view
-      setLoadedVideosAsync(
-        new Set(Array.from({ length: videos.length * 3 }, (_, i) => i))
-      );
-
-      requestAnimationFrame(() => {
-        // Stagger video playback to reduce load
-        videoRefs.current.forEach((video, index) => {
-          if (video) {
-            setTimeout(() => {
-              requestAnimationFrame(() => {
-                video.play().catch(() => {
-                  // Ignore play errors
-                });
-              });
-            }, index * 50);
-          }
-        });
+      // Play all videos when section is in view
+      videoRefs.current.forEach((video, index) => {
+        if (video) {
+          setTimeout(() => {
+            video.play().catch(() => {
+              // Ignore play errors
+            });
+          }, index * 50);
+        }
       });
     } else {
-      requestAnimationFrame(() => {
-        videoRefs.current.forEach((video) => {
-          if (video) {
-            video.pause();
-          }
-        });
+      // Pause all videos when section is out of view
+      videoRefs.current.forEach((video) => {
+        if (video) {
+          video.pause();
+        }
       });
     }
   }, [isInView]);
@@ -94,15 +80,46 @@ export function CreatorVideos() {
     <section ref={sectionRef} className='creator-videos'>
       <h2 className='creator-videos__title gradient-text'>{t('title')}</h2>
 
-      {/* Horizontal Infinite Scroller */}
       <div className='creator-videos__scroller'>
-        <div className='creator-videos__track animate-scroll-horizontal'>
-          {/* Duplicate the videos 3 times for seamless loop */}
-          {Array(3)
-            .fill(videos)
-            .flat()
-            .map((video, index) => (
-              <div key={`creator-${index}`} className='creator-videos__card'>
+        <Splide
+          options={{
+            type: 'loop',
+            drag: 'free',
+            focus: 'center',
+            perPage: 5.5,
+            perMove: 5.5,
+            gap: '1rem',
+            pagination: false,
+            arrows: false,
+            pauseOnHover: false,
+            pauseOnFocus: false,
+            autoScroll: {
+              speed: 1,
+              pauseOnHover: false,
+              pauseOnFocus: false,
+            },
+            breakpoints: {
+              768: {
+                perPage: 1.5,
+                gap: '1.5rem',
+              },
+              1024: {
+                perPage: 3.5,
+                perMove: 3.5,
+                gap: '2.5rem',
+              },
+              1280: {
+                perPage: 4.5,
+                perMove: 4.5,
+                gap: '3rem',
+              },
+            },
+          }}
+          extensions={{ AutoScroll }}
+        >
+          {videos.map((video, index) => (
+            <SplideSlide key={index}>
+              <div className='creator-videos__card'>
                 <video
                   ref={(el) => {
                     videoRefs.current[index] = el;
@@ -110,19 +127,19 @@ export function CreatorVideos() {
                   loop
                   muted
                   playsInline
-                  preload='none'
                   className='creator-videos__video'
                 >
-                  {loadedVideos.has(index) && (
+                  {
                     <>
                       <source src={video.webm} type='video/webm' />
                       <source src={video.mp4} type='video/mp4' />
                     </>
-                  )}
+                  }
                 </video>
               </div>
-            ))}
-        </div>
+            </SplideSlide>
+          ))}
+        </Splide>
       </div>
     </section>
   );

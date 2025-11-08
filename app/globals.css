@@ -18,6 +18,10 @@
 @import '../styles/creators-cta.css';
 @import '../styles/creators-faq.css';
 
+:root {
+  --rounded-clip-path: url(#rounded-clip);
+}
+
 body {
   background: var(--base-white);
   color: var(--slate-800);

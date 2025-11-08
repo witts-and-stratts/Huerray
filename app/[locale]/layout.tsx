@@ -142,6 +142,19 @@ export default async function LocaleLayout({
           {children}
         </NextIntlClientProvider>
       </body>
+
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='0'
+        height='0'
+        className='absolute'
+      >
+        <defs>
+          <clipPath id='rounded-clip' clipPathUnits='objectBoundingBox'>
+            <rect width='1' height='1' rx='0.4587' ry='0.3743' />
+          </clipPath>
+        </defs>
+      </svg>
     </html>
   );
 }

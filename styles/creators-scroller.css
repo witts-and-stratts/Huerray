@@ -1,35 +1,25 @@
 @import 'tailwindcss';
 
 .creators-scroller {
-  @apply relative py-16 overflow-hidden;
-}
-
-.creators-scroller__track {
-  @apply flex gap-8 items-center;
-  animation: scroll-horizontal 40s linear infinite;
-}
-
-.creators-scroller__item {
-  @apply flex flex-col items-center gap-4 shrink-0;
+  @apply relative overflow-hidden py-10;
 }
 
 .creators-scroller__avatar {
-  @apply relative w-[120px] h-[120px] rounded-full overflow-hidden border-4 border-white shadow-lg;
+  @apply relative py-24;
 }
 
 .creators-scroller__image {
-  @apply w-full h-full object-cover;
+  @apply w-full h-full object-cover aspect-279/342;
+  clip-path: var(--rounded-clip-path);
 }
 
-.creators-scroller__label {
-  @apply text-sm font-medium text-slate-700;
-}
-
-@keyframes scroll-horizontal {
-  0% {
-    transform: translateX(0);
+.creators-scroller__avatar-decoration {
+  @apply absolute h-auto w-auto pointer-events-none select-none max-md:max-h-10;
+  &.bottom-right {
+    @apply bottom-10 right-0;
   }
-  100% {
-    transform: translateX(calc(-100% / 3));
+
+  &.top-right {
+    @apply top-8 -right-14;
   }
 }

@@ -13,16 +13,15 @@
   @apply relative overflow-hidden w-full;
 }
 
-.creator-videos__track {
-  @apply flex gap-16;
-}
-
 /* Video Card */
 .creator-videos__card {
-  @apply w-[279px] h-[342px] rounded-[128px] overflow-hidden shrink-0;
+  @apply relative overflow-hidden;
+  clip-path: var(--rounded-clip-path);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .creator-videos__video {
-  @apply w-full h-full object-cover;
+  @apply w-full h-full object-cover aspect-279/342;
   will-change: auto;
 }
