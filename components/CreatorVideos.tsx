@@ -1,5 +1,6 @@
 'use client';
 
+// @ts-expect-error - package "exports" prevents TypeScript from resolving bundled types; this silences the missing declaration-file error
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';

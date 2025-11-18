@@ -17,9 +17,11 @@
 @import '../styles/creators-testimonial.css';
 @import '../styles/creators-cta.css';
 @import '../styles/creators-faq.css';
+@import '../styles/faq.css';
 
 :root {
   --rounded-clip-path: url(#rounded-clip);
+  --square-rounded-clip-path: url(#square-rounded-clip);
 }
 
 body {

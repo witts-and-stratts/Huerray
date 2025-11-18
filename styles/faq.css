@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+.faq__list {
+  @apply space-y-4;
+}
+
+.faq__item {
+  @apply bg-orange-50 rounded-2xl duration-300 overflow-hidden border border-orange-100;
+}
+
+.faq__question {
+  @apply w-full text-h6 flex items-center justify-between py-2 px-4 text-left font-regular hover:bg-orange-100/60 transition-colors duration-200 text-deep-maroon;
+}
+
+.faq__icon {
+  @apply text-base text-deep-maroon ml-4 shrink-0 transition-transform duration-300 ease-out;
+}
+
+.faq__answer-wrapper {
+  @apply overflow-hidden;
+}
+
+.faq__answer {
+  @apply px-6 py-6 text-slate-700 leading-relaxed;
+}

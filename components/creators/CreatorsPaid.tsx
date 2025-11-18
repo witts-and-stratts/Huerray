@@ -7,11 +7,11 @@ export function CreatorsPaid() {
   const t = useTranslations('creators.paid');
 
   return (
-    <section className='creators-section creators-section--white'>
+    <section className='creators-section creators-section--white mt-0! rounded-none!'>
       <div className='creators-section__container creators-section__container--reverse'>
         <div className='creators-section__image'>
           <Image
-            src='/images/creators/creator-7.jpg'
+            src='/images/creators/creator-20.jpg'
             alt='Get paid on time'
             width={545}
             height={470}
@@ -21,7 +21,9 @@ export function CreatorsPaid() {
 
         <div className='creators-section__content'>
           <span className='creators-section__pill'>{t('pill')}</span>
-          <h2 className='gradient-text creators-section__title'>{t('title')}</h2>
+          <h2 className='gradient-text creators-section__title'>
+            {t('title')}
+          </h2>
           <p className='creators-section__description'>{t('description')}</p>
         </div>
       </div>

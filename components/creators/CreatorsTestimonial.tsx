@@ -7,7 +7,7 @@ export function CreatorsTestimonial() {
   const t = useTranslations('creators.testimonial');
 
   return (
-    <section className='creators-testimonial'>
+    <section className='creators-testimonial relative -z-10'>
       <div className='creators-testimonial__container'>
         <div className='creators-testimonial__content'>
           <blockquote className='creators-testimonial__quote'>
@@ -18,7 +18,7 @@ export function CreatorsTestimonial() {
 
         <div className='creators-testimonial__image'>
           <Image
-            src='/images/creators/creator-8.jpg'
+            src='/images/creators/testimonial-baron-mchennnie.jpg'
             alt='Creator testimonial'
             width={545}
             height={571}

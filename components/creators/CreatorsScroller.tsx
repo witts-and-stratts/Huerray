@@ -1,13 +1,14 @@
 'use client';
 
 import Image from 'next/image';
+// @ts-expect-error - package "exports" prevents TypeScript from resolving bundled types; this silences the missing declaration-file error
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import '@splidejs/react-splide/css';
 import { cn } from '@/lib/utils';
 
 export function CreatorsScroller() {
-  const creators = [
+  const creators: Array<[string, [string, string]?]> = [
     ['/images/creators/optimized/creator-10.jpg'],
     ['/images/creators/optimized/creator-11.jpg'],
     ['/images/creators/optimized/creator-12.jpg'],
@@ -33,13 +34,14 @@ export function CreatorsScroller() {
           type: 'loop',
           drag: 'free',
           focus: 'center',
-          perPage: 4.5,
+          perPage: 2.5,
           perMove: 1,
-          gap: '4rem',
+          gap: '1.5rem',
           pagination: false,
           arrows: false,
           pauseOnHover: false,
           pauseOnFocus: false,
+          mediaQuery: 'min',
           autoScroll: {
             speed: 2,
             pauseOnHover: false,
@@ -47,46 +49,49 @@ export function CreatorsScroller() {
           },
           breakpoints: {
             768: {
-              perPage: 2,
+              perPage: 3.5,
               gap: '2.5rem',
             },
             1024: {
-              perPage: 3.5,
+              perPage: 4.5,
               gap: '3.5rem',
             },
             1280: {
-              perPage: 3.5,
+              perPage: 4.5,
               gap: '4rem',
             },
           },
         }}
         extensions={{ AutoScroll }}
       >
-        {creators.map((image, index) => (
-          <SplideSlide key={index}>
-            <div className='creators-scroller__avatar'>
-              <Image
-                src={image[0]}
-                alt='Creator'
-                width={280}
-                height={315}
-                className='creators-scroller__image'
-              />
-              {image[1] && (
+        {creators.map((image, index) => {
+          const [imgSrc, deco] = image;
+          return (
+            <SplideSlide key={index}>
+              <div className='creators-scroller__avatar'>
                 <Image
-                  src={`/images/${image[1][0]}`}
-                  alt='Decoration'
-                  width={180}
-                  height={180}
-                  className={cn(
-                    'creators-scroller__avatar-decoration',
-                    image[1][1]
-                  )}
+                  src={imgSrc}
+                  alt='Creator'
+                  width={280}
+                  height={315}
+                  className='creators-scroller__image'
                 />
-              )}
-            </div>
-          </SplideSlide>
-        ))}
+                {deco && (
+                  <Image
+                    src={`/images/${deco[0]}`}
+                    alt='Decoration'
+                    width={180}
+                    height={180}
+                    className={cn(
+                      'creators-scroller__avatar-decoration',
+                      deco[1]
+                    )}
+                  />
+                )}
+              </div>
+            </SplideSlide>
+          );
+        })}
       </Splide>
     </section>
   );

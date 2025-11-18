@@ -16,7 +16,7 @@ export function CreatorsCTA() {
         <CreatorsScroller />
 
         <h3 className='gradient-text creators-cta__title'>{t('title')}</h3>
-        <Button variant='hero' size='xl'>
+        <Button variant='hero' size='xl' className='bg-dark-burgundy min-w-200'>
           {tCommon('button.getStarted')}
         </Button>
       </div>

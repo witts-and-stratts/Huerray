@@ -7,11 +7,11 @@ export function CreatorsDirector() {
   const t = useTranslations('creators.director');
 
   return (
-    <section className='creators-section creators-section--beige'>
+    <section className='creators-section creators-section--fuschia mt-10! z-100 relative'>
       <div className='creators-section__container creators-section__container--reverse'>
         <div className='creators-section__image'>
           <Image
-            src='/images/creators/creator-5.jpg'
+            src='/images/creators/source/creative-director.jpg'
             alt='Be the creative director'
             width={545}
             height={470}

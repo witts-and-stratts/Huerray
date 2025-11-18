@@ -1,8 +1,7 @@
 @import 'tailwindcss';
 
 .creators-testimonial {
-  @apply py-20 md:py-32 px-4 lg:px-10;
-  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+  @apply py-10 md:py-16 px-4 md:px-10 bg-orange rounded-4xl  lg:rounded-[60px];
 }
 
 .creators-testimonial__container {
@@ -14,17 +13,16 @@
 }
 
 .creators-testimonial__quote {
-  @apply text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed not-italic;
+  @apply text-h3 font-light;
 }
 
 .creators-testimonial__author {
-  @apply block text-lg md:text-xl font-normal not-italic opacity-90;
+  @apply block text-base font-mono not-italic opacity-90;
 }
 
 .creators-testimonial__image {
-  @apply relative overflow-hidden shadow-2xl;
-  aspect-ratio: 545 / 571;
-  border-radius: 128px;
+  @apply relative overflow-hidden shadow-2xl aspect-545/571 md:aspect-square lg:aspect-545/571;
+  clip-path: var(--square-rounded-clip-path);
 }
 
 .creators-testimonial__img {

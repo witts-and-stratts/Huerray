@@ -153,6 +153,9 @@ export default async function LocaleLayout({
           <clipPath id='rounded-clip' clipPathUnits='objectBoundingBox'>
             <rect width='1' height='1' rx='0.4587' ry='0.3743' />
           </clipPath>
+          <clipPath id='square-rounded-clip' clipPathUnits='objectBoundingBox'>
+            <path d='M0 0.2723 C0 0.1219 0.1052 0 0.2348 0 H0.7651 C0.8947 0 1 0.1219 1 0.2723 V0.7277 C1 0.8781 0.8947 1 0.7651 1 H0.2348 C0.1052 1 0 0.8781 0 0.7277 V0.2723 Z' />
+          </clipPath>
         </defs>
       </svg>
     </html>

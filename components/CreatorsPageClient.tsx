@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import { Header } from '@/components/Header';
 import { CreatorsHero } from '@/components/creators/CreatorsHero';
@@ -24,8 +24,10 @@ export function CreatorsPageClient() {
         <CreatorsManage />
         <CreatorsPaid />
         <CreatorsTestimonial />
-        <CreatorsFAQ />
-        <CreatorsCTA />
+        <div className='bg-maroon-50 w-full h-full pt-10 -mt-16 relative z-20'>
+          <CreatorsFAQ />
+          <CreatorsCTA />
+        </div>
       </main>
       <Footer />
     </>

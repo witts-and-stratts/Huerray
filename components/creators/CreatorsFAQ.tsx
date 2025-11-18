@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { cn } from '@/lib/utils';
+import { FAQs } from '../ui/FAQs';
 
 export function CreatorsFAQ() {
   const t = useTranslations('creators.faq');
@@ -27,35 +29,7 @@ export function CreatorsFAQ() {
       <div className='creators-faq__container'>
         <h2 className='gradient-text creators-faq__heading'>{t('heading')}</h2>
 
-        <div className='creators-faq__list'>
-          {faqs.map((faq, index) => (
-            <div key={index} className='creators-faq__item'>
-              <button
-                className='creators-faq__question'
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                aria-expanded={openIndex === index}
-              >
-                <span>{faq.question}</span>
-                <span className='creators-faq__icon'>
-                  {openIndex === index ? '−' : '+'}
-                </span>
-              </button>
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className='creators-faq__answer-wrapper'
-                  >
-                    <div className='creators-faq__answer'>{faq.answer}</div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </div>
+        <FAQs faqs={faqs} />
       </div>
     </section>
   );
