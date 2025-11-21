@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "title": "Collaborate with top creators",
+    "subtitle": "Work with brands & real companies. Start earning cash for what you love.",
+    "buttonText": "Get Started"
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "q1": {
+      "question": "What is Huerray?",
+      "answer": "Huerray is a platform that connects brands with creators to produce high-quality content."
+    },
+    "q2": {
+      "question": "How do I get started?",
+      "answer": "Sign up for an account and create a campaign to start matching with creators."
+    },
+    "q3": {
+      "question": "What kind of content can I get?",
+      "answer": "You can get a wide range of content, from social media posts to professional videos."
+    },
+    "q4": {
+      "question": "How much does it cost?",
+      "answer": "The cost depends on the scope of your campaign and the creators you work with."
+    },
+    "q5": {
+      "question": "How long does it take?",
+      "answer": "The timeline varies depending on the project, but you can typically get content within a few weeks."
+    },
+    "q6": {
+      "question": "How do I pay creators?",
+      "answer": "Payments are handled securely through our platform. You can pay with a credit card or bank transfer."
+    },
+    "q7": {
+      "question": "Can I use the content on my own channels?",
+      "answer": "Yes, you have full rights to use the content on your own marketing channels."
+    },
+    "q8": {
+      "question": "What if I'm not happy with the content?",
+      "answer": "We have a revision process to ensure you're happy with the final product. If you're still not satisfied, we offer a money-back guarantee."
+    },
+    "q9": {
+      "question": "How do you vet creators?",
+      "answer": "We have a rigorous vetting process to ensure that all creators on our platform are professional and produce high-quality work."
+    },
+    "q10": {
+      "question": "Do you offer managed services?",
+      "answer": "Yes, we offer managed services for brands that want a more hands-off approach. Our team can handle everything from campaign strategy to creator management."
+    },
+    "q11": {
+      "question": "I have another question",
+      "answer": "Please contact us at support@huerray.com for any other questions."
+    }
+  }
+}

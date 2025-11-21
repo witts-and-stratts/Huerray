@@ -112,14 +112,14 @@ const imagesByCategory: Record<string, string[]> = {
   ],
 };
 
-const contentCategories = Object.keys(imagesByCategory);
+const contentCategories = Object.keys( imagesByCategory );
 
 // Helper to get initial unique images (client-side only)
-function getInitialImages(count: number, totalImages: number): number[] {
-  const shuffled = Array.from({ length: totalImages }, (_, i) => i).sort(
+function getInitialImages( count: number, totalImages: number ): number[] {
+  const shuffled = Array.from( { length: totalImages }, ( _, i ) => i ).sort(
     () => Math.random() - 0.5
   );
-  return shuffled.slice(0, count);
+  return shuffled.slice( 0, count );
 }
 
 // Initialize image state for each category (deterministic initial state)
@@ -127,10 +127,10 @@ function initializeCategoryImages() {
   const maxSlides = 10;
   const categoryImages: Record<string, number[]> = {};
 
-  contentCategories.forEach((category) => {
+  contentCategories.forEach( ( category ) => {
     // Use sequential indices for SSR, will be randomized on client
-    categoryImages[category] = Array.from({ length: maxSlides }, (_, i) => i);
-  });
+    categoryImages[ category ] = Array.from( { length: maxSlides }, ( _, i ) => i );
+  } );
 
   return categoryImages;
 }
@@ -154,7 +154,7 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 1,
-      ease: [0.22, 1, 0.36, 1] as const, // Custom easing for smooth motion
+      ease: [ 0.22, 1, 0.36, 1 ] as const, // Custom easing for smooth motion
     },
   },
   exit: {
@@ -163,47 +163,47 @@ const itemVariants = {
     transition: {
       duration: 0.6,
       opacity: { duration: 1 },
-      ease: [0.22, 1, 0.36, 1] as const,
+      ease: [ 0.22, 1, 0.36, 1 ] as const,
     },
   },
 };
 
 export function ContentObjectives() {
-  const [selectedCategory, setSelectedCategory] = useState(
-    contentCategories[0]
+  const [ selectedCategory, setSelectedCategory ] = useState(
+    contentCategories[ 0 ]
   );
 
   // Each category has its own independent image state
-  const [categorySlides, setCategorySlides] = useState<
+  const [ categorySlides, setCategorySlides ] = useState<
     Record<string, number[]>
-  >(initializeCategoryImages);
+  >( initializeCategoryImages );
 
   const setSlides = useEffectEvent(
-    (randomizedImages: Record<string, number[]>) => {
-      setCategorySlides(randomizedImages);
+    ( randomizedImages: Record<string, number[]> ) => {
+      setCategorySlides( randomizedImages );
     }
   );
 
   // Randomize images on client mount only
-  useEffect(() => {
+  useEffect( () => {
     const maxSlides = 10;
     const randomizedImages: Record<string, number[]> = {};
 
-    contentCategories.forEach((category) => {
-      randomizedImages[category] = getInitialImages(
+    contentCategories.forEach( ( category ) => {
+      randomizedImages[ category ] = getInitialImages(
         maxSlides,
-        imagesByCategory[category].length
+        imagesByCategory[ category ].length
       );
-    });
+    } );
 
-    setSlides(randomizedImages);
-  }, []);
+    setSlides( randomizedImages );
+  }, [] );
 
-  const animatingCount = useRef(0);
+  const animatingCount = useRef( 0 );
   const maxConcurrentAnimations = 2;
 
   // Track which slides have swiped in the current round
-  const swipedInRound = useRef<Set<number>>(new Set());
+  const swipedInRound = useRef<Set<number>>( new Set() );
 
   const canAnimate = () => {
     return animatingCount.current < maxConcurrentAnimations;
@@ -217,121 +217,119 @@ export function ContentObjectives() {
     animatingCount.current -= 1;
   };
 
-  const handleImageChange = (index: number, category: string) => {
-    if (!canAnimate()) return;
+  const handleImageChange = ( index: number, category: string ) => {
+    if ( !canAnimate() ) return;
 
     // Check if this slide has already swiped in this round
-    if (swipedInRound.current.has(index)) return;
+    if ( swipedInRound.current.has( index ) ) return;
 
-    setCategorySlides((prev) => {
-      const currentCategorySlides = prev[category];
-      const categoryImages = imagesByCategory[category];
+    setCategorySlides( ( prev ) => {
+      const currentCategorySlides = prev[ category ];
+      const categoryImages = imagesByCategory[ category ];
 
       // Filter out images already displayed in the grid
       const availableImages = Array.from(
         { length: categoryImages.length },
-        (_, i) => i
-      ).filter((imgIndex) => !currentCategorySlides.includes(imgIndex));
+        ( _, i ) => i
+      ).filter( ( imgIndex ) => !currentCategorySlides.includes( imgIndex ) );
 
-      if (availableImages.length === 0) return prev;
+      if ( availableImages.length === 0 ) return prev;
 
       startAnimation();
 
       // Mark this slide as having swiped
-      swipedInRound.current.add(index);
+      swipedInRound.current.add( index );
 
       // If all slides have swiped, reset the round
-      if (swipedInRound.current.size >= currentCategorySlides.length) {
+      if ( swipedInRound.current.size >= currentCategorySlides.length ) {
         swipedInRound.current.clear();
       }
 
-      const randomIndex = Math.floor(Math.random() * availableImages.length);
-      const randomImage = availableImages[randomIndex];
-      const newSlides = [...currentCategorySlides];
-      newSlides[index] = randomImage;
+      const randomIndex = Math.floor( Math.random() * availableImages.length );
+      const randomImage = availableImages[ randomIndex ];
+      const newSlides = [ ...currentCategorySlides ];
+      newSlides[ index ] = randomImage;
 
       return {
         ...prev,
-        [category]: newSlides,
+        [ category ]: newSlides,
       };
-    });
+    } );
   };
 
-  const t = useTranslations('home.contentObjectives');
+  const t = useTranslations( 'home.contentObjectives' );
 
   return (
     <section className='content-objectives'>
-      <h2 className='content-objectives__title gradient-text'>{t('title')}</h2>
-      <h4 className='content-objectives__subtitle'>{t('subtitle')}</h4>
+      <h2 className='content-objectives__title gradient-text'>{ t( 'title' ) }</h2>
+      <h4 className='content-objectives__subtitle'>{ t( 'subtitle' ) }</h4>
 
-      {/* Category Pills */}
+      {/* Category Pills */ }
       <div className='content-objectives__pills'>
-        {contentCategories.map((category) => (
+        { contentCategories.map( ( category ) => (
           <Badge
-            key={category}
+            key={ category }
             variant='pill'
-            onClick={() => setSelectedCategory(category)}
-            className={`content-objectives__pill ${
-              selectedCategory === category
+            onClick={ () => setSelectedCategory( category ) }
+            className={ `content-objectives__pill ${ selectedCategory === category
                 ? 'content-objectives__pill--active'
                 : ''
-            }`}
+              }` }
           >
-            {t(
-              `categories.${category
+            { t(
+              `categories.${ category
                 .toLowerCase()
-                .replace(/\s+/g, '_')
-                .replace('&', 'and')}`
-            )}
+                .replace( /\s+/g, '_' )
+                .replace( '&', 'and' ) }`
+            ) }
           </Badge>
-        ))}
+        ) ) }
       </div>
 
-      {/* Grid with all categories loaded but hidden/visible based on selection */}
-      {contentCategories.map((category) => {
-        const slides = categorySlides[category];
-        const images = imagesByCategory[category];
+      {/* Grid with all categories loaded but hidden/visible based on selection */ }
+      { contentCategories.map( ( category ) => {
+        const slides = categorySlides[ category ];
+        const images = imagesByCategory[ category ];
 
         return (
           <Activity
-            key={category}
-            mode={selectedCategory === category ? 'visible' : 'hidden'}
+            key={ category }
+            mode={ selectedCategory === category ? 'visible' : 'hidden' }
           >
             <motion.div
-              variants={gridVariants}
+              variants={ gridVariants }
               initial='hidden'
               animate='show'
               className='content-objectives__grid'
             >
-              {slides.map((imageIndex, i) => (
+              { slides.map( ( imageIndex, i ) => (
                 <motion.div
-                  key={`${category}-${i}`}
-                  variants={itemVariants}
-                  className={`content-objectives__item ${
-                    i >= 9
+                  key={ `${ category }-${ i }` }
+                  variants={ itemVariants }
+                  className={ `content-objectives__item ${ i >= 9
                       ? 'content-objectives__item--desktop-only'
                       : i === 8
-                      ? 'content-objectives__item--mobile-desktop'
-                      : ''
-                  }`}
+                        ? 'content-objectives__item--mobile-desktop'
+                        : ''
+                    }` }
                 >
                   <AnimatedSlide
-                    images={images}
-                    index={i}
-                    currentImageIndex={imageIndex}
-                    onImageChange={() => {
-                      if (category === selectedCategory) {
-                        handleImageChange(i, category);
+                    images={ images }
+                    index={ i }
+                    currentImageIndex={ imageIndex }
+                    onImageChange={ () => {
+                      if ( category === selectedCategory ) {
+                        handleImageChange( i, category );
                       }
-                    }}
-                    onAnimationEnd={endAnimation}
+                    } }
+                    onAnimationEnd={ endAnimation }
                   />
                 </motion.div>
-              ))}
+              ) ) }
             </motion.div>
           </Activity>
         );
-      })}
+      } ) }
     </section>
   );
 }

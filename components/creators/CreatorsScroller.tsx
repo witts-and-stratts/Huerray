@@ -7,26 +7,25 @@ import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import '@splidejs/react-splide/css';
 import { cn } from '@/lib/utils';
 
+const creators: Array<[string, [string, string]?]> = [
+  ['/images/creators/optimized/creator-10.jpg'],
+  ['/images/creators/optimized/creator-11.jpg'],
+  ['/images/creators/optimized/creator-12.jpg'],
+  ['/images/creators/optimized/creator-13.jpg'],
+  ['/images/creators/optimized/creator-14.jpg'],
+  ['/images/creators/optimized/creator-15.jpg'],
+  ['/images/creators/optimized/creator-16.jpg'],
+  [
+    '/images/creators/optimized/creator-17.jpg',
+    ['arrow-fashion.svg', 'bottom-right'],
+  ],
+  [
+    '/images/creators/optimized/creator-18.jpg',
+    ['arrow-health-and-wellness.svg', 'top-right'],
+  ],
+  ['/images/creators/optimized/creator-19.jpg'],
+];
 export function CreatorsScroller() {
-  const creators: Array<[string, [string, string]?]> = [
-    ['/images/creators/optimized/creator-10.jpg'],
-    ['/images/creators/optimized/creator-11.jpg'],
-    ['/images/creators/optimized/creator-12.jpg'],
-    ['/images/creators/optimized/creator-13.jpg'],
-    ['/images/creators/optimized/creator-14.jpg'],
-    ['/images/creators/optimized/creator-15.jpg'],
-    ['/images/creators/optimized/creator-16.jpg'],
-    [
-      '/images/creators/optimized/creator-17.jpg',
-      ['arrow-fashion.svg', 'bottom-right'],
-    ],
-    [
-      '/images/creators/optimized/creator-18.jpg',
-      ['arrow-health-and-wellness.svg', 'top-right'],
-    ],
-    ['/images/creators/optimized/creator-19.jpg'],
-  ];
-
   return (
     <section className='creators-scroller'>
       <Splide

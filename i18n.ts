@@ -22,6 +22,7 @@ export default getRequestConfig(async ({ locale, requestLocale }) => {
       footer: (await import(`./locales/${validLocale}/footer.json`)).default,
       home: (await import(`./locales/${validLocale}/home.json`)).default,
       creators: (await import(`./locales/${validLocale}/creators.json`)).default,
+      brands: (await import(`./locales/${validLocale}/brands.json`)).default,
     },
   };
 });

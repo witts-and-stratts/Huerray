@@ -9,9 +9,11 @@
 @import '../styles/creator-videos.css';
 @import '../styles/content-objectives.css';
 @import '../styles/creators-section.css';
+@import '../styles/section.css';
 @import '../styles/language-selector.css';
 @import '../styles/user-menu.css';
 @import '../styles/creators-hero.css';
+@import '../styles/brands-hero.css';
 @import '../styles/creators-scroller.css';
 @import '../styles/creators-benefits.css';
 @import '../styles/creators-testimonial.css';
@@ -32,7 +34,7 @@ body {
 }
 
 .body-content {
-  @apply relative w-full bg-white z-1 pb-10;
+  @apply relative w-full bg-white z-40 -mb-10 rounded-b-[40px];
 }
 
 /* Hero scroll animations */

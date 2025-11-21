@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+.brands-hero {
+  @apply min-h-auto h-auto bg-orange-100;
+}
+
+.brands-hero__section {
+  @apply relative h-auto md:pb-[8rem] max-md:-mt-20 max-md:pt-20;
+}
+
+.brands-hero__images {
+  @apply relative md:col-span-5 md:col-start-8 md:mt-50 grid grid-cols-6 gap-4;
+}
+
+.brands-hero__decoration {
+  @apply absolute right-0 w-[130%] max-md:max-w-none md:w-2/3 lg:w-1/2 pointer-events-none z-0 max-md:-bottom-30 md:top-[5%] lg:top-[12%] mix-blend-hard-light select-none;
+}
+
+.brands-hero__main-column {
+  @apply col-span-4 flex flex-col gap-4;
+}
+
+.brands-hero__side-column {
+  @apply col-span-2 flex flex-col gap-4;
+}
+
+.brands-hero__main-image {
+  @apply rounded-4xl md:rounded-[64px] overflow-hidden;
+
+  img {
+    @apply w-full h-full object-cover aspect-401/378;
+  }
+}
+
+.brands-hero__secondary-image {
+  @apply rounded-4xl md:rounded-[64px] overflow-hidden;
+
+  img {
+    @apply w-full h-full object-cover aspect-401/220;
+  }
+}
+
+.brands-hero__circle-image {
+  @apply rounded-full overflow-hidden;
+
+  img {
+    @apply w-full h-full object-cover aspect-square;
+  }
+}
+
+.brands-hero__tall-image {
+  @apply rounded-4xl md:rounded-[64px] overflow-hidden grow;
+
+  img {
+    @apply w-full h-full object-cover;
+  }
+}

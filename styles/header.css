@@ -2,7 +2,7 @@
 @import './typography.css';
 
 .header {
-  @apply z-50 relative flex items-center justify-between px-4 py-4 md:px-10 md:py-8;
+  @apply z-70 relative flex items-center justify-between px-4 py-4 md:px-10 md:py-8;
 
   .logo {
     @apply object-contain max-md:w-[140px];

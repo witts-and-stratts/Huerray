@@ -17,7 +17,6 @@ export function HomeClient() {
     <>
       <main className='body-content'>
         <Hero />
-
         <section>
           <h2 className='h4 text-bright-fuchsia font-regular py-5xl px-4 lg:px-10 text-center max-w-[800px] mx-auto'>
             {t('tagline')}
