@@ -1,21 +1,24 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { TextList } from '../ui/TextList';
 
-const listItems = [
-  'Repurpose creator content across all your marketing channels',
-  'No guess work and unplanned expenses. Zero extra cost for multiple platform usage',
-];
-
-const contentUsageItems = [
-  'Store on Shopify',
-  'Cinema',
-  'Inflight entertainment',
-  'In-Game',
-];
-
 export function BrandsBeyondFeed() {
+  const t = useTranslations('brands.beyondFeed');
+
+  const listItems = [
+    t('listItems.item1'),
+    t('listItems.item2'),
+  ];
+
+  const contentUsageItems = [
+    t('contentUsageItems.item1'),
+    t('contentUsageItems.item2'),
+    t('contentUsageItems.item3'),
+    t('contentUsageItems.item4'),
+  ];
+
   return (
     <section className='section-card section-card--white'>
       <div className='section-card__container'>
@@ -30,7 +33,7 @@ export function BrandsBeyondFeed() {
               className='section-card__img'
             />
             <div className='brands-beyond__card'>
-              <div className='brands-beyond__card-title'>Content Usage</div>
+              <div className='brands-beyond__card-title'>{t('contentUsageTitle')}</div>
               <div className='brands-beyond__card-list'>
                 { contentUsageItems.map( ( item, index ) => (
                   <div key={ index } className='brands-beyond__card-item'>
@@ -58,15 +61,12 @@ export function BrandsBeyondFeed() {
         </div>
 
         <div className='section-card__content section-card__content--right'>
-          <span className='section-card__pill'>Omni-Channel</span>
+          <span className='section-card__pill'>{t('pill')}</span>
 
-          <h2 className='section-card__title gradient-text'>Beyond your content feed</h2>
+          <h2 className='section-card__title gradient-text'>{t('title')}</h2>
 
           <p className='section-card__description'>
-            Content created by creators are licensed to you for use in all
-            your marketing channels. From your Website, E-commerce platform,
-            Youtube or in-flight entertainment, create a truly omni-channel
-            creator marketing experience.
+            {t('description')}
           </p>
 
           <TextList list={ listItems } />

@@ -1,16 +1,19 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { TextListItem } from '../ui/TextListItem';
 import { TextList } from '../ui/TextList';
 
-const listItems = [
-  "Whether it's a beauty commercial, review for automotive or showcase of baby products, you will find the specialised creator content",
-  'From UGC to specialised content, you can pick based on your goals',
-  'From additional content to entertainment content, to product reviews and live events, creator content is versatile',
-];
-
 export function BrandsContentObjective() {
+  const t = useTranslations('brands.contentObjective');
+
+  const listItems = [
+    t('listItems.item1'),
+    t('listItems.item2'),
+    t('listItems.item3'),
+  ];
+
   return (
     <section className='section-card section-card--pink mt-10 z-100'>
       <div className='section-card__container'>
@@ -48,15 +51,14 @@ export function BrandsContentObjective() {
 
           {/* Right - Content */ }
           <div className='section-card__content section-card__content--right'>
-            <span className='section-card__pill'>Quality Content</span>
+            <span className='section-card__pill'>{t('pill')}</span>
 
             <h2 className='section-card__title gradient-text'>
-              Content for every objective
+              {t('title')}
             </h2>
 
             <p className='section-card__description'>
-              Creators produce high-quality content, with a range of output that
-              is adapted to match your goals and requirements.
+              {t('description')}
             </p>
 
             <TextList list={ listItems } />

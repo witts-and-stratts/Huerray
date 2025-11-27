@@ -1,0 +1,123 @@
+{
+  "hero": {
+    "title": "Paga por UGC, no por tarifas ocultas",
+    "subtitle": "Cada dólar se destina a UGC escalable y de marca que genera resultados, no a tarifas de plataforma"
+  },
+  "cards": {
+    "disclaimer": "Todos los precios son por un video, IVA excluido.",
+    "buttonText": "Crear un briefing",
+    "short": {
+      "tag": "Corto",
+      "title": "15 Segundos",
+      "price": "Desde €149,99",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    },
+    "medium": {
+      "tag": "Medio",
+      "title": "30 Segundos",
+      "price": "Desde €269,99",
+      "features": [
+        "Instagram-Reel",
+        "TikTok-ADs",
+        "Snapchat-Ad",
+        "Live-Shopping",
+        "Landing-page"
+      ]
+    },
+    "long": {
+      "tag": "Largo",
+      "title": "60 Segundos",
+      "price": "Desde €349,99",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    }
+  },
+  "features": {
+    "title": "Las mismas excelentes funciones para todos los planes",
+    "items": [
+      {
+        "title": "Solicitudes de proyectos ilimitadas",
+        "text": "Desde videos de unboxing y testimonios hasta fotografía de productos y modelos: obtén el contenido que necesitas."
+      },
+      {
+        "title": "Revisa solicitudes de creadores diversos",
+        "text": "Todas las edades, razas, géneros y estilos, Huerray tiene un creador de contenido ideal para tu marca."
+      },
+      {
+        "title": "Sin negociaciones con creadores",
+        "text": "Los creadores de Huerray trabajan con un presupuesto establecido para todos tus proyectos."
+      },
+      {
+        "title": "Derechos completos de licencia y distribución de tu contenido",
+        "text": "100% de derechos de licencia y distribución para usar en redes sociales, sitios web, anuncios y más."
+      },
+      {
+        "title": "Comentarios en tiempo real",
+        "text": "Utiliza la función de comunicación integrada para intercambiar comentarios con tus creadores, hacerles preguntas sobre sus entregables, hacer ajustes cuando sea necesario o refinar tus requisitos"
+      }
+    ]
+  },
+  "extra": {
+    "ai": {
+      "subtitle": "Vanguardia/próxima generación",
+      "title": "Videos generados por IA",
+      "priceLabel": "Desde",
+      "price": "€79,99",
+      "buttonText": "Crear un briefing"
+    },
+    "enterprise": {
+      "badge": "Extra + Gestionado",
+      "title": "Plan Enterprise",
+      "description": "¿Necesitas más contenido generado? Habla con nuestro equipo",
+      "features": [
+        "Solicitar servicio",
+        "Discutir requisitos",
+        "Recibir una oferta personalizada",
+        "Listo para despegar"
+      ],
+      "buttonText": "Reservar una llamada"
+    }
+  },
+  "faqs": {
+    "title": "Haznos preguntas",
+    "items": [
+      {
+        "question": "¿Cuánto tiempo tarda en revisarse mi solicitud de creador?",
+        "answer": "Debido al alto volumen de solicitudes que recibimos, el proceso de revisión puede llevar algo de tiempo. Nos esforzamos por procesar las solicitudes lo más rápido posible, pero ten en cuenta que puede variar según la demanda y nuestra capacidad actual. Ten la seguridad de que te notificaremos tan pronto como haya una actualización sobre el estado de tu solicitud. ¡Gracias por tu paciencia!"
+      },
+      {
+        "question": "¿Necesito una cierta cantidad de seguidores para unirme a Huerray?",
+        "answer": "No. Es posible que ni siquiera tengas redes sociales y eso está totalmente bien. Todo lo que tienes que hacer es crear contenido para recibir un pago."
+      },
+      {
+        "question": "¿Tengo que publicar en canales sociales?",
+        "answer": "No. Todo lo que tienes que hacer es subir el contenido a la plataforma de Huerray."
+      },
+      {
+        "question": "¿Tengo que pagar para unirme?",
+        "answer": "No, Trend es 100% gratis para creadores."
+      },
+      {
+        "question": "¿Cómo encuentro trabajos?",
+        "answer": "Eliges los proyectos de marcas que se alinean con tu estética personal y solicitas esas asociaciones. La aplicación se actualiza cada día con nuevas asociaciones. ¡Solo trabaja con las marcas que desees!"
+      },
+      {
+        "question": "¿Qué tipo de trabajos puedo encontrar en Trend?",
+        "answer": "Los trabajos de fotografía y video son nuestra especialidad. Fotografía de productos, fotos de estilo de vida, videos de productos en acción, videos de unboxing, videos testimoniales, fotos de estilo retrato. Todo el contenido que las marcas de comercio electrónico pueden aprovechar."
+      }
+    ]
+  },
+  "cta": {
+    "title": "¿Listo para tu primer video UGC?",
+    "buttonText": "Regístrate ahora"
+  }
+}

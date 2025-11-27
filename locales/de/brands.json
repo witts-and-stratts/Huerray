@@ -4,6 +4,73 @@
     "subtitle": "Work with brands & real companies. Start earning cash for what you love.",
     "buttonText": "Get Started"
   },
+  "scroller": {
+    "title": "Match with experienced creators"
+  },
+  "match": {
+    "pill": "Matching",
+    "title": "Match with the right creators for your brand",
+    "description": "Our matching process means 92% of creator matches are approved in the first round.",
+    "listItems": {
+      "item1": "Fully opted-in and verified network of creators",
+      "item2": "A large network of diverse creators from underrepresented communities and niche categories"
+    },
+    "paymentMade": "Payment made"
+  },
+  "contentObjective": {
+    "pill": "Quality Content",
+    "title": "Content for every objective",
+    "description": "Creators produce high-quality content, with a range of output that is adapted to match your goals and requirements.",
+    "listItems": {
+      "item1": "Whether it's a beauty commercial, review for automotive or showcase of baby products, you will find the specialised creator content",
+      "item2": "From UGC to specialised content, you can pick based on your goals",
+      "item3": "From additional content to entertainment content, to product reviews and live events, creator content is versatile"
+    }
+  },
+  "expertSupport": {
+    "pill": "Dedicated Support",
+    "title": "Expert level support",
+    "description": "Our team is here to ensure that you're matched with the right creators, deliverables are handed off on time, and to make sure that your campaign and creative strategy is a success.",
+    "listItems": {
+      "item1": "Too busy? Let us handle back and forth with creators",
+      "item2": "Campaign reviews before your approval, so you don't have to go through request that are not aligned",
+      "item3": "We manage live campaigns and deliverables for you, so you don't miss your launch date"
+    }
+  },
+  "beyondFeed": {
+    "pill": "Omni-Channel",
+    "title": "Beyond your content feed",
+    "description": "Content created by creators are licensed to you for use in all your marketing channels. From your Website, E-commerce platform, Youtube or in-flight entertainment, create a truly omni-channel creator marketing experience.",
+    "listItems": {
+      "item1": "Repurpose creator content across all your marketing channels",
+      "item2": "No guess work and unplanned expenses. Zero extra cost for multiple platform usage"
+    },
+    "contentUsageTitle": "Content Usage",
+    "contentUsageItems": {
+      "item1": "Store on Shopify",
+      "item2": "Cinema",
+      "item3": "Inflight entertainment",
+      "item4": "In-Game"
+    }
+  },
+  "stopAssuming": {
+    "pill": "Measurement",
+    "title": "Stop assuming what's working",
+    "description": "Keep a pulse on what's happening during the creative process, with constant feedback and updates.",
+    "listItems": {
+      "item1": "Track your campaign and see how it performs",
+      "item2": "Campaign walkthroughs and insights on all your projects/briefs"
+    },
+    "contentPerformance": "Content Performance"
+  },
+  "cta": {
+    "subtitle": "Join thousands of brands getting awesome content",
+    "title": "Join the marketplace. Find your next brand ambassadors",
+    "buttonText": "Get started"
+  },
+  "industry": {
+    "title": "Content for every industry"
+  },
   "faq": {
     "heading": "Frequently Asked Questions",
     "q1": {

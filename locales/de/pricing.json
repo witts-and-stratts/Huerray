@@ -1,0 +1,123 @@
+{
+  "hero": {
+    "title": "Zahlen Sie für UGC, nicht für versteckte Gebühren",
+    "subtitle": "Jeder Dollar fließt in skalierbaren, markenkonformen UGC, der Ergebnisse liefert, nicht in Plattformgebühren"
+  },
+  "cards": {
+    "disclaimer": "Alle Preise gelten für ein Video, zzgl. MwSt.",
+    "buttonText": "Briefing erstellen",
+    "short": {
+      "tag": "Kurz",
+      "title": "15 Sekunden",
+      "price": "Ab €149,99",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    },
+    "medium": {
+      "tag": "Mittel",
+      "title": "30 Sekunden",
+      "price": "Ab €269,99",
+      "features": [
+        "Instagram-Reel",
+        "TikTok-ADs",
+        "Snapchat-Ad",
+        "Live-Shopping",
+        "Landing-page"
+      ]
+    },
+    "long": {
+      "tag": "Lang",
+      "title": "60 Sekunden",
+      "price": "Ab €349,99",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    }
+  },
+  "features": {
+    "title": "Gleiche großartige Funktionen für alle Pläne",
+    "items": [
+      {
+        "title": "Unbegrenzte Projektanfragen",
+        "text": "Von Unboxing- & Testimonial-Videos bis hin zu Produkt- & Modellfotografie - erhalten Sie die Inhalte, die Sie benötigen."
+      },
+      {
+        "title": "Bewerbungen von vielfältigen Creators prüfen",
+        "text": "Jedes Alter, jede Herkunft, jedes Geschlecht und jeder Vibe - Huerray hat den idealen Content Creator für Ihre Marke."
+      },
+      {
+        "title": "Keine Creator-Verhandlungen",
+        "text": "Huerray Creators arbeiten mit einem festgelegten Budget für alle Ihre Projekte."
+      },
+      {
+        "title": "Vollständige Lizenz- und Vertriebsrechte für Ihre Inhalte",
+        "text": "100% Lizenz- und Vertriebsrechte zur Nutzung in sozialen Medien, auf Websites, in Anzeigen und mehr."
+      },
+      {
+        "title": "Echtzeit-Feedback",
+        "text": "Nutzen Sie die integrierte Kommunikationsfunktion, um Feedback mit Ihren Creators auszutauschen, Fragen zu deren Ergebnissen zu stellen, Anpassungen vorzunehmen oder Ihre Anforderungen zu verfeinern"
+      }
+    ]
+  },
+  "extra": {
+    "ai": {
+      "subtitle": "State of the art/Next-Gen",
+      "title": "KI-generierte Videos",
+      "priceLabel": "Ab",
+      "price": "€79,99",
+      "buttonText": "Briefing erstellen"
+    },
+    "enterprise": {
+      "badge": "Extra + Managed",
+      "title": "Enterprise-Plan",
+      "description": "Benötigen Sie mehr generierten Content? Sprechen Sie mit unserem Team",
+      "features": [
+        "Service anfragen",
+        "Anforderungen besprechen",
+        "Individuelles Angebot erhalten",
+        "Bereit zum Start"
+      ],
+      "buttonText": "Anruf buchen"
+    }
+  },
+  "faqs": {
+    "title": "Stellen Sie uns Fragen",
+    "items": [
+      {
+        "question": "Wie lange dauert es, bis meine Creator-Bewerbung geprüft wird?",
+        "answer": "Aufgrund der hohen Anzahl an Bewerbungen, die wir erhalten, kann der Prüfungsprozess einige Zeit in Anspruch nehmen. Wir bemühen uns, Bewerbungen so schnell wie möglich zu bearbeiten, aber bitte beachten Sie, dass dies je nach Nachfrage und unserer aktuellen Kapazität variieren kann. Seien Sie versichert, wir werden Sie benachrichtigen, sobald es ein Update zu Ihrem Bewerbungsstatus gibt. Vielen Dank für Ihre Geduld!"
+      },
+      {
+        "question": "Benötige ich eine bestimmte Anzahl an Followern, um Huerray beizutreten?",
+        "answer": "Nein. Sie haben vielleicht nicht einmal Social Media und das ist völlig in Ordnung. Alles, was Sie tun müssen, ist Content zu erstellen, um bezahlt zu werden."
+      },
+      {
+        "question": "Muss ich auf Social-Media-Kanälen posten?",
+        "answer": "Nein. Alles, was Sie tun müssen, ist den Content auf die Huerray-Plattform hochzuladen."
+      },
+      {
+        "question": "Muss ich bezahlen, um beizutreten?",
+        "answer": "Nein, Trend ist 100% kostenlos für Creators."
+      },
+      {
+        "question": "Wie finde ich Aufträge?",
+        "answer": "Sie wählen die Projekte von Marken aus, die zu Ihrer persönlichen Ästhetik passen, und bewerben sich für diese Partnerschaften. Die Anwendung wird jeden Tag mit neuen Partnerschaften aktualisiert. Arbeiten Sie nur mit Marken, die Sie möchten!"
+      },
+      {
+        "question": "Welche Art von Aufträgen kann ich auf Trend finden?",
+        "answer": "Foto- und Videojobs sind unsere Stärke. Produktfotografie, Lifestyle-Fotos, Produkt-in-Action-Videos, Unboxing-Videos, Testimonial-Videos, Portrait-Fotos. Alle Inhalte, die E-Commerce-Marken nutzen können."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Bereit für Ihr erstes UGC-Video?",
+    "buttonText": "Jetzt registrieren"
+  }
+}

@@ -13,15 +13,15 @@
 }
 
 /* Category Pills */
-.content-objectives__pills {
+.pills {
   @apply flex flex-wrap gap-4 justify-center mb-16 max-w-[1000px] mx-auto;
 }
 
-.content-objectives__pill {
+.pill {
   @apply cursor-pointer transition-all;
 }
 
-.content-objectives__pill--active {
+.pill--active {
   @apply bg-burgundy-100 border-burgundy-200;
 }
 

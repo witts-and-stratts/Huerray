@@ -20,10 +20,12 @@
 @import '../styles/creators-cta.css';
 @import '../styles/creators-faq.css';
 @import '../styles/faq.css';
+@import '../styles/pricing.css';
 
 :root {
   --rounded-clip-path: url(#rounded-clip);
   --square-rounded-clip-path: url(#square-rounded-clip);
+  --orange-wavy-background: url('/images/orange-wavy-background.jpg');
 }
 
 body {

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { TextListItem } from '../ui/TextListItem';
 import { TextList } from '../ui/TextList';
@@ -26,24 +27,25 @@ const paymentCards = [
 ];
 
 export function BrandsMatch() {
+  const t = useTranslations('brands.match');
+
   return (
     <section className='section-card section-card--light section-card--spaced'>
       <div className='section-card__container'>
         {/* Left Content */ }
         <div className='section-card__content'>
 
-          <span className='section-card__pill'>Matching</span>
+          <span className='section-card__pill'>{t('pill')}</span>
 
           <h2 className='section-card__title gradient-text'>
-            Match with the right creators for your brand
+            {t('title')}
           </h2>
 
           <p className='section-card__description'>
-            Our matching process means 92% of creator matches are approved in
-            the first round.
+            {t('description')}
           </p>
 
-          <TextList list={ [ 'Fully opted-in and verified network of creators', 'A large network of diverse creators from underrepresented communities and niche categories' ] } />
+          <TextList list={ [ t('listItems.item1'), t('listItems.item2') ] } />
         </div>
 
         {/* Right Image with Cards */ }
@@ -70,7 +72,7 @@ export function BrandsMatch() {
                 </div>
                 <div className='brands-match__card-content'>
                   <div className='brands-match__card-title'>
-                    Payment made
+                    {t('paymentMade')}
                     { card.hasCheckbox && (
                       <span className='brands-match__card-checkbox'>
                         <svg

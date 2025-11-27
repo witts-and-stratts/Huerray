@@ -1,0 +1,123 @@
+{
+  "hero": {
+    "title": "Pay for UGC, not hidden fees",
+    "subtitle": "Every dollar goes toward a scalable, on-brand UGC that drives results, not platform fees"
+  },
+  "cards": {
+    "disclaimer": "All prices are for one video, excluding VAT.",
+    "buttonText": "Create a brief",
+    "short": {
+      "tag": "Short",
+      "title": "15 Seconds",
+      "price": "€149.99",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    },
+    "medium": {
+      "tag": "Medium",
+      "title": "30 Seconds",
+      "price": "€269.99",
+      "features": [
+        "Instagram-Reel",
+        "TikTok-Ads",
+        "Snapchat-Ad",
+        "Live-Shopping",
+        "Landing-page"
+      ]
+    },
+    "long": {
+      "tag": "Long",
+      "title": "60 Seconds",
+      "price": "€349.99",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    }
+  },
+  "features": {
+    "title": "Same great features for all plans",
+    "items": [
+      {
+        "title": "Unlimited project requests",
+        "text": "From unboxing & testimonial videos to product & model photography - get the content you need."
+      },
+      {
+        "title": "Review applications from diverse creators",
+        "text": "Every age, race, gender, and vibe, Huerray has a content creator ideal for your brand."
+      },
+      {
+        "title": "No creator negotiations",
+        "text": "Huerray creators work on a set budget for all of your projects."
+      },
+      {
+        "title": "Full licensing & distribution rights to your content",
+        "text": "100% licensing & distribution rights to use on social, websites, ads, & more."
+      },
+      {
+        "title": "Realtime feedback",
+        "text": "Exchange feedback with your creators using our in-built communication feature. Make adjustments where needed, or refine your requirements."
+      }
+    ]
+  },
+  "extra": {
+    "ai": {
+      "subtitle": "State of the art/next-gen",
+      "title": "AI Generated Videos",
+      "priceLabel": "From",
+      "price": "€79.99",
+      "buttonText": "Create a brief"
+    },
+    "enterprise": {
+      "badge": "Extra + Managed",
+      "title": "Enterprise Plan",
+      "description": "Need more generated content? Talk to our team",
+      "features": [
+        "Request service",
+        "Discuss requirements",
+        "Receive a customised offer",
+        "Ready for takeoff"
+      ],
+      "buttonText": "Book A Call"
+    }
+  },
+  "faqs": {
+    "title": "Ask us Questions",
+    "items": [
+      {
+        "question": "How long does it take for my creator application to be reviewed?",
+        "answer": "Due to the high volume of applications we receive, the review process may take some time. We strive to process applications as quickly as possible, but please note that it can vary based on demand and our current capacity. Rest assured, we'll notify you as soon as there's an update on your application status. Thank you for your patience!"
+      },
+      {
+        "question": "Do I need a certain amount of followers to join Huerray?",
+        "answer": "No. You might not even have social media and that's totally fine. All you have to do is shoot content to get paid."
+      },
+      {
+        "question": "Do I have to post on social channels?",
+        "answer": "No. All you have to do is upload the content to the Huerray platform."
+      },
+      {
+        "question": "Do I have to pay to join?",
+        "answer": "No, Trend is 100% free for creators."
+      },
+      {
+        "question": "How do I find gigs?",
+        "answer": "You choose the projects from brands that align with your personal aesthetic and apply for those partnerships. Every day the application is updated with new partnerships. Only work with brands you want to!"
+      },
+      {
+        "question": "What kind of gigs can I find on Trend?",
+        "answer": "Photo and video jobs are our forte. Product photography, lifestyle photos, product in action videos, unboxing videos, testimonial videos, portrait style photos. All content that ecommerce brands can leverage."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready for your first UGC video?",
+    "buttonText": "Register now"
+  }
+}

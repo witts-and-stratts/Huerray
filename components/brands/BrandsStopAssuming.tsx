@@ -1,28 +1,30 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { TextList } from '../ui/TextList';
 
-const listItems = [
-  'Track your campaign and see how it performs',
-  'Campaign walkthroughs and insights on all your projects/briefs',
-];
-
 export function BrandsStopAssuming() {
+  const t = useTranslations('brands.stopAssuming');
+
+  const listItems = [
+    t('listItems.item1'),
+    t('listItems.item2'),
+  ];
+
   return (
     <section className='section-card section-card--pink'>
       <div className='section-card__container'>
         {/* Left - Content */ }
         <div className='section-card__content section-card__content--left'>
-          <span className='section-card__pill'>Measurement</span>
+          <span className='section-card__pill'>{t('pill')}</span>
 
           <h2 className='section-card__title gradient-text'>
-            Stop assuming what&apos;s working
+            {t('title')}
           </h2>
 
           <p className='section-card__description'>
-            Keep a pulse on what&apos;s happening during the creative process,
-            with constant feedback and updates.
+            {t('description')}
           </p>
 
           <TextList list={ listItems } />
@@ -39,7 +41,7 @@ export function BrandsStopAssuming() {
           />
           <div className='brands-stop__chart'>
             <div className='brands-stop__chart-title'>
-              Content Performance
+              {t('contentPerformance')}
             </div>
             <div className='brands-stop__chart-value'>
               89%

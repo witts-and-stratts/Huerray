@@ -265,15 +265,15 @@ export function ContentObjectives() {
       <h4 className='content-objectives__subtitle'>{ t( 'subtitle' ) }</h4>
 
       {/* Category Pills */ }
-      <div className='content-objectives__pills'>
+      <div className='pills'>
         { contentCategories.map( ( category ) => (
           <Badge
             key={ category }
             variant='pill'
             onClick={ () => setSelectedCategory( category ) }
-            className={ `content-objectives__pill ${ selectedCategory === category
-                ? 'content-objectives__pill--active'
-                : ''
+            className={ `pill ${ selectedCategory === category
+              ? 'pill--active'
+              : ''
               }` }
           >
             { t(
@@ -307,10 +307,10 @@ export function ContentObjectives() {
                   key={ `${ category }-${ i }` }
                   variants={ itemVariants }
                   className={ `content-objectives__item ${ i >= 9
-                      ? 'content-objectives__item--desktop-only'
-                      : i === 8
-                        ? 'content-objectives__item--mobile-desktop'
-                        : ''
+                    ? 'content-objectives__item--desktop-only'
+                    : i === 8
+                      ? 'content-objectives__item--mobile-desktop'
+                      : ''
                     }` }
                 >
                   <AnimatedSlide

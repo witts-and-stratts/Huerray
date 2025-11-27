@@ -9,7 +9,7 @@
 }
 
 .faq__question {
-  @apply w-full text-h6 flex items-center justify-between py-2 px-4 text-left font-regular hover:bg-orange-100/60 transition-colors duration-200 text-deep-maroon;
+  @apply w-full text-h6 flex items-center justify-between py-2 px-4 text-left font-medium hover:bg-orange-100/60 transition-colors duration-200 text-deep-maroon;
 }
 
 .faq__icon {

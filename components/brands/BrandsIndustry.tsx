@@ -1,8 +1,11 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 export function BrandsIndustry() {
+  const t = useTranslations('brands.industry');
+
   const categories = [
     'sport',
     'lifestyle',
@@ -19,7 +22,7 @@ export function BrandsIndustry() {
       <div className='creators-section__container'>
         <div className='creators-section__content'>
           <h2 className='gradient-text creators-section__title'>
-            Content for every industry
+            {t('title')}
           </h2>
         </div>
 

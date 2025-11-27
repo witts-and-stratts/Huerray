@@ -1,29 +1,30 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { TextListItem } from '../ui/TextListItem';
 import { TextList } from '../ui/TextList';
 
-const listItems = [
-  'Too busy? Let us handle back and forth with creators',
-  "Campaign reviews before your approval, so you don't have to go through request that are not aligned",
-  "We manage live campaigns and deliverables for you, so you don't miss your launch date",
-];
-
 export function BrandsExpertSupport() {
+  const t = useTranslations('brands.expertSupport');
+
+  const listItems = [
+    t('listItems.item1'),
+    t('listItems.item2'),
+    t('listItems.item3'),
+  ];
+
   return (
     <section className='section-card section-card--maroon -mt-40 md:-mt-20 z-0 pt-60!'>
       <div className='section-card__container'>
         {/* Left - Content */ }
         <div className='section-card__content'>
-          <span className='section-card__pill'>Dedicated Support</span>
+          <span className='section-card__pill'>{t('pill')}</span>
 
-          <h2 className='section-card__title gradient-text'>Expert level support</h2>
+          <h2 className='section-card__title gradient-text'>{t('title')}</h2>
 
           <p className='section-card__description'>
-            Our team is here to ensure that you&apos;re matched with the right
-            creators, deliverables are handed off on time, and to make sure
-            that your campaign and creative strategy is a success.
+            {t('description')}
           </p>
           <TextList list={ listItems } />
         </div>

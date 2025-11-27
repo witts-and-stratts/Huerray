@@ -1,0 +1,123 @@
+{
+  "hero": {
+    "title": "Payez pour l'UGC, pas pour les frais cachés",
+    "subtitle": "Chaque dollar est investi dans un UGC évolutif et conforme à la marque qui génère des résultats, pas dans les frais de plateforme"
+  },
+  "cards": {
+    "disclaimer": "Tous les prix sont pour une vidéo, hors TVA.",
+    "buttonText": "Créer un brief",
+    "short": {
+      "tag": "Court",
+      "title": "15 Secondes",
+      "price": "À partir de 149,99 €",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    },
+    "medium": {
+      "tag": "Moyen",
+      "title": "30 Secondes",
+      "price": "À partir de 269,99 €",
+      "features": [
+        "Instagram-Reel",
+        "TikTok-ADs",
+        "Snapchat-Ad",
+        "Live-Shopping",
+        "Landing-page"
+      ]
+    },
+    "long": {
+      "tag": "Long",
+      "title": "60 Secondes",
+      "price": "À partir de 349,99 €",
+      "features": [
+        "TikTok-Video",
+        "Instagram-Story & Reels",
+        "Pinterest-Video",
+        "Snapchat-Ad"
+      ]
+    }
+  },
+  "features": {
+    "title": "Les mêmes fonctionnalités exceptionnelles pour tous les plans",
+    "items": [
+      {
+        "title": "Demandes de projets illimitées",
+        "text": "Des vidéos de déballage et témoignages à la photographie de produits et de mannequins - obtenez le contenu dont vous avez besoin."
+      },
+      {
+        "title": "Examinez les candidatures de créateurs diversifiés",
+        "text": "Tous les âges, origines, genres et vibes, Huerray a un créateur de contenu idéal pour votre marque."
+      },
+      {
+        "title": "Pas de négociations avec les créateurs",
+        "text": "Les créateurs Huerray travaillent avec un budget fixe pour tous vos projets."
+      },
+      {
+        "title": "Droits complets de licence et de distribution pour votre contenu",
+        "text": "100% de droits de licence et de distribution pour une utilisation sur les réseaux sociaux, les sites web, les publicités et plus encore."
+      },
+      {
+        "title": "Feedback en temps réel",
+        "text": "Utilisez la fonctionnalité de communication intégrée pour échanger des commentaires avec vos créateurs, leur poser des questions sur leurs livrables, apporter des ajustements si nécessaire ou affiner vos exigences"
+      }
+    ]
+  },
+  "extra": {
+    "ai": {
+      "subtitle": "À la pointe de la technologie/prochaine génération",
+      "title": "Vidéos générées par IA",
+      "priceLabel": "À partir de",
+      "price": "€79,99",
+      "buttonText": "Créer un brief"
+    },
+    "enterprise": {
+      "badge": "Extra + Géré",
+      "title": "Plan Entreprise",
+      "description": "Besoin de plus de contenu généré ? Discutez avec notre équipe",
+      "features": [
+        "Demander un service",
+        "Discuter des exigences",
+        "Recevoir une offre personnalisée",
+        "Prêt au décollage"
+      ],
+      "buttonText": "Réserver un appel"
+    }
+  },
+  "faqs": {
+    "title": "Posez-nous des questions",
+    "items": [
+      {
+        "question": "Combien de temps faut-il pour que ma candidature de créateur soit examinée ?",
+        "answer": "En raison du volume élevé de candidatures que nous recevons, le processus d'examen peut prendre un certain temps. Nous nous efforçons de traiter les candidatures aussi rapidement que possible, mais veuillez noter que cela peut varier en fonction de la demande et de notre capacité actuelle. Soyez assuré que nous vous informerons dès qu'il y aura une mise à jour sur le statut de votre candidature. Merci pour votre patience !"
+      },
+      {
+        "question": "Ai-je besoin d'un certain nombre d'abonnés pour rejoindre Huerray ?",
+        "answer": "Non. Vous n'avez peut-être même pas de réseaux sociaux et c'est tout à fait bien. Tout ce que vous avez à faire, c'est créer du contenu pour être payé."
+      },
+      {
+        "question": "Dois-je publier sur les réseaux sociaux ?",
+        "answer": "Non. Tout ce que vous avez à faire, c'est télécharger le contenu sur la plateforme Huerray."
+      },
+      {
+        "question": "Dois-je payer pour rejoindre ?",
+        "answer": "Non, Trend est 100% gratuit pour les créateurs."
+      },
+      {
+        "question": "Comment trouver des missions ?",
+        "answer": "Vous choisissez les projets de marques qui correspondent à votre esthétique personnelle et postulez pour ces partenariats. L'application est mise à jour chaque jour avec de nouveaux partenariats. Ne travaillez qu'avec les marques que vous souhaitez !"
+      },
+      {
+        "question": "Quel type de missions puis-je trouver sur Trend ?",
+        "answer": "Les emplois photo et vidéo sont notre spécialité. Photographie de produits, photos lifestyle, vidéos de produits en action, vidéos de déballage, vidéos de témoignage, photos de style portrait. Tout le contenu que les marques e-commerce peuvent exploiter."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Prêt pour votre première vidéo UGC ?",
+    "buttonText": "S'inscrire maintenant"
+  }
+}

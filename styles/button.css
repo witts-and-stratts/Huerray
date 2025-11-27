@@ -22,8 +22,11 @@
   @apply ring-destructive/40;
 }
 
+.button--hero::after,
+.button--hero-alt::after {
+  @apply content-[''] absolute -bottom-2 right-0 top-auto h-full w-full border-b-[3px] border-l-[3px] border-r-[3px] border-transparent pointer-events-none rounded-full;
+}
 .button--hero::after {
-  @apply content-[''] absolute -bottom-2 -left-[1%] right-0 top-auto h-full w-[102%] border-b-[3px] border-l-[3px] border-r-[3px] border-transparent pointer-events-none rounded-full;
   background: linear-gradient(
       to right,
       rgba(255, 255, 255, 1),
@@ -33,6 +36,22 @@
     border-box;
   mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.button--hero-alt::after {
+  background: linear-gradient(
+      to right,
+      var(--color-dark-burgundy),
+      #d94b91,
+      var(--color-dark-burgundy)
+    )
+    border-box;
+  mask: linear-gradient(var(--color-dark-burgundy) 0 0) padding-box,
+    linear-gradient(var(--color-dark-burgundy) 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(var(--color-dark-burgundy) 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -92,8 +111,13 @@
 }
 
 /* Variant: Hero */
-.button--hero {
-  @apply bg-white text-deep-maroon hover:bg-white/90 font-secondary font-normal text-lg shadow-[0_3px_0_0_rgba(0,0,0,0.1)];
+.button--hero,
+.button--hero-alt {
+  @apply bg-white text-deep-maroon hover:bg-white/90 font-secondary font-normal text-lg h-12!;
+}
+
+.button--hero-alt {
+  @apply bg-dark-burgundy text-white hover:bg-dark-burgundy/90;
 }
 
 /* Size: Default */
