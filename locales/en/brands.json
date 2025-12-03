@@ -69,7 +69,17 @@
     "buttonText": "Get started"
   },
   "industry": {
-    "title": "Content for every industry"
+    "title": "Content for every industry",
+    "categories": {
+      "sport": "Sport",
+      "lifestyle": "Lifestyle",
+      "fashion": "Fashion",
+      "beauty": "Beauty",
+      "skincare": "Skincare",
+      "food": "Food",
+      "tech": "Tech",
+      "fitness": "Fitness"
+    }
   },
   "faq": {
     "heading": "Frequently Asked Questions",

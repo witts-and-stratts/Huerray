@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "title": "Huerray : Chaque Idée. Chaque Créateur.",
+    "subtitle": "Connecter les marques avec des créateurs authentiques pour des collaborations significatives"
+  },
+  "why": {
+    "pill": "Sur Pourquoi",
+    "title": "Le marketing qui attend plus que ce que les gens peuvent donner est une recette pour le désastre",
+    "description": "Nous croyons en des partenariats durables avec les créateurs qui respectent le temps, la créativité et la voix authentique. Notre plateforme garantit une rémunération équitable et des attentes réalistes pour chaque collaboration."
+  },
+  "whatWeDo": {
+    "pill": "Ce Que Nous Faisons",
+    "title": "Nous connectons les marques avec des créateurs qui se soucient vraiment de leurs produits",
+    "description": "Huerray est une plateforme qui met en relation les marques avec les créateurs parfaits pour un contenu authentique. Nous gérons tout, de la découverte au paiement, afin que vous puissiez vous concentrer sur ce qui compte : créer un excellent contenu.",
+    "features": [
+      "Correspondance intelligente des créateurs",
+      "Tarification transparente",
+      "Paiements sécurisés",
+      "Gestion des droits de contenu"
+    ]
+  },
+  "values": {
+    "title": "Nos Valeurs",
+    "items": [
+      {
+        "title": "Authenticité d'abord",
+        "description": "Nous croyons en des connexions authentiques entre les marques et les créateurs"
+      },
+      {
+        "title": "Rémunération équitable",
+        "description": "Les créateurs méritent d'être payés équitablement pour leur travail et leur influence"
+      },
+      {
+        "title": "Transparence",
+        "description": "Des attentes claires et une communication honnête à chaque étape"
+      },
+      {
+        "title": "Qualité plutôt que quantité",
+        "description": "Nous nous concentrons sur des collaborations significatives, pas seulement sur les chiffres"
+      }
+    ]
+  },
+  "story": {
+    "pill": "Notre Histoire",
+    "title": "Huerray réécrit les 2-3 références que les marques attirent et connectent à cette fin",
+    "subtitle": "Un voyage de la frustration à l'innovation",
+    "content": "Fondée par des créateurs et des spécialistes du marketing qui ont vécu de première main les points douloureux du marketing d'influence, Huerray a été créée pour résoudre de vrais problèmes. Nous avons créé une plateforme qui respecte à la fois les marques et les créateurs, rendant les collaborations plus fluides, plus équitables et plus efficaces."
+  },
+  "team": {
+    "title": "Rencontrez l'Équipe",
+    "description": "Les personnes derrière Huerray"
+  },
+  "cta": {
+    "pill": "Prêt à être équipé",
+    "title": "Prêt pour de grandes collaborations adaptées ?",
+    "buttonText": "Commencer"
+  }
+}

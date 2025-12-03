@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "title": "Huerray: Every Idea. Every Creator.",
+    "subtitle": "Connecting brands with authentic creators for meaningful collaborations"
+  },
+  "why": {
+    "pill": "On Why",
+    "title": "Marketing that expects more than people can give is a recipe for disaster",
+    "description": "We believe in sustainable creator partnerships that respect time, creativity, and authentic voice. Our platform ensures fair compensation and realistic expectations for every collaboration."
+  },
+  "whatWeDo": {
+    "pill": "What We Do",
+    "title": "We connect brands with creators who actually care about their products",
+    "description": "Huerray is a platform that matches brands with the perfect creators for authentic content. We handle everything from discovery to payment, so you can focus on what matters: creating great content.",
+    "features": [
+      "Smart creator matching",
+      "Transparent pricing",
+      "Secure payments",
+      "Content rights management"
+    ]
+  },
+  "values": {
+    "title": "Our Values",
+    "items": [
+      {
+        "title": "Authenticity First",
+        "description": "We believe in genuine connections between brands and creators"
+      },
+      {
+        "title": "Fair Compensation",
+        "description": "Creators deserve to be paid fairly for their work and influence"
+      },
+      {
+        "title": "Transparency",
+        "description": "Clear expectations and honest communication at every step"
+      },
+      {
+        "title": "Quality Over Quantity",
+        "description": "We focus on meaningful collaborations, not just numbers"
+      }
+    ]
+  },
+  "story": {
+    "pill": "Our Story",
+    "title": "Huerray is Rewriting the 2-3 Referrals Brands Attract and Connect at This End",
+    "subtitle": "A journey from frustration to innovation",
+    "content": "Founded by creators and marketers who experienced the pain points of influencer marketing firsthand, Huerray was built to solve real problems. We've created a platform that respects both brands and creators, making collaborations smoother, fairer, and more effective."
+  },
+  "team": {
+    "title": "Meet the Team",
+    "description": "The people behind Huerray"
+  },
+  "cta": {
+    "pill": "Ready to get fitted",
+    "title": "Ready for great fitted collaborations?",
+    "buttonText": "Get Started"
+  }
+}

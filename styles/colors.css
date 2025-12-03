@@ -239,4 +239,9 @@
     background-image: var(--orange-wavy-background);
     background-size: cover;
   }
+
+  .bg-textured-gradient-background {
+    background-image: url('/images/textured-gradient-background.jpg');
+    background-size: cover;
+  }
 }

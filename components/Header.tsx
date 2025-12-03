@@ -7,6 +7,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { UserMenu } from '@/components/UserMenu';
 import Link from 'next/link';
+import { HuerrayLogo } from './HuerrayLogo';
 
 const imgLogo = '/images/logo/huerray-logo.svg';
 
@@ -19,20 +20,20 @@ export function Header() {
     { href: `/${locale}/creators`, label: t('nav.forCreators') },
     { href: `/${locale}/brands`, label: t('nav.forBrands') },
     { href: `/${locale}/pricing`, label: t('nav.pricing') },
-    { href: '#resources', label: t('nav.resources') },
   ];
 
   return (
     <header className='header'>
       <Link href={`/${locale}`}>
-        <Image
+        {/* <Image
           alt='Huerray Logo'
           className='logo'
           src={imgLogo}
           width={160}
           height={45}
           priority={true}
-        />
+        /> */}
+        <HuerrayLogo className='logo' />
       </Link>
 
       {/* Desktop Navigation */}

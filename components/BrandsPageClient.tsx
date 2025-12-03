@@ -8,7 +8,6 @@ import { BrandsCTA } from './brands/BrandsCTA';
 import { BrandsExpertSupport } from './brands/BrandsExpertSupport';
 import { BrandsFAQ } from './brands/BrandsFAQ';
 import { BrandsHero } from './brands/BrandsHero';
-import { BrandsIndustry } from './brands/BrandsIndustry';
 import { BrandsMatch } from './brands/BrandsMatch';
 import { BrandsScroller } from './brands/BrandsScroller';
 import { BrandsStopAssuming } from './brands/BrandsStopAssuming';

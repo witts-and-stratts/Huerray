@@ -50,7 +50,13 @@ export function PricingCards() {
       </section>
       <section className='pricing-extra'>
         <div className='pricing-extra__video-card'>
-          <video className='pricing-extra__video' autoPlay muted loop>
+          <video
+            className='pricing-extra__video'
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
             <source src='/videos/ai-generated-content.mp4' type='video/mp4' />
             <source src='/videos/ai-generated-content.webm' type='video/webm' />
           </video>
@@ -58,9 +64,7 @@ export function PricingCards() {
             <h3 className='pricing-extra__video-subtitle'>
               {tExtra('ai.subtitle')}
             </h3>
-            <h2 className='pricing-extra__video-title'>
-              {tExtra('ai.title')}
-            </h2>
+            <h2 className='pricing-extra__video-title'>{tExtra('ai.title')}</h2>
             <div className='pricing-extra__video-price-wrapper'>
               <span>{tExtra('ai.priceLabel')}</span>
               <div className='pricing-card__price'>{tExtra('ai.price')}</div>

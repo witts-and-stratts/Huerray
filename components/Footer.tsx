@@ -29,7 +29,7 @@ export function Footer() {
       { label: t('links.helpCenter'), href: '#' },
     ],
     platform: [
-      { label: t('links.aboutHuerray'), href: '#' },
+      { label: t('links.aboutHuerray'), href: '/about' },
       { label: t('links.siteNotice'), href: '#' },
       { label: t('links.privacyPolicy'), href: '#' },
       { label: t('links.tcCreators'), href: '#' },
@@ -41,10 +41,8 @@ export function Footer() {
     <footer className='footer'>
       {/* Left: CTA */}
       <div className='footer__cta'>
-        <h2 className='footer__cta-title gradient-text'>
-          {t('cta.title')}
-        </h2>
-        <Button variant='hero' className='min-w-60'>
+        <h2 className='footer__cta-title gradient-text'>{t('cta.title')}</h2>
+        <Button variant='heroAlt' className='min-w-70'>
           {t('cta.button')}
         </Button>
       </div>
@@ -114,9 +112,7 @@ export function Footer() {
             height={60}
             className='footer__logo'
           />
-          <p className='footer__copyright'>
-            {t('copyright')}
-          </p>
+          <p className='footer__copyright'>{t('copyright')}</p>
         </div>
 
         {/* Language Selector and Social Icons */}

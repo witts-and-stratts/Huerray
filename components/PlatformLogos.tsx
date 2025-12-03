@@ -54,12 +54,12 @@ const platformLogos = [
   },
 ];
 
-export function PlatformLogos() {
+export function PlatformLogos({ title }: { title?: string }) {
   const t = useTranslations('home.platformLogos');
 
   return (
     <section className='px-4 lg:px-10 py-16 bg-white overflow-hidden'>
-      <h5 className='h5 text-center mb-8 text-slate'>{t('title')}</h5>
+      <h5 className='h5 text-center mb-8 text-slate'>{title ?? t('title')}</h5>
       <div className='relative'>
         <div className='flex gap-16 animate-scroll-platforms'>
           {/* Duplicate logos for seamless loop */}

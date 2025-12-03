@@ -25,7 +25,18 @@ const creators: Array<[string, [string, string]?]> = [
   ],
   ['/images/creators/optimized/creator-19.jpg'],
 ];
-export function CreatorsScroller() {
+
+interface CreatorsScrollerProps {
+  perPageMobile?: number;
+  perPageTablet?: number;
+  perPageDesktop?: number;
+}
+
+export function CreatorsScroller({
+  perPageMobile = 2.5,
+  perPageTablet = 3.5,
+  perPageDesktop = 4.5,
+}: CreatorsScrollerProps) {
   return (
     <section className='creators-scroller'>
       <Splide
@@ -33,7 +44,7 @@ export function CreatorsScroller() {
           type: 'loop',
           drag: 'free',
           focus: 'center',
-          perPage: 2.5,
+          perPage: perPageMobile,
           perMove: 1,
           gap: '1.5rem',
           pagination: false,
@@ -48,15 +59,15 @@ export function CreatorsScroller() {
           },
           breakpoints: {
             768: {
-              perPage: 3.5,
+              perPage: perPageTablet,
               gap: '2.5rem',
             },
             1024: {
-              perPage: 4.5,
+              perPage: perPageDesktop,
               gap: '3.5rem',
             },
             1280: {
-              perPage: 4.5,
+              perPage: perPageDesktop,
               gap: '4rem',
             },
           },

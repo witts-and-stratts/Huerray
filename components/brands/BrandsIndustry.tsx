@@ -6,7 +6,7 @@ import Image from 'next/image';
 export function BrandsIndustry() {
   const t = useTranslations('brands.industry');
 
-  const categories = [
+  const categoryKeys = [
     'sport',
     'lifestyle',
     'fashion',
@@ -16,6 +16,8 @@ export function BrandsIndustry() {
     'tech',
     'fitness',
   ];
+
+  const categories = categoryKeys.map((key) => t(`categories.${key}`));
 
   return (
     <section className='creators-section creators-section--light creators-section--spaced'>
