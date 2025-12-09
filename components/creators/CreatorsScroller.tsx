@@ -8,22 +8,22 @@ import '@splidejs/react-splide/css';
 import { cn } from '@/lib/utils';
 
 const creators: Array<[string, [string, string]?]> = [
-  ['/images/creators/optimized/creator-10.jpg'],
-  ['/images/creators/optimized/creator-11.jpg'],
-  ['/images/creators/optimized/creator-12.jpg'],
-  ['/images/creators/optimized/creator-13.jpg'],
-  ['/images/creators/optimized/creator-14.jpg'],
-  ['/images/creators/optimized/creator-15.jpg'],
-  ['/images/creators/optimized/creator-16.jpg'],
+  ['/images/creators/optimized/creator-10.webp'],
+  ['/images/creators/optimized/creator-11.webp'],
+  ['/images/creators/optimized/creator-12.webp'],
+  ['/images/creators/optimized/creator-13.webp'],
+  ['/images/creators/optimized/creator-14.webp'],
+  ['/images/creators/optimized/creator-15.webp'],
+  ['/images/creators/optimized/creator-16.webp'],
   [
-    '/images/creators/optimized/creator-17.jpg',
+    '/images/creators/optimized/creator-17.webp',
     ['arrow-fashion.svg', 'bottom-right'],
   ],
   [
-    '/images/creators/optimized/creator-18.jpg',
+    '/images/creators/optimized/creator-18.webp',
     ['arrow-health-and-wellness.svg', 'top-right'],
   ],
-  ['/images/creators/optimized/creator-19.jpg'],
+  ['/images/creators/optimized/creator-19.webp'],
 ];
 
 interface CreatorsScrollerProps {

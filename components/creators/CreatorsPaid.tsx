@@ -11,7 +11,7 @@ export function CreatorsPaid() {
       <div className='section-card__container section-card__container--reverse'>
         <div className='section-card__image'>
           <Image
-            src='/images/creators/creator-20.jpg'
+            src='/images/creators/creator-20.webp'
             alt='Get paid on time'
             width={ 545 }
             height={ 470 }

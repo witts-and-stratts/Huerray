@@ -4,12 +4,12 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 const benefitImages = [
-  '/images/content/content-1.jpg',
-  '/images/content/content-2.jpg',
-  '/images/content/content-3.jpg',
-  '/images/content/content-4.jpg',
-  '/images/content/content-5.jpg',
-  '/images/content/content-6.jpg',
+  '/images/content/content-1.webp',
+  '/images/content/content-2.webp',
+  '/images/content/content-3.webp',
+  '/images/content/content-4.webp',
+  '/images/content/content-5.webp',
+  '/images/content/content-6.webp',
 ];
 
 export function CreatorsBenefits() {

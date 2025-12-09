@@ -7,15 +7,15 @@ import Image from 'next/image';
 
 // Creator images for Hero section
 const heroColumn1Images = [
-  '/images/creators/creator-1.jpg',
-  '/images/creators/creator-2.jpg',
-  '/images/creators/creator-3.jpg',
+  '/images/creators/creator-1.webp',
+  '/images/creators/creator-2.webp',
+  '/images/creators/creator-3.webp',
 ];
 
 const heroColumn2Images = [
-  '/images/creators/creator-4.jpg',
-  '/images/creators/creator-5.jpg',
-  '/images/creators/creator-6.jpg',
+  '/images/creators/creator-4.webp',
+  '/images/creators/creator-5.webp',
+  '/images/creators/creator-6.webp',
 ];
 
 export function Hero() {

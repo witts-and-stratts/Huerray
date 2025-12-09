@@ -30,7 +30,7 @@ export function BrandsIndustry() {
 
         <div className='creators-section__image'>
           <Image
-            src='/images/creators/source/main girl.jpg'
+            src='/images/creators/source/main girl.webp'
             alt='Creator collaboration'
             width={ 545 }
             height={ 470 }

@@ -27,7 +27,7 @@ export function CreatorsSection() {
           {/* Main girl image */}
           <div className='creators-section__main-image'>
             <Image
-              src='/images/creators/main-girl.jpg'
+              src='/images/creators/main-girl.webp'
               alt='Creator'
               width={500}
               height={500}
@@ -36,7 +36,7 @@ export function CreatorsSection() {
           {/* Makeup girl image - top right */}
           <div className='creators-section__secondary-image'>
             <Image
-              src='/images/creators/makeup-girl.jpg'
+              src='/images/creators/makeup-girl.webp'
               alt='Creator'
               width={177}
               height={153}
@@ -46,7 +46,7 @@ export function CreatorsSection() {
           <div className='creators-section__payment-card'>
             <div className='creators-section__payment-avatar'>
               <Image
-                src='/images/creators/payment-avatar.jpg'
+                src='/images/creators/payment-avatar.webp'
                 alt='Avatar'
                 width={93}
                 height={93}

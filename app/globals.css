@@ -22,11 +22,13 @@
 @import '../styles/faq.css';
 @import '../styles/pricing.css';
 @import '../styles/about.css';
+@import '../styles/career.css';
+
 
 :root {
   --rounded-clip-path: url(#rounded-clip);
   --square-rounded-clip-path: url(#square-rounded-clip);
-  --orange-wavy-background: url('/images/orange-wavy-background.jpg');
+  --orange-wavy-background: url('/images/orange-wavy-background.webp');
   --logo-text-fill: #9c1e5a;
 }
 
@@ -34,8 +36,12 @@ body {
   background: var(--base-white);
   color: var(--slate-800);
   font-family: var(--body-font-family);
-  @apply md:pb-180;
   overflow-x: hidden;
+  @apply md:pb-180;
+
+  &:has(.footer-normal) {
+    @apply md:pb-0;
+  }
 }
 
 .body-content {

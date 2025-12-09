@@ -26,7 +26,7 @@ export function BrandsBeyondFeed() {
         <div className='section-card__image'>
           <div className='section-card__main-image'>
             <Image
-              src='/images/brands/beyond-feed/f5ca756a549dbd9088646531c76a8dab0d4f32f4.png'
+              src='/images/brands/beyond-feed/f5ca756a549dbd9088646531c76a8dab0d4f32f4.webp'
               alt='Creators traveling'
               width={ 545 }
               height={ 470 }

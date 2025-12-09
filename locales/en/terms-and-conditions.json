@@ -1,0 +1,124 @@
+{
+  "page": {
+    "title": "General Terms and Conditions"
+  },
+  "seo": {
+    "title": "General Terms and Conditions",
+    "description": "General Terms and Conditions (GTC) for the use of the Huerray platform by brands and content creators.",
+    "keywords": "terms and conditions, GTC, platform terms, usage agreement, Huerray, legal terms, brand agreement"
+  },
+  "effectiveDateTitle": "Effective as of",
+  "effectiveDate": "October 21, 2025",
+  "tableOfContents": "Table of Contents",
+  "sections": [
+    {
+      "id": "preamble",
+      "title": "Preamble",
+      "content": "Thrypes operates the online platform Huerray (hereinafter \"Platform\"). Access to the Platform is provided via the website <a href='https://huerray.com'>www.huerray.com</a> (hereinafter \"Website\").<br/><br/>Thrypes enables interested companies, agencies, or brands (each hereinafter referred to as \"Brand\" or collectively as \"Brands\") to commission the creation of video, photo, or other digital content (hereinafter \"Content\") by independent, externally contracted content creators (hereinafter \"Creator\" or \"Creators\") and to acquire usage rights thereto in accordance with the following terms and conditions.<br/><br/>The Platform serves as a medium for the facilitation, execution, and management of content creation orders (\"UGC Orders\") between Brands and Creators. We provide the technical infrastructure, communication and payment processing, as well as the contractual framework necessary to ensure secure, transparent, and efficient collaboration.<br/><br/>The following General Terms and Conditions (hereinafter \"Huerray Brand GTC\") govern the use of the Platform by Brands, the legal relationship concerning the commissioning and creation of Content, as well as all other legal relationships between Thrypes and the Brand.<br/><br/>By registering or using the Platform, the Brand acknowledges these GTC as binding.",
+      "subsections": []
+    },
+    {
+      "id": "scope",
+      "title": "1. Scope of Application",
+      "content": [
+         "(1) These Huerray Brand GTC govern the legal relationship between Thrypes and the registered Brands that use the Huerray Platform to commission content creation services. <br /><br /> (2) Individually agreed terms between Thrypes and the Brand take precedence over these Brand GTC. Unless proven otherwise, a contract concluded in text form or a corresponding written confirmation by us shall be decisive for the content of such agreements. <br /><br />(3) Separate terms of use (\"Huerray Creator GTC\") apply to Creators and can be accessed via the Platform. <br /><br /> (4) Only entrepreneurs within the meaning of Section 14 of the German Civil Code (BGB) may act as Brands. An entrepreneur is a natural or legal person or a partnership with legal capacity who, when entering into a legal transaction, acts in the exercise of their commercial or independent professional activity. <br /><br /> (5) Any general terms and conditions of the Brand that conflict with or deviate from these Huerray Brand GTC shall not be recognized, even if We do not expressly object to their validity in individual cases."
+
+      ]
+    },
+    {
+      "id": "subject-of-service",
+      "title": "2. Subject of Service",
+      "content": "(1) We enable Brands to place content creation orders (\"Orders\") via the Platform. In accordance with each specific Order and the briefing provided by the Brand, Thrypes will produce the ordered digital content (\"Content\") through an externally contracted Creator or—optionally—an automated AI Creator, in line with the agreed specifications. Upon acceptance of the Content in accordance with paragraph 6 of these GTC, Thrypes grants the Brand the contractually agreed usage rights to the Content in exchange for payment as defined in paragraph 5. <br /><br /> (2) The Content is primarily intended for the Brand's online marketing purposes, including the promotion of its products or services through social media activities, websites, digital advertising campaigns, or other marketing initiatives <br /><br />(3) Access to the Platform is obtained by creating a user account (“Account”) on the website www.huerray.de and providing the necessary information. During registration, the Brand must accept these Huerray Brand GTC. After successful registration, the Brand may access and use the services offered by Us. <br /><br />(4) To initiate Content creation, the Brand submits a binding Order via the Platform to Us. We will subcontract the selected Creator or AI Creator—chosen or approved by the Brand via the Platform—to produce the Content. Once completed, the Content will be made available to the Brand electronically for download via the Platform. <br /><br />(5) The Content creation process consists of the following steps:"
+    },
+    {
+      "id": "conclusion-of-contract",
+      "title": "3. Conclusion of Contract",
+      "content": "Terms regarding how contracts are concluded between Thrypes and Brands for content creation services.",
+      "subsections": []
+    },
+    {
+      "id": "user-account",
+      "title": "4. Opening of a User Account",
+      "content": "Requirements and obligations for opening and maintaining a user account on the Huerray platform.",
+      "subsections": []
+    },
+    {
+      "id": "compensation",
+      "title": "5. Compensation, Payment, and Cancellation",
+      "content": "Payment terms, cancellation policies, and fee structures for content creation orders.",
+      "subsections": []
+    },
+    {
+      "id": "acceptance-rights",
+      "title": "6. Acceptance and Transfer of Rights",
+      "content": "Procedures for content acceptance and the transfer of usage rights from Thrypes to Brands.",
+      "subsections": []
+    },
+    {
+      "id": "production-materials",
+      "title": "7. Production Materials",
+      "content": "Terms regarding production materials provided by Brands for content creation.",
+      "subsections": []
+    },
+    {
+      "id": "conduct-obligations",
+      "title": "8. General Conduct Obligations",
+      "content": "Obligations and responsibilities of Brands when using the Huerray platform.",
+      "subsections": []
+    },
+    {
+      "id": "termination",
+      "title": "9. Termination and End of Contract",
+      "content": "Terms and conditions for terminating the contractual relationship.",
+      "subsections": []
+    },
+    {
+      "id": "warranty",
+      "title": "10. Warranty",
+      "content": "Warranty provisions and quality assurance for delivered content.",
+      "subsections": []
+    },
+    {
+      "id": "liability",
+      "title": "11. Limitation of Liability and Responsibility",
+      "content": "Liability limitations and responsibilities of Thrypes and Brands.",
+      "subsections": []
+    },
+    {
+      "id": "confidentiality",
+      "title": "12. Confidentiality",
+      "content": "Confidentiality obligations for both parties regarding information exchanged.",
+      "subsections": []
+    },
+    {
+      "id": "protection-of-rights",
+      "title": "13. Protection of Our Rights and Contractual Penalty",
+      "content": "Protection of intellectual property rights and penalties for violations.",
+      "subsections": []
+    },
+    {
+      "id": "amendments",
+      "title": "14. Amendments to the GTC",
+      "content": "Procedures for amending these terms and conditions.",
+      "subsections": []
+    },
+    {
+      "id": "data-protection",
+      "title": "15. Data Protection",
+      "content": "The data processing provisions agreed upon during registration apply.",
+      "subsections": []
+    },
+    {
+      "id": "ai-systems",
+      "title": "16. Use of AI Systems",
+      "content": "Terms regarding the use of artificial intelligence systems in content creation.",
+      "subsections": []
+    },
+    {
+      "id": "final-provisions",
+      "title": "17. Final Provisions",
+      "content": "Governing law, jurisdiction, and other final legal provisions.",
+      "subsections": []
+    }
+  ]
+}

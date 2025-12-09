@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { FooterSignupForm } from '@/components/FooterSignupForm';
+import { cn } from '@/lib/utils';
 
 const socialLinks = [
   { name: 'Facebook', icon: 'facebook', href: '#' },
@@ -13,125 +14,126 @@ const socialLinks = [
   { name: 'TikTok', icon: 'tiktok', href: '#' },
 ];
 
-export function Footer() {
-  const t = useTranslations('footer');
+export function Footer( { className }: { className?: string; } ) {
+  const t = useTranslations( 'footer' );
 
   const footerLinks = {
     services: [
-      { label: t('links.prices'), href: '#' },
-      { label: t('links.creditPacks'), href: '#' },
-      { label: t('links.managedService'), href: '#' },
+      { label: t( 'links.prices' ), href: '#' },
+      { label: t( 'links.creditPacks' ), href: '#' },
+      { label: t( 'links.managedService' ), href: '#' },
     ],
     faq: [
-      { label: t('links.faqBrands'), href: '#' },
-      { label: t('links.faqCreators'), href: '#' },
-      { label: t('links.caseStudies'), href: '#' },
-      { label: t('links.helpCenter'), href: '#' },
+      { label: t( 'links.faqBrands' ), href: '#' },
+      { label: t( 'links.faqCreators' ), href: '#' },
+      { label: t( 'links.caseStudies' ), href: '#' },
+      { label: t( 'links.helpCenter' ), href: '#' },
     ],
     platform: [
-      { label: t('links.aboutHuerray'), href: '/about' },
-      { label: t('links.siteNotice'), href: '#' },
-      { label: t('links.privacyPolicy'), href: '#' },
-      { label: t('links.tcCreators'), href: '#' },
-      { label: t('links.tcBrands'), href: '#' },
+      { label: t( 'links.aboutHuerray' ), href: '/about' },
+      { label: 'Careers', href: '/careers' },
+      { label: t( 'links.siteNotice' ), href: '#' },
+      { label: t( 'links.privacyPolicy' ), href: '/privacy-policy' },
+      { label: t( 'links.tcCreators' ), href: '#' },
+      { label: t( 'links.tcBrands' ), href: '#' },
     ],
   };
 
   return (
-    <footer className='footer'>
-      {/* Left: CTA */}
+    <footer className={ cn( 'footer', className ) }>
+      {/* Left: CTA */ }
       <div className='footer__cta'>
-        <h2 className='footer__cta-title gradient-text'>{t('cta.title')}</h2>
+        <h2 className='footer__cta-title gradient-text'>{ t( 'cta.title' ) }</h2>
         <Button variant='heroAlt' className='min-w-70'>
-          {t('cta.button')}
+          { t( 'cta.button' ) }
         </Button>
       </div>
 
-      {/* Right: Navigation  */}
+      {/* Right: Navigation  */ }
       <div className='footer__links'>
-        {/* Navigation Links */}
+        {/* Navigation Links */ }
         <div className='footer__links-grid'>
-          {/* Services */}
+          {/* Services */ }
           <div className='footer__links-column'>
-            <h4 className='footer__links-title'>{t('sections.services')}</h4>
+            <h4 className='footer__links-title'>{ t( 'sections.services' ) }</h4>
             <ul className='footer__links-list'>
-              {footerLinks.services.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} title={link.label}>
-                    {link.label}
+              { footerLinks.services.map( ( link ) => (
+                <li key={ link.label }>
+                  <a href={ link.href } title={ link.label }>
+                    { link.label }
                   </a>
                 </li>
-              ))}
+              ) ) }
             </ul>
           </div>
 
-          {/* FAQ */}
+          {/* FAQ */ }
           <div className='footer__links-column'>
-            <h4 className='footer__links-title'>{t('sections.faq')}</h4>
+            <h4 className='footer__links-title'>{ t( 'sections.faq' ) }</h4>
             <ul className='footer__links-list'>
-              {footerLinks.faq.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} title={link.label}>
-                    {link.label}
+              { footerLinks.faq.map( ( link ) => (
+                <li key={ link.label }>
+                  <a href={ link.href } title={ link.label }>
+                    { link.label }
                   </a>
                 </li>
-              ))}
+              ) ) }
             </ul>
           </div>
 
-          {/* Platform */}
+          {/* Platform */ }
           <div className='footer__links-column'>
-            <h4 className='footer__links-title'>{t('sections.platform')}</h4>
+            <h4 className='footer__links-title'>{ t( 'sections.platform' ) }</h4>
             <ul className='footer__links-list'>
-              {footerLinks.platform.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} title={link.label}>
-                    {link.label}
+              { footerLinks.platform.map( ( link ) => (
+                <li key={ link.label }>
+                  <a href={ link.href } title={ link.label }>
+                    { link.label }
                   </a>
                 </li>
-              ))}
+              ) ) }
             </ul>
           </div>
         </div>
 
-        {/* Email Signup */}
+        {/* Email Signup */ }
         <FooterSignupForm />
       </div>
 
-      {/* Divider */}
+      {/* Divider */ }
       <div className='footer__divider' />
 
-      {/* Bottom Section */}
+      {/* Bottom Section */ }
       <div className='footer__bottom'>
-        {/* Logo and Copyright */}
+        {/* Logo and Copyright */ }
         <div className='footer__bottom-info'>
           <Image
             src='/images/logo/huerray-logo.svg'
             alt='Huerray'
-            width={215}
-            height={60}
+            width={ 215 }
+            height={ 60 }
             className='footer__logo'
           />
-          <p className='footer__copyright'>{t('copyright')}</p>
+          <p className='footer__copyright'>{ t( 'copyright' ) }</p>
         </div>
 
-        {/* Language Selector and Social Icons */}
+        {/* Language Selector and Social Icons */ }
         <div className='footer__bottom-right'>
-          {/* Language Selector */}
+          {/* Language Selector */ }
           <LanguageSelector />
 
-          {/* Social Icons */}
+          {/* Social Icons */ }
           <div className='footer__social'>
-            {socialLinks.map((social) => (
+            { socialLinks.map( ( social ) => (
               <a
-                key={social.name}
-                href={social.href}
+                key={ social.name }
+                href={ social.href }
                 className='footer__social-link'
-                aria-label={social.name}
+                aria-label={ social.name }
               >
-                <span className={`icon icon-${social.icon}`}></span>
+                <span className={ `icon icon-${ social.icon }` }></span>
               </a>
-            ))}
+            ) ) }
           </div>
         </div>
       </div>

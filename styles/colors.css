@@ -229,6 +229,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -241,7 +242,12 @@
   }
 
   .bg-textured-gradient-background {
-    background-image: url('/images/textured-gradient-background.jpg');
+    background-image: url('/images/textured-gradient-background.webp');
+    background-size: cover;
+  }
+
+  .bg-stone-orange {
+    background-image: url('/images/stone-orange-bg.webp');
     background-size: cover;
   }
 }

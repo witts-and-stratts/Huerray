@@ -6,20 +6,20 @@ import { notFound } from 'next/navigation';
 import { Locale, locales } from '@/i18n';
 import '@/app/globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
+// const geistSans = Geist({
+//   variable: '--font-geist-sans',
+//   subsets: ['latin'],
+// });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+// const geistMono = Geist_Mono({
+//   variable: '--font-geist-mono',
+//   subsets: ['latin'],
+// });
 
-export const metadata: Metadata = {
-  title: 'Huerray',
-  description: 'Connect with authentic creators for impactful UGC',
-};
+// export const metadata: Metadata = {
+//   title: 'Huerray',
+//   description: 'Connect with authentic creators for impactful UGC',
+// };
 
 export const viewport: Viewport = {
   themeColor: [
@@ -30,17 +30,17 @@ export const viewport: Viewport = {
 
 // export const dynamic = 'force-dynamic';
 
-export default async function LocaleLayout({
+export default async function LocaleLayout( {
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = (await params) as { locale: Locale };
+  params: Promise<{ locale: string; }>;
+} ) {
+  const { locale } = ( await params ) as { locale: Locale; };
 
   // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale)) {
+  if ( !locales.includes( locale ) ) {
     notFound();
   }
 
@@ -49,7 +49,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={ locale }>
       <head>
         <meta name='application-name' content='Huerray' />
         <link rel='icon' type='image/x-icon' href='favicon.ico' />
@@ -136,10 +136,9 @@ export default async function LocaleLayout({
         <link rel='manifest' href='site.webmanifest' />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider messages={messages}>
-          {children}
+        <NextIntlClientProvider messages={ messages }>
+          { children }
         </NextIntlClientProvider>
       </body>
 

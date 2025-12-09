@@ -33,7 +33,7 @@ export function BrandsHero() {
             <div className='brands-hero__main-column'>
               <div className='brands-hero__main-image'>
                 <Image
-                  src='/images/creators/main-girl-2.jpg'
+                  src='/images/creators/main-girl-2.webp'
                   alt='Creator with drink'
                   width={700}
                   height={700}
@@ -42,7 +42,7 @@ export function BrandsHero() {
               </div>
               <div className='brands-hero__secondary-image'>
                 <Image
-                  src='/images/creators/mum-with-daughter-creator.jpg'
+                  src='/images/creators/mum-with-daughter-creator.webp'
                   alt='Mum and daughter creators'
                   width={800}
                   height={600}
@@ -52,7 +52,7 @@ export function BrandsHero() {
             <div className='brands-hero__side-column'>
               <div className='brands-hero__circle-image'>
                 <Image
-                  src='/images/creators/creator-in-swimming-pool.jpg'
+                  src='/images/creators/creator-in-swimming-pool.webp'
                   alt='Swimming pool creator'
                   width={400}
                   height={400}
@@ -60,7 +60,7 @@ export function BrandsHero() {
               </div>
               <div className='brands-hero__tall-image'>
                 <Image
-                  src='/images/creators/couple-vacation-creators.jpg'
+                  src='/images/creators/couple-vacation-creators.webp'
                   alt='Couple on vacation'
                   width={400}
                   height={600}

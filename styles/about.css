@@ -1,7 +1,9 @@
 @import 'tailwindcss';
+
 .about-hero {
   @apply relative -mt-[6.8rem] rounded-bl-[4rem] rounded-br-[4rem] pb-10;
 }
+
 .about-hero__section {
   @apply px-6 md:px-10;
 }
@@ -49,10 +51,18 @@
 }
 
 .about-hero__tall-image {
-  @apply rounded-[40px] flex-4  object-cover;
+  @apply rounded-[40px] flex-4 object-cover;
 }
 
 /* ===== ABOUT WHY ===== */
+.about-why__pill {
+  @apply text-h3 font-secondary text-purple-900! mb-1!;
+}
+
+.about-why__title {
+  @apply text-h2 font-heading;
+}
+
 .about-why__images {
   @apply relative;
 }
@@ -167,23 +177,43 @@
 /* ===== ABOUT TEAM ===== */
 .about-team {
   @apply px-6 md:px-16 lg:px-20 py-20 lg:py-28 bg-orange text-white mb-40;
-  background-image: url('/images/stone-orange-bg.jpg');
+  background-image: url('/images/stone-orange-bg.webp');
 }
 
 .about-team__container {
   @apply max-w-7xl mx-auto;
 }
 
+.about-team__subtitle {
+  @apply text-h3 font-secondary;
+}
+
 .about-team__title {
-  @apply text-h2 font-heading text-center mb-6;
+  @apply text-h2 font-heading;
 }
 
 .about-team__description {
-  @apply text-h5 text-slate-600 text-center mb-16 lg:mb-20 font-light;
+  @apply text-h5 max-w-2/3 text-white mt-8;
 }
 
 .about-team__grid {
-  @apply flex flex-wrap justify-center gap-8 lg:gap-12;
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-32 gap-6;
+}
+
+.about-team__member-card {
+  @apply flex flex-col;
+}
+
+.about-team__member-image {
+  @apply mb-4 bg-slate-200 rounded-2xl aspect-4/5;
+}
+
+.about-team__member-name {
+  @apply text-h4 font-secondary mb-0;
+}
+
+.about-team__member-bio {
+  @apply leading-tight text-white mb-0;
 }
 
 .about-team__member {

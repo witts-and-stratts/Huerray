@@ -1,12 +1,12 @@
 {
   "hero": {
-    "title": "Huerray: Every Idea. Every Creator.",
-    "subtitle": "Connecting brands with authentic creators for meaningful collaborations"
+    "title": "Huerray\nEvery Hue. Every Story",
+    "subtitle": "We connect brands with creators from underrepresented communities to build authentic UGC that converts — culturally rich, emotionally real, and designed for today's social feeds."
   },
   "why": {
-    "pill": "On Why",
-    "title": "Marketing that expects more than people can give is a recipe for disaster",
-    "description": "We believe in sustainable creator partnerships that respect time, creativity, and authentic voice. Our platform ensures fair compensation and realistic expectations for every collaboration."
+    "pill": "Our Why",
+    "title": "Marketing that represents real people performs and feels better",
+    "description": "At Huerray we believe inclusion isn't a checkbox: it's the creative standard. We help brands reach diverse audiences through content that's human, relatable and rooted in lived experience."
   },
   "whatWeDo": {
     "pill": "What We Do",
@@ -47,12 +47,26 @@
     "content": "Founded by creators and marketers who experienced the pain points of influencer marketing firsthand, Huerray was built to solve real problems. We've created a platform that respects both brands and creators, making collaborations smoother, fairer, and more effective."
   },
   "team": {
-    "title": "Meet the Team",
-    "description": "The people behind Huerray"
+    "subtitle": "Our Founding Story",
+    "title": "Born in Berlin; founded by 3 friends from different corners of the world",
+    "description": "Huerray grew from a simple observation: great creators were being overlooked because they didn't fit a narrow template. So we built a platform that makes visibility scalable — where creators are trusted to lead narratives and brands get content that actually connects.",
+    "members": [
+      {
+        "name": "Adedapo",
+        "bio": "A business strategist from Nigeria, had spent years watching brilliant creators being overlooked — not because they lacked skill, but because they didn't fit the mold."
+      },
+      {
+        "name": "Norina",
+        "bio": "A marketing mind from Austria with Indian roots, crafted campaigns for global brands yet rarely saw faces or stories that mirrored her own."
+      },
+      {
+        "name": "",
+        "bio": ""
+      }
+    ]
   },
   "cta": {
-    "pill": "Ready to get fitted",
-    "title": "Ready for great fitted collaborations?",
-    "buttonText": "Get Started"
+    "subtitle": "Join thousands of creators & businesses collaborating to create impactful content for their everyone",
+    "buttonText": "Begin Here"
   }
 }

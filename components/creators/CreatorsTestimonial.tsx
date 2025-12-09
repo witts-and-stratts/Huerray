@@ -18,7 +18,7 @@ export function CreatorsTestimonial() {
 
         <div className='creators-testimonial__image'>
           <Image
-            src='/images/creators/testimonial-baron-mchennnie.jpg'
+            src='/images/creators/testimonial-baron-mchennnie.webp'
             alt='Creator testimonial'
             width={ 545 }
             height={ 571 }

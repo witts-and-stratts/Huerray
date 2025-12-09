@@ -17,7 +17,7 @@ export function CreatorsManage() {
 
         <div className='section-card__image'>
           <Image
-            src='/images/creators/source/automation.jpg'
+            src='/images/creators/source/automation.webp'
             alt='We manage everything'
             width={545}
             height={470}

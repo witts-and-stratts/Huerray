@@ -2,8 +2,13 @@
 @import './typography.css';
 
 .footer {
-  @apply bg-burgundy-100 w-full md:grid md:grid-cols-12 px-4 md:px-10 py-8 md:py-20 max-md:-mt-10 md:fixed bottom-0 gap-8 md:min-h-200 pt-30 content-end z-10;
+  @apply bg-burgundy-100 w-full md:grid md:grid-cols-12 px-4 md:px-10 py-8 md:py-20 max-md:-mt-10 md:fixed bottom-0 gap-8 md:min-h-200 pt-30 content-end;
 }
+
+.footer-normal {
+  @apply relative! max-md:mt-0! mt-0! z-100! md:min-h-auto;
+}
+
 
 /* CTA Section */
 .footer__cta {

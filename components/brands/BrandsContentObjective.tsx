@@ -20,7 +20,7 @@ export function BrandsContentObjective() {
         {/* Left - Image Collage */ }
         <div className='section-card__image flex flex-col gap-4'>
           <Image
-            src='/images/brands/content-objective/ff36e4040fea432abfe66356bcfa58ee12e20e25.png'
+            src='/images/brands/content-objective/ff36e4040fea432abfe66356bcfa58ee12e20e25.webp'
             alt='Creator content'
             width={ 545 }
             height={ 282 }
@@ -29,7 +29,7 @@ export function BrandsContentObjective() {
           <div className='grid grid-cols-6 gap-4 h-40'>
             <div className='rounded-[64px] overflow-hidden col-span-4'>
               <Image
-                src='/images/brands/content-objective/orange-products.png'
+                src='/images/brands/content-objective/orange-products.webp'
                 alt='Beauty products'
                 width={ 262 }
                 height={ 172 }
@@ -38,7 +38,7 @@ export function BrandsContentObjective() {
             </div>
             <div className='rounded-[64px] overflow-hidden col-span-2'>
               <Image
-                src='/images/brands/content-objective/woman-yellow.png'
+                src='/images/brands/content-objective/woman-yellow.webp'
                 alt='Creator'
                 width={ 262 }
                 height={ 172 }

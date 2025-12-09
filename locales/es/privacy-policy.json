@@ -1,0 +1,61 @@
+{
+  "page": {
+    "title": "Política de Privacidad"
+  },
+  "seo": {
+    "title": "Política de Privacidad",
+    "description": "Conozca cómo HUERRAY GmbH recopila, utiliza y protege sus datos personales de acuerdo con el RGPD y las leyes alemanas de protección de datos.",
+    "keywords": "política de privacidad, protección de datos, RGPD, datos personales, HUERRAY, derechos del usuario, seguridad de datos"
+  },
+  "effectiveDateTitle": "Última actualización",
+  "effectiveDate": "21 de octubre de 2025",
+  "tableOfContents": "Tabla de contenidos",
+  "introNote": "Esta Política de Privacidad ha sido traducida del alemán. Hasta el establecimiento de la Ltd británica, HUERRAY sigue bajo la entidad alemana. Por lo tanto, hasta entonces, se aplican los términos y condiciones de HUERRAY según lo estipulado por la entidad alemana.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introducción",
+      "content": "<strong>Esta Política de Privacidad ha sido traducida del alemán. Hasta el establecimiento de la Ltd británica, HUERRAY sigue bajo la entidad alemana. Por lo tanto, hasta entonces, se aplican los términos y condiciones de HUERRAY según lo estipulado por la entidad alemana.</strong><br /><br />Esta Política de Privacidad explica cómo THRYPES GmbH, 4º Piso,<br /> Gontardstr. 11, 10178 Berlín, Alemania (en adelante denominado \"THRYPES\", \"nosotros\" o \"nuestro\"), procesa datos personales cuando utiliza nuestros sitios web, plataformas, páginas de redes sociales, canales de comunicación y servicios relacionados con contenido generado por usuarios (UGC); cuando se registra como creador/influencer o como cliente corporativo; cuando coopera con nosotros, celebra contratos o interactúa de otro modo con nosotros. <br /><br/>Procesamos datos dentro de la región DACH de conformidad con el Reglamento General de Protección de Datos (UE) 2016/679 (\"RGPD\"), la Ley Federal alemana de Protección de Datos (BDSG), la Ley de Protección de Datos de Telecomunicaciones y Telemedia (TTDSG) y otras leyes de protección de datos aplicables."
+    },
+    {
+      "id": "controller-and-contact",
+      "title": "1. Responsable del tratamiento y contacto",
+      "content": "El responsable del tratamiento en el sentido del <strong>Art. 4(7) RGPD</strong> es:<br /><strong>THRYPES GmbH</strong>,<br /> 4º Piso,<br /> Gontardstr. 11,<br /> 10178 Berlín, Alemania. <br /><br />Para consultas generales, contáctenos en: <strong>info@huerray.de</strong>",
+      "subsections": []
+    },
+    {
+      "id": "data-protection-officer",
+      "title": "2. Delegado de Protección dedatos",
+      "content": "Hemos nombrado un Delegado de Protección de Datos, al que se puede contactar de la siguiente manera: THRYPES GmbH, 4º Piso, Gontardstr. 11, 10178 Berlín, Alemania. Correo electrónico: datenschutz@huerray.de",
+      "subsections": []
+    },
+    {
+      "id": "complaints",
+      "title": "3. Reclamaciones",
+      "content": "Usted tiene derecho a presentar una reclamación en cualquier momento ante la autoridad de protección de datos competente. Sin embargo, agradeceríamos la oportunidad de abordar sus preocupaciones antes de que se ponga en contacto con la autoridad, así que contáctenos primero.",
+      "subsections": []
+    },
+    {
+      "id": "general-information",
+      "title": "4. Información general sobre el procesamiento de datos",
+      "subsections": [
+        {
+          "id": "scope-of-processing",
+          "title": "a) Alcance del procesamiento de datos personales",
+          "content": "Solo procesamos datos personales de nuestros usuarios en la medida necesaria para proporcionar un sitio web/plataforma funcional y ofrecer nuestro contenido y servicios comerciales. El procesamiento generalmente se realiza previo consentimiento (por ejemplo, a través de nuestro gestor de consentimiento para tecnologías de análisis/marketing, suscripciones a boletines informativos o contenido UGC publicado). Se aplica una excepción en los casos en que obtener el consentimiento previo no es posible por razones prácticas y el procesamiento está permitido por disposiciones legales o es necesario para la ejecución del contrato. <br /><br />Nos adherimos a los principios de transparencia, limitación de la finalidad, minimización de datos, exactitud, limitación del almacenamiento e integridad/confidencialidad de conformidad con el Art. 5 del RGPD."
+        },
+        {
+          "id": "legal-basis",
+          "title": "b) Base jurídica para el procesamiento de datos personales",
+          "list": ["Procesamos datos basándonos en las siguientes bases legales:<br/><br/><strong>Consentimiento (Art. 6(1)(a) RGPD):</strong> cuando usted ha dado su consentimiento explícito a través del gestor de consentimiento o de otra manera (por ejemplo, para Google Analytics/GA4, correos electrónicos de marketing bajo el procedimiento de doble opt-in, o publicación de material de imagen/video más allá de las obligaciones contractuales). El consentimiento es voluntario y puede retirarse en cualquier momento con efecto futuro",
+          "<strong>Contrato / Medidas precontractuales (Art. 6(1)(b) RGPD):</strong> cuando el procesamiento es necesario para cumplir un contrato con usted o para llevar a cabo medidas precontractuales (por ejemplo, incorporación de creadores, briefing, producción, aprobación, pago, servicio al cliente)", "<strong>Obligación legal (Art. 6(1)(c) RGPD):</strong> cuando el procesamiento es necesario para cumplir con obligaciones legales (por ejemplo, retención comercial/fiscal, cumplimiento o divulgación a las autoridades)", "<strong>Intereses vitales (Art. 6(1)(d) RGPD):</strong> en casos raros, cuando el procesamiento es necesario para proteger los intereses vitales del interesado u otra persona física", "<strong>Intereses legítimos (Art. 6(1)(f) RGPD):</strong> cuando el procesamiento es necesario para salvaguardar nuestros intereses legítimos o los de terceros, siempre que sus intereses o derechos fundamentales no prevalezcan (por ejemplo, seguridad informática, prevención de fraude, medición mínima de alcance, gestión de calidad, aplicación/defensa legal, o selección de creadores adecuados basados en criterios objetivos y no automatizados)", "<strong>TTDSG:</strong> El almacenamiento de información o el acceso a información en su dispositivo (por ejemplo, cookies, ID de dispositivos) requiere su consentimiento según § 25(1) TTDSG a menos que sea técnicamente esencial. El procesamiento posterior se basa entonces en una de las bases legales del RGPD mencionadas anteriormente. Para publicidad de clientes existentes, puede aplicarse § 7(3) UWG."]
+        },
+        {
+          "id": "data-deletion",
+          "title": "c) Eliminación de datos y período de retención",
+          "content": "Los datos personales se eliminan o bloquean tan pronto como cesa el propósito del almacenamiento. Los datos pueden almacenarse más allá de este punto si así lo exigen los legisladores europeos o nacionales en reglamentos, leyes u otras disposiciones de la UE a las que estamos sujetos (por ejemplo, obligaciones de retención comercial/fiscal según el Código de Comercio alemán (HGB) o el Código Fiscal (AO), generalmente de 6 a 10 años). <br /><br />El bloqueo o eliminación también ocurre cuando expira un período de retención legalmente prescrito, a menos que el almacenamiento continuado sea necesario para el cumplimiento del contrato o la afirmación/defensa de reclamaciones legales. Después de la expiración, los datos se eliminarán o, cuando sea posible, se anonimizarán."
+        }
+      ]
+    }
+  ]
+}

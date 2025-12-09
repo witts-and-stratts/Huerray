@@ -1,0 +1,790 @@
+[
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/app/globals.css",
+    "changes": [
+      {
+        "original": "orange-wavy-background.jpg",
+        "webp": "orange-wavy-background.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/ContentObjectives.tsx",
+    "changes": [
+      {
+        "original": "content/content-1.jpg",
+        "webp": "content/content-1.webp"
+      },
+      {
+        "original": "content/content-10.jpg",
+        "webp": "content/content-10.webp"
+      },
+      {
+        "original": "content/content-11.jpg",
+        "webp": "content/content-11.webp"
+      },
+      {
+        "original": "content/content-12.jpg",
+        "webp": "content/content-12.webp"
+      },
+      {
+        "original": "content/content-13.jpg",
+        "webp": "content/content-13.webp"
+      },
+      {
+        "original": "content/content-14.jpg",
+        "webp": "content/content-14.webp"
+      },
+      {
+        "original": "content/content-15.jpg",
+        "webp": "content/content-15.webp"
+      },
+      {
+        "original": "content/content-2.jpg",
+        "webp": "content/content-2.webp"
+      },
+      {
+        "original": "content/content-3.jpg",
+        "webp": "content/content-3.webp"
+      },
+      {
+        "original": "content/content-4.jpg",
+        "webp": "content/content-4.webp"
+      },
+      {
+        "original": "content/content-5.jpg",
+        "webp": "content/content-5.webp"
+      },
+      {
+        "original": "content/content-6.jpg",
+        "webp": "content/content-6.webp"
+      },
+      {
+        "original": "content/content-7.jpg",
+        "webp": "content/content-7.webp"
+      },
+      {
+        "original": "content/content-8.jpg",
+        "webp": "content/content-8.webp"
+      },
+      {
+        "original": "content/content-9.jpg",
+        "webp": "content/content-9.webp"
+      },
+      {
+        "original": "content/lifestyle-1.jpg",
+        "webp": "content/lifestyle-1.webp"
+      },
+      {
+        "original": "content/lifestyle-10.jpg",
+        "webp": "content/lifestyle-10.webp"
+      },
+      {
+        "original": "content/lifestyle-11.jpg",
+        "webp": "content/lifestyle-11.webp"
+      },
+      {
+        "original": "content/lifestyle-12.jpg",
+        "webp": "content/lifestyle-12.webp"
+      },
+      {
+        "original": "content/lifestyle-13.jpg",
+        "webp": "content/lifestyle-13.webp"
+      },
+      {
+        "original": "content/lifestyle-14.jpg",
+        "webp": "content/lifestyle-14.webp"
+      },
+      {
+        "original": "content/lifestyle-15.jpg",
+        "webp": "content/lifestyle-15.webp"
+      },
+      {
+        "original": "content/lifestyle-2.jpg",
+        "webp": "content/lifestyle-2.webp"
+      },
+      {
+        "original": "content/lifestyle-3.jpg",
+        "webp": "content/lifestyle-3.webp"
+      },
+      {
+        "original": "content/lifestyle-4.jpg",
+        "webp": "content/lifestyle-4.webp"
+      },
+      {
+        "original": "content/lifestyle-5.jpg",
+        "webp": "content/lifestyle-5.webp"
+      },
+      {
+        "original": "content/lifestyle-6.jpg",
+        "webp": "content/lifestyle-6.webp"
+      },
+      {
+        "original": "content/lifestyle-7.jpg",
+        "webp": "content/lifestyle-7.webp"
+      },
+      {
+        "original": "content/lifestyle-8.jpg",
+        "webp": "content/lifestyle-8.webp"
+      },
+      {
+        "original": "content/lifestyle-9.jpg",
+        "webp": "content/lifestyle-9.webp"
+      },
+      {
+        "original": "content/product-1.jpg",
+        "webp": "content/product-1.webp"
+      },
+      {
+        "original": "content/product-10.jpg",
+        "webp": "content/product-10.webp"
+      },
+      {
+        "original": "content/product-11.jpg",
+        "webp": "content/product-11.webp"
+      },
+      {
+        "original": "content/product-12.jpg",
+        "webp": "content/product-12.webp"
+      },
+      {
+        "original": "content/product-13.jpg",
+        "webp": "content/product-13.webp"
+      },
+      {
+        "original": "content/product-14.jpg",
+        "webp": "content/product-14.webp"
+      },
+      {
+        "original": "content/product-15.jpg",
+        "webp": "content/product-15.webp"
+      },
+      {
+        "original": "content/product-2.jpg",
+        "webp": "content/product-2.webp"
+      },
+      {
+        "original": "content/product-3.jpg",
+        "webp": "content/product-3.webp"
+      },
+      {
+        "original": "content/product-4.jpg",
+        "webp": "content/product-4.webp"
+      },
+      {
+        "original": "content/product-5.jpg",
+        "webp": "content/product-5.webp"
+      },
+      {
+        "original": "content/product-6.jpg",
+        "webp": "content/product-6.webp"
+      },
+      {
+        "original": "content/product-7.jpg",
+        "webp": "content/product-7.webp"
+      },
+      {
+        "original": "content/product-8.jpg",
+        "webp": "content/product-8.webp"
+      },
+      {
+        "original": "content/product-9.jpg",
+        "webp": "content/product-9.webp"
+      },
+      {
+        "original": "content/testimonial-1.jpg",
+        "webp": "content/testimonial-1.webp"
+      },
+      {
+        "original": "content/testimonial-10.jpg",
+        "webp": "content/testimonial-10.webp"
+      },
+      {
+        "original": "content/testimonial-11.jpg",
+        "webp": "content/testimonial-11.webp"
+      },
+      {
+        "original": "content/testimonial-12.jpg",
+        "webp": "content/testimonial-12.webp"
+      },
+      {
+        "original": "content/testimonial-13.jpg",
+        "webp": "content/testimonial-13.webp"
+      },
+      {
+        "original": "content/testimonial-14.jpg",
+        "webp": "content/testimonial-14.webp"
+      },
+      {
+        "original": "content/testimonial-15.jpg",
+        "webp": "content/testimonial-15.webp"
+      },
+      {
+        "original": "content/testimonial-2.jpg",
+        "webp": "content/testimonial-2.webp"
+      },
+      {
+        "original": "content/testimonial-3.jpg",
+        "webp": "content/testimonial-3.webp"
+      },
+      {
+        "original": "content/testimonial-4.jpg",
+        "webp": "content/testimonial-4.webp"
+      },
+      {
+        "original": "content/testimonial-5.jpg",
+        "webp": "content/testimonial-5.webp"
+      },
+      {
+        "original": "content/testimonial-6.jpg",
+        "webp": "content/testimonial-6.webp"
+      },
+      {
+        "original": "content/testimonial-7.jpg",
+        "webp": "content/testimonial-7.webp"
+      },
+      {
+        "original": "content/testimonial-8.jpg",
+        "webp": "content/testimonial-8.webp"
+      },
+      {
+        "original": "content/testimonial-9.jpg",
+        "webp": "content/testimonial-9.webp"
+      },
+      {
+        "original": "content/travel-1.jpg",
+        "webp": "content/travel-1.webp"
+      },
+      {
+        "original": "content/travel-10.jpg",
+        "webp": "content/travel-10.webp"
+      },
+      {
+        "original": "content/travel-11.jpg",
+        "webp": "content/travel-11.webp"
+      },
+      {
+        "original": "content/travel-12.jpg",
+        "webp": "content/travel-12.webp"
+      },
+      {
+        "original": "content/travel-13.jpg",
+        "webp": "content/travel-13.webp"
+      },
+      {
+        "original": "content/travel-14.jpg",
+        "webp": "content/travel-14.webp"
+      },
+      {
+        "original": "content/travel-15.jpg",
+        "webp": "content/travel-15.webp"
+      },
+      {
+        "original": "content/travel-2.jpg",
+        "webp": "content/travel-2.webp"
+      },
+      {
+        "original": "content/travel-3.jpg",
+        "webp": "content/travel-3.webp"
+      },
+      {
+        "original": "content/travel-4.jpg",
+        "webp": "content/travel-4.webp"
+      },
+      {
+        "original": "content/travel-5.jpg",
+        "webp": "content/travel-5.webp"
+      },
+      {
+        "original": "content/travel-6.jpg",
+        "webp": "content/travel-6.webp"
+      },
+      {
+        "original": "content/travel-7.jpg",
+        "webp": "content/travel-7.webp"
+      },
+      {
+        "original": "content/travel-8.jpg",
+        "webp": "content/travel-8.webp"
+      },
+      {
+        "original": "content/travel-9.jpg",
+        "webp": "content/travel-9.webp"
+      },
+      {
+        "original": "content/unboxing-1.jpg",
+        "webp": "content/unboxing-1.webp"
+      },
+      {
+        "original": "content/unboxing-10.jpg",
+        "webp": "content/unboxing-10.webp"
+      },
+      {
+        "original": "content/unboxing-11.jpg",
+        "webp": "content/unboxing-11.webp"
+      },
+      {
+        "original": "content/unboxing-12.jpg",
+        "webp": "content/unboxing-12.webp"
+      },
+      {
+        "original": "content/unboxing-13.jpg",
+        "webp": "content/unboxing-13.webp"
+      },
+      {
+        "original": "content/unboxing-14.jpg",
+        "webp": "content/unboxing-14.webp"
+      },
+      {
+        "original": "content/unboxing-15.jpg",
+        "webp": "content/unboxing-15.webp"
+      },
+      {
+        "original": "content/unboxing-2.jpg",
+        "webp": "content/unboxing-2.webp"
+      },
+      {
+        "original": "content/unboxing-3.jpg",
+        "webp": "content/unboxing-3.webp"
+      },
+      {
+        "original": "content/unboxing-4.jpg",
+        "webp": "content/unboxing-4.webp"
+      },
+      {
+        "original": "content/unboxing-5.jpg",
+        "webp": "content/unboxing-5.webp"
+      },
+      {
+        "original": "content/unboxing-6.jpg",
+        "webp": "content/unboxing-6.webp"
+      },
+      {
+        "original": "content/unboxing-7.jpg",
+        "webp": "content/unboxing-7.webp"
+      },
+      {
+        "original": "content/unboxing-8.jpg",
+        "webp": "content/unboxing-8.webp"
+      },
+      {
+        "original": "content/unboxing-9.jpg",
+        "webp": "content/unboxing-9.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/CreatorsSection.tsx",
+    "changes": [
+      {
+        "original": "creators/main-girl.jpg",
+        "webp": "creators/main-girl.webp"
+      },
+      {
+        "original": "creators/makeup-girl.jpg",
+        "webp": "creators/makeup-girl.webp"
+      },
+      {
+        "original": "creators/payment-avatar.jpg",
+        "webp": "creators/payment-avatar.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/Hero.tsx",
+    "changes": [
+      {
+        "original": "creators/creator-1.jpg",
+        "webp": "creators/creator-1.webp"
+      },
+      {
+        "original": "creators/creator-2.jpg",
+        "webp": "creators/creator-2.webp"
+      },
+      {
+        "original": "creators/creator-3.jpg",
+        "webp": "creators/creator-3.webp"
+      },
+      {
+        "original": "creators/creator-4.jpg",
+        "webp": "creators/creator-4.webp"
+      },
+      {
+        "original": "creators/creator-5.jpg",
+        "webp": "creators/creator-5.webp"
+      },
+      {
+        "original": "creators/creator-6.jpg",
+        "webp": "creators/creator-6.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/HowItWorks.tsx",
+    "changes": [
+      {
+        "original": "content/how-it-works.png",
+        "webp": "content/how-it-works.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/Testimonial.tsx",
+    "changes": [
+      {
+        "original": "testimonials/jorens-avatar.jpg",
+        "webp": "testimonials/jorens-avatar.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/about/AboutHero.tsx",
+    "changes": [
+      {
+        "original": "about/15164edd8d903dd9c6ac790fe7b93b7d1ce68751.png",
+        "webp": "about/15164edd8d903dd9c6ac790fe7b93b7d1ce68751.webp"
+      },
+      {
+        "original": "about/28060ca24f97badeac0a79aa1e519e59cd2f957a.png",
+        "webp": "about/28060ca24f97badeac0a79aa1e519e59cd2f957a.webp"
+      },
+      {
+        "original": "about/2b4fcd641a40b38ac8c0c0baee83f57ee33e4134.png",
+        "webp": "about/2b4fcd641a40b38ac8c0c0baee83f57ee33e4134.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/about/AboutTeaser.tsx",
+    "changes": [
+      {
+        "original": "about-teaser.jpg",
+        "webp": "about-teaser.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/about/AboutWhatWeDo.tsx",
+    "changes": [
+      {
+        "original": "what-wedo-collage.png",
+        "webp": "what-wedo-collage.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsBeyondFeed.tsx",
+    "changes": [
+      {
+        "original": "brands/beyond-feed/f5ca756a549dbd9088646531c76a8dab0d4f32f4.png",
+        "webp": "brands/beyond-feed/f5ca756a549dbd9088646531c76a8dab0d4f32f4.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsContentObjective.tsx",
+    "changes": [
+      {
+        "original": "brands/content-objective/ff36e4040fea432abfe66356bcfa58ee12e20e25.png",
+        "webp": "brands/content-objective/ff36e4040fea432abfe66356bcfa58ee12e20e25.webp"
+      },
+      {
+        "original": "brands/content-objective/orange-products.png",
+        "webp": "brands/content-objective/orange-products.webp"
+      },
+      {
+        "original": "brands/content-objective/woman-yellow.png",
+        "webp": "brands/content-objective/woman-yellow.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsExpertSupport.tsx",
+    "changes": [
+      {
+        "original": "brands/expert-support/185f2fd7ea251a00b874bee58763148aa815fa3b.png",
+        "webp": "brands/expert-support/185f2fd7ea251a00b874bee58763148aa815fa3b.webp"
+      },
+      {
+        "original": "brands/expert-support/42bdc11cc7775a1b800fd5480be693158f9a2f40.png",
+        "webp": "brands/expert-support/42bdc11cc7775a1b800fd5480be693158f9a2f40.webp"
+      },
+      {
+        "original": "brands/expert-support/b746afa7d90f4c22913780f492525bf4cb291ea3.png",
+        "webp": "brands/expert-support/b746afa7d90f4c22913780f492525bf4cb291ea3.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsHero.tsx",
+    "changes": [
+      {
+        "original": "creators/couple-vacation-creators.jpg",
+        "webp": "creators/couple-vacation-creators.webp"
+      },
+      {
+        "original": "creators/creator-in-swimming-pool.jpg",
+        "webp": "creators/creator-in-swimming-pool.webp"
+      },
+      {
+        "original": "creators/main-girl-2.jpg",
+        "webp": "creators/main-girl-2.webp"
+      },
+      {
+        "original": "creators/mum-with-daughter-creator.jpg",
+        "webp": "creators/mum-with-daughter-creator.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsIndustry.tsx",
+    "changes": [
+      {
+        "original": "creators/source/main girl.jpg",
+        "webp": "creators/source/main girl.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsMatch.tsx",
+    "changes": [
+      {
+        "original": "brands/16928458b125e91694f633476f7fd34ef6d8cefe.png",
+        "webp": "brands/16928458b125e91694f633476f7fd34ef6d8cefe.webp"
+      },
+      {
+        "original": "brands/7d276a19cd69b3c1a8c1f90f9d7393131ea00d7e.png",
+        "webp": "brands/7d276a19cd69b3c1a8c1f90f9d7393131ea00d7e.webp"
+      },
+      {
+        "original": "brands/9e691e42275fd5176b1832d6fab1d491d033637c.png",
+        "webp": "brands/9e691e42275fd5176b1832d6fab1d491d033637c.webp"
+      },
+      {
+        "original": "brands/a1c258df38ed638345ae594b3548de0ec22be9ef.png",
+        "webp": "brands/a1c258df38ed638345ae594b3548de0ec22be9ef.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsScroller.tsx",
+    "changes": [
+      {
+        "original": "creators/best-friends-couple-stylish-girls-posing-white.jpg",
+        "webp": "creators/best-friends-couple-stylish-girls-posing-white.webp"
+      },
+      {
+        "original": "creators/expressive-young-girl-posing-indoor.jpg",
+        "webp": "creators/expressive-young-girl-posing-indoor.webp"
+      },
+      {
+        "original": "creators/front-view-male-courier-yellow-uniform-cape-with-round-delivery-bowl-his-hands-light-pink-background.jpg",
+        "webp": "creators/front-view-male-courier-yellow-uniform-cape-with-round-delivery-bowl-his-hands-light-pink-background.webp"
+      },
+      {
+        "original": "creators/making-presentation-new-facial-cream.jpg",
+        "webp": "creators/making-presentation-new-facial-cream.webp"
+      },
+      {
+        "original": "creators/man-applying-anti-aging-treatment.jpg",
+        "webp": "creators/man-applying-anti-aging-treatment.webp"
+      },
+      {
+        "original": "creators/medium-shot-woman-with-tasty-kombucha.jpg",
+        "webp": "creators/medium-shot-woman-with-tasty-kombucha.webp"
+      },
+      {
+        "original": "creators/side-view-smiley-women-with-smartphone.jpg",
+        "webp": "creators/side-view-smiley-women-with-smartphone.webp"
+      },
+      {
+        "original": "creators/smiling-young-couple-looking-into-cardboard-box.jpg",
+        "webp": "creators/smiling-young-couple-looking-into-cardboard-box.webp"
+      },
+      {
+        "original": "creators/woman-training-outdoors.jpg",
+        "webp": "creators/woman-training-outdoors.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/brands/BrandsStopAssuming.tsx",
+    "changes": [
+      {
+        "original": "brands/stop-assuming/720fff0e9e69deca65f0dd3975902e605144008a.png",
+        "webp": "brands/stop-assuming/720fff0e9e69deca65f0dd3975902e605144008a.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/career/CareerHero.tsx",
+    "changes": [
+      {
+        "original": "about/15164edd8d903dd9c6ac790fe7b93b7d1ce68751.png",
+        "webp": "about/15164edd8d903dd9c6ac790fe7b93b7d1ce68751.webp"
+      },
+      {
+        "original": "about/28060ca24f97badeac0a79aa1e519e59cd2f957a.png",
+        "webp": "about/28060ca24f97badeac0a79aa1e519e59cd2f957a.webp"
+      },
+      {
+        "original": "about/2b4fcd641a40b38ac8c0c0baee83f57ee33e4134.png",
+        "webp": "about/2b4fcd641a40b38ac8c0c0baee83f57ee33e4134.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsBenefits.tsx",
+    "changes": [
+      {
+        "original": "content/content-1.jpg",
+        "webp": "content/content-1.webp"
+      },
+      {
+        "original": "content/content-2.jpg",
+        "webp": "content/content-2.webp"
+      },
+      {
+        "original": "content/content-3.jpg",
+        "webp": "content/content-3.webp"
+      },
+      {
+        "original": "content/content-4.jpg",
+        "webp": "content/content-4.webp"
+      },
+      {
+        "original": "content/content-5.jpg",
+        "webp": "content/content-5.webp"
+      },
+      {
+        "original": "content/content-6.jpg",
+        "webp": "content/content-6.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsCollaborations.tsx",
+    "changes": [
+      {
+        "original": "creators/source/main girl.jpg",
+        "webp": "creators/source/main girl.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsDirector.tsx",
+    "changes": [
+      {
+        "original": "creators/source/creative-director.jpg",
+        "webp": "creators/source/creative-director.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsHero.tsx",
+    "changes": [
+      {
+        "original": "creators/main-girl.jpg",
+        "webp": "creators/main-girl.webp"
+      },
+      {
+        "original": "creators/makeup-girl.jpg",
+        "webp": "creators/makeup-girl.webp"
+      },
+      {
+        "original": "creators/payment-avatar.jpg",
+        "webp": "creators/payment-avatar.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsManage.tsx",
+    "changes": [
+      {
+        "original": "creators/source/automation.jpg",
+        "webp": "creators/source/automation.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsPaid.tsx",
+    "changes": [
+      {
+        "original": "creators/creator-20.jpg",
+        "webp": "creators/creator-20.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsScroller.tsx",
+    "changes": [
+      {
+        "original": "creators/optimized/creator-10.jpg",
+        "webp": "creators/optimized/creator-10.webp"
+      },
+      {
+        "original": "creators/optimized/creator-11.jpg",
+        "webp": "creators/optimized/creator-11.webp"
+      },
+      {
+        "original": "creators/optimized/creator-12.jpg",
+        "webp": "creators/optimized/creator-12.webp"
+      },
+      {
+        "original": "creators/optimized/creator-13.jpg",
+        "webp": "creators/optimized/creator-13.webp"
+      },
+      {
+        "original": "creators/optimized/creator-14.jpg",
+        "webp": "creators/optimized/creator-14.webp"
+      },
+      {
+        "original": "creators/optimized/creator-15.jpg",
+        "webp": "creators/optimized/creator-15.webp"
+      },
+      {
+        "original": "creators/optimized/creator-16.jpg",
+        "webp": "creators/optimized/creator-16.webp"
+      },
+      {
+        "original": "creators/optimized/creator-17.jpg",
+        "webp": "creators/optimized/creator-17.webp"
+      },
+      {
+        "original": "creators/optimized/creator-18.jpg",
+        "webp": "creators/optimized/creator-18.webp"
+      },
+      {
+        "original": "creators/optimized/creator-19.jpg",
+        "webp": "creators/optimized/creator-19.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/components/creators/CreatorsTestimonial.tsx",
+    "changes": [
+      {
+        "original": "creators/testimonial-baron-mchennnie.jpg",
+        "webp": "creators/testimonial-baron-mchennnie.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/styles/about.css",
+    "changes": [
+      {
+        "original": "stone-orange-bg.jpg",
+        "webp": "stone-orange-bg.webp"
+      }
+    ]
+  },
+  {
+    "file": "/Users/ws-one/Documents/www/huerray/styles/colors.css",
+    "changes": [
+      {
+        "original": "textured-gradient-background.jpg",
+        "webp": "textured-gradient-background.webp"
+      }
+    ]
+  }
+]

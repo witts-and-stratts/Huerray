@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "title": "Únete a un movimiento que impulsa la cultura creativa",
+    "subtitle": "Reunimos cultura, creatividad y tecnología para dar a los creativos y voces subrepresentadas en la región DACH la visibilidad que merecen. Y detrás de escena, vivimos lo que defendemos: diversidad, apertura, coraje y verdadera colaboración.",
+    "buttonText": "Ver posiciones abiertas",
+    "videoAlt": "Joven mostrando moda",
+    "imageAlt1": "Creador principal",
+    "imageAlt2": "Contenido del creador",
+    "imageAlt3": "Retrato del creador"
+  },
+  "opportunities": {
+    "title": "Oportunidades abiertas",
+    "subtitle": "Si eres dueño de una mente activa, pensamientos interesantes y un alma bondadosa, nos gustaría saber de ti.",
+    "button": "Saber más",
+    "jobs": [
+      {
+        "category": "Producto, Diseño y Datos",
+        "title": "Lead Product Designer",
+        "location": "Alemania. Tiempo completo - Remoto"
+      },
+      {
+        "category": "Habilitación de ventas",
+        "title": "Sales Enablement Manager",
+        "location": "Austria. Tiempo completo - Remoto"
+      },
+      {
+        "category": "Experiencia del cliente",
+        "title": "Senior Client Success Manager",
+        "location": "Suiza. Tiempo completo - Remoto"
+      }
+    ]
+  },
+  "ourValues": {
+    "title": "Nuestros valores",
+    "values": [
+      {
+        "title": "Diversidad",
+        "text": "La diversidad no es un eslogan. Es quienes somos, en nuestro equipo, nuestros socios y nuestras ideas."
+      },
+      {
+        "title": "Autenticidad siempre",
+        "text": "No hacemos fachadas. Queremos personas reales con historias y perspectivas reales."
+      },
+      {
+        "title": "Innovación con propósito",
+        "text": "La tecnología solo es emocionante cuando crea cambio. La usamos para hacer visible la representación, no para reemplazarla."
+      },
+      {
+        "title": "Comunidad sobre competencia",
+        "text": "Creemos en la colaboración, el intercambio y el apoyo, porque el cambio real solo sucede juntos."
+      }
+    ]
+  },
+  "ourTeams": {
+    "title": "Nuestros equipos",
+    "teams": [
+      {
+        "title": "Producto, Diseño y Datos",
+        "text": "Estamos construyendo la plataforma de referencia que impulsa la creación y distribución de contenido para marcas a nivel mundial. Nuestra misión es servir a la economía de creadores y brindarles el mejor lugar del mundo para hacer lo que aman: crear."
+      },
+      {
+        "title": "Experiencia del cliente",
+        "text": "Somos la salsa secreta de #paid: creamos y habilitamos experiencias de clientes y creadores que generan resultados, impacto y, lo más importante, alegría."
+      },
+      {
+        "title": "Ventas",
+        "text": "Nuestro objetivo es educar a las marcas y agencias sobre cómo pensar en el marketing de creadores. Realizamos un descubrimiento profundo, adaptando nuestra oferta para ayudar a los clientes a alcanzar sus objetivos."
+      },
+      {
+        "title": "Personas",
+        "text": "Las personas son el alma de nuestra empresa. Vivimos este valor buscando a los mejores humanos y luego brindando el mejor entorno para que nuestra gente tenga momentos que definan su carrera."
+      },
+      {
+        "title": "Finanzas",
+        "text": "Nuestro equipo de Finanzas trabaja para construir procesos y políticas que aseguren información precisa y oportuna para que nuestros otros equipos puedan tomar decisiones comerciales informadas."
+      },
+      {
+        "title": "Medios, Analytics y Estrategia",
+        "text": "Tenemos pasión por los analytics y todo lo digital. Encontramos soluciones para desafíos sofisticados que abarcan dimensiones creativas, estratégicas, técnicas y analíticas."
+      },
+      {
+        "title": "Marketing",
+        "text": "Nuestro objetivo es construir una marca que la gente no pueda olvidar. Juntos, nos esforzamos por crear momentos memorables con marcas y creadores."
+      },
+      {
+        "title": "Ingeniería",
+        "text": "Diseñamos herramientas y características que crean la base para que las marcas y los creadores colaboren juntos. Definimos el futuro de #paid y buscamos formas de escalar y compartir el futuro de la Economía de Creadores."
+      }
+    ]
+  },
+  "careerWhy": {
+    "mainTitle": "Imaginamos un mundo donde los creadores son apasionados por construir algo que importa",
+    "subtitle": "Huerray es un espacio para personas que aman las ideas, que creen en la creatividad con propósito y que quieren hacer un cambio real.",
+    "description1": "Ya sea que tu experiencia esté en marketing, tecnología, diseño, desarrollo de negocios o comunidad. Huerray es un espacio para personas que aman las ideas, que creen en la creatividad con propósito y que quieren hacer un cambio real. Nos importan menos los títulos y más quién eres, lo que representas y la energía que aportas. Estamos creciendo, orgánicamente, intencionalmente y con propósito.",
+    "description2": "Siempre estamos abiertos a conocer personas que compartan nuestra visión y quieran ayudar a darle forma.",
+    "imageAlt": "Por qué Huerray"
+  }
+}

@@ -15,7 +15,7 @@ interface PricingCardProps {
   highlight?: boolean;
 }
 
-export function PricingCard({
+export function PricingCard( {
   tag,
   title,
   price,
@@ -23,63 +23,63 @@ export function PricingCard({
   buttonText,
   disclaimer,
   highlight = false,
-}: PricingCardProps) {
+}: PricingCardProps ) {
   return (
     <div className='pricing-card-wrapper'>
       <div
-        className={cn('pricing-card', highlight && 'pricing-card--highlight')}
+        className={ cn( 'pricing-card', highlight && 'pricing-card--highlight' ) }
       >
-        <Badge variant='pill'>{tag}</Badge>
+        <Badge variant='pill'>{ tag }</Badge>
         <h3
-          className={cn('pricing-card__title', { 'gradient-text': !highlight })}
+          className={ cn( 'pricing-card__title', { 'gradient-text': !highlight } ) }
         >
-          {title}
+          { title }
         </h3>
         <div className='flex flex-row gap-2'>
-          <span className={cn('text-h6', { 'text-deep-maroon': !highlight })}>
+          <span className={ cn( 'text-h6', { 'text-deep-maroon': !highlight } ) }>
             From
           </span>
           <div
-            className={cn(
+            className={ cn(
               'gradient-text',
               'pricing-card__price',
               !highlight && 'pricing-card__price--gradient'
-            )}
+            ) }
           >
-            {price}
+            { price }
           </div>
         </div>
 
         <div className='pricing-card__features'>
           <h6
-            className={cn('font-medium mb-4 opacity-80 text-h6 text-white', {
+            className={ cn( 'font-medium mb-4 opacity-80 text-h6 text-white', {
               'text-deep-maroon': !highlight,
-            })}
+            } ) }
           >
             Perfect for
           </h6>
           <ul className='space-y-3'>
-            {features.map((feature, index) => (
-              <li key={index} className='pricing-card__feature'>
+            { features.map( ( feature, index ) => (
+              <li key={ index } className='pricing-card__feature'>
                 <Check
-                  className={cn(
+                  className={ cn(
                     'w-5 h-5',
                     highlight ? 'text-white' : 'text-orange'
-                  )}
+                  ) }
                 />
-                <span>{feature}</span>
+                <span>{ feature }</span>
               </li>
-            ))}
+            ) ) }
           </ul>
         </div>
 
-        <p className='pricing-card__disclaimer'>{disclaimer}</p>
+        <p className='pricing-card__disclaimer'>{ disclaimer }</p>
 
         <Button
           variant='heroAlt'
-          className={cn('w-full rounded-full py-6 text-lg font-medium')}
+          className={ cn( 'w-full rounded-full py-6 text-lg font-medium' ) }
         >
-          {buttonText}
+          { buttonText }
         </Button>
       </div>
     </div>

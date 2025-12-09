@@ -11,7 +11,7 @@ export function CreatorsDirector() {
       <div className='section-card__container section-card__container--reverse'>
         <div className='section-card__image'>
           <Image
-            src='/images/creators/source/creative-director.jpg'
+            src='/images/creators/source/creative-director.webp'
             alt='Be the creative director'
             width={ 545 }
             height={ 470 }

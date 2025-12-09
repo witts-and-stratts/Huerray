@@ -21,7 +21,7 @@ export default function AboutTeaser() {
       </video>
       <div className='md:col-span-4 md:rounded-bl-4xl md:rounded-tl-4xl overflow-hidden h-full'>
         <Image
-          src='/images/about-teaser.jpg'
+          src='/images/about-teaser.webp'
           alt='Creator content'
           width={545}
           height={282}

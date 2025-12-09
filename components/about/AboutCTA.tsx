@@ -6,23 +6,21 @@ import { CreatorsScroller } from '../creators/CreatorsScroller';
 import { PlatformLogos } from '../PlatformLogos';
 
 export function AboutCTA() {
-  const t = useTranslations('creators.cta');
-  const tCommon = useTranslations('common');
+  const t = useTranslations( 'about.cta' );
 
   return (
-    <section className='text-center pb-40'>
-      <h2 className='creators-cta__subtitle max-w-220 mx-auto px-6'>
-        Join thousands of creators & businesses collaborating to create
-        impactful content for their everyone
+    <section className="about-cta">
+      <h2 className="about-cta__subtitle">
+        { t( 'subtitle' ) }
       </h2>
 
       <CreatorsScroller />
 
-      <Button variant='heroAlt' size='xl' className='w-80'>
-        Begin Here
+      <Button variant="heroAlt" size="xl" className="about-cta__button">
+        { t( 'buttonText' ) }
       </Button>
 
-      <PlatformLogos title='' />
+      <PlatformLogos title="" />
     </section>
   );
 }

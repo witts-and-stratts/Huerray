@@ -1,0 +1,4 @@
+# Ignore OpenAPI Generator metadata
+.openapi-generator/
+.openapi-generator-ignore
+openapitools.json

@@ -9,17 +9,17 @@ import '@splidejs/react-splide/css';
 import { cn } from '@/lib/utils';
 
 const creators: Array<[ string, [ string, string ]?]> = [
-  [ '/images/creators/expressive-young-girl-posing-indoor.jpg' ],
-  [ '/images/creators/medium-shot-woman-with-tasty-kombucha.jpg' ],
+  [ '/images/creators/expressive-young-girl-posing-indoor.webp' ],
+  [ '/images/creators/medium-shot-woman-with-tasty-kombucha.webp' ],
   [
-    '/images/creators/front-view-male-courier-yellow-uniform-cape-with-round-delivery-bowl-his-hands-light-pink-background.jpg',
+    '/images/creators/front-view-male-courier-yellow-uniform-cape-with-round-delivery-bowl-his-hands-light-pink-background.webp',
   ],
-  [ '/images/creators/best-friends-couple-stylish-girls-posing-white.jpg' ],
-  [ '/images/creators/woman-training-outdoors.jpg' ],
-  [ '/images/creators/making-presentation-new-facial-cream.jpg' ],
-  [ '/images/creators/man-applying-anti-aging-treatment.jpg' ],
-  [ '/images/creators/side-view-smiley-women-with-smartphone.jpg' ],
-  [ '/images/creators/smiling-young-couple-looking-into-cardboard-box.jpg' ],
+  [ '/images/creators/best-friends-couple-stylish-girls-posing-white.webp' ],
+  [ '/images/creators/woman-training-outdoors.webp' ],
+  [ '/images/creators/making-presentation-new-facial-cream.webp' ],
+  [ '/images/creators/man-applying-anti-aging-treatment.webp' ],
+  [ '/images/creators/side-view-smiley-women-with-smartphone.webp' ],
+  [ '/images/creators/smiling-young-couple-looking-into-cardboard-box.webp' ],
 ];
 
 export function BrandsScroller() {

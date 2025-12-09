@@ -1,0 +1,39 @@
+{
+  "page": {
+    "title": "Politique de confidentialité"
+  },
+  "seo": {
+    "title": "Politique de confidentialité",
+    "description": "Découvrez comment HUERRAY GmbH collecte, utilise et protège vos données personnelles conformément au RGPD et aux lois allemandes sur la protection des données.",
+    "keywords": "politique de confidentialité, protection des données, RGPD, données personnelles, HUERRAY, droits des utilisateurs, sécurité des données"
+  },
+  "effectiveDateTitle": "Dernière mise à jour",
+  "effectiveDate": "21 octobre 2025",
+  "tableOfContents": "Table des matières",
+  "introNote": "Cette politique de confidentialité a été traduite de l'allemand. Jusqu'à la création de la Ltd britannique, HUERRAY relève toujours de l'entité allemande. Par conséquent, jusqu'à ce moment-là, les termes et conditions de HUERRAY tels que stipulés par l'entité allemande s'appliquent.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Introduction",
+      "content": "<strong>Cette politique de confidentialité a été traduite de l'allemand. Jusqu'à la création de la Ltd britannique, HUERRAY relève toujours de l'entité allemande. Par conséquent, jusqu'à ce moment-là, les termes et conditions de HUERRAY tels que stipulés par l'entité allemande s'appliquent.</strong><br /><br />Cette politique de confidentialité explique comment THRYPES GmbH, 4ème étage,<br /> Gontardstr. 11, 10178 Berlin, Allemagne (ci-après dénommé \"THRYPES\", \"nous\" ou \"notre\"), traite les données personnelles lorsque vous utilisez nos sites Web, plateformes, pages de médias sociaux, canaux de communication et services liés au contenu généré par les utilisateurs (UGC) ; lorsque vous vous inscrivez en tant que créateur/influenceur ou en tant que client d'entreprise ; lorsque vous coopérez avec nous, concluez des contrats ou interagissez autrement avec nous. <br /><br/>Nous traitons les données dans la région DACH conformément au Règlement général sur la protection des données (UE) 2016/679 (\"RGPD\"), à la loi fédérale allemande sur la protection des données (BDSG), à la loi sur la protection des données des télécommunications et télémédias (TTDSG) et à d'autres lois applicables en matière de protection des données."
+    },
+    {
+      "id": "controller-and-contact",
+      "title": "1. Responsable du traitement et contact",
+      "content": "Le responsable du traitement au sens de l'<strong>Art. 4(7) RGPD</strong> est :<br /><strong>THRYPES GmbH</strong>,<br /> 4ème étage,<br /> Gontardstr. 11,<br /> 10178 Berlin, Allemagne. <br /><br />Pour les demandes générales, veuillez nous contacter à : <strong>info@huerray.de</strong>",
+      "subsections": []
+    },
+    {
+      "id": "data-protection-officer",
+      "title": "2. Délégué à la protection des données",
+      "content": "Nous avons nommé un délégué à la protection des données, qui peut être contacté comme suit : THRYPES GmbH, 4ème étage, Gontardstr. 11, 10178 Berlin, Allemagne. E-mail : datenschutz@huerray.de",
+      "subsections": []
+    },
+    {
+      "id": "complaints",
+      "title": "3. Réclamations",
+      "content": "Vous avez le droit de déposer une plainte à tout moment auprès de l'autorité compétente de protection des données. Cependant, nous apprécierions l'opportunité de traiter vos préoccupations avant que vous ne contactiez l'autorité - veuillez donc nous contacter en premier.",
+      "subsections": []
+    }
+  ]
+}

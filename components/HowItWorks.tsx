@@ -43,7 +43,7 @@ export function HowItWorks() {
         {/* Image Collage Placeholder */}
         <div className='md:col-span-6 relative -mt-30 max-md:order-1'>
           <Image
-            src='/images/content/how-it-works.png'
+            src='/images/content/how-it-works.webp'
             alt='How It Works'
             width={2000}
             height={2000}

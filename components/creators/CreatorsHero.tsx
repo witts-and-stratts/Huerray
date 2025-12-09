@@ -35,7 +35,7 @@ export function CreatorsHero() {
             {/* Main girl image */}
             <div className='creators-hero__main-image'>
               <Image
-                src='/images/creators/main-girl.jpg'
+                src='/images/creators/main-girl.webp'
                 alt='Creator'
                 width={800}
                 height={800}
@@ -44,7 +44,7 @@ export function CreatorsHero() {
             {/* Makeup girl image - top right */}
             <div className='creators-hero__secondary-image'>
               <Image
-                src='/images/creators/makeup-girl.jpg'
+                src='/images/creators/makeup-girl.webp'
                 alt='Creator'
                 width={177}
                 height={153}
@@ -54,7 +54,7 @@ export function CreatorsHero() {
             <div className='creators-hero__payment-card'>
               <div className='creators-hero__payment-avatar'>
                 <Image
-                  src='/images/creators/payment-avatar.jpg'
+                  src='/images/creators/payment-avatar.webp'
                   alt='Avatar'
                   width={93}
                   height={93}

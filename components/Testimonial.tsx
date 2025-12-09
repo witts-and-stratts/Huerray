@@ -16,7 +16,7 @@ export function Testimonial() {
         <div className='flex flex-col items-center gap-4'>
           <Avatar className='w-16 h-16'>
             <AvatarImage
-              src='/images/testimonials/jorens-avatar.jpg'
+              src='/images/testimonials/jorens-avatar.webp'
               alt={t('author')}
             />
             <AvatarFallback>JN</AvatarFallback>
