@@ -50,7 +50,7 @@ export function useBrandAnalytics(
   return useQuery({
     queryKey: analyticsKeys.brand(),
     queryFn: async () => {
-      const response = await analyticsApi.analyticsGetBrandAnalytics();
+      const response = await analyticsApi.analyticsBrandGet();
       return response.data;
     },
     ...options,
@@ -77,7 +77,7 @@ export function useBrandAnalyticsByPeriod(
   return useQuery({
     queryKey: analyticsKeys.brandByPeriod(period),
     queryFn: async () => {
-      const response = await analyticsApi.analyticsGetBrandAnalyticsPeriod(period);
+      const response = await analyticsApi.analyticsBrandPeriodGet({ period });
       return response.data;
     },
     ...options,
@@ -105,7 +105,7 @@ export function useCreatorAnalytics(
   return useQuery({
     queryKey: analyticsKeys.creator(),
     queryFn: async () => {
-      const response = await analyticsApi.analyticsGetCreatorAnalytics();
+      const response = await analyticsApi.analyticsCreatorGet();
       return response.data;
     },
     ...options,
@@ -132,7 +132,7 @@ export function useCreatorAnalyticsByPeriod(
   return useQuery({
     queryKey: analyticsKeys.creatorByPeriod(period),
     queryFn: async () => {
-      const response = await analyticsApi.analyticsGetCreatorAnalyticsPeriod(period);
+      const response = await analyticsApi.analyticsCreatorPeriodGet({ period });
       return response.data;
     },
     ...options,

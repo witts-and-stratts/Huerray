@@ -1,6 +1,5 @@
 'use client';
 
-// @ts-expect-error - package "exports" prevents TypeScript from resolving bundled types; this silences the missing declaration-file error
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
@@ -31,59 +30,59 @@ const videos = [
 ];
 
 export function CreatorVideos() {
-  const t = useTranslations('home.creatorVideos');
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const [isInView, setIsInView] = useState(false);
+  const t = useTranslations( 'home.creatorVideos' );
+  const sectionRef = useRef<HTMLDivElement>( null );
+  const videoRefs = useRef<( HTMLVideoElement | null )[]>( [] );
+  const [ isInView, setIsInView ] = useState( false );
 
-  useEffect(() => {
+  useEffect( () => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
+      ( [ entry ] ) => {
+        setIsInView( entry.isIntersecting );
       },
       { threshold: 0.1, rootMargin: '100px' }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if ( sectionRef.current ) {
+      observer.observe( sectionRef.current );
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if ( sectionRef.current ) {
+        observer.unobserve( sectionRef.current );
       }
     };
-  }, []);
+  }, [] );
 
-  useEffect(() => {
-    if (isInView) {
+  useEffect( () => {
+    if ( isInView ) {
       // Play all videos when section is in view
-      videoRefs.current.forEach((video, index) => {
-        if (video) {
-          setTimeout(() => {
-            video.play().catch(() => {
+      videoRefs.current.forEach( ( video, index ) => {
+        if ( video ) {
+          setTimeout( () => {
+            video.play().catch( () => {
               // Ignore play errors
-            });
-          }, index * 50);
+            } );
+          }, index * 50 );
         }
-      });
+      } );
     } else {
       // Pause all videos when section is out of view
-      videoRefs.current.forEach((video) => {
-        if (video) {
+      videoRefs.current.forEach( ( video ) => {
+        if ( video ) {
           video.pause();
         }
-      });
+      } );
     }
-  }, [isInView]);
+  }, [ isInView ] );
 
   return (
-    <section ref={sectionRef} className='creator-videos'>
-      <h2 className='creator-videos__title gradient-text'>{t('title')}</h2>
+    <section ref={ sectionRef } className='creator-videos'>
+      <h2 className='creator-videos__title gradient-text'>{ t( 'title' ) }</h2>
 
       <div className='creator-videos__scroller'>
         <Splide
-          options={{
+          options={ {
             type: 'loop',
             drag: 'free',
             focus: 'center',
@@ -115,16 +114,16 @@ export function CreatorVideos() {
                 gap: '3rem',
               },
             },
-          }}
-          extensions={{ AutoScroll }}
+          } }
+          extensions={ { AutoScroll } }
         >
-          {videos.map((video, index) => (
-            <SplideSlide key={index}>
+          { videos.map( ( video, index ) => (
+            <SplideSlide key={ index }>
               <div className='creator-videos__card'>
                 <video
-                  ref={(el) => {
-                    videoRefs.current[index] = el;
-                  }}
+                  ref={ ( el ) => {
+                    videoRefs.current[ index ] = el;
+                  } }
                   loop
                   muted
                   playsInline
@@ -132,14 +131,14 @@ export function CreatorVideos() {
                 >
                   {
                     <>
-                      <source src={video.webm} type='video/webm' />
-                      <source src={video.mp4} type='video/mp4' />
+                      <source src={ video.webm } type='video/webm' />
+                      <source src={ video.mp4 } type='video/mp4' />
                     </>
                   }
                 </video>
               </div>
             </SplideSlide>
-          ))}
+          ) ) }
         </Splide>
       </div>
     </section>

@@ -16,7 +16,7 @@ import {
 } from '@tanstack/react-query';
 import { CampaignsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
-import type { ModelsStandardResponse } from '../generated/models';
+import type { ModelsStandardResponse, ModelsPaginatedResponse, ModelsCampaignResponse } from '../generated/models';
 
 // Create campaigns API instance
 const campaignsApi = new CampaignsApi(apiConfiguration, undefined, apiClient);
@@ -53,12 +53,12 @@ export const campaignsKeys = {
  * ```
  */
 export function useCampaigns(
-  options?: Omit<UseQueryOptions<ModelsStandardResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedResponse, Error> {
   return useQuery({
     queryKey: campaignsKeys.list(),
     queryFn: async () => {
-      const response = await campaignsApi.campaignsGetCampaigns();
+      const response = await campaignsApi.campaignsSearchGet();
       return response.data;
     },
     ...options,
@@ -83,12 +83,12 @@ export function useCampaigns(
  */
 export function useCampaign(
   id: string,
-  options?: Omit<UseQueryOptions<ModelsStandardResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsCampaignResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsCampaignResponse, Error> {
   return useQuery({
     queryKey: campaignsKeys.detail(id),
     queryFn: async () => {
-      const response = await campaignsApi.campaignsGetCampaign(id);
+      const response = await campaignsApi.campaignsIdGet({ id });
       return response.data;
     },
     enabled: !!id, // Only run query if id is provided
@@ -126,7 +126,7 @@ export function useCreateCampaign(
 
   return useMutation({
     mutationFn: async (campaignData: any) => {
-      const response = await campaignsApi.campaignsCreateCampaign(campaignData);
+      const response = await campaignsApi.campaignsPost({ request: campaignData });
       return response.data;
     },
     onSuccess: () => {
@@ -164,7 +164,7 @@ export function useUpdateCampaign(
 
   return useMutation({
     mutationFn: async ({ id, data }) => {
-      const response = await campaignsApi.campaignsUpdateCampaign(id, data);
+      const response = await campaignsApi.campaignsIdPut({ id, request: data });
       return response.data;
     },
     onSuccess: (_, variables) => {
@@ -205,7 +205,7 @@ export function useDeleteCampaign(
 
   return useMutation({
     mutationFn: async (id: string) => {
-      const response = await campaignsApi.campaignsDeleteCampaign(id);
+      const response = await campaignsApi.campaignsIdDelete({ id });
       return response.data;
     },
     onSuccess: (_, id) => {

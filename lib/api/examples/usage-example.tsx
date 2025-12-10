@@ -231,7 +231,7 @@ export function CampaignManager() {
       <div className="space-y-4">
         <h2 className="text-xl font-semibold">Campaigns</h2>
 
-        { campaigns?.data?.campaigns?.map( ( campaign: any ) => (
+        { ( campaigns as any )?.data?.campaigns?.map( ( campaign: any ) => (
           <div key={ campaign.id } className="p-4 bg-white rounded-lg shadow flex items-center justify-between">
             <div>
               <h3 className="font-semibold">{ campaign.title }</h3>

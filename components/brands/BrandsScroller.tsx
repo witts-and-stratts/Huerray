@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-// @ts-expect-error - Types are not properly exported in package.json
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import '@splidejs/react-splide/css';
@@ -23,12 +22,12 @@ const creators: Array<[ string, [ string, string ]?]> = [
 ];
 
 export function BrandsScroller() {
-  const t = useTranslations('brands.scroller');
+  const t = useTranslations( 'brands.scroller' );
 
   return (
     <div className='py-16 bg-white'>
       <h4 className='text-h4 text-center mb-8 gradient-text font-heading max-w-150 mx-auto'>
-        {t('title')}
+        { t( 'title' ) }
       </h4>
       <section className='creators-scroller -my-16'>
         <Splide
