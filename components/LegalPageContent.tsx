@@ -58,7 +58,7 @@ const Content = memo( ( { content }: { content: ContentProps; } ) => {
         case "list":
           if ( !Array.isArray( value ) ) return null;
           return (
-            <ul key={ key } className="list-legal">
+            <ul key={ key } className="list-legal list-disc ml-8">
               { value.map( ( item, index ) => (
                 <li key={ index }>
                   <Content content={ item } />

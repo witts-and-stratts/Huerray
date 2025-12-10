@@ -13,5 +13,5 @@
 }
 
 .creators-cta__title {
-  @apply text-h3 mx-auto text-orange max-w-140;
+  @apply text-h3 mx-auto text-orange max-w-140 font-heading;
 }

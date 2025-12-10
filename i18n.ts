@@ -28,6 +28,8 @@ export default getRequestConfig(async ({ locale, requestLocale }) => {
       career: (await import(`./locales/${validLocale}/career.json`)).default,
       'privacy-policy': (await import(`./locales/${validLocale}/privacy-policy.json`)).default,
       'terms-and-conditions': (await import(`./locales/${validLocale}/terms-and-conditions.json`)).default,
+      'creator-terms': (await import(`./locales/${validLocale}/creator-terms.json`)).default,
+      'site-notice': (await import(`./locales/${validLocale}/site-notice.json`)).default,
     },
   };
 });

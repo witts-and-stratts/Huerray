@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Button } from '../ui/button';
+import Link from 'next/link';
 
 export function CareerHero() {
   const t = useTranslations( 'career.hero' );
@@ -18,9 +19,10 @@ export function CareerHero() {
             { t( 'subtitle' ) }
           </h2>
 
-          <Button variant="hero" className="career-hero__button">
-            { t( 'buttonText' ) }
-          </Button>
+          <Link href='#open-positions' title={ t( 'buttonText' ) }>
+            <Button variant="hero" className="career-hero__button">
+              { t( 'buttonText' ) }
+            </Button></Link>
         </div>
       </section>
 

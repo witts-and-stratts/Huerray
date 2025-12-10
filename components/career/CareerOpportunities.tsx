@@ -25,7 +25,7 @@ export function CareerOpportunities() {
   ];
 
   return (
-    <section className="career-opportunities">
+    <section className="career-opportunities" id="open-positions">
       <div className="career-opportunities__container">
         <h2 className="career-opportunities__title gradient-text">
           { t( 'title' ) }

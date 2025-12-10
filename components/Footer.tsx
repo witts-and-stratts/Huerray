@@ -20,21 +20,21 @@ export function Footer( { className }: { className?: string; } ) {
   const footerLinks = {
     services: [
       { label: t( 'links.prices' ), href: '#' },
-      { label: t( 'links.creditPacks' ), href: '#' },
+      // { label: t( 'links.creditPacks' ), href: '#' },
       { label: t( 'links.managedService' ), href: '#' },
     ],
     faq: [
       { label: t( 'links.faqBrands' ), href: '#' },
       { label: t( 'links.faqCreators' ), href: '#' },
-      { label: t( 'links.caseStudies' ), href: '#' },
-      { label: t( 'links.helpCenter' ), href: '#' },
+      // { label: t( 'links.caseStudies' ), href: '#' },
+      // { label: t( 'links.helpCenter' ), href: '#' },
     ],
     platform: [
       { label: t( 'links.aboutHuerray' ), href: '/about' },
       { label: 'Careers', href: '/careers' },
-      { label: t( 'links.siteNotice' ), href: '#' },
+      { label: t( 'links.siteNotice' ), href: 'site-notice' },
       { label: t( 'links.privacyPolicy' ), href: '/privacy-policy' },
-      { label: t( 'links.tcCreators' ), href: '#' },
+      { label: t( 'links.tcCreators' ), href: '/creator-terms' },
       { label: t( 'links.tcBrands' ), href: '#' },
     ],
   };
