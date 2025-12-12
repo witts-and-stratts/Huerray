@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Rejoignez un mouvement qui fait avancer la culture créative",
-    "subtitle": "Nous réunissons culture, créativité et technologie pour donner aux créatifs et aux voix sous-représentées de la région DACH la visibilité qu'ils méritent. Et en coulisses, nous vivons ce que nous défendons : diversité, ouverture, courage et véritable collaboration.",
+    "subtitle": "Nous rassemblons culture, créativité et technologie pour donner aux créateurs et aux voix sous-représentées de la région DACH la visibilité qu'ils méritent. Et en coulisses, nous vivons ce que nous défendons : diversité, ouverture, courage et véritable collaboration.",
     "buttonText": "Voir les postes ouverts",
     "videoAlt": "Jeune femme présentant la mode",
     "imageAlt1": "Créateur principal",
@@ -9,29 +9,29 @@
     "imageAlt3": "Portrait du créateur"
   },
   "opportunities": {
-    "title": "Opportunités ouvertes",
-    "subtitle": "Si vous êtes propriétaire d'un cerveau actif, de pensées intéressantes et d'une bonne âme, nous aimerions vous entendre.",
+    "title": "Opportunités Ouvertes",
+    "subtitle": "Si vous êtes propriétaire d'un cerveau actif, de pensées intéressantes et d'une bonne âme, nous aimerions avoir de vos nouvelles.",
     "button": "En savoir plus",
     "jobs": [
       {
-        "category": "Produit, Design et Données",
+        "category": "Produit, Design & Données",
         "title": "Lead Product Designer",
         "location": "Allemagne. Temps plein - Télétravail"
       },
       {
-        "category": "Support aux ventes",
+        "category": "Aide à la vente",
         "title": "Sales Enablement Manager",
         "location": "Autriche. Temps plein - Télétravail"
       },
       {
-        "category": "Expérience client",
+        "category": "Expérience Client",
         "title": "Senior Client Success Manager",
         "location": "Suisse. Temps plein - Télétravail"
       }
     ]
   },
   "ourValues": {
-    "title": "Nos valeurs",
+    "title": "Nos Valeurs",
     "values": [
       {
         "title": "Diversité",
@@ -46,53 +46,53 @@
         "text": "La technologie n'est passionnante que lorsqu'elle crée du changement. Nous l'utilisons pour rendre la représentation visible, pas pour la remplacer."
       },
       {
-        "title": "Communauté plutôt que compétition",
+        "title": "Communauté avant compétition",
         "text": "Nous croyons en la collaboration, l'échange et le soutien, car le vrai changement ne se produit qu'ensemble."
       }
     ]
   },
   "ourTeams": {
-    "title": "Nos équipes",
+    "title": "Nos Équipes",
     "teams": [
       {
-        "title": "Produit, Design et Données",
-        "text": "Nous construisons la plateforme de référence qui alimente la création et la distribution de contenu pour les marques à l'échelle mondiale. Notre mission est de servir l'économie des créateurs et de leur fournir le meilleur endroit au monde pour faire ce qu'ils aiment : créer."
+        "title": "Produit, Design & Données",
+        "text": "Nous construisons la plateforme de référence qui alimente la création et la distribution de contenu pour les marques à l'échelle mondiale. Notre mission est de servir l'économie des créateurs et de leur fournir le meilleur endroit sur terre pour faire ce qu'ils aiment — créer."
       },
       {
-        "title": "Expérience client",
-        "text": "Nous sommes l'ingrédient secret de #paid – créant et permettant des expériences client et créateur qui produisent des résultats, de l'impact et, surtout, de la joie."
+        "title": "Expérience Client",
+        "text": "Nous sommes l'ingrédient secret de #paid – créant et permettant des expériences client et créateur qui donnent des résultats, de l'impact et surtout, de la joie."
       },
       {
         "title": "Ventes",
-        "text": "Notre objectif est d'éduquer les marques et les agences sur la façon de penser au marketing des créateurs. Nous effectuons une découverte approfondie, adaptant notre offre pour aider les clients à atteindre leurs objectifs."
+        "text": "Notre objectif est d'éduquer les marques et les agences sur la façon de penser le marketing des créateurs. Nous faisons une découverte approfondie, adaptant notre offre pour aider les clients à atteindre leurs objectifs."
       },
       {
-        "title": "Personnel",
-        "text": "Les personnes sont l'âme de notre entreprise. Nous vivons cette valeur en recrutant les meilleurs humains, puis en offrant le meilleur environnement pour que nos collaborateurs connaissent des moments qui définissent leur carrière."
+        "title": "Personnes",
+        "text": "Les personnes sont l'âme de notre entreprise. Nous vivons cette valeur en recherchant les meilleurs humains, puis en fournissant le meilleur environnement pour que nos gens vivent des moments déterminants pour leur carrière."
       },
       {
-        "title": "Finances",
-        "text": "Notre équipe Finance travaille à construire des processus et des politiques qui garantissent des informations précises et opportunes afin que nos autres équipes puissent prendre des décisions commerciales éclairées."
+        "title": "Finance",
+        "text": "Notre équipe Finance travaille à établir des processus et des politiques qui garantissent des informations précises et opportunes afin que nos autres équipes soient soutenues pour prendre des décisions commerciales éclairées."
       },
       {
-        "title": "Médias, Analytics et Stratégie",
-        "text": "Nous avons une passion pour l'analytics et tout ce qui est digital. Nous trouvons des solutions pour des défis sophistiqués qui s'étendent sur des dimensions créatives, stratégiques, techniques et analytiques."
+        "title": "Médias, Analytique & Stratégie",
+        "text": "Nous avons une passion pour l'analytique et tout ce qui est numérique. Nous trouvons des solutions pour des défis sophistiqués qui couvrent les dimensions créatives, stratégiques, techniques et analytiques."
       },
       {
         "title": "Marketing",
-        "text": "Notre objectif est de construire une marque dont les gens ne peuvent pas se débarrasser. Ensemble, nous nous efforçons de créer des moments mémorables avec les marques et les créateurs."
+        "text": "Notre objectif est de construire une marque que les gens ne peuvent pas oublier. Ensemble, nous nous efforçons de créer des moments mémorables avec les marques et les créateurs."
       },
       {
         "title": "Ingénierie",
-        "text": "Nous concevons des outils et des fonctionnalités qui créent la base pour que les marques et les créateurs collaborent ensemble. Nous définissons l'avenir de #paid et cherchons des moyens de mettre à l'échelle et de partager l'avenir de l'économie des créateurs."
+        "text": "Nous concevons des outils et des fonctionnalités qui créent les bases pour que les marques et les créateurs collaborent ensemble. Nous définissons l'avenir de #paid et cherchons des moyens de faire évoluer et de partager l'avenir de l'économie des créateurs."
       }
     ]
   },
   "careerWhy": {
-    "mainTitle": "Nous imaginons un monde où les créateurs sont passionnés par la création de quelque chose qui compte",
-    "subtitle": "Huerray est un espace pour les personnes qui aiment les idées, qui croient en la créativité avec un but et qui veulent créer un vrai changement.",
-    "description1": "Que votre expérience soit dans le marketing, la technologie, le design, le développement commercial ou la communauté. Huerray est un espace pour les personnes qui aiment les idées, qui croient en la créativité avec un but et qui veulent créer un vrai changement. Les titres nous importent moins que qui vous êtes, ce que vous représentez et l'énergie que vous apportez. Nous grandissons, organiquement, intentionnellement et avec un but.",
-    "description2": "Nous sommes toujours ouverts à rencontrer des personnes qui partagent notre vision et veulent l'aider à se concrétiser.",
+    "mainTitle": "Nous imaginons un monde où les créateurs sont passionnés par la construction de quelque chose qui compte",
+    "subtitle": "Huerray est un espace pour les gens qui aiment les idées, qui croient en la créativité avec un but et qui veulent faire changer les choses pour de vrai.",
+    "description1": "Que votre parcours soit dans le marketing, la tech, le design, le développement commercial ou la communauté. Huerray est un espace pour les gens qui aiment les idées, qui croient en la créativité avec un but et qui veulent faire changer les choses pour de vrai. Nous nous soucions moins des titres et plus de qui vous êtes, ce que vous défendez et l'énergie que vous apportez. Nous grandissons, organiquement, intentionnellement et avec un but.",
+    "description2": "Nous sommes toujours ouverts à rencontrer des gens qui partagent notre vision et veulent aider à la façonner.",
     "imageAlt": "Pourquoi Huerray"
   }
 }

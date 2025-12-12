@@ -2,8 +2,7 @@
   "nav": {
     "forCreators": "Pour les Créateurs",
     "forBrands": "Pour les Marques",
-    "pricing": "Tarifs",
-    "resources": "Ressources"
+    "pricing": "Tarifs"
   },
   "userMenu": {
     "login": "Connexion",

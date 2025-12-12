@@ -1,39 +1,397 @@
 {
   "page": {
-    "title": "Politique de confidentialité"
+    "title": "Politique de Confidentialité"
   },
   "seo": {
-    "title": "Politique de confidentialité",
-    "description": "Découvrez comment HUERRAY GmbH collecte, utilise et protège vos données personnelles conformément au RGPD et aux lois allemandes sur la protection des données.",
-    "keywords": "politique de confidentialité, protection des données, RGPD, données personnelles, HUERRAY, droits des utilisateurs, sécurité des données"
+    "title": "Politique de Confidentialité",
+    "description": "Découvrez comment THRYPES GmbH collecte, utilise et protège vos données personnelles conformément au RGPD et aux lois allemandes sur la protection des données.",
+    "keywords": "politique de confidentialité, protection des données, RGPD, données personnelles, THRYPES, droits des utilisateurs, sécurité des données"
   },
   "effectiveDateTitle": "Dernière mise à jour",
   "effectiveDate": "21 octobre 2025",
-  "tableOfContents": "Table des matières",
-  "introNote": "Cette politique de confidentialité a été traduite de l'allemand. Jusqu'à la création de la Ltd britannique, HUERRAY relève toujours de l'entité allemande. Par conséquent, jusqu'à ce moment-là, les termes et conditions de HUERRAY tels que stipulés par l'entité allemande s'appliquent.",
+  "tableOfContents": "Sommaire",
+  "introNote": "Ces politiques de confidentialité ont été traduites de l'allemand. Jusqu'à l'établissement de la British Ltd, HUERRAY relève encore de l'entité juridique allemande. Jusque-là, les conditions générales de HUERRAY telles que stipulées par l'entité allemande s'appliquent.",
   "sections": [
     {
       "id": "introduction",
       "title": "Introduction",
-      "content": "<strong>Cette politique de confidentialité a été traduite de l'allemand. Jusqu'à la création de la Ltd britannique, HUERRAY relève toujours de l'entité allemande. Par conséquent, jusqu'à ce moment-là, les termes et conditions de HUERRAY tels que stipulés par l'entité allemande s'appliquent.</strong><br /><br />Cette politique de confidentialité explique comment THRYPES GmbH, 4ème étage,<br /> Gontardstr. 11, 10178 Berlin, Allemagne (ci-après dénommé \"THRYPES\", \"nous\" ou \"notre\"), traite les données personnelles lorsque vous utilisez nos sites Web, plateformes, pages de médias sociaux, canaux de communication et services liés au contenu généré par les utilisateurs (UGC) ; lorsque vous vous inscrivez en tant que créateur/influenceur ou en tant que client d'entreprise ; lorsque vous coopérez avec nous, concluez des contrats ou interagissez autrement avec nous. <br /><br/>Nous traitons les données dans la région DACH conformément au Règlement général sur la protection des données (UE) 2016/679 (\"RGPD\"), à la loi fédérale allemande sur la protection des données (BDSG), à la loi sur la protection des données des télécommunications et télémédias (TTDSG) et à d'autres lois applicables en matière de protection des données."
+      "content": "<strong>Ces politiques de confidentialité ont été traduites de l'allemand. Jusqu'à l'établissement de la British Ltd, HUERRAY relève encore de l'entité juridique allemande. Jusque-là, les conditions générales de HUERRAY telles que stipulées par l'entité allemande s'appliquent.</strong><br /><br />Cette politique de confidentialité explique comment THRYPES GmbH, 4e étage,<br /> Gontardstr. 11, 10178 Berlin, Allemagne (ci-après dénommé \"THRYPES\", \"nous\" ou \"notre\"), traite les données personnelles lorsque vous utilisez nos sites web, plateformes, pages de réseaux sociaux, canaux de communication et services liés au contenu généré par les utilisateurs (UGC) ; lorsque vous vous inscrivez en tant que créateur/influenceur ou client professionnel ; lorsque vous coopérez avec nous, concluez des contrats ou interagissez autrement avec nous. <br /><br/>Nous traitons les données au sein de la région DACH conformément au Règlement Général sur la Protection des Données (UE) 2016/679 (\"RGPD\"), à la Loi fédérale sur la protection des données (BDSG), à la Loi sur la protection des données des télécommunications et des télémédias (TTDSG) et aux autres lois applicables sur la protection des données."
     },
     {
       "id": "controller-and-contact",
       "title": "1. Responsable du traitement et contact",
-      "content": "Le responsable du traitement au sens de l'<strong>Art. 4(7) RGPD</strong> est :<br /><strong>THRYPES GmbH</strong>,<br /> 4ème étage,<br /> Gontardstr. 11,<br /> 10178 Berlin, Allemagne. <br /><br />Pour les demandes générales, veuillez nous contacter à : <strong>info@huerray.de</strong>",
+      "content": "Le responsable du traitement au sens de l'<strong>Art. 4(7) RGPD</strong> est :<br /><strong>THRYPES GmbH</strong>,<br /> 4e étage,<br /> Gontardstr. 11,<br /> 10178 Berlin, Allemagne. <br /><br />Pour toute demande générale, veuillez nous contacter à : <strong>info@huerray.de</strong>",
       "subsections": []
     },
     {
       "id": "data-protection-officer",
       "title": "2. Délégué à la protection des données",
-      "content": "Nous avons nommé un délégué à la protection des données, qui peut être contacté comme suit : THRYPES GmbH, 4ème étage, Gontardstr. 11, 10178 Berlin, Allemagne. E-mail : datenschutz@huerray.de",
+      "content": "Nous avons désigné un Délégué à la protection des données, qui peut être contacté comme suit : THRYPES GmbH, 4e étage, Gontardstr. 11, 10178 Berlin, Allemagne. E-mail : datenschutz@huerray.de",
       "subsections": []
     },
     {
       "id": "complaints",
-      "title": "3. Réclamations",
-      "content": "Vous avez le droit de déposer une plainte à tout moment auprès de l'autorité compétente de protection des données. Cependant, nous apprécierions l'opportunité de traiter vos préoccupations avant que vous ne contactiez l'autorité - veuillez donc nous contacter en premier.",
+      "title": "3. Plaintes",
+      "content": "Vous avez le droit de déposer une plainte à tout moment auprès de l'autorité de protection des données compétente. Cependant, nous apprécierions la possibilité de répondre à vos préoccupations avant que vous ne contactiez l'autorité — veuillez donc nous contacter en premier lieu.",
       "subsections": []
+    },
+    {
+      "id": "general-information",
+      "title": "4. Informations générales sur le traitement des données",
+      "subsections": [
+        {
+          "id": "scope-of-processing",
+          "title": "a) Étendue du traitement des données personnelles",
+          "content": "Nous ne traitons les données personnelles de nos utilisateurs que dans la mesure nécessaire pour fournir un site web/plateforme fonctionnel ainsi que nos contenus et services commerciaux. Le traitement a généralement lieu sur la base de votre consentement (par exemple, via notre gestionnaire de consentement pour les technologies d'analyse/marketing, les inscriptions à la newsletter ou le contenu UGC publié). Une exception s'applique dans les cas où l'obtention d'un consentement préalable n'est pas possible pour des raisons pratiques et où le traitement est autorisé par des dispositions légales ou est nécessaire à l'exécution du contrat. <br /><br />Nous respectons les principes de transparence, de limitation des finalités, de minimisation des données, d'exactitude, de limitation de la conservation et d'intégrité/confidentialité conformément à l'Art. 5 RGPD."
+        },
+        {
+          "id": "legal-basis",
+          "title": "b) Base juridique du traitement des données personnelles",
+          "list": [
+            "Nous traitons les données sur les bases juridiques suivantes :<br/><br/><strong>Consentement (Art. 6(1)(a) RGPD) :</strong> lorsque vous avez explicitement donné votre consentement via le gestionnaire de consentement ou autrement (par exemple, pour Google Analytics/GA4, les e-mails marketing selon la procédure de double opt-in, ou la publication de matériel image/vidéo au-delà des obligations contractuelles). Le consentement est volontaire et peut être retiré à tout moment avec effet pour l'avenir.",
+            "<strong>Contrat / Mesures précontractuelles (Art. 6(1)(b) RGPD) :</strong> lorsque le traitement est nécessaire à l'exécution d'un contrat avec vous ou à l'exécution de mesures précontractuelles (par exemple, intégration des créateurs, briefing, production, approbation, paiement, service client).",
+            "<strong>Obligation légale (Art. 6(1)(c) RGPD) :</strong> lorsque le traitement est nécessaire pour respecter des obligations légales (par exemple, conservation commerciale/fiscale, conformité ou divulgation aux autorités).",
+            "<strong>Intérêts vitaux (Art. 6(1)(d) RGPD) :</strong> dans de rares cas, lorsque le traitement est nécessaire pour protéger les intérêts vitaux de la personne concernée ou d'une autre personne physique.",
+            "<strong>Intérêts légitimes (Art. 6(1)(f) RGPD) :</strong> lorsque le traitement est nécessaire aux fins de nos intérêts légitimes ou de ceux d'un tiers, à moins que vos intérêts ou libertés et droits fondamentaux ne prévalent (par exemple, sécurité informatique, prévention de la fraude, mesure d'audience minimale, gestion de la qualité, application/défense juridique ou sélection de créateurs appropriés sur la base de critères objectifs et non automatisés).",
+            "<strong>TTDSG :</strong> Le stockage d'informations ou l'accès à des informations sur votre équipement terminal (par exemple, cookies, identifiants d'appareil) nécessite votre consentement en vertu du § 25(1) TTDSG, sauf si cela est techniquement indispensable. Le traitement ultérieur est alors basé sur l'une des bases juridiques du RGPD mentionnées ci-dessus. Pour la publicité destinée aux clients existants, le § 7(3) UWG peut s'appliquer."
+          ]
+        },
+        {
+          "id": "data-deletion",
+          "title": "c) Suppression des données et durée de conservation",
+          "content": "Les données personnelles sont supprimées ou bloquées dès que la finalité du stockage ne s'applique plus. Les données peuvent être conservées au-delà de ce point si cela est prévu par le législateur européen ou national dans les règlements de l'UE, les lois ou d'autres dispositions auxquelles nous sommes soumis (par exemple, obligations de conservation commerciale/fiscale selon le Code de commerce allemand (HGB) ou le Code fiscal (AO), généralement de 6 à 10 ans). <br /><br />Le blocage ou la suppression intervient également lorsqu'une période de conservation légalement prescrite expire, à moins que la poursuite du stockage ne soit nécessaire à la conclusion ou à l'exécution du contrat. Après expiration, les données seront supprimées ou, si possible, anonymisées."
+        }
+      ]
+    },
+    {
+      "id": "website-provision",
+      "title": "5. Mise à disposition du site web",
+      "subsections": [
+        {
+          "id": "description-scope",
+          "title": "a) Description et étendue du traitement des données",
+          "content": "Chaque fois que notre site web est consulté, notre système collecte automatiquement des données et des informations à partir de l'appareil appelant. Cela inclut notamment :<br/><br/>(1) Informations sur le type et la version du navigateur utilisés<br/>(2) Le système d'exploitation de l'utilisateur<br/>(3) Le fournisseur d'accès à Internet de l'utilisateur<br/>(4) L'adresse IP de l'utilisateur<br/>(5) Date et heure de l'accès<br/>(6) URL de référence (le site web à partir duquel l'utilisateur a été dirigé vers notre site)<br/>(7) Pages/fichiers consultés et durée de la visite sur notre site web<br/><br/>Les données sont traitées pour la durée de la session afin de permettre la livraison du site web. Elles sont également stockées dans les fichiers journaux de notre système. Ces données ne sont pas stockées avec d'autres données personnelles de l'utilisateur."
+        },
+        {
+          "id": "legal-basis-website",
+          "title": "b) Base juridique du traitement des données",
+          "content": "La base juridique du stockage temporaire des données et de l'enregistrement dans les fichiers journaux est l'Art. 6(1)(f) RGPD. Notre intérêt légitime réside dans la garantie de la fonctionnalité technique, de la stabilité et de la sécurité du site web (par exemple, détection d'abus ou d'attaques), ainsi que dans la surveillance des performances et le dépannage."
+        },
+        {
+          "id": "purpose-website",
+          "title": "c) Finalité du traitement",
+          "content": "Le stockage temporaire de l'adresse IP par le système est nécessaire pour livrer le site web à l'appareil de l'utilisateur. À cette fin, l'adresse IP de l'utilisateur doit rester stockée pendant la durée de la session. Ces finalités constituent également notre intérêt légitime dans le traitement des données conformément à l'Art. 6(1)(f) RGPD."
+        },
+        {
+          "id": "storage-duration-website",
+          "title": "d) Durée de stockage",
+          "content": "Les données sont supprimées dès qu'elles ne sont plus nécessaires pour atteindre la finalité de leur collecte. Dans le cas de la mise à disposition du site web, cela se produit lorsque la session respective prend fin."
+        },
+        {
+          "id": "right-to-object-website",
+          "title": "e) Droit d'opposition et option de suppression",
+          "content": "La collecte et le stockage des données pour la mise à disposition du site web et l'enregistrement dans les fichiers journaux sont essentiels au fonctionnement du site web. Par conséquent, l'utilisateur n'a aucune possibilité de s'opposer à ce traitement."
+        }
+      ]
+    },
+    {
+      "id": "cookies",
+      "title": "6. Utilisation de cookies et technologies similaires",
+      "subsections": [
+        {
+          "id": "cookies-description",
+          "title": "a) Description et étendue du traitement des données",
+          "content": "Lorsque vous utilisez nos services, nous et des tiers sélectionnés pouvons utiliser des cookies et des technologies similaires (par exemple, stockage local, pixels, balises et SDK) pour vous offrir une expérience utilisateur meilleure, plus rapide et plus sécurisée, ou pour permettre la mesure d'audience et le contenu/la publicité personnalisés. Les cookies sont de petits fichiers texte stockés sur votre appareil lorsque vous visitez notre site web. Grâce à notre Plateforme de Gestion des Consentements (CMP), vous pouvez gérer les technologies et les fournisseurs auxquels vous consentez, en fonction de finalités spécifiques."
+        },
+        {
+          "id": "cookies-legal-basis",
+          "title": "b) Base juridique du traitement des données",
+          "content": "Selon le type et la finalité de la technologie, le traitement est basé sur :",
+          "list": [
+            "<strong>Art. 6(1)(a) RGPD en lien avec § 25(1) TTDSG (Consentement)</strong> — par exemple, pour l'analyse/marketing et le contenu ou la publicité personnalisés",
+            "<strong>Art. 6(1)(b) RGPD (Contrat/Mesures précontractuelles)</strong> — lorsque l'utilisation de technologies est techniquement nécessaire pour fournir les services demandés (par exemple, panier d'achat/cookies de session, connexion, stockage du consentement) ;",
+            "<strong>Art. 6(1)(f) RGPD en lien avec § 25(2) TTDSG (Intérêts légitimes / Stockage techniquement nécessaire)</strong> — par exemple, pour assurer la sécurité informatique et les fonctionnalités essentielles du site web."
+          ]
+        },
+        {
+          "id": "cookies-purpose",
+          "title": "c) Finalité du traitement des données",
+          "content": "Nos cookies et technologies similaires servent à différentes fins, notamment :",
+          "list": [
+            "<strong>Techniquement nécessaire :</strong> Fourniture de nos services (par exemple, contrôle de session, sécurité, stockage du consentement) ;",
+            "<strong>Optimisation technique :</strong> Surveillance des messages d'erreur, des temps de chargement et de la stabilité du système ;",
+            "<strong>Analyse/Statistiques :</strong> Évaluation du comportement des utilisateurs (agrégé/pseudonymisé) pour l'amélioration continue de nos produits et contenus ;",
+            "<strong>Confort/Personnalisation :</strong> Amélioration de l'expérience utilisateur (par exemple, préférences telles que la taille de la police, la langue ou les dernières saisies de formulaire) ;",
+            "<strong>Marketing/Contenu personnalisé (uniquement avec consentement) :</strong> Affichage et mesure des campagnes publicitaires, potentiellement sur plusieurs plateformes."
+          ]
+        },
+        {
+          "id": "cookies-storage",
+          "title": "d) Durée de stockage",
+          "content": "Les cookies et technologies comparables sont supprimés dès qu'ils ne sont plus nécessaires pour atteindre leur finalité ou dès que vous retirez votre consentement."
+        },
+        {
+          "id": "cookies-objection",
+          "title": "e) Droit d'opposition et options de suppression",
+          "content": "Lorsque des cookies ou des technologies sont techniquement requis, il n'y a aucune possibilité de s'y opposer, car ils sont essentiels au fonctionnement du site web. <br /><br />Si des cookies/technologies sont utilisés sur la base de votre consentement, vous pouvez retirer votre consentement à tout moment avec effet pour l'avenir — soit via le gestionnaire de consentement, soit via les paramètres de votre navigateur (par exemple, suppression/blocage des cookies). <br /><br />Veuillez noter que le retrait du consentement peut limiter la fonctionnalité du site web."
+        }
+      ]
+    },
+    {
+      "id": "email-newsletter",
+      "title": "7. Envoi d'e-mails et Newsletter",
+      "subsections": [
+        {
+          "id": "email-description",
+          "title": "a) Description et étendue du traitement des données",
+          "content": "Sur notre site web, vous pouvez vous inscrire pour recevoir des notifications, des newsletters ou d'autres communications par e-mail (par exemple, mises à jour de projets, actualités UGC). Pour l'envoi et l'analyse de nos e-mails, nous utilisons le service Mailchimp fourni par The Rocket Science Group LLC d/b/a Mailchimp, 675 Ponce de Leon Ave NE, Suite 5000, Atlanta, GA 30308, USA. <br /><br />Mailchimp permet l'organisation et l'envoi d'e-mails (transactionnels et marketing) ainsi que des analyses (par exemple, délivrabilité, ouvertures, clics, désabonnements). À cette fin, les données suivantes, entre autres, sont traitées et stockées sur les serveurs de Mailchimp : adresse e-mail, le cas échéant nom, entreprise, langue/région, heure d'inscription (double opt-in), preuve de consentement, adresse IP/fuseau horaire lors de l'inscription, interactions avec nos e-mails (par exemple, ouvertures, clics), métadonnées techniques (par exemple, informations sur l'appareil/navigateur). Mailchimp peut créer des rapports de livraison pour optimiser la délivrabilité et peut utiliser un pixel de suivi dans les e-mails. Lorsqu'un transfert vers les États-Unis a lieu, nous nous basons sur les CCT et les conditions de protection/traitement des données convenues avec Mailchimp."
+        },
+        {
+          "id": "email-legal-basis",
+          "title": "b) Base juridique du traitement des données",
+          "list": [
+            "<strong>Art. 6(1)(a) RGPD (consentement)</strong> pour l'envoi de newsletters/e-mails marketing selon la procédure de double opt-in et pour la mesure statistique de l'audience ;",
+            "<strong>Art. 6(1)(b) RGPD (contrat/mesures précontractuelles)</strong> pour les e-mails transactionnels (par exemple, avis requis par le système, communication liée au compte/projet) ;",
+            "<strong>§ 7(3) UWG (publicité client existant)</strong>, lorsque cela est autorisé, pour l'envoi d'offres similaires aux clients existants."
+          ]
+        },
+        {
+          "id": "email-purpose",
+          "title": "c) Finalité du traitement des données",
+          "content": "Le traitement sert à l'envoi d'e-mails, à la gestion des abonnements, à la documentation de votre consentement (preuve), à l'optimisation de nos communications (par exemple, contrôle des sujets/fréquence) et à la mesure de la portée/du succès de nos e-mails (statistiques agrégées, messages d'erreur, délivrabilité)."
+        },
+        {
+          "id": "email-storage",
+          "title": "d) Durée de stockage",
+          "content": "Nous conservons vos données d'e-mail jusqu'à ce que vous retiriez votre consentement/vous désabonniez de la liste de diffusion respective et — si nécessaire — à des fins de preuve (enregistrements de consentement) jusqu'à 3 ans après le dernier envoi/retrait (Art. 5(2) RGPD — obligation de responsabilité ; § 7 UWG). Les journaux des e-mails transactionnels sont conservés conformément aux délais de conservation légaux et/ou aux exigences de sécurité informatique, puis supprimés ou anonymisés. Mailchimp supprime ou anonymise les données selon les exigences contractuelles et sur nos instructions."
+        },
+        {
+          "id": "email-objection",
+          "title": "e) Droit d'opposition et options de suppression",
+          "content": "Vous pouvez retirer votre consentement à tout moment avec effet pour l'avenir (par exemple, via le lien de désabonnement dans chaque e-mail ou par e-mail à info@huerray.de). Vous pouvez vous opposer à la publicité destinée aux clients existants à tout moment. Le traitement des e-mails transactionnels est nécessaire à l'exécution du contrat ; il n'y a aucune possibilité de se désabonner de ceux-ci lorsque cela est légalement/contractuellement requis."
+        }
+      ]
+    },
+    {
+      "id": "registration-data",
+      "title": "8. Données que vous fournissez lors de l'inscription, de la conclusion du contrat et de l'utilisation de nos services en ligne",
+      "subsections": [
+        {
+          "id": "registration-description",
+          "title": "a) Description et étendue du traitement des données",
+          "content": "Lorsque vous vous inscrivez pour la première fois et créez un compte, et lorsque vous utilisez nos services en ligne (par exemple, tableau de bord client/créateur, fonctions de briefing/téléchargement, processus de commande/réservation), nous vous demandons de fournir des données personnelles. Nous indiquons de manière transparente quelles informations sont obligatoires (champs obligatoires) et lesquelles sont volontaires.<br/><br/>Les données susceptibles d'être collectées comprennent notamment :",
+          "list": [
+            "<strong>Données d'identité et de contact :</strong> prénom et nom, le cas échéant nom d'artiste/créateur, adresse(s), adresse e-mail, numéro(s) de téléphone, nom de l'entreprise/rôle (pour les clients professionnels), langue préférée.",
+            "<strong>Données d'accès :</strong> nom d'utilisateur, mot de passe (stocké exclusivement sous forme cryptée), le cas échéant attributs de sécurité/vérification.",
+            "<strong>Données de contrat/transaction :</strong> informations concernant la transaction juridique (offre, commande, textes de contrat, conditions, annulations), identifiants de projet/commande, briefings/approbations, acceptations, communication de projet, statut de facturation/paiment.",
+            "<strong>Données de facturation/paiement :</strong> adresse de facturation et de livraison, numéro de TVA (le cas échéant), coordonnées bancaires/IBAN/BIC ou identifiants de prestataires de services de paiement.",
+            "<strong>Données de consentement et de preuve :</strong> déclarations de consentement (par exemple, newsletter/suivi, publications), horodatages de double opt-in, journaux de consentement/retrait.",
+            "<strong>Informations de profil/confort (volontaire) :</strong> photo de profil/avatar, identifiants de réseaux sociaux, préférences thématiques, liens vers le portfolio, paramètres."
+          ],
+          "additionalContent": "Dans le cadre de l'exécution du contrat, vos données personnelles peuvent être partagées avec des tiers lorsque cela est nécessaire pour le traitement respectif du contrat ou la mise en œuvre du projet (par exemple, hébergeurs/fournisseurs informatiques, fournisseur d'e-mail/newsletter Mailchimp, prestataires de services de paiement/bancaires, logistique/transfert de fichiers et, dans le contexte des créateurs, clients/partenaires si nécessaire pour le briefing, les approbations, les acceptations ou la preuve d'utilisation). Nous avons conclu des accords de traitement des données avec des sous-traitants conformément à l'Art. 28 RGPD."
+        },
+        {
+          "id": "registration-legal-basis",
+          "title": "b) Base juridique du traitement des données",
+          "list": [
+            "<strong>Art. 6(1)(b) RGPD (contrato/mesures précontractuelles)</strong> pour les informations obligatoires et tout traitement nécessaire pour fournir le compte, activer les fonctions et exécuter les contrats.",
+            "<strong>Art. 6(1)(a) RGPD (consentement)</strong> pour les informations volontaires, les communications de newsletter/marketing et la publication de contenu lorsque cela n'est pas déjà contractuellement dû.",
+            "<strong>Art. 6(1)(c) RGPD (obligation légale)</strong> par exemple, pour les obligations de conservation fiscale/commerciale.",
+            "<strong>Art. 6(1)(f) RGPD (intérêts légitimes)</strong> par exemple, pour la sécurité informatique et des comptes, la prévention des abus/fraudes, l'administration interne et l'application de la loi ; vos intérêts sont soigneusement mis en balance."
+          ]
+        },
+        {
+          "id": "registration-purpose",
+          "title": "c) Finalité du traitement des données",
+          "content": "Le traitement permet et gère votre compte et l'utilisation des offres/fonctions respectives (par exemple, briefing, téléchargement de contenu, traitement des contrats, rapports), communication (demandes, assistance), personnalisation/utilisation pratique (lorsque des informations volontaires sont fournies), ainsi qu'une facturation correcte et le respect des obligations légales."
+        },
+        {
+          "id": "registration-storage",
+          "title": "d) Durée de stockage",
+          "content": "Nous traitons les données aussi longtemps que nécessaire aux fins mentionnées :",
+          "list": [
+            "<strong>Données de compte/profil :</strong> jusqu'à ce que le compte soit supprimé par vous ou par nous (conformément aux conditions contractuelles/d'utilisation) et par la suite dans la mesure où des obligations légales de conservation existent.",
+            "<strong>Documents de contrat/facturation :</strong> généralement 6 à 10 ans conformément au Code de commerce allemand (HGB) / Code fiscal (AO).",
+            "<strong>Journaux de consentement :</strong> à des fins de preuve jusqu'à 3 ans après le retrait/désabonnement. Une fois que les finalités cessent de s'appliquer, les données sont supprimées ou — lorsque cela est techniquement possible et légalement autorisé — anonymisées."
+          ]
+        },
+        {
+          "id": "registration-objection",
+          "title": "e) Droit d'opposition et options de suppression",
+          "content": "Lorsque nous traitons des données sur la base de votre consentement ou en raison d'informations volontaires, vous pouvez retirer votre consentement à tout moment avec effet pour l'avenir et/ou supprimer/ajuster vous-même les détails volontaires dans votre compte. Il n'y a pas d'option de retrait pour les données obligatoires du contrat/système lorsque cela est nécessaire pour fournir les services ou respecter des obligations légales. Vos droits d'opposition en vertu de l'Art. 21 RGPD restent inchangés (par exemple, contre le traitement basé sur des intérêts légitimes). Veuillez adresser les retraits/oppositions à datenschutz@huerray.de."
+        }
+      ]
+    },
+    {
+      "id": "advertising-without-consent",
+      "title": "9. Publicité sans consentement (Publicité client existant selon § 7(3) UWG)",
+      "subsections": [
+        {
+          "id": "advertising-description",
+          "title": "a) Description et étendue du traitement des données",
+          "content": "Si vous avez créé un compte chez nous ou utilisé l'un de nos services, nous vous considérons comme un client existant. Dans ce cadre, nous pouvons traiter vos coordonnées postales (nom, adresse) — même sans consentement séparé — pour vous envoyer des informations sur nos propres produits ou services similaires. Nous pouvons également utiliser votre adresse e-mail pour vous envoyer nos propres offres similaires, à condition que nous l'ayons obtenue dans le cadre de la vente d'un produit ou d'un service. Les informations volontaires (par exemple, centres d'intérêt) peuvent être utilisées pour adapter le contenu à vos préférences. Aucune donnée ne sera transmise à des tiers à leurs propres fins publicitaires ; des sous-traitants sont utilisés conformément à l'Art. 28 RGPD."
+        },
+        {
+          "id": "advertising-legal-basis",
+          "title": "b) Base juridique",
+          "content": "Le traitement est effectué sur la base de l'Art. 6(1)(f) RGPD (intérêt légitime dans le marketing direct) en lien avec § 7(3) UWG (publicité par e-mail aux clients existants pour des biens/services similaires). Nous effectuons une mise en balance des intérêts et respectons pleinement votre droit d'opposition à tout moment."
+        },
+        {
+          "id": "advertising-purpose",
+          "title": "c) Finalité du traitement",
+          "content": "Marketing direct pour nos propres produits et services similaires, et fourniture d'informations connexes."
+        },
+        {
+          "id": "advertising-storage",
+          "title": "d) Durée de stockage",
+          "content": "Nous traitons les données de contact et d'utilisation requises à cette fin aussi longtemps que la relation client existe, jusqu'à ce que vous vous y opposiez, ou — le cas échéant — conformément aux principes et aux délais de conservation légaux décrits à la section 14 (Durée de stockage et critères)."
+        },
+        {
+          "id": "advertising-objection",
+          "title": "e) Droit d'opposition et options de suppression",
+          "content": "Vous pouvez vous opposer à l'utilisation de vos données à des fins publicitaires à tout moment. Pour les e-mails, veuillez utiliser le lien de désabonnement fourni ou contacter datenschutz@huerray.de ; pour la publicité postale, vous pouvez également vous y opposer à tout moment."
+        }
+      ]
+    },
+    {
+      "id": "ugc-uploads",
+      "title": "10. Téléchargements UGC, examen, publication et mise à disposition des clients professionnels",
+      "content": "Les créateurs téléchargent du contenu (par exemple, vidéos, images, textes, métadonnées associées) via la plateforme. Le contenu est examiné pour s'assurer de son exhaustivité, de sa conformité aux briefings et aux normes juridiques, et — selon le statut de la campagne — mis à la disposition des clients professionnels pour consultation, sélection, approbation et utilisation. Après approbation, le contenu est fourni aux entreprises conformément aux droits d'utilisation convenus (par exemple, pour téléchargement, placements publicitaires, publications organiques, pages de destination ou e-boutiques).<br/><br/><strong>Bases juridiques :</strong><br/>• Art. 6(1)(b) RGPD (contrat / mesures précontractuelles)<br/>• Art. 6(1)(f) RGPD (assurance qualité / modération)<br/>• Art. 6(1)(a) RGPD (consentement) pour traitement/publication au-delà de ce qui est contractuellement requis.<br/><br/><strong>Transparence/Visibilité :</strong><br/>Dans le contexte du projet ou de la campagne, il est visible quelles données/UGC sont mises à la disposition de quelle entreprise. Les données de profil nécessaires aux candidatures/mise en relation (par exemple, nom/nom de créateur, liens sociaux, balises thématiques, exemples UGC) peuvent être affichées aux clients professionnels.<br/><br/><strong>Suppression/Conservation :</strong><br/>Les téléchargements bruts, versions de révision, approbations et acceptations sont stockés par projet. Une fois le projet terminé, nous supprimons ou anonymisons les données, sauf si des obligations légales ou contractuelles exigent leur conservation. Les droits d'utilisation déjà accordés restent inchangés (usages existants).",
+      "subsections": []
+    },
+    {
+      "id": "recipients-third-country",
+      "title": "11. Destinataires, transferts vers des pays tiers et garanties",
+      "content": "<strong>Destinataires :</strong><br/>Services internes (Opérations, Succès Créateurs, Ventes, Finances), sous-traitants mandatés (hébergement/IT, e-mail/newsletter, services de paiement, transfert de fichiers, systèmes CRM/tickets) et — dans les contextes de projets — clients professionnels/partenaires.<br/><br/><strong>Pays tiers :</strong><br/>Si des données sont transférées vers des pays tiers (hors EEE), par exemple vers Mailchimp (USA), ces transferts sont basés sur des garanties appropriées, notamment les Clauses Contractuelles Types (CCT), et des mesures de protection techniques et organisationnelles supplémentaires, limitées à ce qui est nécessaire. <br /><br />Des détails peuvent être fournis sur demande.",
+      "subsections": []
+    },
+    {
+      "id": "social-media",
+      "title": "12. Pages de réseaux sociaux et canaux de communication",
+      "content": "Lorsque vous interagissez avec nos pages de réseaux sociaux, nous traitons les informations que vous fournissez pour traiter votre demande. De plus, les politiques de confidentialité des fournisseurs de plateformes respectifs s'appliquent. Selon la plateforme, une responsabilité conjointe peut exister en vertu de la loi sur la protection des données.",
+      "subsections": []
+    },
+    {
+      "id": "security",
+      "title": "13. Sécurité",
+      "content": "Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles conformes aux normes actuelles de l'industrie (par exemple, cryptage, contrôle d'accès, journalisation, durcissement/surveillance) pour garantir un niveau de protection approprié correspondant au risque.",
+      "subsections": []
+    },
+    {
+      "id": "storage-period",
+      "title": "14. Durée de stockage et critères",
+      "content": "Nous ne stockons les données personnelles que le temps nécessaire pour atteindre les objectifs respectifs ou tel que requis par les obligations légales/contractuelles (généralement 6 à 10 ans pour la documentation fiscale et commerciale). Ensuite, nous supprimons ou anonymisons les données. Les enregistrements de consentement peuvent être conservés jusqu'à 3 ans après le retrait (obligation de responsabilité).",
+      "subsections": []
+    },
+    {
+      "id": "data-subject-rights",
+      "title": "15. Droits des personnes concernées",
+      "content": "Si vos données personnelles sont traitées, vous êtes une personne concernée au sens du RGPD et vous disposez des droits suivants vis-à-vis du responsable du traitement :",
+      "subsections": [
+        {
+          "id": "right-of-access",
+          "title": "Droit d'accès",
+          "content": "Vous avez le droit d'obtenir la confirmation que des données personnelles vous concernant sont ou ne sont pas traitées. Si tel est le cas, vous pouvez demander l'accès aux informations suivantes :<br/><br/>",
+          "orderedList": [
+            "les finalités du traitement ;",
+            "les catégories de données personnelles concernées ;",
+            "les destinataires ou catégories de destinataires auxquels les données personnelles ont été ou seront communiquées ;",
+            "la durée de conservation envisagée ou, si aucune information spécifique n'est possible, les critères utilisés pour déterminer cette durée ;",
+            "l'existence du droit de demander la rectification, l'effacement ou la limitation du traitement des données personnelles, ou le droit de s'opposer à ce traitement ;",
+            "l'existence du droit d'introduire une réclamation auprès d'une autorité de contrôle ;",
+            "lorsque les données personnelles ne sont pas collectées auprès de vous, toute information disponible quant à leur source ;",
+            "l'existence d'une prise de décision automatisée, y compris un profilage conformément à l'Art. 22(1) et (4) RGPD, et — au moins dans ces cas — des informations significatives sur la logique impliquée, ainsi que l'importance et les conséquences prévues de ce traitement pour vous."
+          ],
+          "additionalContent": "Vous avez également le droit d'être informé si vos données sont transférées vers un pays tiers ou une organisation internationale et d'être informé des garanties appropriées en vertu de l'Art. 46 RGPD relatives à ce transfert."
+        },
+        {
+          "id": "right-to-rectification",
+          "title": "Droit de rectification",
+          "content": "Vous avez le droit d'obtenir sans délai injustifié la rectification des données personnelles inexactes et de faire compléter les données incomplètes."
+        },
+        {
+          "id": "right-to-restriction",
+          "title": "Droit à la limitation du traitement",
+          "content": "Vous pouvez demander la limitation du traitement de vos données personnelles dans les conditions suivantes :",
+          "orderedList": [
+            "si vous contestez l'exactitude de vos données personnelles pendant une durée nous permettant de vérifier leur exactitude ;",
+            "le traitement est illicite, mais vous vous opposez à l'effacement et demandez à la place la limitation de leur utilisation ;",
+            "nous n'avons plus besoin des données aux fins du traitement, mais vous en avez besoin pour la constatation, l'exercice ou la défense de droits en justice ; ou",
+            "vous vous êtes opposé au traitement en vertu de l'Art. 21(1) RGPD, en attendant de vérifier si nos motifs légitimes prévalent sur les vôtres."
+          ],
+          "additionalContent": "Lorsque le traitement a été limité, ces données ne peuvent — à l'exception du stockage — être traitées qu'avec votre consentement, ou pour la constatation, l'exercice ou la défense de droits en justice, ou pour la protection des droits d'une autre personne physique ou morale, ou pour des motifs importants d'intérêt public. Vous serez informé avant que la limitation ne soit levée."
+        },
+        {
+          "id": "right-to-erasure",
+          "title": "Droit à l'effacement (\"Droit à l'oubli\")",
+          "subsections": [
+            {
+              "id": "obligation-to-erase",
+              "title": "a) Obligation d'effacement",
+              "content": "Vous pouvez demander l'effacement immédiat de vos données personnelles, et nous sommes tenus de les effacer sans délai injustifié si l'un des motifs suivants s'applique :",
+              "orderedList": [
+                "les données ne sont plus nécessaires au regard des finalités pour lesquelles elles ont été collectées ou traitées ;",
+                "vous retirez votre consentement et il n'existe pas d'autre base juridique pour le traitement ;",
+                "vous vous opposez au traitement en vertu de l'Art. 21(1) ou (2) RGPD et il n'existe pas de motifs légitimes impérieux pour le traitement ;",
+                "les données ont fait l'objet d'un traitement illicite ;",
+                "l'effacement est nécessaire pour respecter une obligation légale en vertu du droit de l'Union ou du droit de l'État membre ;",
+                "les données ont été collectées dans le cadre de l'offre de services de la société de l'information visés à l'Art. 8(1) RGPD."
+              ]
+            },
+            {
+              "id": "notification-to-third-parties",
+              "title": "b) Notification à des tiers",
+              "content": "Lorsque nous avons rendu publiques des données personnelles et que nous sommes tenus de les effacer, nous prendrons des mesures raisonnables, y compris des mesures techniques, pour informer les responsables du traitement qui traitent ces données que vous avez demandé l'effacement de tout lien vers ces données, ou de toute copie ou reproduction de celles-ci."
+            },
+            {
+              "id": "exceptions",
+              "title": "c) Exceptions",
+              "content": "Le droit à l'effacement ne s'applique pas si le traitement est nécessaire :<br/><br/>1. à l'exercice du droit à la liberté d'expression et d'information ;<br/>2. pour respecter une obligation légale ou exécuter une mission d'intérêt public ;<br/>3. pour des motifs d'intérêt public dans le domaine de la santé publique (Art. 9(2)(h, i) et (3) RGPD) ;<br/>4. à des fins archivistiques, scientifiques, historiques ou statistiques (Art. 89(1) RGPD) lorsque l'effacement risquerait de rendre impossible ou de compromettre gravement la réalisation des objectifs ; ou<br/>5. à la constatation, à l'exercice ou à la défense de droits en justice."
+            }
+          ]
+        },
+        {
+          "id": "right-to-notification",
+          "title": "Droit de notification",
+          "content": "Si vous avez exercé votre droit de rectification, d'effacement ou de limitation du traitement, nous informerons tous les destinataires auxquels les données personnelles ont été communiquées, à moins que cela ne s'avère impossible ou n'implique un effort disproportionné. Vous avez le droit d'être informé sur ces destinataires."
+        },
+        {
+          "id": "right-to-data-portability",
+          "title": "Droit à la portabilité des données",
+          "content": "Vous avez le droit de recevoir les données personnelles que vous nous avez fournies dans un format structuré, couramment utilisé et lisible par machine, et le droit de transmettre ces données à un autre responsable du traitement sans obstacle, lorsque :",
+          "orderedList": [
+            "le traitement est fondé sur le consentement (Art. 6(1)(a) ou Art. 9(2)(a) RGPD) ou sur un contrat (Art. 6(1)(b) RGPD) ; et",
+            "le traitement est effectué à l'aide de procédés automatisés."
+          ],
+          "additionalContent": "Vous avez également le droit d'obtenir que vos données soient transmises directement d'un responsable du traitement à un autre, lorsque cela est techniquement possible et à condition que cela ne porte pas atteinte aux droits d'autrui. Ce droit ne s'applique pas au traitement nécessaire à l'exécution d'une mission d'intérêt public ou relevant de l'exercice de l'autorité publique."
+        },
+        {
+          "id": "right-to-object",
+          "title": "Droit d'opposition",
+          "content": "Vous avez le droit de vous opposer à tout moment, pour des raisons tenant à votre situation particulière, au traitement de vos données personnelles fondé sur l'Art. 6(1)(e) ou (f) RGPD, y compris un profilage fondé sur ces dispositions.<br/><br/>Nous ne traiterons plus vos données personnelles, à moins que nous ne puissions démontrer des motifs légitimes et impérieux pour le traitement qui prévalent sur vos intérêts, droits et libertés, ou pour la constatation, l'exercice ou la défense de droits en justice.<br/><br/>Si vos données personnelles sont traitées à des fins de prospection, vous avez le droit de vous opposer à tout moment à ce traitement, y compris au profilage dans la mesure où il est lié à une telle prospection. Si vous vous opposez au traitement à des fins de prospection, vos données personnelles ne seront plus traitées à ces fins.<br/><br/>Vous pouvez exercer votre droit d'opposition par des moyens automatisés utilisant des spécifications techniques, nonobstant la directive 2002/58/CE."
+        },
+        {
+          "id": "right-to-withdraw-consent",
+          "title": "Droit de retrait du consentement",
+          "content": "Vous avez le droit de retirer votre consentement à tout moment. Le retrait du consentement ne compromet pas la licéité du traitement fondé sur le consentement effectué avant ce retrait."
+        },
+        {
+          "id": "automated-decision-making",
+          "title": "Prise de décision automatisée individuelle, y compris le profilage",
+          "content": "Vous avez le droit de ne pas faire l'objet d'une décision fondée exclusivement sur un traitement automatisé — y compris le profilage — produisant des effets juridiques vous concernant ou vous affectant de manière significative de façon similaire, sauf lorsque :",
+          "orderedList": [
+            "elle est nécessaire à la conclusion ou à l'exécution d'un contrat entre vous et nous ;",
+            "elle est autorisée par le droit de l'Union ou de l'État membre offrant des garanties appropriées ; ou",
+            "elle est fondée sur votre consentement explicite."
+          ],
+          "additionalContent": "De telles décisions ne peuvent être fondées sur des catégories particulières de données personnelles, à moins que l'Art. 9(2)(a) ou (g) RGPD ne s'applique et que des mesures appropriées pour la sauvegarde de vos droits et libertés et de vos intérêts légitimes ne soient en place.<br/><br/>Dans les cas visés aux points (1) et (3), nous mettrons en œuvre des mesures appropriées pour la sauvegarde de vos droits et libertés et de vos intérêts légitimes, y compris au moins le droit d'obtenir une intervention humaine, d'exprimer votre point de vue et de contester la décision."
+        },
+        {
+          "id": "right-to-lodge-complaint",
+          "title": "Droit d'introduire une réclamation auprès d'une autorité de contrôle",
+          "content": "Sans préjudice de tout autre recours administratif ou juridictionnel, vous avez le droit d'introduire une réclamation auprès d'une autorité de contrôle — en particulier dans l'État membre de votre résidence habituelle, de votre lieu de travail ou du lieu de l'infraction alléguée — si vous considérez que le traitement de données personnelles vous concernant constitue une violation du RGPD.<br/><br/>L'autorité de contrôle auprès de laquelle la réclamation a été introduite informera l'auteur de la réclamation de l'état d'avancement et de l'issue de la réclamation, y compris de la possibilité d'un recours juridictionnel conformément à l'Art. 78 RGPD."
+        }
+      ]
     }
   ]
 }

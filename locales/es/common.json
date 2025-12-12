@@ -1,8 +1,9 @@
 {
   "button": {
-    "registerNow": "Registrarse ahora",
-    "getStarted": "Comenzar",
+    "registerNow": "Regístrate ahora",
+    "getStarted": "Empezar",
     "learnMore": "Saber más",
-    "joinForFree": "Únete Gratis"
-  }
+    "joinForFree": "Únete gratis"
+  },
+  "from": "de"
 }

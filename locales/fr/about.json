@@ -1,26 +1,26 @@
 {
   "hero": {
-    "title": "Huerray\nChaque Teinte. Chaque Histoire",
-    "subtitle": "Nous connectons les marques avec des créateurs de communautés sous-représentées pour créer de l'UGC authentique qui convertit — culturellement riche, émotionnellement réel et conçu pour les flux sociaux d'aujourd'hui."
+    "title": "Huerray\nChaque Nuance. Chaque Histoire",
+    "subtitle": "Nous connectons les marques avec des créateurs issus de communautés sous-représentées pour créer un UGC authentique qui convertit — culturellement riche, émotionnellement réel et conçu pour les fils d'actualité sociaux d'aujourd'hui."
   },
   "why": {
     "pill": "Notre Pourquoi",
-    "title": "Le marketing qui représente de vraies personnes performe mieux et se sent mieux",
-    "description": "Chez Huerray, nous croyons que l'inclusion n'est pas une case à cocher : c'est la norme créative. Nous aidons les marques à atteindre des publics diversifiés grâce à du contenu humain, identifiable et enraciné dans l'expérience vécue."
+    "title": "Le marketing qui représente de vraies personnes performe et on le ressent mieux",
+    "description": "Chez Huerray, nous pensons que l'inclusion n'est pas une case à cocher : c'est la norme créative. Nous aidons les marques à atteindre des publics diversifiés grâce à un contenu humain, auquel on peut s'identifier et enraciné dans l'expérience vécue."
   },
   "whatWeDo": {
-    "pill": "Ce que nous faisons",
+    "pill": "Ce Que Nous Faisons",
     "title": "Nous connectons les marques avec des créateurs qui se soucient vraiment de leurs produits",
-    "description": "Huerray est une plateforme qui met en relation les marques avec les créateurs parfaits pour du contenu authentique. Nous gérons tout, de la découverte au paiement, pour que vous puissiez vous concentrer sur ce qui compte : créer du contenu de qualité.",
+    "description": "Huerray est une plateforme qui met en relation les marques avec les créateurs parfaits pour un contenu authentique. Nous gérons tout, de la découverte au paiement, afin que vous puissiez vous concentrer sur ce qui compte : créer du bon contenu.",
     "features": [
-      "Mise en relation intelligente de créateurs",
+      "Mise en relation intelligente des créateurs",
       "Tarification transparente",
       "Paiements sécurisés",
       "Gestion des droits de contenu"
     ]
   },
   "values": {
-    "title": "Nos valeurs",
+    "title": "Nos Valeurs",
     "items": [
       {
         "title": "Authenticité d'abord",
@@ -32,32 +32,32 @@
       },
       {
         "title": "Transparence",
-        "description": "Des attentes claires et une communication honnête à chaque étape"
+        "description": "Attentes claires et communication honnête à chaque étape"
       },
       {
-        "title": "Qualité plutôt que quantité",
+        "title": "Qualité sur Quantité",
         "description": "Nous nous concentrons sur des collaborations significatives, pas seulement sur des chiffres"
       }
     ]
   },
   "story": {
-    "pill": "Notre histoire",
-    "title": "Huerray réécrit les 2-3 références que les marques attirent et se connectent à cette extrémité",
+    "pill": "Notre Histoire",
+    "title": "Huerray réécrit les règles",
     "subtitle": "Un voyage de la frustration à l'innovation",
-    "content": "Fondée par des créateurs et des marketeurs qui ont vécu les difficultés du marketing d'influence de première main, Huerray a été créée pour résoudre de vrais problèmes. Nous avons créé une plateforme qui respecte à la fois les marques et les créateurs, rendant les collaborations plus fluides, plus équitables et plus efficaces."
+    "content": "Fondée par des créateurs et des spécialistes du marketing qui ont vécu les points faibles du marketing d'influence, Huerray a été construite pour résoudre de vrais problèmes. Nous avons créé une plateforme qui respecte à la fois les marques et les créateurs, rendant les collaborations plus fluides, plus justes et plus efficaces."
   },
   "team": {
-    "subtitle": "Notre histoire de fondation",
-    "title": "Né à Berlin; fondé par 3 amis de différents coins du monde",
-    "description": "Huerray est née d'une observation simple : de grands créateurs étaient négligés parce qu'ils ne correspondaient pas à un modèle étroit. Nous avons donc construit une plateforme qui rend la visibilité évolutive — où les créateurs sont dignes de confiance pour diriger les récits et les marques obtiennent du contenu qui se connecte vraiment.",
+    "subtitle": "Notre Histoire Fondatrice",
+    "title": "Née à Berlin ; fondée par 3 amis de différents coins du monde",
+    "description": "Huerray est née d'une observation simple : de grands créateurs étaient négligés parce qu'ils ne rentraient pas dans un moule étroit. Nous avons donc construit une plateforme qui rend la visibilité évolutive — où l'on fait confiance aux créateurs pour diriger les récits et où les marques obtiennent du contenu qui connecte vraiment.",
     "members": [
       {
         "name": "Adedapo",
-        "bio": "Un stratège d'affaires du Nigeria, avait passé des années à voir des créateurs brillants être négligés — non pas parce qu'ils manquaient de compétences, mais parce qu'ils ne correspondaient pas au moule."
+        "bio": "Un stratège commercial du Nigeria, avait passé des années à voir des créateurs brillants être négligés — non pas par manque de compétence, mais parce qu'ils ne rentraient pas dans le moule."
       },
       {
         "name": "Norina",
-        "bio": "Un esprit marketing d'Autriche aux racines indiennes, a élaboré des campagnes pour des marques mondiales mais a rarement vu des visages ou des histoires qui reflétaient les siennes."
+        "bio": "Un esprit marketing d'Autriche avec des racines indiennes, a conçu des campagnes pour des marques mondiales mais a rarement vu des visages ou des histoires qui reflétaient les siens."
       },
       {
         "name": "",
@@ -66,7 +66,7 @@
     ]
   },
   "cta": {
-    "subtitle": "Rejoignez des milliers de créateurs et d'entreprises qui collaborent pour créer du contenu percutant pour tous",
-    "buttonText": "Commencez ici"
+    "subtitle": "Rejoignez des milliers de créateurs et d'entreprises collaborant pour créer du contenu percutant pour tous",
+    "buttonText": "Commencez Ici"
   }
 }

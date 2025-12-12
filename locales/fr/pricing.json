@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "Payez pour l'UGC, pas pour les frais cachés",
-    "subtitle": "Chaque dollar est investi dans un UGC évolutif et conforme à la marque qui génère des résultats, pas dans les frais de plateforme"
+    "title": "Payez pour l'UGC, pas pour des frais cachés",
+    "subtitle": "Chaque dollar va vers un UGC évolutif et conforme à la marque qui génère des résultats, pas vers des frais de plateforme"
   },
   "cards": {
     "disclaimer": "Tous les prix sont pour une vidéo, hors TVA.",
@@ -9,35 +9,35 @@
     "short": {
       "tag": "Court",
       "title": "15 Secondes",
-      "price": "À partir de 149,99 €",
+      "price": "€149.99",
       "features": [
-        "TikTok-Video",
-        "Instagram-Story & Reels",
-        "Pinterest-Video",
-        "Snapchat-Ad"
+        "Vidéo TikTok",
+        "Story & Reels Instagram",
+        "Vidéo Pinterest",
+        "Publicité Snapchat"
       ]
     },
     "medium": {
       "tag": "Moyen",
       "title": "30 Secondes",
-      "price": "À partir de 269,99 €",
+      "price": "€269.99",
       "features": [
-        "Instagram-Reel",
-        "TikTok-ADs",
-        "Snapchat-Ad",
-        "Live-Shopping",
-        "Landing-page"
+        "Reel Instagram",
+        "Publicités TikTok",
+        "Publicité Snapchat",
+        "Live Shopping",
+        "Page de destination"
       ]
     },
     "long": {
       "tag": "Long",
       "title": "60 Secondes",
-      "price": "À partir de 349,99 €",
+      "price": "€349.99",
       "features": [
-        "TikTok-Video",
-        "Instagram-Story & Reels",
-        "Pinterest-Video",
-        "Snapchat-Ad"
+        "Vidéo TikTok",
+        "Story & Reels Instagram",
+        "Vidéo Pinterest",
+        "Publicité Snapchat"
       ]
     }
   },
@@ -46,38 +46,38 @@
     "items": [
       {
         "title": "Demandes de projets illimitées",
-        "text": "Des vidéos de déballage et témoignages à la photographie de produits et de mannequins - obtenez le contenu dont vous avez besoin."
+        "text": "Des vidéos d'unboxing et de témoignages à la photographie de produits et de mannequins - obtenez le contenu dont vous avez besoin."
       },
       {
-        "title": "Examinez les candidatures de créateurs diversifiés",
-        "text": "Tous les âges, origines, genres et vibes, Huerray a un créateur de contenu idéal pour votre marque."
+        "title": "Examinez les candidatures de divers créateurs",
+        "text": "Tout âge, race, sexe et ambiance, Huerray a un créateur de contenu idéal pour votre marque."
       },
       {
         "title": "Pas de négociations avec les créateurs",
-        "text": "Les créateurs Huerray travaillent avec un budget fixe pour tous vos projets."
+        "text": "Les créateurs Huerray travaillent avec un budget défini pour tous vos projets."
       },
       {
-        "title": "Droits complets de licence et de distribution pour votre contenu",
-        "text": "100% de droits de licence et de distribution pour une utilisation sur les réseaux sociaux, les sites web, les publicités et plus encore."
+        "title": "Droits de licence et de distribution complets sur votre contenu",
+        "text": "100% droits de licence et de distribution à utiliser sur les réseaux sociaux, sites web, publicités et plus encore."
       },
       {
-        "title": "Feedback en temps réel",
-        "text": "Utilisez la fonctionnalité de communication intégrée pour échanger des commentaires avec vos créateurs, leur poser des questions sur leurs livrables, apporter des ajustements si nécessaire ou affiner vos exigences"
+        "title": "Commentaires en temps réel",
+        "text": "Échangez des commentaires avec vos créateurs en utilisant notre fonction de communication intégrée. Faites des ajustements si nécessaire, ou affinez vos exigences."
       }
     ]
   },
   "extra": {
     "ai": {
-      "subtitle": "À la pointe de la technologie/prochaine génération",
+      "subtitle": "Dernière génération",
       "title": "Vidéos générées par IA",
       "priceLabel": "À partir de",
-      "price": "€79,99",
+      "price": "€79.99",
       "buttonText": "Créer un brief"
     },
     "enterprise": {
       "badge": "Extra + Géré",
       "title": "Plan Entreprise",
-      "description": "Besoin de plus de contenu généré ? Discutez avec notre équipe",
+      "description": "Besoin de plus de contenu généré ? Parlez à notre équipe",
       "features": [
         "Demander un service",
         "Discuter des exigences",
@@ -92,15 +92,15 @@
     "items": [
       {
         "question": "Combien de temps faut-il pour que ma candidature de créateur soit examinée ?",
-        "answer": "En raison du volume élevé de candidatures que nous recevons, le processus d'examen peut prendre un certain temps. Nous nous efforçons de traiter les candidatures aussi rapidement que possible, mais veuillez noter que cela peut varier en fonction de la demande et de notre capacité actuelle. Soyez assuré que nous vous informerons dès qu'il y aura une mise à jour sur le statut de votre candidature. Merci pour votre patience !"
+        "answer": "En raison du volume élevé de candidatures que nous recevons, le processus d'examen peut prendre un certain temps. Nous nous efforçons de traiter les candidatures aussi rapidement que possible, mais veuillez noter que cela peut varier en fonction de la demande et de notre capacité actuelle. Soyez assuré que nous vous informerons dès qu'il y aura une mise à jour sur le statut de votre candidature. Merci de votre patience !"
       },
       {
-        "question": "Ai-je besoin d'un certain nombre d'abonnés pour rejoindre Huerray ?",
-        "answer": "Non. Vous n'avez peut-être même pas de réseaux sociaux et c'est tout à fait bien. Tout ce que vous avez à faire, c'est créer du contenu pour être payé."
+        "question": "Ai-je besoin d'un certain nombre de followers pour rejoindre Huerray ?",
+        "answer": "Non. Vous n'avez même pas besoin d'avoir des réseaux sociaux et c'est tout à fait acceptable. Tout ce que vous avez à faire est de tourner du contenu pour être payé."
       },
       {
-        "question": "Dois-je publier sur les réseaux sociaux ?",
-        "answer": "Non. Tout ce que vous avez à faire, c'est télécharger le contenu sur la plateforme Huerray."
+        "question": "Dois-je poster sur les réseaux sociaux ?",
+        "answer": "Non. Tout ce que vous avez à faire est de télécharger le contenu sur la plateforme Huerray."
       },
       {
         "question": "Dois-je payer pour rejoindre ?",
@@ -108,11 +108,11 @@
       },
       {
         "question": "Comment trouver des missions ?",
-        "answer": "Vous choisissez les projets de marques qui correspondent à votre esthétique personnelle et postulez pour ces partenariats. L'application est mise à jour chaque jour avec de nouveaux partenariats. Ne travaillez qu'avec les marques que vous souhaitez !"
+        "answer": "Vous choisissez les projets de marques qui correspondent à votre esthétique personnelle et postulez pour ces partenariats. Chaque jour, l'application est mise à jour avec de nouveaux partenariats. Ne travaillez qu'avec des marques que vous voulez !"
       },
       {
-        "question": "Quel type de missions puis-je trouver sur Trend ?",
-        "answer": "Les emplois photo et vidéo sont notre spécialité. Photographie de produits, photos lifestyle, vidéos de produits en action, vidéos de déballage, vidéos de témoignage, photos de style portrait. Tout le contenu que les marques e-commerce peuvent exploiter."
+        "question": "Quel genre de missions puis-je trouver sur Trend ?",
+        "answer": "Les emplois photo et vidéo sont notre point fort. Photographie de produits, photos lifestyle, vidéos de produits en action, vidéos d'unboxing, vidéos de témoignages, photos style portrait. Tout le contenu que les marques de e-commerce peuvent exploiter."
       }
     ]
   },

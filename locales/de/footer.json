@@ -1,6 +1,6 @@
 {
   "cta": {
-    "title": "Bereit für Ihr erstes UGC-Video?",
+    "title": "Bereit für dein erstes UGC-Video?",
     "button": "Jetzt registrieren"
   },
   "sections": {
@@ -10,17 +10,17 @@
   },
   "links": {
     "prices": "Preise",
-    "creditPacks": "Kreditpakete",
-    "managedService": "Verwalteter Service",
-    "faqBrands": "FAQ Marken",
+    "creditPacks": "Credit-Pakete",
+    "managedService": "Managed Service",
+    "faqBrands": "FAQ Brands",
     "faqCreators": "FAQ Creator",
-    "caseStudies": "Fallstudien",
+    "caseStudies": "Case Studies",
     "helpCenter": "Hilfe-Center",
     "aboutHuerray": "Über Huerray",
     "siteNotice": "Impressum",
     "privacyPolicy": "Datenschutzerklärung",
     "tcCreators": "AGB – Creator",
-    "tcBrands": "AGB – Marken"
+    "tcBrands": "AGB – Brands"
   },
   "signup": {
     "title": "Für Updates anmelden",

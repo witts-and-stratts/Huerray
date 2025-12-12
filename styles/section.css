@@ -116,7 +116,7 @@
 }
 
 .section-card__list-text {
-  @apply text-black text-h6;
+  @apply text-slate-800 md:text-[18px] font-regular tracking-wide;
 }
 
 .section-card__img {
