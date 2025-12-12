@@ -24,8 +24,8 @@ export function Footer( { className }: { className?: string; } ) {
       { label: t( 'links.managedService' ), href: '#' },
     ],
     faq: [
-      { label: t( 'links.faqBrands' ), href: '#' },
-      { label: t( 'links.faqCreators' ), href: '#' },
+      { label: t( 'links.faqBrands' ), href: '/brands-faq' },
+      { label: t( 'links.faqCreators' ), href: '/creators-faq' },
       // { label: t( 'links.caseStudies' ), href: '#' },
       // { label: t( 'links.helpCenter' ), href: '#' },
     ],

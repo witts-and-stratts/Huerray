@@ -1,0 +1,25 @@
+{
+  "page": {
+    "title": "Impressum"
+  },
+  "seo": {
+    "title": "Impressum",
+    "description": "Rechtliches Impressum für die Huerray-Plattform.",
+    "keywords": "Impressum, rechtlich, Huerray"
+  },
+  "effectiveDateTitle": "Gültig ab",
+  "effectiveDate": "23. Oktober 2025",
+  "tableOfContents": "Informationen",
+  "sections": [
+    {
+      "id": "contact",
+      "title": "Kontaktinformationen",
+      "content": [
+        "THRYPES GmbH <br />4. Etage, <br />Gontardstraße 11, <br />10178 Berlin, Deutschland <br />",
+        "<strong>E-Mail:</strong> <a href='mailto:info@thyrpes.com'>info@thyrpes.com</a>",
+        "<strong>Registergericht:</strong> Amtsgericht Charlottenburg - Handelsregister <br /><strong>Registernummer:</strong> HRB 256430 <br /><strong>UST-ID Nummer:</strong> DE 363934690"
+      ],
+      "subsections": []
+    }
+  ]
+}

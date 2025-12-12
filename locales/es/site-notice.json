@@ -1,0 +1,25 @@
+{
+  "page": {
+    "title": "Aviso Legal"
+  },
+  "seo": {
+    "title": "Aviso Legal",
+    "description": "Aviso legal para la plataforma Huerray.",
+    "keywords": "aviso legal, legal, impronta, Huerray"
+  },
+  "effectiveDateTitle": "Vigente desde",
+  "effectiveDate": "23 de octubre de 2025",
+  "tableOfContents": "Información",
+  "sections": [
+    {
+      "id": "contact",
+      "title": "Información de Contacto",
+      "content": [
+        "THRYPES GmbH <br />4to Piso, <br />Gontardstraße 11, <br />10178 Berlín, Alemania <br />",
+        "<strong>Correo electrónico:</strong> <a href='mailto:info@thyrpes.com'>info@thyrpes.com</a>",
+        "<strong>Juzgado de registro:</strong> Tribunal de Distrito de Charlottenburg - Registro Mercantil <br /><strong>Número de registro:</strong> HRB 256430 <br /><strong>Número de identificación fiscal (UST-ID):</strong> DE 363934690"
+      ],
+      "subsections": []
+    }
+  ]
+}

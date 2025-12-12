@@ -1,0 +1,25 @@
+{
+  "page": {
+    "title": "Mentions Légales"
+  },
+  "seo": {
+    "title": "Mentions Légales",
+    "description": "Mentions légales pour la plateforme Huerray.",
+    "keywords": "mentions légales, juridique, empreinte, Huerray"
+  },
+  "effectiveDateTitle": "En vigueur à partir du",
+  "effectiveDate": "23 octobre 2025",
+  "tableOfContents": "Information",
+  "sections": [
+    {
+      "id": "contact",
+      "title": "Coordonnées",
+      "content": [
+        "THRYPES GmbH <br />4ème étage, <br />Gontardstraße 11, <br />10178 Berlin, Allemagne <br />",
+        "<strong>Email :</strong> <a href='mailto:info@thyrpes.com'>info@thyrpes.com</a>",
+        "<strong>Tribunal d'enregistrement :</strong> Tribunal de district de Charlottenburg - Registre du commerce <br /><strong>Numéro d'enregistrement :</strong> HRB 256430 <br /><strong>Numéro de TVA :</strong> DE 363934690"
+      ],
+      "subsections": []
+    }
+  ]
+}

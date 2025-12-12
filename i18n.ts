@@ -30,6 +30,8 @@ export default getRequestConfig(async ({ locale, requestLocale }) => {
       'terms-and-conditions': (await import(`./locales/${validLocale}/terms-and-conditions.json`)).default,
       'creator-terms': (await import(`./locales/${validLocale}/creator-terms.json`)).default,
       'site-notice': (await import(`./locales/${validLocale}/site-notice.json`)).default,
+      'brands-faq': (await import(`./locales/${validLocale}/brands-faq.json`)).default,
+      'creators-faq': (await import(`./locales/${validLocale}/creators-faq.json`)).default,
     },
   };
 });
