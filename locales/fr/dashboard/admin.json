@@ -1,0 +1,15 @@
+{
+  "welcome": "Bon retour, Admin !",
+  "overview": "Aperçu du système",
+  "stats": {
+    "totalUsers": "Utilisateurs totaux",
+    "activeCampaigns": "Campagnes actives",
+    "pendingReports": "Signalisations en attente",
+    "systemHealth": "Santé du système",
+    "fromLastMonth": "par rapport au mois dernier"
+  },
+  "recentActivity": "Activité récente",
+  "manageUsers": "Gérer les utilisateurs",
+  "reviewReports": "Examiner les signalisations",
+  "noActivity": "Aucune activité récente"
+}

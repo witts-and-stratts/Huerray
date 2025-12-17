@@ -1,0 +1,27 @@
+{
+  "welcome": "Welcome back, Admin!",
+  "overview": "System overview",
+  "stats": {
+    "totalUsers": "Total Users",
+    "activeCampaigns": "Active Campaigns",
+    "pendingReports": "Pending Reports",
+    "systemHealth": "System Health",
+    "fromLastMonth": "from last month"
+  },
+  "recentActivity": "Recent Activity",
+  "manageUsers": "Manage Users",
+  "reviewReports": "Review Reports",
+  "noActivity": "No recent activity",
+  "usersPage": {
+    "title": "Manage Users",
+    "description": "View and manage system users.",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "joined": "Joined",
+      "actions": "Actions"
+    }
+  }
+}

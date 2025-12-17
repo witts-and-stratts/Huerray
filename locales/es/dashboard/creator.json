@@ -1,0 +1,15 @@
+{
+  "welcome": "¡Bienvenido de vuelta, Creador!",
+  "overview": "Aquí está el resumen de tus trabajos",
+  "stats": {
+    "activeGigs": "Trabajos activos",
+    "completedGigs": "Trabajos completados",
+    "totalEarnings": "Ganancias totales",
+    "avgRating": "Calificación promedio",
+    "fromLastMonth": "respecto al mes pasado"
+  },
+  "recentGigs": "Trabajos recientes",
+  "browseGigs": "Explorar trabajos",
+  "updatePortfolio": "Actualizar portafolio",
+  "noGigs": "No hay trabajos recientes"
+}

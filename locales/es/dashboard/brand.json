@@ -1,0 +1,15 @@
+{
+  "welcome": "¡Bienvenido de vuelta!",
+  "overview": "Aquí está tu resumen",
+  "stats": {
+    "activeCampaigns": "Campañas activas",
+    "connectedCreators": "Creadores conectados",
+    "totalSpend": "Gasto total",
+    "averageRoi": "ROI promedio",
+    "fromLastMonth": "respecto al mes pasado"
+  },
+  "recentCampaigns": "Campañas recientes",
+  "createCampaign": "Crear campaña",
+  "findCreators": "Buscar creadores",
+  "noCampaigns": "No hay campañas recientes"
+}

@@ -1,0 +1,15 @@
+{
+  "welcome": "Willkommen zurück!",
+  "overview": "Hier ist Ihre Übersicht",
+  "stats": {
+    "activeCampaigns": "Aktive Kampagnen",
+    "connectedCreators": "Verbundene Creator",
+    "totalSpend": "Gesamtausgaben",
+    "averageRoi": "Durchschnittlicher ROI",
+    "fromLastMonth": "im Vergleich zum Vormonat"
+  },
+  "recentCampaigns": "Aktuelle Kampagnen",
+  "createCampaign": "Kampagne erstellen",
+  "findCreators": "Creator finden",
+  "noCampaigns": "Keine aktuellen Kampagnen"
+}

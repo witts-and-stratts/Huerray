@@ -1,0 +1,51 @@
+"use client";
+
+import * as React from "react";
+import { type Icon } from "@tabler/icons-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/dashboard-ui/sidebar";
+
+// Type for HugeIcons icon data (it's an array)
+type HugeIconData = Parameters<typeof HugeiconsIcon>[ 0 ][ 'icon' ];
+
+export function NavSecondary( {
+  items,
+  ...props
+}: {
+  items: {
+    title: string;
+    url: string;
+    icon: Icon | HugeIconData;
+  }[];
+} & React.ComponentPropsWithoutRef<typeof SidebarGroup> ) {
+  return (
+    <SidebarGroup { ...props }>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          { items.map( ( item ) => (
+            <SidebarMenuItem key={ item.title } className="font-regular">
+              <SidebarMenuButton
+                render={
+                  <a href={ item.url }>
+                    { Array.isArray( item.icon )
+                      ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 2 } />
+                      : <item.icon />
+                    }
+                    <span>{ item.title }</span>
+                  </a>
+                }
+              />
+            </SidebarMenuItem>
+          ) ) }
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+}

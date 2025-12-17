@@ -1,0 +1,35 @@
+{
+  "welcome": "Welcome back!",
+  "overview": "Here's your overview",
+  "stats": {
+    "activeCampaigns": "Active Campaigns",
+    "connectedCreators": "Creators",
+    "totalSpend": "Total Spend",
+    "averageRoi": "Avg. ROI",
+    "fromLastMonth": "from last month"
+  },
+  "campaignsPage": {
+    "title": "Campaigns",
+    "description": "Manage your active and past campaigns.",
+    "create": "Create Campaign",
+    "columns": {
+      "name": "Name",
+      "status": "Status",
+      "creators": "Creators",
+      "budget": "Budget",
+      "duration": "Duration",
+      "actions": "Actions"
+    }
+  },
+  "creatorsPage": {
+    "title": "Find Creators",
+    "description": "Discover and connect with top creators for your campaigns.",
+    "search": "Search creators...",
+    "filter": "Filter",
+    "connect": "Connect"
+  },
+  "recentCampaigns": "Recent Campaigns",
+  "createCampaign": "Create Campaign",
+  "findCreators": "Find Creators",
+  "noCampaigns": "No recent campaigns"
+}

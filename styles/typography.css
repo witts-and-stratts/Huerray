@@ -115,7 +115,7 @@
 
   h3,
   .h3 {
-    /* @apply text-h3 font-heading; */
+    @apply text-h3 font-heading;
     font-weight: 900;
   }
 

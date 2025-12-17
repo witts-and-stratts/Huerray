@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "dashboard": "Dashboard",
+    "campaigns": "Campaigns",
+    "creators": "Creators",
+    "analytics": "Analytics",
+    "billing": "Billing",
+    "settings": "Settings"
+  },
+  "creator": {
+    "dashboard": "Dashboard",
+    "gigs": "Gigs",
+    "portfolio": "Portfolio",
+    "analytics": "Analytics",
+    "earnings": "Earnings",
+    "settings": "Settings"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "campaigns": "Campaigns",
+    "analytics": "Analytics",
+    "moderation": "Moderation",
+    "settings": "Settings"
+  }
+}

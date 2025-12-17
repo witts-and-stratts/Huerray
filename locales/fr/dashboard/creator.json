@@ -1,0 +1,15 @@
+{
+  "welcome": "Bon retour, Créateur !",
+  "overview": "Voici votre aperçu des missions",
+  "stats": {
+    "activeGigs": "Missions actives",
+    "completedGigs": "Missions terminées",
+    "totalEarnings": "Revenus totaux",
+    "avgRating": "Note moyenne",
+    "fromLastMonth": "par rapport au mois dernier"
+  },
+  "recentGigs": "Missions récentes",
+  "browseGigs": "Parcourir les missions",
+  "updatePortfolio": "Mettre à jour le portfolio",
+  "noGigs": "Aucune mission récente"
+}

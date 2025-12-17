@@ -1,0 +1,15 @@
+{
+  "welcome": "Willkommen zurück, Creator!",
+  "overview": "Hier ist Ihre Auftragsübersicht",
+  "stats": {
+    "activeGigs": "Aktive Aufträge",
+    "completedGigs": "Abgeschlossene Aufträge",
+    "totalEarnings": "Gesamteinnahmen",
+    "avgRating": "Durchschnittsbewertung",
+    "fromLastMonth": "im Vergleich zum Vormonat"
+  },
+  "recentGigs": "Aktuelle Aufträge",
+  "browseGigs": "Aufträge durchsuchen",
+  "updatePortfolio": "Portfolio aktualisieren",
+  "noGigs": "Keine aktuellen Aufträge"
+}

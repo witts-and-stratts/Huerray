@@ -6,10 +6,19 @@
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
+import Cookies from 'js-cookie';
 import { Configuration } from './generated';
 
 // Get base URL from environment variable or use default
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.huerray.de/api/v1';
+
+// Cookie configuration
+const COOKIE_NAME = 'authToken';
+const COOKIE_OPTIONS = {
+  secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
+  sameSite: 'strict' as const, // CSRF protection
+  expires: 7, // 7 days
+};
 
 /**
  * Create an axios instance with authentication and interceptors
@@ -26,10 +35,8 @@ export const createApiClient = (): AxiosInstance => {
   // Request interceptor to add authentication token
   instance.interceptors.request.use(
     (config) => {
-      // Get token from localStorage or your auth state management
-      const token = typeof window !== 'undefined' 
-        ? localStorage.getItem('authToken') 
-        : null;
+      // Get token from secure cookie
+      const token = Cookies.get(COOKIE_NAME);
 
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
@@ -50,9 +57,17 @@ export const createApiClient = (): AxiosInstance => {
       if (error.response) {
         switch (error.response.status) {
           case 401:
-            // Unauthorized - redirect to login or refresh token
+            // Unauthorized - clear token and redirect to login
             console.error('Unauthorized access - token may be invalid');
-            // You can add your auth logic here
+            clearAuthToken();
+            // Only redirect if not already on login/signup pages
+            if (typeof window !== 'undefined') {
+              const currentPath = window.location.pathname;
+              const isAuthPage = currentPath.includes('/login') || currentPath.includes('/signup');
+              if (!isAuthPage) {
+                window.location.href = '/login';
+              }
+            }
             break;
           case 403:
             console.error('Forbidden - insufficient permissions');
@@ -92,12 +107,14 @@ export const apiConfiguration = new Configuration({
 });
 
 /**
- * Helper function to set authentication token
+ * Helper function to set authentication token in secure cookie
  * Call this after successful login
+ * 
+ * @param token - The authentication token to store
  */
 export const setAuthToken = (token: string) => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('authToken', token);
+    Cookies.set(COOKIE_NAME, token, COOKIE_OPTIONS);
   }
 };
 
@@ -107,16 +124,30 @@ export const setAuthToken = (token: string) => {
  */
 export const clearAuthToken = () => {
   if (typeof window !== 'undefined') {
-    localStorage.removeItem('authToken');
+    Cookies.remove(COOKIE_NAME);
   }
 };
 
 /**
+ * Helper function to get the current auth token
+ * 
+ * @returns The current auth token or undefined
+ */
+export const getAuthToken = (): string | undefined => {
+  if (typeof window !== 'undefined') {
+    return Cookies.get(COOKIE_NAME);
+  }
+  return undefined;
+};
+
+/**
  * Helper to check if user is authenticated
+ * 
+ * @returns True if an auth token exists
  */
 export const isAuthenticated = (): boolean => {
   if (typeof window !== 'undefined') {
-    return !!localStorage.getItem('authToken');
+    return !!Cookies.get(COOKIE_NAME);
   }
   return false;
 };

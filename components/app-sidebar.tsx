@@ -1,0 +1,72 @@
+"use client";
+
+import { NavDocuments } from "@/components/dashboard-ui/nav-documents";
+import { NavMain } from "@/components/dashboard-ui/nav-main";
+import { NavSecondary } from "@/components/dashboard-ui/nav-secondary";
+import { NavUser } from "@/components/dashboard-ui/nav-user";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem
+} from "@/components/dashboard-ui/sidebar";
+import Image from "next/image";
+import * as React from "react";
+import type { Icon } from "@tabler/icons-react";
+import type { HugeiconsIcon } from '@hugeicons/react';
+
+// Type for HugeIcons icon data (it's an array)
+type HugeIconData = Parameters<typeof HugeiconsIcon>[ 0 ][ 'icon' ];
+
+export interface SidebarNavigationData {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+  navMain: {
+    title: string;
+    url: string;
+    icon: Icon | HugeIconData;
+  }[];
+  documents?: {
+    name: string;
+    url: string;
+    icon: Icon | HugeIconData;
+  }[];
+  navSecondary: {
+    title: string;
+    url: string;
+    icon: Icon | HugeIconData;
+  }[];
+}
+
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  navigationData: SidebarNavigationData;
+}
+
+export function AppSidebar( { navigationData, ...props }: AppSidebarProps ) {
+  return (
+    <Sidebar collapsible="icon" { ...props }>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <a href="#">
+              <Image src="/images/huerray-symbol.svg" alt="Huerray" width={ 40 } height={ 40 } />
+            </a>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={ navigationData.navMain } />
+        { navigationData.documents && <NavDocuments items={ navigationData.documents } /> }
+        <NavSecondary items={ navigationData.navSecondary } className="mt-auto" />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={ navigationData.user } />
+      </SidebarFooter>
+    </Sidebar>
+  );
+}

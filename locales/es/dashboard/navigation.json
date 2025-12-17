@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "dashboard": "Panel de control",
+    "campaigns": "Campañas",
+    "creators": "Creadores",
+    "analytics": "Análisis",
+    "billing": "Facturación",
+    "settings": "Configuración"
+  },
+  "creator": {
+    "dashboard": "Panel de control",
+    "gigs": "Trabajos",
+    "portfolio": "Portafolio",
+    "analytics": "Análisis",
+    "earnings": "Ganancias",
+    "settings": "Configuración"
+  },
+  "admin": {
+    "dashboard": "Panel de control",
+    "users": "Usuarios",
+    "campaigns": "Campañas",
+    "analytics": "Análisis",
+    "moderation": "Moderación",
+    "settings": "Configuración"
+  }
+}

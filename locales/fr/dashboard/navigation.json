@@ -1,0 +1,26 @@
+{
+  "brand": {
+    "dashboard": "Tableau de bord",
+    "campaigns": "Campagnes",
+    "creators": "Créateurs",
+    "analytics": "Analyses",
+    "billing": "Facturation",
+    "settings": "Paramètres"
+  },
+  "creator": {
+    "dashboard": "Tableau de bord",
+    "gigs": "Missions",
+    "portfolio": "Portfolio",
+    "analytics": "Analyses",
+    "earnings": "Revenus",
+    "settings": "Paramètres"
+  },
+  "admin": {
+    "dashboard": "Tableau de bord",
+    "users": "Utilisateurs",
+    "campaigns": "Campagnes",
+    "analytics": "Analyses",
+    "moderation": "Modération",
+    "settings": "Paramètres"
+  }
+}

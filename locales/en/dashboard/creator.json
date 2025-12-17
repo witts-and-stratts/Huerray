@@ -1,0 +1,22 @@
+{
+  "welcome": "Welcome back, Creator!",
+  "overview": "Here's your gig overview",
+  "stats": {
+    "activeGigs": "Active Gigs",
+    "completedGigs": "Completed Gigs",
+    "totalEarnings": "Total Earnings",
+    "avgRating": "Average Rating",
+    "fromLastMonth": "from last month"
+  },
+  "recentGigs": "Recent Gigs",
+  "browseGigs": "Browse Gigs",
+  "updatePortfolio": "Update Portfolio",
+  "noGigs": "No recent gigs",
+  "gigsPage": {
+    "title": "Available Gigs",
+    "description": "Browse and apply for new opportunities.",
+    "apply": "Apply Now",
+    "budget": "Budget",
+    "deadline": "Deadline"
+  }
+}
