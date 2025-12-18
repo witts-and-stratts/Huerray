@@ -16,8 +16,10 @@ import {
   Bell,
   User,
   LogOut,
-  Globe
+  Globe,
+  ChevronDown,
 } from 'lucide-react';
+import { useAuth } from '@/lib/auth/auth-context';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -60,6 +62,15 @@ interface DashboardShellProps {
 export function DashboardShell( { children, navigation, theme }: DashboardShellProps ) {
   const [ collapsed, setCollapsed ] = React.useState( false );
   const pathname = usePathname();
+  const { user } = useAuth();
+
+  const getUserInitials = () => {
+    if (!user) return 'U';
+    if (user.firstName && user.lastName) {
+      return (user.firstName[0] + user.lastName[0]).toUpperCase();
+    }
+    return (user.firstName?.[0] || user.email?.[0] || 'U').toUpperCase();
+  };
 
   return (
     <div className="flex h-screen bg-gray-50" data-dashboard-theme={ theme }>
@@ -148,19 +159,22 @@ export function DashboardShell( { children, navigation, theme }: DashboardShellP
 
             {/* User Menu */ }
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger render={
                 <button className="flex items-center gap-2 hover:bg-gray-100 rounded-lg p-2 transition-colors">
                   <Avatar className="w-8 h-8">
                     <AvatarFallback className="bg-blue-600 text-white text-sm">
-                      WS
+                      { getUserInitials() }
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden md:block text-left">
-                    <div className="text-sm font-medium">User Name</div>
-                    <div className="text-xs text-gray-500">Brand Account</div>
+                    <p className="text-sm font-medium text-gray-900">
+                      { user ? `${user.firstName} ${user.lastName}` : 'User' }
+                    </p>
+                    <p className="text-xs text-gray-500 capitalize">{ user?.role || 'Guest' }</p>
                   </div>
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 </button>
-              </DropdownMenuTrigger>
+              } />
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />

@@ -272,7 +272,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
               size="sm"
               id={`${row.original.id}-reviewer`}
             >
-              <SelectValue placeholder="Assign reviewer" />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent align="end">
               <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
@@ -289,7 +289,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     id: "actions",
     cell: () => (
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger render={
           <Button
             variant="ghost"
             className="data-[state=open]:bg-muted text-muted-foreground flex size-8"
@@ -298,7 +298,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
             <IconDotsVertical />
             <span className="sr-only">Open menu</span>
           </Button>
-        </DropdownMenuTrigger>
+        } />
         <DropdownMenuContent align="end" className="w-32">
           <DropdownMenuItem>Edit</DropdownMenuItem>
           <DropdownMenuItem>Make a copy</DropdownMenuItem>
@@ -416,7 +416,7 @@ export function DataTable({
             size="sm"
             id="view-selector"
           >
-            <SelectValue placeholder="Select a view" />
+            <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="outline">Outline</SelectItem>
@@ -437,14 +437,14 @@ export function DataTable({
         </TabsList>
         <div className="flex items-center gap-2">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger render={
               <Button variant="outline" size="sm">
                 <IconLayoutColumns />
                 <span className="hidden lg:inline">Customize Columns</span>
                 <span className="lg:hidden">Columns</span>
                 <IconChevronDown />
               </Button>
-            </DropdownMenuTrigger>
+            } />
             <DropdownMenuContent align="end" className="w-56">
               {table
                 .getAllColumns()
@@ -547,9 +547,7 @@ export function DataTable({
                 }}
               >
                 <SelectTrigger size="sm" className="w-20" id="rows-per-page">
-                  <SelectValue
-                    placeholder={table.getState().pagination.pageSize}
-                  />
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent side="top">
                   {[10, 20, 30, 40, 50].map((pageSize) => (
@@ -732,7 +730,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                 <Label htmlFor="type">Type</Label>
                 <Select defaultValue={item.type}>
                   <SelectTrigger id="type" className="w-full">
-                    <SelectValue placeholder="Select a type" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Table of Contents">
@@ -758,7 +756,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
                 <Label htmlFor="status">Status</Label>
                 <Select defaultValue={item.status}>
                   <SelectTrigger id="status" className="w-full">
-                    <SelectValue placeholder="Select a status" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Done">Done</SelectItem>
@@ -782,7 +780,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
               <Label htmlFor="reviewer">Reviewer</Label>
               <Select defaultValue={item.reviewer}>
                 <SelectTrigger id="reviewer" className="w-full">
-                  <SelectValue placeholder="Select a reviewer" />
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>

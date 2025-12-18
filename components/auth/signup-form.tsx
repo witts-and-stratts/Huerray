@@ -83,28 +83,31 @@ export function SignupForm( {
         }
       } );
 
+      // Cast to access properties
+      const responseData = response.data?.data as any;
+
       // Store the auth token if provided
-      if ( response.data?.data?.token ) {
-        setAuthToken( response.data.data.token );
+      if ( responseData?.token ) {
+        setAuthToken( responseData.token );
       }
 
       // Store user data
       setUser( {
-        id: response.data?.data?.user?.id || '',
+        id: responseData?.user?.id || '',
         email: formData.email,
         firstName: formData.firstName,
         lastName: formData.lastName,
         role: selectedRole as 'brand' | 'creator' | 'admin',
-        avatar: response.data?.data?.user?.avatar_url,
+        avatar: responseData?.user?.avatar_url,
       } );
 
       // On success, redirect to appropriate dashboard
       if ( response.data ) {
         const dashboardPath = selectedRole === "admin"
-          ? "/dashboard/admin"
+          ? "/admin"
           : selectedRole === "creator"
-            ? "/dashboard/creator"
-            : "/dashboard/brand";
+            ? "/creator-admin"
+            : "/brand-admin";
 
         router.push( dashboardPath );
       }

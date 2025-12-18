@@ -51,7 +51,10 @@ export function NavDocuments( {
                 <a href={ item.url }>
                   { Array.isArray( item.icon )
                     ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 2 } />
-                    : <item.icon />
+                    : (() => {
+                        const IconComponent = item.icon as Icon;
+                        return <IconComponent />;
+                      })()
                   }
                   <span>{ item.name }</span>
                 </a>

@@ -49,12 +49,12 @@ export function NavProjects({
               </a>
             </SidebarMenuButton>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger render={
                 <SidebarMenuAction showOnHover>
                   <MoreHorizontal />
                   <span className="sr-only">More</span>
                 </SidebarMenuAction>
-              </DropdownMenuTrigger>
+              } />
               <DropdownMenuContent
                 className="w-48"
                 side={isMobile ? "bottom" : "right"}

@@ -83,17 +83,20 @@ export function CreatorSidebar( { ...props }: React.ComponentProps<typeof Sideba
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="/en/dashboard/creator">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <IconBriefcase className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Huerray</span>
-                  <span className="truncate text-xs">for Creators</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
+            <SidebarMenuButton
+              size="lg"
+              render={
+                <a href="/en/dashboard/creator">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                    <IconBriefcase className="size-4" />
+                  </div>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">Huerray</span>
+                    <span className="truncate text-xs">for Creators</span>
+                  </div>
+                </a>
+              }
+            />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
