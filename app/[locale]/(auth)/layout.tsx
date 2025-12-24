@@ -14,12 +14,13 @@ export default async function AuthLayout( {
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string; };
+  params: Promise<{ locale: string; }>;
 } ) {
+  const { locale } = await params;
   const messages = await getMessages();
 
   return (
-    <html lang={ params.locale } suppressHydrationWarning>
+    <html lang={ locale } suppressHydrationWarning>
       <body>
         <NextIntlClientProvider messages={ messages }>
           <AuthProvider>

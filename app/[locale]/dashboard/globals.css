@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-@import "../../../styles/typography.css";
-@import "../../../styles/language-selector.css";
+@import '../../../styles/typography.css';
+@import '../../../styles/language-selector.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -161,7 +161,7 @@
 
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.147 0.004 49.25);
+  --foreground: oklch(30.579% 0.0197 285.16);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.147 0.004 49.25);
   --popover: oklch(1 0 0);
@@ -216,7 +216,7 @@
   --ring: oklch(0.553 0.013 58.071);
   --chart-1: oklch(0.83 0.13 321);
   --chart-2: oklch(0.75 0.21 322);
---chart-3: oklch(0.67 0.26 322);
+  --chart-3: oklch(0.67 0.26 322);
   --chart-4: oklch(0.59 0.26 323);
   --chart-5: oklch(0.52 0.23 324);
   --sidebar: oklch(0.216 0.006 56.043);
@@ -231,7 +231,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 font-regular;
   }
   body {
     @apply bg-background text-foreground;

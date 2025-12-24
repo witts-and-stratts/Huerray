@@ -7,17 +7,15 @@ import { cn } from "@/lib/dashboard-utils";
 export function Notifications() {
   return (
     < DropdownMenu >
-      <DropdownMenuTrigger asChild>
-        <button className={ cn( buttonVariants( { variant: "ghost", size: "icon" } ), "relative" ) }>
-          <Bell className="h-5 w-5" />
-          <Badge
-            variant="destructive"
-            className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs"
-          >
-            3
-          </Badge>
-          <span className="sr-only">Notifications</span>
-        </button>
+      <DropdownMenuTrigger className={ cn( buttonVariants( { variant: "ghost", size: "icon" } ), "relative" ) }>
+        <Bell className="h-5 w-5" />
+        <Badge
+          variant="destructive"
+          className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs"
+        >
+          3
+        </Badge>
+        <span className="sr-only">Notifications</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-80">
         <DropdownMenuGroup>

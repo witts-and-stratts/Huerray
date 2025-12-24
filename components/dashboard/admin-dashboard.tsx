@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 
-export default async function AdminDashboardPage() {
+export async function AdminDashboard() {
   const t = await getTranslations( 'dashboard.admin' );
   const tCommon = await getTranslations( 'dashboard.common' );
 
@@ -135,10 +135,10 @@ export default async function AdminDashboardPage() {
                       <p className="text-xs text-muted-foreground">{ item.count } item{ item.count !== 1 ? 's' : '' }</p>
                     </div>
                     <span className={ `text-xs px-2 py-1 rounded-full ${ item.priority === 'High'
-                        ? 'bg-red-100 text-red-700'
-                        : item.priority === 'Medium'
-                          ? 'bg-orange-100 text-orange-700'
-                          : 'bg-gray-100 text-gray-700'
+                      ? 'bg-red-100 text-red-700'
+                      : item.priority === 'Medium'
+                        ? 'bg-orange-100 text-orange-700'
+                        : 'bg-gray-100 text-gray-700'
                       }` }>
                       { item.priority }
                     </span>

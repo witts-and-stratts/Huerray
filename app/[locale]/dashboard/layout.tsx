@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { Locale, locales } from '@/i18n';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/lib/auth/auth-context';
+import { DashboardLayoutClient } from './dashboard-layout-client';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
 
@@ -32,10 +33,12 @@ export default async function DashboardRootLayout( {
         <title>Dashboard - Huerray</title>
         <meta name="robots" content="noindex, nofollow" />
       </head>
-      <body className={ inter.className }>
+      <body className={ inter.className } suppressHydrationWarning>
         <NextIntlClientProvider messages={ messages }>
           <AuthProvider>
-            { children }
+            <DashboardLayoutClient>
+              { children }
+            </DashboardLayoutClient>
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

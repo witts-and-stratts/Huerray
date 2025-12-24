@@ -46,7 +46,7 @@ export function AuthProvider( { children }: { children: React.ReactNode; } ) {
     if ( userData ) {
       Cookies.set( USER_COOKIE_NAME, JSON.stringify( userData ), {
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        sameSite: 'lax', // Changed from 'strict' for better localhost compatibility
         expires: 7,
       } );
     } else {

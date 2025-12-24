@@ -2,30 +2,30 @@ import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 
-export default async function CreatorDashboardPage() {
-  const t = await getTranslations( 'dashboard.creator' );
+export async function BrandDashboard() {
+  const t = await getTranslations( 'dashboard.brand' );
   const tCommon = await getTranslations( 'dashboard.common' );
 
   const stats = [
     {
-      labelKey: 'stats.activeGigs',
-      value: '4',
-      change: '+1',
+      labelKey: 'stats.activeCampaigns',
+      value: '12',
+      change: '+20%',
     },
     {
-      labelKey: 'stats.completedGigs',
-      value: '18',
-      change: '+3',
-    },
-    {
-      labelKey: 'stats.totalEarnings',
-      value: '$3,200',
+      labelKey: 'stats.connectedCreators',
+      value: '45',
       change: '+15%',
     },
     {
-      labelKey: 'stats.avgRating',
-      value: '4.9',
-      change: '+0.1',
+      labelKey: 'stats.totalSpend',
+      value: '$24,500',
+      change: '+8%',
+    },
+    {
+      labelKey: 'stats.averageRoi',
+      value: '3.2x',
+      change: '+12%',
     },
   ];
 
@@ -33,7 +33,7 @@ export default async function CreatorDashboardPage() {
     <div className="space-y-6">
       {/* Page Header */ }
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">
+        <h1 className="text-h3 font-primary font-medium tracking-tight">
           { tCommon( 'dashboard' ) }
         </h1>
         <p className="text-muted-foreground mt-1">
@@ -44,14 +44,14 @@ export default async function CreatorDashboardPage() {
       {/* Stats Grid */ }
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         { stats.map( ( stat ) => (
-          <Card key={ stat.labelKey }>
+          <Card key={ stat.labelKey } className="py-4">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+              <CardTitle className="text-sm font-regular text-slate-600">
                 { t( stat.labelKey ) }
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{ stat.value }</div>
+              <div className="text-3xl font-medium font-primary">{ stat.value }</div>
               <p className="text-xs text-muted-foreground mt-1">
                 <span className="text-green-500 font-medium">{ stat.change }</span> { t( 'stats.fromLastMonth' ) }
               </p>
@@ -60,11 +60,11 @@ export default async function CreatorDashboardPage() {
         ) ) }
       </div>
 
-      {/* Recent Activity / Gigs */ }
+      {/* Recent Campaigns */ }
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg font-semibold">
-            { t( 'recentGigs' ) }
+            { t( 'recentCampaigns' ) }
           </CardTitle>
           <Button variant="link" className="text-sm">
             { tCommon( 'viewAll' ) }
@@ -72,7 +72,7 @@ export default async function CreatorDashboardPage() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
-            { t( 'noGigs' ) }
+            { t( 'noCampaigns' ) }
           </p>
         </CardContent>
       </Card>
@@ -86,10 +86,10 @@ export default async function CreatorDashboardPage() {
         </CardHeader>
         <CardContent className="flex gap-4">
           <Button>
-            { t( 'browseGigs' ) }
+            { t( 'createCampaign' ) }
           </Button>
           <Button variant="outline">
-            { t( 'updatePortfolio' ) }
+            { t( 'findCreators' ) }
           </Button>
         </CardContent>
       </Card>

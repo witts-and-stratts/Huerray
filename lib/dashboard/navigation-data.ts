@@ -50,37 +50,37 @@ export const brandNavigationData: Omit<SidebarNavigationData, 'user'> & { user: 
   navMain: [
     {
       title: "Dashboard",
-      url: "/dashboard/brand",
+      url: "/brand-admin",
       icon: DashboardSquareAddIcon,
     },
     {
       title: "Campaigns",
-      url: "/dashboard/brand/campaigns",
+      url: "/brand-admin/campaigns",
       icon: ChartLineData01Icon,
     },
     {
       title: "Creators",
-      url: "/dashboard/brand/creators",
+      url: "/brand-admin/creators",
       icon: UserGroupIcon,
     },
     {
       title: "Analytics",
-      url: "/dashboard/brand/analytics",
+      url: "/brand-admin/analytics",
       icon: ChartLineData01Icon,
     },
     {
       title: "Billing",
-      url: "/dashboard/brand/billing",
+      url: "/brand-admin/billing",
       icon: FileScriptIcon,
     },
   ],
   documents: [
-    { name: "Saved Lists", url: "/dashboard/brand/saved-lists", icon: DatabaseIcon },
-    { name: "Templates", url: "/dashboard/brand/templates", icon: FileScriptIcon },
-    { name: "Reports", url: "/dashboard/brand/reports", icon: IconReport },
+    { name: "Saved Lists", url: "/brand-admin/saved-lists", icon: DatabaseIcon },
+    { name: "Templates", url: "/brand-admin/templates", icon: FileScriptIcon },
+    { name: "Reports", url: "/brand-admin/reports", icon: IconReport },
   ],
   navSecondary: [
-    { title: "Settings", url: "/dashboard/brand/settings", icon: Settings01Icon },
+    { title: "Settings", url: "/brand-admin/settings", icon: Settings01Icon },
     { title: "Get Help", url: "#", icon: HelpCircleIcon },
     { title: "Search", url: "#", icon: Search01Icon },
   ],
@@ -96,37 +96,37 @@ export const creatorNavigationData: Omit<SidebarNavigationData, 'user'> & { user
   navMain: [
     {
       title: "Dashboard",
-      url: "/dashboard/creator",
+      url: "/creator-admin",
       icon: DashboardSquareAddIcon,
     },
     {
       title: "Available Gigs",
-      url: "/dashboard/creator/gigs",
+      url: "/creator-admin/gigs",
       icon: Task02Icon,
     },
     {
       title: "Active Gigs",
-      url: "/dashboard/creator/gigs/active",
+      url: "/creator-admin/gigs/active",
       icon: Task02Icon,
     },
     {
       title: "Portfolio",
-      url: "/dashboard/creator/portfolio",
+      url: "/creator-admin/portfolio",
       icon: ImageUpload01Icon,
     },
     {
       title: "Analytics",
-      url: "/dashboard/creator/analytics",
+      url: "/creator-admin/analytics",
       icon: ChartLineData01Icon,
     },
     {
       title: "Earnings",
-      url: "/dashboard/creator/earnings",
+      url: "/creator-admin/earnings",
       icon: WalletDone01Icon,
     },
   ],
   navSecondary: [
-    { title: "Settings", url: "/dashboard/creator/settings", icon: Settings01Icon },
+    { title: "Settings", url: "/creator-admin/settings", icon: Settings01Icon },
     { title: "Get Help", url: "#", icon: HelpCircleIcon },
     { title: "Search", url: "#", icon: Search01Icon },
   ],
@@ -142,37 +142,37 @@ export const adminNavigationData: Omit<SidebarNavigationData, 'user'> & { user: 
   navMain: [
     {
       title: "Dashboard",
-      url: "/dashboard/admin",
+      url: "/admin",
       icon: DashboardSquareAddIcon,
     },
     {
       title: "Users",
-      url: "/dashboard/admin/users",
+      url: "/admin/users",
       icon: UserMultiple02Icon,
     },
     {
       title: "Campaigns",
-      url: "/dashboard/admin/campaigns",
+      url: "/admin/campaigns",
       icon: ChartLineData01Icon,
     },
     {
       title: "Analytics",
-      url: "/dashboard/admin/analytics",
+      url: "/admin/analytics",
       icon: ChartLineData01Icon,
     },
     {
       title: "Moderation",
-      url: "/dashboard/admin/moderation",
+      url: "/admin/moderation",
       icon: ShieldUserIcon,
     },
   ],
   documents: [
-    { name: "Platform Reports", url: "/dashboard/admin/reports", icon: IconReport },
-    { name: "System Logs", url: "/dashboard/admin/logs", icon: DatabaseIcon },
-    { name: "Alerts", url: "/dashboard/admin/alerts", icon: AlertCircleIcon },
+    { name: "Platform Reports", url: "/admin/reports", icon: IconReport },
+    { name: "System Logs", url: "/admin/logs", icon: DatabaseIcon },
+    { name: "Alerts", url: "/admin/alerts", icon: AlertCircleIcon },
   ],
   navSecondary: [
-    { title: "Settings", url: "/dashboard/admin/settings", icon: Settings01Icon },
+    { title: "Settings", url: "/admin/settings", icon: Settings01Icon },
     { title: "Get Help", url: "#", icon: HelpCircleIcon },
     { title: "Search", url: "#", icon: Search01Icon },
   ],

@@ -16,7 +16,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.huerra
 const COOKIE_NAME = 'authToken';
 const COOKIE_OPTIONS = {
   secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
-  sameSite: 'strict' as const, // CSRF protection
+  sameSite: 'lax' as const, // Changed from 'strict' for better localhost compatibility
   expires: 7, // 7 days
 };
 
