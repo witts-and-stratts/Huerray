@@ -1,0 +1,15 @@
+# OpenAPI Generator Ignore File
+# 
+# Files and directories listed here will not be overwritten when regenerating the SDK
+# This prevents OpenAPI Generator from overwriting your custom files
+
+# Preserve custom hooks and configuration
+/hooks/
+/client.ts
+/query-provider.tsx
+/README.md
+/examples/
+
+# Ignore common directories
+node_modules/
+.git/

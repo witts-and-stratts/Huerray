@@ -32,6 +32,7 @@ export default getRequestConfig(async ({ locale, requestLocale }) => {
       'site-notice': (await import(`./locales/${validLocale}/site-notice.json`)).default,
       'brands-faq': (await import(`./locales/${validLocale}/brands-faq.json`)).default,
       'creators-faq': (await import(`./locales/${validLocale}/creators-faq.json`)).default,
+      auth: (await import(`./locales/${validLocale}/auth.json`)).default,
       // Dashboard translations
       dashboard: {
         common: (await import(`./locales/${validLocale}/dashboard/common.json`)).default,

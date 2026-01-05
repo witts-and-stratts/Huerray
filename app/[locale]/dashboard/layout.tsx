@@ -7,6 +7,7 @@ import { Locale, locales } from '@/i18n';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/lib/auth/auth-context';
 import { DashboardLayoutClient } from './dashboard-layout-client';
+import { Toaster } from '@/components/dashboard-ui/sonner';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
 

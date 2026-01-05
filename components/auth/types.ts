@@ -1,0 +1,1 @@
+export type UserRole = "brand" | "creator" | "admin" | null;

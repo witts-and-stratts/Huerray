@@ -155,40 +155,39 @@ export function CampaignsTableToolbar( {
             <Button variant='outline' size={ 'icon-sm' }>
               <HugeiconsIcon icon={ EyeIcon } className='text-sm' />
             </Button>
-            <Button variant='outline' className={ 'p-0 ' } size={ 'sm' }>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant='ghost'
-                    className='ml-auto font-regular text-sm '
-                  >
-                    Columns <ChevronDown width={ 1 } />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align='end' className={ 'min-w-60' }>
-                  { table
-                    .getAllColumns()
-                    .filter( ( column ) => column.getCanHide() )
-                    .map( ( column ) => {
-                      const shouldHide =
-                        column.id === 'campaign_name' ||
-                        column.id === 'campaign_status';
-                      return (
-                        <DropdownMenuCheckboxItem
-                          key={ column.id }
-                          className={ cn( 'capitalize', { hidden: shouldHide } ) }
-                          checked={ shouldHide ? false : column.getIsVisible() }
-                          onCheckedChange={ ( value ) =>
-                            column.toggleVisibility( !!value )
-                          }
-                        >
-                          { column.id }
-                        </DropdownMenuCheckboxItem>
-                      );
-                    } ) }
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant='outline'
+                  size='sm'
+                  className='ml-auto font-regular text-sm'
+                >
+                  Columns <ChevronDown width={ 1 } />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end' className={ 'min-w-60' }>
+                { table
+                  .getAllColumns()
+                  .filter( ( column ) => column.getCanHide() )
+                  .map( ( column ) => {
+                    const shouldHide =
+                      column.id === 'campaign_name' ||
+                      column.id === 'campaign_status';
+                    return (
+                      <DropdownMenuCheckboxItem
+                        key={ column.id }
+                        className={ cn( 'capitalize', { hidden: shouldHide } ) }
+                        checked={ shouldHide ? false : column.getIsVisible() }
+                        onCheckedChange={ ( value ) =>
+                          column.toggleVisibility( !!value )
+                        }
+                      >
+                        { column.id }
+                      </DropdownMenuCheckboxItem>
+                    );
+                  } ) }
+              </DropdownMenuContent>
+            </DropdownMenu>
           </ButtonGroup>
         </ButtonGroup>
       </div>

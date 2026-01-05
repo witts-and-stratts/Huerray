@@ -9,6 +9,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import '@/app/[locale]/dashboard/globals.css';
+import { Toaster } from '@/components/dashboard-ui/sonner';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
 
@@ -38,6 +39,7 @@ export default async function BrandAdminLayout( {
                 <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
                   { children }
                 </section>
+                <Toaster />
               </SidebarInset>
             </SidebarProvider>
           </AuthProvider>

@@ -1,9 +1,19 @@
+import Image from "next/image";
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 export default function ForgotPasswordPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4">
-      <ForgotPasswordForm />
+    <div className="grid md:grid-cols-2">
+      <div className="col-span-1 max-md:hidden relative">
+        <Image src="/images/content/lifestyle-9.webp" alt="Product Image" width={ 1920 } height={ 1080 } className="object-cover h-full fixed w-1/2" />
+      </div>
+      <div className="min-h-screen flex items-center justify-center bg-burgundy-50 p-4">
+        <div className="absolute top-4 right-4">
+          <LanguageSelector showLabel={ false } />
+        </div>
+        <ForgotPasswordForm />
+      </div>
     </div>
   );
 }
