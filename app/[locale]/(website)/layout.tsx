@@ -8,10 +8,10 @@ import '@/app/globals.css';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
 
-// export const metadata: Metadata = {
-//   title: 'Huerray',
-//   description: 'Connect with authentic creators for impactful UGC',
-// };
+export const metadata: Metadata = {
+  title: 'Huerray',
+  description: 'Connect with authentic creators for impactful UGC',
+};
 
 export const viewport: Viewport = {
   themeColor: [

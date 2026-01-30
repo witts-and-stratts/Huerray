@@ -41,7 +41,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         brandsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/brands`;
+            const localVarPath = `/brands/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -312,7 +312,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
         brandsPost: async (request: ModelsBrandRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'request' is not null or undefined
             assertParamExists('brandsPost', 'request', request)
-            const localVarPath = `/brands`;
+            const localVarPath = `/brands/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -351,7 +351,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
         brandsPut: async (request: ModelsBrandRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'request' is not null or undefined
             assertParamExists('brandsPut', 'request', request)
-            const localVarPath = `/brands`;
+            const localVarPath = `/brands/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

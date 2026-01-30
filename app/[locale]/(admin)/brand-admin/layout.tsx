@@ -1,50 +1,34 @@
-import { BrandSidebar } from '@/components/dashboard/brand-sidebar';
-import {
-  SidebarInset,
-  SidebarProvider,
-} from '@/components/dashboard-ui/sidebar';
-import { DashboardHeader } from '@/components/dashboard-header';
-import { AuthProvider } from '@/lib/auth/auth-context';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { Inter } from 'next/font/google';
-import '@/app/[locale]/dashboard/globals.css';
-import { Toaster } from '@/components/dashboard-ui/sonner';
+'use client';
 
-const inter = Inter( { subsets: [ 'latin' ] } );
+import { BrandAuthGuard } from '@/components/auth/brand-auth-guard';
+import { usePathname } from 'next/navigation';
+import { RoleProvider } from '@/contexts/role-context';
 
-export default async function BrandAdminLayout( {
+export default function BrandAdminLayout( {
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string; }>;
 } ) {
-  const { locale } = await params;
-  const messages = await getMessages();
+  const pathname = usePathname();
+  const isCompleteProfile = pathname?.includes( '/complete-profile' );
+
+  if ( isCompleteProfile ) {
+    return (
+      <BrandAuthGuard>
+        <RoleProvider>
+          <div className="bg-background min-h-screen flex flex-col">
+            { children }
+          </div>
+        </RoleProvider>
+      </BrandAuthGuard>
+    );
+  }
 
   return (
-    <html lang={ locale }>
-      <head>
-        <title>Brand Dashboard - Huerray</title>
-        <meta name='robots' content='noindex, nofollow' />
-      </head>
-      <body className={ inter.className } suppressHydrationWarning>
-        <NextIntlClientProvider messages={ messages }>
-          <AuthProvider>
-            <SidebarProvider data-dashboard-theme='brand'>
-              <BrandSidebar />
-              <SidebarInset>
-                <DashboardHeader />
-                <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
-                  { children }
-                </section>
-                <Toaster />
-              </SidebarInset>
-            </SidebarProvider>
-          </AuthProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <BrandAuthGuard>
+      <RoleProvider>
+        { children }
+      </RoleProvider>
+    </BrandAuthGuard>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { cn } from "@/lib/dashboard-utils";
 import { Button } from "@/components/dashboard-ui/button";

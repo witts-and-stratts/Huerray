@@ -1,4 +1,6 @@
 'use client';
+/* eslint-disable react/no-children-prop */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button } from '@/components/dashboard-ui/button';
 import {
@@ -17,8 +19,10 @@ import { InputGroupButton } from '@/components/dashboard-ui/input-group';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { apiClient, setAuthToken, setRefreshToken } from '@/lib/api/client';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
+import { BrandApi } from '@/lib/api/generated/api/brand-api';
 import { useAuth } from '@/lib/auth/auth-context';
 import { cn } from '@/lib/dashboard-utils';
+import { AuthLoginResponse } from '@/types/auth';
 import { ViewIcon, ViewOffIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useForm } from '@tanstack/react-form';
@@ -31,7 +35,7 @@ import { z } from 'zod';
 
 // Define base types for form values
 type LoginFormValues = {
-  email: string;
+  identifier: string;
   password: string;
   rememberMe: boolean;
 };
@@ -40,13 +44,13 @@ type LoginFormValues = {
  * Renders the email input field using SuperField.
  * Extracted to a static function to prevent unnecessary re-renders.
  */
-const renderEmailField = ( field: any, t: any ) => (
+const renderIdentifierField = ( field: any, t: any ) => (
   <SuperField
-    id='email'
+    id='identifier'
     name={ field.name }
-    label={ t( 'emailLabel' ) }
-    type='email'
-    placeholder={ t( 'emailPlaceholder' ) }
+    label={ t( 'usernameOrEmailLabel' ) }
+    type='text'
+    placeholder={ t( 'usernameOrEmailPlaceholder' ) }
     value={ field.state.value }
     onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => field.handleChange( e.target.value ) }
     onBlur={ field.handleBlur }
@@ -88,7 +92,6 @@ export function LoginForm( {
   ...props
 }: React.ComponentProps<'div'> & { showResetSuccess?: boolean; } ) {
   const t = useTranslations( 'auth.login' );
-  const router = useRouter();
   const searchParams = useSearchParams();
   const { setUser } = useAuth();
   const [ isLoading, setIsLoading ] = useState( false );
@@ -102,7 +105,7 @@ export function LoginForm( {
    * Defined inside component/useMemo to support translated error messages.
    */
   const loginSchema = useMemo( () => z.object( {
-    email: z.string().email( t( 'validation.emailInvalid' ) ),
+    identifier: z.string().min( 1, t( 'validation.usernameRequired' ) ),
     password: z.string().min( 1, t( 'validation.passwordRequired' ) ),
     rememberMe: z.boolean(),
   } ), [ t ] );
@@ -117,7 +120,7 @@ export function LoginForm( {
 
   const form = useForm( {
     defaultValues: {
-      email: '',
+      identifier: '',
       password: '',
       rememberMe: false,
     } as LoginFormValues,
@@ -131,102 +134,97 @@ export function LoginForm( {
       try {
         const response = await authApi.authLoginPost( {
           credentials: {
-            username: value.email,
+            username: value.identifier,
             password: value.password,
           },
         } );
 
+        const responseData = response.data as unknown as AuthLoginResponse;
+
         /* Review: Debug logging preserved for development/troubleshooting */
         console.log( '=== LOGIN RESPONSE DEBUG ===' );
         console.log( 'Full response:', response );
-        console.log( 'response.data:', response.data );
-        console.log( 'response.data.data:', response.data?.data );
-        console.log( 'All cookies:', document.cookie );
+        console.log( 'responseData:', responseData );
         console.log( '===========================' );
 
-        const responseData = response.data?.data as any;
+        if ( responseData.success && responseData.data ) {
+          const authData = responseData.data;
+          const token = authData.access_token;
+          const refreshToken = authData.refresh_token;
 
-
-
-        // Handle Authentication Token
-        // Check multiple possible locations for the token
-        const token = responseData?.token ||
-          responseData?.accessToken ||
-          responseData?.access_token ||
-          ( response.data as any )?.token ||
-          ( response.data as any )?.accessToken ||
-          ( response.data as any )?.access_token;
-
-        const refreshToken = responseData?.refreshToken ||
-          responseData?.refresh_token ||
-          ( response.data as any )?.refreshToken ||
-          ( response.data as any )?.refresh_token;
-
-        if ( token ) {
-          // If token provided, set cookie with expiration based on 'rememberMe'
-          setAuthToken( token, value.rememberMe );
-
-          if ( refreshToken ) {
-            setRefreshToken( refreshToken, value.rememberMe );
+          if ( token ) {
+            setAuthToken( token, value.rememberMe );
+            if ( refreshToken ) {
+              setRefreshToken( refreshToken, value.rememberMe );
+            }
           }
-        } else {
-          console.error( 'No token found in login response', response.data );
-          // Do NOT set a fallback token that will cause 401s later
-        }
 
-        // Handle User Data & Navigation
-        if ( responseData?.user ) {
-          const userData = responseData.user;
-          console.log( 'Setting user data:', userData );
+          if ( authData.user ) {
+            const userData = authData.user;
+            console.log( 'Setting user data:', userData );
 
-          // Determine user role with fallback logic
-          let userRole: 'brand' | 'creator' | 'admin' = 'brand';
+            // Determine user role with robust fallback logic
+            const rawType = userData.user_type || ( userData as any ).userType || ( userData as any ).role;
+            let userRole: 'brand' | 'creator' | 'admin' = 'brand';
 
-          if ( userData.role ) {
-            userRole = userData.role;
-          } else if ( userData.user_type ) {
-            // Map API user_type to frontend role
-            if ( userData.user_type === 'creator' ) {
-              userRole = 'creator';
-            } else if ( userData.user_type === 'brand_user' || userData.user_type === 'brand' ) {
-              userRole = 'brand';
-            } else if ( userData.user_type === 'admin' ) {
+            if ( rawType === 'admin' || rawType === 'admin_user' || userData.username === 'admin' ) {
               userRole = 'admin';
+            } else if ( rawType === 'creator' ) {
+              userRole = 'creator';
+            } else if ( rawType === 'brand_user' || rawType === 'brand' ) {
+              userRole = 'brand';
             }
+
+            setUser( {
+              id: userData.id,
+              email: userData.email || value.identifier,
+              firstName: userData.first_name,
+              lastName: userData.last_name,
+              role: userRole,
+            } );
+
+            // Determine default dashboard path based on role
+            let targetPath = '/brand-admin';
+            if ( userRole === 'admin' ) {
+              targetPath = '/admin';
+            } else if ( userRole === 'creator' ) {
+              targetPath = '/creator-admin';
+            } else if ( userRole === 'brand' ) {
+              // Check if brand profile exists
+              try {
+                const brandApi = new BrandApi( undefined, undefined, apiClient );
+                const response = await brandApi.brandsGet();
+
+                const data: any = response.data;
+                // Check if data is array or has data property that is array, or if it's just a single object
+                // Based on GeneralSettingsForm usage: const brands = Array.isArray( data.data ) ? data.data : [ data.data ];
+                const brands = Array.isArray( data.data ) ? data.data : ( data.data ? [ data.data ] : [] );
+
+                if ( !brands || brands.length === 0 ) {
+                  targetPath = '/brand-admin/complete-profile';
+                } else {
+                  targetPath = '/brand-admin';
+                }
+              } catch ( e: any ) {
+                if ( e.response && e.response.status === 404 ) {
+                  targetPath = '/brand-admin/complete-profile';
+                }
+              }
+            }
+
+            // Redirect Logic
+            const redirectTo = searchParams.get( 'redirect' );
+
+            setTimeout( () => {
+              if ( redirectTo ) {
+                window.location.href = redirectTo;
+              } else {
+                window.location.href = targetPath;
+              }
+            }, 100 );
           }
-
-          setUser( {
-            id: userData.id || '',
-            email: userData.email || value.email,
-            firstName: userData.first_name || '',
-            lastName: userData.last_name || '',
-            role: userRole,
-            avatar: userData.avatar_url,
-          } );
-
-          // Redirect Logic: Prioritize 'redirect' param, otherwise route based on role
-          const redirectTo = searchParams.get( 'redirect' );
-
-          // Delay to ensure cookies propagate before navigation
-          setTimeout( () => {
-            if ( redirectTo ) {
-              window.location.href = redirectTo;
-            } else {
-              const dashboardPath =
-                userData.role === 'admin'
-                  ? '/admin'
-                  : userData.role === 'creator'
-                    ? '/creator-admin'
-                    : '/brand-admin';
-
-              window.location.href = dashboardPath;
-            }
-          }, 100 );
         } else {
-          // Default fallback if user data is missing
-          setTimeout( () => {
-            window.location.href = '/brand-admin';
-          }, 100 );
+          setFormError( responseData.message || t( 'errors.default' ) );
         }
       } catch ( err: any ) {
         console.error( 'Login error:', err );
@@ -333,8 +331,8 @@ export function LoginForm( {
           <form onSubmit={ handleFormSubmit }>
             <FieldGroup>
               <form.Field
-                name="email"
-                children={ ( field ) => renderEmailField( field, t ) }
+                name="identifier"
+                children={ ( field ) => renderIdentifierField( field, t ) }
               />
 
               <form.Field

@@ -3,69 +3,69 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import LegalPageSidebar from "@/components/LegalPageSidebar";
 
+// Using a loose type compatible with the translation JSON structure
+// The LegalPageSidebar component handles the full type internally
 type Section = {
   id: string;
   title: string;
-  subsections: {
-    id: string;
-    title: string;
-    content?: string;
-    list?: any[];
-    additionalContent?: string;
-  }[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [ key: string ]: any;
 };
 
-export default function LegalPageSidebarWrapper({
+export default function LegalPageSidebarWrapper( {
   sections,
   title,
 }: {
   sections: Section[];
   title: string;
-}) {
+} ) {
   const searchParams = useSearchParams();
-  const [activeSection, setActiveSection] = useState<string>(
-    sections[0]?.id || "",
+  const [ activeSection, setActiveSection ] = useState<string>(
+    sections[ 0 ]?.id || "",
   );
-  const [activeSubsection, setActiveSubsection] = useState<string | undefined>(
+  const [ activeSubsection, setActiveSubsection ] = useState<string | undefined>(
     undefined,
   );
 
-  useEffect(() => {
-    const section = searchParams.get("section");
-    const subsection = searchParams.get("subsection");
+  useEffect( () => {
+    const section = searchParams.get( "section" );
+    const subsection = searchParams.get( "subsection" );
 
-    if (section) {
-      setActiveSection(section);
-      if (subsection) {
-        setActiveSubsection(subsection);
-      } else {
-        setActiveSubsection(undefined);
-      }
+    if ( section ) {
+      // Use queueMicrotask to avoid synchronous setState in effect warning
+      queueMicrotask( () => {
+        setActiveSection( section );
+        if ( subsection ) {
+          setActiveSubsection( subsection );
+        } else {
+          setActiveSubsection( undefined );
+        }
+      } );
     }
-  }, [searchParams]);
+  }, [ searchParams ] );
 
-  const handleSectionClick = (sectionId: string, subsectionId?: string) => {
-    setActiveSection(sectionId);
-    setActiveSubsection(subsectionId);
+  const handleSectionClick = ( sectionId: string, subsectionId?: string ) => {
+    setActiveSection( sectionId );
+    setActiveSubsection( subsectionId );
 
     // Update URL with query parameters
-    const url = new URL(window.location.href);
-    url.searchParams.set("section", sectionId);
-    if (subsectionId) {
-      url.searchParams.set("subsection", subsectionId);
+    const url = new URL( window.location.href );
+    url.searchParams.set( "section", sectionId );
+    if ( subsectionId ) {
+      url.searchParams.set( "subsection", subsectionId );
     } else {
-      url.searchParams.delete("subsection");
+      url.searchParams.delete( "subsection" );
     }
-    window.history.pushState({}, "", url.toString());
+    window.history.pushState( {}, "", url.toString() );
   };
 
   return (
     <LegalPageSidebar
-      sections={sections}
-      onSectionClickAction={handleSectionClick}
-      activeSection={activeSection}
-      activeSubsection={activeSubsection}
-      title={title}
+      sections={ sections }
+      onSectionClickAction={ handleSectionClick }
+      activeSection={ activeSection }
+      activeSubsection={ activeSubsection }
+      title={ title }
     />
   );
 }

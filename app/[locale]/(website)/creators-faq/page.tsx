@@ -14,10 +14,16 @@ export async function generateMetadata( { params }: Props ) {
   return generateSEO( locale, 'creators-faq' );
 }
 
+// Type for FAQ section data from translations
+interface FAQSection {
+  section: string;
+  faqs: { question: string; answer: string; }[];
+}
+
 export default async function CreatorsFAQ( { params }: Props ) {
   const { locale } = await params;
   const t = await getTranslations( { locale, namespace: 'creators-faq' } );
-  const sections = t.raw( 'sections' ) as any[];
+  const sections = t.raw( 'sections' ) as FAQSection[];
 
   return (
     <>

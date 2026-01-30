@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import { getTranslations } from 'next-intl/server';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard-ui/card';

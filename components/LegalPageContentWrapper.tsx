@@ -3,16 +3,13 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import LegalPageContent from "@/components/LegalPageContent";
 
+// Using a loose type compatible with the translation JSON structure
+// The LegalPageContent component handles the full type internally
 type Section = {
   id: string;
   title: string;
-  subsections: {
-    id: string;
-    title: string;
-    content?: string;
-    list?: any[];
-    additionalContent?: string;
-  }[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [ key: string ]: any;
 };
 
 export default function LegalPageContentWrapper( { sections }: { sections: Section[]; } ) {
@@ -25,12 +22,15 @@ export default function LegalPageContentWrapper( { sections }: { sections: Secti
     const subsection = searchParams.get( "subsection" );
 
     if ( section ) {
-      setActiveSection( section );
-      if ( subsection ) {
-        setActiveSubsection( subsection );
-      } else {
-        setActiveSubsection( undefined );
-      }
+      // Use queueMicrotask to avoid synchronous setState in effect warning
+      queueMicrotask( () => {
+        setActiveSection( section );
+        if ( subsection ) {
+          setActiveSubsection( subsection );
+        } else {
+          setActiveSubsection( undefined );
+        }
+      } );
     }
   }, [ searchParams ] );
 

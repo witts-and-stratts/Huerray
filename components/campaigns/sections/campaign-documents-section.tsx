@@ -8,11 +8,12 @@ import { FilesDropzone } from './documents/files-dropzone';
 import { ImportUrlDialog } from './documents/import-url-dialog';
 import { PreviewDialog } from './documents/preview-dialog';
 import { UploadedFile } from './documents/types';
-import { useCampaignDocuments } from './documents/use-campaign-documents';
+import { useCampaignFiles } from './documents/use-campaign-files';
 
 export const CampaignDocumentsSection = memo( function CampaignDocumentsSection( {
   form,
-}: { form: CampaignFormApi; } ) {
+  fileState
+}: { form: CampaignFormApi; fileState: ReturnType<typeof useCampaignFiles>; } ) {
   const {
     items,
     activeId,
@@ -26,9 +27,18 @@ export const CampaignDocumentsSection = memo( function CampaignDocumentsSection(
     handleUploadError,
     handleRetry,
     addImportedItem,
-  } = useCampaignDocuments();
+    setItemsFromUrls
+  } = fileState;
 
-  // Sync with form state
+  // Sync from form state to local state (initial load / restoration)
+  useEffect( () => {
+    if ( form.state.values.documents && form.state.values.documents.length > 0 && items.length === 0 ) {
+      console.debug( '[CampaignDocumentsSection] Restoring documents from form state:', form.state.values.documents );
+      setItemsFromUrls( form.state.values.documents );
+    }
+  }, [ form.state.values.documents, setItemsFromUrls ] );
+
+  // Sync from local state to form state (on changes)
   useEffect( () => {
     const urls = items.filter( i => i.status === 'success' ).map( i => i.url );
     if ( JSON.stringify( urls ) !== JSON.stringify( form.state.values.documents ) ) {
@@ -45,7 +55,7 @@ export const CampaignDocumentsSection = memo( function CampaignDocumentsSection(
 
   return (
     <AnimatePresence>
-      <div className='mt-2 flex gap-2'>
+      <div key="documents-content" className='mt-2 flex gap-2'>
         <div className={ cn( 'flex flex-col gap-4', !items ? 'flex-auto' : 'w-full' ) }>
           <Card className='p-0 overflow-hidden h-full min-h-[calc(100vh-16rem)] ring-0 border-dashed border border-burgundy-200 ring-transparent hover:ring-8 hover:ring-burgundy-600/20 shadow-none'>
             <FilesDropzone
@@ -69,12 +79,14 @@ export const CampaignDocumentsSection = memo( function CampaignDocumentsSection(
       </div >
 
       <ImportUrlDialog
+        key="import-dialog"
         open={ isImportDialogOpen }
         onOpenChange={ setIsImportDialogOpen }
         onImport={ addImportedItem }
       />
 
       <PreviewDialog
+        key="preview-dialog"
         item={ previewItem }
         onClose={ () => setPreviewItem( null ) }
       />

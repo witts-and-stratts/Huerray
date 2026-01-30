@@ -49,7 +49,7 @@ export function CampaignsTableToolbar( {
   }, [ searchValue, table ] );
 
   return (
-    <div className='flex items-center justify-between py-4 sticky top-[104px] bg-background z-20 px-5 transition-all duration-500 mb-3 border-b'>
+    <div className='flex items-center justify-between py-4 sticky top-[104px] bg-background z-20 px-5 transition-all duration-500 mb-3 border-b gap-2'>
       <SuperField
         type='search'
         placeholder='Search Campaign...'

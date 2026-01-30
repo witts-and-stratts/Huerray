@@ -12,9 +12,11 @@ import Link from 'next/link';
 export function CampaignsView( {
   table,
   view,
+  basePath = '/brand-admin'
 }: {
   table: TanstackTable<ModelCampaign>;
   view: 'table' | 'cards';
+  basePath?: string;
 } ) {
   return (
     <div className='px-5 mt-1'>
@@ -40,7 +42,7 @@ export function CampaignsView( {
               Start your first campaign and watch your brand reach new heights with top creators.
             </p>
           </div>
-          <Link href="/brand-admin/campaigns/new">
+          <Link href={ `${ basePath }/campaigns/new` }>
             <Button size="lg" className="rounded-full px-8 shadow-lg shadow-primary/20">
               Create Your First Campaign
             </Button>
@@ -49,7 +51,7 @@ export function CampaignsView( {
       ) : view === 'table' ? (
         <CamapignsTableView table={ table } />
       ) : (
-        <CampaignsCardsView table={ table } />
+        <CampaignsCardsView table={ table } basePath={ basePath } />
       ) }
     </div>
   );

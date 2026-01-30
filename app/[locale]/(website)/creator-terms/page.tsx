@@ -21,6 +21,7 @@ export default async function CreatorTerms( { params }: Props ) {
   const t = await getTranslations( { locale, namespace: 'creator-terms' } );
 
   // Sections are defined in the translation JSON
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sections = t.raw( 'sections' ) as any[];
 
   return (

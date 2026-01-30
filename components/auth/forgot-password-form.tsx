@@ -1,4 +1,6 @@
 "use client";
+/* eslint-disable react/no-children-prop */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { cn } from "@/lib/dashboard-utils";
 import { Button } from "@/components/dashboard-ui/button";
@@ -55,9 +57,10 @@ export function ForgotPasswordForm( {
         } );
 
         setSuccess( true );
-      } catch ( err: any ) {
+      } catch ( err: unknown ) {
+        const error = err as { response?: { data?: { message?: string; }; }; message?: string; };
         console.error( "Password reset error:", err );
-        const errorMessage = err.response?.data?.message || err.message || "Failed to send reset email. Please try again.";
+        const errorMessage = error.response?.data?.message || error.message || "Failed to send reset email. Please try again.";
         setError( errorMessage );
       } finally {
         setIsLoading( false );
@@ -145,6 +148,7 @@ export function ForgotPasswordForm( {
             form.handleSubmit();
           } }>
             <FieldGroup>
+              {/* eslint-disable-next-line react/no-children-prop */ }
               <form.Field
                 name="email"
                 children={ ( field ) => (

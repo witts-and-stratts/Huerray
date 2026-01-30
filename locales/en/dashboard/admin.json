@@ -23,5 +23,9 @@
       "joined": "Joined",
       "actions": "Actions"
     }
+  },
+  "gigsPage": {
+    "title": "Gigs",
+    "description": "View and manage all gigs across the platform."
   }
 }

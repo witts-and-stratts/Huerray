@@ -11,7 +11,7 @@ import { ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import { memo } from 'react';
 import { EmptyState } from './empty-state';
-import { FileCard, SortableFileItem } from './file-item';
+import { FileCard, SortableFileItem } from './file-cards';
 import { UploadedFile } from './types';
 
 interface FilesDropzoneProps {
@@ -82,13 +82,13 @@ export const FilesDropzone = memo( ( {
       { ( { isDragActive, open } ) => (
         <>
           { items.length === 0 &&
-            <div className='flex flex-col h-full'>
+            <div className='flex flex-col h-full w-full'>
               <EmptyState title={ title } description={ description } icon={ icon } />
               <DropZoneFooter open={ open } onImportUrlClick={ onImportUrlClick } />
             </div>
           }
           { items.length > 0 && (
-            <div className='flex flex-col justify-between h-full relative'>
+            <div className='flex flex-col justify-between h-full relative w-full'>
               {
                 isDragActive &&
                 <div className={ cn( 'flex flex-col justify-between h-full absolute w-full z-100 bg-background/80' ) }>

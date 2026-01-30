@@ -30,7 +30,7 @@ export async function BrandDashboard() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 h-full bg-slate-50/30 p-5">
       {/* Page Header */ }
       <div>
         <h1 className="text-h3 font-primary font-medium tracking-tight">

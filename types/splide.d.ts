@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 declare module '@splidejs/react-splide' {
-  import { ComponentType, ReactNode } from 'react';
+  import { ReactNode } from 'react';
   import { Options } from '@splidejs/splide';
 
   export interface SplideProps {

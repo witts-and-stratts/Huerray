@@ -100,7 +100,7 @@ export function CreatorHeader() {
                     </div>
                     <DropdownMenuSeparator />
                     <div className="px-2 py-3">
-                      <p className="text-sm">Payment received for "Tech Review"</p>
+                      <p className="text-sm">Payment received for &quot;Tech Review&quot;</p>
                       <p className="text-xs text-muted-foreground">2 hours ago</p>
                     </div>
                   </div>

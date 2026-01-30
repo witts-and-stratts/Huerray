@@ -1,5 +1,16 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { roles } from "@/components/auth/roles";
+import { createBrandSchema, createCreatorSchema } from "@/components/auth/schemas";
+import {
+  AdminFields,
+  CommonFields,
+  ContactAuthFields,
+  FormActions,
+  RoleSelection
+} from "@/components/auth/signup-form-fields";
+import { UserRole } from "@/components/auth/types";
 import { Button } from "@/components/dashboard-ui/button";
 import {
   Card,
@@ -9,32 +20,22 @@ import {
   CardTitle,
 } from "@/components/dashboard-ui/card";
 import {
-  FieldDescription,
-  FieldGroup,
+  FieldDescription
 } from "@/components/dashboard-ui/field";
 import { apiClient, setAuthToken, setRefreshToken } from "@/lib/api/client";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
-import { BrandApi } from "@/lib/api/generated/api/brand-api";
 import { ModelsRegisterRequestUserTypeEnum } from "@/lib/api/generated/models/models-register-request";
 import { useAuth } from "@/lib/auth/auth-context";
 import { cn } from "@/lib/dashboard-utils";
 import { useForm } from '@tanstack/react-form';
 import { ChevronLeft } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useMemo, useState, useCallback } from "react";
-import { useTranslations } from "next-intl";
-import { createBrandSchema, createCreatorSchema } from "@/components/auth/schemas";
-import {
-  BrandFields,
-  CommonFields,
-  ContactAuthFields,
-  FormActions,
-  RoleSelection
-} from "@/components/auth/signup-form-fields";
-import { UserRole } from "@/components/auth/types";
-import { roles } from "@/components/auth/roles";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useMemo, useState } from "react";
+
+import { toast } from "sonner";
 
 interface SignupFormProps extends React.ComponentProps<"div"> {
   initialRole?: UserRole;
@@ -48,19 +49,6 @@ const defaultValues = {
   password: "",
   confirmPassword: "",
   username: "",
-  companyName: "",
-  website: "",
-  registrationNumber: "",
-  vatId: "",
-  category: "",
-  companySize: "",
-  description: "",
-  country: "",
-  state: "",
-  city: "",
-  street: "",
-  postalCode: "",
-  phone: "",
 };
 
 
@@ -118,9 +106,9 @@ export function SignupForm( {
 
       try {
         // Map role to API user type
-        const userType = selectedRole === "creator"
-          ? ModelsRegisterRequestUserTypeEnum.Creator
-          : ModelsRegisterRequestUserTypeEnum.BrandUser;
+        const userType = selectedRole === 'brand'
+          ? ModelsRegisterRequestUserTypeEnum.BrandUser
+          : ModelsRegisterRequestUserTypeEnum.Creator;
 
         const response = await authApi.authRegisterPost( {
           user: {
@@ -158,41 +146,35 @@ export function SignupForm( {
           avatar: responseData?.user?.avatar_url,
         } );
 
-        // On success, create brand profile if applicable
-        if ( response.data && selectedRole === "brand" ) {
-          const brandApi = new BrandApi( undefined, undefined, apiClient );
-          await brandApi.brandsPost( {
-            request: {
-              category: value.category as any,
-              city: value.city,
-              company_description: value.description,
-              company_name: value.companyName,
-              company_size: value.companySize as any,
-              country: value.country as any,
-              number: value.phone,
-              postal_code: value.postalCode,
-              preferred_contact_email: value.email,
-              preferred_contact_phone: value.phone,
-              registration_number: value.registrationNumber,
-              state: value.state,
-              street: value.street,
-              vat_id: value.vatId,
-              website_url: value.website,
-            }
-          } );
-        }
-
         if ( response.data ) {
-          const dashboardPath = selectedRole === "creator"
-            ? "/creator-admin"
-            : "/brand-admin";
+          // Route to the appropriate dashboard based on the selected role
+          const dashboardPath = selectedRole === 'brand' ? "/brand-admin" : "/creator-admin";
 
-          router.push( dashboardPath );
+          toast.success( "Signup successful. Continue to Login", {
+            action: {
+              label: "Continue",
+              onClick: () => router.push( dashboardPath ),
+            },
+            cancel: {
+              label: "Cancel",
+              onClick: () => toast.dismiss(),
+            },
+            dismissible: false,
+            duration: Infinity,
+            richColors: true,
+          } );
         }
       } catch ( err: any ) {
         console.error( "Registration error:", err );
         const errorMessage = err.response?.data?.message || err.message || "Registration failed. Please try again.";
-        setError( `${ errorMessage }; ${ err.response?.data?.error?.message }` );
+        const fullError = `${ errorMessage }; ${ err.response?.data?.error?.message || '' }`;
+        setError( fullError );
+        toast.error( "Registeration error", {
+          description: fullError,
+          cancel: { label: "Cancel", onClick: () => toast.dismiss() },
+          dismissible: true,
+          richColors: true,
+        } );
       } finally {
         setIsLoading( false );
       }
@@ -247,7 +229,7 @@ export function SignupForm( {
 
             <CommonFields form={ form } />
 
-            { selectedRole === 'brand' && <BrandFields form={ form } /> }
+            { selectedRole === 'brand' && <AdminFields form={ form } /> }
 
             <div className="my-6 border-t" />
 

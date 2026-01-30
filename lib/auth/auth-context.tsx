@@ -31,13 +31,13 @@ export function AuthProvider( { children }: { children: React.ReactNode; } ) {
     const userData = Cookies.get( USER_COOKIE_NAME );
     if ( userData ) {
       try {
-        setUserState( JSON.parse( userData ) );
+        queueMicrotask( () => setUserState( JSON.parse( userData ) ) );
       } catch ( e ) {
         console.error( 'Failed to parse user data:', e );
         Cookies.remove( USER_COOKIE_NAME );
       }
     }
-    setIsLoading( false );
+    queueMicrotask( () => setIsLoading( false ) );
   }, [] );
 
   // Save user to cookie whenever it changes

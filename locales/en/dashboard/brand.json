@@ -28,6 +28,10 @@
     "filter": "Filter",
     "connect": "Connect"
   },
+  "gigsPage": {
+    "title": "Gigs",
+    "description": "Monitor and manage the status of your active gigs."
+  },
   "recentCampaigns": "Recent Campaigns",
   "createCampaign": "Create Campaign",
   "findCreators": "Find Creators",

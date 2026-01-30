@@ -7,12 +7,10 @@ export default function SubpageHeading( {
 } ) {
   return (
     <div>
-      <h1 className="text-h4 font-primary font-normal tracking-tight">
+      <h1 className="text-h4 font-primary font-normal tracking-tight text-primary">
         { title }
       </h1>
-      <p className="text-muted-foreground mt-1 font-regular">
-        { description }
-      </p>
+      <p className="text-muted-foreground mt-1 font-regular" dangerouslySetInnerHTML={ { __html: description || '' } } />
     </div>
   );
 }

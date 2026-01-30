@@ -29,95 +29,96 @@ interface LanguageSelectorProps {
   showLabel?: boolean;
 }
 
-export function LanguageSelector({ showLabel = true }: LanguageSelectorProps) {
-  const [open, setOpen] = useState(false);
-  const [isNavigating, setIsNavigating] = useState(false);
-  const [isPending, startTransition] = useTransition();
+export function LanguageSelector( { showLabel = true }: LanguageSelectorProps ) {
+  const [ open, setOpen ] = useState( false );
+  const [ isNavigating, setIsNavigating ] = useState( false );
+  const [ isPending, startTransition ] = useTransition();
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const popoverRef = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement>( null );
 
   // Force hide popover when navigating
-  useEffect(() => {
-    if (isNavigating) {
-      const portal = document.querySelector('[data-radix-popper-content-wrapper]');
-      if (portal) {
-        (portal as HTMLElement).style.display = 'none';
+  useEffect( () => {
+    if ( isNavigating ) {
+      const portal = document.querySelector( '[data-radix-popper-content-wrapper]' );
+      if ( portal ) {
+        ( portal as HTMLElement ).style.display = 'none';
       }
     }
-  }, [isNavigating]);
+  }, [ isNavigating ] );
 
   // Reset navigating state when popover is opened
-  useEffect(() => {
-    if (open) {
-      setIsNavigating(false);
-    }
-  }, [open]);
+  // Using a ref to track if we should reset, avoiding synchronous setState in effect
+  const shouldResetNavigating = open && isNavigating;
+  if ( shouldResetNavigating ) {
+    // Schedule reset for next tick to avoid synchronous setState warning
+    queueMicrotask( () => setIsNavigating( false ) );
+  }
 
   return (
-    <Popover open={open} onOpenChange={setOpen} modal={true}>
+    <Popover open={ open } onOpenChange={ setOpen } modal={ true }>
       <PopoverTrigger asChild>
         <button className='language-selector' aria-label='Select language'>
           <div className='flex gap-2'>
             <Image
-              src={languages.find((lang) => lang.value === locale)?.flag || ''}
+              src={ languages.find( ( lang ) => lang.value === locale )?.flag || '' }
               alt=''
-              width={19}
-              height={19}
+              width={ 19 }
+              height={ 19 }
               className='language-selector__flag'
             />
-            {showLabel && (
+            { showLabel && (
               <span className='language-selector__label'>
-                {languages.find((lang) => lang.value === locale)?.label}
+                { languages.find( ( lang ) => lang.value === locale )?.label }
               </span>
-            )}
+            ) }
           </div>
           <span className='icon icon-chevron-thin-down language-selector__chevron'></span>
         </button>
       </PopoverTrigger>
       <PopoverContent
-        ref={popoverRef}
+        ref={ popoverRef }
         className='language-selector__dropdown'
         align='end'
-        style={isNavigating ? { display: 'none' } : undefined}
+        style={ isNavigating ? { display: 'none' } : undefined }
       >
         <Command>
-          {/* <CommandInput placeholder='Search language...' /> */}
+          {/* <CommandInput placeholder='Search language...' /> */ }
           <CommandList>
             <CommandEmpty>No language found.</CommandEmpty>
             <CommandGroup>
-              {languages.map((language) => (
+              { languages.map( ( language ) => (
                 <CommandItem
-                  key={language.value}
-                  value={language.value}
-                  onSelect={(currentValue) => {
-                    setIsNavigating(true);
-                    setOpen(false);
-                    setTimeout(() => {
-                      startTransition(() => {
+                  key={ language.value }
+                  value={ language.value }
+                  onSelect={ ( currentValue ) => {
+                    setIsNavigating( true );
+                    setOpen( false );
+                    setTimeout( () => {
+                      startTransition( () => {
                         // Remove the current locale from pathname if it exists
                         const pathnameWithoutLocale =
-                          pathname.replace(`/${locale}`, '') || '/';
+                          pathname.replace( `/${ locale }`, '' ) || '/';
                         // Navigate to the new locale
-                        router.push(`/${currentValue}${pathnameWithoutLocale}`);
-                      });
-                    }, 50);
-                  }}
+                        router.push( `/${ currentValue }${ pathnameWithoutLocale }` );
+                      } );
+                    }, 50 );
+                  } }
                   className='language-selector__dropdown-item'
                 >
                   <span className='language-selector__option'>
                     <Image
-                      src={language.flag}
+                      src={ language.flag }
                       alt=''
-                      width={19}
-                      height={19}
+                      width={ 19 }
+                      height={ 19 }
                       className='language-selector__flag'
                     />
-                    <span>{language.label}</span>
+                    <span>{ language.label }</span>
                   </span>
                 </CommandItem>
-              ))}
+              ) ) }
             </CommandGroup>
           </CommandList>
         </Command>

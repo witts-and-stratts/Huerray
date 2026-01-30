@@ -13,6 +13,7 @@ import {
   UserMultiple02Icon,
   ShieldUserIcon,
   AlertCircleIcon,
+  Store01Icon,
 } from "@hugeicons/core-free-icons";
 import { IconReport } from "@tabler/icons-react";
 import type { SidebarNavigationData } from "@/components/app-sidebar";
@@ -23,9 +24,9 @@ export function getNavigationData(
   user?: { name: string; email: string; avatar?: string }
 ): SidebarNavigationData {
   const defaultUser = {
-    name: user?.name || "User",
-    email: user?.email || "user@example.com",
-    avatar: user?.avatar || "/avatars/shadcn.jpg",
+    name: user?.name || "",
+    email: user?.email || "",
+    avatar: user?.avatar || "",
   };
 
   const navigationMap = {
@@ -59,6 +60,11 @@ export const brandNavigationData: Omit<SidebarNavigationData, 'user'> & { user: 
       icon: ChartLineData01Icon,
     },
     {
+      title: "Gigs",
+      url: "/brand-admin/gigs",
+      icon: Task02Icon,
+    },
+    {
       title: "Creators",
       url: "/brand-admin/creators",
       icon: UserGroupIcon,
@@ -69,8 +75,8 @@ export const brandNavigationData: Omit<SidebarNavigationData, 'user'> & { user: 
       icon: ChartLineData01Icon,
     },
     {
-      title: "Billing",
-      url: "/brand-admin/billing",
+      title: "Invoices",
+      url: "/brand-admin/invoices",
       icon: FileScriptIcon,
     },
   ],
@@ -151,9 +157,19 @@ export const adminNavigationData: Omit<SidebarNavigationData, 'user'> & { user: 
       icon: UserMultiple02Icon,
     },
     {
+      title: "Brands",
+      url: "/admin/brands",
+      icon: Store01Icon,
+    },
+    {
       title: "Campaigns",
       url: "/admin/campaigns",
       icon: ChartLineData01Icon,
+    },
+    {
+      title: "Gigs",
+      url: "/admin/gigs",
+      icon: Task02Icon,
     },
     {
       title: "Analytics",

@@ -8,11 +8,12 @@ import { FilesDropzone } from './documents/files-dropzone';
 import { ImportUrlDialog } from './documents/import-url-dialog';
 import { PreviewDialog } from './documents/preview-dialog';
 import { UploadedFile } from './documents/types';
-import { useCampaignDocuments } from './documents/use-campaign-documents';
+import { useCampaignFiles } from './documents/use-campaign-files';
 
 export const CampaignImagesSection = memo( function CampaignImagesSection( {
   form,
-}: { form: CampaignFormApi; } ) {
+  fileState
+}: { form: CampaignFormApi; fileState: ReturnType<typeof useCampaignFiles>; } ) {
   const {
     items,
     activeId,
@@ -26,9 +27,18 @@ export const CampaignImagesSection = memo( function CampaignImagesSection( {
     handleUploadError,
     handleRetry,
     addImportedItem,
-  } = useCampaignDocuments();
+    setItemsFromUrls
+  } = fileState;
 
-  // Sync with form state
+  // Sync from form state to local state (initial load / restoration)
+  useEffect( () => {
+    if ( form.state.values.images && form.state.values.images.length > 0 && items.length === 0 ) {
+      console.debug( '[CampaignImagesSection] Restoring images from form state:', form.state.values.images );
+      setItemsFromUrls( form.state.values.images );
+    }
+  }, [ form.state.values.images, setItemsFromUrls ] );
+
+  // Sync from local state to form state (on changes)
   useEffect( () => {
     const urls = items.filter( i => i.status === 'success' ).map( i => i.url );
     if ( JSON.stringify( urls ) !== JSON.stringify( form.state.values.images ) ) {
@@ -59,7 +69,7 @@ export const CampaignImagesSection = memo( function CampaignImagesSection( {
               } }
               title="Upload Images"
               description={ <>Drag and drop files here<br />Support for Image files</> }
-              icon={ <ImageFileIcon className="text-primary w-20 h-20 mt-4 stroke-primary" /> }
+              icon={ <ImageFileIcon className="text-primary w-20! h-20! mt-4 stroke-primary" /> }
               onDragStart={ handleDragStart }
               onDragEnd={ handleDragEnd }
               onDrop={ handleDrop }

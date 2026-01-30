@@ -298,7 +298,7 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
         campaignsPost: async (request: ModelsCreateCampaignRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'request' is not null or undefined
             assertParamExists('campaignsPost', 'request', request)
-            const localVarPath = `/campaigns`;
+            const localVarPath = `/campaigns/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

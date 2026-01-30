@@ -1,5 +1,5 @@
 
-import * as React from 'react';
+import { memo } from 'react';
 import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { UtilsCampaignCategory } from '@/lib/api/generated/models/utils-campaign-category';
@@ -17,7 +17,7 @@ const formatEnumLabel = ( value: string | undefined ) => {
     .join( " " );
 };
 
-export const CampaignBasicInfo = React.memo( function CampaignBasicInfo( { form }: CampaignBasicInfoProps ) {
+export const CampaignBasicInfo = memo( function CampaignBasicInfo( { form }: CampaignBasicInfoProps ) {
   return (
     <FieldGroup>
       <form.Field
@@ -42,14 +42,12 @@ export const CampaignBasicInfo = React.memo( function CampaignBasicInfo( { form 
         { ( field ) => (
           <SuperField
             label="Description"
+            type="editor"
             placeholder="Tell us about your campaign goals..."
             value={ field.state.value }
-            onChange={ ( e: React.ChangeEvent<HTMLTextAreaElement> ) => field.handleChange( e.target.value ) }
-            onBlur={ field.handleBlur }
+            onChange={ ( e: string ) => field.handleChange( e ) }
             error={ field.state.meta.isTouched && field.state.meta.errors ? field.state.meta.errors.map( ( e ) => e.message ).join( ", " ) : undefined }
-            type="textarea"
-            rows={ 10 }
-            fieldClassName='min-h-[200px]'
+            fieldClassName='min-h-[300px]'
             required
           />
         ) }
@@ -75,6 +73,20 @@ export const CampaignBasicInfo = React.memo( function CampaignBasicInfo( { form 
           ) }
         </form.Field>
       </div>
+      <form.Field name="keywords">
+        { ( field ) => (
+          <SuperField
+            label="Keywords"
+            type="tags"
+            value={ field.state.value }
+            onChange={ field.handleChange }
+            onBlur={ field.handleBlur }
+            error={ field.state.meta.isTouched && field.state.meta.errors ? field.state.meta.errors.map( ( e ) => e.message ).join( ", " ) : undefined }
+            placeholder="Enter keywords..."
+            expand={ false }
+          />
+        ) }
+      </form.Field>
     </FieldGroup>
   );
 } );

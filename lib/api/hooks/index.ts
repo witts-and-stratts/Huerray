@@ -29,6 +29,13 @@ export {
   campaignsKeys,
 } from './campaigns';
 
+// Brand hooks
+export {
+  useBrand,
+  useSuspenseBrand,
+  brandsKeys,
+} from './brands';
+
 /**
  * Add more exports here as you create hooks for other endpoints:
  * 

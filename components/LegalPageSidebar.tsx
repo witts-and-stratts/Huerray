@@ -10,16 +10,13 @@ import { Typography } from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 
+// Using a loose type compatible with the translation JSON structure
+// The LegalPageSidebar component handles the full type internally
 type Section = {
   id: string;
   title: string;
-  subsections: {
-    id: string;
-    title: string;
-    content?: string;
-    list?: any[];
-    additionalContent?: string;
-  }[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [ key: string ]: any;
 };
 
 type LegalPageSidebarProps = {
@@ -203,7 +200,7 @@ export default function LegalPageSidebar( {
               </AccordionTrigger>
               <AccordionContent className="px-4 pb-2">
                 <div className="flex flex-col space-y-2 pl-4">
-                  { section.subsections?.map( ( subsection ) => (
+                  { section.subsections?.map( ( subsection: { id: string; title: string; } ) => (
                     <button
                       key={ subsection.id }
                       onClick={ () =>

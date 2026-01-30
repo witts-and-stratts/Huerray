@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/dashboard-ui/sidebar";
+import Link from "next/link";
 
 // Type for HugeIcons icon data (it's an array)
 type HugeIconData = Parameters<typeof HugeiconsIcon>[ 0 ][ 'icon' ];
@@ -33,16 +34,16 @@ export function NavSecondary( {
             <SidebarMenuItem key={ item.title } className="font-regular">
               <SidebarMenuButton
                 render={
-                  <a href={ item.url }>
+                  <Link href={ item.url }>
                     { Array.isArray( item.icon )
                       ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 2 } />
-                      : (() => {
-                          const IconComponent = item.icon as Icon;
-                          return <IconComponent />;
-                        })()
+                      : ( () => {
+                        const IconComponent = item.icon as Icon;
+                        return <IconComponent />;
+                      } )()
                     }
                     <span>{ item.title }</span>
-                  </a>
+                  </Link>
                 }
               />
             </SidebarMenuItem>

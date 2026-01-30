@@ -97,7 +97,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
         gigsCampaignsCampaignIdGet: async (campaignId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'campaignId' is not null or undefined
             assertParamExists('gigsCampaignsCampaignIdGet', 'campaignId', campaignId)
-            const localVarPath = `/gigs/campaigns/{campaign_id}`
+            const localVarPath = `/gigs/campaigns/{campaign_id}/`
                 .replace(`{${"campaign_id"}}`, encodeURIComponent(String(campaignId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

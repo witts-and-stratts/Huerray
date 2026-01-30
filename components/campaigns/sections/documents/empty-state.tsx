@@ -9,7 +9,7 @@ interface EmptyStateProps {
 export const EmptyState = ( {
   title = "Upload documents",
   description = <>Drag and drop files here<br />Support for PDF</>,
-  icon = <PdfFileIcon className="text-primary w-16 h-16 mt-4" />
+  icon = <PdfFileIcon className="text-primary w-16! h-16! mt-4" />
 }: EmptyStateProps ) => (
   <div className='flex flex-col gap-2 justify-center items-center py-4 px-10 h-full min-h-[200px]'>
     { icon }

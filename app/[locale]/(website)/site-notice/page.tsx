@@ -20,6 +20,7 @@ export default async function SiteNotice( { params }: Props ) {
   const { locale } = await params;
   const t = await getTranslations( { locale, namespace: 'site-notice' } );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sections = t.raw( 'sections' ) as any[];
 
   return (

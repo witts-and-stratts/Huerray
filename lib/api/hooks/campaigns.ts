@@ -14,12 +14,41 @@ import {
   type UseQueryOptions,
   type UseMutationOptions
 } from '@tanstack/react-query';
-import { CampaignsApi } from '../generated/api';
+import { CampaignsApi, BrandApi, type CampaignsApiCampaignsSearchGetRequest, type BrandApiBrandsSearchCampaignsGetRequest } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
-import type { ModelsStandardResponse, ModelsPaginatedResponse, ModelsCampaignResponse } from '../generated/models';
+import type { 
+  ModelsStandardResponse, 
+  ModelsPaginatedResponse, 
+  ModelsCampaignResponse,
+  ModelsBrandCampaignDecisionRequest,
+  ModelsCreateCampaignRequest,
+} from '../generated/models';
+import { ModelsStandardCampaignResponse } from '@/scripts/lib/api/generated/models';
 
-// Create campaigns API instance
+/**
+ * Hook to submit a brand decision for a campaign
+ */
+export function useCampaignDecision(
+  options?: UseMutationOptions<ModelsStandardCampaignResponse, Error, { id: string; decision: ModelsBrandCampaignDecisionRequest }>
+): UseMutationResult<ModelsStandardCampaignResponse, Error, { id: string; decision: ModelsBrandCampaignDecisionRequest }> {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, decision }) => {
+      const response = await campaignsApi.campaignsIdDecisionPut({ id, request: decision });
+      return response.data;
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: campaignsKeys.detail(variables.id) });
+      queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
+    },
+    ...options,
+  });
+}
+
+// Create API instances
 const campaignsApi = new CampaignsApi(apiConfiguration, undefined, apiClient);
+const brandApi = new BrandApi(apiConfiguration, undefined, apiClient);
 
 /**
  * Query key factory for campaigns endpoints
@@ -27,9 +56,18 @@ const campaignsApi = new CampaignsApi(apiConfiguration, undefined, apiClient);
 export const campaignsKeys = {
   all: ['campaigns'] as const,
   lists: () => [...campaignsKeys.all, 'list'] as const,
-  list: (filters?: Record<string, any>) => [...campaignsKeys.lists(), filters] as const,
+  list: (params?: CampaignsApiCampaignsSearchGetRequest) => [...campaignsKeys.lists(), params] as const,
   details: () => [...campaignsKeys.all, 'detail'] as const,
   detail: (id: string) => [...campaignsKeys.details(), id] as const,
+};
+
+/**
+ * Query key factory for brand campaigns endpoints (/brands/search/campaigns)
+ */
+export const brandCampaignsKeys = {
+  all: ['brand-campaigns'] as const,
+  lists: () => [...brandCampaignsKeys.all, 'list'] as const,
+  list: (params?: BrandApiBrandsSearchCampaignsGetRequest) => [...brandCampaignsKeys.lists(), params] as const,
 };
 
 /**
@@ -53,12 +91,48 @@ export const campaignsKeys = {
  * ```
  */
 export function useCampaigns(
+  params?: CampaignsApiCampaignsSearchGetRequest,
   options?: Omit<UseQueryOptions<ModelsPaginatedResponse, Error>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<ModelsPaginatedResponse, Error> {
   return useQuery({
-    queryKey: campaignsKeys.list(),
+    queryKey: campaignsKeys.list(params),
     queryFn: async () => {
-      const response = await campaignsApi.campaignsSearchGet();
+      const response = await campaignsApi.campaignsSearchGet(params);
+      return response.data;
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to fetch campaigns for the current brand (/brands/search/campaigns)
+ * This should be used in brand-admin pages instead of useCampaigns
+ * 
+ * @example
+ * ```tsx
+ * function BrandCampaignsList() {
+ *   const { data, isLoading } = useBrandCampaigns();
+ *   
+ *   if (isLoading) return <div>Loading campaigns...</div>;
+ *   
+ *   return (
+ *     <ul>
+ *       {data?.data?.map(campaign => (
+ *         <li key={campaign.id}>{campaign.campaign_name}</li>
+ *       ))}
+ *     </ul>
+ *   );
+ * }
+ * ```
+ */
+export function useBrandCampaigns(
+  params?: BrandApiBrandsSearchCampaignsGetRequest,
+  options?: Omit<UseQueryOptions<ModelsPaginatedResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedResponse, Error> {
+  return useQuery({
+    queryKey: brandCampaignsKeys.list(params),
+    queryFn: async () => {
+      const response = await brandApi.brandsSearchCampaignsGet(params);
       return response.data;
     },
     ...options,
@@ -212,6 +286,77 @@ export function useDeleteCampaign(
       // Remove from cache and refetch list
       queryClient.removeQueries({ queryKey: campaignsKeys.detail(id) });
       queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to replicate an existing campaign
+ * 
+ * @example
+ * ```tsx
+ * function ReplicateButton({ id }: { id: string }) {
+ *   const replicateCampaign = useReplicateCampaign();
+ *   
+ *   const handleReplicate = () => {
+ *     replicateCampaign.mutate(id, {
+ *       onSuccess: () => toast.success('Campaign replicated!')
+ *     });
+ *   };
+ *   
+ *   return <button onClick={handleReplicate}>Replicate</button>;
+ * }
+ * ```
+ */
+export function useReplicateCampaign(
+  options?: UseMutationOptions<ModelsStandardResponse, Error, string>
+): UseMutationResult<ModelsStandardResponse, Error, string> {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (campaignId: string) => {
+      // 1. Fetch the campaign details
+      const { data: campaign } = await campaignsApi.campaignsIdGet({ id: campaignId });
+      
+      if (!campaign) {
+        throw new Error('Campaign not found');
+      }
+
+      // 2. Prepare the creation payload
+      const payload: ModelsCreateCampaignRequest = {
+        campaign_name: `${campaign.campaign_name} (Copy)`,
+        category: campaign.category!,
+        content_type: campaign.content_type!,
+        description: campaign.description || '',
+        number_of_creators_wanted: campaign.number_of_creators_wanted || 1,
+        number_of_videos_wanted: campaign.number_of_videos_wanted || 1,
+        video_duration_in_seconds_in_seconds: campaign.video_duration_in_seconds || 60,
+        video_format: campaign.video_format!,
+        
+        // Optional fields
+        allow_multiple_videos: campaign.allow_multiple_videos,
+        campaign_documents: campaign.campaign_documents || [],
+        campaign_images: campaign.campaign_images || [],
+        donts: campaign.donts,
+        dos: campaign.dos,
+        keywords: campaign.keywords,
+        product_image_url: campaign.product_image_url,
+        product_url: campaign.product_url,
+        tone_of_voice: campaign.tone_of_voice,
+      };
+
+      // 3. Create the new campaign
+      const response = await campaignsApi.campaignsPost({ request: payload });
+      return response.data;
+    },
+    onSuccess: (data, variables, context) => {
+      // Invalidate campaigns list
+      queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
+      options?.onSuccess?.(data, variables, context);
+    },
+    onError: (error, variables, context) => {
+      options?.onError?.(error, variables, context);
     },
     ...options,
   });

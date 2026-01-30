@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/dashboard-ui/button';
 import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import useMeasure from 'react-use-measure';
 
@@ -22,6 +22,47 @@ export default function PdfPreview( { src }: PdfPreviewProps ) {
   const onDocumentLoadSuccess = ( { numPages }: { numPages: number; } ) => {
     setNumPages( numPages );
   };
+
+  const goToPrevPage = useCallback( () => {
+    setPageNumber( p => Math.max( 1, p - 1 ) );
+  }, [] );
+
+  const goToNextPage = useCallback( () => {
+    setPageNumber( p => Math.min( numPages, p + 1 ) );
+  }, [ numPages ] );
+
+  useEffect( () => {
+    const handleKeyDown = ( e: KeyboardEvent ) => {
+      // Don't trigger if user is typing in an input/textarea
+      if (
+        document.activeElement?.tagName === 'INPUT' ||
+        document.activeElement?.tagName === 'TEXTAREA' ||
+        ( document.activeElement as HTMLElement )?.isContentEditable
+      ) {
+        return;
+      }
+
+      // Only handle if no modifier keys are pressed
+      if ( e.altKey || e.ctrlKey || e.metaKey || e.shiftKey ) {
+        return;
+      }
+
+      if ( e.key === 'ArrowLeft' ) {
+        if ( pageNumber > 1 ) {
+          e.preventDefault();
+          goToPrevPage();
+        }
+      } else if ( e.key === 'ArrowRight' ) {
+        if ( pageNumber < numPages ) {
+          e.preventDefault();
+          goToNextPage();
+        }
+      }
+    };
+
+    window.addEventListener( 'keydown', handleKeyDown );
+    return () => window.removeEventListener( 'keydown', handleKeyDown );
+  }, [ goToPrevPage, goToNextPage, pageNumber, numPages ] );
 
   return (
     <div className='flex flex-col items-center h-full w-full overflow-hidden'>

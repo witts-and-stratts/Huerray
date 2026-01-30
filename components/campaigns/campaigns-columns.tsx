@@ -4,6 +4,7 @@ import * as React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
+import Link from 'next/link';
 
 import { Button } from '@/components/dashboard-ui/button';
 import { Checkbox } from '@/components/dashboard-ui/checkbox';
@@ -17,8 +18,53 @@ import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { ModelCampaign, Person } from './types';
 import { AvatarCollage } from './avatar-collage';
 import { StatusBadge } from './status-badge';
+import { useReplicateCampaign } from '@/lib/api/hooks/campaigns';
+import { Row } from '@tanstack/react-table';
+import { RoleGuard } from '@/components/auth/role-guard';
 
-export const columns: ColumnDef<ModelCampaign>[] = [
+
+const CampaignActionsCell = ( { row, basePath }: { row: Row<ModelCampaign>, basePath: string; } ) => {
+  const replicateCampaign = useReplicateCampaign();
+
+  return (
+    <div className='flex justify-end'>
+      <ButtonGroup className='flex justify-end'>
+        <Button variant='outline' size='sm' className='font-regular'>
+          Edit
+        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='outline' size='sm' className='font-regular'>
+              <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end' className={ 'min-w-60 text-sm' }>
+            <DropdownMenuItem className='text-sm' asChild>
+              <Link href={ `${ basePath }/campaigns/${ row.original.campaign_id }` }>
+                View Details
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem className='text-sm'>Rename</DropdownMenuItem>
+            <RoleGuard allowedRoles={ [ 'brand' ] }>
+              <DropdownMenuItem
+                className='text-sm'
+                onSelect={ ( e ) => {
+                  e.preventDefault();
+                  if ( row.original.campaign_id ) replicateCampaign.mutate( row.original.campaign_id );
+                } }
+              >
+                Replicate
+              </DropdownMenuItem>
+            </RoleGuard>
+            <DropdownMenuItem className='text-sm'>Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </ButtonGroup>
+    </div>
+  );
+};
+
+export const getColumns = ( basePath: string = '/brand-admin' ): ColumnDef<ModelCampaign>[] => [
   {
     id: 'select',
     header: ( { table } ) => (
@@ -73,13 +119,15 @@ export const columns: ColumnDef<ModelCampaign>[] = [
     accessorKey: 'details',
     header: () => <span className='font-regular'>Details</span>,
     cell: ( { row } ) => {
-      const { campaign_name, description, campaign_status, updated_at } =
+      const { campaign_id, campaign_name, description, campaign_status, updated_at } =
         row.original;
       return (
         <div>
-          <h4 className='capitalize text-[18px] font-medium! text-primary'>
-            { campaign_name }
-          </h4>
+          <Link href={ `${ basePath }/campaigns/${ campaign_id }` } className='hover:underline'>
+            <h4 className='capitalize text-[18px] font-medium! text-primary'>
+              { campaign_name }
+            </h4>
+          </Link>
           <p className='font-regular text-slate-500 mt-1 text-sm'>
             <span className='text-slate-800'>{ description }</span>
             <br />
@@ -89,11 +137,11 @@ export const columns: ColumnDef<ModelCampaign>[] = [
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
-              } ).format( new Date( updated_at ) ) }
+              } ).format( new Date( updated_at as string ) ) }
             </span>
           </p>
           <div className='mt-4'>
-            <StatusBadge status={ campaign_status } />
+            <StatusBadge status={ campaign_status! } />
           </div>
         </div>
       );
@@ -143,33 +191,6 @@ export const columns: ColumnDef<ModelCampaign>[] = [
       </div>
     ),
     enableHiding: false,
-    cell: () => {
-      return (
-        <div className='flex justify-end'>
-          <ButtonGroup className='flex justify-end'>
-            <Button variant='outline' size='sm' className='font-regular'>
-              Edit
-            </Button>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant='outline' size='sm' className='font-regular'>
-                  <ChevronDown />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align='end' className={ 'min-w-60 text-sm' }>
-                <DropdownMenuItem className='text-sm'>
-                  View Details
-                </DropdownMenuItem>
-                <DropdownMenuItem className='text-sm'>Rename</DropdownMenuItem>
-                <DropdownMenuItem className='text-sm'>
-                  Replicate
-                </DropdownMenuItem>
-                <DropdownMenuItem className='text-sm'>Delete</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </ButtonGroup>
-        </div>
-      );
-    },
+    cell: ( { row } ) => <CampaignActionsCell row={ row } basePath={ basePath } />,
   },
 ];

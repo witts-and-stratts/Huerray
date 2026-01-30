@@ -13,13 +13,26 @@ import {
 } from '@tanstack/react-table';
 import * as React from 'react';
 
-import { columns } from './campaigns-columns';
+import { getColumns } from './campaigns-columns';
 import { CampaignsTablePagination } from './campaigns-table-pagination';
 import { CampaignsTableToolbar } from './campaigns-table-toolbar';
-import { campaigns } from './data';
 import { CampaignsView } from '@/components/campaigns/campaigns-view';
+import { ModelCampaign } from './types';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export function CampaignsTable() {
+type CampaignsTableProps = {
+  basePath?: string;
+  campaigns?: ModelCampaign[];
+  isLoading?: boolean;
+  error?: Error | null;
+};
+
+export function CampaignsTable( {
+  basePath = '/brand-admin',
+  campaigns = [],
+  isLoading = false,
+  error = null
+}: CampaignsTableProps ) {
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -31,9 +44,15 @@ export function CampaignsTable() {
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
-    campaigns.forEach( ( campaign ) => statusSet.add( campaign.campaign_status ) );
+    campaigns.forEach( ( campaign ) => {
+      if ( campaign.campaign_status ) {
+        statusSet.add( campaign.campaign_status );
+      }
+    } );
     return Array.from( statusSet );
-  }, [] );
+  }, [ campaigns ] );
+
+  const columns = React.useMemo( () => getColumns( basePath ), [ basePath ] );
 
   const table = useReactTable( {
     data: campaigns,
@@ -54,6 +73,41 @@ export function CampaignsTable() {
     },
   } );
 
+  if ( isLoading ) {
+    return (
+      <div className='w-full space-y-4 px-5'>
+        <div className='flex items-center justify-between'>
+          <Skeleton className='h-10 w-[250px]' />
+          <Skeleton className='h-10 w-[100px]' />
+        </div>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+          { Array.from( { length: 6 } ).map( ( _, i ) => (
+            <Skeleton key={ i } className='h-[300px] w-full rounded-xl' />
+          ) ) }
+        </div>
+      </div>
+    );
+  }
+
+  if ( error ) {
+    return (
+      <div className='w-full p-8 text-center bg-red-50 rounded-xl border border-red-100'>
+        <h3 className='text-lg font-medium text-red-800'>Failed to load campaigns</h3>
+        <p className='text-sm text-red-600 mt-1'>{ error.message }</p>
+        <button
+          onClick={ () => window.location.reload() }
+          className='mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors'
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  if ( !isLoading && campaigns.length === 0 ) {
+    return <CampaignsView table={ table } view={ view } basePath={ basePath } />;
+  }
+
   return (
     <div className='w-full'>
       <CampaignsTableToolbar
@@ -62,8 +116,10 @@ export function CampaignsTable() {
         view={ view }
         setView={ setView }
       />
-      <CampaignsView table={ table } view={ view } />
-      <CampaignsTablePagination table={ table } />
+      <CampaignsView table={ table } view={ view } basePath={ basePath } />
+      <div className='px-5'>
+        <CampaignsTablePagination table={ table } />
+      </div>
     </div>
   );
 }

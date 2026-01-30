@@ -19,19 +19,7 @@ export const createAdminSchema = ( t: ( key: string ) => string ) => createBaseS
 } ) );
 
 export const createBrandSchema = ( t: ( key: string ) => string ) => createBaseSignupSchema( t ).and( z.object( {
-  companyName: z.string().min( 1, t( "companyNameRequired" ) ),
-  website: z.string().url( t( "websiteInvalid" ) ),
-  registrationNumber: z.string().min( 1, t( "registrationNumberRequired" ) ),
-  vatId: z.string().optional(),
-  category: z.string().min( 1, t( "industryRequired" ) ),
-  companySize: z.string().min( 1, t( "companySizeRequired" ) ),
-  description: z.string().optional(),
-  country: z.string().min( 1, t( "countryRequired" ) ),
-  state: z.string().min( 1, t( "stateRequired" ) ),
-  city: z.string().min( 1, t( "cityRequired" ) ),
-  street: z.string().optional(),
-  postalCode: z.string().optional(),
-  phone: z.string().optional(),
+  username: z.string().min( 1, t( "usernameRequired" ) ),
 } ) );
 
 export const createForgotPasswordSchema = ( t: ( key: string ) => string ) => z.object( {

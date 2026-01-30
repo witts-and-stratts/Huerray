@@ -101,6 +101,19 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
             />
           ) }
         </form.Field>
+        <form.Field
+          name="allow_multiple_videos"
+        >
+          { ( field ) => (
+            <SuperField
+              label="Allow multiple videos"
+              type="checkbox"
+              checked={ field.state.value }
+              onCheckedChange={ ( val ) => field.handleChange( !!val ) }
+              description="Creators can upload more than one video for this campaign"
+            />
+          ) }
+        </form.Field>
       </FieldGroup>
     </FieldGroup>
   );

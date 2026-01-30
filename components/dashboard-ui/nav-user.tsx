@@ -33,6 +33,9 @@ import { clearAuthToken } from "@/lib/api/client";
 import { useRouter } from "next/navigation";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { apiClient } from "@/lib/api/client";
+import { useAppDispatch } from "@/lib/redux/hooks";
+import { clearBrandProfile } from "@/lib/redux/features/brand/brandSlice";
+import { clearCreatorProfile } from "@/lib/redux/features/creator/creatorSlice";
 
 export function NavUser( {
   user,
@@ -46,6 +49,7 @@ export function NavUser( {
   const { isMobile } = useSidebar();
   const { setUser } = useAuth();
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleLogout = async () => {
     try {
@@ -60,6 +64,9 @@ export function NavUser( {
       clearAuthToken();
       // Clear user state
       setUser( null );
+      // Clear brand and creator profiles from Redux
+      dispatch( clearBrandProfile() );
+      dispatch( clearCreatorProfile() );
       // Redirect to login
       router.push( "/login" );
     }

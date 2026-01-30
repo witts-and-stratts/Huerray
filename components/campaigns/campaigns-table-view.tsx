@@ -14,7 +14,6 @@ import {
 } from '@tanstack/react-table';
 import { AnimatePresence } from 'motion/react';
 import { MotionTableRow } from '../dashboard-ui/motion-table';
-import { columns } from './campaigns-columns';
 import { ModelCampaign } from './types';
 
 export function CamapignsTableView( {
@@ -76,7 +75,7 @@ export function CamapignsTableView( {
         ) : (
           <TableRow>
             <TableCell
-              colSpan={ columns.length }
+              colSpan={ table.getVisibleLeafColumns().length }
               className='h-24 text-center'
             >
               No results.

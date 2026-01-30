@@ -8,6 +8,7 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
 import { Configuration } from './generated';
+import { isTokenExpiringSoon } from '../utils/jwt';
 
 // Get base URL from environment variable or use default
 export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.huerray.de/api/v1';
@@ -43,6 +44,56 @@ const processQueue = (error: Error | null, token: string | null = null) => {
 };
 
 /**
+ * Handle token refresh logic
+ * Returns a promise that resolves to the new token
+ */
+const refreshToken = async (): Promise<string> => {
+    if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+            failedQueue.push({ resolve, reject });
+        });
+    }
+
+    isRefreshing = true;
+
+    try {
+        const currentRefreshToken = getRefreshToken();
+
+        if (!currentRefreshToken) {
+            throw new Error('No refresh token available');
+        }
+
+        // Call refresh endpoint
+        // using axios directly to avoid interceptors loop
+        const response = await axios.post(`${BASE_URL}/auth/refresh`, {
+            refresh_token: currentRefreshToken
+        });
+
+        const data = response.data.data || response.data;
+        const newToken = data.token || data.accessToken || data.access_token;
+        const newRefreshToken = data.refresh_token || data.refreshToken;
+
+        if (newToken) {
+            setAuthToken(newToken);
+            if (newRefreshToken) {
+                setRefreshToken(newRefreshToken);
+            }
+            
+            processQueue(null, newToken);
+            return newToken;
+        } else {
+            throw new Error('No token returned from refresh');
+        }
+    } catch (error) {
+        processQueue(error as Error, null);
+        handleAuthFailure();
+        throw error;
+    } finally {
+        isRefreshing = false;
+    }
+};
+
+/**
  * Create an axios instance with authentication and interceptors
  */
 export const createApiClient = (): AxiosInstance => {
@@ -52,13 +103,22 @@ export const createApiClient = (): AxiosInstance => {
     headers: {
       'Content-Type': 'application/json',
     },
+    maxRedirects: 0,
+    // Note: withCredentials is disabled due to CORS restrictions
+    // Backend needs to set Access-Control-Allow-Credentials: true
+    // and cannot use wildcard (*) for Access-Control-Allow-Origin
   });
 
-  // Request interceptor to add authentication token
+  // Request interceptor to add authentication token and check expiration
   instance.interceptors.request.use(
-    (config) => {
+    async (config) => {
+      // Enable credentials for upload preview/serve endpoints
+      if (config.url?.includes('/uploads/') && config.method === 'get') {
+        config.withCredentials = true;
+      }
+
       // Get token from secure cookie
-      const token = getAuthToken();
+      let token = getAuthToken();
 
       // Public paths that don't require authentication
       const PUBLIC_PATHS = [
@@ -69,16 +129,29 @@ export const createApiClient = (): AxiosInstance => {
         '/auth/verify-email',
       ];
 
-      // Detailed public path check (some might be partial matches or exact)
-      const isPublicPath = PUBLIC_PATHS.some(path => config.url?.includes(path));
-      // Refresh token endpoint requires its own special handling (custom body, often no auth header or a specific one)
-      // But usually refresh token endpoint is not authenticated with access token, so we can treat it as public or handle broadly.
-      // However, below logic adds Bearer token if not public.
+      // Refresh token endpoint requires its own special handling
       if (config.url?.includes('/auth/refresh')) {
            return config;
       }
 
+      // Detailed public path check (some might be partial matches or exact)
+      const isPublicPath = PUBLIC_PATHS.some(path => config.url?.includes(path));
+
       if (token && !isPublicPath) {
+        // PERFOM PROACTIVE REFRESH CHECK
+        if (isTokenExpiringSoon(token)) {
+            try {
+                // If token is expiring soon, refresh it before making the request
+                // console.debug('Token expiring soon, verifying proactive refresh...');
+                token = await refreshToken();
+            } catch (error) {
+                // If refresh fails, we might still try the request with old token 
+                // or let the response interceptor handle 401. 
+                // For now, let's proceed with old token and let backend reject if expired.
+                console.warn('Proactive refresh failed, proceeding with existing token', error);
+            }
+        }
+
         if ( config.headers && typeof ( config.headers as any ).set === 'function' ) {
             ( config.headers as any ).set( 'Authorization', `Bearer ${ token }` );
         } else {
@@ -101,80 +174,30 @@ export const createApiClient = (): AxiosInstance => {
 
       // Handle 401 Unauthorized
       if (error.response?.status === 401 && !originalRequest._retry) {
-        if (isRefreshing) {
-          // If already refreshing, add to queue
-          return new Promise(function(resolve, reject) {
-            failedQueue.push({ resolve, reject });
-          })
-            .then(token => {
-              if (originalRequest.headers) {
-                  if ( typeof ( originalRequest.headers as any ).set === 'function' ) {
-                      ( originalRequest.headers as any ).set( 'Authorization', 'Bearer ' + token );
-                  } else {
-                      originalRequest.headers.Authorization = 'Bearer ' + token;
-                  }
-              }
-              originalRequest._retry = true;
-              return instance(originalRequest);
-            })
-            .catch(err => {
-              return Promise.reject(err);
-            });
-        }
-
-        originalRequest._retry = true;
-        isRefreshing = true;
-
-        const refreshToken = getRefreshToken();
-
-        if (!refreshToken) {
-            // No refresh token available, clear auth and redirect
+        
+        // Check if this was a refresh attempt itself to avoid infinite loops
+        if (originalRequest.url?.includes('/auth/refresh')) {
             handleAuthFailure();
             return Promise.reject(error);
         }
 
+        originalRequest._retry = true;
+
         try {
-          // Call refresh endpoint
-          // using axios directly to avoid interceptors loop and to keep it simple
-          const response = await axios.post(`${BASE_URL}/auth/refresh`, {
-            refresh_token: refreshToken
-          });
-
-          // Assuming standard response structure where data contains tokens
-          // Adjust based on actual API response if needed.
-          // The models say ModelsStandardResponse { data: object }
-          // We expect data.token or data.accessToken
-          const data = response.data.data || response.data;
-          const newToken = data.token || data.accessToken || data.access_token;
-          const newRefreshToken = data.refresh_token || data.refreshToken;
-
-          if (newToken) {
-             setAuthToken(newToken);
-             if (newRefreshToken) {
-                 setRefreshToken(newRefreshToken);
-             }
-             
-             processQueue(null, newToken);
-             
-             // Retry original request
-             if (originalRequest.headers) {
-                  if ( typeof ( originalRequest.headers as any ).set === 'function' ) {
-                      ( originalRequest.headers as any ).set( 'Authorization', 'Bearer ' + newToken );
-                  } else {
-                      originalRequest.headers.Authorization = 'Bearer ' + newToken;
-                  }
-             }
-             return instance(originalRequest);
-          } else {
-              throw new Error("No token returned from refresh");
-          }
-
-        } catch (refreshError: any) {
-          processQueue(refreshError, null);
-          handleAuthFailure();
-          return Promise.reject(refreshError);
-        } finally {
-          isRefreshing = false;
+            const token = await refreshToken();
+            
+            // Update auth header for retry
+            if (originalRequest.headers) {
+                if ( typeof ( originalRequest.headers as any ).set === 'function' ) {
+                    ( originalRequest.headers as any ).set( 'Authorization', 'Bearer ' + token );
+                } else {
+                    originalRequest.headers.Authorization = 'Bearer ' + token;
+                }
+            }
+            
+            return instance(originalRequest);
+        } catch (refreshError) {
+            return Promise.reject(refreshError);
         }
       }
 
@@ -207,8 +230,10 @@ const handleAuthFailure = () => {
     if (typeof window !== 'undefined') {
         const currentPath = window.location.pathname;
         const isAuthPage = currentPath.startsWith('/login') || currentPath.startsWith('/signup') || currentPath.startsWith('/auth');
+
         if (!isAuthPage) {
-            window.location.href = '/login';
+            const redirectUrl = encodeURIComponent(currentPath + window.location.search);
+            window.location.href = `/login?redirect=${redirectUrl}`;
         }
     }
 };
