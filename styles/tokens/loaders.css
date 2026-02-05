@@ -1,0 +1,52 @@
+.loader {
+  position: relative;
+  width: 100px;
+  height: 12x;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-red-200);
+  box-shadow: 24px 0 var(--color-red-200);
+  left: 0;
+  top: 0;
+  animation: ballMoveX 1s linear infinite;
+}
+
+.loader:after {
+  box-shadow: none;
+  transform-origin: 40px 0;
+  transform: rotate(-153deg);
+  animation: rotateLoader 1s linear infinite;
+}
+
+@keyframes rotateLoader {
+
+  0%,
+  10% {
+    transform: rotate(-153deg);
+  }
+
+  90%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes ballMoveX {
+
+  0%,
+  10% {
+    transform: translateX(0)
+  }
+
+  90%,
+  100% {
+    transform: translateX(24px)
+  }
+}

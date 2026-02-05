@@ -18,7 +18,7 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
@@ -26,9 +26,11 @@ import type { ModelsCreateAdminRequest } from '../models';
 // @ts-ignore
 import type { ModelsEditUserRequest } from '../models';
 // @ts-ignore
-import type { ModelsPaginatedResponse } from '../models';
+import type { ModelsPaginatedUserResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsStandardErrorResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardUserResponse } from '../models';
 // @ts-ignore
 import type { ModelsUpdateUserRequest } from '../models';
 /**
@@ -62,8 +64,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -99,8 +101,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -139,9 +141,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -178,9 +179,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -214,8 +214,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -250,9 +250,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -311,8 +310,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 localVarQueryParameter['limit'] = limit;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -338,7 +337,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async usersIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardUserResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersIdDelete(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersIdDelete']?.[localVarOperationServerIndex]?.url;
@@ -351,7 +350,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async usersIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardUserResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersIdGet']?.[localVarOperationServerIndex]?.url;
@@ -365,7 +364,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersIdPut(id: string, request: ModelsEditUserRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async usersIdPut(id: string, request: ModelsEditUserRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardUserResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersIdPut(id, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersIdPut']?.[localVarOperationServerIndex]?.url;
@@ -378,7 +377,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersPost(request: ModelsCreateAdminRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async usersPost(request: ModelsCreateAdminRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardUserResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersPost(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersPost']?.[localVarOperationServerIndex]?.url;
@@ -390,7 +389,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersProfileGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async usersProfileGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardUserResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersProfileGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersProfileGet']?.[localVarOperationServerIndex]?.url;
@@ -403,7 +402,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersProfilePut(request: ModelsUpdateUserRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async usersProfilePut(request: ModelsUpdateUserRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardUserResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersProfilePut(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersProfilePut']?.[localVarOperationServerIndex]?.url;
@@ -420,7 +419,7 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersSearchGet(q?: string, userType?: UsersSearchGetUserTypeEnum, status?: string, page?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async usersSearchGet(q?: string, userType?: UsersSearchGetUserTypeEnum, status?: string, page?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedUserResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.usersSearchGet(q, userType, status, page, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersSearchGet']?.[localVarOperationServerIndex]?.url;
@@ -442,7 +441,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersIdDelete(requestParameters: UserApiUsersIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        usersIdDelete(requestParameters: UserApiUsersIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardUserResponse> {
             return localVarFp.usersIdDelete(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -452,7 +451,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersIdGet(requestParameters: UserApiUsersIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        usersIdGet(requestParameters: UserApiUsersIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardUserResponse> {
             return localVarFp.usersIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -462,7 +461,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersIdPut(requestParameters: UserApiUsersIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        usersIdPut(requestParameters: UserApiUsersIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardUserResponse> {
             return localVarFp.usersIdPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -472,7 +471,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersPost(requestParameters: UserApiUsersPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        usersPost(requestParameters: UserApiUsersPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardUserResponse> {
             return localVarFp.usersPost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -481,7 +480,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersProfileGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        usersProfileGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardUserResponse> {
             return localVarFp.usersProfileGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -491,7 +490,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersProfilePut(requestParameters: UserApiUsersProfilePutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        usersProfilePut(requestParameters: UserApiUsersProfilePutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardUserResponse> {
             return localVarFp.usersProfilePut(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -501,7 +500,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersSearchGet(requestParameters: UserApiUsersSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        usersSearchGet(requestParameters: UserApiUsersSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedUserResponse> {
             return localVarFp.usersSearchGet(requestParameters.q, requestParameters.userType, requestParameters.status, requestParameters.page, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };

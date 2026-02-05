@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **postal_code** | **string** |  | [optional] [default to undefined]
 **preferred_contact_email** | **string** |  | [optional] [default to undefined]
 **preferred_contact_phone** | **string** |  | [optional] [default to undefined]
+**profile_photo_url** | **string** |  | [optional] [default to undefined]
 **registration_number** | **string** |  | [default to undefined]
 **state** | **string** |  | [default to undefined]
 **street** | **string** |  | [optional] [default to undefined]
@@ -37,6 +38,7 @@ const instance: ModelsBrandRequest = {
     postal_code,
     preferred_contact_email,
     preferred_contact_phone,
+    profile_photo_url,
     registration_number,
     state,
     street,

@@ -18,9 +18,6 @@
 import type { UtilsCampaignCategory } from './utils-campaign-category';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UtilsContentType } from './utils-content-type';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { UtilsVideoFormat } from './utils-video-format';
 
 export interface ModelsCreateCampaignRequest {
@@ -29,7 +26,6 @@ export interface ModelsCreateCampaignRequest {
     'campaign_images'?: Array<string>;
     'campaign_name': string;
     'category': UtilsCampaignCategory;
-    'content_type': UtilsContentType;
     'description': string;
     'donts'?: string;
     'dos'?: string;
@@ -38,6 +34,7 @@ export interface ModelsCreateCampaignRequest {
     'number_of_videos_wanted': number;
     'product_image_url'?: string;
     'product_url'?: string;
+    'sample_video_urls'?: Array<string>;
     'tone_of_voice'?: string;
     /**
      * in seconds

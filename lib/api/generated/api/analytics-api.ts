@@ -18,19 +18,19 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { AnalyticsBrandGet200Response } from '../models';
+import type { ModelsStandardAnalyticsTimeSeriesResponse } from '../models';
 // @ts-ignore
-import type { AnalyticsCreatorGet200Response } from '../models';
+import type { ModelsStandardBrandAnalyticsResponse } from '../models';
 // @ts-ignore
-import type { AnalyticsPlatformGet200Response } from '../models';
+import type { ModelsStandardCreatorAnalyticsResponse } from '../models';
 // @ts-ignore
-import type { AnalyticsTimeSeriesGet200Response } from '../models';
+import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsStandardPlatformAnalyticsResponse } from '../models';
 /**
  * AnalyticsApi - axios parameter creator
  */
@@ -58,8 +58,8 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -98,8 +98,8 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['period'] = period;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -131,8 +131,8 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -171,8 +171,8 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['period'] = period;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -204,8 +204,8 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -244,8 +244,8 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['period'] = period;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -298,8 +298,8 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['end_date'] = endDate;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -324,7 +324,7 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsBrandGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnalyticsBrandGet200Response>> {
+        async analyticsBrandGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandAnalyticsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsBrandGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsBrandGet']?.[localVarOperationServerIndex]?.url;
@@ -337,7 +337,7 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsBrandPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnalyticsBrandGet200Response>> {
+        async analyticsBrandPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandAnalyticsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsBrandPeriodGet(period, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsBrandPeriodGet']?.[localVarOperationServerIndex]?.url;
@@ -349,7 +349,7 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsCreatorGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnalyticsCreatorGet200Response>> {
+        async analyticsCreatorGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorAnalyticsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsCreatorGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsCreatorGet']?.[localVarOperationServerIndex]?.url;
@@ -362,7 +362,7 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsCreatorPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnalyticsCreatorGet200Response>> {
+        async analyticsCreatorPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorAnalyticsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsCreatorPeriodGet(period, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsCreatorPeriodGet']?.[localVarOperationServerIndex]?.url;
@@ -374,7 +374,7 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsPlatformGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnalyticsPlatformGet200Response>> {
+        async analyticsPlatformGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPlatformAnalyticsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsPlatformGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsPlatformGet']?.[localVarOperationServerIndex]?.url;
@@ -387,7 +387,7 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsPlatformPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnalyticsPlatformGet200Response>> {
+        async analyticsPlatformPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPlatformAnalyticsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsPlatformPeriodGet(period, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsPlatformPeriodGet']?.[localVarOperationServerIndex]?.url;
@@ -402,7 +402,7 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsTimeSeriesGet(metric: string, startDate: string, endDate: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AnalyticsTimeSeriesGet200Response>> {
+        async analyticsTimeSeriesGet(metric: string, startDate: string, endDate: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardAnalyticsTimeSeriesResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsTimeSeriesGet(metric, startDate, endDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsTimeSeriesGet']?.[localVarOperationServerIndex]?.url;
@@ -423,7 +423,7 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsBrandGet(options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsBrandGet200Response> {
+        analyticsBrandGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandAnalyticsResponse> {
             return localVarFp.analyticsBrandGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -433,7 +433,7 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsBrandPeriodGet(requestParameters: AnalyticsApiAnalyticsBrandPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsBrandGet200Response> {
+        analyticsBrandPeriodGet(requestParameters: AnalyticsApiAnalyticsBrandPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandAnalyticsResponse> {
             return localVarFp.analyticsBrandPeriodGet(requestParameters.period, options).then((request) => request(axios, basePath));
         },
         /**
@@ -442,7 +442,7 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsCreatorGet(options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsCreatorGet200Response> {
+        analyticsCreatorGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorAnalyticsResponse> {
             return localVarFp.analyticsCreatorGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -452,7 +452,7 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsCreatorPeriodGet(requestParameters: AnalyticsApiAnalyticsCreatorPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsCreatorGet200Response> {
+        analyticsCreatorPeriodGet(requestParameters: AnalyticsApiAnalyticsCreatorPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorAnalyticsResponse> {
             return localVarFp.analyticsCreatorPeriodGet(requestParameters.period, options).then((request) => request(axios, basePath));
         },
         /**
@@ -461,7 +461,7 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsPlatformGet(options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsPlatformGet200Response> {
+        analyticsPlatformGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPlatformAnalyticsResponse> {
             return localVarFp.analyticsPlatformGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -471,7 +471,7 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsPlatformPeriodGet(requestParameters: AnalyticsApiAnalyticsPlatformPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsPlatformGet200Response> {
+        analyticsPlatformPeriodGet(requestParameters: AnalyticsApiAnalyticsPlatformPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPlatformAnalyticsResponse> {
             return localVarFp.analyticsPlatformPeriodGet(requestParameters.period, options).then((request) => request(axios, basePath));
         },
         /**
@@ -481,7 +481,7 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsTimeSeriesGet(requestParameters: AnalyticsApiAnalyticsTimeSeriesGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<AnalyticsTimeSeriesGet200Response> {
+        analyticsTimeSeriesGet(requestParameters: AnalyticsApiAnalyticsTimeSeriesGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardAnalyticsTimeSeriesResponse> {
             return localVarFp.analyticsTimeSeriesGet(requestParameters.metric, requestParameters.startDate, requestParameters.endDate, options).then((request) => request(axios, basePath));
         },
     };

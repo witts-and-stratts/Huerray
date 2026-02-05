@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **campaign_images** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
 **category** | [**UtilsCampaignCategory**](UtilsCampaignCategory.md) |  | [optional] [default to undefined]
-**content_type** | [**UtilsContentType**](UtilsContentType.md) |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **donts** | **string** |  | [optional] [default to undefined]
 **dos** | **string** |  | [optional] [default to undefined]
@@ -19,6 +18,7 @@ Name | Type | Description | Notes
 **number_of_videos_wanted** | **number** |  | [optional] [default to undefined]
 **product_image_url** | **string** |  | [optional] [default to undefined]
 **product_url** | **string** |  | [optional] [default to undefined]
+**sample_video_urls** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **tone_of_voice** | **string** |  | [optional] [default to undefined]
 **video_duration_in_seconds_in_seconds** | **number** |  | [optional] [default to undefined]
 **video_format** | [**UtilsVideoFormat**](UtilsVideoFormat.md) |  | [optional] [default to undefined]
@@ -34,7 +34,6 @@ const instance: ModelsUpdateCampaignRequest = {
     campaign_images,
     campaign_name,
     category,
-    content_type,
     description,
     donts,
     dos,
@@ -43,6 +42,7 @@ const instance: ModelsUpdateCampaignRequest = {
     number_of_videos_wanted,
     product_image_url,
     product_url,
+    sample_video_urls,
     tone_of_voice,
     video_duration_in_seconds_in_seconds,
     video_format,

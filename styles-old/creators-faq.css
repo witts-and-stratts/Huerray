@@ -1,0 +1,13 @@
+@reference 'tailwindcss';
+
+.creators-faq {
+  @apply py-20 md:py-32 px-4 lg:px-10;
+}
+
+.creators-faq__container {
+  @apply max-w-200 mx-auto;
+}
+
+.creators-faq__heading {
+  @apply text-h2 text-center mb-12 font-heading;
+}

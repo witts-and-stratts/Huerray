@@ -15,7 +15,7 @@ All URIs are relative to */api/v1*
 |[**videosSearchGet**](#videossearchget) | **GET** /videos/search | Search video submissions (Admin only)|
 
 # **videoSubmissionsIdStatusPut**
-> ModelsStandardResponse videoSubmissionsIdStatusPut(request)
+> ModelsStandardGenericResponse videoSubmissionsIdStatusPut(request)
 
 Admin updates video submission status (approve/reject)
 
@@ -50,7 +50,7 @@ const { status, data } = await apiInstance.videoSubmissionsIdStatusPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -74,7 +74,7 @@ const { status, data } = await apiInstance.videoSubmissionsIdStatusPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosApprovedCampaignCampaignIdGet**
-> ModelsStandardResponse videosApprovedCampaignCampaignIdGet()
+> ModelsStandardVideoSubmissionResponses videosApprovedCampaignCampaignIdGet()
 
 Get all approved video submissions for a specific campaign (Brand access only)
 
@@ -105,7 +105,7 @@ const { status, data } = await apiInstance.videosApprovedCampaignCampaignIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardVideoSubmissionResponses**
 
 ### Authorization
 
@@ -129,7 +129,7 @@ const { status, data } = await apiInstance.videosApprovedCampaignCampaignIdGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosApprovedGigGigIdGet**
-> ModelsStandardResponse videosApprovedGigGigIdGet()
+> ModelsStandardVideoSubmissionResponse videosApprovedGigGigIdGet()
 
 Get all approved video submissions for a specific gig (Brand access only)
 
@@ -160,7 +160,7 @@ const { status, data } = await apiInstance.videosApprovedGigGigIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardVideoSubmissionResponse**
 
 ### Authorization
 
@@ -184,7 +184,7 @@ const { status, data } = await apiInstance.videosApprovedGigGigIdGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosIdDecisionPut**
-> ModelsStandardResponse videosIdDecisionPut(data)
+> ModelsStandardVideoSubmissionResponse videosIdDecisionPut(data)
 
 Brand accepts or rejects an approved video submission
 
@@ -219,7 +219,7 @@ const { status, data } = await apiInstance.videosIdDecisionPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardVideoSubmissionResponse**
 
 ### Authorization
 
@@ -243,7 +243,7 @@ const { status, data } = await apiInstance.videosIdDecisionPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosIdPut**
-> ModelsStandardResponse videosIdPut(submission)
+> ModelsStandardVideoSubmissionResponse videosIdPut(submission)
 
 Creator updates their video submission
 
@@ -278,7 +278,7 @@ const { status, data } = await apiInstance.videosIdPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardVideoSubmissionResponse**
 
 ### Authorization
 
@@ -302,7 +302,7 @@ const { status, data } = await apiInstance.videosIdPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosIdSubmitPut**
-> ModelsStandardResponse videosIdSubmitPut()
+> ModelsStandardVideoSubmissionResponse videosIdSubmitPut()
 
 Creator submits their video submission for admin approval
 
@@ -333,7 +333,7 @@ const { status, data } = await apiInstance.videosIdSubmitPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardVideoSubmissionResponse**
 
 ### Authorization
 
@@ -357,7 +357,7 @@ const { status, data } = await apiInstance.videosIdSubmitPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosMySubmissionsGet**
-> ModelsPaginatedResponse videosMySubmissionsGet()
+> ModelsPaginatedVideoSubmissionResponse videosMySubmissionsGet()
 
 Get all video submissions by the authenticated creator
 
@@ -391,7 +391,7 @@ const { status, data } = await apiInstance.videosMySubmissionsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedVideoSubmissionResponse**
 
 ### Authorization
 
@@ -413,7 +413,7 @@ const { status, data } = await apiInstance.videosMySubmissionsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosPost**
-> ModelsStandardResponse videosPost(submission)
+> ModelsStandardVideoSubmissionResponse videosPost(submission)
 
 Creator submits a video to a gig
 
@@ -445,7 +445,7 @@ const { status, data } = await apiInstance.videosPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardVideoSubmissionResponse**
 
 ### Authorization
 
@@ -468,7 +468,7 @@ const { status, data } = await apiInstance.videosPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosSearchGet**
-> ModelsPaginatedResponse videosSearchGet()
+> ModelsPaginatedVideoSubmissionResponse videosSearchGet()
 
 Admin can search all video submissions with advanced filters
 
@@ -523,7 +523,7 @@ const { status, data } = await apiInstance.videosSearchGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedVideoSubmissionResponse**
 
 ### Authorization
 

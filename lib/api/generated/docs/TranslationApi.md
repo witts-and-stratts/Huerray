@@ -8,7 +8,7 @@ All URIs are relative to */api/v1*
 |[**translationTranslatePost**](#translationtranslatepost) | **POST** /translation/translate | Translate text using DeepL API|
 
 # **translationLanguagesGet**
-> TranslationLanguagesGet200Response translationLanguagesGet()
+> ServiceStandardLanguagesResponse translationLanguagesGet()
 
 Get list of supported languages for translation. Only accessible from web clients.
 
@@ -39,7 +39,7 @@ const { status, data } = await apiInstance.translationLanguagesGet(
 
 ### Return type
 
-**TranslationLanguagesGet200Response**
+**ServiceStandardLanguagesResponse**
 
 ### Authorization
 
@@ -61,7 +61,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **translationTranslatePost**
-> TranslationTranslatePost200Response translationTranslatePost(translation)
+> ServiceStandardTranslateResponse translationTranslatePost(translation)
 
 Proxy endpoint for DeepL translation API to bypass CORS restrictions. Only accessible from web clients.
 
@@ -93,7 +93,7 @@ const { status, data } = await apiInstance.translationTranslatePost(
 
 ### Return type
 
-**TranslationTranslatePost200Response**
+**ServiceStandardTranslateResponse**
 
 ### Authorization
 

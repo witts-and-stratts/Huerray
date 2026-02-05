@@ -34,6 +34,7 @@ export interface ModelsCreatorResponse {
     'country'?: UtilsCountryCode;
     'creator_id'?: string;
     'creator_status'?: string;
+    'date_of_birth'?: string;
     'email'?: string;
     'first_name'?: string;
     'gender'?: string;
@@ -49,6 +50,7 @@ export interface ModelsCreatorResponse {
      * Categories
      */
     'preferred_categories'?: Array<UtilsBrandCategory>;
+    'profile_image_url'?: string;
     'state'?: string;
     'status_comments'?: string;
     'street'?: string;

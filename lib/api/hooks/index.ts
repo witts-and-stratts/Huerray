@@ -42,5 +42,12 @@ export {
  * export { ... } from './gigs';
  * export { ... } from './auth';
  * export { ... } from './users';
+ * export { ... } from './auth';
  * etc.
  */
+
+export {
+  useUsers,
+  useDeleteUser,
+  usersKeys,
+} from './users';

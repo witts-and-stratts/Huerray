@@ -13,7 +13,7 @@ All URIs are relative to */api/v1*
 |[**usersSearchGet**](#userssearchget) | **GET** /users/search | Search users|
 
 # **usersIdDelete**
-> ModelsStandardResponse usersIdDelete()
+> ModelsStandardUserResponse usersIdDelete()
 
 Delete the profile of a user by ID (Admin)
 
@@ -44,7 +44,7 @@ const { status, data } = await apiInstance.usersIdDelete(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardUserResponse**
 
 ### Authorization
 
@@ -66,7 +66,7 @@ const { status, data } = await apiInstance.usersIdDelete(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersIdGet**
-> ModelsStandardResponse usersIdGet()
+> ModelsStandardUserResponse usersIdGet()
 
 Get a specific user by ID
 
@@ -97,7 +97,7 @@ const { status, data } = await apiInstance.usersIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardUserResponse**
 
 ### Authorization
 
@@ -119,7 +119,7 @@ const { status, data } = await apiInstance.usersIdGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersIdPut**
-> ModelsStandardResponse usersIdPut(request)
+> ModelsStandardUserResponse usersIdPut(request)
 
 Admin edits user information including user type
 
@@ -154,7 +154,7 @@ const { status, data } = await apiInstance.usersIdPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardUserResponse**
 
 ### Authorization
 
@@ -177,7 +177,7 @@ const { status, data } = await apiInstance.usersIdPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersPost**
-> ModelsStandardResponse usersPost(request)
+> ModelsStandardUserResponse usersPost(request)
 
 Create a new admin user
 
@@ -209,7 +209,7 @@ const { status, data } = await apiInstance.usersPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardUserResponse**
 
 ### Authorization
 
@@ -231,7 +231,7 @@ const { status, data } = await apiInstance.usersPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersProfileGet**
-> ModelsStandardResponse usersProfileGet()
+> ModelsStandardUserResponse usersProfileGet()
 
 Get the profile of the authenticated user
 
@@ -255,7 +255,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardUserResponse**
 
 ### Authorization
 
@@ -277,7 +277,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersProfilePut**
-> ModelsStandardResponse usersProfilePut(request)
+> ModelsStandardUserResponse usersProfilePut(request)
 
 Update the profile of the authenticated user
 
@@ -309,7 +309,7 @@ const { status, data } = await apiInstance.usersProfilePut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardUserResponse**
 
 ### Authorization
 
@@ -331,7 +331,7 @@ const { status, data } = await apiInstance.usersProfilePut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usersSearchGet**
-> ModelsPaginatedResponse usersSearchGet()
+> ModelsPaginatedUserResponse usersSearchGet()
 
 Search users with advanced filters (unrestricted for admins, restricted for others)
 
@@ -374,7 +374,7 @@ const { status, data } = await apiInstance.usersSearchGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedUserResponse**
 
 ### Authorization
 

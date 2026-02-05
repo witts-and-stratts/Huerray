@@ -1,6 +1,6 @@
 'use client';
 
-import { EllipsisVertical } from 'lucide-react';
+import { CampaignActionMenu } from './campaign-action-menu';
 import { AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -14,19 +14,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/dashboard-ui/card';
-import { Button } from '@/components/dashboard-ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/dashboard-ui/dropdown-menu';
 import { BrandAvatar } from './brand-avatar';
 import { AvatarCollage } from './avatar-collage';
 import { ModelCampaign } from './types';
 import { StatusBadge } from './status-badge';
-import { useReplicateCampaign } from '@/lib/api/hooks/campaigns';
-import { RoleGuard } from '@/components/auth/role-guard';
 
 interface CampaignCardProps {
   campaign: ModelCampaign;
@@ -48,7 +39,7 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
 
   console.log( "brand ID", brand_id );
 
-  const replicateCampaign = useReplicateCampaign();
+
 
   return (
     <Card className='p-0 py-3 pb-0 justify-between'>
@@ -67,34 +58,10 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
           </div>
         </div>
         <CardAction>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-8 w-8 translate-x-4 text-muted-foreground">
-                <EllipsisVertical className='size-5' strokeWidth={ 1 } />
-                <span className="sr-only">Open menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end' className={ 'min-w-30 text-sm' }>
-              <DropdownMenuItem className='text-sm' asChild>
-                <Link href={ `${ basePath }/campaigns/${ campaign_id }` }>
-                  View Details
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className='text-sm'>Rename</DropdownMenuItem>
-              <RoleGuard allowedRoles={ [ 'brand' ] }>
-                <DropdownMenuItem
-                  className='text-sm'
-                  onSelect={ ( e ) => {
-                    e.preventDefault();
-                    if ( campaign_id ) replicateCampaign.mutate( campaign_id );
-                  } }
-                >
-                  Replicate
-                </DropdownMenuItem>
-              </RoleGuard>
-              <DropdownMenuItem className='text-sm'>Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <CampaignActionMenu
+            campaign={ campaign }
+            basePath={ basePath }
+          />
         </CardAction>
       </CardHeader>
       <CardContent className='space-y-4'>

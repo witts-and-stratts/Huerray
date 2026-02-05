@@ -40,9 +40,11 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 
 interface CampaignFormProps {
   onSubmit?: ( values: CreateCampaignSchema ) => Promise<void>;
+  initialValues?: Partial<CreateCampaignSchema>;
+  mode?: 'create' | 'edit';
 }
 
-export function CampaignForm( { onSubmit }: CampaignFormProps ) {
+export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: CampaignFormProps ) {
   const dispatch = useAppDispatch();
   const reduxCampaign = useAppSelector( ( state: { campaign: CreateCampaignSchema; } ) => state.campaign );
 
@@ -51,19 +53,21 @@ export function CampaignForm( { onSubmit }: CampaignFormProps ) {
 
   // Trace Redux state for debugging
   useEffect( () => {
-    console.debug( '[CampaignForm] [TRACE] reduxCampaign state in Redux:', reduxCampaign );
-  }, [ reduxCampaign ] );
+    if ( mode === 'create' ) {
+      console.debug( '[CampaignForm] [TRACE] reduxCampaign state in Redux:', reduxCampaign );
+    }
+  }, [ reduxCampaign, mode ] );
 
   // Lifted state for files
-  const documentsState = useCampaignFiles();
-  const imagesState = useCampaignFiles();
-  const videosState = useCampaignFiles();
+  const documentsState = useCampaignFiles( initialValues?.documents );
+  const imagesState = useCampaignFiles( initialValues?.images );
+  const videosState = useCampaignFiles( initialValues?.videos );
 
   const [ validationError, setValidationError ] = useState<{ title: string; message: string; tab: string; } | null>( null );
   const [ showSummary, setShowSummary ] = useState( false );
 
   const form = useForm( {
-    defaultValues: reduxCampaign,
+    defaultValues: mode === 'edit' && initialValues ? { ...reduxCampaign, ...initialValues } : reduxCampaign,
     onSubmit: async ( { value } ) => {
       // 2. Check for file upload errors
       const validateFilesState = ( state: ReturnType<typeof useCampaignFiles>, tabName: string, label: string ) => {
@@ -128,6 +132,8 @@ export function CampaignForm( { onSubmit }: CampaignFormProps ) {
 
   // Sync form state to Redux with debounce
   useEffect( () => {
+    if ( mode !== 'create' ) return;
+
     let timeoutId: NodeJS.Timeout;
     const syncState = () => {
       const currentValues = form.store.state.values;
@@ -145,7 +151,7 @@ export function CampaignForm( { onSubmit }: CampaignFormProps ) {
       clearTimeout( timeoutId );
       syncState();
     };
-  }, [ form, dispatch ] );
+  }, [ form, dispatch, mode ] );
 
   const handleSaveAndExit = async () => {
     form.handleSubmit();
@@ -171,7 +177,7 @@ export function CampaignForm( { onSubmit }: CampaignFormProps ) {
   return (
     <>
       <SubHeader
-        title="New Campaign"
+        title={ mode === 'edit' ? 'Edit Campaign' : 'New Campaign' }
         pre={
           <>
             <Breadcrumb className='flex gap-4 items-center mb-4'>
@@ -185,7 +191,7 @@ export function CampaignForm( { onSubmit }: CampaignFormProps ) {
                   <SlashIcon />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem className='text-muted-foreground/40 text-sm'>
-                  New Campaign
+                  { mode === 'edit' ? 'Edit Campaign' : 'New Campaign' }
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -209,7 +215,7 @@ export function CampaignForm( { onSubmit }: CampaignFormProps ) {
             disabled={ isSubmitting }
             className="w-full md:w-40"
           >
-            { isSubmitting ? 'Submitting...' : 'Save and preview' }
+            { isSubmitting ? 'Submitting...' : ( mode === 'edit' ? 'Save changes' : 'Save and preview' ) }
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

@@ -1,10 +1,12 @@
 'use client';
 
+import Link from 'next/link';
+
 import * as React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
-import Link from 'next/link';
+
 
 import { Button } from '@/components/dashboard-ui/button';
 import { Checkbox } from '@/components/dashboard-ui/checkbox';
@@ -18,47 +20,27 @@ import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { ModelCampaign, Person } from './types';
 import { AvatarCollage } from './avatar-collage';
 import { StatusBadge } from './status-badge';
-import { useReplicateCampaign } from '@/lib/api/hooks/campaigns';
 import { Row } from '@tanstack/react-table';
-import { RoleGuard } from '@/components/auth/role-guard';
 
+
+import { CampaignActionMenu } from './campaign-action-menu';
 
 const CampaignActionsCell = ( { row, basePath }: { row: Row<ModelCampaign>, basePath: string; } ) => {
-  const replicateCampaign = useReplicateCampaign();
-
   return (
     <div className='flex justify-end'>
       <ButtonGroup className='flex justify-end'>
         <Button variant='outline' size='sm' className='font-regular'>
           Edit
         </Button>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+        <CampaignActionMenu
+          campaign={ row.original }
+          basePath={ basePath }
+          trigger={
             <Button variant='outline' size='sm' className='font-regular'>
               <ChevronDown />
             </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end' className={ 'min-w-60 text-sm' }>
-            <DropdownMenuItem className='text-sm' asChild>
-              <Link href={ `${ basePath }/campaigns/${ row.original.campaign_id }` }>
-                View Details
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem className='text-sm'>Rename</DropdownMenuItem>
-            <RoleGuard allowedRoles={ [ 'brand' ] }>
-              <DropdownMenuItem
-                className='text-sm'
-                onSelect={ ( e ) => {
-                  e.preventDefault();
-                  if ( row.original.campaign_id ) replicateCampaign.mutate( row.original.campaign_id );
-                } }
-              >
-                Replicate
-              </DropdownMenuItem>
-            </RoleGuard>
-            <DropdownMenuItem className='text-sm'>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          }
+        />
       </ButtonGroup>
     </div>
   );
@@ -119,11 +101,11 @@ export const getColumns = ( basePath: string = '/brand-admin' ): ColumnDef<Model
     accessorKey: 'details',
     header: () => <span className='font-regular'>Details</span>,
     cell: ( { row } ) => {
-      const { campaign_id, campaign_name, description, campaign_status, updated_at } =
+      const { id, campaign_name, description, campaign_status, updated_at } =
         row.original;
       return (
         <div>
-          <Link href={ `${ basePath }/campaigns/${ campaign_id }` } className='hover:underline'>
+          <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
             <h4 className='capitalize text-[18px] font-medium! text-primary'>
               { campaign_name }
             </h4>

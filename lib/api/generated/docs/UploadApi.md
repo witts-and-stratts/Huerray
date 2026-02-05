@@ -10,14 +10,11 @@ All URIs are relative to */api/v1*
 |[**uploadsPreviewDocumentsFilenameGet**](#uploadspreviewdocumentsfilenameget) | **GET** /uploads/preview/documents/{filename} | Preview a document|
 |[**uploadsPreviewImagesFilenameGet**](#uploadspreviewimagesfilenameget) | **GET** /uploads/preview/images/{filename} | Preview an image|
 |[**uploadsPreviewVideosFilenameGet**](#uploadspreviewvideosfilenameget) | **GET** /uploads/preview/videos/{filename} | Preview a video|
-|[**uploadsServeDocumentsFilenameGet**](#uploadsservedocumentsfilenameget) | **GET** /uploads/serve/documents/{filename} | Serve document file|
-|[**uploadsServeImagesFilenameGet**](#uploadsserveimagesfilenameget) | **GET** /uploads/serve/images/{filename} | Serve image file|
-|[**uploadsServeVideosFilenameGet**](#uploadsservevideosfilenameget) | **GET** /uploads/serve/videos/{filename} | Serve video file|
 |[**uploadsVideoSubmissionPost**](#uploadsvideosubmissionpost) | **POST** /uploads/video-submission | Upload video submission|
 |[**uploadsVideosPost**](#uploadsvideospost) | **POST** /uploads/videos | Upload videos|
 
 # **uploadsApplicationVideoPost**
-> ModelsStandardResponse uploadsApplicationVideoPost()
+> ModelsStandardApplicationVideoUploadResponse uploadsApplicationVideoPost()
 
 Upload an application video with unique naming for creator profile
 
@@ -48,7 +45,7 @@ const { status, data } = await apiInstance.uploadsApplicationVideoPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardApplicationVideoUploadResponse**
 
 ### Authorization
 
@@ -71,7 +68,7 @@ const { status, data } = await apiInstance.uploadsApplicationVideoPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadsDocumentsPost**
-> ModelsStandardResponse uploadsDocumentsPost()
+> ModelsStandardFileUploadResponse uploadsDocumentsPost()
 
 Upload one or more PDF files
 
@@ -102,7 +99,7 @@ const { status, data } = await apiInstance.uploadsDocumentsPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardFileUploadResponse**
 
 ### Authorization
 
@@ -124,7 +121,7 @@ const { status, data } = await apiInstance.uploadsDocumentsPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadsImagesPost**
-> ModelsStandardResponse uploadsImagesPost()
+> ModelsStandardFileUploadResponse uploadsImagesPost()
 
 Upload one or more image files
 
@@ -155,7 +152,7 @@ const { status, data } = await apiInstance.uploadsImagesPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardFileUploadResponse**
 
 ### Authorization
 
@@ -177,7 +174,7 @@ const { status, data } = await apiInstance.uploadsImagesPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadsPreviewDocumentsFilenameGet**
-> ModelsStandardResponse uploadsPreviewDocumentsFilenameGet()
+> ModelsStandardFilePreviewResponse uploadsPreviewDocumentsFilenameGet()
 
 Preview a document file without allowing download
 
@@ -208,11 +205,11 @@ const { status, data } = await apiInstance.uploadsPreviewDocumentsFilenameGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardFilePreviewResponse**
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -230,7 +227,7 @@ const { status, data } = await apiInstance.uploadsPreviewDocumentsFilenameGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadsPreviewImagesFilenameGet**
-> ModelsStandardResponse uploadsPreviewImagesFilenameGet()
+> ModelsStandardFilePreviewResponse uploadsPreviewImagesFilenameGet()
 
 Preview an image file without allowing download
 
@@ -261,11 +258,11 @@ const { status, data } = await apiInstance.uploadsPreviewImagesFilenameGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardFilePreviewResponse**
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -283,7 +280,7 @@ const { status, data } = await apiInstance.uploadsPreviewImagesFilenameGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadsPreviewVideosFilenameGet**
-> ModelsStandardResponse uploadsPreviewVideosFilenameGet()
+> ModelsStandardFilePreviewResponse uploadsPreviewVideosFilenameGet()
 
 Preview a video file without allowing download
 
@@ -314,11 +311,11 @@ const { status, data } = await apiInstance.uploadsPreviewVideosFilenameGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardFilePreviewResponse**
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -335,182 +332,8 @@ const { status, data } = await apiInstance.uploadsPreviewVideosFilenameGet(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **uploadsServeDocumentsFilenameGet**
-> File uploadsServeDocumentsFilenameGet()
-
-Serve PDF document files for preview with controlled download permissions. Download is only allowed for admin users.
-
-### Example
-
-```typescript
-import {
-    UploadApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new UploadApi(configuration);
-
-let filename: string; //Document filename (default to undefined)
-let download: boolean; //Set to true to download the file (requires admin privileges) (optional) (default to undefined)
-
-const { status, data } = await apiInstance.uploadsServeDocumentsFilenameGet(
-    filename,
-    download
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **filename** | [**string**] | Document filename | defaults to undefined|
-| **download** | [**boolean**] | Set to true to download the file (requires admin privileges) | (optional) defaults to undefined|
-
-
-### Return type
-
-**File**
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | PDF document file |  -  |
-|**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Document download not allowed for this user type |  -  |
-|**404** | Document not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **uploadsServeImagesFilenameGet**
-> File uploadsServeImagesFilenameGet()
-
-Serve image files for preview with controlled download permissions. Download is only allowed for admin users.
-
-### Example
-
-```typescript
-import {
-    UploadApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new UploadApi(configuration);
-
-let filename: string; //Image filename (default to undefined)
-let download: boolean; //Set to true to download the file (requires admin privileges) (optional) (default to undefined)
-
-const { status, data } = await apiInstance.uploadsServeImagesFilenameGet(
-    filename,
-    download
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **filename** | [**string**] | Image filename | defaults to undefined|
-| **download** | [**boolean**] | Set to true to download the file (requires admin privileges) | (optional) defaults to undefined|
-
-
-### Return type
-
-**File**
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Image file |  -  |
-|**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Image download not allowed for this user type |  -  |
-|**404** | Image not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **uploadsServeVideosFilenameGet**
-> File uploadsServeVideosFilenameGet()
-
-Serve video files for preview with controlled download permissions. Download is only allowed for brand users and admins.
-
-### Example
-
-```typescript
-import {
-    UploadApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new UploadApi(configuration);
-
-let filename: string; //Video filename (default to undefined)
-let download: boolean; //Set to true to download the file (requires brand or admin privileges) (optional) (default to undefined)
-
-const { status, data } = await apiInstance.uploadsServeVideosFilenameGet(
-    filename,
-    download
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **filename** | [**string**] | Video filename | defaults to undefined|
-| **download** | [**boolean**] | Set to true to download the file (requires brand or admin privileges) | (optional) defaults to undefined|
-
-
-### Return type
-
-**File**
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Video file |  -  |
-|**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Video download not allowed for this user type |  -  |
-|**404** | Video not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **uploadsVideoSubmissionPost**
-> ModelsStandardResponse uploadsVideoSubmissionPost()
+> ModelsStandardVideoSubmissionUploadResponse uploadsVideoSubmissionPost()
 
 Upload a video file for a gig submission with unique naming
 
@@ -544,7 +367,7 @@ const { status, data } = await apiInstance.uploadsVideoSubmissionPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardVideoSubmissionUploadResponse**
 
 ### Authorization
 
@@ -567,7 +390,7 @@ const { status, data } = await apiInstance.uploadsVideoSubmissionPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadsVideosPost**
-> ModelsStandardResponse uploadsVideosPost()
+> ModelsStandardFileUploadResponse uploadsVideosPost()
 
 Upload one or more video files
 
@@ -598,7 +421,7 @@ const { status, data } = await apiInstance.uploadsVideosPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardFileUploadResponse**
 
 ### Authorization
 

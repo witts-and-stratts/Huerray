@@ -8,7 +8,7 @@ All URIs are relative to */api/v1*
 |[**paymentItemsSearchGet**](#paymentitemssearchget) | **GET** /payment-items/search | Search payment items|
 
 # **paymentItemsPost**
-> ModelsStandardResponse paymentItemsPost(request)
+> ModelsStandardPaymentItemResponse paymentItemsPost(request)
 
 Admin creates a payment item for a gig and creator
 
@@ -40,7 +40,7 @@ const { status, data } = await apiInstance.paymentItemsPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardPaymentItemResponse**
 
 ### Authorization
 
@@ -62,7 +62,7 @@ const { status, data } = await apiInstance.paymentItemsPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **paymentItemsSearchGet**
-> ModelsStandardResponse paymentItemsSearchGet()
+> ModelsPaginatedPaymentItemResponse paymentItemsSearchGet()
 
 Admin searches payment items with filters
 
@@ -114,7 +114,7 @@ const { status, data } = await apiInstance.paymentItemsSearchGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsPaginatedPaymentItemResponse**
 
 ### Authorization
 

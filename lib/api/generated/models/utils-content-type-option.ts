@@ -18,10 +18,7 @@
 export const UtilsContentTypeOption = {
     ContentTypeVideoOption: 'video',
     ContentTypeImageOption: 'image',
-    ContentTypePDFOption: 'pdf',
-    ContentTypeVideo: 'video',
-    ContentTypeImage: 'image',
-    ContentTypePDF: 'pdf'
+    ContentTypePDFOption: 'pdf'
 } as const;
 
 export type UtilsContentTypeOption = typeof UtilsContentTypeOption[keyof typeof UtilsContentTypeOption];

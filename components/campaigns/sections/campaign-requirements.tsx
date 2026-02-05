@@ -1,12 +1,7 @@
 
-import { memo } from 'react';
-import { FieldGroup, FieldLabel } from '@/components/dashboard-ui/field';
+import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { RadioGroup, RadioGroupItem } from '@/components/dashboard-ui/radio-group';
-import { Button } from '@/components/dashboard-ui/button';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { Image03Icon, Pdf01Icon, PlaySquareIcon } from '@hugeicons/core-free-icons';
-import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
+import { memo } from 'react';
 import { CampaignFormApi } from '../schema';
 
 interface CampaignRequirementsProps {
@@ -60,33 +55,6 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
         </form.Field>
       </div>
       <FieldGroup className='gap-2 mt-2'>
-        <FieldLabel>Content Type</FieldLabel>
-        <form.Field
-          name='content_type'
-        >
-          { ( field ) => (
-            <RadioGroup className={ 'grid grid-cols-3 gap-2' }
-              onValueChange={ ( value ) => field.setValue( value as UtilsContentType ) }
-              value={ field.state.value }
-            >
-              <Button variant={ 'outline' } className="flex flex-col items-center gap-2 h-auto py-2">
-                <HugeiconsIcon icon={ PlaySquareIcon } size={ 56 } strokeWidth={ 0.5 } className='size-8' />
-                <span className='font-normal text-sm'>Video</span>
-                <RadioGroupItem value={ UtilsContentType.ContentTypeVideo } />
-              </Button>
-              <Button variant={ 'outline' } className="flex flex-col items-center gap-2 h-auto py-2">
-                <HugeiconsIcon icon={ Image03Icon } size={ 56 } strokeWidth={ 0.5 } className='size-8' />
-                <span className='font-normal text-sm'>Image</span>
-                <RadioGroupItem value={ UtilsContentType.ContentTypeImage } />
-              </Button>
-              <Button variant={ 'outline' } className="flex flex-col items-center gap-2 h-auto py-2">
-                <HugeiconsIcon icon={ Pdf01Icon } size={ 56 } strokeWidth={ 0.5 } className='size-8' />
-                <span className='font-normal text-sm'>PDF</span>
-                <RadioGroupItem value={ UtilsContentType.ContentTypePDF } />
-              </Button>
-            </RadioGroup>
-          ) }
-        </form.Field>
         <form.Field
           name="video_duration_in_seconds"
         >

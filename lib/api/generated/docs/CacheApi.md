@@ -8,7 +8,7 @@ All URIs are relative to */api/v1*
 |[**cacheStatsGet**](#cachestatsget) | **GET** /cache/stats | Get translation cache statistics|
 
 # **cacheClearDelete**
-> ModelsStandardResponse cacheClearDelete()
+> ModelsStandardGenericResponse cacheClearDelete()
 
 Clear all cached translation data (admin only)
 
@@ -32,7 +32,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -55,7 +55,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **cacheStatsGet**
-> ModelsStandardResponse cacheStatsGet()
+> ModelsStandardGenericResponse cacheStatsGet()
 
 Get detailed statistics about translation cache usage and performance
 
@@ -79,7 +79,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 

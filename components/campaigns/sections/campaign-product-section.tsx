@@ -119,7 +119,7 @@ const ProductImageUploader = memo( function ProductImageUploader( {
           onUploadProgress: ( progressEvent: any ) => {
             setUploadProgress( getUploadProgressPercentage( progressEvent ) );
           }
-        } ) as ModelsUploadsImagePost200Response;
+        } ) as unknown as ModelsUploadsImagePost200Response;
 
         const firstImage = response.data.data[ 0 ];
         if ( firstImage ) {

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **country** | [**UtilsCountryCode**](UtilsCountryCode.md) |  | [optional] [default to undefined]
 **creator_id** | **string** |  | [optional] [default to undefined]
 **creator_status** | **string** |  | [optional] [default to undefined]
+**date_of_birth** | **string** |  | [optional] [default to undefined]
 **email** | **string** |  | [optional] [default to undefined]
 **first_name** | **string** |  | [optional] [default to undefined]
 **gender** | **string** |  | [optional] [default to undefined]
@@ -24,6 +25,7 @@ Name | Type | Description | Notes
 **phone_number** | **string** |  | [optional] [default to undefined]
 **portfolio** | **string** | JSON array of portfolio URLs | [optional] [default to undefined]
 **preferred_categories** | [**Array&lt;UtilsBrandCategory&gt;**](UtilsBrandCategory.md) | Categories | [optional] [default to undefined]
+**profile_image_url** | **string** |  | [optional] [default to undefined]
 **state** | **string** |  | [optional] [default to undefined]
 **status_comments** | **string** |  | [optional] [default to undefined]
 **street** | **string** |  | [optional] [default to undefined]
@@ -51,6 +53,7 @@ const instance: ModelsCreatorResponse = {
     country,
     creator_id,
     creator_status,
+    date_of_birth,
     email,
     first_name,
     gender,
@@ -60,6 +63,7 @@ const instance: ModelsCreatorResponse = {
     phone_number,
     portfolio,
     preferred_categories,
+    profile_image_url,
     state,
     status_comments,
     street,

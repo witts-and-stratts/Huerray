@@ -18,7 +18,7 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
@@ -34,9 +34,23 @@ import type { ModelsGigStatusUpdateRequest } from '../models';
 // @ts-ignore
 import type { ModelsInvitationResponseRequest } from '../models';
 // @ts-ignore
-import type { ModelsPaginatedResponse } from '../models';
+import type { ModelsPaginatedGigResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsStandardErrorResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardGenericResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardGigApplicationResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardGigApplicationResponses } from '../models';
+// @ts-ignore
+import type { ModelsStandardGigBrandListResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardGigInvitationResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardGigInvitationResponses } from '../models';
+// @ts-ignore
+import type { ModelsStandardGigResponse } from '../models';
 // @ts-ignore
 import type { ModelsUpdateGigRequest } from '../models';
 /**
@@ -73,9 +87,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -97,7 +110,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
         gigsCampaignsCampaignIdGet: async (campaignId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'campaignId' is not null or undefined
             assertParamExists('gigsCampaignsCampaignIdGet', 'campaignId', campaignId)
-            const localVarPath = `/gigs/campaigns/{campaign_id}/`
+            const localVarPath = `/gigs/campaigns/{campaign_id}`
                 .replace(`{${"campaign_id"}}`, encodeURIComponent(String(campaignId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -113,8 +126,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -150,8 +163,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -190,9 +203,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -230,8 +242,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -267,8 +279,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -307,9 +319,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -350,9 +361,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -393,9 +403,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -429,8 +438,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -469,9 +478,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -493,7 +501,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
         gigsPost: async (gig: ModelsCreateGigRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'gig' is not null or undefined
             assertParamExists('gigsPost', 'gig', gig)
-            const localVarPath = `/gigs/`;
+            const localVarPath = `/gigs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -508,9 +516,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -629,8 +636,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
                 localVarQueryParameter['status'] = status;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -657,7 +664,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsApplicationsApplicationIdStatusPut(applicationId: string, status: ModelsApplicationStatusRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsApplicationsApplicationIdStatusPut(applicationId: string, status: ModelsApplicationStatusRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsApplicationsApplicationIdStatusPut(applicationId, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsApplicationsApplicationIdStatusPut']?.[localVarOperationServerIndex]?.url;
@@ -670,7 +677,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsCampaignsCampaignIdGet(campaignId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsCampaignsCampaignIdGet(campaignId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigBrandListResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsCampaignsCampaignIdGet(campaignId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsCampaignsCampaignIdGet']?.[localVarOperationServerIndex]?.url;
@@ -683,7 +690,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsIdApplicationsGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsIdApplicationsGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponses>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdApplicationsGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdApplicationsGet']?.[localVarOperationServerIndex]?.url;
@@ -697,7 +704,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsIdApplyPost(id: string, application: ModelsGigApplicationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsIdApplyPost(id: string, application: ModelsGigApplicationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdApplyPost(id, application, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdApplyPost']?.[localVarOperationServerIndex]?.url;
@@ -710,7 +717,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdDelete(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdDelete']?.[localVarOperationServerIndex]?.url;
@@ -723,7 +730,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdGet']?.[localVarOperationServerIndex]?.url;
@@ -737,7 +744,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsIdInvitePost(id: string, invitation: ModelsGigInvitationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsIdInvitePost(id: string, invitation: ModelsGigInvitationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdInvitePost(id, invitation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdInvitePost']?.[localVarOperationServerIndex]?.url;
@@ -751,7 +758,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsIdPut(id: string, gig: ModelsUpdateGigRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsIdPut(id: string, gig: ModelsUpdateGigRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdPut(id, gig, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdPut']?.[localVarOperationServerIndex]?.url;
@@ -765,7 +772,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsIdStatusPut(id: string, status: ModelsGigStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsIdStatusPut(id: string, status: ModelsGigStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdStatusPut(id, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdStatusPut']?.[localVarOperationServerIndex]?.url;
@@ -777,7 +784,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsInvitationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsInvitationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponses>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsInvitationsGet']?.[localVarOperationServerIndex]?.url;
@@ -791,7 +798,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsInvitationsInvitationIdRespondPut(invitationId: string, response: ModelsInvitationResponseRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsInvitationsInvitationIdRespondPut(invitationId: string, response: ModelsInvitationResponseRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsInvitationIdRespondPut(invitationId, response, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsInvitationsInvitationIdRespondPut']?.[localVarOperationServerIndex]?.url;
@@ -804,7 +811,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsPost(gig: ModelsCreateGigRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async gigsPost(gig: ModelsCreateGigRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsPost(gig, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsPost']?.[localVarOperationServerIndex]?.url;
@@ -833,7 +840,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsSearchGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: GigsSearchGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: GigsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async gigsSearchGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: GigsSearchGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: GigsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsSearchGet(ageMax, ageMin, brandId, campaignId, compensationMax, compensationMin, endDate, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, genderRequirement, gigCostMax, gigCostMin, limit, page, q, startDate, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsSearchGet']?.[localVarOperationServerIndex]?.url;
@@ -855,7 +862,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponse> {
             return localVarFp.gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
@@ -865,7 +872,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsCampaignsCampaignIdGet(requestParameters: GigsApiGigsCampaignsCampaignIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsCampaignsCampaignIdGet(requestParameters: GigsApiGigsCampaignsCampaignIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigBrandListResponse> {
             return localVarFp.gigsCampaignsCampaignIdGet(requestParameters.campaignId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -875,7 +882,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsIdApplicationsGet(requestParameters: GigsApiGigsIdApplicationsGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsIdApplicationsGet(requestParameters: GigsApiGigsIdApplicationsGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponses> {
             return localVarFp.gigsIdApplicationsGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -885,7 +892,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsIdApplyPost(requestParameters: GigsApiGigsIdApplyPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsIdApplyPost(requestParameters: GigsApiGigsIdApplyPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponse> {
             return localVarFp.gigsIdApplyPost(requestParameters.id, requestParameters.application, options).then((request) => request(axios, basePath));
         },
         /**
@@ -895,7 +902,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsIdDelete(requestParameters: GigsApiGigsIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsIdDelete(requestParameters: GigsApiGigsIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
             return localVarFp.gigsIdDelete(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -905,7 +912,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsIdGet(requestParameters: GigsApiGigsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsIdGet(requestParameters: GigsApiGigsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigResponse> {
             return localVarFp.gigsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -915,7 +922,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsIdInvitePost(requestParameters: GigsApiGigsIdInvitePostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsIdInvitePost(requestParameters: GigsApiGigsIdInvitePostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
             return localVarFp.gigsIdInvitePost(requestParameters.id, requestParameters.invitation, options).then((request) => request(axios, basePath));
         },
         /**
@@ -925,7 +932,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsIdPut(requestParameters: GigsApiGigsIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsIdPut(requestParameters: GigsApiGigsIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigResponse> {
             return localVarFp.gigsIdPut(requestParameters.id, requestParameters.gig, options).then((request) => request(axios, basePath));
         },
         /**
@@ -935,7 +942,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsIdStatusPut(requestParameters: GigsApiGigsIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsIdStatusPut(requestParameters: GigsApiGigsIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
             return localVarFp.gigsIdStatusPut(requestParameters.id, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
@@ -944,7 +951,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsInvitationsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsInvitationsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponses> {
             return localVarFp.gigsInvitationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -954,7 +961,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
             return localVarFp.gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.response, options).then((request) => request(axios, basePath));
         },
         /**
@@ -964,7 +971,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsPost(requestParameters: GigsApiGigsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        gigsPost(requestParameters: GigsApiGigsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigResponse> {
             return localVarFp.gigsPost(requestParameters.gig, options).then((request) => request(axios, basePath));
         },
         /**
@@ -974,7 +981,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsSearchGet(requestParameters: GigsApiGigsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        gigsSearchGet(requestParameters: GigsApiGigsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedGigResponse> {
             return localVarFp.gigsSearchGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(axios, basePath));
         },
     };

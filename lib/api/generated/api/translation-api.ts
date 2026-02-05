@@ -18,17 +18,17 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsStandardErrorResponse } from '../models';
+// @ts-ignore
+import type { ServiceStandardLanguagesResponse } from '../models';
+// @ts-ignore
+import type { ServiceStandardTranslateResponse } from '../models';
 // @ts-ignore
 import type { ServiceTranslateRequest } from '../models';
-// @ts-ignore
-import type { TranslationLanguagesGet200Response } from '../models';
-// @ts-ignore
-import type { TranslationTranslatePost200Response } from '../models';
 /**
  * TranslationApi - axios parameter creator
  */
@@ -58,8 +58,8 @@ export const TranslationApiAxiosParamCreator = function (configuration?: Configu
                 localVarQueryParameter['type'] = type;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -91,9 +91,8 @@ export const TranslationApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -121,7 +120,7 @@ export const TranslationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async translationLanguagesGet(type?: TranslationLanguagesGetTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TranslationLanguagesGet200Response>> {
+        async translationLanguagesGet(type?: TranslationLanguagesGetTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceStandardLanguagesResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.translationLanguagesGet(type, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TranslationApi.translationLanguagesGet']?.[localVarOperationServerIndex]?.url;
@@ -134,7 +133,7 @@ export const TranslationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async translationTranslatePost(translation: ServiceTranslateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TranslationTranslatePost200Response>> {
+        async translationTranslatePost(translation: ServiceTranslateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceStandardTranslateResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.translationTranslatePost(translation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TranslationApi.translationTranslatePost']?.[localVarOperationServerIndex]?.url;
@@ -156,7 +155,7 @@ export const TranslationApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        translationLanguagesGet(requestParameters: TranslationApiTranslationLanguagesGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TranslationLanguagesGet200Response> {
+        translationLanguagesGet(requestParameters: TranslationApiTranslationLanguagesGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ServiceStandardLanguagesResponse> {
             return localVarFp.translationLanguagesGet(requestParameters.type, options).then((request) => request(axios, basePath));
         },
         /**
@@ -166,7 +165,7 @@ export const TranslationApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        translationTranslatePost(requestParameters: TranslationApiTranslationTranslatePostRequest, options?: RawAxiosRequestConfig): AxiosPromise<TranslationTranslatePost200Response> {
+        translationTranslatePost(requestParameters: TranslationApiTranslationTranslatePostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ServiceStandardTranslateResponse> {
             return localVarFp.translationTranslatePost(requestParameters.translation, options).then((request) => request(axios, basePath));
         },
     };

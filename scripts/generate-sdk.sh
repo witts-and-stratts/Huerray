@@ -9,7 +9,7 @@ echo "🚀 Starting SDK generation..."
 
 # Configuration
 OPENAPI_SPEC_URL="https://backend.huerray.de/swagger/doc.json"
-OUTPUT_DIR="lib/api/generated"
+OUTPUT_DIR="../lib/api/generated"
 TEMP_SPEC_FILE="openapi-spec.json"
 
 # Colors for output

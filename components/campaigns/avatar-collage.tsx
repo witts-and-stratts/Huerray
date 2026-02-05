@@ -68,7 +68,7 @@ export const AvatarCollage = ( { people }: { people: Person[]; } ) => {
           <Dialog modal>
             <Tooltip>
               <TooltipTrigger asChild>
-                <DialogTrigger asChild>
+                <DialogTrigger>
                   <button className='hover:opacity-80 transition-opacity focus:outline-none'>
                     <AvatarGroupCount className='cursor-pointer text-xs'>
                       +{ remainingCount }

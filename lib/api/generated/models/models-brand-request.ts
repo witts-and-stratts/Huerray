@@ -34,6 +34,7 @@ export interface ModelsBrandRequest {
     'postal_code'?: string;
     'preferred_contact_email'?: string;
     'preferred_contact_phone'?: string;
+    'profile_photo_url'?: string;
     'registration_number': string;
     'state': string;
     'street'?: string;

@@ -18,19 +18,31 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import type { ModelsCreateCreatorRequest } from '../models';
 // @ts-ignore
-import type { ModelsCreatorResponse } from '../models';
-// @ts-ignore
 import type { ModelsCreatorStatusUpdateRequest } from '../models';
 // @ts-ignore
-import type { ModelsPaginatedResponse } from '../models';
+import type { ModelsPaginatedCreatorResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsPaginatedGigCreatorResponse } from '../models';
+// @ts-ignore
+import type { ModelsPaginatedPaymentResponse } from '../models';
+// @ts-ignore
+import type { ModelsPaginatedVideoSubmissionResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardCreatorBankTaxDetailsResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardCreatorResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardCreatorStatusUpdateResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardErrorResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardGigApplicationResponses } from '../models';
 // @ts-ignore
 import type { ModelsUpdateCreatorBankDetailsRequest } from '../models';
 // @ts-ignore
@@ -62,8 +74,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -95,8 +107,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -131,9 +143,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -168,8 +179,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -208,9 +219,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -274,8 +284,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['page'] = page;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -342,8 +352,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['search'] = search;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -378,9 +388,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -414,8 +423,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -450,9 +459,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -489,9 +497,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -525,8 +532,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -613,8 +620,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['status'] = status;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -731,8 +738,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['status'] = status;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -809,8 +816,8 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['status'] = status;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -835,7 +842,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsApplicationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async creatorsApplicationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponses>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsApplicationsGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsApplicationsGet']?.[localVarOperationServerIndex]?.url;
@@ -847,7 +854,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsBankDetailsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
+        async creatorsBankDetailsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorBankTaxDetailsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsBankDetailsGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsBankDetailsGet']?.[localVarOperationServerIndex]?.url;
@@ -860,7 +867,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsBankDetailsPut(request: ModelsUpdateCreatorBankDetailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
+        async creatorsBankDetailsPut(request: ModelsUpdateCreatorBankDetailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsBankDetailsPut(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsBankDetailsPut']?.[localVarOperationServerIndex]?.url;
@@ -873,7 +880,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsCreatorResponse>> {
+        async creatorsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsIdGet']?.[localVarOperationServerIndex]?.url;
@@ -887,7 +894,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsIdProfileStatusPut(id: string, request: ModelsCreatorStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async creatorsIdProfileStatusPut(id: string, request: ModelsCreatorStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorStatusUpdateResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsIdProfileStatusPut(id, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsIdProfileStatusPut']?.[localVarOperationServerIndex]?.url;
@@ -905,7 +912,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsMatchingGigsGet(brandId?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, gender?: string, limit?: number, page?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async creatorsMatchingGigsGet(brandId?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, gender?: string, limit?: number, page?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsMatchingGigsGet(brandId, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, gender, limit, page, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsMatchingGigsGet']?.[localVarOperationServerIndex]?.url;
@@ -924,7 +931,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsPaymentsSearchGet(createdAfter?: string, createdBefore?: string, creatorId?: string, limit?: number, page?: number, paymentStatus?: CreatorsPaymentsSearchGetPaymentStatusEnum, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async creatorsPaymentsSearchGet(createdAfter?: string, createdBefore?: string, creatorId?: string, limit?: number, page?: number, paymentStatus?: CreatorsPaymentsSearchGetPaymentStatusEnum, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedPaymentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsPaymentsSearchGet(createdAfter, createdBefore, creatorId, limit, page, paymentStatus, search, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsPaymentsSearchGet']?.[localVarOperationServerIndex]?.url;
@@ -937,7 +944,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsProfileDraftPost(request: ModelsCreateCreatorRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async creatorsProfileDraftPost(request: ModelsCreateCreatorRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsProfileDraftPost(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsProfileDraftPost']?.[localVarOperationServerIndex]?.url;
@@ -949,7 +956,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsProfileGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsCreatorResponse>> {
+        async creatorsProfileGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsProfileGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsProfileGet']?.[localVarOperationServerIndex]?.url;
@@ -962,7 +969,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsProfilePost(request: ModelsCreateCreatorRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsCreatorResponse>> {
+        async creatorsProfilePost(request: ModelsCreateCreatorRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsProfilePost(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsProfilePost']?.[localVarOperationServerIndex]?.url;
@@ -975,7 +982,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsProfilePut(request: ModelsUpdateCreatorRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsCreatorResponse>> {
+        async creatorsProfilePut(request: ModelsUpdateCreatorRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsProfilePut(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsProfilePut']?.[localVarOperationServerIndex]?.url;
@@ -987,7 +994,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsProfileSubmitPost(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async creatorsProfileSubmitPost(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsProfileSubmitPost(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsProfileSubmitPost']?.[localVarOperationServerIndex]?.url;
@@ -1010,7 +1017,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsSearchGet(ageMax?: number, ageMin?: number, city?: string, country?: string, createdAfter?: string, createdBefore?: string, gender?: CreatorsSearchGetGenderEnum, limit?: number, page?: number, q?: string, status?: CreatorsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async creatorsSearchGet(ageMax?: number, ageMin?: number, city?: string, country?: string, createdAfter?: string, createdBefore?: string, gender?: CreatorsSearchGetGenderEnum, limit?: number, page?: number, q?: string, status?: CreatorsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsSearchGet(ageMax, ageMin, city, country, createdAfter, createdBefore, gender, limit, page, q, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsSearchGet']?.[localVarOperationServerIndex]?.url;
@@ -1039,7 +1046,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsSearchGigsGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: CreatorsSearchGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: CreatorsSearchGigsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async creatorsSearchGigsGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: CreatorsSearchGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: CreatorsSearchGigsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsSearchGigsGet(ageMax, ageMin, brandId, campaignId, compensationMax, compensationMin, endDate, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, genderRequirement, gigCostMax, gigCostMin, limit, page, q, startDate, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsSearchGigsGet']?.[localVarOperationServerIndex]?.url;
@@ -1060,7 +1067,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsSearchVideoSubmissionsGet(campaignId?: string, createdAfter?: string, createdBefore?: string, creatorId?: string, gigId?: string, limit?: number, page?: number, q?: string, status?: CreatorsSearchVideoSubmissionsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async creatorsSearchVideoSubmissionsGet(campaignId?: string, createdAfter?: string, createdBefore?: string, creatorId?: string, gigId?: string, limit?: number, page?: number, q?: string, status?: CreatorsSearchVideoSubmissionsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedVideoSubmissionResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsSearchVideoSubmissionsGet(campaignId, createdAfter, createdBefore, creatorId, gigId, limit, page, q, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsSearchVideoSubmissionsGet']?.[localVarOperationServerIndex]?.url;
@@ -1081,7 +1088,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsApplicationsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        creatorsApplicationsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponses> {
             return localVarFp.creatorsApplicationsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1090,7 +1097,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsBankDetailsGet(options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any; }> {
+        creatorsBankDetailsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorBankTaxDetailsResponse> {
             return localVarFp.creatorsBankDetailsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1100,7 +1107,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsBankDetailsPut(requestParameters: CreatorApiCreatorsBankDetailsPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any; }> {
+        creatorsBankDetailsPut(requestParameters: CreatorApiCreatorsBankDetailsPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
             return localVarFp.creatorsBankDetailsPut(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1110,7 +1117,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsIdGet(requestParameters: CreatorApiCreatorsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsCreatorResponse> {
+        creatorsIdGet(requestParameters: CreatorApiCreatorsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
             return localVarFp.creatorsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1120,7 +1127,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsIdProfileStatusPut(requestParameters: CreatorApiCreatorsIdProfileStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        creatorsIdProfileStatusPut(requestParameters: CreatorApiCreatorsIdProfileStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorStatusUpdateResponse> {
             return localVarFp.creatorsIdProfileStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1130,7 +1137,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsMatchingGigsGet(requestParameters: CreatorApiCreatorsMatchingGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        creatorsMatchingGigsGet(requestParameters: CreatorApiCreatorsMatchingGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedGigCreatorResponse> {
             return localVarFp.creatorsMatchingGigsGet(requestParameters.brandId, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.gender, requestParameters.limit, requestParameters.page, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1140,7 +1147,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsPaymentsSearchGet(requestParameters: CreatorApiCreatorsPaymentsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        creatorsPaymentsSearchGet(requestParameters: CreatorApiCreatorsPaymentsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedPaymentResponse> {
             return localVarFp.creatorsPaymentsSearchGet(requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.creatorId, requestParameters.limit, requestParameters.page, requestParameters.paymentStatus, requestParameters.search, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1150,7 +1157,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsProfileDraftPost(requestParameters: CreatorApiCreatorsProfileDraftPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        creatorsProfileDraftPost(requestParameters: CreatorApiCreatorsProfileDraftPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
             return localVarFp.creatorsProfileDraftPost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1159,7 +1166,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsProfileGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsCreatorResponse> {
+        creatorsProfileGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
             return localVarFp.creatorsProfileGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1169,7 +1176,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsProfilePost(requestParameters: CreatorApiCreatorsProfilePostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsCreatorResponse> {
+        creatorsProfilePost(requestParameters: CreatorApiCreatorsProfilePostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
             return localVarFp.creatorsProfilePost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1179,7 +1186,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsProfilePut(requestParameters: CreatorApiCreatorsProfilePutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsCreatorResponse> {
+        creatorsProfilePut(requestParameters: CreatorApiCreatorsProfilePutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
             return localVarFp.creatorsProfilePut(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1188,7 +1195,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsProfileSubmitPost(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        creatorsProfileSubmitPost(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
             return localVarFp.creatorsProfileSubmitPost(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1198,7 +1205,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsSearchGet(requestParameters: CreatorApiCreatorsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        creatorsSearchGet(requestParameters: CreatorApiCreatorsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedCreatorResponse> {
             return localVarFp.creatorsSearchGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.city, requestParameters.country, requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.gender, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1208,7 +1215,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsSearchGigsGet(requestParameters: CreatorApiCreatorsSearchGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        creatorsSearchGigsGet(requestParameters: CreatorApiCreatorsSearchGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedGigCreatorResponse> {
             return localVarFp.creatorsSearchGigsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1218,7 +1225,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsSearchVideoSubmissionsGet(requestParameters: CreatorApiCreatorsSearchVideoSubmissionsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        creatorsSearchVideoSubmissionsGet(requestParameters: CreatorApiCreatorsSearchVideoSubmissionsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedVideoSubmissionResponse> {
             return localVarFp.creatorsSearchVideoSubmissionsGet(requestParameters.campaignId, requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.creatorId, requestParameters.gigId, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.status, options).then((request) => request(axios, basePath));
         },
     };

@@ -13,7 +13,7 @@ All URIs are relative to */api/v1*
 |[**analyticsTimeSeriesGet**](#analyticstimeseriesget) | **GET** /analytics/time-series | Get analytics time series|
 
 # **analyticsBrandGet**
-> AnalyticsBrandGet200Response analyticsBrandGet()
+> ModelsStandardBrandAnalyticsResponse analyticsBrandGet()
 
 Get analytics for brand\'s performance
 
@@ -37,7 +37,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**AnalyticsBrandGet200Response**
+**ModelsStandardBrandAnalyticsResponse**
 
 ### Authorization
 
@@ -59,7 +59,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyticsBrandPeriodGet**
-> AnalyticsBrandGet200Response analyticsBrandPeriodGet()
+> ModelsStandardBrandAnalyticsResponse analyticsBrandPeriodGet()
 
 Get brand analytics for specific time periods (last_week, last_month, last_three_months, last_year)
 
@@ -90,7 +90,7 @@ const { status, data } = await apiInstance.analyticsBrandPeriodGet(
 
 ### Return type
 
-**AnalyticsBrandGet200Response**
+**ModelsStandardBrandAnalyticsResponse**
 
 ### Authorization
 
@@ -113,7 +113,7 @@ const { status, data } = await apiInstance.analyticsBrandPeriodGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyticsCreatorGet**
-> AnalyticsCreatorGet200Response analyticsCreatorGet()
+> ModelsStandardCreatorAnalyticsResponse analyticsCreatorGet()
 
 Get analytics for creator\'s performance
 
@@ -137,7 +137,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**AnalyticsCreatorGet200Response**
+**ModelsStandardCreatorAnalyticsResponse**
 
 ### Authorization
 
@@ -159,7 +159,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyticsCreatorPeriodGet**
-> AnalyticsCreatorGet200Response analyticsCreatorPeriodGet()
+> ModelsStandardCreatorAnalyticsResponse analyticsCreatorPeriodGet()
 
 Get creator analytics for specific time periods (last_week, last_month, last_three_months, last_year)
 
@@ -190,7 +190,7 @@ const { status, data } = await apiInstance.analyticsCreatorPeriodGet(
 
 ### Return type
 
-**AnalyticsCreatorGet200Response**
+**ModelsStandardCreatorAnalyticsResponse**
 
 ### Authorization
 
@@ -213,7 +213,7 @@ const { status, data } = await apiInstance.analyticsCreatorPeriodGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyticsPlatformGet**
-> AnalyticsPlatformGet200Response analyticsPlatformGet()
+> ModelsStandardPlatformAnalyticsResponse analyticsPlatformGet()
 
 Get platform-wide analytics for admin users
 
@@ -237,7 +237,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**AnalyticsPlatformGet200Response**
+**ModelsStandardPlatformAnalyticsResponse**
 
 ### Authorization
 
@@ -259,7 +259,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyticsPlatformPeriodGet**
-> AnalyticsPlatformGet200Response analyticsPlatformPeriodGet()
+> ModelsStandardPlatformAnalyticsResponse analyticsPlatformPeriodGet()
 
 Get platform analytics for specific time periods (last_week, last_month, last_three_months, last_year)
 
@@ -290,7 +290,7 @@ const { status, data } = await apiInstance.analyticsPlatformPeriodGet(
 
 ### Return type
 
-**AnalyticsPlatformGet200Response**
+**ModelsStandardPlatformAnalyticsResponse**
 
 ### Authorization
 
@@ -313,7 +313,7 @@ const { status, data } = await apiInstance.analyticsPlatformPeriodGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **analyticsTimeSeriesGet**
-> AnalyticsTimeSeriesGet200Response analyticsTimeSeriesGet()
+> ModelsStandardAnalyticsTimeSeriesResponse analyticsTimeSeriesGet()
 
 Get time-series analytics data
 
@@ -350,7 +350,7 @@ const { status, data } = await apiInstance.analyticsTimeSeriesGet(
 
 ### Return type
 
-**AnalyticsTimeSeriesGet200Response**
+**ModelsStandardAnalyticsTimeSeriesResponse**
 
 ### Authorization
 

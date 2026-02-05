@@ -19,7 +19,7 @@ All URIs are relative to */api/v1*
 |[**gigsSearchGet**](#gigssearchget) | **GET** /gigs/search | Advanced gig search (Admin only)|
 
 # **gigsApplicationsApplicationIdStatusPut**
-> ModelsStandardResponse gigsApplicationsApplicationIdStatusPut(status)
+> ModelsStandardGigApplicationResponse gigsApplicationsApplicationIdStatusPut(status)
 
 Brand updates the status of a gig application
 
@@ -54,7 +54,7 @@ const { status, data } = await apiInstance.gigsApplicationsApplicationIdStatusPu
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigApplicationResponse**
 
 ### Authorization
 
@@ -78,7 +78,7 @@ const { status, data } = await apiInstance.gigsApplicationsApplicationIdStatusPu
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsCampaignsCampaignIdGet**
-> ModelsStandardResponse gigsCampaignsCampaignIdGet()
+> ModelsStandardGigBrandListResponse gigsCampaignsCampaignIdGet()
 
 Get all gigs for a specific campaign
 
@@ -109,7 +109,7 @@ const { status, data } = await apiInstance.gigsCampaignsCampaignIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigBrandListResponse**
 
 ### Authorization
 
@@ -132,7 +132,7 @@ const { status, data } = await apiInstance.gigsCampaignsCampaignIdGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsIdApplicationsGet**
-> ModelsStandardResponse gigsIdApplicationsGet()
+> ModelsStandardGigApplicationResponses gigsIdApplicationsGet()
 
 Get all applications for a specific gig
 
@@ -163,7 +163,7 @@ const { status, data } = await apiInstance.gigsIdApplicationsGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigApplicationResponses**
 
 ### Authorization
 
@@ -188,7 +188,7 @@ const { status, data } = await apiInstance.gigsIdApplicationsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsIdApplyPost**
-> ModelsStandardResponse gigsIdApplyPost(application)
+> ModelsStandardGigApplicationResponse gigsIdApplyPost(application)
 
 Creator applies to a gig
 
@@ -223,7 +223,7 @@ const { status, data } = await apiInstance.gigsIdApplyPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigApplicationResponse**
 
 ### Authorization
 
@@ -247,7 +247,7 @@ const { status, data } = await apiInstance.gigsIdApplyPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsIdDelete**
-> ModelsStandardResponse gigsIdDelete()
+> ModelsStandardGenericResponse gigsIdDelete()
 
 Delete a gig (Admin only)
 
@@ -278,7 +278,7 @@ const { status, data } = await apiInstance.gigsIdDelete(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -302,7 +302,7 @@ const { status, data } = await apiInstance.gigsIdDelete(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsIdGet**
-> ModelsStandardResponse gigsIdGet()
+> ModelsStandardGigResponse gigsIdGet()
 
 Get a specific gig by its ID
 
@@ -333,7 +333,7 @@ const { status, data } = await apiInstance.gigsIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigResponse**
 
 ### Authorization
 
@@ -356,7 +356,7 @@ const { status, data } = await apiInstance.gigsIdGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsIdInvitePost**
-> ModelsStandardResponse gigsIdInvitePost(invitation)
+> ModelsStandardGigInvitationResponse gigsIdInvitePost(invitation)
 
 Brand invites a creator to apply for a gig
 
@@ -391,7 +391,7 @@ const { status, data } = await apiInstance.gigsIdInvitePost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigInvitationResponse**
 
 ### Authorization
 
@@ -415,7 +415,7 @@ const { status, data } = await apiInstance.gigsIdInvitePost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsIdPut**
-> ModelsStandardResponse gigsIdPut(gig)
+> ModelsStandardGigResponse gigsIdPut(gig)
 
 Update a gig (Admin only)
 
@@ -450,7 +450,7 @@ const { status, data } = await apiInstance.gigsIdPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigResponse**
 
 ### Authorization
 
@@ -474,7 +474,7 @@ const { status, data } = await apiInstance.gigsIdPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsIdStatusPut**
-> ModelsStandardResponse gigsIdStatusPut(status)
+> ModelsStandardGenericResponse gigsIdStatusPut(status)
 
 Update gig status (Admin only)
 
@@ -509,7 +509,7 @@ const { status, data } = await apiInstance.gigsIdStatusPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -533,7 +533,7 @@ const { status, data } = await apiInstance.gigsIdStatusPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsInvitationsGet**
-> ModelsStandardResponse gigsInvitationsGet()
+> ModelsStandardGigInvitationResponses gigsInvitationsGet()
 
 Get all invitations for the authenticated creator
 
@@ -557,7 +557,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigInvitationResponses**
 
 ### Authorization
 
@@ -581,7 +581,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsInvitationsInvitationIdRespondPut**
-> ModelsStandardResponse gigsInvitationsInvitationIdRespondPut(response)
+> ModelsStandardGigInvitationResponse gigsInvitationsInvitationIdRespondPut(response)
 
 Creator responds to a gig invitation
 
@@ -616,7 +616,7 @@ const { status, data } = await apiInstance.gigsInvitationsInvitationIdRespondPut
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigInvitationResponse**
 
 ### Authorization
 
@@ -640,7 +640,7 @@ const { status, data } = await apiInstance.gigsInvitationsInvitationIdRespondPut
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsPost**
-> ModelsStandardResponse gigsPost(gig)
+> ModelsStandardGigResponse gigsPost(gig)
 
 Create a new gig for a campaign
 
@@ -672,7 +672,7 @@ const { status, data } = await apiInstance.gigsPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigResponse**
 
 ### Authorization
 
@@ -695,7 +695,7 @@ const { status, data } = await apiInstance.gigsPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsSearchGet**
-> ModelsPaginatedResponse gigsSearchGet()
+> ModelsPaginatedGigResponse gigsSearchGet()
 
 Admin can search all gigs with comprehensive filters
 
@@ -774,7 +774,7 @@ const { status, data } = await apiInstance.gigsSearchGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedGigResponse**
 
 ### Authorization
 

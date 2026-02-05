@@ -21,9 +21,6 @@ import type { UtilsCampaignCategory } from './utils-campaign-category';
 import type { UtilsCampaignStatus } from './utils-campaign-status';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UtilsContentType } from './utils-content-type';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { UtilsVideoFormat } from './utils-video-format';
 
 export interface ModelsCampaignResponse {
@@ -39,7 +36,6 @@ export interface ModelsCampaignResponse {
     'campaign_name'?: string;
     'campaign_status'?: UtilsCampaignStatus;
     'category'?: UtilsCampaignCategory;
-    'content_type'?: UtilsContentType;
     'created_at'?: string;
     'description'?: string;
     'donts'?: string;
@@ -51,6 +47,7 @@ export interface ModelsCampaignResponse {
     'number_of_videos_wanted'?: number;
     'product_image_url'?: string;
     'product_url'?: string;
+    'sample_video_urls'?: Array<string>;
     'tone_of_voice'?: string;
     'updated_at'?: string;
     'video_duration_in_seconds'?: number;

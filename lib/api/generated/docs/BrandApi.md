@@ -17,7 +17,7 @@ All URIs are relative to */api/v1*
 |[**brandsSearchVideoSubmissionsGet**](#brandssearchvideosubmissionsget) | **GET** /brands/search/video-submissions | Search video submissions for brand|
 
 # **brandsGet**
-> ModelsStandardResponse brandsGet()
+> ModelsStandardBrandResponse brandsGet()
 
 Get brands for the authenticated user
 
@@ -41,7 +41,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardBrandResponse**
 
 ### Authorization
 
@@ -63,7 +63,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsGigsGet**
-> ModelsPaginatedResponse brandsGigsGet()
+> ModelsPaginatedGigBrandResponse brandsGigsGet()
 
 Search gigs associated with the authenticated brand user
 
@@ -142,7 +142,7 @@ const { status, data } = await apiInstance.brandsGigsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedGigBrandResponse**
 
 ### Authorization
 
@@ -164,7 +164,7 @@ const { status, data } = await apiInstance.brandsGigsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsIdDelete**
-> ModelsStandardResponse brandsIdDelete()
+> ModelsStandardGenericResponse brandsIdDelete()
 
 Delete a brand profile
 
@@ -195,7 +195,7 @@ const { status, data } = await apiInstance.brandsIdDelete(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -217,7 +217,7 @@ const { status, data } = await apiInstance.brandsIdDelete(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsIdGet**
-> ModelsStandardResponse brandsIdGet()
+> ModelsStandardBrandResponse brandsIdGet()
 
 Get a specific brand by ID
 
@@ -248,7 +248,7 @@ const { status, data } = await apiInstance.brandsIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardBrandResponse**
 
 ### Authorization
 
@@ -270,7 +270,7 @@ const { status, data } = await apiInstance.brandsIdGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsIdStatusPut**
-> ModelsStandardResponse brandsIdStatusPut(request)
+> ModelsStandardBrandStatusUpdateResponse brandsIdStatusPut(request)
 
 Admin updates brand status with comments
 
@@ -305,7 +305,7 @@ const { status, data } = await apiInstance.brandsIdStatusPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardBrandStatusUpdateResponse**
 
 ### Authorization
 
@@ -327,7 +327,7 @@ const { status, data } = await apiInstance.brandsIdStatusPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsPost**
-> ModelsStandardResponse brandsPost(request)
+> ModelsStandardBrandResponse brandsPost(request)
 
 Create a new brand profile for the authenticated user
 
@@ -359,7 +359,7 @@ const { status, data } = await apiInstance.brandsPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardBrandResponse**
 
 ### Authorization
 
@@ -381,7 +381,7 @@ const { status, data } = await apiInstance.brandsPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsPut**
-> ModelsStandardResponse brandsPut(request)
+> ModelsStandardBrandResponse brandsPut(request)
 
 Update brand profile for the authenticated user
 
@@ -413,7 +413,7 @@ const { status, data } = await apiInstance.brandsPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardBrandResponse**
 
 ### Authorization
 
@@ -435,7 +435,7 @@ const { status, data } = await apiInstance.brandsPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsSearchCampaignsGet**
-> ModelsPaginatedResponse brandsSearchCampaignsGet()
+> ModelsPaginatedCampaignResponse brandsSearchCampaignsGet()
 
 Search campaigns for the authenticated brand user
 
@@ -453,7 +453,7 @@ const apiInstance = new BrandApi(configuration);
 let allowMultiple: boolean; // (optional) (default to undefined)
 let brandId: string; // (optional) (default to undefined)
 let category: 'mobile_phones' | 'laptops' | 'gadgets' | 'electronics' | 'smart_watch' | 'headphones' | 'gaming' | 'software' | 'fashion' | 'clothing' | 'footwear' | 'accessories' | 'jewelry' | 'watches' | 'bags' | 'sunglasses' | 'beauty' | 'perfumes' | 'cosmetics' | 'skincare' | 'haircare' | 'makeup' | 'nail_care' | 'personal_care' | 'food' | 'beverage' | 'snacks' | 'restaurant' | 'alcohol' | 'coffee' | 'tea' | 'health_food' | 'fitness' | 'wellness' | 'supplements' | 'medical' | 'yoga' | 'gym' | 'sports' | 'home' | 'decor' | 'furniture' | 'kitchen' | 'appliances' | 'gardening' | 'pets' | 'books' | 'travel' | 'hotels' | 'tourism' | 'events' | 'entertainment' | 'movies' | 'music' | 'finance' | 'banking' | 'insurance' | 'education' | 'services' | 'cars' | 'motorcycles' | 'auto_parts' | 'other'; // (optional) (default to undefined)
-let contentType: 'video' | 'image' | 'pdf' | 'video' | 'image' | 'pdf'; // (optional) (default to undefined)
+let contentType: 'video' | 'image' | 'pdf'; // (optional) (default to undefined)
 let createdAfter: string; // (optional) (default to undefined)
 let createdBefore: string; // (optional) (default to undefined)
 let limit: number; // (optional) (default to undefined)
@@ -496,7 +496,7 @@ const { status, data } = await apiInstance.brandsSearchCampaignsGet(
 | **allowMultiple** | [**boolean**] |  | (optional) defaults to undefined|
 | **brandId** | [**string**] |  | (optional) defaults to undefined|
 | **category** | [**&#39;mobile_phones&#39; | &#39;laptops&#39; | &#39;gadgets&#39; | &#39;electronics&#39; | &#39;smart_watch&#39; | &#39;headphones&#39; | &#39;gaming&#39; | &#39;software&#39; | &#39;fashion&#39; | &#39;clothing&#39; | &#39;footwear&#39; | &#39;accessories&#39; | &#39;jewelry&#39; | &#39;watches&#39; | &#39;bags&#39; | &#39;sunglasses&#39; | &#39;beauty&#39; | &#39;perfumes&#39; | &#39;cosmetics&#39; | &#39;skincare&#39; | &#39;haircare&#39; | &#39;makeup&#39; | &#39;nail_care&#39; | &#39;personal_care&#39; | &#39;food&#39; | &#39;beverage&#39; | &#39;snacks&#39; | &#39;restaurant&#39; | &#39;alcohol&#39; | &#39;coffee&#39; | &#39;tea&#39; | &#39;health_food&#39; | &#39;fitness&#39; | &#39;wellness&#39; | &#39;supplements&#39; | &#39;medical&#39; | &#39;yoga&#39; | &#39;gym&#39; | &#39;sports&#39; | &#39;home&#39; | &#39;decor&#39; | &#39;furniture&#39; | &#39;kitchen&#39; | &#39;appliances&#39; | &#39;gardening&#39; | &#39;pets&#39; | &#39;books&#39; | &#39;travel&#39; | &#39;hotels&#39; | &#39;tourism&#39; | &#39;events&#39; | &#39;entertainment&#39; | &#39;movies&#39; | &#39;music&#39; | &#39;finance&#39; | &#39;banking&#39; | &#39;insurance&#39; | &#39;education&#39; | &#39;services&#39; | &#39;cars&#39; | &#39;motorcycles&#39; | &#39;auto_parts&#39; | &#39;other&#39;**]**Array<&#39;mobile_phones&#39; &#124; &#39;laptops&#39; &#124; &#39;gadgets&#39; &#124; &#39;electronics&#39; &#124; &#39;smart_watch&#39; &#124; &#39;headphones&#39; &#124; &#39;gaming&#39; &#124; &#39;software&#39; &#124; &#39;fashion&#39; &#124; &#39;clothing&#39; &#124; &#39;footwear&#39; &#124; &#39;accessories&#39; &#124; &#39;jewelry&#39; &#124; &#39;watches&#39; &#124; &#39;bags&#39; &#124; &#39;sunglasses&#39; &#124; &#39;beauty&#39; &#124; &#39;perfumes&#39; &#124; &#39;cosmetics&#39; &#124; &#39;skincare&#39; &#124; &#39;haircare&#39; &#124; &#39;makeup&#39; &#124; &#39;nail_care&#39; &#124; &#39;personal_care&#39; &#124; &#39;food&#39; &#124; &#39;beverage&#39; &#124; &#39;snacks&#39; &#124; &#39;restaurant&#39; &#124; &#39;alcohol&#39; &#124; &#39;coffee&#39; &#124; &#39;tea&#39; &#124; &#39;health_food&#39; &#124; &#39;fitness&#39; &#124; &#39;wellness&#39; &#124; &#39;supplements&#39; &#124; &#39;medical&#39; &#124; &#39;yoga&#39; &#124; &#39;gym&#39; &#124; &#39;sports&#39; &#124; &#39;home&#39; &#124; &#39;decor&#39; &#124; &#39;furniture&#39; &#124; &#39;kitchen&#39; &#124; &#39;appliances&#39; &#124; &#39;gardening&#39; &#124; &#39;pets&#39; &#124; &#39;books&#39; &#124; &#39;travel&#39; &#124; &#39;hotels&#39; &#124; &#39;tourism&#39; &#124; &#39;events&#39; &#124; &#39;entertainment&#39; &#124; &#39;movies&#39; &#124; &#39;music&#39; &#124; &#39;finance&#39; &#124; &#39;banking&#39; &#124; &#39;insurance&#39; &#124; &#39;education&#39; &#124; &#39;services&#39; &#124; &#39;cars&#39; &#124; &#39;motorcycles&#39; &#124; &#39;auto_parts&#39; &#124; &#39;other&#39;>** |  | (optional) defaults to undefined|
-| **contentType** | [**&#39;video&#39; | &#39;image&#39; | &#39;pdf&#39; | &#39;video&#39; | &#39;image&#39; | &#39;pdf&#39;**]**Array<&#39;video&#39; &#124; &#39;image&#39; &#124; &#39;pdf&#39; &#124; &#39;video&#39; &#124; &#39;image&#39; &#124; &#39;pdf&#39;>** |  | (optional) defaults to undefined|
+| **contentType** | [**&#39;video&#39; | &#39;image&#39; | &#39;pdf&#39;**]**Array<&#39;video&#39; &#124; &#39;image&#39; &#124; &#39;pdf&#39;>** |  | (optional) defaults to undefined|
 | **createdAfter** | [**string**] |  | (optional) defaults to undefined|
 | **createdBefore** | [**string**] |  | (optional) defaults to undefined|
 | **limit** | [**number**] |  | (optional) defaults to undefined|
@@ -514,7 +514,7 @@ const { status, data } = await apiInstance.brandsSearchCampaignsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedCampaignResponse**
 
 ### Authorization
 
@@ -536,7 +536,7 @@ const { status, data } = await apiInstance.brandsSearchCampaignsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsSearchCreatorsGet**
-> ModelsPaginatedResponse brandsSearchCreatorsGet()
+> ModelsPaginatedCreatorResponse brandsSearchCreatorsGet()
 
 Brand can search active and approved creators with advanced filters, matching preferred categories with brand category
 
@@ -591,7 +591,7 @@ const { status, data } = await apiInstance.brandsSearchCreatorsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedCreatorResponse**
 
 ### Authorization
 
@@ -613,7 +613,7 @@ const { status, data } = await apiInstance.brandsSearchCreatorsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsSearchGet**
-> ModelsPaginatedResponse brandsSearchGet()
+> ModelsPaginatedBrandResponses brandsSearchGet()
 
 Search brands with advanced filters (unrestricted for admins, restricted for others)
 
@@ -674,7 +674,7 @@ const { status, data } = await apiInstance.brandsSearchGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedBrandResponses**
 
 ### Authorization
 
@@ -696,7 +696,7 @@ const { status, data } = await apiInstance.brandsSearchGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsSearchVideoSubmissionsGet**
-> ModelsPaginatedResponse brandsSearchVideoSubmissionsGet()
+> ModelsPaginatedVideoSubmissionResponse brandsSearchVideoSubmissionsGet()
 
 Brand can search video submissions for their campaigns
 
@@ -751,7 +751,7 @@ const { status, data } = await apiInstance.brandsSearchVideoSubmissionsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedVideoSubmissionResponse**
 
 ### Authorization
 

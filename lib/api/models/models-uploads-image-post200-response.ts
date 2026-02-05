@@ -1,4 +1,4 @@
-import type { ModelsStandardResponse } from '@/lib/api/generated/models/models-standard-response';
+import type { ModelsStandardGenericResponse } from '@/lib/api/generated/models/models-standard-generic-response';
 
 type ModelsUploadsImagePostResponse = {
     filename: string;
@@ -7,6 +7,6 @@ type ModelsUploadsImagePostResponse = {
       url: string;
 }
 
-export type ModelsUploadsImagePost200Response = ModelsStandardResponse & {
-    data: ModelsStandardResponse['data'] & {data: ModelsUploadsImagePostResponse[]};
+export type ModelsUploadsImagePost200Response = ModelsStandardGenericResponse & {
+    data: ModelsStandardGenericResponse['data'] & {data: ModelsUploadsImagePostResponse[]};
 }

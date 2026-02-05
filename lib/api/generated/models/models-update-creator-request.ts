@@ -48,6 +48,10 @@ export interface ModelsUpdateCreatorRequest {
      * Categories
      */
     'preferred_categories'?: Array<UtilsBrandCategory>;
+    /**
+     * URL to creator\'s profile image
+     */
+    'profile_image_url'?: string;
     'state': string;
     'street'?: string;
     'tax_country'?: UtilsCountryCode;

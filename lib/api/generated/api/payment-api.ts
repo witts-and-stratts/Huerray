@@ -18,13 +18,17 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import type { ModelsCreatePaymentRequest } from '../models';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsPaginatedPaymentResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardErrorResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardPaymentResponse } from '../models';
 // @ts-ignore
 import type { ModelsUpdatePaymentStatusRequest } from '../models';
 /**
@@ -58,8 +62,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -98,9 +102,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -137,9 +140,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -208,8 +210,8 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['search'] = search;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -235,7 +237,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async paymentsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async paymentsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPaymentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.paymentsIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.paymentsIdGet']?.[localVarOperationServerIndex]?.url;
@@ -249,7 +251,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async paymentsIdStatusPut(id: string, request: ModelsUpdatePaymentStatusRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async paymentsIdStatusPut(id: string, request: ModelsUpdatePaymentStatusRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPaymentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.paymentsIdStatusPut(id, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.paymentsIdStatusPut']?.[localVarOperationServerIndex]?.url;
@@ -262,7 +264,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async paymentsPost(request: ModelsCreatePaymentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async paymentsPost(request: ModelsCreatePaymentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPaymentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.paymentsPost(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.paymentsPost']?.[localVarOperationServerIndex]?.url;
@@ -281,7 +283,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async paymentsSearchGet(createdAfter?: string, createdBefore?: string, creatorId?: string, limit?: number, page?: number, paymentStatus?: PaymentsSearchGetPaymentStatusEnum, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async paymentsSearchGet(createdAfter?: string, createdBefore?: string, creatorId?: string, limit?: number, page?: number, paymentStatus?: PaymentsSearchGetPaymentStatusEnum, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedPaymentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.paymentsSearchGet(createdAfter, createdBefore, creatorId, limit, page, paymentStatus, search, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.paymentsSearchGet']?.[localVarOperationServerIndex]?.url;
@@ -303,7 +305,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paymentsIdGet(requestParameters: PaymentApiPaymentsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        paymentsIdGet(requestParameters: PaymentApiPaymentsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPaymentResponse> {
             return localVarFp.paymentsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -313,7 +315,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paymentsIdStatusPut(requestParameters: PaymentApiPaymentsIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        paymentsIdStatusPut(requestParameters: PaymentApiPaymentsIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPaymentResponse> {
             return localVarFp.paymentsIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -323,7 +325,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paymentsPost(requestParameters: PaymentApiPaymentsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        paymentsPost(requestParameters: PaymentApiPaymentsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPaymentResponse> {
             return localVarFp.paymentsPost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -333,7 +335,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paymentsSearchGet(requestParameters: PaymentApiPaymentsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        paymentsSearchGet(requestParameters: PaymentApiPaymentsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedPaymentResponse> {
             return localVarFp.paymentsSearchGet(requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.creatorId, requestParameters.limit, requestParameters.page, requestParameters.paymentStatus, requestParameters.search, options).then((request) => request(axios, basePath));
         },
     };

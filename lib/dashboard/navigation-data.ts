@@ -14,6 +14,7 @@ import {
   ShieldUserIcon,
   AlertCircleIcon,
   Store01Icon,
+  AiUserIcon,
 } from "@hugeicons/core-free-icons";
 import { IconReport } from "@tabler/icons-react";
 import type { SidebarNavigationData } from "@/components/app-sidebar";
@@ -154,7 +155,12 @@ export const adminNavigationData: Omit<SidebarNavigationData, 'user'> & { user: 
     {
       title: "Users",
       url: "/admin/users",
-      icon: UserMultiple02Icon,
+      icon: UserMultiple02Icon
+    },
+    {
+      title: "Creators",
+      url: "/admin/creators",
+      icon: AiUserIcon
     },
     {
       title: "Brands",

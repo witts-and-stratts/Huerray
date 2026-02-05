@@ -7,7 +7,7 @@ All URIs are relative to */api/v1*
 |[**healthGet**](#healthget) | **GET** /health | Health check|
 
 # **healthGet**
-> ModelsStandardResponse healthGet()
+> ModelsHealthResponse healthGet()
 
 Check if the API is running and healthy
 
@@ -31,7 +31,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsHealthResponse**
 
 ### Authorization
 

@@ -1,0 +1,89 @@
+'use client';
+
+import { BrandActionMenu } from './brand-action-menu';
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/dashboard-ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Brand } from './brands-data';
+import Link from 'next/link';
+import { getCountryFlag } from '@/lib/country-flags';
+import { Separator } from '@/components/dashboard-ui/separator';
+import { Badge } from '@/components/dashboard-ui/badge';
+import { BrandStatusBadge } from './brand-status-badge';
+
+interface BrandCardProps {
+  brand: Brand;
+}
+
+export function BrandCard( { brand }: BrandCardProps ) {
+  const {
+    id,
+    name,
+    logo,
+    status,
+    total_campaigns,
+    website,
+    contact_email,
+    category,
+    company_size,
+    city,
+    country,
+  } = brand;
+
+  const flagName = getCountryFlag( country );
+  const location = [ city, country ].filter( Boolean ).join( ', ' );
+
+  return (
+    <Card className='py-3 justify-between gap-1'>
+      <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
+        <div className="flex flex-col min-w-0">
+          <Link href={ `/admin/brands/${ id }` } className='hover:underline'>
+            <CardTitle className='capitalize text-[18px] font-normal text-primary font-primary'>
+              { name }
+            </CardTitle>
+          </Link>
+          <CardDescription className="text-muted-foreground/70 text-sm truncate">{ contact_email }</CardDescription>
+        </div>
+        <div className='flex shrink-0 text-right'>
+          <Avatar className="h-10 w-10">
+            <AvatarImage src={ logo } alt={ name } />
+            <AvatarFallback>{ name.substring( 0, 2 ).toUpperCase() }</AvatarFallback>
+          </Avatar>
+          <BrandActionMenu brand={ brand } />
+        </div>
+      </CardHeader>
+
+      <CardContent className="space-y-3 pb-2">
+        { ( category || company_size ) && (
+          <div className="flex flex-wrap gap-2">
+            { category && <Badge variant="secondary" className="px-1.5 py-0 text-[10px] font-normal whitespace-nowrap">{ category }</Badge> }
+            { company_size && <Badge variant="outline" className="px-1.5 py-0 text-[10px] font-normal whitespace-nowrap text-muted-foreground">{ company_size }</Badge> }
+          </div>
+        ) }
+
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          { location && (
+            <div className="flex items-center gap-1">
+              { flagName && <img src={ `/images/flags/${ flagName }.svg` } alt={ country } className="h-3 w-auto" /> }
+              <span>{ city || country }</span>
+            </div>
+          ) }
+        </div>
+
+        <div className="mt-2 text-xs text-muted-foreground">
+          <span className="font-medium text-foreground">{ total_campaigns }</span> Campaigns
+        </div>
+
+        <div className="mt-2">
+          <BrandStatusBadge status={ status || 'active' } />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

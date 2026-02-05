@@ -12,7 +12,7 @@ All URIs are relative to */api/v1*
 |[**invoicesSearchGet**](#invoicessearchget) | **GET** /invoices/search | Search invoices (Admin &amp; Brands)|
 
 # **invoicesIdGeneratePdfPost**
-> ModelsStandardResponse invoicesIdGeneratePdfPost()
+> ModelsStandardInvoicePDFGeneratedResponse invoicesIdGeneratePdfPost()
 
 Generate PDF for an existing invoice and send via email to brand
 
@@ -43,7 +43,7 @@ const { status, data } = await apiInstance.invoicesIdGeneratePdfPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardInvoicePDFGeneratedResponse**
 
 ### Authorization
 
@@ -67,7 +67,7 @@ const { status, data } = await apiInstance.invoicesIdGeneratePdfPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **invoicesIdGet**
-> ModelsStandardResponse invoicesIdGet()
+> ModelsStandardInvoiceResponse invoicesIdGet()
 
 Get detailed invoice information
 
@@ -98,7 +98,7 @@ const { status, data } = await apiInstance.invoicesIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardInvoiceResponse**
 
 ### Authorization
 
@@ -174,7 +174,7 @@ const { status, data } = await apiInstance.invoicesIdPdfGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **invoicesIdStatusPut**
-> ModelsStandardResponse invoicesIdStatusPut(request)
+> ModelsStandardInvoiceResponse invoicesIdStatusPut(request)
 
 Update the status of an invoice (Admin only)
 
@@ -209,7 +209,7 @@ const { status, data } = await apiInstance.invoicesIdStatusPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardInvoiceResponse**
 
 ### Authorization
 
@@ -233,7 +233,7 @@ const { status, data } = await apiInstance.invoicesIdStatusPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **invoicesPost**
-> ModelsStandardResponse invoicesPost(request)
+> ModelsStandardInvoiceResponse invoicesPost(request)
 
 Create an invoice for a completed campaign (Admin only)
 
@@ -265,7 +265,7 @@ const { status, data } = await apiInstance.invoicesPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardInvoiceResponse**
 
 ### Authorization
 
@@ -288,7 +288,7 @@ const { status, data } = await apiInstance.invoicesPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **invoicesSearchGet**
-> ModelsPaginatedResponse invoicesSearchGet()
+> ModelsPaginatedInvoiceResponse invoicesSearchGet()
 
 Search and filter invoices with pagination (Admin & Brands only)
 
@@ -340,7 +340,7 @@ const { status, data } = await apiInstance.invoicesSearchGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedInvoiceResponse**
 
 ### Authorization
 

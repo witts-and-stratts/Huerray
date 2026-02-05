@@ -21,7 +21,7 @@ All URIs are relative to */api/v1*
 |[**creatorsSearchVideoSubmissionsGet**](#creatorssearchvideosubmissionsget) | **GET** /creators/search/video-submissions | Search video submissions for creator|
 
 # **creatorsApplicationsGet**
-> ModelsStandardResponse creatorsApplicationsGet()
+> ModelsStandardGigApplicationResponses creatorsApplicationsGet()
 
 Get applications submitted by the creator
 
@@ -45,7 +45,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGigApplicationResponses**
 
 ### Authorization
 
@@ -67,7 +67,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsBankDetailsGet**
-> { [key: string]: any; } creatorsBankDetailsGet()
+> ModelsStandardCreatorBankTaxDetailsResponse creatorsBankDetailsGet()
 
 Get bank and tax details for the creator (limited info for security)
 
@@ -91,7 +91,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**{ [key: string]: any; }**
+**ModelsStandardCreatorBankTaxDetailsResponse**
 
 ### Authorization
 
@@ -113,7 +113,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsBankDetailsPut**
-> { [key: string]: any; } creatorsBankDetailsPut(request)
+> ModelsStandardCreatorResponse creatorsBankDetailsPut(request)
 
 Update bank and tax details for the creator
 
@@ -145,7 +145,7 @@ const { status, data } = await apiInstance.creatorsBankDetailsPut(
 
 ### Return type
 
-**{ [key: string]: any; }**
+**ModelsStandardCreatorResponse**
 
 ### Authorization
 
@@ -168,7 +168,7 @@ const { status, data } = await apiInstance.creatorsBankDetailsPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsIdGet**
-> ModelsCreatorResponse creatorsIdGet()
+> ModelsStandardCreatorResponse creatorsIdGet()
 
 Get creator profile by ID (public access)
 
@@ -199,7 +199,7 @@ const { status, data } = await apiInstance.creatorsIdGet(
 
 ### Return type
 
-**ModelsCreatorResponse**
+**ModelsStandardCreatorResponse**
 
 ### Authorization
 
@@ -221,7 +221,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsIdProfileStatusPut**
-> ModelsStandardResponse creatorsIdProfileStatusPut(request)
+> ModelsStandardCreatorStatusUpdateResponse creatorsIdProfileStatusPut(request)
 
 Admin updates creator profile status with comments
 
@@ -256,7 +256,7 @@ const { status, data } = await apiInstance.creatorsIdProfileStatusPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardCreatorStatusUpdateResponse**
 
 ### Authorization
 
@@ -278,7 +278,7 @@ const { status, data } = await apiInstance.creatorsIdProfileStatusPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsMatchingGigsGet**
-> ModelsPaginatedResponse creatorsMatchingGigsGet()
+> ModelsPaginatedGigCreatorResponse creatorsMatchingGigsGet()
 
 Get gigs that match the creator\'s profile
 
@@ -324,7 +324,7 @@ const { status, data } = await apiInstance.creatorsMatchingGigsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedGigCreatorResponse**
 
 ### Authorization
 
@@ -347,7 +347,7 @@ const { status, data } = await apiInstance.creatorsMatchingGigsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsPaymentsSearchGet**
-> ModelsStandardResponse creatorsPaymentsSearchGet()
+> ModelsPaginatedPaymentResponse creatorsPaymentsSearchGet()
 
 Creator searches their own payments
 
@@ -396,7 +396,7 @@ const { status, data } = await apiInstance.creatorsPaymentsSearchGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsPaginatedPaymentResponse**
 
 ### Authorization
 
@@ -418,7 +418,7 @@ const { status, data } = await apiInstance.creatorsPaymentsSearchGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsProfileDraftPost**
-> ModelsStandardResponse creatorsProfileDraftPost(request)
+> ModelsStandardCreatorResponse creatorsProfileDraftPost(request)
 
 Save creator profile data as draft for later completion
 
@@ -450,7 +450,7 @@ const { status, data } = await apiInstance.creatorsProfileDraftPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardCreatorResponse**
 
 ### Authorization
 
@@ -472,7 +472,7 @@ const { status, data } = await apiInstance.creatorsProfileDraftPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsProfileGet**
-> ModelsCreatorResponse creatorsProfileGet()
+> ModelsStandardCreatorResponse creatorsProfileGet()
 
 Get the creator profile for the authenticated user
 
@@ -496,7 +496,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsCreatorResponse**
+**ModelsStandardCreatorResponse**
 
 ### Authorization
 
@@ -518,7 +518,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsProfilePost**
-> ModelsCreatorResponse creatorsProfilePost(request)
+> ModelsStandardCreatorResponse creatorsProfilePost(request)
 
 Create a new creator profile for the authenticated user
 
@@ -550,7 +550,7 @@ const { status, data } = await apiInstance.creatorsProfilePost(
 
 ### Return type
 
-**ModelsCreatorResponse**
+**ModelsStandardCreatorResponse**
 
 ### Authorization
 
@@ -572,7 +572,7 @@ const { status, data } = await apiInstance.creatorsProfilePost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsProfilePut**
-> ModelsCreatorResponse creatorsProfilePut(request)
+> ModelsStandardCreatorResponse creatorsProfilePut(request)
 
 Update the creator profile for the authenticated user
 
@@ -604,7 +604,7 @@ const { status, data } = await apiInstance.creatorsProfilePut(
 
 ### Return type
 
-**ModelsCreatorResponse**
+**ModelsStandardCreatorResponse**
 
 ### Authorization
 
@@ -627,7 +627,7 @@ const { status, data } = await apiInstance.creatorsProfilePut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsProfileSubmitPost**
-> ModelsStandardResponse creatorsProfileSubmitPost()
+> ModelsStandardCreatorResponse creatorsProfileSubmitPost()
 
 Submit creator profile for admin review and approval
 
@@ -651,7 +651,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardCreatorResponse**
 
 ### Authorization
 
@@ -673,7 +673,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsSearchGet**
-> ModelsPaginatedResponse creatorsSearchGet()
+> ModelsPaginatedCreatorResponse creatorsSearchGet()
 
 Search creators with advanced filters (unrestricted for admins, restricted for others)
 
@@ -734,7 +734,7 @@ const { status, data } = await apiInstance.creatorsSearchGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedCreatorResponse**
 
 ### Authorization
 
@@ -756,7 +756,7 @@ const { status, data } = await apiInstance.creatorsSearchGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsSearchGigsGet**
-> ModelsPaginatedResponse creatorsSearchGigsGet()
+> ModelsPaginatedGigCreatorResponse creatorsSearchGigsGet()
 
 Creator can search available gigs with advanced filters
 
@@ -835,7 +835,7 @@ const { status, data } = await apiInstance.creatorsSearchGigsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedGigCreatorResponse**
 
 ### Authorization
 
@@ -857,7 +857,7 @@ const { status, data } = await apiInstance.creatorsSearchGigsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsSearchVideoSubmissionsGet**
-> ModelsPaginatedResponse creatorsSearchVideoSubmissionsGet()
+> ModelsPaginatedVideoSubmissionResponse creatorsSearchVideoSubmissionsGet()
 
 Creator can search their own video submissions
 
@@ -912,7 +912,7 @@ const { status, data } = await apiInstance.creatorsSearchVideoSubmissionsGet(
 
 ### Return type
 
-**ModelsPaginatedResponse**
+**ModelsPaginatedVideoSubmissionResponse**
 
 ### Authorization
 

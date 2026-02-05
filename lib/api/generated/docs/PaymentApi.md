@@ -10,7 +10,7 @@ All URIs are relative to */api/v1*
 |[**paymentsSearchGet**](#paymentssearchget) | **GET** /payments/search | Search payments|
 
 # **paymentsIdGet**
-> ModelsStandardResponse paymentsIdGet()
+> ModelsStandardPaymentResponse paymentsIdGet()
 
 Admin gets payment details by ID
 
@@ -41,7 +41,7 @@ const { status, data } = await apiInstance.paymentsIdGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardPaymentResponse**
 
 ### Authorization
 
@@ -63,7 +63,7 @@ const { status, data } = await apiInstance.paymentsIdGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **paymentsIdStatusPut**
-> ModelsStandardResponse paymentsIdStatusPut(request)
+> ModelsStandardPaymentResponse paymentsIdStatusPut(request)
 
 Admin updates payment status
 
@@ -98,7 +98,7 @@ const { status, data } = await apiInstance.paymentsIdStatusPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardPaymentResponse**
 
 ### Authorization
 
@@ -120,7 +120,7 @@ const { status, data } = await apiInstance.paymentsIdStatusPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **paymentsPost**
-> ModelsStandardResponse paymentsPost(request)
+> ModelsStandardPaymentResponse paymentsPost(request)
 
 Admin creates a payment batch from selected payment items
 
@@ -152,7 +152,7 @@ const { status, data } = await apiInstance.paymentsPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardPaymentResponse**
 
 ### Authorization
 
@@ -174,7 +174,7 @@ const { status, data } = await apiInstance.paymentsPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **paymentsSearchGet**
-> ModelsStandardResponse paymentsSearchGet()
+> ModelsPaginatedPaymentResponse paymentsSearchGet()
 
 Admin searches payments with filters
 
@@ -223,7 +223,7 @@ const { status, data } = await apiInstance.paymentsSearchGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsPaginatedPaymentResponse**
 
 ### Authorization
 

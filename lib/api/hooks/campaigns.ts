@@ -17,25 +17,47 @@ import {
 import { CampaignsApi, BrandApi, type CampaignsApiCampaignsSearchGetRequest, type BrandApiBrandsSearchCampaignsGetRequest } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import type { 
-  ModelsStandardResponse, 
-  ModelsPaginatedResponse, 
+  ModelsStandardGenericResponse, 
+  ModelsPaginatedCampaignResponse, 
   ModelsCampaignResponse,
   ModelsBrandCampaignDecisionRequest,
   ModelsCreateCampaignRequest,
+  ModelsAdminCampaignApprovalRequest,
+  ModelsStandardCampaignResponse,
 } from '../generated/models';
-import { ModelsStandardCampaignResponse } from '@/scripts/lib/api/generated/models';
 
 /**
  * Hook to submit a brand decision for a campaign
  */
 export function useCampaignDecision(
-  options?: UseMutationOptions<ModelsStandardCampaignResponse, Error, { id: string; decision: ModelsBrandCampaignDecisionRequest }>
-): UseMutationResult<ModelsStandardCampaignResponse, Error, { id: string; decision: ModelsBrandCampaignDecisionRequest }> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { id: string; decision: ModelsBrandCampaignDecisionRequest }>
+): UseMutationResult<ModelsStandardGenericResponse, Error, { id: string; decision: ModelsBrandCampaignDecisionRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({ id, decision }) => {
       const response = await campaignsApi.campaignsIdDecisionPut({ id, request: decision });
+      return response.data;
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: campaignsKeys.detail(variables.id) });
+      queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook for admin to approve/reject a campaign
+ */
+export function useAdminCampaignApproval(
+  options?: UseMutationOptions<ModelsStandardCampaignResponse, Error, { id: string; request: ModelsAdminCampaignApprovalRequest }>
+): UseMutationResult<ModelsStandardCampaignResponse, Error, { id: string; request: ModelsAdminCampaignApprovalRequest }> {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, request }) => {
+      const response = await campaignsApi.campaignsIdApprovePut({ id, request });
       return response.data;
     },
     onSuccess: (_, variables) => {
@@ -92,8 +114,8 @@ export const brandCampaignsKeys = {
  */
 export function useCampaigns(
   params?: CampaignsApiCampaignsSearchGetRequest,
-  options?: Omit<UseQueryOptions<ModelsPaginatedResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedCampaignResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedCampaignResponse, Error> {
   return useQuery({
     queryKey: campaignsKeys.list(params),
     queryFn: async () => {
@@ -127,8 +149,8 @@ export function useCampaigns(
  */
 export function useBrandCampaigns(
   params?: BrandApiBrandsSearchCampaignsGetRequest,
-  options?: Omit<UseQueryOptions<ModelsPaginatedResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedCampaignResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedCampaignResponse, Error> {
   return useQuery({
     queryKey: brandCampaignsKeys.list(params),
     queryFn: async () => {
@@ -163,7 +185,7 @@ export function useCampaign(
     queryKey: campaignsKeys.detail(id),
     queryFn: async () => {
       const response = await campaignsApi.campaignsIdGet({ id });
-      return response.data;
+      return response.data.data!;
     },
     enabled: !!id, // Only run query if id is provided
     ...options,
@@ -194,8 +216,8 @@ export function useCampaign(
  * ```
  */
 export function useCreateCampaign(
-  options?: UseMutationOptions<ModelsStandardResponse, Error, any>
-): UseMutationResult<ModelsStandardResponse, Error, any> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, any>
+): UseMutationResult<ModelsStandardGenericResponse, Error, any> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -232,8 +254,8 @@ export function useCreateCampaign(
  * ```
  */
 export function useUpdateCampaign(
-  options?: UseMutationOptions<ModelsStandardResponse, Error, { id: string; data: any }>
-): UseMutationResult<ModelsStandardResponse, Error, { id: string; data: any }> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { id: string; data: any }>
+): UseMutationResult<ModelsStandardGenericResponse, Error, { id: string; data: any }> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -273,8 +295,8 @@ export function useUpdateCampaign(
  * ```
  */
 export function useDeleteCampaign(
-  options?: UseMutationOptions<ModelsStandardResponse, Error, string>
-): UseMutationResult<ModelsStandardResponse, Error, string> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, string>
+): UseMutationResult<ModelsStandardGenericResponse, Error, string> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -310,14 +332,16 @@ export function useDeleteCampaign(
  * ```
  */
 export function useReplicateCampaign(
-  options?: UseMutationOptions<ModelsStandardResponse, Error, string>
-): UseMutationResult<ModelsStandardResponse, Error, string> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, string>
+): UseMutationResult<ModelsStandardGenericResponse, Error, string> {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (campaignId: string) => {
       // 1. Fetch the campaign details
-      const { data: campaign } = await campaignsApi.campaignsIdGet({ id: campaignId });
+      const response = await campaignsApi.campaignsIdGet({ id: campaignId });
+      const campaignWrapper = response.data;
+      const campaign = campaignWrapper.data;
       
       if (!campaign) {
         throw new Error('Campaign not found');
@@ -327,7 +351,6 @@ export function useReplicateCampaign(
       const payload: ModelsCreateCampaignRequest = {
         campaign_name: `${campaign.campaign_name} (Copy)`,
         category: campaign.category!,
-        content_type: campaign.content_type!,
         description: campaign.description || '',
         number_of_creators_wanted: campaign.number_of_creators_wanted || 1,
         number_of_videos_wanted: campaign.number_of_videos_wanted || 1,
@@ -347,16 +370,20 @@ export function useReplicateCampaign(
       };
 
       // 3. Create the new campaign
-      const response = await campaignsApi.campaignsPost({ request: payload });
-      return response.data;
+      const result = await campaignsApi.campaignsPost({ request: payload });
+      return result.data;
     },
     onSuccess: (data, variables, context) => {
       // Invalidate campaigns list
       queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
-      options?.onSuccess?.(data, variables, context);
+      if (options?.onSuccess) {
+        (options.onSuccess as any)(data, variables, context);
+      }
     },
     onError: (error, variables, context) => {
-      options?.onError?.(error, variables, context);
+      if (options?.onError) {
+        (options.onError as any)(error, variables, context);
+      }
     },
     ...options,
   });

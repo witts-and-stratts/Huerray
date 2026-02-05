@@ -1,0 +1,81 @@
+@reference 'tailwindcss';
+@reference './typography.css';
+
+body:has(.dark-bg) {
+  .header {
+    a {
+      @apply text-white;
+    }
+  }
+
+  --logo-text-fill: var(--color-orange-100);
+
+  .icon-user,
+  .user-menu__chevron {
+    @apply text-orange-100;
+  }
+
+  .header__hamburger .header__hamburger-line {
+    @apply bg-orange-100;
+  }
+
+  .header__mobile-nav {
+    @apply bg-dark-burgundy;
+  }
+
+  .header__mobile-nav-link {
+    @apply hover:text-burgundy-200!;
+  }
+}
+
+.header {
+  @apply z-70 relative flex items-center justify-between px-4 py-4 md:px-10 md:py-8;
+
+  .logo {
+    @apply object-contain max-md:w-[140px];
+  }
+
+  .header__nav {
+    @apply hidden md:flex items-center gap-11 text-base font-medium;
+
+    a {
+      @apply text-dark-burgundy hover:opacity-80 transition-opacity duration-200;
+    }
+  }
+
+  .header__actions {
+    @apply flex items-center gap-4;
+  }
+
+  .header__language {
+    @apply block;
+  }
+
+  .header__hamburger {
+    @apply md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center;
+  }
+
+  .header__hamburger-line {
+    @apply block w-6 h-0.5 bg-deep-maroon transition-transform;
+  }
+
+  .header__hamburger-line--top-open {
+    @apply rotate-45 translate-y-2;
+  }
+
+  .header__hamburger-line--middle-open {
+    @apply opacity-0;
+  }
+
+  .header__hamburger-line--bottom-open {
+    @apply -rotate-45 -translate-y-2;
+  }
+
+  .header__mobile-nav {
+    @apply absolute top-full left-0 right-0 bg-violet-100 md:hidden flex flex-col px-4 gap-4 border-t border-deep-maroon/10 shadow-2xl shadow-dark-burgundy/30 overflow-hidden;
+  }
+
+  .header__mobile-nav-link {
+    @apply text-deep-maroon font-secondary text-lg py-2 first-of-type:mt-4 last-of-type:mb-4;
+  }
+}

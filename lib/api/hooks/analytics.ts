@@ -9,9 +9,8 @@ import { useQuery, type UseQueryResult, type UseQueryOptions } from '@tanstack/r
 import { AnalyticsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import type { 
-  ModelsBrandAnalyticsResponse,
-  ModelsCreatorAnalyticsResponse,
-  ModelsStandardResponse 
+  ModelsStandardBrandAnalyticsResponse,
+  ModelsStandardCreatorAnalyticsResponse
 } from '../generated/models';
 
 // Create analytics API instance
@@ -31,22 +30,10 @@ export const analyticsKeys = {
 
 /**
  * Hook to fetch brand analytics
- * 
- * @example
- * ```tsx
- * function BrandDashboard() {
- *   const { data, isLoading, error } = useBrandAnalytics();
- *   
- *   if (isLoading) return <div>Loading...</div>;
- *   if (error) return <div>Error loading analytics</div>;
- *   
- *   return <div>Total Campaigns: {data?.data?.totalCampaigns}</div>;
- * }
- * ```
  */
 export function useBrandAnalytics(
-  options?: Omit<UseQueryOptions<ModelsStandardResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardBrandAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardBrandAnalyticsResponse, Error> {
   return useQuery({
     queryKey: analyticsKeys.brand(),
     queryFn: async () => {
@@ -59,21 +46,11 @@ export function useBrandAnalytics(
 
 /**
  * Hook to fetch brand analytics for a specific period
- * 
- * @param period - Time period: 'last_week', 'last_month', 'last_three_months', 'last_year'
- * 
- * @example
- * ```tsx
- * function MonthlyReport() {
- *   const { data } = useBrandAnalyticsByPeriod('last_month');
- *   return <div>{data?.data?.totalRevenue}</div>;
- * }
- * ```
  */
 export function useBrandAnalyticsByPeriod(
   period: 'last_week' | 'last_month' | 'last_three_months' | 'last_year',
-  options?: Omit<UseQueryOptions<ModelsStandardResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardBrandAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardBrandAnalyticsResponse, Error> {
   return useQuery({
     queryKey: analyticsKeys.brandByPeriod(period),
     queryFn: async () => {
@@ -86,22 +63,10 @@ export function useBrandAnalyticsByPeriod(
 
 /**
  * Hook to fetch creator analytics
- * 
- * @example
- * ```tsx
- * function CreatorDashboard() {
- *   const { data, isLoading, error } = useCreatorAnalytics();
- *   
- *   if (isLoading) return <div>Loading...</div>;
- *   if (error) return <div>Error loading analytics</div>;
- *   
- *   return <div>Total Gigs: {data?.data?.totalGigs}</div>;
- * }
- * ```
  */
 export function useCreatorAnalytics(
-  options?: Omit<UseQueryOptions<ModelsStandardResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardCreatorAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardCreatorAnalyticsResponse, Error> {
   return useQuery({
     queryKey: analyticsKeys.creator(),
     queryFn: async () => {
@@ -114,21 +79,11 @@ export function useCreatorAnalytics(
 
 /**
  * Hook to fetch creator analytics for a specific period
- * 
- * @param period - Time period: 'last_week', 'last_month', 'last_three_months', 'last_year'
- * 
- * @example
- * ```tsx
- * function WeeklyStats() {
- *   const { data } = useCreatorAnalyticsByPeriod('last_week');
- *   return <div>This week's earnings: ${data?.data?.earnings}</div>;
- * }
- * ```
  */
 export function useCreatorAnalyticsByPeriod(
   period: 'last_week' | 'last_month' | 'last_three_months' | 'last_year',
-  options?: Omit<UseQueryOptions<ModelsStandardResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardCreatorAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardCreatorAnalyticsResponse, Error> {
   return useQuery({
     queryKey: analyticsKeys.creatorByPeriod(period),
     queryFn: async () => {

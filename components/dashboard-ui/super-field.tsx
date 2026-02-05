@@ -18,8 +18,10 @@ import {
   RenderInput,
   RenderSearchableSelect,
   RenderSelect,
+  RenderSwitch,
   RenderTags,
-  RenderTextarea
+  RenderTextarea,
+  RenderMultiSelect
 } from './superfield/field-renderers';
 import {
   CheckboxFieldProps,
@@ -30,8 +32,10 @@ import {
   SearchableSelectFieldProps,
   SelectFieldProps,
   SelectOption,
+  SwitchFieldProps,
   TagsFieldProps,
-  TextareaFieldProps
+  TextareaFieldProps,
+  MultiSelectFieldProps
 } from "./superfield/types";
 
 // Discriminated union of all field types
@@ -44,13 +48,17 @@ type SuperFieldProps =
   | TagsFieldProps
   | EditorFieldProps
   | SearchableSelectFieldProps
-  | DatePickerFieldProps;
+  | DatePickerFieldProps
+  | SwitchFieldProps
+  | MultiSelectFieldProps;
 
 const renderers: Record<string, React.ElementType> = {
   'select': RenderSelect,
   'searchable-select': RenderSearchableSelect,
+  'multi-select': RenderMultiSelect,
   'textarea': RenderTextarea,
   'checkbox': RenderCheckbox,
+  'switch': RenderSwitch,
   'tags': RenderTags,
   'editor': RenderEditor,
   'datepicker': RenderDatePicker,
@@ -73,6 +81,7 @@ const renderers: Record<string, React.ElementType> = {
  * - editor
  * - checkbox
  * - datepicker
+ * - switch
  *
  * @example
  * // Searchable Select
@@ -140,7 +149,7 @@ export const SuperField = forwardRef<
         : undefined,
   };
 
-  const isCheckbox = type === 'checkbox';
+  const isCheckable = type === 'checkbox' || type === 'switch';
   const Renderer = renderers[ type ] || renderers[ 'default' ];
 
   const baseProps: BaseRendererProps = {
@@ -169,9 +178,9 @@ export const SuperField = forwardRef<
       className={ cn( className, ) }
       data-disabled={ disabled }
       data-invalid={ !!( error || errors?.length ) }
-      orientation={ isCheckbox ? 'horizontal' : 'vertical' }
+      orientation={ isCheckable ? 'horizontal' : 'vertical' }
     >
-      { isCheckbox ? (
+      { isCheckable ? (
         <>
           { renderControl() }
           <FieldContent>

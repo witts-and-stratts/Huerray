@@ -12,7 +12,7 @@ All URIs are relative to */api/v1*
 |[**notificationsStatsGet**](#notificationsstatsget) | **GET** /notifications/stats | Get notification statistics|
 
 # **notificationsGet**
-> ModelsStandardResponse notificationsGet()
+> ModelsStandardNotificationListResponse notificationsGet()
 
 Get notifications for the authenticated user with pagination
 
@@ -49,7 +49,7 @@ const { status, data } = await apiInstance.notificationsGet(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardNotificationListResponse**
 
 ### Authorization
 
@@ -71,7 +71,7 @@ const { status, data } = await apiInstance.notificationsGet(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notificationsIdDelete**
-> ModelsStandardResponse notificationsIdDelete()
+> ModelsStandardGenericResponse notificationsIdDelete()
 
 Delete a specific notification
 
@@ -102,7 +102,7 @@ const { status, data } = await apiInstance.notificationsIdDelete(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -126,7 +126,7 @@ const { status, data } = await apiInstance.notificationsIdDelete(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notificationsIdReadPut**
-> ModelsStandardResponse notificationsIdReadPut()
+> ModelsStandardGenericResponse notificationsIdReadPut()
 
 Mark a specific notification as read
 
@@ -157,7 +157,7 @@ const { status, data } = await apiInstance.notificationsIdReadPut(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -181,7 +181,7 @@ const { status, data } = await apiInstance.notificationsIdReadPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notificationsPost**
-> ModelsStandardResponse notificationsPost(notification)
+> ModelsStandardNotificationResponse notificationsPost(notification)
 
 Create a new notification for a user
 
@@ -213,7 +213,7 @@ const { status, data } = await apiInstance.notificationsPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardNotificationResponse**
 
 ### Authorization
 
@@ -235,7 +235,7 @@ const { status, data } = await apiInstance.notificationsPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notificationsReadAllPut**
-> ModelsStandardResponse notificationsReadAllPut()
+> ModelsStandardGenericResponse notificationsReadAllPut()
 
 Mark all notifications as read for the authenticated user
 
@@ -259,7 +259,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -281,7 +281,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notificationsStatsGet**
-> ModelsStandardResponse notificationsStatsGet()
+> ModelsStandardNotificationResponse notificationsStatsGet()
 
 Get notification statistics for the authenticated user
 
@@ -305,7 +305,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardNotificationResponse**
 
 ### Authorization
 

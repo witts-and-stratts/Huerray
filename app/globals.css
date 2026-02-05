@@ -2,6 +2,7 @@
 @import '../styles/spacing.css';
 @import '../styles/colors.css';
 @import '../styles/typography.css';
+
 @import '../styles/header.css';
 @import '../styles/footer.css';
 @import '../styles/button.css';
@@ -23,6 +24,7 @@
 @import '../styles/pricing.css';
 @import '../styles/about.css';
 @import '../styles/career.css';
+
 
 
 :root {

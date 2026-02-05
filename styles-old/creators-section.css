@@ -1,0 +1,112 @@
+@reference 'tailwindcss';
+
+.creators-section {
+  @apply px-4 lg:px-10 py-8 lg:py-20 text-white bg-orange rounded-4xl md:rounded-[60px] relative z-100 -mt-10 overflow-x-hidden;
+}
+
+.creators-section__container {
+  @apply grid lg:grid-cols-2 items-center gap-16 mx-auto;
+}
+
+/* Content */
+
+.creators-section__label {
+  @apply text-h4 font-bold mb-10 md:mb-20;
+}
+
+.creators-section__title {
+  @apply text-h1;
+}
+
+.creators-section__description {
+  @apply lg:mb-20 text-h5 text-white mt-4;
+}
+
+/* Images */
+.creators-section__images {
+  @apply relative;
+}
+
+.creators-section__main-image {
+  @apply aspect-4/3 rounded-[60px] lg:rounded-[128px] overflow-hidden;
+}
+
+.creators-section__main-image img {
+  @apply w-full h-full object-cover;
+}
+
+.creators-section__secondary-image {
+  @apply absolute -right-5 md:-right-4 top-1/2 w-[177px] lg:h-[153px] rounded-2xl md:rounded-3xl overflow-hidden z-10;
+}
+
+.creators-section__secondary-image img {
+  @apply w-full h-full object-cover;
+}
+
+/* Payment Card */
+.creators-section__payment-card {
+  @apply absolute md:-left-20 -bottom-5 md:-bottom-10 w-5/7 lg:w-2/3 h-20 lg:h-[117px] bg-white rounded-2xl lg:rounded-4xl p-2 md:p-3 flex items-center gap-3 z-10;
+}
+
+.creators-section__payment-avatar {
+  @apply h-full aspect-square rounded-lg overflow-hidden shrink-0;
+}
+
+.creators-section__payment-avatar img {
+  @apply w-full h-full object-cover;
+}
+
+.creators-section__payment-content {
+  @apply flex-1;
+}
+
+.creators-section__payment-title {
+  @apply text-slate-800 text-body lg:text-h6 font-medium mb-2;
+}
+
+.creators-section__payment-bar {
+  @apply bg-slate-100 h-1.5 lg:h-2.5 rounded-full w-full mb-2;
+}
+
+.creators-section__payment-bar--short {
+  @apply bg-slate-100 h-1.5 lg:h-2.5 rounded-full w-[60%];
+}
+
+/* Teaser Card */
+.creators-section__teaser-card {
+  @apply absolute -right-3 md:-right-5 -bottom-10 md:-bottom-20 w-3/8 md:w-4/9 bg-white rounded-2xl z-10;
+}
+
+/* ----------------------------------------------------------------------------------- */
+@import 'tailwindcss';
+
+/* Tags */
+.creators-section__tags {
+  @apply mt-12 md:mt-16 space-y-2;
+}
+
+.creators-section__tags-row {
+  @apply flex gap-2 flex-wrap;
+}
+
+.creators-section__tags-row--offset {
+  @apply md:ml-8;
+}
+
+.creators-section__tag {
+  @apply inline-flex items-center justify-center px-2 md:px-6 py-1 md:py-1.5 rounded-full text-[12px] md:text-sm font-medium transition-colors bg-white border-burgundy-100 text-dark-burgundy;
+}
+
+.creators-section__tag:nth-child(3n),
+.creators-section__tag:nth-child(3n + 1) {
+  @apply bg-dark-burgundy border-dark-burgundy text-white;
+}
+
+.creators-section__tag:nth-child(3n + 2) {
+  background: #fdf0f4;
+  border-color: #fbdee7;
+}
+
+.creators-section__content-usage-img {
+  @apply absolute w-60 bottom-0 right-0;
+}

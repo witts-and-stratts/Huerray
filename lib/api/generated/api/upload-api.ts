@@ -18,11 +18,19 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsStandardApplicationVideoUploadResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardErrorResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardFilePreviewResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardFileUploadResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardVideoSubmissionUploadResponse } from '../models';
 /**
  * UploadApi - axios parameter creator
  */
@@ -58,10 +66,9 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             if (video !== undefined) { 
                 localVarFormParams.append('video', video as any);
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -102,10 +109,9 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             if (documents !== undefined) { 
                 localVarFormParams.append('documents', documents as any);
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -146,10 +152,9 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             if (images !== undefined) { 
                 localVarFormParams.append('images', images as any);
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -183,11 +188,8 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -220,11 +222,8 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -257,137 +256,8 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Serve PDF document files for preview with controlled download permissions. Download is only allowed for admin users.
-         * @summary Serve document file
-         * @param {string} filename Document filename
-         * @param {boolean} [download] Set to true to download the file (requires admin privileges)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsServeDocumentsFilenameGet: async (filename: string, download?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'filename' is not null or undefined
-            assertParamExists('uploadsServeDocumentsFilenameGet', 'filename', filename)
-            const localVarPath = `/uploads/serve/documents/{filename}`
-                .replace(`{${"filename"}}`, encodeURIComponent(String(filename)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-            if (download !== undefined) {
-                localVarQueryParameter['download'] = download;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Serve image files for preview with controlled download permissions. Download is only allowed for admin users.
-         * @summary Serve image file
-         * @param {string} filename Image filename
-         * @param {boolean} [download] Set to true to download the file (requires admin privileges)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsServeImagesFilenameGet: async (filename: string, download?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'filename' is not null or undefined
-            assertParamExists('uploadsServeImagesFilenameGet', 'filename', filename)
-            const localVarPath = `/uploads/serve/images/{filename}`
-                .replace(`{${"filename"}}`, encodeURIComponent(String(filename)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-            if (download !== undefined) {
-                localVarQueryParameter['download'] = download;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Serve video files for preview with controlled download permissions. Download is only allowed for brand users and admins.
-         * @summary Serve video file
-         * @param {string} filename Video filename
-         * @param {boolean} [download] Set to true to download the file (requires brand or admin privileges)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsServeVideosFilenameGet: async (filename: string, download?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'filename' is not null or undefined
-            assertParamExists('uploadsServeVideosFilenameGet', 'filename', filename)
-            const localVarPath = `/uploads/serve/videos/{filename}`
-                .replace(`{${"filename"}}`, encodeURIComponent(String(filename)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-            if (download !== undefined) {
-                localVarQueryParameter['download'] = download;
-            }
-
-
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -430,14 +300,13 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             if (gigId !== undefined) { 
                 localVarFormParams.append('gig_id', gigId as any);
             }
-    
+
             if (video !== undefined) { 
                 localVarFormParams.append('video', video as any);
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -478,10 +347,9 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             if (videos !== undefined) { 
                 localVarFormParams.append('videos', videos as any);
             }
-    
-    
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
+            localVarHeaderParameter['Accept'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -508,7 +376,7 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsApplicationVideoPost(video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsApplicationVideoPost(video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardApplicationVideoUploadResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsApplicationVideoPost(video, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsApplicationVideoPost']?.[localVarOperationServerIndex]?.url;
@@ -521,7 +389,7 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsDocumentsPost(documents: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsDocumentsPost(documents: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsDocumentsPost(documents, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsDocumentsPost']?.[localVarOperationServerIndex]?.url;
@@ -534,7 +402,7 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsImagesPost(images: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsImagesPost(images: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsImagesPost(images, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsImagesPost']?.[localVarOperationServerIndex]?.url;
@@ -547,7 +415,7 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsPreviewDocumentsFilenameGet(filename: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsPreviewDocumentsFilenameGet(filename: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFilePreviewResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsPreviewDocumentsFilenameGet(filename, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsPreviewDocumentsFilenameGet']?.[localVarOperationServerIndex]?.url;
@@ -560,7 +428,7 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsPreviewImagesFilenameGet(filename: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsPreviewImagesFilenameGet(filename: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFilePreviewResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsPreviewImagesFilenameGet(filename, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsPreviewImagesFilenameGet']?.[localVarOperationServerIndex]?.url;
@@ -573,52 +441,10 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsPreviewVideosFilenameGet(filename: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsPreviewVideosFilenameGet(filename: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFilePreviewResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsPreviewVideosFilenameGet(filename, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsPreviewVideosFilenameGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Serve PDF document files for preview with controlled download permissions. Download is only allowed for admin users.
-         * @summary Serve document file
-         * @param {string} filename Document filename
-         * @param {boolean} [download] Set to true to download the file (requires admin privileges)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadsServeDocumentsFilenameGet(filename: string, download?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsServeDocumentsFilenameGet(filename, download, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsServeDocumentsFilenameGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Serve image files for preview with controlled download permissions. Download is only allowed for admin users.
-         * @summary Serve image file
-         * @param {string} filename Image filename
-         * @param {boolean} [download] Set to true to download the file (requires admin privileges)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadsServeImagesFilenameGet(filename: string, download?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsServeImagesFilenameGet(filename, download, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsServeImagesFilenameGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Serve video files for preview with controlled download permissions. Download is only allowed for brand users and admins.
-         * @summary Serve video file
-         * @param {string} filename Video filename
-         * @param {boolean} [download] Set to true to download the file (requires brand or admin privileges)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadsServeVideosFilenameGet(filename: string, download?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsServeVideosFilenameGet(filename, download, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsServeVideosFilenameGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -629,7 +455,7 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsVideoSubmissionPost(gigId: string, video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsVideoSubmissionPost(gigId: string, video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionUploadResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideoSubmissionPost(gigId, video, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideoSubmissionPost']?.[localVarOperationServerIndex]?.url;
@@ -642,7 +468,7 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsVideosPost(videos: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async uploadsVideosPost(videos: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideosPost(videos, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideosPost']?.[localVarOperationServerIndex]?.url;
@@ -664,7 +490,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsApplicationVideoPost(requestParameters: UploadApiUploadsApplicationVideoPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsApplicationVideoPost(requestParameters: UploadApiUploadsApplicationVideoPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardApplicationVideoUploadResponse> {
             return localVarFp.uploadsApplicationVideoPost(requestParameters.video, options).then((request) => request(axios, basePath));
         },
         /**
@@ -674,7 +500,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsDocumentsPost(requestParameters: UploadApiUploadsDocumentsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsDocumentsPost(requestParameters: UploadApiUploadsDocumentsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFileUploadResponse> {
             return localVarFp.uploadsDocumentsPost(requestParameters.documents, options).then((request) => request(axios, basePath));
         },
         /**
@@ -684,7 +510,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsImagesPost(requestParameters: UploadApiUploadsImagesPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsImagesPost(requestParameters: UploadApiUploadsImagesPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFileUploadResponse> {
             return localVarFp.uploadsImagesPost(requestParameters.images, options).then((request) => request(axios, basePath));
         },
         /**
@@ -694,7 +520,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsPreviewDocumentsFilenameGet(requestParameters: UploadApiUploadsPreviewDocumentsFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsPreviewDocumentsFilenameGet(requestParameters: UploadApiUploadsPreviewDocumentsFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFilePreviewResponse> {
             return localVarFp.uploadsPreviewDocumentsFilenameGet(requestParameters.filename, options).then((request) => request(axios, basePath));
         },
         /**
@@ -704,7 +530,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsPreviewImagesFilenameGet(requestParameters: UploadApiUploadsPreviewImagesFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsPreviewImagesFilenameGet(requestParameters: UploadApiUploadsPreviewImagesFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFilePreviewResponse> {
             return localVarFp.uploadsPreviewImagesFilenameGet(requestParameters.filename, options).then((request) => request(axios, basePath));
         },
         /**
@@ -714,38 +540,8 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsPreviewVideosFilenameGet(requestParameters: UploadApiUploadsPreviewVideosFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsPreviewVideosFilenameGet(requestParameters: UploadApiUploadsPreviewVideosFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFilePreviewResponse> {
             return localVarFp.uploadsPreviewVideosFilenameGet(requestParameters.filename, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Serve PDF document files for preview with controlled download permissions. Download is only allowed for admin users.
-         * @summary Serve document file
-         * @param {UploadApiUploadsServeDocumentsFilenameGetRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsServeDocumentsFilenameGet(requestParameters: UploadApiUploadsServeDocumentsFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<File> {
-            return localVarFp.uploadsServeDocumentsFilenameGet(requestParameters.filename, requestParameters.download, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Serve image files for preview with controlled download permissions. Download is only allowed for admin users.
-         * @summary Serve image file
-         * @param {UploadApiUploadsServeImagesFilenameGetRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsServeImagesFilenameGet(requestParameters: UploadApiUploadsServeImagesFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<File> {
-            return localVarFp.uploadsServeImagesFilenameGet(requestParameters.filename, requestParameters.download, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Serve video files for preview with controlled download permissions. Download is only allowed for brand users and admins.
-         * @summary Serve video file
-         * @param {UploadApiUploadsServeVideosFilenameGetRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsServeVideosFilenameGet(requestParameters: UploadApiUploadsServeVideosFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<File> {
-            return localVarFp.uploadsServeVideosFilenameGet(requestParameters.filename, requestParameters.download, options).then((request) => request(axios, basePath));
         },
         /**
          * Upload a video file for a gig submission with unique naming
@@ -754,7 +550,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideoSubmissionPost(requestParameters: UploadApiUploadsVideoSubmissionPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsVideoSubmissionPost(requestParameters: UploadApiUploadsVideoSubmissionPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionUploadResponse> {
             return localVarFp.uploadsVideoSubmissionPost(requestParameters.gigId, requestParameters.video, options).then((request) => request(axios, basePath));
         },
         /**
@@ -764,7 +560,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideosPost(requestParameters: UploadApiUploadsVideosPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        uploadsVideosPost(requestParameters: UploadApiUploadsVideosPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFileUploadResponse> {
             return localVarFp.uploadsVideosPost(requestParameters.videos, options).then((request) => request(axios, basePath));
         },
     };
@@ -828,51 +624,6 @@ export interface UploadApiUploadsPreviewVideosFilenameGetRequest {
      * Video filename
      */
     readonly filename: string
-}
-
-/**
- * Request parameters for uploadsServeDocumentsFilenameGet operation in UploadApi.
- */
-export interface UploadApiUploadsServeDocumentsFilenameGetRequest {
-    /**
-     * Document filename
-     */
-    readonly filename: string
-
-    /**
-     * Set to true to download the file (requires admin privileges)
-     */
-    readonly download?: boolean
-}
-
-/**
- * Request parameters for uploadsServeImagesFilenameGet operation in UploadApi.
- */
-export interface UploadApiUploadsServeImagesFilenameGetRequest {
-    /**
-     * Image filename
-     */
-    readonly filename: string
-
-    /**
-     * Set to true to download the file (requires admin privileges)
-     */
-    readonly download?: boolean
-}
-
-/**
- * Request parameters for uploadsServeVideosFilenameGet operation in UploadApi.
- */
-export interface UploadApiUploadsServeVideosFilenameGetRequest {
-    /**
-     * Video filename
-     */
-    readonly filename: string
-
-    /**
-     * Set to true to download the file (requires brand or admin privileges)
-     */
-    readonly download?: boolean
 }
 
 /**
@@ -968,39 +719,6 @@ export class UploadApi extends BaseAPI {
      */
     public uploadsPreviewVideosFilenameGet(requestParameters: UploadApiUploadsPreviewVideosFilenameGetRequest, options?: RawAxiosRequestConfig) {
         return UploadApiFp(this.configuration).uploadsPreviewVideosFilenameGet(requestParameters.filename, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Serve PDF document files for preview with controlled download permissions. Download is only allowed for admin users.
-     * @summary Serve document file
-     * @param {UploadApiUploadsServeDocumentsFilenameGetRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public uploadsServeDocumentsFilenameGet(requestParameters: UploadApiUploadsServeDocumentsFilenameGetRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsServeDocumentsFilenameGet(requestParameters.filename, requestParameters.download, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Serve image files for preview with controlled download permissions. Download is only allowed for admin users.
-     * @summary Serve image file
-     * @param {UploadApiUploadsServeImagesFilenameGetRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public uploadsServeImagesFilenameGet(requestParameters: UploadApiUploadsServeImagesFilenameGetRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsServeImagesFilenameGet(requestParameters.filename, requestParameters.download, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Serve video files for preview with controlled download permissions. Download is only allowed for brand users and admins.
-     * @summary Serve video file
-     * @param {UploadApiUploadsServeVideosFilenameGetRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public uploadsServeVideosFilenameGet(requestParameters: UploadApiUploadsServeVideosFilenameGetRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsServeVideosFilenameGet(requestParameters.filename, requestParameters.download, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

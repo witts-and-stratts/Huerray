@@ -18,7 +18,7 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
@@ -26,9 +26,23 @@ import type { ModelsBrandRequest } from '../models';
 // @ts-ignore
 import type { ModelsBrandStatusUpdateRequest } from '../models';
 // @ts-ignore
-import type { ModelsPaginatedResponse } from '../models';
+import type { ModelsPaginatedBrandResponses } from '../models';
 // @ts-ignore
-import type { ModelsStandardResponse } from '../models';
+import type { ModelsPaginatedCampaignResponse } from '../models';
+// @ts-ignore
+import type { ModelsPaginatedCreatorResponse } from '../models';
+// @ts-ignore
+import type { ModelsPaginatedGigBrandResponse } from '../models';
+// @ts-ignore
+import type { ModelsPaginatedVideoSubmissionResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardBrandResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardBrandStatusUpdateResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardErrorResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardGenericResponse } from '../models';
 /**
  * BrandApi - axios parameter creator
  */
@@ -41,7 +55,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
          * @throws {RequiredError}
          */
         brandsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/brands/`;
+            const localVarPath = `/brands`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -56,8 +70,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -174,8 +188,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['status'] = status;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -211,8 +225,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -248,8 +262,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -288,9 +302,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -312,7 +325,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
         brandsPost: async (request: ModelsBrandRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'request' is not null or undefined
             assertParamExists('brandsPost', 'request', request)
-            const localVarPath = `/brands/`;
+            const localVarPath = `/brands`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -327,9 +340,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -351,7 +363,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
         brandsPut: async (request: ModelsBrandRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'request' is not null or undefined
             assertParamExists('brandsPut', 'request', request)
-            const localVarPath = `/brands/`;
+            const localVarPath = `/brands`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -366,9 +378,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
             // authentication BearerAuth required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -487,8 +498,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['video_format'] = videoFormat;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -565,8 +576,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['q'] = q;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -653,8 +664,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['status'] = status;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -731,8 +742,8 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['status'] = status;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -757,7 +768,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async brandsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsGet']?.[localVarOperationServerIndex]?.url;
@@ -786,7 +797,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsGigsGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: BrandsGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: BrandsGigsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async brandsGigsGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: BrandsGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: BrandsGigsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigBrandResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsGigsGet(ageMax, ageMin, brandId, campaignId, compensationMax, compensationMin, endDate, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, genderRequirement, gigCostMax, gigCostMin, limit, page, q, startDate, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsGigsGet']?.[localVarOperationServerIndex]?.url;
@@ -799,7 +810,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async brandsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsIdDelete(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsIdDelete']?.[localVarOperationServerIndex]?.url;
@@ -812,7 +823,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async brandsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsIdGet']?.[localVarOperationServerIndex]?.url;
@@ -826,7 +837,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsIdStatusPut(id: string, request: ModelsBrandStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async brandsIdStatusPut(id: string, request: ModelsBrandStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandStatusUpdateResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsIdStatusPut(id, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsIdStatusPut']?.[localVarOperationServerIndex]?.url;
@@ -839,7 +850,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsPost(request: ModelsBrandRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async brandsPost(request: ModelsBrandRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsPost(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsPost']?.[localVarOperationServerIndex]?.url;
@@ -852,7 +863,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsPut(request: ModelsBrandRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponse>> {
+        async brandsPut(request: ModelsBrandRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsPut(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsPut']?.[localVarOperationServerIndex]?.url;
@@ -881,7 +892,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsSearchCampaignsGet(allowMultiple?: boolean, brandId?: string, category?: BrandsSearchCampaignsGetCategoryEnum, contentType?: BrandsSearchCampaignsGetContentTypeEnum, createdAfter?: string, createdBefore?: string, limit?: number, maxCreators?: number, maxDuration?: number, maxVideos?: number, minCreators?: number, minDuration?: number, minVideos?: number, page?: number, q?: string, status?: BrandsSearchCampaignsGetStatusEnum, videoFormat?: BrandsSearchCampaignsGetVideoFormatEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async brandsSearchCampaignsGet(allowMultiple?: boolean, brandId?: string, category?: BrandsSearchCampaignsGetCategoryEnum, contentType?: BrandsSearchCampaignsGetContentTypeEnum, createdAfter?: string, createdBefore?: string, limit?: number, maxCreators?: number, maxDuration?: number, maxVideos?: number, minCreators?: number, minDuration?: number, minVideos?: number, page?: number, q?: string, status?: BrandsSearchCampaignsGetStatusEnum, videoFormat?: BrandsSearchCampaignsGetVideoFormatEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedCampaignResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsSearchCampaignsGet(allowMultiple, brandId, category, contentType, createdAfter, createdBefore, limit, maxCreators, maxDuration, maxVideos, minCreators, minDuration, minVideos, page, q, status, videoFormat, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsSearchCampaignsGet']?.[localVarOperationServerIndex]?.url;
@@ -902,7 +913,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsSearchCreatorsGet(ageMax?: number, ageMin?: number, city?: string, country?: string, gender?: BrandsSearchCreatorsGetGenderEnum, limit?: number, page?: number, preferredCategory?: string, q?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async brandsSearchCreatorsGet(ageMax?: number, ageMin?: number, city?: string, country?: string, gender?: BrandsSearchCreatorsGetGenderEnum, limit?: number, page?: number, preferredCategory?: string, q?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedCreatorResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsSearchCreatorsGet(ageMax, ageMin, city, country, gender, limit, page, preferredCategory, q, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsSearchCreatorsGet']?.[localVarOperationServerIndex]?.url;
@@ -925,7 +936,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsSearchGet(brandId?: string, category?: BrandsSearchGetCategoryEnum, city?: string, companySize?: BrandsSearchGetCompanySizeEnum, country?: string, createdAfter?: string, createdBefore?: string, limit?: number, page?: number, q?: string, status?: BrandsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async brandsSearchGet(brandId?: string, category?: BrandsSearchGetCategoryEnum, city?: string, companySize?: BrandsSearchGetCompanySizeEnum, country?: string, createdAfter?: string, createdBefore?: string, limit?: number, page?: number, q?: string, status?: BrandsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedBrandResponses>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsSearchGet(brandId, category, city, companySize, country, createdAfter, createdBefore, limit, page, q, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsSearchGet']?.[localVarOperationServerIndex]?.url;
@@ -946,7 +957,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsSearchVideoSubmissionsGet(campaignId?: string, createdAfter?: string, createdBefore?: string, creatorId?: string, gigId?: string, limit?: number, page?: number, q?: string, status?: BrandsSearchVideoSubmissionsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedResponse>> {
+        async brandsSearchVideoSubmissionsGet(campaignId?: string, createdAfter?: string, createdBefore?: string, creatorId?: string, gigId?: string, limit?: number, page?: number, q?: string, status?: BrandsSearchVideoSubmissionsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedVideoSubmissionResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandsSearchVideoSubmissionsGet(campaignId, createdAfter, createdBefore, creatorId, gigId, limit, page, q, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsSearchVideoSubmissionsGet']?.[localVarOperationServerIndex]?.url;
@@ -967,7 +978,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        brandsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandResponse> {
             return localVarFp.brandsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -977,7 +988,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsGigsGet(requestParameters: BrandApiBrandsGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        brandsGigsGet(requestParameters: BrandApiBrandsGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedGigBrandResponse> {
             return localVarFp.brandsGigsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
@@ -987,7 +998,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsIdDelete(requestParameters: BrandApiBrandsIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        brandsIdDelete(requestParameters: BrandApiBrandsIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
             return localVarFp.brandsIdDelete(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -997,7 +1008,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsIdGet(requestParameters: BrandApiBrandsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        brandsIdGet(requestParameters: BrandApiBrandsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandResponse> {
             return localVarFp.brandsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1007,7 +1018,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsIdStatusPut(requestParameters: BrandApiBrandsIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        brandsIdStatusPut(requestParameters: BrandApiBrandsIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandStatusUpdateResponse> {
             return localVarFp.brandsIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1017,7 +1028,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsPost(requestParameters: BrandApiBrandsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        brandsPost(requestParameters: BrandApiBrandsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandResponse> {
             return localVarFp.brandsPost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1027,7 +1038,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsPut(requestParameters: BrandApiBrandsPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponse> {
+        brandsPut(requestParameters: BrandApiBrandsPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandResponse> {
             return localVarFp.brandsPut(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1037,7 +1048,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsSearchCampaignsGet(requestParameters: BrandApiBrandsSearchCampaignsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        brandsSearchCampaignsGet(requestParameters: BrandApiBrandsSearchCampaignsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedCampaignResponse> {
             return localVarFp.brandsSearchCampaignsGet(requestParameters.allowMultiple, requestParameters.brandId, requestParameters.category, requestParameters.contentType, requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.limit, requestParameters.maxCreators, requestParameters.maxDuration, requestParameters.maxVideos, requestParameters.minCreators, requestParameters.minDuration, requestParameters.minVideos, requestParameters.page, requestParameters.q, requestParameters.status, requestParameters.videoFormat, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1047,7 +1058,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsSearchCreatorsGet(requestParameters: BrandApiBrandsSearchCreatorsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        brandsSearchCreatorsGet(requestParameters: BrandApiBrandsSearchCreatorsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedCreatorResponse> {
             return localVarFp.brandsSearchCreatorsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.city, requestParameters.country, requestParameters.gender, requestParameters.limit, requestParameters.page, requestParameters.preferredCategory, requestParameters.q, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1057,7 +1068,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsSearchGet(requestParameters: BrandApiBrandsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        brandsSearchGet(requestParameters: BrandApiBrandsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedBrandResponses> {
             return localVarFp.brandsSearchGet(requestParameters.brandId, requestParameters.category, requestParameters.city, requestParameters.companySize, requestParameters.country, requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1067,7 +1078,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsSearchVideoSubmissionsGet(requestParameters: BrandApiBrandsSearchVideoSubmissionsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedResponse> {
+        brandsSearchVideoSubmissionsGet(requestParameters: BrandApiBrandsSearchVideoSubmissionsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedVideoSubmissionResponse> {
             return localVarFp.brandsSearchVideoSubmissionsGet(requestParameters.campaignId, requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.creatorId, requestParameters.gigId, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.status, options).then((request) => request(axios, basePath));
         },
     };
@@ -1488,10 +1499,7 @@ export type BrandsSearchCampaignsGetCategoryEnum = typeof BrandsSearchCampaignsG
 export const BrandsSearchCampaignsGetContentTypeEnum = {
     ContentTypeVideoOption: 'video',
     ContentTypeImageOption: 'image',
-    ContentTypePDFOption: 'pdf',
-    ContentTypeVideo: 'video',
-    ContentTypeImage: 'image',
-    ContentTypePDF: 'pdf'
+    ContentTypePDFOption: 'pdf'
 } as const;
 export type BrandsSearchCampaignsGetContentTypeEnum = typeof BrandsSearchCampaignsGetContentTypeEnum[keyof typeof BrandsSearchCampaignsGetContentTypeEnum];
 export const BrandsSearchCampaignsGetStatusEnum = {

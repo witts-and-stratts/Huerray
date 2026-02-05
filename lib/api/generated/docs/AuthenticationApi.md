@@ -15,7 +15,7 @@ All URIs are relative to */api/v1*
 |[**authVerifyEmailPost**](#authverifyemailpost) | **POST** /auth/verify-email | Verify email|
 
 # **authChangePasswordPost**
-> ModelsStandardResponse authChangePasswordPost(password)
+> ModelsStandardGenericResponse authChangePasswordPost(password)
 
 Change password for authenticated user
 
@@ -47,7 +47,7 @@ const { status, data } = await apiInstance.authChangePasswordPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -70,7 +70,7 @@ const { status, data } = await apiInstance.authChangePasswordPost(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authLoginPost**
-> ModelsStandardResponse authLoginPost(credentials)
+> ModelsStandardAuthResponse authLoginPost(credentials)
 
 Authenticate user with username/email and password
 
@@ -102,7 +102,7 @@ const { status, data } = await apiInstance.authLoginPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardAuthResponse**
 
 ### Authorization
 
@@ -125,7 +125,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authLogoutPost**
-> ModelsStandardResponse authLogoutPost()
+> ModelsStandardGenericResponse authLogoutPost()
 
 Logout user and invalidate tokens
 
@@ -149,7 +149,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -171,7 +171,7 @@ This endpoint does not have any parameters.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authPasswordResetConfirmPost**
-> ModelsStandardResponse authPasswordResetConfirmPost(reset)
+> ModelsStandardGenericResponse authPasswordResetConfirmPost(reset)
 
 Reset password using reset token
 
@@ -203,7 +203,7 @@ const { status, data } = await apiInstance.authPasswordResetConfirmPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -226,7 +226,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authPasswordResetPost**
-> ModelsStandardResponse authPasswordResetPost(email)
+> ModelsStandardGenericResponse authPasswordResetPost(email)
 
 Send password reset email to user
 
@@ -258,7 +258,7 @@ const { status, data } = await apiInstance.authPasswordResetPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -281,7 +281,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authRefreshPost**
-> ModelsStandardResponse authRefreshPost(refresh)
+> ModelsStandardAuthResponse authRefreshPost(refresh)
 
 Generate new access token using refresh token
 
@@ -313,7 +313,7 @@ const { status, data } = await apiInstance.authRefreshPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardAuthResponse**
 
 ### Authorization
 
@@ -336,7 +336,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authRegisterPost**
-> ModelsStandardResponse authRegisterPost(user)
+> ModelsStandardAuthResponse authRegisterPost(user)
 
 Register a new user with email and password
 
@@ -368,7 +368,7 @@ const { status, data } = await apiInstance.authRegisterPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardAuthResponse**
 
 ### Authorization
 
@@ -391,7 +391,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authResendVerificationPost**
-> ModelsStandardResponse authResendVerificationPost(request)
+> ModelsStandardGenericResponse authResendVerificationPost(request)
 
 Resend email verification to user
 
@@ -423,7 +423,7 @@ const { status, data } = await apiInstance.authResendVerificationPost(
 
 ### Return type
 
-**ModelsStandardResponse**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 
@@ -444,7 +444,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authVerifyEmailPost**
-> { [key: string]: any; } authVerifyEmailPost(request)
+> ModelsStandardGenericResponse authVerifyEmailPost(request)
 
 Verify user email using token
 
@@ -476,7 +476,7 @@ const { status, data } = await apiInstance.authVerifyEmailPost(
 
 ### Return type
 
-**{ [key: string]: any; }**
+**ModelsStandardGenericResponse**
 
 ### Authorization
 

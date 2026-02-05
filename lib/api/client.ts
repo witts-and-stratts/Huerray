@@ -112,7 +112,7 @@ export const createApiClient = (): AxiosInstance => {
   // Request interceptor to add authentication token and check expiration
   instance.interceptors.request.use(
     async (config) => {
-      // Enable credentials for upload preview/serve endpoints
+      // Enable credentials for get requests in the upload preview/serve endpoints
       if (config.url?.includes('/uploads/') && config.method === 'get') {
         config.withCredentials = true;
       }

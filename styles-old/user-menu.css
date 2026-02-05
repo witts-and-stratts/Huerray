@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+.user-menu {
+  @apply flex items-center justify-center gap-1 cursor-pointer border-none outline-none px-2 h-10 rounded-full hover:bg-white/20 transition-colors;
+}
+
+.user-menu .icon-user {
+  @apply text-lg text-deep-maroon;
+}
+
+.user-menu__chevron {
+  @apply text-xs text-deep-maroon transition-transform;
+}
+
+.user-menu[data-state='open'] .user-menu__chevron {
+  @apply rotate-180;
+}
+
+/* Dropdown */
+.user-menu__dropdown {
+  @apply w-50 p-2 border-0 shadow-lg;
+}
+
+.user-menu__list {
+  @apply flex flex-col gap-1;
+}
+
+.user-menu__item {
+  @apply px-4 py-2 text-sm font-medium text-deep-maroon hover:bg-maroon-50/40 rounded-lg transition-colors cursor-pointer;
+}

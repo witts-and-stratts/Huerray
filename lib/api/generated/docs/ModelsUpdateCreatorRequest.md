@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **phone_number** | **string** | Creator Profile Fields | [optional] [default to undefined]
 **portfolio** | **string** | JSON array of portfolio URLs | [optional] [default to undefined]
 **preferred_categories** | [**Array&lt;UtilsBrandCategory&gt;**](UtilsBrandCategory.md) | Categories | [optional] [default to undefined]
+**profile_image_url** | **string** | URL to creator\&#39;s profile image | [optional] [default to undefined]
 **state** | **string** |  | [default to undefined]
 **street** | **string** |  | [optional] [default to undefined]
 **tax_country** | [**UtilsCountryCode**](UtilsCountryCode.md) |  | [optional] [default to undefined]
@@ -50,6 +51,7 @@ const instance: ModelsUpdateCreatorRequest = {
     phone_number,
     portfolio,
     preferred_categories,
+    profile_image_url,
     state,
     street,
     tax_country,
