@@ -20,27 +20,9 @@ import { DataTablePagination } from "@/components/ui/data-table-pagination";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "motion/react";
+import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
 
-const UserSkeleton = () => {
-  return (
-    <motion.div
-      initial={ { opacity: 0 } }
-      animate={ { opacity: 1 } }
-      exit={ { opacity: 0 } }
-      transition={ { duration: 0.5 } }
-      className="w-full space-y-4 px-1">
-      <div className="flex items-center justify-between">
-        <Skeleton className="h-10 w-[250px]" />
-        <Skeleton className="h-10 w-[100px]" />
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        { Array.from( { length: 8 } ).map( ( _, i ) => (
-          <Skeleton key={ i } className="h-[200px] w-full rounded-xl" />
-        ) ) }
-      </div>
-    </motion.div>
-  );
-};
+
 
 interface UsersTableProps {
   users?: ModelsUserResponse[];
@@ -104,7 +86,7 @@ export function UsersTable( {
 
   return (
     <AnimatePresence>
-      { isLoading && <UserSkeleton /> }
+      { isLoading && <TableSkeleton /> }
       { error && <motion.div
         initial={ { opacity: 0 } }
         animate={ { opacity: 1 } }

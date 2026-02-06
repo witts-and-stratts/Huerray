@@ -14,32 +14,14 @@ import * as React from 'react';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { AnimatePresence, motion } from 'motion/react';
+import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { columns } from './brands-columns';
 import { Brand } from './brands-data';
 import { BrandsView } from './brands-view';
 import { BrandsTableToolbar } from './brands-table-toolbar';
 import { BrandsTablePagination } from './brands-table-pagination';
 
-const BrandSkeleton = () => {
-  return (
-    <motion.div
-      initial={ { opacity: 0 } }
-      animate={ { opacity: 1 } }
-      exit={ { opacity: 0 } }
-      transition={ { duration: 0.5 } }
-      className='w-full space-y-4 px-5'>
-      <div className='flex items-center justify-between'>
-        <Skeleton className='h-10 w-[250px]' />
-        <Skeleton className='h-10 w-[100px]' />
-      </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        { Array.from( { length: 8 } ).map( ( _, i ) => (
-          <Skeleton key={ i } className='h-[250px] w-full rounded-xl' />
-        ) ) }
-      </div>
-    </motion.div>
-  );
-};
+
 
 type BrandsTableProps = {
   brandsData?: Brand[];
@@ -92,7 +74,7 @@ export function BrandsTable( {
 
   return (
     <AnimatePresence>
-      { isLoading && <BrandSkeleton /> }
+      { isLoading && <TableSkeleton cardHeight="h-[250px]" /> }
       { error && <motion.div
         initial={ { opacity: 0 } }
         animate={ { opacity: 1 } }

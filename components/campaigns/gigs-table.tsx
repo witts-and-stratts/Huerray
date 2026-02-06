@@ -12,6 +12,8 @@ import {
   type VisibilityState
 } from '@tanstack/react-table';
 import * as React from 'react';
+import { AnimatePresence } from 'motion/react';
+import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 
 import { getColumns } from './gigs-columns';
 import { GigsTableToolbar } from './gigs-table-toolbar';
@@ -29,7 +31,7 @@ export interface GigsTableProps {
   hideViewToggle?: boolean;
 }
 
-export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false }: GigsTableProps ) {
+export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false, isLoading = false }: GigsTableProps ) {
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -80,30 +82,40 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
   } );
 
   return (
-    <div className='w-full'>
-      <GigsTableToolbar
-        table={ table }
-        statuses={ statuses }
-        view={ view }
-        setView={ setView }
-        hideViewToggle={ hideViewToggle }
-      />
-      <GigsView
-        table={ table }
-        view={ view }
-        onViewGig={ ( gig ) => setSelectedGig( gig ) }
-      />
-      <CampaignsTablePagination table={ table } />
-      <GigDetailsSheet
-        gig={ selectedGig }
-        open={ !!selectedGig }
-        onOpenChange={ ( open ) => !open && setSelectedGig( null ) }
-      />
-      <GigEditSheet
-        gig={ editingGig }
-        open={ !!editingGig }
-        onOpenChange={ ( open ) => !open && setEditingGig( null ) }
-      />
-    </div>
+    <AnimatePresence>
+      { isLoading ? (
+        <TableSkeleton />
+      ) : (
+        <div className='w-full'>
+          <GigsTableToolbar
+            table={ table }
+            statuses={ statuses }
+            view={ view }
+            setView={ setView }
+            hideViewToggle={ hideViewToggle }
+          />
+          <div className='px-5'>
+            <GigsView
+              table={ table }
+              view={ view }
+              onViewGig={ ( gig ) => setSelectedGig( gig ) }
+            />
+          </div>
+          <div className="px-4">
+            <CampaignsTablePagination table={ table } />
+          </div>
+          <GigDetailsSheet
+            gig={ selectedGig }
+            open={ !!selectedGig }
+            onOpenChange={ ( open ) => !open && setSelectedGig( null ) }
+          />
+          <GigEditSheet
+            gig={ editingGig }
+            open={ !!editingGig }
+            onOpenChange={ ( open ) => !open && setEditingGig( null ) }
+          />
+        </div>
+      ) }
+    </AnimatePresence>
   );
 }
