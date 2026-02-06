@@ -4,11 +4,13 @@ import { ActionMenu, MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
-import { useDeleteCampaign, useReplicateCampaign } from "@/lib/api/hooks/campaigns";
+import { useDeleteCampaign, useReplicateCampaign, useAdminCampaignApproval } from "@/lib/api/hooks/campaigns";
+import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum } from "@/lib/api/generated/models";
 import { EllipsisVertical, MoreVertical } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CampaignRenameDialog } from "./campaign-rename-dialog";
+import { CampaignDecisionDialog } from "./campaign-decision-dialog";
 import { toast } from "sonner";
 import React, { ReactNode } from "react";
 import { ModelCampaign } from "./types";
@@ -35,8 +37,13 @@ export function CampaignActionMenu( {
   const router = useRouter();
   const deleteCampaign = useDeleteCampaign();
   const replicateCampaign = useReplicateCampaign();
+  const approveCampaign = useAdminCampaignApproval();
+  const [ approveDialogOpen, setApproveDialogOpen ] = React.useState( false );
+  const [ adminComment, setAdminComment ] = React.useState( '' );
   const [ deleteDialogOpen, setDeleteDialogOpen ] = React.useState( false );
   const [ renameDialogOpen, setRenameDialogOpen ] = React.useState( false );
+  const [ decisionDialogOpen, setDecisionDialogOpen ] = React.useState( false );
+  const [ initialDecision, setInitialDecision ] = React.useState<'yes' | 'no'>( 'yes' );
 
   const [ deleteConfirmation, setDeleteConfirmation ] = React.useState( '' );
 
@@ -68,6 +75,38 @@ export function CampaignActionMenu( {
     }
   };
 
+  const handleApprove = () => {
+    if ( campaign.id ) {
+      approveCampaign.mutate( {
+        id: campaign.id,
+        request: {
+          campaign_status: ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved,
+          admin_comments: adminComment || "Approved by admin",
+          number_of_gigs_validated: true,
+        }
+      }, {
+        onSuccess: () => {
+          toast.success( "Campaign approved successfully" );
+          setApproveDialogOpen( false );
+          setAdminComment( '' );
+          if ( !hideViewDetails ) {
+            router.refresh(); // Or handle navigation if needed
+          } else {
+            router.refresh();
+          }
+        },
+        onError: () => {
+          toast.error( "Failed to approve campaign" );
+        }
+      } );
+    }
+  };
+
+  const handleDecision = ( decision: 'yes' | 'no' ) => {
+    setInitialDecision( decision );
+    setDecisionDialogOpen( true );
+  };
+
   const defaultActions: MenuAction<ModelCampaign>[] = [
     {
       label: (
@@ -81,8 +120,16 @@ export function CampaignActionMenu( {
       condition: () => !hideViewDetails,
     },
     {
+      label: (
+        <Link href={ `${ basePath }/campaigns/${ campaign.id }/gigs/new` } className='w-full'>
+          Create Gig
+        </Link>
+      ),
+      allowedRoles: [ 'admin' ],
+    },
+    {
       label: "Edit",
-      action: () => router.push( `${ basePath }/campaigns/${ campaign.campaign_id }/edit` ),
+      action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
     },
     {
@@ -94,13 +141,29 @@ export function CampaignActionMenu( {
       label: "Replicate",
       allowedRoles: [ "brand" ],
       action: () => {
-        if ( campaign.campaign_id ) {
-          replicateCampaign.mutate( campaign.campaign_id, {
+        if ( campaign.id ) {
+          replicateCampaign.mutate( campaign.id, {
             onSuccess: () => toast.success( "Campaign replicated successfully" ),
             onError: () => toast.error( "Failed to replicate campaign" ),
           } );
         }
       },
+    },
+    {
+      label: "Approve Campaign",
+      action: () => setApproveDialogOpen( true ),
+      allowedRoles: [ "admin" ],
+      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved
+    },
+    {
+      label: 'Approve Campaign',
+      action: () => handleDecision( 'yes' ),
+      allowedRoles: [ 'brand' ],
+    },
+    {
+      label: 'Reject Campaign',
+      action: () => handleDecision( 'no' ),
+      allowedRoles: [ 'brand' ],
     },
     {
       label: "Delete",
@@ -131,11 +194,11 @@ export function CampaignActionMenu( {
           )
         }
       />
-      { campaign.campaign_id && (
+      { campaign.id && (
         <CampaignRenameDialog
           open={ renameDialogOpen }
           onOpenChange={ setRenameDialogOpen }
-          campaignId={ campaign.campaign_id }
+          campaignId={ campaign.id }
           currentName={ campaign.campaign_name || '' }
           onSuccess={ () => router.refresh() }
         />
@@ -161,6 +224,38 @@ export function CampaignActionMenu( {
           />
         </div>
       </ConfirmDialog>
+
+      <ConfirmDialog
+        open={ approveDialogOpen }
+        onOpenChange={ setApproveDialogOpen }
+        title="Approve Campaign"
+        description="Are you sure you want to approve this campaign? This will make it active and visible to creators."
+        confirmLabel="Approve"
+        onConfirm={ handleApprove }
+        isLoading={ approveCampaign.isPending }
+        loadingText="Approving..."
+      >
+        <div className="flex flex-col gap-2 py-2">
+          <label htmlFor="admin-comment" className="text-sm font-medium">
+            Admin Comments (Optional)
+          </label>
+          <Input
+            id="admin-comment"
+            value={ adminComment }
+            onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => setAdminComment( e.target.value ) }
+            placeholder="e.g. Approved for launch"
+          />
+        </div>
+      </ConfirmDialog>
+      { campaign.id && (
+        <CampaignDecisionDialog
+          open={ decisionDialogOpen }
+          onOpenChange={ setDecisionDialogOpen }
+          campaignId={ campaign.id }
+          initialDecision={ initialDecision }
+          onSuccess={ () => router.refresh() }
+        />
+      ) }
     </>
   );
 }

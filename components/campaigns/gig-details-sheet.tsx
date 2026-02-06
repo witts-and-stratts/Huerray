@@ -8,11 +8,17 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
+  SheetFooter,
 } from '@/components/dashboard-ui/sheet';
 import { GigStatusBadge } from './gig-status-badge';
 import { formatDate, formatCurrency } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Video01Icon, Clock01Icon } from '@hugeicons/core-free-icons';
+import { Button } from '@/components/dashboard-ui/button';
+import { useApplyToGig } from '@/lib/api/hooks/gigs';
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
+import { RoleGuard } from '../auth/role-guard';
 
 interface GigDetailsSheetProps {
   gig: ModelsGigResponse | null;
@@ -21,6 +27,8 @@ interface GigDetailsSheetProps {
 }
 
 export function GigDetailsSheet( { gig, open, onOpenChange }: GigDetailsSheetProps ) {
+  const { mutate: applyToGig, isPending: isApplying } = useApplyToGig();
+
   if ( !gig ) return null;
 
   const {
@@ -38,6 +46,27 @@ export function GigDetailsSheet( { gig, open, onOpenChange }: GigDetailsSheetPro
     age_min,
     age_max,
   } = gig;
+
+  const handleApply = () => {
+    if ( !gig.id ) return;
+
+    applyToGig( {
+      id: gig.id,
+      application: {
+        message: "I am interested in this gig!",
+        number_of_videos: gig.number_of_videos || 1,
+      }
+    }, {
+      onSuccess: () => {
+        toast.success( "Application submitted successfully!" );
+        onOpenChange( false );
+      },
+      onError: ( error ) => {
+        toast.error( "Failed to submit application. Please try again." );
+        console.error( error );
+      }
+    } );
+  };
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange }>
@@ -119,6 +148,25 @@ export function GigDetailsSheet( { gig, open, onOpenChange }: GigDetailsSheetPro
           </div>
 
         </div>
+
+        <SheetFooter className="p-4 border-t mt-auto">
+          <RoleGuard allowedRoles={ [ 'creator' ] }>
+            <Button
+              className="w-full"
+              onClick={ handleApply }
+              disabled={ isApplying || gig_status !== 'open' }
+            >
+              { isApplying ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Applying...
+                </>
+              ) : (
+                'Apply for Gig'
+              ) }
+            </Button>
+          </RoleGuard>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

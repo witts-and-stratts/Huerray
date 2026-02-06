@@ -29,6 +29,8 @@ import { toast } from 'sonner';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { useRole } from '@/contexts/role-context';
 import { Capitalize, SentenceCase } from '../text-case';
+import { InviteCreatorsCard } from './invite-creators-card';
+import { StatusBadge } from './status-badge';
 
 interface CampaignDetailsViewProps {
   campaign: ModelCampaign;
@@ -45,10 +47,7 @@ function Activity( { mode, children }: { mode: 'visible' | 'hidden'; children: R
 
 export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsViewProps ) {
   const [ activeTab, setActiveTab ] = useState( 'overview' );
-  const [ decisionDialogOpen, setDecisionDialogOpen ] = useState( false );
-  const [ initialDecision, setInitialDecision ] = useState<'yes' | 'no'>( 'yes' );
   const router = useRouter();
-  const replicateCampaign = useReplicateCampaign();
   const role = useRole();
 
   const tabItems = [
@@ -60,52 +59,14 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
     { value: 'gigs', label: 'Gigs' },
   ];
 
-  const { data: gigsData } = useGigsByCampaign( campaign.id || '', 'admin' );
-  const allGigsValidated = React.useMemo( () => {
-    const gigs = gigsData?.data as ModelsGigResponse[];
-    if ( !gigs || gigs.length === 0 ) return false;
-    // Check if ALL gigs are validated
-    return gigs.every( gig => gig.gig_status === UtilsGigStatus.GigStatusValidated );
-  }, [ gigsData ] );
-
-  const handleDecision = ( decision: 'yes' | 'no' ) => {
-    setInitialDecision( decision );
-    setDecisionDialogOpen( true );
-  };
-
-  const { mutate: approveCampaign } = useAdminCampaignApproval();
-
-  const handleAdminApprove = () => {
-    if ( !campaign.id ) return;
-
-    approveCampaign( {
-      id: campaign.id,
-      request: {
-        campaign_status: ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved,
-        admin_comments: "Approved by admin",
-        number_of_gigs_validated: true,
-      }
-    }, {
-      onSuccess: () => {
-        toast.success( "Campaign approved successfully", {
-          richColors: true,
-        } );
-        router.refresh();
-      },
-      onError: ( error ) => {
-        toast.error( "Failed to approve campaign", {
-          description: <SentenceCase>{ ( error as any ).response?.data?.error?.message }</SentenceCase>,
-          richColors: true,
-        } );
-      }
-    } );
-  };
-
   return (
     <>
       <SubHeader
         title={ campaign.campaign_name! }
         description={ campaign.description! }
+        status={
+          <StatusBadge status={ campaign.campaign_status! } />
+        }
         pre={ <span className='font-medium text-muted-foreground'>Campaign</span> }
         breadcrumbs={ [
           { label: 'Campaigns', href: `${ basePath }/campaigns` },
@@ -120,14 +81,6 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
         }
       >
         <ButtonGroup className='items-center'>
-          <Button
-            variant='outline'
-            className='font-regular'
-            size='sm'
-            onClick={ () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ) }
-          >
-            Edit
-          </Button>
           <CampaignActionMenu
             campaign={ campaign }
             basePath={ basePath }
@@ -137,42 +90,6 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
                 <ChevronDown className='size-4' />
               </Button>
             }
-            extraActions={ [
-              {
-                label: (
-                  <Link href={ `${ basePath }/campaigns/${ campaign.id }/gigs/new` } className='w-full'>
-                    Create Gig
-                  </Link>
-                ),
-                allowedRoles: [ 'admin' ],
-              },
-              {
-                separator: true,
-                label: '',
-                allowedRoles: [ 'admin' ],
-              },
-              {
-                label: 'Approve Campaign',
-                action: handleAdminApprove,
-                allowedRoles: [ 'admin' ],
-                condition: () => !!allGigsValidated,
-              },
-              {
-                label: 'Approve Campaign',
-                action: () => handleDecision( 'yes' ),
-                allowedRoles: [ 'brand' ],
-              },
-              {
-                label: 'Reject Campaign',
-                action: () => handleDecision( 'no' ),
-                allowedRoles: [ 'brand' ],
-              },
-              {
-                separator: true,
-                label: '',
-                allowedRoles: [ 'brand' ],
-              },
-            ] }
           />
         </ButtonGroup>
       </SubHeader>
@@ -214,6 +131,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
                 </div>
               </div>
             </div>
+            <InviteCreatorsCard campaignId={ campaign.id || '' } />
           </div>
         </Activity>
 
@@ -243,13 +161,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
         </Activity>
       </div>
 
-      <CampaignDecisionDialog
-        open={ decisionDialogOpen }
-        onOpenChange={ setDecisionDialogOpen }
-        campaignId={ campaign.id || '' }
-        initialDecision={ initialDecision }
-        onSuccess={ () => router.refresh() }
-      />
+
     </>
   );
 }

@@ -39,7 +39,7 @@ export function BrandsTableToolbar( {
         <DataTableViewToggle view={ view } setView={ setView } />
         <DataTableFilterDropdown
           table={ table }
-          columnId='status'
+          columnId='brand_status'
           options={ statuses }
         />
         <DataTableViewOptions table={ table } />

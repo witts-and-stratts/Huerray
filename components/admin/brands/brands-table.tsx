@@ -64,8 +64,8 @@ export function BrandsTable( {
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
     brandsData?.forEach( ( brand ) => {
-      if ( brand.status ) {
-        statusSet.add( brand.status );
+      if ( brand.brand_status ) {
+        statusSet.add( brand.brand_status );
       }
     } );
     return Array.from( statusSet );

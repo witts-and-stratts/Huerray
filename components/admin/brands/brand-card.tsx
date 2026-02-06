@@ -2,6 +2,8 @@
 
 import { BrandActionMenu } from './brand-action-menu';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Badge } from '@/components/dashboard-ui/badge';
 import {
   Card,
   CardContent,
@@ -9,13 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/dashboard-ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
-import { Brand } from './brands-data';
-import Link from 'next/link';
 import { getCountryFlag } from '@/lib/country-flags';
-import { Separator } from '@/components/dashboard-ui/separator';
-import { Badge } from '@/components/dashboard-ui/badge';
+import Link from 'next/link';
 import { BrandStatusBadge } from './brand-status-badge';
+import { Brand } from './brands-data';
 
 interface BrandCardProps {
   brand: Brand;
@@ -26,7 +25,7 @@ export function BrandCard( { brand }: BrandCardProps ) {
     id,
     name,
     logo,
-    status,
+    brand_status,
     total_campaigns,
     website,
     contact_email,
@@ -42,7 +41,7 @@ export function BrandCard( { brand }: BrandCardProps ) {
   return (
     <Card className='py-3 justify-between gap-1'>
       <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
-        <div className="flex flex-col min-w-0">
+        <div className="flex flex-col flex-1 min-w-0">
           <Link href={ `/admin/brands/${ id }` } className='hover:underline'>
             <CardTitle className='capitalize text-[18px] font-normal text-primary font-primary'>
               { name }
@@ -81,7 +80,7 @@ export function BrandCard( { brand }: BrandCardProps ) {
         </div>
 
         <div className="mt-2">
-          <BrandStatusBadge status={ status || 'active' } />
+          <BrandStatusBadge status={ brand_status || 'active' } />
         </div>
       </CardContent>
     </Card>

@@ -40,8 +40,15 @@ export function UsersTableToolbar<TData>( {
         <DataTableViewToggle view={ view } setView={ setView } />
         <DataTableFilterDropdown
           table={ table }
+          columnId='user_type'
+          options={ [ 'Brand_user', 'Creator', 'Admin_user' ] }
+          title="User Type"
+        />
+        <DataTableFilterDropdown
+          table={ table }
           columnId='user_status'
           options={ statuses }
+          title="Status"
         />
         <DataTableViewOptions
           table={ table }

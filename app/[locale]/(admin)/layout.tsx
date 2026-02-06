@@ -2,14 +2,13 @@ import '@/app/[locale]/(admin)/globals.css';
 import { Toaster } from '@/components/dashboard-ui/sonner';
 import { QueryProvider } from '@/lib/api/query-provider';
 import { AuthProvider } from '@/lib/auth/auth-context';
+import { cn } from '@/lib/dashboard-utils';
+import StoreProvider from '@/lib/redux/store-provider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
-
-import { cn } from '@/lib/dashboard-utils';
-import StoreProvider from '@/lib/redux/store-provider';
 
 export default async function AdminLayout( {
   children,

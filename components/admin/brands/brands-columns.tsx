@@ -7,6 +7,7 @@ import { Brand } from "./brands-data";
 import { Badge } from "@/components/dashboard-ui/badge";
 import { Checkbox } from "@/components/dashboard-ui/checkbox";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/dashboard-ui/avatar";
+import { BrandStatusBadge } from "./brand-status-badge";
 
 export const columns: ColumnDef<Brand>[] = [
   {
@@ -48,14 +49,12 @@ export const columns: ColumnDef<Brand>[] = [
     },
   },
   {
-    accessorKey: "status",
+    accessorKey: "brand_status",
     header: "Status",
     cell: ( { row } ) => {
-      const status = row.getValue( "status" ) as string;
+      const status = row.getValue( "brand_status" ) as string;
       return (
-        <Badge variant={ status === "active" ? "default" : status === "inactive" ? "secondary" : "outline" }>
-          { status.charAt( 0 ).toUpperCase() + status.slice( 1 ) }
-        </Badge>
+        <BrandStatusBadge status={ status } />
       );
     },
   },

@@ -1,4 +1,5 @@
 import { Badge } from '@/components/dashboard-ui/badge';
+import { Capitalize } from '@/components/text-case';
 import { cn } from '@/lib/utils';
 
 export const CreatorStatusBadge = ( { status }: { status: string; } ) => {
@@ -16,7 +17,7 @@ export const CreatorStatusBadge = ( { status }: { status: string; } ) => {
 
   return (
     <Badge variant="outline" className={ cn( 'capitalize shadow-none font-normal text-xs', styles[ normalizedStatus ] || styles.inactive ) }>
-      { status }
+      <Capitalize>{ status.split( '_' ).join( ' ' ) }</Capitalize>
     </Badge>
   );
 };

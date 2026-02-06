@@ -1,9 +1,8 @@
 'use client';
 
-import * as React from 'react';
 import { Table } from '@tanstack/react-table';
-import { Brand } from './brands-data';
 import { BrandCard } from './brand-card';
+import { Brand } from './brands-data';
 
 interface BrandsCardsViewProps {
   table: Table<Brand>;

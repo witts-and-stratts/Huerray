@@ -20,8 +20,9 @@ interface SubHeaderProps {
   pre?: React.ReactNode;
   tabs?: React.ReactNode;
   breadcrumbs?: { label: string; href?: string; }[];
+  status?: React.ReactNode;
 }
-export function SubHeader( { title, description, children, pre, tabs, breadcrumbs }: SubHeaderProps ) {
+export function SubHeader( { title, description, children, pre, tabs, breadcrumbs, status }: SubHeaderProps ) {
   return (
     <div className='px-5 pt-4 sticky top-0 bg-background z-50'>
       { breadcrumbs && breadcrumbs.length > 0 && (
@@ -47,7 +48,9 @@ export function SubHeader( { title, description, children, pre, tabs, breadcrumb
       ) }
       { pre }
       <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-        <SubpageHeading title={ title } description={ description || '' } />
+        <SubpageHeading title={ title } description={ description || '' }>
+          { status }
+        </SubpageHeading>
         <div className='flex gap-2'>
           { children }
         </div>

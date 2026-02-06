@@ -3,7 +3,6 @@ import {
   CardFooter
 } from "@/components/dashboard-ui/card";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
-import { CreatorActionMenu } from "./creator-action-menu";
 import { CreatorInfoBlock } from "./creator-info-block";
 import { CreatorStatusBadge } from "./creator-status-badge";
 

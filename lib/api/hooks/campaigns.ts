@@ -24,6 +24,7 @@ import type {
   ModelsCreateCampaignRequest,
   ModelsAdminCampaignApprovalRequest,
   ModelsStandardCampaignResponse,
+  ModelsStandardGigApplicationResponses,
 } from '../generated/models';
 
 /**
@@ -63,6 +64,7 @@ export function useAdminCampaignApproval(
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: campaignsKeys.detail(variables.id) });
       queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: brandCampaignsKeys.lists() });
     },
     ...options,
   });
@@ -81,6 +83,7 @@ export const campaignsKeys = {
   list: (params?: CampaignsApiCampaignsSearchGetRequest) => [...campaignsKeys.lists(), params] as const,
   details: () => [...campaignsKeys.all, 'detail'] as const,
   detail: (id: string) => [...campaignsKeys.details(), id] as const,
+  applications: (id: string) => [...campaignsKeys.details(), id, 'applications'] as const,
 };
 
 /**
@@ -188,6 +191,24 @@ export function useCampaign(
       return response.data.data!;
     },
     enabled: !!id, // Only run query if id is provided
+    ...options,
+  });
+}
+
+/**
+ * Hook to fetch applications for a campaign
+ */
+export function useCampaignApplications(
+  id: string,
+  options?: Omit<UseQueryOptions<ModelsStandardGigApplicationResponses, Error>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: campaignsKeys.applications(id),
+    queryFn: async () => {
+      const response = await campaignsApi.campaignsIdApplicationsGet({ id });
+      return response.data;
+    },
+    enabled: !!id,
     ...options,
   });
 }

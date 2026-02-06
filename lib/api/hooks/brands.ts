@@ -13,7 +13,8 @@ import { apiClient, apiConfiguration } from '../client';
 import type { 
   ModelsStandardBrandResponse,
   ModelsPaginatedBrandResponses,
-  ModelsBrandStatusUpdateRequest
+  ModelsBrandStatusUpdateRequest,
+  ModelsPaginatedCreatorResponse
 } from '../generated/models';
 
 export const brandApi = new BrandApi(apiConfiguration, undefined, apiClient);
@@ -91,5 +92,50 @@ export function useUpdateBrandStatus(id: string) {
       queryClient.invalidateQueries({ queryKey: brandsKeys.all });
       queryClient.invalidateQueries({ queryKey: brandsKeys.detail(id) });
     },
+  });
+}
+/**
+ * Hook to delete a brand
+ */
+export function useDeleteBrand() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await brandApi.brandsIdDelete({ id });
+      return response.data;
+    },
+    onSuccess: () => {
+      // Invalidate brands lists
+      queryClient.invalidateQueries({ queryKey: brandsKeys.all });
+    },
+  });
+}
+
+/**
+ * Hook to search creators (Brand view)
+ */
+export function useBrandCreators(
+  params?: {
+    q?: string;
+    page?: number;
+    limit?: number;
+    // Add other filters as needed to match BrandsSearchCreatorsGetRequest
+    preferredCategory?: string;
+  },
+  options?: Omit<UseQueryOptions<ModelsPaginatedCreatorResponse, Error>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedCreatorResponse, Error> {
+  return useQuery({
+    queryKey: [...brandsKeys.all, 'creators', params],
+    queryFn: async () => {
+      const response = await brandApi.brandsSearchCreatorsGet({
+        limit: params?.limit,
+        page: params?.page,
+        preferredCategory: params?.preferredCategory,
+        q: params?.q
+      });
+      return response.data;
+    },
+    ...options,
   });
 }

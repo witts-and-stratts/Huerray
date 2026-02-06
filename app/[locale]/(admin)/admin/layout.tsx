@@ -1,5 +1,6 @@
 'use client';
 
+import { EmailVerificationBanner } from '@/components/auth/email-verification-banner';
 import { DashboardHeader } from '@/components/dashboard-header';
 import {
   SidebarInset,
@@ -18,6 +19,7 @@ export default function AdminLayout( {
       <SidebarProvider data-dashboard-theme='brand'>
         <AdminSidebar />
         <SidebarInset>
+          <EmailVerificationBanner />
           <DashboardHeader />
           <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
             { children }

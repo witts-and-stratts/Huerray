@@ -1,9 +1,11 @@
 export default function SubpageHeading( {
   title,
   description,
+  children,
 }: {
   title: string;
   description: string;
+  children?: React.ReactNode;
 } ) {
   return (
     <div>
@@ -11,6 +13,11 @@ export default function SubpageHeading( {
         { title }
       </h1>
       <p className="text-muted-foreground mt-1 font-regular" dangerouslySetInnerHTML={ { __html: description || '' } } />
+      { children && (
+        <div className="mt-2">
+          { children }
+        </div>
+      ) }
     </div>
   );
 }

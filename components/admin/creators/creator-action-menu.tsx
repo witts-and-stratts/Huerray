@@ -4,12 +4,11 @@ import {
   ActionMenu,
   MenuAction
 } from "@/components/dashboard-ui/action-menu";
-import { ModelsUserResponse, ModelsCreatorResponse } from "@/lib/api/generated/models";
-import { useCreator } from "@/lib/api/hooks/creators";
+import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { useResendVerification } from "@/lib/api/hooks/users";
 import { Copy } from "lucide-react";
+import { ReactNode, useState } from "react";
 import { toast } from "sonner";
-import { useState, ReactNode } from "react";
 import { CreatorStatusDialog } from "./creator-status-dialog";
 
 interface CreatorActionMenuProps {
@@ -64,10 +63,11 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
       action: () => onViewDetails( creator ),
       separator: true,
     },
-    {
-      label: "Edit profile",
-      action: () => { console.log( "Edit profile clicked" ); } // Placeholder as per original
-    },
+    // {
+    //   label: "Edit profile",
+    //   action: () => { console.log( "Edit profile clicked" ); },
+    //   allowedRoles: [ "brand" ],
+    // },
     {
       label: "Resend Email Verification",
       action: handleResendVerification,

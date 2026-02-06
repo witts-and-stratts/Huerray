@@ -20,7 +20,7 @@ export default function BrandsPage() {
       id: brand.id || '',
       name: brand.company_name || brand.name || 'Unknown',
       logo: brand.logo_url || brand.profile_photo_url || brand.logo || '',
-      status: ( brand.status || 'active' ) as 'active' | 'inactive' | 'pending',
+      brand_status: ( brand.brand_status || 'pending' ),
       total_campaigns: brand.total_campaigns || brand.campaigns_count || 0,
       website: brand.website_url || brand.website || '',
       joined_date: brand.created_at || brand.joined_date || new Date().toISOString(),

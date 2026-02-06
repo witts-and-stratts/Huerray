@@ -1,34 +1,34 @@
 'use client';
 
-import * as React from 'react';
-import { motion } from 'motion/react';
 import {
   Avatar,
   AvatarFallback,
-  AvatarImage,
   AvatarGroup,
   AvatarGroupCount,
+  AvatarImage,
 } from '@/components/dashboard-ui/avatar';
 import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from '@/components/dashboard-ui/tooltip';
-import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from '@/components/dashboard-ui/dialog';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/dashboard-ui/tooltip';
+import { motion } from 'motion/react';
 import { Person } from './types';
 
 export const AvatarCollage = ( { people }: { people: Person[]; } ) => {
   const limit = 4;
   const shownPeople = people?.slice( 0, limit ) || [];
   const remainingCount = people?.length > limit ? people.length - limit : 0;
+
+  console.log( 'people', people );
 
   return (
     <div className='flex items-center'>

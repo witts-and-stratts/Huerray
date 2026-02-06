@@ -12,6 +12,7 @@ import { isTokenExpiringSoon } from '../utils/jwt';
 
 // Get base URL from environment variable or use default
 export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.huerray.de/api/v1';
+axios.defaults.withCredentials = true;
 
 // Cookie configuration
 const COOKIE_NAME = 'authToken';
@@ -175,6 +176,11 @@ export const createApiClient = (): AxiosInstance => {
       // Handle 401 Unauthorized
       if (error.response?.status === 401 && !originalRequest._retry) {
         
+        // Don't attempt to refresh if the 401 came from the login endpoint itself
+        if (originalRequest.url?.includes('/auth/login')) {
+            return Promise.reject(error);
+        }
+
         // Check if this was a refresh attempt itself to avoid infinite loops
         if (originalRequest.url?.includes('/auth/refresh')) {
             handleAuthFailure();
@@ -229,7 +235,9 @@ const handleAuthFailure = () => {
     clearAuthToken();
     if (typeof window !== 'undefined') {
         const currentPath = window.location.pathname;
-        const isAuthPage = currentPath.startsWith('/login') || currentPath.startsWith('/signup') || currentPath.startsWith('/auth');
+        // Updated to handle localized paths (e.g. /en/login, /de/signup)
+        // Checks for paths starting with /login, /signup, /auth OR /[locale]/login, /[locale]/signup, etc.
+        const isAuthPage = /^(?:\/[a-zA-Z]{2})?\/(login|signup|auth)/.test(currentPath);
 
         if (!isAuthPage) {
             const redirectUrl = encodeURIComponent(currentPath + window.location.search);

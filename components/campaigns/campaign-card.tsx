@@ -7,10 +7,8 @@ import Link from 'next/link';
 
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/dashboard-ui/card';
@@ -18,6 +16,9 @@ import { BrandAvatar } from './brand-avatar';
 import { AvatarCollage } from './avatar-collage';
 import { ModelCampaign } from './types';
 import { StatusBadge } from './status-badge';
+
+import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
+import { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
 
 interface CampaignCardProps {
   campaign: ModelCampaign;
@@ -27,44 +28,48 @@ interface CampaignCardProps {
 export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
   const {
     id,
-    campaign_id,
     campaign_name,
     description,
     campaign_status,
     updated_at,
     creators,
-    applications,
     brand_id,
   } = campaign;
 
-  console.log( "brand ID", brand_id );
+  // Fetch applications
+  const { data: applicationsData } = useCampaignApplications( id || '' );
+  const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
 
-
+  // Map applications to Person type for AvatarCollage
+  const applicationPeople = applications.map( app => ( {
+    first_name: app.creator?.first_name || '',
+    last_name: app.creator?.last_name || '',
+    avatar: app.creator?.profile_image_url || '',
+    username: app.creator?.username || ''
+  } ) );
 
   return (
-    <Card className='p-0 py-3 pb-0 justify-between'>
-      <CardHeader>
-        <div className="flex items-start gap-4">
+    <Card className='py-3 justify-between gap-1'>
+      <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
+        <div className="flex flex-col flex-1 min-w-0">
+          <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
+            <CardTitle className='capitalize text-[18px] font-normal text-primary font-primary truncate'>
+              { campaign_name }
+            </CardTitle>
+          </Link>
+          <CardDescription dangerouslySetInnerHTML={ { __html: description! } } className="text-muted-foreground/70 text-sm line-clamp-2"></CardDescription>
+        </div>
+        <div className="flex shrink-0 text-right gap-2 items-start">
           { brand_id && (
             <BrandAvatar brandId={ brand_id } className="size-10 border bg-white rounded-full shrink-0" />
           ) }
-          <div className="flex flex-col gap-1 min-w-0">
-            <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
-              <CardTitle className='capitalize text-[18px] font-medium! text-primary truncate'>
-                { campaign_name }
-              </CardTitle>
-            </Link>
-            <CardDescription dangerouslySetInnerHTML={ { __html: description! } } className="line-clamp-2"></CardDescription>
-          </div>
-        </div>
-        <CardAction>
           <CampaignActionMenu
             campaign={ campaign }
             basePath={ basePath }
           />
-        </CardAction>
+        </div>
       </CardHeader>
-      <CardContent className='space-y-4'>
+      <CardContent className='space-y-3 pb-2'>
         { creators && creators.length > 0 && (
           <div className='flex flex-col gap-2'>
             <span className='text-xs font-medium text-muted-foreground'>
@@ -77,28 +82,32 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
             </div>
           </div>
         ) }
-        { applications && applications.length > 0 && (
+        { applicationPeople.length > 0 && (
           <div className='flex flex-col gap-2'>
             <span className='text-xs font-medium text-muted-foreground'>
               Applications
             </span>
             <div className='flex min-h-10'>
-              <AvatarCollage people={ applications || [] } />
+              <AvatarCollage people={ applicationPeople } />
             </div>
           </div>
         ) }
+
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <span className='text-xs text-muted-foreground/60'>
+            Updated{ ' ' }
+            { Intl.DateTimeFormat( 'en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            } ).format( new Date( updated_at! ) ) }
+          </span>
+        </div>
+
+        <div className="mt-2">
+          <StatusBadge status={ campaign_status! } />
+        </div>
       </CardContent>
-      <CardFooter className='justify-between items-center bg-muted/30 py-3 px-4 rounded-b-xl border-t whitespace-nowrap gap-3 text-ellipsis overflow-x-hidden'>
-        <StatusBadge status={ campaign_status! } />
-        <span className='text-xs text-muted-foreground/60'>
-          Updated{ ' ' }
-          { Intl.DateTimeFormat( 'en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          } ).format( new Date( updated_at! ) ) }
-        </span>
-      </CardFooter>
     </Card>
   );
 }

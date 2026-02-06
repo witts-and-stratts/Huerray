@@ -41,9 +41,9 @@ export default function GigsPage() {
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       >
-        <Link href='/brand-admin/gigs/new'>
+        {/* <Link href='/brand-admin/gigs/new'>
           <Button className='gap-2 rounded-md'>Create Gig</Button>
-        </Link>
+        </Link> */}
       </SubHeader>
       <div className="px-5">
         <GigsTable data={ gigs } isLoading={ isLoading } />

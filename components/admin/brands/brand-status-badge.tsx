@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/dashboard-ui/badge";
+import { Capitalize } from "@/components/text-case";
 import { cn } from "@/lib/dashboard-utils";
 
 interface BrandStatusBadgeProps {
@@ -21,7 +22,7 @@ export function BrandStatusBadge( { status }: BrandStatusBadgeProps ) {
 
   return (
     <Badge variant="outline" className={ cn( 'capitalize shadow-none font-normal', styles[ normalizedStatus ] || styles.inactive ) }>
-      { status }
+      <Capitalize>{ status.split( '_' ).join( ' ' ) }</Capitalize>
     </Badge>
   );
 }

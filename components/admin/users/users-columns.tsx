@@ -1,13 +1,16 @@
 "use client";
 
+import { toast } from "sonner";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, MoreVertical } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal, MoreVertical, BadgeCheck, X, Copy } from "lucide-react";
 import { Button } from "@/components/dashboard-ui/button";
 import { Checkbox } from "@/components/dashboard-ui/checkbox";
+import { Badge } from "@/components/dashboard-ui/badge";
 import { UserActionMenu } from "./user-action-menu";
 import { UserStatusBadge } from "./user-status-badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserInfoBlock } from "./user-info-block";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
+import { CopyText } from "@/components/dashboard-ui/copy-text";
 
 interface GetColumnsProps {
   onViewDetails: ( user: ModelsUserResponse ) => void;
@@ -35,7 +38,8 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     enableHiding: false,
   },
   {
-    accessorKey: "username", // Using username or combination of names
+    id: "name", // Custom column for complex user info
+    accessorFn: ( row ) => `${ row.first_name || '' } ${ row.last_name || '' }`.trim() || row.username || 'Unknown',
     header: ( { column } ) => {
       return (
         <Button
@@ -49,24 +53,75 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
       );
     },
     cell: ( { row } ) => {
-      const user = row.original;
-      const fullName = `${ user.first_name || '' } ${ user.last_name || '' }`.trim() || user.username || 'Unknown';
-
       return (
-        <div className="flex items-center gap-3 pl-4">
-          <Avatar className="h-9 w-9">
-            {/* TODO: Add avatar to user model if exists, or use a placeholder */ }
-            <AvatarImage src={ undefined } alt={ fullName } />
-            <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col">
-            <span className="font-medium font-primary text-[16px] text-primary">{ fullName }</span>
-            <span className="text-xs text-muted-foreground">{ user.email }</span>
-          </div>
+        <div className="pl-4 py-0">
+          <UserInfoBlock user={ row.original } onViewDetails={ onViewDetails } showActions={ false } showType={ false } />
         </div>
       );
     },
   },
+  {
+    accessorKey: "username",
+    header: ( { column } ) => {
+      return (
+        <Button
+          variant="ghost"
+          className={ 'font-regular pl-0' }
+          onClick={ () => column.toggleSorting( column.getIsSorted() === "asc" ) }
+        >
+          Username
+          <ArrowUpDown className="ml-2 size-4" strokeWidth={ 1 } />
+        </Button>
+      );
+    },
+    cell: ( { row } ) => {
+      const username = row.getValue( "username" ) as string;
+      if ( !username ) return <div className="text-muted-foreground">-</div>;
+
+      return (
+        <Badge
+          variant="outline"
+          className="font-normal cursor-pointer w-fit hover:text-foreground transition-colors pr-1.5"
+        >
+          <CopyText
+            text={ username }
+            copyMessage="Username copied"
+            iconSize={ 12 }
+            className="gap-2"
+          >
+            { username }
+          </CopyText>
+        </Badge>
+      );
+    },
+  },
+  {
+    accessorKey: "user_type",
+    header: () => <span className={ 'font-regular' }>Type</span>,
+    cell: ( { row } ) => {
+      const type = row.getValue( "user_type" ) as string;
+      // Format type: Brand_user -> Brand, Admin_user -> Admin
+      const formattedType = type
+        ? type.replace( /_user$/i, '' ).replace( /_/g, ' ' )
+        : 'User';
+
+      const typeColors: Record<string, string> = {
+        'brand': 'bg-blue-100 text-blue-700 border-blue-200',
+        'creator': 'bg-pink-100 text-pink-700 border-pink-200',
+        'admin': 'bg-purple-100 text-purple-700 border-purple-200',
+        'default': 'bg-gray-100 text-gray-700 border-gray-200'
+      };
+
+      const colorClass = typeColors[ formattedType.toLowerCase() ] || typeColors.default;
+
+      return (
+        <Badge variant="outline" className={ `capitalize font-normal ${ colorClass }` }>
+          { formattedType }
+        </Badge>
+      );
+    },
+  },
+
   {
     accessorKey: "user_status",
     header: () => <span className={ 'font-regular' }>Status</span>,

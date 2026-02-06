@@ -6,6 +6,8 @@ import * as React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
+import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
+import { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
 
 
 import { Button } from '@/components/dashboard-ui/button';
@@ -42,6 +44,27 @@ const CampaignActionsCell = ( { row, basePath }: { row: Row<ModelCampaign>, base
           }
         />
       </ButtonGroup>
+    </div>
+  );
+};
+
+const ApplicationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+  const { id } = row.original;
+  const { data: applicationsData } = useCampaignApplications( id || '' );
+  const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
+
+  const applicationPeople = applications.map( app => ( {
+    first_name: app.creator?.first_name || '',
+    last_name: app.creator?.last_name || '',
+    avatar: app.creator?.profile_image_url || '',
+    creatorId: app.creator?.creator_id || ''
+  } ) );
+
+  return (
+    <div className='flex'>
+      <AnimatePresence>
+        <AvatarCollage people={ applicationPeople } />
+      </AnimatePresence>
     </div>
   );
 };
@@ -150,20 +173,14 @@ export const getColumns = ( basePath: string = '/brand-admin' ): ColumnDef<Model
         <Button
           variant='ghost'
           onClick={ () => column.toggleSorting( column.getIsSorted() === 'asc' ) }
+          className={ 'pl-0' }
         >
           <span className='font-regular'>Applications</span>
           <ArrowUpDown />
         </Button>
       );
     },
-    cell: ( { row } ) => {
-      const applications = row.getValue( 'applications' ) as Person[];
-      return (
-        <div className='flex'>
-          <AvatarCollage people={ applications } />
-        </div>
-      );
-    },
+    cell: ( { row } ) => <ApplicationsCell row={ row } />,
   },
   {
     id: 'actions',

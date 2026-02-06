@@ -22,7 +22,11 @@ import type {
   ModelsGigStatusUpdateRequest,
   ModelsUpdateGigRequest,
   ModelsGigResponse,
-  ModelsStandardGigResponse
+  ModelsStandardGigResponse,
+  ModelsGigApplicationRequest,
+  ModelsStandardGigApplicationResponse,
+  ModelsGigInvitationRequest,
+  ModelsStandardGigInvitationResponse
 } from '../generated/models';
 
 
@@ -183,6 +187,35 @@ export function useGig(
       return response.data;
     },
     enabled: !!id,
+    ...options,
+  } );
+}
+/**
+ * Hook to apply to a gig
+ */
+export function useApplyToGig(
+  options?: UseMutationOptions<ModelsStandardGigApplicationResponse, Error, { id: string; application: ModelsGigApplicationRequest }>
+): UseMutationResult<ModelsStandardGigApplicationResponse, Error, { id: string; application: ModelsGigApplicationRequest }> {
+  return useMutation( {
+    mutationFn: async ( { id, application } ) => {
+      const response = await gigsApi.gigsIdApplyPost( { id, application } );
+      return response.data;
+    },
+    ...options,
+  } );
+}
+
+/**
+ * Hook to invite a creator to a gig
+ */
+export function useInviteCreatorToGig(
+  options?: UseMutationOptions<ModelsStandardGigInvitationResponse, Error, { id: string; invitation: ModelsGigInvitationRequest }>
+): UseMutationResult<ModelsStandardGigInvitationResponse, Error, { id: string; invitation: ModelsGigInvitationRequest }> {
+  return useMutation( {
+    mutationFn: async ( { id, invitation } ) => {
+      const response = await gigsApi.gigsIdInvitePost( { id, invitation } );
+      return response.data;
+    },
     ...options,
   } );
 }

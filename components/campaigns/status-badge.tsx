@@ -1,14 +1,14 @@
 'use client';
 
-import * as React from 'react';
 import { cn } from '@/lib/dashboard-utils';
-import { HugeiconsIcon } from '@hugeicons/react';
 import {
-  PlayIcon,
-  CircleIcon,
   CheckmarkCircle01Icon,
-  Clock01Icon
+  CircleIcon,
+  Clock01Icon,
+  PlayIcon
 } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Capitalize } from '../text-case';
 
 type CampaignStatus = 'running' | 'created' | 'completed' | 'pending_approval' | string;
 
@@ -54,7 +54,7 @@ export function StatusBadge( { status, className }: StatusBadgeProps ) {
       className
     ) }>
       <HugeiconsIcon icon={ config.icon } className="w-3 h-3" />
-      { config.label }
+      <Capitalize>{ config.label.split( '_' ).join( ' ' ) }</Capitalize>
     </div>
   );
 }

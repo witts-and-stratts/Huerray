@@ -27,12 +27,14 @@ export function DataTableFilterDropdown<TData>( {
   table,
   columnId,
   options,
+  title,
 }: DataTableFilterDropdownProps<TData> ) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={ 'h-8' }>
         <Button variant='outline' size={ 'sm' } className={ 'h-8' }>
           <HugeiconsIcon icon={ FilterHorizontalIcon } className='text-sm' />
+          <span className='font-regular'>{ title }</span>
           <ChevronDown width={ 1 } />
         </Button>
       </DropdownMenuTrigger>

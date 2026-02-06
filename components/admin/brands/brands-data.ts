@@ -3,7 +3,7 @@ export type Brand = {
   id: string;
   name: string;
   logo: string;
-  status: 'active' | 'inactive' | 'pending';
+  brand_status: string;
   total_campaigns: number;
   website: string;
   joined_date: string;

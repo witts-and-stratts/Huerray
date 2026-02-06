@@ -1,12 +1,14 @@
 'use client';
 
 import { CreatorAuthGuard } from '@/components/auth/creator-auth-guard';
+import { EmailVerificationBanner } from '@/components/auth/email-verification-banner';
 import { DashboardHeader } from '@/components/dashboard-header';
 import {
   SidebarInset,
   SidebarProvider,
 } from '@/components/dashboard-ui/sidebar';
 import { CreatorSidebar } from '@/components/dashboard/creator-sidebar';
+import { RoleProvider } from '@/contexts/role-context';
 import { usePathname } from 'next/navigation';
 
 export default function CreatorAdminLayout( {
@@ -20,12 +22,12 @@ export default function CreatorAdminLayout( {
   if ( isCompleteProfile ) {
     return (
       <CreatorAuthGuard>
-        <div className="bg-background min-h-screen flex flex-col">
-          {/* Minimal Header could go here if needed, or just the content */ }
-          {/* User requested no searchbar at top, so likely no DashboardHeader. 
-               We can just render children. */}
-          { children }
-        </div>
+        <RoleProvider>
+          <div className="bg-background min-h-screen flex flex-col">
+            <EmailVerificationBanner />
+            { children }
+          </div>
+        </RoleProvider>
       </CreatorAuthGuard>
     );
   }
@@ -33,13 +35,16 @@ export default function CreatorAdminLayout( {
   return (
     <SidebarProvider data-dashboard-theme='creator'>
       <CreatorAuthGuard>
-        <CreatorSidebar />
-        <SidebarInset>
-          <DashboardHeader />
-          <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
-            { children }
-          </section>
-        </SidebarInset>
+        <RoleProvider>
+          <CreatorSidebar />
+          <SidebarInset>
+            <EmailVerificationBanner />
+            <DashboardHeader />
+            <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
+              { children }
+            </section>
+          </SidebarInset>
+        </RoleProvider>
       </CreatorAuthGuard>
     </SidebarProvider>
   );

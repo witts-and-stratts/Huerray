@@ -10,6 +10,7 @@ interface User {
   lastName: string;
   role: 'brand' | 'creator' | 'admin';
   avatar?: string;
+  emailVerified?: boolean;
 }
 
 interface AuthContextType {

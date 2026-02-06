@@ -25,9 +25,11 @@ export interface GigsTableProps {
   data: ModelsGigResponse[];
   isLoading?: boolean;
   basePath?: string;
+  defaultView?: 'table' | 'cards';
+  hideViewToggle?: boolean;
 }
 
-export function GigsTable( { data, basePath }: GigsTableProps ) {
+export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false }: GigsTableProps ) {
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -35,7 +37,7 @@ export function GigsTable( { data, basePath }: GigsTableProps ) {
   const [ columnVisibility, setColumnVisibility ] =
     React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ view, setView ] = React.useState<'table' | 'cards'>( 'table' );
+  const [ view, setView ] = React.useState<'table' | 'cards'>( defaultView );
   type NewType = ModelsGigResponse;
 
   const [ selectedGig, setSelectedGig ] = React.useState<NewType | null>( null );
@@ -84,6 +86,7 @@ export function GigsTable( { data, basePath }: GigsTableProps ) {
         statuses={ statuses }
         view={ view }
         setView={ setView }
+        hideViewToggle={ hideViewToggle }
       />
       <GigsView
         table={ table }

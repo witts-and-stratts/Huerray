@@ -8,6 +8,8 @@ import { ReactNode, useState } from "react";
 import { Brand } from "./brands-data";
 import { BrandStatusDialog } from "./brand-status-dialog";
 import { toast } from "sonner";
+import { useDeleteBrand } from "@/lib/api/hooks/brands";
+import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 
 interface BrandActionMenuProps {
   brand: Brand;
@@ -23,6 +25,26 @@ export function BrandActionMenu( {
   align = "end",
 }: BrandActionMenuProps ) {
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
+  const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
+  const deleteBrand = useDeleteBrand();
+
+  const handleDelete = () => {
+    setIsDeleteDialogOpen( true );
+  };
+
+  const confirmDelete = () => {
+    if ( !brand.id ) return;
+
+    deleteBrand.mutate( brand.id, {
+      onSuccess: () => {
+        toast.success( "Brand deleted successfully" );
+        setIsDeleteDialogOpen( false );
+      },
+      onError: () => {
+        toast.error( "Failed to delete brand" );
+      },
+    } );
+  };
 
   const handleReviewProfile = () => {
     if ( !brand.id ) {
@@ -38,7 +60,7 @@ export function BrandActionMenu( {
       icon: Copy,
       action: () => {
         navigator.clipboard.writeText( brand.id );
-        toast.success( "Brand ID copied to clipboard" );
+        toast.success( "Brand ID copied to clipboard", { richColors: true } );
       },
     },
     {
@@ -69,7 +91,7 @@ export function BrandActionMenu( {
       label: "Delete Brand",
       variant: "destructive",
       className: "text-destructive",
-      action: () => console.log( "Delete Brand clicked" ),
+      action: handleDelete,
     },
   ];
 
@@ -92,7 +114,21 @@ export function BrandActionMenu( {
         open={ isStatusDialogOpen }
         onOpenChange={ setIsStatusDialogOpen }
         brandId={ brand.id }
-        currentStatus={ brand.status }
+        currentStatus={ brand.brand_status }
+      />
+      <ConfirmDialog
+        open={ isDeleteDialogOpen }
+        onOpenChange={ setIsDeleteDialogOpen }
+        title="Delete Brand"
+        description={
+          <span>
+            Are you sure you want to delete <span className="font-semibold">{ brand.name }</span>? This action cannot be undone.
+          </span>
+        }
+        confirmLabel="Delete"
+        variant="destructive"
+        onConfirm={ confirmDelete }
+        isLoading={ deleteBrand.isPending }
       />
     </>
   );

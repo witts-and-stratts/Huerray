@@ -29,11 +29,13 @@ export default function UsersPage() {
       >
         <Button className="gap-2 rounded-md">Add User</Button>
       </SubHeader>
-      <UsersTable
-        users={ users }
-        isLoading={ isLoading }
-        error={ error }
-      />
+      <div className="h-full -mt-5 space-y-6">
+        <UsersTable
+          users={ users }
+          isLoading={ isLoading }
+          error={ error }
+        />
+      </div>
     </>
   );
 }

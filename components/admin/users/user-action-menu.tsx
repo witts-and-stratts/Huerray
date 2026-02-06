@@ -4,6 +4,8 @@ import {
   ActionMenu,
   MenuAction
 } from "@/components/dashboard-ui/action-menu";
+import { apiClient } from "@/lib/api/client";
+import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { useResendVerification } from "@/lib/api/hooks/users";
 import { Copy } from "lucide-react";
@@ -45,6 +47,28 @@ export function UserActionMenu( { user, onViewDetails }: UserActionMenuProps ) {
     );
   };
 
+  const handleInitiatePasswordReset = async () => {
+    if ( !user.email ) {
+      toast.error( "User has no email address" );
+      return;
+    }
+
+    const authApi = new AuthenticationApi( undefined, undefined, apiClient );
+
+    toast.promise(
+      authApi.authPasswordResetPost( { email: { email: user.email } } ),
+      {
+        loading: 'Initiating password reset...',
+        success: 'Password reset email sent',
+        error: ( error ) => {
+          const errorMessage = error.response?.data?.message || error.message || "Failed to initiate password reset";
+          return <span>{ errorMessage }</span>;
+        },
+        richColors: true,
+      }
+    );
+  };
+
   const handleCopyId = () => {
     navigator.clipboard.writeText( user.id || "" );
     toast.success( "ID copied to clipboard" );
@@ -53,8 +77,29 @@ export function UserActionMenu( { user, onViewDetails }: UserActionMenuProps ) {
   const actions: MenuAction<ModelsUserResponse>[] = [
     {
       label: "Copy ID",
-      icon: Copy,
       action: handleCopyId,
+    },
+    {
+      label: "Copy Username",
+      action: () => {
+        if ( user.username ) {
+          navigator.clipboard.writeText( user.username );
+          toast.success( "Username copied to clipboard" );
+        } else {
+          toast.error( "No username available" );
+        }
+      },
+    },
+    {
+      label: "Copy Email",
+      action: () => {
+        if ( user.email ) {
+          navigator.clipboard.writeText( user.email );
+          toast.success( "Email copied to clipboard" );
+        } else {
+          toast.error( "No email available" );
+        }
+      },
     },
     {
       label: "View details",
@@ -68,6 +113,12 @@ export function UserActionMenu( { user, onViewDetails }: UserActionMenuProps ) {
     {
       label: "Resend Email Verification",
       action: handleResendVerification,
+      condition: () => !user.email_verified,
+    },
+    {
+      label: "Initiate Password Reset",
+      action: handleInitiatePasswordReset,
+      condition: () => !!user.email,
     },
     {
       label: "Review Profile",

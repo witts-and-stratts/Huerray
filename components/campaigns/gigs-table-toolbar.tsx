@@ -30,6 +30,7 @@ interface GigsTableToolbarProps {
   statuses: string[];
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
+  hideViewToggle?: boolean;
 }
 
 export function GigsTableToolbar( {
@@ -37,6 +38,7 @@ export function GigsTableToolbar( {
   statuses,
   view,
   setView,
+  hideViewToggle = false,
 }: GigsTableToolbarProps ) {
   const [ searchValue, setSearchValue ] = React.useState( '' );
 
@@ -62,32 +64,34 @@ export function GigsTableToolbar( {
         autoComplete='off'
       />
       <div className='flex items-center gap-2 w-full md:w-auto'>
-        <ToggleGroup
-          variant={ 'outline' }
-          size={ 'sm' }
-          className={ 'rounded-md overflow-hidden border' }
-          value={ [ view ] }
-          onValueChange={ ( value ) => {
-            if ( Array.isArray( value ) && value.length > 0 ) {
-              setView( value[ 0 ] as 'table' | 'cards' );
-            }
-          } }
-        >
-          <ToggleGroupItem
-            title='Table View'
-            className={ 'border-0 data-[state=on]:bg-muted' }
-            value='table'
+        { !hideViewToggle && (
+          <ToggleGroup
+            variant={ 'outline' }
+            size={ 'sm' }
+            className={ 'rounded-md overflow-hidden border' }
+            value={ [ view ] }
+            onValueChange={ ( value ) => {
+              if ( Array.isArray( value ) && value.length > 0 ) {
+                setView( value[ 0 ] as 'table' | 'cards' );
+              }
+            } }
           >
-            <TableIcon className='h-4 w-4' strokeWidth={ 1 } />
-          </ToggleGroupItem>
-          <ToggleGroupItem
-            title='Cards View'
-            className={ 'border-0 border-l data-[state=on]:bg-muted' }
-            value='cards'
-          >
-            <Grip className='h-4 w-4' strokeWidth={ 1 } />
-          </ToggleGroupItem>
-        </ToggleGroup>
+            <ToggleGroupItem
+              title='Table View'
+              className={ 'border-0 data-[state=on]:bg-muted' }
+              value='table'
+            >
+              <TableIcon className='h-4 w-4' strokeWidth={ 1 } />
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              title='Cards View'
+              className={ 'border-0 border-l data-[state=on]:bg-muted' }
+              value='cards'
+            >
+              <Grip className='h-4 w-4' strokeWidth={ 1 } />
+            </ToggleGroupItem>
+          </ToggleGroup>
+        ) }
         <ButtonGroup>
           <ButtonGroup>
             <DropdownMenu>

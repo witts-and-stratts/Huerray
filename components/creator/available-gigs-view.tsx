@@ -22,6 +22,8 @@ export function AvailableGigsView() {
           data={ gigs }
           isLoading={ isLoading }
           basePath="/creator-admin"
+          defaultView="cards"
+          hideViewToggle={ true }
         />
       </div>
     </>
