@@ -15,12 +15,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/dashboard-ui/dropdown-menu';
 import { CampaignCreatorsSection } from './sections/campaign-creators-section';
+import { CampaignInvitationsSection } from './sections/campaign-invitations-section';
 import { CampaignGigsSection } from './sections/campaign-gigs-section';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CampaignDecisionDialog } from './campaign-decision-dialog';
 import { CampaignImagesView } from './sections/campaign-images-view';
 import { CampaignDocumentsView } from './sections/campaign-documents-view';
+import { CampaignApplicationsSection } from './sections/campaign-applications-section';
 import { useReplicateCampaign, useAdminCampaignApproval } from '@/lib/api/hooks/campaigns';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { UtilsGigStatus } from '@/lib/api/generated/models/utils-gig-status';
@@ -56,6 +58,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
     { value: 'documents', label: 'Documents' },
     { value: 'applications', label: 'Applications' },
     { value: 'creators', label: 'Creators' },
+    { value: 'invitations', label: 'Invitations' },
     { value: 'gigs', label: 'Gigs' },
   ];
 
@@ -144,13 +147,15 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
         </Activity>
 
         <Activity mode={ activeTab === 'applications' ? 'visible' : 'hidden' }>
-          <div className='flex items-center justify-center p-12 bg-muted/10 border-2 border-dashed rounded-xl'>
-            <p className='text-muted-foreground'>Applications content coming soon</p>
-          </div>
+          <CampaignApplicationsSection campaignId={ campaign.id || '' } />
         </Activity>
 
         <Activity mode={ activeTab === 'creators' ? 'visible' : 'hidden' }>
           <CampaignCreatorsSection creators={ campaign.creators || [] } />
+        </Activity>
+
+        <Activity mode={ activeTab === 'invitations' ? 'visible' : 'hidden' }>
+          <CampaignInvitationsSection campaignId={ campaign.id || '' } />
         </Activity>
 
         <Activity mode={ activeTab === 'gigs' ? 'visible' : 'hidden' }>

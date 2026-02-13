@@ -26,7 +26,9 @@ import type {
   ModelsGigApplicationRequest,
   ModelsStandardGigApplicationResponse,
   ModelsGigInvitationRequest,
-  ModelsStandardGigInvitationResponse
+  ModelsStandardGigInvitationResponse,
+  ModelsStandardGigInvitationResponses,
+  ModelsInvitationResponseRequest
 } from '../generated/models';
 
 
@@ -214,6 +216,42 @@ export function useInviteCreatorToGig(
   return useMutation( {
     mutationFn: async ( { id, invitation } ) => {
       const response = await gigsApi.gigsIdInvitePost( { id, invitation } );
+      return response.data;
+    },
+    ...options,
+  } );
+}
+
+/**
+ * Hook to respond to an invitation
+ */
+export function useRespondToInvitation(
+  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsInvitationResponseRequest }>
+): UseMutationResult<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsInvitationResponseRequest }> {
+  const queryClient = useQueryClient();
+
+  return useMutation( {
+    mutationFn: async ( { invitationId, response } ) => {
+      const result = await gigsApi.gigsInvitationsInvitationIdRespondPut( { invitationId, response } );
+      return result.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries( { queryKey: gigsKeys.all } );
+    },
+    ...options,
+  } );
+}
+
+/**
+ * Hook to fetch all invitations for the authenticated creator
+ */
+export function useCreatorInvitations(
+  options?: Omit<UseQueryOptions<ModelsStandardGigInvitationResponses, Error>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery( {
+    queryKey: [ ...gigsKeys.all, 'invitations' ],
+    queryFn: async () => {
+      const response = await gigsApi.gigsInvitationsGet();
       return response.data;
     },
     ...options,

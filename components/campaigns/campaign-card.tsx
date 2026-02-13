@@ -45,7 +45,7 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
     first_name: app.creator?.first_name || '',
     last_name: app.creator?.last_name || '',
     avatar: app.creator?.profile_image_url || '',
-    username: app.creator?.username || ''
+    creatorId: app.creator?.creator_id || ''
   } ) );
 
   return (

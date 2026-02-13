@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/dashboard-ui/button';
-import { InviteCreatorsSheet } from './invite-creators-sheet';
+import { InviteCreatorsDialog } from './invite-creators-dialog';
 import { GigSelectionDialog } from './gig-selection-dialog';
 import { Sparkles } from 'lucide-react';
 
@@ -59,7 +59,7 @@ export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
         onSelect={ handleGigSelect }
       />
 
-      <InviteCreatorsSheet
+      <InviteCreatorsDialog
         campaignId={ campaignId }
         gigId={ selectedGigId }
         open={ sheetOpen }

@@ -15,7 +15,7 @@ import { formatDate, formatCurrency } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Video01Icon, Clock01Icon } from '@hugeicons/core-free-icons';
 import { Button } from '@/components/dashboard-ui/button';
-import { useApplyToGig } from '@/lib/api/hooks/gigs';
+import { useApplyToGig, useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { RoleGuard } from '../auth/role-guard';
@@ -24,10 +24,13 @@ interface GigDetailsSheetProps {
   gig: ModelsGigResponse | null;
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
+  invitationId?: string;
+  invitationStatus?: string;
 }
 
-export function GigDetailsSheet( { gig, open, onOpenChange }: GigDetailsSheetProps ) {
+export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invitationStatus }: GigDetailsSheetProps ) {
   const { mutate: applyToGig, isPending: isApplying } = useApplyToGig();
+  const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
 
   if ( !gig ) return null;
 
@@ -63,6 +66,24 @@ export function GigDetailsSheet( { gig, open, onOpenChange }: GigDetailsSheetPro
       },
       onError: ( error ) => {
         toast.error( "Failed to submit application. Please try again." );
+        console.error( error );
+      }
+    } );
+  };
+
+  const handleRespond = ( status: 'accepted' | 'declined' ) => {
+    if ( !invitationId ) return;
+
+    respondToInvitation( {
+      invitationId,
+      response: { status }
+    }, {
+      onSuccess: () => {
+        toast.success( `Invitation ${ status === 'accepted' ? 'accepted' : 'declined' } successfully` );
+        onOpenChange( false );
+      },
+      onError: ( error ) => {
+        toast.error( "Failed to update invitation status" );
         console.error( error );
       }
     } );
@@ -151,20 +172,49 @@ export function GigDetailsSheet( { gig, open, onOpenChange }: GigDetailsSheetPro
 
         <SheetFooter className="p-4 border-t mt-auto">
           <RoleGuard allowedRoles={ [ 'creator' ] }>
-            <Button
-              className="w-full"
-              onClick={ handleApply }
-              disabled={ isApplying || gig_status !== 'open' }
-            >
-              { isApplying ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Applying...
-                </>
-              ) : (
-                'Apply for Gig'
-              ) }
-            </Button>
+            { invitationId && invitationStatus === 'pending' ? (
+              <div className="flex flex-col gap-2 w-full">
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={ () => handleRespond( 'declined' ) }
+                  disabled={ isResponding }
+                >
+                  Reject
+                </Button>
+                <Button
+                  className="w-full"
+                  onClick={ () => handleRespond( 'accepted' ) }
+                  disabled={ isResponding }
+                >
+                  { isResponding ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Updating...
+                    </>
+                  ) : (
+                    'Accept Invitation'
+                  ) }
+                </Button>
+              </div>
+            ) : (
+              <Button
+                className="w-full"
+                onClick={ handleApply }
+                disabled={ isApplying || gig_status !== 'open' || ( !!invitationId && invitationStatus !== 'pending' ) }
+              >
+                { isApplying ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Applying...
+                  </>
+                ) : (
+                  !!invitationId && invitationStatus === 'accepted' ? 'Invitation Accepted' :
+                    !!invitationId && invitationStatus === 'declined' ? 'Invitation Declined' :
+                      'Apply for Gig'
+                ) }
+              </Button>
+            ) }
           </RoleGuard>
         </SheetFooter>
       </SheetContent>

@@ -8,6 +8,7 @@ import { apiClient } from '@/lib/api/client';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
 import { useAuth } from '@/lib/auth/auth-context';
 import { Loader2, Mail, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -77,9 +78,14 @@ export function EmailVerificationBanner() {
   };
 
   return (
-    <>
-      <div className="bg-amber-50 border-b border-amber-200 px-4 py-3">
-        <div className="flex items-center justify-between gap-4 max-w-screen-2xl mx-auto">
+    <AnimatePresence presenceAffectsLayout>
+      <motion.div
+        initial={ { opacity: 0, y: -20 } }
+        animate={ { opacity: 1, y: 0 } }
+        exit={ { opacity: 0, y: -20 } }
+        transition={ { duration: 0.6 } }
+        className="bg-amber-50 border-b border-amber-200 px-4 py-3">
+        <motion.div className="flex items-center justify-between gap-4 max-w-screen-2xl mx-auto">
           <div className="flex items-center gap-3">
             <div className="shrink-0 p-1.5 bg-amber-100 rounded-full">
               <Mail className="h-4 w-4 text-amber-600" />
@@ -118,8 +124,8 @@ export function EmailVerificationBanner() {
               <X className="h-4 w-4" />
             </Button>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <ConfirmDialog
         open={ isDialogOpen }
@@ -144,6 +150,6 @@ export function EmailVerificationBanner() {
           />
         </div>
       </ConfirmDialog>
-    </>
+    </AnimatePresence>
   );
 }

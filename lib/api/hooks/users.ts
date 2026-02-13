@@ -8,7 +8,7 @@ import { apiClient, apiConfiguration } from '../client';
 const userApi = new UserApi(apiConfiguration, undefined, apiClient);
 const authApi = new AuthenticationApi(apiConfiguration, undefined, apiClient);
 
-import { ModelsUserResponse, ModelsEditUserRequestUserTypeEnum, ModelsEditUserRequest } from '../generated/models';
+import { ModelsUserResponse, ModelsEditUserRequestUserTypeEnum, ModelsEditUserRequest, ModelsCreateAdminRequest } from '../generated/models';
 
 export const usersKeys = {
   all: ['users'] as const,
@@ -107,6 +107,20 @@ export function useUpdateUserStatus() {
     },
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: usersKeys.detail(variables.id) });
+      queryClient.invalidateQueries({ queryKey: usersKeys.lists() });
+    },
+  });
+}
+
+export function useCreateUser() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (request: ModelsCreateAdminRequest) => {
+      const response = await userApi.usersPost({ request });
+      return response.data;
+    },
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: usersKeys.lists() });
     },
   });

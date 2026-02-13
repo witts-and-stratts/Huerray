@@ -8,6 +8,7 @@ import {
 } from '@/components/dashboard-ui/sidebar';
 import { AdminSidebar } from '@/components/dashboard/admin-sidebar';
 import { RoleProvider } from '@/contexts/role-context';
+import { AnimatePresence } from 'motion/react';
 
 export default function AdminLayout( {
   children,

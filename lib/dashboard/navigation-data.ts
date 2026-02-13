@@ -112,6 +112,11 @@ export const creatorNavigationData: Omit<SidebarNavigationData, 'user'> & { user
       icon: Task02Icon,
     },
     {
+      title: "Invitations",
+      url: "/creator-admin/invitations",
+      icon: Task02Icon,
+    },
+    {
       title: "Active Gigs",
       url: "/creator-admin/gigs/active",
       icon: Task02Icon,

@@ -17,7 +17,7 @@ export function AvailableGigsView() {
         title="Available Gigs"
         description="Explore and apply to new opportunities matched to your profile."
       />
-      <div className="px-5">
+      <div className="">
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }

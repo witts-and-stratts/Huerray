@@ -6,6 +6,7 @@ import { SubHeader } from "@/components/subheader";
 import { useUsers } from "@/lib/api/hooks/users";
 import { UsersSearchGetUserTypeEnum } from "@/lib/api/generated/api/user-api";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
+import { CreateUserSheet } from "@/components/admin/users/create-user-sheet";
 import * as React from "react";
 
 export default function UsersPage() {
@@ -17,6 +18,8 @@ export default function UsersPage() {
     limit: 100,
   } );
 
+  const [ sheetOpen, setSheetOpen ] = React.useState( false );
+
   const users = React.useMemo( () => {
     return ( response?.data?.data as unknown as ModelsUserResponse[] ) || [];
   }, [ response ] );
@@ -27,8 +30,9 @@ export default function UsersPage() {
         title="Users"
         description="Manage platform users"
       >
-        <Button className="gap-2 rounded-md">Add User</Button>
+        <Button className="gap-2 rounded-md" onClick={ () => setSheetOpen( true ) }>Add User</Button>
       </SubHeader>
+      <CreateUserSheet open={ sheetOpen } onOpenChange={ setSheetOpen } />
       <div className="h-full -mt-5 space-y-6">
         <UsersTable
           users={ users }
