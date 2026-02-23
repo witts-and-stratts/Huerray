@@ -87,7 +87,7 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
       { isLoading ? (
         <TableSkeleton />
       ) : (
-        <div className='w-full'>
+        <div className="space-y-4 bg-background grow relative overflow-auto">
           <GigsTableToolbar
             table={ table }
             statuses={ statuses }

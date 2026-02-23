@@ -36,7 +36,7 @@ export function GigsStatsBlock() {
 
     return sorted.slice( 0, 5 ).map( ( gig ) => {
       const brand = gig.brand?.company_name || gig.campaign_name || 'Brand';
-      const brandLogo = gig.brand?.profile_photo_url || gig.brand?.logo_url || '';
+      const brandLogo = gig.brand?.profile_photo_url || '';
       const submittedAt = gig.created_at
         ? new Date( gig.created_at ).toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } )
         : 'N/A';

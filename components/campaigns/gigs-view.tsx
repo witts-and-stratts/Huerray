@@ -18,7 +18,7 @@ import { ModelsGigResponse } from '@/lib/api/generated/models';
 // Inline Table View Component (extracted from previous gigs-table.tsx)
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
   return (
-    <Table className='overflow-auto '>
+    <Table className='overflow-auto'>
       <TableHeader sticky>
         { table.getHeaderGroups().map( ( headerGroup ) => (
           <TableRow key={ headerGroup.id }>

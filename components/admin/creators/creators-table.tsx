@@ -110,7 +110,7 @@ export function CreatorsTable( {
           animate={ { opacity: 1, y: 0 } }
           exit={ { opacity: 0, y: -20 } }
           transition={ { duration: 0.5 } }
-          className="space-y-4"
+          className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
         >
           <CreatorsTableToolbar
             table={ table }

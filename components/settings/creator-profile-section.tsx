@@ -37,7 +37,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                     label="Date of Birth"
                     type="datepicker"
                     value={ field.state.value }
-                    onChange={ ( date: Date | undefined ) => field.handleChange( date ? date.toISOString() : '' ) }
+                    onChange={ ( date ) => { if ( !date || date instanceof Date ) field.handleChange( date ? date.toISOString() : '' ); } }
                     onBlur={ field.handleBlur }
                     error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
                   />

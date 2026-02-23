@@ -21,9 +21,7 @@ export default function BrandAdminDashboardLayout( {
         <EmailVerificationBanner />
         <ProfileStatusBanner role="brand" />
         <DashboardHeader />
-        <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
-          { children }
-        </section>
+        { children }
       </SidebarInset>
     </SidebarProvider>
   );

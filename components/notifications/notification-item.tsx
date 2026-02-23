@@ -11,11 +11,11 @@ import {
 import { cn } from "@/lib/dashboard-utils";
 import { timeAgo } from "@/lib/utils";
 import { Bell, Check, ChevronDown, ChevronUp, EllipsisVertical } from "lucide-react";
-import type { Notification } from "@/lib/api/hooks/notifications";
 import { useState } from "react";
+import { ModelsNotificationResponse } from "@/lib/api/generated";
 
 interface NotificationItemProps {
-  notification: Notification;
+  notification: ModelsNotificationResponse;
   onMarkAsRead: ( id: string, e?: React.MouseEvent ) => void;
   onDelete: ( id: string, e?: React.MouseEvent ) => void;
 }
@@ -71,7 +71,7 @@ export function NotificationItem( { notification, onMarkAsRead, onDelete }: Noti
               ) }
             </div>
             <p className="mt-2 text-xs text-muted-foreground">
-              { timeAgo( notification.created_at ) }
+              { timeAgo( notification.created_at! ) }
             </p>
           </div>
         </div>
@@ -83,7 +83,7 @@ export function NotificationItem( { notification, onMarkAsRead, onDelete }: Noti
             variant="ghost"
             size="icon"
             className="h-8 w-8 text-muted-foreground hover:text-primary"
-            onClick={ ( e ) => onMarkAsRead( notification.id, e ) }
+            onClick={ ( e ) => onMarkAsRead( notification.id!, e ) }
             title="Mark as read"
           >
             <Check className="h-4 w-4" />
@@ -102,12 +102,12 @@ export function NotificationItem( { notification, onMarkAsRead, onDelete }: Noti
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             { !notification.is_read && (
-              <DropdownMenuItem onClick={ ( e ) => onMarkAsRead( notification.id, e ) }>
+              <DropdownMenuItem onClick={ ( e ) => onMarkAsRead( notification.id!, e ) }>
                 <span>Mark as read</span>
               </DropdownMenuItem>
             ) }
             <DropdownMenuItem
-              onClick={ ( e ) => onDelete( notification.id, e ) }
+              onClick={ ( e ) => onDelete( notification.id!, e ) }
               className="text-destructive focus:text-destructive text-sm"
             >
               <span>Delete</span>

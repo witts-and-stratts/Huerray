@@ -131,7 +131,7 @@ export function SubmissionsStatsBlock() {
                         <div className="md:col-span-5">
                           <video
                             src={ submission.videoUrl }
-                            className="aspect-video w-full rounded-md bg-black/10 object-cover"
+                            className="aspect-video w-full rounded-sm bg-black/10 object-cover"
                             controls
                             preload="metadata"
                           />

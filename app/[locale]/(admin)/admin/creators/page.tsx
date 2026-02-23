@@ -22,13 +22,11 @@ export default function CreatorsPage() {
       >
         {/* <Button className="gap-2 rounded-md">Add Creator</Button> */ }
       </SubHeader>
-      <div className="h-full -mt-5 space-y-6">
-        <CreatorsTable
-          creators={ creators }
-          isLoading={ isLoading }
-          error={ error }
-        />
-      </div>
+      <CreatorsTable
+        creators={ creators }
+        isLoading={ isLoading }
+        error={ error }
+      />
     </>
   );
 }

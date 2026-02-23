@@ -11,9 +11,7 @@ export default async function AdminGigsPage() {
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       />
-      <div className="px-5">
-        <AdminGigsClient />
-      </div>
+      <AdminGigsClient />
     </>
   );
 }

@@ -45,7 +45,7 @@ export function SubmissionStatusUpdateDialog( {
           <label className="text-xs font-medium text-foreground">Status</label>
           <Select value={ statusValue } onValueChange={ ( value ) => onStatusChange( value as UtilsVideoSubmissionStatus ) }>
             <SelectTrigger className="mt-1">
-              <SelectValue placeholder="Select status">
+              <SelectValue>
                 <TextCapitalize>{ statusValue.replace( /_/g, ' ' ) }</TextCapitalize>
               </SelectValue>
             </SelectTrigger>

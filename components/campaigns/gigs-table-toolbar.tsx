@@ -52,7 +52,7 @@ export function GigsTableToolbar( {
   }, [ searchValue, table ] );
 
   return (
-    <div className='flex flex-col md:flex-row md:items-center justify-between pb-4 sticky top-0 z-20 transition-all duration-500 mb-3 border-b gap-2 px-5'>
+    <div className='flex flex-col md:flex-row md:items-center justify-between py-4 sticky top-0 bg-background z-20 transition-all duration-500 mb-3 border-b gap-2 px-5'>
       <SuperField
         type='search'
         placeholder='Search Gigs...'

@@ -28,7 +28,7 @@ export function UsersTableToolbar<TData>( {
   setView,
 }: UsersTableToolbarProps<TData> ) {
   return (
-    <div className='flex items-center justify-between py-4 sticky top-[104px] bg-background z-20 px-5 transition-all duration-500 mb-3 border-b gap-2'>
+    <div className='flex items-center justify-between py-4 sticky top-0 bg-background z-20 px-5 transition-all duration-500 mb-3 border-b gap-2'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
           table={ table }

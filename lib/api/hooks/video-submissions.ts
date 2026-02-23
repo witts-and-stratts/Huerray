@@ -14,6 +14,7 @@ import {
   type UseMutationOptions
 } from '@tanstack/react-query';
 import { VideoSubmissionsApi } from '../generated/api';
+import type { VideoSubmissionsApiVideosMySubmissionsGetRequest } from '../generated/api/video-submissions-api';
 import { apiClient, apiConfiguration } from '../client';
 import type { 
   ModelsStandardGenericResponse,
@@ -69,11 +70,11 @@ export function useCreateVideoSubmission(
  * Hook to fetch creator's video submissions
  */
 export function useMyVideoSubmissions(
-  params?: { page?: number; limit?: number },
+  params?: VideoSubmissionsApiVideosMySubmissionsGetRequest,
   options?: Omit<UseQueryOptions<ModelsPaginatedVideoSubmissionResponse, ApiError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<ModelsPaginatedVideoSubmissionResponse, ApiError> {
   return useQuery( {
-    queryKey: videoSubmissionsKeys.mySubmissions( params ),
+    queryKey: videoSubmissionsKeys.mySubmissions( params as Record<string, unknown> | undefined ),
     queryFn: async () => {
       const response = await videoSubmissionsApi.videosMySubmissionsGet( params );
       return response.data;

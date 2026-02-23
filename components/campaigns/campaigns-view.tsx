@@ -12,15 +12,22 @@ import Link from 'next/link';
 export function CampaignsView( {
   table,
   view,
-  basePath = '/brand-admin'
+  basePath = '/brand-admin',
+  emptyTitle = 'Ready to launch?',
+  simpleEmptyState = false,
 }: {
   table: TanstackTable<ModelCampaign>;
   view: 'table' | 'cards';
   basePath?: string;
+  emptyTitle?: string;
+  simpleEmptyState?: boolean;
 } ) {
   return (
     <div className='px-5 mt-1'>
       { table.getRowModel().rows.length === 0 ? (
+        simpleEmptyState ? (
+          <div className="py-8 text-center text-xs text-muted-foreground">{ emptyTitle }</div>
+        ) : (
         <motion.div
           initial={ { opacity: 0, y: 20 } }
           animate={ { opacity: 1, y: 0 } }
@@ -37,7 +44,7 @@ export function CampaignsView( {
             </motion.div>
           </div>
           <div className="space-y-2">
-            <h3 className="text-2xl font-bold">Ready to launch?</h3>
+            <h3 className="text-2xl font-bold">{ emptyTitle }</h3>
             <p className="text-muted-foreground max-w-xs mx-auto text-balance">
               Start your first campaign and watch your brand reach new heights with top creators.
             </p>
@@ -48,6 +55,7 @@ export function CampaignsView( {
             </Button>
           </Link>
         </motion.div>
+        )
       ) : view === 'table' ? (
         <CamapignsTableView table={ table } />
       ) : (

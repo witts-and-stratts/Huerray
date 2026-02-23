@@ -33,13 +33,11 @@ export default function UsersPage() {
         <Button className="gap-2 rounded-md" onClick={ () => setSheetOpen( true ) }>Add User</Button>
       </SubHeader>
       <CreateUserSheet open={ sheetOpen } onOpenChange={ setSheetOpen } />
-      <div className="h-full -mt-5 space-y-6">
-        <UsersTable
-          users={ users }
-          isLoading={ isLoading }
-          error={ error }
-        />
-      </div>
+      <UsersTable
+        users={ users }
+        isLoading={ isLoading }
+        error={ error }
+      />
     </>
   );
 }

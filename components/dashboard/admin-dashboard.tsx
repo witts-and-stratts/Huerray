@@ -21,7 +21,7 @@ export function AdminDashboard() {
         <AdminDateRangePicker />
       </SubHeader>
 
-      <div className="ad-shell">
+      <div className="ad-shell py-4 bg-burgundy-50/50 mt-0">
         <KpiOverviewBlock />
 
         <section className="ad-grid-main">

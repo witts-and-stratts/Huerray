@@ -9,7 +9,6 @@ import {
   useReactTable,
   type ColumnFiltersState,
   type SortingState,
-  type Table as TanstackTable,
   type VisibilityState
 } from '@tanstack/react-table';
 import * as React from 'react';
@@ -48,13 +47,17 @@ type CampaignsTableProps = {
   campaigns?: ModelCampaign[];
   isLoading?: boolean;
   error?: Error | null;
+  emptyTitle?: string;
+  simpleEmptyState?: boolean;
 };
 
 export function CampaignsTable( {
   basePath = '/brand-admin',
   campaigns = [],
   isLoading = false,
-  error = null
+  error = null,
+  emptyTitle = 'Ready to launch?',
+  simpleEmptyState = false,
 }: CampaignsTableProps ) {
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
@@ -120,10 +123,16 @@ export function CampaignsTable( {
           animate={ { opacity: 1, y: 0 } }
           exit={ { opacity: 0, y: -20 } }
           transition={ { duration: 0.5 } }
-          className='w-full'
+          className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
         >
           { campaigns.length === 0 ? (
-            <CampaignsView table={ table } view={ view } basePath={ basePath } />
+            <CampaignsView
+              table={ table }
+              view={ view }
+              basePath={ basePath }
+              emptyTitle={ emptyTitle }
+              simpleEmptyState={ simpleEmptyState }
+            />
           ) : (
             <>
               <CampaignsTableToolbar
