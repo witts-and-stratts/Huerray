@@ -20,17 +20,23 @@ import type { HugeiconsIcon } from '@hugeicons/react';
 // Type for HugeIcons icon data (it's an array)
 type HugeIconData = Parameters<typeof HugeiconsIcon>[ 0 ][ 'icon' ];
 
+export interface SidebarNavMainItem {
+  title: string;
+  url: string;
+  icon?: Icon | HugeIconData;
+  items?: {
+    title: string;
+    url: string;
+  }[];
+}
+
 export interface SidebarNavigationData {
   user: {
     name: string;
     email: string;
     avatar: string;
   };
-  navMain: {
-    title: string;
-    url: string;
-    icon: Icon | HugeIconData;
-  }[];
+  navMain: SidebarNavMainItem[];
   documents?: {
     name: string;
     url: string;

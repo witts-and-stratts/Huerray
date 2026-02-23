@@ -40,6 +40,8 @@ body {
   font-family: var(--body-font-family);
   overflow-x: hidden;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+
   @apply md:pb-180;
 
   &:has(.footer-normal) {

@@ -29,7 +29,6 @@ import {
   useSidebar,
 } from "@/components/dashboard-ui/sidebar";
 import { useAuth } from "@/lib/auth/auth-context";
-import { clearAuthToken } from "@/lib/api/client";
 import { useRouter } from "next/navigation";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { apiClient } from "@/lib/api/client";
@@ -60,8 +59,6 @@ export function NavUser( {
       console.error( "Logout error:", error );
       // Continue with logout even if API call fails
     } finally {
-      // Clear auth token
-      clearAuthToken();
       // Clear user state
       setUser( null );
       // Clear brand and creator profiles from Redux

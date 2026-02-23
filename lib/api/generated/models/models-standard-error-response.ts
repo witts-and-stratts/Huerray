@@ -20,6 +20,5 @@ import type { ModelsErrorInfo } from './models-error-info';
 export interface ModelsStandardErrorResponse {
     'error'?: ModelsErrorInfo;
     'message'?: string;
-    'success'?: boolean;
 }
 

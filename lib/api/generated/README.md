@@ -85,11 +85,13 @@ Class | Method | HTTP request | Description
 *CampaignsApi* | [**campaignsIdDecisionPut**](docs/CampaignsApi.md#campaignsiddecisionput) | **PUT** /campaigns/{id}/decision | Brand decision on campaign
 *CampaignsApi* | [**campaignsIdDelete**](docs/CampaignsApi.md#campaignsiddelete) | **DELETE** /campaigns/{id} | Delete campaign
 *CampaignsApi* | [**campaignsIdGet**](docs/CampaignsApi.md#campaignsidget) | **GET** /campaigns/{id} | Get campaign by ID
+*CampaignsApi* | [**campaignsIdInvitationsGet**](docs/CampaignsApi.md#campaignsidinvitationsget) | **GET** /campaigns/{id}/invitations | Get gig invitations by campaign
 *CampaignsApi* | [**campaignsIdPut**](docs/CampaignsApi.md#campaignsidput) | **PUT** /campaigns/{id} | Update campaign
 *CampaignsApi* | [**campaignsIdStatusPut**](docs/CampaignsApi.md#campaignsidstatusput) | **PUT** /campaigns/{id}/status | Update campaign status
 *CampaignsApi* | [**campaignsIdVideoSubmissionsGet**](docs/CampaignsApi.md#campaignsidvideosubmissionsget) | **GET** /campaigns/{id}/video-submissions | Get video submissions by campaign ID
 *CampaignsApi* | [**campaignsPost**](docs/CampaignsApi.md#campaignspost) | **POST** /campaigns | Create a new campaign
 *CampaignsApi* | [**campaignsSearchGet**](docs/CampaignsApi.md#campaignssearchget) | **GET** /campaigns/search | Search campaigns
+*CreatorApi* | [**creatorsActiveGigsGet**](docs/CreatorApi.md#creatorsactivegigsget) | **GET** /creators/active-gigs | Get active gigs for the logged-in creator
 *CreatorApi* | [**creatorsApplicationsGet**](docs/CreatorApi.md#creatorsapplicationsget) | **GET** /creators/applications | Get creator applications
 *CreatorApi* | [**creatorsBankDetailsGet**](docs/CreatorApi.md#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details
 *CreatorApi* | [**creatorsBankDetailsPut**](docs/CreatorApi.md#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details
@@ -111,13 +113,14 @@ Class | Method | HTTP request | Description
 *GigsApi* | [**gigsIdApplyPost**](docs/GigsApi.md#gigsidapplypost) | **POST** /gigs/{id}/apply | Apply to gig
 *GigsApi* | [**gigsIdDelete**](docs/GigsApi.md#gigsiddelete) | **DELETE** /gigs/{id} | Delete gig
 *GigsApi* | [**gigsIdGet**](docs/GigsApi.md#gigsidget) | **GET** /gigs/{id} | Get gig by ID
+*GigsApi* | [**gigsIdInvitationsGet**](docs/GigsApi.md#gigsidinvitationsget) | **GET** /gigs/{id}/invitations | Get gig invitations
 *GigsApi* | [**gigsIdInvitePost**](docs/GigsApi.md#gigsidinvitepost) | **POST** /gigs/{id}/invite | Invite creator to gig
 *GigsApi* | [**gigsIdPut**](docs/GigsApi.md#gigsidput) | **PUT** /gigs/{id} | Update gig
 *GigsApi* | [**gigsIdStatusPut**](docs/GigsApi.md#gigsidstatusput) | **PUT** /gigs/{id}/status | Update gig status
 *GigsApi* | [**gigsInvitationsGet**](docs/GigsApi.md#gigsinvitationsget) | **GET** /gigs/invitations | Get creator invitations
-*GigsApi* | [**gigsInvitationsInvitationIdRespondPut**](docs/GigsApi.md#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to invitation
+*GigsApi* | [**gigsInvitationsInvitationIdRespondPut**](docs/GigsApi.md#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to gig invitation
 *GigsApi* | [**gigsPost**](docs/GigsApi.md#gigspost) | **POST** /gigs/ | Create a new gig
-*GigsApi* | [**gigsSearchGet**](docs/GigsApi.md#gigssearchget) | **GET** /gigs/search | Advanced gig search (Admin only)
+*GigsApi* | [**gigsSearchGet**](docs/GigsApi.md#gigssearchget) | **GET** /gigs/search | Search gigs
 *InvoiceApi* | [**invoicesIdGeneratePdfPost**](docs/InvoiceApi.md#invoicesidgeneratepdfpost) | **POST** /invoices/{id}/generate-pdf | Generate PDF for existing invoice
 *InvoiceApi* | [**invoicesIdGet**](docs/InvoiceApi.md#invoicesidget) | **GET** /invoices/{id} | Get invoice by ID
 *InvoiceApi* | [**invoicesIdPdfGet**](docs/InvoiceApi.md#invoicesidpdfget) | **GET** /invoices/{id}/pdf | Download invoice PDF
@@ -154,11 +157,11 @@ Class | Method | HTTP request | Description
 *UserApi* | [**usersProfileGet**](docs/UserApi.md#usersprofileget) | **GET** /users/profile | Get user profile
 *UserApi* | [**usersProfilePut**](docs/UserApi.md#usersprofileput) | **PUT** /users/profile | Update user profile
 *UserApi* | [**usersSearchGet**](docs/UserApi.md#userssearchget) | **GET** /users/search | Search users
-*VideoSubmissionsApi* | [**videoSubmissionsIdStatusPut**](docs/VideoSubmissionsApi.md#videosubmissionsidstatusput) | **PUT** /video-submissions/{id}/status | Update video submission status
-*VideoSubmissionsApi* | [**videosApprovedCampaignCampaignIdGet**](docs/VideoSubmissionsApi.md#videosapprovedcampaigncampaignidget) | **GET** /videos/approved/campaign/{campaignId} | Get approved video submissions by campaign
-*VideoSubmissionsApi* | [**videosApprovedGigGigIdGet**](docs/VideoSubmissionsApi.md#videosapprovedgiggigidget) | **GET** /videos/approved/gig/{gigId} | Get approved video submissions by gig
+*VideoSubmissionsApi* | [**videosCampaignCampaignIdGet**](docs/VideoSubmissionsApi.md#videoscampaigncampaignidget) | **GET** /videos/campaign/{campaignId} | Get video submissions by campaign
+*VideoSubmissionsApi* | [**videosGigGigIdGet**](docs/VideoSubmissionsApi.md#videosgiggigidget) | **GET** /videos/gig/{gigId} | Get video submissions by gig
 *VideoSubmissionsApi* | [**videosIdDecisionPut**](docs/VideoSubmissionsApi.md#videosiddecisionput) | **PUT** /videos/{id}/decision | Brand makes decision on video submission
 *VideoSubmissionsApi* | [**videosIdPut**](docs/VideoSubmissionsApi.md#videosidput) | **PUT** /videos/{id} | Update video submission
+*VideoSubmissionsApi* | [**videosIdStatusPut**](docs/VideoSubmissionsApi.md#videosidstatusput) | **PUT** /videos/{id}/status | Update video submission status
 *VideoSubmissionsApi* | [**videosIdSubmitPut**](docs/VideoSubmissionsApi.md#videosidsubmitput) | **PUT** /videos/{id}/submit | Submit video for approval
 *VideoSubmissionsApi* | [**videosMySubmissionsGet**](docs/VideoSubmissionsApi.md#videosmysubmissionsget) | **GET** /videos/my-submissions | Get creator\&#39;s video submissions
 *VideoSubmissionsApi* | [**videosPost**](docs/VideoSubmissionsApi.md#videospost) | **POST** /videos | Create video submission
@@ -170,7 +173,6 @@ Class | Method | HTTP request | Description
  - [ModelsAdminCampaignApprovalRequest](docs/ModelsAdminCampaignApprovalRequest.md)
  - [ModelsAnalyticsTimeSeriesData](docs/ModelsAnalyticsTimeSeriesData.md)
  - [ModelsAnalyticsTimeSeriesResponse](docs/ModelsAnalyticsTimeSeriesResponse.md)
- - [ModelsApplicationStatusRequest](docs/ModelsApplicationStatusRequest.md)
  - [ModelsApplicationVideoUploadResponse](docs/ModelsApplicationVideoUploadResponse.md)
  - [ModelsAuthResponse](docs/ModelsAuthResponse.md)
  - [ModelsBrandAnalyticsResponse](docs/ModelsBrandAnalyticsResponse.md)
@@ -180,6 +182,7 @@ Class | Method | HTTP request | Description
  - [ModelsBrandStatusUpdateRequest](docs/ModelsBrandStatusUpdateRequest.md)
  - [ModelsBrandStatusUpdateResponse](docs/ModelsBrandStatusUpdateResponse.md)
  - [ModelsBrandVideoDecisionRequest](docs/ModelsBrandVideoDecisionRequest.md)
+ - [ModelsCampaignBrandResponse](docs/ModelsCampaignBrandResponse.md)
  - [ModelsCampaignResponse](docs/ModelsCampaignResponse.md)
  - [ModelsCampaignStatusUpdateRequest](docs/ModelsCampaignStatusUpdateRequest.md)
  - [ModelsChangePasswordRequest](docs/ModelsChangePasswordRequest.md)
@@ -206,13 +209,14 @@ Class | Method | HTTP request | Description
  - [ModelsGigApplicationResponse](docs/ModelsGigApplicationResponse.md)
  - [ModelsGigBrandListResponse](docs/ModelsGigBrandListResponse.md)
  - [ModelsGigBrandResponse](docs/ModelsGigBrandResponse.md)
+ - [ModelsGigCreatorListResponse](docs/ModelsGigCreatorListResponse.md)
  - [ModelsGigCreatorResponse](docs/ModelsGigCreatorResponse.md)
  - [ModelsGigInvitationRequest](docs/ModelsGigInvitationRequest.md)
  - [ModelsGigInvitationResponse](docs/ModelsGigInvitationResponse.md)
+ - [ModelsGigInvitationResponseRequest](docs/ModelsGigInvitationResponseRequest.md)
  - [ModelsGigResponse](docs/ModelsGigResponse.md)
  - [ModelsGigStatusUpdateRequest](docs/ModelsGigStatusUpdateRequest.md)
  - [ModelsHealthResponse](docs/ModelsHealthResponse.md)
- - [ModelsInvitationResponseRequest](docs/ModelsInvitationResponseRequest.md)
  - [ModelsInvoiceItemResponse](docs/ModelsInvoiceItemResponse.md)
  - [ModelsInvoicePDFGeneratedResponse](docs/ModelsInvoicePDFGeneratedResponse.md)
  - [ModelsInvoiceResponse](docs/ModelsInvoiceResponse.md)
@@ -257,8 +261,8 @@ Class | Method | HTTP request | Description
  - [ModelsStandardGigApplicationResponse](docs/ModelsStandardGigApplicationResponse.md)
  - [ModelsStandardGigApplicationResponses](docs/ModelsStandardGigApplicationResponses.md)
  - [ModelsStandardGigBrandListResponse](docs/ModelsStandardGigBrandListResponse.md)
+ - [ModelsStandardGigCreatorListResponse](docs/ModelsStandardGigCreatorListResponse.md)
  - [ModelsStandardGigInvitationResponse](docs/ModelsStandardGigInvitationResponse.md)
- - [ModelsStandardGigInvitationResponses](docs/ModelsStandardGigInvitationResponses.md)
  - [ModelsStandardGigResponse](docs/ModelsStandardGigResponse.md)
  - [ModelsStandardInvoicePDFGeneratedResponse](docs/ModelsStandardInvoicePDFGeneratedResponse.md)
  - [ModelsStandardInvoiceResponse](docs/ModelsStandardInvoiceResponse.md)
@@ -274,6 +278,7 @@ Class | Method | HTTP request | Description
  - [ModelsUpdateCampaignRequest](docs/ModelsUpdateCampaignRequest.md)
  - [ModelsUpdateCreatorBankDetailsRequest](docs/ModelsUpdateCreatorBankDetailsRequest.md)
  - [ModelsUpdateCreatorRequest](docs/ModelsUpdateCreatorRequest.md)
+ - [ModelsUpdateGigApplicationRequest](docs/ModelsUpdateGigApplicationRequest.md)
  - [ModelsUpdateGigRequest](docs/ModelsUpdateGigRequest.md)
  - [ModelsUpdateInvoiceRequest](docs/ModelsUpdateInvoiceRequest.md)
  - [ModelsUpdatePaymentStatusRequest](docs/ModelsUpdatePaymentStatusRequest.md)
@@ -299,6 +304,7 @@ Class | Method | HTTP request | Description
  - [UtilsCountryCode](docs/UtilsCountryCode.md)
  - [UtilsCreatorStatus](docs/UtilsCreatorStatus.md)
  - [UtilsGender](docs/UtilsGender.md)
+ - [UtilsGigApplicationStatus](docs/UtilsGigApplicationStatus.md)
  - [UtilsGigStatus](docs/UtilsGigStatus.md)
  - [UtilsInvoiceStatus](docs/UtilsInvoiceStatus.md)
  - [UtilsPaymentItemStatus](docs/UtilsPaymentItemStatus.md)

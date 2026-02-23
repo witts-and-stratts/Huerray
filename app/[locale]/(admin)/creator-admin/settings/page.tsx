@@ -4,6 +4,7 @@
 
 import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/dashboard-ui/dropdown-menu';
 import { CreatorBioSection } from '@/components/settings/creator-bio-section';
 import { CreatorProfileSection } from '@/components/settings/creator-profile-section';
@@ -25,6 +26,7 @@ export default function CreatorSettingsPage() {
   const [ isLoading, setIsLoading ] = useState( true );
   const [ isSaving, setIsSaving ] = useState( false );
   const [ currentProfile, setCurrentProfile ] = useState<any>( null );
+  const [ isReviewConfirmOpen, setIsReviewConfirmOpen ] = useState( false );
   const dispatch = useAppDispatch();
 
   const form = useForm( {
@@ -210,6 +212,18 @@ export default function CreatorSettingsPage() {
   const handleFormSubmit = useCallback( ( e: React.FormEvent ) => {
     e.preventDefault();
     e.stopPropagation();
+
+    const status = currentProfile?.creator_status?.toLowerCase();
+    if ( status === 'approved' ) {
+      setIsReviewConfirmOpen( true );
+      return;
+    }
+
+    form.handleSubmit();
+  }, [ currentProfile, form ] );
+
+  const handleConfirmSave = useCallback( () => {
+    setIsReviewConfirmOpen( false );
     form.handleSubmit();
   }, [ form ] );
 
@@ -354,6 +368,17 @@ export default function CreatorSettingsPage() {
           <CreatorSocialSection form={ form } />
         </Activity>
       </div>
+
+      <ConfirmDialog
+        open={ isReviewConfirmOpen }
+        onOpenChange={ setIsReviewConfirmOpen }
+        title="Confirm profile update"
+        description="Saving your profile will require review and approval before you can perform certain tasks."
+        confirmLabel="Continue and save"
+        onConfirm={ handleConfirmSave }
+        isLoading={ isSaving }
+        loadingText="Saving..."
+      />
     </form>
   );
 }

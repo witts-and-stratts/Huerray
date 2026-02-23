@@ -45,58 +45,16 @@ import type { ModelsVideoSubmissionStatusUpdateRequest } from '../models';
 export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Admin updates video submission status (approve/reject)
-         * @summary Update video submission status
-         * @param {string} id Video Submission ID
-         * @param {ModelsVideoSubmissionStatusUpdateRequest} request Status update request
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        videoSubmissionsIdStatusPut: async (id: string, request: ModelsVideoSubmissionStatusUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('videoSubmissionsIdStatusPut', 'id', id)
-            // verify required parameter 'request' is not null or undefined
-            assertParamExists('videoSubmissionsIdStatusPut', 'request', request)
-            const localVarPath = `/video-submissions/{id}/status`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get all approved video submissions for a specific campaign (Brand access only)
-         * @summary Get approved video submissions by campaign
+         * Get video submissions for all gigs in a specific campaign with role-based filtering
+         * @summary Get video submissions by campaign
          * @param {string} campaignId Campaign ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        videosApprovedCampaignCampaignIdGet: async (campaignId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        videosCampaignCampaignIdGet: async (campaignId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'campaignId' is not null or undefined
-            assertParamExists('videosApprovedCampaignCampaignIdGet', 'campaignId', campaignId)
-            const localVarPath = `/videos/approved/campaign/{campaignId}`
+            assertParamExists('videosCampaignCampaignIdGet', 'campaignId', campaignId)
+            const localVarPath = `/videos/campaign/{campaignId}`
                 .replace(`{${"campaignId"}}`, encodeURIComponent(String(campaignId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -109,9 +67,6 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -124,16 +79,16 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Get all approved video submissions for a specific gig (Brand access only)
-         * @summary Get approved video submissions by gig
+         * Get video submissions for a specific gig with role-based filtering
+         * @summary Get video submissions by gig
          * @param {string} gigId Gig ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        videosApprovedGigGigIdGet: async (gigId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        videosGigGigIdGet: async (gigId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'gigId' is not null or undefined
-            assertParamExists('videosApprovedGigGigIdGet', 'gigId', gigId)
-            const localVarPath = `/videos/approved/gig/{gigId}`
+            assertParamExists('videosGigGigIdGet', 'gigId', gigId)
+            const localVarPath = `/videos/gig/{gigId}`
                 .replace(`{${"gigId"}}`, encodeURIComponent(String(gigId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -145,9 +100,6 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -185,9 +137,6 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -228,9 +177,6 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -238,6 +184,45 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(submission, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Admin updates video submission status (approve/reject)
+         * @summary Update video submission status
+         * @param {string} id Video Submission ID
+         * @param {ModelsVideoSubmissionStatusUpdateRequest} request Status update request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videosIdStatusPut: async (id: string, request: ModelsVideoSubmissionStatusUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('videosIdStatusPut', 'id', id)
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('videosIdStatusPut', 'request', request)
+            const localVarPath = `/videos/{id}/status`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -267,9 +252,6 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -284,12 +266,12 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
         /**
          * Get all video submissions by the authenticated creator
          * @summary Get creator\'s video submissions
-         * @param {number} [page] Page number
-         * @param {number} [limit] Items per page
+         * @param {string} [gigId] Filter by Gig ID
+         * @param {string} [status] Filter by status
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        videosMySubmissionsGet: async (page?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        videosMySubmissionsGet: async (gigId?: string, status?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/videos/my-submissions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -302,15 +284,12 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-            if (page !== undefined) {
-                localVarQueryParameter['page'] = page;
+            if (gigId !== undefined) {
+                localVarQueryParameter['gig_id'] = gigId;
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
             }
 
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -345,9 +324,6 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -389,9 +365,6 @@ export const VideoSubmissionsApiAxiosParamCreator = function (configuration?: Co
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             if (campaignId !== undefined) {
                 localVarQueryParameter['campaign_id'] = campaignId;
@@ -450,43 +423,29 @@ export const VideoSubmissionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = VideoSubmissionsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Admin updates video submission status (approve/reject)
-         * @summary Update video submission status
-         * @param {string} id Video Submission ID
-         * @param {ModelsVideoSubmissionStatusUpdateRequest} request Status update request
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async videoSubmissionsIdStatusPut(id: string, request: ModelsVideoSubmissionStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.videoSubmissionsIdStatusPut(id, request, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videoSubmissionsIdStatusPut']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Get all approved video submissions for a specific campaign (Brand access only)
-         * @summary Get approved video submissions by campaign
+         * Get video submissions for all gigs in a specific campaign with role-based filtering
+         * @summary Get video submissions by campaign
          * @param {string} campaignId Campaign ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async videosApprovedCampaignCampaignIdGet(campaignId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionResponses>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.videosApprovedCampaignCampaignIdGet(campaignId, options);
+        async videosCampaignCampaignIdGet(campaignId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionResponses>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videosCampaignCampaignIdGet(campaignId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videosApprovedCampaignCampaignIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videosCampaignCampaignIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get all approved video submissions for a specific gig (Brand access only)
-         * @summary Get approved video submissions by gig
+         * Get video submissions for a specific gig with role-based filtering
+         * @summary Get video submissions by gig
          * @param {string} gigId Gig ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async videosApprovedGigGigIdGet(gigId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.videosApprovedGigGigIdGet(gigId, options);
+        async videosGigGigIdGet(gigId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionResponses>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videosGigGigIdGet(gigId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videosApprovedGigGigIdGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videosGigGigIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -518,6 +477,20 @@ export const VideoSubmissionsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Admin updates video submission status (approve/reject)
+         * @summary Update video submission status
+         * @param {string} id Video Submission ID
+         * @param {ModelsVideoSubmissionStatusUpdateRequest} request Status update request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async videosIdStatusPut(id: string, request: ModelsVideoSubmissionStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videosIdStatusPut(id, request, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videosIdStatusPut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Creator submits their video submission for admin approval
          * @summary Submit video for approval
          * @param {string} id Video Submission ID
@@ -533,13 +506,13 @@ export const VideoSubmissionsApiFp = function(configuration?: Configuration) {
         /**
          * Get all video submissions by the authenticated creator
          * @summary Get creator\'s video submissions
-         * @param {number} [page] Page number
-         * @param {number} [limit] Items per page
+         * @param {string} [gigId] Filter by Gig ID
+         * @param {string} [status] Filter by status
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async videosMySubmissionsGet(page?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedVideoSubmissionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.videosMySubmissionsGet(page, limit, options);
+        async videosMySubmissionsGet(gigId?: string, status?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedVideoSubmissionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.videosMySubmissionsGet(gigId, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videosMySubmissionsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -588,34 +561,24 @@ export const VideoSubmissionsApiFactory = function (configuration?: Configuratio
     const localVarFp = VideoSubmissionsApiFp(configuration)
     return {
         /**
-         * Admin updates video submission status (approve/reject)
-         * @summary Update video submission status
-         * @param {VideoSubmissionsApiVideoSubmissionsIdStatusPutRequest} requestParameters Request parameters.
+         * Get video submissions for all gigs in a specific campaign with role-based filtering
+         * @summary Get video submissions by campaign
+         * @param {VideoSubmissionsApiVideosCampaignCampaignIdGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        videoSubmissionsIdStatusPut(requestParameters: VideoSubmissionsApiVideoSubmissionsIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
-            return localVarFp.videoSubmissionsIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
+        videosCampaignCampaignIdGet(requestParameters: VideoSubmissionsApiVideosCampaignCampaignIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionResponses> {
+            return localVarFp.videosCampaignCampaignIdGet(requestParameters.campaignId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get all approved video submissions for a specific campaign (Brand access only)
-         * @summary Get approved video submissions by campaign
-         * @param {VideoSubmissionsApiVideosApprovedCampaignCampaignIdGetRequest} requestParameters Request parameters.
+         * Get video submissions for a specific gig with role-based filtering
+         * @summary Get video submissions by gig
+         * @param {VideoSubmissionsApiVideosGigGigIdGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        videosApprovedCampaignCampaignIdGet(requestParameters: VideoSubmissionsApiVideosApprovedCampaignCampaignIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionResponses> {
-            return localVarFp.videosApprovedCampaignCampaignIdGet(requestParameters.campaignId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get all approved video submissions for a specific gig (Brand access only)
-         * @summary Get approved video submissions by gig
-         * @param {VideoSubmissionsApiVideosApprovedGigGigIdGetRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        videosApprovedGigGigIdGet(requestParameters: VideoSubmissionsApiVideosApprovedGigGigIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionResponse> {
-            return localVarFp.videosApprovedGigGigIdGet(requestParameters.gigId, options).then((request) => request(axios, basePath));
+        videosGigGigIdGet(requestParameters: VideoSubmissionsApiVideosGigGigIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionResponses> {
+            return localVarFp.videosGigGigIdGet(requestParameters.gigId, options).then((request) => request(axios, basePath));
         },
         /**
          * Brand accepts or rejects an approved video submission
@@ -638,6 +601,16 @@ export const VideoSubmissionsApiFactory = function (configuration?: Configuratio
             return localVarFp.videosIdPut(requestParameters.id, requestParameters.submission, options).then((request) => request(axios, basePath));
         },
         /**
+         * Admin updates video submission status (approve/reject)
+         * @summary Update video submission status
+         * @param {VideoSubmissionsApiVideosIdStatusPutRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        videosIdStatusPut(requestParameters: VideoSubmissionsApiVideosIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
+            return localVarFp.videosIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Creator submits their video submission for admin approval
          * @summary Submit video for approval
          * @param {VideoSubmissionsApiVideosIdSubmitPutRequest} requestParameters Request parameters.
@@ -655,7 +628,7 @@ export const VideoSubmissionsApiFactory = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         videosMySubmissionsGet(requestParameters: VideoSubmissionsApiVideosMySubmissionsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedVideoSubmissionResponse> {
-            return localVarFp.videosMySubmissionsGet(requestParameters.page, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.videosMySubmissionsGet(requestParameters.gigId, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
          * Creator submits a video to a gig
@@ -681,24 +654,9 @@ export const VideoSubmissionsApiFactory = function (configuration?: Configuratio
 };
 
 /**
- * Request parameters for videoSubmissionsIdStatusPut operation in VideoSubmissionsApi.
+ * Request parameters for videosCampaignCampaignIdGet operation in VideoSubmissionsApi.
  */
-export interface VideoSubmissionsApiVideoSubmissionsIdStatusPutRequest {
-    /**
-     * Video Submission ID
-     */
-    readonly id: string
-
-    /**
-     * Status update request
-     */
-    readonly request: ModelsVideoSubmissionStatusUpdateRequest
-}
-
-/**
- * Request parameters for videosApprovedCampaignCampaignIdGet operation in VideoSubmissionsApi.
- */
-export interface VideoSubmissionsApiVideosApprovedCampaignCampaignIdGetRequest {
+export interface VideoSubmissionsApiVideosCampaignCampaignIdGetRequest {
     /**
      * Campaign ID
      */
@@ -706,9 +664,9 @@ export interface VideoSubmissionsApiVideosApprovedCampaignCampaignIdGetRequest {
 }
 
 /**
- * Request parameters for videosApprovedGigGigIdGet operation in VideoSubmissionsApi.
+ * Request parameters for videosGigGigIdGet operation in VideoSubmissionsApi.
  */
-export interface VideoSubmissionsApiVideosApprovedGigGigIdGetRequest {
+export interface VideoSubmissionsApiVideosGigGigIdGetRequest {
     /**
      * Gig ID
      */
@@ -746,6 +704,21 @@ export interface VideoSubmissionsApiVideosIdPutRequest {
 }
 
 /**
+ * Request parameters for videosIdStatusPut operation in VideoSubmissionsApi.
+ */
+export interface VideoSubmissionsApiVideosIdStatusPutRequest {
+    /**
+     * Video Submission ID
+     */
+    readonly id: string
+
+    /**
+     * Status update request
+     */
+    readonly request: ModelsVideoSubmissionStatusUpdateRequest
+}
+
+/**
  * Request parameters for videosIdSubmitPut operation in VideoSubmissionsApi.
  */
 export interface VideoSubmissionsApiVideosIdSubmitPutRequest {
@@ -760,14 +733,14 @@ export interface VideoSubmissionsApiVideosIdSubmitPutRequest {
  */
 export interface VideoSubmissionsApiVideosMySubmissionsGetRequest {
     /**
-     * Page number
+     * Filter by Gig ID
      */
-    readonly page?: number
+    readonly gigId?: string
 
     /**
-     * Items per page
+     * Filter by status
      */
-    readonly limit?: number
+    readonly status?: string
 }
 
 /**
@@ -808,36 +781,25 @@ export interface VideoSubmissionsApiVideosSearchGetRequest {
  */
 export class VideoSubmissionsApi extends BaseAPI {
     /**
-     * Admin updates video submission status (approve/reject)
-     * @summary Update video submission status
-     * @param {VideoSubmissionsApiVideoSubmissionsIdStatusPutRequest} requestParameters Request parameters.
+     * Get video submissions for all gigs in a specific campaign with role-based filtering
+     * @summary Get video submissions by campaign
+     * @param {VideoSubmissionsApiVideosCampaignCampaignIdGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public videoSubmissionsIdStatusPut(requestParameters: VideoSubmissionsApiVideoSubmissionsIdStatusPutRequest, options?: RawAxiosRequestConfig) {
-        return VideoSubmissionsApiFp(this.configuration).videoSubmissionsIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
+    public videosCampaignCampaignIdGet(requestParameters: VideoSubmissionsApiVideosCampaignCampaignIdGetRequest, options?: RawAxiosRequestConfig) {
+        return VideoSubmissionsApiFp(this.configuration).videosCampaignCampaignIdGet(requestParameters.campaignId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Get all approved video submissions for a specific campaign (Brand access only)
-     * @summary Get approved video submissions by campaign
-     * @param {VideoSubmissionsApiVideosApprovedCampaignCampaignIdGetRequest} requestParameters Request parameters.
+     * Get video submissions for a specific gig with role-based filtering
+     * @summary Get video submissions by gig
+     * @param {VideoSubmissionsApiVideosGigGigIdGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public videosApprovedCampaignCampaignIdGet(requestParameters: VideoSubmissionsApiVideosApprovedCampaignCampaignIdGetRequest, options?: RawAxiosRequestConfig) {
-        return VideoSubmissionsApiFp(this.configuration).videosApprovedCampaignCampaignIdGet(requestParameters.campaignId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get all approved video submissions for a specific gig (Brand access only)
-     * @summary Get approved video submissions by gig
-     * @param {VideoSubmissionsApiVideosApprovedGigGigIdGetRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public videosApprovedGigGigIdGet(requestParameters: VideoSubmissionsApiVideosApprovedGigGigIdGetRequest, options?: RawAxiosRequestConfig) {
-        return VideoSubmissionsApiFp(this.configuration).videosApprovedGigGigIdGet(requestParameters.gigId, options).then((request) => request(this.axios, this.basePath));
+    public videosGigGigIdGet(requestParameters: VideoSubmissionsApiVideosGigGigIdGetRequest, options?: RawAxiosRequestConfig) {
+        return VideoSubmissionsApiFp(this.configuration).videosGigGigIdGet(requestParameters.gigId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -863,6 +825,17 @@ export class VideoSubmissionsApi extends BaseAPI {
     }
 
     /**
+     * Admin updates video submission status (approve/reject)
+     * @summary Update video submission status
+     * @param {VideoSubmissionsApiVideosIdStatusPutRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public videosIdStatusPut(requestParameters: VideoSubmissionsApiVideosIdStatusPutRequest, options?: RawAxiosRequestConfig) {
+        return VideoSubmissionsApiFp(this.configuration).videosIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Creator submits their video submission for admin approval
      * @summary Submit video for approval
      * @param {VideoSubmissionsApiVideosIdSubmitPutRequest} requestParameters Request parameters.
@@ -881,7 +854,7 @@ export class VideoSubmissionsApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public videosMySubmissionsGet(requestParameters: VideoSubmissionsApiVideosMySubmissionsGetRequest = {}, options?: RawAxiosRequestConfig) {
-        return VideoSubmissionsApiFp(this.configuration).videosMySubmissionsGet(requestParameters.page, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return VideoSubmissionsApiFp(this.configuration).videosMySubmissionsGet(requestParameters.gigId, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

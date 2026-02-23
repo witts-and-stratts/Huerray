@@ -5,13 +5,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { Dropzone, DropzoneEmptyState } from '@/components/ui/shadcn-io/dropzone';
 import { VideoFileIcon } from '@/components/campaigns/sections/documents/video-file-icon';
 import { FileCardVideoSubmission } from '@/components/creator/file-card-video-submission';
-import { UploadedFile } from '@/components/campaigns/sections/documents/types';
+import { UploadedFile, VideoUploadResponseData } from '@/components/campaigns/sections/documents/types';
 import { nanoid } from 'nanoid';
+import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny';
 
 interface VideoDropzoneProps {
   value?: File | null;
   onChange: ( file: File | null ) => void;
-  onUploadSuccess?: ( url: string ) => void;
+  onUploadSuccess?: ( data: VideoUploadResponseData ) => void;
   className?: string;
   gigId: string;
 }
@@ -70,9 +71,9 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, gi
     setFileItem( null );
   }, [ onChange ] );
 
-  const handleUploadSuccess = useCallback( ( id: string, url: string ) => {
-    setFileItem( prev => prev ? { ...prev, status: 'success', url } : null );
-    onUploadSuccess?.( url );
+  const handleUploadSuccess = useCallback( ( id: string, data: VideoUploadResponseData ) => {
+    setFileItem( prev => prev ? { ...prev, status: 'success', url: data.video_url } : null );
+    onUploadSuccess?.( data );
   }, [ onUploadSuccess ] );
 
   const handleUploadError = useCallback( ( id: string, error: Error ) => {
@@ -88,7 +89,7 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, gi
   // Sync external value reset
   useEffect( () => {
     if ( !value && fileItem ) {
-      setFileItem( null );
+      queueMicrotask( () => setFileItem( null ) );
     }
   }, [ value, fileItem ] );
 

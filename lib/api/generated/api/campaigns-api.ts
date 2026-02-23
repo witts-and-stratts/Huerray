@@ -40,6 +40,8 @@ import type { ModelsStandardGenericResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardGigApplicationResponses } from '../models';
 // @ts-ignore
+import type { ModelsStandardGigInvitationResponse } from '../models';
+// @ts-ignore
 import type { ModelsStandardVideoSubmissionResponses } from '../models';
 // @ts-ignore
 import type { ModelsUpdateCampaignRequest } from '../models';
@@ -70,9 +72,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -110,9 +109,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -153,9 +149,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -170,7 +163,7 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Delete a campaign
+         * Delete a campaign (Admin can delete any campaign, Brand can only delete their own)
          * @summary Delete campaign
          * @param {string} id Campaign ID
          * @param {*} [options] Override http request option.
@@ -191,9 +184,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -229,8 +219,39 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get all invitations for all gigs in a specific campaign
+         * @summary Get gig invitations by campaign
+         * @param {string} id Campaign ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignsIdInvitationsGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignsIdInvitationsGet', 'id', id)
+            const localVarPath = `/campaigns/{id}/invitations`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -268,9 +289,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -311,9 +329,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -350,9 +365,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -385,9 +397,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -437,9 +446,6 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             if (allowMultiple !== undefined) {
                 localVarQueryParameter['allow_multiple'] = allowMultiple;
@@ -571,7 +577,7 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Delete a campaign
+         * Delete a campaign (Admin can delete any campaign, Brand can only delete their own)
          * @summary Delete campaign
          * @param {string} id Campaign ID
          * @param {*} [options] Override http request option.
@@ -594,6 +600,19 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CampaignsApi.campaignsIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Get all invitations for all gigs in a specific campaign
+         * @summary Get gig invitations by campaign
+         * @param {string} id Campaign ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignsIdInvitationsGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsIdInvitationsGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CampaignsApi.campaignsIdInvitationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -719,7 +738,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
             return localVarFp.campaignsIdDecisionPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
-         * Delete a campaign
+         * Delete a campaign (Admin can delete any campaign, Brand can only delete their own)
          * @summary Delete campaign
          * @param {CampaignsApiCampaignsIdDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -737,6 +756,16 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          */
         campaignsIdGet(requestParameters: CampaignsApiCampaignsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCampaignResponse> {
             return localVarFp.campaignsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get all invitations for all gigs in a specific campaign
+         * @summary Get gig invitations by campaign
+         * @param {CampaignsApiCampaignsIdInvitationsGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignsIdInvitationsGet(requestParameters: CampaignsApiCampaignsIdInvitationsGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
+            return localVarFp.campaignsIdInvitationsGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Update an existing campaign
@@ -845,6 +874,16 @@ export interface CampaignsApiCampaignsIdDeleteRequest {
  * Request parameters for campaignsIdGet operation in CampaignsApi.
  */
 export interface CampaignsApiCampaignsIdGetRequest {
+    /**
+     * Campaign ID
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for campaignsIdInvitationsGet operation in CampaignsApi.
+ */
+export interface CampaignsApiCampaignsIdInvitationsGetRequest {
     /**
      * Campaign ID
      */
@@ -978,7 +1017,7 @@ export class CampaignsApi extends BaseAPI {
     }
 
     /**
-     * Delete a campaign
+     * Delete a campaign (Admin can delete any campaign, Brand can only delete their own)
      * @summary Delete campaign
      * @param {CampaignsApiCampaignsIdDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -997,6 +1036,17 @@ export class CampaignsApi extends BaseAPI {
      */
     public campaignsIdGet(requestParameters: CampaignsApiCampaignsIdGetRequest, options?: RawAxiosRequestConfig) {
         return CampaignsApiFp(this.configuration).campaignsIdGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Get all invitations for all gigs in a specific campaign
+     * @summary Get gig invitations by campaign
+     * @param {CampaignsApiCampaignsIdInvitationsGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public campaignsIdInvitationsGet(requestParameters: CampaignsApiCampaignsIdInvitationsGetRequest, options?: RawAxiosRequestConfig) {
+        return CampaignsApiFp(this.configuration).campaignsIdInvitationsGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

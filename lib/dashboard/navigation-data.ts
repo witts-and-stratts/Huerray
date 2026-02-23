@@ -107,19 +107,28 @@ export const creatorNavigationData: Omit<SidebarNavigationData, 'user'> & { user
       icon: DashboardSquareAddIcon,
     },
     {
-      title: "Available Gigs",
-      url: "/creator-admin/gigs",
-      icon: Task02Icon,
-    },
-    {
       title: "Invitations",
       url: "/creator-admin/invitations",
       icon: Task02Icon,
     },
     {
-      title: "Active Gigs",
-      url: "/creator-admin/gigs/active",
+      title: "My Gigs",
+      url: "/creator-admin/my-gigs",
       icon: Task02Icon,
+      items: [
+        {
+          title: "All Gigs",
+          url: "/creator-admin/my-gigs",
+        },
+        {
+          title: "Available Gigs",
+          url: "/creator-admin/gigs",
+        },
+        {
+          title: "Active Gigs",
+          url: "/creator-admin/gigs/active",
+        },
+      ],
     },
     {
       title: "Portfolio",

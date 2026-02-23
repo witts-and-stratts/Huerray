@@ -22,12 +22,13 @@ import {
 import {
   FieldDescription
 } from "@/components/dashboard-ui/field";
-import { apiClient, setAuthToken, setRefreshToken } from "@/lib/api/client";
+import { apiClient } from "@/lib/api/client";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { ModelsRegisterRequestUserTypeEnum } from "@/lib/api/generated/models/models-register-request";
 import { useAuth } from "@/lib/auth/auth-context";
 import { cn } from "@/lib/dashboard-utils";
 import { useForm } from '@tanstack/react-form';
+import Cookies from 'js-cookie';
 import { ChevronLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -127,13 +128,18 @@ export function SignupForm( {
         // Cast to access properties
         const responseData = response.data?.data as any;
 
-        // Store the auth token if provided
-        if ( responseData?.token ) {
-          setAuthToken( responseData.token );
-
-          if ( responseData.refreshToken || responseData.refresh_token ) {
-            setRefreshToken( responseData.refreshToken || responseData.refresh_token );
-          }
+        // Store auth tokens as cookies for middleware auth checks
+        if ( responseData?.access_token ) {
+          Cookies.set( 'authToken', responseData.access_token, {
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+          } );
+        }
+        if ( responseData?.refresh_token ) {
+          Cookies.set( 'refreshToken', responseData.refresh_token, {
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+          } );
         }
 
         // Store user data

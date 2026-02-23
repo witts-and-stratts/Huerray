@@ -8,7 +8,7 @@ import {
   PlayIcon
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Capitalize } from '../text-case';
+import { TextCapitalize } from '../text-case';
 
 type CampaignStatus = 'running' | 'created' | 'completed' | 'pending_approval' | string;
 
@@ -54,7 +54,7 @@ export function StatusBadge( { status, className }: StatusBadgeProps ) {
       className
     ) }>
       <HugeiconsIcon icon={ config.icon } className="w-3 h-3" />
-      <Capitalize>{ config.label.split( '_' ).join( ' ' ) }</Capitalize>
+      <TextCapitalize>{ config.label.split( '_' ).join( ' ' ) }</TextCapitalize>
     </div>
   );
 }

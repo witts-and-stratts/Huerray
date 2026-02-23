@@ -4,6 +4,7 @@
 
 import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/dashboard-ui/dropdown-menu';
 import { BrandProfileSection } from '@/components/settings/brand-profile-section';
 import { BrandSettings } from '@/components/settings/brand-settings-schema';
@@ -22,6 +23,7 @@ export default function GeneralSettingsPage() {
   const [ isLoading, setIsLoading ] = useState( true );
   const [ isSaving, setIsSaving ] = useState( false );
   const [ currentBrand, setCurrentBrand ] = useState<any>( null );
+  const [ isReviewConfirmOpen, setIsReviewConfirmOpen ] = useState( false );
 
   const form = useForm( {
     defaultValues: {
@@ -194,6 +196,18 @@ export default function GeneralSettingsPage() {
   const handleFormSubmit = useCallback( ( e: React.FormEvent ) => {
     e.preventDefault();
     e.stopPropagation();
+
+    const status = ( currentBrand?.status || currentBrand?.brand_status )?.toLowerCase();
+    if ( status === 'approved' ) {
+      setIsReviewConfirmOpen( true );
+      return;
+    }
+
+    form.handleSubmit();
+  }, [ currentBrand, form ] );
+
+  const handleConfirmSave = useCallback( () => {
+    setIsReviewConfirmOpen( false );
     form.handleSubmit();
   }, [ form ] );
 
@@ -237,6 +251,17 @@ export default function GeneralSettingsPage() {
       <div className='p-6 space-y-6 bg-slate-50/50 h-full -mt-5'>
         <BrandProfileSection form={ form } />
       </div>
+
+      <ConfirmDialog
+        open={ isReviewConfirmOpen }
+        onOpenChange={ setIsReviewConfirmOpen }
+        title="Confirm profile update"
+        description="Saving your profile will require review and approval before you can perform certain tasks."
+        confirmLabel="Continue and save"
+        onConfirm={ handleConfirmSave }
+        isLoading={ isSaving }
+        loadingText="Saving..."
+      />
     </form>
   );
 }

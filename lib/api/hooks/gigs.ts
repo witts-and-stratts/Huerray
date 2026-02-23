@@ -15,6 +15,7 @@ import {
 } from '@tanstack/react-query';
 import { GigsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
+import { campaignsKeys } from './campaigns';
 import type { 
   ModelsStandardGenericResponse,
   ModelsPaginatedGigResponse, 
@@ -27,9 +28,10 @@ import type {
   ModelsStandardGigApplicationResponse,
   ModelsGigInvitationRequest,
   ModelsStandardGigInvitationResponse,
-  ModelsStandardGigInvitationResponses,
-  ModelsInvitationResponseRequest
+  ModelsGigInvitationResponseRequest,
+  ModelsUpdateGigApplicationRequest,
 } from '../generated/models';
+import type { ApiError } from './types';
 
 
 // Create API instance
@@ -45,6 +47,7 @@ export const gigsKeys = {
   details: () => [ ...gigsKeys.all, 'detail' ] as const,
   detail: ( id: string ) => [ ...gigsKeys.details(), id ] as const,
   byCampaign: ( campaignId: string ) => [ ...gigsKeys.all, 'campaign', campaignId ] as const,
+  invitations: ( gigId: string ) => [ ...gigsKeys.all, 'invitations', gigId ] as const,
 };
 
 /**
@@ -52,8 +55,8 @@ export const gigsKeys = {
  */
 export function useGigs(
   params?: Record<string, unknown>,
-  options?: Omit<UseQueryOptions<ModelsPaginatedGigResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedGigResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedGigResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedGigResponse, ApiError> {
   return useQuery( {
     queryKey: gigsKeys.list( params ),
     queryFn: async () => {
@@ -70,8 +73,8 @@ export function useGigs(
 export function useGigsByCampaign(
   campaignId: string,
   role: 'brand' | 'admin',
-  options?: Omit<UseQueryOptions<ModelsPaginatedGigResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedGigResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedGigResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedGigResponse, ApiError> {
   return useQuery( {
     queryKey: gigsKeys.byCampaign( campaignId ),
     queryFn: async () => {
@@ -180,8 +183,8 @@ export function useDeleteGig(
  */
 export function useGig(
   id: string,
-  options?: Omit<UseQueryOptions<ModelsStandardGigResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardGigResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardGigResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardGigResponse, ApiError> {
   return useQuery( {
     queryKey: gigsKeys.detail( id ),
     queryFn: async () => {
@@ -196,13 +199,43 @@ export function useGig(
  * Hook to apply to a gig
  */
 export function useApplyToGig(
-  options?: UseMutationOptions<ModelsStandardGigApplicationResponse, Error, { id: string; application: ModelsGigApplicationRequest }>
-): UseMutationResult<ModelsStandardGigApplicationResponse, Error, { id: string; application: ModelsGigApplicationRequest }> {
+  options?: UseMutationOptions<ModelsStandardGigApplicationResponse, ApiError, { id: string; application: ModelsGigApplicationRequest }>
+): UseMutationResult<ModelsStandardGigApplicationResponse, ApiError, { id: string; application: ModelsGigApplicationRequest }> {
+  const queryClient = useQueryClient();
+  const { onSuccess, ...restOptions } = options ?? {};
+
   return useMutation( {
     mutationFn: async ( { id, application } ) => {
       const response = await gigsApi.gigsIdApplyPost( { id, application } );
       return response.data;
     },
+    onSuccess: async ( data, variables, onMutateResult, context ) => {
+      await Promise.all( [
+        queryClient.invalidateQueries( { queryKey: gigsKeys.all } ),
+        queryClient.invalidateQueries( { queryKey: [ 'creators' ] } ),
+        queryClient.invalidateQueries( { queryKey: [ 'campaigns' ] } ),
+      ] );
+
+      await onSuccess?.( data, variables, onMutateResult, context );
+    },
+    ...restOptions,
+  } );
+}
+
+/**
+ * Hook to fetch invitations for a specific gig
+ */
+export function useGigInvitations(
+  gigId: string,
+  options?: Omit<UseQueryOptions<ModelsStandardGigInvitationResponse, ApiError>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery( {
+    queryKey: gigsKeys.invitations( gigId ),
+    queryFn: async () => {
+      const response = await gigsApi.gigsIdInvitationsGet( { id: gigId } );
+      return response.data;
+    },
+    enabled: !!gigId,
     ...options,
   } );
 }
@@ -213,10 +246,15 @@ export function useApplyToGig(
 export function useInviteCreatorToGig(
   options?: UseMutationOptions<ModelsStandardGigInvitationResponse, Error, { id: string; invitation: ModelsGigInvitationRequest }>
 ): UseMutationResult<ModelsStandardGigInvitationResponse, Error, { id: string; invitation: ModelsGigInvitationRequest }> {
+  const queryClient = useQueryClient();
+
   return useMutation( {
     mutationFn: async ( { id, invitation } ) => {
       const response = await gigsApi.gigsIdInvitePost( { id, invitation } );
       return response.data;
+    },
+    onSuccess: ( _, variables ) => {
+      queryClient.invalidateQueries( { queryKey: gigsKeys.invitations( variables.id ) } );
     },
     ...options,
   } );
@@ -226,13 +264,13 @@ export function useInviteCreatorToGig(
  * Hook to respond to an invitation
  */
 export function useRespondToInvitation(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsInvitationResponseRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsInvitationResponseRequest }> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsGigInvitationResponseRequest }>
+): UseMutationResult<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsGigInvitationResponseRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {
     mutationFn: async ( { invitationId, response } ) => {
-      const result = await gigsApi.gigsInvitationsInvitationIdRespondPut( { invitationId, response } );
+      const result = await gigsApi.gigsInvitationsInvitationIdRespondPut( { invitationId, request: response } );
       return result.data;
     },
     onSuccess: () => {
@@ -243,10 +281,31 @@ export function useRespondToInvitation(
 }
 
 /**
+ * Hook to update a gig application status (accept/decline)
+ */
+export function useUpdateApplicationStatus(
+  options?: UseMutationOptions<ModelsStandardGigApplicationResponse, Error, { applicationId: string; request: ModelsUpdateGigApplicationRequest }>
+): UseMutationResult<ModelsStandardGigApplicationResponse, Error, { applicationId: string; request: ModelsUpdateGigApplicationRequest }> {
+  const queryClient = useQueryClient();
+
+  return useMutation( {
+    mutationFn: async ( { applicationId, request } ) => {
+      const response = await gigsApi.gigsApplicationsApplicationIdStatusPut( { applicationId, request } );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries( { queryKey: gigsKeys.all } );
+      queryClient.invalidateQueries( { queryKey: campaignsKeys.details() } );
+    },
+    ...options,
+  } );
+}
+
+/**
  * Hook to fetch all invitations for the authenticated creator
  */
 export function useCreatorInvitations(
-  options?: Omit<UseQueryOptions<ModelsStandardGigInvitationResponses, Error>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<ModelsStandardGigInvitationResponse, ApiError>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery( {
     queryKey: [ ...gigsKeys.all, 'invitations' ],

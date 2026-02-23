@@ -30,10 +30,6 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   }
 
   return (
-    <Card>
-      <CardContent className='relative'>
-        <GigsTable data={ gigs } isLoading={ isLoading } basePath={ basePath } />
-      </CardContent>
-    </Card>
+    <GigsTable data={ gigs } isLoading={ isLoading } basePath={ basePath } defaultView="cards" hideViewToggle />
   );
 }

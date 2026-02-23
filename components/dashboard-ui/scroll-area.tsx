@@ -8,8 +8,9 @@ import { cn } from "@/lib/dashboard-utils";
 function ScrollArea( {
   className,
   children,
+  scrollbar,
   ...props
-}: ScrollAreaPrimitive.Root.Props ) {
+}: ScrollAreaPrimitive.Root.Props & { scrollbar?: ScrollAreaPrimitive.Scrollbar.Props; } ) {
   return (
     <ScrollAreaPrimitive.Root
       data-slot="scroll-area"
@@ -22,7 +23,7 @@ function ScrollArea( {
       >
         { children }
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar />
+      <ScrollBar { ...scrollbar } />
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   );

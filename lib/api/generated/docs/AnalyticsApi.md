@@ -41,7 +41,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -94,7 +94,7 @@ const { status, data } = await apiInstance.analyticsBrandPeriodGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -141,7 +141,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -194,7 +194,7 @@ const { status, data } = await apiInstance.analyticsCreatorPeriodGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -241,7 +241,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -294,7 +294,7 @@ const { status, data } = await apiInstance.analyticsPlatformPeriodGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -354,7 +354,7 @@ const { status, data } = await apiInstance.analyticsTimeSeriesGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 

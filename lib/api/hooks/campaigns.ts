@@ -14,18 +14,21 @@ import {
   type UseQueryOptions,
   type UseMutationOptions
 } from '@tanstack/react-query';
-import { CampaignsApi, BrandApi, type CampaignsApiCampaignsSearchGetRequest, type BrandApiBrandsSearchCampaignsGetRequest } from '../generated/api';
+import { CampaignsApi, BrandApi, VideoSubmissionsApi, type CampaignsApiCampaignsSearchGetRequest, type BrandApiBrandsSearchCampaignsGetRequest } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
-import type { 
-  ModelsStandardGenericResponse, 
-  ModelsPaginatedCampaignResponse, 
+import type {
+  ModelsStandardGenericResponse,
+  ModelsPaginatedCampaignResponse,
   ModelsCampaignResponse,
   ModelsBrandCampaignDecisionRequest,
   ModelsCreateCampaignRequest,
   ModelsAdminCampaignApprovalRequest,
   ModelsStandardCampaignResponse,
   ModelsStandardGigApplicationResponses,
+  ModelsStandardGigInvitationResponse,
+  ModelsStandardVideoSubmissionResponses,
 } from '../generated/models';
+import type { ApiError } from './types';
 
 /**
  * Hook to submit a brand decision for a campaign
@@ -73,6 +76,7 @@ export function useAdminCampaignApproval(
 // Create API instances
 const campaignsApi = new CampaignsApi(apiConfiguration, undefined, apiClient);
 const brandApi = new BrandApi(apiConfiguration, undefined, apiClient);
+const videoSubmissionsApi = new VideoSubmissionsApi(apiConfiguration, undefined, apiClient);
 
 /**
  * Query key factory for campaigns endpoints
@@ -84,6 +88,8 @@ export const campaignsKeys = {
   details: () => [...campaignsKeys.all, 'detail'] as const,
   detail: (id: string) => [...campaignsKeys.details(), id] as const,
   applications: (id: string) => [...campaignsKeys.details(), id, 'applications'] as const,
+  invitations: (id: string) => [...campaignsKeys.details(), id, 'invitations'] as const,
+  submissions: (id: string) => [...campaignsKeys.details(), id, 'submissions'] as const,
 };
 
 /**
@@ -117,8 +123,8 @@ export const brandCampaignsKeys = {
  */
 export function useCampaigns(
   params?: CampaignsApiCampaignsSearchGetRequest,
-  options?: Omit<UseQueryOptions<ModelsPaginatedCampaignResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedCampaignResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedCampaignResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedCampaignResponse, ApiError> {
   return useQuery({
     queryKey: campaignsKeys.list(params),
     queryFn: async () => {
@@ -152,8 +158,8 @@ export function useCampaigns(
  */
 export function useBrandCampaigns(
   params?: BrandApiBrandsSearchCampaignsGetRequest,
-  options?: Omit<UseQueryOptions<ModelsPaginatedCampaignResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedCampaignResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedCampaignResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedCampaignResponse, ApiError> {
   return useQuery({
     queryKey: brandCampaignsKeys.list(params),
     queryFn: async () => {
@@ -182,8 +188,8 @@ export function useBrandCampaigns(
  */
 export function useCampaign(
   id: string,
-  options?: Omit<UseQueryOptions<ModelsCampaignResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsCampaignResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsCampaignResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsCampaignResponse, ApiError> {
   return useQuery({
     queryKey: campaignsKeys.detail(id),
     queryFn: async () => {
@@ -200,12 +206,48 @@ export function useCampaign(
  */
 export function useCampaignApplications(
   id: string,
-  options?: Omit<UseQueryOptions<ModelsStandardGigApplicationResponses, Error>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<ModelsStandardGigApplicationResponses, ApiError>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery({
     queryKey: campaignsKeys.applications(id),
     queryFn: async () => {
       const response = await campaignsApi.campaignsIdApplicationsGet({ id });
+      return response.data;
+    },
+    enabled: !!id,
+    ...options,
+  });
+}
+
+/**
+ * Hook to fetch invitations for a campaign
+ */
+export function useCampaignInvitations(
+  id: string,
+  options?: Omit<UseQueryOptions<ModelsStandardGigInvitationResponse, ApiError>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: campaignsKeys.invitations(id),
+    queryFn: async () => {
+      const response = await campaignsApi.campaignsIdInvitationsGet({ id });
+      return response.data;
+    },
+    enabled: !!id,
+    ...options,
+  });
+}
+
+/**
+ * Hook to fetch video submissions for a campaign
+ */
+export function useCampaignSubmissions(
+  id: string,
+  options?: Omit<UseQueryOptions<ModelsStandardVideoSubmissionResponses, ApiError>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: campaignsKeys.submissions(id),
+    queryFn: async () => {
+      const response = await videoSubmissionsApi.videosCampaignCampaignIdGet({ campaignId: id });
       return response.data;
     },
     enabled: !!id,

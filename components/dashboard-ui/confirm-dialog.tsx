@@ -61,7 +61,7 @@ export function ConfirmDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className={ className }>
         <DialogHeader>
-          <DialogTitle className='font-primary text-h5 font-normal text-primary!'>
+          <DialogTitle className='dialog__title'>
             { title }
           </DialogTitle>
           { description && (

@@ -10,16 +10,17 @@ All URIs are relative to */api/v1*
 |[**gigsIdApplyPost**](#gigsidapplypost) | **POST** /gigs/{id}/apply | Apply to gig|
 |[**gigsIdDelete**](#gigsiddelete) | **DELETE** /gigs/{id} | Delete gig|
 |[**gigsIdGet**](#gigsidget) | **GET** /gigs/{id} | Get gig by ID|
+|[**gigsIdInvitationsGet**](#gigsidinvitationsget) | **GET** /gigs/{id}/invitations | Get gig invitations|
 |[**gigsIdInvitePost**](#gigsidinvitepost) | **POST** /gigs/{id}/invite | Invite creator to gig|
 |[**gigsIdPut**](#gigsidput) | **PUT** /gigs/{id} | Update gig|
 |[**gigsIdStatusPut**](#gigsidstatusput) | **PUT** /gigs/{id}/status | Update gig status|
 |[**gigsInvitationsGet**](#gigsinvitationsget) | **GET** /gigs/invitations | Get creator invitations|
-|[**gigsInvitationsInvitationIdRespondPut**](#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to invitation|
+|[**gigsInvitationsInvitationIdRespondPut**](#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to gig invitation|
 |[**gigsPost**](#gigspost) | **POST** /gigs/ | Create a new gig|
-|[**gigsSearchGet**](#gigssearchget) | **GET** /gigs/search | Advanced gig search (Admin only)|
+|[**gigsSearchGet**](#gigssearchget) | **GET** /gigs/search | Search gigs|
 
 # **gigsApplicationsApplicationIdStatusPut**
-> ModelsStandardGigApplicationResponse gigsApplicationsApplicationIdStatusPut(status)
+> ModelsStandardGigApplicationResponse gigsApplicationsApplicationIdStatusPut(request)
 
 Brand updates the status of a gig application
 
@@ -29,18 +30,18 @@ Brand updates the status of a gig application
 import {
     GigsApi,
     Configuration,
-    ModelsApplicationStatusRequest
+    ModelsUpdateGigApplicationRequest
 } from 'huerray-api';
 
 const configuration = new Configuration();
 const apiInstance = new GigsApi(configuration);
 
 let applicationId: string; //Application ID (default to undefined)
-let status: ModelsApplicationStatusRequest; //Status update request
+let request: ModelsUpdateGigApplicationRequest; //Status update request
 
 const { status, data } = await apiInstance.gigsApplicationsApplicationIdStatusPut(
     applicationId,
-    status
+    request
 );
 ```
 
@@ -48,7 +49,7 @@ const { status, data } = await apiInstance.gigsApplicationsApplicationIdStatusPu
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **status** | **ModelsApplicationStatusRequest**| Status update request | |
+| **request** | **ModelsUpdateGigApplicationRequest**| Status update request | |
 | **applicationId** | [**string**] | Application ID | defaults to undefined|
 
 
@@ -58,7 +59,7 @@ const { status, data } = await apiInstance.gigsApplicationsApplicationIdStatusPu
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -113,7 +114,7 @@ const { status, data } = await apiInstance.gigsCampaignsCampaignIdGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -167,7 +168,7 @@ const { status, data } = await apiInstance.gigsIdApplicationsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -227,7 +228,7 @@ const { status, data } = await apiInstance.gigsIdApplyPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -282,7 +283,7 @@ const { status, data } = await apiInstance.gigsIdDelete(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -337,7 +338,7 @@ const { status, data } = await apiInstance.gigsIdGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -352,6 +353,62 @@ const { status, data } = await apiInstance.gigsIdGet(
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**404** | Gig not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **gigsIdInvitationsGet**
+> ModelsStandardGigInvitationResponse gigsIdInvitationsGet()
+
+Get all invitations for a specific gig with role-based access
+
+### Example
+
+```typescript
+import {
+    GigsApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new GigsApi(configuration);
+
+let id: string; //Gig ID (default to undefined)
+
+const { status, data } = await apiInstance.gigsIdInvitationsGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Gig ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGigInvitationResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Invitations retrieved successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | Forbidden |  -  |
+|**404** | Gig/Creator not found |  -  |
+|**500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -395,7 +452,7 @@ const { status, data } = await apiInstance.gigsIdInvitePost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -454,7 +511,7 @@ const { status, data } = await apiInstance.gigsIdPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -513,7 +570,7 @@ const { status, data } = await apiInstance.gigsIdStatusPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -533,7 +590,7 @@ const { status, data } = await apiInstance.gigsIdStatusPut(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsInvitationsGet**
-> ModelsStandardGigInvitationResponses gigsInvitationsGet()
+> ModelsStandardGigInvitationResponse gigsInvitationsGet()
 
 Get all invitations for the authenticated creator
 
@@ -557,11 +614,11 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardGigInvitationResponses**
+**ModelsStandardGigInvitationResponse**
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -574,16 +631,14 @@ This endpoint does not have any parameters.
 |-------------|-------------|------------------|
 |**200** | Invitations retrieved successfully |  -  |
 |**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
 |**404** | Creator profile not found |  -  |
-|**500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsInvitationsInvitationIdRespondPut**
-> ModelsStandardGigInvitationResponse gigsInvitationsInvitationIdRespondPut(response)
+> ModelsStandardGigInvitationResponse gigsInvitationsInvitationIdRespondPut(request)
 
-Creator responds to a gig invitation
+Creator accepts or declines a gig invitation
 
 ### Example
 
@@ -591,18 +646,18 @@ Creator responds to a gig invitation
 import {
     GigsApi,
     Configuration,
-    ModelsInvitationResponseRequest
+    ModelsGigInvitationResponseRequest
 } from 'huerray-api';
 
 const configuration = new Configuration();
 const apiInstance = new GigsApi(configuration);
 
 let invitationId: string; //Invitation ID (default to undefined)
-let response: ModelsInvitationResponseRequest; //Invitation response
+let request: ModelsGigInvitationResponseRequest; //Invitation response
 
 const { status, data } = await apiInstance.gigsInvitationsInvitationIdRespondPut(
     invitationId,
-    response
+    request
 );
 ```
 
@@ -610,7 +665,7 @@ const { status, data } = await apiInstance.gigsInvitationsInvitationIdRespondPut
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **response** | **ModelsInvitationResponseRequest**| Invitation response | |
+| **request** | **ModelsGigInvitationResponseRequest**| Invitation response | |
 | **invitationId** | [**string**] | Invitation ID | defaults to undefined|
 
 
@@ -620,7 +675,7 @@ const { status, data } = await apiInstance.gigsInvitationsInvitationIdRespondPut
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -631,11 +686,8 @@ const { status, data } = await apiInstance.gigsInvitationsInvitationIdRespondPut
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Invitation response submitted successfully |  -  |
+|**200** | Response recorded successfully |  -  |
 |**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
-|**404** | Creator profile not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -676,7 +728,7 @@ const { status, data } = await apiInstance.gigsPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -697,7 +749,7 @@ const { status, data } = await apiInstance.gigsPost(
 # **gigsSearchGet**
 > ModelsPaginatedGigResponse gigsSearchGet()
 
-Admin can search all gigs with comprehensive filters
+Admin can search all gigs with advanced filters
 
 ### Example
 
@@ -778,7 +830,7 @@ const { status, data } = await apiInstance.gigsSearchGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -789,11 +841,8 @@ const { status, data } = await apiInstance.gigsSearchGet(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Search results |  -  |
+|**200** | List of gigs matching search |  -  |
 |**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
-|**500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,11 +1,11 @@
-# ModelsStandardGigInvitationResponses
+# ModelsStandardGigCreatorListResponse
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**Array&lt;ModelsGigInvitationResponse&gt;**](ModelsGigInvitationResponse.md) |  | [optional] [default to undefined]
+**data** | [**ModelsGigCreatorListResponse**](ModelsGigCreatorListResponse.md) |  | [optional] [default to undefined]
 **error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **success** | **boolean** |  | [optional] [default to undefined]
@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ModelsStandardGigInvitationResponses } from 'huerray-api';
+import { ModelsStandardGigCreatorListResponse } from 'huerray-api';
 
-const instance: ModelsStandardGigInvitationResponses = {
+const instance: ModelsStandardGigCreatorListResponse = {
     data,
     error,
     message,

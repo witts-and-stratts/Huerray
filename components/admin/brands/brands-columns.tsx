@@ -57,6 +57,15 @@ export const columns: ColumnDef<Brand>[] = [
         <BrandStatusBadge status={ status } />
       );
     },
+    filterFn: ( row, id, filterValue ) => {
+      if ( filterValue === undefined ) {
+        return true;
+      }
+      if ( !Array.isArray( filterValue ) ) return true;
+      if ( filterValue.length === 0 ) return false;
+      const rowValue = row.getValue( id ) as string;
+      return filterValue.includes( rowValue );
+    },
   },
   {
     accessorKey: "total_campaigns",

@@ -14,12 +14,15 @@ import { Calendar } from "@/components/dashboard-ui/calendar";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Calendar01Icon } from "@hugeicons/core-free-icons";
 import { BaseFieldProps } from "./types";
+import { type DateRange } from "react-day-picker";
+
+export type { DateRange };
 
 export interface DatePickerInputProps {
   id?: string;
   name?: string;
-  value?: Date | string;
-  onChange?: ( value: Date | undefined ) => void;
+  value?: Date | string | DateRange;
+  onChange?: ( value: Date | DateRange | undefined ) => void;
   placeholder?: string;
   disabled?: boolean;
   className?: string;
@@ -28,6 +31,7 @@ export interface DatePickerInputProps {
   locale?: string;
   minDate?: Date;
   maxDate?: Date;
+  mode?: 'single' | 'range';
   onBlur?: () => void;
 }
 
@@ -36,6 +40,10 @@ export interface DatePickerFieldProps extends BaseFieldProps, Omit<DatePickerInp
 }
 
 const DEFAULT_DATE_FORMAT: Intl.DateTimeFormatOptions = { day: "2-digit", month: "long", year: "numeric" };
+
+function isDateRange( v: unknown ): v is DateRange {
+  return typeof v === 'object' && v !== null && 'from' in v;
+}
 
 const normalizeDate = ( d: Date | string | undefined ): Date | undefined => {
   if ( !d ) return undefined;
@@ -52,9 +60,32 @@ function formatDateValue( date: Date | undefined, format: Intl.DateTimeFormatOpt
   return date.toLocaleDateString( loc, format );
 }
 
+function formatRangeValue( range: DateRange, format: Intl.DateTimeFormatOptions, loc: string ) {
+  const from = range.from ? formatDateValue( range.from, format, loc ) : "...";
+  const to = range.to ? formatDateValue( range.to, format, loc ) : "...";
+  return range.from ? `${ from } – ${ to }` : "";
+}
+
+function formatValue( v: Date | DateRange | undefined, format: Intl.DateTimeFormatOptions, loc: string ) {
+  if ( !v ) return "";
+  if ( isDateRange( v ) ) return formatRangeValue( v, format, loc );
+  return formatDateValue( v, format, loc );
+}
+
 function isValidDate( date: Date | undefined ) {
   if ( !date ) return false;
   return !isNaN( date.getTime() );
+}
+
+function normalizeValue( value: Date | string | DateRange | undefined ): Date | DateRange | undefined {
+  if ( isDateRange( value ) ) return value;
+  return normalizeDate( value as Date | string | undefined );
+}
+
+function getMonthFromValue( v: Date | DateRange | undefined ): Date {
+  if ( !v ) return new Date();
+  if ( isDateRange( v ) ) return v.from ?? new Date();
+  return v;
 }
 
 export const DatePickerInput = ( {
@@ -69,48 +100,69 @@ export const DatePickerInput = ( {
   locale = "en-US",
   minDate,
   maxDate,
+  mode = 'single',
   onBlur,
 }: DatePickerInputProps ) => {
 
-  const normalizedValue = normalizeDate( value as Date | string | undefined );
+  const normalizedValue = normalizeValue( value );
 
   const [ open, setOpen ] = useState( false );
-  const [ month, setMonth ] = useState<Date | undefined>( normalizedValue || new Date() );
-  const [ inputValue, setInputValue ] = useState( normalizedValue ? formatDateValue( normalizedValue, dateFormat, locale ) : "" );
-  const lastEmittedDateRef = useRef<Date | undefined>( undefined );
+  const [ month, setMonth ] = useState<Date | undefined>( getMonthFromValue( normalizedValue ) );
+  const [ inputValue, setInputValue ] = useState( formatValue( normalizedValue, dateFormat, locale ) );
+  const lastEmittedRef = useRef<Date | DateRange | undefined>( undefined );
 
-  // Sync input value when external value changes
+  // In range mode we buffer the in-progress selection here instead of calling
+  // onChange immediately. Calling onChange with a partial range causes the
+  // parent to re-render and pass a new `value` prop back, which forces the
+  // Calendar to re-render and momentarily move focus, which Base UI's Popover
+  // interprets as a click-outside and dismisses the popup.
+  const [ internalRange, setInternalRange ] = useState<DateRange | undefined>(
+    mode === 'range' && isDateRange( normalizedValue ) ? normalizedValue : undefined
+  );
+
+  // Sync internal range from the committed external value each time the
+  // popover opens so any externally-driven value changes are reflected.
   useEffect( () => {
-    const normalized = normalizeDate( value as Date | string | undefined );
-    if ( normalized ) {
-      queueMicrotask( () => {
-        setMonth( normalized );
-        const isFromTyping = lastEmittedDateRef.current && lastEmittedDateRef.current.getTime() === normalized.getTime();
-        if ( !isFromTyping ) {
-          setInputValue( formatDateValue( normalized, dateFormat, locale ) );
-        }
-      } );
-    } else {
-      queueMicrotask( () => setInputValue( "" ) );
+    if ( open && mode === 'range' ) {
+      setInternalRange( isDateRange( normalizedValue ) ? normalizedValue : undefined );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ open ] );
+
+  useEffect( () => {
+    const normalized = normalizeValue( value );
+    queueMicrotask( () => {
+      if ( normalized ) {
+        const prev = lastEmittedRef.current;
+        const isFromTyping = prev instanceof Date && normalized instanceof Date
+          ? prev.getTime() === normalized.getTime()
+          : false;
+        if ( !isFromTyping ) {
+          setInputValue( formatValue( normalized, dateFormat, locale ) );
+        }
+        setMonth( getMonthFromValue( normalized ) );
+      } else {
+        setInputValue( "" );
+      }
+    } );
   }, [ value, dateFormat, locale ] );
 
   const handleInputChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
     const newValue = e.target.value;
     setInputValue( newValue );
-    const date = new Date( newValue );
-    if ( isValidDate( date ) ) {
-      lastEmittedDateRef.current = date;
-      onChange?.( date );
-      setMonth( date );
+    if ( mode !== 'range' ) {
+      const date = new Date( newValue );
+      if ( isValidDate( date ) ) {
+        lastEmittedRef.current = date;
+        onChange?.( date );
+        setMonth( date );
+      }
     }
   };
 
   const handleBlur = () => {
-    if ( normalizedValue ) {
-      setInputValue( formatDateValue( normalizedValue, dateFormat, locale ) );
-    }
-    lastEmittedDateRef.current = undefined;
+    setInputValue( formatValue( normalizedValue, dateFormat, locale ) );
+    lastEmittedRef.current = undefined;
     onBlur?.();
   };
 
@@ -121,13 +173,34 @@ export const DatePickerInput = ( {
     }
   };
 
-  const handleSelect = ( date: Date | undefined ) => {
+  const handleSingleSelect = ( date: Date | undefined ) => {
     onChange?.( date );
-    if ( date ) {
-      setInputValue( formatDateValue( date, dateFormat, locale ) );
-    }
+    setInputValue( date instanceof Date ? formatDateValue( date, dateFormat, locale ) : "" );
     setOpen( false );
-    lastEmittedDateRef.current = undefined;
+    lastEmittedRef.current = undefined;
+  };
+
+  const handleRangeSelect = ( date: DateRange | undefined ) => {
+    if ( !date ) {
+      setInternalRange( undefined );
+      return;
+    }
+    // Buffer the partial range locally — do NOT call onChange until both
+    // from and to are selected. This prevents the parent re-render that
+    // would move focus and cause the popover to close prematurely.
+    setInternalRange( date );
+    setInputValue( formatRangeValue( date, dateFormat, locale ) );
+    if ( date.from && date.to ) {
+      onChange?.( date );
+      setOpen( false );
+      lastEmittedRef.current = undefined;
+    }
+  };
+
+  const calendarDisabled = ( date: Date ) => {
+    if ( minDate && date < minDate ) return true;
+    if ( maxDate && date > maxDate ) return true;
+    return false;
   };
 
   return (
@@ -168,19 +241,28 @@ export const DatePickerInput = ( {
               onClick={ ( e ) => e.stopPropagation() }
               onMouseDown={ ( e ) => e.stopPropagation() }
             >
-              <Calendar
-                mode="single"
-                selected={ normalizedValue }
-                month={ month }
-                onMonthChange={ setMonth }
-                onSelect={ handleSelect }
-                captionLayout="dropdown"
-                disabled={ ( date ) => {
-                  if ( minDate && date < minDate ) return true;
-                  if ( maxDate && date > maxDate ) return true;
-                  return false;
-                } }
-              />
+              { mode === 'range' ? (
+                <Calendar
+                  mode="range"
+                  selected={ internalRange }
+                  onSelect={ handleRangeSelect }
+                  month={ month }
+                  onMonthChange={ setMonth }
+                  captionLayout="dropdown"
+                  numberOfMonths={ 2 }
+                  disabled={ calendarDisabled }
+                />
+              ) : (
+                <Calendar
+                  mode="single"
+                  selected={ normalizedValue instanceof Date ? normalizedValue : undefined }
+                  onSelect={ handleSingleSelect }
+                  month={ month }
+                  onMonthChange={ setMonth }
+                  captionLayout="dropdown"
+                  disabled={ calendarDisabled }
+                />
+              ) }
             </div>
           </PopoverContent>
         </Popover>

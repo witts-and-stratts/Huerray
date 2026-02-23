@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsCreatorResponse } from './models-creator-response';
 
 export interface ModelsVideoSubmissionResponse {
     'admin_comments'?: string;
@@ -20,8 +23,10 @@ export interface ModelsVideoSubmissionResponse {
     'brand_comments'?: string;
     'brand_reviewed_at'?: string;
     'created_at'?: string;
+    'creator'?: ModelsCreatorResponse;
     'creator_id'?: string;
     'description'?: string;
+    'gig'?: object;
     'gig_id'?: string;
     'id'?: string;
     'status'?: string;

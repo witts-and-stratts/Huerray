@@ -1,92 +1,94 @@
 "use client";
 
-import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
-import { BrandAvatar } from '@/components/campaigns/brand-avatar';
-import { Badge } from '@/components/dashboard-ui/badge';
-import { Button } from '@/components/dashboard-ui/button';
-import { formatDate } from 'date-fns';
-import { Video, Calendar, Eye } from 'lucide-react';
+import { Cancel01Icon, CheckmarkCircle01Icon, Clock01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+
+import { CreatorInfoBlock } from '@/components/admin/creators/creator-info-block';
+import { Card, CardFooter } from '@/components/dashboard-ui/card';
+import { cn } from '@/lib/dashboard-utils';
+import { ModelsCreatorResponse, ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import { CircleIcon } from 'lucide-react';
 import { InvitationActionMenu } from './invitation-action-menu';
+import { TextCapitalize } from '../text-case';
+
+const invitationStatusConfig: Record<string, { label: string; color: string; icon: any; }> = {
+  pending: {
+    label: 'Pending',
+    color: 'bg-amber-500/10 text-amber-600 border-amber-500/20',
+    icon: Clock01Icon,
+  },
+  accepted: {
+    label: 'Accepted',
+    color: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
+    icon: CheckmarkCircle01Icon,
+  },
+  declined: {
+    label: 'Declined',
+    color: 'bg-red-500/10 text-red-600 border-red-500/20',
+    icon: Cancel01Icon,
+  },
+};
+
+function InvitationStatusBadge( { status, className }: { status?: string; className?: string; } ) {
+  const config = invitationStatusConfig[ status?.toLowerCase() || '' ] || {
+    label: status || 'Unknown',
+    color: 'bg-gray-500/10 text-gray-600 border-gray-500/20',
+    icon: CircleIcon,
+  };
+
+  return (
+    <div className={ cn(
+      "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border whitespace-nowrap",
+      config.color,
+      className
+    ) }>
+      <HugeiconsIcon icon={ config.icon } className="w-3 h-3" />
+      <TextCapitalize>{ config.label }</TextCapitalize>
+    </div>
+  );
+}
 
 interface InvitationCardProps {
   invitation: ModelsGigInvitationResponse;
   onViewDetails: ( invitation: ModelsGigInvitationResponse ) => void;
 }
 
+function getInvitationCreator( invitation: ModelsGigInvitationResponse ): ModelsCreatorResponse {
+  const creator = invitation.creator;
+  if ( creator ) {
+    return creator as ModelsCreatorResponse;
+  }
+
+  return {
+    first_name: '',
+    last_name: '',
+    email: 'Unknown Creator',
+    creator_id: invitation.creator_id,
+  } as ModelsCreatorResponse;
+}
+
 export function InvitationCard( { invitation, onViewDetails }: InvitationCardProps ) {
-  const {
-    id,
-    gig,
-    brand_id,
-    invited_at,
-    status,
-    message,
-  } = invitation;
+  const creator = getInvitationCreator( invitation );
 
   return (
-    <Card className='py-3 justify-between gap-1 h-full flex flex-col'>
-      <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
-        <div className="flex flex-col flex-1 min-w-0">
-          <div className='flex items-center gap-2 mb-1'>
-            <Badge variant={
-              status === 'pending' ? 'outline' :
-                status === 'accepted' ? 'secondary' :
-                  'destructive'
-            } className="capitalize">
-              { status }
-            </Badge>
+    <Card className='py-0 gap-1 min-h-[180px]'>
+      <div className='flex flex-col gap-4 justify-between h-full'>
+        <div className="flex items-start justify-between gap-4 p-4 pb-0">
+          <CreatorInfoBlock
+            creator={ creator }
+            className="flex-1 min-w-0"
+            onViewDetails={ () => onViewDetails( invitation ) }
+            showActions={ false }
+          />
+          <div className="shrink-0 -mr-2 -mt-1">
+            <InvitationActionMenu invitation={ invitation } onViewDetails={ onViewDetails } />
           </div>
-          <button
-            onClick={ () => onViewDetails( invitation ) }
-            className='text-left hover:underline focus:outline-none'
-          >
-            <CardTitle className='capitalize text-[18px] font-normal text-primary font-primary truncate'>
-              { gig?.title || 'Untitled Gig' }
-            </CardTitle>
-          </button>
-          <CardDescription className="text-muted-foreground/70 text-sm line-clamp-1">
-            { gig?.campaign_name || 'Unknown Campaign' }
-          </CardDescription>
         </div>
-        <div className="flex shrink-0 text-right gap-2 items-start">
-          { brand_id && (
-            <BrandAvatar brandId={ brand_id } className="size-10 border bg-white rounded-full shrink-0" />
-          ) }
-          <InvitationActionMenu invitation={ invitation } onViewDetails={ onViewDetails } />
-        </div>
-      </CardHeader>
 
-      <CardContent className='space-y-3 pb-2 flex-1 flex flex-col'>
-        { message && (
-          <div className="p-3 bg-muted/30 rounded-lg text-sm text-muted-foreground italic line-clamp-3">
-            &quot;{ message }&quot;
-          </div>
-        ) }
-
-        <div className="mt-auto pt-2 space-y-2">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1.5">
-              <Video className="size-3.5" />
-              <span className="text-xs">{ invitation.number_of_videos } video{ invitation.number_of_videos !== 1 ? 's' : '' }</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Calendar className="size-3.5" />
-              <span className="text-xs">Invited { invited_at ? formatDate( new Date( invited_at ), 'MMM d, yyyy' ) : '-' }</span>
-            </div>
-          </div>
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full mt-2"
-            onClick={ () => onViewDetails( invitation ) }
-          >
-            <Eye className="size-3.5 mr-2" />
-            View Details
-          </Button>
-        </div>
-      </CardContent>
+        <CardFooter className="py-4 pt-3! bg-muted/30 border-t gap-3">
+          <InvitationStatusBadge status={ invitation.status } />
+        </CardFooter>
+      </div>
     </Card>
   );
 }

@@ -13,16 +13,13 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsGigApplicationStatus } from './utils-gig-application-status';
 
-export interface ModelsApplicationStatusRequest {
-    'status': ModelsApplicationStatusRequestStatusEnum;
+export interface ModelsUpdateGigApplicationRequest {
+    'gig_status': UtilsGigApplicationStatus;
 }
 
-export const ModelsApplicationStatusRequestStatusEnum = {
-    Accepted: 'accepted',
-    Declined: 'declined'
-} as const;
-
-export type ModelsApplicationStatusRequestStatusEnum = typeof ModelsApplicationStatusRequestStatusEnum[keyof typeof ModelsApplicationStatusRequestStatusEnum];
 
 

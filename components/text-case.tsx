@@ -1,6 +1,6 @@
 
 
-export function Capitalize( { children }: { children: string; } ) {
+export function TextCapitalize( { children }: { children: string; } ) {
   const words = children.split( ' ' );
   const capitalizedWords = words.map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ) );
   return <>{ capitalizedWords.join( ' ' ) }</>;

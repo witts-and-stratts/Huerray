@@ -24,9 +24,9 @@ interface SubHeaderProps {
 }
 export function SubHeader( { title, description, children, pre, tabs, breadcrumbs, status }: SubHeaderProps ) {
   return (
-    <div className='px-5 pt-4 sticky top-0 bg-background z-50'>
+    <div className='pt-4 sticky top-0 bg-background z-50'>
       { breadcrumbs && breadcrumbs.length > 0 && (
-        <Breadcrumb className="mb-8">
+        <Breadcrumb className="mb-8 px-5">
           <BreadcrumbList>
             { breadcrumbs.map( ( crumb, index ) => {
               const isLast = index === breadcrumbs.length - 1;
@@ -46,8 +46,8 @@ export function SubHeader( { title, description, children, pre, tabs, breadcrumb
           </BreadcrumbList>
         </Breadcrumb>
       ) }
-      { pre }
-      <div className='flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+      <div className='px-5'>{ pre }</div>
+      <div className='flex flex-col gap-4 px-5 sm:flex-row sm:items-center sm:justify-between'>
         <SubpageHeading title={ title } description={ description || '' }>
           { status }
         </SubpageHeading>
@@ -55,7 +55,7 @@ export function SubHeader( { title, description, children, pre, tabs, breadcrumb
           { children }
         </div>
       </div>
-      { tabs }
+      <div className='px-5'>{ tabs }</div>
       <Separator className={ 'mt-4' } />
     </div>
   );

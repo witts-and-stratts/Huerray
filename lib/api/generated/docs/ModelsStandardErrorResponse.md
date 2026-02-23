@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
-**success** | **boolean** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -17,7 +16,6 @@ import { ModelsStandardErrorResponse } from 'huerray-api';
 const instance: ModelsStandardErrorResponse = {
     error,
     message,
-    success,
 };
 ```
 

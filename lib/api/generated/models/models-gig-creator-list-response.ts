@@ -15,15 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsErrorInfo } from './models-error-info';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ModelsGigInvitationResponse } from './models-gig-invitation-response';
+import type { ModelsGigCreatorResponse } from './models-gig-creator-response';
 
-export interface ModelsStandardGigInvitationResponses {
-    'data'?: Array<ModelsGigInvitationResponse>;
-    'error'?: ModelsErrorInfo;
-    'message'?: string;
-    'success'?: boolean;
+export interface ModelsGigCreatorListResponse {
+    'gigs'?: Array<ModelsGigCreatorResponse>;
+    'total'?: number;
 }
 

@@ -10,8 +10,10 @@ Name | Type | Description | Notes
 **brand_comments** | **string** |  | [optional] [default to undefined]
 **brand_reviewed_at** | **string** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
+**creator** | [**ModelsCreatorResponse**](ModelsCreatorResponse.md) |  | [optional] [default to undefined]
 **creator_id** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
+**gig** | **object** |  | [optional] [default to undefined]
 **gig_id** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **status** | **string** |  | [optional] [default to undefined]
@@ -31,8 +33,10 @@ const instance: ModelsVideoSubmissionResponse = {
     brand_comments,
     brand_reviewed_at,
     created_at,
+    creator,
     creator_id,
     description,
+    gig,
     gig_id,
     id,
     status,

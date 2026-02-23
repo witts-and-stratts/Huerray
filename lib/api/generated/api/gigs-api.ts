@@ -22,17 +22,15 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { ModelsApplicationStatusRequest } from '../models';
-// @ts-ignore
 import type { ModelsCreateGigRequest } from '../models';
 // @ts-ignore
 import type { ModelsGigApplicationRequest } from '../models';
 // @ts-ignore
 import type { ModelsGigInvitationRequest } from '../models';
 // @ts-ignore
-import type { ModelsGigStatusUpdateRequest } from '../models';
+import type { ModelsGigInvitationResponseRequest } from '../models';
 // @ts-ignore
-import type { ModelsInvitationResponseRequest } from '../models';
+import type { ModelsGigStatusUpdateRequest } from '../models';
 // @ts-ignore
 import type { ModelsPaginatedGigResponse } from '../models';
 // @ts-ignore
@@ -48,9 +46,9 @@ import type { ModelsStandardGigBrandListResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardGigInvitationResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardGigInvitationResponses } from '../models';
-// @ts-ignore
 import type { ModelsStandardGigResponse } from '../models';
+// @ts-ignore
+import type { ModelsUpdateGigApplicationRequest } from '../models';
 // @ts-ignore
 import type { ModelsUpdateGigRequest } from '../models';
 /**
@@ -62,15 +60,15 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
          * Brand updates the status of a gig application
          * @summary Update application status
          * @param {string} applicationId Application ID
-         * @param {ModelsApplicationStatusRequest} status Status update request
+         * @param {ModelsUpdateGigApplicationRequest} request Status update request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsApplicationsApplicationIdStatusPut: async (applicationId: string, status: ModelsApplicationStatusRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        gigsApplicationsApplicationIdStatusPut: async (applicationId: string, request: ModelsUpdateGigApplicationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'applicationId' is not null or undefined
             assertParamExists('gigsApplicationsApplicationIdStatusPut', 'applicationId', applicationId)
-            // verify required parameter 'status' is not null or undefined
-            assertParamExists('gigsApplicationsApplicationIdStatusPut', 'status', status)
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('gigsApplicationsApplicationIdStatusPut', 'request', request)
             const localVarPath = `/gigs/applications/{applicationId}/status`
                 .replace(`{${"applicationId"}}`, encodeURIComponent(String(applicationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -84,16 +82,13 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(status, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -122,9 +117,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -159,9 +151,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -200,9 +189,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -239,9 +225,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -276,8 +259,39 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get all invitations for a specific gig with role-based access
+         * @summary Get gig invitations
+         * @param {string} id Gig ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gigsIdInvitationsGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('gigsIdInvitationsGet', 'id', id)
+            const localVarPath = `/gigs/{id}/invitations`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -315,9 +329,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -358,9 +369,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -400,9 +408,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -435,9 +440,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -450,18 +452,18 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * Creator responds to a gig invitation
-         * @summary Respond to invitation
+         * Creator accepts or declines a gig invitation
+         * @summary Respond to gig invitation
          * @param {string} invitationId Invitation ID
-         * @param {ModelsInvitationResponseRequest} response Invitation response
+         * @param {ModelsGigInvitationResponseRequest} request Invitation response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsInvitationsInvitationIdRespondPut: async (invitationId: string, response: ModelsInvitationResponseRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        gigsInvitationsInvitationIdRespondPut: async (invitationId: string, request: ModelsGigInvitationResponseRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'invitationId' is not null or undefined
             assertParamExists('gigsInvitationsInvitationIdRespondPut', 'invitationId', invitationId)
-            // verify required parameter 'response' is not null or undefined
-            assertParamExists('gigsInvitationsInvitationIdRespondPut', 'response', response)
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('gigsInvitationsInvitationIdRespondPut', 'request', request)
             const localVarPath = `/gigs/invitations/{invitationId}/respond`
                 .replace(`{${"invitationId"}}`, encodeURIComponent(String(invitationId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -475,16 +477,13 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(response, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -501,7 +500,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
         gigsPost: async (gig: ModelsCreateGigRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'gig' is not null or undefined
             assertParamExists('gigsPost', 'gig', gig)
-            const localVarPath = `/gigs`;
+            const localVarPath = `/gigs/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -512,9 +511,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -530,8 +526,8 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * Admin can search all gigs with comprehensive filters
-         * @summary Advanced gig search (Admin only)
+         * Admin can search all gigs with advanced filters
+         * @summary Search gigs
          * @param {number} [ageMax] 
          * @param {number} [ageMin] 
          * @param {string} [brandId] 
@@ -564,9 +560,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             if (ageMax !== undefined) {
                 localVarQueryParameter['age_max'] = ageMax;
@@ -660,12 +653,12 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * Brand updates the status of a gig application
          * @summary Update application status
          * @param {string} applicationId Application ID
-         * @param {ModelsApplicationStatusRequest} status Status update request
+         * @param {ModelsUpdateGigApplicationRequest} request Status update request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsApplicationsApplicationIdStatusPut(applicationId: string, status: ModelsApplicationStatusRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsApplicationsApplicationIdStatusPut(applicationId, status, options);
+        async gigsApplicationsApplicationIdStatusPut(applicationId: string, request: ModelsUpdateGigApplicationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsApplicationsApplicationIdStatusPut(applicationId, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsApplicationsApplicationIdStatusPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -737,6 +730,19 @@ export const GigsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Get all invitations for a specific gig with role-based access
+         * @summary Get gig invitations
+         * @param {string} id Gig ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gigsIdInvitationsGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsIdInvitationsGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsIdInvitationsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Brand invites a creator to apply for a gig
          * @summary Invite creator to gig
          * @param {string} id Gig ID
@@ -784,22 +790,22 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsInvitationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponses>> {
+        async gigsInvitationsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsInvitationsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creator responds to a gig invitation
-         * @summary Respond to invitation
+         * Creator accepts or declines a gig invitation
+         * @summary Respond to gig invitation
          * @param {string} invitationId Invitation ID
-         * @param {ModelsInvitationResponseRequest} response Invitation response
+         * @param {ModelsGigInvitationResponseRequest} request Invitation response
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsInvitationsInvitationIdRespondPut(invitationId: string, response: ModelsInvitationResponseRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsInvitationIdRespondPut(invitationId, response, options);
+        async gigsInvitationsInvitationIdRespondPut(invitationId: string, request: ModelsGigInvitationResponseRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsInvitationIdRespondPut(invitationId, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsInvitationsInvitationIdRespondPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -818,8 +824,8 @@ export const GigsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Admin can search all gigs with comprehensive filters
-         * @summary Advanced gig search (Admin only)
+         * Admin can search all gigs with advanced filters
+         * @summary Search gigs
          * @param {number} [ageMax] 
          * @param {number} [ageMin] 
          * @param {string} [brandId] 
@@ -863,7 +869,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @throws {RequiredError}
          */
         gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponse> {
-            return localVarFp.gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.status, options).then((request) => request(axios, basePath));
+            return localVarFp.gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
          * Get all gigs for a specific campaign
@@ -916,6 +922,16 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.gigsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get all invitations for a specific gig with role-based access
+         * @summary Get gig invitations
+         * @param {GigsApiGigsIdInvitationsGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gigsIdInvitationsGet(requestParameters: GigsApiGigsIdInvitationsGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
+            return localVarFp.gigsIdInvitationsGet(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Brand invites a creator to apply for a gig
          * @summary Invite creator to gig
          * @param {GigsApiGigsIdInvitePostRequest} requestParameters Request parameters.
@@ -951,18 +967,18 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsInvitationsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponses> {
+        gigsInvitationsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
             return localVarFp.gigsInvitationsGet(options).then((request) => request(axios, basePath));
         },
         /**
-         * Creator responds to a gig invitation
-         * @summary Respond to invitation
+         * Creator accepts or declines a gig invitation
+         * @summary Respond to gig invitation
          * @param {GigsApiGigsInvitationsInvitationIdRespondPutRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
-            return localVarFp.gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.response, options).then((request) => request(axios, basePath));
+            return localVarFp.gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
          * Create a new gig for a campaign
@@ -975,8 +991,8 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.gigsPost(requestParameters.gig, options).then((request) => request(axios, basePath));
         },
         /**
-         * Admin can search all gigs with comprehensive filters
-         * @summary Advanced gig search (Admin only)
+         * Admin can search all gigs with advanced filters
+         * @summary Search gigs
          * @param {GigsApiGigsSearchGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -999,7 +1015,7 @@ export interface GigsApiGigsApplicationsApplicationIdStatusPutRequest {
     /**
      * Status update request
      */
-    readonly status: ModelsApplicationStatusRequest
+    readonly request: ModelsUpdateGigApplicationRequest
 }
 
 /**
@@ -1051,6 +1067,16 @@ export interface GigsApiGigsIdDeleteRequest {
  * Request parameters for gigsIdGet operation in GigsApi.
  */
 export interface GigsApiGigsIdGetRequest {
+    /**
+     * Gig ID
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for gigsIdInvitationsGet operation in GigsApi.
+ */
+export interface GigsApiGigsIdInvitationsGetRequest {
     /**
      * Gig ID
      */
@@ -1114,7 +1140,7 @@ export interface GigsApiGigsInvitationsInvitationIdRespondPutRequest {
     /**
      * Invitation response
      */
-    readonly response: ModelsInvitationResponseRequest
+    readonly request: ModelsGigInvitationResponseRequest
 }
 
 /**
@@ -1178,7 +1204,7 @@ export class GigsApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig) {
-        return GigsApiFp(this.configuration).gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
+        return GigsApiFp(this.configuration).gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1237,6 +1263,17 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
+     * Get all invitations for a specific gig with role-based access
+     * @summary Get gig invitations
+     * @param {GigsApiGigsIdInvitationsGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public gigsIdInvitationsGet(requestParameters: GigsApiGigsIdInvitationsGetRequest, options?: RawAxiosRequestConfig) {
+        return GigsApiFp(this.configuration).gigsIdInvitationsGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Brand invites a creator to apply for a gig
      * @summary Invite creator to gig
      * @param {GigsApiGigsIdInvitePostRequest} requestParameters Request parameters.
@@ -1280,14 +1317,14 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
-     * Creator responds to a gig invitation
-     * @summary Respond to invitation
+     * Creator accepts or declines a gig invitation
+     * @summary Respond to gig invitation
      * @param {GigsApiGigsInvitationsInvitationIdRespondPutRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     public gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig) {
-        return GigsApiFp(this.configuration).gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.response, options).then((request) => request(this.axios, this.basePath));
+        return GigsApiFp(this.configuration).gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1302,8 +1339,8 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
-     * Admin can search all gigs with comprehensive filters
-     * @summary Advanced gig search (Admin only)
+     * Admin can search all gigs with advanced filters
+     * @summary Search gigs
      * @param {GigsApiGigsSearchGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **last_name** | **string** |  | [default to undefined]
 **middle_name** | **string** |  | [optional] [default to undefined]
 **password** | **string** |  | [default to undefined]
-**username** | **string** |  | [default to undefined]
+**username** | **string** |  | [optional] [default to undefined]
 **verify_password** | **string** |  | [default to undefined]
 
 ## Example

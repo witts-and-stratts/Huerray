@@ -9,6 +9,7 @@ All URIs are relative to */api/v1*
 |[**campaignsIdDecisionPut**](#campaignsiddecisionput) | **PUT** /campaigns/{id}/decision | Brand decision on campaign|
 |[**campaignsIdDelete**](#campaignsiddelete) | **DELETE** /campaigns/{id} | Delete campaign|
 |[**campaignsIdGet**](#campaignsidget) | **GET** /campaigns/{id} | Get campaign by ID|
+|[**campaignsIdInvitationsGet**](#campaignsidinvitationsget) | **GET** /campaigns/{id}/invitations | Get gig invitations by campaign|
 |[**campaignsIdPut**](#campaignsidput) | **PUT** /campaigns/{id} | Update campaign|
 |[**campaignsIdStatusPut**](#campaignsidstatusput) | **PUT** /campaigns/{id}/status | Update campaign status|
 |[**campaignsIdVideoSubmissionsGet**](#campaignsidvideosubmissionsget) | **GET** /campaigns/{id}/video-submissions | Get video submissions by campaign ID|
@@ -51,7 +52,7 @@ const { status, data } = await apiInstance.campaignsIdApplicationsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -106,7 +107,7 @@ const { status, data } = await apiInstance.campaignsIdApprovePut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -166,7 +167,7 @@ const { status, data } = await apiInstance.campaignsIdDecisionPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -186,7 +187,7 @@ const { status, data } = await apiInstance.campaignsIdDecisionPut(
 # **campaignsIdDelete**
 > ModelsStandardGenericResponse campaignsIdDelete()
 
-Delete a campaign
+Delete a campaign (Admin can delete any campaign, Brand can only delete their own)
 
 ### Example
 
@@ -219,7 +220,7 @@ const { status, data } = await apiInstance.campaignsIdDelete(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -272,7 +273,7 @@ const { status, data } = await apiInstance.campaignsIdGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -286,6 +287,62 @@ const { status, data } = await apiInstance.campaignsIdGet(
 |**200** | Campaign details |  -  |
 |**400** | Bad request |  -  |
 |**404** | Campaign not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **campaignsIdInvitationsGet**
+> ModelsStandardGigInvitationResponse campaignsIdInvitationsGet()
+
+Get all invitations for all gigs in a specific campaign
+
+### Example
+
+```typescript
+import {
+    CampaignsApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CampaignsApi(configuration);
+
+let id: string; //Campaign ID (default to undefined)
+
+const { status, data } = await apiInstance.campaignsIdInvitationsGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Campaign ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGigInvitationResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Invitations retrieved successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | Forbidden |  -  |
+|**404** | Campaign not found |  -  |
+|**500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -329,7 +386,7 @@ const { status, data } = await apiInstance.campaignsIdPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -386,7 +443,7 @@ const { status, data } = await apiInstance.campaignsIdStatusPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -438,7 +495,7 @@ const { status, data } = await apiInstance.campaignsIdVideoSubmissionsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -490,7 +547,7 @@ const { status, data } = await apiInstance.campaignsPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -591,7 +648,7 @@ const { status, data } = await apiInstance.campaignsSearchGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 

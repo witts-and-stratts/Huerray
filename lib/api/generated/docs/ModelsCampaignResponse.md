@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **admin_comments** | **string** |  | [optional] [default to undefined]
 **allow_multiple_videos** | **boolean** |  | [optional] [default to undefined]
+**brand** | [**ModelsCampaignBrandResponse**](ModelsCampaignBrandResponse.md) |  | [optional] [default to undefined]
 **brand_accepted** | **boolean** |  | [optional] [default to undefined]
 **brand_decision_comments** | **string** |  | [optional] [default to undefined]
 **brand_id** | **string** |  | [optional] [default to undefined]
@@ -42,6 +43,7 @@ import { ModelsCampaignResponse } from 'huerray-api';
 const instance: ModelsCampaignResponse = {
     admin_comments,
     allow_multiple_videos,
+    brand,
     brand_accepted,
     brand_decision_comments,
     brand_id,

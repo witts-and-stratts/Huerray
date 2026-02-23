@@ -1,4 +1,4 @@
-# ModelsApplicationStatusRequest
+# ModelsGigInvitationResponseRequest
 
 
 ## Properties
@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ModelsApplicationStatusRequest } from 'huerray-api';
+import { ModelsGigInvitationResponseRequest } from 'huerray-api';
 
-const instance: ModelsApplicationStatusRequest = {
+const instance: ModelsGigInvitationResponseRequest = {
     status,
 };
 ```

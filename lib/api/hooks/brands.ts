@@ -16,6 +16,7 @@ import type {
   ModelsBrandStatusUpdateRequest,
   ModelsPaginatedCreatorResponse
 } from '../generated/models';
+import type { ApiError } from './types';
 
 export const brandApi = new BrandApi(apiConfiguration, undefined, apiClient);
 
@@ -30,8 +31,8 @@ export const brandsKeys = {
  */
 export function useBrand(
   id: string,
-  options?: Omit<UseQueryOptions<ModelsStandardBrandResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardBrandResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardBrandResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardBrandResponse, ApiError> {
   return useQuery({
     queryKey: brandsKeys.detail(id),
     queryFn: async () => {
@@ -47,8 +48,8 @@ export function useBrand(
  * Hook to fetch all brands
  */
 export function useBrands(
-  options?: Omit<UseQueryOptions<ModelsPaginatedBrandResponses, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedBrandResponses, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedBrandResponses, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedBrandResponses, ApiError> {
   return useQuery({
     queryKey: brandsKeys.all,
     queryFn: async () => {
@@ -64,8 +65,8 @@ export function useBrands(
  */
 export function useSuspenseBrand(
   id: string,
-  options?: Omit<UseSuspenseQueryOptions<ModelsStandardBrandResponse, Error>, 'queryKey' | 'queryFn'>
-): UseSuspenseQueryResult<ModelsStandardBrandResponse, Error> {
+  options?: Omit<UseSuspenseQueryOptions<ModelsStandardBrandResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseSuspenseQueryResult<ModelsStandardBrandResponse, ApiError> {
   return useSuspenseQuery({
     queryKey: brandsKeys.detail(id),
     queryFn: async () => {
@@ -123,8 +124,8 @@ export function useBrandCreators(
     // Add other filters as needed to match BrandsSearchCreatorsGetRequest
     preferredCategory?: string;
   },
-  options?: Omit<UseQueryOptions<ModelsPaginatedCreatorResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedCreatorResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedCreatorResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedCreatorResponse, ApiError> {
   return useQuery({
     queryKey: [...brandsKeys.all, 'creators', params],
     queryFn: async () => {

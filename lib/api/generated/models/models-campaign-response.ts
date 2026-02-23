@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsCampaignBrandResponse } from './models-campaign-brand-response';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsCampaignCategory } from './utils-campaign-category';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -26,6 +29,7 @@ import type { UtilsVideoFormat } from './utils-video-format';
 export interface ModelsCampaignResponse {
     'admin_comments'?: string;
     'allow_multiple_videos'?: boolean;
+    'brand'?: ModelsCampaignBrandResponse;
     'brand_accepted'?: boolean;
     'brand_decision_comments'?: string;
     'brand_id'?: string;

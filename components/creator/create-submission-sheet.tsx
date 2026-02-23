@@ -14,7 +14,6 @@ import {
   SheetTitle,
 } from '@/components/dashboard-ui/sheet';
 import { Textarea } from '@/components/dashboard-ui/textarea';
-import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
@@ -38,13 +37,13 @@ const formSchema = z.object( {
 interface CreateSubmissionSheetProps {
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
-  invitation: ModelsGigInvitationResponse;
+  gigId: string;
 }
 
 export function CreateSubmissionSheet( {
   open,
   onOpenChange,
-  invitation,
+  gigId,
 }: CreateSubmissionSheetProps ) {
   const { mutate: createSubmission, isPending: isCreating } = useCreateVideoSubmission();
   const [ videoData, setVideoData ] = useState<{ url: string; filename: string; } | null>( null );
@@ -65,7 +64,7 @@ export function CreateSubmissionSheet( {
   } );
 
   const onSubmit = async ( values: z.infer<typeof formSchema> ) => {
-    if ( !invitation.gig_id ) {
+    if ( !gigId ) {
       toast.error( 'Gig ID is missing' );
       return;
     }
@@ -77,7 +76,7 @@ export function CreateSubmissionSheet( {
 
     createSubmission(
       {
-        gig_id: invitation.gig_id,
+        gig_id: gigId,
         title: values.title,
         description: values.description,
         video_url: videoData.url,
@@ -120,21 +119,14 @@ export function CreateSubmissionSheet( {
                 render={ ( { field: { value, onChange } } ) => (
                   <VideoDropzone
                     value={ value }
-                    gigId={ invitation.gig_id || '' }
+                    gigId={ gigId || '' }
                     onChange={ ( file ) => {
                       onChange( file );
                       if ( !file ) setVideoData( null );
                     } }
-                    onUploadSuccess={ ( url ) => {
-                      // Extract filename from URL or use the file name if available
-                      // Ideally the API returns both, but here we get URL.
-                      // We can use the file name from the form value as a fallback or assume the backend handles it.
-                      // However, FileCardVideo only returns URL in onUploadSuccess.
-                      // Let's assume the component helps us here or updates the state.
-                      // Actually, we need the filename too. I should update VideoDropzone to render it or just use the file object's name.
-                      if ( value instanceof File ) {
-                        setVideoData( { url, filename: value.name } );
-                      }
+                    onUploadSuccess={ ( data ) => {
+                      console.log( "Video uploaded", data );
+                      setVideoData( { url: data.video_url, filename: data.filename } );
                     } }
                   />
                 ) }

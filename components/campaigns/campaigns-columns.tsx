@@ -107,14 +107,11 @@ export const getColumns = ( basePath: string = '/brand-admin' ): ColumnDef<Model
     enableHiding: false,
     header: () => <></>,
     filterFn: ( row, id, filterValue ) => {
-      // If no filter is set, show all rows
-      if (
-        !filterValue ||
-        !Array.isArray( filterValue ) ||
-        filterValue.length === 0
-      ) {
+      if ( filterValue === undefined ) {
         return true;
       }
+      if ( !Array.isArray( filterValue ) ) return true;
+      if ( filterValue.length === 0 ) return false;
       // Check if the row's status is in the filter array
       const rowValue = row.getValue( id ) as string;
       return filterValue.includes( rowValue );

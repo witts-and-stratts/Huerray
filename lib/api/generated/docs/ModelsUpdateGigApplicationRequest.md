@@ -1,19 +1,19 @@
-# ModelsInvitationResponseRequest
+# ModelsUpdateGigApplicationRequest
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** |  | [default to undefined]
+**gig_status** | [**UtilsGigApplicationStatus**](UtilsGigApplicationStatus.md) |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { ModelsInvitationResponseRequest } from 'huerray-api';
+import { ModelsUpdateGigApplicationRequest } from 'huerray-api';
 
-const instance: ModelsInvitationResponseRequest = {
-    status,
+const instance: ModelsUpdateGigApplicationRequest = {
+    gig_status,
 };
 ```
 

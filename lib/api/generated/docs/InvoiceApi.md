@@ -47,7 +47,7 @@ const { status, data } = await apiInstance.invoicesIdGeneratePdfPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -102,7 +102,7 @@ const { status, data } = await apiInstance.invoicesIdGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -156,7 +156,7 @@ const { status, data } = await apiInstance.invoicesIdPdfGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -213,7 +213,7 @@ const { status, data } = await apiInstance.invoicesIdStatusPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -269,7 +269,7 @@ const { status, data } = await apiInstance.invoicesPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -344,7 +344,7 @@ const { status, data } = await apiInstance.invoicesSearchGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 

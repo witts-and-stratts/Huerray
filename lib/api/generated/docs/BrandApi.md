@@ -45,7 +45,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -146,7 +146,7 @@ const { status, data } = await apiInstance.brandsGigsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -199,7 +199,7 @@ const { status, data } = await apiInstance.brandsIdDelete(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -252,7 +252,7 @@ const { status, data } = await apiInstance.brandsIdGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -309,7 +309,7 @@ const { status, data } = await apiInstance.brandsIdStatusPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -363,7 +363,7 @@ const { status, data } = await apiInstance.brandsPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -417,7 +417,7 @@ const { status, data } = await apiInstance.brandsPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -518,7 +518,7 @@ const { status, data } = await apiInstance.brandsSearchCampaignsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -595,7 +595,7 @@ const { status, data } = await apiInstance.brandsSearchCreatorsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -678,7 +678,7 @@ const { status, data } = await apiInstance.brandsSearchGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -755,7 +755,7 @@ const { status, data } = await apiInstance.brandsSearchVideoSubmissionsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 

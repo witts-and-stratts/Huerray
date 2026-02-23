@@ -20,7 +20,7 @@ export interface ModelsCreateAdminRequest {
     'last_name': string;
     'middle_name'?: string;
     'password': string;
-    'username': string;
+    'username'?: string;
     'verify_password': string;
 }
 

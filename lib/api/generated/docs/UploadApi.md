@@ -49,7 +49,7 @@ const { status, data } = await apiInstance.uploadsApplicationVideoPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -103,7 +103,7 @@ const { status, data } = await apiInstance.uploadsDocumentsPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -156,7 +156,7 @@ const { status, data } = await apiInstance.uploadsImagesPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -371,7 +371,7 @@ const { status, data } = await apiInstance.uploadsVideoSubmissionPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -425,7 +425,7 @@ const { status, data } = await apiInstance.uploadsVideosPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 

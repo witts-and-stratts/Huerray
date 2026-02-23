@@ -1,0 +1,221 @@
+@layer components {
+  .ad-shell {
+    @apply mt-1 space-y-5 px-5 pb-6;
+  }
+
+  .ad-header {
+    @apply rounded-2xl bg-transparent;
+  }
+
+  .ad-kicker {
+    @apply text-xs font-medium uppercase tracking-[0.18em] text-slate-500;
+  }
+
+  .ad-page-title {
+    @apply text-h3 font-primary font-medium tracking-tight;
+  }
+
+  .ad-page-description {
+    @apply mt-1 max-w-3xl text-sm text-muted-foreground;
+  }
+
+  .ad-grid-main {
+    @apply grid grid-cols-1 gap-4 2xl:grid-cols-3;
+  }
+
+  .ad-grid-two {
+    @apply grid grid-cols-1 gap-4 xl:grid-cols-2;
+  }
+
+  .ad-main-span {
+    @apply 2xl:col-span-2;
+  }
+
+  .ad-kpi-grid {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .ad-card {
+    @apply py-4;
+  }
+
+  .ad-kpi-card {
+    @apply py-4 overflow-hidden;
+  }
+
+  .ad-card-title {
+    @apply text-h6 font-primary font-normal text-primary;
+  }
+
+  .ad-card-description {
+    @apply text-xs text-muted-foreground;
+  }
+
+  .ad-stat-label {
+    @apply text-xs font-medium text-muted-foreground;
+  }
+
+  .ad-stat-value {
+    @apply text-[2rem] leading-none font-primary font-medium;
+  }
+
+  .ad-delta-positive {
+    @apply mt-2 inline-flex rounded-full bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-700;
+  }
+
+  .ad-delta-negative {
+    @apply mt-2 inline-flex rounded-full bg-rose-100 px-2 py-1 text-xs font-medium text-rose-700;
+  }
+
+  .ad-delta-neutral {
+    @apply mt-2 inline-flex rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700;
+  }
+
+  .ad-delta-positive-compact {
+    @apply inline-flex rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700;
+  }
+
+  .ad-delta-negative-compact {
+    @apply inline-flex rounded-full bg-rose-100 px-1.5 py-0.5 text-[10px] font-medium text-rose-700;
+  }
+
+  .ad-users-card {
+    @apply py-4 md:col-span-2 xl:col-span-2 overflow-hidden;
+  }
+
+  .ad-summary-card {
+    @apply py-4 md:col-span-1 xl:col-span-1 overflow-hidden flex flex-col gap-2;
+  }
+
+  .ad-users-content {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center;
+  }
+
+  .ad-chart-radial {
+    @apply mx-auto h-[300px] w-full max-w-[360px];
+  }
+
+  .ad-total-label {
+    @apply text-xs uppercase tracking-[0.14em] text-muted-foreground;
+  }
+
+  .ad-total-value {
+    @apply mt-1 text-3xl leading-none font-primary font-normal text-primary;
+  }
+
+  .ad-users-breakdown {
+    @apply space-y-2;
+  }
+
+  .ad-users-breakdown-item {
+    @apply flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-white/80 px-3 py-2 text-sm;
+  }
+
+  .ad-chart-legend {
+    @apply mt-2 flex flex-wrap gap-3 text-xs;
+  }
+
+  .ad-chart-legend-item {
+    @apply inline-flex items-center gap-1.5 text-muted-foreground;
+  }
+
+  .ad-chart-dot {
+    @apply h-2 w-2 rounded-full;
+  }
+
+  .ad-chart-lg {
+    @apply h-[320px] w-full;
+  }
+
+  .ad-chart-md {
+    @apply h-[280px] w-full;
+  }
+
+  .ad-queue-header {
+    @apply flex flex-row items-start justify-between gap-4;
+  }
+
+  .ad-queue-list {
+    @apply space-y-4;
+  }
+
+  .ad-queue-item {
+    @apply rounded-lg border border-border/60 bg-white p-4;
+  }
+
+  .ad-queue-top {
+    @apply mb-2 flex items-center justify-between gap-3;
+  }
+
+  .ad-queue-bottom {
+    @apply flex items-end justify-between gap-3;
+  }
+
+  .ad-queue-count {
+    @apply text-2xl font-primary font-medium;
+  }
+
+  .ad-action-grid {
+    @apply grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .ad-action-btn {
+    @apply justify-start bg-white/80;
+  }
+
+  .ad-alert-list {
+    @apply space-y-3;
+  }
+
+  .ad-alert-item-high {
+    @apply rounded-lg border border-rose-200 bg-rose-50/50 p-4;
+  }
+
+  .ad-alert-item-medium {
+    @apply rounded-lg border border-amber-200 bg-amber-50/50 p-4;
+  }
+
+  .ad-alert-item-low {
+    @apply rounded-lg border border-border/60 bg-white p-4;
+  }
+
+  .ad-alert-top {
+    @apply mb-1 flex items-center justify-between gap-3;
+  }
+
+  .ad-alert-detail {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .ad-table-wrap {
+    @apply overflow-x-auto rounded-lg border border-border/60;
+  }
+
+  .ad-table {
+    @apply w-full text-left;
+  }
+
+  .ad-table-head {
+    @apply bg-slate-50;
+  }
+
+  .ad-table-head-row {
+    @apply border-b border-border/60;
+  }
+
+  .ad-table-header {
+    @apply px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground;
+  }
+
+  .ad-table-row {
+    @apply border-b border-border/40 bg-white;
+  }
+
+  .ad-table-cell {
+    @apply px-4 py-3 text-sm;
+  }
+
+  .ad-table-cell-muted {
+    @apply px-4 py-3 text-sm text-muted-foreground;
+  }
+}

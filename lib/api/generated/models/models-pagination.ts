@@ -15,6 +15,8 @@
 
 
 export interface ModelsPagination {
+    'has_more'?: boolean;
+    'next_page_url'?: string;
     'page'?: number;
     'per_page'?: number;
     'total'?: number;

@@ -1,6 +1,7 @@
 'use client';
 
 import { EmailVerificationBanner } from '@/components/auth/email-verification-banner';
+import { ProfileStatusBanner } from '@/components/auth/profile-status-banner';
 import { DashboardHeader } from '@/components/dashboard-header';
 import {
   SidebarInset,
@@ -18,6 +19,7 @@ export default function BrandAdminDashboardLayout( {
       <BrandSidebar />
       <SidebarInset>
         <EmailVerificationBanner />
+        <ProfileStatusBanner role="brand" />
         <DashboardHeader />
         <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
           { children }

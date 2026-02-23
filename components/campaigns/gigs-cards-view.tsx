@@ -8,9 +8,10 @@ import { ModelsGigResponse } from '@/lib/api/generated/models';
 interface GigsCardsProps {
   table: Table<ModelsGigResponse>;
   onViewGig: ( gig: ModelsGigResponse ) => void;
+  onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 
-export function GigsCardsView( { table, onViewGig }: GigsCardsProps ) {
+export function GigsCardsView( { table, onViewGig, onCreateSubmission }: GigsCardsProps ) {
   const rows = table.getRowModel().rows;
 
   return (
@@ -21,6 +22,7 @@ export function GigsCardsView( { table, onViewGig }: GigsCardsProps ) {
           key={ row.id }
           gig={ row.original }
           onViewGig={ onViewGig }
+          onCreateSubmission={ onCreateSubmission }
         />
       ) ) }
     </div>

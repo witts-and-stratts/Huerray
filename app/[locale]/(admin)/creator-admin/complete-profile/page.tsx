@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { CreatorBioSection } from '@/components/settings/creator-bio-section';
 import { CreatorProfileSection } from '@/components/settings/creator-profile-section';
-import { CreatorSettings } from '@/components/settings/creator-settings-schema';
+import { CreatorSettings, creatorSettingsSchema } from '@/components/settings/creator-settings-schema';
 import { CreatorSocialSection } from '@/components/settings/creator-social-section';
 import { apiClient } from '@/lib/api/client';
 import { ModelsCreateCreatorRequestGenderEnum, UtilsCountryCode } from '@/lib/api/generated';
@@ -51,6 +51,9 @@ export default function CompleteProfilePage() {
       applicationVideo: '',
       profileImageUrl: '',
     } as CreatorSettings,
+    validators: {
+      onChange: creatorSettingsSchema,
+    },
     onSubmit: async ( { value } ) => {
       setIsSaving( true );
       try {

@@ -7,3 +7,11 @@ export interface UploadedFile {
   name: string;
   type: string;
 }
+
+export interface VideoUploadResponseData {
+  filename: string;
+  video_url: string;
+  file_size: number;
+  content_type: string;
+  original_name: string;
+}

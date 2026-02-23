@@ -29,6 +29,9 @@ export function DataTableFilterDropdown<TData>( {
   options,
   title,
 }: DataTableFilterDropdownProps<TData> ) {
+  const column = table.getColumn( columnId );
+  const filterValue = column?.getFilterValue() as string[] | undefined;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={ 'h-8' }>
@@ -43,19 +46,14 @@ export function DataTableFilterDropdown<TData>( {
           className='focus:bg-accent focus:text-accent-foreground gap-2 rounded-sm px-2 py-1.5 relative flex cursor-default items-center outline-hidden select-none hover:bg-accent text-xs text-primary'
           onClick={ ( e ) => {
             e.stopPropagation();
-            const column = table.getColumn( columnId );
             if ( !column ) return;
-            column.setFilterValue( options );
+            column.setFilterValue( options.length > 0 ? [ ...options ] : undefined );
           } }
         >
           Select All
         </div>
         <DropdownMenuSeparator />
         { options.map( ( option ) => {
-          const filterValue = table
-            .getColumn( columnId )
-            ?.getFilterValue() as string[] | undefined;
-
           return (
             <DropdownMenuCheckboxItem
               key={ option }
@@ -64,21 +62,18 @@ export function DataTableFilterDropdown<TData>( {
                 Array.isArray( filterValue ) && filterValue.includes( option )
               }
               onCheckedChange={ ( value ) => {
-                const column = table.getColumn( columnId );
                 if ( !column ) return;
 
-                let currentFilters =
-                  ( column.getFilterValue() as string[] ) ?? [];
+                const currentFilters = ( column.getFilterValue() as string[] ) ?? [];
+                const nextFilters = new Set( currentFilters );
 
                 if ( value ) {
-                  currentFilters = [ ...currentFilters, option ];
+                  nextFilters.add( option );
                 } else {
-                  currentFilters = currentFilters.filter( ( s ) => s !== option );
+                  nextFilters.delete( option );
                 }
 
-                column.setFilterValue(
-                  currentFilters.length > 0 ? currentFilters : undefined
-                );
+                column.setFilterValue( Array.from( nextFilters ) );
               } }
             >
               { option.replace( /_/g, ' ' ) }

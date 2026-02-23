@@ -4,6 +4,7 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**creatorsActiveGigsGet**](#creatorsactivegigsget) | **GET** /creators/active-gigs | Get active gigs for the logged-in creator|
 |[**creatorsApplicationsGet**](#creatorsapplicationsget) | **GET** /creators/applications | Get creator applications|
 |[**creatorsBankDetailsGet**](#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details|
 |[**creatorsBankDetailsPut**](#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details|
@@ -19,6 +20,53 @@ All URIs are relative to */api/v1*
 |[**creatorsSearchGet**](#creatorssearchget) | **GET** /creators/search | Search creators|
 |[**creatorsSearchGigsGet**](#creatorssearchgigsget) | **GET** /creators/search/gigs | Search gigs for creator|
 |[**creatorsSearchVideoSubmissionsGet**](#creatorssearchvideosubmissionsget) | **GET** /creators/search/video-submissions | Search video submissions for creator|
+
+# **creatorsActiveGigsGet**
+> ModelsStandardGigCreatorListResponse creatorsActiveGigsGet()
+
+Get all gigs that are in progress for which there is either an accepted invitation or accepted application
+
+### Example
+
+```typescript
+import {
+    CreatorApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CreatorApi(configuration);
+
+const { status, data } = await apiInstance.creatorsActiveGigsGet();
+```
+
+### Parameters
+This endpoint does not have any parameters.
+
+
+### Return type
+
+**ModelsStandardGigCreatorListResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | In-progress gigs retrieved successfully |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Creator profile not found |  -  |
+|**500** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsApplicationsGet**
 > ModelsStandardGigApplicationResponses creatorsApplicationsGet()
@@ -49,7 +97,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -95,7 +143,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -149,7 +197,7 @@ const { status, data } = await apiInstance.creatorsBankDetailsPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -260,7 +308,7 @@ const { status, data } = await apiInstance.creatorsIdProfileStatusPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -328,7 +376,7 @@ const { status, data } = await apiInstance.creatorsMatchingGigsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -400,7 +448,7 @@ const { status, data } = await apiInstance.creatorsPaymentsSearchGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -454,7 +502,7 @@ const { status, data } = await apiInstance.creatorsProfileDraftPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -500,7 +548,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -554,7 +602,7 @@ const { status, data } = await apiInstance.creatorsProfilePost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -608,7 +656,7 @@ const { status, data } = await apiInstance.creatorsProfilePut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -655,7 +703,7 @@ This endpoint does not have any parameters.
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -738,7 +786,7 @@ const { status, data } = await apiInstance.creatorsSearchGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -839,7 +887,7 @@ const { status, data } = await apiInstance.creatorsSearchGigsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -916,7 +964,7 @@ const { status, data } = await apiInstance.creatorsSearchVideoSubmissionsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 

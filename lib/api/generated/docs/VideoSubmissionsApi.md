@@ -4,79 +4,20 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**videoSubmissionsIdStatusPut**](#videosubmissionsidstatusput) | **PUT** /video-submissions/{id}/status | Update video submission status|
-|[**videosApprovedCampaignCampaignIdGet**](#videosapprovedcampaigncampaignidget) | **GET** /videos/approved/campaign/{campaignId} | Get approved video submissions by campaign|
-|[**videosApprovedGigGigIdGet**](#videosapprovedgiggigidget) | **GET** /videos/approved/gig/{gigId} | Get approved video submissions by gig|
+|[**videosCampaignCampaignIdGet**](#videoscampaigncampaignidget) | **GET** /videos/campaign/{campaignId} | Get video submissions by campaign|
+|[**videosGigGigIdGet**](#videosgiggigidget) | **GET** /videos/gig/{gigId} | Get video submissions by gig|
 |[**videosIdDecisionPut**](#videosiddecisionput) | **PUT** /videos/{id}/decision | Brand makes decision on video submission|
 |[**videosIdPut**](#videosidput) | **PUT** /videos/{id} | Update video submission|
+|[**videosIdStatusPut**](#videosidstatusput) | **PUT** /videos/{id}/status | Update video submission status|
 |[**videosIdSubmitPut**](#videosidsubmitput) | **PUT** /videos/{id}/submit | Submit video for approval|
 |[**videosMySubmissionsGet**](#videosmysubmissionsget) | **GET** /videos/my-submissions | Get creator\&#39;s video submissions|
 |[**videosPost**](#videospost) | **POST** /videos | Create video submission|
 |[**videosSearchGet**](#videossearchget) | **GET** /videos/search | Search video submissions (Admin only)|
 
-# **videoSubmissionsIdStatusPut**
-> ModelsStandardGenericResponse videoSubmissionsIdStatusPut(request)
+# **videosCampaignCampaignIdGet**
+> ModelsStandardVideoSubmissionResponses videosCampaignCampaignIdGet()
 
-Admin updates video submission status (approve/reject)
-
-### Example
-
-```typescript
-import {
-    VideoSubmissionsApi,
-    Configuration,
-    ModelsVideoSubmissionStatusUpdateRequest
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new VideoSubmissionsApi(configuration);
-
-let id: string; //Video Submission ID (default to undefined)
-let request: ModelsVideoSubmissionStatusUpdateRequest; //Status update request
-
-const { status, data } = await apiInstance.videoSubmissionsIdStatusPut(
-    id,
-    request
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **request** | **ModelsVideoSubmissionStatusUpdateRequest**| Status update request | |
-| **id** | [**string**] | Video Submission ID | defaults to undefined|
-
-
-### Return type
-
-**ModelsStandardGenericResponse**
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Video submission status updated successfully |  -  |
-|**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
-|**404** | Video submission not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **videosApprovedCampaignCampaignIdGet**
-> ModelsStandardVideoSubmissionResponses videosApprovedCampaignCampaignIdGet()
-
-Get all approved video submissions for a specific campaign (Brand access only)
+Get video submissions for all gigs in a specific campaign with role-based filtering
 
 ### Example
 
@@ -91,7 +32,7 @@ const apiInstance = new VideoSubmissionsApi(configuration);
 
 let campaignId: string; //Campaign ID (default to undefined)
 
-const { status, data } = await apiInstance.videosApprovedCampaignCampaignIdGet(
+const { status, data } = await apiInstance.videosCampaignCampaignIdGet(
     campaignId
 );
 ```
@@ -109,7 +50,7 @@ const { status, data } = await apiInstance.videosApprovedCampaignCampaignIdGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -120,7 +61,7 @@ const { status, data } = await apiInstance.videosApprovedCampaignCampaignIdGet(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of approved video submissions for the campaign |  -  |
+|**200** | List of video submissions for the campaign |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
@@ -128,10 +69,10 @@ const { status, data } = await apiInstance.videosApprovedCampaignCampaignIdGet(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **videosApprovedGigGigIdGet**
-> ModelsStandardVideoSubmissionResponse videosApprovedGigGigIdGet()
+# **videosGigGigIdGet**
+> ModelsStandardVideoSubmissionResponses videosGigGigIdGet()
 
-Get all approved video submissions for a specific gig (Brand access only)
+Get video submissions for a specific gig with role-based filtering
 
 ### Example
 
@@ -146,7 +87,7 @@ const apiInstance = new VideoSubmissionsApi(configuration);
 
 let gigId: string; //Gig ID (default to undefined)
 
-const { status, data } = await apiInstance.videosApprovedGigGigIdGet(
+const { status, data } = await apiInstance.videosGigGigIdGet(
     gigId
 );
 ```
@@ -160,11 +101,11 @@ const { status, data } = await apiInstance.videosApprovedGigGigIdGet(
 
 ### Return type
 
-**ModelsStandardVideoSubmissionResponse**
+**ModelsStandardVideoSubmissionResponses**
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -175,7 +116,7 @@ const { status, data } = await apiInstance.videosApprovedGigGigIdGet(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of approved video submissions for the gig |  -  |
+|**200** | List of video submissions for the gig |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
@@ -223,7 +164,7 @@ const { status, data } = await apiInstance.videosIdDecisionPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -282,7 +223,7 @@ const { status, data } = await apiInstance.videosIdPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -297,6 +238,65 @@ const { status, data } = await apiInstance.videosIdPut(
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden - not owner |  -  |
+|**404** | Video submission not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **videosIdStatusPut**
+> ModelsStandardGenericResponse videosIdStatusPut(request)
+
+Admin updates video submission status (approve/reject)
+
+### Example
+
+```typescript
+import {
+    VideoSubmissionsApi,
+    Configuration,
+    ModelsVideoSubmissionStatusUpdateRequest
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new VideoSubmissionsApi(configuration);
+
+let id: string; //Video Submission ID (default to undefined)
+let request: ModelsVideoSubmissionStatusUpdateRequest; //Status update request
+
+const { status, data } = await apiInstance.videosIdStatusPut(
+    id,
+    request
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **request** | **ModelsVideoSubmissionStatusUpdateRequest**| Status update request | |
+| **id** | [**string**] | Video Submission ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGenericResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Video submission status updated successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | Forbidden |  -  |
 |**404** | Video submission not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -337,7 +337,7 @@ const { status, data } = await apiInstance.videosIdSubmitPut(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -372,12 +372,12 @@ import {
 const configuration = new Configuration();
 const apiInstance = new VideoSubmissionsApi(configuration);
 
-let page: number; //Page number (optional) (default to 1)
-let limit: number; //Items per page (optional) (default to 10)
+let gigId: string; //Filter by Gig ID (optional) (default to undefined)
+let status: string; //Filter by status (optional) (default to undefined)
 
 const { status, data } = await apiInstance.videosMySubmissionsGet(
-    page,
-    limit
+    gigId,
+    status
 );
 ```
 
@@ -385,8 +385,8 @@ const { status, data } = await apiInstance.videosMySubmissionsGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **page** | [**number**] | Page number | (optional) defaults to 1|
-| **limit** | [**number**] | Items per page | (optional) defaults to 10|
+| **gigId** | [**string**] | Filter by Gig ID | (optional) defaults to undefined|
+| **status** | [**string**] | Filter by status | (optional) defaults to undefined|
 
 
 ### Return type
@@ -395,7 +395,7 @@ const { status, data } = await apiInstance.videosMySubmissionsGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -449,7 +449,7 @@ const { status, data } = await apiInstance.videosPost(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 
@@ -527,7 +527,7 @@ const { status, data } = await apiInstance.videosSearchGet(
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+No authorization required
 
 ### HTTP request headers
 

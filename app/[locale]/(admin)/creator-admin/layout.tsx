@@ -2,6 +2,7 @@
 
 import { CreatorAuthGuard } from '@/components/auth/creator-auth-guard';
 import { EmailVerificationBanner } from '@/components/auth/email-verification-banner';
+import { ProfileStatusBanner } from '@/components/auth/profile-status-banner';
 import { DashboardHeader } from '@/components/dashboard-header';
 import {
   SidebarInset,
@@ -25,6 +26,7 @@ export default function CreatorAdminLayout( {
         <RoleProvider>
           <div className="bg-background min-h-screen flex flex-col">
             <EmailVerificationBanner />
+            <ProfileStatusBanner role="creator" />
             { children }
           </div>
         </RoleProvider>
@@ -39,6 +41,7 @@ export default function CreatorAdminLayout( {
           <CreatorSidebar />
           <SidebarInset>
             <EmailVerificationBanner />
+            <ProfileStatusBanner role="creator" />
             <DashboardHeader />
             <section className='bg-background flex flex-1 flex-col gap-4 overflow-y-auto'>
               { children }

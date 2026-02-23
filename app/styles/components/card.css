@@ -10,7 +10,7 @@
   }
 
   .card__title {
-   @apply text-base leading-normal font-medium group-data-[size=sm]/card:text-sm;
+    @apply text-base leading-normal font-medium group-data-[size=sm]/card:text-sm;
   }
 
   .card__description {

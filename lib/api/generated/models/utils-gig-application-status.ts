@@ -14,15 +14,14 @@
 
 
 
-export interface ModelsInvitationResponseRequest {
-    'status': ModelsInvitationResponseRequestStatusEnum;
-}
 
-export const ModelsInvitationResponseRequestStatusEnum = {
-    Accepted: 'accepted',
-    Declined: 'declined'
+export const UtilsGigApplicationStatus = {
+    ApplicationStatusPending: 'pending',
+    ApplicationStatusAccepted: 'accepted',
+    ApplicationStatusDeclined: 'declined'
 } as const;
 
-export type ModelsInvitationResponseRequestStatusEnum = typeof ModelsInvitationResponseRequestStatusEnum[keyof typeof ModelsInvitationResponseRequestStatusEnum];
+export type UtilsGigApplicationStatus = typeof UtilsGigApplicationStatus[keyof typeof UtilsGigApplicationStatus];
+
 
 

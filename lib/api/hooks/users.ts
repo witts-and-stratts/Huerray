@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserApi, UsersSearchGetUserTypeEnum } from '../generated/api/user-api';
 import { AuthenticationApi } from '../generated/api/authentication-api';
 import { apiClient, apiConfiguration } from '../client';
+import type { ApiError } from './types';
 
 // Create API instance
 const userApi = new UserApi(apiConfiguration, undefined, apiClient);
@@ -33,7 +34,7 @@ export function useUsers(
     limit?: number;
   } = {}
 ) {
-  return useQuery({
+  return useQuery<any, ApiError>({
     queryKey: usersKeys.list({ q, userType, status, page, limit }),
     queryFn: async () => {
       const response = await userApi.usersSearchGet({
@@ -72,7 +73,7 @@ export function useResendVerification() {
 }
 
 export function useUser(id: string) {
-  return useQuery({
+  return useQuery<ModelsUserResponse | undefined, ApiError>({
     queryKey: usersKeys.detail(id),
     queryFn: async () => {
       const response = await userApi.usersIdGet({ id });

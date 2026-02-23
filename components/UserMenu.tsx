@@ -7,18 +7,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import Link from 'next/link';
 
 export function UserMenu() {
-  const [open, setOpen] = useState(false);
-  const t = useTranslations('header.userMenu');
+  const [ open, setOpen ] = useState( false );
+  const t = useTranslations( 'header.userMenu' );
 
   const menuItems = [
-    { label: t('login'), href: '#login' },
-    { label: t('signup'), href: '#signup' },
+    { label: t( 'login' ), href: '/login' },
+    { label: t( 'signup' ), href: '/signup' },
   ];
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={ open } onOpenChange={ setOpen }>
       <PopoverTrigger asChild>
         <button className='user-menu' aria-label='User menu'>
           <span className='icon icon-user'></span>
@@ -27,16 +28,16 @@ export function UserMenu() {
       </PopoverTrigger>
       <PopoverContent className='user-menu__dropdown' align='end'>
         <div className='user-menu__list'>
-          {menuItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
+          { menuItems.map( ( item ) => (
+            <Link
+              key={ item.label }
+              href={ item.href }
               className='user-menu__item'
-              onClick={() => setOpen(false)}
+              onClick={ () => setOpen( false ) }
             >
-              {item.label}
-            </a>
-          ))}
+              { item.label }
+            </Link>
+          ) ) }
         </div>
       </PopoverContent>
     </Popover>

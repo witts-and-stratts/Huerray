@@ -10,6 +10,8 @@
 @import '../../styles/components/toggle-group.css';
 @import '../../styles/components/card.css';
 @import '../../styles/components/dropdown-menu.css';
+@import '../../styles/components/dialog.css';
+@import '../../styles/components/dashboard-stats.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -132,6 +134,7 @@
 
   body {
     @apply bg-background text-foreground;
+    scrollbar-gutter: stable;
   }
 }
 

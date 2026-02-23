@@ -16,7 +16,7 @@ import {
 } from '@/components/dashboard-ui/field';
 import { InputGroupButton } from '@/components/dashboard-ui/input-group';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { apiClient, setAuthToken, setRefreshToken } from '@/lib/api/client';
+import { apiClient } from '@/lib/api/client';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
 import { useAuth } from '@/lib/auth/auth-context';
 import { DASHBOARD_PATHS, getUserRole } from '@/lib/constants';
@@ -194,15 +194,7 @@ export function LoginForm( {
           return;
         }
 
-        const { access_token, refresh_token, user } = responseData.data;
-
-        // Store authentication tokens
-        if ( access_token ) {
-          setAuthToken( access_token, value.rememberMe );
-        }
-        if ( refresh_token ) {
-          setRefreshToken( refresh_token, value.rememberMe );
-        }
+        const user = responseData.data.user;
 
         if ( !user ) return;
 

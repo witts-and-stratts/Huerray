@@ -15,7 +15,8 @@ import {
 } from '@tanstack/react-query';
 import { NotificationsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
-import type { ModelsStandardGenericResponse } from '../generated/models';
+import type { ModelsNotificationResponse, ModelsStandardGenericResponse, ModelsStandardNotificationListResponse } from '../generated/models';
+import type { ApiError } from './types';
 
 // Create notifications API instance
 const notificationsApi = new NotificationsApi(apiConfiguration, undefined, apiClient);
@@ -63,14 +64,14 @@ export function useNotifications(
   page: number = 1,
   perPage: number = 10,
   unreadOnly: boolean = false,
-  options?: Omit<UseQueryOptions<NotificationsResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<NotificationsResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardNotificationListResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardNotificationListResponse, ApiError> {
   return useQuery({
     queryKey: notificationsKeys.list({ page, perPage, unreadOnly }),
     queryFn: async () => {
       const response = await notificationsApi.notificationsGet({ page, perPage, unreadOnly });
       // Casting because the generated client returns ModelsStandardGenericResponse where data is object
-      return response.data as NotificationsResponse;
+      return response.data;
     },
     ...options,
   });

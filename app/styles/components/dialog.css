@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+@layer components {
+  .dialog__title {
+    @apply font-primary text-h5 text-primary font-normal!;
+  }
+}

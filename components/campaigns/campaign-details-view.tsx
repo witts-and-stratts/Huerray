@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/dashboard-ui/dropdown-menu';
-import { CampaignCreatorsSection } from './sections/campaign-creators-section';
+import { CampaignSubmissionsSection } from './sections/campaign-submissions-section';
 import { CampaignInvitationsSection } from './sections/campaign-invitations-section';
 import { CampaignGigsSection } from './sections/campaign-gigs-section';
 import Link from 'next/link';
@@ -30,7 +30,7 @@ import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsGigResponse
 import { toast } from 'sonner';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { useRole } from '@/contexts/role-context';
-import { Capitalize, SentenceCase } from '../text-case';
+import { SentenceCase } from '../text-case';
 import { InviteCreatorsCard } from './invite-creators-card';
 import { StatusBadge } from './status-badge';
 
@@ -57,7 +57,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
     { value: 'images', label: 'Images' },
     { value: 'documents', label: 'Documents' },
     { value: 'applications', label: 'Applications' },
-    { value: 'creators', label: 'Creators' },
+    { value: 'submissions', label: 'Submissions' },
     { value: 'invitations', label: 'Invitations' },
     { value: 'gigs', label: 'Gigs' },
   ];
@@ -150,8 +150,8 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
           <CampaignApplicationsSection campaignId={ campaign.id || '' } />
         </Activity>
 
-        <Activity mode={ activeTab === 'creators' ? 'visible' : 'hidden' }>
-          <CampaignCreatorsSection creators={ campaign.creators || [] } />
+        <Activity mode={ activeTab === 'submissions' ? 'visible' : 'hidden' }>
+          <CampaignSubmissionsSection campaignId={ campaign.id || '' } />
         </Activity>
 
         <Activity mode={ activeTab === 'invitations' ? 'visible' : 'hidden' }>

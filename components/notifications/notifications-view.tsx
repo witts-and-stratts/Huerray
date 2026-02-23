@@ -8,6 +8,9 @@ import { NotificationsSkeleton } from "./notifications-skeleton";
 export function NotificationsView() {
   const { data: response, isLoading } = useNotifications( 1, 50, false, {
     refetchInterval: 30000,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
   } );
 
   const markAsRead = useMarkNotificationAsRead();

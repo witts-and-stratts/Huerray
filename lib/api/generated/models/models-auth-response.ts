@@ -18,8 +18,6 @@
 import type { ModelsUserResponse } from './models-user-response';
 
 export interface ModelsAuthResponse {
-    'access_token'?: string;
-    'refresh_token'?: string;
     'user'?: ModelsUserResponse;
 }
 

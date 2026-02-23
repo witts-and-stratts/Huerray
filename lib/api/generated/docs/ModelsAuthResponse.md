@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access_token** | **string** |  | [optional] [default to undefined]
-**refresh_token** | **string** |  | [optional] [default to undefined]
 **user** | [**ModelsUserResponse**](ModelsUserResponse.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -15,8 +13,6 @@ Name | Type | Description | Notes
 import { ModelsAuthResponse } from 'huerray-api';
 
 const instance: ModelsAuthResponse = {
-    access_token,
-    refresh_token,
     user,
 };
 ```

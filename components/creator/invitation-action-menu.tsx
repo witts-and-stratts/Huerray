@@ -1,17 +1,10 @@
 "use client";
 
+import { ActionMenu, MenuAction } from '@/components/dashboard-ui/action-menu';
 import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/dashboard-ui/dropdown-menu';
 import { Button } from '@/components/dashboard-ui/button';
-import { UtilsGigStatus } from '@/lib/api/generated/models/utils-gig-status';
 import { CreateSubmissionSheet } from './create-submission-sheet';
-import { Check, Eye, MoreVertical, X, UploadCloud } from 'lucide-react';
+import { Eye, MoreVertical, UploadCloud } from 'lucide-react';
 import { useState } from 'react';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
@@ -49,44 +42,48 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
   };
 
   const isPending = invitation.status === 'pending';
+  const actions: MenuAction<ModelsGigInvitationResponse>[] = [
+    {
+      label: "Create Submission",
+      icon: UploadCloud,
+      condition: () => invitation.status === 'accepted',
+      action: () => setShowSubmissionSheet( true ),
+      allowedRoles: [ 'creator' ]
+    },
+    {
+      label: "View Invitation",
+      icon: Eye,
+      action: () => onViewDetails( invitation ),
+    },
+    {
+      label: "Accept Invitation",
+      condition: () => isPending,
+      separator: true,
+      action: () => setShowAcceptDialog( true ),
+      allowedRoles: [ 'creator' ]
+    },
+    {
+      label: "Reject Invitation",
+      condition: () => isPending,
+      variant: "destructive",
+      className: "text-destructive focus:text-destructive",
+      action: () => setShowRejectDialog( true ),
+      allowedRoles: [ 'creator' ]
+    },
+  ];
 
   return (
     <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <ActionMenu
+        actions={ actions }
+        data={ invitation }
+        trigger={
           <Button variant="ghost" size="icon" className="h-8 w-8">
             <MoreVertical className="h-4 w-4" />
             <span className="sr-only">Open menu</span>
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="min-w-40">
-          <DropdownMenuItem
-            onClick={ () => setShowSubmissionSheet( true ) }
-            disabled={ invitation.status !== 'accepted' }
-          >
-            <UploadCloud className="mr-2 h-4 w-4" />
-            Create Submission
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={ () => onViewDetails( invitation ) }>
-            <Eye className="mr-2 h-4 w-4" />
-            View Invitation
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={ () => setShowAcceptDialog( true ) }
-            disabled={ !isPending }
-          >
-            Accept Invitation
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={ () => setShowRejectDialog( true ) }
-            disabled={ !isPending }
-            className="text-destructive focus:text-destructive"
-          >
-            Reject Invitation
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        }
+      />
 
       <ConfirmDialog
         open={ showAcceptDialog }
@@ -115,7 +112,7 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
       <CreateSubmissionSheet
         open={ showSubmissionSheet }
         onOpenChange={ setShowSubmissionSheet }
-        invitation={ invitation }
+        gigId={ invitation.gig_id || '' }
       />
     </>
   );

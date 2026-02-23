@@ -434,7 +434,7 @@ export const RenderDatePicker = ( {
   props: DatePickerFieldProps;
   base: BaseRendererProps;
 } ) => {
-  const { value, onChange, placeholder, dateFormat, locale, minDate, maxDate, onBlur } = props;
+  const { value, onChange, placeholder, dateFormat, locale, minDate, maxDate, mode, onBlur } = props;
   return (
     <DatePickerInput
       id={ base.fieldId }
@@ -449,6 +449,7 @@ export const RenderDatePicker = ( {
       locale={ locale }
       minDate={ minDate }
       maxDate={ maxDate }
+      mode={ mode }
     />
   );
 };

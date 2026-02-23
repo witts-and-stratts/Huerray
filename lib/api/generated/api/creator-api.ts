@@ -44,6 +44,8 @@ import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardGigApplicationResponses } from '../models';
 // @ts-ignore
+import type { ModelsStandardGigCreatorListResponse } from '../models';
+// @ts-ignore
 import type { ModelsUpdateCreatorBankDetailsRequest } from '../models';
 // @ts-ignore
 import type { ModelsUpdateCreatorRequest } from '../models';
@@ -52,6 +54,36 @@ import type { ModelsUpdateCreatorRequest } from '../models';
  */
 export const CreatorApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Get all gigs that are in progress for which there is either an accepted invitation or accepted application
+         * @summary Get active gigs for the logged-in creator
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsActiveGigsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/creators/active-gigs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Get applications submitted by the creator
          * @summary Get creator applications
@@ -70,9 +102,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -103,9 +132,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -139,9 +165,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -216,9 +239,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -256,9 +276,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             if (brandId !== undefined) {
                 localVarQueryParameter['brand_id'] = brandId;
@@ -321,9 +338,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             if (createdAfter !== undefined) {
                 localVarQueryParameter['created_after'] = createdAfter;
             }
@@ -385,9 +399,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -419,9 +430,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -455,9 +463,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -494,9 +499,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -528,9 +530,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -572,9 +571,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             if (ageMax !== undefined) {
                 localVarQueryParameter['age_max'] = ageMax;
@@ -666,9 +662,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
             if (ageMax !== undefined) {
                 localVarQueryParameter['age_max'] = ageMax;
@@ -777,9 +770,6 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication BearerAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
             if (campaignId !== undefined) {
                 localVarQueryParameter['campaign_id'] = campaignId;
             }
@@ -836,6 +826,18 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
 export const CreatorApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CreatorApiAxiosParamCreator(configuration)
     return {
+        /**
+         * Get all gigs that are in progress for which there is either an accepted invitation or accepted application
+         * @summary Get active gigs for the logged-in creator
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creatorsActiveGigsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigCreatorListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsActiveGigsGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsActiveGigsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * Get applications submitted by the creator
          * @summary Get creator applications
@@ -1082,6 +1084,15 @@ export const CreatorApiFp = function(configuration?: Configuration) {
 export const CreatorApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = CreatorApiFp(configuration)
     return {
+        /**
+         * Get all gigs that are in progress for which there is either an accepted invitation or accepted application
+         * @summary Get active gigs for the logged-in creator
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsActiveGigsGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigCreatorListResponse> {
+            return localVarFp.creatorsActiveGigsGet(options).then((request) => request(axios, basePath));
+        },
         /**
          * Get applications submitted by the creator
          * @summary Get creator applications
@@ -1425,6 +1436,16 @@ export interface CreatorApiCreatorsSearchVideoSubmissionsGetRequest {
  * CreatorApi - object-oriented interface
  */
 export class CreatorApi extends BaseAPI {
+    /**
+     * Get all gigs that are in progress for which there is either an accepted invitation or accepted application
+     * @summary Get active gigs for the logged-in creator
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public creatorsActiveGigsGet(options?: RawAxiosRequestConfig) {
+        return CreatorApiFp(this.configuration).creatorsActiveGigsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Get applications submitted by the creator
      * @summary Get creator applications

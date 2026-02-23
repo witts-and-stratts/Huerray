@@ -14,14 +14,18 @@ import {
   type UseMutationOptions
 } from '@tanstack/react-query';
 import { CreatorApi } from '../generated/api';
+import type { CreatorApiCreatorsSearchGigsGetRequest } from '../generated/api/creator-api';
 import { apiClient, apiConfiguration } from '../client';
-import type { 
+import type {
   ModelsPaginatedGigCreatorResponse,
+  ModelsPaginatedCreatorResponse,
+  ModelsStandardGigCreatorListResponse,
   ModelsGigResponse,
   ModelsCreatorResponse,
   ModelsStandardCreatorResponse,
   ModelsCreatorStatusUpdateRequest
 } from '@/lib/api/generated/models';
+import type { ApiError } from './types';
 
 // Create API instance
 const creatorsApi = new CreatorApi( apiConfiguration, undefined, apiClient );
@@ -32,6 +36,8 @@ const creatorsApi = new CreatorApi( apiConfiguration, undefined, apiClient );
 export const creatorsKeys = {
   all: [ 'creators' ] as const,
   matchingGigs: ( params?: Record<string, unknown> ) => [ ...creatorsKeys.all, 'matching-gigs', params ] as const,
+  activeGigs: () => [ ...creatorsKeys.all, 'active-gigs' ] as const,
+  gigs: ( params?: CreatorApiCreatorsSearchGigsGetRequest ) => [ ...creatorsKeys.all, 'gigs', params ] as const,
 };
 
 /**
@@ -46,8 +52,8 @@ export function useMatchingGigs(
     limit?: number;
     page?: number;
   },
-  options?: Omit<UseQueryOptions<ModelsPaginatedGigCreatorResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsPaginatedGigCreatorResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsPaginatedGigCreatorResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedGigCreatorResponse, ApiError> {
   return useQuery( {
     queryKey: creatorsKeys.matchingGigs( params ),
     queryFn: async () => {
@@ -58,11 +64,44 @@ export function useMatchingGigs(
   } );
 }
 /**
+ * Hook to fetch active gigs for the current creator
+ */
+export function useActiveGigs(
+  options?: Omit<UseQueryOptions<ModelsStandardGigCreatorListResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardGigCreatorListResponse, ApiError> {
+  return useQuery( {
+    queryKey: creatorsKeys.activeGigs(),
+    queryFn: async () => {
+      const response = await creatorsApi.creatorsActiveGigsGet();
+      return response.data;
+    },
+    ...options,
+  } );
+}
+
+/**
+ * Hook to fetch gigs where the current creator has participated
+ */
+export function useCreatorGigs(
+  params?: CreatorApiCreatorsSearchGigsGetRequest,
+  options?: Omit<UseQueryOptions<ModelsPaginatedGigCreatorResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedGigCreatorResponse, ApiError> {
+  return useQuery( {
+    queryKey: creatorsKeys.gigs( params ),
+    queryFn: async () => {
+      const response = await creatorsApi.creatorsSearchGigsGet( params || {} );
+      return response.data;
+    },
+    ...options,
+  } );
+}
+
+/**
  * Hook to fetch a single creator by ID
  */
 export function useCreator(
   id: string,
-  options?: Omit<UseQueryOptions<ModelsCreatorResponse | undefined, Error>, 'queryKey' | 'queryFn'>
+  options?: Omit<UseQueryOptions<ModelsCreatorResponse | undefined, ApiError>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery({
     queryKey: [...creatorsKeys.all, 'detail', id],
@@ -108,7 +147,8 @@ export function useCreators(
     page?: number;
     limit?: number;
     [key: string]: any;
-  } = {}
+  } = {},
+  options?: Omit<UseQueryOptions<ModelsPaginatedCreatorResponse, ApiError>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery({
     queryKey: [...creatorsKeys.all, 'list', { q, status, page, limit, ...filters }],
@@ -123,5 +163,6 @@ export function useCreators(
       });
       return response.data;
     },
+    ...options,
   });
 }

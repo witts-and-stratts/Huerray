@@ -16,10 +16,25 @@
 
 
 export const UtilsCompanySize = {
+    /**
+    * 
+    */
     CompanySizeStartup: 'startup',
+    /**
+    * 1-50 employees
+    */
     CompanySizeSmall: 'small',
+    /**
+    * 51-250 employees
+    */
     CompanySizeMedium: 'medium',
+    /**
+    * 251-1000 employees
+    */
     CompanySizeLarge: 'large',
+    /**
+    * 1000+ employees
+    */
     CompanySizeEnterprise: 'enterprise'
 } as const;
 

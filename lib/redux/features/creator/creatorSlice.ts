@@ -76,7 +76,7 @@ export const fetchCreatorProfile = createAsyncThunk(
       
       return { profile: profile as CreatorProfile, hasProfile: true };
     } catch ( error: any ) {
-      if ( error.response?.status === 404 ) {
+      if ( error.response?.status === 404 || error.response?.status === 401 ) {
         return { profile: null, hasProfile: false };
       }
       return rejectWithValue( error.message || 'Failed to fetch creator profile' );

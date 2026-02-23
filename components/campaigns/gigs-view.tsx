@@ -89,15 +89,16 @@ interface GigsViewProps {
   table: TanstackTable<ModelsGigResponse>;
   view: 'table' | 'cards';
   onViewGig: ( gig: ModelsGigResponse ) => void;
+  onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 
-export function GigsView( { table, view, onViewGig }: GigsViewProps ) {
+export function GigsView( { table, view, onViewGig, onCreateSubmission }: GigsViewProps ) {
   return (
     <div className='mt-1'>
       { view === 'table' ? (
         <GigsTableView table={ table } />
       ) : (
-        <GigsCardsView table={ table } onViewGig={ onViewGig } />
+        <GigsCardsView table={ table } onViewGig={ onViewGig } onCreateSubmission={ onCreateSubmission } />
       ) }
     </div>
   );

@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/dashboard-ui/dropdown-menu";
 import { cn } from "@/lib/dashboard-utils";
+import { timeAgo } from "@/lib/utils";
 import { Bell, Check, ChevronDown, ChevronUp, EllipsisVertical } from "lucide-react";
 import type { Notification } from "@/lib/api/hooks/notifications";
 import { useState } from "react";
@@ -22,21 +23,6 @@ interface NotificationItemProps {
 export function NotificationItem( { notification, onMarkAsRead, onDelete }: NotificationItemProps ) {
   const [ isExpanded, setIsExpanded ] = useState( false );
   const shouldTruncate = notification.message ? notification.message.length > 140 : false;
-
-  const timeAgo = ( dateStr: string ) => {
-    try {
-      const date = new Date( dateStr );
-      const now = new Date();
-      const diffInSeconds = Math.max( 0, Math.floor( ( now.getTime() - date.getTime() ) / 1000 ) );
-
-      if ( diffInSeconds < 60 ) return 'Just now';
-      if ( diffInSeconds < 3600 ) return `${ Math.floor( diffInSeconds / 60 ) }m ago`;
-      if ( diffInSeconds < 86400 ) return `${ Math.floor( diffInSeconds / 3600 ) }h ago`;
-      return `${ Math.floor( diffInSeconds / 86400 ) }d ago`;
-    } catch {
-      return '';
-    }
-  };
 
   return (
     <div

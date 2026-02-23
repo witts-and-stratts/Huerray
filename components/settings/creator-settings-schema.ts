@@ -17,7 +17,7 @@ export const creatorSettingsSchema = z.object({
   street: z.string(),
   city: z.string(),
   state: z.string(),
-  zipcode: z.string(),
+  zipcode: z.string("Zipcode is required"),
   country: z.string(),
 
   // Social

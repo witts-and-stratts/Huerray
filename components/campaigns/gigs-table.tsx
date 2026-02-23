@@ -29,9 +29,10 @@ export interface GigsTableProps {
   basePath?: string;
   defaultView?: 'table' | 'cards';
   hideViewToggle?: boolean;
+  onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 
-export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false, isLoading = false }: GigsTableProps ) {
+export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false, isLoading = false, onCreateSubmission }: GigsTableProps ) {
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -99,6 +100,7 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
               table={ table }
               view={ view }
               onViewGig={ ( gig ) => setSelectedGig( gig ) }
+              onCreateSubmission={ onCreateSubmission }
             />
           </div>
           <div className="px-4">

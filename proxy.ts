@@ -50,17 +50,9 @@ export default function middleware(request: NextRequest) {
   const isProtectedRoute = isAdminRoute || isBrandAdminRoute || isCreatorAdminRoute || isDashboardRoute;
 
   if (isProtectedRoute) {
-    const authToken = request.cookies.get('authToken');
     const userData = getUserDataFromCookie(request);
 
-    // Redirect to login if no auth token
-    if (!authToken) {
-      const loginUrl = new URL(`/${locale}/login`, request.url);
-      loginUrl.searchParams.set('redirect', pathWithoutLocale);
-      return NextResponse.redirect(loginUrl);
-    }
-
-    // Redirect to login if no user data
+    // Redirect to login if no user session data
     if (!userData) {
       const loginUrl = new URL(`/${locale}/login`, request.url);
       loginUrl.searchParams.set('redirect', pathWithoutLocale);

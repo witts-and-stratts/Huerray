@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import Cookies from 'js-cookie';
 
 interface User {
@@ -23,35 +23,41 @@ const AuthContext = createContext<AuthContextType | undefined>( undefined );
 
 const USER_COOKIE_NAME = 'userData';
 
-export function AuthProvider( { children }: { children: React.ReactNode; } ) {
-  const [ user, setUserState ] = useState<User | null>( null );
-  const [ isLoading, setIsLoading ] = useState( true );
+function readUserFromCookie(): User | null {
+  if ( typeof window === 'undefined' ) {
+    return null;
+  }
 
-  // Load user from cookie on mount
-  useEffect( () => {
-    const userData = Cookies.get( USER_COOKIE_NAME );
-    if ( userData ) {
-      try {
-        queueMicrotask( () => setUserState( JSON.parse( userData ) ) );
-      } catch ( e ) {
-        console.error( 'Failed to parse user data:', e );
-        Cookies.remove( USER_COOKIE_NAME );
-      }
-    }
-    queueMicrotask( () => setIsLoading( false ) );
-  }, [] );
+  const userData = Cookies.get( USER_COOKIE_NAME );
+  if ( !userData ) {
+    return null;
+  }
+
+  try {
+    return JSON.parse( userData ) as User;
+  } catch ( e ) {
+    console.error( 'Failed to parse user data:', e );
+    Cookies.remove( USER_COOKIE_NAME, { path: '/' } );
+    return null;
+  }
+}
+
+export function AuthProvider( { children }: { children: React.ReactNode; } ) {
+  const [ user, setUserState ] = useState<User | null>( readUserFromCookie );
+  const isLoading = false;
 
   // Save user to cookie whenever it changes
   const setUser = ( userData: User | null ) => {
     setUserState( userData );
     if ( userData ) {
       Cookies.set( USER_COOKIE_NAME, JSON.stringify( userData ), {
+        path: '/',
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax', // Changed from 'strict' for better localhost compatibility
         expires: 7,
       } );
     } else {
-      Cookies.remove( USER_COOKIE_NAME );
+      Cookies.remove( USER_COOKIE_NAME, { path: '/' } );
     }
   };
 

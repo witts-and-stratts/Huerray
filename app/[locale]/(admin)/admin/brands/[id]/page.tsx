@@ -1,110 +1,182 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useState, useEffect, useMemo } from 'react';
-import { useForm } from '@tanstack/react-form';
-import { BrandSettings, brandSettingsSchema } from '@/components/settings/brand-settings-schema';
-import { BrandProfileSection } from '@/components/settings/brand-profile-section';
+import Image from 'next/image';
+import { useMemo } from 'react';
+import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
 import { SubHeader } from '@/components/subheader';
-import { Loader2, LayoutDashboard, FileText, UserCircle } from 'lucide-react';
-import { toast } from 'sonner';
-import { UtilsBrandCategory } from '@/lib/api/generated/models/utils-brand-category';
-import { UtilsCompanySize } from '@/lib/api/generated/models/utils-company-size';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useBrand } from '@/lib/api/hooks/brands';
 import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
+import { useGigs } from '@/lib/api/hooks/gigs';
 import { CampaignsTable } from '@/components/campaigns/campaigns-table';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
-import { ModelCampaign } from '@/components/campaigns/types';
+import type { ModelCampaign } from '@/components/campaigns/types';
+import { VideoSubmissionsApi } from '@/lib/api/generated/api';
+import { apiClient, apiConfiguration } from '@/lib/api/client';
+import type { ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Badge } from '@/components/dashboard-ui/badge';
+import { Separator } from '@/components/dashboard-ui/separator';
+import { getCountryFlag } from '@/lib/country-flags';
+import { BrandStatusBadge } from '@/components/admin/brands/brand-status-badge';
+
+function toDateLabel( value?: string ) {
+  if ( !value ) return 'N/A';
+
+  const date = new Date( value );
+  if ( Number.isNaN( date.getTime() ) ) return 'N/A';
+
+  return date.toLocaleDateString( 'en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  } );
+}
+
+function toCurrency( value: number ) {
+  return new Intl.NumberFormat( 'en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  } ).format( value );
+}
 
 export default function BrandDashboardPage() {
   const params = useParams<{ id: string; }>();
   const brandId = params.id;
 
-  // Fetch Brand Data
   const { data: brandData, isLoading: isBrandLoading, error: brandError } = useBrand( brandId );
-
-  // Fetch Brand Campaigns
-  const { data: campaignsData, isLoading: isCampaignsLoading } = useBrandCampaigns( {
-    brandId: brandId
-  } );
+  const { data: campaignsData, isLoading: isCampaignsLoading } = useBrandCampaigns( { brandId } );
+  const { data: gigsData } = useGigs( { brandId, page: 1, limit: 500 } );
 
   const brand = useMemo( () => {
     if ( !brandData?.data ) return null;
-    // Handle if it returns an array (search) or object (get by id)
     return Array.isArray( brandData.data ) ? brandData.data[ 0 ] : brandData.data;
   }, [ brandData ] );
 
   const campaigns = useMemo<ModelCampaign[]>( () => {
-    if ( !campaignsData?.data ) return [];
-    const camps = Array.isArray( campaignsData.data ) ? campaignsData.data : [];
-    // Map to ModelCampaign if necessary, assuming API response matches or is compatible
-    return camps as unknown as ModelCampaign[];
+    if ( !campaignsData?.data || !Array.isArray( campaignsData.data ) ) return [];
+    return campaignsData.data as unknown as ModelCampaign[];
   }, [ campaignsData ] );
 
-  // Form for Profile Tab (Read-only)
-  const form = useForm( {
-    defaultValues: {
-      companyName: '',
-      websiteUrl: '',
-      companyDescription: '',
-      category: undefined as UtilsBrandCategory | undefined,
-      companySize: undefined as UtilsCompanySize | undefined,
-      registrationNumber: '',
-      city: '',
-      country: '',
-      building_number: '',
-      preferredContactEmail: '',
-      preferredContactPhone: '',
-      state: '',
-      street: '',
-      vatId: '',
-      postalCode: '',
-      profilePhotoUrl: '',
-    } as BrandSettings,
-    validators: {
-      onChange: brandSettingsSchema,
-    },
-    onSubmit: async () => {
-      toast.info( 'Editing brand profiles is read-only here.' );
+  const gigs = useMemo<ModelsGigResponse[]>( () => {
+    if ( !gigsData?.data || !Array.isArray( gigsData.data ) ) return [];
+    return gigsData.data;
+  }, [ gigsData ] );
+
+  const campaignMetrics = useMemo( () => {
+    const total = campaigns.length;
+
+    const active = campaigns.filter( ( campaign ) => {
+      const status = String( ( campaign as { status?: string; campaign_status?: string; } ).campaign_status || ( campaign as { status?: string; } ).status || '' ).toLowerCase();
+      return [ 'active', 'in_progress', 'ongoing', 'open' ].includes( status );
+    } ).length;
+
+    const finished = campaigns.filter( ( campaign ) => {
+      const status = String( ( campaign as { status?: string; campaign_status?: string; } ).campaign_status || ( campaign as { status?: string; } ).status || '' ).toLowerCase();
+      return [ 'completed', 'finished', 'closed' ].includes( status );
+    } ).length;
+
+    const draft = campaigns.filter( ( campaign ) => {
+      const status = String( ( campaign as { status?: string; campaign_status?: string; } ).campaign_status || ( campaign as { status?: string; } ).status || '' ).toLowerCase();
+      return [ 'draft', 'pending', 'pending_approval' ].includes( status );
+    } ).length;
+
+    return { total, active, finished, draft };
+  }, [ campaigns ] );
+
+  const spendMetrics = useMemo( () => {
+    const totalGigs = gigs.length;
+
+    const totalSpend = gigs.reduce( ( sum, gig ) => {
+      if ( typeof gig.gig_cost === 'number' ) return sum + gig.gig_cost;
+      if ( typeof gig.compensation === 'number' && typeof gig.number_of_videos === 'number' ) {
+        return sum + ( gig.compensation * gig.number_of_videos );
+      }
+      if ( typeof gig.compensation === 'number' ) return sum + gig.compensation;
+      return sum;
+    }, 0 );
+
+    const avgGigSpend = totalGigs > 0 ? totalSpend / totalGigs : 0;
+    const totalVideosRequested = campaigns.reduce(
+      ( sum, campaign ) => sum + ( typeof campaign.number_of_videos_wanted === 'number' ? campaign.number_of_videos_wanted : 0 ),
+      0
+    );
+    const totalCreatorsRequested = campaigns.reduce(
+      ( sum, campaign ) => sum + ( typeof campaign.number_of_creators_wanted === 'number' ? campaign.number_of_creators_wanted : 0 ),
+      0
+    );
+
+    return { totalSpend, avgGigSpend, totalGigs, totalVideosRequested, totalCreatorsRequested };
+  }, [ campaigns, gigs ] );
+
+  const financialRows = useMemo( () => ( [
+    { label: 'Total Spend', value: toCurrency( spendMetrics.totalSpend ), numeric: spendMetrics.totalSpend || 0 },
+    { label: 'Avg Gig Spend', value: toCurrency( spendMetrics.avgGigSpend ), numeric: spendMetrics.avgGigSpend || 0 },
+  ] ), [ spendMetrics.avgGigSpend, spendMetrics.totalSpend ] );
+
+  const campaignRows = useMemo( () => ( [
+    { label: 'Total Campaigns', value: `${ campaignMetrics.total }`, numeric: campaignMetrics.total },
+    { label: 'Active Campaigns', value: `${ campaignMetrics.active }`, numeric: campaignMetrics.active },
+    { label: 'Finished Campaigns', value: `${ campaignMetrics.finished }`, numeric: campaignMetrics.finished },
+    { label: 'Draft Campaigns', value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
+  ] ), [ campaignMetrics.active, campaignMetrics.draft, campaignMetrics.finished, campaignMetrics.total ] );
+
+  const campaignIds = useMemo(
+    () => campaigns
+      .map( ( campaign ) => campaign.id || campaign.campaign_id )
+      .filter( ( id ): id is string => Boolean( id ) ),
+    [ campaigns ]
+  );
+
+  const {
+    data: recentSubmissions = [],
+    isLoading: isRecentSubmissionsLoading,
+    isError: isRecentSubmissionsError,
+  } = useQuery( {
+    queryKey: [ 'brand-recent-submissions', brandId, campaignIds ],
+    enabled: campaignIds.length > 0,
+    queryFn: async () => {
+      const videoSubmissionsApi = new VideoSubmissionsApi( apiConfiguration, undefined, apiClient );
+      const responses = await Promise.all(
+        campaignIds.slice( 0, 10 ).map( async ( campaignId ) => {
+          try {
+            const response = await videoSubmissionsApi.videosCampaignCampaignIdGet( { campaignId } );
+            return response.data?.data || [];
+          } catch {
+            return [];
+          }
+        } )
+      );
+
+      const merged = responses.flat() as ModelsVideoSubmissionResponse[];
+      const byId = new Map<string, ModelsVideoSubmissionResponse>();
+
+      for ( const submission of merged ) {
+        if ( submission.id ) byId.set( submission.id, submission );
+      }
+
+      return [ ...byId.values() ]
+        .sort( ( a, b ) => {
+          const aTime = a.created_at ? new Date( a.created_at ).getTime() : 0;
+          const bTime = b.created_at ? new Date( b.created_at ).getTime() : 0;
+          return bTime - aTime;
+        } )
+        .slice( 0, 6 );
     },
   } );
 
-  // Populate form when brand data loads
-  useEffect( () => {
-    if ( brand ) {
-      form.setFieldValue( 'companyName', brand.company_name || '' );
-      form.setFieldValue( 'websiteUrl', brand.website_url || '' );
-      form.setFieldValue( 'companyDescription', brand.company_description || '' );
-
-      const categoryVal = brand.category?.toLowerCase();
-      const category = Object.values( UtilsBrandCategory ).includes( categoryVal ) ? categoryVal : undefined;
-
-      const companySizeVal = brand.company_size?.toLowerCase();
-      const companySize = Object.values( UtilsCompanySize ).includes( companySizeVal ) ? companySizeVal : undefined;
-
-      form.setFieldValue( 'category', category );
-      form.setFieldValue( 'companySize', companySize );
-
-      form.setFieldValue( 'registrationNumber', brand.registration_number || '' );
-      form.setFieldValue( 'city', brand.city || '' );
-      form.setFieldValue( 'country', brand.country || '' );
-      form.setFieldValue( 'building_number', brand.building_number || brand.number || '' );
-      form.setFieldValue( 'preferredContactEmail', brand.preferred_contact_email || '' );
-      form.setFieldValue( 'preferredContactPhone', brand.preferred_contact_phone || '' );
-      form.setFieldValue( 'state', brand.state || '' );
-      form.setFieldValue( 'street', brand.street || '' );
-      form.setFieldValue( 'vatId', brand.vat_id || '' );
-      form.setFieldValue( 'postalCode', brand.postal_code || '' );
-
-      const logo = brand.profile_photo_url || brand.logo_url || brand.logo || '';
-      form.setFieldValue( 'profilePhotoUrl', logo );
-    }
-  }, [ brand, form ] );
+  const statusVariant = ( status?: string ) => {
+    if ( status === 'approved' ) return 'secondary' as const;
+    if ( status === 'returned' || status === 'rejected' ) return 'destructive' as const;
+    return 'outline' as const;
+  };
 
   if ( isBrandLoading ) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex min-h-[400px] items-center justify-center">
         <Loader2 className="size-8 animate-spin text-muted-foreground" />
       </div>
     );
@@ -112,87 +184,252 @@ export default function BrandDashboardPage() {
 
   if ( brandError || ( !isBrandLoading && !brand ) ) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-        <h3 className='text-lg font-medium text-red-800'>Failed to load brand profile</h3>
-        <p className='text-sm text-red-600'>{ ( brandError as Error )?.message || 'Brand not found' }</p>
+      <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
+        <h3 className="text-lg font-medium text-red-800">Failed to load brand profile</h3>
+        <p className="text-sm text-red-600">{ ( brandError as Error )?.message || 'Brand not found' }</p>
       </div>
     );
   }
 
+  const brandName = brand?.company_name || 'Brand Dashboard';
+  const brandLogo = brand?.profile_photo_url || brand?.logo_url || brand?.logo || '';
+  const flagName = getCountryFlag( brand?.country );
+  const location = [ brand?.city, brand?.country ].filter( Boolean ).join( ', ' );
+  const address = [ brand?.street, brand?.building_number || brand?.number, brand?.city, brand?.state, brand?.postal_code, brand?.country ]
+    .filter( Boolean )
+    .join( ', ' );
+
   return (
-    <div className="space-y-6">
+    <div>
       <SubHeader
-        title={ brand?.company_name || 'Brand Dashboard' }
+        title={ brandName }
         description="Overview of brand performance and details"
         breadcrumbs={ [
           { label: 'Brands', href: '/admin/brands' },
-          { label: brand?.company_name || 'Dashboard', href: `/admin/brands/${ brandId }` },
+          { label: brandName, href: `/admin/brands/${ brandId }` },
         ] }
       />
 
-      <Tabs defaultValue="overview" className="w-full">
-        <div className="px-6">
-          <TabsList>
-            <TabsTrigger value="overview" className="gap-2">
-              <LayoutDashboard className="size-4" />
-              Overview
-            </TabsTrigger>
-            <TabsTrigger value="campaigns" className="gap-2">
-              <FileText className="size-4" />
-              Campaigns
-            </TabsTrigger>
-            <TabsTrigger value="profile" className="gap-2">
-              <UserCircle className="size-4" />
-              Profile
-            </TabsTrigger>
-          </TabsList>
-        </div>
+      <div className="ad-shell py-4">
+        <section className="grid gap-4 xl:grid-cols-12">
+          <aside className="space-y-4 xl:col-span-5 xl:sticky xl:top-24 xl:self-start">
+            <Card className="ad-summary-card border-primary/20">
+              <CardHeader className="pb-3">
+                <CardTitle className="ad-card-title">Brand Profile</CardTitle>
+                <CardDescription className="ad-card-description">Core brand information</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="rounded-xl border border-primary/15 bg-primary/5 p-4">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="size-16 border-2 border-primary/20">
+                      <AvatarImage src={ brandLogo } alt={ brandName } />
+                      <AvatarFallback>{ brandName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-base font-primary font-medium text-primary">{ brandName }</p>
+                      <p className="text-xs text-muted-foreground">{ brand?.preferred_contact_email || 'No contact email' }</p>
+                      <div className="mt-2">
+                        <BrandStatusBadge status={ brand?.status || 'inactive' } />
+                      </div>
+                    </div>
+                  </div>
 
-        <div className="p-6">
-          <TabsContent value="overview" className="space-y-6 mt-0">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Campaigns</CardTitle>
-                  <FileText className="h-4 w-4 text-muted-foreground" />
+                  { ( brand?.category || brand?.company_size ) && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      { brand?.category && (
+                        <Badge variant="secondary" className="px-1.5 py-0 text-[10px] font-normal whitespace-nowrap">
+                          { brand.category }
+                        </Badge>
+                      ) }
+                      { brand?.company_size && (
+                        <Badge variant="outline" className="px-1.5 py-0 text-[10px] font-normal whitespace-nowrap text-muted-foreground capitalize">
+                          { String( brand.company_size ).replace( /_/g, ' ' ) }
+                        </Badge>
+                      ) }
+                    </div>
+                  ) }
+
+                  { location && (
+                    <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                      { flagName && (
+                        <Image
+                          src={ `/images/flags/${ flagName }.svg` }
+                          alt={ brand?.country || 'Country' }
+                          width={ 14 }
+                          height={ 10 }
+                          className="h-3 w-auto"
+                        />
+                      ) }
+                      <span>{ location }</span>
+                    </div>
+                  ) }
+                </div>
+
+                <div className="space-y-2">
+                  <div className="rounded-lg border border-border/60 bg-white px-3 py-2.5">
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="ad-stat-label">Website</p>
+                      <p className="text-right text-sm font-medium">{ brand?.website_url || 'N/A' }</p>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-border/60 bg-white px-3 py-2.5">
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="ad-stat-label">Company Size</p>
+                      <p className="text-right text-sm font-medium capitalize">{ String( brand?.company_size || 'N/A' ).replace( /_/g, ' ' ) }</p>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-border/60 bg-white px-3 py-2.5">
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="ad-stat-label">Registered</p>
+                      <p className="text-right text-sm font-medium">{ brand?.registration_number || 'N/A' }</p>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-border/60 bg-white px-3 py-2.5">
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="ad-stat-label">VAT ID</p>
+                      <p className="text-right text-sm font-medium">{ brand?.vat_id || 'N/A' }</p>
+                    </div>
+                  </div>
+                </div>
+
+                <Separator />
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="ad-stat-label">Created</span>
+                    <span className="text-right">{ toDateLabel( brand?.created_at ) }</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="ad-summary-card">
+              <CardHeader className="pb-3">
+                <CardTitle className="ad-card-title">Contact & Address</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="ad-stat-label">Email</span>
+                  <span className="text-right">{ brand?.preferred_contact_email || 'N/A' }</span>
+                </div>
+                <div className="flex items-start justify-between gap-3">
+                  <span className="ad-stat-label">Phone</span>
+                  <span className="text-right">{ brand?.preferred_contact_phone || 'N/A' }</span>
+                </div>
+                <div className="flex items-start justify-between gap-3">
+                  <span className="ad-stat-label">Address</span>
+                  <span className="text-right">{ address || 'N/A' }</span>
+                </div>
+              </CardContent>
+            </Card>
+          </aside>
+
+          <section className="space-y-4 xl:col-span-7">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              <Card className="ad-summary-card">
+                <CardHeader className="pb-2">
+                  <CardTitle className="ad-card-title">Financials</CardTitle>
+                  <CardDescription className="ad-card-description">Spend performance for this brand</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{ brand.total_campaigns || brand.campaigns_count || campaigns.length || 0 }</div>
-                  <p className="text-xs text-muted-foreground">
-                    All time campaigns
-                  </p>
+                <CardContent className="space-y-2">
+                  { financialRows.map( ( item ) => (
+                    <div key={ item.label } className="rounded-lg border border-border/60 bg-white p-2.5">
+                      <div className="mb-1.5 flex items-end justify-between gap-3">
+                        <p className="ad-stat-label">{ item.label }</p>
+                      </div>
+                      <p className="mb-1.5 text-2xl leading-none font-primary font-medium">{ item.value }</p>
+                    </div>
+                  ) ) }
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Status</CardTitle>
-                  <UserCircle className="h-4 w-4 text-muted-foreground" />
+
+              <Card className="ad-summary-card">
+                <CardHeader className="pb-2">
+                  <CardTitle className="ad-card-title">Campaigns</CardTitle>
+                  <CardDescription className="ad-card-description">Campaign lifecycle overview</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold capitalize">{ brand.status || 'Active' }</div>
-                  <p className="text-xs text-muted-foreground">
-                    Current account status
-                  </p>
+                <CardContent className="space-y-2">
+                  { campaignRows.map( ( item ) => {
+                    const maxValue = Math.max( ...campaignRows.map( ( row ) => row.numeric ), 1 );
+                    const widthPct = Math.max( 10, Math.round( ( item.numeric / maxValue ) * 100 ) );
+                    return (
+                      <div key={ item.label } className="rounded-lg border border-border/60 bg-white p-2.5">
+                        <div className="mb-1.5 flex items-end justify-between gap-3">
+                          <p className="ad-stat-label">{ item.label }</p>
+                        </div>
+                        <p className="mb-1.5 text-2xl leading-none font-primary font-medium">{ item.value }</p>
+                        <div className="h-2 w-full rounded-full bg-muted">
+                          <div className="h-2 rounded-full bg-primary transition-all" style={ { width: `${ widthPct }%` } } />
+                        </div>
+                      </div>
+                    );
+                  } ) }
                 </CardContent>
               </Card>
-              {/* Add more stats cards as data becomes available */ }
+
+              <Card className="ad-summary-card xl:col-span-2">
+                <CardHeader className="pb-2">
+                  <CardTitle className="ad-card-title">Recent Submissions</CardTitle>
+                  <CardDescription className="ad-card-description">Latest video submissions from brand campaigns</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  { isRecentSubmissionsLoading && (
+                    <p className="py-8 text-center text-xs text-muted-foreground">Loading recent submissions...</p>
+                  ) }
+
+                  { isRecentSubmissionsError && (
+                    <p className="py-8 text-center text-xs text-destructive">Unable to load recent submissions.</p>
+                  ) }
+
+                  { !isRecentSubmissionsLoading && !isRecentSubmissionsError && recentSubmissions.length === 0 && (
+                    <p className="py-8 text-center text-xs text-muted-foreground">No submissions yet.</p>
+                  ) }
+
+                  { !isRecentSubmissionsLoading && !isRecentSubmissionsError && recentSubmissions.map( ( submission ) => {
+                    const creatorName = submission.creator?.first_name || submission.creator?.last_name
+                      ? `${ submission.creator?.first_name || '' } ${ submission.creator?.last_name || '' }`.trim()
+                      : 'Creator';
+
+                    return (
+                      <div key={ submission.id || `${ submission.title }-${ submission.created_at }` } className="rounded-lg border border-border/60 bg-white p-2.5">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <Link
+                              href={ submission.id ? `/admin/submissions/${ submission.id }` : '/admin/submissions' }
+                              className="text-sm font-medium text-primary hover:underline underline-offset-2"
+                            >
+                              { submission.title || 'Untitled Submission' }
+                            </Link>
+                            <p className="mt-0.5 text-xs text-muted-foreground">Creator: { creatorName }</p>
+                            <p className="mt-0.5 text-xs text-muted-foreground">Submitted: { toDateLabel( submission.created_at ) }</p>
+                          </div>
+                          <Badge variant={ statusVariant( submission.status ) } className="h-5 px-1.5 py-0 text-[10px] font-medium capitalize">
+                            { ( submission.status || 'pending_approval' ).replace( /_/g, ' ' ) }
+                          </Badge>
+                        </div>
+                      </div>
+                    );
+                  } ) }
+                </CardContent>
+              </Card>
+
             </div>
-          </TabsContent>
 
-          <TabsContent value="campaigns" className="mt-0">
-            <CampaignsTable
-              campaigns={ campaigns }
-              isLoading={ isCampaignsLoading }
-              basePath={ `/admin/brands/${ brandId }/campaigns` } // Adjust base path for admin view if needed
-            />
-          </TabsContent>
-
-          <TabsContent value="profile" className="mt-0">
-            <BrandProfileSection form={ form } disabled={ true } />
-          </TabsContent>
-        </div>
-      </Tabs>
+            <Card className="ad-summary-card">
+              <CardHeader className="pb-2">
+                <CardTitle className="ad-card-title">Campaigns</CardTitle>
+                <CardDescription className="ad-card-description">Brand campaign activity and status</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CampaignsTable
+                  campaigns={ campaigns }
+                  isLoading={ isCampaignsLoading }
+                  basePath={ `/admin/brands/${ brandId }/campaigns` }
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </section>
+      </div>
     </div>
   );
 }
-

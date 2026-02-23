@@ -5,6 +5,7 @@ import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
 import { useDeleteCampaign, useReplicateCampaign, useAdminCampaignApproval } from "@/lib/api/hooks/campaigns";
+import { useCreateInvoice } from "@/lib/api/hooks/invoices";
 import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum } from "@/lib/api/generated/models";
 import { EllipsisVertical, MoreVertical } from "lucide-react";
 import Link from "next/link";
@@ -38,12 +39,14 @@ export function CampaignActionMenu( {
   const deleteCampaign = useDeleteCampaign();
   const replicateCampaign = useReplicateCampaign();
   const approveCampaign = useAdminCampaignApproval();
+  const createInvoice = useCreateInvoice();
   const [ approveDialogOpen, setApproveDialogOpen ] = React.useState( false );
   const [ adminComment, setAdminComment ] = React.useState( '' );
   const [ deleteDialogOpen, setDeleteDialogOpen ] = React.useState( false );
   const [ renameDialogOpen, setRenameDialogOpen ] = React.useState( false );
   const [ decisionDialogOpen, setDecisionDialogOpen ] = React.useState( false );
   const [ initialDecision, setInitialDecision ] = React.useState<'yes' | 'no'>( 'yes' );
+  const [ invoiceDialogOpen, setInvoiceDialogOpen ] = React.useState( false );
 
   const [ deleteConfirmation, setDeleteConfirmation ] = React.useState( '' );
 
@@ -107,6 +110,28 @@ export function CampaignActionMenu( {
     setDecisionDialogOpen( true );
   };
 
+  const handleCreateInvoice = () => {
+    if ( campaign.id ) {
+      createInvoice.mutate(
+        { campaign_id: campaign.id },
+        {
+          onSuccess: () => {
+            toast.success( "Invoice created successfully", {
+              richColors: true,
+            } );
+            setInvoiceDialogOpen( false );
+          },
+          onError: () => {
+            toast.error( "Failed to create invoice", {
+              description: "Please try again later.",
+              richColors: true,
+            } );
+          },
+        }
+      );
+    }
+  };
+
   const defaultActions: MenuAction<ModelCampaign>[] = [
     {
       label: (
@@ -166,10 +191,16 @@ export function CampaignActionMenu( {
       allowedRoles: [ 'brand' ],
     },
     {
+      label: "Create Invoice",
+      action: () => setInvoiceDialogOpen( true ),
+      allowedRoles: [ "admin" ],
+    },
+    {
       label: "Delete",
       action: () => setDeleteDialogOpen( true ),
       className: "text-destructive focus:text-destructive",
-      allowedRoles: [ "admin" ]
+      allowedRoles: [ "admin" ],
+      separator: true,
     },
   ];
 
@@ -256,6 +287,17 @@ export function CampaignActionMenu( {
           onSuccess={ () => router.refresh() }
         />
       ) }
+
+      <ConfirmDialog
+        open={ invoiceDialogOpen }
+        onOpenChange={ setInvoiceDialogOpen }
+        title="Create Invoice"
+        description={ <>Are you sure you want to create an invoice for <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>?</> }
+        confirmLabel="Create Invoice"
+        onConfirm={ handleCreateInvoice }
+        isLoading={ createInvoice.isPending }
+        loadingText="Creating..."
+      />
     </>
   );
 }

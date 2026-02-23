@@ -120,6 +120,15 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
         </Badge>
       );
     },
+    filterFn: ( row, id, filterValue ) => {
+      if ( filterValue === undefined ) {
+        return true;
+      }
+      if ( !Array.isArray( filterValue ) ) return true;
+      if ( filterValue.length === 0 ) return false;
+      const rowValue = row.getValue( id ) as string;
+      return filterValue.includes( rowValue );
+    }
   },
 
   {
@@ -127,9 +136,11 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     header: () => <span className={ 'font-regular' }>Status</span>,
     cell: ( { row } ) => <UserStatusBadge status={ row.getValue( "user_status" ) as string } />,
     filterFn: ( row, id, filterValue ) => {
-      if ( !filterValue || !Array.isArray( filterValue ) || filterValue.length === 0 ) {
+      if ( filterValue === undefined ) {
         return true;
       }
+      if ( !Array.isArray( filterValue ) ) return true;
+      if ( filterValue.length === 0 ) return false;
       const rowValue = row.getValue( id ) as string;
       return filterValue.includes( rowValue );
     }

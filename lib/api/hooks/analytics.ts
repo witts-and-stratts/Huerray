@@ -12,6 +12,7 @@ import type {
   ModelsStandardBrandAnalyticsResponse,
   ModelsStandardCreatorAnalyticsResponse
 } from '../generated/models';
+import type { ApiError } from './types';
 
 // Create analytics API instance
 const analyticsApi = new AnalyticsApi(apiConfiguration, undefined, apiClient);
@@ -32,8 +33,8 @@ export const analyticsKeys = {
  * Hook to fetch brand analytics
  */
 export function useBrandAnalytics(
-  options?: Omit<UseQueryOptions<ModelsStandardBrandAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardBrandAnalyticsResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardBrandAnalyticsResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardBrandAnalyticsResponse, ApiError> {
   return useQuery({
     queryKey: analyticsKeys.brand(),
     queryFn: async () => {
@@ -49,8 +50,8 @@ export function useBrandAnalytics(
  */
 export function useBrandAnalyticsByPeriod(
   period: 'last_week' | 'last_month' | 'last_three_months' | 'last_year',
-  options?: Omit<UseQueryOptions<ModelsStandardBrandAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardBrandAnalyticsResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardBrandAnalyticsResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardBrandAnalyticsResponse, ApiError> {
   return useQuery({
     queryKey: analyticsKeys.brandByPeriod(period),
     queryFn: async () => {
@@ -65,8 +66,8 @@ export function useBrandAnalyticsByPeriod(
  * Hook to fetch creator analytics
  */
 export function useCreatorAnalytics(
-  options?: Omit<UseQueryOptions<ModelsStandardCreatorAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardCreatorAnalyticsResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardCreatorAnalyticsResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardCreatorAnalyticsResponse, ApiError> {
   return useQuery({
     queryKey: analyticsKeys.creator(),
     queryFn: async () => {
@@ -82,8 +83,8 @@ export function useCreatorAnalytics(
  */
 export function useCreatorAnalyticsByPeriod(
   period: 'last_week' | 'last_month' | 'last_three_months' | 'last_year',
-  options?: Omit<UseQueryOptions<ModelsStandardCreatorAnalyticsResponse, Error>, 'queryKey' | 'queryFn'>
-): UseQueryResult<ModelsStandardCreatorAnalyticsResponse, Error> {
+  options?: Omit<UseQueryOptions<ModelsStandardCreatorAnalyticsResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardCreatorAnalyticsResponse, ApiError> {
   return useQuery({
     queryKey: analyticsKeys.creatorByPeriod(period),
     queryFn: async () => {
