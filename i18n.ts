@@ -40,6 +40,7 @@ export default getRequestConfig(async ({ locale, requestLocale }) => {
         brand: (await import(`./locales/${validLocale}/dashboard/brand.json`)).default,
         creator: (await import(`./locales/${validLocale}/dashboard/creator.json`)).default,
         admin: (await import(`./locales/${validLocale}/dashboard/admin.json`)).default,
+        notifications: (await import(`./locales/${validLocale}/dashboard/notifications.json`)).default,
       },
     },
   };

@@ -5,15 +5,13 @@ import { useMemo } from 'react';
 import { Loader2 } from 'lucide-react';
 import { SubHeader } from '@/components/subheader';
 import { useBrand } from '@/lib/api/hooks/brands';
-import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
+import { useCampaigns } from '@/lib/api/hooks/campaigns';
 import { useGigs } from '@/lib/api/hooks/gigs';
-import type { ModelCampaign } from '@/components/campaigns/types';
-import type { ModelsGigResponse } from '@/lib/api/generated/models';
+import type { ModelsCampaignResponse, ModelsGigResponse } from '@/lib/api/generated/models';
 import {
   BrandCampaignMetricsBlock,
-  BrandCampaignsTableBlock,
-  BrandContactBlock,
   BrandFinancialsBlock,
+  BrandRecentCampaignsBlock,
   BrandRecentSubmissionsBlock,
   BrandProfileBlock,
   toCurrency,
@@ -25,7 +23,7 @@ export default function BrandDashboardPage() {
   const brandId = params.id;
 
   const { data: brandData, isLoading: isBrandLoading, error: brandError } = useBrand( brandId );
-  const { data: campaignsData, isLoading: isCampaignsLoading } = useBrandCampaigns( { brandId } );
+  const { data: campaignsData } = useCampaigns( { brandId, limit: 100, page: 1 } );
   const { data: gigsData } = useGigs( { brandId, page: 1, limit: 500 } );
 
   const brand = useMemo( () => {
@@ -33,9 +31,9 @@ export default function BrandDashboardPage() {
     return Array.isArray( brandData.data ) ? brandData.data[ 0 ] : brandData.data;
   }, [ brandData ] );
 
-  const campaigns = useMemo<ModelCampaign[]>( () => {
+  const campaigns = useMemo<ModelsCampaignResponse[]>( () => {
     if ( !campaignsData?.data || !Array.isArray( campaignsData.data ) ) return [];
-    return campaignsData.data as unknown as ModelCampaign[];
+    return campaignsData.data as ModelsCampaignResponse[];
   }, [ campaignsData ] );
 
   const gigs = useMemo<ModelsGigResponse[]>( () => {
@@ -93,8 +91,14 @@ export default function BrandDashboardPage() {
     { label: 'Draft', value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
   ] ), [ campaignMetrics.active, campaignMetrics.draft, campaignMetrics.finished, campaignMetrics.total ] );
 
-  const campaignIds = useMemo(
+  const recentCampaignIds = useMemo(
     () => campaigns
+      .sort( ( a, b ) => {
+        const aTime = a.created_at ? new Date( a.created_at ).getTime() : 0;
+        const bTime = b.created_at ? new Date( b.created_at ).getTime() : 0;
+        return bTime - aTime;
+      } )
+      .slice( 0, 6 )
       .map( ( campaign ) => campaign.id || campaign.campaign_id )
       .filter( ( id ): id is string => Boolean( id ) ),
     [ campaigns ]
@@ -121,7 +125,7 @@ export default function BrandDashboardPage() {
   const brandLogo = brand?.profile_photo_url || brand?.logo_url || brand?.logo || '';
 
   return (
-    <div>
+    <div className="flex flex-1 flex-col h-full">
       <SubHeader
         title={ brandName }
         description="Overview of brand performance and details"
@@ -131,25 +135,21 @@ export default function BrandDashboardPage() {
         ] }
       />
 
-      <div className="ad-shell py-4 bg-slate-50/50 mt-0 min-h-full">
-        <section className="grid gap-4 xl:grid-cols-12">
-          <aside className="space-y-4 xl:col-span-5 xl:sticky xl:top-24 xl:self-start h-full">
+      <div className="ad-shell py-4 bg-slate-50/50 mt-0 flex-1">
+        <section className="grid gap-4 md:grid-cols-12 lg:h-full">
+          <aside className="space-y-4 md:col-span-5 md:sticky md:top-24 md:self-start h-full">
             <BrandProfileBlock brand={ brand } brandName={ brandName } brandLogo={ brandLogo } />
-            <BrandContactBlock brand={ brand } />
           </aside>
 
-          <section className="space-y-4 xl:col-span-7">
-            <div className="grid gap-4 md:grid-cols-2">
-              <BrandFinancialsBlock rows={ financialRows } />
-              <BrandCampaignMetricsBlock rows={ campaignRows } />
-              <BrandRecentSubmissionsBlock brandId={ brandId } campaignIds={ campaignIds } />
+          <section className="space-y-4 md:col-span-7">
+            <div className="flex flex-col gap-4 h-full">
+              <div className='flex flex-col md:flex-row gap-4 w-full flex-1'>
+                <BrandFinancialsBlock rows={ financialRows } />
+                <BrandCampaignMetricsBlock rows={ campaignRows } />
+              </div>
+              <BrandRecentCampaignsBlock brandId={ brandId } />
+              <BrandRecentSubmissionsBlock brandId={ brandId } recentCampaignIds={ recentCampaignIds } />
             </div>
-
-            <BrandCampaignsTableBlock
-              brandId={ brandId }
-              campaigns={ campaigns }
-              isLoading={ isCampaignsLoading }
-            />
           </section>
         </section>
       </div>

@@ -500,7 +500,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
         gigsPost: async (gig: ModelsCreateGigRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'gig' is not null or undefined
             assertParamExists('gigsPost', 'gig', gig)
-            const localVarPath = `/gigs/`;
+            const localVarPath = `/gigs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

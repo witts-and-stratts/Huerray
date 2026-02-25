@@ -2,14 +2,22 @@
   "brand": {
     "dashboard": "Dashboard",
     "campaigns": "Campaigns",
+    "gigs": "Gigs",
     "creators": "Creators",
     "analytics": "Analytics",
-    "billing": "Invoices",
+    "invoices": "Invoices",
+    "savedLists": "Saved Lists",
+    "templates": "Templates",
+    "reports": "Reports",
     "settings": "Settings"
   },
   "creator": {
     "dashboard": "Dashboard",
-    "gigs": "Gigs",
+    "invitations": "Invitations",
+    "myGigs": "My Gigs",
+    "allGigs": "All Gigs",
+    "availableGigs": "Available Gigs",
+    "activeGigs": "Active Gigs",
     "portfolio": "Portfolio",
     "analytics": "Analytics",
     "earnings": "Earnings",
@@ -18,9 +26,19 @@
   "admin": {
     "dashboard": "Dashboard",
     "users": "Users",
+    "creators": "Creators",
+    "brands": "Brands",
     "campaigns": "Campaigns",
+    "gigs": "Gigs",
     "analytics": "Analytics",
     "moderation": "Moderation",
+    "platformReports": "Platform Reports",
+    "systemLogs": "System Logs",
+    "alerts": "Alerts",
     "settings": "Settings"
+  },
+  "common": {
+    "getHelp": "Get Help",
+    "search": "Search"
   }
 }

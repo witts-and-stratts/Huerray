@@ -7,32 +7,15 @@ import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { CampaignActionMenu } from './campaign-action-menu';
 import { ChevronDown } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/dashboard-ui/dropdown-menu';
 import { CampaignSubmissionsSection } from './sections/campaign-submissions-section';
 import { CampaignInvitationsSection } from './sections/campaign-invitations-section';
 import { CampaignGigsSection } from './sections/campaign-gigs-section';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { CampaignDecisionDialog } from './campaign-decision-dialog';
 import { CampaignImagesView } from './sections/campaign-images-view';
 import { CampaignDocumentsView } from './sections/campaign-documents-view';
 import { CampaignApplicationsSection } from './sections/campaign-applications-section';
-import { useReplicateCampaign, useAdminCampaignApproval } from '@/lib/api/hooks/campaigns';
-import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
-import { UtilsGigStatus } from '@/lib/api/generated/models/utils-gig-status';
-import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsGigResponse } from '@/lib/api/generated/models';
-import { toast } from 'sonner';
-import { RoleGuard } from '@/components/auth/role-guard';
 import { useRole } from '@/contexts/role-context';
-import { SentenceCase } from '../text-case';
-import { InviteCreatorsCard } from './invite-creators-card';
 import { StatusBadge } from './status-badge';
+import { CampaignOverviewSection } from './sections/campaign-overview-section';
 
 interface CampaignDetailsViewProps {
   campaign: ModelCampaign;
@@ -49,7 +32,6 @@ function Activity( { mode, children }: { mode: 'visible' | 'hidden'; children: R
 
 export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsViewProps ) {
   const [ activeTab, setActiveTab ] = useState( 'overview' );
-  const router = useRouter();
   const role = useRole();
 
   const tabItems = [
@@ -96,46 +78,12 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
           />
         </ButtonGroup>
       </SubHeader>
-      <div className='p-6 space-y-6 bg-slate-50/30 h-full -mt-4'>
+      <div className='p-6 space-y-6 bg-slate-50/30 h-full'>
         <Activity mode={ activeTab === 'overview' ? 'visible' : 'hidden' }>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-card rounded-xl border p-6 space-y-4">
-              <h3 className="font-semibold text-lg">Details</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground">Status</span>
-                  <p className="font-medium capitalize">{ campaign.campaign_status?.replace( '_', ' ' ) || '-' }</p>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Category</span>
-                  <p className="font-medium capitalize">{ campaign.category || '-' }</p>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Format</span>
-                  <p className="font-medium uppercase">{ campaign.video_format || '-' }</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-card rounded-xl border p-6 space-y-4">
-              <h3 className="font-semibold text-lg">Stats</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground">Creators Wanted</span>
-                  <p className="font-medium">{ campaign.number_of_creators_wanted }</p>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Videos Wanted</span>
-                  <p className="font-medium">{ campaign.number_of_videos_wanted }</p>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Duration</span>
-                  <p className="font-medium">{ campaign.video_duration_in_seconds }s</p>
-                </div>
-              </div>
-            </div>
-            <InviteCreatorsCard campaignId={ campaign.id || '' } />
-          </div>
+          <CampaignOverviewSection
+            campaign={ campaign }
+            onViewAllInvitations={ () => setActiveTab( 'invitations' ) }
+          />
         </Activity>
 
         <Activity mode={ activeTab === 'images' ? 'visible' : 'hidden' }>

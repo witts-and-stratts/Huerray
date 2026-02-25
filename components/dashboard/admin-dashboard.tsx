@@ -3,7 +3,6 @@ import {
   ApprovalQueuesBlock,
   FinancialSnapshotBlock,
   KpiOverviewBlock,
-  OperationalAlertsBlock,
   PipelineBreakdownBlock,
   PlatformHealthAreaBlock,
   RecentActivityBlock,
@@ -38,10 +37,8 @@ export function AdminDashboard() {
 
         <section className="ad-grid-two">
           <ActionCenterBlock />
-          <OperationalAlertsBlock />
+          <RecentActivityBlock />
         </section>
-
-        <RecentActivityBlock />
       </div>
     </>
   );

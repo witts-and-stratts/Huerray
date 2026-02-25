@@ -4,6 +4,8 @@ interface NotificationActionLabelRule {
   label: string;
 }
 
+export type NotificationsRole = "admin" | "brand" | "creator";
+
 // Derived from current notification payload variants.
 export const NOTIFICATION_ACTION_LABEL_RULES: NotificationActionLabelRule[] = [
   {
@@ -53,4 +55,11 @@ export function getNotificationActionLabel( notification: NotificationActionCont
   }
 
   return "View details";
+}
+
+export function getNotificationsPagePath( role?: NotificationsRole | null ): string {
+  if ( role === "admin" ) return "/admin/notifications";
+  if ( role === "brand" ) return "/brand-admin/notifications";
+  if ( role === "creator" ) return "/creator-admin/notifications";
+  return "/notifications";
 }

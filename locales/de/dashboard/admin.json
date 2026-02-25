@@ -11,5 +11,67 @@
   "recentActivity": "Aktuelle Aktivität",
   "manageUsers": "Benutzer verwalten",
   "reviewReports": "Meldungen überprüfen",
-  "noActivity": "Keine aktuelle Aktivität"
+  "noActivity": "Keine aktuelle Aktivität",
+  "campaignOverview": {
+    "workflow": {
+      "title": "Workflow",
+      "description": "Bewerbungen, Einreichungen und Einladungen",
+      "tabs": {
+        "submissions": "Einreichungen",
+        "applications": "Bewerbungen",
+        "invitations": "Einladungen"
+      },
+      "states": {
+        "submissionsError": "Einreichungen konnten nicht geladen werden.",
+        "applicationsError": "Bewerbungen konnten nicht geladen werden.",
+        "invitationsError": "Einladungen konnten nicht geladen werden.",
+        "noSubmissions": "Noch keine Einreichungen.",
+        "noApplications": "Noch keine Bewerbungen.",
+        "noInvitations": "Noch keine Einladungen."
+      },
+      "actions": {
+        "retry": "Erneut versuchen",
+        "viewAllInvitations": "Alle Einladungen anzeigen"
+      },
+      "labels": {
+        "unknownApplicant": "Unbekannter Bewerber",
+        "campaignApplication": "Kampagnenbewerbung",
+        "creator": "Creator",
+        "campaignInvitation": "Kampagneneinladung",
+        "na": "k. A."
+      }
+    },
+    "metadata": {
+      "title": "Kampagnen-Metadaten",
+      "description": "Zeitplan, Format und Lieferkontext",
+      "labels": {
+        "created": "Erstellt",
+        "updated": "Aktualisiert",
+        "format": "Format",
+        "multiVideo": "Mehrere Videos",
+        "brand": "Marke",
+        "na": "k. A."
+      },
+      "values": {
+        "allowed": "Erlaubt",
+        "singleVideo": "Einzelvideo"
+      }
+    },
+    "assets": {
+      "title": "Assets",
+      "description": "Kampagnenbilder und Dokumente",
+      "tabs": {
+        "images": "Bilder ({count})",
+        "documents": "Dokumente ({count})"
+      },
+      "states": {
+        "noImages": "Noch keine Bilder hochgeladen.",
+        "noDocuments": "Noch keine Dokumente angehängt."
+      },
+      "labels": {
+        "previewAsset": "Kampagnen-Asset {index} ansehen",
+        "assetAlt": "Kampagnen-Asset {index}"
+      }
+    }
+  }
 }

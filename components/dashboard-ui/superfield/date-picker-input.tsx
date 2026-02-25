@@ -119,12 +119,17 @@ export const DatePickerInput = ( {
   const [ internalRange, setInternalRange ] = useState<DateRange | undefined>(
     mode === 'range' && isDateRange( normalizedValue ) ? normalizedValue : undefined
   );
+  const [ rangeClickStep, setRangeClickStep ] = useState( 0 );
 
   // Sync internal range from the committed external value each time the
   // popover opens so any externally-driven value changes are reflected.
   useEffect( () => {
     if ( open && mode === 'range' ) {
       setInternalRange( isDateRange( normalizedValue ) ? normalizedValue : undefined );
+      setRangeClickStep( 0 );
+    }
+    if ( !open && mode === 'range' ) {
+      setRangeClickStep( 0 );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ open ] );
@@ -183,6 +188,7 @@ export const DatePickerInput = ( {
   const handleRangeSelect = ( date: DateRange | undefined ) => {
     if ( !date ) {
       setInternalRange( undefined );
+      setRangeClickStep( 0 );
       return;
     }
     // Buffer the partial range locally — do NOT call onChange until both
@@ -190,11 +196,26 @@ export const DatePickerInput = ( {
     // would move focus and cause the popover to close prematurely.
     setInternalRange( date );
     setInputValue( formatRangeValue( date, dateFormat, locale ) );
+    if ( rangeClickStep < 1 ) {
+      setRangeClickStep( 1 );
+      return;
+    }
     if ( date.from && date.to ) {
       onChange?.( date );
       setOpen( false );
       lastEmittedRef.current = undefined;
+      setRangeClickStep( 0 );
     }
+  };
+
+  const handleOpenChange = ( nextOpen: boolean ) => {
+    if ( !nextOpen && mode === 'range' ) {
+      const activeRange = internalRange;
+      if ( activeRange?.from && !activeRange?.to ) {
+        return;
+      }
+    }
+    setOpen( nextOpen );
   };
 
   const calendarDisabled = ( date: Date ) => {
@@ -216,7 +237,7 @@ export const DatePickerInput = ( {
         { ...ariaConfig }
       />
       <InputGroupAddon align="inline-end">
-        <Popover open={ open } onOpenChange={ setOpen }>
+        <Popover open={ open } onOpenChange={ handleOpenChange }>
           <PopoverTrigger
             render={
               <InputGroupButton

@@ -11,5 +11,67 @@
   "recentActivity": "Actividad reciente",
   "manageUsers": "Gestionar usuarios",
   "reviewReports": "Revisar reportes",
-  "noActivity": "No hay actividad reciente"
+  "noActivity": "No hay actividad reciente",
+  "campaignOverview": {
+    "workflow": {
+      "title": "Flujo de trabajo",
+      "description": "Solicitudes, envíos e invitaciones",
+      "tabs": {
+        "submissions": "Envíos",
+        "applications": "Solicitudes",
+        "invitations": "Invitaciones"
+      },
+      "states": {
+        "submissionsError": "No se pudieron cargar los envíos.",
+        "applicationsError": "No se pudieron cargar las solicitudes.",
+        "invitationsError": "No se pudieron cargar las invitaciones.",
+        "noSubmissions": "Aún no hay envíos.",
+        "noApplications": "Aún no hay solicitudes.",
+        "noInvitations": "Aún no hay invitaciones."
+      },
+      "actions": {
+        "retry": "Reintentar",
+        "viewAllInvitations": "Ver todas las invitaciones"
+      },
+      "labels": {
+        "unknownApplicant": "Solicitante desconocido",
+        "campaignApplication": "Solicitud de campaña",
+        "creator": "Creador",
+        "campaignInvitation": "Invitación de campaña",
+        "na": "N/A"
+      }
+    },
+    "metadata": {
+      "title": "Metadatos de la campaña",
+      "description": "Calendario, formato y contexto de entrega",
+      "labels": {
+        "created": "Creado",
+        "updated": "Actualizado",
+        "format": "Formato",
+        "multiVideo": "Multivídeo",
+        "brand": "Marca",
+        "na": "N/A"
+      },
+      "values": {
+        "allowed": "Permitido",
+        "singleVideo": "Vídeo único"
+      }
+    },
+    "assets": {
+      "title": "Recursos",
+      "description": "Imágenes y documentos de la campaña",
+      "tabs": {
+        "images": "Imágenes ({count})",
+        "documents": "Documentos ({count})"
+      },
+      "states": {
+        "noImages": "Aún no hay imágenes cargadas.",
+        "noDocuments": "Aún no hay documentos adjuntos."
+      },
+      "labels": {
+        "previewAsset": "Vista previa del recurso {index}",
+        "assetAlt": "Recurso de campaña {index}"
+      }
+    }
+  }
 }

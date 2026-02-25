@@ -31,8 +31,8 @@ export function SubmissionViewDialog( { open, onOpenChange, submission }: Submis
 
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>
-      <DialogContent className="w-[98vw] max-w-7xl p-0 gap-0 overflow-hidden">
-        <div className="w-full aspect-[4/3] bg-black">
+      <DialogContent className="p-0 gap-0 overflow-hidden max-w-5xl!">
+        <div className="w-full md:min-h-[500px] bg-black transition-all duration-300 ease-in-out">
           <video
             src={ submission.video_url || '' }
             controls

@@ -22,27 +22,27 @@ const chartConfig = {
 
 export function PlatformHealthAreaBlock() {
   return (
-    <Card className="ad-card">
+    <Card className="ad-card h-full">
       <CardHeader>
         <CardTitle className="ad-card-title">Platform Health Trend</CardTitle>
         <CardDescription className="ad-card-description">Users, campaigns, and submissions over the last 6 months</CardDescription>
         <div className="ad-chart-legend">
           <span className="ad-chart-legend-item">
-            <span className="ad-chart-dot bg-[var(--chart-1)]" />
+            <span className="ad-chart-dot bg-chart-1" />
             Users
           </span>
           <span className="ad-chart-legend-item">
-            <span className="ad-chart-dot bg-[var(--chart-2)]" />
+            <span className="ad-chart-dot bg-chart-2" />
             Campaigns
           </span>
           <span className="ad-chart-legend-item">
-            <span className="ad-chart-dot bg-[var(--chart-3)]" />
+            <span className="ad-chart-dot bg-chart-3" />
             Submissions
           </span>
         </div>
       </CardHeader>
       <CardContent className="pt-2">
-        <ChartContainer config={ chartConfig } className="ad-chart-lg">
+        <ChartContainer config={ chartConfig } className="ad-chart-lg h-full">
           <AreaChart data={ platformHealthSeries }>
             <defs>
               <linearGradient id="fillUsers" x1="0" y1="0" x2="0" y2="1">

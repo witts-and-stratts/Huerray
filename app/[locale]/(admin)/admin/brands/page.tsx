@@ -16,12 +16,24 @@ export default function BrandsPage() {
     // The API returns an array of brands in the data field
     const brands = Array.isArray( data.data ) ? data.data : [];
 
-    return brands.map( ( brand: any ) => ( {
+    return brands.map( ( brand: any ) => {
+      const rawCampaignCount =
+        brand.total_campaigns
+        ?? brand.campaigns_count
+        ?? brand.campaign_count
+        ?? brand.total_campaign_count
+        ?? ( Array.isArray( brand.campaigns ) ? brand.campaigns.length : undefined );
+
+      const totalCampaigns = typeof rawCampaignCount === 'number'
+        ? rawCampaignCount
+        : Number( rawCampaignCount );
+
+      return {
       id: brand.id || '',
       name: brand.company_name || brand.name || 'Unknown',
       logo: brand.logo_url || brand.profile_photo_url || brand.logo || '',
       brand_status: ( brand.brand_status || 'pending' ),
-      total_campaigns: brand.total_campaigns || brand.campaigns_count || 0,
+      total_campaigns: Number.isFinite( totalCampaigns ) ? totalCampaigns : 0,
       website: brand.website_url || brand.website || '',
       joined_date: brand.created_at || brand.joined_date || new Date().toISOString(),
       contact_email: brand.preferred_contact_email || brand.contact_email || brand.email || '',
@@ -29,7 +41,8 @@ export default function BrandsPage() {
       company_size: brand.company_size || '',
       city: brand.city || '',
       country: brand.country || '',
-    } ) );
+      };
+    } );
   }, [ data ] );
 
   return (
@@ -50,4 +63,3 @@ export default function BrandsPage() {
     </>
   );
 }
-

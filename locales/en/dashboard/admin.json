@@ -27,5 +27,67 @@
   "gigsPage": {
     "title": "Gigs",
     "description": "View and manage all gigs across the platform."
+  },
+  "campaignOverview": {
+    "workflow": {
+      "title": "Workflow",
+      "description": "Applications, submissions and invitations",
+      "tabs": {
+        "submissions": "Submissions",
+        "applications": "Applications",
+        "invitations": "Invitations"
+      },
+      "states": {
+        "submissionsError": "Unable to load submissions.",
+        "applicationsError": "Unable to load applications.",
+        "invitationsError": "Unable to load invitations.",
+        "noSubmissions": "No submissions yet.",
+        "noApplications": "No applications yet.",
+        "noInvitations": "No invitations yet."
+      },
+      "actions": {
+        "retry": "Retry",
+        "viewAllInvitations": "View all invitations"
+      },
+      "labels": {
+        "unknownApplicant": "Unknown applicant",
+        "campaignApplication": "Campaign application",
+        "creator": "Creator",
+        "campaignInvitation": "Campaign invitation",
+        "na": "N/A"
+      }
+    },
+    "metadata": {
+      "title": "Campaign Metadata",
+      "description": "Timing, format and delivery context",
+      "labels": {
+        "created": "Created",
+        "updated": "Updated",
+        "format": "Format",
+        "multiVideo": "Multi Video",
+        "brand": "Brand",
+        "na": "N/A"
+      },
+      "values": {
+        "allowed": "Allowed",
+        "singleVideo": "Single Video"
+      }
+    },
+    "assets": {
+      "title": "Assets",
+      "description": "Campaign images and documents",
+      "tabs": {
+        "images": "Images ({count})",
+        "documents": "Documents ({count})"
+      },
+      "states": {
+        "noImages": "No images uploaded yet.",
+        "noDocuments": "No documents attached yet."
+      },
+      "labels": {
+        "previewAsset": "Preview campaign asset {index}",
+        "assetAlt": "Campaign asset {index}"
+      }
+    }
   }
 }

@@ -17,6 +17,7 @@ export const BaseFileCard = memo( ( {
   onRetry,
   onPreview,
   isOverlay,
+  hideFileName,
   style,
   attributes,
   listeners,
@@ -65,7 +66,14 @@ export const BaseFileCard = memo( ( {
 
       <div className="min-w-0 grid gap-1 w-full text-center mt-1">
         <div className="flex items-center justify-center overflow-hidden w-full relative">
-          <p className={ cn( "text-xs font-normal line-clamp-2 wrap-words max-w-full px-2", item.status === 'error' && "text-destructive" ) } title={ item.name }>
+          <p
+            className={ cn(
+              "text-xs font-normal line-clamp-2 wrap-words max-w-full px-2",
+              item.status === 'error' && "text-destructive",
+              hideFileName && "hidden"
+            ) }
+            title={ item.name }
+          >
             { item.name }
           </p>
         </div>

@@ -12,6 +12,7 @@ export interface FileItemProps {
 
 export interface FileCardProps extends FileItemProps {
   isOverlay?: boolean;
+  hideFileName?: boolean;
   style?: React.CSSProperties;
   attributes?: any;
   listeners?: any;

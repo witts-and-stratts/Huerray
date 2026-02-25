@@ -47,6 +47,8 @@ export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsS
         <SubmissionCard
           key={ submission.id }
           submission={ submission }
+          layout="media-overlay"
+          overlayDetailsMode="always"
         />
       ) ) }
     </div>

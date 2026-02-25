@@ -77,11 +77,11 @@
   --border: oklch(0.923 0.003 48.717);
   --input: oklch(0.923 0.003 48.717);
   --ring: oklch(0.709 0.01 56.259);
-  --chart-1: oklch(0.59 0.26 323);
-  --chart-2: oklch(0.52 0.23 324);
-  --chart-3: oklch(0.45 0.19 325);
-  --chart-4: oklch(0.59 0.26 323);
-  --chart-5: oklch(0.52 0.23 324);
+  --chart-1: var(--color-burgundy-700);
+  --chart-2: var(--color-burgundy-600);
+  --chart-3: var(--color-burgundy-500);
+  --chart-4: var(--color-burgundy-400);
+  --chart-5: var(--color-burgundy-300);
   --radius: 0.625rem;
   --sidebar: var(--color-burgundy-50);
   --sidebar-foreground: var(--color-burgundy-900);

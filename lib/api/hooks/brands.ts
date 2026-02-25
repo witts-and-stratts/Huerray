@@ -9,12 +9,19 @@ import {
   type UseSuspenseQueryOptions
 } from '@tanstack/react-query';
 import { BrandApi } from '../generated';
+import type {
+  BrandApiBrandsGigsGetRequest,
+  BrandApiBrandsSearchGetRequest,
+  BrandApiBrandsSearchVideoSubmissionsGetRequest,
+} from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import type { 
   ModelsStandardBrandResponse,
   ModelsPaginatedBrandResponses,
   ModelsBrandStatusUpdateRequest,
-  ModelsPaginatedCreatorResponse
+  ModelsPaginatedCreatorResponse,
+  ModelsPaginatedGigBrandResponse,
+  ModelsPaginatedVideoSubmissionResponse,
 } from '../generated/models';
 import type { ApiError } from './types';
 
@@ -22,8 +29,13 @@ export const brandApi = new BrandApi(apiConfiguration, undefined, apiClient);
 
 export const brandsKeys = {
   all: ['brands'] as const,
+  lists: () => [ ...brandsKeys.all, 'list' ] as const,
+  list: ( params?: BrandApiBrandsSearchGetRequest ) => [ ...brandsKeys.lists(), params ] as const,
   details: () => [...brandsKeys.all, 'detail'] as const,
   detail: (id: string) => [...brandsKeys.details(), id] as const,
+  profile: () => [...brandsKeys.all, 'profile'] as const,
+  gigs: (params?: BrandApiBrandsGigsGetRequest) => [...brandsKeys.all, 'gigs', params] as const,
+  videoSubmissions: (params?: BrandApiBrandsSearchVideoSubmissionsGetRequest) => [...brandsKeys.all, 'video-submissions', params] as const,
 };
 
 /**
@@ -45,15 +57,32 @@ export function useBrand(
 }
 
 /**
+ * Hook to fetch the authenticated brand profile (/brands)
+ */
+export function useBrandProfile(
+  options?: Omit<UseQueryOptions<ModelsStandardBrandResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardBrandResponse, ApiError> {
+  return useQuery({
+    queryKey: brandsKeys.profile(),
+    queryFn: async () => {
+      const response = await brandApi.brandsGet();
+      return response.data;
+    },
+    ...options,
+  });
+}
+
+/**
  * Hook to fetch all brands
  */
 export function useBrands(
+  params?: BrandApiBrandsSearchGetRequest,
   options?: Omit<UseQueryOptions<ModelsPaginatedBrandResponses, ApiError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<ModelsPaginatedBrandResponses, ApiError> {
   return useQuery({
-    queryKey: brandsKeys.all,
+    queryKey: brandsKeys.list( params ),
     queryFn: async () => {
-      const response = await brandApi.brandsSearchGet();
+      const response = await brandApi.brandsSearchGet( params );
       return response.data;
     },
     ...options,
@@ -135,6 +164,40 @@ export function useBrandCreators(
         preferredCategory: params?.preferredCategory,
         q: params?.q
       });
+      return response.data;
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to search gigs for the authenticated brand (/brands/gigs)
+ */
+export function useBrandGigs(
+  params?: BrandApiBrandsGigsGetRequest,
+  options?: Omit<UseQueryOptions<ModelsPaginatedGigBrandResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedGigBrandResponse, ApiError> {
+  return useQuery({
+    queryKey: brandsKeys.gigs(params),
+    queryFn: async () => {
+      const response = await brandApi.brandsGigsGet(params);
+      return response.data;
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to search video submissions for the authenticated brand (/brands/search/video-submissions)
+ */
+export function useBrandVideoSubmissions(
+  params?: BrandApiBrandsSearchVideoSubmissionsGetRequest,
+  options?: Omit<UseQueryOptions<ModelsPaginatedVideoSubmissionResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsPaginatedVideoSubmissionResponse, ApiError> {
+  return useQuery({
+    queryKey: brandsKeys.videoSubmissions(params),
+    queryFn: async () => {
+      const response = await brandApi.brandsSearchVideoSubmissionsGet(params);
       return response.data;
     },
     ...options,

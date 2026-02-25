@@ -235,7 +235,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         data={ submission }
         label=""
         trigger={
-          <Button variant="ghost" size="icon-sm" className="shrink-0">
+          <Button variant="ghost" size="icon-sm" className="shrink-0 -mb-1 hover:bg-background/70">
             <MoreVertical className="size-4" />
             <span className="sr-only">Open menu</span>
           </Button>

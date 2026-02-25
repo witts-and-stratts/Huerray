@@ -20,8 +20,6 @@ export default function CampaignPage() {
     );
   }
 
-  // API returns { data: campaign } but generic type might not match runtime
-
   if ( error || !data ) {
     return (
       <div className='flex flex-col items-center justify-center min-h-[400px] gap-2'>

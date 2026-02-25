@@ -11,5 +11,67 @@
   "recentActivity": "Activité récente",
   "manageUsers": "Gérer les utilisateurs",
   "reviewReports": "Examiner les signalisations",
-  "noActivity": "Aucune activité récente"
+  "noActivity": "Aucune activité récente",
+  "campaignOverview": {
+    "workflow": {
+      "title": "Workflow",
+      "description": "Candidatures, soumissions et invitations",
+      "tabs": {
+        "submissions": "Soumissions",
+        "applications": "Candidatures",
+        "invitations": "Invitations"
+      },
+      "states": {
+        "submissionsError": "Impossible de charger les soumissions.",
+        "applicationsError": "Impossible de charger les candidatures.",
+        "invitationsError": "Impossible de charger les invitations.",
+        "noSubmissions": "Aucune soumission pour le moment.",
+        "noApplications": "Aucune candidature pour le moment.",
+        "noInvitations": "Aucune invitation pour le moment."
+      },
+      "actions": {
+        "retry": "Réessayer",
+        "viewAllInvitations": "Voir toutes les invitations"
+      },
+      "labels": {
+        "unknownApplicant": "Candidat inconnu",
+        "campaignApplication": "Candidature à la campagne",
+        "creator": "Créateur",
+        "campaignInvitation": "Invitation à la campagne",
+        "na": "N/A"
+      }
+    },
+    "metadata": {
+      "title": "Métadonnées de campagne",
+      "description": "Calendrier, format et contexte de livraison",
+      "labels": {
+        "created": "Créé",
+        "updated": "Mis à jour",
+        "format": "Format",
+        "multiVideo": "Multi-vidéo",
+        "brand": "Marque",
+        "na": "N/A"
+      },
+      "values": {
+        "allowed": "Autorisé",
+        "singleVideo": "Vidéo unique"
+      }
+    },
+    "assets": {
+      "title": "Ressources",
+      "description": "Images et documents de la campagne",
+      "tabs": {
+        "images": "Images ({count})",
+        "documents": "Documents ({count})"
+      },
+      "states": {
+        "noImages": "Aucune image téléversée pour le moment.",
+        "noDocuments": "Aucun document joint pour le moment."
+      },
+      "labels": {
+        "previewAsset": "Prévisualiser la ressource {index}",
+        "assetAlt": "Ressource de campagne {index}"
+      }
+    }
+  }
 }

@@ -1,13 +1,20 @@
-import { SubHeader } from "@/components/subheader";
-import { NotificationsView } from "@/components/notifications/notifications-view";
+"use client";
+
+import { NotificationsHeaderActions } from '@/components/notifications/notifications-header-actions';
+import { NotificationsView } from '@/components/notifications/notifications-view';
+import { SubHeader } from '@/components/subheader';
+import { useTranslations } from 'next-intl';
 
 export default function NotificationsPage() {
+  const t = useTranslations( "dashboard.notifications" );
   return (
     <>
       <SubHeader
-        title="Notifications"
-        description="View and manage all your notifications"
-      />
+        title={ t( "title" ) }
+        description={ t( "descriptionBrand" ) }
+      >
+        <NotificationsHeaderActions />
+      </SubHeader>
       <NotificationsView />
     </>
   );

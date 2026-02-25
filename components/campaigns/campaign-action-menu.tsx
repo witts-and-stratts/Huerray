@@ -7,7 +7,7 @@ import { Input } from "@/components/dashboard-ui/input";
 import { useDeleteCampaign, useReplicateCampaign, useAdminCampaignApproval } from "@/lib/api/hooks/campaigns";
 import { useCreateInvoice } from "@/lib/api/hooks/invoices";
 import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum } from "@/lib/api/generated/models";
-import { EllipsisVertical, MoreVertical } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CampaignRenameDialog } from "./campaign-rename-dialog";
@@ -42,6 +42,7 @@ export function CampaignActionMenu( {
   const createInvoice = useCreateInvoice();
   const [ approveDialogOpen, setApproveDialogOpen ] = React.useState( false );
   const [ adminComment, setAdminComment ] = React.useState( '' );
+  const [ adminDecision, setAdminDecision ] = React.useState<'approve' | 'reject'>( 'approve' );
   const [ deleteDialogOpen, setDeleteDialogOpen ] = React.useState( false );
   const [ renameDialogOpen, setRenameDialogOpen ] = React.useState( false );
   const [ decisionDialogOpen, setDecisionDialogOpen ] = React.useState( false );
@@ -78,18 +79,21 @@ export function CampaignActionMenu( {
     }
   };
 
-  const handleApprove = () => {
+  const handleAdminApproval = () => {
     if ( campaign.id ) {
+      const isApprove = adminDecision === 'approve';
       approveCampaign.mutate( {
         id: campaign.id,
         request: {
-          campaign_status: ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved,
-          admin_comments: adminComment || "Approved by admin",
-          number_of_gigs_validated: true,
+          campaign_status: isApprove
+            ? ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved
+            : ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned,
+          admin_comments: adminComment || ( isApprove ? "Approved by admin" : "Rejected by admin" ),
+          number_of_gigs_validated: isApprove ? true : undefined,
         }
       }, {
         onSuccess: () => {
-          toast.success( "Campaign approved successfully" );
+          toast.success( isApprove ? "Campaign approved successfully" : "Campaign rejected successfully" );
           setApproveDialogOpen( false );
           setAdminComment( '' );
           if ( !hideViewDetails ) {
@@ -99,10 +103,15 @@ export function CampaignActionMenu( {
           }
         },
         onError: () => {
-          toast.error( "Failed to approve campaign" );
+          toast.error( isApprove ? "Failed to approve campaign" : "Failed to reject campaign" );
         }
       } );
     }
+  };
+
+  const openAdminDecisionDialog = ( decision: 'approve' | 'reject' ) => {
+    setAdminDecision( decision );
+    setApproveDialogOpen( true );
   };
 
   const handleDecision = ( decision: 'yes' | 'no' ) => {
@@ -176,9 +185,15 @@ export function CampaignActionMenu( {
     },
     {
       label: "Approve Campaign",
-      action: () => setApproveDialogOpen( true ),
+      action: () => openAdminDecisionDialog( 'approve' ),
       allowedRoles: [ "admin" ],
-      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved
+      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved && campaign.campaign_status === "running"
+    },
+    {
+      label: "Reject Campaign",
+      action: () => openAdminDecisionDialog( 'reject' ),
+      allowedRoles: [ "admin" ],
+      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned && campaign.campaign_status === "running"
     },
     {
       label: 'Approve Campaign',
@@ -259,12 +274,16 @@ export function CampaignActionMenu( {
       <ConfirmDialog
         open={ approveDialogOpen }
         onOpenChange={ setApproveDialogOpen }
-        title="Approve Campaign"
-        description="Are you sure you want to approve this campaign? This will make it active and visible to creators."
-        confirmLabel="Approve"
-        onConfirm={ handleApprove }
+        title={ adminDecision === 'approve' ? "Approve Campaign" : "Reject Campaign" }
+        description={
+          adminDecision === 'approve'
+            ? "Are you sure you want to approve this campaign? This will make it active and visible to creators."
+            : "Are you sure you want to reject this campaign? The campaign will be returned to the brand."
+        }
+        confirmLabel={ adminDecision === 'approve' ? "Approve" : "Reject" }
+        onConfirm={ handleAdminApproval }
         isLoading={ approveCampaign.isPending }
-        loadingText="Approving..."
+        loadingText={ adminDecision === 'approve' ? "Approving..." : "Rejecting..." }
       >
         <div className="flex flex-col gap-2 py-2">
           <label htmlFor="admin-comment" className="text-sm font-medium">

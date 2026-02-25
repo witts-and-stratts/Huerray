@@ -1,98 +1,111 @@
-import { getTranslations } from 'next-intl/server';
+"use client";
+
+import Link from 'next/link';
+import { useMemo } from 'react';
+import { ArrowUpRight, CirclePlus } from 'lucide-react';
 import { Button } from '@/components/dashboard-ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { SubHeader } from '@/components/subheader';
+import { useAuth } from '@/lib/auth/auth-context';
+import { useBrandGigs, useBrandProfile } from '@/lib/api/hooks/brands';
+import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
+import type { ModelsCampaignResponse, ModelsGigBrandResponse } from '@/lib/api/generated/models';
+import {
+  BrandActionCenterBlock,
+  BrandCampaignsRadialBlock,
+  BrandGigsStatsBlock,
+  BrandKpiOverviewBlock,
+  BrandNotificationsBlock,
+  BrandProfileSnapshotBlock,
+  BrandSubmissionsStatsBlock,
+  buildSummary,
+} from '@/components/dashboard/blocks/brand';
+import { CampaignStatsBlock } from '@/components/dashboard/blocks/admin/campaign-stats-block';
+import { RecentActivityBlock } from '@/components/dashboard/blocks/admin/recent-activity-block';
 
-export async function BrandDashboard() {
-  const t = await getTranslations( 'dashboard.brand' );
-  const tCommon = await getTranslations( 'dashboard.common' );
+export function BrandDashboard() {
+  const { user } = useAuth();
+  const brandId = user?.id || '';
 
-  const stats = [
-    {
-      labelKey: 'stats.activeCampaigns',
-      value: '12',
-      change: '+20%',
-    },
-    {
-      labelKey: 'stats.connectedCreators',
-      value: '45',
-      change: '+15%',
-    },
-    {
-      labelKey: 'stats.totalSpend',
-      value: '$24,500',
-      change: '+8%',
-    },
-    {
-      labelKey: 'stats.averageRoi',
-      value: '3.2x',
-      change: '+12%',
-    },
-  ];
+  const { data: brandData } = useBrandProfile();
+  const { data: campaignsResponse, isLoading: isCampaignsLoading } = useBrandCampaigns( { limit: 100, page: 1 } );
+  const { data: gigsResponse, isLoading: isGigsLoading } = useBrandGigs( { brandId, limit: 100, page: 1 }, { enabled: !!brandId } );
+
+  const brand = useMemo( () => {
+    if ( !brandData?.data ) return null;
+    return Array.isArray( brandData.data ) ? brandData.data[ 0 ] : brandData.data;
+  }, [ brandData ] );
+
+  const campaigns = useMemo<ModelsCampaignResponse[]>( () => {
+    if ( !campaignsResponse?.data || !Array.isArray( campaignsResponse.data ) ) return [];
+    return campaignsResponse.data;
+  }, [ campaignsResponse ] );
+
+  const gigs = useMemo<ModelsGigBrandResponse[]>( () => {
+    if ( !gigsResponse?.data || !Array.isArray( gigsResponse.data ) ) return [];
+    return gigsResponse.data;
+  }, [ gigsResponse ] );
+
+  const summary = useMemo( () => buildSummary( campaigns, gigs ), [ campaigns, gigs ] );
 
   return (
-    <div className="space-y-6 h-full bg-slate-50/30 p-5">
-      {/* Page Header */ }
-      <div>
-        <h1 className="text-h3 font-primary font-medium tracking-tight">
-          { tCommon( 'dashboard' ) }
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          { t( 'welcome' ) } { t( 'overview' ) }
-        </p>
+    <>
+      <SubHeader
+        title="Dashboard"
+        description="Campaign performance and operational view for your brand account"
+      >
+        <Link href="/brand-admin/campaigns/new">
+          <Button className="gap-2">
+            <CirclePlus className="size-4" />
+            Create Campaign
+          </Button>
+        </Link>
+        <Link href="/brand-admin/campaigns">
+          <Button variant="outline" className="gap-2">
+            View Campaigns
+            <ArrowUpRight className="size-4" />
+          </Button>
+        </Link>
+      </SubHeader>
+
+      <div className="ad-shell py-4 bg-burgundy-50/50 mt-0">
+        <section className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+          <div className="order-2 lg:order-1 lg:col-span-8 space-y-4">
+            <BrandCampaignsRadialBlock campaigns={ campaigns } isLoading={ isCampaignsLoading } />
+            <BrandKpiOverviewBlock
+              campaignsCount={ campaigns.length }
+              gigsCount={ gigs.length }
+              summary={ summary }
+              isCampaignsLoading={ isCampaignsLoading }
+              isGigsLoading={ isGigsLoading }
+            />
+          </div>
+          <div className="order-1 lg:order-2 lg:col-span-4">
+            <BrandProfileSnapshotBlock
+              brand={ brand }
+              fallbackName={ `${ user?.firstName || '' } ${ user?.lastName || '' }`.trim() }
+              fallbackEmail={ user?.email }
+            />
+          </div>
+        </section>
+
+        <section className="ad-kpi-grid grid-cols-1 lg:grid-cols-3">
+          <CampaignStatsBlock />
+          <BrandGigsStatsBlock />
+          <BrandSubmissionsStatsBlock />
+        </section>
+
+        <section>
+          <BrandActionCenterBlock />
+        </section>
+
+        <section>
+          <BrandNotificationsBlock />
+        </section>
+
+        <section>
+          <RecentActivityBlock />
+        </section>
       </div>
-
-      {/* Stats Grid */ }
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        { stats.map( ( stat ) => (
-          <Card key={ stat.labelKey } className="py-4">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-regular text-slate-600">
-                { t( stat.labelKey ) }
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-medium font-primary">{ stat.value }</div>
-              <p className="text-xs text-muted-foreground mt-1">
-                <span className="text-green-500 font-medium">{ stat.change }</span> { t( 'stats.fromLastMonth' ) }
-              </p>
-            </CardContent>
-          </Card>
-        ) ) }
-      </div>
-
-      {/* Recent Campaigns */ }
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-lg font-semibold">
-            { t( 'recentCampaigns' ) }
-          </CardTitle>
-          <Button variant="link" className="text-sm">
-            { tCommon( 'viewAll' ) }
-          </Button>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">
-            { t( 'noCampaigns' ) }
-          </p>
-        </CardContent>
-      </Card>
-
-      {/* Quick Actions */ }
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg font-semibold">
-            { tCommon( 'quickActions' ) }
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex gap-4">
-          <Button>
-            { t( 'createCampaign' ) }
-          </Button>
-          <Button variant="outline">
-            { t( 'findCreators' ) }
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
+    </>
   );
 }

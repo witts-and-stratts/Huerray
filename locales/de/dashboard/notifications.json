@@ -1,0 +1,52 @@
+{
+  "title": "Benachrichtigungen",
+  "description": "Alle Benachrichtigungen anzeigen und verwalten",
+  "descriptionBrand": "Alle Ihre Benachrichtigungen anzeigen und verwalten",
+  "stats": {
+    "total": "Benachrichtigungen gesamt",
+    "unread": "Ungelesen",
+    "today": "Heute"
+  },
+  "tabs": {
+    "all": "Alle",
+    "read": "Gelesen",
+    "unread": "Ungelesen"
+  },
+  "actions": {
+    "markAllAsRead": "Alle als gelesen markieren",
+    "markAsRead": "Als gelesen markieren",
+    "delete": "Löschen",
+    "deleteAll": "Alle löschen",
+    "open": "Öffnen"
+  },
+  "item": {
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen",
+    "eventTypeFallback": "Aktualisierung"
+  },
+  "empty": {
+    "title": "Keine Benachrichtigungen vorhanden",
+    "description": "Sie sind aktuell auf dem neuesten Stand."
+  },
+  "confirm": {
+    "deleteAllTitle": "Alle Benachrichtigungen löschen",
+    "deleteAllDescription": "Möchten Sie wirklich alle Benachrichtigungen löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleteAllConfirm": "Alle löschen",
+    "deleting": "Lösche..."
+  },
+  "toast": {
+    "deleteAllSuccess": "Alle Benachrichtigungen wurden gelöscht",
+    "deleteAllError": "Alle Benachrichtigungen konnten nicht gelöscht werden"
+  },
+  "search": {
+    "placeholder": "Benachrichtigungen durchsuchen",
+    "noResults": "Keine Benachrichtigungen entsprechen Ihrer Suche."
+  },
+  "pagination": {
+    "rowsPerPage": "Zeilen pro Seite",
+    "page": "Seite",
+    "of": "von",
+    "previous": "Vorherige",
+    "next": "Nächste"
+  }
+}

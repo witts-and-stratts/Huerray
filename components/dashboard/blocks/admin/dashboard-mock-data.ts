@@ -1,7 +1,4 @@
-export const adminKpis: { label: string; value: string; delta: string; tone: 'positive' | 'negative' | 'neutral' }[] = [
-  { label: 'Unread Notifications', value: '54', delta: '+12 today', tone: 'neutral' },
-  { label: 'Platform Uptime', value: '99.96%', delta: 'Stable', tone: 'neutral' },
-];
+export const platformUptime = { value: '99.96%', delta: 'Stable' };
 
 export const campaignKpis = [
   { label: 'Total Campaigns', value: '612', delta: '+6.8%' },

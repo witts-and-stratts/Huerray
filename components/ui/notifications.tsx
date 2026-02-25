@@ -3,8 +3,9 @@
 import { ActionMenu, MenuAction } from "@/components/dashboard-ui/action-menu";
 import { ModelsNotificationListResponse, ModelsNotificationResponse } from "@/lib/api/generated";
 import { useDeleteNotification, useMarkAllNotificationsAsRead, useMarkNotificationAsRead, useNotifications } from "@/lib/api/hooks/notifications";
+import { useAuth } from "@/lib/auth/auth-context";
 import { cn } from "@/lib/dashboard-utils";
-import { getNotificationActionLabel } from "@/lib/notification-utils";
+import { getNotificationActionLabel, getNotificationsPagePath } from "@/lib/notification-utils";
 import { timeAgo } from "@/lib/utils";
 import { Bell, Check, ChevronDown, ChevronUp, EllipsisVertical, MegaphoneOff } from "lucide-react";
 import Link from "next/link";
@@ -16,6 +17,7 @@ import { AnimatePresence } from "motion/react";
 
 export function Notifications() {
   const [ isOpen, setIsOpen ] = useState( false );
+  const { user } = useAuth();
 
   // Fetch notifications
   const { data: response, isLoading } = useNotifications( 1, 20, false, {
@@ -31,6 +33,7 @@ export function Notifications() {
 
   const notifications = response?.data?.notifications || [];
   const unreadCount = response?.data?.unread_count || 0;
+  const notificationsPagePath = getNotificationsPagePath( user?.role );
 
   const handleMarkAsRead = ( id: string, e?: React.MouseEvent ) => {
     e?.stopPropagation();
@@ -61,7 +64,7 @@ export function Notifications() {
           onMarkAsRead={ handleMarkAsRead }
           onDelete={ handleDelete }
         />
-        <Link href='notifications' className="p-2 border-t w-full">
+        <Link href={ notificationsPagePath } className="p-2 border-t w-full">
           <Button variant="outline" size={ 'sm' } className="w-full justify-center text-xs">
             View all notifications
           </Button>

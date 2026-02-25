@@ -1,0 +1,52 @@
+{
+  "title": "Notifications",
+  "description": "Afficher et gérer toutes les notifications",
+  "descriptionBrand": "Afficher et gérer toutes vos notifications",
+  "stats": {
+    "total": "Notifications totales",
+    "unread": "Non lues",
+    "today": "Aujourd'hui"
+  },
+  "tabs": {
+    "all": "Toutes",
+    "read": "Lues",
+    "unread": "Non lues"
+  },
+  "search": {
+    "placeholder": "Rechercher des notifications",
+    "noResults": "Aucune notification ne correspond à votre recherche."
+  },
+  "actions": {
+    "markAllAsRead": "Tout marquer comme lu",
+    "markAsRead": "Marquer comme lu",
+    "delete": "Supprimer",
+    "deleteAll": "Tout supprimer",
+    "open": "Ouvrir"
+  },
+  "item": {
+    "showMore": "Afficher plus",
+    "showLess": "Afficher moins",
+    "eventTypeFallback": "Mise à jour"
+  },
+  "empty": {
+    "title": "Aucune notification à afficher",
+    "description": "Vous êtes à jour pour le moment."
+  },
+  "confirm": {
+    "deleteAllTitle": "Supprimer toutes les notifications",
+    "deleteAllDescription": "Voulez-vous vraiment supprimer toutes les notifications ? Cette action est irréversible.",
+    "deleteAllConfirm": "Tout supprimer",
+    "deleting": "Suppression..."
+  },
+  "toast": {
+    "deleteAllSuccess": "Toutes les notifications ont été supprimées",
+    "deleteAllError": "Échec de la suppression de toutes les notifications"
+  },
+  "pagination": {
+    "rowsPerPage": "Lignes par page",
+    "page": "Page",
+    "of": "sur",
+    "previous": "Précédente",
+    "next": "Suivante"
+  }
+}

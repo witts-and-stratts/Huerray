@@ -2,14 +2,22 @@
   "brand": {
     "dashboard": "Tableau de bord",
     "campaigns": "Campagnes",
+    "gigs": "Missions",
     "creators": "Créateurs",
     "analytics": "Analyses",
-    "billing": "Factures",
+    "invoices": "Factures",
+    "savedLists": "Listes enregistrées",
+    "templates": "Modèles",
+    "reports": "Rapports",
     "settings": "Paramètres"
   },
   "creator": {
     "dashboard": "Tableau de bord",
-    "gigs": "Missions",
+    "invitations": "Invitations",
+    "myGigs": "Mes missions",
+    "allGigs": "Toutes les missions",
+    "availableGigs": "Missions disponibles",
+    "activeGigs": "Missions actives",
     "portfolio": "Portfolio",
     "analytics": "Analyses",
     "earnings": "Revenus",
@@ -18,9 +26,19 @@
   "admin": {
     "dashboard": "Tableau de bord",
     "users": "Utilisateurs",
+    "creators": "Créateurs",
+    "brands": "Marques",
     "campaigns": "Campagnes",
+    "gigs": "Missions",
     "analytics": "Analyses",
     "moderation": "Modération",
+    "platformReports": "Rapports de la plateforme",
+    "systemLogs": "Journaux système",
+    "alerts": "Alertes",
     "settings": "Paramètres"
+  },
+  "common": {
+    "getHelp": "Aide",
+    "search": "Rechercher"
   }
 }
