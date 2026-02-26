@@ -173,7 +173,7 @@ function OverlayVideoPlayer( { videoUrl, showControl, compact = false }: Overlay
         src={ videoUrl }
         preload="metadata"
         playsInline
-        className="h-full w-full object-cover"
+        className="w-full object-cover aspect-video"
         onPlay={ () => setIsPlaying( true ) }
         onPause={ () => setIsPlaying( false ) }
         onClick={ togglePlayback }

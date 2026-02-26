@@ -9,7 +9,6 @@ import {
 import { Button } from "@/components/dashboard-ui/button";
 import { Loader2 } from "lucide-react";
 import { ReactNode } from 'react';
-import { AnimatePresence, motion } from "motion/react";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -67,14 +66,14 @@ export function ConfirmDialog( {
           { description && (
             <DialogDescription>
               { description }
-              { children && (
-                <div className="grid gap-4">
-                  { children }
-                </div>
-              ) }
             </DialogDescription>
           ) }
         </DialogHeader>
+        { children && (
+          <div className="grid gap-4 pt-3">
+            { children }
+          </div>
+        ) }
 
         <DialogFooter>
           { actions ? actions : (

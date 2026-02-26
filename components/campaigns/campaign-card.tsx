@@ -2,7 +2,6 @@
 
 import { CampaignActionMenu } from './campaign-action-menu';
 import { AnimatePresence } from 'motion/react';
-import { useEffect } from 'react';
 import Link from 'next/link';
 
 import {
@@ -16,6 +15,7 @@ import { BrandAvatar } from './brand-avatar';
 import { AvatarCollage } from './avatar-collage';
 import { ModelCampaign } from './types';
 import { StatusBadge } from './status-badge';
+import { Skeleton } from '@/components/dashboard-ui/skeleton';
 
 import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
 import { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
@@ -37,7 +37,7 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
   } = campaign;
 
   // Fetch applications
-  const { data: applicationsData } = useCampaignApplications( id || '' );
+  const { data: applicationsData, isLoading: isApplicationsLoading } = useCampaignApplications( id || '' );
   const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
 
   // Map applications to Person type for AvatarCollage
@@ -82,16 +82,27 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
             </div>
           </div>
         ) }
-        { applicationPeople.length > 0 && (
+        { isApplicationsLoading ? (
           <div className='flex flex-col gap-2'>
             <span className='text-xs font-medium text-muted-foreground'>
               Applications
             </span>
-            <div className='flex min-h-10'>
+            <div className='flex min-h-10 gap-2'>
+              { Array.from( { length: 5 } ).map( ( _, index ) => (
+                <Skeleton key={ index } className='h-10 w-10 rounded-full' />
+              ) ) }
+            </div>
+          </div>
+        ) : applicationPeople.length > 0 ? (
+          <div className='flex flex-col gap-2'>
+            <span className='text-xs font-medium text-muted-foreground'>
+              Applications
+            </span>
+            <div className='flex min-h-10 gap-2'>
               <AvatarCollage people={ applicationPeople } />
             </div>
           </div>
-        ) }
+        ) : null }
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <span className='text-xs text-muted-foreground/60'>

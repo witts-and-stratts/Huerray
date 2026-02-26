@@ -42,8 +42,14 @@ export function NotificationsHeaderActions() {
 
   const actions: MenuAction<NotificationActionsData>[] = [
     {
+      label: t( 'actions.markAllAsRead' ),
+      action: () => markAllAsRead.mutate(),
+      disabled: unreadCount === 0,
+    },
+    {
       label: t( 'actions.deleteAll' ),
       variant: 'destructive',
+      separator: true,
       action: () => setIsDeleteAllOpen( true ),
       condition: () => notifications.length > 0,
     },
@@ -59,6 +65,7 @@ export function NotificationsHeaderActions() {
         <Button
           variant='outline'
           size='default'
+          className='hidden sm:flex'
           onClick={ () => markAllAsRead.mutate() }
           disabled={ markAllAsRead.isPending || unreadCount === 0 }
         >
@@ -71,7 +78,7 @@ export function NotificationsHeaderActions() {
           data={ { notifications } }
           label=''
           trigger={
-            <Button variant='outline' size='default' className='font-regular'>
+            <Button variant='outline' size='default' className='font-regular max-md:border-l max-md:rounded-l-md'>
               <ChevronDown className='size-4' />
             </Button>
           }

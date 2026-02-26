@@ -134,6 +134,25 @@ export function useUpdateCreatorStatus(id: string) {
     },
   });
 }
+
+/**
+ * Hook to update any creator's profile status (id passed as mutation variable)
+ */
+export function useUpdateCreatorProfileStatus() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, creator_status, comments }: { id: string } & ModelsCreatorStatusUpdateRequest) => {
+      // @ts-ignore
+      const response = await creatorsApi.creatorsIdProfileStatusPut({ id, request: { creator_status, comments } });
+      return response.data;
+    },
+    onSuccess: ( _, variables ) => {
+      queryClient.invalidateQueries({ queryKey: creatorsKeys.all });
+      queryClient.invalidateQueries({ queryKey: [ ...creatorsKeys.all, 'detail', variables.id ] });
+    },
+  });
+}
 export function useCreators(
   {
     q,

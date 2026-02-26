@@ -8,6 +8,7 @@ import { CreatorCategories } from "./creator-categories";
 import { CreatorSocialLinks } from "./creator-social-links";
 import { cn } from "@/lib/dashboard-utils";
 import { CreatorActionMenu } from "./creator-action-menu";
+import Link from 'next/link';
 
 interface CreatorInfoBlockProps {
   creator: ModelsCreatorResponse;
@@ -119,9 +120,12 @@ const CreatorHeader = memo( ( { creator, hideAge, age, showEmail, onViewDetails,
           <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
         </Avatar>
         <div className="flex flex-col min-w-0">
-          <span className='capitalize text-[18px] font-normal text-primary font-primary leading-tight'>
+          <Link
+            href={ `/admin/creators/${ creator.id }` }
+            className='capitalize text-[18px] font-normal text-primary font-primary leading-tight hover:underline transition-colors'
+          >
             { fullName }
-          </span>
+          </Link>
           <CreatorIdCopyAndAge creator={ creator } hideAge={ hideAge } age={ age! } />
           { showEmail && <span className="text-xs text-muted-foreground mt-0.5">{ creator.email }</span> }
         </div>

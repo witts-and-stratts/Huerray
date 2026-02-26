@@ -7,9 +7,11 @@ interface CreatorsViewProps {
   table: Table<ModelsCreatorResponse>;
   view: "table" | "cards";
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
+  onApproveProfile: ( creator: ModelsCreatorResponse ) => void;
+  onRejectProfile: ( creator: ModelsCreatorResponse ) => void;
 }
 
-export function CreatorsView( { table, view, onViewDetails }: CreatorsViewProps ) {
+export function CreatorsView( { table, view, onViewDetails, onApproveProfile, onRejectProfile }: CreatorsViewProps ) {
   if ( view === "cards" ) {
     // Check if there are rows to display in card view
     if ( table.getRowModel().rows.length === 0 ) {
@@ -21,14 +23,18 @@ export function CreatorsView( { table, view, onViewDetails }: CreatorsViewProps 
     }
 
     return (
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        { table.getRowModel().rows.map( ( row ) => (
-          <CreatorCard
-            key={ row.id }
-            creator={ row.original }
-            onViewDetails={ onViewDetails }
-          />
-        ) ) }
+      <div className="@container">
+        <div className="grid grid-cols-2 gap-4 @max-sm:grid-cols-1 @md:grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 @2xl:grid-cols-7">
+          { table.getRowModel().rows.map( ( row ) => (
+            <CreatorCard
+              key={ row.id }
+              creator={ row.original }
+              onViewDetails={ onViewDetails }
+              onApproveProfile={ onApproveProfile }
+              onRejectProfile={ onRejectProfile }
+            />
+          ) ) }
+        </div>
       </div>
     );
   }

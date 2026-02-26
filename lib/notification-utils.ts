@@ -57,6 +57,20 @@ export function getNotificationActionLabel( notification: NotificationActionCont
   return "View details";
 }
 
+export function getNotificationActionUrl(
+  actionUrl: string | null | undefined,
+  role?: NotificationsRole | null,
+  locale?: string
+): string | null {
+  if ( !actionUrl ) return null;
+  const roleBase = role === "admin" ? "/admin" : role === "brand" ? "/brand" : role === "creator" ? "/creator" : "";
+  const hasRolePrefix = /^\/(admin|brand|creator)(\/|$)/.test( actionUrl );
+  const rolePath = hasRolePrefix
+    ? actionUrl.replace( /^\/(admin|brand|creator)/, roleBase )
+    : `${ roleBase }${ actionUrl }`;
+  return locale ? `/${ locale }${ rolePath }` : rolePath;
+}
+
 export function getNotificationsPagePath( role?: NotificationsRole | null ): string {
   if ( role === "admin" ) return "/admin/notifications";
   if ( role === "brand" ) return "/brand/notifications";

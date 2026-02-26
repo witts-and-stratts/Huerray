@@ -57,6 +57,16 @@
   --radius-4xl: calc(var(--radius) + 16px);
 }
 
+@theme {
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-3xl: 1792px;
+  --container-4xl: 2048px;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(30.579% 0.0197 285.16);

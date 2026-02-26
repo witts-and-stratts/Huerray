@@ -12,6 +12,7 @@ export default function AdminNotificationsPage() {
       <SubHeader
         title={ t( "title" ) }
         description={ t( "description" ) }
+        className='max-md:flex flex-row justify-between'
       >
         <NotificationsHeaderActions />
       </SubHeader>

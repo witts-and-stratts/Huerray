@@ -5,6 +5,14 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const nextConfig: NextConfig = {
   /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'backend.huerray.de',
+      },
+    ],
+  },
   experimental: {
     // turbopackFileSystemCacheForDev: true,
   },

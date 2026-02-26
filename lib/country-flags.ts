@@ -3,6 +3,15 @@ export const countryFlags: Record<string, string> = {
   // e.g. 'GB': 'uk' if you prefer uk.svg over gb.svg
 };
 
+export function getCountryName( countryCode?: string ): string | null {
+  if ( !countryCode ) return null;
+  try {
+    return new Intl.DisplayNames( [ 'en' ], { type: 'region' } ).of( countryCode.toUpperCase() ) ?? null;
+  } catch {
+    return countryCode;
+  }
+}
+
 export function getCountryFlag(countryCode?: string): string | null {
   if (!countryCode) return null;
   

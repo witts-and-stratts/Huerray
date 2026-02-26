@@ -13,15 +13,20 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { GigStatusBadge } from './gig-status-badge';
 import { formatDate, formatCurrency } from '@/lib/utils';
-import { cn } from '@/lib/dashboard-utils';
 import { Button } from '@/components/dashboard-ui/button';
 import { useApplyToGig, useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
 import { SubmissionCard } from './submission-card';
-import { useAuth } from '@/lib/auth/auth-context';
 import { toast } from 'sonner';
-import { Loader2, Video } from 'lucide-react';
+import { Globe, Loader2, Video } from 'lucide-react';
 import { RoleGuard } from '../auth/role-guard';
+import { Badge } from '@/components/dashboard-ui/badge';
+import { Card, CardContent } from '@/components/dashboard-ui/card';
+import { Separator } from '@/components/dashboard-ui/separator';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { getCountryFlag, getCountryName } from '@/lib/country-flags';
+import { WrappedCard } from '../dashboard-ui/wrapped-card';
+import { Row } from '../admin/creators/creator-details-sheet';
 
 interface GigDetailsSheetProps {
   gig: ModelsGigResponse | null;
@@ -32,19 +37,17 @@ interface GigDetailsSheetProps {
 }
 
 export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invitationStatus }: GigDetailsSheetProps ) {
-  const { user } = useAuth();
-  const [ activeTab, setActiveTab ] = React.useState<'overview' | 'submissions'>( 'overview' );
+  const [ activeTab, setActiveTab ] = React.useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const { mutate: applyToGig, isPending: isApplying } = useApplyToGig();
   const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
-  const isCreator = user?.role === 'creator';
   const { data: submissionsResponse, isLoading: isSubmissionsLoading, error: submissionsError } = useVideoSubmissionsByGig(
     gig?.id || '',
-    { enabled: isCreator && !!gig?.id && open }
+    { enabled: !!gig?.id && open }
   );
 
   React.useEffect( () => {
     if ( !open ) return;
-    setActiveTab( 'overview' );
+    setActiveTab( 'details' );
   }, [ open, gig?.id ] );
 
   if ( !gig ) return null;
@@ -67,7 +70,6 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
 
   const handleApply = () => {
     if ( !gig.id ) return;
-
     applyToGig( {
       id: gig.id,
       application: {
@@ -85,14 +87,12 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
           description: error?.response?.data?.error?.message,
           dismissible: true,
         } );
-        console.error( error?.response?.data );
       }
     } );
   };
 
   const handleRespond = ( status: 'accepted' | 'declined' ) => {
     if ( !invitationId ) return;
-
     respondToInvitation( {
       invitationId,
       response: { status }
@@ -101,146 +101,182 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
         toast.success( `Invitation ${ status === 'accepted' ? 'accepted' : 'declined' } successfully` );
         onOpenChange( false );
       },
-      onError: ( error ) => {
+      onError: () => {
         toast.error( "Failed to update invitation status" );
-        console.error( error );
       }
     } );
   };
 
   const submissions = submissionsResponse?.data || [];
 
-  const overviewContent = (
-    <div className="space-y-6 p-4 pt-0">
-      <div className="grid grid-cols-2 gap-4">
-        <div className="p-3 bg-muted/30 rounded-lg space-y-1">
-          <span className="text-xs text-muted-foreground font-medium uppercase">Compensation</span>
-          <div className="text-lg font-semibold">{ formatCurrency( compensation! ) }</div>
-        </div>
-        <div className="p-3 bg-muted/30 rounded-lg space-y-1">
-          <span className="text-xs text-muted-foreground font-medium uppercase">Videos</span>
-          <div className="flex items-center gap-2 font-medium">
-            { number_of_videos } ({ video_duration_in_seconds }s)
-          </div>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <h4 className="text-sm font-medium">Timeline</h4>
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <span className="text-muted-foreground block text-xs">Start Date</span>
-              { formatDate( posting_start_date! ) }
-            </div>
-            <div>
-              <span className="text-muted-foreground block text-xs">End Date</span>
-              { formatDate( posting_end_date! ) }
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <h4 className="text-sm font-medium">Requirements</h4>
-          <div className="text-sm text-muted-foreground space-y-1">
-            { requirements ? <p>{ requirements }</p> : <p className="italic">No specific requirements.</p> }
-            <div className="flex flex-wrap gap-2 mt-2">
-              { gender_requirement && (
-                <span className="px-2 py-1 bg-secondary rounded text-xs capitalize">
-                  { gender_requirement }
-                </span>
-              ) }
-              { ( age_min || age_max ) && (
-                <span className="px-2 py-1 bg-secondary rounded text-xs">
-                  Age: { age_min ?? '?' } - { age_max ?? '?' }
-                </span>
-              ) }
-              { ambience && (
-                <span className="px-2 py-1 bg-secondary rounded text-xs capitalize">
-                  { ambience }
-                </span>
-              ) }
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <h4 className="text-sm font-medium">Content Guidelines</h4>
-          <div className="text-sm text-muted-foreground">
-            { content_guidelines ? <p>{ content_guidelines }</p> : <p className="italic">No specific guidelines.</p> }
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange }>
-      <SheetContent className="w-full sm:max-w-md overflow-y-auto">
-        <SheetHeader>
-          <div className="flex items-center gap-2 mb-2">
+      <SheetContent className="w-[90%]! max-w-[500px]! overflow-y-auto bg-background/70 flex flex-col">
+        <SheetHeader className="relative flex flex-col items-center gap-4 bg-burgundy-50/60 p-6 pb-8 m-6 rounded-lg mt-16 border border-primary/20 mb-0">
+          <div className="flex flex-col items-center gap-2 text-center">
             <GigStatusBadge status={ gig_status } />
+            <SheetTitle className="text-xl font-normal text-primary font-primary tracking-tight leading-snug">
+              { title }
+            </SheetTitle>
           </div>
-          <SheetTitle className="text-xl">{ title }</SheetTitle>
-          <SheetDescription>
-            Review the details for this gig below.
+
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+            { compensation && (
+              <Badge className="bg-background/80 py-1" variant="outline">
+                { formatCurrency( compensation ) }
+              </Badge>
+            ) }
+            { number_of_videos && (
+              <Badge className="bg-background/80 py-1" variant="outline">
+                { number_of_videos } video{ number_of_videos > 1 ? 's' : '' }
+                { video_duration_in_seconds ? ` · ${ video_duration_in_seconds }s` : '' }
+              </Badge>
+            ) }
+            { ( posting_start_date || posting_end_date ) && (
+              <Badge className="bg-background/80 py-1" variant="outline">
+                { formatDate( posting_start_date! ) } → { formatDate( posting_end_date! ) }
+              </Badge>
+            ) }
+          </div>
+
+          <SheetDescription className="sr-only">
+            Details for gig: { title }
           </SheetDescription>
         </SheetHeader>
 
-        { isCreator ? (
-          <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'overview' | 'submissions' ) } className="px-4 pb-4">
-            <TabsList className="bg-background gap-4">
-              <TabsTrigger
-                value="overview"
-                className={ cn(
-                  "font-normal shadow-none! rounded-none! pb-3 text-primary border-b border-b-transparent -mb-5 px-0! transition-all duration-600 ease-out",
-                  activeTab === "overview" ? "text-primary! border-b-dark-burgundy" : "text-gray-500!"
-                ) }
-              >
-                Overview
-              </TabsTrigger>
-              <TabsTrigger
-                value="submissions"
-                className={ cn(
-                  "font-normal shadow-none! rounded-none! pb-3 text-primary border-b border-b-transparent -mb-5 px-0! transition-all duration-600 ease-out",
-                  activeTab === "submissions" ? "text-primary! border-b-dark-burgundy" : "text-gray-500!"
-                ) }
-              >
-                Submissions
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="overview" className="mt-4">
-              { overviewContent }
-            </TabsContent>
-            <TabsContent value="submissions" className="mt-4">
-              { isSubmissionsLoading ? (
-                <div className="flex justify-center items-center p-8">
-                  <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-                </div>
-              ) : submissionsError ? (
-                <div className="p-4 text-red-500 bg-red-50 rounded-md border border-red-200">
-                  Error loading submissions: { submissionsError.message }
-                </div>
-              ) : submissions.length === 0 ? (
-                <div className="flex flex-col items-center justify-center p-10 bg-muted/10 border-2 border-dashed rounded-xl space-y-3">
-                  <div className="p-4 bg-background rounded-full border shadow-sm">
-                    <Video className="size-8 text-muted-foreground" />
+        { ( gig.campaign?.brand || gig.campaign_name ) && ( () => {
+          const brand = gig.campaign?.brand;
+          const name = brand?.company_name || gig.campaign_name;
+          return (
+            <div className="px-6">
+              <Card>
+                <CardContent className="flex items-center gap-3 py-3">
+                  <Avatar className="size-10 rounded-full">
+                    <AvatarImage src={ brand?.profile_photo_url } alt={ name } className="object-cover" />
+                    <AvatarFallback className="rounded-md text-sm">
+                      { name?.slice( 0, 2 ).toUpperCase() }
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-sm font-medium text-primary truncate">{ name }</span>
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      { brand?.category && <span className="capitalize">{ brand.category }</span> }
+                      { brand?.category && brand?.country && <span>·</span> }
+                      { brand?.country && ( () => {
+                        const flagName = getCountryFlag( brand.country );
+                        const countryName = getCountryName( brand.country );
+                        return (
+                          <span className="inline-flex items-center gap-1">
+                            { flagName && <img src={ `/images/flags/${ flagName }.svg` } alt={ countryName ?? brand.country } className="h-3 w-auto" /> }
+                            { countryName }
+                          </span>
+                        );
+                      } )() }
+                    </div>
                   </div>
-                  <p className="text-muted-foreground font-medium">No submissions yet</p>
-                  <p className="text-sm text-muted-foreground">Create your first submission for this gig.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 gap-4">
-                  { submissions.map( ( submission, index ) => (
-                    <SubmissionCard key={ submission.id || `${ submission.gig_id || 'submission' }-${ index }` } submission={ submission } />
-                  ) ) }
-                </div>
-              ) }
-            </TabsContent>
-          </Tabs>
-        ) : overviewContent }
+                  { brand?.website_url && (
+                    <a
+                      href={ brand.website_url }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-auto text-xs flex items-center gap-1.5 text-muted-foreground hover:text-primary hover:underline hover:underline-offset-2 shrink-0"
+                    >
+                      Website
+                      <Globe className="size-3.5 mb-0.5" />
+                    </a>
+                  ) }
+                </CardContent>
+              </Card>
+            </div>
+          );
+        } )() }
 
-        <SheetFooter className="p-4 border-t mt-auto">
+        <Tabs
+          value={ activeTab }
+          onValueChange={ ( v ) => setActiveTab( v as typeof activeTab ) }
+          className="px-6 flex-1"
+        >
+          <TabsList className="w-full border">
+            <TabsTrigger value="details" className="text-sm font-normal">
+              Details
+            </TabsTrigger>
+            <TabsTrigger value="guidelines" className="text-sm font-normal">
+              Guidelines
+            </TabsTrigger>
+            <TabsTrigger value="submissions" className="text-sm font-normal">
+              Submissions
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="details" className="space-y-3 pt-0">
+            <WrappedCard title='Compensation & Scope'>
+              <Row label="Compensation" value={ compensation ? formatCurrency( compensation ) : 'N/A' } />
+              <Separator />
+              <Row label="Videos required" value={ number_of_videos ?? 'N/A' } />
+              <Separator />
+              <Row label="Video duration" value={ video_duration_in_seconds ? `${ video_duration_in_seconds }s` : 'N/A' } />
+            </WrappedCard>
+
+            <WrappedCard title='Timeline'>
+              <Row label="Start date" value={ posting_start_date ? formatDate( posting_start_date ) : 'N/A' } />
+              <Separator />
+              <Row label="End date" value={ posting_end_date ? formatDate( posting_end_date ) : 'N/A' } />
+            </WrappedCard>
+
+            <WrappedCard title='Creator Requirements'>
+              <Row label="Gender" value={ gender_requirement ? <span className="capitalize">{ gender_requirement }</span> : 'Any' } />
+              <Separator />
+              <Row label="Age range" value={ ( age_min || age_max ) ? `${ age_min ?? '—' } – ${ age_max ?? '—' }` : 'Any' } />
+              <Separator />
+              <Row label="Ambience" value={ ambience ? <span className="capitalize">{ ambience }</span> : 'N/A' } />
+              { requirements && (
+                <>
+                  <Separator />
+                  <div className="text-xs text-muted-foreground pt-1">{ requirements }</div>
+                </>
+              ) }
+            </WrappedCard>
+          </TabsContent>
+
+          <TabsContent value="guidelines" className="pt-0">
+            <WrappedCard title='Content Guidelines'>
+              { content_guidelines ? (
+                <p className="text-xs text-muted-foreground leading-relaxed">{ content_guidelines }</p>
+              ) : (
+                <p className="text-xs text-muted-foreground italic py-6 text-center">No specific guidelines provided.</p>
+              ) }
+            </WrappedCard>
+          </TabsContent>
+
+          <TabsContent value="submissions" className="pt-0">
+            { isSubmissionsLoading ? (
+              <div className="flex justify-center items-center p-8">
+                <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              </div>
+            ) : submissionsError ? (
+              <div className="p-4 text-red-500 bg-red-50 rounded-md border border-red-200 text-sm">
+                Error loading submissions: { submissionsError.message }
+              </div>
+            ) : submissions.length === 0 ? (
+              <div className="flex flex-col items-center justify-center p-10 bg-muted/10 border-2 border-dashed rounded-xl space-y-3">
+                <div className="p-4 bg-background rounded-full border shadow-sm">
+                  <Video className="size-8 text-muted-foreground" />
+                </div>
+                <p className="text-muted-foreground font-medium">No submissions yet</p>
+                <p className="text-sm text-muted-foreground">Create your first submission for this gig.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-4">
+                { submissions.map( ( submission, index ) => (
+                  <SubmissionCard key={ submission.id || `${ submission.gig_id || 'submission' }-${ index }` } submission={ submission } overlayDetailsMode='hover' layout='media-overlay' />
+                ) ) }
+              </div>
+            ) }
+          </TabsContent>
+        </Tabs>
+
+        <SheetFooter className="px-6 pb-6 pt-2">
           <RoleGuard allowedRoles={ [ 'creator' ] }>
             { invitationId && invitationStatus === 'pending' ? (
               <div className="flex flex-col gap-2 w-full">
@@ -250,21 +286,14 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
                   onClick={ () => handleRespond( 'declined' ) }
                   disabled={ isResponding }
                 >
-                  Reject
+                  Decline
                 </Button>
                 <Button
                   className="w-full"
                   onClick={ () => handleRespond( 'accepted' ) }
                   disabled={ isResponding }
                 >
-                  { isResponding ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Updating...
-                    </>
-                  ) : (
-                    'Accept Invitation'
-                  ) }
+                  { isResponding ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Updating...</> : 'Accept Invitation' }
                 </Button>
               </div>
             ) : (
@@ -274,10 +303,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
                 disabled={ isApplying || gig_status !== 'open' || ( !!invitationId && invitationStatus !== 'pending' ) }
               >
                 { isApplying ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Applying...
-                  </>
+                  <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Applying...</>
                 ) : (
                   !!invitationId && invitationStatus === 'accepted' ? 'Invitation Accepted' :
                     !!invitationId && invitationStatus === 'declined' ? 'Invitation Declined' :
@@ -288,6 +314,6 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
           </RoleGuard>
         </SheetFooter>
       </SheetContent>
-    </Sheet>
+    </Sheet >
   );
 }

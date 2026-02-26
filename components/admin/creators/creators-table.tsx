@@ -21,6 +21,10 @@ import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "motion/react";
 import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
+import { useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
+import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
+import { toast } from "sonner";
+import { SuperField } from "@/components/dashboard-ui/super-field";
 
 
 
@@ -46,6 +50,41 @@ export function CreatorsTable( {
   const [ selectedCreator, setSelectedCreator ] =
     React.useState<ModelsCreatorResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
+  const [ pendingAction, setPendingAction ] = React.useState<{
+    creator: ModelsCreatorResponse;
+    type: "approve" | "reject";
+    comments: string;
+  } | null>( null );
+
+  const updateStatus = useUpdateCreatorProfileStatus();
+
+  const handleOnApproveProfile = ( creator: ModelsCreatorResponse ) => {
+    setPendingAction( { creator, type: "approve", comments: "" } );
+  };
+
+  const handleOnRejectProfile = ( creator: ModelsCreatorResponse ) => {
+    setPendingAction( { creator, type: "reject", comments: "" } );
+  };
+
+  const handleConfirm = () => {
+    if ( !pendingAction?.creator.id ) return;
+    const { creator, type } = pendingAction;
+    updateStatus.mutate(
+      { id: creator.id!, creator_status: type === "approve" ? "approved" : "rejected", comments: pendingAction.comments },
+      {
+        onSuccess: () => {
+          setPendingAction( null );
+          type === "approve"
+            ? toast.success( `${ creator.first_name || "Creator" } approved successfully` )
+            : toast.success( `${ creator.first_name || "Creator" } rejected` );
+        },
+        onError: () => {
+          setPendingAction( null );
+          toast.error( `Failed to ${ type } creator` );
+        },
+      }
+    );
+  };
 
   const statuses = React.useMemo( () => {
     const uniqueStatuses = Array.from(
@@ -126,6 +165,8 @@ export function CreatorsTable( {
                 setSelectedCreator( creator );
                 setIsSheetOpen( true );
               } }
+              onApproveProfile={ handleOnApproveProfile }
+              onRejectProfile={ handleOnRejectProfile }
             />
           </div>
           <div className="px-4">
@@ -138,6 +179,37 @@ export function CreatorsTable( {
           />
         </motion.div>
       ) }
+
+      <ConfirmDialog
+        open={ !!pendingAction }
+        onOpenChange={ ( open ) => { if ( !open ) setPendingAction( null ); } }
+        title={ pendingAction?.type === "approve" ? "Approve creator profile?" : "Reject creator profile?" }
+        description={
+          pendingAction?.type === "approve"
+            ? `${ pendingAction.creator.first_name || "This creator" }'s profile will be approved and they will be notified.`
+            : `${ pendingAction?.creator.first_name || "This creator" }'s profile will be rejected and they will be notified.`
+        }
+        confirmLabel={ pendingAction?.type === "approve" ? "Approve" : "Reject" }
+        variant={ pendingAction?.type === "approve" ? "default" : "destructive" }
+        onConfirm={ handleConfirm }
+        isLoading={ updateStatus.isPending }
+        loadingText={ pendingAction?.type === "approve" ? "Approving..." : "Rejecting..." }
+        className="w-[560px]"
+      >
+        <SuperField
+          type="textarea"
+          label="Comment"
+          placeholder="Add a comment"
+          value={ pendingAction?.comments }
+          onChange={ ( e ) => {
+            setPendingAction( {
+              ...pendingAction!,
+              comments: e.target.value,
+            } );
+          } }
+          fieldClassName="min-h-40"
+        />
+      </ConfirmDialog>
     </AnimatePresence>
   );
 }

@@ -22,6 +22,7 @@ import { RoleGuard } from '../auth/role-guard';
 import { BrandAvatar } from '../campaigns/brand-avatar';
 import { Button } from '../dashboard-ui/button';
 import { ConfirmDialog } from '../dashboard-ui/confirm-dialog';
+import { Textarea } from '../dashboard-ui/textarea';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '../dashboard-ui/avatar';
@@ -105,6 +106,8 @@ function getInvitationCreator( invitation: ModelsGigInvitationResponse ): Models
 export function InvitationCard( { invitation, onViewDetails, onViewCreatorDetails }: InvitationCardProps ) {
   const [ showAcceptDialog, setShowAcceptDialog ] = useState( false );
   const [ showRejectDialog, setShowRejectDialog ] = useState( false );
+  const [ acceptComment, setAcceptComment ] = useState( '' );
+  const [ rejectComment, setRejectComment ] = useState( '' );
   const [ showQuickActions, setShowQuickActions ] = useState( false );
   const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
   const role = useRole();
@@ -121,15 +124,22 @@ export function InvitationCard( { invitation, onViewDetails, onViewCreatorDetail
     ? 'border-emerald-500/60 shadow-[0_12px_30px_-26px_rgba(16,185,129,0.65)]'
     : 'border-border/70';
 
-  const handleRespond = ( status: 'accepted' | 'declined' ) => {
+  const handleRespond = ( status: 'accepted' | 'declined', comment?: string ) => {
     if ( !invitation.id ) return;
+
+    const trimmedComment = comment?.trim();
 
     respondToInvitation( {
       invitationId: invitation.id,
-      response: { status }
+      response: {
+        status,
+        status_comment: trimmedComment
+      }
     }, {
       onSuccess: () => {
         toast.success( `Invitation ${ status === 'accepted' ? 'accepted' : 'declined' } successfully` );
+        setAcceptComment( '' );
+        setRejectComment( '' );
         setShowAcceptDialog( false );
         setShowRejectDialog( false );
       },
@@ -137,6 +147,16 @@ export function InvitationCard( { invitation, onViewDetails, onViewCreatorDetail
         toast.error( "Failed to update invitation status" );
       }
     } );
+  };
+
+  const handleAcceptDialogChange = ( open: boolean ) => {
+    setShowAcceptDialog( open );
+    if ( !open ) setAcceptComment( '' );
+  };
+
+  const handleRejectDialogChange = ( open: boolean ) => {
+    setShowRejectDialog( open );
+    if ( !open ) setRejectComment( '' );
   };
 
   const handleCardBlur = ( event: FocusEvent<HTMLDivElement> ) => {
@@ -323,27 +343,47 @@ export function InvitationCard( { invitation, onViewDetails, onViewCreatorDetail
 
       <ConfirmDialog
         open={ showAcceptDialog }
-        onOpenChange={ setShowAcceptDialog }
+        onOpenChange={ handleAcceptDialogChange }
         title="Accept Invitation"
         description="Are you sure you want to accept this invitation? This will notify the brand and you can start working on the gig."
         confirmLabel="Accept"
-        onConfirm={ () => handleRespond( 'accepted' ) }
+        confirmDisabled={ !acceptComment.trim() }
+        onConfirm={ () => handleRespond( 'accepted', acceptComment ) }
         isLoading={ isResponding }
         loadingText="Accepting..."
         variant="default"
-      />
+        className="max-w-sm"
+      >
+        <Textarea
+          placeholder="Add a comment for this approval"
+          rows={ 3 }
+          className="bg-muted/10"
+          value={ acceptComment }
+          onValueChange={ setAcceptComment }
+        />
+      </ConfirmDialog>
 
       <ConfirmDialog
         open={ showRejectDialog }
-        onOpenChange={ setShowRejectDialog }
+        onOpenChange={ handleRejectDialogChange }
         title="Reject Invitation"
         description="Are you sure you want to reject this invitation? This action cannot be undone."
         confirmLabel="Reject"
-        onConfirm={ () => handleRespond( 'declined' ) }
+        confirmDisabled={ !rejectComment.trim() }
+        onConfirm={ () => handleRespond( 'declined', rejectComment ) }
         isLoading={ isResponding }
         loadingText="Rejecting..."
         variant="destructive"
-      />
+        className="max-w-sm"
+      >
+        <Textarea
+          placeholder="Explain why you're rejecting"
+          rows={ 3 }
+          className="bg-muted/10"
+          value={ rejectComment }
+          onValueChange={ setRejectComment }
+        />
+      </ConfirmDialog>
     </>
   );
 }

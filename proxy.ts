@@ -34,9 +34,16 @@ export default function middleware(request: NextRequest) {
   const firstSegment = segments[1] ?? '';
   const hasLocalePrefix = (locales as readonly string[]).includes(firstSegment);
   const locale = hasLocalePrefix ? firstSegment : defaultLocale;
-  const pathWithoutLocale = hasLocalePrefix
-    ? '/' + segments.slice(2).join('/')
-    : pathname;
+  let pathWithoutLocale = pathname;
+  if (hasLocalePrefix) {
+    pathWithoutLocale = '/' + segments.slice(2).join('/');
+  }
+
+  // If there's no locale prefix but it looks like a known route, 
+  // we want pathWithoutLocale to be evaluated correctly.
+  // Actually, wait, if there's no locale prefix, the middleware will hit next-intl middleware at the end
+  // BUT we intercept it with our auth redirects first, which construct URLs like `/${locale}${redirectPath}`.
+  // We need to make sure that the pathWithoutLocale calculation handles paths like `/admin/creators/[id]` correctly.
 
   // Allow public routes (without auth check, but with i18n)
   const publicRoutes = ['/login', '/signup', '/forgot-password', '/reset-password'];
@@ -54,6 +61,13 @@ export default function middleware(request: NextRequest) {
   const isProtectedRoute = isAdminRoute || isBrandRoute || isCreatorRoute || isDashboardRoute;
 
   if (isProtectedRoute) {
+    // If the path DOES NOT have a locale prefix, but it IS a protected route,
+    // we should redirect it to add the locale prefix to the path before checking roles,
+    // otherwise the redirect logic gets confused.
+    if (!hasLocalePrefix) {
+      return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
+    }
+
     const userData = getUserDataFromCookie(request);
 
     // Redirect to login if no user session data

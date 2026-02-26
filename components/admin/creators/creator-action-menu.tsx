@@ -15,10 +15,12 @@ interface CreatorActionMenuProps {
   creator: ModelsCreatorResponse;
   creatorId?: string;
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
+  onApproveProfile: ( creator: ModelsCreatorResponse ) => void;
+  onRejectProfile: ( creator: ModelsCreatorResponse ) => void;
   trigger?: ReactNode;
 }
 
-export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorActionMenuProps ) {
+export function CreatorActionMenu( { creator, onViewDetails, onApproveProfile, onRejectProfile, trigger }: CreatorActionMenuProps ) {
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const resendVerification = useResendVerification();
 
@@ -30,22 +32,22 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
     setIsStatusDialogOpen( true );
   };
 
-  const handleResendVerification = async () => {
-    if ( !creator.email ) {
-      toast.error( "User has no email address" );
-      return;
-    }
+  // const handleResendVerification = async () => {
+  //   if ( !creator.email ) {
+  //     toast.error( "User has no email address" );
+  //     return;
+  //   }
 
-    toast.promise(
-      resendVerification.mutateAsync( creator.email ),
-      {
-        loading: 'Sending verification email...',
-        success: 'Verification email sent',
-        error: ( error ) => <><span>Failed to send verification email</span><span>{ JSON.stringify( error.message ) }</span></>,
-        richColors: true,
-      }
-    );
-  };
+  //   toast.promise(
+  //     resendVerification.mutateAsync( creator.email ),
+  //     {
+  //       loading: 'Sending verification email...',
+  //       success: 'Verification email sent',
+  //       error: ( error ) => <><span>Failed to send verification email</span><span>{ JSON.stringify( error.message ) }</span></>,
+  //       richColors: true,
+  //     }
+  //   );
+  // };
 
   const handleCopyId = () => {
     navigator.clipboard.writeText( creator.creator_id || "" );
@@ -63,23 +65,28 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
       action: () => onViewDetails( creator ),
       separator: true,
     },
-    // {
-    //   label: "Edit profile",
-    //   action: () => { console.log( "Edit profile clicked" ); },
-    //   allowedRoles: [ "brand" ],
-    // },
     {
-      label: "Resend Email Verification",
-      action: handleResendVerification,
+      label: "Approve Profile",
+      action: () => onApproveProfile( creator ),
+      allowedRoles: [ 'admin' ],
+      condition: ( creator ) => creator.creator_status !== "approved",
+    },
+    {
+      label: "Reject Profile",
+      action: () => onRejectProfile( creator ),
+      allowedRoles: [ 'admin' ],
+      condition: ( creator ) => creator.creator_status !== "rejected",
     },
     {
       label: "Review Profile",
       action: handleReviewProfile,
+      allowedRoles: [ 'admin' ]
     },
     {
       label: "Delete creator",
       action: () => { console.log( "Delete creator clicked" ); }, // Placeholder as per original
       variant: "destructive",
+      allowedRoles: [ 'admin' ],
       className: "text-red-600",
     }
   ];

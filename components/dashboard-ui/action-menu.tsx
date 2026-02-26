@@ -22,6 +22,7 @@ export interface MenuAction<T> {
   icon?: LucideIcon;
   action?: ( data: T ) => void | Promise<void>;
   condition?: ( data: T ) => boolean; // If false, item is hidden
+  disabled?: boolean | (( data: T ) => boolean); // If true, item is shown but not clickable
   allowedRoles?: AllowedRoles[]; // If user role not in list, item is hidden
   variant?: "default" | "destructive";
   separator?: boolean; // Add separator before this item
@@ -98,6 +99,7 @@ export function ActionMenu<T>( {
                   e.stopPropagation();
                   handleAction( action );
                 } }
+                disabled={ typeof action.disabled === "function" ? action.disabled( data ) : action.disabled }
                 className={ cn(
                   action.variant === "destructive" ? "text-red-600 focus:text-red-600" : "",
                   action.className

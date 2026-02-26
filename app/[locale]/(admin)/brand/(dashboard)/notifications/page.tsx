@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 export default function NotificationsPage() {
   const t = useTranslations( "dashboard.notifications" );
   return (
-    <>
+    <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
       <SubHeader
         title={ t( "title" ) }
         description={ t( "descriptionBrand" ) }
@@ -16,6 +16,6 @@ export default function NotificationsPage() {
         <NotificationsHeaderActions />
       </SubHeader>
       <NotificationsView />
-    </>
+    </div>
   );
 }

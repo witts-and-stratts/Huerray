@@ -165,6 +165,7 @@ export function CampaignActionMenu( {
       label: "Edit",
       action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
+      condition: () => campaign.campaign_status === "created" || campaign.campaign_status === "pending_approval"
     },
     {
       label: "Rename",

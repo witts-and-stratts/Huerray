@@ -29,7 +29,9 @@ import {
   useSidebar,
 } from "@/components/dashboard-ui/sidebar";
 import { useAuth } from "@/lib/auth/auth-context";
+import { getNotificationsPagePath } from "@/lib/notification-utils";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { apiClient } from "@/lib/api/client";
 import { useAppDispatch } from "@/lib/redux/hooks";
@@ -46,8 +48,9 @@ export function NavUser( {
   };
 } ) {
   const { isMobile } = useSidebar();
-  const { setUser } = useAuth();
+  const { setUser, user: authUser } = useAuth();
   const router = useRouter();
+  const locale = useLocale();
   const dispatch = useAppDispatch();
 
   const handleLogout = async () => {
@@ -125,7 +128,7 @@ export function NavUser( {
                 <IconCreditCard />
                 Billing
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={ () => router.push( `/${ locale }${ getNotificationsPagePath( authUser?.role ) }` ) }>
                 <IconNotification />
                 Notifications
               </DropdownMenuItem>
