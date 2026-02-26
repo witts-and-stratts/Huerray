@@ -112,7 +112,7 @@ export function CreateProfileForm() {
         toast.success( 'Profile created successfully!', {
           richColors: true,
         } );
-        router.push( '/brand-admin' );
+        router.push( '/brand' );
       } catch ( error: any ) {
         console.error( 'Failed to create profile', error );
         const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to create profile';

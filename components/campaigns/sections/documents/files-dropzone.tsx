@@ -19,6 +19,7 @@ interface FilesDropzoneProps {
   activeId: string | null;
   sensors: SensorDescriptor<SensorOptions>[];
   accept: Record<string, string[]>;
+  maxSize?: number;
   onDragStart: ( event: any ) => void;
   onDragEnd: ( event: any ) => void;
   onDrop: ( files: File[] ) => void;
@@ -57,6 +58,7 @@ export const FilesDropzone = memo( ( {
   activeId,
   sensors,
   accept,
+  maxSize,
   onDragStart,
   onDragEnd,
   onDrop,
@@ -78,6 +80,7 @@ export const FilesDropzone = memo( ( {
       onDrop={ onDrop }
       onError={ onDropError }
       maxFiles={ 30 }
+      maxSize={ maxSize }
     >
       { ( { isDragActive, open } ) => (
         <>

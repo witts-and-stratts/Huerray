@@ -65,42 +65,42 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
   navMain: [
     {
       title: withFallback( t, "brand.dashboard", "Dashboard" ),
-      url: "/brand-admin",
+      url: "/brand",
       icon: DashboardSquareAddIcon,
     },
     {
       title: withFallback( t, "brand.campaigns", "Campaigns" ),
-      url: "/brand-admin/campaigns",
+      url: "/brand/campaigns",
       icon: ChartLineData01Icon,
     },
     {
       title: withFallback( t, "brand.gigs", "Gigs" ),
-      url: "/brand-admin/gigs",
+      url: "/brand/gigs",
       icon: Task02Icon,
     },
     {
       title: withFallback( t, "brand.creators", "Creators" ),
-      url: "/brand-admin/creators",
+      url: "/brand/creators",
       icon: UserGroupIcon,
     },
     {
       title: withFallback( t, "brand.analytics", "Analytics" ),
-      url: "/brand-admin/analytics",
+      url: "/brand/analytics",
       icon: ChartLineData01Icon,
     },
     {
       title: withFallback( t, "brand.invoices", "Invoices" ),
-      url: "/brand-admin/invoices",
+      url: "/brand/invoices",
       icon: FileScriptIcon,
     },
   ],
   documents: [
-    { name: withFallback( t, "brand.savedLists", "Saved Lists" ), url: "/brand-admin/saved-lists", icon: DatabaseIcon },
-    { name: withFallback( t, "brand.templates", "Templates" ), url: "/brand-admin/templates", icon: FileScriptIcon },
-    { name: withFallback( t, "brand.reports", "Reports" ), url: "/brand-admin/reports", icon: IconReport },
+    { name: withFallback( t, "brand.savedLists", "Saved Lists" ), url: "/brand/saved-lists", icon: DatabaseIcon },
+    { name: withFallback( t, "brand.templates", "Templates" ), url: "/brand/templates", icon: FileScriptIcon },
+    { name: withFallback( t, "brand.reports", "Reports" ), url: "/brand/reports", icon: IconReport },
   ],
   navSecondary: [
-    { title: withFallback( t, "brand.settings", "Settings" ), url: "/brand-admin/settings", icon: Settings01Icon },
+    { title: withFallback( t, "brand.settings", "Settings" ), url: "/brand/settings", icon: Settings01Icon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon },
   ],
@@ -116,51 +116,51 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
   navMain: [
     {
       title: withFallback( t, "creator.dashboard", "Dashboard" ),
-      url: "/creator-admin",
+      url: "/creator",
       icon: DashboardSquareAddIcon,
     },
     {
       title: withFallback( t, "creator.invitations", "Invitations" ),
-      url: "/creator-admin/invitations",
+      url: "/creator/invitations",
       icon: Task02Icon,
     },
     {
       title: withFallback( t, "creator.myGigs", "My Gigs" ),
-      url: "/creator-admin/my-gigs",
+      url: "/creator/my-gigs",
       icon: Task02Icon,
       items: [
         {
           title: withFallback( t, "creator.allGigs", "All Gigs" ),
-          url: "/creator-admin/my-gigs",
+          url: "/creator/my-gigs",
         },
         {
           title: withFallback( t, "creator.availableGigs", "Available Gigs" ),
-          url: "/creator-admin/gigs",
+          url: "/creator/gigs",
         },
         {
           title: withFallback( t, "creator.activeGigs", "Active Gigs" ),
-          url: "/creator-admin/gigs/active",
+          url: "/creator/gigs/active",
         },
       ],
     },
     {
       title: withFallback( t, "creator.portfolio", "Portfolio" ),
-      url: "/creator-admin/portfolio",
+      url: "/creator/portfolio",
       icon: ImageUpload01Icon,
     },
     {
       title: withFallback( t, "creator.analytics", "Analytics" ),
-      url: "/creator-admin/analytics",
+      url: "/creator/analytics",
       icon: ChartLineData01Icon,
     },
     {
       title: withFallback( t, "creator.earnings", "Earnings" ),
-      url: "/creator-admin/earnings",
+      url: "/creator/earnings",
       icon: WalletDone01Icon,
     },
   ],
   navSecondary: [
-    { title: withFallback( t, "creator.settings", "Settings" ), url: "/creator-admin/settings", icon: Settings01Icon },
+    { title: withFallback( t, "creator.settings", "Settings" ), url: "/creator/settings", icon: Settings01Icon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon },
   ],

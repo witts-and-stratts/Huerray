@@ -51,7 +51,7 @@ export function CreatorAuthGuard( { children }: { children: React.ReactNode; } )
 
     // Only redirect if we've fetched this session, not loading, and no profile exists
     if ( hasFetchedThisSession && hasProfile === false && !isLoading ) {
-      router.replace( `/${ locale }/creator-admin/complete-profile` );
+      router.replace( `/${ locale }/creator/complete-profile` );
     }
   }, [ hasProfile, isLoading, router, locale, pathname, hasFetchedThisSession ] );
 

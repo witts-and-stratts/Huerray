@@ -50,7 +50,7 @@ export function NavDocuments( {
               render={
                 <a href={ item.url }>
                   { Array.isArray( item.icon )
-                    ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 2 } />
+                    ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
                     : (() => {
                         const IconComponent = item.icon as Icon;
                         return <IconComponent />;

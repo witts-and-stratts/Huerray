@@ -231,7 +231,7 @@ export default function CreatorSettingsPage() {
     { value: 'profile', label: 'Profile' },
     { value: 'bio', label: 'Bio' },
     { value: 'social-media', label: 'Social Media' },
-    { value: '/creator-admin/settings/bank', label: 'Bank Details' },
+    { value: '/creator/settings/bank', label: 'Bank Details' },
   ];
 
   const pageDetails: Record<string, { title: string; description: string; }> = {
@@ -254,8 +254,8 @@ export default function CreatorSettingsPage() {
   const activeLabel = tabItems.find( t => t.value === activeTab )?.label || 'Profile';
 
   const breadcrumbs = [
-    { label: 'Dashboard', href: '/creator-admin' },
-    { label: 'Settings', href: '/creator-admin/settings' },
+    { label: 'Dashboard', href: '/creator' },
+    { label: 'Settings', href: '/creator/settings' },
     { label: activeLabel },
   ];
 

@@ -41,7 +41,7 @@ export default function GigsPage() {
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       >
-        {/* <Link href='/brand-admin/gigs/new'>
+        {/* <Link href='/brand/gigs/new'>
           <Button className='gap-2 rounded-md'>Create Gig</Button>
         </Link> */}
       </SubHeader>

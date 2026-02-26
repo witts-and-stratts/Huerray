@@ -104,10 +104,10 @@ export default function CreatorBankSettingsPage() {
   }, [ form ] );
 
   const tabItems = [
-    { value: '/creator-admin/settings', label: 'Profile' },
-    { value: '/creator-admin/settings#bio', label: 'Bio' },
-    { value: '/creator-admin/settings#social-media', label: 'Social Media' },
-    { value: '/creator-admin/settings/bank', label: 'Bank Details' },
+    { value: '/creator/settings', label: 'Profile' },
+    { value: '/creator/settings#bio', label: 'Bio' },
+    { value: '/creator/settings#social-media', label: 'Social Media' },
+    { value: '/creator/settings/bank', label: 'Bank Details' },
   ];
 
   /* 
@@ -122,8 +122,8 @@ export default function CreatorBankSettingsPage() {
   };
 
   const breadcrumbs = [
-    { label: 'Dashboard', href: '/creator-admin' },
-    { label: 'Settings', href: '/creator-admin/settings' },
+    { label: 'Dashboard', href: '/creator' },
+    { label: 'Settings', href: '/creator/settings' },
     { label: 'Bank Details' },
   ];
 
@@ -136,7 +136,7 @@ export default function CreatorBankSettingsPage() {
           description="Manage your banking and tax information."
           tabs={
             <SubHeaderTabs
-              value='/creator-admin/settings/bank'
+              value='/creator/settings/bank'
               onChange={ handleTabChange }
               tabItems={ tabItems }
             />
@@ -157,7 +157,7 @@ export default function CreatorBankSettingsPage() {
         description="Manage your banking and tax information."
         tabs={
           <SubHeaderTabs
-            value='/creator-admin/settings/bank'
+            value='/creator/settings/bank'
             onChange={ handleTabChange }
             tabItems={ tabItems }
           />

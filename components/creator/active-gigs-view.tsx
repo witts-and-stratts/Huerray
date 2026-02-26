@@ -23,7 +23,7 @@ export function ActiveGigsView() {
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }
-          basePath="/creator-admin"
+          basePath="/creator"
           defaultView="cards"
           hideViewToggle={ true }
           onCreateSubmission={ ( gig ) => setSubmissionGigId( gig.id || null ) }

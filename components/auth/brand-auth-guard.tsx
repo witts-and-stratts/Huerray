@@ -51,7 +51,7 @@ export function BrandAuthGuard( { children }: { children: React.ReactNode; } ) {
 
     // Only redirect if we've fetched this session, not loading, and no profile exists
     if ( hasFetchedThisSession && hasProfile === false && !isLoading ) {
-      router.replace( `/${ locale }/brand-admin/complete-profile` );
+      router.replace( `/${ locale }/brand/complete-profile` );
     }
   }, [ hasProfile, isLoading, router, locale, pathname, hasFetchedThisSession ] );
 

@@ -35,12 +35,12 @@ export default function CampaignsPage() {
         title='Campaigns'
         description='Manage and track all your marketing campaigns'
       >
-        <Link href='/brand-admin/campaigns/new'>
+        <Link href='/brand/campaigns/new'>
           <Button className='gap-2 rounded-md'>Create</Button>
         </Link>
       </SubHeader>
       <CampaignsTable
-        basePath='/brand-admin'
+        basePath='/brand'
         campaigns={ campaigns }
         isLoading={ isLoading }
         error={ error }

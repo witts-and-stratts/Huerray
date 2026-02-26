@@ -1,12 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import type { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import type { ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
 import { useCampaignInvitations } from '@/lib/api/hooks/campaigns';
 import { Loader2, Mail } from 'lucide-react';
 
 import { InvitationCard } from '@/components/creator/invitation-card';
 import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
+import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
 
 interface CampaignInvitationsSectionProps {
   campaignId: string;
@@ -17,10 +18,17 @@ export function CampaignInvitationsSection( { campaignId }: CampaignInvitationsS
   const { data: invitationsData, isLoading, error } = useCampaignInvitations( campaignId );
   const [ selectedInvitation, setSelectedInvitation ] = useState<ModelsGigInvitationResponse | null>( null );
   const [ sheetOpen, setSheetOpen ] = useState( false );
+  const [ selectedCreator, setSelectedCreator ] = useState<ModelsCreatorResponse | null>( null );
+  const [ creatorSheetOpen, setCreatorSheetOpen ] = useState( false );
 
   const handleViewDetails = ( invitation: ModelsGigInvitationResponse ) => {
     setSelectedInvitation( invitation );
     setSheetOpen( true );
+  };
+
+  const handleViewCreatorDetails = ( creator: ModelsCreatorResponse ) => {
+    setSelectedCreator( creator );
+    setCreatorSheetOpen( true );
   };
 
   if ( isLoading ) {
@@ -62,17 +70,24 @@ export function CampaignInvitationsSection( { campaignId }: CampaignInvitationsS
               key={ invitation.id }
               invitation={ invitation }
               onViewDetails={ handleViewDetails }
+              onViewCreatorDetails={ handleViewCreatorDetails }
             />
           );
         } ) }
       </div>
 
       <GigDetailsSheet
-        gig={ selectedInvitation?.gig as any }
+        gig={ ( selectedInvitation?.gig as unknown as ModelsGigResponse ) || null }
         open={ sheetOpen }
         onOpenChange={ setSheetOpen }
         invitationId={ selectedInvitation?.id }
         invitationStatus={ selectedInvitation?.status }
+      />
+
+      <CreatorDetailsSheet
+        creator={ selectedCreator }
+        open={ creatorSheetOpen }
+        onOpenChange={ setCreatorSheetOpen }
       />
     </>
   );

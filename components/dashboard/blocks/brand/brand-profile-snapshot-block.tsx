@@ -10,7 +10,7 @@ interface BrandProfileSnapshotBlockProps {
 
 export function BrandProfileSnapshotBlock( { brand, fallbackName, fallbackEmail }: BrandProfileSnapshotBlockProps ) {
   const brandName = brand?.company_name || fallbackName || 'Brand account';
-  const brandAvatar = brand?.profile_photo_url || brand?.logo_url || brand?.logo || '';
+  const brandAvatar = brand?.profile_photo_url || '';
 
   return (
     <Card className="ad-summary-card">

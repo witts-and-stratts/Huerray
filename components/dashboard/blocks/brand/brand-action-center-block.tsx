@@ -6,21 +6,21 @@ import { ArrowRight, BriefcaseBusiness, CirclePlus, UsersRound } from 'lucide-re
 const actions = [
   {
     label: 'Create Campaign',
-    href: '/brand-admin/campaigns/new',
+    href: '/brand/campaigns/new',
     detail: 'Launch a new campaign briefing and approval request',
     icon: CirclePlus,
     priority: 'high',
   },
   {
     label: 'Find Creators',
-    href: '/brand-admin/creators',
+    href: '/brand/creators',
     detail: 'Search creators that match your campaign goals',
     icon: UsersRound,
     priority: 'medium',
   },
   {
     label: 'Manage Gigs',
-    href: '/brand-admin/gigs',
+    href: '/brand/gigs',
     detail: 'Track gig setup, status, and creator activity',
     icon: BriefcaseBusiness,
     priority: 'medium',

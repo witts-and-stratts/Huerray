@@ -154,7 +154,7 @@ export function SignupForm( {
 
         if ( response.data ) {
           // Route to the appropriate dashboard based on the selected role
-          const dashboardPath = selectedRole === 'brand' ? "/brand-admin" : "/creator-admin";
+          const dashboardPath = selectedRole === 'brand' ? "/brand" : "/creator";
 
           toast.success( "Signup successful. Continue to Login", {
             action: {

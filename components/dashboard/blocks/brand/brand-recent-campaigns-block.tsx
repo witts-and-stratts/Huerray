@@ -25,7 +25,7 @@ export function BrandRecentCampaignsBlock( { campaigns }: BrandRecentCampaignsBl
           return (
             <div key={ id || campaign.campaign_name } className="rounded-lg border border-border/60 bg-white p-3">
               <div className="mb-1 flex items-start justify-between gap-2">
-                <Link href={ id ? `/brand-admin/campaigns/${ id }` : '/brand-admin/campaigns' } className="text-sm font-medium text-primary hover:underline">
+                <Link href={ id ? `/brand/campaigns/${ id }` : '/brand/campaigns' } className="text-sm font-medium text-primary hover:underline">
                   { campaign.campaign_name || 'Untitled Campaign' }
                 </Link>
                 <Badge variant={ campaignStatusVariant( status ) } className="capitalize">

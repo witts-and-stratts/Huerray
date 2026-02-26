@@ -20,7 +20,7 @@ export function ApprovalQueuesBlock() {
   const { data: brandsPendingResponse, isLoading: isBrandsPendingLoading } = useBrands( { status: 'pending_approval', page: 1, limit: 1 } );
   const { data: creatorsPendingResponse, isLoading: isCreatorsPendingLoading } = useCreators( { status: 'pending_approval', page: 1, limit: 1 } );
   const { data: campaignsPendingResponse, isLoading: isCampaignsPendingLoading } = useCampaigns( {
-    status: CampaignsSearchGetStatusEnum.PendingApproval,
+    status: CampaignsSearchGetStatusEnum.CampaignStatusPendingApproval,
     page: 1,
     limit: 1,
   } );

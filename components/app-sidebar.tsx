@@ -60,7 +60,9 @@ export function AppSidebar( { navigationData, ...props }: AppSidebarProps ) {
         <SidebarMenu>
           <SidebarMenuItem>
             <a href="#">
-              <Image src="/images/huerray-symbol.svg" alt="Huerray" width={ 40 } height={ 40 } />
+              <div className="relative w-10 h-10 group-data-[collapsible=icon]:w-7 group-data-[collapsible=icon]:h-7 transition-[width,height] duration-200 ease-linear">
+                <Image src="/images/huerray-symbol.svg" alt="Huerray" fill className="object-contain" />
+              </div>
             </a>
           </SidebarMenuItem>
         </SidebarMenu>

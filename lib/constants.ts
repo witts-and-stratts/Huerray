@@ -2,8 +2,8 @@ export type UserRole = 'admin' | 'creator' | 'brand';
 
 export const DASHBOARD_PATHS: Record<UserRole, string> = {
   admin: '/admin',
-  creator: '/creator-admin',
-  brand: '/brand-admin',
+  creator: '/creator',
+  brand: '/brand',
 };
 
 export interface UserData {

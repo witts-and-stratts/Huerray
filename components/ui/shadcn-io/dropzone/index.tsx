@@ -66,12 +66,17 @@ export const Dropzone = ( {
     disabled,
     onDrop: ( acceptedFiles, fileRejections, event ) => {
       if ( fileRejections.length > 0 ) {
-        const message = fileRejections.at( 0 )?.errors.at( 0 )?.message;
-        onError?.( new Error( message ) );
-        return;
+        const error = new Error( fileRejections.at( 0 )?.errors.at( 0 )?.message ) as Error & { rejectedFiles: { name: string; reason: string }[] };
+        error.rejectedFiles = fileRejections.map( r => ( {
+          name: r.file.name,
+          reason: r.errors.at( 0 )?.message ?? 'Unknown error',
+        } ) );
+        onError?.( error );
       }
 
-      onDrop?.( acceptedFiles, fileRejections, event );
+      if ( acceptedFiles.length > 0 ) {
+        onDrop?.( acceptedFiles, fileRejections, event );
+      }
     },
     ...props,
   } );

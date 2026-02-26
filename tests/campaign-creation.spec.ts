@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 test.describe('Campaign Creation Flow', () => {
   test('should navigate through the multi-step form', async ({ page }) => {
     // Navigate to the campaign creation page
-    // We use /en/brand-admin/campaigns/new
-    await page.goto('http://localhost:3003/en/brand-admin/campaigns/new');
+    // We use /en/brand/campaigns/new
+    await page.goto('http://localhost:3003/en/brand/campaigns/new');
     
     // Check if we are on Step 1
     await expect(page.getByText('Basics', { exact: true })).toBeVisible();

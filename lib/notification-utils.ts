@@ -59,7 +59,7 @@ export function getNotificationActionLabel( notification: NotificationActionCont
 
 export function getNotificationsPagePath( role?: NotificationsRole | null ): string {
   if ( role === "admin" ) return "/admin/notifications";
-  if ( role === "brand" ) return "/brand-admin/notifications";
-  if ( role === "creator" ) return "/creator-admin/notifications";
+  if ( role === "brand" ) return "/brand/notifications";
+  if ( role === "creator" ) return "/creator/notifications";
   return "/notifications";
 }

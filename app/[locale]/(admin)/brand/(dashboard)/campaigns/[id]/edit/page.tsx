@@ -83,7 +83,7 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
         }
       } );
       toast.success( 'Campaign updated successfully' );
-      router.push( '/brand-admin/campaigns' );
+      router.push( '/brand/campaigns' );
     } catch ( e ) {
       toast.error( 'Failed to update campaign' );
       console.error( e );

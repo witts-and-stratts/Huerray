@@ -36,7 +36,7 @@ export function NavSecondary( {
                 render={
                   <Link href={ item.url }>
                     { Array.isArray( item.icon )
-                      ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 2 } />
+                      ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
                       : ( () => {
                         const IconComponent = item.icon as Icon;
                         return <IconComponent />;

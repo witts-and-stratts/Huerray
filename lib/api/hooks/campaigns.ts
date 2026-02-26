@@ -137,7 +137,7 @@ export function useCampaigns(
 
 /**
  * Hook to fetch campaigns for the current brand (/brands/search/campaigns)
- * This should be used in brand-admin pages instead of useCampaigns
+ * This should be used in brand pages instead of useCampaigns
  * 
  * @example
  * ```tsx

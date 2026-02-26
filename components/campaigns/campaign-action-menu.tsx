@@ -28,7 +28,7 @@ interface CampaignActionMenuProps {
 
 export function CampaignActionMenu( {
   campaign,
-  basePath = "/brand-admin",
+  basePath = "/brand",
   className,
   trigger,
   align = "end",
@@ -187,7 +187,7 @@ export function CampaignActionMenu( {
       label: "Approve Campaign",
       action: () => openAdminDecisionDialog( 'approve' ),
       allowedRoles: [ "admin" ],
-      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved && campaign.campaign_status === "running"
+      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved && ( campaign.campaign_status === "running" || campaign.campaign_status === "pending_approval" )
     },
     {
       label: "Reject Campaign",

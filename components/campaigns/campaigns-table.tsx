@@ -52,7 +52,7 @@ type CampaignsTableProps = {
 };
 
 export function CampaignsTable( {
-  basePath = '/brand-admin',
+  basePath = '/brand',
   campaigns = [],
   isLoading = false,
   error = null,

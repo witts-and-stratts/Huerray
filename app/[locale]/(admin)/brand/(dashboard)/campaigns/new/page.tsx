@@ -64,7 +64,7 @@ export default function NewCampaignPage() {
     return new Promise<void>( ( resolve, reject ) => {
       createCampaign.mutate( requestData, {
         onSuccess: () => {
-          router.push( '/brand-admin/campaigns' );
+          router.push( '/brand/campaigns' );
           resolve();
         },
         onError: ( error ) => {

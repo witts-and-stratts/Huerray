@@ -183,7 +183,7 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
             <Breadcrumb className='flex gap-4 items-center mb-4'>
               <BreadcrumbList>
                 <BreadcrumbItem className='text-sm text-muted-foreground/70'>
-                  <BreadcrumbLink href="/brand-admin/campaigns">
+                  <BreadcrumbLink href="/brand/campaigns">
                     Campaigns
                   </BreadcrumbLink>
                 </BreadcrumbItem>

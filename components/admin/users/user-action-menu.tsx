@@ -8,9 +8,8 @@ import { apiClient } from "@/lib/api/client";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { useResendVerification } from "@/lib/api/hooks/users";
-import { Copy } from "lucide-react";
-import { toast } from "sonner";
 import { useState } from "react";
+import { toast } from "sonner";
 import { UserStatusDialog } from "./user-status-dialog";
 
 interface UserActionMenuProps {

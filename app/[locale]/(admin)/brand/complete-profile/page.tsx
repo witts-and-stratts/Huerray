@@ -127,7 +127,7 @@ export default function BrandCompleteProfilePage() {
         await dispatch( fetchBrandProfile() );
 
         toast.success( 'Profile completed successfully!', { richColors: true } );
-        router.push( `/${ locale }/brand-admin` );
+        router.push( `/${ locale }/brand` );
       } catch ( error: any ) {
         console.error( 'Failed to complete profile', error );
         const errorMessage = error.response?.data?.error || error.response?.data?.message || 'Failed to complete profile';

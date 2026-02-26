@@ -97,7 +97,7 @@ export default function CompleteProfilePage() {
 
         toast.success( 'Profile created successfully!', { richColors: true } );
         // After success, redirect to dashboard
-        router.push( `/${ locale }/creator-admin` );
+        router.push( `/${ locale }/creator` );
       } catch ( error: any ) {
         console.error( 'Failed to create profile', error );
         const errorMessage = error.response?.data?.error || error.response?.data?.message || 'Failed to create profile';

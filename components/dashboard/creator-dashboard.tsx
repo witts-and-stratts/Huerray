@@ -49,20 +49,17 @@ function KpiCard( {
   title,
   value,
   caption,
-  icon: Icon,
   isLoading = false,
 }: {
   title: string;
   value: string;
   caption: string;
-  icon: React.ComponentType<{ className?: string }>;
   isLoading?: boolean;
 } ) {
   return (
     <Card className="ad-kpi-card h-full">
-      <CardHeader className="pb-2 min-h-24">
+      <CardHeader className="pb-2 min-h-12">
         <CardTitle className="ad-card-title flex items-center gap-2 leading-tight">
-          <Icon className="size-4" />
           { title }
         </CardTitle>
       </CardHeader>
@@ -147,13 +144,13 @@ export function CreatorDashboard() {
         title="Dashboard"
         description="Track invitations, gigs, submissions, and projected earnings."
       >
-        <Link href="/creator-admin/gigs">
+        <Link href="/creator/gigs">
           <Button className="gap-2">
             <CirclePlus className="size-4" />
             Browse Gigs
           </Button>
         </Link>
-        <Link href="/creator-admin/my-gigs">
+        <Link href="/creator/my-gigs">
           <Button variant="outline" className="gap-2">
             View My Gigs
             <ArrowUpRight className="size-4" />
@@ -167,28 +164,24 @@ export function CreatorDashboard() {
             title="Available Gigs"
             value={ `${ matchingQuery.data?.pagination?.total ?? availableGigs.length }` }
             caption="Open opportunities matching your profile."
-            icon={ BriefcaseBusiness }
             isLoading={ matchingQuery.isLoading }
           />
           <KpiCard
             title="Active Gigs"
             value={ `${ activeGigs.length }` }
             caption="Gigs currently assigned to you."
-            icon={ Film }
             isLoading={ activeQuery.isLoading }
           />
           <KpiCard
             title="Pending Invitations"
             value={ `${ invitations.filter( ( invitation ) => ( invitation.status || "" ).toLowerCase() === "pending" ).length }` }
             caption="Invitations awaiting your response."
-            icon={ Inbox }
             isLoading={ invitationsQuery.isLoading }
           />
           <KpiCard
             title="Projected Earnings"
             value={ toMoney( totalProjectedEarnings ) }
-            caption={`Completion rate: ${ completionRate }%`}
-            icon={ Wallet }
+            caption={ `Completion rate: ${ completionRate }%` }
             isLoading={ activeQuery.isLoading || submissionsQuery.isLoading }
           />
         </section>
@@ -259,7 +252,7 @@ export function CreatorDashboard() {
                   <p className="font-medium">{ approvedCount }</p>
                 </div>
               </div>
-              <Link href="/creator-admin/settings" className="block">
+              <Link href="/creator/settings" className="block">
                 <Button variant="outline" className="w-full justify-between">
                   Update Profile
                   <ArrowUpRight className="size-4" />

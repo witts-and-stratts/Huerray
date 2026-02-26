@@ -53,13 +53,13 @@ export function BrandDashboard() {
         title="Dashboard"
         description="Campaign performance and operational view for your brand account"
       >
-        <Link href="/brand-admin/campaigns/new">
+        <Link href="/brand/campaigns/new">
           <Button className="gap-2">
             <CirclePlus className="size-4" />
             Create Campaign
           </Button>
         </Link>
-        <Link href="/brand-admin/campaigns">
+        <Link href="/brand/campaigns">
           <Button variant="outline" className="gap-2">
             View Campaigns
             <ArrowUpRight className="size-4" />

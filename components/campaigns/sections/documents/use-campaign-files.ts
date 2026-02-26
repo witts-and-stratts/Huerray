@@ -131,9 +131,14 @@ export function useCampaignFiles( initialItems: UploadedFile[] | string[] = [] )
     setItems( prev => prev.filter( i => i.id !== id ) );
   }, [] );
 
-  const handleDropError = useCallback( ( error: Error ) => {
+  const handleDropError = useCallback( ( error: Error & { rejectedFiles?: { name: string; reason: string }[] } ) => {
     console.error( error );
-    toast.error( error.message );
+    if ( error.rejectedFiles && error.rejectedFiles.length > 0 ) {
+      const list = error.rejectedFiles.map( f => `"${ f.name }"` ).join( ', ' );
+      toast.error( `${ error.rejectedFiles.length === 1 ? 'File' : 'Files' } could not be uploaded: ${ list }` );
+    } else {
+      toast.error( error.message );
+    }
   }, [] );
 
   const handleUploadSuccess = useCallback( ( id: string, url: string ) => {

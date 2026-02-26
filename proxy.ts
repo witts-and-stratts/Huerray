@@ -28,8 +28,15 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Extract locale from path
-  const locale = pathname.split('/')[1] || defaultLocale;
+  // Extract locale from path — only treat the first segment as a locale if it
+  // is an actual supported locale, otherwise fall back to the default locale.
+  const segments = pathname.split('/');
+  const firstSegment = segments[1] ?? '';
+  const hasLocalePrefix = (locales as readonly string[]).includes(firstSegment);
+  const locale = hasLocalePrefix ? firstSegment : defaultLocale;
+  const pathWithoutLocale = hasLocalePrefix
+    ? '/' + segments.slice(2).join('/')
+    : pathname;
 
   // Allow public routes (without auth check, but with i18n)
   const publicRoutes = ['/login', '/signup', '/forgot-password', '/reset-password'];
@@ -39,15 +46,12 @@ export default function middleware(request: NextRequest) {
   if (isPublicRoute) {
     return intlMiddleware(request);
   }
-
-  // Protected admin routes - check more specifically to avoid false matches
-  const pathWithoutLocale = pathname.replace(`/${locale}`, '');
-  const isAdminRoute = pathWithoutLocale.startsWith('/admin') && !pathWithoutLocale.startsWith('/brand-admin') && !pathWithoutLocale.startsWith('/creator-admin');
-  const isBrandAdminRoute = pathWithoutLocale.startsWith('/brand-admin');
-  const isCreatorAdminRoute = pathWithoutLocale.startsWith('/creator-admin');
+  const isAdminRoute = pathWithoutLocale.startsWith('/admin');
+  const isBrandRoute = pathWithoutLocale.startsWith('/brand');
+  const isCreatorRoute = pathWithoutLocale.startsWith('/creator');
   const isDashboardRoute = pathWithoutLocale.startsWith('/dashboard');
 
-  const isProtectedRoute = isAdminRoute || isBrandAdminRoute || isCreatorAdminRoute || isDashboardRoute;
+  const isProtectedRoute = isAdminRoute || isBrandRoute || isCreatorRoute || isDashboardRoute;
 
   if (isProtectedRoute) {
     const userData = getUserDataFromCookie(request);
@@ -64,25 +68,25 @@ export default function middleware(request: NextRequest) {
 
     // Admin route - only admins allowed
     if (isAdminRoute && userRole !== 'admin') {
-      const redirectPath = userRole === 'brand' ? '/brand-admin' : '/creator-admin';
+      const redirectPath = userRole === 'brand' ? '/brand' : '/creator';
       return NextResponse.redirect(new URL(`/${locale}${redirectPath}`, request.url));
     }
 
-    // Brand admin route - only brands allowed
-    if (isBrandAdminRoute && userRole !== 'brand') {
-      const redirectPath = userRole === 'admin' ? '/admin' : '/creator-admin';
+    // Brand route - only brands allowed
+    if (isBrandRoute && userRole !== 'brand') {
+      const redirectPath = userRole === 'admin' ? '/admin' : '/creator';
       return NextResponse.redirect(new URL(`/${locale}${redirectPath}`, request.url));
     }
 
-    // Creator admin route - only creators allowed
-    if (isCreatorAdminRoute && userRole !== 'creator') {
-      const redirectPath = userRole === 'admin' ? '/admin' : '/brand-admin';
+    // Creator route - only creators allowed
+    if (isCreatorRoute && userRole !== 'creator') {
+      const redirectPath = userRole === 'admin' ? '/admin' : '/brand';
       return NextResponse.redirect(new URL(`/${locale}${redirectPath}`, request.url));
     }
 
     // Old /dashboard route - redirect to role-specific dashboard
-    if (isDashboardRoute && !isAdminRoute && !isBrandAdminRoute && !isCreatorAdminRoute) {
-      const redirectPath = userRole === 'admin' ? '/admin' : userRole === 'creator' ? '/creator-admin' : '/brand-admin';
+    if (isDashboardRoute && !isAdminRoute && !isBrandRoute && !isCreatorRoute) {
+      const redirectPath = userRole === 'admin' ? '/admin' : userRole === 'creator' ? '/creator' : '/brand';
       return NextResponse.redirect(new URL(`/${locale}${redirectPath}`, request.url));
     }
   }

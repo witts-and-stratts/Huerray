@@ -44,7 +44,7 @@ export function InvitationsView() {
         description="Manage your gig invitations from brands."
       />
 
-      <div className="p-6 pt-0 space-y-6">
+      <div className="p-x pt-0 space-y-6 bg-slate-50/50 h-full">
         { invitations.length === 0 ? (
           <div className="flex h-[400px] flex-col items-center justify-center gap-4 border-2 border-dashed rounded-xl bg-muted/10">
             <div className="p-4 bg-background rounded-full border shadow-sm">
@@ -58,7 +58,7 @@ export function InvitationsView() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
             { invitations.map( ( invitation ) => (
               <InvitationCard
                 key={ invitation.id }

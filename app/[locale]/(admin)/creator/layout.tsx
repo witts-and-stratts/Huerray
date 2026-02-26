@@ -11,6 +11,7 @@ import {
 import { CreatorSidebar } from '@/components/dashboard/creator-sidebar';
 import { RoleProvider } from '@/contexts/role-context';
 import { usePathname } from 'next/navigation';
+import { CreatorBreadcrumbs } from '@/components/creator/creator-breadcrumbs';
 
 export default function CreatorAdminLayout( {
   children,
@@ -27,6 +28,7 @@ export default function CreatorAdminLayout( {
           <div className="bg-background min-h-screen flex flex-col">
             <EmailVerificationBanner />
             <ProfileStatusBanner role="creator" />
+            <CreatorBreadcrumbs />
             { children }
           </div>
         </RoleProvider>
@@ -43,6 +45,7 @@ export default function CreatorAdminLayout( {
             <EmailVerificationBanner />
             <ProfileStatusBanner role="creator" />
             <DashboardHeader />
+            <CreatorBreadcrumbs />
             { children }
           </SidebarInset>
         </RoleProvider>

@@ -69,7 +69,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   );
 };
 
-export const getColumns = ( basePath: string = '/brand-admin' ): ColumnDef<ModelCampaign>[] => [
+export const getColumns = ( basePath: string = '/brand' ): ColumnDef<ModelCampaign>[] => [
   {
     id: 'select',
     header: ( { table } ) => (

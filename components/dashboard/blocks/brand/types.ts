@@ -44,10 +44,10 @@ export function campaignStatusVariant( status: string ): CampaignStatusVariant {
 
 export function calculateGigSpend( gig: BrandGigLike ) {
   if ( typeof gig.gig_cost === 'number' ) return gig.gig_cost;
-  if ( typeof gig.compensation === 'number' && typeof gig.number_of_videos === 'number' ) {
+  if ( 'compensation' in gig && typeof gig.compensation === 'number' && typeof gig.number_of_videos === 'number' ) {
     return gig.compensation * gig.number_of_videos;
   }
-  if ( typeof gig.compensation === 'number' ) return gig.compensation;
+  if ( 'compensation' in gig && typeof gig.compensation === 'number' ) return gig.compensation;
   return 0;
 }
 

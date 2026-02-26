@@ -12,7 +12,7 @@ import { formatCurrency } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Video01Icon, Clock01Icon } from '@hugeicons/core-free-icons';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
-import { GigActionsDropdown } from './gig-actions-dropdown';
+import { GigActionMenu } from './gig-action-menu';
 import { Button } from '@/components/dashboard-ui/button';
 
 interface GigCardProps {
@@ -50,7 +50,7 @@ export function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) 
           ) }
         </div>
         <div className="flex shrink-0 text-right gap-2 items-start">
-          <GigActionsDropdown
+          <GigActionMenu
             gig={ gig }
             onViewGig={ onViewGig }
             trigger="icon"

@@ -9,7 +9,7 @@ import { Checkbox } from '@/components/dashboard-ui/checkbox';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { GigStatusBadge } from './gig-status-badge';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
-import { GigActionsDropdown } from './gig-actions-dropdown';
+import { GigActionMenu } from './gig-action-menu';
 
 export const getColumns = ( onViewGig: ( gig: ModelsGigResponse ) => void, basePath?: string, onEditGig?: ( gig: ModelsGigResponse ) => void ): ColumnDef<ModelsGigResponse>[] => [
   {
@@ -157,7 +157,7 @@ export const getColumns = ( onViewGig: ( gig: ModelsGigResponse ) => void, baseP
             >
               View
             </Button>
-            <GigActionsDropdown
+            <GigActionMenu
               gig={ row.original }
               onViewGig={ onViewGig }
               basePath={ basePath }

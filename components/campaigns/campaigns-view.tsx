@@ -12,7 +12,7 @@ import Link from 'next/link';
 export function CampaignsView( {
   table,
   view,
-  basePath = '/brand-admin',
+  basePath = '/brand',
   emptyTitle = 'Ready to launch?',
   simpleEmptyState = false,
 }: {

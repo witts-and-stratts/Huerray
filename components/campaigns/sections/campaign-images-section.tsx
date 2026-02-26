@@ -67,6 +67,7 @@ export const CampaignImagesSection = memo( function CampaignImagesSection( {
                 'image/png': [ '.png' ],
                 'image/gif': [ '.gif' ],
               } }
+              maxSize={ 10 * 1024 * 1024 }
               title="Upload Images"
               description={ <>Drag and drop files here<br />Support for Image files</> }
               icon={ <ImageFileIcon className="text-primary w-20! h-20! mt-4 stroke-primary" /> }

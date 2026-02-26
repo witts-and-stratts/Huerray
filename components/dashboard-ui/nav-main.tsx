@@ -4,6 +4,8 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { type Icon } from "@tabler/icons-react";
 import { ChevronRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { useLocale } from 'next-intl';
+import { locales } from '@/i18n';
 
 import {
   SidebarGroup,
@@ -28,23 +30,29 @@ export function NavMain( {
 }: {
   items: SidebarNavMainItem[];
 } ) {
-  const pathname = usePathname();
-  const isActivePath = ( url: string ) => pathname === url || pathname?.startsWith( `${ url }/` );
+  const locale = useLocale();
+  const rawPathname = usePathname();
+  // Strip locale prefix so nav URLs (/brand/...) match regardless of locale (/en/brand/...)
+  const segments = rawPathname?.split( '/' ) ?? [];
+  const pathname = locales.includes( segments[ 1 ] as typeof locales[ number ] )
+    ? '/' + segments.slice( 2 ).join( '/' )
+    : rawPathname ?? '';
+  // Prefix every nav URL with the current locale so the middleware always
+  // receives a locale-prefixed path (e.g. /en/admin/creators, not /admin/creators)
+  const localisedUrl = ( url: string ) => `/${ locale }${ url }`;
+
+  // Find the longest nav URL that matches the current pathname so that
+  // e.g. /brand/campaigns wins over /brand, preventing Dashboard from
+  // always appearing active.
+  const allNavUrls = items.flatMap( item => [ item.url, ...( item.items?.map( s => s.url ) ?? [] ) ] );
+  const longestMatchUrl = allNavUrls
+    .filter( url => pathname === url || pathname.startsWith( `${ url }/` ) )
+    .reduce( ( longest, url ) => url.length > longest.length ? url : longest, '' );
+  const isActivePath = ( url: string ) => url === longestMatchUrl;
 
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
-        {/* <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton
-              tooltip="Quick Create"
-              className="bg-primary/10 text-primary hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
-            >
-              <IconCirclePlusFilled />
-              <span>Create Campaign</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu> */}
         <SidebarMenu>
           { items.map( ( item ) => {
             const hasChildren = !!item.items?.length;
@@ -60,18 +68,18 @@ export function NavMain( {
                   className="group/collapsible"
                 >
                   <SidebarMenuItem className="font-regular">
-                    <Link href={ item.url }>
+                    <Link href={ localisedUrl( item.url ) }>
                       <SidebarMenuButton
                         tooltip={ item.title }
                         isActive={ isParentActive || isAnyChildActive }
                       >
                         { item.icon && (
                           Array.isArray( item.icon )
-                            ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 2 } />
-                            : (() => {
-                                const IconComponent = item.icon as Icon;
-                                return <IconComponent />;
-                              })()
+                            ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
+                            : ( () => {
+                              const IconComponent = item.icon as Icon;
+                              return <IconComponent />;
+                            } )()
                         ) }
                         <span>{ item.title }</span>
                       </SidebarMenuButton>
@@ -89,7 +97,7 @@ export function NavMain( {
                         { item.items?.map( ( subItem ) => (
                           <SidebarMenuSubItem key={ subItem.title }>
                             <SidebarMenuSubButton
-                              render={ <Link href={ subItem.url } /> }
+                              render={ <Link href={ localisedUrl( subItem.url ) } /> }
                               isActive={ isActivePath( subItem.url ) }
                             >
                               <span>{ subItem.title }</span>
@@ -105,18 +113,18 @@ export function NavMain( {
 
             return (
               <SidebarMenuItem key={ item.title } className="font-regular">
-                <Link href={ item.url }>
+                <Link href={ localisedUrl( item.url ) }>
                   <SidebarMenuButton
                     tooltip={ item.title }
                     isActive={ isParentActive }
                   >
                     { item.icon && (
                       Array.isArray( item.icon )
-                        ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 2 } />
-                        : (() => {
-                            const IconComponent = item.icon as Icon;
-                            return <IconComponent />;
-                          })()
+                        ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
+                        : ( () => {
+                          const IconComponent = item.icon as Icon;
+                          return <IconComponent />;
+                        } )()
                     ) }
                     <span>{ item.title }</span>
                   </SidebarMenuButton>

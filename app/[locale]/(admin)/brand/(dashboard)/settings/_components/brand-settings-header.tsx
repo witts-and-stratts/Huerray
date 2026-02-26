@@ -22,7 +22,7 @@ export function BrandSettingsHeader( { children }: BrandSettingsHeaderProps ) {
   const activeTab = getActiveTab();
 
   const handleTabChange = ( value: string ) => {
-    router.push( `/brand-admin/settings/${ value }` );
+    router.push( `/brand/settings/${ value }` );
   };
 
   const tabItems = [
@@ -33,8 +33,8 @@ export function BrandSettingsHeader( { children }: BrandSettingsHeaderProps ) {
   const activeLabel = tabItems.find( t => t.value === activeTab )?.label || 'Brand Profile';
 
   const breadcrumbs = [
-    { label: 'Dashboard', href: '/brand-admin' },
-    { label: 'Settings', href: '/brand-admin/settings' },
+    { label: 'Dashboard', href: '/brand' },
+    { label: 'Settings', href: '/brand/settings' },
     { label: activeLabel },
   ];
 
