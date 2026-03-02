@@ -18,8 +18,7 @@ export default function CampaignPage() {
     );
   }
 
-  // API returns { data: campaign } but generic type might not match runtime
-  const campaignData = ( response as any );
+  const campaignData = response;
 
   if ( error || !campaignData ) {
     return (

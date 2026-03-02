@@ -15,8 +15,8 @@ import { CreatorStatusBadge } from "./creator-status-badge";
 interface CreatorCardProps {
   creator: ModelsCreatorResponse;
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
-  onApproveProfile: ( creator: ModelsCreatorResponse ) => void;
-  onRejectProfile: ( creator: ModelsCreatorResponse ) => void;
+  onApproveProfile?: ( creator: ModelsCreatorResponse ) => void;
+  onRejectProfile?: ( creator: ModelsCreatorResponse ) => void;
 }
 
 export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejectProfile }: CreatorCardProps ) {

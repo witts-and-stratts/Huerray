@@ -81,8 +81,8 @@ export function useNotifications(
  * Hook to mark a notification as read
  */
 export function useMarkNotificationAsRead(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, string | number>
-): UseMutationResult<ModelsStandardGenericResponse, Error, string | number> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, string | number>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, string | number> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -102,8 +102,8 @@ export function useMarkNotificationAsRead(
  * Hook to mark all notifications as read
  */
 export function useMarkAllNotificationsAsRead(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, void>
-): UseMutationResult<ModelsStandardGenericResponse, Error, void> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, void>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, void> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -122,8 +122,8 @@ export function useMarkAllNotificationsAsRead(
  * Hook to delete a notification
  */
 export function useDeleteNotification(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, string>
-): UseMutationResult<ModelsStandardGenericResponse, Error, string> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, string>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, string> {
   const queryClient = useQueryClient();
 
   return useMutation({

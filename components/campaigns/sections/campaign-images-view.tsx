@@ -8,6 +8,14 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/components/dashboard-ui/dialog';
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/dashboard-ui/empty';
+import { ImageIcon } from 'lucide-react';
 
 interface CampaignImagesViewProps {
   images: string[];
@@ -18,9 +26,17 @@ export function CampaignImagesView( { images }: CampaignImagesViewProps ) {
 
   if ( !images || images.length === 0 ) {
     return (
-      <div className='flex items-center justify-center p-12 bg-muted/10 border-2 border-dashed rounded-xl'>
-        <p className='text-muted-foreground'>No images uploaded</p>
-      </div>
+      <Empty className='border py-20 my-6 flex-1 bg-white'>
+        <EmptyHeader>
+          <EmptyMedia variant='icon'>
+            <ImageIcon />
+          </EmptyMedia>
+          <EmptyTitle className='font-normal font-primary text-primary'>No images uploaded</EmptyTitle>
+          <EmptyDescription>
+            Images for this campaign will appear here.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     );
   }
 

@@ -323,6 +323,7 @@ No authorization required
 |**200** | Brand status updated successfully |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -431,6 +432,7 @@ No authorization required
 |**200** | Brand updated successfully |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -638,7 +640,7 @@ let createdBefore: string; // (optional) (default to undefined)
 let limit: number; // (optional) (default to undefined)
 let page: number; // (optional) (default to undefined)
 let q: string; // (optional) (default to undefined)
-let status: 'created' | 'pending_approval' | 'returned' | 'active' | 'inactive' | 'suspended' | 'deleted'; // (optional) (default to undefined)
+let status: 'created' | 'pending_approval' | 'returned' | 'approved' | 'inactive' | 'suspended' | 'deleted'; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.brandsSearchGet(
     brandId,
@@ -669,7 +671,7 @@ const { status, data } = await apiInstance.brandsSearchGet(
 | **limit** | [**number**] |  | (optional) defaults to undefined|
 | **page** | [**number**] |  | (optional) defaults to undefined|
 | **q** | [**string**] |  | (optional) defaults to undefined|
-| **status** | [**&#39;created&#39; | &#39;pending_approval&#39; | &#39;returned&#39; | &#39;active&#39; | &#39;inactive&#39; | &#39;suspended&#39; | &#39;deleted&#39;**]**Array<&#39;created&#39; &#124; &#39;pending_approval&#39; &#124; &#39;returned&#39; &#124; &#39;active&#39; &#124; &#39;inactive&#39; &#124; &#39;suspended&#39; &#124; &#39;deleted&#39;>** |  | (optional) defaults to undefined|
+| **status** | [**&#39;created&#39; | &#39;pending_approval&#39; | &#39;returned&#39; | &#39;approved&#39; | &#39;inactive&#39; | &#39;suspended&#39; | &#39;deleted&#39;**]**Array<&#39;created&#39; &#124; &#39;pending_approval&#39; &#124; &#39;returned&#39; &#124; &#39;approved&#39; &#124; &#39;inactive&#39; &#124; &#39;suspended&#39; &#124; &#39;deleted&#39;>** |  | (optional) defaults to undefined|
 
 
 ### Return type

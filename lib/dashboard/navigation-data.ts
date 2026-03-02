@@ -15,6 +15,7 @@ import {
   AlertCircleIcon,
   Store01Icon,
   AiUserIcon,
+  CreditCardAcceptIcon,
 } from "@hugeicons/core-free-icons";
 import { IconReport } from "@tabler/icons-react";
 import type { SidebarNavigationData } from "@/components/app-sidebar";
@@ -92,6 +93,11 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       title: withFallback( t, "brand.invoices", "Invoices" ),
       url: "/brand/invoices",
       icon: FileScriptIcon,
+    },
+    {
+      title: withFallback( t, "brand.payments", "Payments" ),
+      url: "/brand/payments",
+      icon: CreditCardAcceptIcon,
     },
   ],
   documents: [
@@ -203,6 +209,16 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       title: withFallback( t, "admin.gigs", "Gigs" ),
       url: "/admin/gigs",
       icon: Task02Icon,
+    },
+    {
+      title: withFallback( t, "admin.invoices", "Invoices" ),
+      url: "/admin/invoices",
+      icon: FileScriptIcon,
+    },
+    {
+      title: withFallback( t, "admin.payments", "Payments" ),
+      url: "/admin/payouts",
+      icon: CreditCardAcceptIcon,
     },
     {
       title: withFallback( t, "admin.analytics", "Analytics" ),

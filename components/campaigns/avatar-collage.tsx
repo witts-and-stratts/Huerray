@@ -23,12 +23,10 @@ import {
 import { motion } from 'motion/react';
 import { Person } from './types';
 
-export const AvatarCollage = ( { people }: { people: Person[]; } ) => {
+export const AvatarCollage = ( { people, onPersonClick }: { people: Person[]; onPersonClick?: ( index: number ) => void; } ) => {
   const limit = 4;
   const shownPeople = people?.slice( 0, limit ) || [];
   const remainingCount = people?.length > limit ? people.length - limit : 0;
-
-  console.log( 'people', people );
 
   return (
     <div className='flex items-center'>
@@ -43,10 +41,12 @@ export const AvatarCollage = ( { people }: { people: Person[]; } ) => {
               delay: index * 0.1,
               ease: 'easeOut',
             } }
-            key={ person.avatar }
+            key={ person.avatar || index }
+            onClick={ () => onPersonClick?.( index ) }
+            className={ onPersonClick ? 'cursor-pointer' : undefined }
           >
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <Avatar className='border-2 border-white'>
                   <AvatarImage src={ person.avatar } />
                   <AvatarFallback className='text-xs'>

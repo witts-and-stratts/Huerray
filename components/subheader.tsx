@@ -65,7 +65,7 @@ export function SubHeader( { title, description, children, pre, tabs, breadcrumb
 interface SubHeaderTabsProps {
   value: string;
   onChange: ( value: string ) => void;
-  tabItems: { value: string; label: string; }[];
+  tabItems: { value: string; label: React.ReactNode; }[];
 }
 
 

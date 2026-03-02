@@ -3,6 +3,14 @@
 import { useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { Loader2, Video } from 'lucide-react';
 import { SubmissionCard } from '@/components/campaigns/submission-card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/dashboard-ui/empty';
 
 interface CampaignSubmissionsSectionProps {
   campaignId: string;
@@ -31,13 +39,36 @@ export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsS
 
   if ( submissions.length === 0 ) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 bg-muted/10 border-2 border-dashed rounded-xl space-y-3">
-        <div className="p-4 bg-background rounded-full border shadow-sm">
-          <Video className="size-8 text-muted-foreground" />
-        </div>
-        <p className="text-muted-foreground font-medium">No submissions yet</p>
-        <p className="text-sm text-muted-foreground">Video submissions for this campaign will appear here.</p>
-      </div>
+      <Empty className='border py-20 my-6 flex-1 bg-white'>
+        <EmptyHeader>
+          <EmptyMedia>
+            <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/maxleiter.png"
+                  alt="@maxleiter"
+                />
+                <AvatarFallback>LR</AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/evilrabbit.png"
+                  alt="@evilrabbit"
+                />
+                <AvatarFallback>ER</AvatarFallback>
+              </Avatar>
+            </div>
+          </EmptyMedia>
+          <EmptyTitle className='font-normal font-primary text-primary'>No submissions yet</EmptyTitle>
+          <EmptyDescription>
+            Video submissions for this campaign will appear here.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     );
   }
 

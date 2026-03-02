@@ -2,6 +2,15 @@
 
 import { useState } from 'react';
 import { ReadOnlyDocumentCard } from './documents/file-cards/read-only-document-card';
+import PdfPreview from './documents/pdf-preview';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/dashboard-ui/empty';
 import {
   Dialog,
   DialogContent,
@@ -17,9 +26,36 @@ export function CampaignDocumentsView( { documents }: CampaignDocumentsViewProps
 
   if ( !documents || documents.length === 0 ) {
     return (
-      <div className='flex items-center justify-center p-12 bg-muted/10 border-2 border-dashed rounded-xl'>
-        <p className='text-muted-foreground'>No documents uploaded</p>
-      </div>
+      <Empty className='border py-20 my-6 flex-1 bg-white'>
+        <EmptyHeader>
+          <EmptyMedia>
+            <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/maxleiter.png"
+                  alt="@maxleiter"
+                />
+                <AvatarFallback>LR</AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/evilrabbit.png"
+                  alt="@evilrabbit"
+                />
+                <AvatarFallback>ER</AvatarFallback>
+              </Avatar>
+            </div>
+          </EmptyMedia>
+          <EmptyTitle className='font-normal font-primary text-primary'>No documents uploaded</EmptyTitle>
+          <EmptyDescription>
+            There are no documents uploaded for this campaign yet.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     );
   }
 
@@ -49,13 +85,17 @@ export function CampaignDocumentsView( { documents }: CampaignDocumentsViewProps
       <Dialog open={ !!previewUrl } onOpenChange={ () => setPreviewUrl( null ) }>
         <DialogContent className="max-w-4xl max-h-[90vh]">
           <DialogTitle className="sr-only">Document Preview</DialogTitle>
-          { previewUrl && (
+          { previewUrl && ( previewUrl.toLowerCase().endsWith( '.pdf' ) || getFileName( previewUrl, 0 ).toLowerCase().endsWith( '.pdf' ) ) ? (
+            <div className="h-[80vh]">
+              <PdfPreview src={ previewUrl } />
+            </div>
+          ) : previewUrl ? (
             <iframe
               src={ previewUrl }
               className="w-full h-[80vh]"
               title="Document Preview"
             />
-          ) }
+          ) : null }
         </DialogContent>
       </Dialog>
     </>

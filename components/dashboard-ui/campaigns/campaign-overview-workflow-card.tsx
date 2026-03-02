@@ -1,12 +1,13 @@
 'use client';
 
-import { Activity, useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { ApplicationsTabContent } from './workflow-block/applications-tab-content';
 import { InvitationsTabContent } from './workflow-block/invitations-tab-content';
 import { SubmissionsTabContent } from './workflow-block/submissions-tab-content';
+import { AnimateActivity } from '@/components/ui/animate-activity';
 
 interface CampaignWorkflowCardProps {
   campaignId: string;
@@ -32,27 +33,35 @@ export function CampaignWorkflowCard( { campaignId, onViewAllInvitations }: Camp
           </TabsList>
         </Tabs>
 
-        <Activity mode={ activeTab === 'submissions' ? 'visible' : 'hidden' }>
-          <SubmissionsTabContent
-            campaignId={ campaignId }
-            isActive={ activeTab === 'submissions' }
-          />
-        </Activity>
+        <div className="mt-3">
+          <AnimateActivity
+            mode={ activeTab === 'submissions' ? 'visible' : 'hidden' }
+          >
+            <SubmissionsTabContent
+              campaignId={ campaignId }
+              isActive={ activeTab === 'submissions' }
+            />
+          </AnimateActivity>
 
-        <Activity mode={ activeTab === 'applications' ? 'visible' : 'hidden' }>
-          <ApplicationsTabContent
-            campaignId={ campaignId }
-            isActive={ activeTab === 'applications' }
-          />
-        </Activity>
+          <AnimateActivity
+            mode={ activeTab === 'applications' ? 'visible' : 'hidden' }
+          >
+            <ApplicationsTabContent
+              campaignId={ campaignId }
+              isActive={ activeTab === 'applications' }
+            />
+          </AnimateActivity>
 
-        <Activity mode={ activeTab === 'invitations' ? 'visible' : 'hidden' }>
-          <InvitationsTabContent
-            campaignId={ campaignId }
-            isActive={ activeTab === 'invitations' }
-            onViewAllInvitations={ onViewAllInvitations }
-          />
-        </Activity>
+          <AnimateActivity
+            mode={ activeTab === 'invitations' ? 'visible' : 'hidden' }
+          >
+            <InvitationsTabContent
+              campaignId={ campaignId }
+              isActive={ activeTab === 'invitations' }
+              onViewAllInvitations={ onViewAllInvitations }
+            />
+          </AnimateActivity>
+        </div>
       </CardContent>
     </Card>
   );

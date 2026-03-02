@@ -11,5 +11,9 @@
   "recentGigs": "Aktuelle Aufträge",
   "browseGigs": "Aufträge durchsuchen",
   "updatePortfolio": "Portfolio aktualisieren",
-  "noGigs": "Keine aktuellen Aufträge"
+  "noGigs": "Keine aktuellen Aufträge",
+  "earningsPage": {
+    "title": "Einnahmen",
+    "description": "Verfolgen Sie Ihren Zahlungsverlauf und Ihre Einnahmen aus abgeschlossenen Aufträgen."
+  }
 }

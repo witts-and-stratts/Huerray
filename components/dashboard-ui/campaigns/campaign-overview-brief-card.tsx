@@ -3,6 +3,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { ModelCampaign } from '@/components/campaigns/types';
+import { WrappedCard } from '../wrapped-card';
+import { Badge } from '@/components/ui/badge';
+import { stripTags } from '@/lib/utils';
 
 interface CampaignBriefCardProps {
   campaign: ModelCampaign;
@@ -27,51 +30,45 @@ export function CampaignBriefCard( { campaign, keywordList }: CampaignBriefCardP
         </div>
       </CardHeader>
       <CardContent className="space-y-4 text-sm">
-        <div>
-          <p className="ad-stat-label">Description</p>
-          <p className="mt-1 leading-relaxed text-foreground/85">{ campaign.description || 'No description provided.' }</p>
+        <WrappedCard title='Description' variant='flush'>
+          <p className="font-regular leading-relaxed text-foreground/85" dangerouslySetInnerHTML={ { __html: stripTags( campaign.description!, [ 'p', ] ) || 'No description provided.' } } />
+        </WrappedCard>
+
+        <div className="grid grid-cols-1 gap-4">
+          <WrappedCard title='Do&apos;s' variant='flush'>
+            <p className="font-regular leading-relaxed text-foreground/85" dangerouslySetInnerHTML={ { __html: stripTags( campaign.dos!, [ 'p', ] ) || 'No guidance provided.' } } />
+          </WrappedCard>
+          <WrappedCard title='Don&apos;ts' variant='flush'>
+            <p className="font-regular leading-relaxed text-foreground/85" dangerouslySetInnerHTML={ { __html: stripTags( campaign.donts!, [ 'p', ] ) || 'No restrictions provided.' } } />
+          </WrappedCard>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div>
-            <p className="ad-stat-label">Do&apos;s</p>
-            <p className="mt-1 leading-relaxed text-foreground/85">{ campaign.dos || 'No guidance provided.' }</p>
-          </div>
-          <div>
-            <p className="ad-stat-label">Don&apos;ts</p>
-            <p className="mt-1 leading-relaxed text-foreground/85">{ campaign.donts || 'No restrictions provided.' }</p>
-          </div>
+        <div className="grid grid-cols-1 gap-4">
+          <WrappedCard title='Category' variant='flush'>
+            <p className="font-regular capitalize">{ stripTags( campaign.category!, [ 'p', ] ) || 'N/A' }</p>
+          </WrappedCard>
+          <WrappedCard title='Tone of Voice' variant='flush'>
+            <p className="font-regular capitalize">{ stripTags( campaign.tone_of_voice!, [ 'p', ] ) || 'N/A' }</p>
+          </WrappedCard>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div>
-            <p className="ad-stat-label">Category</p>
-            <p className="mt-1 font-medium capitalize">{ campaign.category || 'N/A' }</p>
-          </div>
-          <div>
-            <p className="ad-stat-label">Tone of Voice</p>
-            <p className="mt-1 font-medium capitalize">{ campaign.tone_of_voice || 'N/A' }</p>
-          </div>
-        </div>
-
-        <div>
-          <p className="ad-stat-label">Keywords</p>
+        <WrappedCard title='Keywords'>
           { keywordList.length > 0 ? (
             <div className="mt-2 flex flex-wrap gap-1.5">
               { keywordList.map( ( keyword ) => (
-                <span
+                <Badge
                   key={ keyword }
                   className="inline-flex items-center rounded-md border border-border/70 bg-muted/40 px-2 py-0.5 text-xs text-foreground/80"
                 >
                   { keyword }
-                </span>
+                </Badge>
               ) ) }
             </div>
           ) : (
             <p className="mt-1 text-foreground/70">No keywords defined.</p>
           ) }
-        </div>
+        </WrappedCard>
       </CardContent>
-    </Card>
+    </Card >
   );
 }

@@ -1,8 +1,8 @@
 'use client';
 
 import { Button } from '@/components/dashboard-ui/button';
-import { ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
-import { useState, useEffect, useCallback } from 'react';
+import { ChevronLeft, ChevronRight, Download, Loader2 } from 'lucide-react';
+import { useState, useEffect, useCallback, useMemo, useTransition } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import useMeasure from 'react-use-measure';
 
@@ -16,12 +16,34 @@ interface PdfPreviewProps {
 export default function PdfPreview( { src }: PdfPreviewProps ) {
   const [ numPages, setNumPages ] = useState<number>( 0 );
   const [ pageNumber, setPageNumber ] = useState<number>( 1 );
+  const [ isPending, startTransition ] = useTransition();
+
+  const handleDownload = () => {
+    startTransition( async () => {
+      try {
+        const response = await fetch( src, { credentials: 'include' } );
+        const blob = await response.blob();
+        const url = URL.createObjectURL( blob );
+        const a = document.createElement( 'a' );
+        a.href = url;
+        a.download = src.split( '/' ).pop()?.split( '?' )[ 0 ] || 'document.pdf';
+        document.body.appendChild( a );
+        a.click();
+        document.body.removeChild( a );
+        URL.revokeObjectURL( url );
+      } catch {
+        window.open( src, '_blank', 'noopener,noreferrer' );
+      }
+    } );
+  };
   const [ pageDimensions, setPageDimensions ] = useState<{ width: number; height: number; } | null>( null );
   const [ ref, bounds ] = useMeasure();
 
   const onDocumentLoadSuccess = ( { numPages }: { numPages: number; } ) => {
     setNumPages( numPages );
   };
+
+  const pdfFile = useMemo( () => ( { url: src, withCredentials: true } ), [ src ] );
 
   const goToPrevPage = useCallback( () => {
     setPageNumber( p => Math.max( 1, p - 1 ) );
@@ -60,15 +82,15 @@ export default function PdfPreview( { src }: PdfPreviewProps ) {
       }
     };
 
-    window.addEventListener( 'keydown', handleKeyDown );
-    return () => window.removeEventListener( 'keydown', handleKeyDown );
+    window.addEventListener( 'keydown', handleKeyDown, { capture: true } );
+    return () => window.removeEventListener( 'keydown', handleKeyDown, { capture: true } );
   }, [ goToPrevPage, goToNextPage, pageNumber, numPages ] );
 
   return (
     <div className='flex flex-col items-center h-full w-full overflow-hidden'>
       <div ref={ ref } className='flex-1 overflow-auto w-full h-full flex justify-center p-4 bg-gray-100 rounded-md relative'>
         <Document
-          file={ src }
+          file={ pdfFile }
           onLoadSuccess={ onDocumentLoadSuccess }
           loading={
             <div className="flex items-center gap-2 text-muted-foreground absolute inset-0 m-auto h-fit w-fit">
@@ -107,31 +129,44 @@ export default function PdfPreview( { src }: PdfPreviewProps ) {
           ) }
         </Document>
       </div>
-      { numPages > 1 && (
-        <div className="flex items-center gap-4 py-1 mt-2 bg-background/95 backdrop-blur rounded-full px-1 shadow-sm border">
-          <Button
-            variant="outline"
-            size="icon"
-            disabled={ pageNumber <= 1 }
-            onClick={ () => setPageNumber( p => p - 1 ) }
-            className={ 'rounded-full' }
-          >
-            <ChevronLeft className='h-3 w-3' />
-          </Button>
-          <span className="text-xs font-medium">
-            Page { pageNumber } of { numPages }
-          </span>
-          <Button
-            variant="outline"
-            size="icon"
-            disabled={ pageNumber >= numPages }
-            onClick={ () => setPageNumber( p => p + 1 ) }
-            className={ 'rounded-full' }
-          >
-            <ChevronRight className='h-3 w-3' />
-          </Button>
-        </div>
-      ) }
+      <div className="flex items-center gap-2 py-1 mt-2 bg-background/95 backdrop-blur rounded-full px-1 shadow-sm border">
+        { numPages > 1 && (
+          <>
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={ pageNumber <= 1 }
+              onClick={ () => setPageNumber( p => p - 1 ) }
+              className="rounded-full"
+            >
+              <ChevronLeft className='h-3 w-3' />
+            </Button>
+            <span className="text-xs font-medium px-2">
+              Page { pageNumber } of { numPages }
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={ pageNumber >= numPages }
+              onClick={ () => setPageNumber( p => p + 1 ) }
+              className="rounded-full"
+            >
+              <ChevronRight className='h-3 w-3' />
+            </Button>
+            <div className="w-px h-4 bg-border mx-1" />
+          </>
+        ) }
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full"
+          onClick={ handleDownload }
+          disabled={ isPending }
+        >
+          { isPending ? <Loader2 className="h-3 w-3 animate-spin" /> : <Download className="h-3 w-3" /> }
+          <span className="sr-only">Download PDF</span>
+        </Button>
+      </div>
     </div>
   );
 }

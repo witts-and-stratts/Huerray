@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **age_max** | **number** |  | [optional] [default to undefined]
 **age_min** | **number** |  | [optional] [default to undefined]
 **ambience** | **string** |  | [optional] [default to undefined]
-**brand** | [**ModelsBrandResponse**](ModelsBrandResponse.md) |  | [optional] [default to undefined]
 **campaign** | [**ModelsCampaignResponse**](ModelsCampaignResponse.md) |  | [optional] [default to undefined]
 **campaign_id** | **string** |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
@@ -38,7 +37,6 @@ const instance: ModelsGigResponse = {
     age_max,
     age_min,
     ambience,
-    brand,
     campaign,
     campaign_id,
     campaign_name,

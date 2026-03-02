@@ -3,6 +3,7 @@
 import { ActionMenu, MenuAction } from "@/components/dashboard-ui/action-menu";
 import { ModelsNotificationListResponse, ModelsNotificationResponse } from "@/lib/api/generated";
 import { useDeleteNotification, useMarkAllNotificationsAsRead, useMarkNotificationAsRead, useNotifications } from "@/lib/api/hooks/notifications";
+import { config } from "@/lib/config";
 import { useAuth } from "@/lib/auth/auth-context";
 import { cn } from "@/lib/dashboard-utils";
 import { getNotificationActionLabel, getNotificationsPagePath } from "@/lib/notification-utils";
@@ -21,7 +22,8 @@ export function Notifications() {
 
   // Fetch notifications
   const { data: response, isLoading } = useNotifications( 1, 20, false, {
-    refetchInterval: 30000,
+    refetchInterval: config.polling.notificationsInterval,
+    refetchIntervalInBackground: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,

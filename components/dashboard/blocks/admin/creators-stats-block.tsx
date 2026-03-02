@@ -1,16 +1,63 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
-import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from '@/components/dashboard-ui/avatar';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
-import { creatorKpis, recentCreators } from './dashboard-mock-data';
+'use client';
+import Link from 'next/link';
+import { Activity, useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Badge } from '@/components/dashboard-ui/badge';
+import { Button } from '@/components/dashboard-ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
+import { Skeleton } from '@/components/dashboard-ui/skeleton';
+import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { useCreators } from '@/lib/api/hooks/creators';
+import type { ModelsCreatorResponse } from '@/lib/api/generated/models';
 
 export function CreatorsStatsBlock() {
-  const parsed = creatorKpis.map( ( item ) => ( {
-    ...item,
-    numeric: Number( item.value.replace( /,/g, '' ) ),
-  } ) );
-  const maxValue = Math.max( ...parsed.map( ( item ) => item.numeric ) );
-  const visibleCreators = recentCreators.slice( 0, 5 );
-  const remainingCount = Math.max( 0, recentCreators.length - visibleCreators.length );
+  const [ activeTab, setActiveTab ] = useState<'stats' | 'recent'>( 'stats' );
+  const { data: creatorsResponse, isLoading, isError } = useCreators( { limit: 100, page: 1 } );
+  const creators = useMemo( () => ( creatorsResponse?.data || [] ) as ModelsCreatorResponse[], [ creatorsResponse ] );
+
+  const parsed = useMemo( () => {
+    const total = creatorsResponse?.pagination?.total || creators.length;
+    const approved = creators.filter( ( c ) => {
+      const status = String( c.creator_status || '' ).toLowerCase();
+      return status === 'approved';
+    } ).length;
+    const pending = creators.filter( ( c ) => {
+      const status = String( c.creator_status || '' ).toLowerCase();
+      return [ 'pending_approval', 'pending' ].includes( status );
+    } ).length;
+    const returned = creators.filter( ( c ) => {
+      const status = String( c.creator_status || '' ).toLowerCase();
+      return status === 'returned';
+    } ).length;
+
+    return [
+      { label: 'Total', value: `${ total }`, numeric: total },
+      { label: 'Approved', value: `${ approved }`, numeric: approved },
+      { label: 'Pending', value: `${ pending }`, numeric: pending },
+      { label: 'Returned', value: `${ returned }`, numeric: returned },
+    ];
+  }, [ creators, creatorsResponse?.pagination?.total ] );
+
+  const recentCreators = useMemo( () => {
+    return [ ...creators ]
+      .sort( ( a, b ) => {
+        const aName = `${ a.first_name || '' } ${ a.last_name || '' }`.trim();
+        const bName = `${ b.first_name || '' } ${ b.last_name || '' }`.trim();
+        return aName.localeCompare( bName );
+      } )
+      .slice( 0, 10 );
+  }, [ creators ] );
+
+  const maxValue = Math.max( ...parsed.map( ( item ) => item.numeric ), 1 );
+
+  const statusVariant = ( status: string ) => {
+    const normalized = status.toLowerCase();
+    if ( normalized === 'approved' ) return 'secondary' as const;
+    if ( [ 'rejected', 'returned' ].includes( normalized ) ) return 'destructive' as const;
+    return 'outline' as const;
+  };
 
   return (
     <Card className="ad-summary-card">
@@ -18,56 +65,126 @@ export function CreatorsStatsBlock() {
         <CardTitle className="ad-card-title">Creators</CardTitle>
         <CardDescription className="ad-card-description">Creator base and approval status overview</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2">
-        { parsed.map( ( item ) => {
-          const widthPct = Math.max( 10, Math.round( ( item.numeric / maxValue ) * 100 ) );
+      <CardContent>
+        <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
+          <TabsList variant="default" className="mb-2 w-full">
+            <TabsTrigger value="stats" className={ 'text-xs font-normal' }>Stats</TabsTrigger>
+            <TabsTrigger value="recent" className={ 'text-xs font-normal' }>Recent Creators</TabsTrigger>
+          </TabsList>
 
-          return (
-            <div key={ item.label } className="rounded-lg border border-border/60 bg-white p-2.5">
-              <div className="mb-1.5 flex items-end justify-between gap-3">
-                <p className="ad-stat-label">{ item.label }</p>
-                <span className={ item.delta.startsWith( '-' ) ? 'ad-delta-negative-compact' : 'ad-delta-positive-compact' }>
-                  { item.delta }
-                </span>
-              </div>
-              <p className="mb-1.5 text-2xl leading-none font-primary font-medium">{ item.value }</p>
-              <div className="h-2 w-full rounded-full bg-muted">
-                <div
-                  className="h-2 rounded-full bg-primary transition-all"
-                  style={ { width: `${ widthPct }%` } }
-                />
-              </div>
-            </div>
-          );
-        } ) }
+          <Activity mode={ activeTab === 'stats' ? 'visible' : 'hidden' }>
+            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading creator stats...</p> }
+            { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load creator stats.</p> }
+            { !isLoading && !isError && (
+              <div className="grid grid-cols-2 gap-2">
+                { parsed.map( ( item ) => {
+                  const widthPct = Math.max( 10, Math.round( ( item.numeric / maxValue ) * 100 ) );
 
-        <div className="rounded-lg border border-border/60 bg-white p-2.5">
-          <p className="ad-stat-label mb-1.5">Recent Creators</p>
-          <div className="flex items-center justify-between gap-3">
-            <AvatarGroup>
-              { visibleCreators.map( ( creator ) => (
-                <Tooltip key={ creator.name }>
-                  <TooltipTrigger>
-                    <Avatar size="lg">
-                      <AvatarImage src={ creator.avatar } alt={ creator.name } />
-                      <AvatarFallback>{ creator.name.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
-                    </Avatar>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <span>{ creator.name }</span>
-                  </TooltipContent>
-                </Tooltip>
-              ) ) }
-              { remainingCount > 0 && (
-                <AvatarGroupCount className="size-10 text-base">+{ remainingCount }</AvatarGroupCount>
-              ) }
-            </AvatarGroup>
-            <p className="text-xs text-muted-foreground">
-              { recentCreators.slice( 0, 2 ).map( ( creator ) => creator.name ).join( ', ') }
-            </p>
-          </div>
-        </div>
+                  return (
+                    <div key={ item.label } className="rounded-lg border border-border/60 bg-white p-2.5">
+                      <div className="mb-1.5 flex items-end justify-between gap-3">
+                        <p className="ad-stat-label">{ item.label }</p>
+                      </div>
+                      <p className="mb-1.5 text-2xl leading-none font-primary font-medium">{ item.value }</p>
+                      <div className="h-2 w-full rounded-full bg-muted">
+                        <div
+                          className="h-2 rounded-full bg-primary transition-all"
+                          style={ { width: `${ widthPct }%` } }
+                        />
+                      </div>
+                    </div>
+                  );
+                } ) }
+              </div>
+            ) }
+          </Activity>
+
+          <Activity mode={ activeTab === 'recent' ? 'visible' : 'hidden' }>
+            { isLoading && (
+              <div className="space-y-2">
+                { Array.from( { length: 4 } ).map( ( _, index ) => (
+                  <div key={ `recent-creator-skeleton-${ index }` } className="rounded-lg border border-border/60 bg-white p-2.5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex min-w-0 items-start gap-2.5">
+                        <Skeleton className="h-8 w-8 shrink-0 rounded-full" />
+                        <div className="min-w-0 space-y-1.5">
+                          <Skeleton className="h-4 w-40" />
+                          <Skeleton className="h-3 w-28" />
+                        </div>
+                      </div>
+                      <Skeleton className="h-5 w-16 rounded-full" />
+                    </div>
+                  </div>
+                ) ) }
+              </div>
+            ) }
+            { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent creators.</p> }
+            { !isLoading && !isError && recentCreators.length === 0 && (
+              <p className="py-8 text-center text-xs text-muted-foreground">No creators yet</p>
+            ) }
+            { !isLoading && !isError && recentCreators.length > 0 && (
+              <ScrollArea className="h-[240px] pr-2" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
+                <motion.div className="space-y-2">
+                  <AnimatePresence>
+                    { recentCreators.map( ( creator, index ) => {
+                      const creatorId = creator.id || creator.creator_id;
+                      const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || 'Unknown Creator';
+                      const status = String( creator.creator_status || 'draft' );
+
+                      return (
+                        <motion.div
+                          initial={ { opacity: 0, y: 10 } }
+                          animate={ { opacity: 1, y: 0 } }
+                          exit={ { opacity: 0, y: -10 } }
+                          transition={ { duration: 0.8, delay: index * 0.05 } }
+                          key={ creatorId || `${ fullName }-${ index }` }
+                          className="rounded-lg border border-border/60 bg-white p-2.5"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex min-w-0 items-start gap-2.5">
+                              <Avatar size="sm" className="shrink-0">
+                                <AvatarImage
+                                  src={ creator.profile_image_url || '' }
+                                  alt={ fullName }
+                                />
+                                <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
+                              </Avatar>
+                              <div className="min-w-0">
+                                <Link
+                                  href={ creatorId ? `/admin/creators/${ creatorId }` : '/admin/creators' }
+                                  className="text-sm font-medium text-primary hover:underline underline-offset-2"
+                                >
+                                  { fullName }
+                                </Link>
+                                { creator.email && (
+                                  <p className="mt-0.5 text-xs text-muted-foreground/60">{ creator.email }</p>
+                                ) }
+                              </div>
+                            </div>
+                            <Badge variant={ statusVariant( status ) } className="h-5 px-1.5 py-0 text-[10px] font-medium capitalize">
+                              { status.replace( /_/g, ' ' ) }
+                            </Badge>
+                          </div>
+                        </motion.div>
+                      );
+                    } ) }
+                  </AnimatePresence>
+                </motion.div>
+              </ScrollArea>
+            ) }
+          </Activity>
+        </Tabs>
       </CardContent>
+      <CardFooter className="flex-col justify-end gap-2 text-sm grow">
+        <Button
+          variant="outline"
+          size={ 'sm' }
+          className="mt-2 w-full font-normal"
+          render={ <Link href="/admin/creators" /> }
+        >
+          View all Creators
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

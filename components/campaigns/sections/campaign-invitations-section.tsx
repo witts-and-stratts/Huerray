@@ -8,18 +8,43 @@ import { Loader2, Mail } from 'lucide-react';
 import { InvitationCard } from '@/components/creator/invitation-card';
 import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
 import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
+import { InviteCreatorsDialog } from '@/components/campaigns/invite-creators-dialog';
+import { GigSelectionDialog } from '@/components/campaigns/gig-selection-dialog';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyContent,
+} from '@/components/dashboard-ui/empty';
+import { Button } from '@/components/dashboard-ui/button';
+import Link from 'next/link';
+import { useRole } from '@/contexts/role-context';
 
 interface CampaignInvitationsSectionProps {
   campaignId: string;
+  campaignStatus?: string;
 }
 
 
-export function CampaignInvitationsSection( { campaignId }: CampaignInvitationsSectionProps ) {
+export function CampaignInvitationsSection( { campaignId, campaignStatus }: CampaignInvitationsSectionProps ) {
+  const role = useRole();
   const { data: invitationsData, isLoading, error } = useCampaignInvitations( campaignId );
   const [ selectedInvitation, setSelectedInvitation ] = useState<ModelsGigInvitationResponse | null>( null );
   const [ sheetOpen, setSheetOpen ] = useState( false );
   const [ selectedCreator, setSelectedCreator ] = useState<ModelsCreatorResponse | null>( null );
   const [ creatorSheetOpen, setCreatorSheetOpen ] = useState( false );
+  const [ selectionOpen, setSelectionOpen ] = useState( false );
+  const [ inviteSheetOpen, setInviteSheetOpen ] = useState( false );
+  const [ selectedGigId, setSelectedGigId ] = useState<string>( '' );
+
+  const handleGigSelect = ( gigId: string ) => {
+    setSelectedGigId( gigId );
+    setSelectionOpen( false );
+    setInviteSheetOpen( true );
+  };
 
   const handleViewDetails = ( invitation: ModelsGigInvitationResponse ) => {
     setSelectedInvitation( invitation );
@@ -51,13 +76,60 @@ export function CampaignInvitationsSection( { campaignId }: CampaignInvitationsS
 
   if ( invitations.length === 0 ) {
     return (
-      <div className="flex flex-col items-center justify-center p-12 bg-muted/10 border-2 border-dashed rounded-xl space-y-3">
-        <div className="p-4 bg-background rounded-full border shadow-sm">
-          <Mail className="size-8 text-muted-foreground" />
-        </div>
-        <p className="text-muted-foreground font-medium">No invitations yet</p>
-        <p className="text-sm text-muted-foreground">Invitations sent to creators for this campaign will appear here.</p>
-      </div>
+      <>
+        <Empty className='border py-20 my-6 flex-1 bg-white'>
+          <EmptyHeader>
+            <EmptyMedia>
+              <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/maxleiter.png"
+                    alt="@maxleiter"
+                  />
+                  <AvatarFallback>LR</AvatarFallback>
+                </Avatar>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/evilrabbit.png"
+                    alt="@evilrabbit"
+                  />
+                  <AvatarFallback>ER</AvatarFallback>
+                </Avatar>
+              </div>
+            </EmptyMedia>
+            <EmptyTitle className='font-normal font-primary text-primary'>No invitations yet</EmptyTitle>
+            <EmptyDescription>
+              { role === 'brand'
+                ? 'Invitations sent to creators for this campaign will appear here. You can sending sending invitations when your campaign has been approved'
+                : 'Invitations sent to creators for this campaign will appear here.'
+              }
+            </EmptyDescription>
+          </EmptyHeader>
+          { role === 'brand' && campaignStatus === 'running' && (
+            <EmptyContent>
+              <Button size='lg' className='min-w-[200px]' onClick={ () => setSelectionOpen( true ) }>Invite Creators</Button>
+            </EmptyContent>
+          ) }
+        </Empty>
+
+        <GigSelectionDialog
+          campaignId={ campaignId }
+          open={ selectionOpen }
+          onOpenChange={ setSelectionOpen }
+          onSelect={ handleGigSelect }
+        />
+
+        <InviteCreatorsDialog
+          campaignId={ campaignId }
+          gigId={ selectedGigId }
+          open={ inviteSheetOpen }
+          onOpenChange={ setInviteSheetOpen }
+        />
+      </>
     );
   }
 
@@ -88,6 +160,20 @@ export function CampaignInvitationsSection( { campaignId }: CampaignInvitationsS
         creator={ selectedCreator }
         open={ creatorSheetOpen }
         onOpenChange={ setCreatorSheetOpen }
+      />
+
+      <GigSelectionDialog
+        campaignId={ campaignId }
+        open={ selectionOpen }
+        onOpenChange={ setSelectionOpen }
+        onSelect={ handleGigSelect }
+      />
+
+      <InviteCreatorsDialog
+        campaignId={ campaignId }
+        gigId={ selectedGigId }
+        open={ inviteSheetOpen }
+        onOpenChange={ setInviteSheetOpen }
       />
     </>
   );

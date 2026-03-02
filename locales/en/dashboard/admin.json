@@ -28,6 +28,14 @@
     "title": "Gigs",
     "description": "View and manage all gigs across the platform."
   },
+  "invoicesPage": {
+    "title": "Invoices",
+    "description": "View and manage all invoices across the platform."
+  },
+  "paymentsPage": {
+    "title": "Payouts",
+    "description": "View and manage all creator payouts across the platform."
+  },
   "campaignOverview": {
     "workflow": {
       "title": "Workflow",

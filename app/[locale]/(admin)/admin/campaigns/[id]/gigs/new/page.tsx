@@ -6,11 +6,11 @@ import { Loader2 } from 'lucide-react';
 import * as React from 'react';
 
 import { useCreateGig } from '@/lib/api/hooks/gigs';
+import type { ApiError } from '@/lib/api/hooks/types';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
-import { ModelsCampaignResponse, ModelsCreateGigRequest, ModelsCreateGigRequestGenderRequirementEnum } from '@/lib/api/generated/models';
+import { ModelsCreateGigRequest, ModelsCreateGigRequestGenderRequirementEnum } from '@/lib/api/generated/models';
 import { GigForm } from '@/components/gigs/gig-form';
 import { CreateGigSchema } from '@/components/gigs/schema';
-import { ModelsStandardCampaignResponse, ModelsStandardGenericResponse } from '@/lib/api/generated/models';
 
 export default function CreateGigPage() {
   const params = useParams<{ id: string; }>();
@@ -28,8 +28,7 @@ export default function CreateGigPage() {
     );
   }
 
-  const campaign = ( campaignResponse as ModelsStandardCampaignResponse )?.data;
-  const campaignName = campaign?.campaign_name || 'Campaign';
+  const campaignName = campaignResponse?.campaign_name || 'Campaign';
 
   const handleSubmit = async ( data: CreateGigSchema ) => {
     const requestData: ModelsCreateGigRequest = {
@@ -46,10 +45,11 @@ export default function CreateGigPage() {
     try {
       await createGig.mutateAsync( requestData );
       toast.success( 'Gig created successfully' );
-      router.push( `/admin/campaigns/${ campaignId }` );
-    } catch ( error ) {
+      router.push( `/admin/campaigns/${ campaignId }#gigs` );
+    } catch ( err ) {
+      const error = err as ApiError;
       toast.error( 'Failed to create gig', {
-        description: ( error as any )?.response?.error.message,
+        description: error?.response?.data?.error?.message,
         richColors: true,
       } );
       console.error( 'Failed to create gig:', error );

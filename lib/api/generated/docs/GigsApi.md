@@ -16,7 +16,7 @@ All URIs are relative to */api/v1*
 |[**gigsIdStatusPut**](#gigsidstatusput) | **PUT** /gigs/{id}/status | Update gig status|
 |[**gigsInvitationsGet**](#gigsinvitationsget) | **GET** /gigs/invitations | Get creator invitations|
 |[**gigsInvitationsInvitationIdRespondPut**](#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to gig invitation|
-|[**gigsPost**](#gigspost) | **POST** /gigs/ | Create a new gig|
+|[**gigsPost**](#gigspost) | **POST** /gigs | Create a new gig|
 |[**gigsSearchGet**](#gigssearchget) | **GET** /gigs/search | Search gigs|
 
 # **gigsApplicationsApplicationIdStatusPut**
@@ -75,6 +75,7 @@ No authorization required
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**404** | Brand profile not found |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -244,6 +245,7 @@ No authorization required
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**404** | Creator profile not found |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -299,6 +301,7 @@ No authorization required
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**404** | Gig not found |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -468,6 +471,7 @@ No authorization required
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**404** | Brand profile not found |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -527,6 +531,7 @@ No authorization required
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**404** | Gig not found |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -586,6 +591,7 @@ No authorization required
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
 |**404** | Gig not found |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

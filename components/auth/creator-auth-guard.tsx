@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { fetchCreatorProfile, selectShouldFetchCreatorProfile } from '@/lib/redux/features/creator/creatorSlice';
 import { usePathname, useRouter, useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-
-// Background refresh interval (30 minutes)
-const BACKGROUND_REFRESH_INTERVAL = 30 * 60 * 1000;
+import { config } from '@/lib/config';
 
 export function CreatorAuthGuard( { children }: { children: React.ReactNode; } ) {
   const router = useRouter();
@@ -60,7 +58,7 @@ export function CreatorAuthGuard( { children }: { children: React.ReactNode; } )
     // Set up background refresh
     backgroundRefreshRef.current = setInterval( () => {
       dispatch( fetchCreatorProfile() );
-    }, BACKGROUND_REFRESH_INTERVAL );
+    }, config.polling.profileRefreshInterval );
 
     return () => {
       if ( backgroundRefreshRef.current ) {

@@ -12,6 +12,14 @@
   "manageUsers": "Gestionar usuarios",
   "reviewReports": "Revisar reportes",
   "noActivity": "No hay actividad reciente",
+  "invoicesPage": {
+    "title": "Facturas",
+    "description": "Ver y gestionar todas las facturas de la plataforma."
+  },
+  "paymentsPage": {
+    "title": "Pagos a creadores",
+    "description": "Ver y gestionar todos los pagos a creadores de la plataforma."
+  },
   "campaignOverview": {
     "workflow": {
       "title": "Flujo de trabajo",

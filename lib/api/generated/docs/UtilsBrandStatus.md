@@ -9,7 +9,7 @@
 
 * `BrandStatusReturned` (value: `'returned'`)
 
-* `BrandStatusActive` (value: `'active'`)
+* `BrandStatusActive` (value: `'approved'`)
 
 * `BrandStatusInactive` (value: `'inactive'`)
 

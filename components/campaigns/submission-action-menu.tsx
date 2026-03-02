@@ -11,6 +11,7 @@ import {
   useUpdateVideoSubmission,
   useUpdateVideoSubmissionStatus,
   useVideoSubmissionDecision,
+  useSubmitVideoSubmission,
 } from '@/lib/api/hooks/video-submissions';
 import { Check, Copy, ExternalLink, MoreVertical, Pencil, RefreshCw, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
@@ -19,6 +20,7 @@ import { SubmissionViewDialog } from './submission-view-dialog';
 import { SubmissionDecisionDialog } from './submission-decision-dialog';
 import { SubmissionUpdateDialog } from './submission-update-dialog';
 import { SubmissionStatusUpdateDialog } from './submission-status-update-dialog';
+import { ConfirmDialog } from '../dashboard-ui/confirm-dialog';
 
 interface SubmissionActionMenuProps {
   submission: ModelsVideoSubmissionResponse;
@@ -28,6 +30,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
   const updateSubmission = useUpdateVideoSubmission();
   const updateSubmissionStatus = useUpdateVideoSubmissionStatus();
   const submissionDecision = useVideoSubmissionDecision();
+  const submitVideoSubmission = useSubmitVideoSubmission();
 
   const [ isAcceptOpen, setIsAcceptOpen ] = useState( false );
   const [ isRejectOpen, setIsRejectOpen ] = useState( false );
@@ -41,6 +44,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
   const [ statusValue, setStatusValue ] = useState<UtilsVideoSubmissionStatus>(
     UtilsVideoSubmissionStatus.VideoSubmissionStatusPendingApproval
   );
+  const [ isConfirmOpen, setIsConfirmOpen ] = useState( false );
   const [ title, setTitle ] = useState( submission.title || '' );
   const [ description, setDescription ] = useState( submission.description || '' );
   const [ videoFile, setVideoFile ] = useState<File | null>( null );
@@ -77,6 +81,24 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
       return;
     }
     setIsViewOpen( true );
+  };
+
+  const handleConfirmSubmission = () => {
+    if ( !submission.id ) return;
+    setIsConfirmOpen( true );
+  };
+
+  const handleConfirmSubmissionSubmit = async () => {
+    if ( !submission.id ) return;
+    await toast.promise(
+      submitVideoSubmission.mutateAsync( { id: submission.id } ),
+      {
+        loading: 'Submitting for approval...',
+        success: 'Submission sent for approval',
+        error: 'Failed to submit for approval',
+      }
+    );
+    setIsConfirmOpen( false );
   };
 
   const isApprovedSubmission = ( submission.status || '' ).toLowerCase() === UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved;
@@ -206,6 +228,13 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
       },
     },
     {
+      label: 'Confirm Submission',
+      icon: Check,
+      allowedRoles: [ 'creator' ],
+      condition: ( current ) => !!current.id && ( current.status === UtilsVideoSubmissionStatus.VideoStatusCreated ),
+      action: () => handleConfirmSubmission(),
+    },
+    {
       label: 'Copy Submission ID',
       separator: true,
       condition: ( current ) => !!current.id,
@@ -333,6 +362,18 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         } }
         isLoading={ updateSubmissionStatus.isPending }
       />
+
+      <ConfirmDialog
+        open={ isConfirmOpen }
+        onOpenChange={ setIsConfirmOpen }
+        title="Confirm Submission"
+        description="Submit this video for approval? Once submitted, it will be reviewed by an admin."
+        confirmLabel="Submit for Approval"
+        onConfirm={ handleConfirmSubmissionSubmit }
+        isLoading={ submitVideoSubmission.isPending }
+        loadingText="Submitting..."
+      />
     </>
   );
 }
+

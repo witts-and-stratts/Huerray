@@ -18,7 +18,7 @@
 import type { UtilsGigApplicationStatus } from './utils-gig-application-status';
 
 export interface ModelsUpdateGigApplicationRequest {
-    'gig_status': UtilsGigApplicationStatus;
+    'application_status': UtilsGigApplicationStatus;
 }
 
 

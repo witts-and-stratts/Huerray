@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/dashboard-ui/button";
 import { Loader2 } from "lucide-react";
 import { ReactNode } from 'react';
+import { cn } from "@/lib/dashboard-utils";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -58,7 +59,7 @@ export function ConfirmDialog( {
 
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>
-      <DialogContent className={ className }>
+      <DialogContent className={ cn( 'w-[500px]', className ) }>
         <DialogHeader>
           <DialogTitle className='dialog__title'>
             { title }

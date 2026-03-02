@@ -100,8 +100,8 @@ export function useGigsByCampaign(
  * Hook to create a new gig
  */
 export function useCreateGig(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, ModelsCreateGigRequest>
-): UseMutationResult<ModelsStandardGenericResponse, Error, ModelsCreateGigRequest> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, ModelsCreateGigRequest>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, ModelsCreateGigRequest> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -122,8 +122,8 @@ export function useCreateGig(
  * Hook to update gig status
  */
 export function useUpdateGigStatus(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { id: string; status: ModelsGigStatusUpdateRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, Error, { id: string; status: ModelsGigStatusUpdateRequest }> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string; status: ModelsGigStatusUpdateRequest }>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string; status: ModelsGigStatusUpdateRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -142,8 +142,8 @@ export function useUpdateGigStatus(
  * Hook to update a gig
  */
 export function useUpdateGig(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { id: string; gig: ModelsUpdateGigRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, Error, { id: string; gig: ModelsUpdateGigRequest }> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string; gig: ModelsUpdateGigRequest }>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string; gig: ModelsUpdateGigRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -162,8 +162,8 @@ export function useUpdateGig(
  * Hook to delete a gig
  */
 export function useDeleteGig(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, string>
-): UseMutationResult<ModelsStandardGenericResponse, Error, string> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, string>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, string> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -244,8 +244,8 @@ export function useGigInvitations(
  * Hook to invite a creator to a gig
  */
 export function useInviteCreatorToGig(
-  options?: UseMutationOptions<ModelsStandardGigInvitationResponse, Error, { id: string; invitation: ModelsGigInvitationRequest }>
-): UseMutationResult<ModelsStandardGigInvitationResponse, Error, { id: string; invitation: ModelsGigInvitationRequest }> {
+  options?: UseMutationOptions<ModelsStandardGigInvitationResponse, ApiError, { id: string; invitation: ModelsGigInvitationRequest }>
+): UseMutationResult<ModelsStandardGigInvitationResponse, ApiError, { id: string; invitation: ModelsGigInvitationRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -264,8 +264,8 @@ export function useInviteCreatorToGig(
  * Hook to respond to an invitation
  */
 export function useRespondToInvitation(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsGigInvitationResponseRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, Error, { invitationId: string; response: ModelsGigInvitationResponseRequest }> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { invitationId: string; response: ModelsGigInvitationResponseRequest }>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, { invitationId: string; response: ModelsGigInvitationResponseRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -284,8 +284,8 @@ export function useRespondToInvitation(
  * Hook to update a gig application status (accept/decline)
  */
 export function useUpdateApplicationStatus(
-  options?: UseMutationOptions<ModelsStandardGigApplicationResponse, Error, { applicationId: string; request: ModelsUpdateGigApplicationRequest }>
-): UseMutationResult<ModelsStandardGigApplicationResponse, Error, { applicationId: string; request: ModelsUpdateGigApplicationRequest }> {
+  options?: UseMutationOptions<ModelsStandardGigApplicationResponse, ApiError, { applicationId: string; request: ModelsUpdateGigApplicationRequest }>
+): UseMutationResult<ModelsStandardGigApplicationResponse, ApiError, { applicationId: string; request: ModelsUpdateGigApplicationRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {

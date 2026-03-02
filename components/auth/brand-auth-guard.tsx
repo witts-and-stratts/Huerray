@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { fetchBrandProfile, selectShouldFetchProfile } from '@/lib/redux/features/brand/brandSlice';
 import { usePathname, useRouter, useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-
-// Background refresh interval (30 minutes)
-const BACKGROUND_REFRESH_INTERVAL = 30 * 60 * 1000;
+import { config } from '@/lib/config';
 
 export function BrandAuthGuard( { children }: { children: React.ReactNode; } ) {
   const router = useRouter();
@@ -60,7 +58,7 @@ export function BrandAuthGuard( { children }: { children: React.ReactNode; } ) {
     // Set up background refresh
     backgroundRefreshRef.current = setInterval( () => {
       dispatch( fetchBrandProfile() );
-    }, BACKGROUND_REFRESH_INTERVAL );
+    }, config.polling.profileRefreshInterval );
 
     return () => {
       if ( backgroundRefreshRef.current ) {

@@ -233,6 +233,7 @@ export const DatePickerInput = ( {
         onChange={ handleInputChange }
         onKeyDown={ handleKeyDown }
         onBlur={ handleBlur }
+        onClick={ () => { if ( !disabled ) setOpen( true ); } }
         disabled={ disabled }
         { ...ariaConfig }
       />

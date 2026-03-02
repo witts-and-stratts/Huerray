@@ -133,6 +133,7 @@ export * from './utils-country-code';
 export * from './utils-creator-status';
 export * from './utils-gender';
 export * from './utils-gig-application-status';
+export * from './utils-gig-invitation-status';
 export * from './utils-gig-status';
 export * from './utils-invoice-status';
 export * from './utils-payment-item-status';

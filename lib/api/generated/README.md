@@ -119,7 +119,7 @@ Class | Method | HTTP request | Description
 *GigsApi* | [**gigsIdStatusPut**](docs/GigsApi.md#gigsidstatusput) | **PUT** /gigs/{id}/status | Update gig status
 *GigsApi* | [**gigsInvitationsGet**](docs/GigsApi.md#gigsinvitationsget) | **GET** /gigs/invitations | Get creator invitations
 *GigsApi* | [**gigsInvitationsInvitationIdRespondPut**](docs/GigsApi.md#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to gig invitation
-*GigsApi* | [**gigsPost**](docs/GigsApi.md#gigspost) | **POST** /gigs/ | Create a new gig
+*GigsApi* | [**gigsPost**](docs/GigsApi.md#gigspost) | **POST** /gigs | Create a new gig
 *GigsApi* | [**gigsSearchGet**](docs/GigsApi.md#gigssearchget) | **GET** /gigs/search | Search gigs
 *InvoiceApi* | [**invoicesIdGeneratePdfPost**](docs/InvoiceApi.md#invoicesidgeneratepdfpost) | **POST** /invoices/{id}/generate-pdf | Generate PDF for existing invoice
 *InvoiceApi* | [**invoicesIdGet**](docs/InvoiceApi.md#invoicesidget) | **GET** /invoices/{id} | Get invoice by ID
@@ -305,6 +305,7 @@ Class | Method | HTTP request | Description
  - [UtilsCreatorStatus](docs/UtilsCreatorStatus.md)
  - [UtilsGender](docs/UtilsGender.md)
  - [UtilsGigApplicationStatus](docs/UtilsGigApplicationStatus.md)
+ - [UtilsGigInvitationStatus](docs/UtilsGigInvitationStatus.md)
  - [UtilsGigStatus](docs/UtilsGigStatus.md)
  - [UtilsInvoiceStatus](docs/UtilsInvoiceStatus.md)
  - [UtilsPaymentItemStatus](docs/UtilsPaymentItemStatus.md)

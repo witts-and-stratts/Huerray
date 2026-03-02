@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** |  | [default to undefined]
+**status** | [**UtilsGigInvitationStatus**](UtilsGigInvitationStatus.md) |  | [default to undefined]
 
 ## Example
 

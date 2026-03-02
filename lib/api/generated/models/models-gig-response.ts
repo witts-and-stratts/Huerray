@@ -15,16 +15,12 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsBrandResponse } from './models-brand-response';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { ModelsCampaignResponse } from './models-campaign-response';
 
 export interface ModelsGigResponse {
     'age_max'?: number;
     'age_min'?: number;
     'ambience'?: string;
-    'brand'?: ModelsBrandResponse;
     'campaign'?: ModelsCampaignResponse;
     'campaign_id'?: string;
     'campaign_name'?: string;

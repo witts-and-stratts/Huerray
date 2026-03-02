@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**gig_status** | [**UtilsGigApplicationStatus**](UtilsGigApplicationStatus.md) |  | [default to undefined]
+**application_status** | [**UtilsGigApplicationStatus**](UtilsGigApplicationStatus.md) |  | [default to undefined]
 
 ## Example
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 import { ModelsUpdateGigApplicationRequest } from 'huerray-api';
 
 const instance: ModelsUpdateGigApplicationRequest = {
-    gig_status,
+    application_status,
 };
 ```
 

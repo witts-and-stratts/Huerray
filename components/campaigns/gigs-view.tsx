@@ -14,6 +14,15 @@ import {
   TableRow,
 } from '@/components/dashboard-ui/table';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyContent,
+} from '@/components/dashboard-ui/empty';
 
 // Inline Table View Component (extracted from previous gigs-table.tsx)
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
@@ -90,12 +99,49 @@ interface GigsViewProps {
   view: 'table' | 'cards';
   onViewGig: ( gig: ModelsGigResponse ) => void;
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
+  actionButtons?: React.ReactNode;
 }
 
-export function GigsView( { table, view, onViewGig, onCreateSubmission }: GigsViewProps ) {
+export function GigsView( { table, view, onViewGig, onCreateSubmission, actionButtons }: GigsViewProps ) {
   return (
     <div className='mt-1'>
-      { view === 'table' ? (
+      { table.getRowModel().rows.length === 0 ? (
+        <Empty className='border py-20 my-6 flex-1 bg-white'>
+          <EmptyHeader>
+            <EmptyMedia>
+              <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/maxleiter.png"
+                    alt="@maxleiter"
+                  />
+                  <AvatarFallback>LR</AvatarFallback>
+                </Avatar>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/evilrabbit.png"
+                    alt="@evilrabbit"
+                  />
+                  <AvatarFallback>ER</AvatarFallback>
+                </Avatar>
+              </div>
+            </EmptyMedia>
+            <EmptyTitle className='font-normal font-primary text-primary'>No gigs yet</EmptyTitle>
+            <EmptyDescription>
+              There are no gigs yet for this campaign.
+            </EmptyDescription>
+          </EmptyHeader>
+          { actionButtons && (
+            <EmptyContent>
+              { actionButtons }
+            </EmptyContent>
+          ) }
+        </Empty>
+      ) : view === 'table' ? (
         <GigsTableView table={ table } />
       ) : (
         <GigsCardsView table={ table } onViewGig={ onViewGig } onCreateSubmission={ onCreateSubmission } />

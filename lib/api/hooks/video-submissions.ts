@@ -49,8 +49,8 @@ export const videoSubmissionsKeys = {
  * Hook to create a new video submission
  */
 export function useCreateVideoSubmission(
-  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, Error, ModelsCreateVideoSubmissionRequest>
-): UseMutationResult<ModelsStandardVideoSubmissionResponse, Error, ModelsCreateVideoSubmissionRequest> {
+  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, ApiError, ModelsCreateVideoSubmissionRequest>
+): UseMutationResult<ModelsStandardVideoSubmissionResponse, ApiError, ModelsCreateVideoSubmissionRequest> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -122,8 +122,8 @@ export function useVideoSubmissionsByGig(
  * Hook for brand decision on a video submission (accept/reject)
  */
 export function useVideoSubmissionDecision(
-  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, Error, { id: string; data: ModelsBrandVideoDecisionRequest }>
-): UseMutationResult<ModelsStandardVideoSubmissionResponse, Error, { id: string; data: ModelsBrandVideoDecisionRequest }> {
+  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, ApiError, { id: string; data: ModelsBrandVideoDecisionRequest }>
+): UseMutationResult<ModelsStandardVideoSubmissionResponse, ApiError, { id: string; data: ModelsBrandVideoDecisionRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -144,8 +144,8 @@ export function useVideoSubmissionDecision(
  * Hook to update a video submission
  */
 export function useUpdateVideoSubmission(
-  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, Error, { id: string; submission: ModelsUpdateVideoSubmissionRequest }>
-): UseMutationResult<ModelsStandardVideoSubmissionResponse, Error, { id: string; submission: ModelsUpdateVideoSubmissionRequest }> {
+  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, ApiError, { id: string; submission: ModelsUpdateVideoSubmissionRequest }>
+): UseMutationResult<ModelsStandardVideoSubmissionResponse, ApiError, { id: string; submission: ModelsUpdateVideoSubmissionRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -163,11 +163,33 @@ export function useUpdateVideoSubmission(
 }
 
 /**
+ * Hook for creator to submit a video submission for approval
+ */
+export function useSubmitVideoSubmission(
+  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, ApiError, { id: string }>
+): UseMutationResult<ModelsStandardVideoSubmissionResponse, ApiError, { id: string }> {
+  const queryClient = useQueryClient();
+
+  return useMutation( {
+    mutationFn: async ( { id } ) => {
+      const response = await videoSubmissionsApi.videosIdSubmitPut( { id } );
+      return response.data;
+    },
+    onSuccess: ( _response, variables ) => {
+      queryClient.invalidateQueries( { queryKey: videoSubmissionsKeys.lists() } );
+      queryClient.invalidateQueries( { queryKey: videoSubmissionsKeys.detail( variables.id ) } );
+      queryClient.invalidateQueries( { queryKey: [ 'campaigns' ] } );
+    },
+    ...options,
+  } );
+}
+
+/**
  * Hook for admin update of video submission status
  */
 export function useUpdateVideoSubmissionStatus(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, Error, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, Error, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }> {
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {

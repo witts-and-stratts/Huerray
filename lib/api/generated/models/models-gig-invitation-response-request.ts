@@ -13,16 +13,13 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsGigInvitationStatus } from './utils-gig-invitation-status';
 
 export interface ModelsGigInvitationResponseRequest {
-    'status': ModelsGigInvitationResponseRequestStatusEnum;
+    'status': UtilsGigInvitationStatus;
 }
 
-export const ModelsGigInvitationResponseRequestStatusEnum = {
-    Accepted: 'accepted',
-    Declined: 'declined'
-} as const;
-
-export type ModelsGigInvitationResponseRequestStatusEnum = typeof ModelsGigInvitationResponseRequestStatusEnum[keyof typeof ModelsGigInvitationResponseRequestStatusEnum];
 
 

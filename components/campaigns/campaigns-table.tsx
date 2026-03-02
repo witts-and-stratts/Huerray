@@ -130,22 +130,22 @@ export function CampaignsTable( {
               table={ table }
               view={ view }
               basePath={ basePath }
-              emptyTitle={ emptyTitle }
-              simpleEmptyState={ simpleEmptyState }
             />
           ) : (
-            <>
+            <div className='flex flex-col w-full flex-1 h-full'>
               <CampaignsTableToolbar
                 table={ table }
                 statuses={ statuses }
                 view={ view }
                 setView={ setView }
               />
-              <CampaignsView table={ table } view={ view } basePath={ basePath } />
+              <div className='flex-1'>
+                <CampaignsView table={ table } view={ view } basePath={ basePath } />
+              </div>
               <div className='px-5'>
                 <CampaignsTablePagination table={ table } />
               </div>
-            </>
+            </div>
           ) }
         </motion.div>
       ) }

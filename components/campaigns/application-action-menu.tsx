@@ -9,6 +9,7 @@ import { useUpdateApplicationStatus } from '@/lib/api/hooks/gigs';
 import { MoreVertical } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { toast } from 'sonner';
+import { SentenceCase } from '../text-case';
 
 interface ApplicationActionMenuProps {
   application: ModelsGigApplicationResponse;
@@ -31,7 +32,7 @@ export function ApplicationActionMenu( {
     updateStatus.mutate(
       {
         applicationId: application.id,
-        request: { gig_status: status },
+        request: { application_status: status },
       },
       {
         onSuccess: () => {
@@ -44,9 +45,10 @@ export function ApplicationActionMenu( {
           setAcceptDialogOpen( false );
           setDeclineDialogOpen( false );
         },
-        onError: () => {
+        onError: ( error ) => {
+          console.log( "Error", error );
           toast.error( "Failed to update application status", {
-            description: "Please try again later.",
+            description: <SentenceCase>{ error.response?.data?.error?.message! }</SentenceCase>,
             richColors: true,
           } );
         },
@@ -61,13 +63,13 @@ export function ApplicationActionMenu( {
       label: "Accept",
       action: () => setAcceptDialogOpen( true ),
       condition: () => isPending,
-      allowedRoles: [ "admin", "brand" ],
+      allowedRoles: [ "brand" ],
     },
     {
       label: "Decline",
       action: () => setDeclineDialogOpen( true ),
       condition: () => isPending,
-      allowedRoles: [ "admin", "brand" ],
+      allowedRoles: [ "brand" ],
       className: "text-destructive focus:text-destructive",
     },
   ];

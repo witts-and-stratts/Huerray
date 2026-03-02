@@ -30,9 +30,12 @@ export interface GigsTableProps {
   defaultView?: 'table' | 'cards';
   hideViewToggle?: boolean;
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
+  actionButtons?: React.ReactNode;
+  hideToolbar?: boolean;
+  hidePagination?: boolean;
 }
 
-export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false, isLoading = false, onCreateSubmission }: GigsTableProps ) {
+export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false, isLoading = false, actionButtons, hideToolbar = false, hidePagination = false, onCreateSubmission }: GigsTableProps ) {
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -41,9 +44,8 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
     React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ view, setView ] = React.useState<'table' | 'cards'>( defaultView );
-  type NewType = ModelsGigResponse;
 
-  const [ selectedGig, setSelectedGig ] = React.useState<NewType | null>( null );
+  const [ selectedGig, setSelectedGig ] = React.useState<ModelsGigResponse | null>( null );
   const [ editingGig, setEditingGig ] = React.useState<ModelsGigResponse | null>( null );
 
   const statuses = React.useMemo( () => {
@@ -88,24 +90,29 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
         <TableSkeleton />
       ) : (
         <div className="space-y-4 bg-background grow relative overflow-auto">
-          <GigsTableToolbar
-            table={ table }
-            statuses={ statuses }
-            view={ view }
-            setView={ setView }
-            hideViewToggle={ hideViewToggle }
-          />
+          { data && data.length > 0 && !hideToolbar && (
+            <GigsTableToolbar
+              table={ table }
+              statuses={ statuses }
+              view={ view }
+              setView={ setView }
+              hideViewToggle={ hideViewToggle }
+            />
+          ) }
           <div className='px-5'>
             <GigsView
               table={ table }
               view={ view }
               onViewGig={ ( gig ) => setSelectedGig( gig ) }
               onCreateSubmission={ onCreateSubmission }
+              actionButtons={ actionButtons }
             />
           </div>
-          <div className="px-4">
-            <CampaignsTablePagination table={ table } />
-          </div>
+          { data && data.length > 0 && !hidePagination && (
+            <div className="px-4">
+              <CampaignsTablePagination table={ table } />
+            </div>
+          ) }
           <GigDetailsSheet
             gig={ selectedGig }
             open={ !!selectedGig }

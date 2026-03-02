@@ -15,8 +15,10 @@ import * as React from 'react';
 import { Activity } from 'react';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
 import { ChevronDown } from 'lucide-react';
+import { RoleGuard } from '@/components/auth/role-guard';
 import { ModelsCreatorResponse } from '@/lib/api/generated/models';
 import { useCreator } from '@/lib/api/hooks/creators';
+import { useUser } from '@/lib/api/hooks/users';
 import { getCountryFlag } from '@/lib/country-flags';
 import { cn } from '@/lib/dashboard-utils';
 import { calculateAge } from '@/lib/utils';
@@ -100,6 +102,7 @@ export function CreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDet
   } = c;
 
   const { data: creatorDetails } = useCreator( id || '' );
+  const { data: userDetails } = useUser( user_id || '' );
 
   const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || 'Unknown';
   const initials = fullName.slice( 0, 2 ).toUpperCase();
@@ -161,7 +164,12 @@ export function CreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDet
           <TabsList className="w-full border">
             <TabsTrigger value="overview" className="text-sm font-normal">Overview</TabsTrigger>
             <TabsTrigger value="bio" className="text-sm font-normal">Bio</TabsTrigger>
-            <TabsTrigger value="bank" className="text-sm font-normal">Bank Details</TabsTrigger>
+            <RoleGuard allowedRoles={ [ 'admin' ] }>
+              <TabsTrigger value="bank" className="text-sm font-normal">Bank Details</TabsTrigger>
+            </RoleGuard>
+            <RoleGuard allowedRoles={ [ 'admin' ] }>
+              <TabsTrigger value="user" className="text-sm font-normal">User</TabsTrigger>
+            </RoleGuard>
           </TabsList>
 
           {/* Overview */ }
@@ -228,21 +236,49 @@ export function CreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDet
           </Activity>
 
           {/* Bank Details */ }
-          <Activity mode={ activeTab === 'bank' ? 'visible' : 'hidden' }>
+          <RoleGuard allowedRoles={ [ 'admin' ] }>
+            <Activity mode={ activeTab === 'bank' ? 'visible' : 'hidden' }>
+              <div className="pt-4 space-y-3">
+                <WrappedCard title="Bank Account">
+                  <Row label="Account Name" value={ bank_account_name || 'N/A' } />
+                  <Separator />
+                  <Row label="Account Number" value={ bank_account_number || 'N/A' } />
+                  <Separator />
+                  <Row label="Bank Name" value={ bank_name || 'N/A' } />
+                  <Separator />
+                  <Row label="Routing Number" value={ bank_routing_number || 'N/A' } />
+                </WrappedCard>
+                <WrappedCard title="Tax Details">
+                  <Row label="Tax Country" value={ tax_country || 'N/A' } />
+                  <Separator />
+                  <Row label="Tax ID" value={ tax_id || 'N/A' } />
+                </WrappedCard>
+              </div>
+            </Activity>
+          </RoleGuard>
+
+          {/* User */ }
+          <Activity mode={ activeTab === 'user' ? 'visible' : 'hidden' }>
             <div className="pt-4 space-y-3">
-              <WrappedCard title="Bank Account">
-                <Row label="Account Name" value={ bank_account_name || 'N/A' } />
+              <WrappedCard title="Account">
+                <Row label="Username" value={ userDetails?.username || 'N/A' } />
                 <Separator />
-                <Row label="Account Number" value={ bank_account_number || 'N/A' } />
+                <Row label="Email" value={ userDetails?.email || 'N/A' } />
                 <Separator />
-                <Row label="Bank Name" value={ bank_name || 'N/A' } />
+                <Row label="Phone" value={ userDetails?.phone_number || 'N/A' } />
                 <Separator />
-                <Row label="Routing Number" value={ bank_routing_number || 'N/A' } />
+                <Row label="Type" value={ userDetails?.user_type || 'N/A' } />
+                <Separator />
+                <Row label="Status" value={ userDetails?.user_status || 'N/A' } />
+                <Separator />
+                <Row label="Verified" value={ userDetails?.email_verified ? 'Yes' : 'No' } />
               </WrappedCard>
-              <WrappedCard title="Tax Details">
-                <Row label="Tax Country" value={ tax_country || 'N/A' } />
+              <WrappedCard title="System">
+                <Row label="User ID" value={ <span className="font-mono break-all">{ userDetails?.id || user_id }</span> } />
                 <Separator />
-                <Row label="Tax ID" value={ tax_id || 'N/A' } />
+                <Row label="Created" value={ userDetails?.created_at ? toDateLabel( userDetails.created_at ) : 'N/A' } />
+                <Separator />
+                <Row label="Updated" value={ userDetails?.updated_at ? toDateLabel( userDetails.updated_at ) : 'N/A' } />
               </WrappedCard>
             </div>
           </Activity>

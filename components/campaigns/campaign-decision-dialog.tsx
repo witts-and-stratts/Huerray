@@ -96,7 +96,7 @@ export function CampaignDecisionDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="">
         <DialogHeader>
-          <DialogTitle className='text-h5! font-primary text-primary font-normal'>Campaign Decision</DialogTitle>
+          <DialogTitle className='text-h5! font-primary text-primary font-normal'>Decision</DialogTitle>
           <DialogDescription>
             Make a decision to accept or reject this campaign. This action cannot be undone.
           </DialogDescription>
@@ -110,7 +110,7 @@ export function CampaignDecisionDialog( {
             children={ ( field ) => (
               <SuperField
                 type="select"
-                label="Accept Campaign"
+                label="Decision"
                 id="decision"
                 value={ String( field.state.value ) }
                 onValueChange={ ( val: string | null ) => field.handleChange( val as 'yes' | 'no' ) }

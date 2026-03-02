@@ -6,8 +6,12 @@ import * as React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
-import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
-import { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
+import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
+import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
+import { ApplicationCard } from './application-card';
+import { GigDetailsSheet } from './gig-details-sheet';
+import { SubmissionViewDialog } from './submission-view-dialog';
 
 
 import { Button } from '@/components/dashboard-ui/button';
@@ -19,7 +23,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/dashboard-ui/dropdown-menu';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
-import { ModelCampaign, Person } from './types';
+import { ModelCampaign } from './types';
 import { AvatarCollage } from './avatar-collage';
 import { StatusBadge } from './status-badge';
 import { Row } from '@tanstack/react-table';
@@ -52,20 +56,99 @@ const ApplicationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   const { id } = row.original;
   const { data: applicationsData } = useCampaignApplications( id || '' );
   const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
+  const [ selected, setSelected ] = React.useState<ModelsGigApplicationResponse | null>( null );
 
-  const applicationPeople = applications.map( app => ( {
+  const people = applications.map( app => ( {
     first_name: app.creator?.first_name || '',
     last_name: app.creator?.last_name || '',
     avatar: app.creator?.profile_image_url || '',
-    creatorId: app.creator?.creator_id || ''
   } ) );
 
   return (
-    <div className='flex'>
-      <AnimatePresence>
-        <AvatarCollage people={ applicationPeople } />
-      </AnimatePresence>
-    </div>
+    <>
+      <div className='flex'>
+        <AnimatePresence>
+          <AvatarCollage
+            people={ people }
+            onPersonClick={ ( i ) => setSelected( applications[ i ] ) }
+          />
+        </AnimatePresence>
+      </div>
+      <Sheet open={ !!selected } onOpenChange={ ( open ) => !open && setSelected( null ) }>
+        <SheetContent className='w-[90%]! max-w-[420px]! overflow-y-auto'>
+          <SheetHeader className='mb-4'>
+            <SheetTitle className='font-normal text-primary font-primary'>Application</SheetTitle>
+          </SheetHeader>
+          { selected && <ApplicationCard application={ selected } /> }
+        </SheetContent>
+      </Sheet>
+    </>
+  );
+};
+
+const InvitationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+  const { id } = row.original;
+  const { data: invitationsData } = useCampaignInvitations( id || '' );
+  const invitations = ( invitationsData?.data || [] ) as ModelsGigInvitationResponse[];
+  const [ selected, setSelected ] = React.useState<ModelsGigInvitationResponse | null>( null );
+
+  const people = invitations.map( inv => ( {
+    first_name: inv.creator?.first_name || '',
+    last_name: inv.creator?.last_name || '',
+    avatar: inv.creator?.profile_image_url || '',
+  } ) );
+
+  return (
+    <>
+      <div className='flex'>
+        <AnimatePresence>
+          <AvatarCollage
+            people={ people }
+            onPersonClick={ ( i ) => setSelected( invitations[ i ] ) }
+          />
+        </AnimatePresence>
+      </div>
+      <GigDetailsSheet
+        gig={ ( selected?.gig as unknown as ModelsGigResponse ) || null }
+        open={ !!selected }
+        onOpenChange={ ( open ) => !open && setSelected( null ) }
+        invitationId={ selected?.id }
+        invitationStatus={ selected?.status }
+      />
+    </>
+  );
+};
+
+const SubmissionsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+  const { id } = row.original;
+  const { data: submissionsData } = useCampaignSubmissions( id || '' );
+  const submissions = ( submissionsData?.data || [] ) as ModelsVideoSubmissionResponse[];
+  const [ selected, setSelected ] = React.useState<ModelsVideoSubmissionResponse | null>( null );
+
+  const people = submissions.map( sub => ( {
+    first_name: sub.creator?.first_name || '',
+    last_name: sub.creator?.last_name || '',
+    avatar: sub.creator?.profile_image_url || '',
+  } ) );
+
+  return (
+    <>
+      <div className='flex'>
+        <AnimatePresence>
+          <AvatarCollage
+            people={ people }
+            onPersonClick={ ( i ) => setSelected( submissions[ i ] ) }
+          />
+        </AnimatePresence>
+      </div>
+      { selected && (
+        <SubmissionViewDialog
+          open={ !!selected }
+          onOpenChange={ ( open ) => !open && setSelected( null ) }
+          submission={ selected }
+        />
+      ) }
+    </>
   );
 };
 
@@ -150,20 +233,6 @@ export const getColumns = ( basePath: string = '/brand' ): ColumnDef<ModelCampai
     },
   },
   {
-    accessorKey: 'creators',
-    header: () => <span className='font-regular'>Creators</span>,
-    cell: ( { row } ) => {
-      const creators = row.getValue( 'creators' ) as Person[];
-      return (
-        <div className='flex'>
-          <AnimatePresence>
-            <AvatarCollage people={ creators } />
-          </AnimatePresence>
-        </div>
-      );
-    },
-  },
-  {
     accessorKey: 'applications',
     header: ( { column } ) => {
       return (
@@ -178,6 +247,16 @@ export const getColumns = ( basePath: string = '/brand' ): ColumnDef<ModelCampai
       );
     },
     cell: ( { row } ) => <ApplicationsCell row={ row } />,
+  },
+  {
+    accessorKey: 'invitations',
+    header: () => <span className='font-regular'>Invitations</span>,
+    cell: ( { row } ) => <InvitationsCell row={ row } />,
+  },
+  {
+    accessorKey: 'submissions',
+    header: () => <span className='font-regular'>Submissions</span>,
+    cell: ( { row } ) => <SubmissionsCell row={ row } />,
   },
   {
     id: 'actions',

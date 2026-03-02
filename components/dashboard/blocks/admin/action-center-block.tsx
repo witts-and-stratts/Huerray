@@ -41,7 +41,7 @@ const actions = [
   },
   {
     label: 'Check Payments',
-    href: '/admin/payments',
+    href: '/admin/payouts',
     detail: 'Payout health, transaction anomalies, and reconciliation',
     icon: CreditCard,
     priority: 'normal',

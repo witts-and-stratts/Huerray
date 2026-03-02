@@ -2,6 +2,7 @@
 
 import {
   ActionMenu,
+  AllowedRoles,
   MenuAction
 } from "@/components/dashboard-ui/action-menu";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
@@ -15,8 +16,8 @@ interface CreatorActionMenuProps {
   creator: ModelsCreatorResponse;
   creatorId?: string;
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
-  onApproveProfile: ( creator: ModelsCreatorResponse ) => void;
-  onRejectProfile: ( creator: ModelsCreatorResponse ) => void;
+  onApproveProfile?: ( creator: ModelsCreatorResponse ) => void;
+  onRejectProfile?: ( creator: ModelsCreatorResponse ) => void;
   trigger?: ReactNode;
 }
 
@@ -65,18 +66,18 @@ export function CreatorActionMenu( { creator, onViewDetails, onApproveProfile, o
       action: () => onViewDetails( creator ),
       separator: true,
     },
-    {
+    ...( onApproveProfile ? [ {
       label: "Approve Profile",
       action: () => onApproveProfile( creator ),
-      allowedRoles: [ 'admin' ],
-      condition: ( creator ) => creator.creator_status !== "approved",
-    },
-    {
+      allowedRoles: [ 'admin' ] as AllowedRoles[],
+      condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "approved",
+    } ] : [] ),
+    ...( onRejectProfile ? [ {
       label: "Reject Profile",
       action: () => onRejectProfile( creator ),
-      allowedRoles: [ 'admin' ],
-      condition: ( creator ) => creator.creator_status !== "rejected",
-    },
+      allowedRoles: [ 'admin' ] as AllowedRoles[],
+      condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "rejected",
+    } ] : [] ),
     {
       label: "Review Profile",
       action: handleReviewProfile,

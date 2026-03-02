@@ -11,5 +11,9 @@
   "recentGigs": "Missions récentes",
   "browseGigs": "Parcourir les missions",
   "updatePortfolio": "Mettre à jour le portfolio",
-  "noGigs": "Aucune mission récente"
+  "noGigs": "Aucune mission récente",
+  "earningsPage": {
+    "title": "Revenus",
+    "description": "Suivez votre historique de paiements et vos revenus issus des missions terminées."
+  }
 }

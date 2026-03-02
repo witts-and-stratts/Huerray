@@ -12,6 +12,14 @@
   "manageUsers": "Gérer les utilisateurs",
   "reviewReports": "Examiner les signalisations",
   "noActivity": "Aucune activité récente",
+  "invoicesPage": {
+    "title": "Factures",
+    "description": "Consulter et gérer toutes les factures de la plateforme."
+  },
+  "paymentsPage": {
+    "title": "Versements",
+    "description": "Consulter et gérer tous les versements aux créateurs de la plateforme."
+  },
   "campaignOverview": {
     "workflow": {
       "title": "Workflow",

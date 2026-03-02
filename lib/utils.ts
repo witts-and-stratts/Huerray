@@ -36,6 +36,30 @@ export const calculateAge = (dobString?: string) => {
   return age;
 };
 
+/**
+ * Strip HTML tags from a string.
+ *
+ * @param html     The HTML string to process.
+ * @param tags     Optional list of tag names to strip (e.g. ['b', 'i']).
+ *                 When omitted, ALL tags are stripped.
+ *
+ * @example
+ * stripTags('<p>Hello <b>world</b></p>')        // → 'Hello world'
+ * stripTags('<p>Hello <b>world</b></p>', ['b'])  // → '<p>Hello world</p>'
+ */
+export function stripTags( html: string, tags?: string[] ): string {
+  if ( !html ) return '';
+
+  if ( !tags || tags.length === 0 ) {
+    return html.replace( /<[^>]*>/g, '' );
+  }
+
+  const pattern = tags
+    .map( tag => tag.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ) )
+    .join( '|' );
+  return html.replace( new RegExp( `</?(${ pattern })(?:\\s[^>]*)?>`, 'gi' ), '' );
+}
+
 export const timeAgo = ( dateStr: string ) => {
   try {
     const date = new Date( dateStr );

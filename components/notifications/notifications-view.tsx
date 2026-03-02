@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Sheet, SheetContent } from "@/components/dashboard-ui/sheet";
 import { Tabs, TabsList, TabsTrigger } from "@/components/dashboard-ui/tabs";
 import { useDeleteNotification, useMarkNotificationAsRead, useNotifications } from "@/lib/api/hooks/notifications";
+import { config } from "@/lib/config";
 import { keepPreviousData } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight, Loader2, Search } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -30,7 +31,8 @@ export function NotificationsView() {
 
   const { data: response, isLoading, isPlaceholderData } = useNotifications( page, perPage, false, {
     placeholderData: keepPreviousData,
-    refetchInterval: 30000,
+    refetchInterval: config.polling.notificationsInterval,
+    refetchIntervalInBackground: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,

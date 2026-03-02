@@ -127,13 +127,10 @@ export function InvitationCard( { invitation, onViewDetails, onViewCreatorDetail
   const handleRespond = ( status: 'accepted' | 'declined', comment?: string ) => {
     if ( !invitation.id ) return;
 
-    const trimmedComment = comment?.trim();
-
     respondToInvitation( {
       invitationId: invitation.id,
       response: {
         status,
-        status_comment: trimmedComment
       }
     }, {
       onSuccess: () => {

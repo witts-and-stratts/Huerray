@@ -12,6 +12,14 @@
   "manageUsers": "Benutzer verwalten",
   "reviewReports": "Meldungen überprüfen",
   "noActivity": "Keine aktuelle Aktivität",
+  "invoicesPage": {
+    "title": "Rechnungen",
+    "description": "Alle Rechnungen der Plattform anzeigen und verwalten."
+  },
+  "paymentsPage": {
+    "title": "Auszahlungen",
+    "description": "Alle Creator-Auszahlungen der Plattform anzeigen und verwalten."
+  },
   "campaignOverview": {
     "workflow": {
       "title": "Workflow",

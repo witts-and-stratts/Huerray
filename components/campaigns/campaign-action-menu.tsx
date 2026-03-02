@@ -4,9 +4,9 @@ import { ActionMenu, MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
-import { useDeleteCampaign, useReplicateCampaign, useAdminCampaignApproval } from "@/lib/api/hooks/campaigns";
+import { useDeleteCampaign, useReplicateCampaign, useAdminCampaignApproval, useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
 import { useCreateInvoice } from "@/lib/api/hooks/invoices";
-import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum } from "@/lib/api/generated/models";
+import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsCampaignStatusUpdateRequestCampaignStatusEnum } from "@/lib/api/generated/models";
 import { MoreVertical } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,6 +15,8 @@ import { CampaignDecisionDialog } from "./campaign-decision-dialog";
 import { toast } from "sonner";
 import React, { ReactNode } from "react";
 import { ModelCampaign } from "./types";
+import { ApiError } from "@/lib/api/hooks/types";
+import { SentenceCase } from "../text-case";
 
 interface CampaignActionMenuProps {
   campaign: ModelCampaign;
@@ -39,10 +41,11 @@ export function CampaignActionMenu( {
   const deleteCampaign = useDeleteCampaign();
   const replicateCampaign = useReplicateCampaign();
   const approveCampaign = useAdminCampaignApproval();
+  const updateCampaignStatus = useUpdateCampaignStatus();
   const createInvoice = useCreateInvoice();
   const [ approveDialogOpen, setApproveDialogOpen ] = React.useState( false );
   const [ adminComment, setAdminComment ] = React.useState( '' );
-  const [ adminDecision, setAdminDecision ] = React.useState<'approve' | 'reject'>( 'approve' );
+  const [ adminDecision, setAdminDecision ] = React.useState<'approve' | 'reject' | 'complete'>( 'approve' );
   const [ deleteDialogOpen, setDeleteDialogOpen ] = React.useState( false );
   const [ renameDialogOpen, setRenameDialogOpen ] = React.useState( false );
   const [ decisionDialogOpen, setDecisionDialogOpen ] = React.useState( false );
@@ -80,36 +83,53 @@ export function CampaignActionMenu( {
   };
 
   const handleAdminApproval = () => {
-    if ( campaign.id ) {
-      const isApprove = adminDecision === 'approve';
-      approveCampaign.mutate( {
+    if ( !campaign.id ) return;
+
+    if ( adminDecision === 'complete' ) {
+      updateCampaignStatus.mutate( {
         id: campaign.id,
         request: {
-          campaign_status: isApprove
-            ? ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved
-            : ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned,
-          admin_comments: adminComment || ( isApprove ? "Approved by admin" : "Rejected by admin" ),
-          number_of_gigs_validated: isApprove ? true : undefined,
+          campaign_status: ModelsCampaignStatusUpdateRequestCampaignStatusEnum.Completed,
         }
       }, {
         onSuccess: () => {
-          toast.success( isApprove ? "Campaign approved successfully" : "Campaign rejected successfully" );
+          toast.success( "Campaign completed successfully" );
           setApproveDialogOpen( false );
-          setAdminComment( '' );
-          if ( !hideViewDetails ) {
-            router.refresh(); // Or handle navigation if needed
-          } else {
-            router.refresh();
-          }
         },
         onError: () => {
-          toast.error( isApprove ? "Failed to approve campaign" : "Failed to reject campaign" );
+          toast.error( "Failed to complete campaign" );
         }
       } );
+      return;
     }
+
+    const isApprove = adminDecision === 'approve';
+    approveCampaign.mutate( {
+      id: campaign.id,
+      request: {
+        campaign_status: isApprove
+          ? ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved
+          : ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned,
+        admin_comments: adminComment || ( isApprove ? "Approved by admin" : "Rejected by admin" ),
+        number_of_gigs_validated: isApprove ? true : undefined,
+      }
+    }, {
+      onSuccess: () => {
+        toast.success( isApprove ? "Campaign approved successfully" : "Campaign rejected successfully" );
+        setApproveDialogOpen( false );
+        setAdminComment( '' );
+      },
+      onError: ( err ) => {
+        const error = err as ApiError;
+        toast.error( isApprove ? "Failed to approve campaign" : "Failed to reject campaign", {
+          description: <SentenceCase>{ error.response?.data?.error?.message || "Please try again later." }</SentenceCase>,
+          richColors: true,
+        } );
+      }
+    } );
   };
 
-  const openAdminDecisionDialog = ( decision: 'approve' | 'reject' ) => {
+  const openAdminDecisionDialog = ( decision: 'approve' | 'reject' | 'complete' ) => {
     setAdminDecision( decision );
     setApproveDialogOpen( true );
   };
@@ -130,9 +150,10 @@ export function CampaignActionMenu( {
             } );
             setInvoiceDialogOpen( false );
           },
-          onError: () => {
+          onError: ( err ) => {
+            const error = err as ApiError;
             toast.error( "Failed to create invoice", {
-              description: "Please try again later.",
+              description: <SentenceCase>{ error.response?.data?.error?.message || "Please try again later." }</SentenceCase>,
               richColors: true,
             } );
           },
@@ -140,6 +161,8 @@ export function CampaignActionMenu( {
       );
     }
   };
+
+  const isCompleted = campaign.campaign_status === 'completed';
 
   const defaultActions: MenuAction<ModelCampaign>[] = [
     {
@@ -160,21 +183,24 @@ export function CampaignActionMenu( {
         </Link>
       ),
       allowedRoles: [ 'admin' ],
+      condition: () => !isCompleted,
     },
     {
       label: "Edit",
       action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
-      condition: () => campaign.campaign_status === "created" || campaign.campaign_status === "pending_approval"
+      condition: () => !isCompleted && ( campaign.campaign_status === "created" || campaign.campaign_status === "pending_approval" || campaign.campaign_status === "returned" ),
     },
     {
       label: "Rename",
       action: () => setRenameDialogOpen( true ),
       allowedRoles: [ "brand" ],
+      condition: () => !isCompleted,
     },
     {
       label: "Replicate",
       allowedRoles: [ "brand" ],
+      condition: () => !isCompleted,
       action: () => {
         if ( campaign.id ) {
           replicateCampaign.mutate( campaign.id, {
@@ -188,23 +214,31 @@ export function CampaignActionMenu( {
       label: "Approve Campaign",
       action: () => openAdminDecisionDialog( 'approve' ),
       allowedRoles: [ "admin" ],
-      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved && ( campaign.campaign_status === "running" || campaign.campaign_status === "pending_approval" )
+      condition: () => !isCompleted && campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved && ( campaign.campaign_status === "running" || campaign.campaign_status === "pending_approval" ),
     },
     {
       label: "Reject Campaign",
       action: () => openAdminDecisionDialog( 'reject' ),
       allowedRoles: [ "admin" ],
-      condition: () => campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned && campaign.campaign_status === "running"
+      condition: () => !isCompleted && campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned && campaign.campaign_status !== "running",
     },
     {
-      label: 'Approve Campaign',
+      label: "Complete Campaign",
+      action: () => openAdminDecisionDialog( 'complete' ),
+      allowedRoles: [ "admin" ],
+      condition: () => !isCompleted && campaign.campaign_status === "running" && campaign.number_of_gigs_validated === true,
+    },
+    {
+      label: 'Accept Campaign',
       action: () => handleDecision( 'yes' ),
       allowedRoles: [ 'brand' ],
+      condition: () => !isCompleted,
     },
     {
       label: 'Reject Campaign',
       action: () => handleDecision( 'no' ),
       allowedRoles: [ 'brand' ],
+      condition: () => !isCompleted,
     },
     {
       label: "Create Invoice",
@@ -217,6 +251,7 @@ export function CampaignActionMenu( {
       className: "text-destructive focus:text-destructive",
       allowedRoles: [ "admin" ],
       separator: true,
+      condition: () => !isCompleted,
     },
   ];
 
@@ -275,16 +310,16 @@ export function CampaignActionMenu( {
       <ConfirmDialog
         open={ approveDialogOpen }
         onOpenChange={ setApproveDialogOpen }
-        title={ adminDecision === 'approve' ? "Approve Campaign" : "Reject Campaign" }
+        title={ adminDecision === 'approve' ? "Approve Campaign" : ( adminDecision === 'complete' ? "Complete Campaign" : "Reject Campaign" ) }
         description={
           adminDecision === 'approve'
             ? "Are you sure you want to approve this campaign? This will make it active and visible to creators."
-            : "Are you sure you want to reject this campaign? The campaign will be returned to the brand."
+            : ( adminDecision === 'complete' ? "Are you sure you want to complete this campaign? This will make it inactive and visible to creators." : "Are you sure you want to reject this campaign? The campaign will be returned to the brand." )
         }
-        confirmLabel={ adminDecision === 'approve' ? "Approve" : "Reject" }
+        confirmLabel={ adminDecision === 'approve' ? "Approve" : ( adminDecision === 'complete' ? "Complete" : "Reject" ) }
         onConfirm={ handleAdminApproval }
-        isLoading={ approveCampaign.isPending }
-        loadingText={ adminDecision === 'approve' ? "Approving..." : "Rejecting..." }
+        isLoading={ approveCampaign.isPending || updateCampaignStatus.isPending }
+        loadingText={ adminDecision === 'approve' ? "Approving..." : ( adminDecision === 'complete' ? "Completing..." : "Rejecting..." ) }
       >
         <div className="flex flex-col gap-2 py-2">
           <label htmlFor="admin-comment" className="text-sm font-medium">

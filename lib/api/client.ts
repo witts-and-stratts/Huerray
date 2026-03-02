@@ -9,9 +9,9 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import Cookies from 'js-cookie';
 import { Configuration } from './generated';
 import { toast } from 'sonner';
+import { config } from '@/lib/config';
 
-// Get base URL from environment variable or use default
-export const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://backend.huerray.de/api/v1';
+export const BASE_URL = config.api.baseUrl;
 
 // Internal helper to handle auth failures
 const handleAuthFailure = () => {
@@ -38,7 +38,7 @@ const handleAuthFailure = () => {
 export const createApiClient = (): AxiosInstance => {
   const instance = axios.create({
     baseURL: BASE_URL,
-    timeout: 120000, // 120 seconds
+    timeout: config.api.timeout,
     headers: {
       'Content-Type': 'application/json',
     },

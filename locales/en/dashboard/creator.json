@@ -18,5 +18,9 @@
     "apply": "Apply Now",
     "budget": "Budget",
     "deadline": "Deadline"
+  },
+  "earningsPage": {
+    "title": "Earnings",
+    "description": "Track your payment history and earnings from completed gigs."
   }
 }

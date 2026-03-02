@@ -173,6 +173,7 @@ No authorization required
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**404** | User not found |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

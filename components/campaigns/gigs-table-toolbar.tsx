@@ -31,6 +31,7 @@ interface GigsTableToolbarProps {
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
   hideViewToggle?: boolean;
+  actionButtons?: React.ReactNode;
 }
 
 export function GigsTableToolbar( {
@@ -39,6 +40,7 @@ export function GigsTableToolbar( {
   view,
   setView,
   hideViewToggle = false,
+  actionButtons,
 }: GigsTableToolbarProps ) {
   const [ searchValue, setSearchValue ] = React.useState( '' );
 
@@ -184,6 +186,7 @@ export function GigsTableToolbar( {
             </DropdownMenu>
           </ButtonGroup>
         </ButtonGroup>
+        { actionButtons }
       </div>
     </div>
   );

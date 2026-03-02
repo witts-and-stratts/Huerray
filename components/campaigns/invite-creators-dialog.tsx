@@ -16,6 +16,8 @@ import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Button } from '@/components/dashboard-ui/button';
 import { useInviteCreatorToGig, useGigInvitations } from '@/lib/api/hooks/gigs';
+import { campaignsKeys } from '@/lib/api/hooks/campaigns';
+import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { cn } from '@/lib/dashboard-utils';
 import { HugeiconsIcon } from '@hugeicons/react';
@@ -114,6 +116,7 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
   };
 
   // Invite mutation
+  const queryClient = useQueryClient();
   const inviteMutation = useInviteCreatorToGig();
 
   const handleInvite = ( creatorId: string, creatorName: string ) => {
@@ -133,6 +136,8 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
       onSuccess: () => {
         toast.success( `Invitation sent to ${ creatorName }` );
         setLocalInvitedCreators( prev => new Set( prev ).add( creatorId ) );
+        queryClient.invalidateQueries( { queryKey: campaignsKeys.invitations( campaignId ) } );
+        queryClient.invalidateQueries( { queryKey: campaignsKeys.detail( campaignId ) } );
       },
       onError: ( error ) => {
         toast.error( "Failed to send invitation" );

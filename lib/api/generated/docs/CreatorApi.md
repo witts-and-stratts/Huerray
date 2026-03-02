@@ -322,6 +322,7 @@ No authorization required
 |**200** | Creator profile status updated successfully |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -900,7 +901,7 @@ No authorization required
 |-------------|-------------|------------------|
 |**200** | OK |  -  |
 |**401** | Unauthorized |  -  |
-|**500** | Internal Server Error |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -977,7 +978,7 @@ No authorization required
 |-------------|-------------|------------------|
 |**200** | OK |  -  |
 |**401** | Unauthorized |  -  |
-|**500** | Internal Server Error |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

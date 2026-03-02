@@ -1609,7 +1609,7 @@ export const BrandsSearchGetStatusEnum = {
     BrandStatusCreated: 'created',
     BrandStatusPendingApproval: 'pending_approval',
     BrandStatusReturned: 'returned',
-    BrandStatusActive: 'active',
+    BrandStatusActive: 'approved',
     BrandStatusInactive: 'inactive',
     BrandStatusSuspended: 'suspended',
     BrandStatusDeleted: 'deleted'

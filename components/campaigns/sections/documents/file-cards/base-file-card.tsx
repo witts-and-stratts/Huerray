@@ -43,7 +43,7 @@ export const BaseFileCard = memo( ( {
       { ...attributes }
       { ...listeners }
       className={ cn(
-        "group bg-primary/2 border rounded-sm flex flex-col items-center gap-1 select-none transition-colors p-4 aspect-3/4 relative active:cursor-grabbing justify-center",
+        "group bg-primary/2 border rounded-sm flex flex-col items-center gap-1 select-none transition-colors aspect-3/4 relative active:cursor-grabbing justify-center",
         !isOverlay && "cursor-grab",
         item.status === 'error' && "border-destructive/50 bg-destructive/5",
         item.status === 'success' && "border-green-500/30 bg-green-500/3",
@@ -60,7 +60,7 @@ export const BaseFileCard = memo( ( {
         onPreview( item );
       } }
     >
-      <div className="shrink-0 bg-muted/30 rounded flex flex-col items-center justify-center overflow-hidden w-full relative">
+      <div className="flex-1 bg-muted/30 rounded flex flex-col items-center justify-center overflow-hidden w-full relative h-full min-h-0">
         { children }
       </div>
 
