@@ -2,42 +2,62 @@
 
 import Link from 'next/link';
 
-import * as React from 'react';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
+import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
-import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
-import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
+import * as React from 'react';
 import { ApplicationCard } from './application-card';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { SubmissionViewDialog } from './submission-view-dialog';
 
 
 import { Button } from '@/components/dashboard-ui/button';
-import { Checkbox } from '@/components/dashboard-ui/checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/dashboard-ui/dropdown-menu';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
-import { ModelCampaign } from './types';
+import { Checkbox } from '@/components/dashboard-ui/checkbox';
+import { Row } from '@tanstack/react-table';
 import { AvatarCollage } from './avatar-collage';
 import { StatusBadge } from './status-badge';
-import { Row } from '@tanstack/react-table';
+import { ModelCampaign } from './types';
 
 
 import { CampaignActionMenu } from './campaign-action-menu';
+import { stripTags } from '@/lib/utils';
+import { RoleGuard } from '../auth/role-guard';
 
 const CampaignActionsCell = ( { row, basePath }: { row: Row<ModelCampaign>, basePath: string; } ) => {
   return (
     <div className='flex justify-end'>
       <ButtonGroup className='flex justify-end'>
-        <Button variant='outline' size='sm' className='font-regular'>
-          Edit
-        </Button>
+        <RoleGuard allowedRoles={ [ 'admin' ] }>
+          <Button variant='outline' size='sm' className='font-regular' render={
+            <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
+              View
+            </Link>
+          }>
+          </Button>
+        </RoleGuard>
+        <RoleGuard allowedRoles={ [ 'brand' ] }>
+          {
+            ( row.original.campaign_status === 'created' || row.original.campaign_status === 'returned' ) ? (
+              <Button variant='outline' size='sm' className='font-regular' render={
+                <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
+                  Edit
+                </Link>
+              }>
+              </Button>
+            ) : (
+              <Button variant='outline' size='sm' className='font-regular' render={
+                <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
+                  View
+                </Link>
+              }>
+              </Button>
+            )
+          }
+        </RoleGuard>
         <CampaignActionMenu
           campaign={ row.original }
           basePath={ basePath }
@@ -214,10 +234,10 @@ export const getColumns = ( basePath: string = '/brand' ): ColumnDef<ModelCampai
             </h4>
           </Link>
           <p className='font-regular text-slate-500 mt-1 text-sm'>
-            <span className='text-slate-800'>{ description }</span>
+            <span className='text-slate-700' dangerouslySetInnerHTML={ { __html: stripTags( description! ) } }></span>
             <br />
             <span>
-              Last updated on{ ' ' }
+              <span>Updated on{ ' ' }</span>
               { Intl.DateTimeFormat( 'en-US', {
                 year: 'numeric',
                 month: 'long',

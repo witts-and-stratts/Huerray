@@ -17,6 +17,7 @@ import {
   PaymentApi,
   VideoSubmissionsApi,
 } from '../generated/api';
+import { ModelsVideoSubmissionResponse } from '../generated/models';
 import { apiClient, apiConfiguration } from '../client';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -43,10 +44,15 @@ export interface SearchResult {
   subtitle?: string;
   status?: string;
   createdAt?: string;
+  avatarUrl?: string;
+  /** ISO 3166-1 alpha-2 country code – used for flag + full name display */
+  country?: string;
   /** Extra context shown as small tags */
   tags?: { label: string; value: string }[];
   /** Used for navigation – e.g. campaignId on a submission */
   meta?: Record<string, string | undefined>;
+  /** Full submission object – only populated for type === 'submissions' */
+  rawSubmission?: ModelsVideoSubmissionResponse;
 }
 
 export interface SearchGroup {
@@ -124,9 +130,10 @@ export function useGlobalSearch({
             type: 'brands',
             title: b.company_name ?? 'Unknown Brand',
             subtitle: b.category ?? undefined,
-            status: b.brand_status ?? undefined,
-            createdAt: b.created_at ?? undefined,
-            tags: b.country ? [{ label: 'Country', value: String(b.country) }] : [],
+            status: undefined,
+            avatarUrl: b.profile_photo_url ?? undefined,
+            country: b.country ?? undefined,
+            tags: [],
           }));
         },
         enabled: canSearch('brands') && role === 'admin',
@@ -165,6 +172,7 @@ export function useGlobalSearch({
             subtitle: c.brand_name ?? undefined,
             status: c.campaign_status ?? undefined,
             createdAt: c.created_at ?? undefined,
+            avatarUrl: c.product_image_url ?? undefined,
             tags: c.category ? [{ label: 'Category', value: String(c.category) }] : [],
           }));
         },
@@ -196,9 +204,11 @@ export function useGlobalSearch({
             type: 'creators',
             title: [c.first_name, c.last_name].filter(Boolean).join(' ') || c.email || 'Unknown Creator',
             subtitle: c.email ?? undefined,
-            status: c.creator_status ?? undefined,
+            status: undefined,
             createdAt: (c as any).created_at ?? undefined,
-            tags: c.country ? [{ label: 'Country', value: String(c.country) }] : [],
+            avatarUrl: c.profile_image_url ?? undefined,
+            country: c.country ?? undefined,
+            tags: [],
           }));
         },
         enabled: canSearch('creators') && (role === 'admin' || role === 'brand'),
@@ -370,6 +380,7 @@ export function useGlobalSearch({
             subtitle: (s as any).campaign_name ?? undefined,
             status: s.status ?? undefined,
             createdAt: s.created_at ?? undefined,
+            rawSubmission: s as ModelsVideoSubmissionResponse,
             meta: {
               gigId: s.gig_id ?? undefined,
               campaignId: (s as any).campaign_id ?? undefined,

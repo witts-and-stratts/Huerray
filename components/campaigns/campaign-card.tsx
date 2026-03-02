@@ -1,7 +1,7 @@
 'use client';
 
 import { CampaignActionMenu } from './campaign-action-menu';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 
 import {
@@ -36,7 +36,7 @@ const AvatarRowSkeleton = ( { label }: { label: string; } ) => (
     <span className='text-xs font-medium text-muted-foreground'>{ label }</span>
     <div className='flex min-h-10 gap-2'>
       { Array.from( { length: 4 } ).map( ( _, i ) => (
-        <Skeleton key={ i } className='h-8 w-8 rounded-full' />
+        <Skeleton key={ i } className='h-8 w-8 rounded-full -m-l-4' />
       ) ) }
     </div>
   </div>
@@ -77,7 +77,7 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
 
   return (
     <>
-      <Card className='py-3 justify-between gap-1'>
+      <Card className='py-3 justify-between gap-1 h-full'>
         <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
           <div className="flex flex-col flex-1 min-w-0">
             <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
@@ -87,7 +87,7 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
             </Link>
             <CardDescription
               dangerouslySetInnerHTML={ { __html: stripTags( description! ) } }
-              className="font-regular text-slate-800 mt-1 text-sm line-clamp-2"
+              className="font-regular text-muted-foreground mt-1 text-sm line-clamp-2"
             />
           </div>
           <div className="flex shrink-0 text-right gap-2 items-start">
@@ -99,45 +99,49 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
         </CardHeader>
 
         <CardContent className='space-y-3 pb-2'>
-          { ( loadingApps || loadingInvitations || loadingSubmissions ) ? (
-            <AvatarRowSkeleton label='&nbsp;' />
-          ) : submissionPeople.length > 0 ? (
-            <div className='flex flex-col gap-2'>
-              <span className='text-xs font-medium text-muted-foreground'>Submissions</span>
-              <div className='flex min-h-10'>
-                <AnimatePresence>
-                  <AvatarCollage
-                    people={ submissionPeople }
-                    onPersonClick={ ( i ) => setSelectedSubmission( submissions[ i ] ) }
-                  />
-                </AnimatePresence>
-              </div>
-            </div>
-          ) : applicationPeople.length > 0 ? (
-            <div className='flex flex-col gap-2'>
-              <span className='text-xs font-medium text-muted-foreground'>Applications</span>
-              <div className='flex min-h-10'>
-                <AnimatePresence>
-                  <AvatarCollage
-                    people={ applicationPeople }
-                    onPersonClick={ ( i ) => setSelectedApp( applications[ i ] ) }
-                  />
-                </AnimatePresence>
-              </div>
-            </div>
-          ) : invitationPeople.length > 0 ? (
-            <div className='flex flex-col gap-2'>
-              <span className='text-xs font-medium text-muted-foreground'>Invitations</span>
-              <div className='flex min-h-10'>
-                <AnimatePresence>
-                  <AvatarCollage
-                    people={ invitationPeople }
-                    onPersonClick={ ( i ) => setSelectedInvitation( invitations[ i ] ) }
-                  />
-                </AnimatePresence>
-              </div>
-            </div>
-          ) : null }
+          <div className='min-h-[64px]'>
+            <AnimatePresence>
+              { ( loadingApps || loadingInvitations || loadingSubmissions ) ? (
+                <AvatarRowSkeleton label='&nbsp;' />
+              ) : submissionPeople.length > 0 ? (
+                <motion.div className='flex flex-col gap-2'>
+                  <span className='text-xs font-medium text-muted-foreground'>Submissions</span>
+                  <motion.div className='flex min-h-10'>
+                    <AnimatePresence>
+                      <AvatarCollage
+                        people={ submissionPeople }
+                        onPersonClick={ ( i ) => setSelectedSubmission( submissions[ i ] ) }
+                      />
+                    </AnimatePresence>
+                  </motion.div>
+                </motion.div>
+              ) : applicationPeople.length > 0 ? (
+                <motion.div className='flex flex-col gap-2'>
+                  <span className='text-xs font-medium text-muted-foreground'>Applications</span>
+                  <motion.div className='flex min-h-10'>
+                    <AnimatePresence>
+                      <AvatarCollage
+                        people={ applicationPeople }
+                        onPersonClick={ ( i ) => setSelectedApp( applications[ i ] ) }
+                      />
+                    </AnimatePresence>
+                  </motion.div>
+                </motion.div>
+              ) : invitationPeople.length > 0 ? (
+                <motion.div className='flex flex-col gap-2'>
+                  <span className='text-xs font-medium text-muted-foreground'>Invitations</span>
+                  <motion.div className='flex min-h-10'>
+                    <AnimatePresence>
+                      <AvatarCollage
+                        people={ invitationPeople }
+                        onPersonClick={ ( i ) => setSelectedInvitation( invitations[ i ] ) }
+                      />
+                    </AnimatePresence>
+                  </motion.div>
+                </motion.div>
+              ) : null }
+            </AnimatePresence>
+          </div>
 
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className='text-xs text-muted-foreground/60'>
