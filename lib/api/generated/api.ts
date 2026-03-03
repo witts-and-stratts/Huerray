@@ -19,6 +19,7 @@ export * from './api/authentication-api';
 export * from './api/brand-api';
 export * from './api/cache-api';
 export * from './api/campaigns-api';
+export * from './api/comments-api';
 export * from './api/creator-api';
 export * from './api/gigs-api';
 export * from './api/invoice-api';

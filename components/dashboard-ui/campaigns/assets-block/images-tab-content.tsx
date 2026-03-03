@@ -16,7 +16,7 @@ export function ImagesTabContent( { imageItems, onPreview }: ImagesTabContentPro
   }
 
   return (
-    <ScrollArea className="w-full" scrollbar={ { orientation: 'horizontal' } }>
+    <ScrollArea className="w-full" scrollbar={ { orientation: 'horizontal', style: { height: '6px' } } }>
       <div className="flex gap-2 pb-3">
         { imageItems.map( ( item, index ) => (
           <button

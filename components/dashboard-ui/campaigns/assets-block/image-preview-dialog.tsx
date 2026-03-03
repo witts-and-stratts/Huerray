@@ -104,10 +104,37 @@ export function ImagePreviewDialog( {
   const [ contentHeight, setContentHeight ] = useState<number | undefined>( undefined );
   const contentRef = useRef<HTMLDivElement | null>( null );
   const directionRef = useRef<1 | -1>( 1 );
+  const preloadedRef = useRef<Set<string>>( new Set() );
+  const [ imgReady, setImgReady ] = useState( false );
+  const [ showSpinner, setShowSpinner ] = useState( false );
 
   useEffect( () => {
     if ( initialIndex !== null ) setIndex( initialIndex );
   }, [ initialIndex ] );
+
+  // Preload all images into browser cache when the dialog opens
+  useEffect( () => {
+    if ( !open || type !== 'images' ) return;
+    items.forEach( ( src ) => {
+      if ( preloadedRef.current.has( src ) ) return;
+      preloadedRef.current.add( src );
+      const img = new Image();
+      img.src = src;
+    } );
+  }, [ open, items, type ] );
+
+  // Reset ready state when the displayed image changes
+  useEffect( () => {
+    if ( type !== 'images' ) return;
+    setImgReady( false );
+  }, [ index, type ] );
+
+  // Only show a spinner after 150 ms — avoids flashing for cached images
+  useEffect( () => {
+    if ( imgReady ) { setShowSpinner( false ); return; }
+    const timer = setTimeout( () => setShowSpinner( true ), 150 );
+    return () => clearTimeout( timer );
+  }, [ imgReady ] );
 
   const current = items[ index ];
   const isPdf = current?.toLowerCase().endsWith( '.pdf' );
@@ -174,13 +201,20 @@ export function ImagePreviewDialog( {
               onAnimationComplete={ type !== 'images' ? measureHeight : undefined }
             >
               { type === 'images' ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={ current }
-                  alt={ `Asset ${ index + 1 }` }
-                  className="max-h-[75vh] w-full object-contain"
-                  onLoad={ measureHeight }
-                />
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element */ }
+                  <img
+                    src={ current }
+                    alt={ `Asset ${ index + 1 }` }
+                    className="max-h-[75vh] w-full object-contain"
+                    onLoad={ () => { setImgReady( true ); measureHeight(); } }
+                  />
+                  { showSpinner && !imgReady && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-background/60">
+                      <div className="size-7 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+                    </div>
+                  ) }
+                </>
               ) : isPdf ? (
                 <div className="w-full h-[75vh]">
                   { open && <PdfPreview src={ current } /> }

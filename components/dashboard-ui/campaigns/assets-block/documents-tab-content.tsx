@@ -19,7 +19,7 @@ export function DocumentsTabContent( { documentItems, onPreview }: DocumentsTabC
   }
 
   return (
-    <ScrollArea className="w-full" scrollbar={ { orientation: 'horizontal' } }>
+    <ScrollArea className="w-full" scrollbar={ { orientation: 'horizontal', style: { height: '6px' } } }>
       <div className="flex gap-2 pb-3">
         { documentItems.map( ( item, index ) => {
           const fileItem: UploadedFile = {

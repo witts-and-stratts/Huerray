@@ -8,7 +8,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
-import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { Tabs, TabsList, TabsTab, TabsPanel, TabsPanels } from '@/components/animate-ui/components/base/tabs';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
 import type { ModelsCampaignResponse } from '@/lib/api/generated/models';
 
@@ -68,114 +68,116 @@ export function CampaignStatsBlock() {
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTrigger value="stats" className={ 'text-xs font-normal' }>Stats</TabsTrigger>
-            <TabsTrigger value="recent" className={ 'text-xs font-normal' }>Recent Campaigns</TabsTrigger>
+            <TabsTab value="stats" className={ 'text-xs font-normal' }>Stats</TabsTab>
+            <TabsTab value="recent" className={ 'text-xs font-normal' }>Recent Campaigns</TabsTab>
           </TabsList>
 
-          <Activity mode={ activeTab === 'stats' ? 'visible' : 'hidden' }>
-            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading campaign stats...</p> }
-            { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load campaign stats.</p> }
-            { !isLoading && !isError && (
-              <div className="grid grid-cols-2 gap-2">
-                { parsed.map( ( item ) => {
-                  const widthPct = Math.max( 10, Math.round( ( item.numeric / maxValue ) * 100 ) );
+          <TabsPanels>
+            <TabsPanel value="stats" keepMounted>
+              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading campaign stats...</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load campaign stats.</p> }
+              { !isLoading && !isError && (
+                <div className="grid grid-cols-2 gap-2">
+                  { parsed.map( ( item ) => {
+                    const widthPct = Math.max( 10, Math.round( ( item.numeric / maxValue ) * 100 ) );
 
-                  return (
-                    <div key={ item.label } className="rounded-lg border border-border/60 bg-white p-2.5">
-                      <div className="mb-1.5 flex items-end justify-between gap-3">
-                        <p className="ad-stat-label">{ item.label }</p>
-                      </div>
-                      <p className="mb-1.5 text-2xl leading-none font-primary font-medium">{ item.value }</p>
-                      <div className="h-2 w-full rounded-full bg-muted">
-                        <div
-                          className="h-2 rounded-full bg-primary transition-all"
-                          style={ { width: `${ widthPct }%` } }
-                        />
-                      </div>
-                    </div>
-                  );
-                } ) }
-              </div>
-            ) }
-          </Activity>
-
-          <Activity mode={ activeTab === 'recent' ? 'visible' : 'hidden' }>
-            { isLoading && (
-              <div className="space-y-2">
-                { Array.from( { length: 4 } ).map( ( _, index ) => (
-                  <div key={ `recent-campaign-skeleton-${ index }` } className="rounded-lg border border-border/60 bg-white p-2.5">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex min-w-0 items-start gap-2.5">
-                        <Skeleton className="h-8 w-8 shrink-0 rounded-full" />
-                        <div className="min-w-0 space-y-1.5">
-                          <Skeleton className="h-4 w-40" />
-                          <Skeleton className="h-3 w-56" />
-                          <Skeleton className="h-3 w-28" />
+                    return (
+                      <div key={ item.label } className="rounded-lg border border-border/60 bg-white p-2.5">
+                        <div className="mb-1.5 flex items-end justify-between gap-3">
+                          <p className="ad-stat-label">{ item.label }</p>
+                        </div>
+                        <p className="mb-1.5 text-2xl leading-none font-primary font-medium">{ item.value }</p>
+                        <div className="h-2 w-full rounded-full bg-muted">
+                          <div
+                            className="h-2 rounded-full bg-primary transition-all"
+                            style={ { width: `${ widthPct }%` } }
+                          />
                         </div>
                       </div>
-                      <Skeleton className="h-5 w-16 rounded-full" />
-                    </div>
-                  </div>
-                ) ) }
-              </div>
-            ) }
-            { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent campaigns.</p> }
-            { !isLoading && !isError && recentCampaigns.length === 0 && (
-              <p className="py-8 text-center text-xs text-muted-foreground">No campaigns yet</p>
-            ) }
-            { !isLoading && !isError && recentCampaigns.length > 0 && (
-              <ScrollArea className="h-[240px] pr-2" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
-                <motion.div className="space-y-2">
-                  <AnimatePresence>
-                    { recentCampaigns.map( ( campaign, index ) => {
-                      const campaignId = campaign.id || campaign.campaign_id;
-                      const campaignName = campaign.campaign_name || 'Untitled Campaign';
-                      const status = String( campaign.campaign_status || 'draft' );
-                      const submittedAt = campaign.created_at
-                        ? new Date( campaign.created_at ).toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } )
-                        : 'N/A';
+                    );
+                  } ) }
+                </div>
+              ) }
+            </TabsPanel>
 
-                      return (
-                        <motion.div
-                          initial={ { opacity: 0, y: 10 } }
-                          animate={ { opacity: 1, y: 0 } }
-                          exit={ { opacity: 0, y: -10 } }
-                          transition={ { duration: 0.8, delay: index * 0.05 } }
-                          key={ campaignId || `${ campaignName }-${ submittedAt }` }
-                          className="rounded-lg border border-border/60 bg-white p-2.5"
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="flex min-w-0 items-start gap-2.5">
-                              <Avatar size="sm" className="shrink-0">
-                                <AvatarImage
-                                  src={ campaign.brand?.profile_photo_url || '' }
-                                  alt={ campaign.brand?.company_name || campaignName }
-                                />
-                                <AvatarFallback>{ ( campaign.brand?.company_name || campaignName ).slice( 0, 2 ).toUpperCase() }</AvatarFallback>
-                              </Avatar>
-                              <div className="min-w-0">
-                                <Link
-                                  href={ campaignId ? `/admin/campaigns/${ campaignId }` : '/admin/campaigns' }
-                                  className="text-sm font-medium text-primary hover:underline underline-offset-2"
-                                >
-                                  { campaignName }
-                                </Link>
-                                <p className="mt-0.5 text-sm text-muted-foreground line-clamp-2" dangerouslySetInnerHTML={ { __html: campaign.description?.replace( '<p>', '' ).replace( '</p>', '' ) || 'No description provided.' } } />
-                                <p className="mt-0.5 text-xs text-muted-foreground/60">Created: { submittedAt }</p>
-                              </div>
-                            </div>
-                            <Badge variant={ statusVariant( status ) } className="h-5 px-1.5 py-0 text-[10px] font-medium capitalize">
-                              { status.replace( /_/g, ' ' ) }
-                            </Badge>
+            <TabsPanel value="recent" keepMounted>
+              { isLoading && (
+                <div className="space-y-2">
+                  { Array.from( { length: 4 } ).map( ( _, index ) => (
+                    <div key={ `recent-campaign-skeleton-${ index }` } className="rounded-lg border border-border/60 bg-white p-2.5">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex min-w-0 items-start gap-2.5">
+                          <Skeleton className="h-8 w-8 shrink-0 rounded-full" />
+                          <div className="min-w-0 space-y-1.5">
+                            <Skeleton className="h-4 w-40" />
+                            <Skeleton className="h-3 w-56" />
+                            <Skeleton className="h-3 w-28" />
                           </div>
-                        </motion.div>
-                      );
-                    } ) }
-                  </AnimatePresence>
-                </motion.div>
-              </ScrollArea>
-            ) }
-          </Activity>
+                        </div>
+                        <Skeleton className="h-5 w-16 rounded-full" />
+                      </div>
+                    </div>
+                  ) ) }
+                </div>
+              ) }
+              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent campaigns.</p> }
+              { !isLoading && !isError && recentCampaigns.length === 0 && (
+                <p className="py-8 text-center text-xs text-muted-foreground">No campaigns yet</p>
+              ) }
+              { !isLoading && !isError && recentCampaigns.length > 0 && (
+                <ScrollArea className="h-[240px] pr-2" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
+                  <motion.div className="space-y-2">
+                    <AnimatePresence>
+                      { recentCampaigns.map( ( campaign, index ) => {
+                        const campaignId = campaign.id || campaign.campaign_id;
+                        const campaignName = campaign.campaign_name || 'Untitled Campaign';
+                        const status = String( campaign.campaign_status || 'draft' );
+                        const submittedAt = campaign.created_at
+                          ? new Date( campaign.created_at ).toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } )
+                          : 'N/A';
+
+                        return (
+                          <motion.div
+                            initial={ { opacity: 0, y: 10 } }
+                            animate={ { opacity: 1, y: 0 } }
+                            exit={ { opacity: 0, y: -10 } }
+                            transition={ { duration: 0.8, delay: index * 0.05 } }
+                            key={ campaignId || `${ campaignName }-${ submittedAt }` }
+                            className="rounded-lg border border-border/60 bg-white p-2.5"
+                          >
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="flex min-w-0 items-start gap-2.5">
+                                <Avatar size="sm" className="shrink-0">
+                                  <AvatarImage
+                                    src={ campaign.brand?.profile_photo_url || '' }
+                                    alt={ campaign.brand?.company_name || campaignName }
+                                  />
+                                  <AvatarFallback>{ ( campaign.brand?.company_name || campaignName ).slice( 0, 2 ).toUpperCase() }</AvatarFallback>
+                                </Avatar>
+                                <div className="min-w-0">
+                                  <Link
+                                    href={ campaignId ? `/admin/campaigns/${ campaignId }` : '/admin/campaigns' }
+                                    className="text-sm font-medium text-primary hover:underline underline-offset-2"
+                                  >
+                                    { campaignName }
+                                  </Link>
+                                  <p className="mt-0.5 text-sm text-muted-foreground line-clamp-2" dangerouslySetInnerHTML={ { __html: campaign.description?.replace( '<p>', '' ).replace( '</p>', '' ) || 'No description provided.' } } />
+                                  <p className="mt-0.5 text-xs text-muted-foreground/60">Created: { submittedAt }</p>
+                                </div>
+                              </div>
+                              <Badge variant={ statusVariant( status ) } className="h-5 px-1.5 py-0 text-[10px] font-medium capitalize">
+                                { status.replace( /_/g, ' ' ) }
+                              </Badge>
+                            </div>
+                          </motion.div>
+                        );
+                      } ) }
+                    </AnimatePresence>
+                  </motion.div>
+                </ScrollArea>
+              ) }
+            </TabsPanel>
+          </TabsPanels>
         </Tabs>
       </CardContent>
       <CardFooter className="flex-col justify-end gap-2 text-sm grow">

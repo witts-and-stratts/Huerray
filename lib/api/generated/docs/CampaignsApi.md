@@ -596,7 +596,7 @@ let minDuration: number; // (optional) (default to undefined)
 let minVideos: number; // (optional) (default to undefined)
 let page: number; // (optional) (default to undefined)
 let q: string; // (optional) (default to undefined)
-let status: 'created' | 'pending_approval' | 'returned' | 'gigs_approved' | 'running' | 'completed' | 'deactivated'; // (optional) (default to undefined)
+let status: 'draft' | 'pending_approval' | 'returned' | 'gigs_approved' | 'running' | 'completed' | 'deactivated'; // (optional) (default to undefined)
 let videoFormat: 'mp4' | 'mov' | 'avi' | 'mkv' | 'webm' | 'mp4' | 'mov' | 'avi' | 'mkv' | 'webm'; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.campaignsSearchGet(
@@ -639,7 +639,7 @@ const { status, data } = await apiInstance.campaignsSearchGet(
 | **minVideos** | [**number**] |  | (optional) defaults to undefined|
 | **page** | [**number**] |  | (optional) defaults to undefined|
 | **q** | [**string**] |  | (optional) defaults to undefined|
-| **status** | [**&#39;created&#39; | &#39;pending_approval&#39; | &#39;returned&#39; | &#39;gigs_approved&#39; | &#39;running&#39; | &#39;completed&#39; | &#39;deactivated&#39;**]**Array<&#39;created&#39; &#124; &#39;pending_approval&#39; &#124; &#39;returned&#39; &#124; &#39;gigs_approved&#39; &#124; &#39;running&#39; &#124; &#39;completed&#39; &#124; &#39;deactivated&#39;>** |  | (optional) defaults to undefined|
+| **status** | [**&#39;draft&#39; | &#39;pending_approval&#39; | &#39;returned&#39; | &#39;gigs_approved&#39; | &#39;running&#39; | &#39;completed&#39; | &#39;deactivated&#39;**]**Array<&#39;draft&#39; &#124; &#39;pending_approval&#39; &#124; &#39;returned&#39; &#124; &#39;gigs_approved&#39; &#124; &#39;running&#39; &#124; &#39;completed&#39; &#124; &#39;deactivated&#39;>** |  | (optional) defaults to undefined|
 | **videoFormat** | [**&#39;mp4&#39; | &#39;mov&#39; | &#39;avi&#39; | &#39;mkv&#39; | &#39;webm&#39; | &#39;mp4&#39; | &#39;mov&#39; | &#39;avi&#39; | &#39;mkv&#39; | &#39;webm&#39;**]**Array<&#39;mp4&#39; &#124; &#39;mov&#39; &#124; &#39;avi&#39; &#124; &#39;mkv&#39; &#124; &#39;webm&#39; &#124; &#39;mp4&#39; &#124; &#39;mov&#39; &#124; &#39;avi&#39; &#124; &#39;mkv&#39; &#124; &#39;webm&#39;>** |  | (optional) defaults to undefined|
 
 

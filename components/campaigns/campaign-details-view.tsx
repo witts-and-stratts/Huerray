@@ -10,7 +10,9 @@ import {
   ModelsCampaignStatusUpdateRequestCampaignStatusEnum,
 } from '@/lib/api/generated/models';
 import { useAdminCampaignApproval, useCampaignApplications, useCampaignInvitations, useCampaignSubmissions, useUpdateCampaignStatus } from '@/lib/api/hooks/campaigns';
+import { useComments } from '@/lib/api/hooks/comments';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
+import { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
 import { ApiError } from '@/lib/api/hooks/types';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
@@ -28,6 +30,7 @@ import {
 import { GigSelectionDialog } from './gig-selection-dialog';
 import { InviteCreatorsDialog } from './invite-creators-dialog';
 import { CampaignApplicationsSection } from './sections/campaign-applications-section';
+import { CampaignCommentsSection } from './sections/campaign-comments-section';
 import { CampaignGigsSection } from './sections/campaign-gigs-section';
 import { CampaignInvitationsSection } from './sections/campaign-invitations-section';
 import { CampaignOverviewSection } from './sections/campaign-overview-section';
@@ -35,7 +38,7 @@ import { CampaignSubmissionsSection } from './sections/campaign-submissions-sect
 import { StatusBadge } from './status-badge';
 import { ModelCampaign } from './types';
 
-const VALID_TABS = [ 'overview', 'applications', 'submissions', 'invitations', 'gigs' ] as const;
+const VALID_TABS = [ 'overview', 'applications', 'submissions', 'invitations', 'gigs', 'comments' ] as const;
 type TabValue = typeof VALID_TABS[ number ];
 
 function getTabFromHash(): TabValue {
@@ -98,6 +101,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
   const { data: submissionsData } = useCampaignSubmissions( campaign.id || '' );
   const { data: invitationsData } = useCampaignInvitations( campaign.id || '' );
   const { data: gigsData } = useGigsByCampaign( campaign.id || '', role === 'admin' ? 'admin' : 'brand' );
+  const { data: commentsData } = useComments( UtilsEntityType.EntityTypeCampaign, campaign.id || '' );
 
   const applicationCount = applicationsData?.data?.length ?? 0;
   const submissionCount = submissionsData?.data?.length ?? 0;
@@ -107,6 +111,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
   const openGigCount = gigsData?.data?.filter( ( g: any ) => g.gig_status === 'open' ).length ?? 0;
   const inProgressGigCount = gigsData?.data?.filter( ( g: any ) => g.gig_status === 'in_progress' ).length ?? 0;
   const invitationCount = Array.isArray( invitationsData?.data ) ? invitationsData.data.length : 0;
+  const commentCount = commentsData?.data?.length ?? 0;
 
   // Quick action dialog state
   const [ approveDialogOpen, setApproveDialogOpen ] = useState( false );
@@ -190,12 +195,20 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
     );
   }
 
+  // If the comments tab is active but there are no comments, fall back to overview
+  useEffect( () => {
+    if ( activeTab === 'comments' && commentCount === 0 && commentsData !== undefined ) {
+      changeTab( 'overview' );
+    }
+  }, [ activeTab, commentCount, commentsData, changeTab ] );
+
   const tabItems = [
     { value: 'overview', label: 'Overview' },
     { value: 'applications', label: <TabLabel label="Applications" count={ applicationCount } /> },
     { value: 'submissions', label: <TabLabel label="Submissions" count={ submissionCount } /> },
     { value: 'invitations', label: <TabLabel label="Invitations" count={ invitationCount } /> },
     { value: 'gigs', label: 'Gigs' },
+    ...( commentCount > 0 ? [ { value: 'comments', label: <TabLabel label="Comments" count={ commentCount } /> } ] : [] ),
   ];
 
   return (
@@ -234,7 +247,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
         </ButtonGroup>
       </SubHeader>
 
-      <div className='p-6 space-y-6 bg-slate-50/70 h-full'>
+      <div className='p-2 md:p-6 space-y-6 bg-slate-50/70 flex flex-col flex-1 min-h-0 overflow-y-auto'>
         <Activity mode={ activeTab === 'overview' ? 'visible' : 'hidden' }>
           <CampaignOverviewSection
             campaign={ campaign }
@@ -261,6 +274,12 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
             role={ role === 'admin' ? 'admin' : 'brand' }
             basePath={ basePath }
           />
+        </Activity>
+
+        <Activity mode={ activeTab === 'comments' ? 'visible' : 'hidden' }>
+          <div className='flex flex-col flex-1 min-h-0'>
+            <CampaignCommentsSection campaignId={ campaign.id || '' } />
+          </div>
         </Activity>
       </div>
 

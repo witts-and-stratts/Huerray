@@ -16,7 +16,7 @@
 
 
 export const UtilsCampaignStatus = {
-    CampaignStatusCreated: 'created',
+    CampaignStatusDraft: 'draft',
     CampaignStatusPendingApproval: 'pending_approval',
     CampaignStatusReturned: 'returned',
     CampaignStatusGigsApproved: 'gigs_approved',

@@ -1,10 +1,10 @@
 'use client';
 
-import { Activity, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
-import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { Tabs, TabsList, TabsTab, TabsPanel, TabsPanels } from '@/components/animate-ui/components/base/tabs';
 import { useVideoSubmissionsSearch } from '@/lib/api/hooks/video-submissions';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
 import type { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
@@ -137,26 +137,28 @@ export function SubmissionsStatsBlock() {
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTrigger value="stats" className={ 'text-xs font-normal' }>Stats</TabsTrigger>
-            <TabsTrigger value="recent" className={ 'text-xs font-normal' }>Recent Submissions</TabsTrigger>
+            <TabsTab value="stats" className={ 'text-xs font-normal' }>Stats</TabsTab>
+            <TabsTab value="recent" className={ 'text-xs font-normal' }>Recent Submissions</TabsTab>
           </TabsList>
 
-          <Activity mode={ activeTab === 'stats' ? 'visible' : 'hidden' }>
-            { isLoading && <SubmissionsStatsSkeleton /> }
-            { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load submissions.</p> }
-            { !isLoading && !isError && <SubmissionsStatsPanel items={ parsed } /> }
-          </Activity>
+          <TabsPanels>
+            <TabsPanel value="stats" keepMounted>
+              { isLoading && <SubmissionsStatsSkeleton /> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load submissions.</p> }
+              { !isLoading && !isError && <SubmissionsStatsPanel items={ parsed } /> }
+            </TabsPanel>
 
-          <Activity mode={ activeTab === 'recent' ? 'visible' : 'hidden' }>
-            { ( isCampaignsLoading || isRecentSubmissionsLoading ) && <SubmissionsRecentSkeleton /> }
-            { ( isCampaignsError || isRecentSubmissionsError ) && <p className="py-8 text-center text-xs text-destructive">Unable to load recent submissions.</p> }
-            { !isCampaignsLoading && !isRecentSubmissionsLoading && !isCampaignsError && !isRecentSubmissionsError && recentItems.length === 0 && (
-              <p className="py-8 text-center text-xs text-muted-foreground">No submissions found.</p>
-            ) }
-            { !isCampaignsLoading && !isRecentSubmissionsLoading && !isCampaignsError && !isRecentSubmissionsError && recentItems.length > 0 && (
-              <SubmissionsRecentPanel items={ recentItems } />
-            ) }
-          </Activity>
+            <TabsPanel value="recent" keepMounted>
+              { ( isCampaignsLoading || isRecentSubmissionsLoading ) && <SubmissionsRecentSkeleton /> }
+              { ( isCampaignsError || isRecentSubmissionsError ) && <p className="py-8 text-center text-xs text-destructive">Unable to load recent submissions.</p> }
+              { !isCampaignsLoading && !isRecentSubmissionsLoading && !isCampaignsError && !isRecentSubmissionsError && recentItems.length === 0 && (
+                <p className="py-8 text-center text-xs text-muted-foreground">No submissions found.</p>
+              ) }
+              { !isCampaignsLoading && !isRecentSubmissionsLoading && !isCampaignsError && !isRecentSubmissionsError && recentItems.length > 0 && (
+                <SubmissionsRecentPanel items={ recentItems } />
+              ) }
+            </TabsPanel>
+          </TabsPanels>
         </Tabs>
       </CardContent>
     </Card>

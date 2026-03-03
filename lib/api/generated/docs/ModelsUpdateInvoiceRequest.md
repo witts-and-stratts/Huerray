@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **due_date** | **string** |  | [optional] [default to undefined]
-**invoice_status** | **string** |  | [default to undefined]
+**invoice_status** | [**UtilsInvoiceStatus**](UtilsInvoiceStatus.md) |  | [default to undefined]
 **notes** | **string** |  | [optional] [default to undefined]
 **paid_date** | **string** |  | [optional] [default to undefined]
 

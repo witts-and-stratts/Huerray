@@ -1178,7 +1178,7 @@ export const CampaignsSearchGetContentTypeEnum = {
 } as const;
 export type CampaignsSearchGetContentTypeEnum = typeof CampaignsSearchGetContentTypeEnum[keyof typeof CampaignsSearchGetContentTypeEnum];
 export const CampaignsSearchGetStatusEnum = {
-    CampaignStatusCreated: 'created',
+    CampaignStatusDraft: 'draft',
     CampaignStatusPendingApproval: 'pending_approval',
     CampaignStatusReturned: 'returned',
     CampaignStatusGigsApproved: 'gigs_approved',

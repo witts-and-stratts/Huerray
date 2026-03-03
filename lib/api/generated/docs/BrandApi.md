@@ -4,6 +4,7 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**brandsCampaignsIdSubmitPost**](#brandscampaignsidsubmitpost) | **POST** /brands/campaigns/{id}/submit | Submit campaign for approval|
 |[**brandsGet**](#brandsget) | **GET** /brands | Get user brands|
 |[**brandsGigsGet**](#brandsgigsget) | **GET** /brands/gigs | Search gigs for brand|
 |[**brandsIdDelete**](#brandsiddelete) | **DELETE** /brands/{id} | Delete brand|
@@ -15,6 +16,60 @@ All URIs are relative to */api/v1*
 |[**brandsSearchCreatorsGet**](#brandssearchcreatorsget) | **GET** /brands/search/creators | Search creators for brand|
 |[**brandsSearchGet**](#brandssearchget) | **GET** /brands/search | Search brands|
 |[**brandsSearchVideoSubmissionsGet**](#brandssearchvideosubmissionsget) | **GET** /brands/search/video-submissions | Search video submissions for brand|
+
+# **brandsCampaignsIdSubmitPost**
+> ModelsStandardCampaignResponse brandsCampaignsIdSubmitPost()
+
+Submit a draft or returned campaign for admin approval
+
+### Example
+
+```typescript
+import {
+    BrandApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new BrandApi(configuration);
+
+let id: string; //Campaign ID (default to undefined)
+
+const { status, data } = await apiInstance.brandsCampaignsIdSubmitPost(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Campaign ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardCampaignResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Campaign submitted for approval successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Campaign not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsGet**
 > ModelsStandardBrandResponse brandsGet()
@@ -467,7 +522,7 @@ let minDuration: number; // (optional) (default to undefined)
 let minVideos: number; // (optional) (default to undefined)
 let page: number; // (optional) (default to undefined)
 let q: string; // (optional) (default to undefined)
-let status: 'created' | 'pending_approval' | 'returned' | 'gigs_approved' | 'running' | 'completed' | 'deactivated'; // (optional) (default to undefined)
+let status: 'draft' | 'pending_approval' | 'returned' | 'gigs_approved' | 'running' | 'completed' | 'deactivated'; // (optional) (default to undefined)
 let videoFormat: 'mp4' | 'mov' | 'avi' | 'mkv' | 'webm' | 'mp4' | 'mov' | 'avi' | 'mkv' | 'webm'; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.brandsSearchCampaignsGet(
@@ -510,7 +565,7 @@ const { status, data } = await apiInstance.brandsSearchCampaignsGet(
 | **minVideos** | [**number**] |  | (optional) defaults to undefined|
 | **page** | [**number**] |  | (optional) defaults to undefined|
 | **q** | [**string**] |  | (optional) defaults to undefined|
-| **status** | [**&#39;created&#39; | &#39;pending_approval&#39; | &#39;returned&#39; | &#39;gigs_approved&#39; | &#39;running&#39; | &#39;completed&#39; | &#39;deactivated&#39;**]**Array<&#39;created&#39; &#124; &#39;pending_approval&#39; &#124; &#39;returned&#39; &#124; &#39;gigs_approved&#39; &#124; &#39;running&#39; &#124; &#39;completed&#39; &#124; &#39;deactivated&#39;>** |  | (optional) defaults to undefined|
+| **status** | [**&#39;draft&#39; | &#39;pending_approval&#39; | &#39;returned&#39; | &#39;gigs_approved&#39; | &#39;running&#39; | &#39;completed&#39; | &#39;deactivated&#39;**]**Array<&#39;draft&#39; &#124; &#39;pending_approval&#39; &#124; &#39;returned&#39; &#124; &#39;gigs_approved&#39; &#124; &#39;running&#39; &#124; &#39;completed&#39; &#124; &#39;deactivated&#39;>** |  | (optional) defaults to undefined|
 | **videoFormat** | [**&#39;mp4&#39; | &#39;mov&#39; | &#39;avi&#39; | &#39;mkv&#39; | &#39;webm&#39; | &#39;mp4&#39; | &#39;mov&#39; | &#39;avi&#39; | &#39;mkv&#39; | &#39;webm&#39;**]**Array<&#39;mp4&#39; &#124; &#39;mov&#39; &#124; &#39;avi&#39; &#124; &#39;mkv&#39; &#124; &#39;webm&#39; &#124; &#39;mp4&#39; &#124; &#39;mov&#39; &#124; &#39;avi&#39; &#124; &#39;mkv&#39; &#124; &#39;webm&#39;>** |  | (optional) defaults to undefined|
 
 

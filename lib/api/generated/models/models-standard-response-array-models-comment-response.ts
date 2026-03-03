@@ -15,14 +15,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UtilsInvoiceStatus } from './utils-invoice-status';
+import type { ModelsCommentResponse } from './models-comment-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsErrorInfo } from './models-error-info';
 
-export interface ModelsUpdateInvoiceRequest {
-    'due_date'?: string;
-    'invoice_status': UtilsInvoiceStatus;
-    'notes'?: string;
-    'paid_date'?: string;
+export interface ModelsStandardResponseArrayModelsCommentResponse {
+    'data'?: Array<ModelsCommentResponse>;
+    'error'?: ModelsErrorInfo;
+    'message'?: string;
+    'success'?: boolean;
 }
-
-
 

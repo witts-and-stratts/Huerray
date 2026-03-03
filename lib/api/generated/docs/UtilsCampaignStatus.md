@@ -3,7 +3,7 @@
 
 ## Enum
 
-* `CampaignStatusCreated` (value: `'created'`)
+* `CampaignStatusDraft` (value: `'draft'`)
 
 * `CampaignStatusPendingApproval` (value: `'pending_approval'`)
 

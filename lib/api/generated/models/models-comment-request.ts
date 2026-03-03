@@ -15,13 +15,12 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UtilsInvoiceStatus } from './utils-invoice-status';
+import type { UtilsEntityType } from './utils-entity-type';
 
-export interface ModelsUpdateInvoiceRequest {
-    'due_date'?: string;
-    'invoice_status': UtilsInvoiceStatus;
-    'notes'?: string;
-    'paid_date'?: string;
+export interface ModelsCommentRequest {
+    'comment': string;
+    'entity_id': string;
+    'entity_type': UtilsEntityType;
 }
 
 

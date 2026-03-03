@@ -67,6 +67,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authRegisterPost**](docs/AuthenticationApi.md#authregisterpost) | **POST** /auth/register | Register a new user
 *AuthenticationApi* | [**authResendVerificationPost**](docs/AuthenticationApi.md#authresendverificationpost) | **POST** /auth/resend-verification | Resend email verification
 *AuthenticationApi* | [**authVerifyEmailPost**](docs/AuthenticationApi.md#authverifyemailpost) | **POST** /auth/verify-email | Verify email
+*BrandApi* | [**brandsCampaignsIdSubmitPost**](docs/BrandApi.md#brandscampaignsidsubmitpost) | **POST** /brands/campaigns/{id}/submit | Submit campaign for approval
 *BrandApi* | [**brandsGet**](docs/BrandApi.md#brandsget) | **GET** /brands | Get user brands
 *BrandApi* | [**brandsGigsGet**](docs/BrandApi.md#brandsgigsget) | **GET** /brands/gigs | Search gigs for brand
 *BrandApi* | [**brandsIdDelete**](docs/BrandApi.md#brandsiddelete) | **DELETE** /brands/{id} | Delete brand
@@ -91,6 +92,10 @@ Class | Method | HTTP request | Description
 *CampaignsApi* | [**campaignsIdVideoSubmissionsGet**](docs/CampaignsApi.md#campaignsidvideosubmissionsget) | **GET** /campaigns/{id}/video-submissions | Get video submissions by campaign ID
 *CampaignsApi* | [**campaignsPost**](docs/CampaignsApi.md#campaignspost) | **POST** /campaigns | Create a new campaign
 *CampaignsApi* | [**campaignsSearchGet**](docs/CampaignsApi.md#campaignssearchget) | **GET** /campaigns/search | Search campaigns
+*CommentsApi* | [**commentsGet**](docs/CommentsApi.md#commentsget) | **GET** /comments | Get comments for an entity
+*CommentsApi* | [**commentsIdDelete**](docs/CommentsApi.md#commentsiddelete) | **DELETE** /comments/{id} | Delete a comment
+*CommentsApi* | [**commentsIdPut**](docs/CommentsApi.md#commentsidput) | **PUT** /comments/{id} | Update a comment
+*CommentsApi* | [**commentsPost**](docs/CommentsApi.md#commentspost) | **POST** /comments | Add a new comment
 *CreatorApi* | [**creatorsActiveGigsGet**](docs/CreatorApi.md#creatorsactivegigsget) | **GET** /creators/active-gigs | Get active gigs for the logged-in creator
 *CreatorApi* | [**creatorsApplicationsGet**](docs/CreatorApi.md#creatorsapplicationsget) | **GET** /creators/applications | Get creator applications
 *CreatorApi* | [**creatorsBankDetailsGet**](docs/CreatorApi.md#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details
@@ -186,6 +191,9 @@ Class | Method | HTTP request | Description
  - [ModelsCampaignResponse](docs/ModelsCampaignResponse.md)
  - [ModelsCampaignStatusUpdateRequest](docs/ModelsCampaignStatusUpdateRequest.md)
  - [ModelsChangePasswordRequest](docs/ModelsChangePasswordRequest.md)
+ - [ModelsCommentEditRequest](docs/ModelsCommentEditRequest.md)
+ - [ModelsCommentRequest](docs/ModelsCommentRequest.md)
+ - [ModelsCommentResponse](docs/ModelsCommentResponse.md)
  - [ModelsCreateAdminRequest](docs/ModelsCreateAdminRequest.md)
  - [ModelsCreateCampaignRequest](docs/ModelsCreateCampaignRequest.md)
  - [ModelsCreateCreatorRequest](docs/ModelsCreateCreatorRequest.md)
@@ -271,6 +279,9 @@ Class | Method | HTTP request | Description
  - [ModelsStandardPaymentItemResponse](docs/ModelsStandardPaymentItemResponse.md)
  - [ModelsStandardPaymentResponse](docs/ModelsStandardPaymentResponse.md)
  - [ModelsStandardPlatformAnalyticsResponse](docs/ModelsStandardPlatformAnalyticsResponse.md)
+ - [ModelsStandardResponseAny](docs/ModelsStandardResponseAny.md)
+ - [ModelsStandardResponseArrayModelsCommentResponse](docs/ModelsStandardResponseArrayModelsCommentResponse.md)
+ - [ModelsStandardResponseModelsCommentResponse](docs/ModelsStandardResponseModelsCommentResponse.md)
  - [ModelsStandardUserResponse](docs/ModelsStandardUserResponse.md)
  - [ModelsStandardVideoSubmissionResponse](docs/ModelsStandardVideoSubmissionResponse.md)
  - [ModelsStandardVideoSubmissionResponses](docs/ModelsStandardVideoSubmissionResponses.md)
@@ -303,6 +314,7 @@ Class | Method | HTTP request | Description
  - [UtilsContentTypeOption](docs/UtilsContentTypeOption.md)
  - [UtilsCountryCode](docs/UtilsCountryCode.md)
  - [UtilsCreatorStatus](docs/UtilsCreatorStatus.md)
+ - [UtilsEntityType](docs/UtilsEntityType.md)
  - [UtilsGender](docs/UtilsGender.md)
  - [UtilsGigApplicationStatus](docs/UtilsGigApplicationStatus.md)
  - [UtilsGigInvitationStatus](docs/UtilsGigInvitationStatus.md)

@@ -10,6 +10,7 @@ import { Loader2 } from 'lucide-react';
 import { PdfFileIcon } from '../pdf-file-icon';
 import { BaseFileCard } from './base-file-card';
 import { FileCardProps } from './file-card-types';
+import { useAnimateActivity } from '@/components/ui/animate-activity';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${ pdfjs.version }/build/pdf.worker.min.mjs`;
 
@@ -56,6 +57,7 @@ export const FileCardDocument = memo( ( props: FileCardProps ) => {
     }
   }, [ item.status, item.file, item.url, item.id, onUploadSuccess, onUploadError, isOverlay ] );
 
+  const { phase } = useAnimateActivity();
   const isPdf = item.type.includes( 'pdf' ) || item.name.toLowerCase().endsWith( '.pdf' );
 
   // Caching mechanism for PDF page rendering
@@ -91,7 +93,7 @@ export const FileCardDocument = memo( ( props: FileCardProps ) => {
               alt={ item.name }
               className="w-full h-full object-contain opacity-95 group-hover:opacity-100 transition-opacity drop-shadow-sm"
             />
-          ) : (
+          ) : phase !== 'hidden' ? (
             <Document
               file={ pdfFile }
               loading={ <Loader2 className="size-8 animate-spin text-muted-foreground" /> }
@@ -109,7 +111,7 @@ export const FileCardDocument = memo( ( props: FileCardProps ) => {
                 loading={ <Loader2 className="size-8 animate-spin text-muted-foreground" /> }
               />
             </Document>
-          ) }
+          ) : null }
           <div className="absolute bottom-1 right-2 bg-background/80 backdrop-blur-md rounded-sm p-1 border shadow-xs">
             <PdfFileIcon className="text-primary size-4" />
           </div>

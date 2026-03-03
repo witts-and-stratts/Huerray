@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Activity, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { Button } from '@/components/dashboard-ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { Tabs, TabsList, TabsTab, TabsPanel, TabsPanels } from '@/components/animate-ui/components/base/tabs';
 import { useGigs } from '@/lib/api/hooks/gigs';
 import { GigsRecentPanel } from './gigs-recent-panel';
 import { GigsStatsPanel } from './gigs-stats-panel';
@@ -61,24 +61,26 @@ export function GigsStatsBlock() {
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTrigger value="stats" className={ 'text-xs font-normal' }>Stats</TabsTrigger>
-            <TabsTrigger value="recent" className={ 'text-xs font-normal' }>Recent Gigs</TabsTrigger>
+            <TabsTab value="stats" className={ 'text-xs font-normal' }>Stats</TabsTab>
+            <TabsTab value="recent" className={ 'text-xs font-normal' }>Recent Gigs</TabsTab>
           </TabsList>
 
-          <Activity mode={ activeTab === 'stats' ? 'visible' : 'hidden' }>
-            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading gigs...</p> }
-            { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load gigs.</p> }
-            { !isLoading && !isError && <GigsStatsPanel chartData={ chartData } /> }
-          </Activity>
+          <TabsPanels>
+            <TabsPanel value="stats" keepMounted>
+              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading gigs...</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load gigs.</p> }
+              { !isLoading && !isError && <GigsStatsPanel chartData={ chartData } /> }
+            </TabsPanel>
 
-          <Activity mode={ activeTab === 'recent' ? 'visible' : 'hidden' }>
-            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading recent gigs...</p> }
-            { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent gigs.</p> }
-            { !isLoading && !isError && recentGigItems.length === 0 && (
-              <p className="py-8 text-center text-xs text-muted-foreground">No gigs found.</p>
-            ) }
-            { !isLoading && !isError && recentGigItems.length > 0 && <GigsRecentPanel items={ recentGigItems } /> }
-          </Activity>
+            <TabsPanel value="recent" keepMounted>
+              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading recent gigs...</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent gigs.</p> }
+              { !isLoading && !isError && recentGigItems.length === 0 && (
+                <p className="py-8 text-center text-xs text-muted-foreground">No gigs found.</p>
+              ) }
+              { !isLoading && !isError && recentGigItems.length > 0 && <GigsRecentPanel items={ recentGigItems } /> }
+            </TabsPanel>
+          </TabsPanels>
         </Tabs>
       </CardContent>
       <CardFooter className="flex-col justify-end gap-2 text-sm grow">
