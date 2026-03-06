@@ -189,7 +189,7 @@ export function CampaignActionMenu( {
       label: "Edit",
       action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
-      condition: () => !isCompleted && ( campaign.campaign_status === "created" || campaign.campaign_status === "pending_approval" || campaign.campaign_status === "returned" ),
+      condition: () => !isCompleted && ( campaign.campaign_status === "draft" || campaign.campaign_status === "pending_approval" || campaign.campaign_status === "returned" ),
     },
     {
       label: "Rename",

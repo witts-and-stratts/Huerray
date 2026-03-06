@@ -1,13 +1,6 @@
 'use client';
 
-export function formatDate( value?: string ) {
-  if ( !value ) return 'N/A';
-  return new Date( value ).toLocaleDateString( 'en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  } );
-}
+export { formatDate } from '@/lib/utils/format';
 
 export function getFileName( value: string ) {
   try {

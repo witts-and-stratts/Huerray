@@ -1,11 +1,12 @@
 import {
   ActionCenterBlock,
   ApprovalQueuesBlock,
-  FinancialSnapshotBlock,
   KpiOverviewBlock,
   PipelineBreakdownBlock,
+  PlatformAnalyticsBlock,
   PlatformHealthAreaBlock,
   RecentActivityBlock,
+  RevenueStatsBlock,
 } from '@/components/dashboard/blocks/admin';
 import { AdminDateRangePicker } from '@/components/dashboard/admin-date-range-picker';
 import { SubHeader } from '@/components/subheader';
@@ -23,6 +24,8 @@ export function AdminDashboard() {
       <div className="ad-shell py-4 bg-burgundy-50/50 mt-0">
         <KpiOverviewBlock />
 
+        <PlatformAnalyticsBlock />
+
         <section className="ad-grid-main">
           <div className="ad-main-span">
             <PlatformHealthAreaBlock />
@@ -32,7 +35,7 @@ export function AdminDashboard() {
 
         <section className="ad-grid-two">
           <PipelineBreakdownBlock />
-          <FinancialSnapshotBlock />
+          <RevenueStatsBlock />
         </section>
 
         <section className="ad-grid-two">

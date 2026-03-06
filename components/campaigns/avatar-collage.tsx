@@ -41,7 +41,7 @@ export const AvatarCollage = ( { people, onPersonClick }: { people: Person[]; on
               delay: index * 0.1,
               ease: 'easeOut',
             } }
-            key={ person.avatar || index }
+            key={ `${ person.avatar }-${ index }` }
             onClick={ () => onPersonClick?.( index ) }
             className={ onPersonClick ? 'cursor-pointer' : undefined }
           >

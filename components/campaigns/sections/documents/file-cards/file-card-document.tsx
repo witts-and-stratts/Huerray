@@ -108,6 +108,7 @@ export const FileCardDocument = memo( ( props: FileCardProps ) => {
                 className="opacity-95 group-hover:opacity-100 transition-opacity"
                 canvasRef={ canvasRef }
                 onRenderSuccess={ onRenderSuccess }
+                onRenderError={ () => {} }
                 loading={ <Loader2 className="size-8 animate-spin text-muted-foreground" /> }
               />
             </Document>

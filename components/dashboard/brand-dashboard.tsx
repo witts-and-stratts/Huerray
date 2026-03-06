@@ -11,6 +11,7 @@ import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
 import type { ModelsCampaignResponse, ModelsGigBrandResponse } from '@/lib/api/generated/models';
 import {
   BrandActionCenterBlock,
+  BrandAnalyticsBlock,
   BrandCampaignsRadialBlock,
   BrandGigsStatsBlock,
   BrandKpiOverviewBlock,
@@ -88,6 +89,8 @@ export function BrandDashboard() {
           </div>
         </section>
 
+        <BrandAnalyticsBlock />
+
         <section className="ad-kpi-grid grid-cols-1 lg:grid-cols-3">
           <CampaignStatsBlock />
           <BrandGigsStatsBlock />
@@ -109,3 +112,4 @@ export function BrandDashboard() {
     </>
   );
 }
+

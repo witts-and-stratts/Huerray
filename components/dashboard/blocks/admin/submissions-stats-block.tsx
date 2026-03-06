@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { Tabs, TabsList, TabsTab, TabsPanel, TabsPanels } from '@/components/animate-ui/components/base/tabs';
-import { useVideoSubmissionsSearch } from '@/lib/api/hooks/video-submissions';
+import { usePlatformAnalytics } from '@/lib/api/hooks/analytics';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
 import type { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { VideoSubmissionsApi } from '@/lib/api/generated/api';
@@ -61,9 +61,9 @@ function SubmissionsRecentSkeleton() {
 
 export function SubmissionsStatsBlock() {
   const [ activeTab, setActiveTab ] = useState<'stats' | 'recent'>( 'stats' );
-  const { data: submissionsResponse, isLoading, isError } = useVideoSubmissionsSearch( { limit: 20, page: 1 } );
+  const { data: analyticsResponse, isLoading: isAnalyticsLoading, isError: isAnalyticsError } = usePlatformAnalytics();
   const { data: campaignsResponse, isLoading: isCampaignsLoading, isError: isCampaignsError } = useCampaigns( { limit: 20, page: 1 } );
-  const submissions = useMemo( () => ( submissionsResponse?.data || [] ) as ModelsVideoSubmissionResponse[], [ submissionsResponse ] );
+
   const recentCampaignIds = useMemo( () => {
     const campaigns = campaignsResponse?.data || [];
     return [ ...campaigns ]
@@ -113,16 +113,17 @@ export function SubmissionsStatsBlock() {
   } );
 
   const parsed = useMemo( () => {
-    const total = submissionsResponse?.pagination?.total || submissions.length;
-    const pending = submissions.filter( ( item ) => item.status === 'pending_approval' ).length;
-    const approved = submissions.filter( ( item ) => item.status === 'approved' ).length;
+    const analytics = analyticsResponse?.data;
+    const total = analytics?.total_video_submissions ?? 0;
+    const approved = analytics?.approved_video_submissions ?? 0;
+    const pending = total - approved;
 
     return [
       { label: 'Total Submissions', value: `${ total }`, delta: '+0.0%', numeric: total },
       { label: 'Pending Submissions', value: `${ pending }`, delta: pending > 0 ? '-0.0%' : '+0.0%', numeric: pending },
       { label: 'Approved Submissions', value: `${ approved }`, delta: '+0.0%', numeric: approved },
     ];
-  }, [ submissions, submissionsResponse?.pagination?.total ] );
+  }, [ analyticsResponse ] );
 
   const recentItems = useMemo<RecentSubmissionItem[]>( () => {
     return recentSubmissionsByCampaign.map( ( item ) => ( { raw: item } ) );
@@ -143,9 +144,9 @@ export function SubmissionsStatsBlock() {
 
           <TabsPanels>
             <TabsPanel value="stats" keepMounted>
-              { isLoading && <SubmissionsStatsSkeleton /> }
-              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load submissions.</p> }
-              { !isLoading && !isError && <SubmissionsStatsPanel items={ parsed } /> }
+              { isAnalyticsLoading && <SubmissionsStatsSkeleton /> }
+              { isAnalyticsError && <p className="py-8 text-center text-xs text-destructive">Unable to load submissions.</p> }
+              { !isAnalyticsLoading && !isAnalyticsError && <SubmissionsStatsPanel items={ parsed } /> }
             </TabsPanel>
 
             <TabsPanel value="recent" keepMounted>

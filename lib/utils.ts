@@ -47,7 +47,7 @@ export const calculateAge = (dobString?: string) => {
  * stripTags('<p>Hello <b>world</b></p>')        // → 'Hello world'
  * stripTags('<p>Hello <b>world</b></p>', ['b'])  // → '<p>Hello world</p>'
  */
-export function stripTags( html: string, tags?: string[] ): string {
+export function stripTags( html: string | null | undefined, tags?: string[] ): string {
   if ( !html ) return '';
 
   if ( !tags || tags.length === 0 ) {

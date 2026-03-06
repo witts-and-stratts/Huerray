@@ -4,7 +4,6 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**brandsCampaignsIdSubmitPost**](#brandscampaignsidsubmitpost) | **POST** /brands/campaigns/{id}/submit | Submit campaign for approval|
 |[**brandsGet**](#brandsget) | **GET** /brands | Get user brands|
 |[**brandsGigsGet**](#brandsgigsget) | **GET** /brands/gigs | Search gigs for brand|
 |[**brandsIdDelete**](#brandsiddelete) | **DELETE** /brands/{id} | Delete brand|
@@ -16,60 +15,6 @@ All URIs are relative to */api/v1*
 |[**brandsSearchCreatorsGet**](#brandssearchcreatorsget) | **GET** /brands/search/creators | Search creators for brand|
 |[**brandsSearchGet**](#brandssearchget) | **GET** /brands/search | Search brands|
 |[**brandsSearchVideoSubmissionsGet**](#brandssearchvideosubmissionsget) | **GET** /brands/search/video-submissions | Search video submissions for brand|
-
-# **brandsCampaignsIdSubmitPost**
-> ModelsStandardCampaignResponse brandsCampaignsIdSubmitPost()
-
-Submit a draft or returned campaign for admin approval
-
-### Example
-
-```typescript
-import {
-    BrandApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new BrandApi(configuration);
-
-let id: string; //Campaign ID (default to undefined)
-
-const { status, data } = await apiInstance.brandsCampaignsIdSubmitPost(
-    id
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | Campaign ID | defaults to undefined|
-
-
-### Return type
-
-**ModelsStandardCampaignResponse**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | Campaign submitted for approval successfully |  -  |
-|**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**404** | Campaign not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brandsGet**
 > ModelsStandardBrandResponse brandsGet()

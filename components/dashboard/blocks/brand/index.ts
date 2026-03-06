@@ -1,3 +1,4 @@
+export { BrandAnalyticsBlock } from './brand-analytics-block';
 export { BrandKpiOverviewBlock } from './brand-kpi-overview-block';
 export { BrandPipelineBreakdownBlock } from './brand-pipeline-breakdown-block';
 export { BrandActionCenterBlock } from './brand-action-center-block';

@@ -8,9 +8,12 @@ All URIs are relative to */api/v1*
 |[**creatorsApplicationsGet**](#creatorsapplicationsget) | **GET** /creators/applications | Get creator applications|
 |[**creatorsBankDetailsGet**](#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details|
 |[**creatorsBankDetailsPut**](#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details|
+|[**creatorsIdBankDetailsGet**](#creatorsidbankdetailsget) | **GET** /creators/{id}/bank-details | Get creator bank details by creator ID (Admin only)|
 |[**creatorsIdGet**](#creatorsidget) | **GET** /creators/{id} | Get creator by ID|
 |[**creatorsIdProfileStatusPut**](#creatorsidprofilestatusput) | **PUT** /creators/{id}/profile-status | Update creator profile status|
 |[**creatorsMatchingGigsGet**](#creatorsmatchinggigsget) | **GET** /creators/matching-gigs | Get matching gigs|
+|[**creatorsPaymentItemsSearchGet**](#creatorspaymentitemssearchget) | **GET** /creators/payment-items/search | Search creator\&#39;s payment items|
+|[**creatorsPaymentsIdGet**](#creatorspaymentsidget) | **GET** /creators/payments/{id} | Get creator\&#39;s payment by ID|
 |[**creatorsPaymentsSearchGet**](#creatorspaymentssearchget) | **GET** /creators/payments/search | Search creator\&#39;s payments|
 |[**creatorsProfileDraftPost**](#creatorsprofiledraftpost) | **POST** /creators/profile/draft | Save creator profile as draft|
 |[**creatorsProfileGet**](#creatorsprofileget) | **GET** /creators/profile | Get creator profile|
@@ -215,6 +218,59 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **creatorsIdBankDetailsGet**
+> ModelsStandardCreatorBankTaxDetailsResponse creatorsIdBankDetailsGet()
+
+Get bank and tax details for a specific creator by their ID. This includes full sensitive information.
+
+### Example
+
+```typescript
+import {
+    CreatorApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CreatorApi(configuration);
+
+let id: string; //Creator ID (default to undefined)
+
+const { status, data } = await apiInstance.creatorsIdBankDetailsGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Creator ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardCreatorBankTaxDetailsResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Bank details retrieved successfully |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Creator profile not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **creatorsIdGet**
 > ModelsStandardCreatorResponse creatorsIdGet()
 
@@ -392,6 +448,134 @@ No authorization required
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**422** | Unprocessable entity |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **creatorsPaymentItemsSearchGet**
+> ModelsPaginatedPaymentItemResponse creatorsPaymentItemsSearchGet()
+
+Creator searches their own payment items
+
+### Example
+
+```typescript
+import {
+    CreatorApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CreatorApi(configuration);
+
+let createdAfter: string; // (optional) (default to undefined)
+let createdBefore: string; // (optional) (default to undefined)
+let creatorId: string; // (optional) (default to undefined)
+let itemStatus: 'pending' | 'included' | 'paid' | 'failed' | 'cancelled'; // (optional) (default to undefined)
+let limit: number; // (optional) (default to undefined)
+let page: number; // (optional) (default to undefined)
+let paymentId: string; // (optional) (default to undefined)
+let search: string; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.creatorsPaymentItemsSearchGet(
+    createdAfter,
+    createdBefore,
+    creatorId,
+    itemStatus,
+    limit,
+    page,
+    paymentId,
+    search
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createdAfter** | [**string**] |  | (optional) defaults to undefined|
+| **createdBefore** | [**string**] |  | (optional) defaults to undefined|
+| **creatorId** | [**string**] |  | (optional) defaults to undefined|
+| **itemStatus** | [**&#39;pending&#39; | &#39;included&#39; | &#39;paid&#39; | &#39;failed&#39; | &#39;cancelled&#39;**]**Array<&#39;pending&#39; &#124; &#39;included&#39; &#124; &#39;paid&#39; &#124; &#39;failed&#39; &#124; &#39;cancelled&#39;>** |  | (optional) defaults to undefined|
+| **limit** | [**number**] |  | (optional) defaults to undefined|
+| **page** | [**number**] |  | (optional) defaults to undefined|
+| **paymentId** | [**string**] |  | (optional) defaults to undefined|
+| **search** | [**string**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**ModelsPaginatedPaymentItemResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment items retrieved successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **creatorsPaymentsIdGet**
+> ModelsStandardPaymentResponse creatorsPaymentsIdGet()
+
+Creator gets their own payment details by ID
+
+### Example
+
+```typescript
+import {
+    CreatorApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CreatorApi(configuration);
+
+let id: string; //Payment ID (default to undefined)
+
+const { status, data } = await apiInstance.creatorsPaymentsIdGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Payment ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardPaymentResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment retrieved successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | Forbidden |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

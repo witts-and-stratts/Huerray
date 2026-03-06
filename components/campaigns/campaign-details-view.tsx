@@ -10,7 +10,7 @@ import {
   ModelsCampaignStatusUpdateRequestCampaignStatusEnum,
 } from '@/lib/api/generated/models';
 import { useAdminCampaignApproval, useCampaignApplications, useCampaignInvitations, useCampaignSubmissions, useUpdateCampaignStatus } from '@/lib/api/hooks/campaigns';
-import { useComments } from '@/lib/api/hooks/comments';
+import { useMultipleComments } from '@/lib/api/hooks/comments';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
 import { ApiError } from '@/lib/api/hooks/types';
@@ -64,7 +64,7 @@ function SubheaderActionButton( { item }: { item: ActionItem; } ) {
 
   const inner = (
     <>
-      <Icon className="size-3.5" />
+      { Icon && <Icon className="size-3.5" /> }
       { item.label }
     </>
   );
@@ -101,7 +101,11 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
   const { data: submissionsData } = useCampaignSubmissions( campaign.id || '' );
   const { data: invitationsData } = useCampaignInvitations( campaign.id || '' );
   const { data: gigsData } = useGigsByCampaign( campaign.id || '', role === 'admin' ? 'admin' : 'brand' );
-  const { data: commentsData } = useComments( UtilsEntityType.EntityTypeCampaign, campaign.id || '' );
+  const commentsResults = useMultipleComments( [
+    { entityType: UtilsEntityType.EntityTypeCampaign, entityId: campaign.id || '' },
+    { entityType: UtilsEntityType.EntityTypeAdminCampaignApproval, entityId: campaign.id || '' },
+    { entityType: UtilsEntityType.EntityTypeBrandCampaignDecision, entityId: campaign.id || '' },
+  ] );
 
   const applicationCount = applicationsData?.data?.length ?? 0;
   const submissionCount = submissionsData?.data?.length ?? 0;
@@ -111,7 +115,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
   const openGigCount = gigsData?.data?.filter( ( g: any ) => g.gig_status === 'open' ).length ?? 0;
   const inProgressGigCount = gigsData?.data?.filter( ( g: any ) => g.gig_status === 'in_progress' ).length ?? 0;
   const invitationCount = Array.isArray( invitationsData?.data ) ? invitationsData.data.length : 0;
-  const commentCount = commentsData?.data?.length ?? 0;
+  const commentCount = commentsResults.reduce( ( sum, r ) => sum + ( r.data?.data?.length ?? 0 ), 0 );
 
   // Quick action dialog state
   const [ approveDialogOpen, setApproveDialogOpen ] = useState( false );
@@ -195,12 +199,14 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
     );
   }
 
+  const commentsLoaded = commentsResults.every( ( r ) => !r.isLoading );
+
   // If the comments tab is active but there are no comments, fall back to overview
   useEffect( () => {
-    if ( activeTab === 'comments' && commentCount === 0 && commentsData !== undefined ) {
+    if ( activeTab === 'comments' && commentCount === 0 && commentsLoaded ) {
       changeTab( 'overview' );
     }
-  }, [ activeTab, commentCount, commentsData, changeTab ] );
+  }, [ activeTab, commentCount, commentsLoaded, changeTab ] );
 
   const tabItems = [
     { value: 'overview', label: 'Overview' },

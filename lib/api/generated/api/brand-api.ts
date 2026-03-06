@@ -40,8 +40,6 @@ import type { ModelsStandardBrandResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardBrandStatusUpdateResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardCampaignResponse } from '../models';
-// @ts-ignore
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardGenericResponse } from '../models';
@@ -50,40 +48,6 @@ import type { ModelsStandardGenericResponse } from '../models';
  */
 export const BrandApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * Submit a draft or returned campaign for admin approval
-         * @summary Submit campaign for approval
-         * @param {string} id Campaign ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        brandsCampaignsIdSubmitPost: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('brandsCampaignsIdSubmitPost', 'id', id)
-            const localVarPath = `/brands/campaigns/{id}/submit`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Get brands for the authenticated user
          * @summary Get user brands
@@ -766,19 +730,6 @@ export const BrandApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = BrandApiAxiosParamCreator(configuration)
     return {
         /**
-         * Submit a draft or returned campaign for admin approval
-         * @summary Submit campaign for approval
-         * @param {string} id Campaign ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async brandsCampaignsIdSubmitPost(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCampaignResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.brandsCampaignsIdSubmitPost(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsCampaignsIdSubmitPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Get brands for the authenticated user
          * @summary Get user brands
          * @param {*} [options] Override http request option.
@@ -989,16 +940,6 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
     const localVarFp = BrandApiFp(configuration)
     return {
         /**
-         * Submit a draft or returned campaign for admin approval
-         * @summary Submit campaign for approval
-         * @param {BrandApiBrandsCampaignsIdSubmitPostRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        brandsCampaignsIdSubmitPost(requestParameters: BrandApiBrandsCampaignsIdSubmitPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCampaignResponse> {
-            return localVarFp.brandsCampaignsIdSubmitPost(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Get brands for the authenticated user
          * @summary Get user brands
          * @param {*} [options] Override http request option.
@@ -1109,16 +1050,6 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
         },
     };
 };
-
-/**
- * Request parameters for brandsCampaignsIdSubmitPost operation in BrandApi.
- */
-export interface BrandApiBrandsCampaignsIdSubmitPostRequest {
-    /**
-     * Campaign ID
-     */
-    readonly id: string
-}
 
 /**
  * Request parameters for brandsGigsGet operation in BrandApi.
@@ -1330,17 +1261,6 @@ export interface BrandApiBrandsSearchVideoSubmissionsGetRequest {
  * BrandApi - object-oriented interface
  */
 export class BrandApi extends BaseAPI {
-    /**
-     * Submit a draft or returned campaign for admin approval
-     * @summary Submit campaign for approval
-     * @param {BrandApiBrandsCampaignsIdSubmitPostRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public brandsCampaignsIdSubmitPost(requestParameters: BrandApiBrandsCampaignsIdSubmitPostRequest, options?: RawAxiosRequestConfig) {
-        return BrandApiFp(this.configuration).brandsCampaignsIdSubmitPost(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * Get brands for the authenticated user
      * @summary Get user brands

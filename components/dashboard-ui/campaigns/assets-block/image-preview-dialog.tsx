@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import PdfPreview from '@/components/campaigns/sections/documents/pdf-preview';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { AnimatePresence, motion, type Variants, type Easing } from 'motion/react';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${ pdfjs.version }/build/pdf.worker.min.mjs`;
 
@@ -204,7 +205,7 @@ export function ImagePreviewDialog( {
                 <>
                   {/* eslint-disable-next-line @next/next/no-img-element */ }
                   <img
-                    src={ current }
+                    src={ imgpresets.large( current ) }
                     alt={ `Asset ${ index + 1 }` }
                     className="max-h-[75vh] w-full object-contain"
                     onLoad={ () => { setImgReady( true ); measureHeight(); } }
@@ -272,7 +273,7 @@ export function ImagePreviewDialog( {
                 >
                   { type === 'images' ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={ item } alt={ `Thumb ${ i + 1 }` } className="size-full object-cover" />
+                    <img src={ imgpresets.thumbnail( item ) } alt={ `Thumb ${ i + 1 }` } className="size-full object-cover" />
                   ) : (
                     <div className="size-full overflow-hidden flex items-center justify-center bg-muted/40 [&_.react-pdf\_\_Page\_\_canvas]:!w-full [&_.react-pdf\_\_Page\_\_canvas]:!h-auto">
                       <PdfThumbnail src={ item } />

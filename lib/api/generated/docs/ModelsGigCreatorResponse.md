@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **age_min** | **number** |  | [optional] [default to undefined]
 **ambience** | **string** |  | [optional] [default to undefined]
 **brand** | [**ModelsBrandResponse**](ModelsBrandResponse.md) |  | [optional] [default to undefined]
+**brand_logo_url** | **string** |  | [optional] [default to undefined]
+**brand_name** | **string** |  | [optional] [default to undefined]
 **campaign** | [**ModelsCampaignResponse**](ModelsCampaignResponse.md) |  | [optional] [default to undefined]
 **campaign_id** | **string** |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
@@ -38,6 +40,8 @@ const instance: ModelsGigCreatorResponse = {
     age_min,
     ambience,
     brand,
+    brand_logo_url,
+    brand_name,
     campaign,
     campaign_id,
     campaign_name,

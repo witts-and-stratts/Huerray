@@ -41,7 +41,7 @@ const CampaignActionsCell = ( { row, basePath }: { row: Row<ModelCampaign>, base
         </RoleGuard>
         <RoleGuard allowedRoles={ [ 'brand' ] }>
           {
-            ( row.original.campaign_status === 'created' || row.original.campaign_status === 'returned' ) ? (
+            ( row.original.campaign_status === 'draft' || row.original.campaign_status === 'returned' ) ? (
               <Button variant='outline' size='sm' className='font-regular' render={
                 <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
                   Edit

@@ -25,6 +25,8 @@ export interface ModelsGigCreatorResponse {
     'age_min'?: number;
     'ambience'?: string;
     'brand'?: ModelsBrandResponse;
+    'brand_logo_url'?: string;
+    'brand_name'?: string;
     'campaign'?: ModelsCampaignResponse;
     'campaign_id'?: string;
     'campaign_name'?: string;

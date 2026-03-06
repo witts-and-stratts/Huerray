@@ -11,8 +11,16 @@ interface CampaignCommentsSectionProps {
 export function CampaignCommentsSection( { campaignId, disableComment }: CampaignCommentsSectionProps ) {
   return (
     <CommentsThread
-      entityType={ UtilsEntityType.EntityTypeCampaign }
-      entityId={ campaignId }
+      entities={ [ {
+        entityType: UtilsEntityType.EntityTypeCampaign,
+        entityId: campaignId
+      }, {
+        entityType: UtilsEntityType.EntityTypeAdminCampaignApproval,
+        entityId: campaignId
+      }, {
+        entityType: UtilsEntityType.EntityTypeBrandCampaignDecision,
+        entityId: campaignId
+      } ] }
       disableComment={ disableComment }
     />
   );

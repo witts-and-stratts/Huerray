@@ -20,7 +20,7 @@ const actions = [
   },
   {
     label: 'Manage Gigs',
-    href: '/brand/gigs',
+    href: '/brand/campaigns',
     detail: 'Track gig setup, status, and creator activity',
     icon: BriefcaseBusiness,
     priority: 'medium',

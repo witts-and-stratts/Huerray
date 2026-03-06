@@ -67,7 +67,6 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authRegisterPost**](docs/AuthenticationApi.md#authregisterpost) | **POST** /auth/register | Register a new user
 *AuthenticationApi* | [**authResendVerificationPost**](docs/AuthenticationApi.md#authresendverificationpost) | **POST** /auth/resend-verification | Resend email verification
 *AuthenticationApi* | [**authVerifyEmailPost**](docs/AuthenticationApi.md#authverifyemailpost) | **POST** /auth/verify-email | Verify email
-*BrandApi* | [**brandsCampaignsIdSubmitPost**](docs/BrandApi.md#brandscampaignsidsubmitpost) | **POST** /brands/campaigns/{id}/submit | Submit campaign for approval
 *BrandApi* | [**brandsGet**](docs/BrandApi.md#brandsget) | **GET** /brands | Get user brands
 *BrandApi* | [**brandsGigsGet**](docs/BrandApi.md#brandsgigsget) | **GET** /brands/gigs | Search gigs for brand
 *BrandApi* | [**brandsIdDelete**](docs/BrandApi.md#brandsiddelete) | **DELETE** /brands/{id} | Delete brand
@@ -89,6 +88,7 @@ Class | Method | HTTP request | Description
 *CampaignsApi* | [**campaignsIdInvitationsGet**](docs/CampaignsApi.md#campaignsidinvitationsget) | **GET** /campaigns/{id}/invitations | Get gig invitations by campaign
 *CampaignsApi* | [**campaignsIdPut**](docs/CampaignsApi.md#campaignsidput) | **PUT** /campaigns/{id} | Update campaign
 *CampaignsApi* | [**campaignsIdStatusPut**](docs/CampaignsApi.md#campaignsidstatusput) | **PUT** /campaigns/{id}/status | Update campaign status
+*CampaignsApi* | [**campaignsIdSubmitPost**](docs/CampaignsApi.md#campaignsidsubmitpost) | **POST** /campaigns/{id}/submit | Submit campaign for approval
 *CampaignsApi* | [**campaignsIdVideoSubmissionsGet**](docs/CampaignsApi.md#campaignsidvideosubmissionsget) | **GET** /campaigns/{id}/video-submissions | Get video submissions by campaign ID
 *CampaignsApi* | [**campaignsPost**](docs/CampaignsApi.md#campaignspost) | **POST** /campaigns | Create a new campaign
 *CampaignsApi* | [**campaignsSearchGet**](docs/CampaignsApi.md#campaignssearchget) | **GET** /campaigns/search | Search campaigns
@@ -100,9 +100,12 @@ Class | Method | HTTP request | Description
 *CreatorApi* | [**creatorsApplicationsGet**](docs/CreatorApi.md#creatorsapplicationsget) | **GET** /creators/applications | Get creator applications
 *CreatorApi* | [**creatorsBankDetailsGet**](docs/CreatorApi.md#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details
 *CreatorApi* | [**creatorsBankDetailsPut**](docs/CreatorApi.md#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details
+*CreatorApi* | [**creatorsIdBankDetailsGet**](docs/CreatorApi.md#creatorsidbankdetailsget) | **GET** /creators/{id}/bank-details | Get creator bank details by creator ID (Admin only)
 *CreatorApi* | [**creatorsIdGet**](docs/CreatorApi.md#creatorsidget) | **GET** /creators/{id} | Get creator by ID
 *CreatorApi* | [**creatorsIdProfileStatusPut**](docs/CreatorApi.md#creatorsidprofilestatusput) | **PUT** /creators/{id}/profile-status | Update creator profile status
 *CreatorApi* | [**creatorsMatchingGigsGet**](docs/CreatorApi.md#creatorsmatchinggigsget) | **GET** /creators/matching-gigs | Get matching gigs
+*CreatorApi* | [**creatorsPaymentItemsSearchGet**](docs/CreatorApi.md#creatorspaymentitemssearchget) | **GET** /creators/payment-items/search | Search creator\&#39;s payment items
+*CreatorApi* | [**creatorsPaymentsIdGet**](docs/CreatorApi.md#creatorspaymentsidget) | **GET** /creators/payments/{id} | Get creator\&#39;s payment by ID
 *CreatorApi* | [**creatorsPaymentsSearchGet**](docs/CreatorApi.md#creatorspaymentssearchget) | **GET** /creators/payments/search | Search creator\&#39;s payments
 *CreatorApi* | [**creatorsProfileDraftPost**](docs/CreatorApi.md#creatorsprofiledraftpost) | **POST** /creators/profile/draft | Save creator profile as draft
 *CreatorApi* | [**creatorsProfileGet**](docs/CreatorApi.md#creatorsprofileget) | **GET** /creators/profile | Get creator profile
@@ -128,7 +131,6 @@ Class | Method | HTTP request | Description
 *GigsApi* | [**gigsSearchGet**](docs/GigsApi.md#gigssearchget) | **GET** /gigs/search | Search gigs
 *InvoiceApi* | [**invoicesIdGeneratePdfPost**](docs/InvoiceApi.md#invoicesidgeneratepdfpost) | **POST** /invoices/{id}/generate-pdf | Generate PDF for existing invoice
 *InvoiceApi* | [**invoicesIdGet**](docs/InvoiceApi.md#invoicesidget) | **GET** /invoices/{id} | Get invoice by ID
-*InvoiceApi* | [**invoicesIdPdfGet**](docs/InvoiceApi.md#invoicesidpdfget) | **GET** /invoices/{id}/pdf | Download invoice PDF
 *InvoiceApi* | [**invoicesIdStatusPut**](docs/InvoiceApi.md#invoicesidstatusput) | **PUT** /invoices/{id}/status | Update invoice status
 *InvoiceApi* | [**invoicesPost**](docs/InvoiceApi.md#invoicespost) | **POST** /invoices | Create invoice for campaign
 *InvoiceApi* | [**invoicesSearchGet**](docs/InvoiceApi.md#invoicessearchget) | **GET** /invoices/search | Search invoices (Admin &amp; Brands)
@@ -165,6 +167,7 @@ Class | Method | HTTP request | Description
 *VideoSubmissionsApi* | [**videosCampaignCampaignIdGet**](docs/VideoSubmissionsApi.md#videoscampaigncampaignidget) | **GET** /videos/campaign/{campaignId} | Get video submissions by campaign
 *VideoSubmissionsApi* | [**videosGigGigIdGet**](docs/VideoSubmissionsApi.md#videosgiggigidget) | **GET** /videos/gig/{gigId} | Get video submissions by gig
 *VideoSubmissionsApi* | [**videosIdDecisionPut**](docs/VideoSubmissionsApi.md#videosiddecisionput) | **PUT** /videos/{id}/decision | Brand makes decision on video submission
+*VideoSubmissionsApi* | [**videosIdGet**](docs/VideoSubmissionsApi.md#videosidget) | **GET** /videos/{id} | Get video submission by ID
 *VideoSubmissionsApi* | [**videosIdPut**](docs/VideoSubmissionsApi.md#videosidput) | **PUT** /videos/{id} | Update video submission
 *VideoSubmissionsApi* | [**videosIdStatusPut**](docs/VideoSubmissionsApi.md#videosidstatusput) | **PUT** /videos/{id}/status | Update video submission status
 *VideoSubmissionsApi* | [**videosIdSubmitPut**](docs/VideoSubmissionsApi.md#videosidsubmitput) | **PUT** /videos/{id}/submit | Submit video for approval

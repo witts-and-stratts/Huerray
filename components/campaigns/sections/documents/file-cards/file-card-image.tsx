@@ -52,7 +52,7 @@ export const FileCardImage = memo( ( props: FileCardProps ) => {
   return (
     <BaseFileCard { ...props } progress={ progress }>
       { ( item.preview || item.url ) && (
-        <Media url={ item.preview || item.url! } alt={ item.name } className="w-full max-h-40 object-cover object-top" />
+        <Media url={ item.preview || item.url! } alt={ item.name } className="w-full max-h-40 object-contain object-top" type='image' />
       ) }
     </BaseFileCard>
   );

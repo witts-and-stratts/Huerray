@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **notes** | **string** |  | [optional] [default to undefined]
 **payment_date** | **string** |  | [optional] [default to undefined]
 **payment_method** | **string** |  | [optional] [default to undefined]
-**payment_status** | **string** |  | [default to undefined]
+**payment_status** | [**UtilsPaymentStatus**](UtilsPaymentStatus.md) |  | [default to undefined]
 
 ## Example
 

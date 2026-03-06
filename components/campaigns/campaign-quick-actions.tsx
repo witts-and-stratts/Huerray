@@ -27,7 +27,7 @@ type ActionVariant = 'primary' | 'outline' | 'destructive';
 export interface ActionItem {
   key: string;
   label: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   variant?: ActionVariant;
   href?: string;
   onClick?: () => void;
@@ -101,17 +101,17 @@ function resolveAdminPhase(
   openGigs: number,
 ): AdminPhase {
   switch ( status ) {
-    case 'created':          return 'created';
-    case 'returned':         return 'returned';
+    case 'created': return 'created';
+    case 'returned': return 'returned';
     case 'pending_approval': return 'pending_approval';
-    case 'gigs_approved':    return 'gigs_approved';
-    case 'completed':        return 'completed';
+    case 'gigs_approved': return 'gigs_approved';
+    case 'completed': return 'completed';
     case 'running':
-      if ( pendingSubmissions > 0 )  return 'running:review';
+      if ( pendingSubmissions > 0 ) return 'running:review';
       if ( approvedSubmissions > 0 ) return 'running:awaiting_confirmation';
-      if ( openGigs > 0 )            return 'running:awaiting_submissions';
+      if ( openGigs > 0 ) return 'running:awaiting_submissions';
       return 'completed';
-    default:                 return 'created';
+    default: return 'created';
   }
 }
 
@@ -125,18 +125,18 @@ function resolveBrandPhase(
   inProgressGigs: number,
 ): BrandPhase {
   switch ( status ) {
-    case 'created':          return 'created';
-    case 'returned':         return 'returned';
+    case 'created': return 'created';
+    case 'returned': return 'returned';
     case 'pending_approval': return 'pending_approval';
-    case 'gigs_approved':    return 'gigs_approved';
-    case 'completed':        return 'completed';
+    case 'gigs_approved': return 'gigs_approved';
+    case 'completed': return 'completed';
     case 'running':
       if ( pendingSubmissions > 0 || approvedSubmissions > 0 ) return 'running:review';
       if ( openGigs > 0 && totalSubmissions > 0 && acceptedSubmissions === totalSubmissions ) return 'running:invite_more';
-      if ( inProgressGigs > 0 )     return 'running:awaiting_submissions';
-      if ( totalSubmissions === 0 )  return 'running:invite';
+      if ( inProgressGigs > 0 ) return 'running:awaiting_submissions';
+      if ( totalSubmissions === 0 ) return 'running:invite';
       return 'completed';
-    default:                 return 'created';
+    default: return 'created';
   }
 }
 
@@ -157,16 +157,16 @@ export function buildAdminActions(
   const gigHref = `${ basePath }/campaigns/${ campaignId }/gigs/new`;
 
   const phaseActions: Record<AdminPhase, ActionItem | null> = {
-    'created':                       { key: 'create-gig',            label: 'Create Gig',                        icon: Plus,        variant: 'outline',     href: gigHref },
-    'returned':                      { key: 'create-gig',            label: 'Create Gig',                        icon: Plus,        variant: 'outline',     href: gigHref },
-    'pending_approval':              gigsValidated
-      ? { key: 'approve',            label: 'Approve',                                                           icon: CheckCircle, variant: 'primary',     onClick: () => openDialog( 'approve' ) }
-      : { key: 'create-gig',         label: 'Create Gig',                                                        icon: Plus,        variant: 'outline',     href: gigHref },
-    'gigs_approved':                 { key: 'awaiting-brand',        label: 'Awaiting brand decision',           icon: Clock,       variant: 'outline',     disabled: true },
-    'running:review':                { key: 'review-submissions',    label: 'Review Submissions',                icon: FileSearch,  variant: 'primary',     onClick: () => onNavigateToTab( 'submissions' ) },
-    'running:awaiting_confirmation': { key: 'awaiting-confirmation', label: 'Waiting for Submission Acceptance', icon: Clock,       variant: 'outline',     disabled: true },
-    'running:awaiting_submissions':  { key: 'awaiting-submissions',  label: 'Awaiting Submissions',              icon: Clock,       variant: 'outline',     disabled: true },
-    'completed':                     null,
+    'created': { key: 'create-gig', label: 'Create Gig', icon: Plus, variant: 'primary', href: gigHref },
+    'returned': { key: 'create-gig', label: 'Create Gig', icon: Plus, variant: 'primary', href: gigHref },
+    'pending_approval': gigsValidated
+      ? { key: 'approve', label: 'Approve', icon: CheckCircle, variant: 'primary', onClick: () => openDialog( 'approve' ) }
+      : { key: 'create-gig', label: 'Create Gig', icon: Plus, variant: 'primary', href: gigHref },
+    'gigs_approved': { key: 'awaiting-brand', label: 'Awaiting brand decision', icon: Clock, variant: 'outline', disabled: true },
+    'running:review': { key: 'review-submissions', label: 'Review Submissions', icon: FileSearch, variant: 'primary', onClick: () => onNavigateToTab( 'submissions' ) },
+    'running:awaiting_confirmation': { key: 'awaiting-confirmation', label: 'Waiting for Submission Acceptance', icon: Clock, variant: 'outline', disabled: true },
+    'running:awaiting_submissions': { key: 'awaiting-submissions', label: 'Awaiting Submissions', icon: Clock, variant: 'outline', disabled: true },
+    'completed': null,
   };
 
   const action = phaseActions[ phase ];
@@ -191,15 +191,15 @@ export function buildBrandActions(
   const editHref = `${ basePath }/campaigns/${ campaignId }/edit`;
 
   const phaseActions: Record<BrandPhase, ActionItem | null> = {
-    'created':          { key: 'edit',               label: 'Edit',               icon: FilePen,    variant: 'outline', href: editHref },
-    'returned':         { key: 'edit',               label: 'Edit',               icon: FilePen,    variant: 'outline', href: editHref },
-    'pending_approval': { key: 'edit',               label: 'Edit',               icon: FilePen,    variant: 'outline', href: editHref },
-    'gigs_approved':    { key: 'accept',             label: 'Accept Campaign',    icon: ThumbsUp,   variant: 'primary', onClick: openAccept },
-    'running:review':       { key: 'review-submissions', label: 'Review Submissions',  icon: FileSearch, variant: 'primary', onClick: () => onNavigateToTab( 'submissions' ) },
-    'running:invite_more':        { key: 'invite-more',           label: 'Invite More Creators', icon: Users,   variant: 'primary',  onClick: openInviteCreators },
-    'running:awaiting_submissions': { key: 'awaiting-submissions', label: 'Awaiting Submissions', icon: Clock,   variant: 'outline',  disabled: true },
-    'running:invite':             { key: 'invite-creators',        label: 'Invite Creators',      icon: Users,   variant: 'primary',  onClick: openInviteCreators },
-    'completed':        null,
+    'created': { key: 'edit', label: 'Edit', icon: FilePen, variant: 'primary', href: editHref },
+    'returned': { key: 'edit', label: 'Edit', icon: FilePen, variant: 'primary', href: editHref },
+    'pending_approval': { key: '', label: 'Awaiting approval', variant: 'outline', disabled: true },
+    'gigs_approved': { key: 'accept', label: 'Accept Campaign', icon: ThumbsUp, variant: 'primary', onClick: openAccept },
+    'running:review': { key: 'review-submissions', label: 'Review Submissions', icon: FileSearch, variant: 'primary', onClick: () => onNavigateToTab( 'submissions' ) },
+    'running:invite_more': { key: 'invite-more', label: 'Invite More Creators', icon: Users, variant: 'primary', onClick: openInviteCreators },
+    'running:awaiting_submissions': { key: 'awaiting-submissions', label: 'Awaiting Submissions', icon: Clock, variant: 'outline', disabled: true },
+    'running:invite': { key: 'invite-creators', label: 'Invite Creators', icon: Users, variant: 'primary', onClick: openInviteCreators },
+    'completed': null,
   };
 
   const action = phaseActions[ phase ];

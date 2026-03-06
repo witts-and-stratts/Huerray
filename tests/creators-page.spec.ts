@@ -16,7 +16,7 @@ test.describe('Creators Page', () => {
     await expect(page.getByRole('button', { name: 'Get started' })).toBeVisible();
 
     // Check that creator avatars are visible
-    const avatars = page.getByAlt(/Creator \d+/);
+    const avatars = page.getByAltText(/Creator \d+/);
     await expect(avatars.first()).toBeVisible();
 
     // Check benefits section
@@ -136,9 +136,9 @@ test.describe('Creators Page', () => {
     ).toBeVisible();
 
     // Check for some platform logos
-    await expect(page.getByAlt('Instagram')).toBeVisible();
-    await expect(page.getByAlt('TikTok')).toBeVisible();
-    await expect(page.getByAlt('YouTube')).toBeVisible();
+    await expect(page.getByAltText('Instagram')).toBeVisible();
+    await expect(page.getByAltText('TikTok')).toBeVisible();
+    await expect(page.getByAltText('YouTube')).toBeVisible();
   });
 
   test('should have footer with all sections', async ({ page }) => {

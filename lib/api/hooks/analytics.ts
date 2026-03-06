@@ -10,7 +10,8 @@ import { AnalyticsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import type { 
   ModelsStandardBrandAnalyticsResponse,
-  ModelsStandardCreatorAnalyticsResponse
+  ModelsStandardCreatorAnalyticsResponse,
+  ModelsStandardPlatformAnalyticsResponse
 } from '../generated/models';
 import type { ApiError } from './types';
 
@@ -27,6 +28,8 @@ export const analyticsKeys = {
   brandByPeriod: (period: string) => [...analyticsKeys.brand(), period] as const,
   creator: () => [...analyticsKeys.all, 'creator'] as const,
   creatorByPeriod: (period: string) => [...analyticsKeys.creator(), period] as const,
+  platform: () => [...analyticsKeys.all, 'platform'] as const,
+  platformByPeriod: (period: string) => [...analyticsKeys.platform(), period] as const,
 };
 
 /**
@@ -89,6 +92,39 @@ export function useCreatorAnalyticsByPeriod(
     queryKey: analyticsKeys.creatorByPeriod(period),
     queryFn: async () => {
       const response = await analyticsApi.analyticsCreatorPeriodGet({ period });
+      return response.data;
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to fetch platform-wide analytics (admin only)
+ */
+export function usePlatformAnalytics(
+  options?: Omit<UseQueryOptions<ModelsStandardPlatformAnalyticsResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardPlatformAnalyticsResponse, ApiError> {
+  return useQuery({
+    queryKey: analyticsKeys.platform(),
+    queryFn: async () => {
+      const response = await analyticsApi.analyticsPlatformGet();
+      return response.data;
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to fetch platform analytics for a specific period (admin only)
+ */
+export function usePlatformAnalyticsByPeriod(
+  period: 'last_week' | 'last_month' | 'last_three_months' | 'last_year',
+  options?: Omit<UseQueryOptions<ModelsStandardPlatformAnalyticsResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardPlatformAnalyticsResponse, ApiError> {
+  return useQuery({
+    queryKey: analyticsKeys.platformByPeriod(period),
+    queryFn: async () => {
+      const response = await analyticsApi.analyticsPlatformPeriodGet({ period });
       return response.data;
     },
     ...options,

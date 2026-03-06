@@ -28,9 +28,9 @@ const CampaignSkeleton = () => {
       animate={ { opacity: 1 } }
       exit={ { opacity: 0 } }
       transition={ { duration: 0.5 } }
-      className='w-full space-y-4 px-5'>
+      className='w-full space-y-4 px-5 py-5'>
       <div className='flex items-center justify-between'>
-        <Skeleton className='h-10 w-[250px]' />
+        <Skeleton className='h-10 w-[600px] max-w-full' />
         <Skeleton className='h-10 w-[100px]' />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>

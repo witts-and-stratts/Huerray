@@ -87,7 +87,19 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
       const vidError = validateFilesState( videosState, 'videos', 'videos' );
       if ( vidError ) { setValidationError( vidError ); setSubheadTabValue( vidError.tab ); return; }
 
-      setShowSummary( true );
+      if ( mode === 'edit' && onSubmit ) {
+        setIsSubmitting( true );
+        try {
+          await onSubmit( value as CreateCampaignSchema );
+          dispatch( resetCampaign() );
+        } catch ( error ) {
+          console.error( 'Submission failed', error );
+        } finally {
+          setIsSubmitting( false );
+        }
+      } else {
+        setShowSummary( true );
+      }
     },
     onSubmitInvalid: ( { formApi } ) => {
       // Mapping fields to tabs

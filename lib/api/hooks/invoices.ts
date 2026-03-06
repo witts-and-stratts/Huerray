@@ -68,15 +68,23 @@ export function useUpdateInvoiceStatus(
   const queryClient = useQueryClient();
 
   return useMutation( {
+    ...options,
     mutationFn: async ( { id, request } ) => {
       const response = await invoiceApi.invoicesIdStatusPut( { id, request } );
       return response.data;
     },
-    onSuccess: ( _, variables ) => {
+    onSuccess: ( data, variables, context ) => {
       queryClient.invalidateQueries( { queryKey: invoicesKeys.lists() } );
       queryClient.invalidateQueries( { queryKey: invoicesKeys.detail( variables.id ) } );
+      if (options?.onSuccess) {
+        options.onSuccess( data, variables, context, context as any );
+      }
     },
-    ...options,
+    onError: ( error, variables, context ) => {
+      if (options?.onError) {
+        options.onError( error, variables, context, context as any );
+      }
+    },
   } );
 }
 
@@ -98,13 +106,21 @@ export function useCreateInvoice(
   const queryClient = useQueryClient();
 
   return useMutation( {
+    ...options,
     mutationFn: async ( request: ModelsCreateInvoiceRequest ) => {
       const response = await invoiceApi.invoicesPost( { request } );
       return response.data;
     },
-    onSuccess: () => {
+    onSuccess: ( data, variables, context ) => {
       queryClient.invalidateQueries( { queryKey: invoicesKeys.lists() } );
+      if (options?.onSuccess) {
+        options.onSuccess( data, variables, context, context as any );
+      }
     },
-    ...options,
+    onError: ( error, variables, context ) => {
+      if (options?.onError) {
+        options.onError( error, variables, context, context as any );
+      }
+    },
   } );
 }

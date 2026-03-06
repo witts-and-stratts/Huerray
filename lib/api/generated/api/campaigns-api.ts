@@ -343,6 +343,40 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
+         * Submit a draft or returned campaign for admin approval
+         * @summary Submit campaign for approval
+         * @param {string} id Campaign ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignsIdSubmitPost: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('campaignsIdSubmitPost', 'id', id)
+            const localVarPath = `/campaigns/{id}/submit`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get all video submissions associated with a campaign
          * @summary Get video submissions by campaign ID
          * @param {string} id Campaign ID
@@ -644,6 +678,19 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Submit a draft or returned campaign for admin approval
+         * @summary Submit campaign for approval
+         * @param {string} id Campaign ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async campaignsIdSubmitPost(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCampaignResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsIdSubmitPost(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CampaignsApi.campaignsIdSubmitPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Get all video submissions associated with a campaign
          * @summary Get video submissions by campaign ID
          * @param {string} id Campaign ID
@@ -788,6 +835,16 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
             return localVarFp.campaignsIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
+         * Submit a draft or returned campaign for admin approval
+         * @summary Submit campaign for approval
+         * @param {CampaignsApiCampaignsIdSubmitPostRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        campaignsIdSubmitPost(requestParameters: CampaignsApiCampaignsIdSubmitPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCampaignResponse> {
+            return localVarFp.campaignsIdSubmitPost(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get all video submissions associated with a campaign
          * @summary Get video submissions by campaign ID
          * @param {CampaignsApiCampaignsIdVideoSubmissionsGetRequest} requestParameters Request parameters.
@@ -918,6 +975,16 @@ export interface CampaignsApiCampaignsIdStatusPutRequest {
      * Status update request
      */
     readonly request: ModelsCampaignStatusUpdateRequest
+}
+
+/**
+ * Request parameters for campaignsIdSubmitPost operation in CampaignsApi.
+ */
+export interface CampaignsApiCampaignsIdSubmitPostRequest {
+    /**
+     * Campaign ID
+     */
+    readonly id: string
 }
 
 /**
@@ -1069,6 +1136,17 @@ export class CampaignsApi extends BaseAPI {
      */
     public campaignsIdStatusPut(requestParameters: CampaignsApiCampaignsIdStatusPutRequest, options?: RawAxiosRequestConfig) {
         return CampaignsApiFp(this.configuration).campaignsIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Submit a draft or returned campaign for admin approval
+     * @summary Submit campaign for approval
+     * @param {CampaignsApiCampaignsIdSubmitPostRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public campaignsIdSubmitPost(requestParameters: CampaignsApiCampaignsIdSubmitPostRequest, options?: RawAxiosRequestConfig) {
+        return CampaignsApiFp(this.configuration).campaignsIdSubmitPost(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

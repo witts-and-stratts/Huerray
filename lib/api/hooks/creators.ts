@@ -23,7 +23,8 @@ import type {
   ModelsGigResponse,
   ModelsCreatorResponse,
   ModelsStandardCreatorResponse,
-  ModelsCreatorStatusUpdateRequest
+  ModelsCreatorStatusUpdateRequest,
+  ModelsCreatorBankTaxDetailsResponse
 } from '@/lib/api/generated/models';
 import type { ApiError } from './types';
 
@@ -114,6 +115,25 @@ export function useCreator(
     ...options,
   });
 }
+
+/**
+ * Hook to fetch a single creator's bank details by ID
+ */
+export function useCreatorBankDetails(
+  id: string,
+  options?: Omit<UseQueryOptions<ModelsCreatorBankTaxDetailsResponse | undefined, ApiError>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: [...creatorsKeys.all, 'bank-details', id],
+    queryFn: async () => {
+      const response = await creatorsApi.creatorsIdBankDetailsGet({id});
+      return response.data?.data;
+    },
+    enabled: !!id,
+    ...options,
+  });
+}
+
 /**
  * Hook to update creator profile status
  */

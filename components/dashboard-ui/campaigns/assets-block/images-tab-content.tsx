@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface ImagesTabContentProps {
   imageItems: string[];
@@ -27,7 +28,7 @@ export function ImagesTabContent( { imageItems, onPreview }: ImagesTabContentPro
             aria-label={ t( 'labels.previewAsset', { index: index + 1 } ) }
           >
             {/* eslint-disable-next-line @next/next/no-img-element */ }
-            <img src={ item } alt={ t( 'labels.assetAlt', { index: index + 1 } ) } className="aspect-square w-full object-cover" />
+            <img src={ imgpresets.card( item ) } alt={ t( 'labels.assetAlt', { index: index + 1 } ) } className="aspect-square w-full object-cover" />
           </button>
         ) ) }
       </div>

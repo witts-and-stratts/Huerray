@@ -12,6 +12,7 @@ All URIs are relative to */api/v1*
 |[**campaignsIdInvitationsGet**](#campaignsidinvitationsget) | **GET** /campaigns/{id}/invitations | Get gig invitations by campaign|
 |[**campaignsIdPut**](#campaignsidput) | **PUT** /campaigns/{id} | Update campaign|
 |[**campaignsIdStatusPut**](#campaignsidstatusput) | **PUT** /campaigns/{id}/status | Update campaign status|
+|[**campaignsIdSubmitPost**](#campaignsidsubmitpost) | **POST** /campaigns/{id}/submit | Submit campaign for approval|
 |[**campaignsIdVideoSubmissionsGet**](#campaignsidvideosubmissionsget) | **GET** /campaigns/{id}/video-submissions | Get video submissions by campaign ID|
 |[**campaignsPost**](#campaignspost) | **POST** /campaigns | Create a new campaign|
 |[**campaignsSearchGet**](#campaignssearchget) | **GET** /campaigns/search | Search campaigns|
@@ -457,6 +458,60 @@ No authorization required
 |-------------|-------------|------------------|
 |**200** | Campaign status updated successfully |  -  |
 |**400** | Bad request |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **campaignsIdSubmitPost**
+> ModelsStandardCampaignResponse campaignsIdSubmitPost()
+
+Submit a draft or returned campaign for admin approval
+
+### Example
+
+```typescript
+import {
+    CampaignsApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CampaignsApi(configuration);
+
+let id: string; //Campaign ID (default to undefined)
+
+const { status, data } = await apiInstance.campaignsIdSubmitPost(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Campaign ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardCampaignResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Campaign submitted for approval successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Campaign not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

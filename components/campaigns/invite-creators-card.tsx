@@ -32,7 +32,7 @@ export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
           </div>
 
           <div>
-            <h3 className="font-normal text-xl font--secondary!">Invite Creators</h3>
+            <h3 className="font-bold text-xl font-primary">Invite Creators</h3>
             <p className="text-white/80 mt-1 text-sm max-w-[80%]">
               Find and invite the perfect creators for your campaign gigs directly.
             </p>

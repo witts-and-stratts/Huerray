@@ -34,8 +34,8 @@ export function GigSelectionDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Select a Gig</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className={ 'dialog__title' }>Select a Gig</DialogTitle>
+          <DialogDescription className={ 'dialog__description' }>
             Choose a gig to invite creators to.
           </DialogDescription>
         </DialogHeader>

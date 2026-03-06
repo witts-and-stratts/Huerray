@@ -6,6 +6,7 @@
 
 import {
   useQuery,
+  useQueries,
   useMutation,
   useQueryClient,
   type UseQueryResult,
@@ -40,6 +41,19 @@ export function useComments(
       return response.data;
     },
     enabled: !!entityId,
+  } );
+}
+
+export function useMultipleComments( entities: Array<{ entityType: string; entityId: string }> ) {
+  return useQueries( {
+    queries: entities.map( ( { entityType, entityId } ) => ( {
+      queryKey: commentsKeys.entity( entityType, entityId ),
+      queryFn: async () => {
+        const response = await commentsApi.commentsGet( { entityType, entityId } );
+        return response.data;
+      },
+      enabled: !!entityId,
+    } ) ),
   } );
 }
 

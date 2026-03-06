@@ -45,7 +45,7 @@ export function BrandGigsStatsBlock() {
         brand,
         brandLogo,
         title: gig.title || 'Untitled Gig',
-        url: '/brand/gigs',
+        url: '/brand/campaigns',
         submittedAt,
         status: gig.gig_status || 'open',
       };
@@ -86,7 +86,7 @@ export function BrandGigsStatsBlock() {
           variant="outline"
           size={ 'sm' }
           className="mt-2 w-full font-normal"
-          render={ <Link href="/brand/gigs" /> }
+          render={ <Link href="/brand/campaigns" /> }
         >
           View all Gigs
         </Button>

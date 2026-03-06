@@ -6,7 +6,6 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 |[**invoicesIdGeneratePdfPost**](#invoicesidgeneratepdfpost) | **POST** /invoices/{id}/generate-pdf | Generate PDF for existing invoice|
 |[**invoicesIdGet**](#invoicesidget) | **GET** /invoices/{id} | Get invoice by ID|
-|[**invoicesIdPdfGet**](#invoicesidpdfget) | **GET** /invoices/{id}/pdf | Download invoice PDF|
 |[**invoicesIdStatusPut**](#invoicesidstatusput) | **PUT** /invoices/{id}/status | Update invoice status|
 |[**invoicesPost**](#invoicespost) | **POST** /invoices | Create invoice for campaign|
 |[**invoicesSearchGet**](#invoicessearchget) | **GET** /invoices/search | Search invoices (Admin &amp; Brands)|
@@ -117,59 +116,6 @@ No authorization required
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**404** | Invoice not found |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **invoicesIdPdfGet**
-> File invoicesIdPdfGet()
-
-Download the PDF file for a specific invoice
-
-### Example
-
-```typescript
-import {
-    InvoiceApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new InvoiceApi(configuration);
-
-let id: string; //Invoice ID (default to undefined)
-
-const { status, data } = await apiInstance.invoicesIdPdfGet(
-    id
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | Invoice ID | defaults to undefined|
-
-
-### Return type
-
-**File**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/pdf
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | PDF file |  -  |
-|**401** | Unauthorized |  -  |
-|**404** | Invoice or PDF not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

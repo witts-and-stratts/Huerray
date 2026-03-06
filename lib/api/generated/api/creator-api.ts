@@ -30,6 +30,8 @@ import type { ModelsPaginatedCreatorResponse } from '../models';
 // @ts-ignore
 import type { ModelsPaginatedGigCreatorResponse } from '../models';
 // @ts-ignore
+import type { ModelsPaginatedPaymentItemResponse } from '../models';
+// @ts-ignore
 import type { ModelsPaginatedPaymentResponse } from '../models';
 // @ts-ignore
 import type { ModelsPaginatedVideoSubmissionResponse } from '../models';
@@ -45,6 +47,8 @@ import type { ModelsStandardErrorResponse } from '../models';
 import type { ModelsStandardGigApplicationResponses } from '../models';
 // @ts-ignore
 import type { ModelsStandardGigCreatorListResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardPaymentResponse } from '../models';
 // @ts-ignore
 import type { ModelsUpdateCreatorBankDetailsRequest } from '../models';
 // @ts-ignore
@@ -180,6 +184,40 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Get bank and tax details for a specific creator by their ID. This includes full sensitive information.
+         * @summary Get creator bank details by creator ID (Admin only)
+         * @param {string} id Creator ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsIdBankDetailsGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('creatorsIdBankDetailsGet', 'id', id)
+            const localVarPath = `/creators/{id}/bank-details`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get creator profile by ID (public access)
          * @summary Get creator by ID
          * @param {string} id Creator UUID
@@ -300,6 +338,110 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
             }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Creator searches their own payment items
+         * @summary Search creator\'s payment items
+         * @param {string} [createdAfter] 
+         * @param {string} [createdBefore] 
+         * @param {string} [creatorId] 
+         * @param {CreatorsPaymentItemsSearchGetItemStatusEnum} [itemStatus] 
+         * @param {number} [limit] 
+         * @param {number} [page] 
+         * @param {string} [paymentId] 
+         * @param {string} [search] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsPaymentItemsSearchGet: async (createdAfter?: string, createdBefore?: string, creatorId?: string, itemStatus?: CreatorsPaymentItemsSearchGetItemStatusEnum, limit?: number, page?: number, paymentId?: string, search?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/creators/payment-items/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (createdAfter !== undefined) {
+                localVarQueryParameter['created_after'] = createdAfter;
+            }
+
+            if (createdBefore !== undefined) {
+                localVarQueryParameter['created_before'] = createdBefore;
+            }
+
+            if (creatorId !== undefined) {
+                localVarQueryParameter['creator_id'] = creatorId;
+            }
+
+            if (itemStatus !== undefined) {
+                localVarQueryParameter['item_status'] = itemStatus;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (paymentId !== undefined) {
+                localVarQueryParameter['payment_id'] = paymentId;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Creator gets their own payment details by ID
+         * @summary Get creator\'s payment by ID
+         * @param {string} id Payment ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsPaymentsIdGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('creatorsPaymentsIdGet', 'id', id)
+            const localVarPath = `/creators/payments/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -876,6 +1018,19 @@ export const CreatorApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Get bank and tax details for a specific creator by their ID. This includes full sensitive information.
+         * @summary Get creator bank details by creator ID (Admin only)
+         * @param {string} id Creator ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creatorsIdBankDetailsGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorBankTaxDetailsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsIdBankDetailsGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsIdBankDetailsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Get creator profile by ID (public access)
          * @summary Get creator by ID
          * @param {string} id Creator UUID
@@ -918,6 +1073,39 @@ export const CreatorApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsMatchingGigsGet(brandId, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, gender, limit, page, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsMatchingGigsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Creator searches their own payment items
+         * @summary Search creator\'s payment items
+         * @param {string} [createdAfter] 
+         * @param {string} [createdBefore] 
+         * @param {string} [creatorId] 
+         * @param {CreatorsPaymentItemsSearchGetItemStatusEnum} [itemStatus] 
+         * @param {number} [limit] 
+         * @param {number} [page] 
+         * @param {string} [paymentId] 
+         * @param {string} [search] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creatorsPaymentItemsSearchGet(createdAfter?: string, createdBefore?: string, creatorId?: string, itemStatus?: CreatorsPaymentItemsSearchGetItemStatusEnum, limit?: number, page?: number, paymentId?: string, search?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedPaymentItemResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsPaymentItemsSearchGet(createdAfter, createdBefore, creatorId, itemStatus, limit, page, paymentId, search, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsPaymentItemsSearchGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Creator gets their own payment details by ID
+         * @summary Get creator\'s payment by ID
+         * @param {string} id Payment ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creatorsPaymentsIdGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPaymentResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsPaymentsIdGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsPaymentsIdGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1122,6 +1310,16 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.creatorsBankDetailsPut(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get bank and tax details for a specific creator by their ID. This includes full sensitive information.
+         * @summary Get creator bank details by creator ID (Admin only)
+         * @param {CreatorApiCreatorsIdBankDetailsGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsIdBankDetailsGet(requestParameters: CreatorApiCreatorsIdBankDetailsGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorBankTaxDetailsResponse> {
+            return localVarFp.creatorsIdBankDetailsGet(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get creator profile by ID (public access)
          * @summary Get creator by ID
          * @param {CreatorApiCreatorsIdGetRequest} requestParameters Request parameters.
@@ -1150,6 +1348,26 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          */
         creatorsMatchingGigsGet(requestParameters: CreatorApiCreatorsMatchingGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedGigCreatorResponse> {
             return localVarFp.creatorsMatchingGigsGet(requestParameters.brandId, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.gender, requestParameters.limit, requestParameters.page, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Creator searches their own payment items
+         * @summary Search creator\'s payment items
+         * @param {CreatorApiCreatorsPaymentItemsSearchGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsPaymentItemsSearchGet(requestParameters: CreatorApiCreatorsPaymentItemsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedPaymentItemResponse> {
+            return localVarFp.creatorsPaymentItemsSearchGet(requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.creatorId, requestParameters.itemStatus, requestParameters.limit, requestParameters.page, requestParameters.paymentId, requestParameters.search, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Creator gets their own payment details by ID
+         * @summary Get creator\'s payment by ID
+         * @param {CreatorApiCreatorsPaymentsIdGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsPaymentsIdGet(requestParameters: CreatorApiCreatorsPaymentsIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPaymentResponse> {
+            return localVarFp.creatorsPaymentsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Creator searches their own payments
@@ -1253,6 +1471,16 @@ export interface CreatorApiCreatorsBankDetailsPutRequest {
 }
 
 /**
+ * Request parameters for creatorsIdBankDetailsGet operation in CreatorApi.
+ */
+export interface CreatorApiCreatorsIdBankDetailsGetRequest {
+    /**
+     * Creator ID
+     */
+    readonly id: string
+}
+
+/**
  * Request parameters for creatorsIdGet operation in CreatorApi.
  */
 export interface CreatorApiCreatorsIdGetRequest {
@@ -1292,6 +1520,37 @@ export interface CreatorApiCreatorsMatchingGigsGetRequest {
     readonly limit?: number
 
     readonly page?: number
+}
+
+/**
+ * Request parameters for creatorsPaymentItemsSearchGet operation in CreatorApi.
+ */
+export interface CreatorApiCreatorsPaymentItemsSearchGetRequest {
+    readonly createdAfter?: string
+
+    readonly createdBefore?: string
+
+    readonly creatorId?: string
+
+    readonly itemStatus?: CreatorsPaymentItemsSearchGetItemStatusEnum
+
+    readonly limit?: number
+
+    readonly page?: number
+
+    readonly paymentId?: string
+
+    readonly search?: string
+}
+
+/**
+ * Request parameters for creatorsPaymentsIdGet operation in CreatorApi.
+ */
+export interface CreatorApiCreatorsPaymentsIdGetRequest {
+    /**
+     * Payment ID
+     */
+    readonly id: string
 }
 
 /**
@@ -1478,6 +1737,17 @@ export class CreatorApi extends BaseAPI {
     }
 
     /**
+     * Get bank and tax details for a specific creator by their ID. This includes full sensitive information.
+     * @summary Get creator bank details by creator ID (Admin only)
+     * @param {CreatorApiCreatorsIdBankDetailsGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public creatorsIdBankDetailsGet(requestParameters: CreatorApiCreatorsIdBankDetailsGetRequest, options?: RawAxiosRequestConfig) {
+        return CreatorApiFp(this.configuration).creatorsIdBankDetailsGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Get creator profile by ID (public access)
      * @summary Get creator by ID
      * @param {CreatorApiCreatorsIdGetRequest} requestParameters Request parameters.
@@ -1508,6 +1778,28 @@ export class CreatorApi extends BaseAPI {
      */
     public creatorsMatchingGigsGet(requestParameters: CreatorApiCreatorsMatchingGigsGetRequest = {}, options?: RawAxiosRequestConfig) {
         return CreatorApiFp(this.configuration).creatorsMatchingGigsGet(requestParameters.brandId, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.gender, requestParameters.limit, requestParameters.page, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creator searches their own payment items
+     * @summary Search creator\'s payment items
+     * @param {CreatorApiCreatorsPaymentItemsSearchGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public creatorsPaymentItemsSearchGet(requestParameters: CreatorApiCreatorsPaymentItemsSearchGetRequest = {}, options?: RawAxiosRequestConfig) {
+        return CreatorApiFp(this.configuration).creatorsPaymentItemsSearchGet(requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.creatorId, requestParameters.itemStatus, requestParameters.limit, requestParameters.page, requestParameters.paymentId, requestParameters.search, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creator gets their own payment details by ID
+     * @summary Get creator\'s payment by ID
+     * @param {CreatorApiCreatorsPaymentsIdGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public creatorsPaymentsIdGet(requestParameters: CreatorApiCreatorsPaymentsIdGetRequest, options?: RawAxiosRequestConfig) {
+        return CreatorApiFp(this.configuration).creatorsPaymentsIdGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1608,6 +1900,14 @@ export class CreatorApi extends BaseAPI {
     }
 }
 
+export const CreatorsPaymentItemsSearchGetItemStatusEnum = {
+    PaymentItemStatusPending: 'pending',
+    PaymentItemStatusIncluded: 'included',
+    PaymentItemStatusPaid: 'paid',
+    PaymentItemStatusFailed: 'failed',
+    PaymentItemStatusCancelled: 'cancelled'
+} as const;
+export type CreatorsPaymentItemsSearchGetItemStatusEnum = typeof CreatorsPaymentItemsSearchGetItemStatusEnum[keyof typeof CreatorsPaymentItemsSearchGetItemStatusEnum];
 export const CreatorsPaymentsSearchGetPaymentStatusEnum = {
     PaymentStatusPending: 'pending',
     PaymentStatusProcessing: 'processing',

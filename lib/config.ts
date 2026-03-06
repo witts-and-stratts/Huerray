@@ -11,8 +11,8 @@ export const config = {
   },
   polling: {
     /** Notification list refetch interval in ms (default 30 s) */
-    notificationsInterval: Number(process.env.NEXT_PUBLIC_NOTIFICATIONS_REFETCH_INTERVAL ?? 60 * 5 * 1000),
+    notificationsInterval: Number(process.env.NEXT_PUBLIC_NOTIFICATIONS_REFETCH_INTERVAL ?? 60 * 5 * 5 * 1000),
     /** Auth-guard background profile refresh interval in ms (default 30 min) */
-    profileRefreshInterval: Number(process.env.NEXT_PUBLIC_PROFILE_REFRESH_INTERVAL ?? 60 * 30 * 1000),
+    profileRefreshInterval: Number(process.env.NEXT_PUBLIC_PROFILE_REFRESH_INTERVAL ?? 60 * 5 * 30 * 1000),
   },
 } as const;

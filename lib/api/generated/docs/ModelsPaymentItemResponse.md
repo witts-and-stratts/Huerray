@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **creator_name** | **string** |  | [optional] [default to undefined]
 **currency** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
+**gig** | **object** |  | [optional] [default to undefined]
 **gig_id** | **string** |  | [optional] [default to undefined]
 **gig_title** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
@@ -33,6 +34,7 @@ const instance: ModelsPaymentItemResponse = {
     creator_name,
     currency,
     description,
+    gig,
     gig_id,
     gig_title,
     id,

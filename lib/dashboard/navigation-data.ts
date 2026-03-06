@@ -75,11 +75,6 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       icon: ChartLineData01Icon,
     },
     {
-      title: withFallback( t, "brand.gigs", "Gigs" ),
-      url: "/brand/gigs",
-      icon: Task02Icon,
-    },
-    {
       title: withFallback( t, "brand.creators", "Creators" ),
       url: "/brand/creators",
       icon: UserGroupIcon,

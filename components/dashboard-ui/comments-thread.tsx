@@ -5,17 +5,24 @@ import { Button } from '@/components/dashboard-ui/button';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { useAuth } from '@/lib/auth/auth-context';
 import type { ModelsCommentResponse, UtilsEntityType } from '@/lib/api/generated/models';
-import { useAddComment, useComments } from '@/lib/api/hooks/comments';
+import { UtilsEntityType as EntityType } from '@/lib/api/generated/models/utils-entity-type';
+import { useAddComment, useMultipleComments } from '@/lib/api/hooks/comments';
 import { cn } from '@/lib/dashboard-utils';
-import { Loader2, Send } from 'lucide-react';
+import { Loader2, Send, ShieldCheck } from 'lucide-react';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { SuperField } from './super-field';
 import { timeAgo } from '@/lib/utils';
 
-export interface CommentsThreadProps {
+export interface EntityRef {
   entityType: UtilsEntityType;
   entityId: string;
+}
+
+export interface CommentsThreadProps {
+  entities: EntityRef[];
+  /** Which entity receives new comments. Defaults to the first entry in `entities`. */
+  postTo?: EntityRef;
   disableComment?: boolean;
 }
 
@@ -23,53 +30,46 @@ function getInitials( firstName?: string, lastName?: string ) {
   return `${ firstName?.[ 0 ] ?? '' }${ lastName?.[ 0 ] ?? '' }`.toUpperCase() || '?';
 }
 
-function formatTime( dateString?: string ) {
-  if ( !dateString ) return '';
-  const date = new Date( dateString );
-  const now = new Date();
-  const diffDays = Math.floor( ( now.getTime() - date.getTime() ) / ( 1000 * 60 * 60 * 24 ) );
 
-  if ( diffDays === 0 ) {
-    return date.toLocaleTimeString( [], { hour: '2-digit', minute: '2-digit' } );
-  }
-  if ( diffDays === 1 ) {
-    return `Yesterday ${ date.toLocaleTimeString( [], { hour: '2-digit', minute: '2-digit' } ) }`;
-  }
-  if ( diffDays < 7 ) {
-    return date.toLocaleDateString( [], { weekday: 'short', hour: '2-digit', minute: '2-digit' } );
-  }
-  return date.toLocaleDateString( [], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' } );
-}
-
-type MessageGroup = { senderId: string; commenter: ModelsCommentResponse[ 'commenter' ]; messages: ModelsCommentResponse[]; };
+type MessageGroup = {
+  senderId: string;
+  entityType: string;
+  commenter: ModelsCommentResponse[ 'commenter' ];
+  messages: ModelsCommentResponse[];
+};
 
 function groupMessages( messages: ModelsCommentResponse[] ): MessageGroup[] {
   const groups: MessageGroup[] = [];
 
   for ( const msg of messages ) {
     const last = groups[ groups.length - 1 ];
-    if ( last && last.senderId === msg.commenter_id ) {
+    if ( last && last.senderId === msg.commenter_id && last.entityType === msg.entity_type ) {
       last.messages.push( msg );
     } else {
-      groups.push( { senderId: msg.commenter_id ?? '', commenter: msg.commenter, messages: [ msg ] } );
+      groups.push( { senderId: msg.commenter_id ?? '', entityType: msg.entity_type ?? '', commenter: msg.commenter, messages: [ msg ] } );
     }
   }
 
   return groups;
 }
 
-export function CommentsThread( { entityType, entityId, disableComment = false }: CommentsThreadProps ) {
+export function CommentsThread( { entities, postTo, disableComment = false }: CommentsThreadProps ) {
   const { user } = useAuth();
-  const { data, isLoading, error } = useComments( entityType, entityId );
+  const results = useMultipleComments( entities );
   const addComment = useAddComment();
   const [ text, setText ] = useState( '' );
   const messagesEndRef = useRef<HTMLDivElement>( null );
   const textareaRef = useRef<HTMLTextAreaElement>( null );
 
-  const comments: ModelsCommentResponse[] = ( data?.data ?? [] )
-    .slice()
+  const isLoading = results.some( ( r ) => r.isLoading );
+  const error = results.find( ( r ) => r.error )?.error ?? null;
+
+  const comments: ModelsCommentResponse[] = results
+    .flatMap( ( r ) => r.data?.data ?? [] )
     .sort( ( a, b ) => new Date( a.created_at ?? 0 ).getTime() - new Date( b.created_at ?? 0 ).getTime() );
   const groups = groupMessages( comments );
+
+  const target = postTo ?? entities[ 0 ];
 
   useEffect( () => {
     messagesEndRef.current?.scrollIntoView( { behavior: 'smooth' } );
@@ -84,10 +84,10 @@ export function CommentsThread( { entityType, entityId, disableComment = false }
 
   const handleSend = () => {
     const trimmed = text.trim();
-    if ( !trimmed ) return;
+    if ( !trimmed || !target ) return;
 
     addComment.mutate(
-      { comment: trimmed, entity_id: entityId, entity_type: entityType },
+      { comment: trimmed, entity_id: target.entityId, entity_type: target.entityType },
       {
         onSuccess: () => setText( '' ),
         onError: () => toast.error( 'Failed to send comment' ),
@@ -132,6 +132,8 @@ export function CommentsThread( { entityType, entityId, disableComment = false }
               || group.commenter?.email
               || 'Unknown';
 
+            const isAdminApproval = group.entityType === EntityType.EntityTypeAdminCampaignApproval;
+
             return (
               <div key={ gi } className={ cn( 'flex gap-2', isOwn ? 'flex-row-reverse' : 'flex-row' ) }>
                 { !isOwn && (
@@ -146,6 +148,12 @@ export function CommentsThread( { entityType, entityId, disableComment = false }
                   { !isOwn && (
                     <span className="text-xs font-medium text-muted-foreground px-1 mb-0.5">{ fullName }</span>
                   ) }
+                  { isAdminApproval && (
+                    <div className={ cn( 'flex items-center gap-1 px-1 mb-0.5 text-xs font-medium text-amber-600', isOwn ? 'flex-row-reverse' : 'flex-row' ) }>
+                      <ShieldCheck className="size-4" strokeWidth={ 1.5 } />
+                      <span>Admin Approval</span>
+                    </div>
+                  ) }
 
                   { group.messages.map( ( msg, mi ) => {
                     const isFirst = mi === 0;
@@ -159,6 +167,8 @@ export function CommentsThread( { entityType, entityId, disableComment = false }
                           isOwn
                             ? cn( 'bg-primary text-primary-foreground', 'rounded-2xl', isFirst && 'rounded-tr-lg', isLast ? 'rounded-br-sm' : 'rounded-br-lg' )
                             : cn( 'bg-slate-100 text-foreground', 'rounded-2xl', isFirst && 'rounded-tl-lg', isLast ? 'rounded-bl-sm' : 'rounded-bl-lg' ),
+                          isAdminApproval && !isOwn && 'bg-primary/15 text-primary',
+                          isAdminApproval && isOwn && 'bg-primary/15 text-primary',
                         ) }
                       >
                         { msg.comment }

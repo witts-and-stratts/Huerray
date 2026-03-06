@@ -7,7 +7,7 @@ import { SuperField } from "@/components/dashboard-ui/super-field";
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
-import { ModelsInvoiceResponse } from "@/lib/api/generated/models";
+import { ModelsInvoiceResponse, UtilsInvoiceStatus } from "@/lib/api/generated/models";
 import { useGenerateInvoicePdf, useUpdateInvoiceStatus } from "@/lib/api/hooks/invoices";
 import { InvoiceDetailsSheet } from "./invoice-details-sheet";
 import { ButtonGroup } from "../dashboard-ui/button-group";
@@ -52,7 +52,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
     },
   } );
 
-  const handleInvoiceStatusUpdate = ( invoiceStatus: string ) => {
+  const handleInvoiceStatusUpdate = ( invoiceStatus: UtilsInvoiceStatus ) => {
     if ( invoice.id ) updateInvoiceStatusAction( { id: invoice.id, request: { invoice_status: invoiceStatus } } );
   };
 
@@ -90,6 +90,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
       icon: Ban,
       action: () => setOpenDialog( 'cancelInvoice' ),
       className: "text-destructive focus:text-destructive",
+      condition: () => invoice.invoice_status !== 'cancelled',
     },
   ];
 
@@ -155,7 +156,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
         title="Issue Invoice"
         description="Mark this invoice as issued. The brand will be notified."
         confirmLabel="Issue Invoice"
-        onConfirm={ () => handleInvoiceStatusUpdate( 'invoice_issued' ) }
+        onConfirm={ () => handleInvoiceStatusUpdate( 'issued' ) }
         isLoading={ isStatusActionPending }
         loadingText="Issuing..."
       />
@@ -166,7 +167,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
         title="Send Invoice"
         description="Mark this invoice as sent to the brand."
         confirmLabel="Send Invoice"
-        onConfirm={ () => handleInvoiceStatusUpdate( 'invoice_sent' ) }
+        onConfirm={ () => handleInvoiceStatusUpdate( 'sent' ) }
         isLoading={ isStatusActionPending }
         loadingText="Sending..."
       />
@@ -177,7 +178,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
         title="Invoice Paid"
         description="Mark this invoice as paid by the brand."
         confirmLabel="Mark as Paid"
-        onConfirm={ () => handleInvoiceStatusUpdate( 'invoice_paid' ) }
+        onConfirm={ () => handleInvoiceStatusUpdate( 'paid' ) }
         isLoading={ isStatusActionPending }
         loadingText="Updating..."
       />
@@ -188,7 +189,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
         title="Cancel Invoice"
         description="Are you sure you want to cancel this invoice? This action cannot be undone."
         confirmLabel="Cancel Invoice"
-        onConfirm={ () => handleInvoiceStatusUpdate( 'invoice_cancelled' ) }
+        onConfirm={ () => handleInvoiceStatusUpdate( 'cancelled' ) }
         isLoading={ isStatusActionPending }
         loadingText="Cancelling..."
         variant="destructive"

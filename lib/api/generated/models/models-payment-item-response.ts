@@ -22,6 +22,7 @@ export interface ModelsPaymentItemResponse {
     'creator_name'?: string;
     'currency'?: string;
     'description'?: string;
+    'gig'?: object;
     'gig_id'?: string;
     'gig_title'?: string;
     'id'?: string;

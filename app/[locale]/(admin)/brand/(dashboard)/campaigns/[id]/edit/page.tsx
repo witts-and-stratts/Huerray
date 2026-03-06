@@ -2,10 +2,11 @@
 
 import { CampaignForm } from '@/components/campaigns/campaign-form';
 import { CreateCampaignSchema } from '@/components/campaigns/schema';
-import { useCampaign, useUpdateCampaign } from '@/lib/api/hooks/campaigns';
+import { useCampaign, useUpdateCampaign, useSubmitCampaign } from '@/lib/api/hooks/campaigns';
 import { notFound, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import React from 'react';
+import React, { useState } from 'react';
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 
 interface EditCampaignPageProps {
   params: Promise<{
@@ -19,6 +20,9 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
   const router = useRouter();
   const { data: campaignResponse, isLoading, error } = useCampaign( resolvedParams.id );
   const updateCampaign = useUpdateCampaign();
+  const submitCampaign = useSubmitCampaign();
+
+  const [ showSubmitConfirm, setShowSubmitConfirm ] = useState( false );
 
   if ( isLoading ) {
     return <div className="p-8 text-center text-muted-foreground">Loading campaign...</div>;
@@ -83,18 +87,52 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
         }
       } );
       toast.success( 'Campaign updated successfully' );
-      router.push( '/brand/campaigns' );
+      setShowSubmitConfirm( true );
     } catch ( e ) {
       toast.error( 'Failed to update campaign' );
       console.error( e );
     }
   };
 
+  const handleSendForApproval = async () => {
+    try {
+      await submitCampaign.mutateAsync( resolvedParams.id );
+      toast.success( 'Campaign sent for approval successfully' );
+      router.push( '/brand/campaigns' );
+    } catch ( e ) {
+      toast.error( 'Failed to send campaign for approval' );
+      console.error( e );
+    } finally {
+      setShowSubmitConfirm( false );
+    }
+  };
+
+  const handleDeclineSubmit = () => {
+    setShowSubmitConfirm( false );
+    router.push( '/brand/campaigns' );
+  };
+
   return (
-    <CampaignForm
-      mode="edit"
-      initialValues={ initialValues }
-      onSubmit={ handleSubmit }
-    />
+    <>
+      <CampaignForm
+        mode="edit"
+        initialValues={ initialValues }
+        onSubmit={ handleSubmit }
+      />
+
+      <ConfirmDialog
+        open={ showSubmitConfirm }
+        onOpenChange={ ( open ) => !open && handleDeclineSubmit() }
+        title="Send for approval?"
+        description="Your campaign has been successfully saved. Would you like to submit it for approval now?"
+        cancelLabel="No, maybe later"
+        confirmLabel="Yes, send for approval"
+        onCancel={ handleDeclineSubmit }
+        onConfirm={ handleSendForApproval }
+        isLoading={ submitCampaign.isPending }
+        loadingText="Sending..."
+        variant="default"
+      />
+    </>
   );
 }

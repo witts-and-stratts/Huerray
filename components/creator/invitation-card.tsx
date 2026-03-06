@@ -27,6 +27,7 @@ import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '../dashboard-ui/avatar';
 import { useRole } from '@/contexts/role-context';
+import { formatDate } from '@/lib/utils/format';
 
 type StatusIcon = ComponentProps<typeof HugeiconsIcon>[ 'icon' ];
 
@@ -67,18 +68,6 @@ function InvitationStatusBadge( { status, className }: { status?: string; classN
   );
 }
 
-function formatDate( value?: string ): string {
-  if ( !value ) return 'Date unavailable';
-
-  const date = new Date( value );
-  if ( Number.isNaN( date.getTime() ) ) return 'Date unavailable';
-
-  return new Intl.DateTimeFormat( 'en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  } ).format( date );
-}
 
 interface InvitationCardProps {
   invitation: ModelsGigInvitationResponse;

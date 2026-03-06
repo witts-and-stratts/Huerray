@@ -96,6 +96,28 @@ export function useUpdateCampaignStatus(
   });
 }
 
+/**
+ * Hook to submit a campaign for approval
+ */
+export function useSubmitCampaign(
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, string>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, string> {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await campaignsApi.campaignsIdSubmitPost({ id });
+      return response.data;
+    },
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: campaignsKeys.detail(id) });
+      queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: brandCampaignsKeys.lists() });
+    },
+    ...options,
+  });
+}
+
 // Create API instances
 const campaignsApi = new CampaignsApi(apiConfiguration, undefined, apiClient);
 const brandApi = new BrandApi(apiConfiguration, undefined, apiClient);

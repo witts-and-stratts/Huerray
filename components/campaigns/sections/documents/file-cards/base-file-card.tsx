@@ -9,6 +9,7 @@ import { Button } from '@/components/dashboard-ui/button';
 interface BaseFileCardProps extends FileCardProps {
   children: React.ReactNode;
   progress?: number;
+  showTitle?: boolean;
 }
 
 export const BaseFileCard = memo( ( {
@@ -24,7 +25,8 @@ export const BaseFileCard = memo( ( {
   setNodeRef,
   isDragging,
   children,
-  progress = 0
+  progress = 0,
+  showTitle = true,
 }: BaseFileCardProps ) => {
   const [ isHovering, setIsHovering ] = useState( false );
 
@@ -66,9 +68,9 @@ export const BaseFileCard = memo( ( {
 
       <div className="min-w-0 grid gap-1 w-full text-center mt-1">
         <div className="flex items-center justify-center overflow-hidden w-full relative">
-          <p
+          { showTitle && <p
             className={ cn(
-              "text-xs font-normal line-clamp-2 wrap-words max-w-full px-2",
+              "text-xs font-normal line-clamp-2 wrap-words max-w-full px-2 py-2",
               item.status === 'error' && "text-destructive",
               hideFileName && "hidden"
             ) }
@@ -76,6 +78,7 @@ export const BaseFileCard = memo( ( {
           >
             { item.name }
           </p>
+          }
         </div>
         { item.status === 'uploading' && (
           <div className="w-full flex flex-col items-center gap-1 absolute bottom-4 left-1/2 transform -translate-x-1/2 max-w-[90%]">

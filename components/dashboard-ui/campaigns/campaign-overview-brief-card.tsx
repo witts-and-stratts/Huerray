@@ -6,6 +6,7 @@ import type { ModelCampaign } from '@/components/campaigns/types';
 import { WrappedCard } from '../wrapped-card';
 import { Badge } from '@/components/ui/badge';
 import { stripTags } from '@/lib/utils';
+import { SentenceCase } from '@/components/text-case';
 
 interface CampaignBriefCardProps {
   campaign: ModelCampaign;
@@ -45,7 +46,7 @@ export function CampaignBriefCard( { campaign, keywordList }: CampaignBriefCardP
 
         <div className="grid grid-cols-1 gap-4">
           <WrappedCard title='Category' variant='flush'>
-            <p className="font-regular capitalize">{ stripTags( campaign.category!, [ 'p', ] ) || 'N/A' }</p>
+            <p className="font-regular capitalize"><Badge variant={ 'outline' }><SentenceCase>{ campaign.category?.replaceAll( "_", " " ) ?? "" }</SentenceCase></Badge></p>
           </WrappedCard>
           <WrappedCard title='Tone of Voice' variant='flush'>
             <p className="font-regular capitalize">{ stripTags( campaign.tone_of_voice!, [ 'p', ] ) || 'N/A' }</p>
@@ -65,7 +66,7 @@ export function CampaignBriefCard( { campaign, keywordList }: CampaignBriefCardP
               ) ) }
             </div>
           ) : (
-            <p className="mt-1 text-foreground/70">No keywords defined.</p>
+            <p className="mt-1 text-foreground/70 text-sm">No keywords defined.</p>
           ) }
         </WrappedCard>
       </CardContent>

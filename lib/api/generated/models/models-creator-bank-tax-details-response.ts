@@ -16,9 +16,13 @@
 
 export interface ModelsCreatorBankTaxDetailsResponse {
     'bank_account_name'?: string;
+    'bank_account_number'?: string;
+    'bank_address'?: string;
     'bank_name'?: string;
+    'bank_routing_number'?: string;
     'has_bank_details'?: boolean;
     'has_tax_details'?: boolean;
+    'tax_id'?: string;
     'tax_residence_country'?: string;
 }
 

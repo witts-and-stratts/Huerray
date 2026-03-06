@@ -145,7 +145,7 @@ export function buildUrl(
       case 'creators':
         return `${ base }/brand/creators`;
       case 'gigs':
-        return `${ base }/brand/gigs`;
+        return `${ base }/brand/campaigns`;
       case 'submissions':
         return meta?.campaignId
           ? `${ base }/brand/campaigns/${ meta.campaignId }`

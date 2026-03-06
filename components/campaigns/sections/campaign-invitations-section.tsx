@@ -1,4 +1,5 @@
 'use client';
+'use no memo';
 
 import { useState } from 'react';
 import type { ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';

@@ -1,5 +1,5 @@
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
 import { UserApi, UsersSearchGetUserTypeEnum } from '../generated/api/user-api';
 import { AuthenticationApi } from '../generated/api/authentication-api';
 import { apiClient, apiConfiguration } from '../client';
@@ -72,7 +72,10 @@ export function useResendVerification() {
   });
 }
 
-export function useUser(id: string) {
+export function useUser(
+  id: string,
+  options?: Omit<UseQueryOptions<ModelsUserResponse | undefined, ApiError>, 'queryKey' | 'queryFn'>
+) {
   return useQuery<ModelsUserResponse | undefined, ApiError>({
     queryKey: usersKeys.detail(id),
     queryFn: async () => {
@@ -80,6 +83,7 @@ export function useUser(id: string) {
       return response.data.data;
     },
     enabled: !!id,
+    ...options,
   });
 }
 
