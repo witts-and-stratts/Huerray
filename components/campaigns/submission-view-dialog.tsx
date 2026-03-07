@@ -12,6 +12,7 @@ import { useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 import { TextCapitalize } from '../text-case';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface SubmissionViewDialogProps {
   open: boolean;
@@ -91,7 +92,7 @@ export function SubmissionViewDialog( { open, onOpenChange, submission }: Submis
               className="flex items-center gap-3 min-w-0 text-left hover:bg-muted/50 p-2 -ml-2 rounded-lg transition-colors"
             >
               <Avatar className="size-10 shrink-0">
-                <AvatarImage src={ creatorAvatar } alt={ creatorDisplayName } />
+                <AvatarImage src={ imgpresets.avatar( creatorAvatar ) } alt={ creatorDisplayName } />
                 <AvatarFallback>{ creatorDisplayName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
               </Avatar>
               <div className="min-w-0">

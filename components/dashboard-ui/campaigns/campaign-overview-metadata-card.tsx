@@ -8,6 +8,7 @@ import type { ModelCampaign } from '@/components/campaigns/types';
 import { formatDate } from './campaign-overview-utils';
 import Link from 'next/link';
 import { cn } from '@/lib/dashboard-utils';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 
 function MetaRow( { icon: Icon, label, value, valueClassName }: { icon: LucideIcon; label: string; value: string; valueClassName?: string; } ) {
@@ -27,7 +28,7 @@ function CampaignMetadataCardImage( { image, title, url }: CampaignMetadataCardI
   return <>
     { image &&
       <div className='w-full aspect-4/3 relative overflow-hidden'>
-        <img src={ image } alt={ title } className='object-cover w-full h-full hover:scale-125 hover:object-bottom transition-all duration-10000' />
+        <img src={ imgpresets.banner( image ) } alt={ title } className='object-cover w-full h-full hover:scale-125 hover:object-bottom transition-all duration-10000' />
         { url && <Link href={ url } title={ title } target="_blank">
           <Globe strokeWidth={ 1.5 } className='size-4 absolute top-2 right-2 text-foreground invert hover:scale-150 transition-transform duration-300 cursor-pointer' />
         </Link> }

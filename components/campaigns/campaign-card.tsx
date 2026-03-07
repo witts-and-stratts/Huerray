@@ -20,7 +20,7 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { stripTags } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { ApplicationCard } from './application-card';
 import { GigDetailsSheet } from './gig-details-sheet';
@@ -48,6 +48,19 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
   const { data: applicationsData, isLoading: loadingApps } = useCampaignApplications( id || '' );
   const { data: invitationsData, isLoading: loadingInvitations } = useCampaignInvitations( id || '' );
   const { data: submissionsData, isLoading: loadingSubmissions } = useCampaignSubmissions( id || '' );
+
+  const isLoadingAny = loadingApps || loadingInvitations || loadingSubmissions;
+  const [ showSkeleton, setShowSkeleton ] = useState( false );
+
+  useEffect( () => {
+    let timer: NodeJS.Timeout;
+    if ( isLoadingAny ) {
+      timer = setTimeout( () => setShowSkeleton( true ), 2000 );
+    } else {
+      setShowSkeleton( false );
+    }
+    return () => clearTimeout( timer );
+  }, [ isLoadingAny ] );
 
   const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
   const invitations = ( invitationsData?.data || [] ) as ModelsGigInvitationResponse[];
@@ -101,8 +114,8 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
         <CardContent className='space-y-3 pb-2'>
           <div className='min-h-[64px]'>
             <AnimatePresence>
-              { ( loadingApps || loadingInvitations || loadingSubmissions ) ? (
-                <AvatarRowSkeleton label='&nbsp;' />
+              { isLoadingAny ? (
+                showSkeleton ? <AvatarRowSkeleton label='&nbsp;' /> : null
               ) : submissionPeople.length > 0 ? (
                 <motion.div className='flex flex-col gap-2'>
                   <span className='text-xs font-medium text-muted-foreground'>Submissions</span>

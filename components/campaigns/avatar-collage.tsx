@@ -22,6 +22,7 @@ import {
 } from '@/components/dashboard-ui/tooltip';
 import { motion } from 'motion/react';
 import { Person } from './types';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 export const AvatarCollage = ( { people, onPersonClick }: { people: Person[]; onPersonClick?: ( index: number ) => void; } ) => {
   const limit = 4;
@@ -48,7 +49,7 @@ export const AvatarCollage = ( { people, onPersonClick }: { people: Person[]; on
             <Tooltip>
               <TooltipTrigger asChild>
                 <Avatar className='border-2 border-white'>
-                  <AvatarImage src={ person.avatar } />
+                  <AvatarImage src={ imgpresets.avatar( person.avatar ) } />
                   <AvatarFallback className='text-xs'>
                     { person.first_name[ 0 ] }
                     { person.last_name[ 0 ] }
@@ -108,7 +109,7 @@ export const AvatarCollage = ( { people, onPersonClick }: { people: Person[]; on
                       } }
                     >
                       <Avatar className='border border-border/50'>
-                        <AvatarImage src={ person.avatar } />
+                        <AvatarImage src={ imgpresets.avatar( person.avatar ) } />
                         <AvatarFallback className='text-xs'>
                           { person.first_name[ 0 ] }
                           { person.last_name[ 0 ] }

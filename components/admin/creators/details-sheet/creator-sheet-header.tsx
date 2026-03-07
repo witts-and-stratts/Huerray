@@ -6,6 +6,7 @@ import { calculateAge, cn } from "@/lib/utils";
 import { CreatorStatusBadge } from "../creator-status-badge";
 import { MetaBadge } from "./creator-details-shared";
 import Image from 'next/image';
+import { imgpresets } from "@/lib/utils/imgproxy";
 
 export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorResponse; } ) {
   const { first_name, last_name, creator_status, email, date_of_birth, city, country, gender, profile_image_url } = creator;
@@ -25,7 +26,7 @@ export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorRespons
         isApproved ? "border-emerald-400/30" : "border-border/60"
       ) }>
         { profile_image_url
-          ? <AvatarImage src={ profile_image_url } alt={ fullName } className="object-cover" />
+          ? <AvatarImage src={ imgpresets.card( profile_image_url ) } alt={ fullName } className="object-cover" />
           : <AvatarFallback className="text-3xl">{ initials }</AvatarFallback>
         }
       </Avatar>

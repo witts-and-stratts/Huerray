@@ -119,8 +119,10 @@ export function ImagePreviewDialog( {
     items.forEach( ( src ) => {
       if ( preloadedRef.current.has( src ) ) return;
       preloadedRef.current.add( src );
-      const img = new Image();
-      img.src = src;
+      const largeImg = new Image();
+      largeImg.src = imgpresets.large( src );
+      const thumbImg = new Image();
+      thumbImg.src = imgpresets.thumbnail( src );
     } );
   }, [ open, items, type ] );
 

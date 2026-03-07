@@ -3,6 +3,7 @@
 import { useBrand } from '@/lib/api/hooks';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface BrandAvatarProps {
   brandId: string;
@@ -28,7 +29,7 @@ function BrandAvatarContent( { brandId, className }: BrandAvatarProps ) {
   return (
     <Avatar className={ className }>
       <AvatarImage
-        src={ brandLogo }
+        src={ imgpresets.avatar( brandLogo ) }
         alt={ brandName }
         className="object-cover"
       />

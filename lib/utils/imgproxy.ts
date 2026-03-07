@@ -145,11 +145,11 @@ export const imgpresets = {
 
   /** Banner — 1080 wide, high quality */
   banner: (src: string, overrides?: Partial<ImgproxyOptions>) =>
-    imgproxyUrl( src, { width: 1080, quality: 100, sharpen: 0.5, ...overrides } ),
+    imgproxyUrl( src, { width: 1080, quality: 80, sharpen: 0.5, ...overrides } ),
   
   /** Large — 1600 wide, high quality */
   large: (src: string, overrides?: Partial<ImgproxyOptions>) =>
-    imgproxyUrl( src, { width: 1600, quality: 100, sharpen: 0.5, ...overrides } ),
+    imgproxyUrl( src, { width: 1600, quality: 80, sharpen: 0.5, ...overrides } ),
 
   /** Full-size — original dimensions, webp conversion only */
   full: (src: string, overrides?: Partial<ImgproxyOptions>) =>

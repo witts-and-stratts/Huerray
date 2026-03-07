@@ -11,6 +11,7 @@ import { MoreVertical } from "lucide-react";
 import Image from "next/image";
 import { CreatorActionMenu } from "./creator-action-menu";
 import { CreatorStatusBadge } from "./creator-status-badge";
+import { imgpresets } from "@/lib/utils/imgproxy";
 
 interface CreatorCardProps {
   creator: ModelsCreatorResponse;
@@ -60,7 +61,7 @@ export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejec
             isApproved ? "border-emerald-400/30" : "border-border/60"
           ) }>
             { imageUrl ? (
-              <AvatarImage src={ imageUrl } alt={ fullName } />
+              <AvatarImage src={ imgpresets.card( imageUrl ) } alt={ fullName } />
             ) : (
               <AvatarFallback>{ initials }</AvatarFallback>
             ) }

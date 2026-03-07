@@ -12,6 +12,7 @@ import { useRef, useState } from 'react';
 import { TextCapitalize } from '../text-case';
 import { SubmissionActionMenu } from './submission-action-menu';
 import { SubmissionViewDialog } from './submission-view-dialog';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 const submissionStatusClass: Record<string, string> = {
   submitted: 'bg-blue-500/10 text-blue-700 border-blue-500/20',
@@ -277,7 +278,7 @@ export function SubmissionCard( {
                 className="shrink-0"
               >
                 <Avatar className={ isMiniLayout ? "size-6" : "size-8" }>
-                  <AvatarImage src={ submission.creator?.profile_image_url } alt={ submission.creator?.first_name || '' } />
+                  <AvatarImage src={ imgpresets.avatar( submission.creator?.profile_image_url! ) } alt={ submission.creator?.first_name || '' } />
                   <AvatarFallback>{ submission.creator?.first_name?.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
                 </Avatar>
               </motion.div>

@@ -15,6 +15,7 @@ import { getCountryFlag } from '@/lib/country-flags';
 import Link from 'next/link';
 import { BrandStatusBadge } from './brand-status-badge';
 import { Brand } from './brands-data';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface BrandCardProps {
   brand: Brand;
@@ -51,7 +52,7 @@ export function BrandCard( { brand }: BrandCardProps ) {
         </div>
         <div className='flex shrink-0 text-right'>
           <Avatar className="h-10 w-10">
-            <AvatarImage src={ logo } alt={ name } />
+            <AvatarImage src={ imgpresets.avatar( logo ) } alt={ name } />
             <AvatarFallback>{ name.substring( 0, 2 ).toUpperCase() }</AvatarFallback>
           </Avatar>
           <BrandActionMenu brand={ brand } />
