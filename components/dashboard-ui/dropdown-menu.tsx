@@ -96,15 +96,31 @@ function DropdownMenuItem( {
   inset,
   variant = "default",
   asChild = false,
+  children,
   ...props
 }: MenuPrimitive.Item.Props & {
   inset?: boolean;
   variant?: "default" | "destructive";
   asChild?: boolean;
 } ) {
-  const Comp = asChild ? Slot : MenuPrimitive.Item;
+  if ( asChild && React.isValidElement( children ) ) {
+    return (
+      <MenuPrimitive.Item
+        data-slot="dropdown-menu-item"
+        data-inset={ inset }
+        data-variant={ variant }
+        className={ cn(
+          "dropdown-menu__item group/dropdown-menu-item",
+          className
+        ) }
+        render={ children }
+        { ...props }
+      />
+    );
+  }
+
   return (
-    <Comp
+    <MenuPrimitive.Item
       data-slot="dropdown-menu-item"
       data-inset={ inset }
       data-variant={ variant }
@@ -113,7 +129,9 @@ function DropdownMenuItem( {
         className
       ) }
       { ...props }
-    />
+    >
+      { children }
+    </MenuPrimitive.Item>
   );
 }
 

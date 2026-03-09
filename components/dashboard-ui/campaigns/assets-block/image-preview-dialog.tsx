@@ -113,17 +113,30 @@ export function ImagePreviewDialog( {
     if ( initialIndex !== null ) setIndex( initialIndex );
   }, [ initialIndex ] );
 
-  // Preload all images into browser cache when the dialog opens
   useEffect( () => {
     if ( !open || type !== 'images' ) return;
-    items.forEach( ( src ) => {
-      if ( preloadedRef.current.has( src ) ) return;
-      preloadedRef.current.add( src );
-      const largeImg = new Image();
-      largeImg.src = imgpresets.large( src );
-      const thumbImg = new Image();
-      thumbImg.src = imgpresets.thumbnail( src );
-    } );
+
+    Promise.all(
+      items.map( ( src ) => {
+        if ( preloadedRef.current.has( src ) ) return Promise.resolve();
+        preloadedRef.current.add( src );
+
+        return Promise.all( [
+          new Promise( ( resolve ) => {
+            const largeImg = new Image();
+            largeImg.onload = resolve;
+            largeImg.onerror = resolve;
+            largeImg.src = imgpresets.large( src );
+          } ),
+          new Promise( ( resolve ) => {
+            const thumbImg = new Image();
+            thumbImg.onload = resolve;
+            thumbImg.onerror = resolve;
+            thumbImg.src = imgpresets.thumbnail( src );
+          } ),
+        ] );
+      } )
+    );
   }, [ open, items, type ] );
 
   // Reset ready state when the displayed image changes

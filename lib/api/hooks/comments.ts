@@ -57,6 +57,17 @@ export function useMultipleComments( entities: Array<{ entityType: string; entit
   } );
 }
 
+import { UtilsEntityType } from '../generated/models/utils-entity-type';
+
+export function useSubmissionComments( submissionId?: string ) {
+  const entities = submissionId ? [
+    { entityType: UtilsEntityType.EntityTypeVideoSubmissionStatusUpdate, entityId: submissionId },
+    { entityType: UtilsEntityType.EntityTypeBrandVideoDecision, entityId: submissionId },
+  ] : [];
+
+  return useMultipleComments( entities );
+}
+
 export function useAddComment(): UseMutationResult<
   ModelsStandardResponseModelsCommentResponse,
   ApiError,

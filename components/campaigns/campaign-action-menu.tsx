@@ -6,7 +6,7 @@ import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
 import { useDeleteCampaign, useReplicateCampaign, useAdminCampaignApproval, useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
 import { useCreateInvoice } from "@/lib/api/hooks/invoices";
-import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsCampaignStatusUpdateRequestCampaignStatusEnum } from "@/lib/api/generated/models";
+import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsCampaignStatusUpdateRequestCampaignStatusEnum, UtilsCampaignStatus } from "@/lib/api/generated/models";
 import { MoreVertical } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -163,44 +163,36 @@ export function CampaignActionMenu( {
   };
 
   const isCompleted = campaign.campaign_status === 'completed';
+  const campaignStatus = campaign.campaign_status;
 
   const defaultActions: MenuAction<ModelCampaign>[] = [
     {
-      label: (
-        <Link
-          href={ `${ basePath }/campaigns/${ campaign.id }` }
-          className="w-full"
-        >
-          View Details
-        </Link>
-      ),
+      label: "View Details",
+      href: `${ basePath }/campaigns/${ campaign.id }`,
       condition: () => !hideViewDetails,
     },
     {
-      label: (
-        <Link href={ `${ basePath }/campaigns/${ campaign.id }/gigs/new` } className='w-full'>
-          Create Gig
-        </Link>
-      ),
+      label: "Create Gig",
+      href: `${ basePath }/campaigns/${ campaign.id }/gigs/new`,
       allowedRoles: [ 'admin' ],
-      condition: () => !isCompleted,
+      condition: () => campaignStatus === 'pending_approval',
     },
     {
       label: "Edit",
       action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
-      condition: () => !isCompleted && ( campaign.campaign_status === "draft" || campaign.campaign_status === "pending_approval" || campaign.campaign_status === "returned" ),
+      condition: () => !isCompleted && ( campaignStatus === "draft" || campaignStatus === "pending_approval" || campaignStatus === "returned" ),
     },
     {
       label: "Rename",
       action: () => setRenameDialogOpen( true ),
       allowedRoles: [ "brand" ],
-      condition: () => !isCompleted,
+      condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusDraft || campaignStatus === UtilsCampaignStatus.CampaignStatusReturned,
     },
     {
       label: "Replicate",
       allowedRoles: [ "brand" ],
-      condition: () => !isCompleted,
+      condition: () => isCompleted,
       action: () => {
         if ( campaign.id ) {
           replicateCampaign.mutate( campaign.id, {
@@ -214,35 +206,45 @@ export function CampaignActionMenu( {
       label: "Approve Campaign",
       action: () => openAdminDecisionDialog( 'approve' ),
       allowedRoles: [ "admin" ],
-      condition: () => !isCompleted && campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved && ( campaign.campaign_status === "running" || campaign.campaign_status === "pending_approval" ),
+      condition: () => !isCompleted &&
+        campaignStatus === UtilsCampaignStatus.CampaignStatusPendingApproval,
     },
     {
       label: "Reject Campaign",
       action: () => openAdminDecisionDialog( 'reject' ),
       allowedRoles: [ "admin" ],
-      condition: () => !isCompleted && campaign.campaign_status !== ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned && campaign.campaign_status !== "running",
+      condition: () => !isCompleted &&
+        campaignStatus === UtilsCampaignStatus.CampaignStatusPendingApproval,
     },
     {
       label: "Complete Campaign",
       action: () => openAdminDecisionDialog( 'complete' ),
       allowedRoles: [ "admin" ],
-      condition: () => !isCompleted && campaign.campaign_status === "running" && campaign.number_of_gigs_validated === true,
+      condition: () => isCompleted,
     },
     {
       label: 'Accept Campaign',
       action: () => handleDecision( 'yes' ),
       allowedRoles: [ 'brand' ],
-      condition: () => !isCompleted,
+      condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusGigsApproved,
     },
     {
       label: 'Reject Campaign',
       action: () => handleDecision( 'no' ),
       allowedRoles: [ 'brand' ],
-      condition: () => !isCompleted,
+      condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusGigsApproved,
     },
     {
       label: "Create Invoice",
       action: () => setInvoiceDialogOpen( true ),
+      allowedRoles: [ "admin" ],
+      condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusCompleted
+    },
+    {
+      label: "Deactivate",
+      action: () => { },
+      className: "text-destructive focus:text-destructive",
+      separator: true,
       allowedRoles: [ "admin" ],
     },
     {
@@ -250,7 +252,6 @@ export function CampaignActionMenu( {
       action: () => setDeleteDialogOpen( true ),
       className: "text-destructive focus:text-destructive",
       allowedRoles: [ "admin" ],
-      separator: true,
       condition: () => !isCompleted,
     },
   ];

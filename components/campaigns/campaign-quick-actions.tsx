@@ -18,6 +18,7 @@ import { Input } from '@/components/dashboard-ui/input';
 import { Textarea } from '@/components/dashboard-ui/textarea';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { useCampaignDecision } from '@/lib/api/hooks/campaigns';
+import { SuperField } from '../dashboard-ui/super-field';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -158,7 +159,7 @@ export function buildAdminActions(
 
   const phaseActions: Record<AdminPhase, ActionItem | null> = {
     'created': { key: 'create-gig', label: 'Create Gig', icon: Plus, variant: 'primary', href: gigHref },
-    'returned': { key: 'create-gig', label: 'Create Gig', icon: Plus, variant: 'primary', href: gigHref },
+    'returned': { key: 'awaiting-update', label: 'Awaiting brand update...', variant: 'outline', href: gigHref, disabled: true },
     'pending_approval': gigsValidated
       ? { key: 'approve', label: 'Approve', icon: CheckCircle, variant: 'primary', onClick: () => openDialog( 'approve' ) }
       : { key: 'create-gig', label: 'Create Gig', icon: Plus, variant: 'primary', href: gigHref },
@@ -260,7 +261,8 @@ export function CampaignActionDialogs( {
   const brandCommentField = (
     <div className="flex flex-col gap-2 py-2">
       <label htmlFor="brand-comment" className="text-sm font-medium">Comments (Optional)</label>
-      <Textarea
+      <SuperField
+        type='textarea'
         id="brand-comment"
         value={ brandComment }
         onChange={ ( e: React.ChangeEvent<HTMLTextAreaElement> ) => setBrandComment( e.target.value ) }

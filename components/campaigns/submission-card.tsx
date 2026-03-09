@@ -13,6 +13,8 @@ import { TextCapitalize } from '../text-case';
 import { SubmissionActionMenu } from './submission-action-menu';
 import { SubmissionViewDialog } from './submission-view-dialog';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { useSubmissionComments } from '@/lib/api/hooks/comments';
+import { MessageSquare } from 'lucide-react';
 
 const submissionStatusClass: Record<string, string> = {
   submitted: 'bg-blue-500/10 text-blue-700 border-blue-500/20',
@@ -53,6 +55,8 @@ interface OverlayVideoPlayerProps {
   showControl: boolean;
   compact?: boolean;
   onExpand?: () => void;
+  commentCount?: number;
+  onCommentClick?: () => void;
 }
 
 function getCreatorName( creator?: {
@@ -140,7 +144,7 @@ function SubmissionMetaRow( { status, createdAt }: SubmissionMetaRowProps ) {
   );
 }
 
-function OverlayVideoPlayer( { videoUrl, showControl, compact = false, onExpand }: OverlayVideoPlayerProps ) {
+function OverlayVideoPlayer( { videoUrl, showControl, compact = false, onExpand, commentCount, onCommentClick }: OverlayVideoPlayerProps ) {
   const videoRef = useRef<HTMLVideoElement>( null );
   const [ isPlaying, setIsPlaying ] = useState( false );
 
@@ -178,6 +182,7 @@ function OverlayVideoPlayer( { videoUrl, showControl, compact = false, onExpand 
       />
       <AnimatePresence>
         <motion.button
+          key="playback"
           type="button"
           onClick={ togglePlayback }
           className={ cn(
@@ -198,6 +203,7 @@ function OverlayVideoPlayer( { videoUrl, showControl, compact = false, onExpand 
         </motion.button>
         { onExpand && (
           <motion.button
+            key="expand"
             type="button"
             onClick={ onExpand }
             className={ cn(
@@ -214,6 +220,28 @@ function OverlayVideoPlayer( { videoUrl, showControl, compact = false, onExpand 
           >
             <HugeiconsIcon icon={ ExpandIcon } className={ compact ? "size-5" : "size-7" } strokeWidth={ 1 } />
           </motion.button>
+        ) }
+        { !!commentCount && commentCount > 0 && (
+          <motion.div
+            key="comments"
+            onClick={ ( e ) => {
+              e.stopPropagation();
+              onCommentClick?.();
+            } }
+            role="button"
+            className={ cn(
+              "absolute z-10 flex flex-col items-center justify-center rounded-full text-white bg-black/30 backdrop-blur-md border border-white/5 cursor-pointer hover:bg-black/50 transition-colors",
+              compact ? "right-2 top-[64px] min-w-7 py-1 px-1" : "right-3 top-[92px] min-w-8 py-1 px-1",
+              showControl ? 'pointer-events-auto' : 'pointer-events-none'
+            ) }
+            initial={ { opacity: 0, scale: 0.9 } }
+            whileHover={ { scale: 1.05 } }
+            animate={ showControl ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 } }
+            transition={ { duration: 0.6, ease: 'easeOut', delay: 0.2 } }
+          >
+            <MessageSquare className={ compact ? "size-3" : "size-3.5" } />
+            <span className={ cn( "font-medium mt-0.5 leading-none", compact ? "text-[8px]" : "text-[10px]" ) }>{ commentCount }</span>
+          </motion.div>
         ) }
       </AnimatePresence>
     </div>
@@ -233,9 +261,31 @@ export function SubmissionCard( {
   const submittedDate = formatDate( submission.created_at );
   const [ isHovering, setIsHovering ] = useState( false );
   const [ expandOpen, setExpandOpen ] = useState( false );
+  const [ expandCommentsOpen, setExpandCommentsOpen ] = useState( false );
   const showControl = overlayDetailsMode === 'always' || isHovering;
   const isMiniLayout = layout === 'mini';
   const handleExpand = onExpand ?? ( () => setExpandOpen( true ) );
+
+  const handleCommentClick = () => {
+    if ( onExpand ) {
+      // If controlled externally, we fall back to just expand
+      onExpand();
+    } else {
+      setExpandCommentsOpen( true );
+      setExpandOpen( true );
+    }
+  };
+
+  const handleOpenChange = ( open: boolean ) => {
+    setExpandOpen( open );
+    if ( !open ) {
+      // reset comments open state when closing
+      setTimeout( () => setExpandCommentsOpen( false ), 300 );
+    }
+  };
+
+  const commentsResults = useSubmissionComments( submission.id );
+  const commentCount = commentsResults.reduce( ( sum, r ) => sum + ( r.data?.data?.length ?? 0 ), 0 );
 
   if ( layout === 'media-overlay' || layout === 'mini' ) {
     return (
@@ -255,12 +305,14 @@ export function SubmissionCard( {
             showControl={ showControl }
             compact={ isMiniLayout }
             onExpand={ handleExpand }
+            commentCount={ commentCount }
+            onCommentClick={ handleCommentClick }
           />
 
           <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/45 to-transparent" />
           { isMiniLayout && (
             <motion.div
-              className="absolute left-2 top-2 z-20"
+              className="absolute left-2 top-2 z-20 flex flex-col gap-1 items-start"
               initial={ false }
               animate={ showControl ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 } }
               transition={ { duration: 0.2, ease: 'easeOut' } }
@@ -278,7 +330,7 @@ export function SubmissionCard( {
                 className="shrink-0"
               >
                 <Avatar className={ isMiniLayout ? "size-6" : "size-8" }>
-                  <AvatarImage src={ imgpresets.avatar( submission.creator?.profile_image_url! ) } alt={ submission.creator?.first_name || '' } />
+                  <AvatarImage src={ imgpresets.avatar( submission.creator?.profile_image_url || '' ) } alt={ submission.creator?.first_name || '' } />
                   <AvatarFallback>{ submission.creator?.first_name?.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
                 </Avatar>
               </motion.div>
@@ -333,6 +385,19 @@ export function SubmissionCard( {
                         </CardDescription>
                       </div>
                       <div className="flex shrink-0 items-end self-end gap-2">
+                        { commentCount > 0 && (
+                          <div
+                            role="button"
+                            onClick={ ( e ) => {
+                              e.stopPropagation();
+                              handleCommentClick();
+                            } }
+                            className="flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-medium bg-black/60 text-white rounded-full border border-white/10 backdrop-blur-md cursor-pointer hover:bg-black/80 transition-colors pointer-events-auto"
+                          >
+                            <MessageSquare className="w-3 h-3" />
+                            <span>{ commentCount }</span>
+                          </div>
+                        ) }
                         <SubmissionStatusBadge status={ status } />
                         { showActions ? <SubmissionActionMenu submission={ submission } /> : null }
                       </div>
@@ -346,8 +411,9 @@ export function SubmissionCard( {
 
         <SubmissionViewDialog
           open={ expandOpen }
-          onOpenChange={ setExpandOpen }
+          onOpenChange={ handleOpenChange }
           submission={ submission }
+          initialCommentsOpen={ expandCommentsOpen }
         />
       </>
     );
@@ -362,22 +428,37 @@ export function SubmissionCard( {
       />
 
       <CardContent className='pb-2 space-y-2'>
-        <div className="flex items-center gap-2 min-w-0 w-full p-1 mb-1 -mt-4">
-          <Avatar className="shrink-0 size-9">
-            <AvatarImage src={ submission.creator?.profile_image_url } alt={ submission.creator?.first_name || '' } />
-            <AvatarFallback>{ submission.creator?.first_name?.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
-          </Avatar>
-          <div className="min-w-0">
-            <p className="text-foreground/70 truncate text-sm">{ submission.creator?.first_name || '' }</p>
-            <p className="truncate text-xs -mt-0.5 text-muted-foreground/60">
-              { submission.creator?.email || '' }
-            </p>
+        <div className="flex items-center justify-between min-w-0 w-full p-1 mb-1 -mt-4">
+          <div className="flex items-center gap-2 min-w-0">
+            <Avatar className="shrink-0 size-9">
+              <AvatarImage src={ submission.creator?.profile_image_url } alt={ submission.creator?.first_name || '' } />
+              <AvatarFallback>{ submission.creator?.first_name?.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
+            </Avatar>
+            <div className="min-w-0">
+              <p className="text-foreground/70 truncate text-sm">{ submission.creator?.first_name || '' }</p>
+              <p className="truncate text-xs -mt-0.5 text-muted-foreground/60">
+                { submission.creator?.email || '' }
+              </p>
+            </div>
           </div>
+          { commentCount > 0 && (
+            <div
+              role="button"
+              onClick={ ( e ) => {
+                e.stopPropagation();
+                handleCommentClick();
+              } }
+              className="flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-medium bg-primary/10 text-primary rounded-full shrink-0 cursor-pointer hover:bg-primary/20 transition-colors"
+            >
+              <MessageSquare className="w-3 h-3" />
+              <span>{ commentCount }</span>
+            </div>
+          ) }
         </div>
       </CardContent>
       <CardFooter className='w-full block bg-muted-foreground/5 py-3 rounded-none border-t'>
         <SubmissionMetaRow status={ status } createdAt={ submission.created_at } />
       </CardFooter>
-    </Card>
+    </Card >
   );
 }

@@ -13,6 +13,7 @@ import {
 import { useCampaignApplications, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/dashboard-ui/card';
+import { RoleGuard } from '@/components/auth/role-guard';
 
 interface CampaignOverviewSectionProps {
   campaign: ModelCampaign;
@@ -160,9 +161,11 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
           campaignId={ campaign.id || '' }
           onViewAllInvitations={ onViewAllInvitations }
         />
-        { campaign?.number_of_gigs_validated && (
-          <InviteCreatorsCard campaignId={ campaign.id || '' } />
-        ) }
+        <RoleGuard allowedRoles={ [ "brand" ] }>
+          { campaign?.number_of_gigs_validated && (
+            <InviteCreatorsCard campaignId={ campaign.id || '' } />
+          ) }
+        </RoleGuard>
       </div>
     </div>
   );

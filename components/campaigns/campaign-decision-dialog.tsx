@@ -1,24 +1,9 @@
 "use client";
-/* eslint-disable react/no-children-prop */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useForm } from "@tanstack/react-form";
-import { Loader2 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { z } from "zod";
-
-import { Button } from "@/components/dashboard-ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/dashboard-ui/dialog";
-import { SuperField } from "@/components/dashboard-ui/super-field";
-
+import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
+import { Textarea } from "@/components/dashboard-ui/textarea";
 import { useCampaignDecision } from "@/lib/api/hooks/campaigns";
 
 type decisionType = 'yes' | 'no';
@@ -31,11 +16,6 @@ interface CampaignDecisionDialogProps {
   onSuccess?: () => void;
 }
 
-const decisionSchema = z.object( {
-  decision: z.enum( [ "yes", "no" ] ),
-  comments: z.string().optional(),
-} );
-
 export function CampaignDecisionDialog( {
   open,
   onOpenChange,
@@ -44,120 +24,66 @@ export function CampaignDecisionDialog( {
   onSuccess,
 }: CampaignDecisionDialogProps ) {
   const { mutate: submitDecision, isPending } = useCampaignDecision();
+  const [ comments, setComments ] = useState( "" );
 
-  const form = useForm( {
-    defaultValues: {
-      decision: initialDecision,
-      comments: "",
-    },
-    onSubmit: async ( { value } ) => {
-      submitDecision(
-        {
-          id: campaignId,
-          decision: {
-            brand_accepted: value.decision === 'yes' ? true : false,
-            brand_decision_comments: value.comments || ""
-          }
-        },
-        {
-          onSuccess: () => {
-            toast.success( "Campaign decision submitted successfully" );
-            onOpenChange( false );
-            onSuccess?.();
-          },
-          onError: ( error ) => {
-            toast.error( "Failed to submit decision", {
-              richColors: true,
-              description: ( error as any ).response?.data?.message,
-            } );
-          }
+  const handleConfirm = () => {
+    submitDecision(
+      {
+        id: campaignId,
+        decision: {
+          brand_accepted: initialDecision === 'yes',
+          brand_decision_comments: comments
         }
-      );
-    },
-  } );
-
-  // Reset form when dialog opens or initial decision changes
-  useEffect( () => {
-    if ( open ) {
-      form.reset( {
-        decision: initialDecision,
-        comments: "",
-      } );
-    }
-  }, [ open, initialDecision, form ] );
-
-  const handleSubmit = ( e: React.FormEvent ) => {
-    e.preventDefault();
-    e.stopPropagation();
-    form.handleSubmit();
+      },
+      {
+        onSuccess: () => {
+          toast.success( "Campaign decision submitted successfully", {
+            richColors: true,
+            description: `Campaign decision ${ initialDecision === 'yes' ? 'accepted' : 'rejected' }.`,
+          } );
+          onOpenChange( false );
+          onSuccess?.();
+          setComments( "" );
+        },
+        onError: ( error: any ) => {
+          toast.error( "Failed to submit decision", {
+            richColors: true,
+            description: error.response?.data?.message,
+          } );
+        }
+      }
+    );
   };
 
+  useEffect( () => {
+    if ( open ) {
+      setComments( "" );
+    }
+  }, [ open, initialDecision ] );
+
   return (
-    <Dialog open={ open } onOpenChange={ onOpenChange }>
-      <DialogContent className="">
-        <DialogHeader>
-          <DialogTitle className='text-h5! font-primary text-primary font-normal'>Decision</DialogTitle>
-          <DialogDescription>
-            Make a decision to accept or reject this campaign. This action cannot be undone.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={ handleSubmit } className="space-y-4">
-          <form.Field
-            name="decision"
-            validators={ {
-              onBlur: decisionSchema.shape.decision,
-            } }
-            children={ ( field ) => (
-              <SuperField
-                type="select"
-                label="Decision"
-                id="decision"
-                value={ String( field.state.value ) }
-                onValueChange={ ( val: string | null ) => field.handleChange( val as 'yes' | 'no' ) }
-                onBlur={ field.handleBlur }
-                placeholder="Select decision"
-                options={ [
-                  { label: "Yes", value: "yes" },
-                  { label: "No", value: "no" }
-                ] }
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-              />
-            ) }
-          />
-
-          <form.Field
-            name="comments"
-            children={ ( field ) => (
-              <SuperField
-                type="textarea"
-                label="Comments"
-                id="comments"
-                value={ field.state.value ?? "" }
-                onChange={ ( e: React.ChangeEvent<HTMLTextAreaElement> ) => field.handleChange( e.target.value ) }
-                onBlur={ field.handleBlur }
-                placeholder="Add any comments or feedback..."
-                fieldClassName="resize-none min-h-[100px]"
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-              />
-            ) }
-          />
-
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={ () => onOpenChange( false ) }>
-              Cancel
-            </Button>
-            <form.Subscribe
-              selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
-              children={ ( [ canSubmit, isSubmitting ] ) => (
-                <Button type="submit" disabled={ !canSubmit || isSubmitting || isPending }>
-                  { ( isSubmitting || isPending ) && <Loader2 className="mr-2 h-4 w-4 animate-spin" /> }
-                  Submit Decision
-                </Button>
-              ) }
-            />
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+    <ConfirmDialog
+      open={ open }
+      onOpenChange={ onOpenChange }
+      title={ initialDecision === 'yes' ? 'Accept Campaign' : 'Reject Campaign' }
+      description={ `Are you sure you want to ${ initialDecision === 'yes' ? 'accept' : 'reject' } this campaign? This action cannot be undone.` }
+      confirmLabel={ initialDecision === 'yes' ? 'Accept' : 'Reject' }
+      onConfirm={ handleConfirm }
+      isLoading={ isPending }
+      loadingText={ initialDecision === 'yes' ? 'Accepting...' : 'Rejecting...' }
+    >
+      <div className="flex flex-col gap-2 py-2">
+        <label htmlFor="decision-comments" className="text-sm font-medium">
+          Comments (Optional)
+        </label>
+        <Textarea
+          id="decision-comments"
+          value={ comments }
+          onChange={ ( e ) => setComments( e.target.value ) }
+          placeholder="Add any comments or feedback..."
+          className="resize-none min-h-[100px]"
+        />
+      </div>
+    </ConfirmDialog>
   );
 }

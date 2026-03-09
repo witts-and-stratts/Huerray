@@ -37,6 +37,7 @@ import { CampaignOverviewSection } from './sections/campaign-overview-section';
 import { CampaignSubmissionsSection } from './sections/campaign-submissions-section';
 import { StatusBadge } from './status-badge';
 import { ModelCampaign } from './types';
+import { cn } from '@/lib/dashboard-utils';
 
 const VALID_TABS = [ 'overview', 'applications', 'submissions', 'invitations', 'gigs', 'comments' ] as const;
 type TabValue = typeof VALID_TABS[ number ];
@@ -70,7 +71,7 @@ function SubheaderActionButton( { item }: { item: ActionItem; } ) {
   );
 
   return (
-    <Button variant={ variant } size="default" className="font-regular border-border" onClick={ item.onClick } disabled={ item.disabled }>
+    <Button variant={ variant } size="default" className="font-regular border-border disabled:opacity-60" onClick={ item.onClick } disabled={ item.disabled }>
       { item.href
         ? <Link href={ item.href } className="flex items-center gap-1.5 text-current">{ inner }</Link>
         : inner }
@@ -221,7 +222,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
     <>
       <SubHeader
         title={ campaign.campaign_name! }
-        description={ campaign.description! }
+        // description={ campaign.description! }
         status={ <StatusBadge status={ campaign.campaign_status! } /> }
         pre={ <span className='font-medium text-muted-foreground'>Campaign</span> }
         breadcrumbs={ [
@@ -245,7 +246,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
             basePath={ basePath }
             hideViewDetails={ true }
             trigger={
-              <Button variant={ dropdownVariant } className='px-2 font-regular' size='default'>
+              <Button variant={ dropdownVariant } className={ cn( 'px-2 font-regular', dropdownVariant === 'outline' && 'border-border/60' ) } size='default'>
                 <ChevronDown className='size-4' />
               </Button>
             }
@@ -253,7 +254,7 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
         </ButtonGroup>
       </SubHeader>
 
-      <div className='p-2 md:p-6 space-y-6 bg-slate-50/70 flex flex-col flex-1 min-h-0 overflow-y-auto'>
+      <div className='p-2 md:p-6 space-y-6 bg-slate-50/80 flex flex-col flex-1 min-h-0 overflow-y-auto'>
         <Activity mode={ activeTab === 'overview' ? 'visible' : 'hidden' }>
           <CampaignOverviewSection
             campaign={ campaign }

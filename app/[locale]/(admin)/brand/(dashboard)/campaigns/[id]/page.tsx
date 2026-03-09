@@ -9,7 +9,6 @@ import { Loader2 } from 'lucide-react';
 
 export default function CampaignPage() {
   const params = useParams<{ id: string; }>();
-  console.log( "Params ID:", params.id );
   const { data, isLoading, error } = useCampaign( params.id );
 
   if ( isLoading ) {

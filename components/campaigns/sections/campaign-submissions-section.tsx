@@ -74,9 +74,9 @@ export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsS
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      { submissions.map( ( submission ) => (
+      { submissions.map( ( submission, index ) => (
         <SubmissionCard
-          key={ submission.id }
+          key={ `${ submission.id }-${ index }` }
           submission={ submission }
           layout="media-overlay"
           overlayDetailsMode="always"

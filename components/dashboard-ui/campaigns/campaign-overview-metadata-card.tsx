@@ -15,7 +15,7 @@ function MetaRow( { icon: Icon, label, value, valueClassName }: { icon: LucideIc
   return (
     <div className="flex items-center justify-between gap-3">
       <span className="ad-stat-label inline-flex items-center gap-1.5 text-muted-foreground/70 font-normal"><Icon className="size-3.5" strokeWidth={ 1.5 } /> { label }</span>
-      <span className={ `font-normal ${ valueClassName || '' }` }>{ value }</span>
+      <span className={ `font-regular ${ valueClassName || '' }` }>{ value }</span>
     </div>
   );
 }
@@ -42,7 +42,7 @@ export function CampaignMetadataCard( { campaign }: { campaign: ModelCampaign; }
   return (
     <Card className="ad-summary-card pt-0">
       <CampaignMetadataCardImage title={ campaign.campaign_name } image={ campaign.product_image_url } url={ campaign.product_url } />
-      <CardHeader className={ cn( "pb-2 bg-white", { "-mt-14 z-20 rounded-t-lg pt-2 bg-background": campaign.product_image_url } ) }>
+      <CardHeader className={ cn( "py-4 bg-white", { "-mt-14 z-20 rounded-t-lg bg-background": campaign.product_image_url } ) }>
         <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
         <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
       </CardHeader>

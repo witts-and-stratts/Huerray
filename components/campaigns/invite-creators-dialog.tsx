@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Button } from '@/components/dashboard-ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,28 +9,30 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/dashboard-ui/dialog";
-import { useBrandCreators } from '@/lib/api/hooks/brands';
-import { useCreators } from '@/lib/api/hooks/creators';
-import { Input } from '@/components/dashboard-ui/input';
-import { Search } from 'lucide-react';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
-import { Button } from '@/components/dashboard-ui/button';
-import { useInviteCreatorToGig, useGigInvitations } from '@/lib/api/hooks/gigs';
+import { Skeleton } from '@/components/dashboard-ui/skeleton';
+import { useBrandCreators } from '@/lib/api/hooks/brands';
 import { campaignsKeys } from '@/lib/api/hooks/campaigns';
-import { useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { useGigInvitations, useInviteCreatorToGig } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
-import { HugeiconsIcon } from '@hugeicons/react';
 import {
+  Cancel01Icon,
   CheckmarkCircle01Icon,
   Clock01Icon,
-  Cancel01Icon,
   SentIcon,
 } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { useQueryClient } from '@tanstack/react-query';
+import { Search } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
 import { useAuth } from '@/lib/auth/auth-context';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import { motion, variantProps, Variants } from 'motion/react';
+import { SuperField } from '../dashboard-ui/super-field';
+import { Badge } from '../dashboard-ui/badge';
 
 const statusConfig: Record<string, { label: string; color: string; icon: any; }> = {
   pending: {
@@ -58,13 +61,13 @@ function InvitationStatusIndicator( { status }: { status: string; } ) {
   const config = statusConfig[ status.toLowerCase() ] || statusConfig.pending;
 
   return (
-    <div className={ cn(
-      "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border whitespace-nowrap",
+    <Badge className={ cn(
+      'text-[11px] font-normal',
       config.color,
     ) }>
       <HugeiconsIcon icon={ config.icon } className="w-3 h-3" />
       { config.label }
-    </div>
+    </Badge>
   );
 }
 
@@ -82,23 +85,14 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
   const { user } = useAuth();
   const isAdmin = user?.role === 'admin';
 
-  // Creator search
-  const { data: adminCreatorsData, isLoading: isLoadingAdminCreators } = useCreators(
-    {
-      q: searchQuery || undefined,
-      limit: 100,
-    },
-    { enabled: isAdmin && open }
-  );
-  const { data: brandCreatorsData, isLoading: isLoadingBrandCreators } = useBrandCreators(
+  const { data: brandCreatorsData, isLoading } = useBrandCreators(
     {
       q: searchQuery || undefined,
       limit: 100,
     },
     { enabled: !isAdmin && open }
   );
-  const creators = ( isAdmin ? adminCreatorsData : brandCreatorsData )?.data || [];
-  const isLoadingCreators = isAdmin ? isLoadingAdminCreators : isLoadingBrandCreators;
+  const creators = brandCreatorsData?.data;
 
   // Fetch existing invitations for this gig
   const { data: invitationsData } = useGigInvitations( gigId, { enabled: !!gigId && open } );
@@ -121,7 +115,7 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
 
   const handleInvite = ( creatorId: string, creatorName: string ) => {
     if ( !gigId ) {
-      toast.error( "Invalid gig selected" );
+      toast.error( "Invalid gig selected", { richColors: true } );
       return;
     }
 
@@ -134,13 +128,13 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
       }
     }, {
       onSuccess: () => {
-        toast.success( `Invitation sent to ${ creatorName }` );
+        toast.success( `Invitation sent to ${ creatorName }`, { richColors: true } );
         setLocalInvitedCreators( prev => new Set( prev ).add( creatorId ) );
         queryClient.invalidateQueries( { queryKey: campaignsKeys.invitations( campaignId ) } );
         queryClient.invalidateQueries( { queryKey: campaignsKeys.detail( campaignId ) } );
       },
       onError: ( error ) => {
-        toast.error( "Failed to send invitation" );
+        toast.error( "Failed to send invitation", { richColors: true } );
         console.error( error );
       }
     } );
@@ -149,69 +143,83 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
   return (
     <>
       <Dialog open={ open } onOpenChange={ onOpenChange }>
-        <DialogContent className="max-w-[400px] sm:max-w-[540px] flex flex-col p-0 gap-0">
-          <DialogHeader className="p-6 pb-2">
-            <DialogTitle>Invite Creators</DialogTitle>
-            <DialogDescription>
+        <DialogContent className="max-w-[400px] sm:max-w-[540px] flex flex-col p-0 gap-0 bg-background/30 overflow-hidden">
+          <DialogHeader className="p-6 pb-2 bg-background/80">
+            <DialogTitle className={ 'dialog__title' }>Invite Creators</DialogTitle>
+            <DialogDescription className={ 'font-regular' }>
               Search for creators and invite them to apply to your gig.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="p-6 pt-2 space-y-4 border-b">
+          <div className="p-6 pt-2 space-y-4 border-b bg-background/80">
             <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search by name or username..."
-                className="pl-9"
+              <SuperField
+                type='search'
+                prefix={ <Search /> }
+                placeholder='Search by name or username'
                 value={ searchQuery }
-                onChange={ ( e ) => setSearchQuery( e.target.value ) }
+                onValueChange={ setSearchQuery }
+                fieldClassName='placeholder:text-foreground/50'
               />
             </div>
           </div>
 
           <ScrollArea className="h-[400px] flex-1">
-            <div className="p-6 space-y-4">
-              { isLoadingCreators ? (
-                <div className="text-center p-4 text-muted-foreground">Loading creators...</div>
-              ) : creators.length === 0 ? (
+            <div className="p-6 space-y-1 bg-background m-2 rounded-lg border">
+              { isLoading ? (
+                <div className="space-y-4">
+                  { Array.from( { length: 5 } ).map( ( _, i ) => (
+                    <div key={ `skeleton-${ i }` } className="flex items-center justify-between p-2">
+                      <div className="flex items-center gap-3">
+                        <Skeleton className="size-10 rounded-full shrink-0" />
+                        <div className="space-y-2">
+                          <Skeleton className="h-4 w-[120px]" />
+                          <Skeleton className="h-3 w-[80px]" />
+                        </div>
+                      </div>
+                    </div>
+                  ) ) }
+                </div>
+              ) : creators?.length === 0 ? (
                 <div className="text-center p-4 text-muted-foreground">No creators found</div>
               ) : (
-                creators.map( ( creator: any ) => {
-                  const invitationStatus = getCreatorInvitationStatus( creator.id );
-
+                creators?.map( ( creator, index ) => {
+                  const invitationStatus = getCreatorInvitationStatus( creator.id! );
                   return (
-                    <div
+                    <motion.div
                       key={ creator.id }
                       className="flex items-center justify-between group p-2 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
                       onClick={ () => setSelectedCreator( creator ) }
+                      initial={ { opacity: 0, y: 20 } }
+                      animate={ { opacity: 1, y: 0 } }
+                      exit={ { opacity: 0, y: 20 } }
+                      transition={ { ease: 'easeOut', duration: 0.3, delay: index * 0.03 } }
                     >
                       <div className="flex items-center gap-3">
                         <Avatar>
-                          <AvatarImage src={ creator.profile_image_url } />
+                          { creator.profile_image_url && <AvatarImage src={ imgpresets.avatar( creator.profile_image_url ) } /> }
                           <AvatarFallback>{ creator.first_name?.[ 0 ] }{ creator.last_name?.[ 0 ] }</AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-medium text-sm">{ creator.first_name } { creator.last_name }</p>
-                          <p className="text-xs text-muted-foreground">@{ creator.username }</p>
+                          <p className="font-normal text-sm">{ creator.first_name } { creator.last_name }</p>
                         </div>
                       </div>
                       { invitationStatus ? (
                         <InvitationStatusIndicator status={ invitationStatus } />
                       ) : (
                         <div onClick={ ( e ) => e.stopPropagation() }>
-                          <Button
+                          { creator.id && <Button
                             size="sm"
                             variant="secondary"
                             className="opacity-0 group-hover:opacity-100 transition-opacity"
-                            onClick={ () => handleInvite( creator.id, creator.first_name ) }
+                            onClick={ () => handleInvite( creator.id!, creator.first_name! ) }
                             disabled={ inviteMutation.isPending }
                           >
                             Invite
-                          </Button>
+                          </Button> }
                         </div>
                       ) }
-                    </div>
+                    </motion.div>
                   );
                 } )
               ) }

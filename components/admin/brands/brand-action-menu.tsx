@@ -64,16 +64,9 @@ export function BrandActionMenu( {
       },
     },
     {
-      label: (
-        <Link
-          href={ brand.website }
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center w-full"
-        >
-          Visit Website
-        </Link>
-      ),
+      label: "Visit Website",
+      href: brand.website,
+      external: true,
       icon: SquareArrowOutUpRight,
       separator: true,
       condition: ( data ) => !!data.website,

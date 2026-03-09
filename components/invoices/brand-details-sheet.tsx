@@ -25,7 +25,7 @@ function getInitials( name?: string ) {
   return name.split( ' ' ).map( w => w[ 0 ] ).join( '' ).toUpperCase().slice( 0, 2 );
 }
 
-const Row = ( { label, value }: { label: string; value: React.ReactNode } ) => (
+const Row = ( { label, value }: { label: string; value: React.ReactNode; } ) => (
   <div className="flex items-start justify-between gap-3">
     <span className="text-xs text-muted-foreground shrink-0">{ label }</span>
     <span className="text-xs text-right">{ value ?? '—' }</span>
