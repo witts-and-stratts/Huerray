@@ -178,7 +178,7 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
 
   useEffect( () => {
     const unsubscribe = form.store.subscribe( ( state ) => {
-      if ( state.currentVal.values.product_image === '' ) {
+      if ( state.values.product_image === '' ) {
         setFilePreview( DEFAULT_FILE_PREVIEW );
       }
     } );
