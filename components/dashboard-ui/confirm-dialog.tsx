@@ -10,6 +10,7 @@ import { Button } from "@/components/dashboard-ui/button";
 import { Loader2 } from "lucide-react";
 import { ReactNode } from 'react';
 import { cn } from "@/lib/dashboard-utils";
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "./alert-dialog";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -58,25 +59,25 @@ export function ConfirmDialog( {
   };
 
   return (
-    <Dialog open={ open } onOpenChange={ onOpenChange }>
-      <DialogContent className={ cn( 'w-[500px]', className ) }>
-        <DialogHeader>
-          <DialogTitle className='dialog__title'>
+    <AlertDialog open={ open } onOpenChange={ onOpenChange }>
+      <AlertDialogContent className={ cn( 'w-[500px]', className ) }>
+        <AlertDialogHeader>
+          <AlertDialogTitle className='dialog__title'>
             { title }
-          </DialogTitle>
+          </AlertDialogTitle>
           { description && (
-            <DialogDescription>
+            <AlertDialogDescription>
               { description }
-            </DialogDescription>
+            </AlertDialogDescription>
           ) }
-        </DialogHeader>
+        </AlertDialogHeader>
         { children && (
           <div className="grid gap-4 pt-3">
             { children }
           </div>
         ) }
 
-        <DialogFooter>
+        <AlertDialogFooter>
           { actions ? actions : (
             <>
               <Button
@@ -100,8 +101,8 @@ export function ConfirmDialog( {
               </Button>
             </>
           ) }
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

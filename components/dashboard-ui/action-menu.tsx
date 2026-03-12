@@ -93,7 +93,7 @@ export function ActionMenu<T>( {
           </Button>
         ) }
       </DropdownMenuTrigger>
-      <DropdownMenuContent align={ align } className="w-auto min-w-56">
+      <DropdownMenuContent align={ align } className="w-auto min-w-60">
         <DropdownMenuGroup>
           { label && <DropdownMenuLabel>{ label }</DropdownMenuLabel> }
           { filteredActions.map( ( action, index ) => {
@@ -123,7 +123,7 @@ export function ActionMenu<T>( {
                   } }
                   disabled={ typeof action.disabled === "function" ? action.disabled( data ) : action.disabled }
                   className={ cn(
-                    'block w-full cursor-pointer',
+                    'flex justify-between w-full cursor-pointer',
                     action.variant === "destructive" ? "text-red-600 focus:text-red-600" : "",
                     action.className
                   ) }

@@ -35,8 +35,8 @@ import type { ApiError } from './types';
  * Hook to submit a brand decision for a campaign
  */
 export function useCampaignDecision(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string; decision: ModelsBrandCampaignDecisionRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string; decision: ModelsBrandCampaignDecisionRequest }> {
+  options?: UseMutationOptions<ModelsStandardCampaignResponse, ApiError, { id: string; decision: ModelsBrandCampaignDecisionRequest }>
+): UseMutationResult<ModelsStandardCampaignResponse, ApiError, { id: string; decision: ModelsBrandCampaignDecisionRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -100,8 +100,8 @@ export function useUpdateCampaignStatus(
  * Hook to submit a campaign for approval
  */
 export function useSubmitCampaign(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, string>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, string> {
+  options?: UseMutationOptions<ModelsStandardCampaignResponse, ApiError, string>
+): UseMutationResult<ModelsStandardCampaignResponse, ApiError, string> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -324,8 +324,8 @@ export function useCampaignSubmissions(
  * ```
  */
 export function useCreateCampaign(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, any>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, any> {
+  options?: UseMutationOptions<ModelsStandardCampaignResponse, ApiError, any>
+): UseMutationResult<ModelsStandardCampaignResponse, ApiError, any> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -362,8 +362,8 @@ export function useCreateCampaign(
  * ```
  */
 export function useUpdateCampaign(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string; data: any }>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string; data: any }> {
+  options?: UseMutationOptions<ModelsStandardCampaignResponse, ApiError, { id: string; data: any }>
+): UseMutationResult<ModelsStandardCampaignResponse, ApiError, { id: string; data: any }> {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -440,8 +440,8 @@ export function useDeleteCampaign(
  * ```
  */
 export function useReplicateCampaign(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, string>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, string> {
+  options?: UseMutationOptions<ModelsStandardCampaignResponse, ApiError, string>
+): UseMutationResult<ModelsStandardCampaignResponse, ApiError, string> {
   const queryClient = useQueryClient();
 
   return useMutation({

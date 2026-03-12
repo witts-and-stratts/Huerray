@@ -43,7 +43,7 @@ export interface NotificationsData {
   unread_count: number;
 }
 
-export interface NotificationsResponse extends ModelsStandardGenericResponse {
+export interface NotificationsResponse {
   data?: NotificationsData;
 }
 

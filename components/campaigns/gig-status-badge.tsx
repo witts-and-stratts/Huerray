@@ -75,7 +75,7 @@ export function GigStatusBadge( { status, className }: GigStatusBadgeProps ) {
   };
 
   // Rotating animation for in_progress status
-  const iconClass = status === 'in_progress' ? 'animate-spin' : '';
+  // const iconClass = status === 'in_progress' ? 'animate-spin' : '';
 
   return (
     <div className={ cn(
@@ -83,7 +83,7 @@ export function GigStatusBadge( { status, className }: GigStatusBadgeProps ) {
       config.color,
       className
     ) }>
-      <HugeiconsIcon icon={ config.icon } className={ cn( "w-3 h-3", iconClass ) } />
+      <HugeiconsIcon icon={ config.icon } className={ cn( "w-3 h-3" ) } />
       { config.label }
     </div>
   );

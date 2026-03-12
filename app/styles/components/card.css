@@ -10,11 +10,11 @@
   }
 
   .card__title {
-    @apply text-base leading-normal font-medium group-data-[size=sm]/card:text-sm;
+    @apply leading-normal font-medium group-data-[size=sm]/card:text-sm capitalize text-[18px] text-primary font-primary;
   }
 
   .card__description {
-    @apply text-muted-foreground text-sm;
+    @apply text-muted-foreground text-sm font-regular;
   }
 
   .card__action {

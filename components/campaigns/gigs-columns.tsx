@@ -11,7 +11,7 @@ import { GigStatusBadge } from './gig-status-badge';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
 import { GigActionMenu } from './gig-action-menu';
 
-export const getColumns = ( onViewGig: ( gig: ModelsGigResponse ) => void, basePath?: string, onEditGig?: ( gig: ModelsGigResponse ) => void ): ColumnDef<ModelsGigResponse>[] => [
+export const getColumns = ( onViewGig: ( gig: ModelsGigResponse ) => void, onEditGig?: ( gig: ModelsGigResponse ) => void ): ColumnDef<ModelsGigResponse>[] => [
   {
     id: 'select',
     header: ( { table } ) => (
@@ -160,7 +160,6 @@ export const getColumns = ( onViewGig: ( gig: ModelsGigResponse ) => void, baseP
             <GigActionMenu
               gig={ row.original }
               onViewGig={ onViewGig }
-              basePath={ basePath }
               onEditGig={ onEditGig }
             />
           </ButtonGroup>

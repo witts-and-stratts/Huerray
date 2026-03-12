@@ -15,8 +15,10 @@ import { CampaignsCardsView } from './campaigns-cards-view';
 import { CamapignsTableView } from './campaigns-table-view';
 import { ModelCampaign } from './types';
 
+import { useBasePath } from '@/lib/providers/path-provider';
 
-function CampaignEmptyState( { basePath }: { basePath: string; } ) {
+function CampaignEmptyState() {
+  const basePath = useBasePath();
   return (
     <Empty className='border py-20 my-6 flex-1'>
       <EmptyHeader>
@@ -64,20 +66,18 @@ function CampaignEmptyState( { basePath }: { basePath: string; } ) {
 export function CampaignsView( {
   table,
   view,
-  basePath = '/brand',
 }: {
   table: TanstackTable<ModelCampaign>;
   view: 'table' | 'cards';
-  basePath?: string;
 } ) {
   return (
     <div className='px-5 mt-1 grow flex-1'>
       { table.getRowModel().rows.length === 0 ? (
-        <CampaignEmptyState basePath={ basePath } />
+        <CampaignEmptyState />
       ) : view === 'table' ? (
         <CamapignsTableView table={ table } />
       ) : (
-        <CampaignsCardsView table={ table } basePath={ basePath } />
+        <CampaignsCardsView table={ table } />
       ) }
     </div>
   );

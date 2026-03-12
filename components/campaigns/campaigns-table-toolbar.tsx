@@ -1,12 +1,7 @@
 'use client';
 
-import { EyeIcon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { Table } from '@tanstack/react-table';
-import * as React from 'react';
 
-import { Button } from '@/components/dashboard-ui/button';
-import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import {
   DataTableFilterDropdown,
 } from '@/components/dashboard-ui/data-table/data-table-filter-dropdown';

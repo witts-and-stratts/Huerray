@@ -21,7 +21,6 @@ export function AvailableGigsView() {
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }
-          basePath="/creator"
           defaultView="cards"
           hideViewToggle={ true }
         />

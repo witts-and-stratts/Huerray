@@ -15,9 +15,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsErrorInfo } from './models-error-info';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { ModelsPagination } from './models-pagination';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -25,7 +22,6 @@ import type { ModelsPaymentItemResponse } from './models-payment-item-response';
 
 export interface ModelsPaginatedPaymentItemResponse {
     'data'?: Array<ModelsPaymentItemResponse>;
-    'error'?: ModelsErrorInfo;
     'message'?: string;
     'pagination'?: ModelsPagination;
     'success'?: boolean;

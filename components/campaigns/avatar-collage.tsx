@@ -25,7 +25,7 @@ import { motion } from 'motion/react';
 import { Person } from './types';
 import { imgpresets } from '@/lib/utils/imgproxy';
 
-export const AvatarCollage = ( { people, onPersonClick, title }: { people: Person[]; onPersonClick?: ( index: number ) => void; title: string; } ) => {
+export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' }: { people: Person[]; onPersonClick?: ( index: number ) => void; title: string; size?: 'sm' | 'default' | 'lg'; } ) => {
   const limit = 4;
   const shownPeople = people?.slice( 0, limit ) || [];
   const remainingCount = people?.length > limit ? people.length - limit : 0;
@@ -51,7 +51,7 @@ export const AvatarCollage = ( { people, onPersonClick, title }: { people: Perso
           >
             <Tooltip>
               <TooltipTrigger asChild>
-                <Avatar className='border-2 border-white'>
+                <Avatar size={ size } className='border-2 border-white'>
                   <AvatarImage src={ imgpresets.avatar( person.avatar ) } />
                   <AvatarFallback className='text-xs'>
                     { person.first_name[ 0 ] }

@@ -10,7 +10,7 @@ import { useGig } from '@/lib/api/hooks/gigs';
 import { formatCurrency, formatDate } from '@/lib/utils/format';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
-import { memo, ReactNode, useState, useEffect, useCallback, useMemo } from 'react';
+import { memo, ReactNode, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { TextCapitalize } from '../text-case';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { Button } from '@/components/dashboard-ui/button';
@@ -27,6 +27,7 @@ import { MessageSquare, X } from 'lucide-react';
 import { CommentsThread } from '../dashboard-ui/comments-thread';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { cn } from '@/lib/dashboard-utils';
+import { motion } from 'motion/react';
 
 interface SubmissionViewDialogProps {
   open: boolean;
@@ -68,16 +69,39 @@ function Row( { label, value }: { label: string, value: ReactNode; } ) {
   );
 }
 
-const SubmissionVideo = memo( ( { videoUrl }: { videoUrl: string; } ) => (
-  <div className="w-full bg-black transition-all duration-300 ease-in-out will-change-auto shrink-0">
-    <video
-      src={ videoUrl }
-      controls
-      preload="metadata"
-      className="w-full md:min-h-[500px] max-h-[60vh] md:object-cover transition-all duration-500"
-    />
-  </div>
-) );
+const SubmissionVideo = memo( ( { videoUrl }: { videoUrl: string; } ) => {
+  const containerRef = useRef<HTMLDivElement>( null );
+  const [ measuredHeight, setMeasuredHeight ] = useState<number | null>( null );
+
+  const handleLoadedMetadata = useCallback( () => {
+    if ( containerRef.current ) {
+      // Temporarily make the container auto-height to measure
+      const el = containerRef.current;
+      el.style.height = 'auto';
+      const rect = el.getBoundingClientRect();
+      setMeasuredHeight( rect.height );
+    }
+  }, [] );
+
+  return (
+    <motion.div
+      ref={ containerRef }
+      className="w-full bg-black shrink-0 overflow-hidden"
+      initial={ { opacity: 0, height: 0 } }
+      animate={ { opacity: 1, height: measuredHeight ?? 'auto' } }
+      exit={ { opacity: 0, height: 0 } }
+      transition={ { duration: 0.5, ease: [ 0.25, 0.1, 0.25, 1 ] } }
+    >
+      <video
+        src={ videoUrl }
+        controls
+        preload="metadata"
+        className="w-full h-full md:min-h-[500px] max-h-[60vh] md:object-cover"
+        onLoadedMetadata={ handleLoadedMetadata }
+      />
+    </motion.div>
+  );
+} );
 SubmissionVideo.displayName = 'SubmissionVideo';
 
 const SubmissionHeader = memo( ( {

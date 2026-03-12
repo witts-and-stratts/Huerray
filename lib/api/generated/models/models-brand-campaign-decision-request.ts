@@ -15,7 +15,7 @@
 
 
 export interface ModelsBrandCampaignDecisionRequest {
-    'brand_accepted': boolean;
+    'brand_accepted'?: boolean;
     'brand_decision_comments'?: string;
 }
 

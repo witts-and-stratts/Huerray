@@ -56,7 +56,7 @@ const STAGE_COLORS = [
 
 function CampaignProgressBar( { steps }: { steps: PipelineStep[]; } ) {
   return (
-    <Card className="flex w-full overflow-hidden flex-row p-0 gap-0 rounded-md">
+    <Card className="flex w-full overflow-hidden flex-row p-0 gap-0 rounded-md select-none">
       { steps.map( ( step, i ) => {
         const isReached = step.reached;
         const isFirst = i === 0;

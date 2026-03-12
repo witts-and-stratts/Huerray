@@ -103,7 +103,7 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
   navSecondary: [
     { title: withFallback( t, "brand.settings", "Settings" ), url: "/brand/settings", icon: Settings01Icon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
-    { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon },
+    { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );
 
@@ -163,7 +163,7 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
   navSecondary: [
     { title: withFallback( t, "creator.settings", "Settings" ), url: "/creator/settings", icon: Settings01Icon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
-    { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon },
+    { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );
 
@@ -215,25 +215,25 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       url: "/admin/payouts",
       icon: CreditCardAcceptIcon,
     },
-    {
-      title: withFallback( t, "admin.analytics", "Analytics" ),
-      url: "/admin/analytics",
-      icon: ChartLineData01Icon,
-    },
-    {
-      title: withFallback( t, "admin.moderation", "Moderation" ),
-      url: "/admin/moderation",
-      icon: ShieldUserIcon,
-    },
+    // {
+    //   title: withFallback( t, "admin.analytics", "Analytics" ),
+    //   url: "/admin/analytics",
+    //   icon: ChartLineData01Icon,
+    // },
+    // {
+    //   title: withFallback( t, "admin.moderation", "Moderation" ),
+    //   url: "/admin/moderation",
+    //   icon: ShieldUserIcon,
+    // },
   ],
   documents: [
-    { name: withFallback( t, "admin.platformReports", "Platform Reports" ), url: "/admin/reports", icon: IconReport },
-    { name: withFallback( t, "admin.systemLogs", "System Logs" ), url: "/admin/logs", icon: DatabaseIcon },
-    { name: withFallback( t, "admin.alerts", "Alerts" ), url: "/admin/alerts", icon: AlertCircleIcon },
+    { name: withFallback( t, "admin.platformReports", "Platform Reports" ), url: "/admin/dashboard", icon: IconReport },
+    // { name: withFallback( t, "admin.systemLogs", "System Logs" ), url: "/admin/logs", icon: DatabaseIcon },
+    { name: withFallback( t, "admin.alerts", "Alerts" ), url: "/admin/notifications", icon: AlertCircleIcon },
   ],
   navSecondary: [
     { title: withFallback( t, "admin.settings", "Settings" ), url: "/admin/settings", icon: Settings01Icon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
-    { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon },
+    { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );

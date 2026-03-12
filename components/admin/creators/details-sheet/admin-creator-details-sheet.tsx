@@ -119,9 +119,9 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
               <WrappedCard title="Bio">
                 <ExpandableContent maxHeightClass="max-h-24">
                   <p
-                    className="text-sm text-muted-foreground"
+                    className="text-sm text-muted-foreground *:text-sm *:font-normal"
                     dangerouslySetInnerHTML={ {
-                      __html: stripTags( displayBio, [ 'p' ] ) || 'No bio available'
+                      __html: displayBio || 'No bio available'
                     } }
                   />
                 </ExpandableContent>

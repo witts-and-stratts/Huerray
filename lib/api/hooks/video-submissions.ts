@@ -188,8 +188,8 @@ export function useSubmitVideoSubmission(
  * Hook for admin update of video submission status
  */
 export function useUpdateVideoSubmissionStatus(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }> {
+  options?: UseMutationOptions<ModelsStandardVideoSubmissionResponse, ApiError, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }>
+): UseMutationResult<ModelsStandardVideoSubmissionResponse, ApiError, { id: string; request: ModelsVideoSubmissionStatusUpdateRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {

@@ -14,7 +14,7 @@ import {
 import { Table } from "@tanstack/react-table";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { EyeIcon } from "@hugeicons/core-free-icons";
-import { ButtonGroup } from "../button-group";
+import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;
   labels?: Record<string, string>;

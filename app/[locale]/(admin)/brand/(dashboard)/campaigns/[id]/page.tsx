@@ -34,5 +34,5 @@ export default function CampaignPage() {
     applications: [],
   };
 
-  return <CampaignDetailsView campaign={ campaign } basePath='/brand' />;
+  return <CampaignDetailsView campaign={ campaign } />;
 }

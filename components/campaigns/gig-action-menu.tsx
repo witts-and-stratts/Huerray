@@ -12,11 +12,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { useBasePath } from "@/lib/providers/path-provider";
+
 interface GigActionMenuProps {
   gig: ModelsGigResponse;
   onViewGig: ( gig: ModelsGigResponse ) => void;
   trigger?: 'icon' | 'button' | React.ReactNode;
-  basePath?: string;
   onEditGig?: ( gig: ModelsGigResponse ) => void;
 }
 
@@ -24,9 +25,9 @@ export function GigActionMenu( {
   gig,
   onViewGig,
   trigger = 'button',
-  basePath = '/admin',
   onEditGig,
 }: GigActionMenuProps ) {
+  const basePath = useBasePath();
   const router = useRouter();
   const { mutate: updateStatus } = useUpdateGigStatus();
   const { mutate: deleteGig, isPending: isDeleting } = useDeleteGig();

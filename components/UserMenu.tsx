@@ -1,21 +1,45 @@
 'use client';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useState, useEffect } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import Link from 'next/link';
+import { useAuth } from '@/lib/auth/auth-context';
 
 export function UserMenu() {
   const [ open, setOpen ] = useState( false );
+  const [ mounted, setMounted ] = useState( false );
   const t = useTranslations( 'header.userMenu' );
+  const locale = useLocale();
+  const { user } = useAuth();
+
+  useEffect( () => {
+    setMounted( true );
+  }, [] );
+
+  if ( !mounted ) {
+    return (
+      <div className='user-menu' aria-label='Loading user menu'>
+        <span className='icon icon-user'></span>
+      </div>
+    );
+  }
+
+  if ( user ) {
+    return (
+      <Link href={ `/${ locale }/${ user.role }` } className='user-menu' aria-label='Dashboard'>
+        <span className='icon icon-user'></span>
+      </Link>
+    );
+  }
 
   const menuItems = [
-    { label: t( 'login' ), href: '/login' },
-    { label: t( 'signup' ), href: '/signup' },
+    { label: t( 'login' ), href: `/${ locale }/login` },
+    { label: t( 'signup' ), href: `/${ locale }/signup` },
   ];
 
   return (

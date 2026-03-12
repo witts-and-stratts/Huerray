@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **data** | [**Array&lt;ModelsInvoiceResponse&gt;**](ModelsInvoiceResponse.md) |  | [optional] [default to undefined]
-**error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **pagination** | [**ModelsPagination**](ModelsPagination.md) |  | [optional] [default to undefined]
 **success** | **boolean** |  | [optional] [default to undefined]
@@ -18,7 +17,6 @@ import { ModelsPaginatedInvoiceResponse } from 'huerray-api';
 
 const instance: ModelsPaginatedInvoiceResponse = {
     data,
-    error,
     message,
     pagination,
     success,

@@ -46,6 +46,7 @@ export interface SidebarNavigationData {
     title: string;
     url: string;
     icon: Icon | HugeIconData;
+    onClick?: () => void;
   }[];
 }
 

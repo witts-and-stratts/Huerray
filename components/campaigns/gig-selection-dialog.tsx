@@ -13,6 +13,7 @@ import { Button } from "@/components/dashboard-ui/button";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 import { Loader2, Music, Video, FileText } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
+import { Separator } from "../dashboard-ui/separator";
 
 interface GigSelectionDialogProps {
   campaignId: string;
@@ -62,7 +63,7 @@ export function GigSelectionDialog( {
                 { gigs.map( ( gig ) => (
                   <div
                     key={ gig.id }
-                    className="flex flex-col gap-1 p-4 rounded-lg border bg-card hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
+                    className="flex flex-col gap-1 p-4 rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/20 hover:text-accent-foreground transition-colors cursor-pointer"
                     onClick={ () => {
                       if ( gig.id ) {
                         onSelect( gig.id );
@@ -70,7 +71,7 @@ export function GigSelectionDialog( {
                     } }
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <h4 className="font-semibold text-sm line-clamp-1">
+                      <h4 className="line-clamp-1 card__title">
                         { gig.title }
                       </h4>
                       <span className="shrink-0 text-xs font-medium text-muted-foreground bg-secondary px-2 py-0.5 rounded-full capitalize">
@@ -80,9 +81,10 @@ export function GigSelectionDialog( {
 
                     <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
                       <div className="flex items-center gap-1">
-                        <Video className="size-3" />
+                        <Video className="size-4" strokeWidth={ 1 } />
                         { gig.number_of_videos } Video{ gig.number_of_videos !== 1 ? 's' : '' }
                       </div>
+                      <Separator orientation="vertical" />
                       <div className="flex items-center gap-1">
                         Duration: { gig.video_duration_in_seconds }s
                       </div>

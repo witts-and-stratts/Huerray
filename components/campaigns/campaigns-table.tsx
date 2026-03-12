@@ -16,10 +16,15 @@ import * as React from 'react';
 import { getColumns } from './campaigns-columns';
 import { CampaignsTablePagination } from './campaigns-table-pagination';
 import { CampaignsTableToolbar } from './campaigns-table-toolbar';
+import { useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { setViewMode } from "@/lib/redux/features/ui/uiSlice";
+import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { CampaignsView } from '@/components/campaigns/campaigns-view';
 import { ModelCampaign } from './types';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AnimatePresence, motion } from 'motion/react';
+import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 
 const CampaignSkeleton = () => {
   return (
@@ -43,7 +48,6 @@ const CampaignSkeleton = () => {
 };
 
 type CampaignsTableProps = {
-  basePath?: string;
   campaigns?: ModelCampaign[];
   isLoading?: boolean;
   error?: Error | null;
@@ -52,18 +56,31 @@ type CampaignsTableProps = {
 };
 
 export function CampaignsTable( {
-  basePath = '/brand',
   campaigns = [],
   isLoading = false,
   error = null,
   emptyTitle = 'Ready to launch?',
   simpleEmptyState = false,
 }: CampaignsTableProps ) {
+  const showLoading = useDelayedLoading( isLoading, 50 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
   );
-  const [ view, setView ] = React.useState<'table' | 'cards'>( 'cards' );
+  const dispatch = useAppDispatch();
+  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'campaigns' ] ) || 'table';
+  const [ view, setInternalView ] = React.useState<"table" | "cards">( persistedView );
+
+  React.useEffect( () => {
+    if ( persistedView && persistedView !== view ) {
+      setInternalView( persistedView );
+    }
+  }, [ persistedView ] );
+
+  const setView = ( newView: "table" | "cards" ) => {
+    setInternalView( newView );
+    dispatch( setViewMode( { pageKey: 'campaigns', viewMode: newView } ) );
+  };
   const [ columnVisibility, setColumnVisibility ] =
     React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
@@ -78,7 +95,7 @@ export function CampaignsTable( {
     return Array.from( statusSet );
   }, [ campaigns ] );
 
-  const columns = React.useMemo( () => getColumns( basePath ), [ basePath ] );
+  const columns = React.useMemo( () => getColumns(), [] );
 
   const table = useReactTable( {
     data: campaigns,
@@ -101,7 +118,7 @@ export function CampaignsTable( {
 
   return (
     <AnimatePresence>
-      { isLoading && <CampaignSkeleton /> }
+      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <CampaignSkeleton /> ) }
       { error && <motion.div
         initial={ { opacity: 0 } }
         animate={ { opacity: 1 } }
@@ -129,7 +146,6 @@ export function CampaignsTable( {
             <CampaignsView
               table={ table }
               view={ view }
-              basePath={ basePath }
             />
           ) : (
             <div className='flex flex-col w-full flex-1 h-full'>
@@ -140,7 +156,7 @@ export function CampaignsTable( {
                 setView={ setView }
               />
               <div className='flex-1'>
-                <CampaignsView table={ table } view={ view } basePath={ basePath } />
+                <CampaignsView table={ table } view={ view } />
               </div>
               <div className='px-5'>
                 <CampaignsTablePagination table={ table } />

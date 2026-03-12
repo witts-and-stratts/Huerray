@@ -15,18 +15,20 @@ import storage from 'redux-persist/lib/storage';
 import campaignReducer from './features/campaign/campaignSlice';
 import brandReducer from './features/brand/brandSlice';
 import creatorReducer from './features/creator/creatorSlice';
+import uiReducer from './features/ui/uiSlice';
 
 const rootReducer = combineReducers({
   campaign: campaignReducer,
   brand: brandReducer,
   creator: creatorReducer,
+  ui: uiReducer,
 });
 
 const persistConfig = {
   key: 'huerray_root',
   version: 1,
   storage,
-  whitelist: ['campaign', 'brand', 'creator'], // Persist campaign, brand, and creator slices
+  whitelist: ['campaign', 'brand', 'creator', 'ui'], // Persist campaign, brand, creator, and ui slices
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

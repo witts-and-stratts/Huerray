@@ -46,7 +46,7 @@ export const gigsKeys = {
   list: ( params?: Record<string, unknown> ) => [ ...gigsKeys.lists(), params ] as const,
   details: () => [ ...gigsKeys.all, 'detail' ] as const,
   detail: ( id: string ) => [ ...gigsKeys.details(), id ] as const,
-  byCampaign: ( campaignId: string ) => [ ...gigsKeys.all, 'campaign', campaignId ] as const,
+  byCampaign: ( campaignId: string, role?: string ) => [ ...gigsKeys.all, 'campaign', campaignId, role ] as const,
   invitations: ( gigId: string ) => [ ...gigsKeys.all, 'invitations', gigId ] as const,
 };
 
@@ -76,7 +76,7 @@ export function useGigsByCampaign(
   options?: Omit<UseQueryOptions<ModelsPaginatedGigResponse, ApiError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<ModelsPaginatedGigResponse, ApiError> {
   return useQuery( {
-    queryKey: gigsKeys.byCampaign( campaignId ),
+    queryKey: gigsKeys.byCampaign( campaignId, role ),
     queryFn: async () => {
       if ( role === 'admin' ) {
         const response = await gigsApi.gigsSearchGet( { campaignId } );
@@ -100,8 +100,8 @@ export function useGigsByCampaign(
  * Hook to create a new gig
  */
 export function useCreateGig(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, ModelsCreateGigRequest>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, ModelsCreateGigRequest> {
+  options?: UseMutationOptions<ModelsStandardGigResponse, ApiError, ModelsCreateGigRequest>
+): UseMutationResult<ModelsStandardGigResponse, ApiError, ModelsCreateGigRequest> {
   const queryClient = useQueryClient();
 
   return useMutation( {
@@ -142,8 +142,8 @@ export function useUpdateGigStatus(
  * Hook to update a gig
  */
 export function useUpdateGig(
-  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string; gig: ModelsUpdateGigRequest }>
-): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string; gig: ModelsUpdateGigRequest }> {
+  options?: UseMutationOptions<ModelsStandardGigResponse, ApiError, { id: string; gig: ModelsUpdateGigRequest }>
+): UseMutationResult<ModelsStandardGigResponse, ApiError, { id: string; gig: ModelsUpdateGigRequest }> {
   const queryClient = useQueryClient();
 
   return useMutation( {

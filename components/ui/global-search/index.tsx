@@ -24,6 +24,12 @@ export function GlobalSearch() {
     return () => document.removeEventListener( 'keydown', handler );
   }, [] );
 
+  useEffect( () => {
+    const handler = () => setOpen( true );
+    document.addEventListener( 'open-global-search', handler );
+    return () => document.removeEventListener( 'open-global-search', handler );
+  }, [] );
+
   const ShortcutBtn = (
     <InputGroupAddon align="inline-end">
       <KbdGroup>

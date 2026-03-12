@@ -79,7 +79,7 @@ export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsS
           key={ `${ submission.id }-${ index }` }
           submission={ submission }
           layout="media-overlay"
-          overlayDetailsMode="always"
+          overlayDetailsMode="hover"
         />
       ) ) }
     </div>

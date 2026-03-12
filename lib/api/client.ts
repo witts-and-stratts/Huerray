@@ -63,7 +63,7 @@ export const createApiClient = (): AxiosInstance => {
           const backendMessage =
             (error.response.data as { message?: string } | undefined)?.message || error.message || 'Unauthorized';
 
-          alert(
+          console.log(
             `401 detected before logout.\n\nRequest: ${method} ${requestUrl}\nMessage: ${backendMessage}`
           );
         }

@@ -34,7 +34,6 @@ export default function CampaignsPage() {
         description='Manage and track all your marketing campaigns'
       />
       <CampaignsTable
-        basePath='/admin'
         campaigns={ campaigns }
         isLoading={ isLoading }
         error={ error }

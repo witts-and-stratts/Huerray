@@ -25,10 +25,12 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashb
 import { ApplicationCard } from './application-card';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { SubmissionViewDialog } from './submission-view-dialog';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import { cn } from '@/lib/dashboard-utils';
+import { useBasePath } from '@/lib/providers/path-provider';
 
 interface CampaignCardProps {
   campaign: ModelCampaign;
-  basePath: string;
 }
 
 type SelectedItem =
@@ -90,7 +92,8 @@ const CampaignAvatars = memo( ( { campaignId, onSelectMatch }: {
     if ( isLoadingAny ) {
       timer = setTimeout( () => setShowSkeleton( true ), 2000 );
     } else {
-      setShowSkeleton( false );
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShowSkeleton( prev => prev ? false : prev );
     }
     return () => clearTimeout( timer );
   }, [ isLoadingAny ] );
@@ -180,7 +183,8 @@ const CampaignModals = memo( ( { selectedItem, onSelectMatch }: {
 } );
 CampaignModals.displayName = 'CampaignModals';
 
-export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
+export function CampaignCard( { campaign }: CampaignCardProps ) {
+  const basePath = useBasePath();
   const { id, campaign_name, description, campaign_status, updated_at, brand_id } = campaign;
   const [ selectedItem, setSelectedItem ] = useState<SelectedItem | null>( null );
 
@@ -199,27 +203,44 @@ export function CampaignCard( { campaign, basePath }: CampaignCardProps ) {
 
   const cleanDescription = useMemo( () => stripTags( description || '' ), [ description ] );
 
+  const coverImage = campaign.product_image_url || campaign.campaign_images?.[ 0 ];
+
   return (
     <>
-      <Card className='py-3 justify-between gap-1 h-full'>
+      <Card className='flex flex-col h-full overflow-hidden relative'>
         <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
           <div className="flex flex-col flex-1 min-w-0">
             <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
-              <CardTitle className='capitalize text-[18px] font-normal text-primary font-primary truncate'>
+              <CardTitle className='truncate'>
                 { campaign_name }
               </CardTitle>
             </Link>
             <CardDescription
               dangerouslySetInnerHTML={ { __html: cleanDescription } }
-              className="font-regular text-muted-foreground mt-1 text-sm line-clamp-2"
+              className="line-clamp-2 mt-1"
             />
           </div>
-          <div className="flex shrink-0 text-right gap-2 items-start">
-            { brand_id && (
-              <BrandAvatar brandId={ brand_id } className="size-10 border bg-white rounded-full shrink-0" />
+          <div className={ cn( "flex text-right gap-2 items-start relative -mr-4", {
+            "size-12": coverImage
+          } ) }>
+            { coverImage && (
+              <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
+                <div className="size-12 bg-muted shrink-0 overflow-hidden rounded-full">
+                  <img
+                    src={ imgpresets.card( coverImage ) }
+                    alt={ campaign_name || 'Campaign cover' }
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              </Link>
             ) }
-            <CampaignActionMenu campaign={ campaign } basePath={ basePath } />
+            { brand_id && (
+              <BrandAvatar brandId={ brand_id } className={ cn( "size-10 border bg-white rounded-full shrink-0", {
+                "absolute -right-2 -bottom-1 size-6 p-0.5": coverImage
+              } ) } />
+            ) }
           </div>
+          <CampaignActionMenu campaign={ campaign } />
         </CardHeader>
 
         <CardContent className='space-y-3 pb-2'>

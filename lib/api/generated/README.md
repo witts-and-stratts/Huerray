@@ -232,6 +232,7 @@ Class | Method | HTTP request | Description
  - [ModelsInvoicePDFGeneratedResponse](docs/ModelsInvoicePDFGeneratedResponse.md)
  - [ModelsInvoiceResponse](docs/ModelsInvoiceResponse.md)
  - [ModelsLoginRequest](docs/ModelsLoginRequest.md)
+ - [ModelsMessage](docs/ModelsMessage.md)
  - [ModelsNotificationListResponse](docs/ModelsNotificationListResponse.md)
  - [ModelsNotificationResponse](docs/ModelsNotificationResponse.md)
  - [ModelsPaginatedBrandResponses](docs/ModelsPaginatedBrandResponses.md)

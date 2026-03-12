@@ -7,6 +7,7 @@ import { WrappedCard } from '../wrapped-card';
 import { Badge } from '@/components/ui/badge';
 import { stripTags } from '@/lib/utils';
 import { SentenceCase } from '@/components/text-case';
+import { BrandHoverCard } from '@/components/campaigns/brand-hover-card';
 
 interface CampaignBriefCardProps {
   campaign: ModelCampaign;
@@ -24,10 +25,12 @@ export function CampaignBriefCard( { campaign, keywordList }: CampaignBriefCardP
             <CardTitle className="ad-card-title">Campaign Brief</CardTitle>
             <CardDescription className="ad-card-description">Core details and messaging requirements</CardDescription>
           </div>
-          <Avatar className="size-10 shrink-0">
-            <AvatarImage src={ campaign.brand?.profile_photo_url || '' } alt={ brandName } />
-            <AvatarFallback>{ brandName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
-          </Avatar>
+          <BrandHoverCard brand={ campaign.brand } brandName={ brandName }>
+            <Avatar className="size-10 shrink-0 hover:ring-2 hover:ring-primary/30 transition-shadow cursor-pointer">
+              <AvatarImage src={ campaign.brand?.profile_photo_url || '' } alt={ brandName } />
+              <AvatarFallback>{ brandName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
+            </Avatar>
+          </BrandHoverCard>
         </div>
       </CardHeader>
       <CardContent className="space-y-4 text-sm">

@@ -3,7 +3,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CreateCampaignSchema } from '@/components/campaigns/schema';
 import { UtilsCampaignCategory } from '@/lib/api/generated/models/utils-campaign-category';
-import { UtilsVideoFormat } from '@/lib/api/generated/models/utils-video-format';
+import { UtilsVideoFormat } from '@/lib/api/generated/models';
 
 const initialState: CreateCampaignSchema = {
   campaign_name: '',

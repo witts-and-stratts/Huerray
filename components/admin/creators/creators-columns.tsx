@@ -1,16 +1,15 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, MoreVertical, ChevronDown } from "lucide-react";
 import { Button } from "@/components/dashboard-ui/button";
 import { Checkbox } from "@/components/dashboard-ui/checkbox";
-import { ButtonGroup } from "@/components/dashboard-ui/button-group";
-import { CreatorActionMenu } from "./creator-action-menu";
-import { CreatorStatusBadge } from "./creator-status-badge";
-import { CreatorInfoBlock } from "./creator-info-block";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
-import { calculateAge } from "@/lib/utils";
 import { getCountryFlag } from "@/lib/country-flags";
+import { calculateAge } from "@/lib/utils";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, MoreVertical } from "lucide-react";
+import { CreatorActionMenu } from "./creator-action-menu";
+import { CreatorInfoBlock } from "./creator-info-block";
+import { CreatorStatusBadge } from "./creator-status-badge";
 
 interface GetColumnsProps {
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;

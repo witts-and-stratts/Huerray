@@ -9,6 +9,7 @@ import {
 import { AdminSidebar } from '@/components/dashboard/admin-sidebar';
 import { RoleProvider } from '@/contexts/role-context';
 import { AnimatePresence } from 'motion/react';
+import { PathProvider } from '@/lib/providers/path-provider';
 
 export default function AdminLayout( {
   children,
@@ -17,14 +18,16 @@ export default function AdminLayout( {
 } ) {
   return (
     <RoleProvider>
-      <SidebarProvider data-dashboard-theme='brand'>
-        <AdminSidebar />
-        <SidebarInset>
-          <EmailVerificationBanner />
-          <DashboardHeader />
-          { children }
-        </SidebarInset>
-      </SidebarProvider>
+      <PathProvider basePath='/admin'>
+        <SidebarProvider data-dashboard-theme='brand'>
+          <AdminSidebar />
+          <SidebarInset>
+            <EmailVerificationBanner />
+            <DashboardHeader />
+            { children }
+          </SidebarInset>
+        </SidebarProvider>
+      </PathProvider>
     </RoleProvider>
   );
 }

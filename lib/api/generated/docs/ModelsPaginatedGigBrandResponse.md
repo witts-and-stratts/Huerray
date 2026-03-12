@@ -6,7 +6,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **data** | [**Array&lt;ModelsGigBrandResponse&gt;**](ModelsGigBrandResponse.md) |  | [optional] [default to undefined]
-**error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **pagination** | [**ModelsPagination**](ModelsPagination.md) |  | [optional] [default to undefined]
 **success** | **boolean** |  | [optional] [default to undefined]
@@ -18,7 +17,6 @@ import { ModelsPaginatedGigBrandResponse } from 'huerray-api';
 
 const instance: ModelsPaginatedGigBrandResponse = {
     data,
-    error,
     message,
     pagination,
     success,

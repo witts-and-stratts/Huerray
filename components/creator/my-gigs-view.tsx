@@ -38,7 +38,6 @@ export function MyGigsView() {
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }
-          basePath="/creator"
           defaultView="cards"
           hideViewToggle={ true }
         />

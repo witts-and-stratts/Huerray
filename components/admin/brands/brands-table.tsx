@@ -15,11 +15,15 @@ import * as React from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AnimatePresence, motion } from 'motion/react';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
+import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { columns } from './brands-columns';
 import { Brand } from './brands-data';
 import { BrandsView } from './brands-view';
 import { BrandsTableToolbar } from './brands-table-toolbar';
 import { BrandsTablePagination } from './brands-table-pagination';
+import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
+import { setViewMode } from '@/lib/redux/features/ui/uiSlice';
+import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 
 
 
@@ -34,6 +38,7 @@ export function BrandsTable( {
   isLoading = false,
   error = null,
 }: BrandsTableProps ) {
+  const showLoading = useDelayedLoading( isLoading, 250 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -41,7 +46,20 @@ export function BrandsTable( {
   const [ columnVisibility, setColumnVisibility ] =
     React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ view, setView ] = React.useState<'table' | 'cards'>( 'cards' );
+  const dispatch = useAppDispatch();
+  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'brands' ] ) || 'cards';
+  const [ view, setInternalView ] = React.useState<'table' | 'cards'>( persistedView );
+
+  React.useEffect( () => {
+    if ( persistedView && persistedView !== view ) {
+      setInternalView( persistedView );
+    }
+  }, [ persistedView ] );
+
+  const setView = ( newView: 'table' | 'cards' ) => {
+    setInternalView( newView );
+    dispatch( setViewMode( { pageKey: 'brands', viewMode: newView } ) );
+  };
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
@@ -74,7 +92,7 @@ export function BrandsTable( {
 
   return (
     <AnimatePresence>
-      { isLoading && <TableSkeleton cardHeight="h-[250px]" /> }
+      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton cardHeight="h-[250px]" /> ) }
       { error && <motion.div
         initial={ { opacity: 0 } }
         animate={ { opacity: 1 } }

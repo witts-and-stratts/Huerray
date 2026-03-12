@@ -79,7 +79,6 @@ export function BrandRecentCampaignsBlock( { brandId }: BrandRecentCampaignsBloc
                 <div key={ campaign.id || campaign.campaign_id || campaign.campaign_name } className="w-[320px] md:w-[360px] shrink-0">
                   <CampaignCard
                     campaign={ campaign }
-                    basePath="/admin"
                   />
                 </div>
               ) ) }

@@ -120,14 +120,18 @@ export function NavUser( {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <IconUserCircle />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconCreditCard />
-                Billing
-              </DropdownMenuItem>
+              { authUser?.role !== 'admin' && (
+                <>
+                  <DropdownMenuItem>
+                    <IconUserCircle />
+                    Account
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <IconCreditCard />
+                    Billing
+                  </DropdownMenuItem>
+                </>
+              ) }
               <DropdownMenuItem onClick={ () => router.push( `/${ locale }${ getNotificationsPagePath( authUser?.role ) }` ) }>
                 <IconNotification />
                 Notifications

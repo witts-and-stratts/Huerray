@@ -21,10 +21,14 @@ import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "motion/react";
 import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
+import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
 import { useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { toast } from "sonner";
 import { SuperField } from "@/components/dashboard-ui/super-field";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { setViewMode } from "@/lib/redux/features/ui/uiSlice";
+import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 
 
 
@@ -39,6 +43,7 @@ export function CreatorsTable( {
   isLoading = false,
   error = null,
 }: CreatorsTableProps ) {
+  const showLoading = useDelayedLoading( isLoading, 250 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -46,7 +51,20 @@ export function CreatorsTable( {
   const [ columnVisibility, setColumnVisibility ] =
     React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ view, setView ] = React.useState<"table" | "cards">( "cards" );
+  const dispatch = useAppDispatch();
+  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'creators' ] ) || 'cards';
+  const [ view, setInternalView ] = React.useState<"table" | "cards">( persistedView );
+
+  React.useEffect( () => {
+    if ( persistedView && persistedView !== view ) {
+      setInternalView( persistedView );
+    }
+  }, [ persistedView ] );
+
+  const setView = ( newView: "table" | "cards" ) => {
+    setInternalView( newView );
+    dispatch( setViewMode( { pageKey: 'creators', viewMode: newView } ) );
+  };
   const [ selectedCreator, setSelectedCreator ] =
     React.useState<ModelsCreatorResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -125,7 +143,7 @@ export function CreatorsTable( {
 
   return (
     <AnimatePresence>
-      { isLoading && <TableSkeleton /> }
+      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
       { error && <motion.div
         initial={ { opacity: 0 } }
         animate={ { opacity: 1 } }

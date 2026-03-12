@@ -17,10 +17,11 @@ import React, { ReactNode } from "react";
 import { ModelCampaign } from "./types";
 import { ApiError } from "@/lib/api/hooks/types";
 import { SentenceCase } from "../text-case";
+import { cn } from "@/lib/dashboard-utils";
+import { useBasePath } from "@/lib/providers/path-provider";
 
 interface CampaignActionMenuProps {
   campaign: ModelCampaign;
-  basePath?: string;
   className?: string;
   trigger?: ReactNode;
   align?: "center" | "start" | "end";
@@ -30,13 +31,13 @@ interface CampaignActionMenuProps {
 
 export function CampaignActionMenu( {
   campaign,
-  basePath = "/brand",
   className,
   trigger,
   align = "end",
   extraActions = [],
   hideViewDetails = false,
 }: CampaignActionMenuProps ) {
+  const basePath = useBasePath();
   const router = useRouter();
   const deleteCampaign = useDeleteCampaign();
   const replicateCampaign = useReplicateCampaign();
@@ -51,6 +52,8 @@ export function CampaignActionMenu( {
   const [ decisionDialogOpen, setDecisionDialogOpen ] = React.useState( false );
   const [ initialDecision, setInitialDecision ] = React.useState<'yes' | 'no'>( 'yes' );
   const [ invoiceDialogOpen, setInvoiceDialogOpen ] = React.useState( false );
+  const [ deactivateDialogOpen, setDeactivateDialogOpen ] = React.useState( false );
+  const [ reactivateDialogOpen, setReactivateDialogOpen ] = React.useState( false );
 
   const [ deleteConfirmation, setDeleteConfirmation ] = React.useState( '' );
 
@@ -139,6 +142,50 @@ export function CampaignActionMenu( {
     setDecisionDialogOpen( true );
   };
 
+  const handleDeactivate = () => {
+    if ( !campaign.id ) return;
+
+    updateCampaignStatus.mutate( {
+      id: campaign.id,
+      request: {
+        campaign_status: ModelsCampaignStatusUpdateRequestCampaignStatusEnum.Deactivated,
+      }
+    }, {
+      onSuccess: () => {
+        toast.success( "Campaign deactivated successfully" );
+        setDeactivateDialogOpen( false );
+      },
+      onError: () => {
+        toast.error( "Failed to deactivate campaign", {
+          description: "Please try again later.",
+          richColors: true,
+        } );
+      }
+    } );
+  };
+
+  const handleReactivate = () => {
+    if ( !campaign.id ) return;
+
+    updateCampaignStatus.mutate( {
+      id: campaign.id,
+      request: {
+        campaign_status: ModelsCampaignStatusUpdateRequestCampaignStatusEnum.Running,
+      }
+    }, {
+      onSuccess: () => {
+        toast.success( "Campaign re-activated successfully" );
+        setReactivateDialogOpen( false );
+      },
+      onError: () => {
+        toast.error( "Failed to re-activate campaign", {
+          description: "Please try again later.",
+          richColors: true,
+        } );
+      }
+    } );
+  };
+
   const handleCreateInvoice = () => {
     if ( campaign.id ) {
       createInvoice.mutate(
@@ -220,7 +267,7 @@ export function CampaignActionMenu( {
       label: "Complete Campaign",
       action: () => openAdminDecisionDialog( 'complete' ),
       allowedRoles: [ "admin" ],
-      condition: () => isCompleted,
+      condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusRunning,
     },
     {
       label: 'Accept Campaign',
@@ -235,6 +282,12 @@ export function CampaignActionMenu( {
       condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusGigsApproved,
     },
     {
+      label: "Re-activate",
+      action: () => setReactivateDialogOpen( true ),
+      allowedRoles: [ "admin" ],
+      condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusDeactivated,
+    },
+    {
       label: "Create Invoice",
       action: () => setInvoiceDialogOpen( true ),
       allowedRoles: [ "admin" ],
@@ -242,10 +295,11 @@ export function CampaignActionMenu( {
     },
     {
       label: "Deactivate",
-      action: () => { },
+      action: () => setDeactivateDialogOpen( true ),
       className: "text-destructive focus:text-destructive",
       separator: true,
       allowedRoles: [ "admin" ],
+      condition: () => campaignStatus !== UtilsCampaignStatus.CampaignStatusDeactivated,
     },
     {
       label: "Delete",
@@ -268,7 +322,7 @@ export function CampaignActionMenu( {
           trigger || (
             <Button
               variant="ghost"
-              className={ className }
+              className={ cn( className, "px-1" ) }
               size="sm"
             >
               <span className="sr-only">Open menu</span>
@@ -353,6 +407,29 @@ export function CampaignActionMenu( {
         onConfirm={ handleCreateInvoice }
         isLoading={ createInvoice.isPending }
         loadingText="Creating..."
+      />
+
+      <ConfirmDialog
+        open={ deactivateDialogOpen }
+        onOpenChange={ setDeactivateDialogOpen }
+        title="Deactivate Campaign"
+        description={ <>Are you sure you want to deactivate <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>? This will make it inactive.</> }
+        confirmLabel="Deactivate"
+        variant="destructive"
+        onConfirm={ handleDeactivate }
+        isLoading={ updateCampaignStatus.isPending }
+        loadingText="Deactivating..."
+      />
+
+      <ConfirmDialog
+        open={ reactivateDialogOpen }
+        onOpenChange={ setReactivateDialogOpen }
+        title="Re-activate Campaign"
+        description={ <>Are you sure you want to re-activate <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>? This will make it active again.</> }
+        confirmLabel="Re-activate"
+        onConfirm={ handleReactivate }
+        isLoading={ updateCampaignStatus.isPending }
+        loadingText="Re-activating..."
       />
     </>
   );

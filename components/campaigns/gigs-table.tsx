@@ -12,8 +12,30 @@ import {
   type VisibilityState
 } from '@tanstack/react-table';
 import * as React from 'react';
-import { AnimatePresence } from 'motion/react';
-import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
+import { AnimatePresence, motion } from 'motion/react';
+import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const GigSkeleton = () => {
+  return (
+    <motion.div
+      initial={ { opacity: 0 } }
+      animate={ { opacity: 1 } }
+      exit={ { opacity: 0 } }
+      transition={ { duration: 0.5 } }
+      className='w-full space-y-4 px-5 py-5'>
+      <div className='flex items-center justify-between'>
+        <Skeleton className='h-10 w-[600px] max-w-full' />
+        <Skeleton className='h-10 w-[100px]' />
+      </div>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
+        { Array.from( { length: 8 } ).map( ( _, i ) => (
+          <Skeleton key={ i } className='h-[250px] w-full rounded-xl' />
+        ) ) }
+      </div>
+    </motion.div>
+  );
+};
 
 import { getColumns } from './gigs-columns';
 import { GigsTableToolbar } from './gigs-table-toolbar';
@@ -22,11 +44,13 @@ import { GigsView } from './gigs-view';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { GigEditSheet } from '../gigs/gig-edit-sheet';
 import { ModelsGigResponse } from '@/lib/api/generated';
+import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
+import { setViewMode } from '@/lib/redux/features/ui/uiSlice';
+import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 
 export interface GigsTableProps {
   data: ModelsGigResponse[];
   isLoading?: boolean;
-  basePath?: string;
   defaultView?: 'table' | 'cards';
   hideViewToggle?: boolean;
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
@@ -35,7 +59,8 @@ export interface GigsTableProps {
   hidePagination?: boolean;
 }
 
-export function GigsTable( { data, basePath, defaultView = 'table', hideViewToggle = false, isLoading = false, actionButtons, hideToolbar = false, hidePagination = false, onCreateSubmission }: GigsTableProps ) {
+export function GigsTable( { data, defaultView = 'table', hideViewToggle = false, isLoading = false, actionButtons, hideToolbar = false, hidePagination = false, onCreateSubmission }: GigsTableProps ) {
+  const showLoading = useDelayedLoading( isLoading, 250 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -43,7 +68,20 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
   const [ columnVisibility, setColumnVisibility ] =
     React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ view, setView ] = React.useState<'table' | 'cards'>( defaultView );
+  const dispatch = useAppDispatch();
+  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'gigs' ] ) || defaultView;
+  const [ view, setInternalView ] = React.useState<'table' | 'cards'>( persistedView );
+
+  React.useEffect( () => {
+    if ( persistedView && persistedView !== view ) {
+      setInternalView( persistedView );
+    }
+  }, [ persistedView ] );
+
+  const setView = ( newView: "table" | "cards" ) => {
+    setInternalView( newView );
+    dispatch( setViewMode( { pageKey: 'gigs', viewMode: newView } ) );
+  };
 
   const [ selectedGig, setSelectedGig ] = React.useState<ModelsGigResponse | null>( null );
   const [ editingGig, setEditingGig ] = React.useState<ModelsGigResponse | null>( null );
@@ -60,8 +98,8 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
 
 
   const columns = React.useMemo(
-    () => getColumns( ( gig ) => setSelectedGig( gig ), basePath, ( gig ) => setEditingGig( gig ) ),
-    [ basePath ]
+    () => getColumns( ( gig: ModelsGigResponse ) => setSelectedGig( gig ), ( gig: ModelsGigResponse ) => setEditingGig( gig ) ),
+    []
   );
 
 
@@ -86,9 +124,10 @@ export function GigsTable( { data, basePath, defaultView = 'table', hideViewTogg
 
   return (
     <AnimatePresence>
-      { isLoading ? (
-        <TableSkeleton />
-      ) : (
+      { showLoading && (
+        view === 'table' ? <DataTableSkeleton /> : <GigSkeleton />
+      ) }
+      { !isLoading && (
         <div className="space-y-4 bg-background grow relative overflow-auto">
           { data && data.length > 0 && !hideToolbar && (
             <GigsTableToolbar

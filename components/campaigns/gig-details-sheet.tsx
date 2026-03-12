@@ -112,7 +112,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange }>
-      <SheetContent className="w-[90%]! max-w-[500px]! overflow-y-auto bg-background/70 flex flex-col">
+      <SheetContent className="w-[90%]! max-w-[550px]! overflow-y-auto bg-background/70 flex flex-col">
         <SheetHeader className="relative flex flex-col items-center gap-4 bg-burgundy-50/60 p-6 pb-8 m-6 rounded-lg mt-16 border border-primary/20 mb-0">
           <div className="flex flex-col items-center gap-2 text-center">
             <GigStatusBadge status={ gig_status } />

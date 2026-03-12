@@ -30,8 +30,6 @@ import type { ModelsPaginatedVideoSubmissionResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardGenericResponse } from '../models';
-// @ts-ignore
 import type { ModelsStandardVideoSubmissionResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardVideoSubmissionResponses } from '../models';
@@ -531,7 +529,7 @@ export const VideoSubmissionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async videosIdStatusPut(id: string, request: ModelsVideoSubmissionStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
+        async videosIdStatusPut(id: string, request: ModelsVideoSubmissionStatusUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.videosIdStatusPut(id, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['VideoSubmissionsApi.videosIdStatusPut']?.[localVarOperationServerIndex]?.url;
@@ -664,7 +662,7 @@ export const VideoSubmissionsApiFactory = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        videosIdStatusPut(requestParameters: VideoSubmissionsApiVideosIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
+        videosIdStatusPut(requestParameters: VideoSubmissionsApiVideosIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionResponse> {
             return localVarFp.videosIdStatusPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**

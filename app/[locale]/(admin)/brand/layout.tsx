@@ -3,6 +3,7 @@
 import { BrandAuthGuard } from '@/components/auth/brand-auth-guard';
 import { usePathname } from 'next/navigation';
 import { RoleProvider } from '@/contexts/role-context';
+import { PathProvider } from '@/lib/providers/path-provider';
 
 export default function BrandAdminLayout( {
   children,
@@ -16,9 +17,11 @@ export default function BrandAdminLayout( {
     return (
       <BrandAuthGuard>
         <RoleProvider>
-          <div className="bg-background min-h-screen flex flex-col">
-            { children }
-          </div>
+          <PathProvider basePath="/brand">
+            <div className="bg-background min-h-screen flex flex-col">
+              { children }
+            </div>
+          </PathProvider>
         </RoleProvider>
       </BrandAuthGuard>
     );
@@ -27,7 +30,9 @@ export default function BrandAdminLayout( {
   return (
     <BrandAuthGuard>
       <RoleProvider>
-        { children }
+        <PathProvider basePath="/brand">
+          { children }
+        </PathProvider>
       </RoleProvider>
     </BrandAuthGuard>
   );

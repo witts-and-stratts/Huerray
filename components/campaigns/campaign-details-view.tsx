@@ -50,7 +50,6 @@ function getTabFromHash(): TabValue {
 
 interface CampaignDetailsViewProps {
   campaign: ModelCampaign;
-  basePath: string;
 }
 
 function SubheaderActionButton( { item }: { item: ActionItem; } ) {
@@ -79,7 +78,10 @@ function SubheaderActionButton( { item }: { item: ActionItem; } ) {
   );
 }
 
-export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsViewProps ) {
+import { useBasePath } from '@/lib/providers/path-provider';
+
+export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
+  const basePath = useBasePath();
   const [ activeTab, setActiveTab ] = useState<TabValue>( getTabFromHash );
 
   // Sync: tab → URL hash
@@ -243,7 +245,6 @@ export function CampaignDetailsView( { campaign, basePath }: CampaignDetailsView
           ) ) }
           <CampaignActionMenu
             campaign={ campaign }
-            basePath={ basePath }
             hideViewDetails={ true }
             trigger={
               <Button variant={ dropdownVariant } className={ cn( 'px-2 font-regular', dropdownVariant === 'outline' && 'border-border/60' ) } size='default'>

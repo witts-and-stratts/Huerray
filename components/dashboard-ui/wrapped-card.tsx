@@ -15,7 +15,7 @@ export function WrappedCard( { children, title, className, titleClass, contentCl
   return (
     <Card className={ cn( 'p-0 gap-0 bg-background/20', className ) }>
       <CardHeader className={ cn( 'px-2 pt-2', titleClass ) }>
-        <CardTitle className="card__title font-normal text-sm">{ title }</CardTitle>
+        <CardTitle className={ cn( "card__title font-normal text-sm", titleClass ) }>{ title }</CardTitle>
       </CardHeader>
       <CardContent className={ cn( 'space-y-2 flex flex-col gap-1 border p-4 m-1 bg-background', { 'rounded-lg': variant === 'default', 'm-0 border-0 bg-slate-50/40 rounded-tl-0 rounded-tr-0 border-t mt-1': variant === 'flush' }, contentClass ) }>
         { children }

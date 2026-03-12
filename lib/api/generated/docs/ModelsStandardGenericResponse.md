@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | **object** |  | [optional] [default to undefined]
+**data** | [**ModelsMessage**](ModelsMessage.md) |  | [optional] [default to undefined]
+**error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **success** | **boolean** |  | [optional] [default to undefined]
 
@@ -16,6 +17,7 @@ import { ModelsStandardGenericResponse } from 'huerray-api';
 
 const instance: ModelsStandardGenericResponse = {
     data,
+    error,
     message,
     success,
 };

@@ -1,75 +1,70 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, memo } from 'react';
 import { Dialog, DialogContent } from '@/components/dashboard-ui/dialog';
 import { Button } from '@/components/dashboard-ui/button';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
-import PdfPreview from '@/components/campaigns/sections/documents/pdf-preview';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { AnimatePresence, motion, type Variants, type Easing } from 'motion/react';
+import PdfPreview from '@/components/campaigns/sections/documents/pdf-preview';
 import { imgpresets } from '@/lib/utils/imgproxy';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${ pdfjs.version }/build/pdf.worker.min.mjs`;
 
-function PdfThumbnail( { src }: { src: string; } ) {
-  return (
-    <Document file={ { url: src } } loading={ null } error={ null }>
-      <Page
-        pageNumber={ 1 }
-        width={ 40 }
-        renderTextLayer={ false }
-        renderAnnotationLayer={ false }
-      />
-    </Document>
-  );
-}
+const MIN_PREVIEW_HEIGHT = 200;
 
-// ---------------------------------------------------------------------------
-// Animation types
-// ---------------------------------------------------------------------------
+type AnimationPreset = 'fade' | 'slide' | 'scale' | 'zoom' | 'none';
 
-export type AnimationPreset = 'fade' | 'slide' | 'scale' | 'zoom' | 'none';
-
-export interface AnimationConfig {
-  /** Named animation style. Defaults to 'fade'. */
+interface AnimationConfig {
   preset?: AnimationPreset;
-  /** Transition duration in seconds. Defaults to 0.25. */
   duration?: number;
-  /** Framer Motion easing. Accepts a named easing string or a cubic-bezier array. */
   ease?: string | [ number, number, number, number ];
 }
 
-const SLIDE_DISTANCE = 50;
+interface ImagePreviewDialogProps {
+  items: string[];
+  initialIndex: number | null;
+  type: 'images' | 'documents';
+  onOpenChange: ( open: boolean ) => void;
+  animation?: AnimationConfig;
+}
+
+const PdfThumbnail = memo( ( { src }: { src: string; } ) => (
+  <Document file={ { url: src } } loading={ null } error={ null }>
+    <Page
+      pageNumber={ 1 }
+      width={ 40 }
+      renderTextLayer={ false }
+      renderAnnotationLayer={ false }
+    />
+  </Document>
+) );
 
 function buildVariants(
   preset: AnimationPreset,
   duration: number,
-  ease: AnimationConfig[ 'ease' ],
+  ease?: AnimationConfig[ 'ease' ],
 ): Variants {
   const t = ease ? { duration, ease: ease as Easing } : { duration };
 
   switch ( preset ) {
-    case 'slide':
-      return {
-        // direction is passed as `custom` — positive = next, negative = prev
-        initial: ( dir: 1 | -1 ) => ( { opacity: 0, x: dir * SLIDE_DISTANCE } ),
-        animate: { opacity: 1, x: 0, transition: t },
-        exit: ( dir: 1 | -1 ) => ( { opacity: 0, x: dir * -SLIDE_DISTANCE, transition: t } ),
-      };
     case 'scale':
       return {
-        initial: { opacity: 0, scale: 0.92 },
+        initial: { opacity: 0, scale: 0.95 },
         animate: { opacity: 1, scale: 1, transition: t },
-        exit: { opacity: 0, scale: 0.92, transition: t },
+        exit: { opacity: 0, scale: 0.95, transition: t },
       };
+
     case 'zoom':
       return {
-        initial: { opacity: 0, scale: 0.75 },
+        initial: { opacity: 0, scale: 0.85 },
         animate: { opacity: 1, scale: 1, transition: t },
         exit: { opacity: 0, scale: 1.1, transition: t },
       };
+
     case 'none':
       return { initial: {}, animate: {}, exit: {} };
+
     case 'fade':
     default:
       return {
@@ -80,19 +75,6 @@ function buildVariants(
   }
 }
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
-
-interface ImagePreviewDialogProps {
-  items: string[];
-  initialIndex: number | null;
-  type: 'images' | 'documents';
-  onOpenChange: ( open: boolean ) => void;
-  /** Animation preset and/or parameter overrides. */
-  animation?: AnimationConfig;
-}
-
 export function ImagePreviewDialog( {
   items,
   initialIndex,
@@ -101,95 +83,92 @@ export function ImagePreviewDialog( {
   animation,
 }: ImagePreviewDialogProps ) {
   const open = initialIndex !== null;
+
   const [ index, setIndex ] = useState( initialIndex ?? 0 );
-  const [ contentHeight, setContentHeight ] = useState<number | undefined>( undefined );
-  const contentRef = useRef<HTMLDivElement | null>( null );
+  const [ loadedSet, setLoadedSet ] = useState<Set<number>>( () => new Set() );
+  const [ height, setHeight ] = useState<number | undefined>();
+
+  const wrapperRef = useRef<HTMLDivElement>( null );
   const directionRef = useRef<1 | -1>( 1 );
-  const preloadedRef = useRef<Set<string>>( new Set() );
-  const [ imgReady, setImgReady ] = useState( false );
-  const [ showSpinner, setShowSpinner ] = useState( false );
+  /** Natural dimensions for each loaded slide, keyed by slide index. */
+  const sizesRef = useRef<Map<number, { w: number; h: number }>>( new Map() );
+
+  const current = items[ index ];
+  const isPdf = current?.toLowerCase().endsWith( '.pdf' );
+
+  const duration = animation?.duration ?? 0.25;
+  const ease = animation?.ease;
+
+  const variants = useMemo(
+    () => buildVariants( animation?.preset ?? 'fade', duration, ease ),
+    [ animation?.preset, duration, ease ],
+  );
+
+  const heightTransition = {
+    duration: duration * 1.4,
+    ease: ( ease ?? [ 0.4, 0, 0.2, 1 ] ) as Easing,
+  };
 
   useEffect( () => {
     if ( initialIndex !== null ) setIndex( initialIndex );
   }, [ initialIndex ] );
 
+  /**
+   * Compute height for the current slide whenever the index changes or a new
+   * image finishes loading. Because this runs after React commits, `index` is
+   * always the final, correct value — no race with onLoad from exiting slides.
+   */
   useEffect( () => {
-    if ( !open || type !== 'images' ) return;
+    if ( type !== 'images' || !wrapperRef.current ) return;
 
-    Promise.all(
-      items.map( ( src ) => {
-        if ( preloadedRef.current.has( src ) ) return Promise.resolve();
-        preloadedRef.current.add( src );
+    const size = sizesRef.current.get( index );
+    if ( !size ) return;
 
-        return Promise.all( [
-          new Promise( ( resolve ) => {
-            const largeImg = new Image();
-            largeImg.onload = resolve;
-            largeImg.onerror = resolve;
-            largeImg.src = imgpresets.large( src );
-          } ),
-          new Promise( ( resolve ) => {
-            const thumbImg = new Image();
-            thumbImg.onload = resolve;
-            thumbImg.onerror = resolve;
-            thumbImg.src = imgpresets.thumbnail( src );
-          } ),
-        ] );
-      } )
-    );
-  }, [ open, items, type ] );
+    const containerW = wrapperRef.current.clientWidth;
+    const maxH = window.innerHeight * 0.75;
+    const h = Math.min( ( size.h / size.w ) * containerW, maxH );
 
-  // Reset ready state when the displayed image changes
+    setHeight( Math.round( h ) );
+  }, [ index, loadedSet, type ] );
+
+  /** Preload nearby images */
   useEffect( () => {
     if ( type !== 'images' ) return;
-    setImgReady( false );
-  }, [ index, type ] );
 
-  // Only show a spinner after 150 ms — avoids flashing for cached images
-  useEffect( () => {
-    if ( imgReady ) { setShowSpinner( false ); return; }
-    const timer = setTimeout( () => setShowSpinner( true ), 150 );
-    return () => clearTimeout( timer );
-  }, [ imgReady ] );
+    const preload = ( src?: string ) => {
+      if ( !src ) return;
+      const img = new Image();
+      img.src = imgpresets.large( src );
+    };
 
-  const current = items[ index ];
-  const isPdf = current?.toLowerCase().endsWith( '.pdf' );
+    preload( items[ index ] );
+    preload( items[ index + 1 ] );
+    preload( items[ index - 1 ] );
+  }, [ index, items, type ] );
 
-  const preset = animation?.preset ?? 'fade';
-  const duration = animation?.duration ?? 0.25;
-  const ease = animation?.ease;
-  const variants = buildVariants( preset, duration, ease );
-  const heightTransition = {
-    duration: ( animation?.duration ?? 0.35 ) * 1.4,
-    ease: ( ease ?? [ 0.4, 0, 0.2, 1 ] ) as Easing,
-  };
-
-  // Measure content height whenever content changes or loads
-  const measureHeight = useCallback( () => {
-    if ( contentRef.current ) {
-      setContentHeight( contentRef.current.scrollHeight );
-    }
-  }, [] );
-
-  const prev = () => {
+  function prev() {
     directionRef.current = -1;
     setIndex( ( i ) => ( i - 1 + items.length ) % items.length );
-  };
-  const next = () => {
+  }
+
+  function next() {
     directionRef.current = 1;
     setIndex( ( i ) => ( i + 1 ) % items.length );
-  };
-  const goTo = ( i: number ) => {
+  }
+
+  function goTo( i: number ) {
     directionRef.current = i >= index ? 1 : -1;
     setIndex( i );
-  };
+  }
 
   function handleKeyDown( e: React.KeyboardEvent ) {
-    // When a PDF is open, PdfPreview owns ArrowLeft/ArrowRight for page navigation
     if ( type === 'documents' && isPdf ) return;
+
     if ( e.key === 'ArrowLeft' ) prev();
-    else if ( e.key === 'ArrowRight' ) next();
+    if ( e.key === 'ArrowRight' ) next();
   }
+
+  if ( !current ) return null;
 
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>
@@ -198,99 +177,133 @@ export function ImagePreviewDialog( {
         showCloseButton
         onKeyDown={ handleKeyDown }
       >
-        {/* Height-animating wrapper */ }
         <motion.div
+          ref={ wrapperRef }
           className="relative overflow-hidden bg-black/5"
-          animate={ { height: contentHeight ?? 'auto' } }
+          style={ { minHeight: MIN_PREVIEW_HEIGHT } }
+          animate={ { height: height ?? 'auto' } }
           transition={ heightTransition }
         >
-          <AnimatePresence mode="popLayout" initial={ false } custom={ directionRef.current }>
-            <motion.div
-              ref={ contentRef }
-              key={ current }
-              custom={ directionRef.current }
-              variants={ variants }
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="relative flex items-center justify-center"
-              onAnimationComplete={ type !== 'images' ? measureHeight : undefined }
-            >
-              { type === 'images' ? (
-                <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */ }
-                  <img
-                    src={ imgpresets.large( current ) }
-                    alt={ `Asset ${ index + 1 }` }
-                    className="max-h-[75vh] w-full object-contain"
-                    onLoad={ () => { setImgReady( true ); measureHeight(); } }
-                  />
-                  { showSpinner && !imgReady && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-background/60">
-                      <div className="size-7 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-                    </div>
-                  ) }
-                </>
-              ) : isPdf ? (
-                <div className="w-full h-[75vh]">
-                  { open && <PdfPreview src={ current } /> }
-                </div>
-              ) : (
-                <div className="flex flex-col items-center gap-3 py-20">
-                  <p className="text-sm text-muted-foreground">Preview not available</p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={ () => window.open( current, '_blank', 'noopener,noreferrer' ) }
-                  >
-                    <ExternalLink className="size-4 mr-1.5" /> Open file
-                  </Button>
-                </div>
-              ) }
-            </motion.div>
-          </AnimatePresence>
+          {/* layout container */ }
+          <div className="relative flex items-center justify-center w-full h-full pointer-events-none">
+            <AnimatePresence initial={ false } custom={ directionRef.current }>
+              <motion.div
+                key={ `${ current }-${ index }` }
+                custom={ directionRef.current }
+                variants={ variants }
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                { type === 'images' ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */ }
+                    <img
+                      src={ imgpresets.large( current ) }
+                      alt={ `Asset ${ index + 1 }` }
+                      className="max-h-[75vh] w-full object-contain"
+                      onLoad={ ( ( slideIndex ) => ( e: React.SyntheticEvent<HTMLImageElement> ) => {
+                        const img = e.currentTarget;
+                        sizesRef.current.set( slideIndex, { w: img.naturalWidth, h: img.naturalHeight } );
+                        setLoadedSet( ( prev ) => new Set( [ ...prev, slideIndex ] ) );
+                      } )( index ) }
+                    />
 
-          {/* Nav buttons live outside AnimatePresence so they don't flicker */ }
+                    { !loadedSet.has( index ) && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-background/60">
+                        <div className="size-7 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+                      </div>
+                    ) }
+                  </>
+                ) : isPdf ? (
+                  <div className="w-full h-[75vh]">
+                    { open && <PdfPreview src={ current } /> }
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-3 py-20">
+                    <p className="text-sm text-muted-foreground">
+                      Preview not available
+                    </p>
+
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={ () =>
+                        window.open( current, '_blank', 'noopener,noreferrer' )
+                      }
+                    >
+                      <ExternalLink className="size-4 mr-1.5" />
+                      Open file
+                    </Button>
+                  </div>
+                ) }
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
           { items.length > 1 && (
             <>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                onClick={ prev }
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background"
+              <motion.div
+                whileTap={ { scale: 0.88 } }
+                transition={ { duration: 0.1 } }
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10"
               >
-                <ChevronLeft className="size-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon-sm"
-                onClick={ next }
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background"
+                <Button
+                  aria-label="Previous image"
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={ prev }
+                  className="bg-background/80 hover:bg-background active:translate-y-0"
+                >
+                  <ChevronLeft className="size-5" />
+                </Button>
+              </motion.div>
+
+              <motion.div
+                whileTap={ { scale: 0.88 } }
+                transition={ { duration: 0.1 } }
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-10"
               >
-                <ChevronRight className="size-5" />
-              </Button>
+                <Button
+                  aria-label="Next image"
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={ next }
+                  className="bg-background/80 hover:bg-background active:translate-y-0"
+                >
+                  <ChevronRight className="size-5" />
+                </Button>
+              </motion.div>
             </>
           ) }
         </motion.div>
 
-
-        {/* Thumbnail strip + counter */ }
         { items.length > 1 && (
           <div className="flex flex-col items-center gap-2 px-4 py-3 border-t bg-background">
-            <p className="text-xs text-muted-foreground">{ index + 1 } / { items.length }</p>
+            <p className="text-xs text-muted-foreground">
+              { index + 1 } / { items.length }
+            </p>
+
             <div className="flex gap-1.5 overflow-x-auto max-w-full pb-1">
               { items.map( ( item, i ) => (
                 <button
-                  key={ i }
+                  key={ `${ item }-${ i }` }
                   type="button"
                   onClick={ () => goTo( i ) }
-                  className={ `shrink-0 size-10 rounded border-2 overflow-hidden transition-all ${ i === index ? 'border-primary' : 'border-transparent opacity-50 hover:opacity-80' }` }
+                  className={ `shrink-0 size-10 rounded border-2 overflow-hidden transition-all ${ i === index
+                    ? 'border-primary'
+                    : 'border-transparent opacity-50 hover:opacity-80'
+                    }` }
                 >
                   { type === 'images' ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={ imgpresets.thumbnail( item ) } alt={ `Thumb ${ i + 1 }` } className="size-full object-cover" />
+                    <img
+                      src={ imgpresets.thumbnail( item ) }
+                      alt={ `Thumb ${ i + 1 }` }
+                      className="size-full object-cover"
+                    />
                   ) : (
-                    <div className="size-full overflow-hidden flex items-center justify-center bg-muted/40 [&_.react-pdf\_\_Page\_\_canvas]:!w-full [&_.react-pdf\_\_Page\_\_canvas]:!h-auto">
+                    <div className="size-full overflow-hidden flex items-center justify-center bg-muted/40">
                       <PdfThumbnail src={ item } />
                     </div>
                   ) }

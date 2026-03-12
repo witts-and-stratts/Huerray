@@ -52,6 +52,7 @@ export * from './models-invoice-item-response';
 export * from './models-invoice-pdfgenerated-response';
 export * from './models-invoice-response';
 export * from './models-login-request';
+export * from './models-message';
 export * from './models-notification-list-response';
 export * from './models-notification-response';
 export * from './models-paginated-brand-responses';

@@ -24,6 +24,7 @@ export function NavSecondary( {
     title: string;
     url: string;
     icon: Icon | HugeIconData;
+    onClick?: () => void;
   }[];
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup> ) {
   return (
@@ -32,20 +33,37 @@ export function NavSecondary( {
         <SidebarMenu>
           { items.map( ( item ) => (
             <SidebarMenuItem key={ item.title } className="font-regular">
-              <SidebarMenuButton
-                render={
-                  <Link href={ item.url }>
-                    { Array.isArray( item.icon )
-                      ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
-                      : ( () => {
-                        const IconComponent = item.icon as Icon;
-                        return <IconComponent />;
-                      } )()
-                    }
-                    <span>{ item.title }</span>
-                  </Link>
-                }
-              />
+              { item.onClick ? (
+                <SidebarMenuButton
+                  render={
+                    <button onClick={ item.onClick }>
+                      { Array.isArray( item.icon )
+                        ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
+                        : ( () => {
+                          const IconComponent = item.icon as Icon;
+                          return <IconComponent />;
+                        } )()
+                      }
+                      <span>{ item.title }</span>
+                    </button>
+                  }
+                />
+              ) : (
+                <SidebarMenuButton
+                  render={
+                    <Link href={ item.url }>
+                      { Array.isArray( item.icon )
+                        ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
+                        : ( () => {
+                          const IconComponent = item.icon as Icon;
+                          return <IconComponent />;
+                        } )()
+                      }
+                      <span>{ item.title }</span>
+                    </Link>
+                  }
+                />
+              ) }
             </SidebarMenuItem>
           ) ) }
         </SidebarMenu>

@@ -26,10 +26,14 @@ import { ModelCampaign } from './types';
 import { CampaignActionMenu } from './campaign-action-menu';
 import { stripTags } from '@/lib/utils';
 import { RoleGuard } from '../auth/role-guard';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import { cn } from '@/lib/dashboard-utils';
+import { useBasePath } from '@/lib/providers/path-provider';
 
-const CampaignActionsCell = ( { row, basePath }: { row: Row<ModelCampaign>, basePath: string; } ) => {
+const CampaignActionsCell = ( { row, className }: { row: Row<ModelCampaign>, className?: string; } ) => {
+  const basePath = useBasePath();
   return (
-    <div className='flex justify-end'>
+    <div className={ `flex justify-end ${ className }` }>
       <ButtonGroup className='flex justify-end'>
         <RoleGuard allowedRoles={ [ 'admin' ] }>
           <Button variant='outline' size='sm' className='font-regular' render={
@@ -60,7 +64,6 @@ const CampaignActionsCell = ( { row, basePath }: { row: Row<ModelCampaign>, base
         </RoleGuard>
         <CampaignActionMenu
           campaign={ row.original }
-          basePath={ basePath }
           trigger={
             <Button variant='outline' size='sm' className='font-regular'>
               <ChevronDown />
@@ -91,6 +94,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( applications[ i ] ) }
+            title="Applications"
           />
         </AnimatePresence>
       </div>
@@ -125,6 +129,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( invitations[ i ] ) }
+            title="Invitations"
           />
         </AnimatePresence>
       </div>
@@ -158,6 +163,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( submissions[ i ] ) }
+            title="Submissions"
           />
         </AnimatePresence>
       </div>
@@ -172,7 +178,50 @@ const SubmissionsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   );
 };
 
-export const getColumns = ( basePath: string = '/brand' ): ColumnDef<ModelCampaign>[] => [
+const DetailsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+  const basePath = useBasePath();
+  const { id, campaign_name, description, campaign_status, updated_at } = row.original;
+  const coverImage = row.original.campaign_images?.[ 0 ] || row.original.product_image_url;
+
+  return (
+    <div className='flex gap-4'>
+      <div className={ cn( "size-10 shrink-0 overflow-hidden rounded-full" ) }>
+        { coverImage && (
+          <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
+            <img
+              src={ imgpresets.card( coverImage ) }
+              alt={ campaign_name || 'Campaign cover' }
+              className="object-cover w-full h-full"
+            />
+          </Link>
+        ) }
+      </div>
+      <div>
+        <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
+          <h4 className='card__title'>
+            { campaign_name }
+          </h4>
+        </Link>
+        <p className='card__description line-clamp-2'>
+          <span className='text-slate-700' dangerouslySetInnerHTML={ { __html: stripTags( description! ) } }></span>
+        </p>
+        <div className='mt-4 flex flex-col gap-2'>
+          <span className='text-xs text-muted-foreground/60'>
+            <span>Updated on{ ' ' }</span>
+            { Intl.DateTimeFormat( 'en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            } ).format( new Date( updated_at as string ) ) }
+          </span>
+          <StatusBadge status={ campaign_status! } className='w-fit' />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const getColumns = (): ColumnDef<ModelCampaign>[] => [
   {
     id: 'select',
     header: ( { table } ) => (
@@ -223,34 +272,7 @@ export const getColumns = ( basePath: string = '/brand' ): ColumnDef<ModelCampai
   {
     accessorKey: 'details',
     header: () => <span className='font-regular'>Details</span>,
-    cell: ( { row } ) => {
-      const { id, campaign_name, description, campaign_status, updated_at } =
-        row.original;
-      return (
-        <div>
-          <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
-            <h4 className='capitalize text-[18px] font-medium! text-primary'>
-              { campaign_name }
-            </h4>
-          </Link>
-          <p className='font-regular text-slate-500 mt-1 text-sm'>
-            <span className='text-slate-700' dangerouslySetInnerHTML={ { __html: stripTags( description! ) } }></span>
-            <br />
-            <span>
-              <span>Updated on{ ' ' }</span>
-              { Intl.DateTimeFormat( 'en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              } ).format( new Date( updated_at as string ) ) }
-            </span>
-          </p>
-          <div className='mt-4'>
-            <StatusBadge status={ campaign_status! } />
-          </div>
-        </div>
-      );
-    },
+    cell: ( { row } ) => <DetailsCell row={ row } />,
   },
   {
     accessorKey: 'applications',
@@ -281,11 +303,11 @@ export const getColumns = ( basePath: string = '/brand' ): ColumnDef<ModelCampai
   {
     id: 'actions',
     header: () => (
-      <div className='flex justify-end'>
+      <div className='flex justify-end pr-2'>
         <span className='font-regular text-right'>Actions</span>
       </div>
     ),
     enableHiding: false,
-    cell: ( { row } ) => <CampaignActionsCell row={ row } basePath={ basePath } />,
+    cell: ( { row } ) => <CampaignActionsCell row={ row } className='pr-2' />,
   },
 ];

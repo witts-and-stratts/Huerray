@@ -181,13 +181,13 @@ export default function CompleteProfilePage() {
       <div className="col-span-1 max-md:hidden relative">
         <Image src="/images/content/lifestyle-4.webp" alt="Huerray Lifestyle" width={ 1920 } height={ 1080 } className="object-cover h-full fixed w-1/2" />
       </div>
-      <div className="flex flex-col min-h-screen relative bg-burgundy-50 py-4 px-2 overflow-y-auto w-full col-span-2">
+      <div className="flex flex-col min-h-screen relative bg-burgundy-50 py-4 px-2 w-full col-span-2">
         <div className="absolute top-4 right-4 z-50">
           <LanguageSelector showLabel={ false } />
         </div>
 
-        <Card className="rounded-4xl relative overflow-hidden bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 mt-10 mx-4">
-          <CardContent>
+        <Card className="flex-1 rounded-4xl relative bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 mt-10 mx-4 h-full">
+          <CardContent className='h-full overflow-auto'>
             <CardHeader className="text-center mb-8 pb-0">
               <div className="flex justify-center py-4 mb-2">
                 <Image
@@ -204,7 +204,7 @@ export default function CompleteProfilePage() {
               </CardDescription>
             </CardHeader>
 
-            <Tabs value={ activeTab } onValueChange={ handleTabChange } className="w-full">
+            <Tabs value={ activeTab } onValueChange={ handleTabChange } className="w-full h-full">
               <Card>
                 <CardHeader>
                   <div className="flex justify-center w-full">

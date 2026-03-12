@@ -21,6 +21,10 @@ import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "motion/react";
 import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
+import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
+import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { setViewMode } from "@/lib/redux/features/ui/uiSlice";
+import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 
 
 
@@ -35,6 +39,7 @@ export function UsersTable( {
   isLoading = false,
   error = null,
 }: UsersTableProps ) {
+  const showLoading = useDelayedLoading( isLoading, 250 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
     []
@@ -42,7 +47,20 @@ export function UsersTable( {
   const [ columnVisibility, setColumnVisibility ] =
     React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ view, setView ] = React.useState<"table" | "cards">( "cards" );
+  const dispatch = useAppDispatch();
+  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'users' ] ) || 'cards';
+  const [ view, setInternalView ] = React.useState<"table" | "cards">( persistedView );
+
+  React.useEffect( () => {
+    if ( persistedView && persistedView !== view ) {
+      setInternalView( persistedView );
+    }
+  }, [ persistedView ] );
+
+  const setView = ( newView: "table" | "cards" ) => {
+    setInternalView( newView );
+    dispatch( setViewMode( { pageKey: 'users', viewMode: newView } ) );
+  };
   const [ selectedUser, setSelectedUser ] =
     React.useState<ModelsUserResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -86,7 +104,7 @@ export function UsersTable( {
 
   return (
     <AnimatePresence>
-      { isLoading && <TableSkeleton /> }
+      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
       { error && <motion.div
         initial={ { opacity: 0 } }
         animate={ { opacity: 1 } }

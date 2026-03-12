@@ -1,8 +1,8 @@
 localhost:443 {
-  reverse_proxy localhost:3000
+	reverse_proxy localhost:3000
 }
 
 dev.huerray.de {
-  tls ./deploy/tls/dev.huerray.de.pem ./deploy/tls/dev.huerray.de-key.pem 
-  reverse_proxy localhost:3000
+	tls ./deploy/tls/dev.huerray.de.pem ./deploy/tls/dev.huerray.de-key.pem
+	reverse_proxy localhost:3000
 }

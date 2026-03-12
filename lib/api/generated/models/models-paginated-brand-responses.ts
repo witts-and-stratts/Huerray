@@ -18,14 +18,10 @@
 import type { ModelsBrandResponse } from './models-brand-response';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsErrorInfo } from './models-error-info';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { ModelsPagination } from './models-pagination';
 
 export interface ModelsPaginatedBrandResponses {
     'data'?: Array<ModelsBrandResponse>;
-    'error'?: ModelsErrorInfo;
     'message'?: string;
     'pagination'?: ModelsPagination;
     'success'?: boolean;

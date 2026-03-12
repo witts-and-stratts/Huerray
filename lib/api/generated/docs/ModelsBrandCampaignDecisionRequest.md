@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**brand_accepted** | **boolean** |  | [default to undefined]
+**brand_accepted** | **boolean** |  | [optional] [default to undefined]
 **brand_decision_comments** | **string** |  | [optional] [default to undefined]
 
 ## Example

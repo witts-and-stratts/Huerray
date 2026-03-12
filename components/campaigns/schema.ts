@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from 'zod';
 import { UtilsCampaignCategory } from '@/lib/api/generated/models/utils-campaign-category';
-import { UtilsVideoFormat } from '@/lib/api/generated/models/utils-video-format';
+import { UtilsVideoFormat } from '@/lib/api/generated/models';
 
 // Helper to extract values for z.enum
 function getEnumValues<T extends Record<string, any>>(obj: T) {

@@ -248,7 +248,7 @@ export default function GeneralSettingsPage() {
           ) }
         />
       </BrandSettingsHeader>
-      <div className='p-6 space-y-6 bg-slate-50/50 h-full -mt-5'>
+      <div className='p-6 pt-10 space-y-6 bg-slate-50/50 h-full -mt-5'>
         <BrandProfileSection form={ form } />
       </div>
 

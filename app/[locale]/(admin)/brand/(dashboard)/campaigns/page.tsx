@@ -40,7 +40,6 @@ export default function CampaignsPage() {
         </Link>
       </SubHeader>
       <CampaignsTable
-        basePath='/brand'
         campaigns={ campaigns }
         isLoading={ isLoading }
         error={ error }

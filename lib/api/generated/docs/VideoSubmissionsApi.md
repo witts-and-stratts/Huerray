@@ -300,7 +300,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **videosIdStatusPut**
-> ModelsStandardGenericResponse videosIdStatusPut(request)
+> ModelsStandardVideoSubmissionResponse videosIdStatusPut(request)
 
 Admin updates video submission status (approve/reject)
 
@@ -335,7 +335,7 @@ const { status, data } = await apiInstance.videosIdStatusPut(
 
 ### Return type
 
-**ModelsStandardGenericResponse**
+**ModelsStandardVideoSubmissionResponse**
 
 ### Authorization
 
@@ -350,7 +350,7 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Video submission status updated successfully |  -  |
+|**200** | OK |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
