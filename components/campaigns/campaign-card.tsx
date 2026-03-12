@@ -235,7 +235,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
               </Link>
             ) }
             { brand_id && (
-              <BrandAvatar brandId={ brand_id } className={ cn( "size-10 border bg-white rounded-full shrink-0", {
+              <BrandAvatar brand={ { id: brand_id } as any } className={ cn( "size-10 border bg-white rounded-full shrink-0", {
                 "absolute -right-2 -bottom-1 size-6 p-0.5": coverImage
               } ) } />
             ) }
