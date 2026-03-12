@@ -184,7 +184,7 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
     } );
 
     return () => {
-      unsubscribe();
+      unsubscribe.unsubscribe();
     };
   }, [ form.store ] );
 
