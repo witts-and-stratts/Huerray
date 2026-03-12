@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/dashboard-ui/dropdown-menu';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
-import { useForm } from '@tanstack/react-form';
+import { useForm, useStore } from '@tanstack/react-form';
 import { ChevronDown, SlashIcon } from 'lucide-react';
 import { ReactNode, useEffect, useState } from 'react';
 import { CampaignSummaryDialog } from './campaign-summary-dialog';
@@ -143,27 +143,15 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
   } );
 
   // Sync form state to Redux with debounce
+  const formValues = useStore( form.store, ( state ) => state.values );
+
   useEffect( () => {
     if ( mode !== 'create' ) return;
-
-    let timeoutId: NodeJS.Timeout;
-    const syncState = () => {
-      const currentValues = form.store.state.values;
-
-      dispatch( updateCampaign( currentValues as CreateCampaignSchema ) );
-    };
-
-    const unsubscribe = form.store.subscribe( () => {
-      clearTimeout( timeoutId );
-      timeoutId = setTimeout( syncState, 150 ); // 150ms debounce
-    } );
-
-    return () => {
-      unsubscribe();
-      clearTimeout( timeoutId );
-      syncState();
-    };
-  }, [ form, dispatch, mode ] );
+    const timeoutId = setTimeout( () => {
+      dispatch( updateCampaign( formValues as CreateCampaignSchema ) );
+    }, 150 );
+    return () => clearTimeout( timeoutId );
+  }, [ formValues, dispatch, mode ] );
 
   const handleSaveAndExit = async () => {
     form.handleSubmit();
