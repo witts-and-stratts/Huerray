@@ -30,7 +30,6 @@ export default function CreatorAdminLayout( {
             <div className="bg-background min-h-screen flex flex-col">
               <EmailVerificationBanner />
               <ProfileStatusBanner role="creator" />
-              <CreatorBreadcrumbs />
               { children }
             </div>
           </PathProvider>

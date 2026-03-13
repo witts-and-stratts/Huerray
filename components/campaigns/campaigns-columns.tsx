@@ -24,6 +24,7 @@ import { ModelCampaign } from './types';
 
 
 import { CampaignActionMenu } from './campaign-action-menu';
+import { CampaignGigsButton } from './campaign-card';
 import { stripTags } from '@/lib/utils';
 import { RoleGuard } from '../auth/role-guard';
 import { imgpresets } from '@/lib/utils/imgproxy';
@@ -33,7 +34,10 @@ import { useBasePath } from '@/lib/providers/path-provider';
 const CampaignActionsCell = ( { row, className }: { row: Row<ModelCampaign>, className?: string; } ) => {
   const basePath = useBasePath();
   return (
-    <div className={ `flex justify-end ${ className }` }>
+    <div className={ `flex justify-end items-center gap-2 ${ className }` }>
+      <RoleGuard allowedRoles={ [ 'admin' ] }>
+        <CampaignGigsButton campaignId={ row.original.id! } basePath={ basePath } />
+      </RoleGuard>
       <ButtonGroup className='flex justify-end'>
         <RoleGuard allowedRoles={ [ 'admin' ] }>
           <Button variant='outline' size='sm' className='font-regular' render={

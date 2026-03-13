@@ -18,7 +18,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { ChevronDown } from 'lucide-react';
 
 import { getPaymentColumns } from './payments-columns';
-import { CampaignsTablePagination } from '@/components/campaigns/campaigns-table-pagination';
+import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { Button } from '@/components/dashboard-ui/button';
@@ -225,7 +225,7 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
 
           { data.length > 0 && (
             <div className="px-4 mt-4">
-              <CampaignsTablePagination table={ table } />
+              <DataTablePagination table={ table } />
             </div>
           ) }
         </motion.div>

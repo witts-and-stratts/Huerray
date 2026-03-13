@@ -18,17 +18,16 @@ import { CreatorsTableToolbar } from "./creators-table-toolbar";
 import { CreatorsView } from "./creators-view";
 import { DataTablePagination } from "@/components/ui/data-table-pagination";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
-import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "motion/react";
 import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
 import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
+import { TableErrorState } from "@/components/dashboard-ui/table-error-state";
 import { useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { toast } from "sonner";
 import { SuperField } from "@/components/dashboard-ui/super-field";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { setViewMode } from "@/lib/redux/features/ui/uiSlice";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
+import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 
 
 
@@ -44,27 +43,11 @@ export function CreatorsTable( {
   error = null,
 }: CreatorsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
+  const { view, setView } = usePersistedViewMode( 'creators', 'cards' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
-  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [ columnVisibility, setColumnVisibility ] =
-    React.useState<VisibilityState>( {} );
+  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
+  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const dispatch = useAppDispatch();
-  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'creators' ] ) || 'cards';
-  const [ view, setInternalView ] = React.useState<"table" | "cards">( persistedView );
-
-  React.useEffect( () => {
-    if ( persistedView && persistedView !== view ) {
-      setInternalView( persistedView );
-    }
-  }, [ persistedView ] );
-
-  const setView = ( newView: "table" | "cards" ) => {
-    setInternalView( newView );
-    dispatch( setViewMode( { pageKey: 'creators', viewMode: newView } ) );
-  };
   const [ selectedCreator, setSelectedCreator ] =
     React.useState<ModelsCreatorResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -144,29 +127,13 @@ export function CreatorsTable( {
   return (
     <AnimatePresence>
       { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
-      { error && <motion.div
-        initial={ { opacity: 0 } }
-        animate={ { opacity: 1 } }
-        exit={ { opacity: 0 } }
-        transition={ { duration: 0.3 } }
-        className="w-full p-8 text-center bg-red-50 rounded-xl border border-red-100">
-        <h3 className="text-lg font-medium text-red-800">
-          Failed to load creators
-        </h3>
-        <p className="text-sm text-red-600 mt-1">{ error.message }</p>
-        <button
-          onClick={ () => window.location.reload() }
-          className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
-        >
-          Try again
-        </button>
-      </motion.div> }
+      { error && <TableErrorState entity="creators" message={ error.message } /> }
       { !isLoading && !error && (
         <motion.div
-          initial={ { opacity: 0, y: 20 } }
-          animate={ { opacity: 1, y: 0 } }
-          exit={ { opacity: 0, y: -20 } }
-          transition={ { duration: 0.5 } }
+          initial={ { opacity: 0 } }
+          animate={ { opacity: 1 } }
+          exit={ { opacity: 0 } }
+          transition={ { duration: 0.3 } }
           className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
         >
           <CreatorsTableToolbar

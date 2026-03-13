@@ -5,7 +5,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Locale, locales } from '@/i18n';
 import { AuthProvider } from '@/lib/auth/auth-context';
-import '@/app/globals.css';
+import '@/styles/globals.css';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
 

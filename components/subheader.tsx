@@ -12,6 +12,7 @@ import {
   BreadcrumbSeparator,
 } from './dashboard-ui/breadcrumb';
 import React from 'react';
+import { ScrollArea } from './dashboard-ui/scroll-area';
 
 interface SubHeaderProps {
   title: string;
@@ -71,16 +72,18 @@ interface SubHeaderTabsProps {
 
 export function SubHeaderTabs( { value, onChange, tabItems }: SubHeaderTabsProps ) {
   return (
-    <Tabs className={ 'mt-4' } value={ value } onValueChange={ onChange }>
-      <TabsList className='bg-background gap-4'>
-        { tabItems.map( ( item ) => (
-          <TabsTrigger key={ item.value } value={ item.value } className={ cn( 'font-normal shadow-none! rounded-none! pb-3 text-primary border-b border-b-transparent -mb-5 px-0! transition-all duration-600 ease-out',
-            {
-              'text-primary! border-b-dark-burgundy': value === item.value,
-              'text-gray-500!': value !== item.value,
-            } ) }>{ item.label }</TabsTrigger>
-        ) ) }
-      </TabsList>
-    </Tabs>
+    <div className={ 'mt-4 w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] -mb-5' }>
+      <Tabs value={ value } onValueChange={ onChange } className='h-fit'>
+        <TabsList className='bg-transparent gap-4'>
+          { tabItems.map( ( item ) => (
+            <TabsTrigger key={ item.value } value={ item.value } className={ cn( 'font-normal shadow-none! rounded-none! pb-3 text-primary border-b border-b-transparent px-0! transition-all duration-600 ease-out bg-transparent',
+              {
+                'text-primary! border-b-dark-burgundy': value === item.value,
+                'text-gray-500!': value !== item.value,
+              } ) }>{ item.label }</TabsTrigger>
+          ) ) }
+        </TabsList>
+      </Tabs>
+    </div>
   );
 };

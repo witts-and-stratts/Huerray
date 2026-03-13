@@ -27,13 +27,14 @@ import {
 // Inline Table View Component (extracted from previous gigs-table.tsx)
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
   return (
+    <div className='border border-border rounded-lg overflow-hidden'>
     <Table className='overflow-auto'>
       <TableHeader sticky>
         { table.getHeaderGroups().map( ( headerGroup ) => (
           <TableRow key={ headerGroup.id }>
             { headerGroup.headers.map( ( header ) => {
               return (
-                <TableHead key={ header.id } className='bg-accent/50'>
+                <TableHead key={ header.id } className='bg-slate-50/80'>
                   { header.isPlaceholder
                     ? null
                     : flexRender(
@@ -91,6 +92,7 @@ function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } 
         </AnimatePresence>
       </TableBody>
     </Table>
+    </div>
   );
 }
 
@@ -104,7 +106,7 @@ interface GigsViewProps {
 
 export function GigsView( { table, view, onViewGig, onCreateSubmission, actionButtons }: GigsViewProps ) {
   return (
-    <div className='mt-1'>
+    <div className='px-5 mt-1 grow flex-1'>
       { table.getRowModel().rows.length === 0 ? (
         <Empty className='border py-20 my-6 flex-1 bg-white'>
           <EmptyHeader>

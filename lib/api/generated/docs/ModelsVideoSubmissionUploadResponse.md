@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **file_size** | **number** |  | [optional] [default to undefined]
 **filename** | **string** |  | [optional] [default to undefined]
 **original_name** | **string** |  | [optional] [default to undefined]
+**thumbnail_url** | **string** |  | [optional] [default to undefined]
 **video_url** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -21,6 +22,7 @@ const instance: ModelsVideoSubmissionUploadResponse = {
     file_size,
     filename,
     original_name,
+    thumbnail_url,
     video_url,
 };
 ```

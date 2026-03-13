@@ -8,7 +8,6 @@ import {
 } from '@/components/dashboard-ui/sidebar';
 import { AdminSidebar } from '@/components/dashboard/admin-sidebar';
 import { RoleProvider } from '@/contexts/role-context';
-import { AnimatePresence } from 'motion/react';
 import { PathProvider } from '@/lib/providers/path-provider';
 
 export default function AdminLayout( {

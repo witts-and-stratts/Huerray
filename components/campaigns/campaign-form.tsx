@@ -243,7 +243,7 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
           </Card>
           <Card className='md:col-span-2'>
             <CardHeader>
-              <CardTitle className='uppercase text-sm tracking-widest font-normal'>Creator Requirements</CardTitle>
+              <CardTitle>Creator Requirements</CardTitle>
               <CardDescription>Specify the creator requirements for your campaign</CardDescription>
             </CardHeader>
             <CardContent>
@@ -257,7 +257,7 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
         <div className='px-5 grid md:grid-cols-2 gap-4'>
           <Card>
             <CardHeader className='pb-2'>
-              <CardTitle className='text-sm uppercase tracking-wider font-medium'>Instructions</CardTitle>
+              <CardTitle>Instructions</CardTitle>
               <CardDescription>Guidelines for the creators</CardDescription>
             </CardHeader>
             <CardContent className='space-y-4'>
@@ -287,7 +287,7 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
           </Card>
           <Card>
             <CardHeader className='pb-2'>
-              <CardTitle className='text-sm uppercase tracking-wider font-medium'>Tone of Voice</CardTitle>
+              <CardTitle>Tone of Voice</CardTitle>
               <CardDescription>Describe the desired tone for the content</CardDescription>
             </CardHeader>
             <CardContent>

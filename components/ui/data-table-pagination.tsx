@@ -1,3 +1,4 @@
+"use client";
 
 import { Table } from "@tanstack/react-table";
 import {
@@ -8,91 +9,157 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/dashboard-ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/dashboard-ui/select";
+import { cn } from "@/lib/utils";
+import { SuperField } from "@/components/dashboard-ui/super-field";
+import '@/app/styles/components/data-table-pagination.css';
+
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
+  pageSizeOptions?: number[];
+  showSelectionCount?: boolean;
+  className?: string;
 }
 
-const ROWS_PER_PAGE = [ 10, 20, 30, 40, 50, 100, 200 ];
+interface NavButtonProps {
+  icon: React.ReactNode;
+  onClick: () => void;
+  disabled: boolean;
+  variant?: 'outline' | 'ghost';
+  size?: Parameters<typeof Button>[ 0 ][ 'size' ];
+  title: string;
+  className?: string;
+}
 
+function NavButton( {
+  icon,
+  onClick,
+  disabled,
+  variant = 'outline',
+  size = 'icon',
+  title,
+  className
+}: NavButtonProps ) {
+  return (
+    <Button
+      variant={ variant }
+      size={ size }
+      onClick={ onClick }
+      disabled={ disabled }
+      className={ cn( "pagination-nav-button", className ) }
+    >
+      { icon }
+      <span className="sr-only">{ title }</span>
+    </Button>
+  );
+}
+
+function PaginationSelectionCount<TData>( { table }: { table: Table<TData>; } ) {
+  return (
+    <div className="pagination-selection-count">
+      { table.getFilteredSelectedRowModel().rows.length } of{ " " }
+      { table.getFilteredRowModel().rows.length } row(s) selected.
+    </div>
+  );
+}
+
+function PaginationRowsPerPage<TData>( {
+  table,
+  pageSizeOptions
+}: {
+  table: Table<TData>;
+  pageSizeOptions: number[];
+} ) {
+  return (
+    <div className="pagination-rows-per-page">
+      <p className="pagination-rows-label">Rows per page</p>
+      <SuperField
+        type="select"
+        value={ `${ table.getState().pagination.pageSize }` }
+        options={ pageSizeOptions }
+        onValueChange={ ( value ) => {
+          table.setPageSize( Number( value ) );
+        } }
+        className="pagination-field"
+      />
+    </div>
+  );
+}
+
+function PaginationPageStatus<TData>( { table }: { table: Table<TData>; } ) {
+  return (
+    <div className="pagination-page-status">
+      Page { table.getState().pagination.pageIndex + 1 } of{ " " }
+      { table.getPageCount() }
+    </div>
+  );
+}
+
+function PaginationNavigation<TData>( { table }: { table: Table<TData>; } ) {
+  return (
+    <div className="pagination-navigation">
+      <NavButton
+        icon={ <ChevronsLeft className="h-4 w-4" /> }
+        className="hidden lg:flex"
+        onClick={ () => table.setPageIndex( 0 ) }
+        disabled={ !table.getCanPreviousPage() }
+        title="Go to first page"
+      />
+
+      <NavButton
+        icon={ <ChevronLeft className="h-4 w-4" /> }
+        onClick={ () => table.previousPage() }
+        disabled={ !table.getCanPreviousPage() }
+        title="Go to previous page"
+      />
+
+      <NavButton
+        icon={ <ChevronRight className="h-4 w-4" /> }
+        onClick={ () => table.nextPage() }
+        disabled={ !table.getCanNextPage() }
+        title="Go to next page"
+      />
+
+      <NavButton
+        icon={ <ChevronsRight className="h-4 w-4" /> }
+        className="hidden lg:flex"
+        onClick={ () => table.setPageIndex( table.getPageCount() - 1 ) }
+        disabled={ !table.getCanNextPage() }
+        title="Go to last page"
+      />
+    </div>
+  );
+}
+
+/**
+ * DataTablePagination Component
+ * 
+ * A reusable pagination component for @tanstack/react-table.
+ * Supports selection count, customizable page size options, and responsive navigation.
+ */
 export function DataTablePagination<TData>( {
   table,
+  pageSizeOptions = [ 10, 20, 30, 40, 50, 100, 200 ],
+  showSelectionCount = true,
+  className,
 }: DataTablePaginationProps<TData> ) {
   return (
-    <div className="flex items-center justify-between px-2">
-      <div className="flex-1 text-sm text-muted-foreground">
-        { table.getFilteredSelectedRowModel().rows.length } of{ " " }
-        { table.getFilteredRowModel().rows.length } row(s) selected.
-      </div>
-      <div className="flex items-center space-x-6 lg:space-x-8">
-        <div className="flex items-center space-x-2">
-          <p className="text-sm font-medium">Rows per page</p>
-          <Select
-            value={ `${ table.getState().pagination.pageSize }` }
-            onValueChange={ ( value ) => {
-              table.setPageSize( Number( value ) );
-            } }
-          >
-            <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent side="top">
-              { ROWS_PER_PAGE.map( ( pageSize ) => (
-                <SelectItem key={ pageSize } value={ `${ pageSize }` }>
-                  { pageSize }
-                </SelectItem>
-              ) ) }
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page { table.getState().pagination.pageIndex + 1 } of{ " " }
-          { table.getPageCount() }
-        </div>
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={ () => table.setPageIndex( 0 ) }
-            disabled={ !table.getCanPreviousPage() }
-          >
-            <span className="sr-only">Go to first page</span>
-            <ChevronsLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            className="h-8 w-8 p-0"
-            onClick={ () => table.previousPage() }
-            disabled={ !table.getCanPreviousPage() }
-          >
-            <span className="sr-only">Go to previous page</span>
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            className="h-8 w-8 p-0"
-            onClick={ () => table.nextPage() }
-            disabled={ !table.getCanNextPage() }
-          >
-            <span className="sr-only">Go to next page</span>
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={ () => table.setPageIndex( table.getPageCount() - 1 ) }
-            disabled={ !table.getCanNextPage() }
-          >
-            <span className="sr-only">Go to last page</span>
-            <ChevronsRight className="h-4 w-4" />
-          </Button>
+    <div className={ cn( "pagination-container", className ) }>
+      { showSelectionCount ? (
+        <PaginationSelectionCount table={ table } />
+      ) : (
+        <div className="pagination-selection-placeholder" />
+      ) }
+
+      <div className="pagination-controls">
+        <PaginationRowsPerPage
+          table={ table }
+          pageSizeOptions={ pageSizeOptions }
+        />
+
+        <div className="pagination-status-container">
+          <PaginationPageStatus table={ table } />
+          <PaginationNavigation table={ table } />
         </div>
       </div>
     </div>

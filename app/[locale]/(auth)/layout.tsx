@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { AuthProvider } from "@/lib/auth/auth-context";
-import "@/app/[locale]/(admin)/globals.css";
+import "@/app/styles/dashboard-globals.css";
 
 export const metadata: Metadata = {
   title: "Sign In - Huerray",

@@ -1,0 +1,42 @@
+@reference 'tailwindcss';
+
+@layer components {
+
+  /* Action Center Item styles */
+  .action-center-item {
+    @apply block;
+  }
+
+  .action-center-item__header {
+    @apply mb-1.5 flex items-center justify-between gap-2;
+  }
+
+  .action-center-item__identity {
+    @apply flex items-center gap-2;
+  }
+
+  .action-center-item__icon-wrapper {
+    @apply flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary;
+  }
+
+  .action-center-item__icon {
+    @apply size-4;
+  }
+
+  .action-center-item__label {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  .action-center-item__detail {
+    @apply text-xs text-muted-foreground;
+  }
+
+  .action-center-item__arrow {
+    @apply size-3.5 transition-transform;
+  }
+
+  /* Action Center Card specific layout */
+  .action-center-card__content {
+    @apply space-y-2;
+  }
+}

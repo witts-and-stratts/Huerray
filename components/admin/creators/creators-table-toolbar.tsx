@@ -8,6 +8,7 @@ import {
 import { DataTableSearch } from '@/components/dashboard-ui/data-table/data-table-search';
 import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
 import { DataTableViewToggle } from '@/components/dashboard-ui/data-table/data-table-view-toggle';
+import '@/app/styles/components/data-table.css';
 
 interface CreatorsTableToolbarProps<TData> {
   table: Table<TData>;
@@ -23,7 +24,7 @@ export function CreatorsTableToolbar<TData>( {
   setView,
 }: CreatorsTableToolbarProps<TData> ) {
   return (
-    <div className='flex items-center justify-between py-4 sticky top-0 bg-background z-20 px-5 transition-all duration-500 mb-3 border-b gap-2'>
+    <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
           table={ table }

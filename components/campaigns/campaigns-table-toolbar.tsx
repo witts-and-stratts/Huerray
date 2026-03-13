@@ -9,6 +9,7 @@ import { DataTableSearch } from '@/components/dashboard-ui/data-table/data-table
 import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
 import { DataTableViewToggle } from '@/components/dashboard-ui/data-table/data-table-view-toggle';
 import { ModelCampaign } from './types';
+import '@/app/styles/components/data-table.css';
 
 interface CampaignsTableToolbarProps {
   table: Table<ModelCampaign>;
@@ -24,7 +25,7 @@ export function CampaignsTableToolbar( {
   setView,
 }: CampaignsTableToolbarProps ) {
   return (
-    <div className='flex items-center justify-between py-4 sticky top-0 bg-background z-20 px-5 transition-all duration-500 mb-3 border-b gap-2'>
+    <div className='dt-toolbar'>
       <DataTableSearch
         table={ table }
         columnId='campaign_name'

@@ -61,11 +61,7 @@ export function ActionCenterBlock() {
       <CardContent className="space-y-3">
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
           { primaryActions.map( ( item ) => (
-            <Link
-              key={ item.label }
-              href={ item.href }
-              className="group rounded-lg border border-border/60 bg-white p-3 transition-colors hover:bg-muted/40"
-            >
+            <Link key={ item.label } href={ item.href } className="ad-action-link group block">
               <div className="mb-2 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <span className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary">
@@ -78,7 +74,7 @@ export function ActionCenterBlock() {
                 </Badge>
               </div>
               <p className="line-clamp-2 text-xs text-muted-foreground">{ item.detail }</p>
-              <div className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary">
+              <div className="ad-action-link-open">
                 Open
                 <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
               </div>
@@ -91,7 +87,7 @@ export function ActionCenterBlock() {
             <Link
               key={ item.label }
               href={ item.href }
-              className="flex items-center justify-between rounded-lg border border-border/60 bg-white px-3 py-2 text-sm transition-colors hover:bg-muted/40"
+              className="ad-action-link group flex items-center justify-between px-3 py-2 text-sm"
             >
               <span className="flex items-center gap-2">
                 <item.icon className="size-4 text-muted-foreground" />

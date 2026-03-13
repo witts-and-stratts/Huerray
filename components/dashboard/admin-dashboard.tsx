@@ -10,6 +10,7 @@ import {
 } from '@/components/dashboard/blocks/admin';
 import { AdminDateRangePicker } from '@/components/dashboard/admin-date-range-picker';
 import { SubHeader } from '@/components/subheader';
+import '@/app/styles/components/dashboard-stats.css';
 
 export function AdminDashboard() {
   return (

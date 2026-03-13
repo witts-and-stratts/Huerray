@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState, useTransition, useRef, useEffect } from 'react';
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import {
   Popover,
   PopoverContent,
@@ -36,6 +36,7 @@ export function LanguageSelector( { showLabel = true }: LanguageSelectorProps ) 
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const popoverRef = useRef<HTMLDivElement>( null );
 
   // Force hide popover when navigating
@@ -100,8 +101,10 @@ export function LanguageSelector( { showLabel = true }: LanguageSelectorProps ) 
                         // Remove the current locale from pathname if it exists
                         const pathnameWithoutLocale =
                           pathname.replace( `/${ locale }`, '' ) || '/';
+                        const search = searchParams.toString();
+                        const query = search ? `?${ search }` : '';
                         // Navigate to the new locale
-                        router.push( `/${ currentValue }${ pathnameWithoutLocale }` );
+                        router.push( `/${ currentValue }${ pathnameWithoutLocale }${ query }` );
                       } );
                     }, 50 );
                   } }

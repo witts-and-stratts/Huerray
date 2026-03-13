@@ -228,7 +228,7 @@ export function CampaignActionMenu( {
       label: "Edit",
       action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
-      condition: () => !isCompleted && ( campaignStatus === "draft" || campaignStatus === "pending_approval" || campaignStatus === "returned" ),
+      condition: () => !isCompleted && ( campaignStatus === "draft" || campaignStatus === "returned" ),
     },
     {
       label: "Rename",

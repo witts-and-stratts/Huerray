@@ -4,18 +4,9 @@ import {
   FieldGroup
 } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { UtilsCountryCode } from '@/lib/api/generated/models/utils-country-code';
 import { creatorSettingsSchema } from './creator-settings-schema';
 import { Separator } from '../dashboard-ui/separator';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/dashboard-ui/card';
-
-const getCountryName = ( code: string ) => {
-  try {
-    return new Intl.DisplayNames( [ "en" ], { type: "region" } ).of( code ) || code;
-  } catch ( e ) {
-    return code;
-  }
-};
 
 export function CreatorBankSection( { form }: { form: any; } ) {
   return (
@@ -149,12 +140,8 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 name={ field.name }
                 label="Tax Country"
                 value={ field.state.value }
-                type="searchable-select"
+                type="country"
                 onValueChange={ ( val: any ) => field.handleChange( val || "" ) }
-                options={ Object.values( UtilsCountryCode ).map( ( val ) => ( {
-                  label: getCountryName( val ),
-                  value: val,
-                } ) ) }
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }

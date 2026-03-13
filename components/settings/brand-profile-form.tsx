@@ -18,7 +18,6 @@ import { ModelsBrandRequest } from '@/lib/api/generated';
 import { BrandApi } from '@/lib/api/generated/api/brand-api';
 import { UtilsBrandCategory } from '@/lib/api/generated/models/utils-brand-category';
 import { UtilsCompanySize } from '@/lib/api/generated/models/utils-company-size';
-import { UtilsCountryCode } from '@/lib/api/generated/models/utils-country-code';
 import { cn } from '@/lib/utils';
 import { useForm } from '@tanstack/react-form';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -35,14 +34,6 @@ const formatEnumLabel = ( value: string ) => {
     .split( /[_\- ]+/ )
     .map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ).toLowerCase() )
     .join( " " );
-};
-
-const getCountryName = ( code: string ) => {
-  try {
-    return new Intl.DisplayNames( [ "en" ], { type: "region" } ).of( code ) || code;
-  } catch ( e ) {
-    return code;
-  }
 };
 
 export function GeneralSettingsForm() {
@@ -432,12 +423,8 @@ export function GeneralSettingsForm() {
                     name={ field.name }
                     label="Country"
                     value={ field.state.value }
-                    type="searchable-select"
+                    type="country"
                     onValueChange={ ( val ) => field.handleChange( val || "" ) }
-                    options={ Object.values( UtilsCountryCode ).map( ( val ) => ( {
-                      label: getCountryName( val ),
-                      value: val,
-                    } ) ) }
                     error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
                   />
                 ) }

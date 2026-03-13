@@ -11,9 +11,8 @@ import {
 } from "@/components/dashboard-ui/dialog";
 import { Button } from "@/components/dashboard-ui/button";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
-import { Loader2, Music, Video, FileText } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
-import { Separator } from "../dashboard-ui/separator";
+import { Loader2 } from "lucide-react";
+import { GigSelectionItem } from "./gig-selection/gig-selection-item";
 
 interface GigSelectionDialogProps {
   campaignId: string;
@@ -35,19 +34,19 @@ export function GigSelectionDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle className={ 'dialog__title' }>Select a Gig</DialogTitle>
-          <DialogDescription className={ 'dialog__description' }>
+          <DialogTitle className="dialog__title">Select a Gig</DialogTitle>
+          <DialogDescription className="dialog__description">
             Choose a gig to invite creators to.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="min-h-[200px] max-h-[60vh] flex flex-col">
+        <div className="gig-selection-dialog__container">
           { isLoading ? (
-            <div className="flex-1 flex items-center justify-center">
+            <div className="gig-selection-dialog__loading">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           ) : gigs.length === 0 ? (
-            <div className="flex-1 flex flex-col items-center justify-center text-center p-8 text-muted-foreground">
+            <div className="gig-selection-dialog__empty">
               <p>No gigs found for this campaign.</p>
               <Button
                 variant="link"
@@ -58,41 +57,14 @@ export function GigSelectionDialog( {
               </Button>
             </div>
           ) : (
-            <ScrollArea className="flex-1 -mr-4 pr-4">
-              <div className="space-y-3">
+            <ScrollArea className="gig-selection-dialog__scroll-area">
+              <div className="gig-selection-dialog__list">
                 { gigs.map( ( gig ) => (
-                  <div
+                  <GigSelectionItem
                     key={ gig.id }
-                    className="flex flex-col gap-1 p-4 rounded-lg border bg-card hover:bg-primary/5 hover:border-primary/20 hover:text-accent-foreground transition-colors cursor-pointer"
-                    onClick={ () => {
-                      if ( gig.id ) {
-                        onSelect( gig.id );
-                      }
-                    } }
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <h4 className="line-clamp-1 card__title">
-                        { gig.title }
-                      </h4>
-                      <span className="shrink-0 text-xs font-medium text-muted-foreground bg-secondary px-2 py-0.5 rounded-full capitalize">
-                        { gig.gig_status?.replace( "_", " " ) }
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
-                      <div className="flex items-center gap-1">
-                        <Video className="size-4" strokeWidth={ 1 } />
-                        { gig.number_of_videos } Video{ gig.number_of_videos !== 1 ? 's' : '' }
-                      </div>
-                      <Separator orientation="vertical" />
-                      <div className="flex items-center gap-1">
-                        Duration: { gig.video_duration_in_seconds }s
-                      </div>
-                      <div className="flex items-center gap-1 ml-auto font-medium text-foreground">
-                        { formatCurrency( gig.gig_cost || 0 ) }
-                      </div>
-                    </div>
-                  </div>
+                    gig={ gig }
+                    onSelect={ onSelect }
+                  />
                 ) ) }
               </div>
             </ScrollArea>

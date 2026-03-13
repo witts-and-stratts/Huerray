@@ -162,8 +162,6 @@ export function ImagePreviewDialog( {
   }
 
   function handleKeyDown( e: React.KeyboardEvent ) {
-    if ( type === 'documents' && isPdf ) return;
-
     if ( e.key === 'ArrowLeft' ) prev();
     if ( e.key === 'ArrowRight' ) next();
   }
@@ -181,7 +179,7 @@ export function ImagePreviewDialog( {
           ref={ wrapperRef }
           className="relative overflow-hidden bg-black/5"
           style={ { minHeight: MIN_PREVIEW_HEIGHT } }
-          animate={ { height: height ?? 'auto' } }
+          animate={ { height: type === 'documents' ? '75vh' : ( height ?? 'auto' ) } }
           transition={ heightTransition }
         >
           {/* layout container */ }
@@ -217,7 +215,7 @@ export function ImagePreviewDialog( {
                     ) }
                   </>
                 ) : isPdf ? (
-                  <div className="w-full h-[75vh]">
+                  <div className="w-full h-[75vh] pointer-events-auto">
                     { open && <PdfPreview src={ current } /> }
                   </div>
                 ) : (

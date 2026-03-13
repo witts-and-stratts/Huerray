@@ -138,7 +138,7 @@ export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSetting
   }, [] );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 max-w-5xl">
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 max-w-5xl m-px max-md:m-2">
       <Card className='md:col-span-3'>
         <CardHeader>
           <CardTitle>Biography</CardTitle>

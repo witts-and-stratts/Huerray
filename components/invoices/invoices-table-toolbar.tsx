@@ -20,6 +20,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/dashboard-ui/dropdown-menu';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
+import '@/app/styles/components/data-table.css';
 
 interface InvoicesTableToolbarProps {
   table: Table<ModelsInvoiceResponse>;
@@ -43,7 +44,7 @@ export function InvoicesTableToolbar( {
   statuses,
 }: InvoicesTableToolbarProps ) {
   return (
-    <div className="flex flex-col md:flex-row md:items-center justify-between py-4 sticky top-0 bg-background z-20 border-b gap-2 px-5 mb-3">
+    <div className="dt-toolbar">
       <SuperField
         type="search"
         placeholder="Search invoices..."

@@ -13,7 +13,6 @@ import {
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { UtilsBrandCategory } from '@/lib/api/generated/models/utils-brand-category';
 import { UtilsCompanySize } from '@/lib/api/generated/models/utils-company-size';
-import { UtilsCountryCode } from '@/lib/api/generated/models/utils-country-code';
 import { Separator } from '../dashboard-ui/separator';
 import { ImageUploader } from './image-uploader';
 import { BrandSettings, brandSettingsSchema, ReactFormApi } from './brand-settings-schema';
@@ -23,14 +22,6 @@ const formatEnumLabel = ( value: string ) => {
     .split( /[_\- ]+/ )
     .map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ).toLowerCase() )
     .join( " " );
-};
-
-const getCountryName = ( code: string ) => {
-  try {
-    return new Intl.DisplayNames( [ "en" ], { type: "region" } ).of( code ) || code;
-  } catch ( e ) {
-    return code;
-  }
 };
 
 export function BrandProfileSection( { form, disabled }: { form: ReactFormApi<BrandSettings>; disabled?: boolean; } ) {
@@ -263,12 +254,8 @@ export function BrandProfileSection( { form, disabled }: { form: ReactFormApi<Br
                 name={ field.name }
                 label="Country"
                 value={ field.state.value }
-                type="searchable-select"
+                type="country"
                 onValueChange={ ( val ) => field.handleChange( val || "" ) }
-                options={ Object.values( UtilsCountryCode ).map( ( val ) => ( {
-                  label: getCountryName( val ),
-                  value: val,
-                } ) ) }
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
                 disabled={ disabled }
               />

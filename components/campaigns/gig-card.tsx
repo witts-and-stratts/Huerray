@@ -221,7 +221,7 @@ export function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) 
           </div>
 
           {/* ── Deadline / Status row ── */ }
-          <div className="flex items-center justify-between border-t border-border/50 mt-2 pt-2">
+          <div className="flex items-center justify-between border-t border-border/50 mt-auto pt-2">
             <div className="flex items-center gap-1.5 text-muted-foreground">
               <HugeiconsIcon icon={ InformationCircleIcon } className="size-3.5" strokeWidth={ 1.5 } />
               <span className="uppercase tracking-widest text-[10px] font-medium">Deadline</span>

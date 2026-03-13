@@ -24,6 +24,7 @@ import {
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { cn } from '@/lib/dashboard-utils';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
+import '@/app/styles/components/data-table.css';
 
 interface GigsTableToolbarProps {
   table: Table<ModelsGigResponse>;
@@ -54,7 +55,7 @@ export function GigsTableToolbar( {
   }, [ searchValue, table ] );
 
   return (
-    <div className='flex flex-col md:flex-row md:items-center justify-between py-4 sticky top-0 bg-background z-20 transition-all duration-500 mb-3 border-b gap-2 px-5'>
+    <div className='dt-toolbar'>
       <SuperField
         type='search'
         placeholder='Search Gigs...'

@@ -1,17 +1,21 @@
 @import 'tailwindcss';
-@import '../../../styles/typography.css';
-@import '../../../styles/colors.css';
-@import '../../../styles/language-selector.css';
-@import '../../../styles/tokens/loaders.css';
+@import '../../styles/typography.css';
+@import '../../styles/colors.css';
+@import '../../styles/language-selector.css';
+@import '../../styles/tokens/loaders.css';
 
-@import '../../styles/components/button.css';
-@import '../../styles/components/button-group.css';
-@import '../../styles/components/toggle.css';
-@import '../../styles/components/toggle-group.css';
-@import '../../styles/components/card.css';
-@import '../../styles/components/dropdown-menu.css';
-@import '../../styles/components/dialog.css';
-@import '../../styles/components/dashboard-stats.css';
+@import './components/button.css';
+@import './components/button-group.css';
+@import './components/toggle.css';
+@import './components/toggle-group.css';
+@import './components/card.css';
+@import './components/submission-card.css';
+@import './components/dropdown-menu.css';
+@import './components/dialog.css';
+@import './components/action-center-card.css';
+@import './components/gig-selection.css';
+/* @import './components/data-table.css';
+@import './components/data-table-pagination.css'; */
 
 @custom-variant dark (&:is(.dark *));
 

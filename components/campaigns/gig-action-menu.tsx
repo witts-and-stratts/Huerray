@@ -38,11 +38,13 @@ export function GigActionMenu( {
     if ( !gig.id || confirmName !== gig.title ) return;
     deleteGig( gig.id, {
       onSuccess: () => {
-        toast.success( "Gig deleted successfully" );
+        toast.success( "Gig deleted successfully", {
+          richColors: true,
+        } );
         setIsDeleteDialogOpen( false );
       },
       onError: ( error ) => {
-        toast.error( "Failed to delete gig" );
+        toast.error( "Failed to delete gig", { richColors: true } );
         console.error( error );
       },
     } );

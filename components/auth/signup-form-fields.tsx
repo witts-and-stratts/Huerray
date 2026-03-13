@@ -16,7 +16,6 @@ import {
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import { UtilsBrandCategory } from "@/lib/api/generated/models/utils-brand-category";
 import { UtilsCompanySize } from "@/lib/api/generated/models/utils-company-size";
-import { UtilsCountryCode } from "@/lib/api/generated/models/utils-country-code";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -29,14 +28,6 @@ const formatEnumLabel = ( value: string ) => {
     .split( /[_\- ]+/ )
     .map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ).toLowerCase() )
     .join( " " );
-};
-
-const getCountryName = ( code: string ) => {
-  try {
-    return new Intl.DisplayNames( [ "en" ], { type: "region" } ).of( code ) || code;
-  } catch ( e ) {
-    return code;
-  }
 };
 
 interface RoleSelectionProps extends React.ComponentProps<"div"> {
@@ -338,12 +329,7 @@ export function BrandFields( { form }: FieldsProps ) {
             <SuperField
               id="country"
               name={ field.name }
-              type="select"
-              placeholder={ t( 'country.placeholder' ) }
-              options={ Object.values( UtilsCountryCode ).map( ( val ) => ( {
-                label: getCountryName( val ),
-                value: val,
-              } ) ) }
+              type="country"
               value={ field.state.value }
               onValueChange={ ( val ) => field.handleChange( val || "" ) }
               error={ field.state.meta.isTouched && field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message ).join( ", " ) : undefined }

@@ -18,6 +18,7 @@ import {
   CreatorNotificationsBlock,
   CreatorActionCenterBlock,
 } from "@/components/dashboard/blocks/creator";
+import '@/app/styles/components/dashboard-stats.css';
 
 export function CreatorDashboard() {
   const { user } = useAuth();

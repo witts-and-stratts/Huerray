@@ -14,38 +14,17 @@ import {
 import * as React from 'react';
 
 import { getColumns } from './campaigns-columns';
-import { CampaignsTablePagination } from './campaigns-table-pagination';
+import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { CampaignsTableToolbar } from './campaigns-table-toolbar';
 import { useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { setViewMode } from "@/lib/redux/features/ui/uiSlice";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
+import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 import { CampaignsView } from '@/components/campaigns/campaigns-view';
 import { ModelCampaign } from './types';
-import { Skeleton } from '@/components/ui/skeleton';
 import { AnimatePresence, motion } from 'motion/react';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
-
-const CampaignSkeleton = () => {
-  return (
-    <motion.div
-      initial={ { opacity: 0 } }
-      animate={ { opacity: 1 } }
-      exit={ { opacity: 0 } }
-      transition={ { duration: 0.5 } }
-      className='w-full space-y-4 px-5 py-5'>
-      <div className='flex items-center justify-between'>
-        <Skeleton className='h-10 w-[600px] max-w-full' />
-        <Skeleton className='h-10 w-[100px]' />
-      </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        { Array.from( { length: 6 } ).map( ( _, i ) => (
-          <Skeleton key={ i } className='h-[300px] w-full rounded-xl' />
-        ) ) }
-      </div>
-    </motion.div>
-  );
-};
+import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
+import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 
 type CampaignsTableProps = {
   campaigns?: ModelCampaign[];
@@ -63,26 +42,10 @@ export function CampaignsTable( {
   simpleEmptyState = false,
 }: CampaignsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 50 );
+  const { view, setView } = usePersistedViewMode( 'campaigns', 'table' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
-  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const dispatch = useAppDispatch();
-  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'campaigns' ] ) || 'table';
-  const [ view, setInternalView ] = React.useState<"table" | "cards">( persistedView );
-
-  React.useEffect( () => {
-    if ( persistedView && persistedView !== view ) {
-      setInternalView( persistedView );
-    }
-  }, [ persistedView ] );
-
-  const setView = ( newView: "table" | "cards" ) => {
-    setInternalView( newView );
-    dispatch( setViewMode( { pageKey: 'campaigns', viewMode: newView } ) );
-  };
-  const [ columnVisibility, setColumnVisibility ] =
-    React.useState<VisibilityState>( {} );
+  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
+  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
 
   const statuses = React.useMemo( () => {
@@ -118,28 +81,14 @@ export function CampaignsTable( {
 
   return (
     <AnimatePresence>
-      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <CampaignSkeleton /> ) }
-      { error && <motion.div
-        initial={ { opacity: 0 } }
-        animate={ { opacity: 1 } }
-        exit={ { opacity: 0 } }
-        transition={ { duration: 0.3 } }
-        className='w-full p-8 text-center bg-red-50 rounded-xl border border-red-100'>
-        <h3 className='text-lg font-medium text-red-800'>Failed to load campaigns</h3>
-        <p className='text-sm text-red-600 mt-1'>{ error.message }</p>
-        <button
-          onClick={ () => window.location.reload() }
-          className='mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors'
-        >
-          Try again
-        </button>
-      </motion.div> }
+      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <CardGridSkeleton count={ 6 } cardHeight="h-[300px]" /> ) }
+      { error && <TableErrorState entity="campaigns" message={ error.message } /> }
       { !isLoading && !error && (
         <motion.div
-          initial={ { opacity: 0, y: 20 } }
-          animate={ { opacity: 1, y: 0 } }
-          exit={ { opacity: 0, y: -20 } }
-          transition={ { duration: 0.5 } }
+          initial={ { opacity: 0 } }
+          animate={ { opacity: 1 } }
+          exit={ { opacity: 0 } }
+          transition={ { duration: 0.3 } }
           className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
         >
           { campaigns.length === 0 ? (
@@ -159,7 +108,10 @@ export function CampaignsTable( {
                 <CampaignsView table={ table } view={ view } />
               </div>
               <div className='px-5'>
-                <CampaignsTablePagination table={ table } />
+                <DataTablePagination
+                  table={ table }
+                  pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
+                />
               </div>
             </div>
           ) }

@@ -18,7 +18,7 @@ import { FileX } from 'lucide-react';
 
 import { getColumns } from './invoices-columns';
 import { InvoicesTableToolbar } from './invoices-table-toolbar';
-import { CampaignsTablePagination } from '@/components/campaigns/campaigns-table-pagination';
+import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import {
   Table,
@@ -176,7 +176,7 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
 
           { data.length > 0 && (
             <div className="px-4 mt-4">
-              <CampaignsTablePagination table={ table } />
+              <DataTablePagination table={ table } />
             </div>
           ) }
         </motion.div>

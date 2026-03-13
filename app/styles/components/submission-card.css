@@ -1,0 +1,149 @@
+@reference 'tailwindcss';
+
+@layer components {
+  .submission-card {
+    @apply relative overflow-hidden border-border/60 bg-black p-0;
+  }
+
+  .submission-card--mini {
+    @apply max-w-[240px];
+  }
+
+  .submission-card__overlay {
+    @apply pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/45 to-transparent;
+  }
+
+  .submission-card__content {
+    @apply absolute inset-x-0 bottom-0 text-white;
+  }
+
+  .submission-card__content--mini {
+    @apply p-2;
+  }
+
+  .submission-card__content--standard {
+    @apply p-3;
+  }
+
+  .submission-card__status-overlay {
+    @apply absolute left-2 top-2 z-20 flex flex-col gap-1 items-start;
+  }
+
+  /* Status Badge component */
+  .submission-status-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full font-medium border capitalize invert;
+  }
+
+  .submission-status-badge--compact {
+    @apply px-1 py-0 text-[9px];
+  }
+
+  .submission-status-badge--standard {
+    @apply px-2 py-0.5 text-[11px];
+  }
+
+  /* Status variants */
+  .submission-status-badge--submitted { @apply bg-blue-500/10 text-blue-700 border-blue-500/20; }
+  .submission-status-badge--pending { @apply bg-amber-500/10 text-amber-700 border-amber-500/20; }
+  .submission-status-badge--approved { @apply bg-emerald-500/10 text-emerald-700 border-emerald-500/20; }
+  .submission-status-badge--rejected { @apply bg-red-500/10 text-red-700 border-red-500/20; }
+  .submission-status-badge--unknown { @apply bg-gray-500/10 text-gray-700 border-gray-500/20; }
+
+  /* Video Player component */
+  .submission-video-player {
+    @apply relative aspect-video w-full;
+  }
+
+  .submission-video-player__media {
+    @apply w-full object-cover aspect-video;
+  }
+
+  .submission-video-player__fallback {
+    @apply flex h-56 w-full items-center justify-center bg-muted/20 text-xs text-muted-foreground;
+  }
+
+  .submission-video-player__control {
+    @apply absolute z-10 inline-flex items-center justify-center rounded-full text-white;
+  }
+
+  .submission-video-player__control--compact {
+    @apply right-2 top-2 size-6;
+  }
+
+  .submission-video-player__control--standard {
+    @apply right-3 top-3 size-8;
+  }
+
+  .submission-video-player__expand {
+    @apply absolute z-10 inline-flex items-center justify-center rounded-full text-white;
+  }
+
+  .submission-video-player__expand--compact {
+    @apply right-2 top-8 size-7;
+  }
+
+  .submission-video-player__expand--standard {
+    @apply right-3 top-[52px] size-8;
+  }
+
+  .submission-video-player__comments {
+    @apply absolute z-10 flex flex-col items-center justify-center rounded-full text-white bg-black/30 backdrop-blur-md border border-white/5 cursor-pointer hover:bg-black/50 transition-colors;
+  }
+
+  .submission-video-player__comments--compact {
+    @apply right-2 top-[64px] min-w-7 py-1 px-1;
+  }
+
+  .submission-video-player__comments--standard {
+    @apply right-3 top-[92px] min-w-8 py-1 px-1;
+  }
+
+  /* Content elements */
+  .submission-card__footer {
+    @apply flex justify-between;
+  }
+
+  .submission-card__creator-info {
+    @apply min-w-0 flex-1;
+  }
+
+  .submission-card__creator-header {
+    @apply flex items-end justify-between gap-2;
+  }
+
+  .submission-card__creator-name {
+    @apply truncate text-burgundy-300;
+  }
+
+  .submission-card__creator-meta {
+    @apply truncate text-[10px] text-white/65;
+  }
+
+  .submission-card__creator-meta--standard {
+    @apply mt-0.5 flex items-center gap-1 text-xs text-white/65;
+  }
+
+  .submission-card__details {
+    @apply min-w-0 overflow-hidden;
+  }
+
+  .submission-card__details-footer {
+    @apply flex items-end justify-between gap-2;
+  }
+
+  .submission-card__title {
+    @apply truncate font-medium text-sm text-white;
+  }
+
+  .submission-card__description {
+    @apply mt-0.5 line-clamp-1 text-xs text-white/75;
+  }
+
+  .submission-card__actions {
+    @apply flex shrink-0 items-end self-end gap-2;
+  }
+
+  .submission-card__comments-badge {
+    @apply flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-medium bg-black/60 text-white rounded-full border border-white/10 backdrop-blur-md cursor-pointer hover:bg-black/80 transition-colors pointer-events-auto;
+  }
+}

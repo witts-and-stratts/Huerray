@@ -9,64 +9,9 @@ import {
 } from '@/components/dashboard-ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { DollarSign, Video } from 'lucide-react';
-import { cn } from '@/lib/dashboard-utils';
-import {
-  CheckmarkCircle01Icon,
-  CircleIcon,
-  Clock01Icon,
-  Cancel01Icon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { TextCapitalize } from '@/components/text-case';
 import { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
 import { ApplicationActionMenu } from './application-action-menu';
-
-const applicationStatusConfig: Record<string, { label: string; color: string; icon: any; }> = {
-  pending: {
-    label: 'Pending',
-    color: 'bg-amber-500/10 text-amber-600 border-amber-500/20',
-    icon: Clock01Icon,
-  },
-  approved: {
-    label: 'Approved',
-    color: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
-    icon: CheckmarkCircle01Icon,
-  },
-  accepted: {
-    label: 'Accepted',
-    color: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
-    icon: CheckmarkCircle01Icon,
-  },
-  rejected: {
-    label: 'Rejected',
-    color: 'bg-red-500/10 text-red-600 border-red-500/20',
-    icon: Cancel01Icon,
-  },
-  declined: {
-    label: 'Declined',
-    color: 'bg-red-500/10 text-red-600 border-red-500/20',
-    icon: Cancel01Icon,
-  },
-};
-
-function ApplicationStatusBadge( { status, className }: { status?: string; className?: string; } ) {
-  const config = applicationStatusConfig[ status?.toLowerCase() || '' ] || {
-    label: status || 'Unknown',
-    color: 'bg-gray-500/10 text-gray-600 border-gray-500/20',
-    icon: CircleIcon,
-  };
-
-  return (
-    <div className={ cn(
-      "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border scale-90 origin-left whitespace-nowrap",
-      config.color,
-      className
-    ) }>
-      <HugeiconsIcon icon={ config.icon } className="w-3 h-3" />
-      <TextCapitalize>{ config.label }</TextCapitalize>
-    </div>
-  );
-}
+import { ApplicationStatusBadge } from '@/components/dashboard-ui/status-badge';
 
 interface ApplicationCardProps {
   application: ModelsGigApplicationResponse;

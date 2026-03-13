@@ -20,9 +20,14 @@ import {
   TextareaFieldProps,
   FileFieldProps,
   SwitchFieldProps,
-  MultiSelectFieldProps
+  MultiSelectFieldProps,
+  CountryFieldProps
 } from './types';
+import { UtilsCountryCode } from '@/lib/api/generated/models/utils-country-code';
+import { getCountryName } from '@/lib/country-flags';
 import { MultiSelectInput } from './multi-select-input';
+import { ChoiceCardInput } from './choice-card-input';
+import type { ChoiceCardFieldProps } from './types';
 import dynamic from 'next/dynamic';
 
 const QuillEditor = dynamic( () => import( '@/components/dashboard-ui/quill-editor' ).then( mod => mod.QuillEditor ), {
@@ -450,6 +455,55 @@ export const RenderDatePicker = ( {
       minDate={ minDate }
       maxDate={ maxDate }
       mode={ mode }
+    />
+  );
+};
+
+const COUNTRY_OPTIONS = Object.values( UtilsCountryCode )
+  .map( ( val ) => ( { label: getCountryName( val ) ?? val, value: val } ) )
+  .sort( ( a, b ) => a.label.localeCompare( b.label ) );
+
+export const RenderCountry = ( {
+  props,
+  base
+}: {
+  props: CountryFieldProps;
+  base: BaseRendererProps;
+} ) => {
+  const { value, onValueChange, placeholder } = props;
+  return (
+    <SearchableSelect
+      id={ base.fieldId }
+      value={ value }
+      onValueChange={ onValueChange }
+      options={ COUNTRY_OPTIONS }
+      placeholder={ placeholder }
+      disabled={ base.disabled }
+      required={ base.required }
+      className={ base.fieldClassName }
+    />
+  );
+};
+
+export const RenderChoiceCard = ( {
+  props,
+  base
+}: {
+  props: ChoiceCardFieldProps;
+  base: BaseRendererProps;
+} ) => {
+  const { value, defaultValue, onValueChange, onBlur, options, containerClassName } = props;
+  return (
+    <ChoiceCardInput
+      id={ base.fieldId }
+      value={ value }
+      defaultValue={ defaultValue }
+      onValueChange={ onValueChange }
+      onBlur={ onBlur }
+      options={ options }
+      disabled={ base.disabled }
+      className={ base.fieldClassName }
+      containerClassName={ containerClassName }
     />
   );
 };

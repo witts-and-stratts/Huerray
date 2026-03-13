@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from "react";
+import React, { ComponentProps, ReactNode } from "react";
 import { Input } from '@/components/dashboard-ui/input';
 import { Textarea } from '@/components/dashboard-ui/textarea';
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
@@ -14,7 +14,7 @@ export type SelectOption =
 
 // Base props shared by all field types
 export interface BaseFieldProps {
-  label?: string;
+  label?: React.ReactNode;
   description?: string;
   error?: string;
   errors?: Array<{ message?: string; } | undefined>;
@@ -106,7 +106,19 @@ export interface EditorFieldProps extends BaseFieldProps {
   toolbar?: QuillToolbarConfig;
 }
 
+// Country field specific props (searchable-select pre-populated with countries)
+export interface CountryFieldProps extends BaseFieldProps {
+  type: 'country';
+  placeholder?: string;
+  value?: string;
+  onValueChange?: ( value: string | null ) => void;
+  onBlur?: () => void;
+  name?: string;
+  id?: string;
+}
+
 // Re-export types from other files
+export type { ChoiceCardFieldProps } from './choice-card-input';
 export type { DatePickerFieldProps } from './date-picker-input';
 export type { TagsFieldProps } from './tags-input';
 export type { SearchableSelectFieldProps } from './searchable-select';

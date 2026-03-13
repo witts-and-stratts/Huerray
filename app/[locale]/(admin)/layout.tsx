@@ -1,4 +1,4 @@
-import '@/app/[locale]/(admin)/globals.css';
+import '@/app/styles/dashboard-globals.css';
 import { Toaster } from '@/components/dashboard-ui/sonner';
 import { QueryProvider } from '@/lib/api/query-provider';
 import { AuthProvider } from '@/lib/auth/auth-context';

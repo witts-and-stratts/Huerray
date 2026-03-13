@@ -1,28 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { KpiCard } from '@/components/dashboard/blocks/shared/kpi-card';
 import type { BrandDashboardSummary } from './types';
 import { toMoney } from './types';
-
-function KpiCard( {
-  title,
-  value,
-  caption,
-}: {
-  title: string;
-  value: string;
-  caption: string;
-} ) {
-  return (
-    <Card className="ad-kpi-card h-full justify-between gap-1">
-      <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title leading-tight">{ title }</CardTitle>
-      </CardHeader>
-      <CardContent className="pt-0">
-        <p className="ad-stat-value">{ value }</p>
-        <p className="mt-1 text-xs text-muted-foreground">{ caption }</p>
-      </CardContent>
-    </Card>
-  );
-}
 
 interface BrandKpiOverviewBlockProps {
   campaignsCount: number;
@@ -45,6 +23,7 @@ export function BrandKpiOverviewBlock( {
         title="Total Campaigns"
         value={ `${ campaignsCount }` }
         caption={ isCampaignsLoading ? 'Loading campaigns...' : 'Across all campaign statuses' }
+        isLoading={ isCampaignsLoading }
       />
       <KpiCard
         title="Active Campaigns"
@@ -55,6 +34,7 @@ export function BrandKpiOverviewBlock( {
         title="Total Gigs"
         value={ `${ gigsCount }` }
         caption={ isGigsLoading ? 'Loading gigs...' : 'All gigs linked to your campaigns' }
+        isLoading={ isGigsLoading }
       />
       <KpiCard
         title="Total Spend"

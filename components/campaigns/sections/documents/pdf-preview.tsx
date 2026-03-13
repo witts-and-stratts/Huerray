@@ -72,11 +72,13 @@ export default function PdfPreview( { src }: PdfPreviewProps ) {
       if ( e.key === 'ArrowLeft' ) {
         if ( pageNumber > 1 ) {
           e.preventDefault();
+          e.stopPropagation();
           goToPrevPage();
         }
       } else if ( e.key === 'ArrowRight' ) {
         if ( pageNumber < numPages ) {
           e.preventDefault();
+          e.stopPropagation();
           goToNextPage();
         }
       }
@@ -129,44 +131,46 @@ export default function PdfPreview( { src }: PdfPreviewProps ) {
           ) }
         </Document>
       </div>
-      <div className="flex items-center gap-2 py-1 mt-2 bg-background/95 backdrop-blur rounded-full px-1 shadow-sm border">
-        { numPages > 1 && (
-          <>
-            <Button
-              variant="outline"
-              size="icon"
-              disabled={ pageNumber <= 1 }
-              onClick={ () => setPageNumber( p => p - 1 ) }
-              className="rounded-full"
-            >
-              <ChevronLeft className='h-3 w-3' />
-            </Button>
-            <span className="text-xs font-medium px-2">
-              Page { pageNumber } of { numPages }
-            </span>
-            <Button
-              variant="outline"
-              size="icon"
-              disabled={ pageNumber >= numPages }
-              onClick={ () => setPageNumber( p => p + 1 ) }
-              className="rounded-full"
-            >
-              <ChevronRight className='h-3 w-3' />
-            </Button>
-            <div className="w-px h-4 bg-border mx-1" />
-          </>
-        ) }
-        <Button
-          variant="outline"
-          size="icon"
-          className="rounded-full"
-          onClick={ handleDownload }
-          disabled={ isPending }
-        >
-          { isPending ? <Loader2 className="h-3 w-3 animate-spin" /> : <Download className="h-3 w-3" /> }
-          <span className="sr-only">Download PDF</span>
-        </Button>
-      </div>
+      { numPages > 0 && (
+        <div className="flex items-center gap-2 py-1 my-3 bg-background/95 backdrop-blur rounded-full px-1 shadow-sm border">
+          { numPages > 1 && (
+            <>
+              <Button
+                variant="outline"
+                size="icon"
+                disabled={ pageNumber <= 1 }
+                onClick={ () => setPageNumber( p => p - 1 ) }
+                className="rounded-full"
+              >
+                <ChevronLeft className='h-3 w-3' />
+              </Button>
+              <span className="text-xs font-medium px-2">
+                Page { pageNumber } of { numPages }
+              </span>
+              <Button
+                variant="outline"
+                size="icon"
+                disabled={ pageNumber >= numPages }
+                onClick={ () => setPageNumber( p => p + 1 ) }
+                className="rounded-full"
+              >
+                <ChevronRight className='h-3 w-3' />
+              </Button>
+              <div className="w-px h-4 bg-border mx-1" />
+            </>
+          ) }
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full"
+            onClick={ handleDownload }
+            disabled={ isPending }
+          >
+            { isPending ? <Loader2 className="h-3 w-3 animate-spin" /> : <Download className="h-3 w-3" /> }
+            <span className="sr-only">Download PDF</span>
+          </Button>
+        </div>
+      ) }
     </div>
   );
 }

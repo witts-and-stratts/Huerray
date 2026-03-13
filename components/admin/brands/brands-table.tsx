@@ -12,18 +12,17 @@ import {
 } from '@tanstack/react-table';
 import * as React from 'react';
 
-import { Skeleton } from '@/components/ui/skeleton';
 import { AnimatePresence, motion } from 'motion/react';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
+import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 import { columns } from './brands-columns';
 import { Brand } from './brands-data';
 import { BrandsView } from './brands-view';
 import { BrandsTableToolbar } from './brands-table-toolbar';
-import { BrandsTablePagination } from './brands-table-pagination';
-import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
-import { setViewMode } from '@/lib/redux/features/ui/uiSlice';
+import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
+import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 
 
 
@@ -39,27 +38,11 @@ export function BrandsTable( {
   error = null,
 }: BrandsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
+  const { view, setView } = usePersistedViewMode( 'brands', 'cards' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
-  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [ columnVisibility, setColumnVisibility ] =
-    React.useState<VisibilityState>( {} );
+  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
+  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const dispatch = useAppDispatch();
-  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'brands' ] ) || 'cards';
-  const [ view, setInternalView ] = React.useState<'table' | 'cards'>( persistedView );
-
-  React.useEffect( () => {
-    if ( persistedView && persistedView !== view ) {
-      setInternalView( persistedView );
-    }
-  }, [ persistedView ] );
-
-  const setView = ( newView: 'table' | 'cards' ) => {
-    setInternalView( newView );
-    dispatch( setViewMode( { pageKey: 'brands', viewMode: newView } ) );
-  };
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
@@ -93,31 +76,17 @@ export function BrandsTable( {
   return (
     <AnimatePresence>
       { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton cardHeight="h-[250px]" /> ) }
-      { error && <motion.div
+      { error && <TableErrorState entity="brands" message={ error.message } /> }
+      { !isLoading && !error && <motion.div
         initial={ { opacity: 0 } }
         animate={ { opacity: 1 } }
         exit={ { opacity: 0 } }
         transition={ { duration: 0.3 } }
-        className='w-full p-8 text-center bg-red-50 rounded-xl border border-red-100'>
-        <h3 className='text-lg font-medium text-red-800'>Failed to load brands</h3>
-        <p className='text-sm text-red-600 mt-1'>{ error.message }</p>
-        <button
-          onClick={ () => window.location.reload() }
-          className='mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors'
-        >
-          Try again
-        </button>
-      </motion.div> }
-      { !isLoading && !error && <motion.div
-        initial={ { opacity: 0, y: 20 } }
-        animate={ { opacity: 1, y: 0 } }
-        exit={ { opacity: 0, y: -20 } }
-        transition={ { duration: 0.5 } }
         className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
       >
         <BrandsTableToolbar table={ table } view={ view } setView={ setView } statuses={ statuses } />
         <BrandsView table={ table } view={ view } />
-        <BrandsTablePagination table={ table } />
+        <DataTablePagination table={ table } className="px-5" />
       </motion.div> }
     </AnimatePresence>
   );

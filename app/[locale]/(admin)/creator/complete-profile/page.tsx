@@ -2,9 +2,10 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import '@/app/styles/components/complete-profile.css';
+import { Tabs, TabsList, TabsTab, TabsPanel } from '@/components/animate-ui/components/base/tabs';
 import { Button } from '@/components/dashboard-ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { CreatorBioSection } from '@/components/settings/creator-bio-section';
 import { CreatorProfileSection } from '@/components/settings/creator-profile-section';
@@ -13,14 +14,14 @@ import { CreatorSocialSection } from '@/components/settings/creator-social-secti
 import { apiClient } from '@/lib/api/client';
 import { ModelsCreateCreatorRequestGenderEnum, UtilsCountryCode } from '@/lib/api/generated';
 import { CreatorApi } from '@/lib/api/generated/api/creator-api';
+import { fetchCreatorProfile } from '@/lib/redux/features/creator/creatorSlice';
+import { useAppDispatch } from '@/lib/redux/hooks';
 import { useForm } from '@tanstack/react-form';
 import { Check, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import { Activity, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
-import { useAppDispatch } from '@/lib/redux/hooks';
-import { fetchCreatorProfile } from '@/lib/redux/features/creator/creatorSlice';
 
 export default function CompleteProfilePage() {
   const router = useRouter();
@@ -177,94 +178,93 @@ export default function CompleteProfilePage() {
   };
 
   return (
-    <div className="grid md:grid-cols-3 min-h-screen">
-      <div className="col-span-1 max-md:hidden relative">
-        <Image src="/images/content/lifestyle-4.webp" alt="Huerray Lifestyle" width={ 1920 } height={ 1080 } className="object-cover h-full fixed w-1/2" />
+    <div className="complete-profile__layout">
+      <div className="complete-profile__image-col">
+        <Image src="/images/content/lifestyle-4.webp" alt="Huerray Lifestyle" width={ 1920 } height={ 1080 } className="complete-profile__image" />
       </div>
-      <div className="flex flex-col min-h-screen relative bg-burgundy-50 py-4 px-2 w-full col-span-2">
-        <div className="absolute top-4 right-4 z-50">
+      <div className="complete-profile__right-col">
+        <div className="complete-profile__lang-selector">
           <LanguageSelector showLabel={ false } />
         </div>
 
-        <Card className="flex-1 rounded-4xl relative bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 mt-10 mx-4 h-full">
-          <CardContent className='h-full overflow-auto'>
-            <CardHeader className="text-center mb-8 pb-0">
-              <div className="flex justify-center py-4 mb-2">
+        <Card className="complete-profile__outer-card">
+          <CardContent className="complete-profile__outer-card-content">
+            <CardHeader className="complete-profile__header">
+              <div className="flex justify-center py-2 md:py-4 mb-2">
                 <Image
                   src="/images/huerray-symbol.svg"
                   alt="Huerray"
                   width={ 60 }
                   height={ 60 }
-                  className="dark:invert"
+                  className="complete-profile__logo"
                 />
               </div>
-              <CardTitle className="text-2xl font-primary text-primary">Complete Your Profile</CardTitle>
+              <CardTitle className="complete-profile__title">Complete Your Profile</CardTitle>
               <CardDescription>
                 Let&apos;s get you set up to start working with brands.
               </CardDescription>
             </CardHeader>
 
-            <Tabs value={ activeTab } onValueChange={ handleTabChange } className="w-full h-full">
-              <Card>
-                <CardHeader>
+            <Tabs value={ activeTab } onValueChange={ handleTabChange } className="complete-profile__tabs">
+              <Card className="complete-profile__inner-card">
+                <CardHeader className="complete-profile__inner-card-header">
                   <div className="flex justify-center w-full">
                     <TabsList className="grid w-full grid-cols-3">
                       { tabs.map( ( tab ) => (
-                        <TabsTrigger key={ tab.value } value={ tab.value }>{ tab.label }</TabsTrigger>
+                        <TabsTab key={ tab.value } value={ tab.value } className="max-md:text-xs">{ tab.label }</TabsTab>
                       ) ) }
                     </TabsList>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="complete-profile__inner-card-content">
                   <form onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
-                    <Activity mode={ activeTab === 'profile' ? 'visible' : 'hidden' }>
+                    <TabsPanel value="profile">
                       <div className="space-y-6">
                         <CreatorProfileSection form={ form } />
-                        <div className="flex justify-end pt-4">
-                          <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                            Next Step <ChevronRight className="w-4 h-4" />
-                          </Button>
-                        </div>
                       </div>
-                    </Activity>
+                    </TabsPanel>
 
-                    <Activity mode={ activeTab === 'social' ? 'visible' : 'hidden' }>
+                    <TabsPanel value="social">
                       <div className="space-y-8">
                         <CreatorSocialSection form={ form } />
-
-                        <div className="flex justify-between pt-6 border-t">
-                          <Button type="button" variant="outline" onClick={ prevTab } size="lg">
-                            Back
-                          </Button>
-                          <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                            Next Step <ChevronRight className="w-4 h-4" />
-                          </Button>
-                        </div>
                       </div>
-                    </Activity>
+                    </TabsPanel>
 
-                    <Activity mode={ activeTab === 'bio' ? 'visible' : 'hidden' }>
+                    <TabsPanel value="bio">
                       <div className="space-y-8">
                         <CreatorBioSection form={ form } />
-
-                        <div className="flex justify-between pt-6 border-t">
-                          <Button type="button" variant="outline" onClick={ prevTab } size="lg">
-                            Back
-                          </Button>
-                          <form.Subscribe
-                            selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
-                            children={ ( [ canSubmit, isSubmitting ] ) => (
-                              <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2">
-                                { isSubmitting || isSaving ? 'Creating Profile...' : 'Complete Profile' }
-                                { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
-                              </Button>
-                            ) }
-                          />
-                        </div>
                       </div>
-                    </Activity>
+                    </TabsPanel>
                   </form>
                 </CardContent>
+                <CardFooter className="complete-profile__inner-card-footer">
+                  <div className="complete-profile__footer-actions">
+                    <div>
+                      { activeTab !== 'profile' && (
+                        <Button type="button" variant="outline" onClick={ prevTab } size="lg">
+                          Back
+                        </Button>
+                      ) }
+                    </div>
+                    <div>
+                      { activeTab !== 'bio' ? (
+                        <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
+                          Next Step <ChevronRight className="w-4 h-4" />
+                        </Button>
+                      ) : (
+                        <form.Subscribe
+                          selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
+                          children={ ( [ , isSubmitting ] ) => (
+                            <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2" onClick={ () => form.handleSubmit() }>
+                              { isSubmitting || isSaving ? 'Creating Profile...' : 'Complete Profile' }
+                              { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
+                            </Button>
+                          ) }
+                        />
+                      ) }
+                    </div>
+                  </div>
+                </CardFooter>
               </Card>
             </Tabs>
           </CardContent>

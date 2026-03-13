@@ -1,0 +1,42 @@
+@reference "tailwindcss";
+@reference "../dashboard-globals.css";
+
+@layer components {
+
+  .dt-table-wrap {
+    @apply overflow-x-auto rounded-lg border border-border/60;
+  }
+
+  .dt-table {
+    @apply w-full text-left;
+  }
+
+  .dt-table-head {
+    @apply bg-slate-50;
+  }
+
+  .dt-table-head-row {
+    @apply border-b border-border/60;
+  }
+
+  .dt-table-header {
+    @apply px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground font-semibold;
+  }
+
+  .dt-table-row {
+    @apply border-b border-border/40 bg-white transition-colors hover:bg-slate-50/50;
+  }
+
+  .dt-table-cell {
+    @apply px-4 py-3 text-sm;
+  }
+
+  .dt-table-cell-muted {
+    @apply px-4 py-3 text-sm text-muted-foreground;
+  }
+
+  /* Table Toolbar - Usually above the table for search/filters */
+  .dt-toolbar {
+    @apply flex flex-col md:flex-row md:items-center justify-between py-4 sticky top-0 bg-background z-20 border-b gap-2 px-5 mb-3 transition-all duration-500;
+  }
+}

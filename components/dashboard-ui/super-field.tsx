@@ -13,6 +13,8 @@ import { ForwardedRef, forwardRef, useId } from "react";
 import {
   BaseRendererProps,
   RenderCheckbox,
+  RenderChoiceCard,
+  RenderCountry,
   RenderDatePicker,
   RenderEditor,
   RenderInput,
@@ -25,6 +27,8 @@ import {
 } from './superfield/field-renderers';
 import {
   CheckboxFieldProps,
+  ChoiceCardFieldProps,
+  CountryFieldProps,
   DatePickerFieldProps,
   EditorFieldProps,
   FileFieldProps,
@@ -50,12 +54,16 @@ type SuperFieldProps =
   | SearchableSelectFieldProps
   | DatePickerFieldProps
   | SwitchFieldProps
-  | MultiSelectFieldProps;
+  | MultiSelectFieldProps
+  | CountryFieldProps
+  | ChoiceCardFieldProps;
 
 const renderers: Record<string, React.ElementType> = {
   'select': RenderSelect,
   'searchable-select': RenderSearchableSelect,
   'multi-select': RenderMultiSelect,
+  'country': RenderCountry,
+  'choice-card': RenderChoiceCard,
   'textarea': RenderTextarea,
   'checkbox': RenderCheckbox,
   'switch': RenderSwitch,

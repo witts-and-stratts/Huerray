@@ -1,3 +1,6 @@
+@reference "tailwindcss";
+@reference "../dashboard-globals.css";
+
 @layer components {
   .ad-shell {
     @apply mt-1 space-y-5 px-5 pb-6;
@@ -187,35 +190,25 @@
     @apply text-sm text-muted-foreground;
   }
 
-  .ad-table-wrap {
-    @apply overflow-x-auto rounded-lg border border-border/60;
+
+  .ad-list-item {
+    @apply rounded-lg border border-border/60 bg-white p-3;
   }
 
-  .ad-table {
-    @apply w-full text-left;
+  .ad-list-item-sm {
+    @apply rounded-lg border border-border/60 bg-white p-2.5;
   }
 
-  .ad-table-head {
-    @apply bg-slate-50;
+  .ad-action-link {
+    @apply rounded-lg border border-border/60 bg-white p-3 transition-colors hover:bg-muted/40;
   }
 
-  .ad-table-head-row {
-    @apply border-b border-border/60;
+  .ad-action-link-open {
+    @apply mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary;
   }
 
-  .ad-table-header {
-    @apply px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground;
+  .ad-stat-number {
+    @apply text-2xl leading-none font-primary font-medium;
   }
 
-  .ad-table-row {
-    @apply border-b border-border/40 bg-white;
-  }
-
-  .ad-table-cell {
-    @apply px-4 py-3 text-sm;
-  }
-
-  .ad-table-cell-muted {
-    @apply px-4 py-3 text-sm text-muted-foreground;
-  }
 }

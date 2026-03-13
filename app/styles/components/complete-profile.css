@@ -1,0 +1,68 @@
+@reference 'tailwindcss';
+@reference '../dashboard-globals.css';
+
+@layer components {
+  .complete-profile__layout {
+    @apply grid md:grid-cols-3 h-screen;
+  }
+
+  .complete-profile__image-col {
+    @apply col-span-1 max-md:hidden relative;
+  }
+
+  .complete-profile__image {
+    @apply object-cover h-full fixed w-1/2;
+  }
+
+  .complete-profile__right-col {
+    @apply flex flex-col h-screen overflow-hidden relative bg-burgundy-50 py-2 md:py-4 md:px-2 w-full col-span-2;
+  }
+
+  .complete-profile__lang-selector {
+    @apply absolute top-2 md:top-4 right-4 z-50;
+  }
+
+  .complete-profile__outer-card {
+    @apply flex flex-col flex-1 min-h-0 rounded-4xl relative bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 mt-8 md:mt-10 mx-2 md:mx-4 mb-4 max-md:py-2;
+  }
+
+  .complete-profile__outer-card-content {
+    @apply flex flex-col flex-1 min-h-0 max-md:px-2;
+  }
+
+  .complete-profile__header {
+    @apply shrink-0 text-center mb-4 md:mb-8 pb-0;
+  }
+
+  .complete-profile__logo {
+    @apply dark:invert size-12 md:size-14;
+  }
+
+  .complete-profile__title {
+    @apply text-xl md:text-2xl font-primary text-primary md:-mt-3;
+  }
+
+  .complete-profile__tabs {
+    @apply w-full flex flex-col flex-1 min-h-0;
+  }
+
+  .complete-profile__inner-card {
+    @apply flex flex-col flex-1 min-h-0 max-md:py-3 max-md:rounded-none max-md:border-0 max-md:shadow-none max-md:ring-0 max-md:bg-transparent max-md:gap-2;
+  }
+
+  .complete-profile__inner-card-header {
+    @apply shrink-0 max-md:px-2;
+  }
+
+  .complete-profile__inner-card-content {
+    @apply flex-1 min-h-0 overflow-y-auto max-md:px-0;
+  }
+
+  .complete-profile__inner-card-footer {
+    @apply shrink-0 border-t pt-4;
+  }
+
+  .complete-profile__footer-actions {
+    @apply flex justify-between items-center w-full;
+  }
+}

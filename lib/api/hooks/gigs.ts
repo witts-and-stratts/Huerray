@@ -16,9 +16,9 @@ import {
 import { GigsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import { campaignsKeys } from './campaigns';
-import type { 
+import type {
   ModelsStandardGenericResponse,
-  ModelsPaginatedGigResponse, 
+  ModelsPaginatedGigResponse,
   ModelsCreateGigRequest,
   ModelsGigStatusUpdateRequest,
   ModelsUpdateGigRequest,
@@ -26,12 +26,14 @@ import type {
   ModelsStandardGigResponse,
   ModelsGigApplicationRequest,
   ModelsStandardGigApplicationResponse,
+  ModelsStandardGigApplicationResponses,
   ModelsGigInvitationRequest,
   ModelsStandardGigInvitationResponse,
   ModelsGigInvitationResponseRequest,
   ModelsUpdateGigApplicationRequest,
 } from '../generated/models';
 import type { ApiError } from './types';
+import { UserRole } from '@/contexts/role-context';
 
 
 // Create API instance
@@ -48,6 +50,7 @@ export const gigsKeys = {
   detail: ( id: string ) => [ ...gigsKeys.details(), id ] as const,
   byCampaign: ( campaignId: string, role?: string ) => [ ...gigsKeys.all, 'campaign', campaignId, role ] as const,
   invitations: ( gigId: string ) => [ ...gigsKeys.all, 'invitations', gigId ] as const,
+  applications: ( gigId: string ) => [ ...gigsKeys.all, 'applications', gigId ] as const,
 };
 
 /**
@@ -72,11 +75,11 @@ export function useGigs(
  */
 export function useGigsByCampaign(
   campaignId: string,
-  role: 'brand' | 'admin',
+  role: Omit<UserRole, "creator">,
   options?: Omit<UseQueryOptions<ModelsPaginatedGigResponse, ApiError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<ModelsPaginatedGigResponse, ApiError> {
   return useQuery( {
-    queryKey: gigsKeys.byCampaign( campaignId, role ),
+    queryKey: gigsKeys.byCampaign( campaignId, role as string ),
     queryFn: async () => {
       if ( role === 'admin' ) {
         const response = await gigsApi.gigsSearchGet( { campaignId } );
@@ -233,6 +236,24 @@ export function useGigInvitations(
     queryKey: gigsKeys.invitations( gigId ),
     queryFn: async () => {
       const response = await gigsApi.gigsIdInvitationsGet( { id: gigId } );
+      return response.data;
+    },
+    enabled: !!gigId,
+    ...options,
+  } );
+}
+
+/**
+ * Hook to fetch all applications for a specific gig
+ */
+export function useGigApplications(
+  gigId: string,
+  options?: Omit<UseQueryOptions<ModelsStandardGigApplicationResponses, ApiError>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery( {
+    queryKey: gigsKeys.applications( gigId ),
+    queryFn: async () => {
+      const response = await gigsApi.gigsIdApplicationsGet( { id: gigId } );
       return response.data;
     },
     enabled: !!gigId,

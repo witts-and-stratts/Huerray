@@ -1,4 +1,5 @@
 import type { ModelsCampaignResponse, ModelsGigBrandResponse, ModelsGigResponse } from '@/lib/api/generated/models';
+export { toMoney } from '@/lib/utils';
 
 export interface BrandDashboardSummary {
   pending: number;
@@ -13,14 +14,6 @@ export interface BrandDashboardSummary {
 export type BrandGigLike = ModelsGigResponse | ModelsGigBrandResponse;
 
 export type CampaignStatusVariant = 'secondary' | 'destructive' | 'outline';
-
-export function toMoney( value: number ) {
-  return new Intl.NumberFormat( 'en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  } ).format( value );
-}
 
 export function toShortDate( date?: string ) {
   if ( !date ) return 'N/A';

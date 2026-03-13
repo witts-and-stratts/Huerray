@@ -8,20 +8,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useActiveGigs } from '@/lib/api/hooks/creators';
 import type { ModelsGigCreatorResponse } from '@/lib/api/generated/models';
+import { toMoney } from '@/lib/utils';
 
 function toDate( value?: string ) {
   if ( !value ) return 'N/A';
   const date = new Date( value );
   if ( Number.isNaN( date.getTime() ) ) return 'N/A';
   return date.toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } );
-}
-
-function toMoney( value: number ) {
-  return new Intl.NumberFormat( 'en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  } ).format( value );
 }
 
 function projectedGigEarning( gig: ModelsGigCreatorResponse ) {

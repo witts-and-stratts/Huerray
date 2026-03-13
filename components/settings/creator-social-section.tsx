@@ -47,7 +47,7 @@ const SocialCard = ( { icon, children }: SocialCardProps ) => (
 
 export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl md:m-px h-full max-md:m-2">
       {/* Instagram */ }
       <SocialCard
         icon={ <InstagramIcon className="w-full h-full" /> }

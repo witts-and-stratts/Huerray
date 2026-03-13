@@ -10,7 +10,7 @@
   }
 
   .card__title {
-    @apply leading-normal font-medium group-data-[size=sm]/card:text-sm capitalize text-[18px] text-primary font-primary;
+    @apply leading-normal font-normal group-data-[size=sm]/card:text-sm capitalize text-lg text-primary font-primary;
   }
 
   .card__description {

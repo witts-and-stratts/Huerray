@@ -36,14 +36,6 @@ const formatEnumLabel = ( value: string ) => {
     .join( " " );
 };
 
-const getCountryName = ( code: string ) => {
-  try {
-    return new Intl.DisplayNames( [ "en" ], { type: "region" } ).of( code ) || code;
-  } catch ( e ) {
-    return code;
-  }
-};
-
 export function CreateProfileForm() {
   const router = useRouter();
   const [ isSaving, setIsSaving ] = useState( false );
@@ -351,12 +343,8 @@ export function CreateProfileForm() {
                   name={ field.name }
                   label="Country"
                   value={ field.state.value }
-                  type="searchable-select"
+                  type="country"
                   onValueChange={ ( val ) => field.handleChange( val || "" ) }
-                  options={ Object.values( UtilsCountryCode ).map( ( val ) => ( {
-                    label: getCountryName( val ),
-                    value: val,
-                  } ) ) }
                   error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
                 />
               ) }

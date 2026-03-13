@@ -8,20 +8,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useCreatorEarnings } from '@/lib/api/hooks/payments';
 import type { ModelsPaymentResponse } from '@/lib/api/generated/models';
+import { formatCurrency } from '@/lib/utils';
 
 function toDate( value?: string ) {
   if ( !value ) return 'N/A';
   const date = new Date( value );
   if ( Number.isNaN( date.getTime() ) ) return 'N/A';
   return date.toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } );
-}
-
-function toMoney( value: number ) {
-  return new Intl.NumberFormat( 'en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 2,
-  } ).format( value );
 }
 
 function paymentStatusVariant( status?: string ): 'secondary' | 'outline' | 'destructive' {
@@ -63,13 +56,13 @@ export function CreatorEarningsBlock() {
           <>
             <div className="rounded-lg border border-border/60 bg-white p-2.5">
               <p className="ad-stat-label mb-1.5">Recent Total</p>
-              <p className="text-2xl leading-none font-primary font-medium">{ toMoney( totalEarned ) }</p>
+              <p className="text-2xl leading-none font-primary font-medium">{ formatCurrency( totalEarned ) }</p>
             </div>
             { payments.slice( 0, 3 ).map( ( payment ) => (
               <div key={ payment.id } className="rounded-lg border border-border/60 bg-white p-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium">{ toMoney( payment.total_amount || 0 ) }</p>
+                    <p className="truncate text-sm font-medium">{ formatCurrency( payment.total_amount || 0 ) }</p>
                     <p className="mt-0.5 truncate text-xs text-muted-foreground">
                       { toDate( payment.created_at ) }
                     </p>

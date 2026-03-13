@@ -5,26 +5,17 @@ import {
   FieldGroup
 } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { UtilsCountryCode } from '@/lib/api/generated';
 import { Separator } from '../dashboard-ui/separator';
 import { creatorSettingsSchema, CreatorSettings, ReactFormApi } from './creator-settings-schema';
 import { ImageUploader } from './image-uploader';
 
-const getCountryName = ( code: string ) => {
-  try {
-    return new Intl.DisplayNames( [ "en" ], { type: "region" } ).of( code ) || code;
-  } catch ( e ) {
-    return code;
-  }
-};
-
 export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl m-px">
       {/* Left Column - Main Info */ }
       <div className="lg:col-span-2 space-y-6">
-        <Card>
-          <CardContent>
+        <Card className='max-md:px-0 max-md:border-0 max-md:shadow-none max-md:ring-0 max-md:rounded-none max-md:bg-transparent'>
+          <CardContent className='max-md:px-4'>
             <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <form.Field
                 name="dateOfBirth"
@@ -167,12 +158,8 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                     name={ field.name }
                     label="Country"
                     value={ field.state.value }
-                    type="searchable-select"
+                    type="country"
                     onValueChange={ ( val: any ) => field.handleChange( val || "" ) }
-                    options={ Object.values( UtilsCountryCode ).map( ( val ) => ( {
-                      label: getCountryName( val ),
-                      value: val,
-                    } ) ) }
                     error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
                   />
                 ) }
@@ -183,7 +170,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
       </div>
 
       {/* Right Column - Sidebar */ }
-      <div className="lg:col-span-1 space-y-6">
+      <div className="lg:col-span-1 space-y-6 max-md:px-4">
         {/* Avatar Card */ }
         <form.Subscribe
           selector={ ( state: any ) => state.values.gender }

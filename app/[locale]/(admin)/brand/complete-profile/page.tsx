@@ -2,13 +2,15 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import '@/app/styles/components/complete-profile.css';
+import { Tabs, TabsList, TabsTab, TabsPanel } from '@/components/animate-ui/components/base/tabs';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import {
   FieldGroup
 } from '@/components/dashboard-ui/field';
+import { Separator } from '@/components/dashboard-ui/separator';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { ImageUploader } from '@/components/settings/image-uploader';
 import { apiClient } from '@/lib/api/client';
@@ -16,39 +18,22 @@ import { BrandApi } from '@/lib/api/generated/api/brand-api';
 import { ModelsBrandRequest } from '@/lib/api/generated/models/models-brand-request';
 import { UtilsBrandCategory } from '@/lib/api/generated/models/utils-brand-category';
 import { UtilsCompanySize } from '@/lib/api/generated/models/utils-company-size';
-import { UtilsCountryCode } from '@/lib/api/generated/models/utils-country-code';
+import { fetchBrandProfile } from '@/lib/redux/features/brand/brandSlice';
+import { useAppDispatch } from '@/lib/redux/hooks';
 import { useForm } from '@tanstack/react-form';
 import { Check, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import { ReactNode, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { useAppDispatch } from '@/lib/redux/hooks';
-import { fetchBrandProfile } from '@/lib/redux/features/brand/brandSlice';
 
-// Activity component for tab content visibility
-function Activity( { mode, children }: { mode: 'visible' | 'hidden'; children: ReactNode; } ) {
-  return (
-    <div className={ mode === 'hidden' ? 'hidden' : '' }>
-      { children }
-    </div>
-  );
-}
 
 const formatEnumLabel = ( value: string ) => {
   return value
     .split( /[_\- ]+/ )
     .map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ).toLowerCase() )
     .join( " " );
-};
-
-const getCountryName = ( code: string ) => {
-  try {
-    return new Intl.DisplayNames( [ "en" ], { type: "region" } ).of( code ) || code;
-  } catch ( e ) {
-    return code;
-  }
 };
 
 export default function BrandCompleteProfilePage() {
@@ -63,13 +48,13 @@ export default function BrandCompleteProfilePage() {
     companyName: z.string().min( 1, 'Company name is required' ),
     websiteUrl: z.string().url( 'Invalid URL' ),
     companyDescription: z.string(),
-    category: z.nativeEnum( UtilsBrandCategory ).optional(),
-    companySize: z.nativeEnum( UtilsCompanySize ).optional(),
+    category: z.enum( UtilsBrandCategory ).optional(),
+    companySize: z.enum( UtilsCompanySize ).optional(),
     registrationNumber: z.string(),
     city: z.string(),
     country: z.string(),
     building_number: z.string(),
-    preferredContactEmail: z.string().email().or( z.literal( '' ) ),
+    preferredContactEmail: z.email().or( z.literal( '' ) ),
     preferredContactPhone: z.string(),
     state: z.string().min( 1, 'State/Province is required' ),
     street: z.string(),
@@ -205,254 +190,253 @@ export default function BrandCompleteProfilePage() {
   };
 
   return (
-    <div className="grid md:grid-cols-3 h-screen">
-      <div className="col-span-1 max-md:hidden relative">
-        <Image src="/images/content/lifestyle-4.webp" alt="Huerray Lifestyle" width={ 1920 } height={ 1080 } className="object-cover h-full fixed w-1/3" />
+    <div className="complete-profile__layout">
+      <div className="complete-profile__image-col">
+        <Image src="/images/content/lifestyle-4.webp" alt="Huerray Lifestyle" width={ 1920 } height={ 1080 } className="complete-profile__image" />
       </div>
-      <div className="flex flex-col h-screen relative bg-burgundy-50 py-4 px-2 overflow-y-auto w-full col-span-2">
-        <div className="absolute top-4 right-4 z-50">
+      <div className="complete-profile__right-col">
+        <div className="complete-profile__lang-selector">
           <LanguageSelector showLabel={ false } />
         </div>
 
-        <Card className="rounded-4xl relative bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 mt-10 mx-4 mb-4">
-          <CardContent>
-            <CardHeader className="text-center mb-8 pb-0">
-              <div className="flex justify-center py-4 mb-2">
+        <Card className="complete-profile__outer-card">
+          <CardContent className="complete-profile__outer-card-content">
+            <CardHeader className="complete-profile__header">
+              <div className="flex justify-center py-2 md:py-4 mb-2">
                 <Image
                   src="/images/huerray-symbol.svg"
                   alt="Huerray"
                   width={ 60 }
                   height={ 60 }
-                  className="dark:invert"
+                  className="complete-profile__logo"
                 />
               </div>
-              <CardTitle className="text-2xl font-primary text-primary">Complete Your Brand Profile</CardTitle>
+              <CardTitle className="complete-profile__title">Complete Your Brand Profile</CardTitle>
               <CardDescription>
                 Let&apos;s set up your brand details to start launching campaigns.
               </CardDescription>
             </CardHeader>
 
-            <Tabs value={ activeTab } onValueChange={ handleTabChange } className="w-full">
-              <Card className="flex flex-col max-h-[calc(100vh-350px)]">
-                <CardHeader className="shrink-0">
+            <Tabs value={ activeTab } onValueChange={ handleTabChange } className="complete-profile__tabs">
+              <Card className="complete-profile__inner-card">
+                <CardHeader className="complete-profile__inner-card-header">
                   <div className="flex justify-center w-full">
                     <TabsList className="grid w-full grid-cols-2">
                       { tabs.map( ( tab ) => (
-                        <TabsTrigger key={ tab.value } value={ tab.value }>{ tab.label }</TabsTrigger>
+                        <TabsTab key={ tab.value } value={ tab.value } className="max-md:text-xs">{ tab.label }</TabsTab>
                       ) ) }
                     </TabsList>
                   </div>
                 </CardHeader>
-                <CardContent className="overflow-y-auto flex-1">
+                <CardContent className="complete-profile__inner-card-content">
                   <form onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
-                    {/* Company & Address Tab */ }
-                    <Activity mode={ activeTab === 'company' ? 'visible' : 'hidden' }>
-                      <div className="space-y-6">
-                        <h4 className="text-sm font-medium tracking-widest uppercase">Company Details</h4>
-                        <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <form.Field
-                            name="companyName"
-                            validators={ { onBlur: brandProfileSchema.shape.companyName } }
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Company Name"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                onBlur={ field.handleBlur }
-                                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-                                required
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="websiteUrl"
-                            validators={ { onBlur: brandProfileSchema.shape.websiteUrl } }
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Website URL"
-                                type="url"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                onBlur={ field.handleBlur }
-                                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="category"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                type="searchable-select"
-                                label="Industry Category"
-                                value={ field.state.value }
-                                onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsBrandCategory ) }
-                                options={ Object.values( UtilsBrandCategory ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="companySize"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                type="select"
-                                label="Company Size"
-                                value={ field.state.value }
-                                onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsCompanySize ) }
-                                options={ Object.values( UtilsCompanySize ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="vatId"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="VAT ID"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="registrationNumber"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Registration Number"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                        </FieldGroup>
+                    <TabsPanel value="company">
+                      <Card className="m-px">
+                        <CardContent>
+                          <h4 className="card__title mb-3">Company Details</h4>
+                          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <form.Field
+                              name="companyName"
+                              validators={ { onBlur: brandProfileSchema.shape.companyName } }
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Company Name"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                  onBlur={ field.handleBlur }
+                                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                  required
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="websiteUrl"
+                              validators={ { onBlur: brandProfileSchema.shape.websiteUrl } }
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Website URL"
+                                  type="url"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                  onBlur={ field.handleBlur }
+                                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="category"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  type="searchable-select"
+                                  label="Industry Category"
+                                  value={ field.state.value }
+                                  onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsBrandCategory ) }
+                                  options={ Object.values( UtilsBrandCategory ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="companySize"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  type="select"
+                                  label="Company Size"
+                                  value={ field.state.value }
+                                  onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsCompanySize ) }
+                                  options={ Object.values( UtilsCompanySize ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="vatId"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="VAT ID"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="registrationNumber"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Registration Number"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                          </FieldGroup>
+                          <Separator className="my-6" />
+                          <h4 className="card__title mb-3">Address Information</h4>
+                          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <form.Field
+                              name="street"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Street"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="building_number"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Number/Suite"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="city"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="City"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="state"
+                              validators={ { onBlur: brandProfileSchema.shape.state } }
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="State/Province"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                  onBlur={ field.handleBlur }
+                                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                  required
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="postalCode"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Postal Code"
+                                  type="text"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="country"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Country"
+                                  value={ field.state.value }
+                                  type="country"
+                                  onValueChange={ ( val: string | null ) => field.handleChange( val || "" ) }
+                                />
+                              ) }
+                            />
+                          </FieldGroup>
 
-                        <h4 className="text-sm font-medium tracking-widest uppercase pt-4">Address Information</h4>
-                        <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <form.Field
-                            name="street"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Street"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="building_number"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Number/Suite"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="city"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="City"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="state"
-                            validators={ { onBlur: brandProfileSchema.shape.state } }
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="State/Province"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                onBlur={ field.handleBlur }
-                                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-                                required
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="postalCode"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Postal Code"
-                                type="text"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="country"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Country"
-                                value={ field.state.value }
-                                type="searchable-select"
-                                onValueChange={ ( val: string | null ) => field.handleChange( val || "" ) }
-                                options={ Object.values( UtilsCountryCode ).map( ( val ) => ( { label: getCountryName( val ), value: val } ) ) }
-                              />
-                            ) }
-                          />
-                        </FieldGroup>
+                          <Separator className="my-6" />
 
-                        <h4 className="text-sm font-medium tracking-widest uppercase pt-4">Contact Information</h4>
-                        <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <form.Field
-                            name="preferredContactEmail"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Contact Email"
-                                type="email"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                          <form.Field
-                            name="preferredContactPhone"
-                            children={ ( field ) => (
-                              <SuperField
-                                name={ field.name }
-                                label="Contact Phone"
-                                type="tel"
-                                value={ field.state.value }
-                                onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                              />
-                            ) }
-                          />
-                        </FieldGroup>
-                      </div>
-                    </Activity>
+                          <h4 className="card__title mb-3">Contact Information</h4>
+                          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <form.Field
+                              name="preferredContactEmail"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Contact Email"
+                                  type="email"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                            <form.Field
+                              name="preferredContactPhone"
+                              children={ ( field ) => (
+                                <SuperField
+                                  name={ field.name }
+                                  label="Contact Phone"
+                                  type="tel"
+                                  value={ field.state.value }
+                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                />
+                              ) }
+                            />
+                          </FieldGroup>
+                        </CardContent>
+                      </Card>
+                    </TabsPanel>
 
-
-
-                    {/* Branding Tab */ }
-                    <Activity mode={ activeTab === 'contact' ? 'visible' : 'hidden' }>
+                    <TabsPanel value="contact">
                       <div className="space-y-8">
-                        <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                          <div className="col-span-1 md:col-span-2 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            <div className="lg:col-span-2">
+                        <Card className="m-px">
+                          <CardContent className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="md:col-span-2">
                               <form.Field
                                 name="companyDescription"
                                 children={ ( field ) => (
@@ -483,14 +467,14 @@ export default function BrandCompleteProfilePage() {
                                 />
                               </div>
                             </div>
-                          </div>
-                        </FieldGroup>
+                          </CardContent>
+                        </Card>
                       </div>
-                    </Activity>
+                    </TabsPanel>
                   </form>
                 </CardContent>
-                <CardFooter className="shrink-0 border-t pt-4">
-                  <div className="flex justify-between items-center w-full">
+                <CardFooter className="complete-profile__inner-card-footer">
+                  <div className="complete-profile__footer-actions">
                     <div>
                       { activeTab !== 'company' && (
                         <Button type="button" variant="outline" onClick={ prevTab } size="lg">
@@ -506,7 +490,7 @@ export default function BrandCompleteProfilePage() {
                       ) : (
                         <form.Subscribe
                           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
-                          children={ ( [ canSubmit, isSubmitting ] ) => (
+                          children={ ( [ , isSubmitting ] ) => (
                             <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2" onClick={ () => form.handleSubmit() }>
                               { isSubmitting || isSaving ? 'Creating Profile...' : 'Complete Profile' }
                               { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }

@@ -205,15 +205,15 @@ export function NotificationsView() {
 
           {/* Pagination */ }
           <div className="flex items-center justify-between gap-2 px-3 py-2 border-t border-border/60 shrink-0 bg-muted/20">
-            <span className="text-xs text-muted-foreground">
+            <span className="text-[10px] sm:text-xs text-muted-foreground whitespace-nowrap">
               { startItem }–{ endItem } / { totalCount }
             </span>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 sm:gap-1.5">
               <Select
                 value={ String( currentPerPage ) }
                 onValueChange={ ( v ) => { setPerPage( Number( v ) ); setPage( 1 ); } }
               >
-                <SelectTrigger className="h-7 w-16 text-xs">
+                <SelectTrigger className="h-7 w-12 sm:w-16 text-[10px] sm:text-xs">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent side="top">
@@ -222,24 +222,26 @@ export function NotificationsView() {
                   ) ) }
                 </SelectContent>
               </Select>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-7 w-7 p-0"
-                disabled={ currentPage <= 1 }
-                onClick={ () => setPage( p => Math.max( p - 1, 1 ) ) }
-              >
-                <ChevronLeft className="size-3.5" />
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="h-7 w-7 p-0"
-                disabled={ currentPage >= totalPages }
-                onClick={ () => setPage( p => Math.min( p + 1, totalPages ) ) }
-              >
-                <ChevronRight className="size-3.5" />
-              </Button>
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 w-7 p-0"
+                  disabled={ currentPage <= 1 }
+                  onClick={ () => setPage( p => Math.max( p - 1, 1 ) ) }
+                >
+                  <ChevronLeft className="size-3.5" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 w-7 p-0"
+                  disabled={ currentPage >= totalPages }
+                  onClick={ () => setPage( p => Math.min( p + 1, totalPages ) ) }
+                >
+                  <ChevronRight className="size-3.5" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

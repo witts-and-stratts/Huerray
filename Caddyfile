@@ -6,3 +6,12 @@ dev.huerray.de {
 	tls ./deploy/tls/dev.huerray.de.pem ./deploy/tls/dev.huerray.de-key.pem
 	reverse_proxy localhost:3000
 }
+
+http://dev2.huerray.de {
+	reverse_proxy localhost:3000
+}
+
+dev.huerray.dev {
+	tls ./deploy/tls/dev.huerray.dev.pem ./deploy/tls/dev.huerray.dev-key.pem
+	reverse_proxy localhost:3000
+}

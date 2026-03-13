@@ -18,13 +18,12 @@ import { UsersTableToolbar } from "./users-table-toolbar";
 import { UsersView } from "./users-view";
 import { DataTablePagination } from "@/components/ui/data-table-pagination";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
-import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatePresence, motion } from "motion/react";
 import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
 import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { setViewMode } from "@/lib/redux/features/ui/uiSlice";
+import { TableErrorState } from "@/components/dashboard-ui/table-error-state";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
+import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 
 
 
@@ -40,27 +39,11 @@ export function UsersTable( {
   error = null,
 }: UsersTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
+  const { view, setView } = usePersistedViewMode( 'users', 'cards' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
-  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [ columnVisibility, setColumnVisibility ] =
-    React.useState<VisibilityState>( {} );
+  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
+  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const dispatch = useAppDispatch();
-  const persistedView = useAppSelector( ( state ) => state.ui.viewModes[ 'users' ] ) || 'cards';
-  const [ view, setInternalView ] = React.useState<"table" | "cards">( persistedView );
-
-  React.useEffect( () => {
-    if ( persistedView && persistedView !== view ) {
-      setInternalView( persistedView );
-    }
-  }, [ persistedView ] );
-
-  const setView = ( newView: "table" | "cards" ) => {
-    setInternalView( newView );
-    dispatch( setViewMode( { pageKey: 'users', viewMode: newView } ) );
-  };
   const [ selectedUser, setSelectedUser ] =
     React.useState<ModelsUserResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -105,29 +88,13 @@ export function UsersTable( {
   return (
     <AnimatePresence>
       { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
-      { error && <motion.div
-        initial={ { opacity: 0 } }
-        animate={ { opacity: 1 } }
-        exit={ { opacity: 0 } }
-        transition={ { duration: 0.3 } }
-        className="w-full p-8 text-center bg-red-50 rounded-xl border border-red-100">
-        <h3 className="text-lg font-medium text-red-800">
-          Failed to load users
-        </h3>
-        <p className="text-sm text-red-600 mt-1">{ error.message }</p>
-        <button
-          onClick={ () => window.location.reload() }
-          className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
-        >
-          Try again
-        </button>
-      </motion.div> }
+      { error && <TableErrorState entity="users" message={ error.message } /> }
       { !isLoading && !error && (
         <motion.div
-          initial={ { opacity: 0, y: 20 } }
-          animate={ { opacity: 1, y: 0 } }
-          exit={ { opacity: 0, y: -20 } }
-          transition={ { duration: 0.5 } }
+          initial={ { opacity: 0 } }
+          animate={ { opacity: 1 } }
+          exit={ { opacity: 0 } }
+          transition={ { duration: 0.3 } }
           className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
         >
           <UsersTableToolbar

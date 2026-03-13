@@ -7,7 +7,7 @@ function getEnumValues<T extends Record<string, any>>(obj: T) {
   return Object.values(obj) as [string, ...string[]];
 }
 
-export const createGigSchema = z.object({
+export const createGigBaseSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   compensation: z.number({ error: 'Compensation must be a number' }).min(0, 'Compensation must be positive'),
   gig_cost: z.number({ error: 'Gig cost must be a number' }).min(0, 'Gig cost must be positive'),
@@ -21,14 +21,16 @@ export const createGigSchema = z.object({
   requirements: z.string().optional(),
   content_guidelines: z.string().optional(),
   ambience: z.string().optional(),
-  enforce_single_creator_submission: z.boolean().default(false).optional(),
-  enforce_unique_creator_submission: z.boolean().default(false).optional(),
-}).superRefine((data, ctx) => {
-  // Rule 1: Total Gig cost cannot be less than Compensation per video
-  if (data.gig_cost < data.compensation) {
+  submission_enforcement: z.enum(['single', 'unique'], { error: 'Please select a submission enforcement type' }),
+});
+
+export const createGigSchema = createGigBaseSchema.superRefine((data, ctx) => {
+  // Rule 1: Total Gig cost cannot be less than Compensation × Number of videos
+  const minGigCost = data.compensation * (data.number_of_videos || 1);
+  if (data.gig_cost < minGigCost) {
     ctx.addIssue({
       code: 'custom',
-      message: 'Total Gig cost cannot be less than Compensation per video',
+      message: `Total Gig cost cannot be less than Compensation × Number of videos (min. ${minGigCost})`,
       path: ['gig_cost'],
     });
   }
@@ -67,20 +69,6 @@ export const createGigSchema = z.object({
     }
   }
 
-  // Rule 4: One of Enforce Single Creator Submission and Enforce Unique Creator Submission must be selected
-  if (!data.enforce_single_creator_submission && !data.enforce_unique_creator_submission) {
-    ctx.addIssue({
-      code: 'custom',
-      message: 'You must chose to either Enforce Single Creator Submission or Enforce Unique Creator Submission',
-      path: ['enforce_single_creator_submission'], // Attach error to one of the fields
-    });
-    // Optionally attach to the other field as well, or handle in UI to show general error
-    // ctx.addIssue({
-    //   code: 'custom',
-    //   message: 'You must chose to either Enforce Single Creator Submission or Enforce Unique Creator Submission',
-    //   path: ['enforce_unique_creator_submission'],
-    // });
-  }
 });
 
 export type CreateGigSchema = z.infer<typeof createGigSchema>;

@@ -1,8 +1,8 @@
 'use client';
 
-import { CampaignActionMenu } from './campaign-action-menu';
 import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
+import { CampaignActionMenu } from './campaign-action-menu';
 
 import {
   Card,
@@ -11,23 +11,32 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/dashboard-ui/card';
-import { BrandAvatar } from './brand-avatar';
-import { AvatarCollage } from './avatar-collage';
-import { ModelCampaign } from './types';
-import { StatusBadge } from './status-badge';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
+import { AvatarCollage } from './avatar-collage';
+import { BrandAvatar } from './brand-avatar';
+import { StatusBadge } from './status-badge';
+import { ModelCampaign } from './types';
 
-import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
-import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
-import { stripTags } from '@/lib/utils';
-import { useState, useEffect, useMemo, memo, useCallback } from 'react';
+import { Badge } from '@/components/dashboard-ui/badge';
+import { Button } from '@/components/dashboard-ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
+import { useRole } from '@/contexts/role-context';
+import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
+import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
+import { cn } from '@/lib/dashboard-utils';
+import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
+import { useBasePath } from '@/lib/providers/path-provider';
+import { stripTags } from '@/lib/utils';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AddToListIcon } from '@hugeicons/core-free-icons';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ApplicationCard } from './application-card';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { SubmissionViewDialog } from './submission-view-dialog';
-import { imgpresets } from '@/lib/utils/imgproxy';
-import { cn } from '@/lib/dashboard-utils';
-import { useBasePath } from '@/lib/providers/path-provider';
+import { RoleGuard } from '../auth/role-guard';
 
 interface CampaignCardProps {
   campaign: ModelCampaign;
@@ -183,6 +192,38 @@ const CampaignModals = memo( ( { selectedItem, onSelectMatch }: {
 } );
 CampaignModals.displayName = 'CampaignModals';
 
+export const CampaignGigsButton = memo( ( { campaignId, basePath }: { campaignId: string; basePath: string; } ) => {
+  const role = useRole();
+  const { data, isLoading } = useGigsByCampaign( campaignId, role );
+  const showLoading = useDelayedLoading( isLoading );
+  const count = useMemo( () => data?.data?.length ?? 0, [ data ] );
+
+  if ( showLoading ) return <Skeleton className="size-7 rounded-full" />;
+  if ( count === 0 ) return null;
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Link href={ `${ basePath }/campaigns/${ campaignId }#gigs` }>
+          <Button variant="outline" size="icon-sm" className="rounded-full relative">
+            <HugeiconsIcon icon={ AddToListIcon } className="size-4" strokeWidth={ 1 } />
+            <Badge className={ cn(
+              "absolute -top-1.5 -right-1.5 min-w-4 h-4 px-1",
+              "flex items-center justify-center",
+              "rounded-full bg-primary text-primary-foreground",
+              "text-[9px] font-semibold leading-none"
+            ) }>
+              { count }
+            </Badge>
+          </Button>
+        </Link>
+      </TooltipTrigger>
+      <TooltipContent side="top">{ count } gig{ count !== 1 ? 's' : '' }</TooltipContent>
+    </Tooltip>
+  );
+} );
+CampaignGigsButton.displayName = 'CampaignGigsButton';
+
 export function CampaignCard( { campaign }: CampaignCardProps ) {
   const basePath = useBasePath();
   const { id, campaign_name, description, campaign_status, updated_at, brand_id } = campaign;
@@ -243,7 +284,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
           <CampaignActionMenu campaign={ campaign } />
         </CardHeader>
 
-        <CardContent className='space-y-3 pb-2'>
+        <CardContent className='flex flex-col flex-1 space-y-3 pb-2'>
           <div className='min-h-[64px]'>
             <CampaignAvatars
               campaignId={ id! }
@@ -251,15 +292,20 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
             />
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span className='text-xs text-muted-foreground/60'>
-              Updated{ ' ' }
-              { formattedDate }
-            </span>
-          </div>
+          <div className="mt-auto flex flex-col gap-2">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span className='text-xs text-muted-foreground/60'>
+                Updated{ ' ' }
+                { formattedDate }
+              </span>
+            </div>
 
-          <div className="mt-2">
-            <StatusBadge status={ campaign_status! } />
+            <div className="flex items-center justify-between">
+              <StatusBadge status={ campaign_status! } />
+              <RoleGuard allowedRoles={ [ 'admin' ] }>
+                <CampaignGigsButton campaignId={ id! } basePath={ basePath } />
+              </RoleGuard>
+            </div>
           </div>
         </CardContent>
       </Card>
