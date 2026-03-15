@@ -19,6 +19,9 @@ import type { ModelsBrandResponse } from './models-brand-response';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ModelsCampaignResponse } from './models-campaign-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsMoney } from './models-money';
 
 export interface ModelsGigCreatorResponse {
     'age_max'?: number;
@@ -30,7 +33,7 @@ export interface ModelsGigCreatorResponse {
     'campaign'?: ModelsCampaignResponse;
     'campaign_id'?: string;
     'campaign_name'?: string;
-    'compensation'?: number;
+    'compensation'?: ModelsMoney;
     'content_guidelines'?: string;
     'created_at'?: string;
     'enforce_single_creator_submission'?: boolean;

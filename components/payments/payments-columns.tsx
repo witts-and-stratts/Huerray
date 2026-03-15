@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from 'react';
+import { imgpresets } from '@/lib/utils/imgproxy';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 
@@ -22,12 +23,12 @@ function getInitials( name?: string ) {
 
 function CreatorCell( { creator_id, creator_name }: { creator_id?: string; creator_name?: string } ) {
   const { data } = useCreator( creator_id || '', { enabled: !!creator_id } );
-  const photoUrl = data?.profile_image_url;
+  const photoUrl = data?.profile_image?.asset;
 
   return (
     <div className="flex items-center gap-2.5">
       <Avatar size="sm">
-        { photoUrl && <AvatarImage src={ photoUrl } alt={ creator_name } /> }
+        { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ creator_name } /> }
         <AvatarFallback>{ getInitials( creator_name ) }</AvatarFallback>
       </Avatar>
       <span className="text-sm font-medium">{ creator_name || '—' }</span>
@@ -64,10 +65,13 @@ export const getPaymentColumns = (
   {
     id: 'payment_status',
     accessorKey: 'payment_status',
-    header: () => <></>,
-    cell: () => <></>,
+    header: () => <span data-hidden-column="true" />,
+    cell: () => <span data-hidden-column="true" />,
     enableSorting: false,
     enableHiding: true,
+    size: 0,
+    minSize: 0,
+    maxSize: 0,
     filterFn: ( row, id, filterValue ) => {
       if ( !Array.isArray( filterValue ) || filterValue.length === 0 ) return false;
       const rowValue = row.getValue( id ) as string;
@@ -135,7 +139,7 @@ export const getPaymentColumns = (
     ),
   },
   {
-    accessorKey: 'total_amount',
+    accessorKey: 'total',
     header: ( { column } ) => (
       <Button
         variant="ghost"
@@ -146,7 +150,7 @@ export const getPaymentColumns = (
       </Button>
     ),
     cell: ( { row } ) => {
-      const amount = row.original.total_amount;
+      const amount = row.original.total?.value;
       if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
       return <div className="pl-4 font-medium">{ formatCurrency( amount ) }</div>;
     },

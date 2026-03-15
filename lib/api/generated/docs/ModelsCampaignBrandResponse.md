@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **company_name** | **string** |  | [optional] [default to undefined]
 **country** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
-**profile_photo_url** | **string** |  | [optional] [default to undefined]
+**profile_photo** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **website_url** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -22,7 +22,7 @@ const instance: ModelsCampaignBrandResponse = {
     company_name,
     country,
     id,
-    profile_photo_url,
+    profile_photo,
     website_url,
 };
 ```

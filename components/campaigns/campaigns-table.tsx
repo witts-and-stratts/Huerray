@@ -1,6 +1,14 @@
 
 'use client';
 
+import { CampaignsView } from '@/components/campaigns/campaigns-view';
+import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
+import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
+import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
+import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
+import { DataTablePagination } from '@/components/ui/data-table-pagination';
+import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
+import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -8,23 +16,34 @@ import {
   getSortedRowModel,
   useReactTable,
   type ColumnFiltersState,
+  type FilterFn,
   type SortingState,
   type VisibilityState
 } from '@tanstack/react-table';
-import * as React from 'react';
-
-import { getColumns } from './campaigns-columns';
-import { DataTablePagination } from '@/components/ui/data-table-pagination';
-import { CampaignsTableToolbar } from './campaigns-table-toolbar';
-import { useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
-import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
-import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
-import { CampaignsView } from '@/components/campaigns/campaigns-view';
-import { ModelCampaign } from './types';
 import { AnimatePresence, motion } from 'motion/react';
-import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
-import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
-import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
+import * as React from 'react';
+import { getColumns } from './campaigns-columns';
+import { CampaignsTableToolbar } from './campaigns-table-toolbar';
+import { ModelCampaign } from './types';
+
+const campaignGlobalFilter: FilterFn<ModelCampaign> = ( row, _columnId, filterValue: string ) => {
+  const q = filterValue.toLowerCase().trim();
+  if ( !q ) return true;
+  const c = row.original;
+  const searchable = [
+    c.campaign_name,
+    c.campaign_status,
+    c.description,
+    c.category,
+    c.brand_name,
+    c.keywords,
+    c.tone_of_voice,
+    c.brand?.company_name,
+    c.brand?.category,
+    c.brand?.country,
+  ].filter( Boolean ).join( ' ' ).toLowerCase();
+  return searchable.includes( q );
+};
 
 type CampaignsTableProps = {
   campaigns?: ModelCampaign[];
@@ -47,24 +66,45 @@ export function CampaignsTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
+  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
+  const [ dateFilterType, setDateFilterType ] = React.useState<'created_at' | 'updated_at'>( 'created_at' );
+  const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
+
+  const filteredData = React.useMemo( () => {
+    if ( !dateRange?.from && !dateRange?.to ) return campaigns;
+    return ( campaigns || [] ).filter( ( campaign ) => {
+      const dateStr = dateFilterType === 'created_at' ? campaign.created_at : campaign.updated_at;
+      if ( !dateStr ) return false;
+      const date = new Date( dateStr );
+      if ( dateRange.from && date < dateRange.from ) return false;
+      if ( dateRange.to ) {
+        const end = new Date( dateRange.to );
+        end.setHours( 23, 59, 59, 999 );
+        if ( date > end ) return false;
+      }
+      return true;
+    } );
+  }, [ campaigns, dateFilterType, dateRange ] );
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
-    campaigns.forEach( ( campaign ) => {
+    filteredData.forEach( ( campaign ) => {
       if ( campaign.campaign_status ) {
         statusSet.add( campaign.campaign_status );
       }
     } );
     return Array.from( statusSet );
-  }, [ campaigns ] );
+  }, [ filteredData ] );
 
   const columns = React.useMemo( () => getColumns(), [] );
 
   const table = useReactTable( {
-    data: campaigns,
+    data: filteredData,
     columns,
+    globalFilterFn: campaignGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -76,47 +116,49 @@ export function CampaignsTable( {
       columnFilters,
       columnVisibility,
       rowSelection,
+      globalFilter,
     },
   } );
 
   return (
-    <AnimatePresence>
-      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <CardGridSkeleton count={ 6 } cardHeight="h-[300px]" /> ) }
+    <div className="grow relative overflow-auto bg-slate-50/50">
+      <AnimatePresence>
+        { ( showLoading || isLoading ) && (
+          <motion.div
+            key="skeleton"
+            className="absolute inset-0 z-10 bg-slate-50/50"
+            exit={ { opacity: 0 } }
+            transition={ { duration: 0.3 } }
+          >
+            { view === 'table' ? <DataTableSkeleton /> : <CardGridSkeleton count={ 6 } cardHeight="h-[300px]" /> }
+          </motion.div>
+        ) }
+      </AnimatePresence>
       { error && <TableErrorState entity="campaigns" message={ error.message } /> }
       { !isLoading && !error && (
-        <motion.div
-          initial={ { opacity: 0 } }
-          animate={ { opacity: 1 } }
-          exit={ { opacity: 0 } }
-          transition={ { duration: 0.3 } }
-          className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
-        >
-          { campaigns.length === 0 ? (
-            <CampaignsView
+        <div className="space-y-4">
+          { campaigns.length > 0 && (
+            <CampaignsTableToolbar
               table={ table }
+              statuses={ statuses }
               view={ view }
+              setView={ setView }
+              dateFilterType={ dateFilterType }
+              setDateFilterType={ setDateFilterType }
+              dateRange={ dateRange }
+              setDateRange={ setDateRange }
             />
-          ) : (
-            <div className='flex flex-col w-full flex-1 h-full'>
-              <CampaignsTableToolbar
-                table={ table }
-                statuses={ statuses }
-                view={ view }
-                setView={ setView }
-              />
-              <div className='flex-1'>
-                <CampaignsView table={ table } view={ view } />
-              </div>
-              <div className='px-5'>
-                <DataTablePagination
-                  table={ table }
-                  pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
-                />
-              </div>
-            </div>
           ) }
-        </motion.div>
+          <CampaignsView table={ table } view={ view } />
+          { campaigns.length > 0 && (
+            <DataTablePagination
+              table={ table }
+              pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
+              className="px-5"
+            />
+          ) }
+        </div>
       ) }
-    </AnimatePresence>
+    </div>
   );
 }

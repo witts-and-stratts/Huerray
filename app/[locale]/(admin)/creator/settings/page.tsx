@@ -84,7 +84,7 @@ export default function CreatorSettingsPage() {
           twitter_handle: value.twitterHandle,
           portfolio: portfolioJson,
           application_video: value.applicationVideo,
-          profile_image_url: value.profileImageUrl,
+          profile_image: value.profileImageUrl ? { asset: value.profileImageUrl } : undefined,
           // However, safety:
           // However, safety:
           preferred_categories: value.preferredCategories || [],
@@ -182,7 +182,7 @@ export default function CreatorSettingsPage() {
           }
           form.setFieldValue( 'portfolio', portfolioDisplay );
           form.setFieldValue( 'applicationVideo', ( p as any ).application_video || '' );
-          form.setFieldValue( 'profileImageUrl', ( p as any ).profile_image_url || '' );
+          form.setFieldValue( 'profileImageUrl', ( p as any ).profile_image?.asset || '' );
         }
 
       } catch ( e: any ) {
@@ -293,7 +293,7 @@ export default function CreatorSettingsPage() {
     }
     form.setFieldValue( 'portfolio', portfolioDisplay );
     form.setFieldValue( 'applicationVideo', ( p as any ).application_video || '' );
-    form.setFieldValue( 'profileImageUrl', ( p as any ).profile_image_url || '' );
+    form.setFieldValue( 'profileImageUrl', ( p as any ).profile_image?.asset || '' );
 
     toast.info( 'Changes discarded' );
   }, [ currentProfile, form ] );

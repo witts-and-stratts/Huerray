@@ -22,28 +22,7 @@ function CampaignEmptyState() {
   return (
     <Empty className='border py-20 my-6 flex-1'>
       <EmptyHeader>
-        <EmptyMedia>
-          <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/maxleiter.png"
-                alt="@maxleiter"
-              />
-              <AvatarFallback>LR</AvatarFallback>
-            </Avatar>
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/evilrabbit.png"
-                alt="@evilrabbit"
-              />
-              <AvatarFallback>ER</AvatarFallback>
-            </Avatar>
-          </div>
-        </EmptyMedia>
+        <img src="/svg/content-creator-at-work.svg" alt="No campaigns yet" className='w-full h-full object-contain max-h-[320px]' />
         <EmptyTitle className='font-normal font-primary text-primary'>No campaigns yet</EmptyTitle>
         <EmptyDescription>
           <RoleGuard allowedRoles={ [ 'admin' ] }>

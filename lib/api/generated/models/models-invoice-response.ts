@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ModelsInvoiceItemResponse } from './models-invoice-item-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsMoney } from './models-money';
 
 export interface ModelsInvoiceResponse {
     'brand_id'?: string;
@@ -23,7 +26,6 @@ export interface ModelsInvoiceResponse {
     'campaign_id'?: string;
     'campaign_name'?: string;
     'created_at'?: string;
-    'currency'?: string;
     'due_date'?: string;
     'id'?: string;
     'invoice_id'?: string;
@@ -35,7 +37,7 @@ export interface ModelsInvoiceResponse {
     'notes'?: string;
     'paid_date'?: string;
     'pdf_path'?: string;
-    'total_amount'?: number;
+    'total'?: ModelsMoney;
     'updated_at'?: string;
 }
 

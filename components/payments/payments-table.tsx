@@ -8,6 +8,7 @@ import {
   useReactTable,
   flexRender,
   type ColumnFiltersState,
+  type FilterFn,
   type SortingState,
   type VisibilityState,
 } from '@tanstack/react-table';
@@ -48,6 +49,22 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
 
+const paymentGlobalFilter: FilterFn<ModelsPaymentResponse> = ( row, _columnId, filterValue: string ) => {
+  const q = filterValue.toLowerCase().trim();
+  if ( !q ) return true;
+  const p = row.original;
+  const searchable = [
+    p.payment_id,
+    p.payment_status,
+    p.payment_method,
+    p.creator_name,
+    p.total?.currency,
+    p.reference,
+    p.notes,
+  ].filter( Boolean ).join( ' ' ).toLowerCase();
+  return searchable.includes( q );
+};
+
 export interface PaymentsTableProps {
   data: ModelsPaymentResponse[];
   isLoading?: boolean;
@@ -75,15 +92,16 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
   const table = useReactTable( {
     data: data || [],
     columns,
+    globalFilterFn: paymentGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setSearchValue,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-    globalFilterFn: 'includesString',
     state: {
       sorting,
       columnFilters,

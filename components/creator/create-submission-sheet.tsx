@@ -79,7 +79,7 @@ export function CreateSubmissionSheet( {
         gig_id: gigId,
         title: values.title,
         description: values.description,
-        video_url: videoData.url,
+        video: { asset: videoData.url },
         video_filename: videoData.filename,
       },
       {

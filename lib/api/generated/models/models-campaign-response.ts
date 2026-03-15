@@ -18,6 +18,9 @@
 import type { ModelsCampaignBrandResponse } from './models-campaign-brand-response';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsCampaignCategory } from './utils-campaign-category';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -34,9 +37,9 @@ export interface ModelsCampaignResponse {
     'brand_decision_comments'?: string;
     'brand_id'?: string;
     'brand_name'?: string;
-    'campaign_documents'?: Array<string>;
+    'campaign_documents'?: Array<ModelsContentMedia>;
     'campaign_id'?: string;
-    'campaign_images'?: Array<string>;
+    'campaign_images'?: Array<ModelsContentMedia>;
     'campaign_name'?: string;
     'campaign_status'?: UtilsCampaignStatus;
     'category'?: UtilsCampaignCategory;
@@ -49,9 +52,9 @@ export interface ModelsCampaignResponse {
     'number_of_creators_wanted'?: number;
     'number_of_gigs_validated'?: boolean;
     'number_of_videos_wanted'?: number;
-    'product_image_url'?: string;
+    'product_image'?: ModelsContentMedia;
     'product_url'?: string;
-    'sample_video_urls'?: Array<string>;
+    'sample_videos'?: Array<ModelsContentMedia>;
     'tone_of_voice'?: string;
     'updated_at'?: string;
     'video_duration_in_seconds'?: number;

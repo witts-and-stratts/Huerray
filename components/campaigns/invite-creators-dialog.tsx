@@ -13,13 +13,15 @@ import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useBrandCreators } from '@/lib/api/hooks/brands';
 import { campaignsKeys } from '@/lib/api/hooks/campaigns';
-import { useGigInvitations, useInviteCreatorToGig } from '@/lib/api/hooks/gigs';
+import { useGigInvitations, useInviteCreatorToGig, useGig } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
 import {
   Cancel01Icon,
   CheckmarkCircle01Icon,
   Clock01Icon,
   SentIcon,
+  UserMultiple02Icon,
+  SearchListIcon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -71,6 +73,31 @@ function InvitationStatusIndicator( { status }: { status: string; } ) {
   );
 }
 
+function EmptyState( { hasSearchQuery, hasFilters }: { hasSearchQuery: boolean; hasFilters: boolean; } ) {
+  return (
+    <div className="flex flex-col items-center justify-center py-12 px-4">
+      <div className="size-16 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+        <HugeiconsIcon
+          icon={ hasSearchQuery ? SearchListIcon : UserMultiple02Icon }
+          className="w-8 h-8 text-muted-foreground/50"
+        />
+      </div>
+      <h3 className="text-base font-medium text-foreground mb-1">
+        { hasSearchQuery ? 'No creators found' : 'No matching creators' }
+      </h3>
+      <p className="text-sm text-muted-foreground text-center max-w-[280px]">
+        { hasSearchQuery ? (
+          <>Try adjusting your search terms or check the spelling.</>
+        ) : hasFilters ? (
+          <>No creators match the gig requirements. Consider adjusting the age range or gender requirement in your gig settings.</>
+        ) : (
+          <>No creators available at the moment. Try again later.</>
+        ) }
+      </p>
+    </div>
+  );
+}
+
 interface InviteCreatorsDialogProps {
   campaignId: string;
   gigId: string;
@@ -85,10 +112,18 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
   const { user } = useAuth();
   const isAdmin = user?.role === 'admin';
 
+  // Fetch gig details to get requirements for filtering creators
+  const { data: gigData } = useGig( gigId, { enabled: !!gigId && open } );
+  const gig = gigData?.data;
+
   const { data: brandCreatorsData, isLoading } = useBrandCreators(
     {
       q: searchQuery || undefined,
       limit: 100,
+      // Filter creators based on gig requirements
+      ageMin: gig?.age_min,
+      ageMax: gig?.age_max,
+      gender: gig?.gender_requirement as 'male' | 'female' | 'any' | undefined,
     },
     { enabled: !isAdmin && open }
   );
@@ -148,6 +183,15 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
             <DialogTitle className={ 'dialog__title' }>Invite Creators</DialogTitle>
             <DialogDescription className={ 'font-regular' }>
               Search for creators and invite them to apply to your gig.
+              { ( gig?.age_min || gig?.age_max || gig?.gender_requirement ) && (
+                <span className="block mt-2 text-xs text-muted-foreground">
+                  Showing creators matching gig requirements:
+                  { gig.age_min && gig.age_max && ` Age ${ gig.age_min }-${ gig.age_max }` }
+                  { gig.age_min && !gig.age_max && ` Age ${ gig.age_min }+` }
+                  { !gig.age_min && gig.age_max && ` Age up to ${ gig.age_max }` }
+                  { gig.gender_requirement && gig.gender_requirement !== 'any' && `, ${ gig.gender_requirement.charAt( 0 ).toUpperCase() + gig.gender_requirement.slice( 1 ) }` }
+                </span>
+              ) }
             </DialogDescription>
           </DialogHeader>
 
@@ -181,7 +225,10 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
                   ) ) }
                 </div>
               ) : creators?.length === 0 ? (
-                <div className="text-center p-4 text-muted-foreground">No creators found</div>
+                <EmptyState
+                  hasSearchQuery={ !!searchQuery }
+                  hasFilters={ !!( gig?.age_min || gig?.age_max || ( gig?.gender_requirement && gig.gender_requirement !== 'any' ) ) }
+                />
               ) : (
                 creators?.map( ( creator, index ) => {
                   const invitationStatus = getCreatorInvitationStatus( creator.id! );
@@ -197,7 +244,7 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
                     >
                       <div className="flex items-center gap-3">
                         <Avatar>
-                          { creator.profile_image_url && <AvatarImage src={ imgpresets.avatar( creator.profile_image_url ) } /> }
+                          { creator.profile_image?.asset && <AvatarImage src={ imgpresets.avatar( creator.profile_image.asset ) } /> }
                           <AvatarFallback>{ creator.first_name?.[ 0 ] }{ creator.last_name?.[ 0 ] }</AvatarFallback>
                         </Avatar>
                         <div>

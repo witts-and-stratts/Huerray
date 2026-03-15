@@ -18,11 +18,11 @@ function toDate( value?: string ) {
 }
 
 function projectedGigEarning( gig: ModelsGigCreatorResponse ) {
-  if ( typeof gig.compensation !== 'number' ) return 0;
+  if ( !gig.compensation?.value ) return 0;
   if ( typeof gig.number_of_videos === 'number' && gig.number_of_videos > 0 ) {
-    return gig.compensation * gig.number_of_videos;
+    return ( gig.compensation?.value ?? 0 ) * gig.number_of_videos;
   }
-  return gig.compensation;
+  return gig.compensation?.value ?? 0;
 }
 
 function statusVariant( status?: string ): 'secondary' | 'outline' | 'destructive' {

@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **description** | **string** |  | [optional] [default to undefined]
 **gig_id** | **string** |  | [default to undefined]
 **title** | **string** |  | [default to undefined]
+**video** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [default to undefined]
 **video_filename** | **string** |  | [default to undefined]
-**video_url** | **string** |  | [default to undefined]
 
 ## Example
 
@@ -20,8 +20,8 @@ const instance: ModelsCreateVideoSubmissionRequest = {
     description,
     gig_id,
     title,
+    video,
     video_filename,
-    video_url,
 };
 ```
 

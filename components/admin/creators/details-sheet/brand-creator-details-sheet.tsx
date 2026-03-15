@@ -23,7 +23,7 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
   const c = creator as any;
   const {
     first_name, last_name, email, creator_status,
-    profile_image_url,
+    profile_image,
     city, country, gender, date_of_birth,
     instagram_handle, tiktok_handle, youtube_handle,
   } = c;

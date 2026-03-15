@@ -36,4 +36,4 @@ export default function CampaignPage() {
   };
 
   return <CampaignDetailsView campaign={ campaign } />;
-}
+} 

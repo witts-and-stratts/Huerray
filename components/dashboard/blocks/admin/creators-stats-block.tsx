@@ -145,7 +145,7 @@ export function CreatorsStatsBlock() {
                               <div className="flex min-w-0 items-start gap-2.5">
                                 <Avatar size="sm" className="shrink-0">
                                   <AvatarImage
-                                    src={ creator.profile_image_url || '' }
+                                    src={ creator.profile_image?.asset || '' }
                                     alt={ fullName }
                                   />
                                   <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>

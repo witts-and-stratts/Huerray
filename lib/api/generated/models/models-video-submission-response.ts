@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ModelsCreatorResponse } from './models-creator-response';
 
 export interface ModelsVideoSubmissionResponse {
@@ -32,7 +35,7 @@ export interface ModelsVideoSubmissionResponse {
     'status'?: string;
     'title'?: string;
     'updated_at'?: string;
+    'video'?: ModelsContentMedia;
     'video_filename'?: string;
-    'video_url'?: string;
 }
 

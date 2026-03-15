@@ -8,11 +8,13 @@ export interface FileItemProps {
   onUploadError: ( id: string, error: any, name?: string ) => void;
   onRetry: ( id: string ) => void;
   onPreview: ( item: UploadedFile ) => void;
+  showTitle?: boolean;
 }
 
 export interface FileCardProps extends FileItemProps {
   isOverlay?: boolean;
   hideFileName?: boolean;
+  showTitle?: boolean;
   style?: React.CSSProperties;
   attributes?: any;
   listeners?: any;

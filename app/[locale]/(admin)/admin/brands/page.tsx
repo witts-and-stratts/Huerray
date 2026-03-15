@@ -31,7 +31,7 @@ export default function BrandsPage() {
       return {
       id: brand.id || '',
       name: brand.company_name || brand.name || 'Unknown',
-      logo: brand.logo_url || brand.profile_photo_url || brand.logo || '',
+      logo: brand.logo_url || brand.profile_photo?.asset || brand.logo || '',
       brand_status: ( brand.brand_status || 'pending' ),
       total_campaigns: Number.isFinite( totalCampaigns ) ? totalCampaigns : 0,
       website: brand.website_url || brand.website || '',

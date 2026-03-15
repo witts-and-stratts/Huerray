@@ -24,7 +24,7 @@ export default function NewCampaignPage() {
       category: values.category as any,
       keywords: values.keywords.join( ', ' ),
       product_url: values.product_url || undefined,
-      product_image_url: values.product_image || undefined,
+      product_image: values.product_image ? { asset: values.product_image } : undefined,
       number_of_creators_wanted: values.number_of_creators_wanted,
       number_of_videos_wanted: values.number_of_videos_wanted,
       video_duration_in_seconds_in_seconds: values.video_duration_in_seconds,
@@ -33,8 +33,8 @@ export default function NewCampaignPage() {
       tone_of_voice: values.tone_of_voice || undefined,
       dos: values.dos || undefined,
       donts: values.donts || undefined,
-      campaign_documents: values.documents,
-      campaign_images: values.images,
+      campaign_documents: values.documents?.map( ( url: string ) => ( { asset: url } ) ),
+      campaign_images: values.images?.map( ( url: string ) => ( { asset: url } ) ),
     };
 
     return new Promise<void>( ( resolve, reject ) => {

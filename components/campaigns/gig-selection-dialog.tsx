@@ -13,6 +13,27 @@ import { Button } from "@/components/dashboard-ui/button";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 import { Loader2 } from "lucide-react";
 import { GigSelectionItem } from "./gig-selection/gig-selection-item";
+import { FolderVideoIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+
+function EmptyGigsState() {
+  return (
+    <div className="flex flex-col items-center justify-center py-16 px-4">
+      <div className="size-16 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+        <HugeiconsIcon
+          icon={ FolderVideoIcon }
+          className="w-8 h-8 text-muted-foreground/50"
+        />
+      </div>
+      <h3 className="text-base font-medium text-foreground mb-1">
+        No gigs yet
+      </h3>
+      <p className="text-sm text-muted-foreground text-center max-w-[320px] mb-4">
+        This campaign doesn't have any gigs yet. Create a gig first before inviting creators.
+      </p>
+    </div>
+  );
+}
 
 interface GigSelectionDialogProps {
   campaignId: string;
@@ -46,16 +67,7 @@ export function GigSelectionDialog( {
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           ) : gigs.length === 0 ? (
-            <div className="gig-selection-dialog__empty">
-              <p>No gigs found for this campaign.</p>
-              <Button
-                variant="link"
-                className="mt-2"
-                onClick={ () => onOpenChange( false ) }
-              >
-                Close
-              </Button>
-            </div>
+            <EmptyGigsState />
           ) : (
             <ScrollArea className="gig-selection-dialog__scroll-area">
               <div className="gig-selection-dialog__list">

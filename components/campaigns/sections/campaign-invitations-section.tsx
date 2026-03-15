@@ -81,26 +81,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus }: Camp
         <Empty className='border py-20 my-6 flex-1 bg-white'>
           <EmptyHeader>
             <EmptyMedia>
-              <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/maxleiter.png"
-                    alt="@maxleiter"
-                  />
-                  <AvatarFallback>LR</AvatarFallback>
-                </Avatar>
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/evilrabbit.png"
-                    alt="@evilrabbit"
-                  />
-                  <AvatarFallback>ER</AvatarFallback>
-                </Avatar>
-              </div>
+              <img src="/svg/creator-invitation.svg" alt="No submissions yet" className='w-full h-full object-contain max-h-[280px] md:max-h-[380px]' />
             </EmptyMedia>
             <EmptyTitle className='font-normal font-primary text-primary'>No invitations yet</EmptyTitle>
             <EmptyDescription>

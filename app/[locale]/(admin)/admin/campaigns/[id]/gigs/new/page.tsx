@@ -9,7 +9,7 @@ import * as React from 'react';
 import { useCreateGig } from '@/lib/api/hooks/gigs';
 import type { ApiError } from '@/lib/api/hooks/types';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
-import { ModelsCreateGigRequest, ModelsCreateGigRequestGenderRequirementEnum } from '@/lib/api/generated/models';
+import { ModelsCreateGigRequest, ModelsCreateGigRequestGenderRequirementEnum, ModelsMoney } from '@/lib/api/generated/models';
 import { GigForm } from '@/components/gigs/gig-form';
 import { CreateGigSchema } from '@/components/gigs/schema';
 
@@ -41,10 +41,12 @@ export default function CreateGigPage() {
   const campaignName = campaignResponse?.campaign_name || 'Campaign';
 
   const handleSubmit = async ( data: CreateGigSchema ) => {
-    const { submission_enforcement, ...rest } = data as any;
+    const { submission_enforcement, compensation, gig_cost, ...rest } = data as any;
     const requestData: ModelsCreateGigRequest = {
       ...rest,
       campaign_id: campaignId,
+      compensation: { value: compensation, currency: 'EUR' } as ModelsMoney,
+      gig_cost: { value: gig_cost, currency: 'EUR' } as ModelsMoney,
       posting_start_date: data.posting_start_date.toISOString(),
       posting_end_date: data.posting_end_date.toISOString(),
       requirements: data.requirements || undefined,

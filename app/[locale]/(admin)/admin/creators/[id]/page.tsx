@@ -59,11 +59,11 @@ export default function CreatorDashboardPage() {
     // For creators, maybe it's called earnings or we just check compensation
     const totalEarned = gigs.reduce( ( sum, gig ) => {
       // Logic from brand dashboard reversed/adapted
-      if ( typeof gig.compensation === 'number' && typeof gig.number_of_videos === 'number' ) {
-        return sum + ( gig.compensation * gig.number_of_videos );
+      if ( gig.compensation?.value != null && typeof gig.number_of_videos === 'number' ) {
+        return sum + ( ( gig.compensation?.value ?? 0 ) * gig.number_of_videos );
       }
-      if ( typeof gig.compensation === 'number' ) return sum + gig.compensation;
-      if ( typeof ( gig as { gig_cost?: number; } ).gig_cost === 'number' ) return sum + ( ( gig as { gig_cost?: number; } ).gig_cost || 0 );
+      if ( gig.compensation?.value != null ) return sum + ( gig.compensation?.value ?? 0 );
+      if ( gig.gig_cost?.value != null ) return sum + ( gig.gig_cost?.value ?? 0 );
       return sum;
     }, 0 );
 
@@ -74,7 +74,7 @@ export default function CreatorDashboardPage() {
       const status = String( ( g as { gig_status?: string; status?: string; } ).gig_status || ( g as { status?: string; } ).status || '' ).toLowerCase();
       return ![ 'completed', 'finished', 'closed', 'paid', 'declined', 'withdrawn', 'rejected' ].includes( status );
     } ).reduce( ( sum, gig ) => {
-      if ( typeof gig.compensation === 'number' ) return sum + gig.compensation;
+      if ( gig.compensation?.value != null ) return sum + ( gig.compensation?.value ?? 0 );
       return sum;
     }, 0 );
 
@@ -112,7 +112,7 @@ export default function CreatorDashboardPage() {
   }
 
   const creatorName = [ creator?.first_name, creator?.last_name ].filter( Boolean ).join( ' ' ) || 'Creator Dashboard';
-  const creatorAvatar = ( creator as any )?.profile_photo_url || ( creator as any )?.avatar_url || '';
+  const creatorAvatar = ( creator as any )?.profile_image?.asset || ( creator as any )?.avatar_url || '';
 
   return (
     <div className="flex flex-1 flex-col h-full">

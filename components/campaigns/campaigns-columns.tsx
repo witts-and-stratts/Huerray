@@ -88,7 +88,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   const people = applications.map( app => ( {
     first_name: app.creator?.first_name || '',
     last_name: app.creator?.last_name || '',
-    avatar: app.creator?.profile_image_url || '',
+    avatar: app.creator?.profile_image?.asset || '',
   } ) );
 
   return (
@@ -123,7 +123,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   const people = invitations.map( inv => ( {
     first_name: inv.creator?.first_name || '',
     last_name: inv.creator?.last_name || '',
-    avatar: inv.creator?.profile_image_url || '',
+    avatar: inv.creator?.profile_image?.asset || '',
   } ) );
 
   return (
@@ -157,7 +157,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   const people = submissions.map( sub => ( {
     first_name: sub.creator?.first_name || '',
     last_name: sub.creator?.last_name || '',
-    avatar: sub.creator?.profile_image_url || '',
+    avatar: sub.creator?.profile_image?.asset || '',
   } ) );
 
   return (
@@ -185,10 +185,11 @@ const SubmissionsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
 const DetailsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   const basePath = useBasePath();
   const { id, campaign_name, description, campaign_status, updated_at } = row.original;
-  const coverImage = row.original.campaign_images?.[ 0 ] || row.original.product_image_url;
+  const rawImage = row.original.campaign_images?.[ 0 ]?.asset || row.original.product_image?.asset;
+  const coverImage = typeof rawImage === 'string' && rawImage ? rawImage : undefined;
 
   return (
-    <div className='flex gap-4'>
+    <div className='flex gap-4 pl-4'>
       <div className={ cn( "size-10 shrink-0 overflow-hidden rounded-full" ) }>
         { coverImage && (
           <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
@@ -250,18 +251,24 @@ export const getColumns = (): ColumnDef<ModelCampaign>[] => [
   {
     id: 'campaign_name',
     accessorKey: 'campaign_name',
-    cell: () => <></>,
+    cell: () => <span data-hidden-column="true" />,
     enableSorting: true,
     enableHiding: true,
-    header: () => <></>,
+    header: () => <span data-hidden-column="true" />,
+    size: 0,
+    minSize: 0,
+    maxSize: 0,
   },
   {
     id: 'campaign_status',
     accessorKey: 'campaign_status',
-    cell: () => <></>,
+    cell: () => <span data-hidden-column="true" />,
     enableSorting: false,
     enableHiding: false,
-    header: () => <></>,
+    header: () => <span data-hidden-column="true" />,
+    size: 0,
+    minSize: 0,
+    maxSize: 0,
     filterFn: ( row, id, filterValue ) => {
       if ( filterValue === undefined ) {
         return true;
@@ -274,8 +281,30 @@ export const getColumns = (): ColumnDef<ModelCampaign>[] => [
     },
   },
   {
+    id: 'created_at',
+    accessorKey: 'created_at',
+    cell: () => <span data-hidden-column="true" />,
+    enableSorting: false,
+    enableHiding: false,
+    header: () => <span data-hidden-column="true" />,
+    size: 0,
+    minSize: 0,
+    maxSize: 0,
+  },
+  {
+    id: 'updated_at',
+    accessorKey: 'updated_at',
+    cell: () => <span data-hidden-column="true" />,
+    enableSorting: false,
+    enableHiding: false,
+    header: () => <span data-hidden-column="true" />,
+    size: 0,
+    minSize: 0,
+    maxSize: 0,
+  },
+  {
     accessorKey: 'details',
-    header: () => <span className='font-regular'>Details</span>,
+    header: () => <span className='font-regular pl-4'>Details</span>,
     cell: ( { row } ) => <DetailsCell row={ row } />,
   },
   {

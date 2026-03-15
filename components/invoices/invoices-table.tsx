@@ -8,6 +8,7 @@ import {
   useReactTable,
   flexRender,
   type ColumnFiltersState,
+  type FilterFn,
   type SortingState,
   type VisibilityState,
 } from '@tanstack/react-table';
@@ -36,6 +37,21 @@ import {
   EmptyDescription,
 } from '@/components/dashboard-ui/empty';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
+
+const invoiceGlobalFilter: FilterFn<ModelsInvoiceResponse> = ( row, _columnId, filterValue: string ) => {
+  const q = filterValue.toLowerCase().trim();
+  if ( !q ) return true;
+  const inv = row.original;
+  const searchable = [
+    inv.invoice_number,
+    inv.invoice_status,
+    inv.brand_name,
+    inv.campaign_name,
+    inv.total?.currency,
+    inv.notes,
+  ].filter( Boolean ).join( ' ' ).toLowerCase();
+  return searchable.includes( q );
+};
 
 export interface InvoicesTableProps {
   data: ModelsInvoiceResponse[];
@@ -82,15 +98,16 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
   const table = useReactTable( {
     data: filteredData,
     columns,
+    globalFilterFn: invoiceGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setSearchValue,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-    globalFilterFn: 'includesString',
     state: {
       sorting,
       columnFilters,

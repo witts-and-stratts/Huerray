@@ -472,7 +472,7 @@ export function useReplicateCampaign(
         donts: campaign.donts,
         dos: campaign.dos,
         keywords: campaign.keywords,
-        product_image_url: campaign.product_image_url,
+        product_image: campaign.product_image,
         product_url: campaign.product_url,
         tone_of_voice: campaign.tone_of_voice,
       };

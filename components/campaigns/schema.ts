@@ -11,7 +11,9 @@ function getEnumValues<T extends Record<string, any>>(obj: T) {
 export const createCampaignSchema = z.object({
   campaign_name: z.string().min(1, 'Campaign name is required'),
   description: z.string().min(1, 'Description is required'),
-  category: z.enum(getEnumValues(UtilsCampaignCategory)),
+  category: z.enum( getEnumValues( UtilsCampaignCategory ), {
+    message: 'A valid category is required',
+  }),
   keywords: z.array(z.string()).default([]),
   product_url: z.url('Please enter a valid URL').optional().or(z.literal('')),
   product_image: z.url('Please enter a valid URL').optional().or(z.literal('')),

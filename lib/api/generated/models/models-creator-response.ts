@@ -15,13 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsBrandCategory } from './utils-brand-category';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { UtilsCountryCode } from './utils-country-code';
 
 export interface ModelsCreatorResponse {
-    'application_video'?: string;
+    'application_video'?: ModelsContentMedia;
     /**
      * Bank & Tax Details
      */
@@ -50,7 +53,7 @@ export interface ModelsCreatorResponse {
      * Categories
      */
     'preferred_categories'?: Array<UtilsBrandCategory>;
-    'profile_image_url'?: string;
+    'profile_image'?: ModelsContentMedia;
     'state'?: string;
     'status_comments'?: string;
     'street'?: string;

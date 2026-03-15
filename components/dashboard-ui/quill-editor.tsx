@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import { cn } from '@/lib/dashboard-utils';
+import '@/app/styles/components/content.css';
 
 export type QuillToolbarConfig = ( string[] | Record<string, any>[] | string )[];
 
@@ -112,49 +113,6 @@ export function QuillEditor( { value, onChange, onBlur, placeholder, className, 
       className
     ) }>
       <div ref={ containerRef } className="min-h-[150px] text-foreground flex-1" />
-      <style jsx global>{ `
-        .quill-editor-wrapper .ql-toolbar.ql-snow {
-          border: none;
-          border-bottom: 1px solid hsl(var(--input));
-          background-color: transparent;
-          padding: 8px;
-          font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
-        }
-        .quill-editor-wrapper .ql-container.ql-snow {
-          border: none;
-          font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
-        .quill-editor-wrapper .ql-editor {
-          min-height: 150px;
-          flex: 1;
-          font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
-          font-size: 0.875rem;
-          line-height: 1.5;
-          font-weight: 400;
-          padding: 0.625rem 0.75rem;
-        }
-        .quill-editor-wrapper .ql-editor p {
-          font-weight: 300;
-        }
-        .quill-editor-wrapper .ql-editor p,
-        .quill-editor-wrapper .ql-editor li,
-        .quill-editor-wrapper .ql-editor span {
-          font-family: inherit;
-        }
-        .quill-editor-wrapper .ql-editor.ql-blank::before {
-          color: hsl(var(--muted-foreground));
-          font-style: normal;
-          font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
-          left: 0.75rem;
-          right: 0.75rem;
-        }
-          .quill-editor .ql-blank p {
-            font-weight: 300;
-          }
-      `}</style>
     </div>
   );
 }

@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 **status** | **string** |  | [optional] [default to undefined]
 **title** | **string** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
+**video** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **video_filename** | **string** |  | [optional] [default to undefined]
-**video_url** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -42,8 +42,8 @@ const instance: ModelsVideoSubmissionResponse = {
     status,
     title,
     updated_at,
+    video,
     video_filename,
-    video_url,
 };
 ```
 

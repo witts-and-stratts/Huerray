@@ -66,11 +66,11 @@ export default function BrandDashboardPage() {
     const totalGigs = gigs.length;
 
     const totalSpend = gigs.reduce( ( sum, gig ) => {
-      if ( typeof gig.gig_cost === 'number' ) return sum + gig.gig_cost;
-      if ( typeof gig.compensation === 'number' && typeof gig.number_of_videos === 'number' ) {
-        return sum + ( gig.compensation * gig.number_of_videos );
+      if ( gig.gig_cost?.value != null ) return sum + ( gig.gig_cost?.value ?? 0 );
+      if ( gig.compensation?.value != null && typeof gig.number_of_videos === 'number' ) {
+        return sum + ( ( gig.compensation?.value ?? 0 ) * gig.number_of_videos );
       }
-      if ( typeof gig.compensation === 'number' ) return sum + gig.compensation;
+      if ( gig.compensation?.value != null ) return sum + ( gig.compensation?.value ?? 0 );
       return sum;
     }, 0 );
 
@@ -122,7 +122,7 @@ export default function BrandDashboardPage() {
   }
 
   const brandName = brand?.company_name || 'Brand Dashboard';
-  const brandLogo = brand?.profile_photo_url || brand?.logo_url || brand?.logo || '';
+  const brandLogo = brand?.profile_photo?.asset || brand?.logo_url || brand?.logo || '';
 
   return (
     <div className="flex flex-1 flex-col h-full">

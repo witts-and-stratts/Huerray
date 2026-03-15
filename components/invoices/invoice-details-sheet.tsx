@@ -66,7 +66,7 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
           { invoice.brand_id && (
             <div className="flex items-center gap-3 p-3 rounded-lg border bg-muted/20">
               <Avatar size="sm" className="size-8">
-                { brand?.profile_photo_url && <AvatarImage src={ brand.profile_photo_url } alt={ invoice.brand_name } /> }
+                { brand?.profile_photo?.asset && <AvatarImage src={ brand.profile_photo.asset } alt={ invoice.brand_name } /> }
                 <AvatarFallback>{ getInitials( invoice.brand_name ) }</AvatarFallback>
               </Avatar>
               <div>
@@ -80,7 +80,7 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
           { invoice.campaign_name && (
             <div className="flex items-center gap-3 p-3 rounded-lg border bg-muted/20">
               <Avatar size="sm" className="size-8">
-                { campaign?.product_image_url && <AvatarImage src={ campaign.product_image_url } alt={ invoice.campaign_name } /> }
+                { campaign?.product_image?.asset && <AvatarImage src={ campaign.product_image.asset } alt={ invoice.campaign_name } /> }
                 <AvatarFallback>{ getInitials( invoice.campaign_name ) }</AvatarFallback>
               </Avatar>
               <div>
@@ -121,7 +121,7 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
                       ) }
                     </div>
                     <span className="text-sm font-medium shrink-0">
-                      { item.amount != null ? formatCurrency( item.amount ) : '—' }
+                      { item.amount?.value != null ? formatCurrency( item.amount.value ) : '—' }
                     </span>
                   </div>
                 ) ) }
@@ -133,7 +133,7 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
           <div className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
             <span className="text-sm font-medium">Total</span>
             <span className="text-base font-semibold">
-              { invoice.total_amount != null ? formatCurrency( invoice.total_amount ) : '—' }
+              { invoice.total?.value != null ? formatCurrency( invoice.total.value ) : '—' }
             </span>
           </div>
 

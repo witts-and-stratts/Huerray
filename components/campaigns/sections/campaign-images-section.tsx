@@ -55,7 +55,7 @@ export const CampaignImagesSection = memo( function CampaignImagesSection( {
 
   return (
     <AnimatePresence>
-      <div className='mt-2 flex gap-2'>
+      <div key="images-content" className='mt-2 flex gap-2'>
         <div className={ cn( 'flex flex-col gap-4', !items ? 'flex-auto' : 'w-full' ) }>
           <Card className='p-0 overflow-hidden h-full min-h-[calc(100vh-16rem)] ring-0 border-dashed border border-burgundy-200 ring-transparent hover:ring-8 hover:ring-burgundy-600/20 shadow-none'>
             <FilesDropzone
@@ -67,6 +67,7 @@ export const CampaignImagesSection = memo( function CampaignImagesSection( {
                 'image/png': [ '.png' ],
                 'image/gif': [ '.gif' ],
               } }
+              showTitle={ false }
               maxSize={ 10 * 1024 * 1024 }
               title="Upload Images"
               description={ <>Drag and drop files here<br />Support for Image files</> }
@@ -87,12 +88,14 @@ export const CampaignImagesSection = memo( function CampaignImagesSection( {
       </div >
 
       <ImportUrlDialog
+        key="import-dialog"
         open={ isImportDialogOpen }
         onOpenChange={ setIsImportDialogOpen }
         onImport={ addImportedItem }
       />
 
       <PreviewDialog
+        key="preview-dialog"
         item={ previewItem }
         onClose={ () => setPreviewItem( null ) }
       />

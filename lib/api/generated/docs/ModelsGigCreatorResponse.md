@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **campaign** | [**ModelsCampaignResponse**](ModelsCampaignResponse.md) |  | [optional] [default to undefined]
 **campaign_id** | **string** |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
-**compensation** | **number** |  | [optional] [default to undefined]
+**compensation** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
 **content_guidelines** | **string** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **enforce_single_creator_submission** | **boolean** |  | [optional] [default to undefined]

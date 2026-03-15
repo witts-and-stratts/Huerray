@@ -103,7 +103,7 @@ export default function BrandCompleteProfilePage() {
           street: value.street || '',
           vat_id: value.vatId || '',
           postal_code: value.postalCode || '',
-          profile_photo_url: value.profilePhotoUrl || '',
+          profile_photo: value.profilePhotoUrl ? { asset: value.profilePhotoUrl } : undefined,
         };
 
         await brandApi.brandsPost( { request: updateRequest } );

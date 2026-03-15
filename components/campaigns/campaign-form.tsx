@@ -9,16 +9,40 @@ import {
 } from '@/components/dashboard-ui/alert-dialog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/dashboard-ui/breadcrumb';
 import { Button } from '@/components/dashboard-ui/button';
-import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/dashboard-ui/dropdown-menu';
+import { ActionMenu, type MenuAction } from '@/components/dashboard-ui/action-menu';
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { SuperField } from '@/components/dashboard-ui/super-field';
+import { useDeleteCampaign } from '@/lib/api/hooks/campaigns';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 import { useForm, useStore } from '@tanstack/react-form';
-import { ChevronDown, SlashIcon } from 'lucide-react';
+import { ChevronDown, Eye, Loader2, SlashIcon, Trash2, Undo2 } from 'lucide-react';
+import { toast } from 'sonner';
 import { ReactNode, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { CampaignSummaryDialog } from './campaign-summary-dialog';
-import { type CreateCampaignSchema } from './schema';
+import { createCampaignSchema, type CreateCampaignSchema } from './schema';
+
+const fieldToTab: Record<string, string> = {
+  campaign_name: 'overview',
+  description: 'overview',
+  category: 'overview',
+  keywords: 'overview',
+  product_url: 'overview',
+  product_image: 'overview',
+  number_of_creators_wanted: 'overview',
+  number_of_videos_wanted: 'overview',
+  content_type: 'overview',
+  video_duration_in_seconds: 'overview',
+  video_format: 'overview',
+  allow_multiple_videos: 'overview',
+  dos: 'instructions',
+  donts: 'instructions',
+  tone_of_voice: 'instructions',
+  documents: 'documents',
+  images: 'images',
+  videos: 'videos',
+};
 import { CampaignBasicInfo } from './sections/campaign-basic-info';
 import { CampaignDocumentsSection } from './sections/campaign-documents-section';
 import { CampaignImagesSection } from './sections/campaign-images-section';
@@ -37,19 +61,35 @@ function Activity( { mode, children }: { mode: 'visible' | 'hidden'; children: R
 
 import { resetCampaign, updateCampaign } from '@/lib/redux/features/campaign/campaignSlice';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
+import type { UploadedFile } from './sections/documents/types';
+import { ButtonGroup } from '../dashboard-ui/button-group';
 
-interface CampaignFormProps {
-  onSubmit?: ( values: CreateCampaignSchema ) => Promise<void>;
-  initialValues?: Partial<CreateCampaignSchema>;
-  mode?: 'create' | 'edit';
+export interface CampaignFileItems {
+  documents: UploadedFile[];
+  videos: UploadedFile[];
 }
 
-export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: CampaignFormProps ) {
+interface CampaignFormProps {
+  onSubmit?: ( values: CreateCampaignSchema, fileItems: CampaignFileItems, intent: 'draft' | 'publish' ) => Promise<void>;
+  initialValues?: Partial<CreateCampaignSchema>;
+  initialDocuments?: UploadedFile[];
+  initialVideos?: UploadedFile[];
+  mode?: 'create' | 'edit';
+  campaignId?: string;
+}
+
+export function CampaignForm( { onSubmit, initialValues, initialDocuments, initialVideos, mode = 'create', campaignId }: CampaignFormProps ) {
   const dispatch = useAppDispatch();
   const reduxCampaign = useAppSelector( ( state: { campaign: CreateCampaignSchema; } ) => state.campaign );
 
+  const router = useRouter();
+  const deleteCampaign = useDeleteCampaign();
+
   const [ isSubmitting, setIsSubmitting ] = useState( false );
+  const [ submitIntent, setSubmitIntent ] = useState<'draft' | 'publish'>( 'draft' );
   const [ subheadTabValue, setSubheadTabValue ] = useState( 'overview' );
+  const [ showDeleteConfirm, setShowDeleteConfirm ] = useState( false );
+  const [ showPreview, setShowPreview ] = useState( false );
 
   // Trace Redux state for debugging
   useEffect( () => {
@@ -59,17 +99,19 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
   }, [ reduxCampaign, mode ] );
 
   // Lifted state for files
-  const documentsState = useCampaignFiles( initialValues?.documents );
+  const documentsState = useCampaignFiles( initialDocuments ?? initialValues?.documents );
   const imagesState = useCampaignFiles( initialValues?.images );
-  const videosState = useCampaignFiles( initialValues?.videos );
+  const videosState = useCampaignFiles( initialVideos ?? initialValues?.videos );
 
   const [ validationError, setValidationError ] = useState<{ title: string; message: string; tab: string; } | null>( null );
   const [ showSummary, setShowSummary ] = useState( false );
 
   const form = useForm( {
     defaultValues: mode === 'edit' && initialValues ? { ...reduxCampaign, ...initialValues } : reduxCampaign,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    validators: { onSubmit: createCampaignSchema as any },
     onSubmit: async ( { value } ) => {
-      // 2. Check for file upload errors
+      // 1. Check for file upload errors
       const validateFilesState = ( state: ReturnType<typeof useCampaignFiles>, tabName: string, label: string ) => {
         const uploading = state.items.filter( i => i.status === 'uploading' ).length;
         const errors = state.items.filter( i => i.status === 'error' ).length;
@@ -90,10 +132,24 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
       if ( mode === 'edit' && onSubmit ) {
         setIsSubmitting( true );
         try {
-          await onSubmit( value as CreateCampaignSchema );
+          await onSubmit( value as CreateCampaignSchema, { documents: documentsState.items, videos: videosState.items }, 'draft' );
           dispatch( resetCampaign() );
         } catch ( error ) {
           console.error( 'Submission failed', error );
+        } finally {
+          setIsSubmitting( false );
+        }
+      } else if ( submitIntent === 'draft' ) {
+        setIsSubmitting( true );
+        try {
+          if ( onSubmit ) {
+            await onSubmit( value as CreateCampaignSchema, { documents: documentsState.items, videos: videosState.items }, 'draft' );
+          }
+          dispatch( resetCampaign() );
+          toast.success( 'Draft saved successfully' );
+        } catch ( error ) {
+          console.error( 'Submission failed', error );
+          toast.error( 'Failed to save draft. Please try again.' );
         } finally {
           setIsSubmitting( false );
         }
@@ -102,28 +158,6 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
       }
     },
     onSubmitInvalid: ( { formApi } ) => {
-      // Mapping fields to tabs
-      const fieldToTab: Record<string, string> = {
-        campaign_name: 'overview',
-        description: 'overview',
-        category: 'overview',
-        keywords: 'overview',
-        product_url: 'overview',
-        product_image: 'overview',
-        dos: 'instructions',
-        donts: 'instructions',
-        number_of_creators_wanted: 'overview',
-        number_of_videos_wanted: 'overview',
-        content_type: 'overview',
-        video_duration_in_seconds: 'overview',
-        video_format: 'overview',
-        allow_multiple_videos: 'overview',
-        tone_of_voice: 'instructions',
-        documents: 'documents',
-        images: 'images',
-        videos: 'videos',
-      };
-
       const errors = formApi.state.fieldMeta;
       const firstErrorField = Object.keys( errors ).find( ( key ) => {
         const meta = errors[ key as keyof typeof errors ];
@@ -133,11 +167,9 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
       if ( firstErrorField ) {
         const targetTab = fieldToTab[ firstErrorField ] || 'overview';
         setSubheadTabValue( targetTab );
-        setValidationError( {
-          title: 'Validation Error',
-          message: 'Please fix the errors in the form before saving.',
-          tab: targetTab
-        } );
+        const firstFieldErrors = errors[ firstErrorField as keyof typeof errors ];
+        const firstMessage = firstFieldErrors?.errors?.[ 0 ];
+        toast.error( typeof firstMessage === 'string' ? firstMessage : 'Please fix the errors in the form.' );
       }
     },
   } );
@@ -154,24 +186,55 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
   }, [ formValues, dispatch, mode ] );
 
   const handleSaveAndExit = async () => {
+    setSubmitIntent( 'draft' );
     form.handleSubmit();
   };
 
+  const handlePublish = async () => {
+    setSubmitIntent( 'publish' );
+    form.handleSubmit();
+  };
+
+  const handleDiscardChanges = () => {
+    dispatch( resetCampaign() );
+    router.push( '/brand/campaigns' );
+  };
+
+  const handleDelete = async () => {
+    if ( !campaignId ) return;
+    try {
+      await deleteCampaign.mutateAsync( campaignId );
+      toast.success( 'Campaign deleted' );
+      dispatch( resetCampaign() );
+      router.push( '/brand/campaigns' );
+    } catch {
+      toast.error( 'Failed to delete campaign' );
+    } finally {
+      setShowDeleteConfirm( false );
+    }
+  };
+
   const handleConfirmSubmit = async () => {
-    setShowSummary( false );
     setIsSubmitting( true );
     try {
       if ( onSubmit ) {
-        await onSubmit( form.state.values as CreateCampaignSchema );
+        await onSubmit( form.state.values as CreateCampaignSchema, { documents: documentsState.items, videos: videosState.items }, 'publish' );
       } else {
         await new Promise( resolve => setTimeout( resolve, 1500 ) );
       }
       dispatch( resetCampaign() );
+      setShowSummary( false );
     } catch ( error ) {
       console.error( 'Submission failed', error );
     } finally {
       setIsSubmitting( false );
     }
+  };
+
+  const handleSaveDraftFromSummary = async () => {
+    setShowSummary( false );
+    setSubmitIntent( 'draft' );
+    await form.handleSubmit();
   };
 
   return (
@@ -207,30 +270,65 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
           ] } />
         }
       >
-        <ButtonGroup>
-          <Button
-            type="button"
-            onClick={ handleSaveAndExit }
-            size="sm"
-            disabled={ isSubmitting }
-            className="w-full md:w-40"
-          >
-            { isSubmitting ? 'Submitting...' : ( mode === 'edit' ? 'Save changes' : 'Save and preview' ) }
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size='icon-sm'>
-                <ChevronDown />
+        <div className="flex items-center gap-2">
+          <ButtonGroup>
+            <Button
+              type="button"
+              onClick={ handleSaveAndExit }
+              size="sm"
+              disabled={ isSubmitting }
+              className="w-full md:w-40"
+            >
+              { isSubmitting && submitIntent === 'draft' ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" />
+                  { mode === 'edit' ? 'Saving changes...' : 'Saving draft...' }
+                </>
+              ) : ( mode === 'edit' ? 'Save changes' : 'Save draft' ) }
+            </Button>
+            { mode === 'create' && (
+              <Button
+                type="button"
+                variant="default"
+                onClick={ handlePublish }
+                size="sm"
+                disabled={ isSubmitting }
+                className="w-full md:w-40"
+              >
+                { isSubmitting && submitIntent === 'publish' ? 'Publishing...' : 'Publish' }
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuGroup>
-                <DropdownMenuLabel>Options</DropdownMenuLabel>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </ButtonGroup>
+            ) }
+            <ActionMenu
+              data={ null }
+              label="Actions"
+              trigger={
+                <Button variant="default" size="icon-sm" disabled={ isSubmitting }>
+                  <ChevronDown className="size-4" />
+                </Button>
+              }
+              actions={ [
+                {
+                  label: 'Discard changes',
+                  icon: Undo2,
+                  action: handleDiscardChanges,
+                },
+                {
+                  label: 'Preview changes',
+                  icon: Eye,
+                  action: () => setShowPreview( true ),
+                },
+                {
+                  label: 'Delete',
+                  icon: Trash2,
+                  variant: 'destructive',
+                  separator: true,
+                  condition: () => !!campaignId,
+                  action: () => setShowDeleteConfirm( true ),
+                },
+              ] as MenuAction<null>[] }
+            />
+          </ButtonGroup>
+        </div>
       </SubHeader>
 
       <Activity mode={ subheadTabValue === 'overview' ? 'visible' : 'hidden' }>
@@ -345,10 +443,43 @@ export function CampaignForm( { onSubmit, initialValues, mode = 'create' }: Camp
         </AlertDialogContent>
       </AlertDialog>
 
+      <ConfirmDialog
+        open={ showDeleteConfirm }
+        onOpenChange={ setShowDeleteConfirm }
+        title="Delete campaign?"
+        description="This action cannot be undone. The campaign and all its data will be permanently deleted."
+        confirmLabel="Delete campaign"
+        cancelLabel="Cancel"
+        onConfirm={ handleDelete }
+        isLoading={ deleteCampaign.isPending }
+        loadingText="Deleting..."
+        variant="destructive"
+      />
+
       <CampaignSummaryDialog
         open={ showSummary }
         onOpenChange={ setShowSummary }
         onConfirm={ handleConfirmSubmit }
+        onSaveDraft={ handleSaveDraftFromSummary }
+        isConfirming={ isSubmitting && submitIntent === 'publish' }
+        isSavingDraft={ isSubmitting && submitIntent === 'draft' }
+        data={ form.state.values }
+        documents={ documentsState.items }
+        images={ imagesState.items }
+        videos={ videosState.items }
+      />
+
+      <CampaignSummaryDialog
+        previewOnly
+        open={ showPreview }
+        onOpenChange={ setShowPreview }
+        onConfirm={ () => setShowPreview( false ) }
+        onSaveDraft={ mode === 'edit'
+          ? async () => { setShowPreview( false ); await handleSaveAndExit(); }
+          : async () => { setShowPreview( false ); await handleSaveDraftFromSummary(); }
+        }
+        saveDraftLabel={ mode === 'edit' ? 'Save changes' : 'Save draft' }
+        isSavingDraft={ isSubmitting && submitIntent === 'draft' }
         data={ form.state.values }
         documents={ documentsState.items }
         images={ imagesState.items }

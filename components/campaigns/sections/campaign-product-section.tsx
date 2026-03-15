@@ -10,10 +10,11 @@ import { getUploadProgressPercentage } from '@/lib/utils/axios-utils';
 import { CheckmarkCircle01Icon, Link01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { UploadIcon } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { CampaignFormApi } from '../schema';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 const DEFAULT_FILE_PREVIEW = '/images/product-placeholder.jpg';
 
@@ -51,30 +52,34 @@ const ImagePreview = memo( function ImagePreview( {
   isUploading,
   uploadProgress,
 }: ImagePreviewProps ) {
+  const isDefaultPreview = filePreview === DEFAULT_FILE_PREVIEW;
+
   return (
-    <div className='flex p-0 gap-1 rounded-lg overflow-hidden h-full relative group'>
-      <AnimatePresence>
-        <div className='border-r w-[160px] aspect-square flex shrink-0 relative'>
-          <motion.img
-            alt="Preview"
-            className="w-full h-full object-cover object-top"
-            src={ filePreview }
-            animate={ { opacity: 1 } }
-            exit={ { opacity: 0 } }
-          />
-          { isUploading && (
-            <div className='absolute inset-0 bg-black/40 flex items-center justify-center p-4'>
-              <Progress className='w-full' value={ uploadProgress } />
-            </div>
-          ) }
-          { !isUploading && uploadProgress === 100 && (
-            <div className='absolute bottom-2 right-2 text-green-500 bg-white rounded-full'>
-              <HugeiconsIcon icon={ CheckmarkCircle01Icon } size={ 24 } />
-            </div>
-          ) }
+    <div className='flex p-0 gap-4 rounded-lg overflow-hidden h-full relative w-full'>
+      <div className='w-[160px] aspect-square flex shrink-0 relative'>
+        <motion.img
+          alt="Preview"
+          className="w-full h-full object-cover object-top"
+          src={ filePreview.startsWith( 'http' ) ? imgpresets.card( filePreview ) : filePreview }
+          animate={ { opacity: 1 } }
+          exit={ { opacity: 0 } }
+        />
+        { isUploading && (
+          <div className='absolute inset-0 bg-black/40 flex items-center justify-center p-4'>
+            <Progress className='w-full' value={ uploadProgress } />
+          </div>
+        ) }
+        { !isUploading && uploadProgress === 100 && (
+          <div className='absolute bottom-2 right-2 text-green-500 bg-white rounded-full'>
+            <HugeiconsIcon icon={ CheckmarkCircle01Icon } size={ 24 } />
+          </div>
+        ) }
+      </div>
+      { isDefaultPreview && (
+        <div className='flex-1 flex items-center justify-center'>
+          <EmptyState />
         </div>
-      </AnimatePresence>
-      <EmptyState />
+      ) }
     </div>
   );
 } );
@@ -141,7 +146,7 @@ const ProductImageUploader = memo( function ProductImageUploader( {
   return (
     <Dropzone
       accept={ ACCEPTED_FILE_TYPES }
-      className='p-0 h-32 w-full transition-all duration-300 border border-dashed hover:border-maroon-200 hover:bg-maroon-50/30'
+      className='p-0 h-32 w-full transition-all duration-300 border border-dashed border-burgundy-200 hover:ring-8 hover:ring-burgundy-600/20'
       onDrop={ handleDrop }
       onError={ handleDropError }
       src={ files }

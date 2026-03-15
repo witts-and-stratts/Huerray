@@ -13,13 +13,16 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
 
 export interface ModelsCampaignBrandResponse {
     'category'?: string;
     'company_name'?: string;
     'country'?: string;
     'id'?: string;
-    'profile_photo_url'?: string;
+    'profile_photo'?: ModelsContentMedia;
     'website_url'?: string;
 }
 

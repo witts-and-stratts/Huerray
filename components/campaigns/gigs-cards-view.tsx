@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from 'react';
+import { ModelsGigResponse } from '@/lib/api/generated/models';
 import { Table } from '@tanstack/react-table';
 import { GigCard } from './gig-card';
-import { ModelsGigResponse } from '@/lib/api/generated/models';
 
 interface GigsCardsProps {
   table: Table<ModelsGigResponse>;

@@ -63,7 +63,7 @@ export function SubmissionCard( {
 
   const commentsResults = useSubmissionComments( submission.id );
   const commentCount = commentsResults.reduce( ( sum, r ) => sum + ( r.data?.data?.length ?? 0 ), 0 );
-
+  const videoPoster = submission.video?.thumbnail ? imgpresets.thumbnail( submission.video.thumbnail ) : undefined;
   return (
     <>
       <Card
@@ -77,12 +77,13 @@ export function SubmissionCard( {
         onBlurCapture={ () => setIsHovering( false ) }
       >
         <OverlayVideoPlayer
-          videoUrl={ submission.video_url }
+          videoUrl={ submission.video?.asset }
           showControl={ showControl }
           compact={ isMiniLayout }
           onExpand={ handleExpand }
           commentCount={ commentCount }
           onCommentClick={ handleCommentClick }
+          poster={ videoPoster }
         />
 
         <div className="submission-card__overlay" />
@@ -107,7 +108,7 @@ export function SubmissionCard( {
               className="shrink-0"
             >
               <Avatar className={ isMiniLayout ? "size-6" : "size-8" }>
-                <AvatarImage src={ imgpresets.avatar( submission.creator?.profile_image_url || '' ) } alt={ submission.creator?.first_name || '' } />
+                <AvatarImage src={ imgpresets.avatar( submission.creator?.profile_image?.asset || '' ) } alt={ submission.creator?.first_name || '' } />
                 <AvatarFallback>{ submission.creator?.first_name?.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
               </Avatar>
             </motion.div>

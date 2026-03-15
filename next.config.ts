@@ -19,7 +19,10 @@ const nextConfig: NextConfig = {
   experimental: {
     // turbopackFileSystemCacheForDev: true,
   },
-  allowedDevOrigins: ['dev.huerray.de'],
+  allowedDevOrigins: [ 'dev.huerray.de' ],
+  turbopack: {
+    root: process.cwd(),
+  }
 };
 
 export default withNextIntl(nextConfig);

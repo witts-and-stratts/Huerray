@@ -15,13 +15,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsMoney } from './models-money';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ModelsPaymentItemResponse } from './models-payment-item-response';
 
 export interface ModelsPaymentResponse {
     'created_at'?: string;
     'creator_id'?: string;
     'creator_name'?: string;
-    'currency'?: string;
     'id'?: string;
     'item_count'?: number;
     'notes'?: string;
@@ -31,7 +33,7 @@ export interface ModelsPaymentResponse {
     'payment_method'?: string;
     'payment_status'?: string;
     'reference'?: string;
-    'total_amount'?: number;
+    'total'?: ModelsMoney;
     'updated_at'?: string;
 }
 

@@ -1,15 +1,37 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CampaignForm } from '@/components/campaigns/campaign-form';
+import { CampaignForm, type CampaignFileItems } from '@/components/campaigns/campaign-form';
 import { CreateCampaignSchema } from '@/components/campaigns/schema';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { apiClient, apiConfiguration, BASE_URL } from '@/lib/api/client';
+import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
 import { ModelsCreateCampaignRequest } from '@/lib/api/generated/models';
+import type { ModelsUploadsImagePost200Response } from '@/lib/api/models/models-uploads-image-post200-response';
 import { useCreateCampaign } from '@/lib/api/hooks/campaigns';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import * as React from 'react';
+
+async function uploadThumbnailDataUrl( dataUrl: string ): Promise<string | undefined> {
+  try {
+    const fetchResponse = await fetch( dataUrl );
+    const blob = await fetchResponse.blob();
+    const file = new File( [ blob ], 'thumbnail.jpg', { type: blob.type || 'image/jpeg' } );
+    const uploadApi = UploadApiFactory( apiConfiguration, undefined, apiClient );
+    const response = await uploadApi.uploadsImagesPost( { images: file } ) as unknown as ModelsUploadsImagePost200Response;
+    const uploadedFile = response.data.data[ 0 ] as any;
+    if ( uploadedFile?.url ) {
+      return uploadedFile.url.startsWith( 'http' )
+        ? uploadedFile.url
+        : `${ BASE_URL.replace( '/api/v1', '' ) }${ uploadedFile.url }`;
+    }
+  } catch ( e ) {
+    console.error( 'Failed to upload thumbnail', e );
+  }
+  return undefined;
+}
 
 type CampaignType = 'human' | 'ai' | null;
 
@@ -41,14 +63,28 @@ export default function NewCampaignPage() {
     setCampaignType( type );
   }, [] );
 
-  const handleSubmit = async ( values: CreateCampaignSchema ) => {
+  const handleSubmit = async ( values: CreateCampaignSchema, fileItems: CampaignFileItems, intent: 'draft' | 'publish' ) => {
+    const videoItems = fileItems.videos.filter( v => v.status === 'success' );
+    const documentItems = fileItems.documents.filter( d => d.status === 'success' );
+
+    const [ sampleVideos, campaignDocuments ] = await Promise.all( [
+      Promise.all( videoItems.map( async ( v ) => ( {
+        asset: v.url,
+        thumbnail: v.preview ? await uploadThumbnailDataUrl( v.preview ) : undefined,
+      } ) ) ),
+      Promise.all( documentItems.map( async ( d ) => ( {
+        asset: d.url,
+        thumbnail: d.preview ? await uploadThumbnailDataUrl( d.preview ) : undefined,
+      } ) ) ),
+    ] );
+
     const requestData: ModelsCreateCampaignRequest = {
       campaign_name: values.campaign_name,
       description: values.description,
       category: values.category as any,
       keywords: values.keywords.join( ', ' ),
       product_url: values.product_url || undefined,
-      product_image_url: values.product_image || undefined,
+      product_image: values.product_image ? { asset: values.product_image } : undefined,
       number_of_creators_wanted: values.number_of_creators_wanted,
       number_of_videos_wanted: values.number_of_videos_wanted,
       video_duration_in_seconds_in_seconds: values.video_duration_in_seconds,
@@ -57,14 +93,22 @@ export default function NewCampaignPage() {
       tone_of_voice: values.tone_of_voice || undefined,
       dos: values.dos || undefined,
       donts: values.donts || undefined,
-      campaign_documents: values.documents,
-      campaign_images: values.images,
+      campaign_documents: campaignDocuments.length > 0 ? campaignDocuments : undefined,
+      campaign_images: values.images?.map( ( url: string ) => ( { asset: url } ) ),
+      sample_videos: sampleVideos.length > 0 ? sampleVideos : undefined,
     };
 
     return new Promise<void>( ( resolve, reject ) => {
       createCampaign.mutate( requestData, {
-        onSuccess: () => {
-          router.push( '/brand/campaigns' );
+        onSuccess: ( response ) => {
+          if ( intent === 'publish' ) {
+            router.push( '/brand/campaigns' );
+          } else {
+            const campaignId = response?.data?.id;
+            if ( campaignId ) {
+              router.push( `/brand/campaigns/${ campaignId }/edit` );
+            }
+          }
           resolve();
         },
         onError: ( error ) => {

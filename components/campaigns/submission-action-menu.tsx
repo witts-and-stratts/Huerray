@@ -76,7 +76,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
   };
 
   const handleViewSubmission = () => {
-    if ( !submission.video_url ) {
+    if ( !submission.video?.asset ) {
       toast.error( 'No video available for this submission' );
       return;
     }
@@ -154,7 +154,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         submission: {
           title: title.trim() || undefined,
           description: description.trim() || undefined,
-          video_url: uploadedVideoData.url,
+          video: { asset: uploadedVideoData.url },
           video_filename: uploadedVideoData?.filename || submission.video_filename,
         },
       } ),
@@ -190,7 +190,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
     {
       label: 'View Submission',
       icon: ExternalLink,
-      condition: ( current ) => !!current.video_url,
+      condition: ( current ) => !!current.video?.asset,
       action: () => handleViewSubmission(),
     },
     {

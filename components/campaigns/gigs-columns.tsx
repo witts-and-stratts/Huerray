@@ -20,6 +20,7 @@ import { useBasePath } from '@/lib/providers/path-provider';
 import { AvatarCollage } from './avatar-collage';
 import { ApplicationCard } from './application-card';
 import { BrandAvatar } from './brand-avatar';
+import { BrandHoverCard } from './brand-hover-card';
 import { GigActionMenu } from './gig-action-menu';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { GigStatusBadge } from './gig-status-badge';
@@ -32,15 +33,15 @@ import { useFormatCurrency } from '@/lib/hooks/format';
 
 const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewGig: ( gig: ModelsGigResponse ) => void; } ) => {
   const { title, gig_status, posting_start_date, posting_end_date } = row.original;
-  const coverImage = row.original.campaign?.product_image_url ?? row.original.campaign?.campaign_images?.[ 0 ];
+  const coverImage = row.original.campaign?.product_image?.asset ?? row.original.campaign?.campaign_images?.[ 0 ]?.asset;
 
   const brand = row.original.campaign?.brand;
   const campaign = row.original.campaign;
 
   return (
-    <div className='flex gap-4'>
+    <div className='flex gap-4 pl-4'>
       <div className="relative shrink-0 size-12 pb-1 pr-1">
-        <div className={ cn( "size-10 overflow-hidden rounded-full", !coverImage && "bg-muted" ) }>
+        <div className={ cn( "size-10 overflow-hidden rounded-full" ) }>
           { coverImage && (
             <img
               src={ imgpresets.card( coverImage ) }
@@ -51,10 +52,12 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
           ) }
         </div>
         { brand && (
-          <BrandAvatar
-            brand={ brand as any }
-            className="absolute bottom-0 right-0 size-5 rounded-full border bg-white p-0.5"
-          />
+          <BrandHoverCard brand={ brand as any } brandName={ brand.company_name }>
+            <BrandAvatar
+              brand={ brand as any }
+              className="absolute bottom-0 right-0 size-5 rounded-full border bg-white p-0.5 hover:ring-2 hover:ring-primary/30 transition-shadow cursor-pointer"
+            />
+          </BrandHoverCard>
         ) }
       </div>
       <div className='flex flex-col gap-2'>
@@ -96,7 +99,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const people = applications.map( app => ( {
     first_name: app.creator?.first_name ?? '',
     last_name: app.creator?.last_name ?? '',
-    avatar: app.creator?.profile_image_url ?? '',
+    avatar: app.creator?.profile_image?.asset ?? '',
   } ) );
 
   return (
@@ -133,7 +136,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const people = invitations.map( inv => ( {
     first_name: inv.creator?.first_name ?? '',
     last_name: inv.creator?.last_name ?? '',
-    avatar: inv.creator?.profile_image_url ?? '',
+    avatar: inv.creator?.profile_image?.asset ?? '',
   } ) );
 
   return (
@@ -169,7 +172,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const people = submissions.map( sub => ( {
     first_name: sub.creator?.first_name ?? '',
     last_name: sub.creator?.last_name ?? '',
-    avatar: sub.creator?.profile_image_url ?? '',
+    avatar: sub.creator?.profile_image?.asset ?? '',
   } ) );
 
   return (
@@ -223,7 +226,7 @@ const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 // ─── Reward Cell ──────────────────────────────────────────────────────────────
 
 const RewardCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
-  const amount = row.original.compensation ?? row.original.gig_cost;
+  const amount = row.original.compensation?.value ?? row.original.gig_cost?.value;
   if ( amount == null ) return <span className="text-muted-foreground">—</span>;
   return (
     <span className="font-primary text-primary text-lg">{ useFormatCurrency( amount, "EUR" ) }</span>
@@ -306,10 +309,10 @@ export const getColumns = (
     {
       id: 'gig_status',
       accessorKey: 'gig_status',
-      cell: () => <></>,
+      cell: () => <span data-hidden-column="true" />,
       enableSorting: false,
       enableHiding: false,
-      header: () => <></>,
+      header: () => <span data-hidden-column="true" />,
       filterFn: ( row, id, filterValue ) => {
         if ( filterValue === undefined ) return true;
         if ( !Array.isArray( filterValue ) ) return true;
@@ -318,8 +321,40 @@ export const getColumns = (
       },
     },
     {
+      id: 'created_at',
+      accessorKey: 'created_at',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+    },
+    {
+      id: 'updated_at',
+      accessorKey: 'updated_at',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+    },
+    {
+      id: 'posting_start_date',
+      accessorKey: 'posting_start_date',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+    },
+    {
+      id: 'posting_end_date',
+      accessorKey: 'posting_end_date',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+    },
+    {
       accessorKey: 'details',
-      header: () => <span className='font-regular'>Details</span>,
+      header: () => <span className='font-regular pl-4'>Details</span>,
       cell: ( { row } ) => <>
         <DetailsCell row={ row } onViewGig={ onViewGig } />
       </>,
@@ -348,7 +383,7 @@ export const getColumns = (
       accessorKey: 'gig_cost',
       header: () => <span className='font-regular'>Gig Cost</span>,
       cell: ( { row } ) => {
-        const amount = row.original.gig_cost;
+        const amount = row.original.gig_cost?.value;
         if ( amount == null ) return <span className="text-muted-foreground text-base">—</span>;
         return <span className="text-base font-primary text-primary text-lg">{ useFormatCurrency( amount, "EUR" ) }</span>;
       },

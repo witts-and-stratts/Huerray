@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **enforce_single_creator_submission** | **boolean** |  | [optional] [default to undefined]
 **enforce_unique_creator_submission** | **boolean** |  | [optional] [default to undefined]
 **gender_requirement** | **string** |  | [optional] [default to undefined]
-**gig_cost** | **number** |  | [optional] [default to undefined]
+**gig_cost** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
 **gig_status** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **number_of_videos** | **number** |  | [optional] [default to undefined]

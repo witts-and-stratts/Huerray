@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsMoney } from './models-money';
 
 export interface ModelsCreateGigRequest {
     'age_max'?: number;
@@ -22,7 +25,7 @@ export interface ModelsCreateGigRequest {
     /**
      * Amount per video
      */
-    'compensation': number;
+    'compensation': ModelsMoney;
     'content_guidelines'?: string;
     'enforce_single_creator_submission'?: boolean;
     'enforce_unique_creator_submission'?: boolean;
@@ -30,7 +33,7 @@ export interface ModelsCreateGigRequest {
     /**
      * Total
      */
-    'gig_cost': number;
+    'gig_cost': ModelsMoney;
     'number_of_videos': number;
     'posting_end_date': string;
     'posting_start_date': string;

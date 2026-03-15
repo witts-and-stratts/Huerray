@@ -30,13 +30,9 @@ const configuration = new Configuration();
 const apiInstance = new UploadApi(configuration);
 
 let video: File; //Video file (default to undefined)
-let thumbnailWidth: number; //Optional thumbnail width in pixels (optional) (default to undefined)
-let thumbnailHeight: number; //Optional thumbnail height in pixels (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadsApplicationVideoPost(
-    video,
-    thumbnailWidth,
-    thumbnailHeight
+    video
 );
 ```
 
@@ -45,8 +41,6 @@ const { status, data } = await apiInstance.uploadsApplicationVideoPost(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **video** | [**File**] | Video file | defaults to undefined|
-| **thumbnailWidth** | [**number**] | Optional thumbnail width in pixels | (optional) defaults to undefined|
-| **thumbnailHeight** | [**number**] | Optional thumbnail height in pixels | (optional) defaults to undefined|
 
 
 ### Return type
@@ -90,13 +84,9 @@ const configuration = new Configuration();
 const apiInstance = new UploadApi(configuration);
 
 let documents: File; //PDF files (default to undefined)
-let thumbnailWidth: number; //Optional thumbnail width in pixels (optional) (default to undefined)
-let thumbnailHeight: number; //Optional thumbnail height in pixels (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadsDocumentsPost(
-    documents,
-    thumbnailWidth,
-    thumbnailHeight
+    documents
 );
 ```
 
@@ -105,8 +95,6 @@ const { status, data } = await apiInstance.uploadsDocumentsPost(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **documents** | [**File**] | PDF files | defaults to undefined|
-| **thumbnailWidth** | [**number**] | Optional thumbnail width in pixels | (optional) defaults to undefined|
-| **thumbnailHeight** | [**number**] | Optional thumbnail height in pixels | (optional) defaults to undefined|
 
 
 ### Return type
@@ -362,14 +350,10 @@ const apiInstance = new UploadApi(configuration);
 
 let gigId: string; //Gig ID (default to undefined)
 let video: File; //Video file (default to undefined)
-let thumbnailWidth: number; //Optional thumbnail width in pixels (optional) (default to undefined)
-let thumbnailHeight: number; //Optional thumbnail height in pixels (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadsVideoSubmissionPost(
     gigId,
-    video,
-    thumbnailWidth,
-    thumbnailHeight
+    video
 );
 ```
 
@@ -379,8 +363,6 @@ const { status, data } = await apiInstance.uploadsVideoSubmissionPost(
 |------------- | ------------- | ------------- | -------------|
 | **gigId** | [**string**] | Gig ID | defaults to undefined|
 | **video** | [**File**] | Video file | defaults to undefined|
-| **thumbnailWidth** | [**number**] | Optional thumbnail width in pixels | (optional) defaults to undefined|
-| **thumbnailHeight** | [**number**] | Optional thumbnail height in pixels | (optional) defaults to undefined|
 
 
 ### Return type
@@ -424,13 +406,9 @@ const configuration = new Configuration();
 const apiInstance = new UploadApi(configuration);
 
 let videos: File; //Video files (default to undefined)
-let thumbnailWidth: number; //Optional thumbnail width in pixels (optional) (default to undefined)
-let thumbnailHeight: number; //Optional thumbnail height in pixels (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadsVideosPost(
-    videos,
-    thumbnailWidth,
-    thumbnailHeight
+    videos
 );
 ```
 
@@ -439,8 +417,6 @@ const { status, data } = await apiInstance.uploadsVideosPost(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **videos** | [**File**] | Video files | defaults to undefined|
-| **thumbnailWidth** | [**number**] | Optional thumbnail width in pixels | (optional) defaults to undefined|
-| **thumbnailHeight** | [**number**] | Optional thumbnail height in pixels | (optional) defaults to undefined|
 
 
 ### Return type

@@ -110,7 +110,7 @@ export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' 
                 >
                   { people.map( ( person, index ) => (
                     <motion.div
-                      key={ person.avatar + person.first_name }
+                      key={ `${ person.avatar }-${ person.first_name }-${ index }` }
                       className={ `flex items-center gap-3 p-1 rounded-md ${ onPersonClick ? 'cursor-pointer hover:bg-muted/50 transition-colors duration-200' : '' }` }
                       onClick={ () => {
                         if ( onPersonClick ) {

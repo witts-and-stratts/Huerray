@@ -87,7 +87,7 @@ export default function CompleteProfilePage() {
           twitter_handle: value.twitterHandle,
           portfolio: portfolioJson,
           application_video: value.applicationVideo,
-          profile_image_url: value.profileImageUrl,
+          profile_image: value.profileImageUrl ? { asset: value.profileImageUrl } : undefined,
         };
 
         // Pass as any to bypass strict type check if the field is missing in generated SDK

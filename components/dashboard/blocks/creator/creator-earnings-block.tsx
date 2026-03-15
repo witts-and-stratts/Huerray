@@ -33,7 +33,7 @@ export function CreatorEarningsBlock() {
   );
 
   const totalEarned = useMemo( () =>
-    payments.reduce( ( sum, payment ) => sum + ( payment.total_amount || 0 ), 0 ),
+    payments.reduce( ( sum, payment ) => sum + ( payment.total?.value || 0 ), 0 ),
     [ payments ]
   );
 
@@ -62,7 +62,7 @@ export function CreatorEarningsBlock() {
               <div key={ payment.id } className="rounded-lg border border-border/60 bg-white p-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium">{ formatCurrency( payment.total_amount || 0 ) }</p>
+                    <p className="truncate text-sm font-medium">{ formatCurrency( payment.total?.value || 0 ) }</p>
                     <p className="mt-0.5 truncate text-xs text-muted-foreground">
                       { toDate( payment.created_at ) }
                     </p>

@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { stripTags } from '@/lib/utils';
 import { SentenceCase } from '@/components/text-case';
 import { BrandHoverCard } from '@/components/campaigns/brand-hover-card';
+import { Content } from '../content';
 
 interface CampaignBriefCardProps {
   campaign: ModelCampaign;
@@ -27,7 +28,7 @@ export function CampaignBriefCard( { campaign, keywordList }: CampaignBriefCardP
           </div>
           <BrandHoverCard brand={ campaign.brand } brandName={ brandName }>
             <Avatar className="size-10 shrink-0 hover:ring-2 hover:ring-primary/30 transition-shadow cursor-pointer">
-              <AvatarImage src={ campaign.brand?.profile_photo_url || '' } alt={ brandName } />
+              <AvatarImage src={ campaign.brand?.profile_photo?.asset || '' } alt={ brandName } />
               <AvatarFallback>{ brandName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
             </Avatar>
           </BrandHoverCard>
@@ -35,15 +36,15 @@ export function CampaignBriefCard( { campaign, keywordList }: CampaignBriefCardP
       </CardHeader>
       <CardContent className="space-y-4 text-sm">
         <WrappedCard title='Description' variant='flush'>
-          <p className="font-regular leading-relaxed text-foreground/85" dangerouslySetInnerHTML={ { __html: stripTags( campaign.description!, [ 'p', ] ) || 'No description provided.' } } />
+          <Content content={ campaign.description! } />
         </WrappedCard>
 
         <div className="grid grid-cols-1 gap-4">
           <WrappedCard title='Do&apos;s' variant='flush'>
-            <p className="font-regular leading-relaxed text-foreground/85" dangerouslySetInnerHTML={ { __html: stripTags( campaign.dos!, [ 'p', ] ) || 'No guidance provided.' } } />
+            <Content content={ campaign.dos! } />
           </WrappedCard>
           <WrappedCard title='Don&apos;ts' variant='flush'>
-            <p className="font-regular leading-relaxed text-foreground/85" dangerouslySetInnerHTML={ { __html: stripTags( campaign.donts!, [ 'p', ] ) || 'No restrictions provided.' } } />
+            <Content content={ campaign.donts! } />
           </WrappedCard>
         </div>
 

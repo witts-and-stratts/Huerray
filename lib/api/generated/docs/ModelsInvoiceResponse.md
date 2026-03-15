@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **campaign_id** | **string** |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
-**currency** | **string** |  | [optional] [default to undefined]
 **due_date** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **invoice_id** | **string** |  | [optional] [default to undefined]
@@ -22,7 +21,7 @@ Name | Type | Description | Notes
 **notes** | **string** |  | [optional] [default to undefined]
 **paid_date** | **string** |  | [optional] [default to undefined]
 **pdf_path** | **string** |  | [optional] [default to undefined]
-**total_amount** | **number** |  | [optional] [default to undefined]
+**total** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -36,7 +35,6 @@ const instance: ModelsInvoiceResponse = {
     campaign_id,
     campaign_name,
     created_at,
-    currency,
     due_date,
     id,
     invoice_id,
@@ -48,7 +46,7 @@ const instance: ModelsInvoiceResponse = {
     notes,
     paid_date,
     pdf_path,
-    total_amount,
+    total,
     updated_at,
 };
 ```

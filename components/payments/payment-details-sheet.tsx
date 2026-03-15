@@ -39,7 +39,7 @@ export function PaymentDetailsSheet( { payment, open, onOpenChange }: PaymentDet
   if ( !payment ) return null;
 
   const creator = creatorData;
-  const creatorImageUrl = creator?.profile_image_url;
+  const creatorImageUrl = creator?.profile_image?.asset;
   const items = payment.payment_items || [];
 
   return (
@@ -109,14 +109,14 @@ export function PaymentDetailsSheet( { payment, open, onOpenChange }: PaymentDet
                       { item.gig_title && item.description && (
                         <p className="text-xs text-muted-foreground truncate">{ item.gig_title }</p>
                       ) }
-                      { item.item_count && item.cost_per_item && (
+                      { item.item_count && item.cost_per_item?.value && (
                         <p className="text-xs text-muted-foreground">
-                          { item.item_count } × { formatCurrency( item.cost_per_item ) }
+                          { item.item_count } × { formatCurrency( item.cost_per_item.value ) }
                         </p>
                       ) }
                     </div>
                     <span className="text-sm font-medium shrink-0">
-                      { item.amount != null ? formatCurrency( item.amount ) : '—' }
+                      { item.amount?.value != null ? formatCurrency( item.amount.value ) : '—' }
                     </span>
                   </div>
                 ) ) }
@@ -128,7 +128,7 @@ export function PaymentDetailsSheet( { payment, open, onOpenChange }: PaymentDet
           <div className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
             <span className="text-sm font-medium">Total</span>
             <span className="text-base font-semibold">
-              { payment.total_amount != null ? formatCurrency( payment.total_amount ) : '—' }
+              { payment.total?.value != null ? formatCurrency( payment.total.value ) : '—' }
             </span>
           </div>
 

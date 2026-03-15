@@ -66,7 +66,7 @@ export function InvitationsTabContent( { campaignId, isActive, onViewAllInvitati
               <div className="flex items-start justify-between gap-2">
                 <div className="flex min-w-0 items-center gap-2">
                   <Avatar className="size-8 shrink-0">
-                    <AvatarImage src={ invitation.creator?.profile_image_url || '' } alt={ invitation.creator?.first_name || 'Creator' } />
+                    <AvatarImage src={ invitation.creator?.profile_image?.asset || '' } alt={ invitation.creator?.first_name || 'Creator' } />
                     <AvatarFallback>
                       { ( invitation.creator?.first_name?.[ 0 ] || 'C' ).toUpperCase() }
                       { ( invitation.creator?.last_name?.[ 0 ] || '' ).toUpperCase() }

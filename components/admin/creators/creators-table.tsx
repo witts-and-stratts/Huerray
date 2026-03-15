@@ -10,8 +10,8 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  type FilterFn,
 } from "@tanstack/react-table";
-
 import { getColumns } from "./creators-columns";
 import { CreatorDetailsSheet } from "./creator-details-sheet";
 import { CreatorsTableToolbar } from "./creators-table-toolbar";
@@ -28,6 +28,29 @@ import { toast } from "sonner";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+
+const creatorGlobalFilter: FilterFn<ModelsCreatorResponse> = ( row, _columnId, filterValue: string ) => {
+  const q = filterValue.toLowerCase().trim();
+  if ( !q ) return true;
+  const c = row.original;
+  const searchable = [
+    c.first_name,
+    c.last_name,
+    c.email,
+    c.creator_status,
+    c.bio,
+    c.city,
+    c.country,
+    c.state,
+    c.gender,
+    c.instagram_handle,
+    c.tiktok_handle,
+    c.youtube_handle,
+    c.twitter_handle,
+    c.phone_number,
+  ].filter( Boolean ).join( ' ' ).toLowerCase();
+  return searchable.includes( q );
+};
 
 
 
@@ -48,6 +71,7 @@ export function CreatorsTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
+  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
   const [ selectedCreator, setSelectedCreator ] =
     React.useState<ModelsCreatorResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -108,8 +132,10 @@ export function CreatorsTable( {
   const table = useReactTable( {
     data: creators,
     columns,
+    globalFilterFn: creatorGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -121,6 +147,7 @@ export function CreatorsTable( {
       columnFilters,
       columnVisibility,
       rowSelection,
+      globalFilter,
     },
   } );
 

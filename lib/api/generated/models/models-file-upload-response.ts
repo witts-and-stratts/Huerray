@@ -18,7 +18,6 @@ export interface ModelsFileUploadResponse {
     'content_type'?: string;
     'filename'?: string;
     'size'?: number;
-    'thumbnail_url'?: string;
     'type'?: string;
     'url'?: string;
 }

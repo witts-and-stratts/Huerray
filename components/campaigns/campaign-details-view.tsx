@@ -9,12 +9,12 @@ import {
   ModelsAdminCampaignApprovalRequestCampaignStatusEnum,
   ModelsCampaignStatusUpdateRequestCampaignStatusEnum,
 } from '@/lib/api/generated/models';
-import { useAdminCampaignApproval, useCampaignApplications, useCampaignInvitations, useCampaignSubmissions, useUpdateCampaignStatus } from '@/lib/api/hooks/campaigns';
+import { useAdminCampaignApproval, useCampaignApplications, useCampaignInvitations, useCampaignSubmissions, useSubmitCampaign, useUpdateCampaignStatus } from '@/lib/api/hooks/campaigns';
 import { useMultipleComments } from '@/lib/api/hooks/comments';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
 import { ApiError } from '@/lib/api/hooks/types';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Activity, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -78,6 +78,7 @@ function SubheaderActionButton( { item }: { item: ActionItem; } ) {
   );
 }
 
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { useBasePath } from '@/lib/providers/path-provider';
 
 export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
@@ -132,6 +133,19 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
 
   const approveCampaign = useAdminCampaignApproval();
   const updateCampaignStatus = useUpdateCampaignStatus();
+  const submitCampaign = useSubmitCampaign();
+
+  const [ publishDialogOpen, setPublishDialogOpen ] = useState( false );
+
+  const handlePublishCampaign = async () => {
+    try {
+      await submitCampaign.mutateAsync( campaignId );
+      toast.success( 'Campaign published successfully' );
+      setPublishDialogOpen( false );
+    } catch {
+      toast.error( 'Failed to publish campaign' );
+    }
+  };
 
   const status = campaign.campaign_status ?? '';
   const campaignId = campaign.id ?? '';
@@ -243,6 +257,21 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
           { subheaderActions.map( item => (
             <SubheaderActionButton key={ item.key } item={ item } />
           ) ) }
+          { status === 'draft' && role === 'brand' && (
+            <Button
+              variant="default"
+              size="default"
+              disabled={ submitCampaign.isPending }
+              onClick={ () => setPublishDialogOpen( true ) }
+            >
+              { submitCampaign.isPending ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" />
+                  Publishing...
+                </>
+              ) : 'Publish campaign' }
+            </Button>
+          ) }
           <CampaignActionMenu
             campaign={ campaign }
             hideViewDetails={ true }
@@ -305,6 +334,19 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
         onAcceptDialogChange={ setAcceptDialogOpen }
         rejectDialogOpen={ rejectDialogOpen }
         onRejectDialogChange={ setRejectDialogOpen }
+      />
+
+      <ConfirmDialog
+        open={ publishDialogOpen }
+        onOpenChange={ setPublishDialogOpen }
+        title="Publish campaign?"
+        description="Are you sure you want to publish this campaign? It will be submitted for approval."
+        confirmLabel="Publish campaign"
+        cancelLabel="Cancel"
+        onConfirm={ handlePublishCampaign }
+        isLoading={ submitCampaign.isPending }
+        loadingText="Publishing..."
+        variant="default"
       />
 
       <GigSelectionDialog

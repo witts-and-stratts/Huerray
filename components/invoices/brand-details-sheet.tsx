@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { imgpresets } from '@/lib/utils/imgproxy';
 import {
   Sheet,
   SheetContent,
@@ -62,8 +63,8 @@ export function BrandDetailsSheet( { brandId, brandName, open, onOpenChange }: B
         <SheetHeader className="px-6 pt-6 pb-4">
           <div className="flex flex-col items-center gap-3 pr-8 text-center">
             <Avatar className="size-20">
-              { brand?.profile_photo_url && (
-                <AvatarImage src={ brand.profile_photo_url } alt={ name } />
+              { brand?.profile_photo?.asset && (
+                <AvatarImage src={ imgpresets.avatar( brand.profile_photo.asset ) } alt={ name } />
               ) }
               <AvatarFallback>{ getInitials( name ) }</AvatarFallback>
             </Avatar>

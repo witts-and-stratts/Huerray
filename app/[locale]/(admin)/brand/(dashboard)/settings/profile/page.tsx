@@ -66,7 +66,7 @@ export default function GeneralSettingsPage() {
           street: value.street || '',
           vat_id: value.vatId || '',
           postal_code: value.postalCode || '',
-          profile_photo_url: value.profilePhotoUrl,
+          profile_photo: value.profilePhotoUrl ? { asset: value.profilePhotoUrl } : undefined,
         };
 
         // Ensure safe request format
@@ -86,7 +86,7 @@ export default function GeneralSettingsPage() {
           preferred_contact_phone: updateRequest.preferred_contact_phone,
           postal_code: updateRequest.postal_code,
           number: updateRequest.number,
-          profile_photo_url: value.profilePhotoUrl,
+          profile_photo: value.profilePhotoUrl ? { asset: value.profilePhotoUrl } : undefined,
         };
 
         await brandApi.brandsPut( { request: safeUpdateRequest as any } );
@@ -144,7 +144,7 @@ export default function GeneralSettingsPage() {
           form.setFieldValue( 'postalCode', brand.postal_code || '' );
 
           // Try to get logo
-          const logo = brand.profile_photo_url || brand.logo_url || brand.logo || '';
+          const logo = brand.profile_photo?.asset || brand.logo_url || brand.logo || '';
           form.setFieldValue( 'profilePhotoUrl', logo );
         }
       } catch ( e ) {
@@ -187,7 +187,7 @@ export default function GeneralSettingsPage() {
     form.setFieldValue( 'postalCode', brand.postal_code || '' );
 
     // Try to get logo
-    const logo = brand.profile_photo_url || brand.logo_url || brand.logo || '';
+    const logo = brand.profile_photo?.asset || brand.logo_url || brand.logo || '';
     form.setFieldValue( 'profilePhotoUrl', logo );
 
     toast.info( 'Changes discarded' );

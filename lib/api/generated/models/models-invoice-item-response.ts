@@ -13,11 +13,13 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsMoney } from './models-money';
 
 export interface ModelsInvoiceItemResponse {
-    'amount'?: number;
+    'amount'?: ModelsMoney;
     'created_at'?: string;
-    'currency'?: string;
     'description'?: string;
     'gig_id'?: string;
     'gig_title'?: string;

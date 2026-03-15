@@ -9,9 +9,9 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  type FilterFn,
 } from '@tanstack/react-table';
 import * as React from 'react';
-
 import { AnimatePresence, motion } from 'motion/react';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
@@ -23,6 +23,23 @@ import { BrandsTableToolbar } from './brands-table-toolbar';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+
+const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string ) => {
+  const q = filterValue.toLowerCase().trim();
+  if ( !q ) return true;
+  const b = row.original;
+  const searchable = [
+    b.name,
+    b.brand_status,
+    b.contact_email,
+    b.website,
+    b.category,
+    b.company_size,
+    b.city,
+    b.country,
+  ].filter( Boolean ).join( ' ' ).toLowerCase();
+  return searchable.includes( q );
+};
 
 
 
@@ -43,6 +60,7 @@ export function BrandsTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
+  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
@@ -57,8 +75,10 @@ export function BrandsTable( {
   const table = useReactTable( {
     data: brandsData || [],
     columns,
+    globalFilterFn: brandGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -70,6 +90,7 @@ export function BrandsTable( {
       columnFilters,
       columnVisibility,
       rowSelection,
+      globalFilter,
     },
   } );
 

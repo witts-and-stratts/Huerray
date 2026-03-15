@@ -28,7 +28,7 @@ function BrandDetailRow( { label, value }: { label: string; value?: string; } ) 
 
 export function BrandHoverCard( { brand, brandName, children }: BrandHoverCardProps ) {
   const name = brand?.company_name || brandName || 'Unknown Brand';
-  const photoUrl = brand?.profile_photo_url;
+  const photoUrl = brand?.profile_photo?.asset;
 
   // If there's no brand data at all, just render children
   if ( !brand ) {
@@ -39,6 +39,7 @@ export function BrandHoverCard( { brand, brandName, children }: BrandHoverCardPr
     <HoverCard>
       <HoverCardTrigger
         render={ <span className="cursor-pointer" /> }
+        nativeButton={ false }
       >
         { children }
       </HoverCardTrigger>

@@ -5,9 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **number** |  | [optional] [default to undefined]
+**amount** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
-**currency** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **gig_id** | **string** |  | [optional] [default to undefined]
 **gig_title** | **string** |  | [optional] [default to undefined]
@@ -23,7 +22,6 @@ import { ModelsInvoiceItemResponse } from 'huerray-api';
 const instance: ModelsInvoiceItemResponse = {
     amount,
     created_at,
-    currency,
     description,
     gig_id,
     gig_title,

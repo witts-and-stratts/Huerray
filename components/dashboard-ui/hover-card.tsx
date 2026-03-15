@@ -25,6 +25,7 @@ function HoverCardTrigger( {
       openOnHover
       delay={ delay }
       closeDelay={ closeDelay }
+      nativeButton={ false }
       { ...props }
     />
   );

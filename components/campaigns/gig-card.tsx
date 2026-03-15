@@ -18,6 +18,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { RoleGuard } from '../auth/role-guard';
 import { BrandAvatar } from './brand-avatar';
+import { BrandHoverCard } from './brand-hover-card';
 import { GigActionMenu } from './gig-action-menu';
 import { GigStatusBadge } from './gig-status-badge';
 import { SubmissionCard } from './submission-card';
@@ -117,11 +118,11 @@ GigSubmissionsButton.displayName = 'GigSubmissionsButton';
 export function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) {
   const [ selectedSubmission, setSelectedSubmission ] = useState<ModelsVideoSubmissionResponse | null>( null );
 
-  const formattedCompensation = useFormatCurrency( gig.compensation ?? 0, 'EUR' );
-  const formattedGigCost = useFormatCurrency( gig.gig_cost ?? 0, 'EUR' );
+  const formattedCompensation = useFormatCurrency( gig.compensation?.value ?? 0, gig.compensation?.currency || 'EUR' );
+  const formattedGigCost = useFormatCurrency( gig.gig_cost?.value ?? 0, gig.gig_cost?.currency || 'EUR' );
 
   const coverImage = useMemo(
-    () => gig.campaign?.product_image_url ?? gig.campaign?.campaign_images?.[ 0 ],
+    () => gig.campaign?.product_image?.asset ?? gig.campaign?.campaign_images?.[ 0 ]?.asset,
     [ gig.campaign ]
   );
 
@@ -130,8 +131,8 @@ export function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) 
   const handleSelectSubmission = useCallback( ( sub: ModelsVideoSubmissionResponse ) => setSelectedSubmission( sub ), [] );
   const handleCloseSubmission = useCallback( ( open: boolean ) => { if ( !open ) setSelectedSubmission( null ); }, [] );
 
-  const rewardAmount = gig.compensation ?? gig.gig_cost;
-  const formattedReward = gig.compensation ? formattedCompensation : formattedGigCost;
+  const rewardAmount = gig.compensation?.value ?? gig.gig_cost?.value;
+  const formattedReward = gig.compensation?.value ? formattedCompensation : formattedGigCost;
 
   return (
     <>
@@ -151,10 +152,12 @@ export function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) 
                 </div>
               ) }
               { gig.campaign?.brand && (
-                <BrandAvatar
-                  brand={ gig.campaign.brand as ModelsBrandResponse }
-                  className="size-8 rounded-full border bg-white"
-                />
+                <BrandHoverCard brand={ gig.campaign.brand as any } brandName={ gig.campaign.brand.company_name }>
+                  <BrandAvatar
+                    brand={ gig.campaign.brand as ModelsBrandResponse }
+                    className="size-8 rounded-full border bg-white hover:ring-2 hover:ring-primary/30 transition-shadow cursor-pointer"
+                  />
+                </BrandHoverCard>
               ) }
             </div>
           }

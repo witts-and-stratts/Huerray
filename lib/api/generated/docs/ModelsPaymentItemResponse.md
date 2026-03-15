@@ -5,12 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **number** |  | [optional] [default to undefined]
-**cost_per_item** | **number** |  | [optional] [default to undefined]
+**amount** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
+**cost_per_item** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **creator_id** | **string** |  | [optional] [default to undefined]
 **creator_name** | **string** |  | [optional] [default to undefined]
-**currency** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **gig** | **object** |  | [optional] [default to undefined]
 **gig_id** | **string** |  | [optional] [default to undefined]
@@ -32,7 +31,6 @@ const instance: ModelsPaymentItemResponse = {
     created_at,
     creator_id,
     creator_name,
-    currency,
     description,
     gig,
     gig_id,

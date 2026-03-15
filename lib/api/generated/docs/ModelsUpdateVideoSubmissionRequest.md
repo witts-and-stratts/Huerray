@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **string** |  | [optional] [default to undefined]
 **title** | **string** |  | [optional] [default to undefined]
+**video** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **video_filename** | **string** |  | [optional] [default to undefined]
-**video_url** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -18,8 +18,8 @@ import { ModelsUpdateVideoSubmissionRequest } from 'huerray-api';
 const instance: ModelsUpdateVideoSubmissionRequest = {
     description,
     title,
+    video,
     video_filename,
-    video_url,
 };
 ```
 

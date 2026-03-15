@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsBrandCategory } from './utils-brand-category';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -34,7 +37,7 @@ export interface ModelsBrandRequest {
     'postal_code'?: string;
     'preferred_contact_email'?: string;
     'preferred_contact_phone'?: string;
-    'profile_photo_url'?: string;
+    'profile_photo'?: ModelsContentMedia;
     'registration_number': string;
     'state': string;
     'street'?: string;

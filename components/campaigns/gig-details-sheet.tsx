@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from 'react';
+import { imgpresets } from '@/lib/utils/imgproxy';
 import { ModelsGigResponse } from '@/lib/api/generated';
 import {
   Sheet,
@@ -57,7 +58,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
     gig_status,
     posting_start_date,
     posting_end_date,
-    compensation,
+    compensation: compensationMoney,
     number_of_videos,
     video_duration_in_seconds,
     requirements,
@@ -67,6 +68,8 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
     age_min,
     age_max,
   } = gig;
+
+  const compensation = compensationMoney?.value;
 
   const handleApply = () => {
     if ( !gig.id ) return;
@@ -153,7 +156,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
               <Card>
                 <CardContent className="flex items-center gap-3 py-3">
                   <Avatar className="size-10 rounded-full">
-                    <AvatarImage src={ brand?.profile_photo_url } alt={ name } className="object-cover" />
+                    <AvatarImage src={ brand?.profile_photo?.asset ? imgpresets.avatar( brand.profile_photo.asset ) : undefined } alt={ name } className="object-cover" />
                     <AvatarFallback className="rounded-md text-sm">
                       { name?.slice( 0, 2 ).toUpperCase() }
                     </AvatarFallback>

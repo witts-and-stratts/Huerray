@@ -1,11 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import type { ModelsContentMedia } from '@/lib/api/generated/models/models-content-media';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface ImagesTabContentProps {
-  imageItems: string[];
+  imageItems: ModelsContentMedia[];
   onPreview: ( index: number ) => void;
 }
 
@@ -19,16 +20,15 @@ export function ImagesTabContent( { imageItems, onPreview }: ImagesTabContentPro
   return (
     <ScrollArea className="w-full" scrollbar={ { orientation: 'horizontal', style: { height: '6px' } } }>
       <div className="flex gap-2 pb-3">
-        { imageItems.map( ( item, index ) => (
+        { imageItems.filter( ( item ) => item.asset ).map( ( item, index ) => (
           <button
-            key={ `${ item }-${ index }` }
+            key={ `${ item.asset }-${ index }` }
             type="button"
             onClick={ () => onPreview( index ) }
-            className="shrink-0 w-24 overflow-hidden rounded-md border border-border/60 bg-muted/20 text-left transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="shrink-0 h-36 overflow-hidden rounded-md border border-border/60 bg-muted/20 text-left transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={ t( 'labels.previewAsset', { index: index + 1 } ) }
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */ }
-            <img src={ imgpresets.card( item ) } alt={ t( 'labels.assetAlt', { index: index + 1 } ) } className="aspect-square w-full object-cover" />
+            <img src={ imgpresets.card( item.thumbnail ?? item.asset! ) } alt={ t( 'labels.assetAlt', { index: index + 1 } ) } className="h-full w-auto object-cover" />
           </button>
         ) ) }
       </div>

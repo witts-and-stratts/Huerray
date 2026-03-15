@@ -19,7 +19,6 @@ export interface ModelsVideoSubmissionUploadResponse {
     'file_size'?: number;
     'filename'?: string;
     'original_name'?: string;
-    'thumbnail_url'?: string;
     'video_url'?: string;
 }
 

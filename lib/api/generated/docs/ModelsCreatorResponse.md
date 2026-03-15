@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**application_video** | **string** |  | [optional] [default to undefined]
+**application_video** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **bank_account_name** | **string** | Bank &amp; Tax Details | [optional] [default to undefined]
 **bank_account_number** | **string** |  | [optional] [default to undefined]
 **bank_name** | **string** |  | [optional] [default to undefined]
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **phone_number** | **string** |  | [optional] [default to undefined]
 **portfolio** | **string** | JSON array of portfolio URLs | [optional] [default to undefined]
 **preferred_categories** | [**Array&lt;UtilsBrandCategory&gt;**](UtilsBrandCategory.md) | Categories | [optional] [default to undefined]
-**profile_image_url** | **string** |  | [optional] [default to undefined]
+**profile_image** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **state** | **string** |  | [optional] [default to undefined]
 **status_comments** | **string** |  | [optional] [default to undefined]
 **street** | **string** |  | [optional] [default to undefined]
@@ -63,7 +63,7 @@ const instance: ModelsCreatorResponse = {
     phone_number,
     portfolio,
     preferred_categories,
-    profile_image_url,
+    profile_image,
     state,
     status_comments,
     street,

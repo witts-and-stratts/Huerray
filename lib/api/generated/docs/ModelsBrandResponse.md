@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **postal_code** | **string** |  | [optional] [default to undefined]
 **preferred_contact_email** | **string** |  | [optional] [default to undefined]
 **preferred_contact_phone** | **string** |  | [optional] [default to undefined]
-**profile_photo_url** | **string** |  | [optional] [default to undefined]
+**profile_photo** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **registration_number** | **string** |  | [optional] [default to undefined]
 **state** | **string** |  | [optional] [default to undefined]
 **status_change_comments** | **string** |  | [optional] [default to undefined]
@@ -50,7 +50,7 @@ const instance: ModelsBrandResponse = {
     postal_code,
     preferred_contact_email,
     preferred_contact_phone,
-    profile_photo_url,
+    profile_photo,
     registration_number,
     state,
     status_change_comments,

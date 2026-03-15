@@ -39,7 +39,7 @@ export function GigSelectionItem( { gig, onSelect }: GigSelectionItemProps ) {
           Duration: { gig.video_duration_in_seconds }s
         </div>
         <div className="gig-selection-item__price">
-          { formatCurrency( gig.gig_cost || 0 ) }
+          { formatCurrency( gig.gig_cost?.value || 0 ) }
         </div>
       </div>
     </div>

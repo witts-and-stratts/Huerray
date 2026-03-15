@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { imgpresets } from "@/lib/utils/imgproxy";
 
 export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorResponse; } ) {
-  const { first_name, last_name, creator_status, email, date_of_birth, city, country, gender, profile_image_url } = creator;
+  const { first_name, last_name, creator_status, email, date_of_birth, city, country, gender, profile_image } = creator;
 
   const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || 'Unknown';
   const isApproved = creator_status?.toLowerCase() === 'approved';
@@ -25,8 +25,8 @@ export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorRespons
         "border bg-muted-foreground/10 size-28 ring-background",
         isApproved ? "border-emerald-400/30" : "border-border/60"
       ) }>
-        { profile_image_url
-          ? <AvatarImage src={ imgpresets.card( profile_image_url ) } alt={ fullName } className="object-cover" />
+        { profile_image?.asset
+          ? <AvatarImage src={ imgpresets.card( profile_image.asset ) } alt={ fullName } className="object-cover" />
           : <AvatarFallback className="text-3xl">{ initials }</AvatarFallback>
         }
       </Avatar>

@@ -99,8 +99,9 @@ function CampaignProgressBar( { steps }: { steps: PipelineStep[]; } ) {
 
 export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitations }: CampaignOverviewSectionProps ) {
   const keywordList = parseKeywords( campaign.keywords );
-  const imageItems = campaign.campaign_images || [];
-  const documentItems = campaign.campaign_documents || [];
+  const imageItems = campaign.campaign_images ?? [];
+  const documentItems = campaign.campaign_documents ?? [];
+  const videoItems = campaign.sample_videos ?? [];
 
   const { data: applicationsData } = useCampaignApplications( campaign.id || '' );
   const { data: submissionsData } = useCampaignSubmissions( campaign.id || '' );
@@ -156,7 +157,7 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
 
       <div className="space-y-4 lg:col-span-4">
         <CampaignMetadataCard campaign={ campaign } />
-        <CampaignAssetsCard imageItems={ imageItems } documentItems={ documentItems } />
+        <CampaignAssetsCard imageItems={ imageItems } documentItems={ documentItems } videoItems={ videoItems } />
         <CampaignWorkflowCard
           campaignId={ campaign.id || '' }
           onViewAllInvitations={ onViewAllInvitations }

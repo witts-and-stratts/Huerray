@@ -150,8 +150,13 @@ export function useBrandCreators(
     q?: string;
     page?: number;
     limit?: number;
-    // Add other filters as needed to match BrandsSearchCreatorsGetRequest
     preferredCategory?: string;
+    // Gig requirement filters
+    ageMin?: number;
+    ageMax?: number;
+    gender?: 'male' | 'female' | 'any';
+    city?: string;
+    country?: string;
   },
   options?: Omit<UseQueryOptions<ModelsPaginatedCreatorResponse, ApiError>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<ModelsPaginatedCreatorResponse, ApiError> {
@@ -162,7 +167,12 @@ export function useBrandCreators(
         limit: params?.limit,
         page: params?.page,
         preferredCategory: params?.preferredCategory,
-        q: params?.q
+        q: params?.q,
+        ageMin: params?.ageMin,
+        ageMax: params?.ageMax,
+        gender: params?.gender as any,
+        city: params?.city,
+        country: params?.country,
       });
       return response.data;
     },

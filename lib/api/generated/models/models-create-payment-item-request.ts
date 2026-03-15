@@ -13,9 +13,12 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsMoney } from './models-money';
 
 export interface ModelsCreatePaymentItemRequest {
-    'cost_per_item': number;
+    'cost_per_item': ModelsMoney;
     'creator_id': string;
     'description'?: string;
     'gig_id': string;

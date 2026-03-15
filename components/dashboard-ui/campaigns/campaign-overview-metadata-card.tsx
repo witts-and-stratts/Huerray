@@ -41,8 +41,8 @@ export function CampaignMetadataCard( { campaign }: { campaign: ModelCampaign; }
 
   return (
     <Card className="ad-summary-card pt-0">
-      <CampaignMetadataCardImage title={ campaign.campaign_name } image={ campaign.product_image_url } url={ campaign.product_url } />
-      <CardHeader className={ cn( "py-4 bg-white", { "-mt-14 z-20 rounded-t-lg bg-background": campaign.product_image_url } ) }>
+      <CampaignMetadataCardImage title={ campaign.campaign_name } image={ campaign.product_image?.asset } url={ campaign.product_url } />
+      <CardHeader className={ cn( "py-4 bg-white", { "-mt-14 z-20 rounded-t-lg bg-background": campaign.product_image?.asset } ) }>
         <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
         <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
       </CardHeader>

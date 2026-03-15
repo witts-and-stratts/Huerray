@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **content_type** | **string** |  | [optional] [default to undefined]
 **filename** | **string** |  | [optional] [default to undefined]
 **size** | **number** |  | [optional] [default to undefined]
-**thumbnail_url** | **string** |  | [optional] [default to undefined]
 **type** | **string** |  | [optional] [default to undefined]
 **url** | **string** |  | [optional] [default to undefined]
 
@@ -21,7 +20,6 @@ const instance: ModelsFileUploadResponse = {
     content_type,
     filename,
     size,
-    thumbnail_url,
     type,
     url,
 };

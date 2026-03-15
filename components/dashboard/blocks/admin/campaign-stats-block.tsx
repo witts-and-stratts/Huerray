@@ -149,7 +149,7 @@ export function CampaignStatsBlock() {
                               <div className="flex min-w-0 items-start gap-2.5">
                                 <Avatar size="sm" className="shrink-0">
                                   <AvatarImage
-                                    src={ campaign.brand?.profile_photo_url || '' }
+                                    src={ campaign.brand?.profile_photo?.asset || '' }
                                     alt={ campaign.brand?.company_name || campaignName }
                                   />
                                   <AvatarFallback>{ ( campaign.brand?.company_name || campaignName ).slice( 0, 2 ).toUpperCase() }</AvatarFallback>

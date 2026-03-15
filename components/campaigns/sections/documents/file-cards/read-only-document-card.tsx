@@ -1,7 +1,7 @@
 import { cn } from '@/lib/dashboard-utils';
 import { File01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { memo, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { PdfFileIcon } from '../pdf-file-icon';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Loader2 } from 'lucide-react';
@@ -37,15 +37,17 @@ export const ReadOnlyDocumentCard = memo( ( { url, name, onPreview }: ReadOnlyDo
     }
   };
 
+  const handleDoubleClick = useCallback( ( e: React.MouseEvent ) => {
+    e.stopPropagation();
+    onPreview?.();
+  }, [ onPreview ] );
+
   return (
     <div
       className={ cn(
         "group bg-primary/2 border rounded-sm flex flex-col items-center gap-1 select-none transition-colors p-4 aspect-3/4 relative justify-center cursor-pointer hover:border-primary/30 hover:bg-primary/5"
       ) }
-      onDoubleClick={ ( e ) => {
-        e.stopPropagation();
-        onPreview?.();
-      } }
+      onDoubleClick={ handleDoubleClick }
       title={ name }
     >
       <div className="flex-1 bg-muted/30 rounded-lg flex flex-col items-center justify-center overflow-hidden w-full relative h-full min-h-0">

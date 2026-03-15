@@ -21,7 +21,7 @@ export default function CampaignsPage() {
     return campaignsData.map( ( c: any ) => ( {
       ...c,
       campaign_id: c.campaign_id || c.id,
-      product_image: c.product_image_url || c.product_image,
+      product_image: c.product_image?.asset,
       creators: c.creators || [],
       applications: c.applications || [],
     } as ModelCampaign ) );

@@ -15,13 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsBrandCategory } from './utils-brand-category';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { UtilsCountryCode } from './utils-country-code';
 
 export interface ModelsCreateCreatorRequest {
-    'application_video': string;
+    'application_video': ModelsContentMedia;
     /**
      * Bank & Tax Details
      */
@@ -54,7 +57,7 @@ export interface ModelsCreateCreatorRequest {
     /**
      * URL to creator\'s profile image
      */
-    'profile_image_url'?: string;
+    'profile_image'?: ModelsContentMedia;
     'state': string;
     'street'?: string;
     'tax_country'?: UtilsCountryCode;

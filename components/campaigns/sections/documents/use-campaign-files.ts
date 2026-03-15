@@ -1,9 +1,33 @@
 import { closestCenter, DragEndEvent, DragStartEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny';
+import { pdfjs } from 'react-pdf';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 import { UploadedFile } from './types';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${ pdfjs.version }/build/pdf.worker.min.mjs`;
+
+async function generatePdfThumbnail( file: File ): Promise<string | undefined> {
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjs.getDocument( { data: arrayBuffer } ).promise;
+    const page = await pdf.getPage( 1 );
+    const baseViewport = page.getViewport( { scale: 1.0 } );
+    const scale = Math.min( 1.0, 320 / baseViewport.width );
+    const viewport = page.getViewport( { scale } );
+    const canvas = document.createElement( 'canvas' );
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext( '2d' );
+    if ( !ctx ) return undefined;
+    await page.render( { canvas, canvasContext: ctx, viewport } ).promise;
+    return canvas.toDataURL( 'image/jpeg', 0.7 );
+  } catch ( e ) {
+    console.error( 'Failed to generate PDF thumbnail', e );
+    return undefined;
+  }
+}
 
 // Generate a unique ID for file items
 function generateUniqueId(): string {
@@ -46,7 +70,6 @@ export function useCampaignFiles( initialItems: UploadedFile[] | string[] = [] )
         status: 'success' as const,
         name: url.split( '/' ).pop() || 'File',
         type: getMimeTypeFromUrl( url ),
-        preview: url
       } ) );
     }
     return initialItems as UploadedFile[];
@@ -111,6 +134,8 @@ export function useCampaignFiles( initialItems: UploadedFile[] | string[] = [] )
         } catch ( e ) {
           console.error( "Failed to generate video thumbnail", e );
         }
+      } else if ( file.type === 'application/pdf' ) {
+        preview = await generatePdfThumbnail( file );
       }
 
       return {
@@ -184,6 +209,8 @@ export function useCampaignFiles( initialItems: UploadedFile[] | string[] = [] )
           } catch ( e ) {
             console.error( "Failed to generate video thumbnail for imported file", e );
           }
+      } else if ( file.type === 'application/pdf' ) {
+        preview = await generatePdfThumbnail( file );
       }
 
       const newItem: UploadedFile = {
@@ -225,7 +252,6 @@ export function useCampaignFiles( initialItems: UploadedFile[] | string[] = [] )
           status: 'success' as const,
           name,
           type,
-          preview: url // Best effort
         };
       } );
       

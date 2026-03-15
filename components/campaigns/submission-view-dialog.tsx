@@ -159,7 +159,7 @@ const CreatorTrigger = memo( ( { creatorProfile }: { creatorProfile: ModelsVideo
     creatorProfile?.city || '',
     creatorProfile?.country || '',
   ].filter( Boolean ).join( ' • ' ) || 'No creator details available';
-  const creatorAvatar = creatorProfile?.profile_image_url || '';
+  const creatorAvatar = creatorProfile?.profile_image?.asset || '';
 
   return (
     <>
@@ -226,11 +226,11 @@ const SubmissionDetailsSection = memo( ( { submission, locale, open }: { submiss
               { ( submission.status || 'unknown' ).replace( /_/g, ' ' ) }
             </Badge> } />
 
-            { gig?.compensation &&
-              <Row label='Compensation' value={ <>{ formatCurrency( gig?.compensation, 'EUR', locale ) }</> } />
+            { gig?.compensation?.value &&
+              <Row label='Compensation' value={ <>{ formatCurrency( gig?.compensation?.value, 'EUR', locale ) }</> } />
             }
-            { gig?.gig_cost &&
-              <Row label="Gig Cost" value={ <>{ formatCurrency( gig?.gig_cost, 'EUR', locale ) }</> } />
+            { gig?.gig_cost?.value &&
+              <Row label="Gig Cost" value={ <>{ formatCurrency( gig?.gig_cost?.value, 'EUR', locale ) }</> } />
             }
           </div>
         ) }
@@ -459,7 +459,7 @@ export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, in
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="p-0 gap-0 overflow-hidden max-w-6xl! min-w-[300px] w-[95vw] bg-burgundy-50/80 max-h-[90vh] flex flex-row">
         <div className={ cn( "flex flex-col transition-all duration-300 ease-in-out overflow-y-auto w-full", isCommentsOpen && "md:pr-[416px]" ) }>
-          <SubmissionVideo videoUrl={ submission.video_url || '' } />
+          <SubmissionVideo videoUrl={ submission.video?.asset || '' } />
 
           <div className="p-4 border-t bg-muted/20 space-y-4 flex-1">
             <SubmissionHeader

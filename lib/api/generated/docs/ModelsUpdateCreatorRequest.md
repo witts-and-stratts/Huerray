@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**application_video** | **string** |  | [default to undefined]
+**application_video** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [default to undefined]
 **bank_account_name** | **string** | Bank &amp; Tax Details | [optional] [default to undefined]
 **bank_account_number** | **string** |  | [optional] [default to undefined]
 **bank_address** | **string** |  | [optional] [default to undefined]
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **phone_number** | **string** | Creator Profile Fields | [optional] [default to undefined]
 **portfolio** | **string** | JSON array of portfolio URLs | [optional] [default to undefined]
 **preferred_categories** | [**Array&lt;UtilsBrandCategory&gt;**](UtilsBrandCategory.md) | Categories | [optional] [default to undefined]
-**profile_image_url** | **string** | URL to creator\&#39;s profile image | [optional] [default to undefined]
+**profile_image** | [**ModelsContentMedia**](ModelsContentMedia.md) | URL to creator\&#39;s profile image | [optional] [default to undefined]
 **state** | **string** |  | [default to undefined]
 **street** | **string** |  | [optional] [default to undefined]
 **tax_country** | [**UtilsCountryCode**](UtilsCountryCode.md) |  | [optional] [default to undefined]
@@ -51,7 +51,7 @@ const instance: ModelsUpdateCreatorRequest = {
     phone_number,
     portfolio,
     preferred_categories,
-    profile_image_url,
+    profile_image,
     state,
     street,
     tax_country,

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from 'react';
+import { imgpresets } from '@/lib/utils/imgproxy';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 import Link from 'next/link';
@@ -51,7 +52,7 @@ function InvoiceNumberCell( { invoice }: { invoice: ModelsInvoiceResponse; } ) {
 
 function CampaignInfo( { campaign_id, campaign_name }: { campaign_id?: string; campaign_name?: string; } ) {
   const { data } = useCampaign( campaign_id || '', { enabled: !!campaign_id } );
-  const productImageUrl = data?.product_image_url;
+  const productImageUrl = data?.product_image?.asset;
   const role = useRole();
   const locale = useLocale();
 
@@ -64,7 +65,7 @@ function CampaignInfo( { campaign_id, campaign_name }: { campaign_id?: string; c
   return (
     <Link href={ href } className="flex items-center gap-1.5 mt-0.5 group w-fit">
       <Avatar size="sm" className="size-4 shrink-0">
-        { productImageUrl && <AvatarImage src={ productImageUrl } alt={ campaign_name } /> }
+        { productImageUrl && <AvatarImage src={ imgpresets.thumbnail( productImageUrl ) } alt={ campaign_name } /> }
         <AvatarFallback className="text-[8px]">{ getInitials( campaign_name ) }</AvatarFallback>
       </Avatar>
       <p className="text-xs text-muted-foreground truncate group-hover:underline group-hover:text-primary transition-colors">
@@ -77,7 +78,7 @@ function CampaignInfo( { campaign_id, campaign_name }: { campaign_id?: string; c
 function BrandCell( { brand_id, brand_name }: { brand_id?: string; brand_name?: string; } ) {
   const [ open, setOpen ] = React.useState( false );
   const { data } = useBrand( brand_id || '', { enabled: !!brand_id } );
-  const photoUrl = data?.data?.profile_photo_url;
+  const photoUrl = data?.data?.profile_photo?.asset;
 
   return (
     <>
@@ -86,7 +87,7 @@ function BrandCell( { brand_id, brand_name }: { brand_id?: string; brand_name?: 
         className="flex items-center gap-2.5 hover:opacity-80 transition-opacity text-left"
       >
         <Avatar size="sm">
-          { photoUrl && <AvatarImage src={ photoUrl } alt={ brand_name } /> }
+          { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ brand_name } /> }
           <AvatarFallback>{ getInitials( brand_name ) }</AvatarFallback>
         </Avatar>
         <span className="text-sm font-medium hover:underline">{ brand_name || '—' }</span>
@@ -130,10 +131,13 @@ export const getColumns = (
     {
       id: 'invoice_status',
       accessorKey: 'invoice_status',
-      header: () => <></>,
-      cell: () => <></>,
+      header: () => <span data-hidden-column="true" />,
+      cell: () => <span data-hidden-column="true" />,
       enableSorting: false,
       enableHiding: true,
+      size: 0,
+      minSize: 0,
+      maxSize: 0,
       filterFn: ( row, id, filterValue ) => {
         if ( !Array.isArray( filterValue ) || filterValue.length === 0 ) return false;
         const rowValue = row.getValue( id ) as string;
@@ -191,7 +195,7 @@ export const getColumns = (
       enableSorting: true,
     },
     {
-      accessorKey: 'total_amount',
+      accessorKey: 'total',
       header: ( { column } ) => (
         <Button
           variant="ghost"
@@ -202,7 +206,7 @@ export const getColumns = (
         </Button>
       ),
       cell: ( { row } ) => {
-        const amount = row.original.total_amount;
+        const amount = row.original.total?.value;
         if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
         return <div className="pl-4 font-medium">{ formatCurrency( amount ) }</div>;
       },

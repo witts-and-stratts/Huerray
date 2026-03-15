@@ -40,12 +40,10 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
          * Upload an application video with unique naming for creator profile
          * @summary Upload application video
          * @param {File} video Video file
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsApplicationVideoPost: async (video: File, thumbnailWidth?: number, thumbnailHeight?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadsApplicationVideoPost: async (video: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'video' is not null or undefined
             assertParamExists('uploadsApplicationVideoPost', 'video', video)
             const localVarPath = `/uploads/application-video`;
@@ -65,14 +63,6 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             if (video !== undefined) { 
                 localVarFormParams.append('video', video as any);
             }
-
-            if (thumbnailWidth !== undefined) { 
-                localVarFormParams.append('thumbnail_width', thumbnailWidth as any);
-            }
-
-            if (thumbnailHeight !== undefined) { 
-                localVarFormParams.append('thumbnail_height', thumbnailHeight as any);
-            }
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -90,12 +80,10 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
          * Upload one or more PDF files
          * @summary Upload documents
          * @param {File} documents PDF files
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsDocumentsPost: async (documents: File, thumbnailWidth?: number, thumbnailHeight?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadsDocumentsPost: async (documents: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'documents' is not null or undefined
             assertParamExists('uploadsDocumentsPost', 'documents', documents)
             const localVarPath = `/uploads/documents`;
@@ -114,14 +102,6 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (documents !== undefined) { 
                 localVarFormParams.append('documents', documents as any);
-            }
-
-            if (thumbnailWidth !== undefined) { 
-                localVarFormParams.append('thumbnail_width', thumbnailWidth as any);
-            }
-
-            if (thumbnailHeight !== undefined) { 
-                localVarFormParams.append('thumbnail_height', thumbnailHeight as any);
             }
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -283,12 +263,10 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
          * @summary Upload video submission
          * @param {string} gigId Gig ID
          * @param {File} video Video file
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideoSubmissionPost: async (gigId: string, video: File, thumbnailWidth?: number, thumbnailHeight?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadsVideoSubmissionPost: async (gigId: string, video: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'gigId' is not null or undefined
             assertParamExists('uploadsVideoSubmissionPost', 'gigId', gigId)
             // verify required parameter 'video' is not null or undefined
@@ -314,14 +292,6 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             if (video !== undefined) { 
                 localVarFormParams.append('video', video as any);
             }
-
-            if (thumbnailWidth !== undefined) { 
-                localVarFormParams.append('thumbnail_width', thumbnailWidth as any);
-            }
-
-            if (thumbnailHeight !== undefined) { 
-                localVarFormParams.append('thumbnail_height', thumbnailHeight as any);
-            }
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -339,12 +309,10 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
          * Upload one or more video files
          * @summary Upload videos
          * @param {File} videos Video files
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideosPost: async (videos: File, thumbnailWidth?: number, thumbnailHeight?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadsVideosPost: async (videos: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'videos' is not null or undefined
             assertParamExists('uploadsVideosPost', 'videos', videos)
             const localVarPath = `/uploads/videos`;
@@ -363,14 +331,6 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (videos !== undefined) { 
                 localVarFormParams.append('videos', videos as any);
-            }
-
-            if (thumbnailWidth !== undefined) { 
-                localVarFormParams.append('thumbnail_width', thumbnailWidth as any);
-            }
-
-            if (thumbnailHeight !== undefined) { 
-                localVarFormParams.append('thumbnail_height', thumbnailHeight as any);
             }
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -398,13 +358,11 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * Upload an application video with unique naming for creator profile
          * @summary Upload application video
          * @param {File} video Video file
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsApplicationVideoPost(video: File, thumbnailWidth?: number, thumbnailHeight?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardApplicationVideoUploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsApplicationVideoPost(video, thumbnailWidth, thumbnailHeight, options);
+        async uploadsApplicationVideoPost(video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardApplicationVideoUploadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsApplicationVideoPost(video, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsApplicationVideoPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -413,13 +371,11 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * Upload one or more PDF files
          * @summary Upload documents
          * @param {File} documents PDF files
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsDocumentsPost(documents: File, thumbnailWidth?: number, thumbnailHeight?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsDocumentsPost(documents, thumbnailWidth, thumbnailHeight, options);
+        async uploadsDocumentsPost(documents: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsDocumentsPost(documents, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsDocumentsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -481,13 +437,11 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * @summary Upload video submission
          * @param {string} gigId Gig ID
          * @param {File} video Video file
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsVideoSubmissionPost(gigId: string, video: File, thumbnailWidth?: number, thumbnailHeight?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionUploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideoSubmissionPost(gigId, video, thumbnailWidth, thumbnailHeight, options);
+        async uploadsVideoSubmissionPost(gigId: string, video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionUploadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideoSubmissionPost(gigId, video, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideoSubmissionPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -496,13 +450,11 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * Upload one or more video files
          * @summary Upload videos
          * @param {File} videos Video files
-         * @param {number} [thumbnailWidth] Optional thumbnail width in pixels
-         * @param {number} [thumbnailHeight] Optional thumbnail height in pixels
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsVideosPost(videos: File, thumbnailWidth?: number, thumbnailHeight?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideosPost(videos, thumbnailWidth, thumbnailHeight, options);
+        async uploadsVideosPost(videos: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideosPost(videos, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideosPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -524,7 +476,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         uploadsApplicationVideoPost(requestParameters: UploadApiUploadsApplicationVideoPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardApplicationVideoUploadResponse> {
-            return localVarFp.uploadsApplicationVideoPost(requestParameters.video, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadsApplicationVideoPost(requestParameters.video, options).then((request) => request(axios, basePath));
         },
         /**
          * Upload one or more PDF files
@@ -534,7 +486,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         uploadsDocumentsPost(requestParameters: UploadApiUploadsDocumentsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFileUploadResponse> {
-            return localVarFp.uploadsDocumentsPost(requestParameters.documents, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadsDocumentsPost(requestParameters.documents, options).then((request) => request(axios, basePath));
         },
         /**
          * Upload one or more image files
@@ -584,7 +536,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         uploadsVideoSubmissionPost(requestParameters: UploadApiUploadsVideoSubmissionPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionUploadResponse> {
-            return localVarFp.uploadsVideoSubmissionPost(requestParameters.gigId, requestParameters.video, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadsVideoSubmissionPost(requestParameters.gigId, requestParameters.video, options).then((request) => request(axios, basePath));
         },
         /**
          * Upload one or more video files
@@ -594,7 +546,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         uploadsVideosPost(requestParameters: UploadApiUploadsVideosPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFileUploadResponse> {
-            return localVarFp.uploadsVideosPost(requestParameters.videos, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadsVideosPost(requestParameters.videos, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -607,16 +559,6 @@ export interface UploadApiUploadsApplicationVideoPostRequest {
      * Video file
      */
     readonly video: File
-
-    /**
-     * Optional thumbnail width in pixels
-     */
-    readonly thumbnailWidth?: number
-
-    /**
-     * Optional thumbnail height in pixels
-     */
-    readonly thumbnailHeight?: number
 }
 
 /**
@@ -627,16 +569,6 @@ export interface UploadApiUploadsDocumentsPostRequest {
      * PDF files
      */
     readonly documents: File
-
-    /**
-     * Optional thumbnail width in pixels
-     */
-    readonly thumbnailWidth?: number
-
-    /**
-     * Optional thumbnail height in pixels
-     */
-    readonly thumbnailHeight?: number
 }
 
 /**
@@ -692,16 +624,6 @@ export interface UploadApiUploadsVideoSubmissionPostRequest {
      * Video file
      */
     readonly video: File
-
-    /**
-     * Optional thumbnail width in pixels
-     */
-    readonly thumbnailWidth?: number
-
-    /**
-     * Optional thumbnail height in pixels
-     */
-    readonly thumbnailHeight?: number
 }
 
 /**
@@ -712,16 +634,6 @@ export interface UploadApiUploadsVideosPostRequest {
      * Video files
      */
     readonly videos: File
-
-    /**
-     * Optional thumbnail width in pixels
-     */
-    readonly thumbnailWidth?: number
-
-    /**
-     * Optional thumbnail height in pixels
-     */
-    readonly thumbnailHeight?: number
 }
 
 /**
@@ -736,7 +648,7 @@ export class UploadApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public uploadsApplicationVideoPost(requestParameters: UploadApiUploadsApplicationVideoPostRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsApplicationVideoPost(requestParameters.video, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(this.axios, this.basePath));
+        return UploadApiFp(this.configuration).uploadsApplicationVideoPost(requestParameters.video, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -747,7 +659,7 @@ export class UploadApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public uploadsDocumentsPost(requestParameters: UploadApiUploadsDocumentsPostRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsDocumentsPost(requestParameters.documents, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(this.axios, this.basePath));
+        return UploadApiFp(this.configuration).uploadsDocumentsPost(requestParameters.documents, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -802,7 +714,7 @@ export class UploadApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public uploadsVideoSubmissionPost(requestParameters: UploadApiUploadsVideoSubmissionPostRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsVideoSubmissionPost(requestParameters.gigId, requestParameters.video, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(this.axios, this.basePath));
+        return UploadApiFp(this.configuration).uploadsVideoSubmissionPost(requestParameters.gigId, requestParameters.video, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -813,7 +725,7 @@ export class UploadApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public uploadsVideosPost(requestParameters: UploadApiUploadsVideosPostRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsVideosPost(requestParameters.videos, requestParameters.thumbnailWidth, requestParameters.thumbnailHeight, options).then((request) => request(this.axios, this.basePath));
+        return UploadApiFp(this.configuration).uploadsVideosPost(requestParameters.videos, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

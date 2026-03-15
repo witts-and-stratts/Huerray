@@ -104,9 +104,9 @@ export function InvitationCard( { invitation, onViewDetails, onViewCreatorDetail
   const creator = getInvitationCreator( invitation );
   const creatorName = `${ invitation.creator?.first_name || '' } ${ invitation.creator?.last_name || '' }`.trim() || invitation.creator?.email || 'Invited creator';
 
-  const coverImage = gig?.campaign?.product_image_url ?? gig?.campaign?.campaign_images?.[ 0 ];
-  const compensation = gig?.compensation;
-  const formattedCompensation = useFormatCurrency( compensation ?? 0, 'EUR' );
+  const coverImage = gig?.campaign?.product_image?.asset ?? gig?.campaign?.campaign_images?.[ 0 ]?.asset;
+  const compensation = gig?.compensation?.value;
+  const formattedCompensation = useFormatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
   const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
   const enforceSingle = gig?.enforce_single_creator_submission;
@@ -188,7 +188,7 @@ export function InvitationCard( { invitation, onViewDetails, onViewCreatorDetail
               </RoleGuard>
               <RoleGuard allowedRoles={ [ 'brand', 'admin' ] }>
                 <Avatar className="size-12">
-                  { invitation.creator?.profile_image_url && <AvatarImage src={ invitation.creator?.profile_image_url } alt={ creatorName } className="object-cover" /> }
+                  { invitation.creator?.profile_image?.asset && <AvatarImage src={ invitation.creator.profile_image.asset } alt={ creatorName } className="object-cover" /> }
                   <AvatarFallback className="text-xs">{ creatorName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
                 </Avatar>
               </RoleGuard>

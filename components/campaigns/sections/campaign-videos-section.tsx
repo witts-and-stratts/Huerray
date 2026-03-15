@@ -55,7 +55,7 @@ export const CampaignVideosSection = memo( function CampaignVideosSection( {
 
   return (
     <AnimatePresence>
-      <div className='mt-2 flex gap-2'>
+      <div key="videos-content" className='mt-2 flex gap-2'>
         <div className={ cn( 'flex flex-col gap-4', !items ? 'flex-auto' : 'w-full' ) }>
           <Card className='p-0 overflow-hidden h-full min-h-[calc(100vh-16rem)] ring-0 border-dashed border border-burgundy-200 ring-transparent hover:ring-8 hover:ring-burgundy-600/20 shadow-none'>
             <FilesDropzone
@@ -63,6 +63,8 @@ export const CampaignVideosSection = memo( function CampaignVideosSection( {
               activeId={ activeId }
               sensors={ sensors }
               accept={ { 'video/*': [ '.mp4', '.mov', '.webm', '.avi' ] } }
+              showTitle={ false }
+              gridClassName="grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
               title="Upload Videos"
               description={ <>Drag and drop files here<br />Support for Video files</> }
               icon={ <VideoFileIcon className="text-primary w-20! h-20! mt-4" /> }
@@ -82,12 +84,14 @@ export const CampaignVideosSection = memo( function CampaignVideosSection( {
       </div >
 
       <ImportUrlDialog
+        key="import-dialog"
         open={ isImportDialogOpen }
         onOpenChange={ setIsImportDialogOpen }
         onImport={ addImportedItem }
       />
 
       <PreviewDialog
+        key="preview-dialog"
         item={ previewItem }
         onClose={ () => setPreviewItem( null ) }
       />

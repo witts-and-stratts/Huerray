@@ -1,5 +1,5 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/dashboard-ui/dialog';
-import { FilePreview } from './file-preview';
+import { useEffect, useState } from 'react';
+import { MediaPreview, type MediaItem } from '@/components/campaigns/media-preview';
 import { UploadedFile } from './types';
 
 interface PreviewDialogProps {
@@ -8,20 +8,51 @@ interface PreviewDialogProps {
 }
 
 export function PreviewDialog( { item, onClose }: PreviewDialogProps ) {
+  const [ mediaItem, setMediaItem ] = useState<MediaItem | null>( null );
+
+  useEffect( () => {
+    if ( !item ) {
+      setMediaItem( null );
+      return;
+    }
+
+    // Uploaded file — use the final URL directly
+    if ( item.url ) {
+      setMediaItem( {
+        url: item.url,
+        thumbnail: item.thumbnail,
+        name: item.name,
+        type: item.type,
+      } );
+      return;
+    }
+
+    // Still uploading — create a blob URL from the File so videos/PDFs are actually previewable
+    if ( item.file ) {
+      const blobUrl = URL.createObjectURL( item.file );
+      setMediaItem( {
+        url: blobUrl,
+        thumbnail: item.preview,
+        name: item.name,
+        type: item.type,
+      } );
+      return () => URL.revokeObjectURL( blobUrl );
+    }
+
+    // Fallback (images already have a full data URL in preview)
+    setMediaItem( {
+      url: item.preview ?? '',
+      thumbnail: item.thumbnail,
+      name: item.name,
+      type: item.type,
+    } );
+  }, [ item ] );
+
   return (
-    <Dialog open={ !!item } onOpenChange={ ( open ) => !open && onClose() } modal>
-      <DialogContent className="w-full md:w-[1000px] md:max-w-none h-[80vh] p-0 overflow-hidden flex flex-col bg-background/95 backdrop-blur-sm gap-0">
-        <DialogHeader className="p-4 border-b shrink-0 flex flex-row items-center justify-between">
-          <DialogTitle className="truncate pr-8 text-h6! font-primary font-normal text-muted-foreground/78">
-            { item?.name }
-          </DialogTitle>
-        </DialogHeader>
-        <div className="flex-1 overflow-hidden relative bg-muted/20 flex items-center justify-center p-4">
-          { item && (
-            <FilePreview item={ item } />
-          ) }
-        </div>
-      </DialogContent>
-    </Dialog>
+    <MediaPreview
+      items={ mediaItem ? [ mediaItem ] : [] }
+      initialIndex={ mediaItem ? 0 : null }
+      onOpenChange={ ( open ) => { if ( !open ) onClose(); } }
+    />
   );
 }

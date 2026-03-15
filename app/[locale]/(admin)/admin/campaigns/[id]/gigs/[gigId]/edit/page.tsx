@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import { useUpdateGig, useGig } from '@/lib/api/hooks/gigs';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
-import { ModelsUpdateGigRequest, ModelsUpdateGigRequestGenderRequirementEnum } from '@/lib/api/generated/models';
+import { ModelsUpdateGigRequest, ModelsUpdateGigRequestGenderRequirementEnum, ModelsMoney } from '@/lib/api/generated/models';
 import { GigForm } from '@/components/gigs/gig-form';
 import { CreateGigSchema } from '@/components/gigs/schema';
 import { ModelsStandardCampaignResponse, ModelsStandardGigResponse } from '@/lib/api/generated/models';
@@ -40,8 +40,8 @@ export default function EditGigPage() {
 
   const initialData: Partial<CreateGigSchema> = {
     title: gig.title || '',
-    compensation: gig.compensation || 0,
-    gig_cost: gig.gig_cost || 0,
+    compensation: gig.compensation?.value ?? 0,
+    gig_cost: gig.gig_cost?.value ?? 0,
     number_of_videos: gig.number_of_videos || 1,
     video_duration_in_seconds: gig.video_duration_in_seconds || 30,
     posting_start_date: gig.posting_start_date ? new Date( gig.posting_start_date ) : undefined,
@@ -52,15 +52,14 @@ export default function EditGigPage() {
     requirements: gig.requirements || '',
     content_guidelines: gig.content_guidelines || '',
     ambience: gig.ambience || '',
-    enforce_single_creator_submission: gig.enforce_single_creator_submission || false,
-    enforce_unique_creator_submission: gig.enforce_unique_creator_submission || false,
+    submission_enforcement: gig.enforce_unique_creator_submission ? 'unique' : 'single',
   };
 
   const handleSubmit = async ( data: CreateGigSchema ) => {
     const requestData: ModelsUpdateGigRequest = {
       title: data.title,
-      compensation: data.compensation,
-      gig_cost: data.gig_cost,
+      compensation: { value: data.compensation, currency: 'EUR' } as ModelsMoney,
+      gig_cost: { value: data.gig_cost, currency: 'EUR' } as ModelsMoney,
       number_of_videos: data.number_of_videos,
       video_duration_in_seconds: data.video_duration_in_seconds,
       posting_start_date: data.posting_start_date.toISOString(),
@@ -71,8 +70,8 @@ export default function EditGigPage() {
       requirements: data.requirements || undefined,
       content_guidelines: data.content_guidelines || undefined,
       ambience: data.ambience || undefined,
-      enforce_single_creator_submission: data.enforce_single_creator_submission,
-      enforce_unique_creator_submission: data.enforce_unique_creator_submission,
+      enforce_single_creator_submission: data.submission_enforcement === 'single',
+      enforce_unique_creator_submission: data.submission_enforcement === 'unique',
     };
 
     try {

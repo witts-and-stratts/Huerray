@@ -54,20 +54,7 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
         <Empty className='border py-20 my-6 flex-1 bg-white'>
           <EmptyHeader>
             <EmptyMedia>
-              <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <Avatar>
-                  <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
-                  <AvatarFallback>LR</AvatarFallback>
-                </Avatar>
-                <Avatar>
-                  <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
-                  <AvatarFallback>ER</AvatarFallback>
-                </Avatar>
-              </div>
+              <img src="/svg/creator-going-live.svg" alt="No gigs yet" className='w-full h-full object-contain max-h-[280px] md:max-h-[420px]' />
             </EmptyMedia>
             <EmptyTitle className='font-normal font-primary text-primary'>No gigs yet</EmptyTitle>
             <EmptyDescription>

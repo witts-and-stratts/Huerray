@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cost_per_item** | **number** |  | [default to undefined]
+**cost_per_item** | [**ModelsMoney**](ModelsMoney.md) |  | [default to undefined]
 **creator_id** | **string** |  | [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **gig_id** | **string** |  | [default to undefined]

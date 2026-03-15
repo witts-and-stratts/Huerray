@@ -90,7 +90,8 @@
       },
       "states": {
         "noImages": "No images uploaded yet.",
-        "noDocuments": "No documents attached yet."
+        "noDocuments": "No documents attached yet.",
+        "noVideos": "No sample videos attached yet."
       },
       "labels": {
         "previewAsset": "Preview campaign asset {index}",

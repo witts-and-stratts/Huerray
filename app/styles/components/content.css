@@ -1,0 +1,94 @@
+@reference 'tailwindcss';
+@reference '../dashboard-globals.css';
+
+@layer components {
+  .content,
+  .ql-editor {
+    @apply *:font-regular!;
+
+    p,
+    li {
+      @apply text-foreground/85 leading-normal text-base;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply font-primary font-medium;
+    }
+
+    a {
+      @apply text-primary underline;
+    }
+
+    ul,
+    ol {
+      @apply my-1 pl-8;
+    }
+
+    ul {
+      @apply list-disc!;
+    }
+
+    ol {
+      @apply list-decimal!;
+    }
+
+    li,
+    li[data-list='bullet'] {
+      @apply ml-0! mb-1! font-secondary;
+    }
+  }
+}
+
+.quill-editor-wrapper .ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid hsl(var(--input));
+  background-color: transparent;
+  padding: 8px;
+  font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
+}
+.quill-editor-wrapper .ql-container.ql-snow {
+  border: none;
+  font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.quill-editor-wrapper .ql-editor {
+  min-height: 150px;
+  flex: 1;
+  font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+  padding: 0.625rem 0.75rem;
+}
+/* .quill-editor-wrapper .ql-editor p {
+  font-weight: 300;
+} */
+/* .quill-editor-wrapper .ql-editor p,
+.quill-editor-wrapper .ql-editor li,
+.quill-editor-wrapper .ql-editor span {
+  font-family: inherit;
+} */
+.quill-editor-wrapper .ql-editor.ql-blank::before {
+  color: hsl(var(--muted-foreground));
+  font-style: normal;
+  font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
+  left: 0.75rem;
+  right: 0.75rem;
+}
+/* .quill-editor .ql-blank p {
+  font-weight: 300;
+} */
+.ql-editor ol {
+  @apply pl-0;
+}
+
+.ql-editor li {
+  @apply pl-3;
+}

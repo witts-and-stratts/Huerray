@@ -7,7 +7,7 @@ import {
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Table } from '@tanstack/react-table';
-import { ChevronDown } from 'lucide-react';
+import { CalendarDays, ChevronDown } from 'lucide-react';
 import * as React from 'react';
 
 import { Button, buttonVariants } from '@/components/dashboard-ui/button';
@@ -21,7 +21,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/dashboard-ui/dropdown-menu';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/dashboard-ui/popover';
 import { SuperField } from '@/components/dashboard-ui/super-field';
+import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { cn } from '@/lib/dashboard-utils';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
 import '@/app/styles/components/data-table.css';
@@ -33,6 +35,10 @@ interface GigsTableToolbarProps {
   setView: ( view: 'table' | 'cards' ) => void;
   hideViewToggle?: boolean;
   actionButtons?: React.ReactNode;
+  dateFilterType?: 'created_at' | 'updated_at' | 'posting_start_date' | 'posting_end_date';
+  setDateFilterType?: ( value: 'created_at' | 'updated_at' | 'posting_start_date' | 'posting_end_date' ) => void;
+  dateRange?: DateRange | undefined;
+  setDateRange?: ( value: DateRange | undefined ) => void;
 }
 
 export function GigsTableToolbar( {
@@ -42,6 +48,10 @@ export function GigsTableToolbar( {
   setView,
   hideViewToggle = false,
   actionButtons,
+  dateFilterType,
+  setDateFilterType,
+  dateRange,
+  setDateRange,
 }: GigsTableToolbarProps ) {
   const [ searchValue, setSearchValue ] = React.useState( '' );
 
@@ -67,6 +77,53 @@ export function GigsTableToolbar( {
         autoComplete='off'
       />
       <div className='flex items-center gap-2 w-full md:w-auto'>
+        { dateFilterType && setDateFilterType && setDateRange && (
+          <Popover>
+            <PopoverTrigger
+              render={
+                <Button variant="outline" size="sm" className="relative">
+                  <CalendarDays className="size-4" strokeWidth={ 1.5 } />
+                  <ChevronDown className="size-4" strokeWidth={ 1 } />
+                  { dateRange?.from && (
+                    <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />
+                  ) }
+                </Button>
+              }
+            />
+            <PopoverContent align="end" className="w-72 p-4 flex flex-col gap-3">
+              <SuperField
+                type="select"
+                label="Filter by date"
+                value={ dateFilterType }
+                onValueChange={ ( v ) => setDateFilterType( ( v ?? 'created_at' ) as 'created_at' | 'updated_at' | 'posting_start_date' | 'posting_end_date' ) }
+                options={ [
+                  { value: 'created_at', label: 'Created Date' },
+                  { value: 'updated_at', label: 'Updated Date' },
+                  { value: 'posting_start_date', label: 'Gig Start Date' },
+                  { value: 'posting_end_date', label: 'Deadline' },
+                ] }
+              />
+              <SuperField
+                type="datepicker"
+                label="Date range"
+                mode="range"
+                value={ dateRange }
+                onChange={ ( v ) => setDateRange( v as DateRange | undefined ) }
+                placeholder="Select date range"
+              />
+              { dateRange?.from && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-muted-foreground w-full"
+                  onClick={ () => setDateRange( undefined ) }
+                >
+                  Clear dates
+                </Button>
+              ) }
+            </PopoverContent>
+          </Popover>
+        ) }
         { !hideViewToggle && (
           <ToggleGroup
             variant={ 'outline' }

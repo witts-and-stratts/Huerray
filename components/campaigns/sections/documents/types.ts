@@ -3,7 +3,8 @@ export interface UploadedFile {
   file?: File;
   url: string;
   status: 'uploading' | 'success' | 'error';
-  preview?: string;
+  preview?: string; // Local blob/data URL (pre-upload only)
+  thumbnail?: string; // API-provided thumbnail URL
   name: string;
   type: string;
 }

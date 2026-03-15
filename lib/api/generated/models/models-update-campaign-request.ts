@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsCampaignCategory } from './utils-campaign-category';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -22,8 +25,8 @@ import type { UtilsVideoFormat } from './utils-video-format';
 
 export interface ModelsUpdateCampaignRequest {
     'allow_multiple_videos'?: boolean;
-    'campaign_documents'?: Array<string>;
-    'campaign_images'?: Array<string>;
+    'campaign_documents'?: Array<ModelsContentMedia>;
+    'campaign_images'?: Array<ModelsContentMedia>;
     'campaign_name'?: string;
     'category'?: UtilsCampaignCategory;
     'description'?: string;
@@ -32,9 +35,9 @@ export interface ModelsUpdateCampaignRequest {
     'keywords'?: string;
     'number_of_creators_wanted'?: number;
     'number_of_videos_wanted'?: number;
-    'product_image_url'?: string;
+    'product_image'?: ModelsContentMedia;
     'product_url'?: string;
-    'sample_video_urls'?: Array<string>;
+    'sample_videos'?: Array<ModelsContentMedia>;
     'tone_of_voice'?: string;
     'video_duration_in_seconds_in_seconds'?: number;
     'video_format'?: UtilsVideoFormat;

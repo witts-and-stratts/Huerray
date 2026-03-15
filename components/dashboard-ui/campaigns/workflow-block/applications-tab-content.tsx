@@ -62,7 +62,7 @@ export function ApplicationsTabContent( { campaignId, isActive }: ApplicationsTa
           <div className="flex items-start justify-between gap-2">
             <div className="flex min-w-0 items-center gap-2">
               <Avatar className="size-8 shrink-0">
-                <AvatarImage src={ application.creator?.profile_image_url || '' } alt={ application.creator?.first_name || 'Applicant' } />
+                <AvatarImage src={ application.creator?.profile_image?.asset || '' } alt={ application.creator?.first_name || 'Applicant' } />
                 <AvatarFallback>
                   { ( application.creator?.first_name?.[ 0 ] || 'A' ).toUpperCase() }
                   { ( application.creator?.last_name?.[ 0 ] || '' ).toUpperCase() }

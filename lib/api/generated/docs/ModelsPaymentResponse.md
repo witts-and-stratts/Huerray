@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **created_at** | **string** |  | [optional] [default to undefined]
 **creator_id** | **string** |  | [optional] [default to undefined]
 **creator_name** | **string** |  | [optional] [default to undefined]
-**currency** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **item_count** | **number** |  | [optional] [default to undefined]
 **notes** | **string** |  | [optional] [default to undefined]
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 **payment_method** | **string** |  | [optional] [default to undefined]
 **payment_status** | **string** |  | [optional] [default to undefined]
 **reference** | **string** |  | [optional] [default to undefined]
-**total_amount** | **number** |  | [optional] [default to undefined]
+**total** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -30,7 +29,6 @@ const instance: ModelsPaymentResponse = {
     created_at,
     creator_id,
     creator_name,
-    currency,
     id,
     item_count,
     notes,
@@ -40,7 +38,7 @@ const instance: ModelsPaymentResponse = {
     payment_method,
     payment_status,
     reference,
-    total_amount,
+    total,
     updated_at,
 };
 ```

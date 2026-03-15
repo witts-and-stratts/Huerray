@@ -18,10 +18,9 @@ export function CampaignsCardsView( { table }: CampaignsCardsProps ) {
       <AnimatePresence>
         { rows.map( ( row ) => (
           <motion.div
-            initial={ { opacity: 0, y: 10 } }
-            animate={ { opacity: 1, y: 0, transition: { delay: row.index * 0.075, ease: 'easeOut', } } }
-            exit={ { opacity: 0, y: 10 } }
-            transition={ { duration: 3, ease: 'easeOut' } }
+            initial={ { opacity: 0 } }
+            animate={ { opacity: 1, transition: { delay: row.index * 0.05, ease: 'easeOut', duration: 0.25 } } }
+            exit={ { opacity: 0 } }
             className='flex-1'
           >
             <CampaignCard key={ row.id } campaign={ row.original } />

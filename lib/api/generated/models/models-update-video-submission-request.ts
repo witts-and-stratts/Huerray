@@ -13,11 +13,14 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsContentMedia } from './models-content-media';
 
 export interface ModelsUpdateVideoSubmissionRequest {
     'description'?: string;
     'title'?: string;
+    'video'?: ModelsContentMedia;
     'video_filename'?: string;
-    'video_url'?: string;
 }
 

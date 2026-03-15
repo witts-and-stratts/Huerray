@@ -28,7 +28,7 @@ export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejec
     .join( "" )
     .slice( 0, 2 )
     .toUpperCase();
-  const imageUrl = creator.profile_image_url;
+  const imageUrl = creator.profile_image?.asset;
   const age = creator.date_of_birth ? calculateAge( creator.date_of_birth ) : undefined;
   const location = [ creator.city, creator.country ].filter( Boolean ).join( ', ' );
   const flagName = creator.country ? getCountryFlag( creator.country ) : undefined;

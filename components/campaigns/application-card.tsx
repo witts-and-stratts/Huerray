@@ -35,7 +35,7 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
         </div>
         <div className="flex shrink-0 text-right gap-2 items-start">
           <Avatar className="size-10 border bg-white rounded-full shrink-0">
-            <AvatarImage src={ creator?.profile_image_url } alt={ creatorName } className="object-cover" />
+            <AvatarImage src={ creator?.profile_image?.asset } alt={ creatorName } className="object-cover" />
             <AvatarFallback className="rounded-full text-xs">
               { creatorName.slice( 0, 2 ).toUpperCase() }
             </AvatarFallback>
@@ -52,10 +52,10 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
         ) }
 
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          { gig?.compensation != null && (
+          { gig?.compensation?.value != null && (
             <div className="flex items-center gap-1">
               <DollarSign className="size-3.5" />
-              <span className="text-xs">{ gig.compensation ? `$${ gig.compensation }` : 'Unpaid' }</span>
+              <span className="text-xs">{ gig.compensation?.value ? `$${ gig.compensation.value }` : 'Unpaid' }</span>
             </div>
           ) }
           <div className="flex items-center gap-1">

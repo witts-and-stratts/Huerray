@@ -18,13 +18,13 @@ function BrandAvatarContent( { brand, className }: BrandAvatarProps ) {
   } );
 
   const brandData = ( data )?.data;
-  const url = brand?.profile_photo_url;
+  const url = brand?.profile_photo?.asset;
 
   if ( ( isLoading || !brand?.id ) && !url ) return <BrandAvatarSkeleton className={ className } />;
   if ( !brandData && !url ) return <BrandAvatarSkeleton className={ className } />;
 
   const company_name = brand?.company_name || brandData?.id;
-  const brandLogo = brand?.profile_photo_url || brandData?.profile_photo_url;
+  const brandLogo = brand?.profile_photo?.asset || brandData?.profile_photo?.asset;
   const brandName = company_name || 'Brand';
 
   return (

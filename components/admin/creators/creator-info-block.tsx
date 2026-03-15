@@ -117,8 +117,8 @@ const CreatorHeader = memo( ( { creator, hideAge, age, showEmail, onViewDetails,
     <div className="flex gap-4 justify-between">
       <div className="flex items-start gap-4 flex-1 min-w-0">
         <Avatar className="size-10">
-          { creator.profile_image_url &&
-            <AvatarImage src={ imgpresets.avatar( creator.profile_image_url ) } alt={ fullName } /> }
+          { creator.profile_image?.asset &&
+            <AvatarImage src={ imgpresets.avatar( creator.profile_image.asset ) } alt={ fullName } /> }
           <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
         </Avatar>
         <div className="flex flex-col min-w-0">

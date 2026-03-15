@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **allow_multiple_videos** | **boolean** |  | [optional] [default to undefined]
-**campaign_documents** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**campaign_images** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**campaign_documents** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
+**campaign_images** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [default to undefined]
 **category** | [**UtilsCampaignCategory**](UtilsCampaignCategory.md) |  | [default to undefined]
 **description** | **string** |  | [default to undefined]
@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 **keywords** | **string** |  | [optional] [default to undefined]
 **number_of_creators_wanted** | **number** |  | [default to undefined]
 **number_of_videos_wanted** | **number** |  | [default to undefined]
-**product_image_url** | **string** |  | [optional] [default to undefined]
+**product_image** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **product_url** | **string** |  | [optional] [default to undefined]
-**sample_video_urls** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**sample_videos** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **tone_of_voice** | **string** |  | [optional] [default to undefined]
 **video_duration_in_seconds_in_seconds** | **number** | in seconds | [default to undefined]
 **video_format** | [**UtilsVideoFormat**](UtilsVideoFormat.md) |  | [default to undefined]
@@ -40,9 +40,9 @@ const instance: ModelsCreateCampaignRequest = {
     keywords,
     number_of_creators_wanted,
     number_of_videos_wanted,
-    product_image_url,
+    product_image,
     product_url,
-    sample_video_urls,
+    sample_videos,
     tone_of_voice,
     video_duration_in_seconds_in_seconds,
     video_format,

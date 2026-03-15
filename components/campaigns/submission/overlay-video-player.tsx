@@ -7,8 +7,6 @@ import { MessageSquare } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRef, useState } from 'react';
 
-const VIDEO_EXTENSIONS = [ '.mp4', '.mov', '.avi', '.mkv', '.webm' ];
-
 interface OverlayVideoPlayerProps {
   videoUrl?: string;
   showControl: boolean;
@@ -16,6 +14,7 @@ interface OverlayVideoPlayerProps {
   onExpand?: () => void;
   commentCount?: number;
   onCommentClick?: () => void;
+  poster?: string;
 }
 
 export function OverlayVideoPlayer( {
@@ -24,12 +23,11 @@ export function OverlayVideoPlayer( {
   compact = false,
   onExpand,
   commentCount,
-  onCommentClick
+  onCommentClick,
+  poster,
 }: OverlayVideoPlayerProps ) {
   const videoRef = useRef<HTMLVideoElement>( null );
   const [ isPlaying, setIsPlaying ] = useState( false );
-  const thumbnailUrl = videoUrl?.replaceAll( '.mp4', '' ).replaceAll( '.mov', '' ).replaceAll( '.avi', '' ).replaceAll( '.mkv', '' ).replaceAll( '.webm', '' ) + 'thumbnail.png';
-
   const togglePlayback = () => {
     const node = videoRef.current;
     if ( !node ) return;
@@ -61,7 +59,7 @@ export function OverlayVideoPlayer( {
         onPlay={ () => setIsPlaying( true ) }
         onPause={ () => setIsPlaying( false ) }
         onClick={ togglePlayback }
-        poster={ thumbnailUrl }
+        poster={ poster }
       />
       <AnimatePresence>
         <motion.button

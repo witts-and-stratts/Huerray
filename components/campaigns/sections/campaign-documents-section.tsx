@@ -63,6 +63,7 @@ export const CampaignDocumentsSection = memo( function CampaignDocumentsSection(
               activeId={ activeId }
               sensors={ sensors }
               accept={ { 'application/pdf': [ '.pdf' ] } }
+              showTitle={ false }
               onDragStart={ handleDragStart }
               onDragEnd={ handleDragEnd }
               onDrop={ handleDrop }

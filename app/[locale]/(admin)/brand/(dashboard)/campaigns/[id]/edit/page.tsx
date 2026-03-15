@@ -1,12 +1,37 @@
 'use client';
 
-import { CampaignForm } from '@/components/campaigns/campaign-form';
+import { CampaignForm, type CampaignFileItems } from '@/components/campaigns/campaign-form';
 import { CreateCampaignSchema } from '@/components/campaigns/schema';
+import { apiClient, apiConfiguration, BASE_URL } from '@/lib/api/client';
+import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
+import type { ModelsUploadsImagePost200Response } from '@/lib/api/models/models-uploads-image-post200-response';
 import { useCampaign, useUpdateCampaign, useSubmitCampaign } from '@/lib/api/hooks/campaigns';
+
+async function uploadThumbnailDataUrl( dataUrl: string ): Promise<string | undefined> {
+  try {
+    const fetchResponse = await fetch( dataUrl );
+    const blob = await fetchResponse.blob();
+    const file = new File( [ blob ], 'thumbnail.jpg', { type: blob.type || 'image/jpeg' } );
+    const uploadApi = UploadApiFactory( apiConfiguration, undefined, apiClient );
+    const response = await uploadApi.uploadsImagesPost( { images: file } ) as unknown as ModelsUploadsImagePost200Response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const uploadedFile = response.data.data[ 0 ] as any;
+    if ( uploadedFile?.url ) {
+      return uploadedFile.url.startsWith( 'http' )
+        ? uploadedFile.url
+        : `${ BASE_URL.replace( '/api/v1', '' ) }${ uploadedFile.url }`;
+    }
+  } catch ( e ) {
+    console.error( 'Failed to upload thumbnail', e );
+  }
+  return undefined;
+}
 import { notFound, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import React, { useState } from 'react';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import type { UploadedFile } from '@/components/campaigns/sections/documents/types';
 
 interface EditCampaignPageProps {
   params: Promise<{
@@ -44,7 +69,7 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
     category: campaign.category,
     keywords: campaign.keywords ? campaign.keywords.split( ',' ).map( k => k.trim() ).filter( Boolean ) : [],
     product_url: campaign.product_url || '',
-    product_image: campaign.product_image_url || '',
+    product_image: campaign.product_image?.asset || '',
     number_of_creators_wanted: campaign.number_of_creators_wanted || 1,
     number_of_videos_wanted: campaign.number_of_videos_wanted || 1,
     video_duration_in_seconds: campaign.video_duration_in_seconds || 60,
@@ -53,15 +78,25 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
     tone_of_voice: campaign.tone_of_voice || '',
     dos: campaign.dos || '',
     donts: campaign.donts || '',
-    documents: campaign.campaign_documents || [],
-    images: campaign.campaign_images || [],
-    videos: [], // Assuming video uploads are not part of the initial fetch or handled differently, strictly following schema
+    documents: campaign.campaign_documents?.map( i => i.asset ).filter( ( x ): x is string => typeof x === 'string' ) || [],
+    images: campaign.campaign_images?.map( i => i.asset ).filter( ( x ): x is string => typeof x === 'string' ) || [],
+    videos: campaign.sample_videos?.map( i => i.asset ).filter( ( x ): x is string => typeof x === 'string' ) || [],
   };
 
-  const handleSubmit = async ( values: CreateCampaignSchema ) => {
-    // Construct the update payload. 
-    // Ideally we should only send changed fields, but sending all valid fields is usually safer if the API supports it.
-    // The useUpdateCampaign hook expects { id, data }.
+  const handleSubmit = async ( values: CreateCampaignSchema, fileItems: CampaignFileItems, _intent: 'draft' | 'publish' ) => {
+    const documentItems = fileItems.documents.filter( d => d.status === 'success' );
+    const videoItems = fileItems.videos.filter( v => v.status === 'success' );
+
+    const [ campaignDocuments, sampleVideos ] = await Promise.all( [
+      Promise.all( documentItems.map( async ( d ) => ( {
+        asset: d.url,
+        thumbnail: d.preview ? await uploadThumbnailDataUrl( d.preview ) : d.thumbnail,
+      } ) ) ),
+      Promise.all( videoItems.map( async ( v ) => ( {
+        asset: v.url,
+        thumbnail: v.preview ? await uploadThumbnailDataUrl( v.preview ) : v.thumbnail,
+      } ) ) ),
+    ] );
 
     try {
       await updateCampaign.mutateAsync( {
@@ -72,7 +107,7 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
           category: values.category as any,
           keywords: values.keywords.join( ', ' ),
           product_url: values.product_url || undefined,
-          product_image_url: values.product_image || undefined,
+          product_image: values.product_image ? { asset: values.product_image } : undefined,
           number_of_creators_wanted: values.number_of_creators_wanted,
           number_of_videos_wanted: values.number_of_videos_wanted,
           video_duration_in_seconds_in_seconds: values.video_duration_in_seconds,
@@ -81,9 +116,9 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
           tone_of_voice: values.tone_of_voice,
           dos: values.dos,
           donts: values.donts,
-          campaign_documents: values.documents,
-          campaign_images: values.images,
-          // campaigns_videos: values.videos // Check API if this field exists, schema says `videos` but API might differ
+          campaign_documents: campaignDocuments.length > 0 ? campaignDocuments : undefined,
+          campaign_images: values.images?.map( ( url: string ) => ( { asset: url } ) ),
+          sample_videos: sampleVideos.length > 0 ? sampleVideos : undefined,
         }
       } );
       toast.success( 'Campaign updated successfully' );
@@ -112,11 +147,36 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
     router.push( '/brand/campaigns' );
   };
 
+  const initialVideos: UploadedFile[] = ( campaign.sample_videos ?? [] )
+    .filter( ( i ) => typeof i.asset === 'string' )
+    .map( ( i, idx ) => ( {
+      id: `video-${ idx }`,
+      url: i.asset!,
+      status: 'success' as const,
+      name: i.asset!.split( '/' ).pop() || 'Video',
+      type: 'video/mp4',
+      thumbnail: i.thumbnail ? imgpresets.card( i.thumbnail ) : undefined,
+    } ) );
+
+  const initialDocuments: UploadedFile[] = ( campaign.campaign_documents ?? [] )
+    .filter( ( i ) => typeof i.asset === 'string' )
+    .map( ( i, idx ) => ( {
+      id: `doc-${ idx }`,
+      url: i.asset!,
+      status: 'success' as const,
+      name: i.asset!.split( '/' ).pop() || 'Document',
+      type: 'application/pdf',
+      thumbnail: i.thumbnail ? imgpresets.card( i.thumbnail ) : undefined,
+    } ) );
+
   return (
     <>
       <CampaignForm
         mode="edit"
+        campaignId={ resolvedParams.id }
         initialValues={ initialValues }
+        initialDocuments={ initialDocuments }
+        initialVideos={ initialVideos }
         onSubmit={ handleSubmit }
       />
 

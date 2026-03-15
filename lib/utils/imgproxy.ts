@@ -91,6 +91,8 @@ const DEFAULTS: Required<
  * @returns       The fully-qualified imgproxy CDN URL.
  */
 export function imgproxyUrl(src: string, opts: ImgproxyOptions = {}): string {
+  if ( typeof src !== 'string' || !src ) return '';
+  if ( src.startsWith( CDN_BASE_URL ) ) return src;
   const {
     width = DEFAULTS.width,
     height = DEFAULTS.height,

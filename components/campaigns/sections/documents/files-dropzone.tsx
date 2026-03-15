@@ -33,6 +33,8 @@ interface FilesDropzoneProps {
   title?: string;
   description?: React.ReactNode;
   icon?: React.ReactNode;
+  showTitle?: boolean;
+  gridClassName?: string;
 }
 
 const DropZoneFooter = memo( ( { open, onImportUrlClick }: { open: () => void; onImportUrlClick: () => void; } ) => (
@@ -71,7 +73,9 @@ export const FilesDropzone = memo( ( {
   onImportUrlClick,
   title,
   description,
-  icon
+  icon,
+  showTitle,
+  gridClassName,
 }: FilesDropzoneProps ) => {
   return (
     <Dropzone
@@ -105,7 +109,7 @@ export const FilesDropzone = memo( ( {
                 onDragEnd={ onDragEnd }
               >
                 <SortableContext items={ items.map( i => i.id ) } strategy={ rectSortingStrategy }>
-                  <div className='grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-1 p-2 items-start h-full content-start'>
+                  <div className={ cn( 'grid gap-1 p-2 items-start h-full content-start', gridClassName ?? 'grid-cols-3 md:grid-cols-4 lg:grid-cols-5' ) }>
                     <AnimatePresence>
                       { items.map( ( item ) => (
                         <SortableFileItem
@@ -116,6 +120,7 @@ export const FilesDropzone = memo( ( {
                           onUploadError={ onUploadError }
                           onRetry={ onRetry }
                           onPreview={ onPreview }
+                          showTitle={ showTitle }
                         />
                       ) ) }
                     </AnimatePresence>
@@ -131,6 +136,7 @@ export const FilesDropzone = memo( ( {
                       onUploadError={ onUploadError }
                       onRetry={ onRetry }
                       onPreview={ onPreview }
+                      showTitle={ showTitle }
                     />
                   ) : null }
                 </DragOverlay>

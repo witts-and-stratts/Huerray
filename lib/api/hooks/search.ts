@@ -131,7 +131,7 @@ export function useGlobalSearch({
             title: b.company_name ?? 'Unknown Brand',
             subtitle: b.category ?? undefined,
             status: undefined,
-            avatarUrl: b.profile_photo_url ?? undefined,
+            avatarUrl: b.profile_photo?.asset ?? undefined,
             country: b.country ?? undefined,
             tags: [],
           }));
@@ -172,7 +172,7 @@ export function useGlobalSearch({
             subtitle: c.brand_name ?? undefined,
             status: c.campaign_status ?? undefined,
             createdAt: c.created_at ?? undefined,
-            avatarUrl: c.product_image_url ?? undefined,
+            avatarUrl: c.product_image?.asset ?? undefined,
             tags: c.category ? [{ label: 'Category', value: String(c.category) }] : [],
           }));
         },
@@ -206,7 +206,7 @@ export function useGlobalSearch({
             subtitle: c.email ?? undefined,
             status: undefined,
             createdAt: (c as any).created_at ?? undefined,
-            avatarUrl: c.profile_image_url ?? undefined,
+            avatarUrl: c.profile_image?.asset ?? undefined,
             country: c.country ?? undefined,
             tags: [],
           }));
@@ -283,8 +283,8 @@ export function useGlobalSearch({
             status: inv.invoice_status ?? undefined,
             createdAt: inv.created_at ?? undefined,
             tags:
-              inv.total_amount != null
-                ? [{ label: 'Amount', value: `$${inv.total_amount.toFixed(2)}` }]
+              inv.total?.value != null
+                ? [{ label: 'Amount', value: `$${inv.total.value.toFixed(2)}` }]
                 : [],
           }));
         },
@@ -325,8 +325,8 @@ export function useGlobalSearch({
             status: p.payment_status ?? undefined,
             createdAt: p.created_at ?? undefined,
             tags:
-              p.total_amount != null
-                ? [{ label: 'Amount', value: `$${p.total_amount.toFixed(2)}` }]
+              p.total?.value != null
+                ? [{ label: 'Amount', value: `$${p.total.value.toFixed(2)}` }]
                 : [],
           }));
         },

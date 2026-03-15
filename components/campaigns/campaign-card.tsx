@@ -114,19 +114,19 @@ const CampaignAvatars = memo( ( { campaignId, onSelectMatch }: {
   const applicationPeople = useMemo( () => applications.map( app => ( {
     first_name: app.creator?.first_name || '',
     last_name: app.creator?.last_name || '',
-    avatar: app.creator?.profile_image_url || '',
+    avatar: app.creator?.profile_image?.asset || '',
   } ) ), [ applications ] );
 
   const invitationPeople = useMemo( () => invitations.map( inv => ( {
     first_name: inv.creator?.first_name || '',
     last_name: inv.creator?.last_name || '',
-    avatar: inv.creator?.profile_image_url || '',
+    avatar: inv.creator?.profile_image?.asset || '',
   } ) ), [ invitations ] );
 
   const submissionPeople = useMemo( () => submissions.map( sub => ( {
     first_name: sub.creator?.first_name || '',
     last_name: sub.creator?.last_name || '',
-    avatar: sub.creator?.profile_image_url || '',
+    avatar: sub.creator?.profile_image?.asset || '',
   } ) ), [ submissions ] );
 
   const handleSelect = useCallback( ( item: any, type: any ) => {
@@ -244,7 +244,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
 
   const cleanDescription = useMemo( () => stripTags( description || '' ), [ description ] );
 
-  const coverImage = campaign.product_image_url || campaign.campaign_images?.[ 0 ];
+  const coverImage = campaign.product_image?.asset || campaign.campaign_images?.[ 0 ]?.asset;
 
   return (
     <>

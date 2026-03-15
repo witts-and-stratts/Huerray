@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **brand_decision_comments** | **string** |  | [optional] [default to undefined]
 **brand_id** | **string** |  | [optional] [default to undefined]
 **brand_name** | **string** |  | [optional] [default to undefined]
-**campaign_documents** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**campaign_documents** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **campaign_id** | **string** |  | [optional] [default to undefined]
-**campaign_images** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**campaign_images** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
 **campaign_status** | [**UtilsCampaignStatus**](UtilsCampaignStatus.md) |  | [optional] [default to undefined]
 **category** | [**UtilsCampaignCategory**](UtilsCampaignCategory.md) |  | [optional] [default to undefined]
@@ -27,9 +27,9 @@ Name | Type | Description | Notes
 **number_of_creators_wanted** | **number** |  | [optional] [default to undefined]
 **number_of_gigs_validated** | **boolean** |  | [optional] [default to undefined]
 **number_of_videos_wanted** | **number** |  | [optional] [default to undefined]
-**product_image_url** | **string** |  | [optional] [default to undefined]
+**product_image** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **product_url** | **string** |  | [optional] [default to undefined]
-**sample_video_urls** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**sample_videos** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **tone_of_voice** | **string** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
 **video_duration_in_seconds** | **number** |  | [optional] [default to undefined]
@@ -63,9 +63,9 @@ const instance: ModelsCampaignResponse = {
     number_of_creators_wanted,
     number_of_gigs_validated,
     number_of_videos_wanted,
-    product_image_url,
+    product_image,
     product_url,
-    sample_video_urls,
+    sample_videos,
     tone_of_voice,
     updated_at,
     video_duration_in_seconds,

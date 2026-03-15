@@ -10,8 +10,8 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  type FilterFn,
 } from "@tanstack/react-table";
-
 import { getColumns } from "./users-columns";
 import { UserDetailsSheet } from "./user-details-sheet";
 import { UsersTableToolbar } from "./users-table-toolbar";
@@ -24,6 +24,23 @@ import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton
 import { TableErrorState } from "@/components/dashboard-ui/table-error-state";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+
+const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterValue: string ) => {
+  const q = filterValue.toLowerCase().trim();
+  if ( !q ) return true;
+  const u = row.original;
+  const searchable = [
+    u.first_name,
+    u.last_name,
+    u.middle_name,
+    u.email,
+    u.username,
+    u.user_status,
+    u.user_type,
+    u.phone_number,
+  ].filter( Boolean ).join( ' ' ).toLowerCase();
+  return searchable.includes( q );
+};
 
 
 
@@ -44,6 +61,7 @@ export function UsersTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
+  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
   const [ selectedUser, setSelectedUser ] =
     React.useState<ModelsUserResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -69,8 +87,10 @@ export function UsersTable( {
   const table = useReactTable( {
     data: users,
     columns,
+    globalFilterFn: userGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -82,6 +102,7 @@ export function UsersTable( {
       columnFilters,
       columnVisibility,
       rowSelection,
+      globalFilter,
     },
   } );
 

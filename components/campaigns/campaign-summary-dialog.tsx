@@ -1,69 +1,61 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/dashboard-ui/dialog';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/dashboard-ui/dialog';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
-import { Separator } from '@/components/dashboard-ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
+import { Content } from '@/components/dashboard-ui/content';
 import { apiClient } from '@/lib/api/client';
-import { AlignLeft, CheckCircle2, CircleCheckBigIcon, FileIcon, ImageIcon, Loader2, Tag, Type, VideoIcon } from 'lucide-react';
+import { Clock3, Globe, ImageIcon, Loader2, Users, Video, VideoIcon } from 'lucide-react';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { CreateCampaignSchema } from './schema';
 import { PdfFileIcon } from './sections/documents/pdf-file-icon';
 import { PreviewDialog } from './sections/documents/preview-dialog';
+import { ImageFileIcon } from './sections/documents/image-file-icon';
 import { UploadedFile } from './sections/documents/types';
 import { cn } from '@/lib/dashboard-utils';
-import { SubHeaderTabs } from '../subheader';
-import { ImageFileIcon } from './sections/documents/image-file-icon';
+import { SentenceCase } from '@/components/text-case';
 
 interface CampaignSummaryDialogProps {
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
   onConfirm: () => void;
+  onSaveDraft?: () => void;
+  saveDraftLabel?: string;
   data: CreateCampaignSchema;
   documents: UploadedFile[];
   images: UploadedFile[];
   videos: UploadedFile[];
+  previewOnly?: boolean;
+  isConfirming?: boolean;
+  isSavingDraft?: boolean;
 }
 
-const formatEnumLabel = ( value: string | undefined ) => {
-  if ( !value ) return '-';
-  return value
-    .split( /[_\- ]+/ )
-    .map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ).toLowerCase() )
-    .join( " " );
-};
+function formatDuration( seconds?: number ) {
+  if ( !seconds ) return 'N/A';
+  if ( seconds < 60 ) return `${ seconds }s`;
+  const minutes = Math.floor( seconds / 60 );
+  const rem = seconds % 60;
+  return rem > 0 ? `${ minutes }m ${ rem }s` : `${ minutes }m`;
+}
 
-const SectionTitle = ( { children }: { children: React.ReactNode; } ) => (
-  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">{ children }</h4>
+const KpiCard = ( { label, value, icon: Icon }: { label: string; value: string; icon: any; } ) => (
+  <Card className="flex flex-col gap-1 p-4">
+    <div className="flex items-center gap-1.5 text-muted-foreground/70">
+      <Icon className="size-3.5" strokeWidth={ 1.5 } />
+      <span className="text-xs font-normal">{ label }</span>
+    </div>
+    <span className="text-2xl font-semibold tracking-tight">{ value }</span>
+  </Card>
 );
 
-const InfoRow = ( { label, value }: { label: string, value: React.ReactNode; } ) => (
-  <div className="flex flex-col justify-between py-1 border-b border-border/50 last:border-0">
-    <span className="text-base font-normal">{ label }</span>
-    <span className="text-h6 font-regular tracking-tight">{ value || '-' }</span>
-  </div>
-);
-
-const SummaryRow = ( {
-  label,
-  value,
-  icon: Icon = CheckCircle2,
-  isLast = false
-}: {
-  label: string;
-  value: React.ReactNode;
-  icon?: any;
-  isLast?: boolean;
-} ) => (
-  <div className={ `flex gap-4 px-8 py-4 ${ !isLast ? 'border-b border-border/50' : '' }` }>
-    <div className="shrink-0 mt-1">
-      <Icon className="w-5 h-5 text-muted-foreground/40" />
-    </div>
-    <div className="flex flex-col gap-1 min-w-0 flex-1">
-      <span className="text-sm font-medium text-foreground">{ label }</span>
-      <div className="text-sm text-muted-foreground wrap-break-word">{ value || '-' }</div>
-    </div>
+const MetaRow = ( { label, value }: { label: string; value: React.ReactNode; } ) => (
+  <div className="flex items-center justify-between gap-3 py-2 border-b border-border/60 last:border-0">
+    <span className="text-sm text-muted-foreground/70 font-normal">{ label }</span>
+    <span className="text-sm font-regular text-right">{ value }</span>
   </div>
 );
 
@@ -82,65 +74,56 @@ const AuthenticatedImage = ( { url, alt }: { url: string; alt: string; } ) => {
           setSrc( objectUrl );
           setLoading( false );
         }
-      } catch ( err ) {
-        if ( active ) {
-          console.error( "Failed to load image", err );
-          setError( true );
-          setLoading( false );
-        }
+      } catch {
+        if ( active ) { setError( true ); setLoading( false ); }
       }
     };
     fetchImage();
     return () => { active = false; if ( src ) URL.revokeObjectURL( src ); };
   }, [ url ] );
 
-  if ( loading ) return <div className="w-full h-full flex items-center justify-center bg-muted text-muted-foreground"><Loader2 className="w-6 h-6 animate-spin" /></div>;
-  if ( error || !src ) return <div className="w-full h-full flex items-center justify-center bg-muted text-muted-foreground"><ImageFileIcon className="size-18" /></div>;
-
+  if ( loading ) return <div className="w-full h-full flex items-center justify-center bg-muted"><Loader2 className="size-6 animate-spin text-muted-foreground" /></div>;
+  if ( error || !src ) return <div className="w-full h-full flex items-center justify-center bg-muted"><ImageFileIcon className="size-12 text-muted-foreground" /></div>;
   return <img src={ src } alt={ alt } className="w-full h-full object-cover" />;
 };
 
 const FileGrid = ( { files, onPreview }: { files: UploadedFile[]; onPreview: ( file: UploadedFile ) => void; } ) => {
   if ( files.length === 0 ) {
     return (
-      <div className="h-full bg-muted/20 rounded-md border flex items-center justify-center text-sm text-muted-foreground border-dashed">
+      <div className="h-32 bg-muted/20 rounded-md border border-dashed flex items-center justify-center text-sm text-muted-foreground">
         No files attached
       </div>
     );
   }
 
-  const isImage = ( file: UploadedFile ) => file.type.startsWith( 'image/' );
-  const isVideo = ( file: UploadedFile ) => file.type.startsWith( 'video/' );
-  const isPdf = ( file: UploadedFile ) => file.type.startsWith( 'application/pdf' );
+  const isImage = ( f: UploadedFile ) => f.type.startsWith( 'image/' );
+  const isVideo = ( f: UploadedFile ) => f.type.startsWith( 'video/' );
 
   return (
-    <ScrollArea className="h-full bg-muted/20 rounded-md border">
-      <div className="p-2 grid grid-cols-2 lg:grid-cols-3 gap-2">
-        { files.map( ( file ) => (
-          <div
-            key={ file.id }
-            onClick={ () => onPreview( file ) }
-            className="group cursor-pointer flex flex-col items-center gap-2 rounded border bg-background hover:border-primary/50 transition-colors"
-          >
-            { /* Thumbnail logic */ }
-            <div className={ cn( "relative w-full aspect-square rounded-sm overflow-hidden flex items-center justify-center", ( isVideo( file ) || isImage( file ) ) && "aspect-4/3" ) }>
-              { isImage( file ) ? (
-                <img src={ file.preview || file.url } alt={ file.name } className="w-full h-full object-cover" />
-              ) : isVideo( file ) ? (
-                file.preview ? (
-                  <img src={ file.preview } alt={ file.name } className="w-full h-full object-cover" />
-                ) : <VideoIcon className="w-8 h-8 text-muted-foreground" />
-              ) : (
-                <PdfFileIcon className="w-10 h-10 text-muted-foreground" />
-              ) }
-            </div>
-            { isPdf( file ) && <div className="w-full text-[10px] text-center text-muted-foreground line-clamp-2 px-1 mb-2">
-              { file.name }
-            </div> }
+    <div className="grid grid-cols-3 gap-2">
+      { files.map( ( file ) => (
+        <div
+          key={ file.id }
+          onClick={ () => onPreview( file ) }
+          className="group cursor-pointer rounded border bg-background hover:border-primary/50 transition-colors overflow-hidden"
+        >
+          <div className={ cn( 'relative w-full aspect-square flex items-center justify-center overflow-hidden', ( isVideo( file ) || isImage( file ) ) && 'aspect-4/3' ) }>
+            { isImage( file ) ? (
+              <img src={ file.preview || file.url } alt={ file.name } className="w-full h-full object-cover" />
+            ) : isVideo( file ) ? (
+              file.preview
+                ? <img src={ file.preview } alt={ file.name } className="w-full h-full object-cover" />
+                : <VideoIcon className="size-8 text-muted-foreground" />
+            ) : (
+              <div className="flex flex-col items-center gap-1 p-2">
+                <PdfFileIcon className="size-8 text-muted-foreground" />
+                <span className="text-[10px] text-center text-muted-foreground line-clamp-2">{ file.name }</span>
+              </div>
+            ) }
           </div>
-        ) ) }
-      </div>
-    </ScrollArea>
+        </div>
+      ) ) }
+    </div>
   );
 };
 
@@ -148,137 +131,188 @@ export function CampaignSummaryDialog( {
   open,
   onOpenChange,
   onConfirm,
+  onSaveDraft,
+  saveDraftLabel = 'Save draft',
   data,
   documents,
   images,
-  videos
+  videos,
+  previewOnly = false,
+  isConfirming = false,
+  isSavingDraft = false,
 }: CampaignSummaryDialogProps ) {
   const [ previewItem, setPreviewItem ] = useState<UploadedFile | null>( null );
+  const keywordList = data.keywords ?? [];
 
   return (
     <>
       <Dialog open={ open } onOpenChange={ onOpenChange }>
         <DialogContent className="max-w-none! w-9/10 h-[90vh] flex flex-col p-0 gap-0 overflow-hidden">
-          <DialogHeader className="p-6 pb-2 shrink-0">
-            <DialogTitle className='text-h4 font-normal font-primary'>Review Campaign Details { data.campaign_name && ( <span className='text-primary font-normal'> / { data.campaign_name }</span> ) }</DialogTitle>
-            <DialogDescription className='text-lg! font-light'>
-              Please review the details below before submitting your campaign.
-            </DialogDescription>
-          </DialogHeader>
-          <Separator className="my-2" />
 
-          <div className="flex-1 overflow-y-auto p-6">
-            <div className="grid md:grid-cols-7 gap-8 h-full">
-              {/* Left Column: Basic Info */ }
-              <Card className="md:col-span-4 space-y-6 p-0 h-fit">
-                <CardContent className="p-0">
-                  <div>
-                    <SummaryRow
-                      label="Campaign Name"
-                      value={ data.campaign_name }
-                      icon={ CircleCheckBigIcon }
-                    />
-                    <SummaryRow
-                      label="Category"
-                      value={ formatEnumLabel( data.category ) }
-                      icon={ CircleCheckBigIcon }
-                    />
-                    <SummaryRow
-                      label="Keywords"
-                      value={ data.keywords?.length ? (
-                        <div className="flex flex-wrap gap-1 mt-1">
-                          { data.keywords.map( ( k, i ) => (
-                            <span key={ i } className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-secondary text-secondary-foreground">
-                              { k }
-                            </span>
-                          ) ) }
-                        </div>
-                      ) : '-' }
-                      icon={ Tag }
-                    />
-                    <SummaryRow
-                      label="Description"
-                      value={ data.description }
-                      icon={ CircleCheckBigIcon }
-                      isLast={ true }
-                    />
-                  </div>
-                </CardContent>
-
-                <Card className='overflow-hidden mb-6 rounded-none p-0'>
-                  <div className="flex flex-row h-full">
-                    <div className="w-1/2 h-full aspect-4/3 shrink-0 bg-muted border-r">
-                      { data.product_image ? (
-                        <AuthenticatedImage url={ data.product_image } alt="Product" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-muted-foreground"><ImageIcon className="w-8 h-8" /></div>
-                      ) }
-                    </div>
-                    <div className="flex-1 p-4 flex flex-col justify-center min-w-0">
-                      <div className="flex flex-col gap-1">
-                        <span className="text-muted-foreground font-normal text-sm">Product URL</span>
-                        <a href={ data.product_url } target="_blank" className="text-primary hover:underline text-sm truncate font-medium block">{ data.product_url }</a>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-
-                <div className="px-6 pb-6">
-                  <SectionTitle>Requirements</SectionTitle>
-                  <div className="bg-muted/30 p-4 rounded-lg space-y-1">
-                    <InfoRow label="Creators Needed" value={ data.number_of_creators_wanted } />
-                    <InfoRow label="Videos per Creator" value={ data.number_of_videos_wanted } />
-                    <InfoRow label="Duration" value={ `${ data.video_duration_in_seconds }s` } />
-                    <InfoRow label="Format" value={ data.video_format?.toUpperCase() ?? '-' } />
-                  </div>
-                </div>
-              </Card>
-
-              {/* Right Column: Files */ }
-              <Card className="col-span-3 flex flex-col h-full p-0">
-                <div className="bg-muted/30 p-4 rounded-lg flex-1 flex flex-col">
-                  <Tabs defaultValue="documents" className="w-full flex-1 flex flex-col">
-                    <TabsList className="w-full justify-start border">
-                      <TabsTrigger value="documents" className="flex-1 text-xs font-normal">Documents ({ documents.length })</TabsTrigger>
-                      <TabsTrigger value="images" className="flex-1 text-xs font-normal">Images ({ images.length })</TabsTrigger>
-                      <TabsTrigger value="videos" className="flex-1 text-xs font-normal">Videos ({ videos.length })</TabsTrigger>
-                    </TabsList>
-                    {/* <SubHeaderTabs
-                      tabItems={
-                        [
-                          { value: 'documents', label: `Documents (${ documents.length })` },
-                          { value: 'images', label: `Images (${ images.length })` },
-                          { value: 'videos', label: `Videos (${ videos.length })` },
-                        ]
-                      }
-                      value='documents'
-                      onChange={ ( value ) => {
-                        console.log( value );
-                      } }
-                    /> */}
-                    <TabsContent value="documents" className="flex-1 mt-0">
-                      <FileGrid files={ documents } onPreview={ setPreviewItem } />
-                    </TabsContent>
-                    <TabsContent value="images" className="flex-1 mt-0">
-                      <FileGrid files={ images } onPreview={ setPreviewItem } />
-                    </TabsContent>
-                    <TabsContent value="videos" className="flex-1 mt-0">
-                      <FileGrid files={ videos } onPreview={ setPreviewItem } />
-                    </TabsContent>
-                  </Tabs>
-                </div>
-              </Card>
+          <DialogHeader className="px-6 py-4 border-b shrink-0 flex flex-row items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <DialogTitle className="text-h4 font-normal font-primary truncate">
+                  { data.campaign_name || 'Untitled Campaign' }
+                </DialogTitle>
+                <Badge variant="secondary" className="shrink-0">Draft</Badge>
+              </div>
+              { data.category && (
+                <p className="text-sm text-muted-foreground mt-0.5 capitalize">
+                  <SentenceCase>{ data.category.replaceAll( '_', ' ' ) }</SentenceCase>
+                </p>
+              ) }
             </div>
-          </div>
+          </DialogHeader>
 
-          <DialogFooter className="p-6 pt-2 shrink-0 border-t mt-auto">
-            <Button variant="outline" onClick={ () => onOpenChange( false ) }>
+          <ScrollArea className="flex-1 min-h-0">
+            <div className="p-6 space-y-4">
+
+              {/* KPI row */ }
+              <div className="grid grid-cols-3 gap-3">
+                <KpiCard label="Creators Wanted" value={ String( data.number_of_creators_wanted || 0 ) } icon={ Users } />
+                <KpiCard label="Videos per Creator" value={ String( data.number_of_videos_wanted || 0 ) } icon={ Video } />
+                <KpiCard label="Video Duration" value={ formatDuration( data.video_duration_in_seconds ) } icon={ Clock3 } />
+              </div>
+
+              {/* Main grid */ }
+              <div className="grid lg:grid-cols-12 gap-4">
+
+                {/* Left: Brief */ }
+                <div className="lg:col-span-8 space-y-4">
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="ad-card-title">Campaign Brief</CardTitle>
+                      <CardDescription className="ad-card-description">Core details and messaging requirements</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4 text-sm">
+                      <WrappedCard title="Description" variant="flush">
+                        { data.description
+                          ? <Content content={ data.description } />
+                          : <p className="text-muted-foreground">No description provided.</p> }
+                      </WrappedCard>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <WrappedCard title="Do's" variant="flush">
+                          { data.dos
+                            ? <Content content={ data.dos } />
+                            : <p className="text-muted-foreground">None specified.</p> }
+                        </WrappedCard>
+                        <WrappedCard title="Don'ts" variant="flush">
+                          { data.donts
+                            ? <Content content={ data.donts } />
+                            : <p className="text-muted-foreground">None specified.</p> }
+                        </WrappedCard>
+                      </div>
+
+                      <WrappedCard title="Tone of Voice" variant="flush">
+                        { data.tone_of_voice
+                          ? <Content content={ data.tone_of_voice } />
+                          : <p className="text-muted-foreground">Not specified.</p> }
+                      </WrappedCard>
+
+                      <WrappedCard title="Keywords">
+                        { keywordList.length > 0 ? (
+                          <div className="mt-2 flex flex-wrap gap-1.5">
+                            { keywordList.map( ( k, i ) => (
+                              <Badge key={ i } className="border border-border/70 bg-muted/40 text-xs text-foreground/80">
+                                { k }
+                              </Badge>
+                            ) ) }
+                          </div>
+                        ) : (
+                          <p className="mt-1 text-sm text-muted-foreground">No keywords defined.</p>
+                        ) }
+                      </WrappedCard>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Right: Metadata + Assets */ }
+                <div className="lg:col-span-4 space-y-4">
+
+                  {/* Product / Metadata card */ }
+                  <Card className="pt-0 overflow-hidden">
+                    { data.product_image && (
+                      <div className="w-full aspect-4/3 relative overflow-hidden">
+                        <AuthenticatedImage url={ data.product_image } alt={ data.campaign_name || 'Product' } />
+                        { data.product_url && (
+                          <Link href={ data.product_url } target="_blank" title={ data.product_url }>
+                            <Globe strokeWidth={ 1.5 } className="size-4 absolute top-2 right-2 text-white drop-shadow hover:scale-150 transition-transform duration-300" />
+                          </Link>
+                        ) }
+                      </div>
+                    ) }
+                    <CardHeader className={ cn( 'py-4', data.product_image && '-mt-10 z-20 rounded-t-lg bg-background' ) }>
+                      <CardTitle className="ad-card-title">Details</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-sm">
+                      <MetaRow label="Video Format" value={ <span className="uppercase">{ data.video_format || 'N/A' }</span> } />
+                      <MetaRow label="Multiple Videos" value={ data.allow_multiple_videos ? 'Allowed' : 'Single video' } />
+                      { data.product_url && (
+                        <MetaRow
+                          label="Product URL"
+                          value={
+                            <a href={ data.product_url } target="_blank" rel="noopener noreferrer" className="text-primary hover:underline truncate max-w-[140px] block text-right">
+                              { data.product_url }
+                            </a>
+                          }
+                        />
+                      ) }
+                    </CardContent>
+                  </Card>
+
+                  {/* Assets card */ }
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="ad-card-title">Assets</CardTitle>
+                      <CardDescription className="ad-card-description">Attached documents, images and videos</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Tabs defaultValue="documents" className="w-full">
+                        <TabsList className="w-full border mb-3">
+                          <TabsTrigger value="documents" className="flex-1 text-xs font-normal">Docs ({ documents.length })</TabsTrigger>
+                          <TabsTrigger value="images" className="flex-1 text-xs font-normal">Images ({ images.length })</TabsTrigger>
+                          <TabsTrigger value="videos" className="flex-1 text-xs font-normal">Videos ({ videos.length })</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="documents">
+                          <FileGrid files={ documents } onPreview={ setPreviewItem } />
+                        </TabsContent>
+                        <TabsContent value="images">
+                          <FileGrid files={ images } onPreview={ setPreviewItem } />
+                        </TabsContent>
+                        <TabsContent value="videos">
+                          <FileGrid files={ videos } onPreview={ setPreviewItem } />
+                        </TabsContent>
+                      </Tabs>
+                    </CardContent>
+                  </Card>
+
+                </div>
+              </div>
+            </div>
+          </ScrollArea>
+
+          <DialogFooter className="px-6 py-4 shrink-0 border-t">
+            <Button variant="ghost" onClick={ () => onOpenChange( false ) } disabled={ isConfirming || isSavingDraft }>
               Back to Edit
             </Button>
-            <Button onClick={ onConfirm }>
-              Confirm & Save
-            </Button>
+            { onSaveDraft && (
+              <Button variant="outline" onClick={ onSaveDraft } disabled={ isConfirming || isSavingDraft }>
+                { isSavingDraft ? (
+                  <><Loader2 className="size-4 animate-spin" /> { saveDraftLabel }...</>
+                ) : saveDraftLabel }
+              </Button>
+            ) }
+            { !previewOnly && (
+              <Button onClick={ onConfirm } disabled={ isConfirming || isSavingDraft }>
+                { isConfirming ? (
+                  <><Loader2 className="size-4 animate-spin" /> Publishing...</>
+                ) : 'Confirm & Publish' }
+              </Button>
+            ) }
           </DialogFooter>
+
         </DialogContent>
       </Dialog>
 
