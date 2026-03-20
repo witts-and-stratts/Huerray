@@ -63,7 +63,7 @@ export function SubmissionCard( {
 
   const commentsResults = useSubmissionComments( submission.id );
   const commentCount = commentsResults.reduce( ( sum, r ) => sum + ( r.data?.data?.length ?? 0 ), 0 );
-  const videoPoster = submission.video?.thumbnail ? imgpresets.thumbnail( submission.video.thumbnail ) : undefined;
+  const videoPoster = submission.video?.thumbnail ? imgpresets.banner( submission.video.thumbnail ) : undefined;
   return (
     <>
       <Card
@@ -160,7 +160,7 @@ export function SubmissionCard( {
                       </CardDescription>
                     </div>
                     <div className="submission-card__actions">
-                      { commentCount > 0 && (
+                      {/* { commentCount > 0 && (
                         <div
                           role="button"
                           onClick={ ( e ) => {
@@ -172,7 +172,7 @@ export function SubmissionCard( {
                           <MessageSquare className="w-3 h-3" />
                           <span>{ commentCount }</span>
                         </div>
-                      ) }
+                      ) } */}
                       <SubmissionStatusBadge status={ status } />
                       { showActions ? <SubmissionActionMenu submission={ submission } /> : null }
                     </div>

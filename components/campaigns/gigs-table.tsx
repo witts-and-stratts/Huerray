@@ -31,7 +31,7 @@ const gigGlobalFilter: FilterFn<ModelsGigResponse> = ( row, _columnId, filterVal
   return searchable.includes( q );
 };
 import * as React from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence } from 'motion/react';
 
 import { getColumns } from './gigs-columns';
 import { GigsTableToolbar } from './gigs-table-toolbar';
@@ -81,6 +81,7 @@ export function GigsTable( {
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
 
   const [ selectedGig, setSelectedGig ] = React.useState<ModelsGigResponse | null>( null );
+  const [ selectedTab, setSelectedTab ] = React.useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = React.useState<ModelsGigResponse | null>( null );
 
   const filteredData = React.useMemo( () => {
@@ -113,7 +114,7 @@ export function GigsTable( {
   }, [ filteredData ] );
 
   const columns = React.useMemo(
-    () => getColumns( ( gig ) => setSelectedGig( gig ), ( gig ) => setEditingGig( gig ) ),
+    () => getColumns( ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); }, ( gig ) => setEditingGig( gig ) ),
     []
   );
 
@@ -140,75 +141,64 @@ export function GigsTable( {
   } );
 
   return (
+    <>
     <AnimatePresence>
       { showLoading && (
         view === 'table'
-          ? <DataTableSkeleton />
-          : <CardGridSkeleton count={ 8 } cardHeight="h-[250px]" columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
+          ? <DataTableSkeleton key="skeleton-table" />
+          : <CardGridSkeleton key="skeleton-cards" count={ 8 } cardHeight="h-[250px]" columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
       ) }
-      { error && <TableErrorState entity="gigs" message={ error.message } /> }
+      { error && <TableErrorState key="error" entity="gigs" message={ error.message } /> }
       { !isLoading && !error && (
-        <motion.div
-          initial={ { opacity: 0 } }
-          animate={ { opacity: 1 } }
-          exit={ { opacity: 0 } }
-          transition={ { duration: 0.3 } }
-          className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
+        <div
+          className="bg-slate-50/50 grow relative overflow-auto flex-1 h-full"
         >
-          { ( data?.length ?? 0 ) === 0 ? (
-            <GigsView
-              table={ table }
-              view={ view }
-              onViewGig={ ( gig ) => setSelectedGig( gig ) }
-              onCreateSubmission={ onCreateSubmission }
-              actionButtons={ actionButtons }
-            />
-          ) : (
-            <div className='flex flex-col w-full flex-1 h-full'>
-              { !hideToolbar && (
-                <GigsTableToolbar
+          <div className='flex flex-col w-full flex-1 h-full'>
+            { !hideToolbar && ( data?.length ?? 0 ) > 0 && (
+              <GigsTableToolbar
+                table={ table }
+                statuses={ statuses }
+                view={ view }
+                setView={ setView }
+                hideViewToggle={ hideViewToggle }
+                dateFilterType={ dateFilterType }
+                setDateFilterType={ setDateFilterType }
+                dateRange={ dateRange }
+                setDateRange={ setDateRange }
+              />
+            ) }
+            <div className='flex-1'>
+              <GigsView
+                table={ table }
+                view={ view }
+                onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
+                onCreateSubmission={ onCreateSubmission }
+                actionButtons={ actionButtons }
+              />
+            </div>
+            { !hidePagination && ( data?.length ?? 0 ) > 0 && (
+              <div className='px-5 mt-auto'>
+                <DataTablePagination
                   table={ table }
-                  statuses={ statuses }
-                  view={ view }
-                  setView={ setView }
-                  hideViewToggle={ hideViewToggle }
-                  dateFilterType={ dateFilterType }
-                  setDateFilterType={ setDateFilterType }
-                  dateRange={ dateRange }
-                  setDateRange={ setDateRange }
-                />
-              ) }
-              <div className='flex-1'>
-                <GigsView
-                  table={ table }
-                  view={ view }
-                  onViewGig={ ( gig ) => setSelectedGig( gig ) }
-                  onCreateSubmission={ onCreateSubmission }
-                  actionButtons={ actionButtons }
+                  pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
                 />
               </div>
-              { !hidePagination && (
-                <div className='px-5'>
-                  <DataTablePagination
-                    table={ table }
-                    pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
-                  />
-                </div>
-              ) }
-            </div>
-          ) }
-        </motion.div>
+            ) }
+          </div>
+        </div>
       ) }
-      <GigDetailsSheet
-        gig={ selectedGig }
-        open={ !!selectedGig }
-        onOpenChange={ ( open ) => !open && setSelectedGig( null ) }
-      />
-      <GigEditSheet
-        gig={ editingGig }
-        open={ !!editingGig }
-        onOpenChange={ ( open ) => !open && setEditingGig( null ) }
-      />
     </AnimatePresence>
+    <GigDetailsSheet
+      gig={ selectedGig }
+      open={ !!selectedGig }
+      onOpenChange={ ( open ) => !open && setSelectedGig( null ) }
+      initialTab={ selectedTab }
+    />
+    <GigEditSheet
+      gig={ editingGig }
+      open={ !!editingGig }
+      onOpenChange={ ( open ) => !open && setEditingGig( null ) }
+    />
+    </>
   );
 }

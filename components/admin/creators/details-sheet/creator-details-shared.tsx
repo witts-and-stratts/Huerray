@@ -14,7 +14,7 @@ export interface CreatorDetailsSheetProps {
 
 export const Row = ( { label, value }: { label: string; value: ReactNode; } ) => (
   <div className="flex justify-between items-center gap-3">
-    <span className="text-xs text-muted-foreground">{ label }</span>
+    <span className="text-sm text-muted-foreground">{ label }</span>
     <span className="text-sm font-normal text-muted-foreground">{ value }</span>
   </div>
 );

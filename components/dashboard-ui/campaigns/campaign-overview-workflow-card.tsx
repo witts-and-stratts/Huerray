@@ -18,7 +18,7 @@ export function CampaignWorkflowCard( { campaignId, onViewAllInvitations }: Camp
   const [ activeTab, setActiveTab ] = useState<string>( 'submissions' );
 
   return (
-    <Card className="ad-summary-card">
+    <Card className="ad-summary-card py-4">
       <CardHeader className="pb-2">
         <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
         <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>

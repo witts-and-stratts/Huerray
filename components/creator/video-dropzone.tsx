@@ -8,17 +8,20 @@ import { FileCardVideoSubmission } from '@/components/creator/file-card-video-su
 import { UploadedFile, VideoUploadResponseData } from '@/components/campaigns/sections/documents/types';
 import { nanoid } from 'nanoid';
 import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny';
+import { PreviewDialog } from '@/components/campaigns/sections/documents/preview-dialog';
 
 interface VideoDropzoneProps {
   value?: File | null;
   onChange: ( file: File | null ) => void;
   onUploadSuccess?: ( data: VideoUploadResponseData ) => void;
   className?: string;
-  gigId: string;
+  videoAspect?: boolean;
+  showTitle?: boolean;
 }
 
-export function VideoDropzone( { value, onChange, onUploadSuccess, className, gigId }: VideoDropzoneProps ) {
+export function VideoDropzone( { value, onChange, onUploadSuccess, className, videoAspect, showTitle = true }: VideoDropzoneProps ) {
   const [ fileItem, setFileItem ] = useState<UploadedFile | null>( null );
+  const [ previewItem, setPreviewItem ] = useState<UploadedFile | null>( null );
 
   const handleDrop = useCallback(
     async ( files: File[] ) => {
@@ -38,7 +41,7 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, gi
             } );
             const videoTrack = await input.getPrimaryVideoTrack();
             if ( videoTrack && await videoTrack.canDecode() ) {
-              const width = 320;
+              const width = 1280;
               const sink = new CanvasSink( videoTrack, { width } );
               const result = await sink.getCanvas( 0 ); // Get first frame
               if ( result ) {
@@ -85,6 +88,11 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, gi
     setFileItem( prev => prev ? { ...prev, status: 'uploading' } : null );
   }, [] );
 
+  const handlePreview = useCallback( () => {
+    if ( !fileItem ) return;
+    setPreviewItem( fileItem );
+  }, [ fileItem ] );
+
 
   // Sync external value reset
   useEffect( () => {
@@ -100,7 +108,7 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, gi
           onDrop={ handleDrop }
           accept={ { 'video/*': [ '.mp4', '.mov', '.webm' ] } }
           maxFiles={ 1 }
-          className="bg-card border-dashed border-2 border-muted-foreground/25 hover:bg-accent/50 transition-colors"
+          className="bg-card border-dashed border-px border-muted-foreground/25 hover:bg-accent/50 transition-colors"
         >
           { () => (
             <div className="flex flex-col items-center justify-center p-6 gap-4 text-center min-h-[200px]">
@@ -109,7 +117,7 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, gi
                   <VideoFileIcon className="w-8 h-8 text-primary" />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-sm font-medium">
+                  <p className="text-base card__title">
                     Drag & drop your video here
                   </p>
                   <p className="text-xs text-muted-foreground">
@@ -124,19 +132,25 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, gi
           ) }
         </Dropzone>
       ) : (
-        <div className="w-full max-w-[200px] mx-auto">
+        <div className="w-full">
           <FileCardVideoSubmission
             item={ fileItem }
             onRemove={ handleRemove }
             onUploadSuccess={ handleUploadSuccess }
             onUploadError={ handleUploadError }
             onRetry={ handleRetry }
-            onPreview={ () => { } } // No preview action needed for now
+            onPreview={ handlePreview }
             isOverlay={ false }
-            gigId={ gigId }
+            aspect={ videoAspect ? 'aspect-video' : undefined }
+            showTitle={ showTitle }
           />
         </div>
       ) }
+
+      <PreviewDialog
+        item={ previewItem }
+        onClose={ () => setPreviewItem( null ) }
+      />
     </div>
   );
 }

@@ -166,10 +166,11 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
          * Delete a campaign (Admin can delete any campaign, Brand can only delete their own)
          * @summary Delete campaign
          * @param {string} id Campaign ID
+         * @param {boolean} [isCleanUpOperation] If true, force-delete campaign and all associated entities
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        campaignsIdDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        campaignsIdDelete: async (id: string, isCleanUpOperation?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('campaignsIdDelete', 'id', id)
             const localVarPath = `/campaigns/{id}`
@@ -184,6 +185,10 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (isCleanUpOperation !== undefined) {
+                localVarQueryParameter['isCleanUpOperation'] = isCleanUpOperation;
+            }
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -614,11 +619,12 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
          * Delete a campaign (Admin can delete any campaign, Brand can only delete their own)
          * @summary Delete campaign
          * @param {string} id Campaign ID
+         * @param {boolean} [isCleanUpOperation] If true, force-delete campaign and all associated entities
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async campaignsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsIdDelete(id, options);
+        async campaignsIdDelete(id: string, isCleanUpOperation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.campaignsIdDelete(id, isCleanUpOperation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CampaignsApi.campaignsIdDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -792,7 +798,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         campaignsIdDelete(requestParameters: CampaignsApiCampaignsIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
-            return localVarFp.campaignsIdDelete(requestParameters.id, options).then((request) => request(axios, basePath));
+            return localVarFp.campaignsIdDelete(requestParameters.id, requestParameters.isCleanUpOperation, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a specific campaign by its ID
@@ -925,6 +931,11 @@ export interface CampaignsApiCampaignsIdDeleteRequest {
      * Campaign ID
      */
     readonly id: string
+
+    /**
+     * If true, force-delete campaign and all associated entities
+     */
+    readonly isCleanUpOperation?: boolean
 }
 
 /**
@@ -1091,7 +1102,7 @@ export class CampaignsApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public campaignsIdDelete(requestParameters: CampaignsApiCampaignsIdDeleteRequest, options?: RawAxiosRequestConfig) {
-        return CampaignsApiFp(this.configuration).campaignsIdDelete(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+        return CampaignsApiFp(this.configuration).campaignsIdDelete(requestParameters.id, requestParameters.isCleanUpOperation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

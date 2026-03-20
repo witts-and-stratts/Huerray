@@ -203,9 +203,11 @@ const configuration = new Configuration();
 const apiInstance = new CampaignsApi(configuration);
 
 let id: string; //Campaign ID (default to undefined)
+let isCleanUpOperation: boolean; //If true, force-delete campaign and all associated entities (optional) (default to undefined)
 
 const { status, data } = await apiInstance.campaignsIdDelete(
-    id
+    id,
+    isCleanUpOperation
 );
 ```
 
@@ -214,6 +216,7 @@ const { status, data } = await apiInstance.campaignsIdDelete(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **id** | [**string**] | Campaign ID | defaults to undefined|
+| **isCleanUpOperation** | [**boolean**] | If true, force-delete campaign and all associated entities | (optional) defaults to undefined|
 
 
 ### Return type

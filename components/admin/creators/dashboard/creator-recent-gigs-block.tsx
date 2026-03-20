@@ -87,12 +87,12 @@ export function CreatorRecentGigsBlock( { creatorId }: CreatorRecentGigsBlockPro
         { !isLoading && !isError && recentGigs.length > 0 && (
           <ScrollArea className="w-full overflow-hidden pb-2" scrollbar={ { orientation: 'horizontal', style: { height: '6px', opacity: 0.5 } } }>
             <div className="flex w-max gap-2 p-0.5">
-              {/* @ts-ignore - Assuming standard GigCard props, you might need to adjust based on exact GigCard implementation. */ }
               { recentGigs.map( ( gig: ModelsGigResponse ) => (
                 <div key={ gig.id || ( gig as any ).gig_id || gig.title } className="w-[320px] md:w-[360px] shrink-0">
                   <GigCard
                     gig={ gig as any }
                     onViewGig={ () => { } }
+                    onCreateSubmission={ () => { } }
                   />
                 </div>
               ) ) }

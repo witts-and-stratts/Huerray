@@ -69,7 +69,12 @@ function Row( { label, value }: { label: string, value: ReactNode; } ) {
   );
 }
 
-const SubmissionVideo = memo( ( { videoUrl }: { videoUrl: string; } ) => {
+interface SubmissionVideoProps {
+  videoUrl: string;
+  poster?: string;
+}
+
+const SubmissionVideo = memo( ( { videoUrl, poster }: SubmissionVideoProps ) => {
   const containerRef = useRef<HTMLDivElement>( null );
   const [ measuredHeight, setMeasuredHeight ] = useState<number | null>( null );
 
@@ -82,6 +87,11 @@ const SubmissionVideo = memo( ( { videoUrl }: { videoUrl: string; } ) => {
       setMeasuredHeight( rect.height );
     }
   }, [] );
+
+  const optimisedPoster = useMemo( () => {
+    if ( !poster ) return undefined;
+    return imgpresets.banner( poster );
+  }, [ poster ] );
 
   return (
     <motion.div
@@ -98,6 +108,7 @@ const SubmissionVideo = memo( ( { videoUrl }: { videoUrl: string; } ) => {
         preload="metadata"
         className="w-full h-full md:min-h-[500px] max-h-[60vh] md:object-cover"
         onLoadedMetadata={ handleLoadedMetadata }
+        poster={ optimisedPoster }
       />
     </motion.div>
   );
@@ -459,7 +470,7 @@ export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, in
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="p-0 gap-0 overflow-hidden max-w-6xl! min-w-[300px] w-[95vw] bg-burgundy-50/80 max-h-[90vh] flex flex-row">
         <div className={ cn( "flex flex-col transition-all duration-300 ease-in-out overflow-y-auto w-full", isCommentsOpen && "md:pr-[416px]" ) }>
-          <SubmissionVideo videoUrl={ submission.video?.asset || '' } />
+          <SubmissionVideo videoUrl={ submission.video?.asset || '' } poster={ submission.video?.thumbnail || '' } />
 
           <div className="p-4 border-t bg-muted/20 space-y-4 flex-1">
             <SubmissionHeader

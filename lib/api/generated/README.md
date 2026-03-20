@@ -140,6 +140,7 @@ Class | Method | HTTP request | Description
 *NotificationsApi* | [**notificationsPost**](docs/NotificationsApi.md#notificationspost) | **POST** /notifications | Create a new notification (Admin only)
 *NotificationsApi* | [**notificationsReadAllPut**](docs/NotificationsApi.md#notificationsreadallput) | **PUT** /notifications/read-all | Mark all notifications as read
 *NotificationsApi* | [**notificationsStatsGet**](docs/NotificationsApi.md#notificationsstatsget) | **GET** /notifications/stats | Get notification statistics
+*PaymentApi* | [**paymentsIdDelete**](docs/PaymentApi.md#paymentsiddelete) | **DELETE** /payments/{id} | Delete payment by ID
 *PaymentApi* | [**paymentsIdGet**](docs/PaymentApi.md#paymentsidget) | **GET** /payments/{id} | Get payment by ID
 *PaymentApi* | [**paymentsIdStatusPut**](docs/PaymentApi.md#paymentsidstatusput) | **PUT** /payments/{id}/status | Update payment status
 *PaymentApi* | [**paymentsPost**](docs/PaymentApi.md#paymentspost) | **POST** /payments | Create payment batch
@@ -167,6 +168,7 @@ Class | Method | HTTP request | Description
 *VideoSubmissionsApi* | [**videosCampaignCampaignIdGet**](docs/VideoSubmissionsApi.md#videoscampaigncampaignidget) | **GET** /videos/campaign/{campaignId} | Get video submissions by campaign
 *VideoSubmissionsApi* | [**videosGigGigIdGet**](docs/VideoSubmissionsApi.md#videosgiggigidget) | **GET** /videos/gig/{gigId} | Get video submissions by gig
 *VideoSubmissionsApi* | [**videosIdDecisionPut**](docs/VideoSubmissionsApi.md#videosiddecisionput) | **PUT** /videos/{id}/decision | Brand makes decision on video submission
+*VideoSubmissionsApi* | [**videosIdDelete**](docs/VideoSubmissionsApi.md#videosiddelete) | **DELETE** /videos/{id} | Delete video submission
 *VideoSubmissionsApi* | [**videosIdGet**](docs/VideoSubmissionsApi.md#videosidget) | **GET** /videos/{id} | Get video submission by ID
 *VideoSubmissionsApi* | [**videosIdPut**](docs/VideoSubmissionsApi.md#videosidput) | **PUT** /videos/{id} | Update video submission
 *VideoSubmissionsApi* | [**videosIdStatusPut**](docs/VideoSubmissionsApi.md#videosidstatusput) | **PUT** /videos/{id}/status | Update video submission status

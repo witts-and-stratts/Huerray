@@ -1,5 +1,5 @@
-import { AvailableGigsView } from '@/components/creator/available-gigs-view';
+import { MyGigsView } from '@/components/creator/my-gigs-view';
 
-export default function AvailableGigsPage() {
-  return <AvailableGigsView />;
+export default function GigsPage() {
+  return <MyGigsView />;
 }

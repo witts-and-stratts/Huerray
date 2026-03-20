@@ -12,6 +12,7 @@ export interface UploadedFile {
 export interface VideoUploadResponseData {
   filename: string;
   video_url: string;
+  thumbnail_url?: string;
   file_size: number;
   content_type: string;
   original_name: string;

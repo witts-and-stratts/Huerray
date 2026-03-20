@@ -31,9 +31,9 @@ interface SocialCardProps {
 }
 
 const SocialCard = ( { icon, children }: SocialCardProps ) => (
-  <Card className='py-4'>
+  <Card className='py-4 h-fit'>
     <CardContent className="flex items-start gap-4">
-      <div className={ `shrink-0 w-12 h-12 rounded-lg flex items-center justify-center` }>
+      <div className={ `shrink-0 rounded-lg flex items-center justify-center` }>
         <div className={ `size-10` }>
           { icon }
         </div>
@@ -47,7 +47,7 @@ const SocialCard = ( { icon, children }: SocialCardProps ) => (
 
 export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl md:m-px h-full max-md:m-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl md:m-px max-md:m-2">
       {/* Instagram */ }
       <SocialCard
         icon={ <InstagramIcon className="w-full h-full" /> }

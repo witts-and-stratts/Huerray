@@ -24,7 +24,9 @@ import type {
   ModelsCreatorResponse,
   ModelsStandardCreatorResponse,
   ModelsCreatorStatusUpdateRequest,
-  ModelsCreatorBankTaxDetailsResponse
+  ModelsCreatorBankTaxDetailsResponse,
+  ModelsUpdateCreatorBankDetailsRequest,
+  ModelsStandardGigApplicationResponses,
 } from '@/lib/api/generated/models';
 import type { ApiError } from './types';
 
@@ -39,7 +41,59 @@ export const creatorsKeys = {
   matchingGigs: ( params?: Record<string, unknown> ) => [ ...creatorsKeys.all, 'matching-gigs', params ] as const,
   activeGigs: () => [ ...creatorsKeys.all, 'active-gigs' ] as const,
   gigs: ( params?: CreatorApiCreatorsSearchGigsGetRequest ) => [ ...creatorsKeys.all, 'gigs', params ] as const,
+  applications: () => [ ...creatorsKeys.all, 'applications' ] as const,
+  profile: () => [ ...creatorsKeys.all, 'profile' ] as const,
+  bank: () => [ ...creatorsKeys.all, 'bank' ] as const,
 };
+
+/**
+ * Hook to fetch the profile of the current authenticated creator
+ */
+export function useCreatorProfile(
+  options?: Omit<UseQueryOptions<ModelsCreatorResponse | undefined, ApiError>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: creatorsKeys.profile(),
+    queryFn: async () => {
+      const response = await creatorsApi.creatorsProfileGet();
+      return response.data?.data;
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to fetch the bank details of the current authenticated creator
+ */
+export function useOwnBankDetails(
+  options?: Omit<UseQueryOptions<ModelsCreatorBankTaxDetailsResponse | undefined, ApiError>, 'queryKey' | 'queryFn'>
+) {
+  return useQuery({
+    queryKey: creatorsKeys.bank(),
+    queryFn: async () => {
+      const response = await creatorsApi.creatorsBankDetailsGet();
+      return response.data?.data;
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to update the authenticated creator's bank details
+ */
+export function useUpdateOwnBankDetails() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (request: ModelsUpdateCreatorBankDetailsRequest) => {
+      const response = await creatorsApi.creatorsBankDetailsPut({ request });
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: creatorsKeys.bank() });
+    },
+  });
+}
 
 /**
  * Hook to fetch matching gigs for the current creator
@@ -91,6 +145,22 @@ export function useCreatorGigs(
     queryKey: creatorsKeys.gigs( params ),
     queryFn: async () => {
       const response = await creatorsApi.creatorsSearchGigsGet( params || {} );
+      return response.data;
+    },
+    ...options,
+  } );
+}
+
+/**
+ * Hook to fetch all gig applications submitted by the current creator
+ */
+export function useCreatorApplications(
+  options?: Omit<UseQueryOptions<ModelsStandardGigApplicationResponses, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardGigApplicationResponses, ApiError> {
+  return useQuery( {
+    queryKey: creatorsKeys.applications(),
+    queryFn: async () => {
+      const response = await creatorsApi.creatorsApplicationsGet();
       return response.data;
     },
     ...options,

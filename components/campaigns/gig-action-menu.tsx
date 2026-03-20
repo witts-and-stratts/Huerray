@@ -16,7 +16,7 @@ import { useBasePath } from "@/lib/providers/path-provider";
 
 interface GigActionMenuProps {
   gig: ModelsGigResponse;
-  onViewGig: ( gig: ModelsGigResponse ) => void;
+  onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void;
   trigger?: 'icon' | 'button' | React.ReactNode;
   onEditGig?: ( gig: ModelsGigResponse ) => void;
 }
@@ -110,6 +110,15 @@ export function GigActionMenu( {
     },
     {
       label: "Submissions",
+      action: () => onViewGig( gig, 'submissions' ),
+      allowedRoles: [ 'admin', 'brand' ],
+      condition: () => gig.gig_status === UtilsGigStatus.GigStatusOpen
+    },
+    {
+      label: "My Submissions",
+      action: () => onViewGig( gig, 'submissions' ),
+      allowedRoles: [ 'creator' ],
+      condition: () => gig.gig_status === UtilsGigStatus.GigStatusOpen
     },
     {
       label: "Delete Gig",

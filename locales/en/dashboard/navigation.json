@@ -15,13 +15,14 @@
   "creator": {
     "dashboard": "Dashboard",
     "invitations": "Invitations",
-    "myGigs": "My Gigs",
+    "myGigs": "Gigs",
     "allGigs": "All Gigs",
     "availableGigs": "Available Gigs",
     "activeGigs": "Active Gigs",
-    "portfolio": "Portfolio",
+    "profile": "Profile",
     "analytics": "Analytics",
     "earnings": "Earnings",
+    "account": "Account",
     "settings": "Settings"
   },
   "admin": {

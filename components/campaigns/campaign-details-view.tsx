@@ -269,7 +269,7 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
                   <Loader2 className="size-4 animate-spin" />
                   Publishing...
                 </>
-              ) : 'Publish campaign' }
+              ) : 'Publish' }
             </Button>
           ) }
           <CampaignActionMenu

@@ -31,7 +31,7 @@ import { useFormatCurrency } from '@/lib/hooks/format';
 
 // ─── Details Cell ─────────────────────────────────────────────────────────────
 
-const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewGig: ( gig: ModelsGigResponse ) => void; } ) => {
+const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void; } ) => {
   const { title, gig_status, posting_start_date, posting_end_date } = row.original;
   const coverImage = row.original.campaign?.product_image?.asset ?? row.original.campaign?.campaign_images?.[ 0 ]?.asset;
 
@@ -249,7 +249,7 @@ const DeadlineCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 
 const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
   row: Row<ModelsGigResponse>;
-  onViewGig: ( gig: ModelsGigResponse ) => void;
+  onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void;
   onEditGig?: ( gig: ModelsGigResponse ) => void;
   className?: string;
 } ) => {
@@ -282,7 +282,7 @@ const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
 // ─── Column definitions ───────────────────────────────────────────────────────
 
 export const getColumns = (
-  onViewGig: ( gig: ModelsGigResponse ) => void,
+  onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void,
   onEditGig?: ( gig: ModelsGigResponse ) => void,
 ): ColumnDef<ModelsGigResponse>[] => [
     {

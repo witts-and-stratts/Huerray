@@ -6,6 +6,7 @@ import { ChevronRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { locales } from '@/i18n';
+import { useState, useCallback } from 'react';
 
 import {
   SidebarGroup,
@@ -50,6 +51,29 @@ export function NavMain( {
     .reduce( ( longest, url ) => url.length > longest.length ? url : longest, '' );
   const isActivePath = ( url: string ) => url === longestMatchUrl;
 
+  // Controlled open state for collapsible items
+  const [ openItems, setOpenItems ] = useState<Record<string, boolean>>( () => {
+    const initial: Record<string, boolean> = {};
+    items.forEach( item => {
+      if ( item.items?.length ) {
+        const isParentActive = item.url === longestMatchUrl;
+        const isAnyChildActive = item.items.some( s => s.url === longestMatchUrl );
+        if ( isParentActive || isAnyChildActive ) {
+          initial[ item.title ] = true;
+        }
+      }
+    } );
+    return initial;
+  } );
+
+  const toggleItem = useCallback( ( title: string ) => {
+    setOpenItems( prev => ( { ...prev, [ title ]: !prev[ title ] } ) );
+  }, [] );
+
+  const openItem = useCallback( ( title: string ) => {
+    setOpenItems( prev => ( { ...prev, [ title ]: true } ) );
+  }, [] );
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -60,15 +84,18 @@ export function NavMain( {
             const isAnyChildActive = item.items?.some( ( subItem ) => isActivePath( subItem.url ) ) || false;
 
             if ( hasChildren ) {
+              const isOpen = openItems[ item.title ] ?? false;
+
               return (
                 <Collapsible
                   key={ item.title }
                   asChild
-                  defaultOpen={ isParentActive || isAnyChildActive }
+                  open={ isOpen }
+                  onOpenChange={ ( open ) => setOpenItems( prev => ( { ...prev, [ item.title ]: open } ) ) }
                   className="group/collapsible"
                 >
                   <SidebarMenuItem className="font-regular">
-                    <Link href={ localisedUrl( item.url ) }>
+                    <Link href={ localisedUrl( item.url ) } onClick={ () => openItem( item.title ) }>
                       <SidebarMenuButton
                         tooltip={ item.title }
                         isActive={ isParentActive || isAnyChildActive }
@@ -87,6 +114,7 @@ export function NavMain( {
                     <CollapsibleTrigger asChild>
                       <SidebarMenuAction
                         className="transition-transform group-data-[state=open]/collapsible:rotate-90"
+                        onClick={ ( e ) => { e.preventDefault(); toggleItem( item.title ); } }
                       >
                         <ChevronRight />
                         <span className="sr-only">Toggle submenu</span>

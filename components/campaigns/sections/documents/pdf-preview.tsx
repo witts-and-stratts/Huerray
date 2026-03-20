@@ -11,9 +11,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${ pdfjs.version }
 
 interface PdfPreviewProps {
   src: string;
+  thumbnail?: string;
 }
 
-export default function PdfPreview( { src }: PdfPreviewProps ) {
+export default function PdfPreview( { src, thumbnail }: PdfPreviewProps ) {
   const [ numPages, setNumPages ] = useState<number>( 0 );
   const [ pageNumber, setPageNumber ] = useState<number>( 1 );
   const [ isPending, startTransition ] = useTransition();
@@ -88,48 +89,82 @@ export default function PdfPreview( { src }: PdfPreviewProps ) {
     return () => window.removeEventListener( 'keydown', handleKeyDown, { capture: true } );
   }, [ goToPrevPage, goToNextPage, pageNumber, numPages ] );
 
+  const isLoading = numPages === 0;
+  // pageReady becomes true once the first page canvas has been painted
+  const [ pageReady, setPageReady ] = useState( false );
+
   return (
     <div className='flex flex-col items-center h-full w-full overflow-hidden'>
       <div ref={ ref } className='flex-1 overflow-auto w-full h-full flex justify-center p-4 bg-gray-100 rounded-md relative'>
-        <Document
-          file={ pdfFile }
-          onLoadSuccess={ onDocumentLoadSuccess }
-          loading={
-            <div className="flex items-center gap-2 text-muted-foreground absolute inset-0 m-auto h-fit w-fit">
-              <Loader2 className="animate-spin h-4 w-4" /> Loading PDF...
-            </div>
-          }
-          error={
-            <div className="text-destructive absolute inset-0 m-auto h-fit w-fit">Failed to load PDF.</div>
-          }
-          className='flex items-center justify-center'
+
+        { /* Blurred thumbnail — fades out once the PDF page has rendered */ }
+        { thumbnail && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={ thumbnail }
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none rounded-md"
+            style={ {
+              filter: 'blur(6px)',
+              opacity: pageReady ? 0 : 0.3,
+              transition: 'opacity 0.5s ease',
+            } }
+          />
+        ) }
+
+        { /* Spinner shown while document is parsing */ }
+        { isLoading && (
+          <div className="flex items-center gap-2 text-muted-foreground absolute inset-0 m-auto h-fit w-fit z-10">
+            <Loader2 className="animate-spin h-4 w-4" /> Loading PDF...
+          </div>
+        ) }
+
+        { /* PDF content fades in once first page renders */ }
+        <div
+          className='flex items-center justify-center w-full h-full'
+          style={ {
+            opacity: pageReady ? 1 : 0,
+            transition: 'opacity 0.45s ease',
+          } }
         >
-          { bounds.height > 0 && bounds.width > 0 && (
-            <Page
-              pageNumber={ pageNumber }
-              renderTextLayer={ false }
-              renderAnnotationLayer={ false }
-              className="shadow-md"
-              onLoadSuccess={ ( page ) => {
-                setPageDimensions( { width: page.originalWidth, height: page.originalHeight } );
-              } }
-              { ...( () => {
-                if ( !pageDimensions ) return { height: bounds.height - 32 };
+          <Document
+            file={ pdfFile }
+            onLoadSuccess={ onDocumentLoadSuccess }
+            loading={ null }
+            error={
+              <div className="text-destructive absolute inset-0 m-auto h-fit w-fit">Failed to load PDF.</div>
+            }
+            className='flex items-center justify-center'
+          >
+            { bounds.height > 0 && bounds.width > 0 && (
+              <Page
+                pageNumber={ pageNumber }
+                renderTextLayer={ false }
+                renderAnnotationLayer={ false }
+                className="shadow-md"
+                onLoadSuccess={ ( page ) => {
+                  setPageDimensions( { width: page.originalWidth, height: page.originalHeight } );
+                } }
+                onRenderSuccess={ () => setPageReady( true ) }
+                { ...( () => {
+                  if ( !pageDimensions ) return { height: bounds.height - 32 };
 
-                const containerRatio = ( bounds.width - 32 ) / ( bounds.height - 32 );
-                const pageRatio = pageDimensions.width / pageDimensions.height;
+                  const containerRatio = ( bounds.width - 32 ) / ( bounds.height - 32 );
+                  const pageRatio = pageDimensions.width / pageDimensions.height;
 
-                if ( pageRatio > containerRatio ) {
-                  // Page is wider relative to container -> fit by width
-                  return { width: bounds.width - 32 };
-                } else {
-                  // Page is taller relative to container -> fit by height
-                  return { height: bounds.height - 32 };
-                }
-              } )() }
-            />
-          ) }
-        </Document>
+                  if ( pageRatio > containerRatio ) {
+                    // Page is wider relative to container -> fit by width
+                    return { width: bounds.width - 32 };
+                  } else {
+                    // Page is taller relative to container -> fit by height
+                    return { height: bounds.height - 32 };
+                  }
+                } )() }
+              />
+            ) }
+          </Document>
+        </div>
       </div>
       { numPages > 0 && (
         <div className="flex items-center gap-2 py-1 my-3 bg-background/95 backdrop-blur rounded-full px-1 shadow-sm border">

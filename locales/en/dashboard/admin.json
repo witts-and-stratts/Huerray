@@ -89,9 +89,9 @@
         "documents": "Documents ({count})"
       },
       "states": {
-        "noImages": "No images uploaded yet.",
-        "noDocuments": "No documents attached yet.",
-        "noVideos": "No sample videos attached yet."
+        "noImages": "No images uploaded.",
+        "noDocuments": "No documents attached.",
+        "noVideos": "No sample videos attached."
       },
       "labels": {
         "previewAsset": "Preview campaign asset {index}",

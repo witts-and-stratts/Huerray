@@ -12,6 +12,22 @@
   "manageUsers": "Benutzer verwalten",
   "reviewReports": "Meldungen überprüfen",
   "noActivity": "Keine aktuelle Aktivität",
+  "usersPage": {
+    "title": "Benutzer verwalten",
+    "description": "Systembenutzer anzeigen und verwalten.",
+    "columns": {
+      "name": "Name",
+      "email": "E-Mail",
+      "role": "Rolle",
+      "status": "Status",
+      "joined": "Beigetreten",
+      "actions": "Aktionen"
+    }
+  },
+  "gigsPage": {
+    "title": "Gigs",
+    "description": "Alle Gigs auf der Plattform anzeigen und verwalten."
+  },
   "invoicesPage": {
     "title": "Rechnungen",
     "description": "Alle Rechnungen der Plattform anzeigen und verwalten."
@@ -74,7 +90,8 @@
       },
       "states": {
         "noImages": "Noch keine Bilder hochgeladen.",
-        "noDocuments": "Noch keine Dokumente angehängt."
+        "noDocuments": "Noch keine Dokumente angehängt.",
+        "noVideos": "Noch keine Beispielvideos angehängt."
       },
       "labels": {
         "previewAsset": "Kampagnen-Asset {index} ansehen",

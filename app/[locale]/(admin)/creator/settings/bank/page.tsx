@@ -4,13 +4,14 @@
 
 import { Button } from '@/components/dashboard-ui/button';
 import { CreatorBankSection } from '@/components/settings/creator-bank-section';
-import { SubHeader, SubHeaderTabs } from '@/components/subheader';
+import { SubHeader } from '@/components/subheader';
 import { apiClient } from '@/lib/api/client';
 import { ModelsUpdateCreatorBankDetailsRequest, UtilsCountryCode } from '@/lib/api/generated';
 import { CreatorApi } from '@/lib/api/generated/api/creator-api';
 import { useForm } from '@tanstack/react-form';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { CreatorBankSkeleton } from '@/components/settings/creator-bank-skeleton';
 
 export default function CreatorBankSettingsPage() {
   const [ isLoading, setIsLoading ] = useState( true );
@@ -103,24 +104,6 @@ export default function CreatorBankSettingsPage() {
     form.handleSubmit();
   }, [ form ] );
 
-  const tabItems = [
-    { value: '/creator/settings', label: 'Profile' },
-    { value: '/creator/settings#bio', label: 'Bio' },
-    { value: '/creator/settings#social-media', label: 'Social Media' },
-    { value: '/creator/settings/bank', label: 'Bank Details' },
-  ];
-
-  /* 
-     Ideally for Tabs across pages, we want real links. 
-     SubHeaderTabs likely uses buttons/internal state. 
-     We might need to update SubHeaderTabs or just use router.push on change.
-  */
-  const handleTabChange = ( value: string ) => {
-    if ( value.startsWith( '/' ) ) {
-      window.location.href = value; // Simple navigation
-    }
-  };
-
   const breadcrumbs = [
     { label: 'Dashboard', href: '/creator' },
     { label: 'Settings', href: '/creator/settings' },
@@ -128,25 +111,7 @@ export default function CreatorBankSettingsPage() {
   ];
 
   if ( isLoading ) {
-    return (
-      <>
-        <SubHeader
-          breadcrumbs={ breadcrumbs }
-          title="Bank Details"
-          description="Manage your banking and tax information."
-          tabs={
-            <SubHeaderTabs
-              value='/creator/settings/bank'
-              onChange={ handleTabChange }
-              tabItems={ tabItems }
-            />
-          }
-        />
-        <div className="h-full flex items-center justify-center -mt-5 bg-slate-50/50 p-6">
-          <span className="loader"></span>
-        </div>
-      </>
-    );
+    return <CreatorBankSkeleton />;
   }
 
   return (
@@ -155,24 +120,17 @@ export default function CreatorBankSettingsPage() {
         breadcrumbs={ breadcrumbs }
         title="Bank Details"
         description="Manage your banking and tax information."
-        tabs={
-          <SubHeaderTabs
-            value='/creator/settings/bank'
-            onChange={ handleTabChange }
-            tabItems={ tabItems }
-          />
-        }
       >
         <form.Subscribe
           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
-          children={ ( [ canSubmit, isSubmitting ] ) => (
+          children={ ( [ , isSubmitting ] ) => (
             <Button type='submit' disabled={ isSubmitting || isSaving }>
               { isSubmitting || isSaving ? 'Saving...' : 'Save Changes' }
             </Button>
           ) }
         />
       </SubHeader>
-      <div className='p-6 space-y-6 bg-slate-50/50 h-full -mt-5'>
+      <div className='p-6 space-y-6 bg-slate-50/50 h-full'>
         <CreatorBankSection form={ form } />
       </div>
     </form>

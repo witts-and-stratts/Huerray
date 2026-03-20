@@ -8,6 +8,7 @@ import { Building2, Globe, MapPin, Tag } from 'lucide-react';
 import { SentenceCase } from '@/components/text-case';
 import Link from 'next/link';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface BrandHoverCardProps {
   brand?: ModelsCampaignBrandResponse;
@@ -47,7 +48,7 @@ export function BrandHoverCard( { brand, brandName, children }: BrandHoverCardPr
         <WrappedCard title='Brand Details' titleClass='text-xs'>
           <div className="flex items-center gap-3">
             <Avatar className="size-12 shrink-0 ring-0">
-              { photoUrl && <AvatarImage src={ photoUrl } alt={ name } /> }
+              { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ name } /> }
               <AvatarFallback className="text-sm font-medium">
                 { name.slice( 0, 2 ).toUpperCase() }
               </AvatarFallback>

@@ -82,7 +82,6 @@ export function QuillEditor( { value, onChange, onBlur, placeholder, className, 
   // Handle external value changes
   useEffect( () => {
     const quill = quillRef.current;
-    console.debug( '[QuillEditor] value prop changed:', value, 'lastValueRef:', lastValueRef.current, 'quillReady:', !!quill );
     if ( quill && value !== undefined && value !== lastValueRef.current && !isInternalChange.current ) {
       // Prevent stale props from overwriting local state while user is typing
       if ( quill.hasFocus() ) {

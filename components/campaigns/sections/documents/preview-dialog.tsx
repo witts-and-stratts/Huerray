@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MediaPreview, type MediaItem } from '@/components/campaigns/media-preview';
+import { MediaPreview, type LegacyMediaItem } from '@/components/campaigns/media-preview';
 import { UploadedFile } from './types';
 
 interface PreviewDialogProps {
@@ -8,7 +8,7 @@ interface PreviewDialogProps {
 }
 
 export function PreviewDialog( { item, onClose }: PreviewDialogProps ) {
-  const [ mediaItem, setMediaItem ] = useState<MediaItem | null>( null );
+  const [ mediaItem, setMediaItem ] = useState<LegacyMediaItem | null>( null );
 
   useEffect( () => {
     if ( !item ) {

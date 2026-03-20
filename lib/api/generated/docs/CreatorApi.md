@@ -164,7 +164,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **creatorsBankDetailsPut**
-> ModelsStandardCreatorResponse creatorsBankDetailsPut(request)
+> ModelsStandardCreatorBankTaxDetailsResponse creatorsBankDetailsPut(request)
 
 Update bank and tax details for the creator
 
@@ -196,7 +196,7 @@ const { status, data } = await apiInstance.creatorsBankDetailsPut(
 
 ### Return type
 
-**ModelsStandardCreatorResponse**
+**ModelsStandardCreatorBankTaxDetailsResponse**
 
 ### Authorization
 

@@ -14,12 +14,12 @@ export function ActiveGigsView() {
   const gigs = ( data?.data?.gigs || [] ) as unknown as ModelsGigResponse[];
 
   return (
-    <>
+    <div className="flex flex-col flex-1 h-full">
       <SubHeader
         title="Active Gigs"
         description="Gigs you're currently working on from accepted invitations and applications."
       />
-      <div className="">
+      <div className="ad-shell bg-slate-50/50 flex-1 h-full px-0">
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }
@@ -33,6 +33,6 @@ export function ActiveGigsView() {
         onOpenChange={ ( open ) => { if ( !open ) setSubmissionGigId( null ); } }
         gigId={ submissionGigId || '' }
       />
-    </>
+    </div>
   );
 }

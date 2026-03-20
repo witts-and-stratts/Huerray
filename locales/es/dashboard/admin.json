@@ -12,6 +12,22 @@
   "manageUsers": "Gestionar usuarios",
   "reviewReports": "Revisar reportes",
   "noActivity": "No hay actividad reciente",
+  "usersPage": {
+    "title": "Gestionar usuarios",
+    "description": "Ver y gestionar los usuarios del sistema.",
+    "columns": {
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "role": "Rol",
+      "status": "Estado",
+      "joined": "Se unió",
+      "actions": "Acciones"
+    }
+  },
+  "gigsPage": {
+    "title": "Trabajos",
+    "description": "Ver y gestionar todos los trabajos de la plataforma."
+  },
   "invoicesPage": {
     "title": "Facturas",
     "description": "Ver y gestionar todas las facturas de la plataforma."
@@ -74,7 +90,8 @@
       },
       "states": {
         "noImages": "Aún no hay imágenes cargadas.",
-        "noDocuments": "Aún no hay documentos adjuntos."
+        "noDocuments": "Aún no hay documentos adjuntos.",
+        "noVideos": "Aún no hay vídeos de muestra adjuntos."
       },
       "labels": {
         "previewAsset": "Vista previa del recurso {index}",

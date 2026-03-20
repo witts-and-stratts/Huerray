@@ -126,13 +126,13 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
       icon: Task02Icon,
     },
     {
-      title: withFallback( t, "creator.myGigs", "My Gigs" ),
-      url: "/creator/my-gigs",
+      title: withFallback( t, "creator.myGigs", "Gigs" ),
+      url: "/creator/gigs",
       icon: Task02Icon,
       items: [
         {
           title: withFallback( t, "creator.allGigs", "All Gigs" ),
-          url: "/creator/my-gigs",
+          url: "/creator/gigs",
         },
         {
           title: withFallback( t, "creator.availableGigs", "Available Gigs" ),
@@ -145,19 +145,14 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
       ],
     },
     {
-      title: withFallback( t, "creator.portfolio", "Portfolio" ),
-      url: "/creator/portfolio",
-      icon: ImageUpload01Icon,
-    },
-    {
-      title: withFallback( t, "creator.analytics", "Analytics" ),
-      url: "/creator/analytics",
-      icon: ChartLineData01Icon,
-    },
-    {
       title: withFallback( t, "creator.earnings", "Earnings" ),
       url: "/creator/earnings",
       icon: WalletDone01Icon,
+    },
+    {
+      title: withFallback( t, "creator.profile", "My Profile" ),
+      url: "/creator/profile",
+      icon: ImageUpload01Icon,
     },
   ],
   navSecondary: [

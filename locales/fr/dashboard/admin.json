@@ -12,6 +12,22 @@
   "manageUsers": "Gérer les utilisateurs",
   "reviewReports": "Examiner les signalisations",
   "noActivity": "Aucune activité récente",
+  "usersPage": {
+    "title": "Gérer les utilisateurs",
+    "description": "Afficher et gérer les utilisateurs du système.",
+    "columns": {
+      "name": "Nom",
+      "email": "E-mail",
+      "role": "Rôle",
+      "status": "Statut",
+      "joined": "Inscrit le",
+      "actions": "Actions"
+    }
+  },
+  "gigsPage": {
+    "title": "Missions",
+    "description": "Afficher et gérer toutes les missions sur la plateforme."
+  },
   "invoicesPage": {
     "title": "Factures",
     "description": "Consulter et gérer toutes les factures de la plateforme."
@@ -74,7 +90,8 @@
       },
       "states": {
         "noImages": "Aucune image téléversée pour le moment.",
-        "noDocuments": "Aucun document joint pour le moment."
+        "noDocuments": "Aucun document joint pour le moment.",
+        "noVideos": "Aucune vidéo d'exemple jointe pour le moment."
       },
       "labels": {
         "previewAsset": "Prévisualiser la ressource {index}",

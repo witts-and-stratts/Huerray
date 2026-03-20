@@ -8,6 +8,8 @@ import { useState } from 'react';
 import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
 import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
 
+import { InvitationsSkeleton } from './invitations-skeleton';
+
 export function InvitationsView() {
   const { data, isLoading, error } = useCreatorInvitations();
   const [ selectedGig, setSelectedGig ] = useState<ModelsGigInvitationResponse | null>( null );
@@ -21,11 +23,7 @@ export function InvitationsView() {
   };
 
   if ( isLoading ) {
-    return (
-      <div className="flex h-[400px] items-center justify-center">
-        <Loader2 className="size-8 animate-spin text-muted-foreground" />
-      </div>
-    );
+    return <InvitationsSkeleton />;
   }
 
   if ( error ) {
@@ -38,13 +36,13 @@ export function InvitationsView() {
   }
 
   return (
-    <>
+    <div className="flex flex-col flex-1 h-full bg-slate-50/50">
       <SubHeader
         title="Invitations"
         description="Manage your gig invitations from brands."
       />
 
-      <div className="p-x pt-0 space-y-6 bg-slate-50/50 h-full">
+      <div className="flex-1 h-full ad-shell p-0">
         { invitations.length === 0 ? (
           <div className="flex h-[400px] flex-col items-center justify-center gap-4 border-2 border-dashed rounded-xl bg-muted/10">
             <div className="p-4 bg-background rounded-full border shadow-sm">
@@ -78,6 +76,6 @@ export function InvitationsView() {
         invitationId={ selectedGig?.id }
         invitationStatus={ selectedGig?.status }
       />
-    </>
+    </div>
   );
 }

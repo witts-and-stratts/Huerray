@@ -1,6 +1,6 @@
 import { Progress } from '@/components/dashboard-ui/progress';
 import { cn } from '@/lib/dashboard-utils';
-import { RefreshCw, Trash2 } from 'lucide-react';
+import { Check, CheckCircle2, RefreshCw, Trash2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { memo, useCallback, useState } from 'react';
 import { FileCardProps } from './file-card-types';
@@ -11,6 +11,9 @@ interface BaseFileCardProps extends FileCardProps {
   progress?: number;
   showTitle?: boolean;
   aspect?: string;
+  isSelected?: boolean;
+  isSelectionMode?: boolean;
+  onSelect?: ( id: string ) => void;
 }
 
 export const BaseFileCard = memo( ( {
@@ -29,14 +32,19 @@ export const BaseFileCard = memo( ( {
   progress = 0,
   showTitle = true,
   aspect = 'aspect-3/4',
+  isSelected,
+  isSelectionMode,
+  onSelect,
 }: BaseFileCardProps ) => {
   const [ isHovering, setIsHovering ] = useState( false );
 
-  const handleRemoveClick = useCallback( () => {
+  const handleRemoveClick = useCallback( ( e: React.MouseEvent ) => {
+    e.stopPropagation();
     onRemove( item.id );
   }, [ onRemove, item.id ] );
 
-  const handleRetryClick = useCallback( () => {
+  const handleRetryClick = useCallback( ( e: React.MouseEvent ) => {
+    e.stopPropagation();
     onRetry( item.id );
   }, [ onRetry, item.id ] );
 
@@ -47,7 +55,13 @@ export const BaseFileCard = memo( ( {
 
   const handleClick = useCallback( ( e: React.MouseEvent ) => {
     e.stopPropagation();
-  }, [] );
+    if ( isSelectionMode ) {
+      onSelect?.( item.id, e.shiftKey );
+      return;
+    }
+    // In non-DnD contexts (no drag listeners) a single click opens the preview
+    if ( !listeners ) onPreview( item );
+  }, [ listeners, onPreview, item, isSelectionMode, onSelect ] );
 
   const handlePointerEnter = useCallback( () => {
     setIsHovering( true );
@@ -68,9 +82,10 @@ export const BaseFileCard = memo( ( {
       className={ cn(
         "group bg-primary/2 border rounded-sm flex flex-col items-center gap-1 select-none transition-colors relative active:cursor-grabbing justify-center",
         aspect,
-        !isOverlay && "cursor-grab",
+        !isOverlay && ( listeners ? "cursor-grab" : "cursor-pointer" ),
         item.status === 'error' && "border-destructive/50 bg-destructive/5",
-        item.status === 'success' && "border-green-500/30 bg-green-500/3",
+        item.status === 'success' && "border-green-500/50 bg-green-500/5",
+        isSelected && "ring-2 ring-primary ring-offset-1",
         isDragging && "opacity-50",
         isOverlay && "cursor-grabbing opacity-100 shadow-xl border-primary/20 bg-background z-50",
       ) }
@@ -104,6 +119,38 @@ export const BaseFileCard = memo( ( {
           <Progress value={ progress } className="h-px! w-full" />
         </div>
       ) }
+
+      { ( isHovering || isSelected || isSelectionMode ) && (
+        <div
+          className={ cn(
+            "absolute top-1.5 left-1.5 z-20 w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center transition-all cursor-pointer",
+            isSelected
+              ? "bg-primary border-primary"
+              : "bg-background/80 border-muted-foreground/50 hover:border-primary"
+          ) }
+          onClick={ ( e ) => { e.stopPropagation(); onSelect?.( item.id, e.shiftKey ); } }
+          onPointerDown={ ( e ) => e.stopPropagation() }
+        >
+          { isSelected && <Check size={ 10 } className="text-primary-foreground" strokeWidth={ 3 } /> }
+        </div>
+      ) }
+
+      <AnimatePresence>
+        { item.status === 'success' && (
+          <motion.div
+            key={ `success-${ item.id }` }
+            className="absolute top-1.5 right-1.5 z-20 pointer-events-none"
+            initial={ { opacity: 0, scale: 0.4 } }
+            animate={ { opacity: 1, scale: 1 } }
+            exit={ { opacity: 0, scale: 0.4 } }
+            transition={ { type: 'spring', stiffness: 400, damping: 20 } }
+          >
+            <div className="rounded-full bg-background/90 p-0.5 shadow-sm">
+              <CheckCircle2 size={ 16 } className="text-green-500" strokeWidth={ 2 } />
+            </div>
+          </motion.div>
+        ) }
+      </AnimatePresence>
 
       <AnimatePresence>
         <motion.div key={ `actions-${ item.id }` } className="flex items-center gap-0 absolute bottom-0 right-0 p-1" initial={ { opacity: 0, y: 100 } } animate={ { opacity: 1, y: 0 } } exit={ { opacity: 0, y: 100 } } transition={ { duration: 1 } }>

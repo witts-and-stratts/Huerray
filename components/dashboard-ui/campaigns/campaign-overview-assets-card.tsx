@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { Tabs, TabsList, TabsPanel, TabsPanels, TabsTab } from '@/components/animate-ui/components/base/tabs';
+import { MediaPreview, type LegacyMediaItem } from '@/components/campaigns/media-preview';
 import { Badge } from '@/components/dashboard-ui/badge';
-import { AnimateActivity } from '@/components/ui/animate-activity';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { ModelsContentMedia } from '@/lib/api/generated/models/models-content-media';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import { DocumentsTabContent } from './assets-block/documents-tab-content';
 import { ImagesTabContent } from './assets-block/images-tab-content';
 import { VideosTabContent } from './assets-block/videos-tab-content';
-import { MediaPreview, type MediaItem } from '@/components/campaigns/media-preview';
 
 interface CampaignAssetsCardProps {
   imageItems: ModelsContentMedia[];
@@ -25,7 +24,7 @@ export function CampaignAssetsCard( { imageItems, documentItems, videoItems }: C
 
   return (
     <>
-      <Card className="ad-summary-card">
+      <Card className="ad-summary-card py-4">
         <CardHeader className="pb-2">
           <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
           <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
@@ -65,9 +64,13 @@ export function CampaignAssetsCard( { imageItems, documentItems, videoItems }: C
       </Card>
 
       <MediaPreview
-        items={ ( gallery?.type === 'images' ? imageItems : gallery?.type === 'videos' ? videoItems : documentItems ).map( ( m ): MediaItem => ( { url: m.asset ?? '', thumbnail: m.thumbnail } ) ) }
+        items={ ( gallery?.type === 'images' ? imageItems : gallery?.type === 'videos' ? videoItems : documentItems ).map( ( m ): LegacyMediaItem => ( { url: m.asset ?? '', thumbnail: m.thumbnail } ) ) }
         initialIndex={ gallery?.index ?? null }
         onOpenChange={ ( open ) => { if ( !open ) setGallery( null ); } }
+        animation={ {
+          preset: 'fade',
+          duration: 0.3,
+        } }
       />
     </>
   );

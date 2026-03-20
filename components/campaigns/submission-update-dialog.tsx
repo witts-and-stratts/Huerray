@@ -13,7 +13,6 @@ interface SubmissionUpdateDialogProps {
   title: string;
   description: string;
   videoFile: File | null;
-  gigId: string;
   updateSubmissionError: string | null;
   onTitleChange: ( value: string ) => void;
   onDescriptionChange: ( value: string ) => void;
@@ -29,7 +28,6 @@ export function SubmissionUpdateDialog( {
   title,
   description,
   videoFile,
-  gigId,
   updateSubmissionError,
   onTitleChange,
   onDescriptionChange,
@@ -74,9 +72,10 @@ export function SubmissionUpdateDialog( {
           <Label htmlFor="video">Video File</Label>
           <VideoDropzone
             value={ videoFile }
-            gigId={ gigId }
+            videoAspect
             onChange={ onVideoChange }
             onUploadSuccess={ onUploadSuccess }
+            showTitle={ false }
           />
           { updateSubmissionError && (
             <p className="text-sm text-destructive">{ updateSubmissionError }</p>

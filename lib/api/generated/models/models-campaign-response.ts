@@ -53,7 +53,6 @@ export interface ModelsCampaignResponse {
     'number_of_gigs_validated'?: boolean;
     'number_of_videos_wanted'?: number;
     'product_image'?: ModelsContentMedia;
-    'product_url'?: string;
     'sample_videos'?: Array<ModelsContentMedia>;
     'tone_of_voice'?: string;
     'updated_at'?: string;

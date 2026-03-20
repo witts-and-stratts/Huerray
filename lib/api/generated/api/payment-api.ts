@@ -28,6 +28,8 @@ import type { ModelsPaginatedPaymentResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
+import type { ModelsStandardGenericResponse } from '../models';
+// @ts-ignore
 import type { ModelsStandardPaymentResponse } from '../models';
 // @ts-ignore
 import type { ModelsUpdatePaymentStatusRequest } from '../models';
@@ -36,6 +38,40 @@ import type { ModelsUpdatePaymentStatusRequest } from '../models';
  */
 export const PaymentApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Admin deletes a payment and all associated payment items
+         * @summary Delete payment by ID
+         * @param {string} id Payment ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentsIdDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paymentsIdDelete', 'id', id)
+            const localVarPath = `/payments/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Admin gets payment details by ID
          * @summary Get payment by ID
@@ -219,6 +255,19 @@ export const PaymentApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PaymentApiAxiosParamCreator(configuration)
     return {
         /**
+         * Admin deletes a payment and all associated payment items
+         * @summary Delete payment by ID
+         * @param {string} id Payment ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paymentsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentsIdDelete(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.paymentsIdDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Admin gets payment details by ID
          * @summary Get payment by ID
          * @param {string} id Payment ID
@@ -287,6 +336,16 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = PaymentApiFp(configuration)
     return {
         /**
+         * Admin deletes a payment and all associated payment items
+         * @summary Delete payment by ID
+         * @param {PaymentApiPaymentsIdDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentsIdDelete(requestParameters: PaymentApiPaymentsIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
+            return localVarFp.paymentsIdDelete(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Admin gets payment details by ID
          * @summary Get payment by ID
          * @param {PaymentApiPaymentsIdGetRequest} requestParameters Request parameters.
@@ -328,6 +387,16 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
         },
     };
 };
+
+/**
+ * Request parameters for paymentsIdDelete operation in PaymentApi.
+ */
+export interface PaymentApiPaymentsIdDeleteRequest {
+    /**
+     * Payment ID
+     */
+    readonly id: string
+}
 
 /**
  * Request parameters for paymentsIdGet operation in PaymentApi.
@@ -387,6 +456,17 @@ export interface PaymentApiPaymentsSearchGetRequest {
  * PaymentApi - object-oriented interface
  */
 export class PaymentApi extends BaseAPI {
+    /**
+     * Admin deletes a payment and all associated payment items
+     * @summary Delete payment by ID
+     * @param {PaymentApiPaymentsIdDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public paymentsIdDelete(requestParameters: PaymentApiPaymentsIdDeleteRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).paymentsIdDelete(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Admin gets payment details by ID
      * @summary Get payment by ID

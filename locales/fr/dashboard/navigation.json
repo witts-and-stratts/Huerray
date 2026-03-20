@@ -15,13 +15,14 @@
   "creator": {
     "dashboard": "Tableau de bord",
     "invitations": "Invitations",
-    "myGigs": "Mes missions",
+    "myGigs": "Gigs",
     "allGigs": "Toutes les missions",
     "availableGigs": "Missions disponibles",
     "activeGigs": "Missions actives",
-    "portfolio": "Portfolio",
+    "profile": "Profil",
     "analytics": "Analyses",
     "earnings": "Revenus",
+    "account": "Compte",
     "settings": "Paramètres"
   },
   "admin": {

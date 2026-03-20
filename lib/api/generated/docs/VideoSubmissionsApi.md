@@ -7,6 +7,7 @@ All URIs are relative to */api/v1*
 |[**videosCampaignCampaignIdGet**](#videoscampaigncampaignidget) | **GET** /videos/campaign/{campaignId} | Get video submissions by campaign|
 |[**videosGigGigIdGet**](#videosgiggigidget) | **GET** /videos/gig/{gigId} | Get video submissions by gig|
 |[**videosIdDecisionPut**](#videosiddecisionput) | **PUT** /videos/{id}/decision | Brand makes decision on video submission|
+|[**videosIdDelete**](#videosiddelete) | **DELETE** /videos/{id} | Delete video submission|
 |[**videosIdGet**](#videosidget) | **GET** /videos/{id} | Get video submission by ID|
 |[**videosIdPut**](#videosidput) | **PUT** /videos/{id} | Update video submission|
 |[**videosIdStatusPut**](#videosidstatusput) | **PUT** /videos/{id}/status | Update video submission status|
@@ -182,6 +183,61 @@ No authorization required
 |**403** | Forbidden - not authorized to make decision |  -  |
 |**404** | Video submission not found |  -  |
 |**422** | UnprocessableEntity |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **videosIdDelete**
+> ModelsStandardGenericResponse videosIdDelete()
+
+Delete a video submission and remove associated uploaded media
+
+### Example
+
+```typescript
+import {
+    VideoSubmissionsApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new VideoSubmissionsApi(configuration);
+
+let id: string; //Video Submission ID (default to undefined)
+
+const { status, data } = await apiInstance.videosIdDelete(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Video Submission ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGenericResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Video submission deleted successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | Forbidden |  -  |
+|**404** | Video submission not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

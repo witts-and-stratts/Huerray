@@ -4,10 +4,65 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**paymentsIdDelete**](#paymentsiddelete) | **DELETE** /payments/{id} | Delete payment by ID|
 |[**paymentsIdGet**](#paymentsidget) | **GET** /payments/{id} | Get payment by ID|
 |[**paymentsIdStatusPut**](#paymentsidstatusput) | **PUT** /payments/{id}/status | Update payment status|
 |[**paymentsPost**](#paymentspost) | **POST** /payments | Create payment batch|
 |[**paymentsSearchGet**](#paymentssearchget) | **GET** /payments/search | Search payments|
+
+# **paymentsIdDelete**
+> ModelsStandardGenericResponse paymentsIdDelete()
+
+Admin deletes a payment and all associated payment items
+
+### Example
+
+```typescript
+import {
+    PaymentApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new PaymentApi(configuration);
+
+let id: string; //Payment ID (default to undefined)
+
+const { status, data } = await apiInstance.paymentsIdDelete(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Payment ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGenericResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment deleted successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Payment not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **paymentsIdGet**
 > ModelsStandardPaymentResponse paymentsIdGet()

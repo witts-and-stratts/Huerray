@@ -9,12 +9,16 @@ export interface FileItemProps {
   onRetry: ( id: string ) => void;
   onPreview: ( item: UploadedFile ) => void;
   showTitle?: boolean;
+  isSelected?: boolean;
+  isSelectionMode?: boolean;
+  onSelect?: ( id: string, shiftKey: boolean ) => void;
 }
 
 export interface FileCardProps extends FileItemProps {
   isOverlay?: boolean;
   hideFileName?: boolean;
   showTitle?: boolean;
+  aspect?: string;
   style?: React.CSSProperties;
   attributes?: any;
   listeners?: any;

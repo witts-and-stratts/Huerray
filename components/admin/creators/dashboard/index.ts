@@ -2,4 +2,8 @@ export * from './creator-profile-block';
 export * from './creator-financials-block';
 export * from './creator-gig-metrics-block';
 export * from './creator-recent-gigs-block';
+export * from './creator-bio-block';
+export * from './creator-video-block';
+export * from './creator-portfolio-block';
+export * from './creator-social-block';
 export * from './creator-dashboard-utils';

@@ -9,7 +9,6 @@ const CREATOR_ADMIN_LABELS: Record<string, string> = {
   'creator': 'Creator Dashboard',
   'complete-profile': 'Complete profile',
   gigs: 'Gigs',
-  'my-gigs': 'My Gigs',
   'active': 'Active',
   invitations: 'Invitations',
   notifications: 'Notifications',
@@ -50,7 +49,8 @@ export function CreatorBreadcrumbs() {
 
   // Single-item = root dashboard; settings pages manage their own breadcrumbs via SubHeader
   if ( breadcrumbs.length <= 1 ) return null;
-  if ( pathname?.includes( '/creator/settings' ) ) return null;
+  const isExcluded = pathname?.includes( '/creator/settings' ) || pathname?.includes( '/creator/account' ) || pathname?.includes( '/creator/profile' );
+  if ( isExcluded ) return null;
 
   return (
     <Breadcrumb className="px-5 pt-4 mb-8">

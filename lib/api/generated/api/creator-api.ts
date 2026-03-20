@@ -1011,7 +1011,7 @@ export const CreatorApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async creatorsBankDetailsPut(request: ModelsUpdateCreatorBankDetailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
+        async creatorsBankDetailsPut(request: ModelsUpdateCreatorBankDetailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorBankTaxDetailsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsBankDetailsPut(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsBankDetailsPut']?.[localVarOperationServerIndex]?.url;
@@ -1306,7 +1306,7 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        creatorsBankDetailsPut(requestParameters: CreatorApiCreatorsBankDetailsPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
+        creatorsBankDetailsPut(requestParameters: CreatorApiCreatorsBankDetailsPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorBankTaxDetailsResponse> {
             return localVarFp.creatorsBankDetailsPut(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**

@@ -7,9 +7,9 @@ import { Dropzone } from '@/components/ui/shadcn-io/dropzone';
 import { cn } from '@/lib/dashboard-utils';
 import { closestCenter, DndContext, DragOverlay, SensorDescriptor, SensorOptions } from '@dnd-kit/core';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Trash2 } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
-import { memo } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { EmptyState } from './empty-state';
 import { FileCard, SortableFileItem } from './file-cards';
 import { UploadedFile } from './types';
@@ -77,6 +77,51 @@ export const FilesDropzone = memo( ( {
   showTitle,
   gridClassName,
 }: FilesDropzoneProps ) => {
+  const [ selectedIds, setSelectedIds ] = useState<Set<string>>( new Set() );
+  const lastSelectedIdxRef = useRef<number | null>( null );
+
+  // Remove stale selections when items change
+  useEffect( () => {
+    const itemIds = new Set( items.map( i => i.id ) );
+    setSelectedIds( prev => {
+      const filtered = new Set( [ ...prev ].filter( id => itemIds.has( id ) ) );
+      return filtered.size === prev.size ? prev : filtered;
+    } );
+  }, [ items ] );
+
+  const handleSelect = useCallback( ( id: string, shiftKey: boolean ) => {
+    const ids = items.map( i => i.id );
+    const currentIdx = ids.indexOf( id );
+
+    setSelectedIds( prev => {
+      const next = new Set( prev );
+
+      if ( shiftKey && lastSelectedIdxRef.current !== null ) {
+        const start = Math.min( lastSelectedIdxRef.current, currentIdx );
+        const end = Math.max( lastSelectedIdxRef.current, currentIdx );
+        for ( let i = start; i <= end; i++ ) next.add( ids[ i ] );
+      } else {
+        if ( next.has( id ) ) next.delete( id ); else next.add( id );
+      }
+
+      return next;
+    } );
+
+    if ( !shiftKey ) lastSelectedIdxRef.current = currentIdx;
+  }, [ items ] );
+
+  const handleClearSelection = useCallback( () => {
+    setSelectedIds( new Set() );
+    lastSelectedIdxRef.current = null;
+  }, [] );
+
+  const handleDeleteSelected = useCallback( () => {
+    selectedIds.forEach( id => onRemove( id ) );
+    setSelectedIds( new Set() );
+  }, [ selectedIds, onRemove ] );
+
+  const isSelectionMode = selectedIds.size > 0;
+
   return (
     <Dropzone
       accept={ accept }
@@ -121,6 +166,9 @@ export const FilesDropzone = memo( ( {
                           onRetry={ onRetry }
                           onPreview={ onPreview }
                           showTitle={ showTitle }
+                          isSelected={ selectedIds.has( item.id ) }
+                          isSelectionMode={ isSelectionMode }
+                          onSelect={ handleSelect }
                         />
                       ) ) }
                     </AnimatePresence>
@@ -141,6 +189,19 @@ export const FilesDropzone = memo( ( {
                   ) : null }
                 </DragOverlay>
               </DndContext>
+              { isSelectionMode && (
+                <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/90 backdrop-blur-sm border border-border shadow-lg pointer-events-auto" onClick={ ( e ) => e.stopPropagation() }>
+                  <span className="text-muted-foreground pr-1 whitespace-nowrap">{ selectedIds.size } selected</span>
+                  <ButtonGroup>
+                    <Button variant="outline" size="sm" onClick={ handleClearSelection } className={ 'font-normal text-slate-700' }>
+                      Clear
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={ handleDeleteSelected } className={ 'font-normal text-slate-700' }>
+                      <Trash2 size={ 12 } /> Delete
+                    </Button>
+                  </ButtonGroup>
+                </div>
+              ) }
               <DropZoneFooter open={ open } onImportUrlClick={ onImportUrlClick } />
             </div>
           ) }

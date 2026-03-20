@@ -185,6 +185,28 @@ export function useSubmitVideoSubmission(
 }
 
 /**
+ * Hook to delete a video submission
+ */
+export function useDeleteVideoSubmission(
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, { id: string }>
+): UseMutationResult<ModelsStandardGenericResponse, ApiError, { id: string }> {
+  const queryClient = useQueryClient();
+
+  return useMutation( {
+    mutationFn: async ( { id } ) => {
+      const response = await videoSubmissionsApi.videosIdDelete( { id } );
+      return response.data;
+    },
+    onSuccess: ( _response, variables ) => {
+      queryClient.invalidateQueries( { queryKey: videoSubmissionsKeys.lists() } );
+      queryClient.removeQueries( { queryKey: videoSubmissionsKeys.detail( variables.id ) } );
+      queryClient.invalidateQueries( { queryKey: [ 'campaigns' ] } );
+    },
+    ...options,
+  } );
+}
+
+/**
  * Hook for admin update of video submission status
  */
 export function useUpdateVideoSubmissionStatus(

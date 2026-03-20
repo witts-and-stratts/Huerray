@@ -124,7 +124,7 @@ export function useCampaignFiles( initialItems: UploadedFile[] | string[] = [] )
           } );
           const videoTrack = await input.getPrimaryVideoTrack();
           if ( videoTrack && await videoTrack.canDecode() ) {
-            const width = 320;
+            const width = 1400;
             const sink = new CanvasSink( videoTrack, { width } );
             const result = await sink.getCanvas( 0 ); // Get first frame
             if ( result ) {
@@ -199,7 +199,7 @@ export function useCampaignFiles( initialItems: UploadedFile[] | string[] = [] )
             } );
             const videoTrack = await input.getPrimaryVideoTrack();
             if ( videoTrack && await videoTrack.canDecode() ) {
-              const width = 320;
+              const width = 1400;
               const sink = new CanvasSink( videoTrack, { width } );
               const result = await sink.getCanvas( 0 ); // Get first frame
               if ( result ) {

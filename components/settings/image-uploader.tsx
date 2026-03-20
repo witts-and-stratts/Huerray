@@ -1,11 +1,12 @@
 'use client';
 
 import { Button } from '@/components/dashboard-ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/dashboard-ui/dialog';
 import { Dropzone } from '@/components/ui/shadcn-io/dropzone';
+import { MediaPreview } from '@/components/campaigns/media-preview';
 import { UploadApi } from '@/lib/api/generated/api/upload-api';
 import { BASE_URL, apiClient } from '@/lib/api/client';
 import { cn } from '@/lib/utils';
+import { imgpresets } from '@/lib/utils/imgproxy';
 import { Trash2, UploadIcon, ZoomIn, Loader2 } from 'lucide-react';
 import { useCallback, useState, ReactNode, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
@@ -172,7 +173,7 @@ export function ImageUploader( {
                 ) }>
                   {/* eslint-disable-next-line @next/next/no-img-element */ }
                   <img
-                    src={ currentImageUrl }
+                    src={ currentImageUrl.startsWith( 'blob:' ) || currentImageUrl.startsWith( 'data:' ) ? currentImageUrl : imgpresets.thumbnail( currentImageUrl ) }
                     alt="Preview"
                     className={ cn(
                       "w-full h-full object-cover",
@@ -256,26 +257,13 @@ export function ImageUploader( {
         ) }
       </Dropzone>
 
-      {/* Preview Dialog */ }
-      <Dialog open={ isPreviewOpen } onOpenChange={ setIsPreviewOpen }>
-        <DialogContent className="w-full md:w-[600px] md:max-w-none p-0 overflow-hidden flex flex-col bg-background/95 backdrop-blur-sm gap-0">
-          <DialogHeader className="p-4 border-b shrink-0">
-            <DialogTitle className="truncate pr-8 text-sm font-normal text-muted-foreground">
-              { file?.name || previewTitle }
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex-1 overflow-hidden relative bg-muted/20 flex items-center justify-center p-4">
-            { currentImageUrl && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={ currentImageUrl }
-                alt="Full preview"
-                className="max-w-full max-h-[60vh] object-contain rounded-lg"
-              />
-            ) }
-          </div>
-        </DialogContent>
-      </Dialog>
+      { currentImageUrl && (
+        <MediaPreview
+          items={ [ { kind: 'image', url: currentImageUrl, name: file?.name || previewTitle } ] }
+          initialIndex={ isPreviewOpen ? 0 : null }
+          onOpenChange={ ( open ) => setIsPreviewOpen( open ) }
+        />
+      ) }
     </>
   );
 }

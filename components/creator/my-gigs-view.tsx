@@ -1,40 +1,49 @@
 "use client";
 
 import { useState } from 'react';
-import { useActiveGigs, useMatchingGigs } from '@/lib/api/hooks/creators';
+import { useActiveGigs, useCreatorGigs, useMatchingGigs } from '@/lib/api/hooks/creators';
 import { GigsTable } from '@/components/campaigns/gigs-table';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
 
+type Tab = 'available' | 'active' | 'all';
+
 export function MyGigsView() {
-  const [ tab, setTab ] = useState<'available' | 'active'>( 'available' );
+  const [ tab, setTab ] = useState<Tab>( 'all' );
 
-  const matchingQuery = useMatchingGigs( undefined, { enabled: tab === 'available' } );
-  const activeQuery = useActiveGigs( { enabled: tab === 'active' } );
+  const matchingQuery = useMatchingGigs();
+  const activeQuery = useActiveGigs();
+  const allGigsQuery = useCreatorGigs();
 
-  const gigs = ( tab === 'available'
-    ? matchingQuery.data?.data || []
-    : activeQuery.data?.data?.gigs || [] ) as unknown as ModelsGigResponse[];
+  const gigs = (
+    tab === 'available' ? matchingQuery.data?.data || []
+      : tab === 'active' ? activeQuery.data?.data?.gigs || []
+        : allGigsQuery.data?.data || []
+  ) as unknown as ModelsGigResponse[];
 
-  const isLoading = tab === 'available' ? matchingQuery.isLoading : activeQuery.isLoading;
+  const isLoading =
+    tab === 'available' ? matchingQuery.isLoading
+      : tab === 'active' ? activeQuery.isLoading
+        : allGigsQuery.isLoading;
 
   return (
-    <>
+    <div className="flex flex-col flex-1 h-full">
       <SubHeader
-        title="My Gigs"
+        title="Gigs"
         description="All gigs you have participated in."
         tabs={
           <SubHeaderTabs
             value={ tab }
-            onChange={ ( value ) => setTab( value as 'available' | 'active' ) }
+            onChange={ ( value ) => setTab( value as Tab ) }
             tabItems={ [
+              { value: 'all', label: 'All Gigs' },
               { value: 'available', label: 'Available Gigs' },
               { value: 'active', label: 'Active Gigs' },
             ] }
           />
         }
       />
-      <div>
+      <div className="ad-shell bg-slate-50/50 flex-1 px-0 mt-0">
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }
@@ -42,6 +51,6 @@ export function MyGigsView() {
           hideViewToggle={ true }
         />
       </div>
-    </>
+    </div>
   );
 }

@@ -12,14 +12,14 @@ import {
   useUpdateVideoSubmissionStatus,
   useVideoSubmissionDecision,
   useSubmitVideoSubmission,
+  useDeleteVideoSubmission,
 } from '@/lib/api/hooks/video-submissions';
-import { Check, Copy, ExternalLink, MoreVertical, Pencil, RefreshCw, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { Check, ExternalLink, MoreVertical, Pencil, Trash2, Undo2, X } from 'lucide-react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { SubmissionViewDialog } from './submission-view-dialog';
 import { SubmissionDecisionDialog } from './submission-decision-dialog';
 import { SubmissionUpdateDialog } from './submission-update-dialog';
-import { SubmissionStatusUpdateDialog } from './submission-status-update-dialog';
 import { ConfirmDialog } from '../dashboard-ui/confirm-dialog';
 
 interface SubmissionActionMenuProps {
@@ -31,34 +31,28 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
   const updateSubmissionStatus = useUpdateVideoSubmissionStatus();
   const submissionDecision = useVideoSubmissionDecision();
   const submitVideoSubmission = useSubmitVideoSubmission();
+  const deleteSubmission = useDeleteVideoSubmission();
 
   const [ isAcceptOpen, setIsAcceptOpen ] = useState( false );
   const [ isRejectOpen, setIsRejectOpen ] = useState( false );
+  const [ isDeleteOpen, setIsDeleteOpen ] = useState( false );
   const [ isViewOpen, setIsViewOpen ] = useState( false );
   const [ isUpdateSubmissionOpen, setIsUpdateSubmissionOpen ] = useState( false );
-  const [ isUpdateStatusOpen, setIsUpdateStatusOpen ] = useState( false );
+  const [ isAdminApproveOpen, setIsAdminApproveOpen ] = useState( false );
+  const [ isAdminRejectOpen, setIsAdminRejectOpen ] = useState( false );
+  const [ isAdminReturnOpen, setIsAdminReturnOpen ] = useState( false );
 
   const [ acceptComment, setAcceptComment ] = useState( '' );
   const [ rejectComment, setRejectComment ] = useState( '' );
-  const [ statusComment, setStatusComment ] = useState( '' );
-  const [ statusValue, setStatusValue ] = useState<UtilsVideoSubmissionStatus>(
-    UtilsVideoSubmissionStatus.VideoSubmissionStatusPendingApproval
-  );
+  const [ adminApproveComment, setAdminApproveComment ] = useState( '' );
+  const [ adminRejectComment, setAdminRejectComment ] = useState( '' );
+  const [ adminReturnComment, setAdminReturnComment ] = useState( '' );
   const [ isConfirmOpen, setIsConfirmOpen ] = useState( false );
   const [ title, setTitle ] = useState( submission.title || '' );
   const [ description, setDescription ] = useState( submission.description || '' );
   const [ videoFile, setVideoFile ] = useState<File | null>( null );
-  const [ uploadedVideoData, setUploadedVideoData ] = useState<{ url: string; filename: string; } | null>( null );
+  const [ uploadedVideoData, setUploadedVideoData ] = useState<{ url: string; filename: string; thumbnail?: string; } | null>( null );
   const [ updateSubmissionError, setUpdateSubmissionError ] = useState<string | null>( null );
-
-  const statusOptions: UtilsVideoSubmissionStatus[] = useMemo( () => [
-    UtilsVideoSubmissionStatus.VideoSubmissionStatusCreated,
-    UtilsVideoSubmissionStatus.VideoSubmissionStatusPendingApproval,
-    UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
-    UtilsVideoSubmissionStatus.VideoSubmissionStatusRejected,
-    UtilsVideoSubmissionStatus.VideoSubmissionStatusAccepted,
-    UtilsVideoSubmissionStatus.VideoSubmissionStatusReturned,
-  ], [] );
 
   const syncSubmissionFormState = () => {
     setTitle( submission.title || '' );
@@ -66,13 +60,6 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
     setVideoFile( null );
     setUploadedVideoData( null );
     setUpdateSubmissionError( null );
-  };
-
-  const syncStatusFormState = () => {
-    const current = ( submission.status || '' ).toLowerCase();
-    const matched = statusOptions.find( ( option ) => option === current ) || UtilsVideoSubmissionStatus.VideoSubmissionStatusPendingApproval;
-    setStatusValue( matched );
-    setStatusComment( '' );
   };
 
   const handleViewSubmission = () => {
@@ -154,7 +141,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         submission: {
           title: title.trim() || undefined,
           description: description.trim() || undefined,
-          video: { asset: uploadedVideoData.url },
+          video: { asset: uploadedVideoData.url, thumbnail: uploadedVideoData.thumbnail },
           video_filename: uploadedVideoData?.filename || submission.video_filename,
         },
       } ),
@@ -166,24 +153,6 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
     );
 
     return true;
-  };
-
-  const handleUpdateStatus = async () => {
-    if ( !submission.id ) return;
-    await toast.promise(
-      updateSubmissionStatus.mutateAsync( {
-        id: submission.id,
-        request: {
-          status: statusValue,
-          comments: statusComment.trim() || undefined,
-        },
-      } ),
-      {
-        loading: 'Updating submission status...',
-        success: 'Submission status updated',
-        error: 'Failed to update submission status',
-      }
-    );
   };
 
   const actions: MenuAction<ModelsVideoSubmissionResponse>[] = [
@@ -218,14 +187,25 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
       },
     },
     {
-      label: 'Update Status',
-      icon: RefreshCw,
+      label: 'Approve',
+      icon: Check,
       allowedRoles: [ 'admin' ],
-      condition: ( current ) => !!current.id,
-      action: () => {
-        syncStatusFormState();
-        setIsUpdateStatusOpen( true );
-      },
+      condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
+      action: () => setIsAdminApproveOpen( true ),
+    },
+    {
+      label: 'Reject',
+      icon: X,
+      allowedRoles: [ 'admin' ],
+      condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusRejected,
+      action: () => setIsAdminRejectOpen( true ),
+    },
+    {
+      label: 'Return',
+      icon: Undo2,
+      allowedRoles: [ 'admin' ],
+      condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusReturned,
+      action: () => setIsAdminReturnOpen( true ),
     },
     {
       label: 'Confirm Submission',
@@ -254,6 +234,15 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           toast.success( 'Creator ID copied' );
         }
       },
+    },
+    {
+      label: 'Delete Submission',
+      icon: Trash2,
+      separator: true,
+      variant: 'destructive',
+      allowedRoles: [ 'admin', 'creator' ],
+      condition: ( current ) => !!current.id,
+      action: () => setIsDeleteOpen( true ),
     },
   ];
 
@@ -324,7 +313,6 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         title={ title }
         description={ description }
         videoFile={ videoFile }
-        gigId={ submission.gig_id || '' }
         updateSubmissionError={ updateSubmissionError }
         onTitleChange={ setTitle }
         onDescriptionChange={ setDescription }
@@ -336,7 +324,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           }
         } }
         onUploadSuccess={ ( data ) => {
-          setUploadedVideoData( { url: data.video_url, filename: data.filename } );
+          setUploadedVideoData( { url: data.video_url, filename: data.filename, thumbnail: data.thumbnail_url } );
           setUpdateSubmissionError( null );
         } }
         onConfirm={ async () => {
@@ -348,20 +336,106 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         isLoading={ updateSubmission.isPending }
       />
 
-      <SubmissionStatusUpdateDialog
-        open={ isUpdateStatusOpen }
-        onOpenChange={ setIsUpdateStatusOpen }
-        statusValue={ statusValue }
-        statusOptions={ statusOptions }
-        statusComment={ statusComment }
-        onStatusChange={ setStatusValue }
-        onStatusCommentChange={ setStatusComment }
+      <SubmissionDecisionDialog
+        open={ isAdminApproveOpen }
+        onOpenChange={ setIsAdminApproveOpen }
+        title="Approve Submission"
+        description="Approve this submission?"
+        confirmLabel="Approve"
+        comment={ adminApproveComment }
+        onCommentChange={ setAdminApproveComment }
         onConfirm={ async () => {
-          await handleUpdateStatus();
-          setIsUpdateStatusOpen( false );
+          await toast.promise(
+            updateSubmissionStatus.mutateAsync( {
+              id: submission.id!,
+              request: {
+                status: UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
+                comments: adminApproveComment.trim() || undefined,
+              },
+            } ),
+            {
+              loading: 'Approving submission...',
+              success: 'Submission approved',
+              error: 'Failed to approve submission',
+            }
+          );
+          setIsAdminApproveOpen( false );
+          setAdminApproveComment( '' );
         } }
         isLoading={ updateSubmissionStatus.isPending }
+        loadingText="Approving..."
+        fieldId="admin-approve-comment"
+        fieldLabel="Comment (Optional)"
+        fieldPlaceholder="Add a note"
       />
+
+      <SubmissionDecisionDialog
+        open={ isAdminRejectOpen }
+        onOpenChange={ setIsAdminRejectOpen }
+        title="Reject Submission"
+        description="Reject this submission?"
+        confirmLabel="Reject"
+        variant="destructive"
+        comment={ adminRejectComment }
+        onCommentChange={ setAdminRejectComment }
+        onConfirm={ async () => {
+          await toast.promise(
+            updateSubmissionStatus.mutateAsync( {
+              id: submission.id!,
+              request: {
+                status: UtilsVideoSubmissionStatus.VideoSubmissionStatusRejected,
+                comments: adminRejectComment.trim() || undefined,
+              },
+            } ),
+            {
+              loading: 'Rejecting submission...',
+              success: 'Submission rejected',
+              error: 'Failed to reject submission',
+            }
+          );
+          setIsAdminRejectOpen( false );
+          setAdminRejectComment( '' );
+        } }
+        isLoading={ updateSubmissionStatus.isPending }
+        loadingText="Rejecting..."
+        fieldId="admin-reject-comment"
+        fieldLabel="Reason (Optional)"
+        fieldPlaceholder="Add rejection reason"
+      />
+
+      <SubmissionDecisionDialog
+        open={ isAdminReturnOpen }
+        onOpenChange={ setIsAdminReturnOpen }
+        title="Return Submission"
+        description="Return this submission to the creator for revision?"
+        confirmLabel="Return"
+        comment={ adminReturnComment }
+        onCommentChange={ setAdminReturnComment }
+        onConfirm={ async () => {
+          await toast.promise(
+            updateSubmissionStatus.mutateAsync( {
+              id: submission.id!,
+              request: {
+                status: UtilsVideoSubmissionStatus.VideoSubmissionStatusReturned,
+                comments: adminReturnComment.trim() || undefined,
+              },
+            } ),
+            {
+              loading: 'Returning submission...',
+              success: 'Submission returned',
+              error: 'Failed to return submission',
+            }
+          );
+          setIsAdminReturnOpen( false );
+          setAdminReturnComment( '' );
+        } }
+        isLoading={ updateSubmissionStatus.isPending }
+        loadingText="Returning..."
+        fieldId="admin-return-comment"
+        fieldLabel="Comment (Optional)"
+        fieldPlaceholder="Add a note for the creator"
+      />
+
 
       <ConfirmDialog
         open={ isConfirmOpen }
@@ -372,6 +446,29 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         onConfirm={ handleConfirmSubmissionSubmit }
         isLoading={ submitVideoSubmission.isPending }
         loadingText="Submitting..."
+      />
+
+      <ConfirmDialog
+        open={ isDeleteOpen }
+        onOpenChange={ setIsDeleteOpen }
+        title="Delete Submission"
+        description="Are you sure you want to delete this submission? This action cannot be undone and will also remove the associated video."
+        confirmLabel="Delete"
+        variant="destructive"
+        onConfirm={ async () => {
+          if ( !submission.id ) return;
+          await toast.promise(
+            deleteSubmission.mutateAsync( { id: submission.id } ),
+            {
+              loading: 'Deleting submission...',
+              success: 'Submission deleted',
+              error: 'Failed to delete submission',
+            }
+          );
+          setIsDeleteOpen( false );
+        } }
+        isLoading={ deleteSubmission.isPending }
+        loadingText="Deleting..."
       />
     </>
   );

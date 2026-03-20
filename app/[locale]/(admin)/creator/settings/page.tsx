@@ -12,7 +12,7 @@ import { CreatorSettings } from '@/components/settings/creator-settings-schema';
 import { CreatorSocialSection } from '@/components/settings/creator-social-section';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 import { apiClient } from '@/lib/api/client';
-import { ModelsUpdateCreatorRequest, ModelsUpdateCreatorRequestGenderEnum, UtilsCountryCode } from '@/lib/api/generated';
+import { ModelsUpdateCreatorRequestGenderEnum, UtilsCountryCode } from '@/lib/api/generated';
 import { CreatorApi } from '@/lib/api/generated/api/creator-api';
 import { useForm } from '@tanstack/react-form';
 import { ChevronDown } from 'lucide-react';
@@ -20,6 +20,7 @@ import { Activity, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { fetchCreatorProfile } from '@/lib/redux/features/creator/creatorSlice';
+import { CreatorSettingsSkeleton } from '@/components/settings/creator-settings-skeleton';
 
 export default function CreatorSettingsPage() {
   const [ activeTab, setActiveTab ] = useState( 'profile' );
@@ -200,7 +201,6 @@ export default function CreatorSettingsPage() {
   }, [] );
 
   const handleTabChange = ( value: string ) => {
-    // If value is a link (for Bank Details page), navigate
     if ( value.startsWith( '/' ) ) {
       window.location.href = value;
       return;
@@ -229,9 +229,8 @@ export default function CreatorSettingsPage() {
 
   const tabItems = [
     { value: 'profile', label: 'Profile' },
-    { value: 'bio', label: 'Bio' },
+    { value: 'bio', label: 'Biography' },
     { value: 'social-media', label: 'Social Media' },
-    { value: '/creator/settings/bank', label: 'Bank Details' },
   ];
 
   const pageDetails: Record<string, { title: string; description: string; }> = {
@@ -300,23 +299,12 @@ export default function CreatorSettingsPage() {
 
   if ( isLoading ) {
     return (
-      <>
-        <SubHeader
-          breadcrumbs={ breadcrumbs }
-          title={ currentDetails.title }
-          description={ currentDetails.description }
-          tabs={
-            <SubHeaderTabs
-              value={ activeTab }
-              onChange={ handleTabChange }
-              tabItems={ tabItems }
-            />
-          }
-        />
-        <div className="h-full flex items-center justify-center -mt-5 bg-slate-50/50 p-6">
-          <span className="loader"></span>
-        </div>
-      </>
+      <CreatorSettingsSkeleton
+        activeTab={ activeTab }
+        tabItems={ tabItems }
+        handleTabChange={ handleTabChange }
+        currentDetails={ currentDetails }
+      />
     );
   }
 
@@ -336,7 +324,7 @@ export default function CreatorSettingsPage() {
       >
         <form.Subscribe
           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
-          children={ ( [ canSubmit, isSubmitting ] ) => (
+          children={ ( [ , isSubmitting ] ) => (
             <ButtonGroup>
               <Button type='submit' disabled={ isSubmitting || isSaving }>
                 { isSubmitting || isSaving ? 'Saving...' : 'Save Changes' }
@@ -357,7 +345,7 @@ export default function CreatorSettingsPage() {
           ) }
         />
       </SubHeader>
-      <div className='p-6 space-y-6 bg-slate-50/50 h-full -mt-5'>
+      <div className='p-6 space-y-6 bg-slate-50/50 h-full'>
         <Activity mode={ activeTab === 'profile' ? 'visible' : 'hidden' }>
           <CreatorProfileSection form={ form } />
         </Activity>

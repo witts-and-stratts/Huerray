@@ -28,7 +28,6 @@ Name | Type | Description | Notes
 **number_of_gigs_validated** | **boolean** |  | [optional] [default to undefined]
 **number_of_videos_wanted** | **number** |  | [optional] [default to undefined]
 **product_image** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
-**product_url** | **string** |  | [optional] [default to undefined]
 **sample_videos** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **tone_of_voice** | **string** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
@@ -64,7 +63,6 @@ const instance: ModelsCampaignResponse = {
     number_of_gigs_validated,
     number_of_videos_wanted,
     product_image,
-    product_url,
     sample_videos,
     tone_of_voice,
     updated_at,

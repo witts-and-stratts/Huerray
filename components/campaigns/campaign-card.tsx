@@ -22,7 +22,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 import { useRole } from '@/contexts/role-context';
-import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { ModelsBrandResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
@@ -248,7 +248,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
 
   return (
     <>
-      <Card className='flex flex-col h-full overflow-hidden relative'>
+      <Card className='flex flex-col h-full overflow-hidden relative py-4'>
         <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
           <div className="flex flex-col flex-1 min-w-0">
             <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
@@ -276,7 +276,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
               </Link>
             ) }
             { brand_id && (
-              <BrandAvatar brand={ { id: brand_id } as any } className={ cn( "size-10 border bg-white rounded-full shrink-0", {
+              <BrandAvatar brand={ campaign.brand as ModelsBrandResponse } className={ cn( "size-10 border bg-white rounded-full shrink-0", {
                 "absolute -right-2 -bottom-1 size-6 p-0.5": coverImage
               } ) } />
             ) }

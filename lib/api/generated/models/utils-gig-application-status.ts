@@ -18,7 +18,8 @@
 export const UtilsGigApplicationStatus = {
     ApplicationStatusPending: 'pending',
     ApplicationStatusAccepted: 'accepted',
-    ApplicationStatusDeclined: 'declined'
+    ApplicationStatusDeclined: 'declined',
+    ApplicationStatusExpired: 'expired'
 } as const;
 
 export type UtilsGigApplicationStatus = typeof UtilsGigApplicationStatus[keyof typeof UtilsGigApplicationStatus];

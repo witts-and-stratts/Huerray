@@ -30,6 +30,7 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   const gigs = ( gigsResponse?.data || [] ) as ModelsGigResponse[];
 
   const [ selectedGig, setSelectedGig ] = useState<ModelsGigResponse | null>( null );
+  const [ selectedTab, setSelectedTab ] = useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = useState<ModelsGigResponse | null>( null );
 
   if ( isLoading ) {
@@ -76,7 +77,7 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
             <GigCard
               key={ gig.id }
               gig={ gig }
-              onViewGig={ setSelectedGig }
+              onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
             />
           ) ) }
         </div>
@@ -86,6 +87,7 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
         gig={ selectedGig }
         open={ !!selectedGig }
         onOpenChange={ ( open ) => !open && setSelectedGig( null ) }
+        initialTab={ selectedTab }
       />
       <GigEditSheet
         gig={ editingGig }

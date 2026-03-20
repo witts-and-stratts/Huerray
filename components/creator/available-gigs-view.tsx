@@ -12,12 +12,12 @@ export function AvailableGigsView() {
   const gigs = ( data?.data || [] ) as unknown as ModelsGigResponse[];
 
   return (
-    <>
+    <div className="flex flex-col flex-1 h-full">
       <SubHeader
         title="Available Gigs"
         description="Explore and apply to new opportunities matched to your profile."
       />
-      <div className="">
+      <div className="ad-shell bg-slate-50/50 flex-1 h-full">
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }
@@ -25,6 +25,6 @@ export function AvailableGigsView() {
           hideViewToggle={ true }
         />
       </div>
-    </>
+    </div>
   );
 }
