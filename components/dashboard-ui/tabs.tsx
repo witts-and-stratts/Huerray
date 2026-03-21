@@ -2,6 +2,7 @@
 
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "motion/react";
 
 import { cn } from "@/lib/dashboard-utils";
 
@@ -79,4 +80,49 @@ function TabsContent( { className, ...props }: TabsPrimitive.Panel.Props ) {
   );
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants };
+function AnimatedTabsList( {
+  className,
+  ...props
+}: TabsPrimitive.List.Props ) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      className={ cn(
+        "relative inline-flex w-full items-center justify-center rounded-lg bg-muted p-[3px] h-9",
+        className
+      ) }
+      { ...props }
+    />
+  );
+}
+
+interface AnimatedTabsTriggerProps extends TabsPrimitive.Tab.Props {
+  isActive?: boolean;
+}
+
+function AnimatedTabsTrigger( { className, isActive, children, ...props }: AnimatedTabsTriggerProps ) {
+  return (
+    <TabsPrimitive.Tab
+      data-slot="tabs-trigger"
+      className={ cn(
+        "relative inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium transition-colors",
+        "text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "disabled:pointer-events-none disabled:opacity-50 z-10",
+        isActive && "text-foreground",
+        className
+      ) }
+      { ...props }
+    >
+      { isActive && (
+        <motion.span
+          layoutId="animated-tab-indicator"
+          className="absolute inset-0 rounded-md bg-background shadow-sm dark:bg-input/30 dark:border dark:border-input"
+          transition={ { type: "spring", bounce: 0.2, duration: 0.35 } }
+        />
+      ) }
+      <span className="relative z-10">{ children }</span>
+    </TabsPrimitive.Tab>
+  );
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants, AnimatedTabsList, AnimatedTabsTrigger };

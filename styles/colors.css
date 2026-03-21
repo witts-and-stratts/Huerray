@@ -250,4 +250,13 @@
     background-image: url('/images/stone-orange-bg.webp');
     background-size: cover;
   }
+
+  .bg-gradient {
+    @apply bg-linear-to-r from-dark-burgundy to-orange;
+  }
+
+  .bg-textured {
+    background-image: url('/images/textured-bg.jpg');
+    background-size: cover;
+  }
 }

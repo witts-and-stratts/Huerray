@@ -20,9 +20,9 @@ export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorRespons
   const formattedGender = gender ? gender.charAt( 0 ).toUpperCase() + gender.slice( 1 ) : undefined;
 
   return <>
-    <SheetHeader className="relative flex flex-row items-center gap-4 bg-burgundy-50/60 p-6 pb-8 m-6 rounded-lg mt-16 border border-primary/20 mb-0">
+    <SheetHeader className="relative flex flex-row items-center gap-4 bg-textured p-6 pb-8 m-6 rounded-lg mt-16 mb-0">
       <Avatar className={ cn(
-        "border bg-muted-foreground/10 size-28 ring-background",
+        "bg-muted-foreground/10 size-28 ring-background/10 ring-10 ring-offset-0",
         isApproved ? "border-emerald-400/30" : "border-border/60"
       ) }>
         { profile_image?.asset
@@ -33,11 +33,11 @@ export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorRespons
 
       <div className='flex flex-col items-start'>
         <div className="flex flex-col items-start gap-1.5">
-          <SheetTitle className="text-xl font-normal text-primary font-primary capitalize tracking-tight">
+          <SheetTitle className="text-xl font-normal text-white font-primary capitalize tracking-tight">
             { fullName }
           </SheetTitle>
-          { email && <span className="text-sm text-muted-foreground/80 mb-1.5">{ email }</span> }
-          <CreatorStatusBadge status={ creator_status || 'active' } />
+          { email && <span className="text-sm text-white/60 mb-1.5">{ email }</span> }
+          <div className="rounded-full items-center"><CreatorStatusBadge status={ creator_status || 'active' } /></div>
         </div>
 
         <div className="flex items-center justify-center gap-2 pt-3">

@@ -136,7 +136,10 @@ export function GeneralSettingsForm() {
       } catch ( error: any ) {
         console.error( 'Failed to update settings', error );
         const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update settings';
-        toast.error( `Failed to update settings: ${ errorMessage }` );
+        toast.error( `Failed to update settings`, {
+          description: errorMessage,
+          richColors: true,
+        } );
       } finally {
         setIsSaving( false );
       }

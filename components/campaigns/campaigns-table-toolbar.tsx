@@ -1,13 +1,10 @@
 'use client';
 
 import { Table } from '@tanstack/react-table';
-import {
-  FilterHorizontalIcon,
-  SearchIcon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { CalendarDays, ChevronDown } from 'lucide-react';
 
+import '@/app/styles/components/data-table.css';
+import { Button } from '@/components/dashboard-ui/button';
 import {
   DataTableFilterDropdown,
 } from '@/components/dashboard-ui/data-table/data-table-filter-dropdown';
@@ -16,13 +13,11 @@ import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-
 import { DataTableViewToggle } from '@/components/dashboard-ui/data-table/data-table-view-toggle';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/dashboard-ui/popover';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { Button } from '@/components/dashboard-ui/button';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
-import { ModelCampaign } from './types';
-import '@/app/styles/components/data-table.css';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 interface CampaignsTableToolbarProps {
-  table: Table<ModelCampaign>;
+  table: Table<ModelsCampaignResponse>;
   statuses: string[];
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
@@ -54,7 +49,7 @@ export function CampaignsTableToolbar( {
           <PopoverTrigger
             render={
               <Button variant="outline" size="sm" className="relative">
-                <CalendarDays className="size-4" strokeWidth={ 1.5 } />
+                <CalendarDays className="size-4" strokeWidth={ 1 } />
                 <ChevronDown className="size-4" strokeWidth={ 1 } />
                 { dateRange?.from && (
                   <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />

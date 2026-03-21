@@ -17,7 +17,7 @@ interface CreatorsTableViewProps {
 
 export function CreatorsTableView( { table }: CreatorsTableViewProps ) {
   return (
-    <div>
+    <div className='border border-border rounded-lg overflow-hidden'>
       <Table className='overflow-auto'>
         <TableHeader sticky>
           { table.getHeaderGroups().map( ( headerGroup ) => (

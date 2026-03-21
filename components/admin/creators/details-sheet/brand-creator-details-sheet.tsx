@@ -40,10 +40,8 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange } modal>
-      <SheetContent className="w-[90%]! max-w-[500px]! overflow-y-auto bg-background/70">
-
+      <SheetContent className="w-[95%]! max-w-[500px]! overflow-y-auto bg-background/90">
         <CreatorSheetHeader creator={ creator! } />
-
         {/* ── Brand View (Merged & Streamlined) ── */ }
         <div className="px-6 flex flex-col gap-4 pb-6">
           <WrappedCard title="Bio & Introduction">

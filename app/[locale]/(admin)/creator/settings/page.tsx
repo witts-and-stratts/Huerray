@@ -73,22 +73,20 @@ export default function CreatorSettingsPage() {
         const profileRequest = {
           bio: value.bio,
           date_of_birth: value.dateOfBirth,
-          gender: value.gender as ModelsUpdateCreatorRequestGenderEnum,
+          ...(value.gender ? { gender: value.gender as ModelsUpdateCreatorRequestGenderEnum } : {}),
           phone_number: value.phoneNumber,
           street: value.street,
           city: value.city,
           state: value.state,
           zipcode: value.zipcode,
-          country: value.country as UtilsCountryCode,
+          ...(value.country ? { country: value.country as UtilsCountryCode } : {}),
           instagram_handle: value.instagramHandle,
           tiktok_handle: value.tiktokHandle,
           youtube_handle: value.youtubeHandle,
           twitter_handle: value.twitterHandle,
           portfolio: portfolioJson,
-          application_video: { asset: value.applicationVideo, thumbnail: value.applicationVideoThumbnail || undefined },
+          ...(value.applicationVideo ? { application_video: { asset: value.applicationVideo, thumbnail: value.applicationVideoThumbnail || undefined } } : {}),
           profile_image: value.profileImageUrl ? { asset: value.profileImageUrl } : undefined,
-          // However, safety:
-          // However, safety:
           preferred_categories: value.preferredCategories || [],
         };
 
@@ -111,8 +109,13 @@ export default function CreatorSettingsPage() {
         } );
       } catch ( error: any ) {
         console.error( 'Failed to update settings', error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update settings';
-        toast.error( `Failed to update settings: ${ errorMessage }` );
+        console.error( 'Response data:', JSON.stringify( error.response?.data ) );
+        const rawError = error.response?.data?.error;
+        const errorMessage = ( typeof rawError === 'string' ? rawError : rawError?.message ) || error.response?.data?.message || error.message || 'Failed to update settings';
+        toast.error( `Failed to update settings`, {
+          description: errorMessage,
+          richColors: true,
+        } );
       } finally {
         setIsSaving( false );
       }

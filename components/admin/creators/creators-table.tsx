@@ -69,7 +69,7 @@ export function CreatorsTable( {
   const { view, setView } = usePersistedViewMode( 'creators', 'cards' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
-  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
+  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ globalFilter, setGlobalFilter ] = React.useState( '' );
   const [ selectedCreator, setSelectedCreator ] =
@@ -117,6 +117,16 @@ export function CreatorsTable( {
     );
     return uniqueStatuses as string[];
   }, [ creators ] );
+
+  const countries = React.useMemo( () =>
+    Array.from( new Set( creators.map( c => c.country ).filter( Boolean ) ) ).sort() as string[],
+    [ creators ]
+  );
+
+  const genders = React.useMemo( () =>
+    Array.from( new Set( creators.map( c => c.gender ).filter( Boolean ) ) ).sort() as string[],
+    [ creators ]
+  );
 
   const columns = React.useMemo(
     () =>
@@ -166,6 +176,8 @@ export function CreatorsTable( {
           <CreatorsTableToolbar
             table={ table }
             statuses={ statuses }
+            countries={ countries }
+            genders={ genders }
             view={ view }
             setView={ setView }
           />

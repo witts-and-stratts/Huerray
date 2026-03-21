@@ -53,9 +53,9 @@ export default function middleware(request: NextRequest) {
   if (isPublicRoute) {
     return intlMiddleware(request);
   }
-  const isAdminRoute = pathWithoutLocale.startsWith('/admin');
-  const isBrandRoute = pathWithoutLocale.startsWith('/brand');
-  const isCreatorRoute = pathWithoutLocale.startsWith('/creator');
+  const isAdminRoute = pathWithoutLocale === '/admin' || pathWithoutLocale.startsWith('/admin/');
+  const isBrandRoute = pathWithoutLocale === '/brand' || pathWithoutLocale.startsWith('/brand/');
+  const isCreatorRoute = pathWithoutLocale === '/creator' || pathWithoutLocale.startsWith('/creator/');
   const isDashboardRoute = pathWithoutLocale.startsWith('/dashboard');
 
   const isProtectedRoute = isAdminRoute || isBrandRoute || isCreatorRoute || isDashboardRoute;

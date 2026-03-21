@@ -1,13 +1,14 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/dashboard-ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/dashboard-ui/avatar";
 import { Button } from "@/components/dashboard-ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/dashboard-ui/card";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { getCountryFlag } from "@/lib/country-flags";
-import { cn } from "@/lib/dashboard-utils";
+
 import { calculateAge } from "@/lib/utils";
-import { MoreVertical } from "lucide-react";
+import { User02Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowRight, MoreVertical } from "lucide-react";
 import Image from "next/image";
 import { CreatorActionMenu } from "./creator-action-menu";
 import { CreatorStatusBadge } from "./creator-status-badge";
@@ -22,101 +23,109 @@ interface CreatorCardProps {
 
 export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejectProfile }: CreatorCardProps ) {
   const fullName = `${ creator.first_name || "" } ${ creator.last_name || "" }`.trim() || creator.email || "Creator";
-  const initials = fullName
-    .split( " " )
-    .map( ( part ) => part.charAt( 0 ) || "" )
-    .join( "" )
-    .slice( 0, 2 )
-    .toUpperCase();
   const imageUrl = creator.profile_image?.asset;
   const age = creator.date_of_birth ? calculateAge( creator.date_of_birth ) : undefined;
   const location = [ creator.city, creator.country ].filter( Boolean ).join( ', ' );
   const flagName = creator.country ? getCountryFlag( creator.country ) : undefined;
   const gender = creator.gender ? creator.gender.charAt( 0 ).toUpperCase() + creator.gender.slice( 1 ) : undefined;
   const email = creator.email;
-  const normalizedStatus = ( creator.creator_status || "" ).toLowerCase();
-  const isApproved = normalizedStatus === "approved";
 
   return (
-    <Card
-      className="group relative bg-background shadow-[0_25px_60px_rgba(15,23,42,0.08)] transition hover:-translate-y-0.5 focus-within:-translate-y-0.5 p-0 gap-2"
+    <div
+      className="relative rounded-2xl overflow-hidden aspect-[3/4] cursor-pointer group"
+      onClick={ () => onViewDetails( creator ) }
     >
-      <CardHeader className="relative flex flex-col items-center gap-4 bg-primary/4 p-6 rounded-none min-h-56">
-        <div className="absolute right-0 top-2">
-          <CreatorActionMenu
-            creator={ creator }
-            onViewDetails={ onViewDetails }
-            onApproveProfile={ onApproveProfile }
-            onRejectProfile={ onRejectProfile }
-            trigger={
-              <Button variant="ghost" size="sm" className="h-8 w-8 px-0">
-                <MoreVertical className="size-4" />
-              </Button>
-            }
-          />
-        </div>
-        <div className="relative">
-          <Avatar className={ cn(
-            "border bg-muted-foreground/10 size-30",
-            isApproved ? "border-emerald-400/30" : "border-border/60"
-          ) }>
-            { imageUrl ? (
-              <AvatarImage src={ imgpresets.card( imageUrl ) } alt={ fullName } />
-            ) : (
-              <AvatarFallback>{ initials }</AvatarFallback>
-            ) }
+      { /* Background image or gradient fallback */ }
+      { imageUrl ? (
+        <img
+          src={ imgpresets.card( imageUrl ) }
+          alt={ fullName }
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-700/80 via-slate-600/50 to-slate-500/30" />
+      ) }
+
+      { /* Dark gradient overlay */ }
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+      { /* Center avatar (only when no image) */ }
+      { !imageUrl && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Avatar className="size-20 border-2 border-white/20">
+            <AvatarFallback className="text-2xl bg-white/10 text-white">
+              <HugeiconsIcon icon={ User02Icon } className="size-8" strokeWidth={ 1 } />
+            </AvatarFallback>
           </Avatar>
         </div>
-        <div className="flex flex-col items-center gap-1 text-center">
-          <CardTitle className="card__title capitalize text-[18px] font-normal text-primary font-primary truncate line-clamp-1 hover:underline cursor-pointer block" onClick={ () => onViewDetails( creator ) }>
-            { fullName }
-          </CardTitle>
-          { email && (
-            <span className="text-[12px] text-muted-foreground/80 line-clamp-1 mb-1">
-              { email }
-            </span>
-          ) }
-          <CreatorStatusBadge status={ creator.creator_status || "active" } />
-        </div>
-      </CardHeader>
+      ) }
 
-      <CardContent className="space-y-2 px-5 pb-5 pt-0">
-        <div className="flex flex-wrap items-center justify-center gap-2 pt-1 text-[12px] font-medium text-muted-foreground/70">
-          { location && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted/80 px-1 py-0.5 text-xs text-foreground/80">
-              { flagName && (
-                <Image
-                  src={ `/images/flags/${ flagName }.svg` }
-                  alt={ creator.country || "Flag" }
-                  width={ 16 }
-                  height={ 10 }
-                  className="h-3 w-auto"
-                />
-              ) }
-              { location }
-            </span>
-          ) }
-          { gender && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted/80 px-1 py-0.5 text-xs text-foreground/80">
-              { gender }
-            </span>
-          ) }
-          { age && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-border bg-muted/80 px-1 py-0.5 text-xs text-foreground/80">
-              { age } y/o
-            </span>
-          ) }
-        </div>
-        {/* <p className="text-sm leading-relaxed text-muted-foreground line-clamp-3" dangerouslySetInnerHTML={ { __html: bio.replace( /<[^>]*>/g, "" ) || "" } } /> */ }
+      { /* Top row: status badge + action menu */ }
+      <div className="absolute top-1 left-2 right-2 flex items-center justify-between w-full" onClick={ e => e.stopPropagation() }>
+        <CreatorStatusBadge status={ creator.creator_status || "active" } />
+        <CreatorActionMenu
+          creator={ creator }
+          onViewDetails={ onViewDetails }
+          onApproveProfile={ onApproveProfile }
+          onRejectProfile={ onRejectProfile }
+          trigger={
+            <Button variant="ghost" size="sm" className="size-8 mr-2 px-0 text-white hover:bg-white/20 hover:text-white">
+              <MoreVertical className="size-4" />
+            </Button>
+          }
+        />
+      </div>
 
-        {/* <Button
-          variant="outline"
-          className="w-full justify-center text-sm font-medium"
+      { /* Bottom content panel */ }
+      <div className="absolute bottom-0 left-0 right-0 py-2 px-4 flex flex-col gap-1 bg-black/5 backdrop-blur m-2 rounded-xl border border-white/10">
+        { /* Name */ }
+        <h3 className="text-white text-base font-primary font-normal leading-tight line-clamp-1 capitalize">
+          { fullName }
+        </h3>
+
+        { /* Email */ }
+        { email && (
+          <p className="text-white/50 text-xs line-clamp-1">{ email }</p>
+        ) }
+
+        { /* Meta chips: location, gender, age */ }
+        { ( location || gender || age ) && (
+          <div className="flex flex-wrap items-center gap-1.5 mt-0.5" onClick={ e => e.stopPropagation() }>
+            { location && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 px-1.5 py-0.5 text-[10px] text-white/80 backdrop-blur-sm">
+                { flagName && (
+                  <Image
+                    src={ `/images/flags/${ flagName }.svg` }
+                    alt={ creator.country || "Flag" }
+                    width={ 16 }
+                    height={ 10 }
+                    className="h-3 w-auto"
+                  />
+                ) }
+                { location }
+              </span>
+            ) }
+            { gender && (
+              <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-1.5 py-0.5 text-[10px] text-white/80 backdrop-blur-sm">
+                { gender }
+              </span>
+            ) }
+            {/* { age && (
+              <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-1.5 py-0.5 text-[10px] text-white/80 backdrop-blur-sm">
+                { age } y/o
+              </span>
+            ) } */}
+          </div>
+        ) }
+
+        { /* View details link */ }
+        {/* <button
+          className="flex items-center gap-1.5 text-white/80 text-xs font-medium hover:text-white transition-colors mt-1"
           onClick={ () => onViewDetails( creator ) }
         >
-          View profile
-        </Button> */}
-      </CardContent>
-    </Card>
+          View Profile <ArrowRight className="size-3.5" />
+        </button> */}
+      </div>
+    </div>
   );
 }

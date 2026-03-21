@@ -128,7 +128,7 @@ const CreatorHeader = memo( ( { creator, hideAge, age, showEmail, onViewDetails,
           >
             { fullName }
           </Link>
-          <CreatorIdCopyAndAge creator={ creator } hideAge={ hideAge } age={ age! } />
+          {/* <CreatorIdCopyAndAge creator={ creator } hideAge={ hideAge } age={ age! } /> */ }
           { showEmail && <span className="text-xs text-muted-foreground mt-0.5">{ creator.email }</span> }
         </div>
       </div>
@@ -168,15 +168,11 @@ export function CreatorInfoBlock( { creator, className, showEmail = false, hideG
       <CreatorHeader creator={ creator } hideAge={ hideAge } age={ age! } showEmail={ showEmail } onViewDetails={ onViewDetails } showActions={ showActions } />
 
       {/* Details: Gender, Location */ }
-      <DetailsGenderLocation creator={ creator } hideGender={ hideGender } hideLocation={ hideLocation } />
+      {/* <DetailsGenderLocation creator={ creator } hideGender={ hideGender } hideLocation={ hideLocation } /> */ }
 
       {/* Social Links */ }
-      <CreatorSocialLinks
-        instagram={ creator.instagram_handle }
-        tiktok={ creator.tiktok_handle }
-        youtube={ creator.youtube_handle }
-      />
-      <PreferredCategories creator={ creator } />
+      {/* s */ }
+      {/* <PreferredCategories creator={ creator } /> */ }
     </div>
   );
 }

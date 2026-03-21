@@ -24,7 +24,7 @@ export function CreatorsView( { table, view, onViewDetails, onApproveProfile, on
 
     return (
       <div className="@container">
-        <div className="grid grid-cols-2 gap-4 @max-sm:grid-cols-1 @md:grid-cols-3 @lg:grid-cols-4 @xl:grid-cols-5 @2xl:grid-cols-7">
+        <div className="grid grid-cols-2 gap-4 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-6 @2xl:grid-cols-7">
           { table.getRowModel().rows.map( ( row ) => (
             <CreatorCard
               key={ row.id }
