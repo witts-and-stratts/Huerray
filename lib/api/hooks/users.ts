@@ -117,6 +117,32 @@ export function useUpdateUserStatus() {
   });
 }
 
+export function useUserProfile() {
+  return useQuery<any, ApiError>({
+    queryKey: [...usersKeys.all, 'profile'],
+    queryFn: async () => {
+      const response = await userApi.usersProfileGet();
+      const raw = response.data as any;
+      return raw.data || raw;
+    },
+  });
+}
+
+export function useUpdateUserProfile() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (request: import('../generated/models').ModelsUpdateUserRequest) => {
+      const response = await userApi.usersProfilePut({ request });
+      const raw = response.data as any;
+      return raw.data || raw;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [...usersKeys.all, 'profile'] });
+    },
+  });
+}
+
 export function useCreateUser() {
   const queryClient = useQueryClient();
 

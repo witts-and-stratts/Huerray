@@ -71,10 +71,17 @@ export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSetting
             name="applicationVideo"
             validators={ { onSubmit: creatorSettingsSchema.shape.applicationVideo } }
             children={ ( field: any ) => (
-              <VideoUploadDropzone
-                value={ field.state.value }
-                onChange={ ( url ) => field.handleChange( url ) }
-                error={ toFieldError( field.state.meta.errors ) }
+              <form.Field
+                name="applicationVideoThumbnail"
+                children={ ( thumbField: any ) => (
+                  <VideoUploadDropzone
+                    value={ field.state.value }
+                    thumbnailValue={ thumbField.state.value }
+                    onChange={ ( url ) => field.handleChange( url ) }
+                    onThumbnailChange={ ( url ) => thumbField.handleChange( url ) }
+                    error={ toFieldError( field.state.meta.errors ) }
+                  />
+                ) }
               />
             ) }
           />

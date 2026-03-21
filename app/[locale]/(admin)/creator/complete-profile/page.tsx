@@ -50,6 +50,7 @@ export default function CompleteProfilePage() {
       twitterHandle: '',
       portfolio: '',
       applicationVideo: '',
+      applicationVideoThumbnail: '',
       profileImageUrl: '',
     } as CreatorSettings,
     validators: {
@@ -86,7 +87,7 @@ export default function CompleteProfilePage() {
           youtube_handle: value.youtubeHandle,
           twitter_handle: value.twitterHandle,
           portfolio: portfolioJson,
-          application_video: value.applicationVideo,
+          application_video: { asset: value.applicationVideo, thumbnail: value.applicationVideoThumbnail || undefined },
           profile_image: value.profileImageUrl ? { asset: value.profileImageUrl } : undefined,
         };
 

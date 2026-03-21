@@ -1,23 +1,17 @@
 'use client';
 
-import * as React from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { ExpandableContent } from '@/components/dashboard-ui/expandable-content';
 import {
   Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
+  SheetContent
 } from '@/components/dashboard-ui/sheet';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
 import { getCountryFlag } from '@/lib/country-flags';
-import { cn } from '@/lib/dashboard-utils';
-import { calculateAge, stripTags } from '@/lib/utils';
-import Image from 'next/image';
-import { CreatorStatusBadge } from '../creator-status-badge';
-import { ExpandableContent } from '@/components/dashboard-ui/expandable-content';
-import { CreatorDetailsSheetProps, MetaBadge, SocialLink, ExpandableCategories, SOCIAL_PLATFORMS } from './creator-details-shared';
+import { calculateAge } from '@/lib/utils';
+import { CreatorDetailsSheetProps, ExpandableCategories, SOCIAL_PLATFORMS, SocialLink } from './creator-details-shared';
 import { CreatorSheetHeader } from './creator-sheet-header';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import { Content } from '@/components/dashboard-ui/content';
 
 export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDetailsSheetProps ) {
   const c = creator as any;
@@ -37,7 +31,9 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
   const formattedGender = gender ? gender.charAt( 0 ).toUpperCase() + gender.slice( 1 ) : undefined;
 
   const displayBio = c.bio;
-  const displayVideo = c.application_video;
+  const displayVideo = c.application_video?.asset;
+  const videoPoster = c.application_video?.thumbnail;
+  const optimizedVideoPoster = videoPoster ? imgpresets.banner( videoPoster, { width: 1280 } ) : undefined;
 
   const handles: Record<string, string> = { instagram_handle, tiktok_handle, youtube_handle };
   const activeSocials = SOCIAL_PLATFORMS.filter( p => handles[ p.handleKey ] );
@@ -52,15 +48,10 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
         <div className="px-6 flex flex-col gap-4 pb-6">
           <WrappedCard title="Bio & Introduction">
             { displayVideo && (
-              <video src={ displayVideo } controls className="w-full aspect-video rounded-md mb-4" />
+              <video src={ displayVideo } poster={ optimizedVideoPoster } controls className="w-full aspect-video rounded-md mb-4" />
             ) }
             <ExpandableContent maxHeightClass="max-h-24">
-              <p
-                className="text-sm text-muted-foreground *:text-sm *:font-normal"
-                dangerouslySetInnerHTML={ {
-                  __html: displayBio || 'No bio available'
-                } }
-              />
+              <Content content={ displayBio || 'No bio available' } />
             </ExpandableContent>
           </WrappedCard>
 

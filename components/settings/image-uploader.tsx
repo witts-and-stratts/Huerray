@@ -168,12 +168,12 @@ export function ImageUploader( {
               >
                 {/* Preview Image */ }
                 <div className={ cn(
-                  "relative w-3/4 aspect-square rounded-full overflow-hidden border-2 bg-muted/30",
+                  "relative w-50 max-w-full aspect-square rounded-full overflow-hidden border-2 bg-muted/30",
                   uploadError ? "border-destructive" : "border-slate-200"
                 ) }>
                   {/* eslint-disable-next-line @next/next/no-img-element */ }
                   <img
-                    src={ currentImageUrl.startsWith( 'blob:' ) || currentImageUrl.startsWith( 'data:' ) ? currentImageUrl : imgpresets.thumbnail( currentImageUrl ) }
+                    src={ currentImageUrl.startsWith( 'blob:' ) || currentImageUrl.startsWith( 'data:' ) ? currentImageUrl : imgpresets.card( currentImageUrl ) }
                     alt="Preview"
                     className={ cn(
                       "w-full h-full object-cover",

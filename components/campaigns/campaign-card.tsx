@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import Link from 'next/link';
+import { Link } from '@/lib/navigation';
 import { CampaignActionMenu } from './campaign-action-menu';
 
 import {
@@ -15,14 +15,13 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { AvatarCollage } from './avatar-collage';
 import { BrandAvatar } from './brand-avatar';
 import { StatusBadge } from './status-badge';
-import { ModelCampaign } from './types';
 
 import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 import { useRole } from '@/contexts/role-context';
-import { ModelsBrandResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { ModelsBrandResponse, ModelsCampaignResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
@@ -39,7 +38,7 @@ import { SubmissionViewDialog } from './submission-view-dialog';
 import { RoleGuard } from '../auth/role-guard';
 
 interface CampaignCardProps {
-  campaign: ModelCampaign;
+  campaign: ModelsCampaignResponse;
 }
 
 type SelectedItem =

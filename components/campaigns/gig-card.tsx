@@ -203,7 +203,7 @@ const GigRewardBlock = memo( ( { formattedReward }: GigRewardBlockProps ) => (
     <RoleGuard excludedRoles={ [ 'brand' ] }>
       <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">Reward</span>
     </RoleGuard>
-    <span className="text-2xl font-primary text-primary leading-none">
+    <span className="text-xl font-primary text-primary leading-none">
       { formattedReward }
     </span>
   </div>

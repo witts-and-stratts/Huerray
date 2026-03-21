@@ -26,7 +26,7 @@ import {
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 
 import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
@@ -109,6 +109,7 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
   const [ searchQuery, setSearchQuery ] = useState( '' );
   const [ selectedCreator, setSelectedCreator ] = useState<any>( null );
   const [ localInvitedCreators, setLocalInvitedCreators ] = useState<Set<string>>( new Set() );
+  const [ cachedInvitationMap, setCachedInvitationMap ] = useState<Map<string, string>>( new Map() );
   const { user } = useAuth();
   const isAdmin = user?.role === 'admin';
 
@@ -134,14 +135,18 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
   const invitationsRaw = invitationsData?.data;
   const existingInvitations = Array.isArray( invitationsRaw ) ? invitationsRaw : invitationsRaw ? [ invitationsRaw ] : [];
 
-  // Map creator IDs to their invitation status
-  const creatorInvitationMap = new Map<string, string>(
-    existingInvitations.map( ( inv: any ) => [ inv.creator_id, inv.status || 'pending' ] )
-  );
+  // Cache the invitation map so it persists during refetch (when invitationsData is temporarily undefined)
+  useEffect( () => {
+    if ( invitationsData !== undefined ) {
+      setCachedInvitationMap( new Map(
+        existingInvitations.map( ( inv: any ) => [ inv.creator_id, inv.status || 'pending' ] )
+      ) );
+    }
+  }, [ invitationsData ] );
 
   const getCreatorInvitationStatus = ( creatorId: string ): string | null => {
     if ( localInvitedCreators.has( creatorId ) ) return 'pending';
-    return creatorInvitationMap.get( creatorId ) || null;
+    return cachedInvitationMap.get( creatorId ) || null;
   };
 
   // Invite mutation

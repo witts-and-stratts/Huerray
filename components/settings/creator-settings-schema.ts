@@ -27,6 +27,7 @@ export const creatorSettingsSchema = z.object({
   twitterHandle: z.string().optional(),
   portfolio: z.string().optional(),
   applicationVideo: z.string().min(1, 'Application video is required'),
+  applicationVideoThumbnail: z.string().optional(),
   profileImageUrl: z.string().optional(),
 
   // Bank

@@ -50,6 +50,7 @@ export default function CreatorSettingsPage() {
       twitterHandle: '',
       portfolio: '',
       applicationVideo: '',
+      applicationVideoThumbnail: '',
       profileImageUrl: '',
     } as CreatorSettings,
     onSubmit: async ( { value } ) => {
@@ -84,7 +85,7 @@ export default function CreatorSettingsPage() {
           youtube_handle: value.youtubeHandle,
           twitter_handle: value.twitterHandle,
           portfolio: portfolioJson,
-          application_video: value.applicationVideo,
+          application_video: { asset: value.applicationVideo, thumbnail: value.applicationVideoThumbnail || undefined },
           profile_image: value.profileImageUrl ? { asset: value.profileImageUrl } : undefined,
           // However, safety:
           // However, safety:
@@ -182,7 +183,8 @@ export default function CreatorSettingsPage() {
             }
           }
           form.setFieldValue( 'portfolio', portfolioDisplay );
-          form.setFieldValue( 'applicationVideo', ( p as any ).application_video || '' );
+          form.setFieldValue( 'applicationVideo', ( p as any ).application_video?.asset || '' );
+          form.setFieldValue( 'applicationVideoThumbnail', ( p as any ).application_video?.thumbnail || '' );
           form.setFieldValue( 'profileImageUrl', ( p as any ).profile_image?.asset || '' );
         }
 
@@ -291,7 +293,8 @@ export default function CreatorSettingsPage() {
       }
     }
     form.setFieldValue( 'portfolio', portfolioDisplay );
-    form.setFieldValue( 'applicationVideo', ( p as any ).application_video || '' );
+    form.setFieldValue( 'applicationVideo', ( p as any ).application_video?.asset || '' );
+    form.setFieldValue( 'applicationVideoThumbnail', ( p as any ).application_video?.thumbnail || '' );
     form.setFieldValue( 'profileImageUrl', ( p as any ).profile_image?.asset || '' );
 
     toast.info( 'Changes discarded' );

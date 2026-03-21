@@ -442,13 +442,12 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             { ( field ) => (
               <SuperField
                 // label="Content Guidelines"
-                type="textarea"
+                type="editor"
                 placeholder="Describe the content guidelines for this gig"
                 value={ field.state.value }
-                onChange={ ( e ) => field.handleChange( e.target.value ) }
+                onChange={ ( val ) => field.handleChange( val ) }
                 onBlur={ field.handleBlur }
                 error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
-                rows={ 6 }
                 fieldClassName='md:min-h-40'
               />
             ) }
@@ -465,13 +464,12 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             { ( field ) => (
               <SuperField
                 // label="Ambience / Setting"
-                type="textarea"
+                type="editor"
                 placeholder="Describe the desired ambience or setting for the video"
                 value={ field.state.value }
-                onChange={ ( e ) => field.handleChange( e.target.value ) }
+                onChange={ ( val ) => field.handleChange( val ) }
                 onBlur={ field.handleBlur }
                 error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
-                rows={ 6 }
                 fieldClassName='md:min-h-40'
               />
             ) }

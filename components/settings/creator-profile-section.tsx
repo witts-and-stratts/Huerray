@@ -6,6 +6,7 @@ import { SuperField } from '@/components/dashboard-ui/super-field';
 import { Separator } from '../dashboard-ui/separator';
 import { creatorSettingsSchema, CreatorSettings, ReactFormApi } from './creator-settings-schema';
 import { ImageUploader } from './image-uploader';
+import { memo } from 'react';
 
 const genderOptions = [
   { label: 'Male', value: 'male' },
@@ -19,10 +20,16 @@ function toFieldError( errors: any[] | undefined ): string | undefined {
     : undefined;
 }
 
-export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSettings> } ) {
+export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
+  const DummyProfileAvatar = memo( ( { gender }: { gender: string; } ) => <img
+    src={ gender === 'male' ? '/svg/avatar-male.svg' : '/svg/avatar-female.svg' }
+    alt="Default Profile"
+    className="w-full h-full object-cover"
+  /> );
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl m-px">
-      {/* Left Column - Main Info */}
+      {/* Left Column - Main Info */ }
       <div className="lg:col-span-2 space-y-6">
         <Card className="max-md:px-0 max-md:border-0 max-md:shadow-none max-md:ring-0 max-md:rounded-none max-md:bg-transparent">
           <CardContent className="max-md:px-4">
@@ -127,7 +134,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
         </Card>
       </div>
 
-      {/* Right Column - Sidebar */}
+      {/* Right Column - Sidebar */ }
       <div className="lg:col-span-1 space-y-6 max-md:px-4">
         <form.Subscribe
           selector={ ( state: any ) => state.values.gender }
@@ -140,13 +147,8 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                   onChange={ ( url ) => field.handleChange( url ) }
                   renderDefault={ ( isDragActive ) => (
                     <>
-                      <div className="relative w-3/4 aspect-square rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border border-slate-200 mb-4 transition-colors">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={ gender === 'male' ? '/svg/avatar-male.svg' : '/svg/avatar-female.svg' }
-                          alt="Default Profile"
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="relative w-50 max-w-full aspect-square rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border border-slate-200 mb-4 transition-colors">
+                        <DummyProfileAvatar gender={ gender } />
                       </div>
                       <p className="text-sm font-medium text-center">
                         { isDragActive ? 'Drop your image here' : 'Upload Profile Image' }

@@ -16,6 +16,7 @@ import { Activity } from 'react';
 import { toDateLabel } from '../dashboard/creator-dashboard-utils';
 import { CreatorDetailsSheetProps, ExpandableCategories, Row, SOCIAL_PLATFORMS, SocialLink } from './creator-details-shared';
 import { CreatorSheetHeader } from './creator-sheet-header';
+import { Content } from '@/components/dashboard-ui/content';
 
 
 export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDetailsSheetProps ) {
@@ -37,7 +38,8 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
   const address = [ creatorDetails?.street, creatorDetails?.city, creatorDetails?.state, creatorDetails?.zipcode ].filter( Boolean ).join( ', ' );
 
   const displayBio = creatorDetails?.bio || c.bio;
-  const displayVideo = creatorDetails?.application_video || c.application_video;
+  const displayVideo = creatorDetails?.application_video?.asset || c.application_video?.asset;
+  const videoPoster = creatorDetails?.application_video?.thumbnail || c.application_video?.thumbnail || undefined;
 
   const [ activeTab, setActiveTab ] = React.useState( 'overview' );
 
@@ -113,17 +115,12 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
             <div className="pt-4 flex flex-col gap-4">
               { displayVideo && (
                 <WrappedCard title="Application Video">
-                  <video src={ displayVideo } controls className="w-full aspect-video" />
+                  <video src={ displayVideo } controls className="w-full aspect-video" poster={ videoPoster } />
                 </WrappedCard>
               ) }
               <WrappedCard title="Bio">
                 <ExpandableContent maxHeightClass="max-h-24">
-                  <p
-                    className="text-sm text-muted-foreground *:text-sm *:font-normal"
-                    dangerouslySetInnerHTML={ {
-                      __html: displayBio || 'No bio available'
-                    } }
-                  />
+                  <Content content={ displayBio || 'No bio available' } />
                 </ExpandableContent>
               </WrappedCard>
             </div>
