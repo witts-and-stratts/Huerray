@@ -142,63 +142,63 @@ export function GigsTable( {
 
   return (
     <>
-    <AnimatePresence>
-      { showLoading && (
-        view === 'table'
-          ? <DataTableSkeleton key="skeleton-table" />
-          : <CardGridSkeleton key="skeleton-cards" count={ 8 } cardHeight="h-[250px]" columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
-      ) }
-      { error && <TableErrorState key="error" entity="gigs" message={ error.message } /> }
-      { !isLoading && !error && (
-        <div
-          className="bg-slate-50/50 grow relative overflow-auto flex-1 h-full"
-        >
-          <div className='flex flex-col w-full flex-1 h-full'>
-            { !hideToolbar && ( data?.length ?? 0 ) > 0 && (
-              <GigsTableToolbar
-                table={ table }
-                statuses={ statuses }
-                view={ view }
-                setView={ setView }
-                hideViewToggle={ hideViewToggle }
-                dateFilterType={ dateFilterType }
-                setDateFilterType={ setDateFilterType }
-                dateRange={ dateRange }
-                setDateRange={ setDateRange }
-              />
-            ) }
-            <div className='flex-1'>
-              <GigsView
-                table={ table }
-                view={ view }
-                onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
-                onCreateSubmission={ onCreateSubmission }
-                actionButtons={ actionButtons }
-              />
-            </div>
-            { !hidePagination && ( data?.length ?? 0 ) > 0 && (
-              <div className='px-5 mt-auto'>
-                <DataTablePagination
+      <AnimatePresence>
+        { showLoading && (
+          view === 'table'
+            ? <DataTableSkeleton key="skeleton-table" />
+            : <CardGridSkeleton key="skeleton-cards" count={ 8 } cardHeight="h-[250px]" columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
+        ) }
+        { error && <TableErrorState key="error" entity="gigs" message={ error.message } /> }
+        { !isLoading && !error && (
+          <div
+            className="bg-slate-50/50 grow relative overflow-auto flex-1 h-full"
+          >
+            <div className='flex flex-col w-full flex-1 h-full'>
+              { !hideToolbar && ( data?.length ?? 0 ) > 0 && (
+                <GigsTableToolbar
                   table={ table }
-                  pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
+                  statuses={ statuses }
+                  view={ view }
+                  setView={ setView }
+                  hideViewToggle={ hideViewToggle }
+                  dateFilterType={ dateFilterType }
+                  setDateFilterType={ setDateFilterType }
+                  dateRange={ dateRange }
+                  setDateRange={ setDateRange }
+                />
+              ) }
+              <div className='flex-1'>
+                <GigsView
+                  table={ table }
+                  view={ view }
+                  onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
+                  onCreateSubmission={ onCreateSubmission }
+                  actionButtons={ actionButtons }
                 />
               </div>
-            ) }
+              { !hidePagination && ( data?.length ?? 0 ) > 0 && (
+                <div className='px-2 md:px-5 mt-auto'>
+                  <DataTablePagination
+                    table={ table }
+                    pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
+                  />
+                </div>
+              ) }
+            </div>
           </div>
-        </div>
-      ) }
-    </AnimatePresence>
-    <GigDetailsSheet
-      gig={ selectedGig }
-      open={ !!selectedGig }
-      onOpenChange={ ( open ) => !open && setSelectedGig( null ) }
-      initialTab={ selectedTab }
-    />
-    <GigEditSheet
-      gig={ editingGig }
-      open={ !!editingGig }
-      onOpenChange={ ( open ) => !open && setEditingGig( null ) }
-    />
+        ) }
+      </AnimatePresence>
+      <GigDetailsSheet
+        gig={ selectedGig }
+        open={ !!selectedGig }
+        onOpenChange={ ( open ) => !open && setSelectedGig( null ) }
+        initialTab={ selectedTab }
+      />
+      <GigEditSheet
+        gig={ editingGig }
+        open={ !!editingGig }
+        onOpenChange={ ( open ) => !open && setEditingGig( null ) }
+      />
     </>
   );
 }

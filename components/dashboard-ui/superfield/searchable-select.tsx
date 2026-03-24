@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/dashboard-utils";
 import {
   Popover,
@@ -27,6 +27,8 @@ export interface SearchableSelectProps {
   disabled?: boolean;
   className?: string;
   required?: boolean;
+  renderOption?: ( option: SelectOption, isSelected: boolean ) => React.ReactNode;
+  renderTrigger?: ( selected: SelectOption | undefined ) => React.ReactNode;
 }
 
 export interface SearchableSelectFieldProps extends BaseFieldProps, Omit<SearchableSelectProps, keyof BaseFieldProps> {
@@ -41,7 +43,9 @@ export const SearchableSelect = ( {
   placeholder,
   disabled,
   className,
-  required
+  required,
+  renderOption,
+  renderTrigger,
 }: SearchableSelectProps ) => {
   const [ open, setOpen ] = useState( false );
   const [ width, setWidth ] = useState( 0 );
@@ -90,8 +94,11 @@ export const SearchableSelect = ( {
           ) }
           disabled={ disabled }
         >
-          <span className="flex flex-1 text-left line-clamp-1">
-            { selectedLabel || placeholder || "Select..." }
+          <span className="flex flex-1 text-left line-clamp-1 items-center">
+            { renderTrigger
+              ? renderTrigger( selectedOption )
+              : ( selectedLabel || placeholder || "Select..." )
+            }
           </span>
           <HugeiconsIcon icon={ UnfoldMoreIcon } strokeWidth={ 2 } className="text-muted-foreground size-4 pointer-events-none" />
         </PopoverTrigger>
@@ -120,18 +127,26 @@ export const SearchableSelect = ( {
                       setOpen( false );
                     } }
                     disabled={ optDisabled }
-                    className="data-selected:bg-accent data-selected:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 bg-background"
-                  >
-                    <span className="line-clamp-1">{ optLabel }</span>
-                    { value === optValue && (
-                      <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
-                        <HugeiconsIcon
-                          icon={ Tick02Icon }
-                          strokeWidth={ 2 }
-                          className="h-4 w-4"
-                        />
-                      </span>
+                    className={ cn(
+                      "data-selected:bg-accent data-selected:text-accent-foreground relative flex cursor-default select-none rounded-sm text-sm outline-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 bg-background",
+                      renderOption
+                        ? "p-0 overflow-hidden w-full [&>svg:last-child]:!hidden"
+                        : "items-center py-1.5 pl-2 pr-8"
                     ) }
+                  >
+                    { renderOption
+                      ? renderOption( option, value === optValue )
+                      : (
+                        <>
+                          <span className="line-clamp-1">{ optLabel }</span>
+                          { value === optValue && (
+                            <span className="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+                              <HugeiconsIcon icon={ Tick02Icon } strokeWidth={ 2 } className="h-4 w-4" />
+                            </span>
+                          ) }
+                        </>
+                      )
+                    }
                   </CommandItem>
                 );
               } ) }

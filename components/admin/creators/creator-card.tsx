@@ -5,11 +5,15 @@ import { Button } from "@/components/dashboard-ui/button";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { getCountryFlag } from "@/lib/country-flags";
 
-import { calculateAge } from "@/lib/utils";
-import { User02Icon } from "@hugeicons/core-free-icons";
+import { ageFromDate } from "@/lib/utils";
+import { SquareArrowExpandIcon, User02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowRight, MoreVertical } from "lucide-react";
+import { Expand, MoreVertical } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import { RoleGuard } from "@/components/auth/role-guard";
 import { CreatorActionMenu } from "./creator-action-menu";
 import { CreatorStatusBadge } from "./creator-status-badge";
 import { imgpresets } from "@/lib/utils/imgproxy";
@@ -22,9 +26,12 @@ interface CreatorCardProps {
 }
 
 export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejectProfile }: CreatorCardProps ) {
+  const router = useRouter();
+  const { locale } = useParams<{ locale: string; }>();
+  const [ hovered, setHovered ] = useState( false );
   const fullName = `${ creator.first_name || "" } ${ creator.last_name || "" }`.trim() || creator.email || "Creator";
   const imageUrl = creator.profile_image?.asset;
-  const age = creator.date_of_birth ? calculateAge( creator.date_of_birth ) : undefined;
+  const age = creator.date_of_birth ? ageFromDate( creator.date_of_birth ) : undefined;
   const location = [ creator.city, creator.country ].filter( Boolean ).join( ', ' );
   const flagName = creator.country ? getCountryFlag( creator.country ) : undefined;
   const gender = creator.gender ? creator.gender.charAt( 0 ).toUpperCase() + creator.gender.slice( 1 ) : undefined;
@@ -34,6 +41,8 @@ export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejec
     <div
       className="relative rounded-2xl overflow-hidden aspect-[3/4] cursor-pointer group"
       onClick={ () => onViewDetails( creator ) }
+      onMouseEnter={ () => setHovered( true ) }
+      onMouseLeave={ () => setHovered( false ) }
     >
       { /* Background image or gradient fallback */ }
       { imageUrl ? (
@@ -63,17 +72,40 @@ export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejec
       { /* Top row: status badge + action menu */ }
       <div className="absolute top-1 left-2 right-2 flex items-center justify-between w-full" onClick={ e => e.stopPropagation() }>
         <CreatorStatusBadge status={ creator.creator_status || "active" } />
-        <CreatorActionMenu
-          creator={ creator }
-          onViewDetails={ onViewDetails }
-          onApproveProfile={ onApproveProfile }
-          onRejectProfile={ onRejectProfile }
-          trigger={
-            <Button variant="ghost" size="sm" className="size-8 mr-2 px-0 text-white hover:bg-white/20 hover:text-white">
-              <MoreVertical className="size-4" />
-            </Button>
-          }
-        />
+        <div className="flex items-center">
+          <RoleGuard allowedRoles={ [ "admin" ] }>
+            <AnimatePresence>
+              { hovered && (
+                <motion.div
+                  initial={ { opacity: 0, scale: 0.7 } }
+                  animate={ { opacity: 1, scale: 1 } }
+                  exit={ { opacity: 0, scale: 0.7 } }
+                  transition={ { duration: 0.15, ease: "easeOut" } }
+                >
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="size-8 px-0 text-white hover:bg-white/20 hover:text-white"
+                    onClick={ () => router.push( `/${ locale }/admin/creators/${ creator.id }` ) }
+                  >
+                    <HugeiconsIcon icon={ SquareArrowExpandIcon } className={ "size-5" } strokeWidth={ 1 } />
+                  </Button>
+                </motion.div>
+              ) }
+            </AnimatePresence>
+          </RoleGuard>
+          <CreatorActionMenu
+            creator={ creator }
+            onViewDetails={ onViewDetails }
+            onApproveProfile={ onApproveProfile }
+            onRejectProfile={ onRejectProfile }
+            trigger={
+              <Button variant="ghost" size="sm" className="size-8 mr-2 px-0 text-white hover:bg-white/20 hover:text-white">
+                <MoreVertical className="size-4" />
+              </Button>
+            }
+          />
+        </div>
       </div>
 
       { /* Bottom content panel */ }

@@ -44,6 +44,7 @@ import { Card, CardContent } from '../dashboard-ui/card';
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from '../dashboard-ui/empty';
 import { SentenceCase } from '../text-case';
 import { CreateSubmissionSheet } from '@/components/creator/create-submission-sheet';
+import { EmptySubmission } from '../admin/empty-states/empty-submissions';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -198,7 +199,7 @@ function GigDetailsTab( { genderRequirement, ageMin, ageMax, ambience, requireme
         </div>
 
         <Separator />
-        <Row label="Ambience" value={ ambience ? <span className="capitalize">{ ambience }</span> : 'N/A' } />
+        <Row label="Ambience" value={ ambience ? <span className="capitalize"><Content content={ ambience } /></span> : 'N/A' } />
         { requirements && (
           <>
             <Separator />
@@ -354,22 +355,11 @@ function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSu
   if ( submissions.length === 0 ) {
     return (
       <TabsPanel value="submissions" className="pt-0 flex-1 h-full">
-        <Empty className="flex h-full flex-col items-center justify-center p-10 bg-muted/10 border-2 border-dashed rounded-xl space-y-3">
-          <img src="/svg/ugc-creator.svg" className="max-w-3/4" alt="No submissions" />
-          <EmptyContent>
-            <EmptyHeader>
-              <EmptyTitle className="card__title font-normal">No submissions yet</EmptyTitle>
-              <EmptyDescription>Submissions will appear here once creators start submitting.</EmptyDescription>
-            </EmptyHeader>
-            { canSubmit && (
-              <RoleGuard allowedRoles={ [ 'creator' ] }>
-                <Button className="w-full mt-2" onClick={ onOpenSubmission }>
-                  Create a Submission
-                </Button>
-              </RoleGuard>
-            ) }
-          </EmptyContent>
-        </Empty>
+        <EmptySubmission
+          title="No submissions yet"
+          imageWidth={ 140 }
+          description="Submissions will appear here once creators start submitting."
+        />
       </TabsPanel>
     );
   }

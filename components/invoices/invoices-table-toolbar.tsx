@@ -1,24 +1,16 @@
-"use client";
+'use client';
 
 import { type Table } from '@tanstack/react-table';
-import {
-  FilterHorizontalIcon,
-  SearchIcon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { CalendarDays, ChevronDown } from 'lucide-react';
+import { SearchIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/dashboard-ui/popover';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { Button } from '@/components/dashboard-ui/button';
-import { ButtonGroup } from '@/components/dashboard-ui/button-group';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/dashboard-ui/dropdown-menu';
+import { DataTableFilterDropdown } from '@/components/dashboard-ui/data-table/data-table-filter-dropdown';
+import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
+import { DataTableViewToggle } from '@/components/dashboard-ui/data-table/data-table-view-toggle';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 import '@/app/styles/components/data-table.css';
 
@@ -31,6 +23,8 @@ interface InvoicesTableToolbarProps {
   dateRange: DateRange | undefined;
   setDateRange: ( value: DateRange | undefined ) => void;
   statuses: string[];
+  view: 'table' | 'cards';
+  setView: ( view: 'table' | 'cards' ) => void;
 }
 
 export function InvoicesTableToolbar( {
@@ -42,36 +36,47 @@ export function InvoicesTableToolbar( {
   dateRange,
   setDateRange,
   statuses,
+  view,
+  setView,
 }: InvoicesTableToolbarProps ) {
   return (
-    <div className="dt-toolbar">
-      <SuperField
-        type="search"
-        placeholder="Search invoices..."
-        prefix={ <HugeiconsIcon icon={ SearchIcon } /> }
-        fieldClassName="placeholder:text-gray-400 font-regular"
-        value={ searchValue }
-        onChange={ ( e ) => setSearchValue( e.target.value ) }
-        className="w-full md:max-w-md bg-background"
-        autoComplete="off"
-      />
-      <ButtonGroup>
+    <div className='dt-toolbar'>
+      <div className='flex flex-1 items-center space-x-2'>
+        <SuperField
+          type='search'
+          placeholder='Filter invoices...'
+          prefix={ <HugeiconsIcon icon={ SearchIcon } /> }
+          fieldClassName='placeholder:text-gray-400 font-regular'
+          value={ searchValue }
+          onChange={ ( e ) => setSearchValue( e.target.value ) }
+          className='w-full md:max-w-md bg-background h-8'
+          autoComplete='off'
+        />
+      </div>
+      <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
+        <DataTableViewToggle view={ view } setView={ setView } />
+        <DataTableFilterDropdown
+          table={ table }
+          columnId='invoice_status'
+          options={ statuses }
+          title='Status'
+        />
         <Popover>
           <PopoverTrigger
             render={
-              <Button variant="outline" size="sm" className="relative">
-                <CalendarDays className="size-4" strokeWidth={ 1.5 } />
-                <ChevronDown className="size-4" strokeWidth={ 1 } />
+              <Button variant='outline' size='sm' className={ `h-8 relative${ dateRange?.from ? ' border-primary text-primary' : '' }` }>
+                <CalendarDays className='size-4' strokeWidth={ 1.5 } />
+                <ChevronDown className='size-4' strokeWidth={ 1 } />
                 { dateRange?.from && (
-                  <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary" />
+                  <span className='absolute -top-1 -right-1 h-2 w-2 rounded-full bg-primary' />
                 ) }
               </Button>
             }
           />
-          <PopoverContent align="end" className="w-72 p-4 flex flex-col gap-3">
+          <PopoverContent align='end' className='w-72 p-4 flex flex-col gap-3'>
             <SuperField
-              type="select"
-              label="Filter by date"
+              type='select'
+              label='Filter by date'
               value={ dateFilterType }
               onValueChange={ ( v ) => setDateFilterType( ( v ?? 'issued_date' ) as 'issued_date' | 'due_date' ) }
               options={ [
@@ -80,18 +85,18 @@ export function InvoicesTableToolbar( {
               ] }
             />
             <SuperField
-              type="datepicker"
-              label="Date range"
-              mode="range"
+              type='datepicker'
+              label='Date range'
+              mode='range'
               value={ dateRange }
               onChange={ ( v ) => setDateRange( v as DateRange | undefined ) }
-              placeholder="Select date range"
+              placeholder='Select date range'
             />
             { dateRange?.from && (
               <Button
-                variant="ghost"
-                size="sm"
-                className="text-muted-foreground w-full"
+                variant='ghost'
+                size='sm'
+                className='text-muted-foreground w-full'
                 onClick={ () => setDateRange( undefined ) }
               >
                 Clear dates
@@ -99,44 +104,8 @@ export function InvoicesTableToolbar( {
             ) }
           </PopoverContent>
         </Popover>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm">
-              <HugeiconsIcon icon={ FilterHorizontalIcon } className="text-sm" />
-              <ChevronDown className="size-4" strokeWidth={ 1 } />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="min-w-48">
-            <div
-              className="focus:bg-accent gap-2 rounded-sm px-2 py-1.5 relative flex cursor-default items-center text-xs text-primary hover:bg-accent"
-              onClick={ () => { table.resetColumnFilters(); setDateRange( undefined ); } }
-            >
-              Clear Filters
-            </div>
-            <DropdownMenuSeparator />
-            { statuses.map( ( status ) => {
-              const column = table.getColumn( 'invoice_status' );
-              const filterValue = ( column?.getFilterValue() as string[] ) || [];
-              return (
-                <DropdownMenuCheckboxItem
-                  key={ status }
-                  className="capitalize"
-                  checked={ filterValue.includes( status ) }
-                  onCheckedChange={ ( checked ) => {
-                    column?.setFilterValue(
-                      checked
-                        ? [ ...filterValue, status ]
-                        : filterValue.filter( ( v ) => v !== status )
-                    );
-                  } }
-                >
-                  { status.replace( /_/g, ' ' ) }
-                </DropdownMenuCheckboxItem>
-              );
-            } ) }
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </ButtonGroup>
+        <DataTableViewOptions table={ table } />
+      </div>
     </div>
   );
 }

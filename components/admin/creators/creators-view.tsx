@@ -1,5 +1,8 @@
+'use client';
+
 import { Table } from "@tanstack/react-table";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
+import { AnimatePresence, motion } from "motion/react";
 import { CreatorCard } from "./creator-card";
 import { CreatorsTableView } from "./creators-table-view";
 
@@ -23,21 +26,41 @@ export function CreatorsView( { table, view, onViewDetails, onApproveProfile, on
     }
 
     return (
-      <div className="@container">
-        <div className="grid grid-cols-2 gap-4 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-6 @2xl:grid-cols-7">
-          { table.getRowModel().rows.map( ( row ) => (
-            <CreatorCard
-              key={ row.id }
-              creator={ row.original }
-              onViewDetails={ onViewDetails }
-              onApproveProfile={ onApproveProfile }
-              onRejectProfile={ onRejectProfile }
-            />
-          ) ) }
-        </div>
+      <div className="@container px-2 md:px-5">
+        <AnimatePresence mode='popLayout'>
+          <motion.div
+            className="grid grid-cols-2 gap-4 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-6 @2xl:grid-cols-7"
+            variants={ {
+              show: { transition: { staggerChildren: 0.04 } },
+              exit: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
+            } }
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            { table.getRowModel().rows.map( ( row ) => (
+              <motion.div
+                key={ row.id }
+                layout
+                variants={ {
+                  hidden: { opacity: 0, y: 100 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                  exit: { opacity: 0, y: 100, transition: { duration: 0.3 } },
+                } }
+              >
+                <CreatorCard
+                  creator={ row.original }
+                  onViewDetails={ onViewDetails }
+                  onApproveProfile={ onApproveProfile }
+                  onRejectProfile={ onRejectProfile }
+                />
+              </motion.div>
+            ) ) }
+          </motion.div>
+        </AnimatePresence>
       </div>
     );
   }
 
-  return <CreatorsTableView table={ table } />;
+  return <div className="px-2 md:px-5"><CreatorsTableView table={ table } /></div>;
 }

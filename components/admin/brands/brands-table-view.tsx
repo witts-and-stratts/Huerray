@@ -21,13 +21,14 @@ export function BrandsTableView( {
   table: TanstackTable<Brand>;
 } ) {
   return (
+    <div className='border border-border rounded-lg overflow-hidden'>
     <Table className='overflow-auto'>
       <TableHeader sticky>
         { table.getHeaderGroups().map( ( headerGroup ) => (
           <TableRow key={ headerGroup.id }>
             { headerGroup.headers.map( ( header ) => {
               return (
-                <TableHead key={ header.id } className='bg-accent/50'>
+                <TableHead key={ header.id } className='bg-slate-50/80'>
                   { header.isPlaceholder
                     ? null
                     : flexRender(
@@ -85,5 +86,6 @@ export function BrandsTableView( {
         </AnimatePresence>
       </TableBody>
     </Table>
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/dashboard-ui/a
 import { SheetDescription, SheetHeader, SheetTitle } from "@/components/dashboard-ui/sheet";
 import { ModelsCreatorResponse } from "@/lib/api/generated";
 import { getCountryFlag } from "@/lib/country-flags";
-import { calculateAge, cn } from "@/lib/utils";
+import { ageFromDate, cn } from "@/lib/utils";
 import { CreatorStatusBadge } from "../creator-status-badge";
 import { MetaBadge } from "./creator-details-shared";
 import Image from 'next/image';
@@ -14,7 +14,7 @@ export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorRespons
   const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || 'Unknown';
   const isApproved = creator_status?.toLowerCase() === 'approved';
   const initials = fullName.slice( 0, 2 ).toUpperCase();
-  const age = date_of_birth ? calculateAge( date_of_birth ) : undefined;
+  const age = date_of_birth ? ageFromDate( date_of_birth ) : undefined;
   const location = [ city, country ].filter( Boolean ).join( ', ' );
   const flagName = country ? getCountryFlag( country ) : undefined;
   const formattedGender = gender ? gender.charAt( 0 ).toUpperCase() + gender.slice( 1 ) : undefined;
@@ -37,7 +37,9 @@ export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorRespons
             { fullName }
           </SheetTitle>
           { email && <span className="text-sm text-white/60 mb-1.5">{ email }</span> }
-          <div className="rounded-full items-center"><CreatorStatusBadge status={ creator_status || 'active' } /></div>
+          <div className="rounded-full items-center">
+            <CreatorStatusBadge status={ creator_status || 'active' } className="text-yellow-100/70" />
+          </div>
         </div>
 
         <div className="flex items-center justify-center gap-2 pt-3">

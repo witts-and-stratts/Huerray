@@ -7,21 +7,16 @@ import {
 } from '@/components/dashboard-ui/data-table/data-table-filter-dropdown';
 import { DataTableSearch } from '@/components/dashboard-ui/data-table/data-table-search';
 import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
-import { DataTableViewToggle } from '@/components/dashboard-ui/data-table/data-table-view-toggle';
 import '@/app/styles/components/data-table.css';
 
 interface UsersTableToolbarProps<TData> {
   table: Table<TData>;
   statuses: string[];
-  view: 'table' | 'cards';
-  setView: ( view: 'table' | 'cards' ) => void;
 }
 
 export function UsersTableToolbar<TData>( {
   table,
   statuses,
-  view,
-  setView,
 }: UsersTableToolbarProps<TData> ) {
   return (
     <div className='dt-toolbar'>
@@ -33,10 +28,9 @@ export function UsersTableToolbar<TData>( {
         />
       </div>
       <div className='flex items-center gap-2'>
-        <DataTableViewToggle view={ view } setView={ setView } />
         <DataTableFilterDropdown
           table={ table }
-          columnId='user_type'
+          columnId='user_type_filter'
           options={ [ 'Brand_user', 'Creator', 'Admin_user' ] }
           title="User Type"
         />
@@ -51,7 +45,6 @@ export function UsersTableToolbar<TData>( {
           labels={ {
             user_status: 'Status',
             created_at: 'Joined',
-            user_type: 'User Type'
           } }
         />
       </div>

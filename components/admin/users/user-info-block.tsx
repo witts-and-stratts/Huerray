@@ -22,7 +22,7 @@ const UserHeader = memo( ( { user, showEmail, onViewDetails, showActions, showTy
     <div className="flex gap-4 justify-between">
       <div className="flex items-start gap-4 flex-1 min-w-0">
         {/* ... Avatar code remains same ... */ }
-        <Avatar className="size-10">
+        {/* <Avatar className="size-10">
           <AvatarImage src={ undefined } alt={ fullName } />
           <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
           <AvatarBadge className={ cn(
@@ -30,12 +30,12 @@ const UserHeader = memo( ( { user, showEmail, onViewDetails, showActions, showTy
           ) }>
             { user.email_verified ? <Check className="" size={ 18 } /> : <X size={ 18 } className="text-red-500" /> }
           </AvatarBadge>
-        </Avatar>
+        </Avatar> */}
         <div className="flex flex-col min-w-0">
-          <span className='capitalize text-[18px] font-normal text-primary font-primary leading-tight'>
+          <span className='capitalize text-base font-normal text-primary font-primary leading-tight'>
             { fullName }
           </span>
-          { showEmail && user.email && (
+          {/* { showEmail && user.email && (
             <CopyText
               text={ user.email }
               copyMessage="Email copied to clipboard"
@@ -45,7 +45,7 @@ const UserHeader = memo( ( { user, showEmail, onViewDetails, showActions, showTy
                 { user.email }
               </span>
             </CopyText>
-          ) }
+          ) } */}
 
           {/* ... Type rendering code remains same ... */ }
           { showType && <div className="mt-2">

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/dashboard
 
 interface WrappedCardProps {
   children: ReactNode;
-  title: string;
+  title: ReactNode;
   className?: string;
   titleClass?: string;
   contentClass?: string;

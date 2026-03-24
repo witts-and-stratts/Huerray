@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Ban, CheckCircle, Download, Eye, FileCheck, MoreVertical, Send, Wallet } from "lucide-react";
+import { Ban, CheckCircle, ChevronDown, Download, Eye, FileCheck, MoreVertical, Send, Wallet } from "lucide-react";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
@@ -65,26 +65,26 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
         if ( inv.id ) generatePdf( inv.id );
       },
     },
-    {
-      label: "Generate payment",
-      icon: Wallet,
-      action: () => setOpenDialog( 'generatePayment' ),
-    },
-    {
-      label: "Issue Invoice",
-      icon: FileCheck,
-      action: () => setOpenDialog( 'issueInvoice' ),
-    },
-    {
-      label: "Send Invoice",
-      icon: Send,
-      action: () => setOpenDialog( 'sendInvoice' ),
-    },
-    {
-      label: "Invoice Paid",
-      icon: CheckCircle,
-      action: () => setOpenDialog( 'invoicePaid' ),
-    },
+    // {
+    //   label: "Generate payment",
+    //   icon: Wallet,
+    //   action: () => setOpenDialog( 'generatePayment' ),
+    // },
+    // {
+    //   label: "Issue Invoice",
+    //   icon: FileCheck,
+    //   action: () => setOpenDialog( 'issueInvoice' ),
+    // },
+    // {
+    //   label: "Send Invoice",
+    //   icon: Send,
+    //   action: () => setOpenDialog( 'sendInvoice' ),
+    // },
+    // {
+    //   label: "Invoice Paid",
+    //   icon: CheckCircle,
+    //   action: () => setOpenDialog( 'invoicePaid' ),
+    // },
     {
       label: "Cancel Invoice",
       icon: Ban,
@@ -103,7 +103,6 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
           className="font-regular gap-1.5"
           onClick={ () => setViewOpen( true ) }
         >
-          <Eye className="h-3.5 w-3.5" />
           View
         </Button>
         <ActionMenu
@@ -113,7 +112,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
           label=""
           trigger={
             <Button variant="outline" size="icon-sm">
-              <MoreVertical className="h-4 w-4" />
+              <ChevronDown className="h-4 w-4" />
             </Button>
           }
         />

@@ -19,11 +19,9 @@ import { UsersView } from "./users-view";
 import { DataTablePagination } from "@/components/ui/data-table-pagination";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { AnimatePresence, motion } from "motion/react";
-import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
 import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
 import { TableErrorState } from "@/components/dashboard-ui/table-error-state";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
-import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 
 const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -56,10 +54,9 @@ export function UsersTable( {
   error = null,
 }: UsersTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
-  const { view, setView } = usePersistedViewMode( 'users', 'cards' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
-  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
+  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { user_type_filter: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ globalFilter, setGlobalFilter ] = React.useState( '' );
   const [ selectedUser, setSelectedUser ] =
@@ -108,7 +105,7 @@ export function UsersTable( {
 
   return (
     <AnimatePresence>
-      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
+      { showLoading && <DataTableSkeleton /> }
       { error && <TableErrorState entity="users" message={ error.message } /> }
       { !isLoading && !error && (
         <motion.div
@@ -116,23 +113,22 @@ export function UsersTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
+          className="flex flex-col bg-slate-50/50 grow relative overflow-auto"
         >
-          <UsersTableToolbar
-            table={ table }
-            statuses={ statuses }
-            view={ view }
-            setView={ setView }
-          />
-          <div className="px-5">
-            <UsersView
+          <div className="mb-4">
+            <UsersTableToolbar
               table={ table }
-              view={ view }
-              onViewDetails={ ( user ) => {
-                setSelectedUser( user );
-                setIsSheetOpen( true );
-              } }
+              statuses={ statuses }
             />
+          </div>
+          <UsersView
+            table={ table }
+            onViewDetails={ ( user ) => {
+              setSelectedUser( user );
+              setIsSheetOpen( true );
+            } }
+          />
+          <div className="px-3 mt-auto">
             <DataTablePagination table={ table } />
           </div>
           <UserDetailsSheet

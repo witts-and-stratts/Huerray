@@ -1,27 +1,18 @@
 'use client';
 'use no memo';
 
-import { useState } from 'react';
 import type { ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
 import { useCampaignInvitations } from '@/lib/api/hooks/campaigns';
-import { Loader2, Mail } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import { useState } from 'react';
 
-import { InvitationCard } from '@/components/creator/invitation-card';
-import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
 import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
-import { InviteCreatorsDialog } from '@/components/campaigns/invite-creators-dialog';
+import { EmptyInvitations } from '@/components/admin/empty-states/empty-invitations';
+import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
 import { GigSelectionDialog } from '@/components/campaigns/gig-selection-dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  EmptyContent,
-} from '@/components/dashboard-ui/empty';
+import { InviteCreatorsDialog } from '@/components/campaigns/invite-creators-dialog';
+import { InvitationCard } from '@/components/creator/invitation-card';
 import { Button } from '@/components/dashboard-ui/button';
-import Link from 'next/link';
 import { useRole } from '@/contexts/role-context';
 
 interface CampaignInvitationsSectionProps {
@@ -78,25 +69,13 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus }: Camp
   if ( invitations.length === 0 ) {
     return (
       <>
-        <Empty className='border py-20 my-6 flex-1 bg-white'>
-          <EmptyHeader>
-            <EmptyMedia>
-              <img src="/svg/creator-invitation.svg" alt="No submissions yet" className='w-full h-full object-contain max-h-[280px] md:max-h-[380px]' />
-            </EmptyMedia>
-            <EmptyTitle className='font-normal font-primary text-primary'>No invitations yet</EmptyTitle>
-            <EmptyDescription>
-              { role === 'brand'
-                ? 'Invitations sent to creators for this campaign will appear here. You can sending sending invitations when your campaign has been approved'
-                : 'Invitations sent to creators for this campaign will appear here.'
-              }
-            </EmptyDescription>
-          </EmptyHeader>
+        <EmptyInvitations
+          fill={ true }
+        >
           { role === 'brand' && campaignStatus === 'running' && (
-            <EmptyContent>
-              <Button size='lg' className='min-w-[200px]' onClick={ () => setSelectionOpen( true ) }>Invite Creators</Button>
-            </EmptyContent>
+            <Button size='lg' className='min-w-[200px]' onClick={ () => setSelectionOpen( true ) }>Invite Creators</Button>
           ) }
-        </Empty>
+        </EmptyInvitations>
 
         <GigSelectionDialog
           campaignId={ campaignId }

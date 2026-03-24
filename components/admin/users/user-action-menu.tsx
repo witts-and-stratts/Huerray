@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   ActionMenu,
   MenuAction
@@ -15,9 +16,10 @@ import { UserStatusDialog } from "./user-status-dialog";
 interface UserActionMenuProps {
   user: ModelsUserResponse;
   onViewDetails: ( user: ModelsUserResponse ) => void;
+  trigger?: React.ReactNode;
 }
 
-export function UserActionMenu( { user, onViewDetails }: UserActionMenuProps ) {
+export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenuProps ) {
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const resendVerification = useResendVerification();
 
@@ -106,10 +108,6 @@ export function UserActionMenu( { user, onViewDetails }: UserActionMenuProps ) {
       separator: true,
     },
     {
-      label: "Edit profile",
-      action: () => { console.log( "Edit profile clicked" ); } // Placeholder as per original
-    },
-    {
       label: "Resend Email Verification",
       action: handleResendVerification,
       condition: () => !user.email_verified,
@@ -136,6 +134,7 @@ export function UserActionMenu( { user, onViewDetails }: UserActionMenuProps ) {
       <ActionMenu
         actions={ actions }
         data={ user }
+        trigger={ trigger }
       />
       <UserStatusDialog
         open={ isStatusDialogOpen }

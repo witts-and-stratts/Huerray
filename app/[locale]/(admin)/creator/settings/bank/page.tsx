@@ -5,18 +5,16 @@
 import { Button } from '@/components/dashboard-ui/button';
 import { CreatorBankSection } from '@/components/settings/creator-bank-section';
 import { SubHeader } from '@/components/subheader';
-import { apiClient } from '@/lib/api/client';
-import { ModelsUpdateCreatorBankDetailsRequest, UtilsCountryCode } from '@/lib/api/generated';
-import { CreatorApi } from '@/lib/api/generated/api/creator-api';
+import { UtilsCountryCode } from '@/lib/api/generated';
+import { useOwnBankDetails, useUpdateOwnBankDetails } from '@/lib/api/hooks/creators';
 import { useForm } from '@tanstack/react-form';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { toast } from 'sonner';
 import { CreatorBankSkeleton } from '@/components/settings/creator-bank-skeleton';
 
 export default function CreatorBankSettingsPage() {
-  const [ isLoading, setIsLoading ] = useState( true );
-  const [ isSaving, setIsSaving ] = useState( false );
-  const [ currentBankDetails, setCurrentBankDetails ] = useState<any>( null );
+  const { data: bankDetails, isLoading } = useOwnBankDetails();
+  const { mutateAsync: updateBankDetails, isPending: isSaving } = useUpdateOwnBankDetails();
 
   const form = useForm( {
     defaultValues: {
@@ -29,11 +27,8 @@ export default function CreatorBankSettingsPage() {
       bankAddress: '',
     },
     onSubmit: async ( { value } ) => {
-      setIsSaving( true );
       try {
-        const creatorApi = new CreatorApi( undefined, undefined, apiClient );
-
-        const bankRequest: ModelsUpdateCreatorBankDetailsRequest = {
+        await updateBankDetails( {
           bank_name: value.bankName,
           bank_account_number: value.bankAccountNumber,
           bank_routing_number: value.bankRoutingNumber,
@@ -41,62 +36,25 @@ export default function CreatorBankSettingsPage() {
           tax_country: value.taxCountry as UtilsCountryCode,
           bank_account_name: value.bankAccountName,
           bank_address: value.bankAddress,
-        };
-
-        if ( currentBankDetails ) {
-          await creatorApi.creatorsBankDetailsPut( { request: bankRequest } );
-        } else {
-          // Note: creatorsBankDetailsPost does not exist. Using PUT which likely handles upsert.
-          await creatorApi.creatorsBankDetailsPut( { request: bankRequest } );
-        }
+        } );
         toast.success( 'Bank details updated successfully' );
       } catch ( error: any ) {
-        console.error( 'Failed to update bank details', error );
         const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update settings';
         toast.error( `Failed to update: ${ errorMessage }` );
-      } finally {
-        setIsSaving( false );
       }
     }
   } );
 
-  // Fetch Data
   useEffect( () => {
-    const fetchData = async () => {
-      try {
-        const creatorApi = new CreatorApi( undefined, undefined, apiClient );
-        const bankRes = await creatorApi.creatorsBankDetailsGet();
-
-        if ( bankRes.data ) {
-          const rawData = bankRes.data as any;
-          const b = rawData.data || rawData;
-
-          setCurrentBankDetails( b );
-
-          console.log( "Bank Details Loaded:", b );
-
-          form.setFieldValue( 'bankName', b.bank_name || '' );
-          form.setFieldValue( 'bankAccountNumber', b.bank_account_number || '' );
-          form.setFieldValue( 'bankRoutingNumber', b.bank_routing_number || '' );
-          form.setFieldValue( 'taxId', b.tax_id || '' );
-          form.setFieldValue( 'taxCountry', b.tax_country || '' );
-          form.setFieldValue( 'bankAccountName', b.bank_account_name || '' );
-          form.setFieldValue( 'bankAddress', b.bank_address || '' );
-        }
-
-      } catch ( e: any ) {
-        // If 404, it means the bank details don't exist yet (new user)
-        if ( e?.response?.status === 404 ) {
-          return;
-        }
-        console.error( 'Error fetching bank details', e );
-        toast.error( 'Failed to load bank details' );
-      } finally {
-        setIsLoading( false );
-      }
-    };
-    fetchData();
-  }, [] );
+    if ( !bankDetails ) return;
+    form.setFieldValue( 'bankName', bankDetails.bank_name || '' );
+    form.setFieldValue( 'bankAccountNumber', bankDetails.bank_account_number || '' );
+    form.setFieldValue( 'bankRoutingNumber', bankDetails.bank_routing_number || '' );
+    form.setFieldValue( 'taxId', bankDetails.tax_id || '' );
+    form.setFieldValue( 'taxCountry', bankDetails.tax_country || '' );
+    form.setFieldValue( 'bankAccountName', bankDetails.bank_account_name || '' );
+    form.setFieldValue( 'bankAddress', bankDetails.bank_address || '' );
+  }, [ bankDetails ] );
 
   const handleFormSubmit = useCallback( ( e: React.FormEvent ) => {
     e.preventDefault();

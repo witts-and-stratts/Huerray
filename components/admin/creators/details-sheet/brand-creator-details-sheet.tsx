@@ -7,7 +7,7 @@ import {
 } from '@/components/dashboard-ui/sheet';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
 import { getCountryFlag } from '@/lib/country-flags';
-import { calculateAge } from '@/lib/utils';
+import { ageFromDate } from '@/lib/utils';
 import { CreatorDetailsSheetProps, ExpandableCategories, SOCIAL_PLATFORMS, SocialLink } from './creator-details-shared';
 import { CreatorSheetHeader } from './creator-sheet-header';
 import { imgpresets } from '@/lib/utils/imgproxy';
@@ -25,7 +25,7 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
   const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || 'Unknown';
   const initials = fullName.slice( 0, 2 ).toUpperCase();
   const isApproved = creator_status?.toLowerCase() === 'approved';
-  const age = date_of_birth ? calculateAge( date_of_birth ) : undefined;
+  const age = date_of_birth ? ageFromDate( date_of_birth ) : undefined;
   const location = [ city, country ].filter( Boolean ).join( ', ' );
   const flagName = country ? getCountryFlag( country ) : undefined;
   const formattedGender = gender ? gender.charAt( 0 ).toUpperCase() + gender.slice( 1 ) : undefined;

@@ -16,6 +16,7 @@ interface BrandActionMenuProps {
   className?: string;
   trigger?: ReactNode;
   align?: "center" | "start" | "end";
+  onViewDetails?: ( brand: Brand ) => void;
 }
 
 export function BrandActionMenu( {
@@ -23,6 +24,7 @@ export function BrandActionMenu( {
   className,
   trigger,
   align = "end",
+  onViewDetails,
 }: BrandActionMenuProps ) {
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
@@ -73,7 +75,7 @@ export function BrandActionMenu( {
     },
     {
       label: "View Details",
-      action: () => console.log( "View Details clicked" ),
+      action: () => onViewDetails?.( brand ),
       separator: true,
     },
     {

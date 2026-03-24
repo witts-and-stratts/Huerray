@@ -1,23 +1,20 @@
 'use client';
 
-import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
-import { Loader2, FileText } from 'lucide-react';
+import { EmptyApplications } from '@/components/admin/empty-states/empty-applications';
 import { ApplicationCard } from '@/components/campaigns/application-card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/components/dashboard-ui/empty';
+import { Button } from '@/components/dashboard-ui/button';
+import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
+import { Loader2 } from 'lucide-react';
 
 interface CampaignApplicationsSectionProps {
   campaignId: string;
 }
 
 export function CampaignApplicationsSection( { campaignId }: CampaignApplicationsSectionProps ) {
-  const { data: applicationsData, isLoading, error } = useCampaignApplications( campaignId );
+  const { data: applicationsData, isLoading, error, refetch } = useCampaignApplications( campaignId );
+  const handleRetry = () => {
+    refetch();
+  };
 
   if ( isLoading ) {
     return (
@@ -31,6 +28,8 @@ export function CampaignApplicationsSection( { campaignId }: CampaignApplication
     return (
       <div className="p-4 text-red-500 bg-red-50 rounded-md border border-red-200">
         Error loading applications: { error.message }
+
+        <Button variant={ 'outline' } onClick={ handleRetry }>Retry</Button>
       </div>
     );
   }
@@ -39,17 +38,7 @@ export function CampaignApplicationsSection( { campaignId }: CampaignApplication
 
   if ( applications.length === 0 ) {
     return (
-      <Empty className='border py-20 my-6 flex-1 bg-white'>
-        <EmptyHeader>
-          <EmptyMedia>
-            <img src="/svg/young-creator-applicant.svg" alt="No applications yet" className='w-full h-full object-contain max-h-[320px]' />
-          </EmptyMedia>
-          <EmptyTitle className='font-normal font-primary text-primary'>No applications yet</EmptyTitle>
-          <EmptyDescription>
-            Applications from creators will appear here.
-          </EmptyDescription>
-        </EmptyHeader>
-      </Empty>
+      <EmptyApplications fill />
     );
   }
 

@@ -1,103 +1,80 @@
 'use client';
 
-import { useMemo } from 'react';
+import { SubmissionCard } from '@/components/campaigns/submission-card';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
-import { useCreatorGigs } from '@/lib/api/hooks/creators';
-import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
-import { GigCard } from '@/components/campaigns/gig-card';
-import type { ModelsGigResponse } from '@/lib/api/generated/models';
+import { useVideoSubmissionsSearch } from '@/lib/api/hooks/video-submissions';
+import { useMemo } from 'react';
+import { EmptySubmission } from '../../empty-states/empty-submissions';
 
 interface CreatorRecentGigsBlockProps {
   creatorId: string;
 }
 
-function GigCardSkeleton() {
+function SubmissionCardSkeleton() {
   return (
-    <div className="rounded-lg border border-border/60 bg-white p-3">
-      <div className="space-y-2">
-        <Skeleton className="h-5 w-2/3" />
-        <Skeleton className="h-3 w-full" />
-        <Skeleton className="h-3 w-4/5" />
+    <div className="relative overflow-hidden rounded-lg bg-muted max-w-[240px]">
+      {/* Thumbnail */ }
+      <Skeleton className="aspect-video w-full rounded-none" />
+      {/* Status badge */ }
+      <div className="absolute left-2 top-2">
+        <Skeleton className="h-4 w-12 rounded-full" />
       </div>
-      <div className="mt-4 flex items-center justify-between">
-        <Skeleton className="h-4 w-24" />
-        <Skeleton className="h-6 w-20 rounded-full" />
+      {/* Bottom content */ }
+      <div className="absolute inset-x-0 bottom-0 flex items-end gap-2 p-2">
+        <Skeleton className="size-6 shrink-0 rounded-full" />
+        <div className="flex flex-col gap-1 flex-1 min-w-0">
+          <Skeleton className="h-2.5 w-3/4" />
+          <Skeleton className="h-2 w-1/2" />
+        </div>
       </div>
     </div>
   );
 }
 
+function SubmissionSkeleton() {
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      { Array.from( { length: 5 } ).map( ( _, i ) => (
+        <SubmissionCardSkeleton key={ i } />
+      ) ) }
+    </div>
+  );
+}
+
 export function CreatorRecentGigsBlock( { creatorId }: CreatorRecentGigsBlockProps ) {
-  // Use appropriate API endpoint for getting creator's gigs...
-  const { data: gigsResponse, isLoading, isError } = useCreatorGigs( { creator_id: creatorId } as any );
+  const { data: submissionsData, isLoading, isError } = useVideoSubmissionsSearch( { creatorId, limit: 20 } );
 
-  const recentGigs = useMemo( () => {
-    // If the data comes as data.data
-    const gigs = gigsResponse?.data || [];
-
-    // Sort and slice logic assuming a typical list of ModelsGigResponse[]
-    if ( Array.isArray( gigs ) ) {
-      return [ ...gigs ]
-        .sort( ( a, b ) => {
-          const aTime = a.created_at ? new Date( a.created_at ).getTime() : 0;
-          const bTime = b.created_at ? new Date( b.created_at ).getTime() : 0;
-          return bTime - aTime;
-        } )
-        .slice( 0, 6 );
-    }
-
-    // Handle paginated response if that's the type returned
-    if ( ( gigs as any ).items && Array.isArray( ( gigs as any ).items ) ) {
-      return [ ...( ( gigs as any ).items ) ]
-        .sort( ( a, b ) => {
-          const aTime = a.created_at ? new Date( a.created_at ).getTime() : 0;
-          const bTime = b.created_at ? new Date( b.created_at ).getTime() : 0;
-          return bTime - aTime;
-        } )
-        .slice( 0, 6 );
-    }
-
-    return [];
-  }, [ gigsResponse?.data ] );
+  const recentItems = useMemo( () => {
+    const items = submissionsData?.data ?? [];
+    return [ ...items ]
+      .sort( ( a, b ) => {
+        const aTime = a.created_at ? new Date( a.created_at ).getTime() : 0;
+        const bTime = b.created_at ? new Date( b.created_at ).getTime() : 0;
+        return bTime - aTime;
+      } )
+      .slice( 0, 10 );
+  }, [ submissionsData ] );
 
   return (
-    <Card className="ad-summary-card xl:col-span-2 grow">
+    <Card className="ad-summary-card grow">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Recent Gigs</CardTitle>
-        <CardDescription className="ad-card-description">Latest gigs for this creator</CardDescription>
+        <CardTitle className="ad-card-title">Recent Submissions</CardTitle>
+        <CardDescription className="ad-card-description">Latest video submissions for this creator</CardDescription>
       </CardHeader>
       <CardContent className="grow">
-        { isLoading && (
-          <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-            { Array.from( { length: 4 } ).map( ( _, index ) => (
-              <GigCardSkeleton key={ `recent-gig-card-skeleton-${ index }` } />
+        { isLoading && <SubmissionSkeleton /> }
+        { isError && (
+          <p className="py-8 text-center text-xs text-destructive">Unable to load submission activity.</p>
+        ) }
+        { !isLoading && !isError && recentItems.length === 0 && <EmptySubmission /> }
+
+        { !isLoading && !isError && recentItems.length > 0 && (
+          <div className="flex flex-col gap-2">
+            { recentItems.map( ( item ) => (
+              <SubmissionCard key={ item.id } submission={ item } layout="mini" />
             ) ) }
           </div>
-        ) }
-
-        { isError && (
-          <p className="py-8 text-center text-xs text-destructive">Unable to load recent gigs.</p>
-        ) }
-
-        { !isLoading && !isError && recentGigs.length === 0 && (
-          <p className="py-8 text-center text-xs text-muted-foreground">No gigs found.</p>
-        ) }
-
-        { !isLoading && !isError && recentGigs.length > 0 && (
-          <ScrollArea className="w-full overflow-hidden pb-2" scrollbar={ { orientation: 'horizontal', style: { height: '6px', opacity: 0.5 } } }>
-            <div className="flex w-max gap-2 p-0.5">
-              { recentGigs.map( ( gig: ModelsGigResponse ) => (
-                <div key={ gig.id || ( gig as any ).gig_id || gig.title } className="w-[320px] md:w-[360px] shrink-0">
-                  <GigCard
-                    gig={ gig as any }
-                    onViewGig={ () => { } }
-                    onCreateSubmission={ () => { } }
-                  />
-                </div>
-              ) ) }
-            </div>
-          </ScrollArea>
         ) }
       </CardContent>
     </Card>

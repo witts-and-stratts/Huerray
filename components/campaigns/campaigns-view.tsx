@@ -50,7 +50,7 @@ export function CampaignsView( {
   view: 'table' | 'cards';
 } ) {
   return (
-    <div className='px-5 mt-1 grow flex-1'>
+    <div className='px-2 md:px-5 mt-1 grow flex-1'>
       { table.getRowModel().rows.length === 0 ? (
         <CampaignEmptyState />
       ) : view === 'table' ? (

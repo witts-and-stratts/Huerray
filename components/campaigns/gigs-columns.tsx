@@ -1,33 +1,32 @@
 "use client";
 
 import { ColumnDef, Row } from '@tanstack/react-table';
+import { ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import * as React from 'react';
-import { ChevronDown } from 'lucide-react';
 
 import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { Checkbox } from '@/components/dashboard-ui/checkbox';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useGigApplications, useGigInvitations } from '@/lib/api/hooks/gigs';
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
 import { cn } from '@/lib/dashboard-utils';
-import { formatCurrency, formatDate } from '@/lib/utils';
+import { useFormatCurrency } from '@/lib/hooks/format';
+import { formatDate } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
-import { Clock01Icon, InformationCircleIcon, Video01Icon } from '@hugeicons/core-free-icons';
+import { Clock01Icon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { useBasePath } from '@/lib/providers/path-provider';
-import { AvatarCollage } from './avatar-collage';
+import { Separator } from '../dashboard-ui/separator';
 import { ApplicationCard } from './application-card';
+import { AvatarCollage } from './avatar-collage';
 import { BrandAvatar } from './brand-avatar';
 import { BrandHoverCard } from './brand-hover-card';
 import { GigActionMenu } from './gig-action-menu';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { GigStatusBadge } from './gig-status-badge';
 import { SubmissionViewDialog } from './submission-view-dialog';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
-import { Separator } from '../dashboard-ui/separator';
-import { useFormatCurrency } from '@/lib/hooks/format';
 
 // ─── Details Cell ─────────────────────────────────────────────────────────────
 
@@ -39,7 +38,7 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
   const campaign = row.original.campaign;
 
   return (
-    <div className='flex gap-4 pl-4'>
+    <div className='flex gap-4 pl-4 min-w-[300px]'>
       <div className="relative shrink-0 size-12 pb-1 pr-1">
         <div className={ cn( "size-10 overflow-hidden rounded-full" ) }>
           { coverImage && (
@@ -62,7 +61,7 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
       </div>
       <div className='flex flex-col gap-2'>
         <h4
-          className='card__title cursor-pointer hover:underline'
+          className='card__title capitalize text-[18px] font-normal text-primary font-primary hover:underline'
           onClick={ () => onViewGig( row.original ) }
         >
           { title }

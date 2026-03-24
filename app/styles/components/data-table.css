@@ -2,7 +2,6 @@
 @reference "../dashboard-globals.css";
 
 @layer components {
-
   .dt-table-wrap {
     @apply overflow-x-auto rounded-lg border border-border/60;
   }
@@ -41,8 +40,8 @@
   }
 
   /* Hide columns that are used for filtering but shouldn't render visually */
-  th:has([data-hidden-column="true"]),
-  td:has([data-hidden-column="true"]) {
+  th:has([data-hidden-column='true']),
+  td:has([data-hidden-column='true']) {
     width: 0 !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -52,7 +51,19 @@
     min-width: 0 !important;
   }
 
-  [data-hidden-column="true"] {
+  [data-hidden-column='true'] {
     display: none;
+  }
+
+  .dt-table__col-title {
+    @apply capitalize text-base font-normal text-primary font-primary leading-tight hover:underline transition-colors;
+  }
+
+  .dt-table__avatar {
+    @apply size-10;
+  }
+
+  .dt-table__checkbox {
+    @apply mt-2;
   }
 }

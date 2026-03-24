@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, MoreVertical } from "lucide-react";
+import { ChevronDown, Eye, MoreVertical } from "lucide-react";
 import { toast } from "sonner";
 
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
@@ -63,7 +63,6 @@ export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps 
             className="font-regular gap-1.5"
             onClick={ () => setViewOpen( true ) }
           >
-            <Eye className="h-3.5 w-3.5" />
             View
           </Button>
           <ActionMenu
@@ -73,7 +72,7 @@ export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps 
             label=""
             trigger={
               <Button variant="outline" size="icon-sm">
-                <MoreVertical className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4" />
               </Button>
             }
           />

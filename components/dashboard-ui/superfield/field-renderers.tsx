@@ -276,7 +276,7 @@ export const RenderSearchableSelect = ( {
   props: SearchableSelectFieldProps;
   base: BaseRendererProps;
 } ) => {
-  const { value, onValueChange, options, placeholder } = props;
+  const { value, onValueChange, options, placeholder, renderOption, renderTrigger } = props;
 
   if ( base.hasInputGroup ) {
     return (
@@ -291,6 +291,8 @@ export const RenderSearchableSelect = ( {
           disabled={ base.disabled }
           required={ base.required }
           className={ cn( "rounded-none shadow-none focus-visible:ring-0 border-0 flex-1", base.fieldClassName ) }
+          renderOption={ renderOption }
+          renderTrigger={ renderTrigger }
         />
         { renderAddon( base.suffix, base.suffixAlign || 'inline-end' ) }
       </InputGroup>
@@ -307,6 +309,8 @@ export const RenderSearchableSelect = ( {
       disabled={ base.disabled }
       required={ base.required }
       className={ base.fieldClassName }
+      renderOption={ renderOption }
+      renderTrigger={ renderTrigger }
     />
   );
 };

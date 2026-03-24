@@ -1,98 +1,69 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useMemo } from 'react';
-import { Loader2 } from 'lucide-react';
-import { SubHeader } from '@/components/subheader';
-import { useCreator, useCreatorGigs } from '@/lib/api/hooks/creators';
-import type { ModelsGigResponse } from '@/lib/api/generated/models';
 import {
-  CreatorGigMetricsBlock,
   CreatorFinancialsBlock,
-  CreatorRecentGigsBlock,
+  CreatorGigMetricsBlock,
   CreatorProfileBlock,
-  toCurrency,
+  CreatorRecentGigsBlock,
   type CreatorStatRow,
 } from '@/components/admin/creators/dashboard';
+import { SubHeader } from '@/components/subheader';
+import { useCreator } from '@/lib/api/hooks/creators';
+import { usePaymentItems, usePayments } from '@/lib/api/hooks/payments';
+import { formatCurrency } from '@/lib/utils';
+import { Loader2 } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { useMemo } from 'react';
 
 export default function CreatorDashboardPage() {
   const params = useParams<{ id: string; }>();
   const creatorId = params.id;
 
   const { data: creatorData, isLoading: isCreatorLoading, error: creatorError } = useCreator( creatorId );
-  const { data: gigsData } = useCreatorGigs( { creator_id: creatorId } as any );
+  const { data: paymentsData } = usePayments( { creatorId, limit: 200 } );
+  const { data: paymentItemsData } = usePaymentItems( { creatorId, limit: 200 } );
 
-  // useCreator returns the standard response, the creator is usually just the object
   const creator = creatorData || null;
 
-  const gigs = useMemo<ModelsGigResponse[]>( () => {
-    // Check for different possible response shapes
-    if ( gigsData?.data && Array.isArray( gigsData.data ) ) return gigsData.data;
-    if ( ( gigsData as unknown as { items?: ModelsGigResponse[]; } )?.items && Array.isArray( ( gigsData as unknown as { items: ModelsGigResponse[]; } ).items ) ) return ( gigsData as unknown as { items: ModelsGigResponse[]; } ).items;
-    return [];
-  }, [ gigsData ] );
-
-  const gigMetrics = useMemo( () => {
-    const total = gigs.length;
-
-    const active = gigs.filter( ( gig ) => {
-      const status = String( ( gig as { status?: string; gig_status?: string; } ).gig_status || ( gig as { status?: string; } ).status || '' ).toLowerCase();
-      return [ 'active', 'in_progress', 'ongoing', 'open', 'accepted' ].includes( status );
-    } ).length;
-
-    const finished = gigs.filter( ( gig ) => {
-      const status = String( ( gig as { status?: string; gig_status?: string; } ).gig_status || ( gig as { status?: string; } ).status || '' ).toLowerCase();
-      return [ 'completed', 'finished', 'closed', 'paid' ].includes( status );
-    } ).length;
-
-    const applied = gigs.filter( ( gig ) => {
-      const status = String( ( gig as { status?: string; gig_status?: string; } ).gig_status || ( gig as { status?: string; } ).status || '' ).toLowerCase();
-      return [ 'applied', 'pending', 'pending_approval', 'invited' ].includes( status );
-    } ).length;
-
-    return { total, active, finished, applied };
-  }, [ gigs ] );
+  const payments = useMemo( () => paymentsData?.data ?? [], [ paymentsData ] );
+  const paymentItems = useMemo( () => paymentItemsData?.data ?? [], [ paymentItemsData ] );
 
   const spendMetrics = useMemo( () => {
-    const totalGigs = gigs.length;
+    const totalEarned = payments
+      .filter( p => [ 'completed' ].includes( ( p.payment_status || '' ).toLowerCase() ) )
+      .reduce( ( sum, p ) => sum + ( p.total?.value ?? 0 ), 0 );
 
-    // For creators, maybe it's called earnings or we just check compensation
-    const totalEarned = gigs.reduce( ( sum, gig ) => {
-      // Logic from brand dashboard reversed/adapted
-      if ( gig.compensation?.value != null && typeof gig.number_of_videos === 'number' ) {
-        return sum + ( ( gig.compensation?.value ?? 0 ) * gig.number_of_videos );
-      }
-      if ( gig.compensation?.value != null ) return sum + ( gig.compensation?.value ?? 0 );
-      if ( gig.gig_cost?.value != null ) return sum + ( gig.gig_cost?.value ?? 0 );
-      return sum;
-    }, 0 );
+    const totalPending = payments
+      .filter( p => [ 'pending', 'processing' ].includes( ( p.payment_status || '' ).toLowerCase() ) )
+      .reduce( ( sum, p ) => sum + ( p.total?.value ?? 0 ), 0 );
 
-    const avgGigEarned = totalGigs > 0 ? totalEarned / totalGigs : 0;
+    const uniqueGigCount = new Set( paymentItems.map( i => i.gig_id ).filter( Boolean ) ).size;
+    const avgPerGig = uniqueGigCount > 0 ? totalEarned / uniqueGigCount : 0;
 
-    // Simulate pending based on active/applied gigs (simplistic)
-    const pendingEarned = gigs.filter( g => {
-      const status = String( ( g as { gig_status?: string; status?: string; } ).gig_status || ( g as { status?: string; } ).status || '' ).toLowerCase();
-      return ![ 'completed', 'finished', 'closed', 'paid', 'declined', 'withdrawn', 'rejected' ].includes( status );
-    } ).reduce( ( sum, gig ) => {
-      if ( gig.compensation?.value != null ) return sum + ( gig.compensation?.value ?? 0 );
-      return sum;
-    }, 0 );
+    return { totalEarned, totalPending, avgPerGig };
+  }, [ payments, paymentItems ] );
 
-    return { totalEarned, avgGigEarned, pendingEarned };
-  }, [ gigs ] );
+  const gigMetrics = useMemo( () => {
+    const uniqueGigs = new Set( paymentItems.map( i => i.gig_id ).filter( Boolean ) );
+    const total = uniqueGigs.size || paymentItems.length;
+    const paid = paymentItems.filter( i => i.item_status === 'paid' ).length;
+    const included = paymentItems.filter( i => i.item_status === 'included' ).length;
+    const pending = paymentItems.filter( i => i.item_status === 'pending' ).length;
+
+    return { total, paid, included, pending };
+  }, [ paymentItems ] );
 
   const financialRows = useMemo<CreatorStatRow[]>( () => ( [
-    { label: 'Total Earnings', value: toCurrency( spendMetrics.totalEarned ), numeric: spendMetrics.totalEarned || 0 },
-    { label: 'Avg per Gig', value: toCurrency( spendMetrics.avgGigEarned ), numeric: spendMetrics.avgGigEarned || 0 },
-  ] ), [ spendMetrics.avgGigEarned, spendMetrics.totalEarned ] );
+    { label: 'Total Earned', value: formatCurrency( spendMetrics.totalEarned ), numeric: spendMetrics.totalEarned },
+    { label: 'Avg per Gig', value: formatCurrency( spendMetrics.avgPerGig ), numeric: spendMetrics.avgPerGig },
+  ] ), [ spendMetrics ] );
 
   const gigRows = useMemo<CreatorStatRow[]>( () => ( [
     { label: 'Total', value: `${ gigMetrics.total }`, numeric: gigMetrics.total },
-    { label: 'Completed', value: `${ gigMetrics.finished }`, numeric: gigMetrics.finished },
-    { label: 'Active', value: `${ gigMetrics.active }`, numeric: gigMetrics.active },
-    { label: 'Applied', value: `${ gigMetrics.applied }`, numeric: gigMetrics.applied },
-  ] ), [ gigMetrics.active, gigMetrics.applied, gigMetrics.finished, gigMetrics.total ] );
-
+    { label: 'Paid', value: `${ gigMetrics.paid }`, numeric: gigMetrics.paid },
+    { label: 'Included', value: `${ gigMetrics.included }`, numeric: gigMetrics.included },
+    { label: 'Pending', value: `${ gigMetrics.pending }`, numeric: gigMetrics.pending },
+  ] ), [ gigMetrics ] );
 
   if ( isCreatorLoading ) {
     return (
@@ -125,10 +96,10 @@ export default function CreatorDashboardPage() {
         ] }
       />
 
-      <div className="ad-shell py-4 bg-slate-50/50 mt-0 flex-1">
+      <div className="ad-shell py-4 bg-slate-50/50 mt-0 flex-1 px-5">
         <section className="grid gap-4 md:grid-cols-12 lg:h-full">
           <aside className="space-y-4 md:col-span-5 md:sticky md:top-24 md:self-start h-full">
-            <CreatorProfileBlock creator={ creator as any } creatorName={ creatorName } creatorAvatar={ creatorAvatar } />
+            <CreatorProfileBlock creator={ creator! } creatorName={ creatorName } creatorAvatar={ creatorAvatar } />
           </aside>
 
           <section className="space-y-4 md:col-span-7">
@@ -138,7 +109,6 @@ export default function CreatorDashboardPage() {
                 <CreatorGigMetricsBlock rows={ gigRows } />
               </div>
               <CreatorRecentGigsBlock creatorId={ creatorId } />
-              {/* Optional: Add a portfolio block later */ }
             </div>
           </section>
         </section>

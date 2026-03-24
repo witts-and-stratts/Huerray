@@ -3,7 +3,7 @@
 
 import { CampaignsView } from '@/components/campaigns/campaigns-view';
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
-import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
+import { CampaignsTableSkeleton } from './campaigns-table-skeleton';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
@@ -130,7 +130,7 @@ export function CampaignsTable( {
             exit={ { opacity: 0 } }
             transition={ { duration: 0.3 } }
           >
-            { view === 'table' ? <DataTableSkeleton /> : <CardGridSkeleton count={ 6 } cardHeight="h-[300px]" /> }
+            { view === 'table' ? <CampaignsTableSkeleton /> : <CardGridSkeleton count={ 6 } cardHeight="h-[300px]" /> }
           </motion.div>
         ) }
       </AnimatePresence>

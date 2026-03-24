@@ -3,23 +3,13 @@ import { Badge } from "@/components/dashboard-ui/badge";
 import { Separator } from "@/components/dashboard-ui/separator";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { getCountryFlag } from "@/lib/country-flags";
-import { calculateAge } from "@/lib/utils";
+import { ageFromDate } from "@/lib/utils";
 import { CreatorCategories } from "./creator-categories";
 import { CreatorSocialLinks } from "./creator-social-links";
 import { cn } from "@/lib/dashboard-utils";
 import { CreatorActionMenu } from "./creator-action-menu";
 import Link from 'next/link';
-
-interface CreatorInfoBlockProps {
-  creator: ModelsCreatorResponse;
-  className?: string;
-  showEmail?: boolean;
-  hideGender?: boolean;
-  hideLocation?: boolean;
-  hideAge?: boolean;
-  onViewDetails: ( creator: ModelsCreatorResponse ) => void;
-  showActions?: boolean;
-}
+import { useBasePath } from "@/lib/providers/path-provider";
 
 import { Copy } from "lucide-react";
 import { toast } from "sonner";
@@ -34,7 +24,7 @@ interface DetailsGenderLocationProps {
 
 const DetailsGenderLocation = memo( ( { creator, hideGender, hideLocation }: DetailsGenderLocationProps ) => {
   const flagName = getCountryFlag( creator.country );
-  const age = calculateAge( creator.date_of_birth );
+  const age = ageFromDate( creator.date_of_birth );
   const location = [ creator.city, creator.country ].filter( Boolean ).join( ', ' );
 
   return (
@@ -104,37 +94,34 @@ const CreatorIdCopyAndAge = memo( ( { creator, hideAge, age }: CreatorIdCopyAndA
 
 interface CreatorHeaderProps {
   creator: ModelsCreatorResponse;
-  hideAge?: boolean;
-  age?: number;
-  showEmail?: boolean;
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
-  showActions?: boolean;
 }
 
-const CreatorHeader = memo( ( { creator, hideAge, age, showEmail, onViewDetails, showActions }: CreatorHeaderProps ) => {
-  const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || creator.email || 'Unknown';
+const CreatorHeader = memo( ( { creator, onViewDetails }: CreatorHeaderProps ) => {
+  const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || 'Unknown';
+  const basePath = useBasePath();
+  const isAdmin = basePath.startsWith( '/admin' );
+
   return (
     <div className="flex gap-4 justify-between">
       <div className="flex items-start gap-4 flex-1 min-w-0">
-        <Avatar className="size-10">
+        <Avatar className="dt-table__avatar">
           { creator.profile_image?.asset &&
             <AvatarImage src={ imgpresets.avatar( creator.profile_image.asset ) } alt={ fullName } /> }
           <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
         </Avatar>
         <div className="flex flex-col min-w-0">
-          <Link
-            href={ `/admin/creators/${ creator.id }` }
-            className='capitalize text-[18px] font-normal text-primary font-primary leading-tight hover:underline transition-colors'
-          >
-            { fullName }
-          </Link>
-          {/* <CreatorIdCopyAndAge creator={ creator } hideAge={ hideAge } age={ age! } /> */ }
-          { showEmail && <span className="text-xs text-muted-foreground mt-0.5">{ creator.email }</span> }
+          { isAdmin ? (
+            <Link href={ `${ basePath }/creators/${ creator.id }` } className='dt-table__col-title'>
+              { fullName }
+            </Link>
+          ) : (
+            <button className='dt-table__col-title text-left' onClick={ () => onViewDetails( creator ) }>
+              { fullName }
+            </button>
+          ) }
         </div>
       </div>
-      { showActions && <div className='flex shrink-0 -mr-3 -mt-1'>
-        <CreatorActionMenu creator={ creator } onViewDetails={ onViewDetails } />
-      </div> }
     </div>
   );
 } );
@@ -151,21 +138,11 @@ interface CreatorInfoBlockProps {
 }
 
 export function CreatorInfoBlock( { creator, className, showEmail = false, hideGender = false, hideLocation = false, hideAge = false, onViewDetails, showActions = true }: CreatorInfoBlockProps ) {
-  const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || creator.email || 'Unknown';
-  const flagName = getCountryFlag( creator.country );
-  const age = calculateAge( creator.date_of_birth );
-  const location = [ creator.city, creator.country ].filter( Boolean ).join( ', ' );
-
-  const handleCopyId = () => {
-    if ( creator.creator_id ) {
-      navigator.clipboard.writeText( creator.creator_id );
-      toast.success( "Creator ID copied to clipboard" );
-    }
-  };
+  const age = ageFromDate( creator.date_of_birth );
 
   return (
     <div className={ cn( "flex flex-col gap-3", className ) }>
-      <CreatorHeader creator={ creator } hideAge={ hideAge } age={ age! } showEmail={ showEmail } onViewDetails={ onViewDetails } showActions={ showActions } />
+      <CreatorHeader creator={ creator } onViewDetails={ onViewDetails } />
 
       {/* Details: Gender, Location */ }
       {/* <DetailsGenderLocation creator={ creator } hideGender={ hideGender } hideLocation={ hideLocation } /> */ }

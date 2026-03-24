@@ -29,18 +29,18 @@ export default function BrandsPage() {
         : Number( rawCampaignCount );
 
       return {
-      id: brand.id || '',
-      name: brand.company_name || brand.name || 'Unknown',
-      logo: brand.logo_url || brand.profile_photo?.asset || brand.logo || '',
-      brand_status: ( brand.brand_status || 'pending' ),
-      total_campaigns: Number.isFinite( totalCampaigns ) ? totalCampaigns : 0,
-      website: brand.website_url || brand.website || '',
-      joined_date: brand.created_at || brand.joined_date || new Date().toISOString(),
-      contact_email: brand.preferred_contact_email || brand.contact_email || brand.email || '',
-      category: brand.category || '',
-      company_size: brand.company_size || '',
-      city: brand.city || '',
-      country: brand.country || '',
+        id: brand.id || '',
+        name: brand.company_name || brand.name || 'Unknown',
+        logo: brand.logo_url || brand.profile_photo?.asset || brand.logo || '',
+        brand_status: ( brand.brand_status || 'pending' ),
+        total_campaigns: Number.isFinite( totalCampaigns ) ? totalCampaigns : 0,
+        website: brand.website_url || brand.website || '',
+        joined_date: brand.created_at || brand.joined_date || new Date().toISOString(),
+        contact_email: brand.preferred_contact_email || brand.contact_email || brand.email || '',
+        category: brand.category || '',
+        company_size: brand.company_size || '',
+        city: brand.city || '',
+        country: brand.country || '',
       };
     } );
   }, [ data ] );
@@ -50,11 +50,7 @@ export default function BrandsPage() {
       <SubHeader
         title='Brands'
         description='Manage and track all brands on the platform'
-      >
-        {/* <Link href='/admin/brands/new'>
-          <Button className='gap-2 rounded-md'>Add Brand</Button>
-        </Link> */}
-      </SubHeader>
+      />
       <BrandsTable
         brandsData={ brandsData }
         isLoading={ isLoading }

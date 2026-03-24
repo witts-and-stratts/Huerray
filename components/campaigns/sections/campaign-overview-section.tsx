@@ -1,7 +1,6 @@
 'use client';
 
 import { Clock3, Users, Video } from 'lucide-react';
-import type { ModelCampaign } from '@/components/campaigns/types';
 import { InviteCreatorsCard } from '@/components/campaigns/invite-creators-card';
 import {
   CampaignAssetsCard,
@@ -14,9 +13,10 @@ import { useCampaignApplications, useCampaignSubmissions } from '@/lib/api/hooks
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/dashboard-ui/card';
 import { RoleGuard } from '@/components/auth/role-guard';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 interface CampaignOverviewSectionProps {
-  campaign: ModelCampaign;
+  campaign: ModelsCampaignResponse;
   basePath: string;
   onViewAllInvitations?: () => void;
 }
@@ -87,7 +87,7 @@ function CampaignProgressBar( { steps }: { steps: PipelineStep[]; } ) {
               </svg>
             ) }
 
-            <span className={ cn( 'text-xs hidden sm:inline', isReached ? 'text-white/90' : 'text-muted-foreground' ) }>
+            <span className={ cn( 'text-xs inline', isReached ? 'text-white/90' : 'text-muted-foreground' ) }>
               { step.label }
             </span>
           </div>
@@ -129,7 +129,7 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
       <div className="space-y-4 lg:col-span-8 flex flex-col">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
           <KpiMetricCard
             label="Creators Wanted"
             value={ `${ applicationCount }/${ creatorsWanted }` }

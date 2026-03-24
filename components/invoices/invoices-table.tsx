@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   getCoreRowModel,
@@ -6,7 +6,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  flexRender,
   type ColumnFiltersState,
   type FilterFn,
   type SortingState,
@@ -15,27 +14,14 @@ import {
 import * as React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
-import { FileX } from 'lucide-react';
 
 import { getColumns } from './invoices-columns';
 import { InvoicesTableToolbar } from './invoices-table-toolbar';
+import { InvoicesView } from './invoices-view';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
-import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/dashboard-ui/table';
-import {
-  Empty,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  EmptyDescription,
-} from '@/components/dashboard-ui/empty';
+import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
+import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
+import { usePersistedViewMode } from '@/lib/hooks/use-persisted-view-mode';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 
 const invoiceGlobalFilter: FilterFn<ModelsInvoiceResponse> = ( row, _columnId, filterValue: string ) => {
@@ -60,6 +46,8 @@ export interface InvoicesTableProps {
 }
 
 export function InvoicesTable( { data, isLoading = false, isAdmin = false }: InvoicesTableProps ) {
+  const showLoading = useDelayedLoading( isLoading, 250 );
+  const { view, setView } = usePersistedViewMode( 'invoices', 'table' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
@@ -90,10 +78,7 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
     return Array.from( set );
   }, [ filteredData ] );
 
-  const columns = React.useMemo(
-    () => getColumns( isAdmin ),
-    [ isAdmin ]
-  );
+  const columns = React.useMemo( () => getColumns( isAdmin ), [ isAdmin ] );
 
   const table = useReactTable( {
     data: filteredData,
@@ -119,15 +104,14 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
 
   return (
     <AnimatePresence>
-      { isLoading ? (
-        <TableSkeleton cardCount={ 6 } cardHeight="h-[60px]" />
-      ) : (
+      { showLoading && <DataTableSkeleton /> }
+      { !isLoading && (
         <motion.div
-          initial={ { opacity: 0, y: 10 } }
-          animate={ { opacity: 1, y: 0 } }
+          initial={ { opacity: 0 } }
+          animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="flex flex-col grow overflow-auto"
+          className='flex flex-col bg-slate-50/50 grow relative overflow-auto h-full'
         >
           <InvoicesTableToolbar
             table={ table }
@@ -138,64 +122,13 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
             dateRange={ dateRange }
             setDateRange={ setDateRange }
             statuses={ statuses }
+            view={ view }
+            setView={ setView }
           />
-
-          <div className="px-5">
-            { table.getRowModel().rows.length === 0 ? (
-              <Empty className="border my-4">
-                <EmptyHeader>
-                  <EmptyMedia variant="icon">
-                    <FileX className="size-5" />
-                  </EmptyMedia>
-                  <EmptyTitle>No invoices found</EmptyTitle>
-                  <EmptyDescription>
-                    { searchValue || columnFilters.length > 0 || dateRange?.from
-                      ? 'No invoices match your current filters.'
-                      : 'You have no invoices yet.' }
-                  </EmptyDescription>
-                </EmptyHeader>
-              </Empty>
-            ) : (
-              <div className="rounded-md border overflow-hidden">
-                <Table>
-                  <TableHeader>
-                    { table.getHeaderGroups().map( ( headerGroup ) => (
-                      <TableRow key={ headerGroup.id }>
-                        { headerGroup.headers.map( ( header ) => (
-                          <TableHead key={ header.id } className="bg-muted/30">
-                            { header.isPlaceholder
-                              ? null
-                              : flexRender( header.column.columnDef.header, header.getContext() ) }
-                          </TableHead>
-                        ) ) }
-                      </TableRow>
-                    ) ) }
-                  </TableHeader>
-                  <TableBody>
-                    { table.getRowModel().rows.map( ( row ) => (
-                      <TableRow
-                        key={ row.id }
-                        data-state={ row.getIsSelected() && 'selected' }
-                        className="hover:bg-muted/30 transition-colors"
-                      >
-                        { row.getVisibleCells().map( ( cell ) => (
-                          <TableCell key={ cell.id } className="align-top">
-                            { flexRender( cell.column.columnDef.cell, cell.getContext() ) }
-                          </TableCell>
-                        ) ) }
-                      </TableRow>
-                    ) ) }
-                  </TableBody>
-                </Table>
-              </div>
-            ) }
+          <InvoicesView table={ table } view={ view } isAdmin={ isAdmin } />
+          <div className='px-3 mt-auto'>
+            <DataTablePagination table={ table } />
           </div>
-
-          { data.length > 0 && (
-            <div className="px-4 mt-4">
-              <DataTablePagination table={ table } />
-            </div>
-          ) }
         </motion.div>
       ) }
     </AnimatePresence>

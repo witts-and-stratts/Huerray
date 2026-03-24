@@ -95,11 +95,11 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       icon: CreditCardAcceptIcon,
     },
   ],
-  documents: [
-    { name: withFallback( t, "brand.savedLists", "Saved Lists" ), url: "/brand/saved-lists", icon: DatabaseIcon },
-    { name: withFallback( t, "brand.templates", "Templates" ), url: "/brand/templates", icon: FileScriptIcon },
-    { name: withFallback( t, "brand.reports", "Reports" ), url: "/brand/reports", icon: IconReport },
-  ],
+  // documents: [
+  //   { name: withFallback( t, "brand.savedLists", "Saved Lists" ), url: "/brand/saved-lists", icon: DatabaseIcon },
+  //   { name: withFallback( t, "brand.templates", "Templates" ), url: "/brand/templates", icon: FileScriptIcon },
+  //   { name: withFallback( t, "brand.reports", "Reports" ), url: "/brand/reports", icon: IconReport },
+  // ],
   navSecondary: [
     { title: withFallback( t, "brand.settings", "Settings" ), url: "/brand/settings", icon: Settings01Icon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
@@ -221,11 +221,11 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
     //   icon: ShieldUserIcon,
     // },
   ],
-  documents: [
-    { name: withFallback( t, "admin.platformReports", "Platform Reports" ), url: "/admin/dashboard", icon: IconReport },
-    // { name: withFallback( t, "admin.systemLogs", "System Logs" ), url: "/admin/logs", icon: DatabaseIcon },
-    { name: withFallback( t, "admin.alerts", "Alerts" ), url: "/admin/notifications", icon: AlertCircleIcon },
-  ],
+  // documents: [
+  //   { name: withFallback( t, "admin.platformReports", "Platform Reports" ), url: "/admin/dashboard", icon: IconReport },
+  //   // { name: withFallback( t, "admin.systemLogs", "System Logs" ), url: "/admin/logs", icon: DatabaseIcon },
+  //   { name: withFallback( t, "admin.alerts", "Alerts" ), url: "/admin/notifications", icon: AlertCircleIcon },
+  // ],
   navSecondary: [
     { title: withFallback( t, "admin.settings", "Settings" ), url: "/admin/settings", icon: Settings01Icon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },

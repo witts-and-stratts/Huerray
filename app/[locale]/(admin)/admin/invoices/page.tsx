@@ -11,7 +11,9 @@ export default async function AdminInvoicesPage() {
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       />
-      <AdminInvoicesClient />
+      <div className='bg-slate-50/50 flex-1'>
+        <AdminInvoicesClient />
+      </div>
     </>
   );
 }

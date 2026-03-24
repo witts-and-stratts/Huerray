@@ -91,18 +91,6 @@ export default function BrandDashboardPage() {
     { label: 'Draft', value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
   ] ), [ campaignMetrics.active, campaignMetrics.draft, campaignMetrics.finished, campaignMetrics.total ] );
 
-  const recentCampaignIds = useMemo(
-    () => campaigns
-      .sort( ( a, b ) => {
-        const aTime = a.created_at ? new Date( a.created_at ).getTime() : 0;
-        const bTime = b.created_at ? new Date( b.created_at ).getTime() : 0;
-        return bTime - aTime;
-      } )
-      .slice( 0, 6 )
-      .map( ( campaign ) => campaign.id || campaign.campaign_id )
-      .filter( ( id ): id is string => Boolean( id ) ),
-    [ campaigns ]
-  );
 
   if ( isBrandLoading ) {
     return (
@@ -135,7 +123,7 @@ export default function BrandDashboardPage() {
         ] }
       />
 
-      <div className="ad-shell py-4 bg-slate-50/50 mt-0 flex-1">
+      <div className="ad-shell py-4 bg-slate-50/50 mt-0 flex-1 px-5">
         <section className="grid gap-4 md:grid-cols-12 lg:h-full">
           <aside className="space-y-4 md:col-span-5 md:sticky md:top-24 md:self-start h-full">
             <BrandProfileBlock brand={ brand } brandName={ brandName } brandLogo={ brandLogo } />
@@ -148,7 +136,7 @@ export default function BrandDashboardPage() {
                 <BrandCampaignMetricsBlock rows={ campaignRows } />
               </div>
               <BrandRecentCampaignsBlock brandId={ brandId } />
-              <BrandRecentSubmissionsBlock brandId={ brandId } recentCampaignIds={ recentCampaignIds } />
+              <BrandRecentSubmissionsBlock brandId={ brandId } />
             </div>
           </section>
         </section>

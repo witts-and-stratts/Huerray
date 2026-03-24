@@ -189,7 +189,7 @@ const DetailsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   const coverImage = typeof rawImage === 'string' && rawImage ? rawImage : undefined;
 
   return (
-    <div className='flex gap-4 pl-4'>
+    <div className='flex gap-4 pl-4 min-w-[300px]'>
       <div className={ cn( "size-10 shrink-0 overflow-hidden rounded-full" ) }>
         { coverImage && (
           <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
@@ -203,7 +203,7 @@ const DetailsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
       </div>
       <div>
         <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
-          <h4 className='card__title'>
+          <h4 className='card__title capitalize text-[18px] font-normal text-primary font-primary'>
             { campaign_name }
           </h4>
         </Link>

@@ -3,8 +3,8 @@
 
 import { CampaignsTable } from '@/components/campaigns/campaigns-table';
 import { SubHeader } from '@/components/subheader';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
-import { ModelCampaign } from '@/components/campaigns/types';
 import * as React from 'react';
 
 export default function CampaignsPage() {
@@ -24,7 +24,7 @@ export default function CampaignsPage() {
       product_image: c.product_image?.asset,
       creators: c.creators || [],
       applications: c.applications || [],
-    } as ModelCampaign ) );
+    } as ModelsCampaignResponse ) );
   }, [ response ] );
 
   return (

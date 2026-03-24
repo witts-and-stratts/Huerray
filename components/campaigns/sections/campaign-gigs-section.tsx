@@ -18,6 +18,7 @@ import {
   EmptyTitle,
   EmptyContent,
 } from '@/components/dashboard-ui/empty';
+import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
 
 interface CampaignGigsSectionProps {
   campaignId: string;
@@ -52,25 +53,19 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   return (
     <>
       { gigs.length === 0 ? (
-        <Empty className='border py-20 my-6 flex-1 bg-white'>
-          <EmptyHeader>
-            <EmptyMedia>
-              <img src="/svg/creator-going-live.svg" alt="No gigs yet" className='w-full h-full object-contain max-h-[280px] md:max-h-[420px]' />
-            </EmptyMedia>
-            <EmptyTitle className='font-normal font-primary text-primary'>No gigs yet</EmptyTitle>
-            <EmptyDescription>
-              { role === 'brand'
-                ? 'There are no gigs yet for this campaign. Gigs will appear here when your campaign has been approved.'
-                : 'There are no gigs yet for this campaign.'
-              }
-            </EmptyDescription>
-          </EmptyHeader>
+        <EmptyGigs
+          fill
+          description={ role === 'brand'
+            ? 'There are no gigs yet for this campaign. Gigs will appear here when your campaign has been approved.'
+            : 'There are no gigs yet for this campaign.'
+          }
+        >
           { createGigButton && (
             <EmptyContent>
               { createGigButton }
             </EmptyContent>
           ) }
-        </Empty>
+        </EmptyGigs>
       ) : (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4'>
           { gigs.map( ( gig ) => (

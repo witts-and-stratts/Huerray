@@ -1,17 +1,14 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { SubmissionCard } from '@/components/campaigns/submission-card';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
-import { VideoSubmissionsApi } from '@/lib/api/generated/api';
-import { apiClient, apiConfiguration } from '@/lib/api/client';
-import type { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { useBrandVideoSubmissions } from '@/lib/api/hooks/brands';
+import { EmptySubmission } from '../../empty-states/empty-submissions';
 
 interface BrandRecentSubmissionsBlockProps {
   brandId: string;
-  recentCampaignIds: string[];
 }
 
 function RecentSubmissionItemSkeleton() {
@@ -29,45 +26,15 @@ function RecentSubmissionItemSkeleton() {
   );
 }
 
-export function BrandRecentSubmissionsBlock( { brandId, recentCampaignIds }: BrandRecentSubmissionsBlockProps ) {
-  const { data: recentSubmissions = [], isLoading, isError } = useQuery( {
-    queryKey: [ 'brand-recent-submissions', brandId, recentCampaignIds ],
-    enabled: recentCampaignIds.length > 0,
-    queryFn: async () => {
-      const videoSubmissionsApi = new VideoSubmissionsApi( apiConfiguration, undefined, apiClient );
-      const responses = await Promise.all(
-        recentCampaignIds.map( async ( campaignId ) => {
-          try {
-            const response = await videoSubmissionsApi.videosCampaignCampaignIdGet( { campaignId } );
-            return response.data?.data || [];
-          } catch {
-            return [];
-          }
-        } )
-      );
-
-      const merged = responses.flat() as ModelsVideoSubmissionResponse[];
-      const byId = new Map<string, ModelsVideoSubmissionResponse>();
-
-      for ( const submission of merged ) {
-        if ( submission.id ) byId.set( submission.id, submission );
-      }
-
-      return [ ...byId.values() ]
-        .sort( ( a, b ) => {
-          const aTime = a.created_at ? new Date( a.created_at ).getTime() : 0;
-          const bTime = b.created_at ? new Date( b.created_at ).getTime() : 0;
-          return bTime - aTime;
-        } )
-        .slice( 0, 8 );
-    },
-  } );
+export function BrandRecentSubmissionsBlock( { brandId: _brandId }: BrandRecentSubmissionsBlockProps ) {
+  const { data, isLoading, isError } = useBrandVideoSubmissions( { page: 1, limit: 8 } );
+  const recentSubmissions = data?.data ?? [];
 
   return (
     <Card className="ad-summary-card xl:col-span-2 grow">
       <CardHeader className="pb-2">
         <CardTitle className="ad-card-title">Recent Submissions</CardTitle>
-        <CardDescription className="ad-card-description">Latest video submissions across this brand&apos;s campaigns</CardDescription>
+        <CardDescription className="ad-card-description">Latest video submissions across campaigns</CardDescription>
       </CardHeader>
       <CardContent className="grow">
         { isLoading && (
@@ -83,7 +50,7 @@ export function BrandRecentSubmissionsBlock( { brandId, recentCampaignIds }: Bra
         ) }
 
         { !isLoading && !isError && recentSubmissions.length === 0 && (
-          <p className="py-8 text-center text-xs text-muted-foreground">No submissions yet.</p>
+          <EmptySubmission imageWidth={ 150 } />
         ) }
 
         { !isLoading && !isError && recentSubmissions.length > 0 && (

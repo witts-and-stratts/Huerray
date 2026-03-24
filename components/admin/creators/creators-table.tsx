@@ -171,7 +171,7 @@ export function CreatorsTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
+          className="flex flex-col bg-slate-50/50 grow relative overflow-auto"
         >
           <CreatorsTableToolbar
             table={ table }
@@ -181,19 +181,17 @@ export function CreatorsTable( {
             view={ view }
             setView={ setView }
           />
-          <div className="px-5">
-            <CreatorsView
-              table={ table }
-              view={ view }
-              onViewDetails={ ( creator ) => {
-                setSelectedCreator( creator );
-                setIsSheetOpen( true );
-              } }
-              onApproveProfile={ handleOnApproveProfile }
-              onRejectProfile={ handleOnRejectProfile }
-            />
-          </div>
-          <div className="px-4">
+          <CreatorsView
+            table={ table }
+            view={ view }
+            onViewDetails={ ( creator ) => {
+              setSelectedCreator( creator );
+              setIsSheetOpen( true );
+            } }
+            onApproveProfile={ handleOnApproveProfile }
+            onRejectProfile={ handleOnRejectProfile }
+          />
+          <div className="px-3 mt-auto">
             <DataTablePagination table={ table } />
           </div>
           <CreatorDetailsSheet

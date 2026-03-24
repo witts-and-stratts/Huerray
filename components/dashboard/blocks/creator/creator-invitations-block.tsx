@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useCreatorInvitations } from '@/lib/api/hooks/gigs';
 import type { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import { InvitationCard } from '@/components/creator/invitation-card';
+import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 
 function toDate( value?: string ) {
   if ( !value ) return 'N/A';
@@ -36,34 +38,46 @@ export function CreatorInvitationsBlock() {
   return (
     <Card className="ad-summary-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Invitations</CardTitle>
-        <CardDescription className="ad-card-description">Latest invitations from brands</CardDescription>
+        <CardTitle>Invitations</CardTitle>
+        <CardDescription>Latest invitations from brands</CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         { isLoading ? (
-          <>
-            <Skeleton className="h-14 w-full" />
-            <Skeleton className="h-14 w-full" />
-            <Skeleton className="h-14 w-full" />
-          </>
+          <div className="flex gap-3 pb-3">
+            { Array.from( { length: 4 } ).map( ( _, i ) => (
+              <div key={ i } className="w-[200px] shrink-0">
+                <div className="relative rounded-2xl overflow-hidden aspect-[3/4]">
+                  <Skeleton className="absolute inset-0 w-full h-full" />
+                  {/* Status badge */ }
+                  <div className="absolute top-3 left-3">
+                    <Skeleton className="h-5 w-16 rounded-full" />
+                  </div>
+                  {/* Bottom content block */ }
+                  <div className="absolute bottom-2 left-2 right-2 rounded-2xl p-3 flex flex-col gap-2">
+                    <Skeleton className="h-4 w-3/4 rounded-md" />
+                    <Skeleton className="h-3 w-1/2 rounded-md" />
+                    <Skeleton className="h-3 w-2/3 rounded-md" />
+                  </div>
+                </div>
+              </div>
+            ) ) }
+          </div>
         ) : recentInvitations.length === 0 ? (
           <p className="text-sm text-muted-foreground">No invitations yet.</p>
         ) : (
-          recentInvitations.map( ( invitation ) => (
-            <div key={ invitation.id || `${ invitation.gig_id }-${ invitation.invited_at }` } className="rounded-lg border border-border/60 bg-white p-3">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium">{ invitation.gig?.title || 'Untitled gig' }</p>
-                  <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                    Invited { toDate( invitation.invited_at ) }
-                  </p>
+          <ScrollArea scrollbar={ {
+            orientation: 'horizontal', style: {
+              height: '6px'
+            }
+          } } className="w-full pb-3">
+            <div className="flex gap-3">
+              { recentInvitations.map( ( invitation ) => (
+                <div key={ invitation.id } className="w-[200px] shrink-0">
+                  <InvitationCard invitation={ invitation } onViewDetails={ () => { } } />
                 </div>
-                <Badge variant={ statusVariant( invitation.status ) }>
-                  { ( invitation.status || 'pending' ).replace( /_/g, ' ' ) }
-                </Badge>
-              </div>
+              ) ) }
             </div>
-          ) )
+          </ScrollArea>
         ) }
       </CardContent>
       <CardFooter className="flex-col justify-end gap-2 text-sm grow">

@@ -47,7 +47,7 @@ export function DataTableFilterDropdown<TData>( {
           onClick={ ( e ) => {
             e.stopPropagation();
             if ( !column ) return;
-            column.setFilterValue( options.length > 0 ? [ ...options ] : undefined );
+            column.setFilterValue( undefined );
           } }
         >
           Select All
@@ -58,6 +58,7 @@ export function DataTableFilterDropdown<TData>( {
             <DropdownMenuCheckboxItem
               key={ option }
               className={ cn( 'capitalize' ) }
+              closeOnClick={ false }
               checked={
                 Array.isArray( filterValue ) && filterValue.includes( option )
               }
@@ -73,7 +74,7 @@ export function DataTableFilterDropdown<TData>( {
                   nextFilters.delete( option );
                 }
 
-                column.setFilterValue( Array.from( nextFilters ) );
+                column.setFilterValue( nextFilters.size > 0 ? Array.from( nextFilters ) : undefined );
               } }
             >
               { option.replace( /_/g, ' ' ) }

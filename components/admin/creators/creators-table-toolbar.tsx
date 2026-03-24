@@ -16,11 +16,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/dashboard-ui/dropdown-menu';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/dashboard-ui/popover';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { getCountryFlag, getCountryName } from '@/lib/country-flags';
 import { FilterHorizontalIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ChevronDown, Globe } from 'lucide-react';
+import { ChevronDown, ChevronRight, Globe } from 'lucide-react';
 import * as React from 'react';
 import '@/app/styles/components/data-table.css';
 
@@ -39,7 +40,7 @@ function CountryFilter<TData>( { table, countries }: { table: Table<TData>; coun
         <Button variant='outline' size='sm' className={ `h-8${ isActive ? ' border-primary text-primary' : '' }` }>
           <Globe className='size-4' strokeWidth={ 1 } />
           { isActive && <span className='font-regular text-xs'>{ filterValue!.length }</span> }
-          <ChevronDown width={ 1 } />
+          <ChevronDown className='size-4' strokeWidth={ 1 } />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='min-w-56 max-h-72 overflow-y-auto'>
@@ -101,16 +102,16 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild className='h-8'>
+    <Popover>
+      <PopoverTrigger className='h-8' render={
         <Button variant='outline' size='sm' className={ `h-8${ isActive ? ' border-primary text-primary' : '' }` }>
           <HugeiconsIcon icon={ FilterHorizontalIcon } className='text-sm' />
           <span className='font-regular'>Age</span>
-          <ChevronDown width={ 1 } />
+          <ChevronDown className='size-4' strokeWidth={ 1 } />
         </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='p-3 min-w-48'>
-        <div className='flex items-center gap-2 mb-3'>
+      } />
+      <PopoverContent align='end' className='w-56 p-3 gap-3'>
+        <div className='flex items-end gap-2'>
           <SuperField
             type='number'
             label='Min'
@@ -120,7 +121,9 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
             value={ min }
             onChange={ e => setMin( e.target.value ) }
           />
-          <span className='text-muted-foreground text-sm mt-4'>–</span>
+          <div className='relative z-10 -mx-4 mb-[3px] flex size-8 shrink-0 items-center justify-center rounded-full border border-border bg-background'>
+            <ChevronRight className='size-4 text-muted-foreground' />
+          </div>
           <SuperField
             type='number'
             label='Max'
@@ -129,6 +132,7 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
             max={ 100 }
             value={ max }
             onChange={ e => setMax( e.target.value ) }
+            fieldClassName='pl-3'
           />
         </div>
         <div className='flex gap-2'>
@@ -137,8 +141,8 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
             <Button size='sm' variant='ghost' className='h-7 text-xs' onClick={ clear }>Clear</Button>
           ) }
         </div>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </PopoverContent>
+    </Popover>
   );
 }
 
@@ -168,7 +172,7 @@ export function CreatorsTableToolbar<TData>( {
           placeholder='Filter creators...'
         />
       </div>
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
         <DataTableViewToggle view={ view } setView={ setView } />
         <DataTableFilterDropdown
           table={ table }

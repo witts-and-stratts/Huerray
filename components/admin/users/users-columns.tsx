@@ -1,9 +1,10 @@
 "use client";
 
 import { toast } from "sonner";
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, MoreVertical, BadgeCheck, X, Copy } from "lucide-react";
+import { ColumnDef, Row } from "@tanstack/react-table";
+import { ArrowUpDown, ChevronDown } from "lucide-react";
 import { Button } from "@/components/dashboard-ui/button";
+import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 import { Checkbox } from "@/components/dashboard-ui/checkbox";
 import { Badge } from "@/components/dashboard-ui/badge";
 import { UserActionMenu } from "./user-action-menu";
@@ -11,10 +12,35 @@ import { UserStatusBadge } from "./user-status-badge";
 import { UserInfoBlock } from "./user-info-block";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { CopyText } from "@/components/dashboard-ui/copy-text";
+import { cn } from "@/lib/dashboard-utils";
+import { EmailStatusBadge } from "@/components/dashboard-ui/status-badge";
+import { CancelCircleIcon, CheckmarkCircle01Icon } from "@hugeicons/core-free-icons";
 
 interface GetColumnsProps {
   onViewDetails: ( user: ModelsUserResponse ) => void;
 }
+
+const UserActionsCell = ( { row, onViewDetails, className }: { row: Row<ModelsUserResponse>; onViewDetails: ( user: ModelsUserResponse ) => void; className?: string; } ) => {
+  const user = row.original;
+  return (
+    <div className={ cn( "flex justify-end items-center gap-2", className ) }>
+      <ButtonGroup className="flex justify-end">
+        <Button variant="outline" size="sm" className="font-regular" onClick={ () => onViewDetails( user ) }>
+          View
+        </Button>
+        <UserActionMenu
+          user={ user }
+          onViewDetails={ onViewDetails }
+          trigger={
+            <Button variant="outline" size="sm" className="font-regular">
+              <ChevronDown />
+            </Button>
+          }
+        />
+      </ButtonGroup>
+    </div>
+  );
+};
 
 export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<ModelsUserResponse>[] => [
   {
@@ -38,6 +64,42 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     enableHiding: false,
   },
   {
+    accessorKey: "user_type",
+    header: () => <span className={ 'font-regular' }></span>,
+    cell: ( { row } ) => {
+      const type = row.getValue( "user_type" ) as string;
+      const formattedType = type
+        ? type.replace( /_user$/i, '' ).replace( /_/g, ' ' )
+        : 'User';
+
+      const dotColors: Record<string, string> = {
+        'brand': 'bg-blue-500',
+        'creator': 'bg-pink-500',
+        'admin': 'bg-purple-500',
+      };
+
+      const dotColor = dotColors[ formattedType.toLowerCase() ] || 'bg-gray-400';
+
+      return (
+        <div title={ formattedType } className="flex items-center mt-2 ml-4 -mr-3">
+          <span className={ cn( "size-2.5 rounded-full", dotColor ) } />
+        </div>
+      );
+    },
+  },
+  {
+    id: "user_type_filter",
+    accessorFn: ( row ) => row.user_type ?? '',
+    enableHiding: false,
+    header: () => null,
+    cell: () => null,
+    filterFn: ( row, _id, filterValue ) => {
+      if ( !Array.isArray( filterValue ) || filterValue.length === 0 ) return true;
+      const rowValue = ( row.original.user_type ?? '' ).toLowerCase();
+      return filterValue.some( ( v: string ) => v.toLowerCase() === rowValue );
+    },
+  },
+  {
     id: "name", // Custom column for complex user info
     accessorFn: ( row ) => `${ row.first_name || '' } ${ row.last_name || '' }`.trim() || row.username || 'Unknown',
     header: ( { column } ) => {
@@ -54,7 +116,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     },
     cell: ( { row } ) => {
       return (
-        <div className="pl-4 py-0">
+        <div className="pl-4 py-0 cursor-pointer min-w-[200px]" onClick={ () => onViewDetails( row.original ) }>
           <UserInfoBlock user={ row.original } onViewDetails={ onViewDetails } showActions={ false } showType={ false } />
         </div>
       );
@@ -81,54 +143,19 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
       return (
         <Badge
           variant="outline"
-          className="font-normal cursor-pointer w-fit hover:text-foreground transition-colors pr-1.5"
+          className="font-normal cursor-pointer w-fit hover:text-foreground transition-colors pr-1.5 overflow-visible"
         >
           <CopyText
             text={ username }
             copyMessage="Username copied"
-            iconSize={ 12 }
-            className="gap-2"
+            iconSide="left"
+            iconClassName={ '-left-8' }
           >
             { username }
           </CopyText>
         </Badge>
       );
     },
-  },
-  {
-    accessorKey: "user_type",
-    header: () => <span className={ 'font-regular' }>Type</span>,
-    cell: ( { row } ) => {
-      const type = row.getValue( "user_type" ) as string;
-      // Format type: Brand_user -> Brand, Admin_user -> Admin
-      const formattedType = type
-        ? type.replace( /_user$/i, '' ).replace( /_/g, ' ' )
-        : 'User';
-
-      const typeColors: Record<string, string> = {
-        'brand': 'bg-blue-100 text-blue-700 border-blue-200',
-        'creator': 'bg-pink-100 text-pink-700 border-pink-200',
-        'admin': 'bg-purple-100 text-purple-700 border-purple-200',
-        'default': 'bg-gray-100 text-gray-700 border-gray-200'
-      };
-
-      const colorClass = typeColors[ formattedType.toLowerCase() ] || typeColors.default;
-
-      return (
-        <Badge variant="outline" className={ `capitalize font-normal ${ colorClass }` }>
-          { formattedType }
-        </Badge>
-      );
-    },
-    filterFn: ( row, id, filterValue ) => {
-      if ( filterValue === undefined ) {
-        return true;
-      }
-      if ( !Array.isArray( filterValue ) ) return true;
-      if ( filterValue.length === 0 ) return false;
-      const rowValue = row.getValue( id ) as string;
-      return filterValue.includes( rowValue );
-    }
   },
 
   {
@@ -144,6 +171,19 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
       const rowValue = row.getValue( id ) as string;
       return filterValue.includes( rowValue );
     }
+  },
+  {
+    accessorKey: "email_verified",
+    header: () => <span className={ 'font-regular' }>Verification</span>,
+    cell: ( { row } ) => {
+      const verified = row.getValue( "email_verified" ) as boolean;
+      return (
+        <EmailStatusBadge status={ verified ? "verified" : "unverified" } configOverride={ {
+          verified: { label: "Verified", color: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20", icon: CheckmarkCircle01Icon },
+          unverified: { label: "Unverified", color: "bg-red-500/10 text-red-600 border-red-500/20", icon: CancelCircleIcon },
+        } } />
+      );
+    },
   },
   {
     accessorKey: "created_at",
@@ -174,15 +214,12 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
   },
   {
     id: "actions",
-    header: () => <div className="text-right">Actions</div>,
-    cell: ( { row } ) => {
-      const user = row.original;
-
-      return (
-        <div className="flex justify-end">
-          <UserActionMenu user={ user } onViewDetails={ onViewDetails } />
-        </div>
-      );
-    },
+    header: () => (
+      <div className="flex justify-end pr-2">
+        <span className="font-regular text-right">Actions</span>
+      </div>
+    ),
+    enableHiding: false,
+    cell: ( { row } ) => <UserActionsCell row={ row } onViewDetails={ onViewDetails } className="pr-2" />,
   },
 ];

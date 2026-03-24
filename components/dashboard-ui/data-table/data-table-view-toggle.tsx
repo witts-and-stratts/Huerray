@@ -25,7 +25,7 @@ export function DataTableViewToggle( {
     <ToggleGroup
       variant={ 'outline' }
       size={ 'sm' }
-      className={ cn( 'rounded-md overflow-hidden border font-normal h-8', className ) }
+      className={ cn( 'rounded-md overflow-hidden border font-normal h-8 shrink-0', className ) }
       value={ [ view ] }
       onValueChange={ ( val ) => {
         if ( val && val.length > 0 ) {

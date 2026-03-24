@@ -31,7 +31,7 @@ export const toMoney = ( value: number ) => {
   } ).format( value );
 };
 
-export const calculateAge = (dobString?: string) => {
+export const ageFromDate = (dobString?: string) => {
   if (!dobString) return null;
   const dob = new Date(dobString);
   if (isNaN(dob.getTime())) return null;

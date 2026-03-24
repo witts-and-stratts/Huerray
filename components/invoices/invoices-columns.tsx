@@ -1,24 +1,40 @@
 "use client";
 
-import * as React from 'react';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import {
+  Cancel01Icon,
+  CheckmarkCircle02Icon,
+  Clock01Icon,
+  File01Icon,
+  FileEditIcon,
+  SentIcon,
+} from '@hugeicons/core-free-icons';
+import { HugeiconsIcon, IconSvgElement } from '@hugeicons/react';
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
-import Link from 'next/link';
 import { useLocale } from 'next-intl';
+import Link from 'next/link';
+import * as React from 'react';
 
-import { Button } from '@/components/dashboard-ui/button';
-import { Checkbox } from '@/components/dashboard-ui/checkbox';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/dashboard-ui/avatar';
-import { formatCurrency, formatDate } from '@/lib/utils';
-import { InvoiceStatusBadge } from './invoice-status-badge';
-import { InvoiceDetailsSheet } from './invoice-details-sheet';
-import { BrandDetailsSheet } from './brand-details-sheet';
-import { InvoiceActionMenu } from './invoice-action-menu';
-import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { useRole } from '@/contexts/role-context';
+import { ModelsInvoiceResponse, UtilsInvoiceStatus } from '@/lib/api/generated/models';
 import { useBrand } from '@/lib/api/hooks/brands';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
-import { useRole } from '@/contexts/role-context';
+import { formatCurrency, formatDate } from '@/lib/utils';
+import { BrandDetailsSheet } from '../admin/brands/brand-details-sheet';
+import { TCheckboxCell, TCheckboxHead, THead } from '../admin/data-table';
+import { InvoiceActionMenu } from './invoice-action-menu';
+import { InvoiceDetailsSheet } from './invoice-details-sheet';
+import { useFormatCurrency } from '@/lib/hooks/format';
+
+const statusIconMap: Record<UtilsInvoiceStatus, { icon: IconSvgElement; className: string; label: string; }> = {
+  paid: { icon: CheckmarkCircle02Icon, className: 'text-green-500', label: 'Paid' },
+  overdue: { icon: Clock01Icon, className: 'text-red-500', label: 'Overdue' },
+  cancelled: { icon: Cancel01Icon, className: 'text-red-400', label: 'Cancelled' },
+  draft: { icon: FileEditIcon, className: 'text-gray-400', label: 'Draft' },
+  issued: { icon: File01Icon, className: 'text-blue-400', label: 'Issued' },
+  sent: { icon: SentIcon, className: 'text-blue-500', label: 'Sent' },
+};
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -29,22 +45,16 @@ function getInitials( name?: string ) {
 
 function InvoiceNumberCell( { invoice }: { invoice: ModelsInvoiceResponse; } ) {
   const [ open, setOpen ] = React.useState( false );
-  const { invoice_number, invoice_status, campaign_id, campaign_name } = invoice;
+  const { invoice_number } = invoice;
 
   return (
     <>
-      <div>
-        <button
-          onClick={ () => setOpen( true ) }
-          className="text-[15px] font-medium text-primary hover:underline text-left"
-        >
-          { invoice_number || '—' }
-        </button>
-        <CampaignInfo campaign_id={ campaign_id } campaign_name={ campaign_name } />
-        <div className="mt-2">
-          <InvoiceStatusBadge status={ invoice_status } />
-        </div>
-      </div>
+      <button
+        onClick={ () => setOpen( true ) }
+        className="text-[15px] font-medium text-primary hover:underline text-left"
+      >
+        { invoice_number || '—' }
+      </button>
       <InvoiceDetailsSheet invoice={ invoice } open={ open } onOpenChange={ setOpen } />
     </>
   );
@@ -86,7 +96,7 @@ function BrandCell( { brand_id, brand_name }: { brand_id?: string; brand_name?: 
         onClick={ () => setOpen( true ) }
         className="flex items-center gap-2.5 hover:opacity-80 transition-opacity text-left"
       >
-        <Avatar size="sm">
+        <Avatar size="sm" className={ 'dt-table__avatar' }>
           { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ brand_name } /> }
           <AvatarFallback>{ getInitials( brand_name ) }</AvatarFallback>
         </Avatar>
@@ -94,7 +104,6 @@ function BrandCell( { brand_id, brand_name }: { brand_id?: string; brand_name?: 
       </button>
       <BrandDetailsSheet
         brandId={ brand_id }
-        brandName={ brand_name }
         open={ open }
         onOpenChange={ setOpen }
       />
@@ -109,22 +118,8 @@ export const getColumns = (
 ): ColumnDef<ModelsInvoiceResponse>[] => [
     {
       id: 'select',
-      header: ( { table } ) => (
-        <Checkbox
-          checked={ table.getIsAllPageRowsSelected() }
-          onCheckedChange={ ( value ) => table.toggleAllPageRowsSelected( !!value ) }
-          aria-label="Select all"
-          className="bg-background"
-        />
-      ),
-      cell: ( { row } ) => (
-        <Checkbox
-          checked={ row.getIsSelected() }
-          onCheckedChange={ ( value ) => row.toggleSelected( !!value ) }
-          aria-label="Select row"
-          className="mt-1"
-        />
-      ),
+      header: ( { table } ) => <TCheckboxHead table={ table } />,
+      cell: ( { row } ) => <TCheckboxCell row={ row } className='-mt-[1px]' />,
       enableSorting: false,
       enableHiding: false,
     },
@@ -146,28 +141,30 @@ export const getColumns = (
     },
     {
       accessorKey: 'invoice_number',
-      header: () => <span className="font-normal">Invoice</span>,
+      header: () => <THead title="Invoice" />,
       cell: ( { row } ) => <InvoiceNumberCell invoice={ row.original } />,
     },
     ...( isAdmin ? [
       {
         accessorKey: 'brand_name',
-        header: () => <span className="font-normal">Brand</span>,
-        cell: ( { row }: { row: { original: ModelsInvoiceResponse; }; } ) => (
+        header: () => <THead title="Brand" />,
+        cell: ( { row } ) => (
           <BrandCell brand_id={ row.original.brand_id } brand_name={ row.original.brand_name } />
         ),
       } as ColumnDef<ModelsInvoiceResponse>,
     ] : [] ),
     {
+      accessorKey: 'campaign_name',
+      enableHiding: true,
+      header: () => <span className="font-normal" data-hidden-column="true">Campaign</span>,
+      cell: ( { row } ) => (
+        <div data-hidden-column="true"><CampaignInfo campaign_id={ row.original.campaign_id } campaign_name={ row.original.campaign_name } /></div>
+      ),
+    },
+    {
       accessorKey: 'issued_date',
       header: ( { column } ) => (
-        <Button
-          variant="ghost"
-          onClick={ () => column.toggleSorting( column.getIsSorted() === 'asc' ) }
-        >
-          <span className="font-normal">Issued</span>
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <THead title="Issued" column={ column } />
       ),
       cell: ( { row } ) => (
         <div className="text-sm pl-2">
@@ -177,47 +174,38 @@ export const getColumns = (
       enableSorting: true,
     },
     {
-      accessorKey: 'due_date',
-      header: ( { column } ) => (
-        <Button
-          variant="ghost"
-          onClick={ () => column.toggleSorting( column.getIsSorted() === 'asc' ) }
-        >
-          <span className="font-normal">Due Date</span>
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      ),
-      cell: ( { row } ) => (
-        <div className="text-sm pl-2">
-          { row.original.due_date ? formatDate( row.original.due_date ) : '—' }
-        </div>
-      ),
-      enableSorting: true,
+      id: 'paid',
+      accessorKey: 'invoice_status',
+      header: () => <THead title="Paid?" />,
+      cell: ( { row } ) => {
+        const status = row.original.invoice_status as UtilsInvoiceStatus | undefined;
+        if ( !status ) return <div className="pl-2 text-muted-foreground">—</div>;
+        const { icon, className, label } = statusIconMap[ status ] ?? statusIconMap.draft;
+        return (
+          <div className="pl-2" title={ label }>
+            <HugeiconsIcon icon={ icon } className={ `size-5 ${ className }` } />
+          </div>
+        );
+      },
+      enableSorting: false,
     },
     {
       accessorKey: 'total',
       header: ( { column } ) => (
-        <Button
-          variant="ghost"
-          onClick={ () => column.toggleSorting( column.getIsSorted() === 'asc' ) }
-        >
-          <span className="font-normal">Amount</span>
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <THead title="Amount" column={ column } />
       ),
       cell: ( { row } ) => {
         const amount = row.original.total?.value;
+        const currency = row.original.total?.currency;
         if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
-        return <div className="pl-4 font-medium">{ formatCurrency( amount ) }</div>;
+        return <div className="pl-4 font-medium">{ useFormatCurrency( amount, currency ) }</div>;
       },
       enableSorting: true,
     },
     {
       id: 'actions',
       header: () => (
-        <div className="flex justify-end mr-2">
-          <span className="font-normal text-right">Actions</span>
-        </div>
+        <THead title="Actions" shouldSort={ false } className='justify-end text-right w-full' />
       ),
       enableHiding: false,
       cell: ( { row } ) => <div className='flex justify-end mr-1'><InvoiceActionMenu invoice={ row.original } /></div>,

@@ -16,13 +16,14 @@ import { AnimatePresence, motion } from 'motion/react';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
-import { columns } from './brands-columns';
+import { getColumns } from './brands-columns';
 import { Brand } from './brands-data';
 import { BrandsView } from './brands-view';
 import { BrandsTableToolbar } from './brands-table-toolbar';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+import { BrandDetailsSheet } from './brand-details-sheet';
 
 const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -41,8 +42,6 @@ const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string
   return searchable.includes( q );
 };
 
-
-
 type BrandsTableProps = {
   brandsData?: Brand[];
   isLoading?: boolean;
@@ -58,19 +57,46 @@ export function BrandsTable( {
   const { view, setView } = usePersistedViewMode( 'brands', 'cards' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
-  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
+  const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ globalFilter, setGlobalFilter ] = React.useState( '' );
+  const [ selectedBrand, setSelectedBrand ] = React.useState<Brand | null>( null );
+  const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
     brandsData?.forEach( ( brand ) => {
-      if ( brand.brand_status ) {
-        statusSet.add( brand.brand_status );
-      }
+      if ( brand.brand_status ) statusSet.add( brand.brand_status );
     } );
     return Array.from( statusSet );
   }, [ brandsData ] );
+
+  const countries = React.useMemo( () => {
+    const set = new Set<string>();
+    brandsData?.forEach( ( brand ) => {
+      if ( brand.country ) set.add( brand.country );
+    } );
+    return Array.from( set ).sort();
+  }, [ brandsData ] );
+
+  const sizes = React.useMemo( () => {
+    const set = new Set<string>();
+    brandsData?.forEach( ( brand ) => {
+      if ( brand.company_size ) set.add( brand.company_size );
+    } );
+    return Array.from( set );
+  }, [ brandsData ] );
+
+  const columns = React.useMemo(
+    () =>
+      getColumns( {
+        onViewDetails: ( brand ) => {
+          setSelectedBrand( brand );
+          setIsSheetOpen( true );
+        },
+      } ),
+    []
+  );
 
   const table = useReactTable( {
     data: brandsData || [],
@@ -96,19 +122,28 @@ export function BrandsTable( {
 
   return (
     <AnimatePresence>
-      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton cardHeight="h-[250px]" /> ) }
+      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
       { error && <TableErrorState entity="brands" message={ error.message } /> }
-      { !isLoading && !error && <motion.div
-        initial={ { opacity: 0 } }
-        animate={ { opacity: 1 } }
-        exit={ { opacity: 0 } }
-        transition={ { duration: 0.3 } }
-        className="space-y-4 bg-slate-50/50 grow relative overflow-auto"
-      >
-        <BrandsTableToolbar table={ table } view={ view } setView={ setView } statuses={ statuses } />
-        <BrandsView table={ table } view={ view } />
-        <DataTablePagination table={ table } className="px-5" />
-      </motion.div> }
+      { !isLoading && !error && (
+        <motion.div
+          initial={ { opacity: 0 } }
+          animate={ { opacity: 1 } }
+          exit={ { opacity: 0 } }
+          transition={ { duration: 0.3 } }
+          className="flex flex-col bg-slate-50/50 grow relative overflow-auto"
+        >
+          <BrandsTableToolbar table={ table } view={ view } setView={ setView } statuses={ statuses } countries={ countries } sizes={ sizes } />
+          <BrandsView table={ table } view={ view } onViewDetails={ ( brand ) => { setSelectedBrand( brand ); setIsSheetOpen( true ); } } />
+          <div className="px-3 mt-auto">
+            <DataTablePagination table={ table } />
+          </div>
+          <BrandDetailsSheet
+            brand={ selectedBrand }
+            open={ isSheetOpen }
+            onOpenChange={ setIsSheetOpen }
+          />
+        </motion.div>
+      ) }
     </AnimatePresence>
   );
 }

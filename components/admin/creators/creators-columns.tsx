@@ -4,32 +4,28 @@ import { Button } from "@/components/dashboard-ui/button";
 import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 import { Checkbox } from "@/components/dashboard-ui/checkbox";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
+import { getCountryFlag, getCountryName } from "@/lib/country-flags";
 import { cn } from "@/lib/dashboard-utils";
-import { getCountryFlag } from "@/lib/country-flags";
-import { useBasePath } from "@/lib/providers/path-provider";
-import { calculateAge } from "@/lib/utils";
+import { ageFromDate } from "@/lib/utils";
 import { ColumnDef, Row } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown } from "lucide-react";
-import Link from "next/link";
-import { CreatorActionMenu } from "./creator-action-menu";
-import { CreatorInfoBlock } from "./creator-info-block";
-import { CreatorStatusBadge } from "./creator-status-badge";
+import { ChevronDown } from "lucide-react";
+import { TCheckboxCell, TCheckboxHead, THead } from "../data-table";
+import { CreatorActionMenu } from "@/components/admin/creators/creator-action-menu";
+import { CreatorInfoBlock } from "@/components/admin/creators/creator-info-block";
+import { CreatorStatusBadge } from "@/components/admin/creators/creator-status-badge";
 
 interface GetColumnsProps {
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
 }
 
 const CreatorActionsCell = ( { row, onViewDetails, className }: { row: Row<ModelsCreatorResponse>; onViewDetails: ( creator: ModelsCreatorResponse ) => void; className?: string; } ) => {
-  const basePath = useBasePath();
   const creator = row.original;
   return (
     <div className={ cn( "flex justify-end items-center gap-2", className ) }>
       <ButtonGroup className="flex justify-end">
-        <Button variant="outline" size="sm" className="font-regular" render={
-          <Link href={ `${ basePath }/creators/${ creator.id }` }>
-            View
-          </Link>
-        } />
+        <Button variant="outline" size="sm" className="font-regular" onClick={ () => onViewDetails( creator ) }>
+          View
+        </Button>
         <CreatorActionMenu
           creator={ creator }
           creatorId={ creator.id }
@@ -48,21 +44,8 @@ const CreatorActionsCell = ( { row, onViewDetails, className }: { row: Row<Model
 export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<ModelsCreatorResponse>[] => [
   {
     id: "select",
-    header: ( { table } ) => (
-      <Checkbox
-        checked={ table.getIsAllPageRowsSelected() }
-        onCheckedChange={ ( value ) => table.toggleAllPageRowsSelected( !!value ) }
-        aria-label="Select all"
-      />
-    ),
-    cell: ( { row } ) => (
-      <Checkbox
-        checked={ row.getIsSelected() }
-        onCheckedChange={ ( value ) => row.toggleSelected( !!value ) }
-        aria-label="Select row"
-        className={ 'mt-2' }
-      />
-    ),
+    header: ( { table } ) => <TCheckboxHead table={ table } />,
+    cell: ( { row } ) => <TCheckboxCell row={ row } />,
     enableSorting: false,
     enableHiding: false,
   },
@@ -71,20 +54,13 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     accessorFn: ( row ) => `${ row.first_name || '' } ${ row.last_name || '' }`.trim() || row.email || 'Unknown',
     header: ( { column } ) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={ () => column.toggleSorting( column.getIsSorted() === "asc" ) }
-          className={ 'font-regular pl-4' }
-        >
-          Name
-          <ArrowUpDown className="ml-2 size-4" strokeWidth={ 1 } />
-        </Button>
+        <THead column={ column } title="Name" className="pl-3" />
       );
     },
     cell: ( { row } ) => {
       return (
-        <div className="pl-4 py-0">
-          <CreatorInfoBlock creator={ row.original } hideGender={ true } hideLocation={ true } hideAge={ true } onViewDetails={ onViewDetails } showActions={ false } />
+        <div className="pl-4 py-0 min-w-[250px]">
+          <CreatorInfoBlock creator={ row.original } hideGender={ true } hideLocation={ true } hideAge={ true } onViewDetails={ onViewDetails } />
         </div>
       );
     },
@@ -94,31 +70,24 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     accessorKey: "date_of_birth",
     header: ( { column } ) => {
       return (
-        <Button
-          variant="ghost"
-          className={ 'font-regular pl-0' }
-          onClick={ () => column.toggleSorting( column.getIsSorted() === "asc" ) }
-        >
-          Age
-          <ArrowUpDown className="ml-2 size-4" strokeWidth={ 1 } />
-        </Button>
+        <THead column={ column } title="Age" />
       );
     },
     cell: ( { row } ) => {
       const dob = row.getValue( "date_of_birth" ) as string;
-      const age = calculateAge( dob );
+      const age = ageFromDate( dob );
       return (
         <div>
           { age ? `${ age }` : '-' }
         </div>
       );
     },
-    filterFn: ( row, columnId, filterValue: [ number?, number? ] ) => {
+    filterFn: ( row, columnId, filterValue: [ number?, number?] ) => {
       if ( !filterValue ) return true;
       const [ minAge, maxAge ] = filterValue;
       if ( !minAge && !maxAge ) return true;
       const dob = row.getValue( columnId ) as string;
-      const age = calculateAge( dob );
+      const age = ageFromDate( dob );
       if ( age == null ) return true;
       if ( minAge && age < minAge ) return false;
       if ( maxAge && age > maxAge ) return false;
@@ -129,14 +98,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     accessorKey: "gender",
     header: ( { column } ) => {
       return (
-        <Button
-          variant="ghost"
-          className={ 'font-regular pl-0' }
-          onClick={ () => column.toggleSorting( column.getIsSorted() === "asc" ) }
-        >
-          Sex
-          <ArrowUpDown className="ml-2 size-4" strokeWidth={ 1 } />
-        </Button>
+        <THead column={ column } title="Sex" />
       );
     },
     cell: ( { row } ) => {
@@ -170,14 +132,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
     accessorFn: ( row ) => [ row.city, row.country ].filter( Boolean ).join( ', ' ),
     header: ( { column } ) => {
       return (
-        <Button
-          variant="ghost"
-          className={ 'font-regular pl-0' }
-          onClick={ () => column.toggleSorting( column.getIsSorted() === "asc" ) }
-        >
-          City/Country
-          <ArrowUpDown className="ml-2 size-4" strokeWidth={ 1 } />
-        </Button>
+        <THead column={ column } title="City/Country" />
       );
     },
     cell: ( { row } ) => {
@@ -190,14 +145,18 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
       return (
         <div className="flex items-center gap-2">
           { flagName && <img src={ `/images/flags/${ flagName }.svg` } alt={ creator.country } className="h-4 w-auto" /> }
-          <span className="truncate max-w-[150px]" title={ location }>{ creator.city || creator.country }</span>
+          <span className="truncate max-w-[150px]" title={ location }>{ creator.city || creator.country }, { getCountryName( creator.country ) }</span>
         </div>
       );
     },
   },
   {
     accessorKey: "creator_status",
-    header: () => <span className={ 'font-regular' }>Status</span>,
+    header: ( { column } ) => {
+      return (
+        <THead column={ column } title="Status" />
+      );
+    },
     cell: ( { row } ) => <CreatorStatusBadge status={ row.getValue( "creator_status" ) as string } />,
     filterFn: ( row, id, filterValue ) => {
       if ( filterValue === undefined ) {
@@ -212,9 +171,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
   {
     id: "actions",
     header: () => (
-      <div className="flex justify-end pr-2">
-        <span className="font-regular text-right">Actions</span>
-      </div>
+      <THead title="Actions" shouldSort={ false } className="flex justify-end pr-3 w-full" />
     ),
     enableHiding: false,
     cell: ( { row } ) => <CreatorActionsCell row={ row } onViewDetails={ onViewDetails } className="pr-2" />,

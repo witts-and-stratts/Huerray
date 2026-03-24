@@ -4,12 +4,14 @@
 import { useParams } from 'next/navigation';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
 import { CampaignDetailsView } from '@/components/campaigns/campaign-details-view';
-import { ModelCampaign } from '@/components/campaigns/types';
 import { Loader2 } from 'lucide-react';
+import { Button } from '@/components/dashboard-ui/button';
 
 export default function CampaignPage() {
   const params = useParams<{ id: string; }>();
-  const { data, isLoading, error } = useCampaign( params.id );
+  const { data, isLoading, error, refetch } = useCampaign( params.id );
+
+  const handleRetry = () => refetch();
 
   if ( isLoading ) {
     return (
@@ -24,15 +26,10 @@ export default function CampaignPage() {
       <div className='flex flex-col items-center justify-center min-h-[400px] gap-2'>
         <p className='text-destructive font-medium'>Failed to load campaign</p>
         <p className='text-muted-foreground text-sm'>{ error?.message || 'Campaign not found' }</p>
+        <Button variant={ 'outline' } onClick={ handleRetry } className={ 'text-sm' }>Retry</Button>
       </div>
     );
   }
 
-  const campaign: ModelCampaign = {
-    ...data,
-    creators: [],
-    applications: [],
-  };
-
-  return <CampaignDetailsView campaign={ campaign } />;
+  return <CampaignDetailsView campaign={ data } />;
 }

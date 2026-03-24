@@ -1,4 +1,5 @@
 import { useLocale } from "next-intl";
+import { formatDate } from "../utils/format";
 
 export const useFormatCurrency = ( amount: number, currency: string = 'USD' ) => {
   const locale = useLocale();
@@ -6,4 +7,10 @@ export const useFormatCurrency = ( amount: number, currency: string = 'USD' ) =>
     style: 'currency',
     currency,
   }).format(amount);
+};
+
+export const useFormatDate = ( dateString: string ) => {
+  const locale = useLocale();
+  
+  return formatDate( dateString, locale );
 };

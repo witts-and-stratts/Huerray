@@ -67,14 +67,6 @@ export function CreatorDashboard() {
           <div className="lg:col-span-8">
             <CreatorActiveGigsBlock />
           </div>
-          <div className="lg:col-span-4">
-            <CreatorProfileSnapshotBlock
-              name={ creatorName }
-              avatar={ user?.avatar }
-              submissionsCount={ submissions.length }
-              approvedCount={ approvedCount }
-            />
-          </div>
         </section>
 
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">

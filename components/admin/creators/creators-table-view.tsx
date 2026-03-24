@@ -24,7 +24,7 @@ export function CreatorsTableView( { table }: CreatorsTableViewProps ) {
             <TableRow key={ headerGroup.id }>
               { headerGroup.headers.map( ( header ) => {
                 return (
-                  <TableHead key={ header.id } className='bg-accent/50'>
+                  <TableHead key={ header.id } className='bg-slate-50/80'>
                     { header.isPlaceholder
                       ? null
                       : flexRender(
@@ -69,10 +69,10 @@ export function CreatorsTableView( { table }: CreatorsTableViewProps ) {
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={ table.getAllColumns().length }
-                  className="h-24 text-center"
+                  colSpan={ table.getVisibleLeafColumns().length }
+                  className='h-24 text-center'
                 >
-                  No users found.
+                  No results.
                 </TableCell>
               </TableRow>
             ) }

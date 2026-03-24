@@ -39,11 +39,11 @@ import { ResultGroup } from './result-group';
 function SearchPlaceholderState( { children }: { children: React.ReactNode; } ) {
   return (
     <motion.div
-      className="flex flex-col items-center justify-center py-12 text-center"
-      initial={ { opacity: 0, scale: 0.97 } }
+      className="flex flex-col items-center justify-center py-10 text-center w-full"
+      initial={ { opacity: 0, scale: 0.98 } }
       animate={ { opacity: 1, scale: 1 } }
-      exit={ { opacity: 0, scale: 0.97 } }
-      transition={ { duration: 0.18 } }
+      exit={ { opacity: 0, scale: 0.98, position: 'absolute', top: 0, left: 0, right: 0 } }
+      transition={ { duration: 0.2, ease: 'easeInOut' } }
     >
       <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-muted">
         <HugeiconsIcon icon={ SearchIcon } className="size-5 text-muted-foreground" strokeWidth={ 1.5 } />
@@ -128,18 +128,24 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
   );
 
   const showHint = debouncedQuery.length < 2;
+  const showResults = debouncedQuery.length >= 2 && hasResults;
   const showEmpty = debouncedQuery.length >= 2 && !isAnyLoading && !hasResults;
-  const showResults = debouncedQuery.length >= 2 && !isAnyLoading && hasResults;
+  const showLoading = debouncedQuery.length >= 2 && isAnyLoading && !hasResults;
 
   return (
-    <Dialog open={ open } onOpenChange={ onOpenChange } modal>
+    <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogHeader className="sr-only">
         <DialogTitle>Global Search</DialogTitle>
         <DialogDescription>Search across your dashboard</DialogDescription>
       </DialogHeader>
       <DialogContent className="max-w-[90%] overflow-hidden p-0 rounded-xl! gap-1">
 
-        <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+        <motion.div
+          className="flex items-center gap-2 border-b border-border px-4 py-3"
+          initial={ { opacity: 0, y: -6 } }
+          animate={ { opacity: 1, y: 0 } }
+          transition={ { duration: 0.2, ease: 'easeOut', delay: 0.05 } }
+        >
           <SuperField
             type="search"
             ref={ inputRef }
@@ -161,10 +167,15 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
               ) : null
             }
           />
-        </div>
+        </motion.div>
 
         {/* ── Entity Filter Chips ── */ }
-        <div className="flex items-center gap-2 border-b border-border px-4 py-2.5 overflow-x-auto no-scrollbar">
+        <motion.div
+          className="flex items-center gap-2 border-b border-border px-4 py-2.5 overflow-x-auto no-scrollbar"
+          initial={ { opacity: 0, y: -4 } }
+          animate={ { opacity: 1, y: 0 } }
+          transition={ { duration: 0.2, ease: 'easeOut', delay: 0.1 } }
+        >
           <button
             onClick={ allSelected ? () => { } : selectAllEntities }
             className={ cn(
@@ -205,7 +216,7 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
               ) }
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Advanced Filters (animated) ── */ }
         <AnimatePresence>
@@ -225,17 +236,26 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
             padding: '4px'
           }
         } }>
-          <div className="py-2">
+          <motion.div
+            layout="position"
+            className="py-2 relative min-h-[100px]"
+            transition={ { duration: 0.2, ease: 'easeInOut' } }
+          >
             <AnimatePresence>
               { showHint && (
                 <SearchPlaceholderState key="hint">
                   <p className="text-sm font-medium text-foreground">Search across your dashboard</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Type at least 2 characters to search{ ' ' }
-                    { Array.from( selectedEntities )
-                      .map( ( t ) => ENTITY_LABELS[ t ].toLowerCase() )
-                      .join( ', ' ) }
+                  <p className="mt-1 text-xs text-muted-foreground uppercase tracking-wider text-[10px]">
+                    Type at least 2 characters to search
                   </p>
+                </SearchPlaceholderState>
+              ) }
+              { showLoading && (
+                <SearchPlaceholderState key="loading">
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="size-6 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+                    <p className="text-sm text-muted-foreground">Searching...</p>
+                  </div>
                 </SearchPlaceholderState>
               ) }
               { showEmpty && (
@@ -251,11 +271,11 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
               { showResults && (
                 <motion.div
                   key="results"
-                  className="space-y-3"
-                  initial={ { opacity: 0 } }
-                  animate={ { opacity: 1 } }
-                  exit={ { opacity: 0 } }
-                  transition={ { duration: 0.15 } }
+                  className={ cn( "space-y-3 transition-opacity duration-200", isAnyLoading && "opacity-50 pointer-events-none" ) }
+                  initial={ { opacity: 0, y: 4 } }
+                  animate={ { opacity: 1, y: 0 } }
+                  exit={ { opacity: 0, y: -4, position: 'absolute', top: 0, left: 0, right: 0 } }
+                  transition={ { duration: 0.22, ease: 'easeOut' } }
                 >
                   { groups.map( ( group, i ) => (
                     <ResultGroup key={ group.type } group={ group } groupIndex={ i } onSelect={ handleSelect } />
@@ -263,11 +283,16 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
                 </motion.div>
               ) }
             </AnimatePresence>
-          </div>
+          </motion.div>
         </ScrollArea>
 
         {/* ── Footer ── */ }
-        <div className="flex items-center justify-between border-t border-border px-4 py-2 bg-muted/50">
+        <motion.div
+          className="flex items-center justify-between border-t border-border px-4 py-2 bg-muted/50"
+          initial={ { opacity: 0, y: 4 } }
+          animate={ { opacity: 1, y: 0 } }
+          transition={ { duration: 0.2, ease: 'easeOut', delay: 0.15 } }
+        >
           <p className="text-sm text-muted-foreground font-regular">
             { showResults && hasResults
               ? `Showing top ${ groups.reduce( ( sum, g ) => sum + g.items.length, 0 ) } results`
@@ -288,7 +313,7 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
             </KbdGroup>
             <span className="text-xs text-muted-foreground">close</span>
           </div>
-        </div>
+        </motion.div>
       </DialogContent>
     </Dialog>
   );

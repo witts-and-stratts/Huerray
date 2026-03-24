@@ -464,7 +464,7 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
               isDocOrUnknown ? 'h-[75vh]' : ''
             ) }
             style={ !isDocOrUnknown ? { minHeight: MIN_PREVIEW_HEIGHT } : undefined }
-            animate={ isDocOrUnknown ? {} : { height: height ?? 'auto' } }
+            animate={ isDocOrUnknown ? {} : { height: height ?? MIN_PREVIEW_HEIGHT } }
             transition={ heightTransition }
           >
             <div className="relative flex items-center justify-center w-full h-full pointer-events-none">

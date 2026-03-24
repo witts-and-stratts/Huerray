@@ -11,6 +11,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '@/components/dashboard-ui/empty';
+import { EmptySubmission } from '@/components/admin/empty-states/empty-submissions';
 
 interface CampaignSubmissionsSectionProps {
   campaignId: string;
@@ -39,17 +40,11 @@ export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsS
 
   if ( submissions.length === 0 ) {
     return (
-      <Empty className='border py-20 my-6 flex-1 bg-white'>
-        <EmptyHeader>
-          <EmptyMedia>
-            <img src="/svg/creator-submission.svg" alt="No submissions yet" className='w-full h-full object-contain max-h-[280px] md:max-h-[320px]' />
-          </EmptyMedia>
-          <EmptyTitle className='font-normal font-primary text-primary'>No submissions yet</EmptyTitle>
-          <EmptyDescription>
-            Video submissions for this campaign will appear here.
-          </EmptyDescription>
-        </EmptyHeader>
-      </Empty>
+      <EmptySubmission
+        title='No submissions yet'
+        description='Video submissions for this campaign will appear here.'
+        fill={ true }
+      />
     );
   }
 

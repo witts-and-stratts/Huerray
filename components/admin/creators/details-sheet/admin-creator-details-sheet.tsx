@@ -13,10 +13,11 @@ import { useUser } from '@/lib/api/hooks/users';
 import { stripTags } from '@/lib/utils';
 import * as React from 'react';
 import { Activity } from 'react';
-import { toDateLabel } from '../dashboard/creator-dashboard-utils';
 import { CreatorDetailsSheetProps, ExpandableCategories, Row, SOCIAL_PLATFORMS, SocialLink } from './creator-details-shared';
 import { CreatorSheetHeader } from './creator-sheet-header';
 import { Content } from '@/components/dashboard-ui/content';
+import { useFormatDate } from '@/lib/hooks/format';
+import { CopyText } from '@/components/dashboard-ui/copy-text';
 
 
 export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDetailsSheetProps ) {
@@ -70,9 +71,13 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
           <Activity mode={ activeTab === 'overview' ? 'visible' : 'hidden' }>
             <div className="space-y-3 rounded-lg">
               <WrappedCard title="Contact & Personal Info">
-                <Row label="Email" value={ email || 'N/A' } />
+                <Row label="Email" value={
+                  <CopyText text={ email } iconSide='left'>
+                    <span className='font-normal'>{ email || 'N/A' }</span>
+                  </CopyText> } />
                 <Separator />
-                <Row label="Phone" value={ phone || 'N/A' } />
+                <Row label="Phone" value={ <CopyText text={ phone } iconSide='left'>
+                  <span className='font-normal'>{ phone || 'N/A' }</span></CopyText> } />
                 <Separator />
                 <Row label="Address" value={ address || 'N/A' } />
               </WrappedCard>
@@ -101,11 +106,11 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
               ) }
 
               <WrappedCard title="System Details">
-                <Row label="Joined" value={ created_at ? toDateLabel( created_at as string ) : 'N/A' } />
+                <Row label="Joined" value={ created_at ? useFormatDate( created_at as string ) : 'N/A' } />
                 <Separator />
-                <Row label="Creator ID" value={ <span className="font-mono break-all">{ id }</span> } />
+                <Row label="Creator ID" value={ <CopyText text={ id } iconSide='left' className='font-mono text-[13px]'>{ id }</CopyText> } />
                 <Separator />
-                <Row label="User ID" value={ <span className="font-mono break-all">{ user_id }</span> } />
+                <Row label="User ID" value={ <CopyText text={ user_id } iconSide='left' className='font-mono text-[13px]'>{ user_id }</CopyText> } />
               </WrappedCard>
             </div>
           </Activity>
@@ -150,11 +155,20 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
           <Activity mode={ activeTab === 'user' ? 'visible' : 'hidden' }>
             <div className="pt-4 space-y-3">
               <WrappedCard title="Account">
-                <Row label="Username" value={ userDetails?.username || 'N/A' } />
+                <Row label="Username" value={
+                  <CopyText text={ userDetails?.username || 'N/A' } iconSide='left'>
+                    <span className='font-normal'>{ userDetails?.username || 'N/A' }</span>
+                  </CopyText> } />
                 <Separator />
-                <Row label="Email" value={ userDetails?.email || 'N/A' } />
+                <Row label="Email" value={
+                  <CopyText text={ userDetails?.email || 'N/A' } iconSide='left'>
+                    <span className='font-normal'>{ userDetails?.email || 'N/A' }</span>
+                  </CopyText> } />
                 <Separator />
-                <Row label="Phone" value={ userDetails?.phone_number || 'N/A' } />
+                <Row label="Phone" value={
+                  <CopyText text={ userDetails?.phone_number || 'N/A' } iconSide='left'>
+                    <span className='font-normal'>{ userDetails?.phone_number || 'N/A' }</span>
+                  </CopyText> } />
                 <Separator />
                 <Row label="Type" value={ userDetails?.user_type || 'N/A' } />
                 <Separator />
@@ -163,11 +177,11 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
                 <Row label="Verified" value={ userDetails?.email_verified ? 'Yes' : 'No' } />
               </WrappedCard>
               <WrappedCard title="System">
-                <Row label="User ID" value={ <span className="font-mono break-all">{ userDetails?.id || user_id }</span> } />
+                <Row label="User ID" value={ <CopyText text={ userDetails?.id || user_id } iconSide='left' className='font-mono text-[13px]'>{ userDetails?.id || user_id }</CopyText> } />
                 <Separator />
-                <Row label="Created" value={ userDetails?.created_at ? toDateLabel( userDetails.created_at ) : 'N/A' } />
+                <Row label="Created" value={ userDetails?.created_at ? useFormatDate( userDetails.created_at ) : 'N/A' } />
                 <Separator />
-                <Row label="Updated" value={ userDetails?.updated_at ? toDateLabel( userDetails.updated_at ) : 'N/A' } />
+                <Row label="Updated" value={ userDetails?.updated_at ? useFormatDate( userDetails.updated_at ) : 'N/A' } />
               </WrappedCard>
             </div>
           </Activity>

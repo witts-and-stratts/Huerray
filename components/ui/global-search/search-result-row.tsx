@@ -12,11 +12,10 @@ import type { SearchResult } from '@/lib/api/hooks/search';
 
 interface SearchResultRowProps {
   result: SearchResult;
-  index: number;
   onSelect: ( result: SearchResult ) => void;
 }
 
-export function SearchResultRow( { result, index, onSelect }: SearchResultRowProps ) {
+export function SearchResultRow( { result, onSelect }: SearchResultRowProps ) {
   const hasAvatar =
     ( result.type === 'brands' || result.type === 'creators' ) ||
     ( result.type === 'campaigns' && !!result.avatarUrl );
@@ -31,9 +30,10 @@ export function SearchResultRow( { result, index, onSelect }: SearchResultRowPro
     <motion.button
       onClick={ () => onSelect( result ) }
       className="group flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-primary/5 focus-visible:bg-primary/5 focus-visible:outline-none group/item hover:cursor-pointer"
-      initial={ { opacity: 0 } }
-      animate={ { opacity: 1 } }
-      transition={ { duration: 0.15, delay: index * 0.02 } }
+      variants={ {
+        hidden: { opacity: 0, y: 6 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.18, ease: 'easeOut' } },
+      } }
     >
       { hasAvatar ? (
         <Avatar className="size-8 shrink-0 rounded-md">

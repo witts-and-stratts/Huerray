@@ -1,50 +1,59 @@
 'use client';
 
-import { Building05Icon, PlusSignIcon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { Table as TanstackTable } from '@tanstack/react-table';
-import { motion } from 'motion/react';
-import { BrandsCardsView } from './brands-cards-view';
+import { AnimatePresence, motion } from 'motion/react';
+import { BrandCard } from './brand-card';
 import { Brand } from './brands-data';
 import { BrandsTableView } from './brands-table-view';
 
-export function BrandsView( {
-  table,
-  view,
-}: {
+interface BrandsViewProps {
   table: TanstackTable<Brand>;
   view: 'table' | 'cards';
-} ) {
-  return (
-    <div className='px-5 mt-1'>
-      { table.getRowModel().rows.length === 0 ? (
-        <motion.div
-          initial={ { opacity: 0, y: 20 } }
-          animate={ { opacity: 1, y: 0 } }
-          className="flex flex-col items-center justify-center py-20 text-center space-y-6"
-        >
-          <div className="w-24 h-24 bg-primary/5 rounded-full flex items-center justify-center text-primary/20 relative">
-            <HugeiconsIcon icon={ Building05Icon } className="w-12 h-12" />
-            <motion.div
-              animate={ { scale: [ 1, 1.2, 1 ], opacity: [ 0.5, 1, 0.5 ] } }
-              transition={ { duration: 2, repeat: Infinity } }
-              className="absolute -top-1 -right-1 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center shadow-lg"
-            >
-              <HugeiconsIcon icon={ PlusSignIcon } className="w-4 h-4" />
-            </motion.div>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold">No brands yet</h3>
-            <p className="text-muted-foreground max-w-xs mx-auto text-balance">
-              Brands will appear here once they register on the platform.
-            </p>
-          </div>
-        </motion.div>
-      ) : view === 'table' ? (
-        <BrandsTableView table={ table } />
-      ) : (
-        <BrandsCardsView table={ table } />
-      ) }
-    </div>
-  );
+  onViewDetails?: ( brand: Brand ) => void;
+}
+
+export function BrandsView( { table, view, onViewDetails }: BrandsViewProps ) {
+  if ( view === 'cards' ) {
+    if ( table.getRowModel().rows.length === 0 ) {
+      return (
+        <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
+          <p className="text-muted-foreground">No brands found.</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="@container px-2 md:px-5">
+        <AnimatePresence mode='popLayout'>
+          <motion.div
+            className="grid grid-cols-1 gap-4 @sm:grid-cols-2 @md:grid-cols-3 @xl:grid-cols-4 @2xl:grid-cols-6"
+            variants={ {
+              show: { transition: { staggerChildren: 0.04 } },
+              exit: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
+            } }
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            { table.getRowModel().rows.map( ( row ) => (
+              <motion.div
+                key={ row.id }
+                layout
+                variants={ {
+                  hidden: { opacity: 0, y: 100 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+                  exit: { opacity: 0, y: 100, transition: { duration: 0.3 } },
+                } }
+                className='flex-1 h-full'
+              >
+                <BrandCard brand={ row.original } onViewDetails={ onViewDetails } />
+              </motion.div>
+            ) ) }
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+  return <div className="px-2 md:px-5"><BrandsTableView table={ table } /></div>;
 }

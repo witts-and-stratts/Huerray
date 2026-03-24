@@ -147,7 +147,7 @@ function EmptyGigs( { actionButtons }: { actionButtons?: React.ReactNode; } ) {
 
 export function GigsView( { table, view, onViewGig, onCreateSubmission, actionButtons }: GigsViewProps ) {
   return (
-    <div className='px-5 flex flex-col flex-1 h-full'>
+    <div className='px-2 md:px-5 flex flex-col flex-1 h-full'>
       { table.getRowModel().rows.length === 0 ? (
         <EmptyGigs actionButtons={ actionButtons } />
       ) : view === 'table' ? (

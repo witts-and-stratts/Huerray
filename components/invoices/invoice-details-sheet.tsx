@@ -1,32 +1,179 @@
 'use client';
 
-import * as React from 'react';
+import { MetaBadge, Row } from '@/components/admin/creators/details-sheet/creator-details-shared';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Separator } from '@/components/dashboard-ui/separator';
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetDescription,
 } from '@/components/dashboard-ui/sheet';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
-import { Separator } from '@/components/dashboard-ui/separator';
-import { formatCurrency, formatDate } from '@/lib/utils';
-import { InvoiceStatusBadge } from './invoice-status-badge';
-import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
+import { Button } from '@/components/dashboard-ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/dashboard-ui/hover-card';
+import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
+import { DownloadIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ModelsBrandResponse, ModelsInvoiceResponse } from '@/lib/api/generated/models';
+import { ModelsCampaignResponse } from '@/lib/api/generated/models/models-campaign-response';
 import { useBrand } from '@/lib/api/hooks/brands';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
+import { config } from '@/lib/config';
+import { getCountryFlag } from '@/lib/country-flags';
+import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import * as React from 'react';
+import { Activity } from 'react';
+import { InvoiceStatusBadge } from './invoice-status-badge';
+import { BrandHoverCard } from '../campaigns/brand-hover-card';
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
   return name.split( ' ' ).map( w => w[ 0 ] ).join( '' ).toUpperCase().slice( 0, 2 );
 }
 
-const Row = ( { label, value }: { label: string; value: React.ReactNode; } ) => (
-  <div className="flex items-start justify-between gap-3">
-    <span className="text-xs text-muted-foreground shrink-0">{ label }</span>
-    <span className="text-xs text-right">{ value ?? '—' }</span>
-  </div>
-);
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+function InvoiceSheetHeader( { invoice, total, brand }: { invoice: ModelsInvoiceResponse; total: string; brand?: ModelsBrandResponse; } ) {
+  const logo = brand?.profile_photo?.asset;
+  const flagName = getCountryFlag( brand?.country );
+  const location = [ brand?.city, brand?.state, brand?.country ].filter( Boolean ).join( ', ' );
+
+  return (
+    <SheetHeader className="relative flex flex-row items-start justify-between gap-3 bg-textured p-4 pb-8 m-6 rounded-lg mt-16 mb-0 text-center">
+      <div className="flex flex-col items-start gap-1.5">
+        <SheetTitle className="text-xl font-normal text-white font-primary tracking-tight">
+          { invoice.invoice_number || 'Invoice' }
+        </SheetTitle>
+
+        { invoice.campaign_name && (
+          <span className="text-sm text-white/60">{ invoice.campaign_name }</span>
+        ) }
+
+        <InvoiceStatusBadge status={ invoice.invoice_status } />
+      </div>
+
+      { brand && (
+        <BrandHoverCard brand={ brand }>
+          <Avatar className="size-8 bg-background ring-2 ring-white/20 cursor-pointer">
+            { logo && <AvatarImage src={ imgpresets.avatar( logo ) } alt={ brand?.company_name } className="object-cover rounded-sm" /> }
+            <AvatarFallback className="text-xs rounded-sm text-white bg-white/10">{ getInitials( brand?.company_name ) }</AvatarFallback>
+          </Avatar>
+        </BrandHoverCard>
+      ) }
+
+      <SheetDescription className="sr-only">
+        Invoice details for { invoice.invoice_number }.
+      </SheetDescription>
+    </SheetHeader>
+  );
+}
+
+// ─── Overview tab ─────────────────────────────────────────────────────────────
+
+function InvoiceOverviewTab( {
+  invoice,
+  brand,
+  campaign,
+  formattedIssued,
+  formattedDue,
+  formattedPaid,
+  formattedCreated,
+}: {
+  invoice: ModelsInvoiceResponse;
+  brand?: ModelsBrandResponse;
+  campaign?: ModelsCampaignResponse;
+  formattedIssued: string;
+  formattedDue: string;
+  formattedPaid: string;
+  formattedCreated: string;
+} ) {
+
+  const campaignImage = campaign?.product_image?.asset || campaign?.campaign_images?.[ 0 ]?.asset;
+
+  return (
+    <div className="space-y-3">
+      { /* Campaign */ }
+      { invoice.campaign_name && (
+        <WrappedCard title="Campaign">
+          <div className="flex items-center gap-3">
+            <Avatar className="size-10 bg-muted-foreground/10">
+              { campaignImage && (
+                <AvatarImage src={ imgpresets.avatar( campaignImage ) } alt={ invoice.campaign_name } className="object-cover rounded-sm" />
+              ) }
+              <AvatarFallback className="text-sm rounded-sm">{ getInitials( invoice.campaign_name ) }</AvatarFallback>
+            </Avatar>
+            <div className="min-w-0 flex-1">
+              <p className="dt-table__col-title truncate">{ invoice.campaign_name }</p>
+            </div>
+          </div>
+        </WrappedCard>
+      ) }
+
+      { /* Dates */ }
+      <WrappedCard title="Dates">
+        <Row label="Issued" value={ formattedIssued || '—' } />
+        <Row label="Due" value={ formattedDue || '—' } />
+        { invoice.paid_date && (
+          <>
+            <Row label="Paid" value={ formattedPaid } />
+          </>
+        ) }
+        <Row label="Created" value={ formattedCreated || '—' } />
+      </WrappedCard>
+
+      { /* Notes */ }
+      { invoice.notes && (
+        <WrappedCard title="Notes">
+          <p className="text-sm text-muted-foreground leading-relaxed">{ invoice.notes }</p>
+        </WrappedCard>
+      ) }
+    </div>
+  );
+}
+
+// ─── Items tab ────────────────────────────────────────────────────────────────
+
+function InvoiceItemsTab( { invoice, total }: { invoice: ModelsInvoiceResponse; total: string; } ) {
+  const items = invoice.invoice_items || [];
+
+  return (
+    <div className="space-y-3">
+      { items.length > 0 ? (
+        <WrappedCard title={ `Line Items (${ items.length })` }>
+          { items.map( ( item, i ) => (
+            <React.Fragment key={ item.id || i }>
+              { i > 0 && <Separator /> }
+              <div className="flex items-start justify-between gap-3 py-0.5">
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm truncate">{ item.description || item.gig_title || '—' }</p>
+                  { item.gig_title && item.description && (
+                    <p className="text-xs text-muted-foreground truncate">{ item.gig_title }</p>
+                  ) }
+                </div>
+                <span className="text-sm font-medium shrink-0 text-muted-foreground">
+                  { item.amount?.value != null
+                    ? new Intl.NumberFormat( 'en-US', { style: 'currency', currency: item.amount.currency || 'EUR' } ).format( item.amount.value )
+                    : '—'
+                  }
+                </span>
+              </div>
+            </React.Fragment>
+          ) ) }
+        </WrappedCard>
+      ) : (
+        <div className="flex items-center justify-center py-10 text-sm text-muted-foreground">
+          No line items
+        </div>
+      ) }
+
+    </div>
+  );
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
 
 interface InvoiceDetailsSheetProps {
   invoice: ModelsInvoiceResponse | null;
@@ -35,116 +182,78 @@ interface InvoiceDetailsSheetProps {
 }
 
 export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDetailsSheetProps ) {
+  const [ activeTab, setActiveTab ] = React.useState( 'overview' );
+
   const { data: brandData } = useBrand( invoice?.brand_id || '', { enabled: !!invoice?.brand_id && open } );
-  const { data: campaignData } = useCampaign( invoice?.campaign_id || '', { enabled: !!invoice?.campaign_id && open } );
+  const { data: campaign } = useCampaign( invoice?.campaign_id || '', { enabled: !!invoice?.campaign_id && open } );
+
+  const formattedIssued = useFormatDate( invoice?.issued_date || '' );
+  const formattedDue = useFormatDate( invoice?.due_date || '' );
+  const formattedPaid = useFormatDate( invoice?.paid_date || '' );
+  const formattedCreated = useFormatDate( invoice?.created_at || '' );
+  const formattedTotal = useFormatCurrency( invoice?.total?.value ?? 0, invoice?.total?.currency || 'EUR' );
 
   if ( !invoice ) return null;
 
   const brand = brandData?.data;
-  const campaign = campaignData;
-  const items = invoice.invoice_items || [];
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange } modal>
-      <SheetContent className="w-[90%]! max-w-[480px]! overflow-y-auto">
-        <SheetHeader className="px-6 pt-6 pb-4">
-          <div className="flex items-start justify-between gap-3 pr-8">
-            <div>
-              <SheetTitle className="text-lg font-medium">
-                { invoice.invoice_number || 'Invoice' }
-              </SheetTitle>
-              <SheetDescription className="mt-1">
-                Invoice details and line items
-              </SheetDescription>
-            </div>
-            <InvoiceStatusBadge status={ invoice.invoice_status } />
-          </div>
-        </SheetHeader>
+      <SheetContent className="w-[95%]! max-w-[500px]! flex flex-col overflow-hidden bg-background/90">
 
-        <div className="px-6 space-y-5 pb-8">
-          { /* Brand */ }
-          { invoice.brand_id && (
-            <div className="flex items-center gap-3 p-3 rounded-lg border bg-muted/20">
-              <Avatar size="sm" className="size-8">
-                { brand?.profile_photo?.asset && <AvatarImage src={ brand.profile_photo.asset } alt={ invoice.brand_name } /> }
-                <AvatarFallback>{ getInitials( invoice.brand_name ) }</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="text-sm font-medium">{ invoice.brand_name || '—' }</p>
-                <p className="text-xs text-muted-foreground">{ brand?.preferred_contact_email || '' }</p>
+        <div className="flex-1 overflow-y-auto">
+          <InvoiceSheetHeader invoice={ invoice } total={ formattedTotal } brand={ brand } />
+
+          <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-6 mt-3">
+            <TabsList className="w-full border">
+              <TabsTrigger value="overview" className="text-xs font-normal">Overview</TabsTrigger>
+              <TabsTrigger value="items" className="text-xs font-normal">
+                Line Items
+                { ( invoice.invoice_items?.length ?? 0 ) > 0 && (
+                  <span className="ml-1.5 text-[10px] bg-muted text-muted-foreground rounded-full px-1.5 py-0.5">
+                    { invoice.invoice_items!.length }
+                  </span>
+                ) }
+              </TabsTrigger>
+            </TabsList>
+
+            <Activity mode={ activeTab === 'overview' ? 'visible' : 'hidden' }>
+              <InvoiceOverviewTab
+                invoice={ invoice }
+                brand={ brand }
+                campaign={ campaign }
+                formattedIssued={ formattedIssued }
+                formattedDue={ formattedDue }
+                formattedPaid={ formattedPaid }
+                formattedCreated={ formattedCreated }
+              />
+            </Activity>
+
+            <Activity mode={ activeTab === 'items' ? 'visible' : 'hidden' }>
+              <InvoiceItemsTab invoice={ invoice } total={ formattedTotal } />
+            </Activity>
+          </Tabs>
+        </div>
+
+        <div className="px-6 pb-6 pt-3 border-t space-y-3 bg-slate-50/50">
+          { invoice.total?.value != null && (
+            <WrappedCard title="Total">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Amount due</span>
+                <span className="text-xl font-primary text-primary leading-none">{ formattedTotal }</span>
               </div>
-            </div>
+            </WrappedCard>
           ) }
-
-          { /* Campaign */ }
-          { invoice.campaign_name && (
-            <div className="flex items-center gap-3 p-3 rounded-lg border bg-muted/20">
-              <Avatar size="sm" className="size-8">
-                { campaign?.product_image?.asset && <AvatarImage src={ campaign.product_image.asset } alt={ invoice.campaign_name } /> }
-                <AvatarFallback>{ getInitials( invoice.campaign_name ) }</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="text-sm text-muted-foreground">Campaign</p>
-                <p className="text-sm font-medium">{ invoice.campaign_name }</p>
-              </div>
-            </div>
-          ) }
-
-          <Separator />
-
-          { /* Dates */ }
-          <div className="space-y-2">
-            <Row label="Issued" value={ invoice.issued_date ? formatDate( invoice.issued_date ) : '—' } />
-            <Row label="Due" value={ invoice.due_date ? formatDate( invoice.due_date ) : '—' } />
-            { invoice.paid_date && (
-              <Row label="Paid" value={ formatDate( invoice.paid_date ) } />
-            ) }
-            <Row label="Created" value={ invoice.created_at ? formatDate( invoice.created_at ) : '—' } />
-          </div>
-
-          <Separator />
-
-          { /* Line items */ }
-          { items.length > 0 && (
-            <div className="space-y-2">
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Line Items</p>
-              <div className="rounded-lg border overflow-hidden">
-                { items.map( ( item, i ) => (
-                  <div
-                    key={ item.id || i }
-                    className="flex items-start justify-between gap-3 px-3 py-2.5 border-b last:border-b-0 bg-background"
-                  >
-                    <div className="min-w-0">
-                      <p className="text-sm">{ item.description || item.gig_title || '—' }</p>
-                      { item.gig_title && item.description && (
-                        <p className="text-xs text-muted-foreground truncate">{ item.gig_title }</p>
-                      ) }
-                    </div>
-                    <span className="text-sm font-medium shrink-0">
-                      { item.amount?.value != null ? formatCurrency( item.amount.value ) : '—' }
-                    </span>
-                  </div>
-                ) ) }
-              </div>
-            </div>
-          ) }
-
-          { /* Total */ }
-          <div className="flex items-center justify-between p-3 rounded-lg border bg-muted/30">
-            <span className="text-sm font-medium">Total</span>
-            <span className="text-base font-semibold">
-              { invoice.total?.value != null ? formatCurrency( invoice.total.value ) : '—' }
-            </span>
-          </div>
-
-          { /* Notes */ }
-          { invoice.notes && (
-            <div className="space-y-1">
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Notes</p>
-              <p className="text-sm text-muted-foreground">{ invoice.notes }</p>
-            </div>
+          { invoice.pdf_path && (
+            <Button variant="outline" className="w-full gap-2">
+              <a href={ `${ config.api.baseUrl }/${ invoice.pdf_path.replace( /^\//, '' ) }` } download target="_blank" rel="noreferrer" className='flex gap-2'>
+                <HugeiconsIcon icon={ DownloadIcon } size={ 16 } />
+                Download Invoice
+              </a>
+            </Button>
           ) }
         </div>
+
       </SheetContent>
     </Sheet>
   );

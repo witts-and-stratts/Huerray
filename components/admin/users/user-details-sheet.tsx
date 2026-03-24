@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { Activity } from 'react';
 import { ModelsUserResponse } from '@/lib/api/generated/models';
 import { useUser } from '@/lib/api/hooks/users';
 import {
@@ -10,12 +11,17 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/dashboard-ui/sheet';
-import { Badge } from '@/components/dashboard-ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/dashboard-ui/avatar';
 import { CopyText } from '@/components/dashboard-ui/copy-text';
 import { Separator } from '@/components/dashboard-ui/separator';
+import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
+import { Badge } from '@/components/dashboard-ui/badge';
 import { UserStatusBadge } from './user-status-badge';
-import { formatDate } from '@/lib/utils';
+import { useFormatDate } from '@/lib/hooks/format';
+import { cn } from '@/lib/dashboard-utils';
+import { Row } from '@/components/admin/creators/details-sheet/creator-details-shared';
+import { EmailStatusBadge, StatusBadge } from '@/components/dashboard-ui/status-badge';
 
 interface UserDetailsSheetProps {
   user: ModelsUserResponse | null;
@@ -30,26 +36,10 @@ function toLabel( value?: string ) {
     .replace( /\b\w/g, ( char ) => char.toUpperCase() );
 }
 
-function InfoRow( {
-  label,
-  value,
-}: {
-  label: string;
-  value: React.ReactNode;
-} ) {
-  return (
-    <div className="rounded-lg border border-border/60 bg-white px-3 py-2.5">
-      <div className="flex items-start justify-between gap-3">
-        <span className="text-xs uppercase tracking-wide text-muted-foreground">{ label }</span>
-        <span className="text-right text-sm font-medium">{ value }</span>
-      </div>
-    </div>
-  );
-}
-
 export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheetProps ) {
   const userId = user?.id || '';
   const { data: userDetails } = useUser( userId );
+  const [ activeTab, setActiveTab ] = React.useState( 'account' );
 
   if ( !user ) return null;
 
@@ -57,7 +47,6 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
   const {
     first_name,
     last_name,
-    middle_name,
     username,
     email,
     phone_number,
@@ -77,111 +66,114 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
     .map( ( part ) => part[ 0 ] )
     .join( '' )
     .toUpperCase() || 'U';
-  const joinedLabel = formatDate( created_at || '' );
-  const updatedLabel = formatDate( updated_at || '' );
+
+  const joinedLabel = useFormatDate( created_at || '' );
+  const updatedLabel = useFormatDate( updated_at || '' );
 
   return (
-    <Sheet open={ open } onOpenChange={ onOpenChange }>
-      <SheetContent className="w-full sm:max-w-xl overflow-y-auto bg-slate-50/60 p-0">
-        <SheetHeader className="gap-4 border-b border-border/50 bg-white p-5 pb-4">
-          <div className="rounded-xl border border-primary/20 bg-burgundy-50 p-4">
-            <div className="flex flex-col items-center text-center gap-3">
-              <Avatar className="size-24 bg-background">
-                <AvatarImage src={ undefined } alt={ fullName } />
-                <AvatarFallback className="text-xl font-semibold">{ initials }</AvatarFallback>
-              </Avatar>
-              <div className="min-w-0 space-y-1">
-                <SheetTitle className="text-xl leading-tight">{ fullName }</SheetTitle>
-                <div className="text-sm text-muted-foreground">
-                  { middle_name ? `${ middle_name } ` : '' }{ toLabel( user_type ) }
-                </div>
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                <UserStatusBadge status={ user_status || 'unknown' } />
-                <Badge
-                  variant="outline"
-                  className={ email_verified ? 'border-green-200 bg-green-50 text-green-700' : 'border-amber-200 bg-amber-50 text-amber-700' }
-                >
-                  { email_verified ? 'Verified email' : 'Unverified email' }
-                </Badge>
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
-                <span>Joined { joinedLabel }</span>
-                <Separator orientation="vertical" className="h-3" />
-                <span>Updated { updatedLabel }</span>
-              </div>
-              <div className="text-sm">
-                { username ? (
-                  <CopyText text={ username } copyMessage="Username copied" className="text-muted-foreground">
-                    @{ username }
-                  </CopyText>
-                ) : (
-                  <span className="text-muted-foreground">No username</span>
-                ) }
-              </div>
+    <Sheet open={ open } onOpenChange={ onOpenChange } modal>
+      <SheetContent className="w-[95%]! max-w-[500px]! overflow-y-auto bg-background/90">
+
+        { /* ── Header ── */ }
+        <SheetHeader className="relative flex flex-row items-center gap-4 bg-textured p-6 pb-8 m-6 rounded-lg mt-16 mb-0">
+          <Avatar className={ cn(
+            "bg-muted-foreground/10 size-28 ring-background/10 ring-10 ring-offset-0",
+            "border-border/60"
+          ) }>
+            <AvatarFallback className="text-3xl">{ initials }</AvatarFallback>
+          </Avatar>
+
+          <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start gap-1.5">
+              <SheetTitle className="text-xl font-normal text-white font-primary capitalize tracking-tight">
+                { fullName }
+              </SheetTitle>
+              { email && <span className="text-sm text-white/60 mb-1.5">{ email }</span> }
+            </div>
+
+            <div className="flex items-center pt-3 flex-wrap">
+              <UserStatusBadge status={ user_status || 'unknown' } className='bg-white/80' />
+              <EmailStatusBadge status={ email_verified ? 'Email verified' : 'Email unverified' } className={ cn(
+                "bg-background/10",
+                email_verified
+                  ? "border-green-400/40 text-green-300"
+                  : "border-amber-400/40 text-maroon-200"
+              ) } />
             </div>
           </div>
 
           <SheetDescription className="sr-only">
-            Detailed information about this user
+            Detailed information about user { fullName }.
           </SheetDescription>
         </SheetHeader>
 
-        <div className="space-y-4 p-5">
-          <div className="rounded-xl border border-border/60 bg-slate-50/70 p-3 space-y-2">
-            <InfoRow
-              label="Email"
-              value={
-                email ? (
-                  <CopyText text={ email } copyMessage="Email copied" className="justify-end text-right max-w-full">
-                    <span className="truncate">{ email }</span>
-                  </CopyText>
-                ) : 'N/A'
-              }
-            />
-            <InfoRow
-              label="Phone"
-              value={ phone_number || 'N/A' }
-            />
-            <InfoRow
-              label="Username"
-              value={
-                username ? (
-                  <CopyText text={ username } copyMessage="Username copied" className="justify-end text-right max-w-full">
-                    @{ username }
-                  </CopyText>
-                ) : 'N/A'
-              }
-            />
-            <InfoRow
-              label="User ID"
-              value={
-                id ? (
-                  <CopyText text={ id } copyMessage="User ID copied" className="justify-end text-right max-w-full">
-                    <span className="font-mono text-xs">{ id }</span>
-                  </CopyText>
-                ) : 'N/A'
-              }
-            />
-            <InfoRow
-              label="Email Verification"
-              value={ email_verified ? 'Verified' : 'Pending' }
-            />
-            <InfoRow
-              label="Created At"
-              value={ joinedLabel }
-            />
-            <InfoRow
-              label="Last Updated"
-              value={ updatedLabel }
-            />
-          </div>
+        { /* ── Tabs ── */ }
+        <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-6">
+          <TabsList className="w-full border">
+            <TabsTrigger value="account" className="text-sm font-normal">Account</TabsTrigger>
+            <TabsTrigger value="system" className="text-sm font-normal">System</TabsTrigger>
+          </TabsList>
 
-          <Separator />
-          <div className="rounded-lg border border-dashed border-border/80 bg-white px-3 py-2 text-xs text-muted-foreground">
-            User details are fetched from the Users API and reflect the current account state.
-          </div>
-        </div>
+          { /* Account */ }
+          <Activity mode={ activeTab === 'account' ? 'visible' : 'hidden' }>
+            <div className="pt-4 space-y-3">
+              <WrappedCard title="Contact">
+                <Row
+                  label="Email"
+                  value={
+                    email ? (
+                      <CopyText text={ email } iconSide='left' copyMessage="Email copied">
+                        <span className="truncate">{ email }</span>
+                      </CopyText>
+                    ) : 'N/A'
+                  }
+                />
+                <Separator />
+                <Row
+                  label="Username"
+                  value={
+                    username ? (
+                      <CopyText text={ username } iconSide='left' copyMessage="Username copied">
+                        @{ username }
+                      </CopyText>
+                    ) : 'N/A'
+                  }
+                />
+              </WrappedCard>
+
+              <WrappedCard title="Account Details">
+                <Row label="Type" value={ toLabel( user_type ) } />
+                <Separator />
+                <Row label="Status" value={ <UserStatusBadge status={ user_status || 'unknown' } className='-mr-3' /> } />
+                <Separator />
+                <Row label="Email verified" value={ email_verified ? 'Yes' : 'No' } />
+              </WrappedCard>
+            </div>
+          </Activity>
+
+          { /* System */ }
+          <Activity mode={ activeTab === 'system' ? 'visible' : 'hidden' }>
+            <div className="pt-4 space-y-3">
+              <WrappedCard title="System Details">
+                <Row
+                  label="User ID"
+                  value={
+                    id ? (
+                      <CopyText text={ id } copyMessage="User ID copied" iconSide='left'>
+                        <span className="font-mono text-xs break-all">{ id }</span>
+                      </CopyText>
+                    ) : 'N/A'
+                  }
+                />
+                <Separator />
+                <Row label="Joined" value={ joinedLabel } />
+                <Separator />
+                <Row label="Last updated" value={ updatedLabel } />
+              </WrappedCard>
+            </div>
+          </Activity>
+        </Tabs>
+
       </SheetContent>
     </Sheet>
   );

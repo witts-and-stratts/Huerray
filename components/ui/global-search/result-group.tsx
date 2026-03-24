@@ -11,15 +11,25 @@ interface ResultGroupProps {
   onSelect: ( result: SearchResult ) => void;
 }
 
+const rowListVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.05,
+    },
+  },
+};
+
 export function ResultGroup( { group, groupIndex, onSelect }: ResultGroupProps ) {
   if ( group.items.length === 0 ) return null;
 
   return (
     <motion.div
       className="px-2"
-      initial={ { opacity: 0 } }
-      animate={ { opacity: 1 } }
-      transition={ { duration: 0.2, delay: groupIndex * 0.03, ease: 'easeOut' } }
+      initial={ { opacity: 0, y: 8 } }
+      animate={ { opacity: 1, y: 0 } }
+      transition={ { duration: 0.22, delay: groupIndex * 0.06, ease: 'easeOut' } }
     >
       <p className="mb-1 px-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">
         { ENTITY_LABELS[ group.type ] }
@@ -44,9 +54,11 @@ export function ResultGroup( { group, groupIndex, onSelect }: ResultGroupProps )
           ) }
         </div>
       ) : (
-        group.items.map( ( item, i ) => (
-          <SearchResultRow key={ item.id } result={ item } index={ i } onSelect={ onSelect } />
-        ) )
+        <motion.div variants={ rowListVariants } initial="hidden" animate="show">
+          { group.items.map( ( item, i ) => (
+            <SearchResultRow key={ item.id } result={ item } onSelect={ onSelect } />
+          ) ) }
+        </motion.div>
       ) }
     </motion.div>
   );
