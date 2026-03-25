@@ -73,7 +73,7 @@ interface ApiErrorResponse {
   };
 }
 
-function getFieldError( field: { state: { meta: { isTouched: boolean; errors: ValidationError[] | null } } } ): string | undefined {
+function getFieldError( field: { state: { meta: { isTouched: boolean; errors: ValidationError[] | null; }; }; } ): string | undefined {
   const { isTouched, errors } = field.state.meta;
   return isTouched && errors ? errors.map( getErrorMessage ).join( ', ' ) : undefined;
 }
@@ -244,7 +244,7 @@ export function LoginForm( {
       <Card>
         <CardHeader className='text-center'>
           {/* Logo */ }
-          <div className='flex justify-center mb-4'>
+          <Link className='flex justify-center mb-4' href="/" title="Huerray">
             <Image
               src='/images/huerray-symbol.svg'
               alt='Huerray'
@@ -252,7 +252,7 @@ export function LoginForm( {
               height={ 60 }
               className='dark:invert'
             />
-          </div>
+          </Link>
 
           <CardTitle className='text-2xl font-primary text-primary'>{ t( 'title' ) }</CardTitle>
           <CardDescription className='my-2 text-balance'>{ t( 'description' ) }</CardDescription>
