@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 import { pipelineByStatus } from './dashboard-mock-data';
+import { useTranslations } from 'next-intl';
 
 const chartConfig = {
   campaigns: {
@@ -21,23 +22,24 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function PipelineBreakdownBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <Card className="ad-card">
       <CardHeader>
-        <CardTitle className="ad-card-title">Pipeline By Status</CardTitle>
-        <CardDescription className="ad-card-description">Campaigns, gigs, and submissions grouped by current status</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.pipelineBreakdown.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.pipelineBreakdown.description' ) }</CardDescription>
         <div className="ad-chart-legend">
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-[var(--chart-1)]" />
-            Campaigns
+            { t( 'dashboardBlocks.pipelineBreakdown.labels.campaigns' ) }
           </span>
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-[var(--chart-2)]" />
-            Gigs
+            { t( 'dashboardBlocks.pipelineBreakdown.labels.gigs' ) }
           </span>
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-[var(--chart-5)]" />
-            Submissions
+            { t( 'dashboardBlocks.pipelineBreakdown.labels.submissions' ) }
           </span>
         </div>
       </CardHeader>

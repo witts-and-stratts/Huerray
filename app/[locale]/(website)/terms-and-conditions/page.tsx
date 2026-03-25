@@ -23,7 +23,8 @@ export default async function TermsAndConditions( { params }: Props ) {
   // The sections are already in the translation file
   // We just need to get them and pass them through
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const sections = t.raw( 'sections' ) as any[];
+  const rawSections = t.raw( 'sections' );
+  const sections = Array.isArray( rawSections ) ? rawSections : Object.values( rawSections as any );
 
   return (
     <>

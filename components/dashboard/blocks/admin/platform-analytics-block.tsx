@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { usePlatformAnalytics } from '@/lib/api/hooks/analytics';
 import type { ModelsPlatformAnalyticsResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 type StatItem = {
   label: string;
@@ -12,26 +13,27 @@ type StatItem = {
   key: keyof ModelsPlatformAnalyticsResponse;
 };
 
-const STAT_GROUPS: { title: string; items: StatItem[]; }[] = [
-  {
-    title: 'Content Pipeline',
-    items: [
-      { label: 'Total Campaigns', value: '0', key: 'total_campaigns' },
-      { label: 'Completed Campaigns', value: '0', key: 'completed_campaigns' },
-      { label: 'Total Gigs', value: '0', key: 'total_gigs' },
-      { label: 'Completed Gigs', value: '0', key: 'completed_gigs' },
-    ],
-  },
-];
-
 function formatValue( key: string, raw?: number ): string {
   if ( raw === undefined || raw === null ) return '—';
   return raw.toLocaleString();
 }
 
 export function PlatformAnalyticsBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: response, isLoading, isError } = usePlatformAnalytics();
   const analytics = response?.data;
+
+  const STAT_GROUPS = useMemo( () => [
+    {
+      title: t( 'dashboardBlocks.platformAnalytics.groups.contentPipeline' ),
+      items: [
+        { label: t( 'dashboardBlocks.platformAnalytics.stats.total_campaigns' ), value: '0', key: 'total_campaigns' as const },
+        { label: t( 'dashboardBlocks.platformAnalytics.stats.completed_campaigns' ), value: '0', key: 'completed_campaigns' as const },
+        { label: t( 'dashboardBlocks.platformAnalytics.stats.total_gigs' ), value: '0', key: 'total_gigs' as const },
+        { label: t( 'dashboardBlocks.platformAnalytics.stats.completed_gigs' ), value: '0', key: 'completed_gigs' as const },
+      ],
+    },
+  ], [ t ] );
 
   const groups = useMemo( () => {
     if ( !analytics ) return STAT_GROUPS;
@@ -39,17 +41,17 @@ export function PlatformAnalyticsBlock() {
       ...group,
       items: group.items.map( ( item ) => ( {
         ...item,
-        value: formatValue( item.key, analytics[ item.key ] ),
+        value: formatValue( item.key, analytics[ item.key as keyof ModelsPlatformAnalyticsResponse ] ),
       } ) ),
     } ) );
-  }, [ analytics ] );
+  }, [ analytics, STAT_GROUPS ] );
 
   return (
     <Card className="ad-card">
       <CardHeader>
-        <CardTitle className="ad-card-title">Platform Analytics</CardTitle>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.platformAnalytics.title' ) }</CardTitle>
         <CardDescription className="ad-card-description">
-          Live platform-wide metrics from the analytics endpoint
+          { t( 'dashboardBlocks.platformAnalytics.description' ) }
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -65,7 +67,7 @@ export function PlatformAnalyticsBlock() {
         ) }
 
         { isError && (
-          <p className="py-8 text-center text-xs text-destructive">Unable to load platform analytics.</p>
+          <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.platformAnalytics.states.error' ) }</p>
         ) }
 
         { !isLoading && !isError && (

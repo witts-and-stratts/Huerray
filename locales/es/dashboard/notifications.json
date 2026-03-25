@@ -3,44 +3,18 @@
   "description": "Ver y gestionar todas las notificaciones",
   "descriptionBrand": "Ver y gestionar todas tus notificaciones",
   "stats": {
-    "total": "Notificaciones totales",
-    "unread": "No leídas",
+    "total": "Total de notificaciones",
+    "unread": "Sin leer",
     "today": "Hoy"
   },
   "tabs": {
-    "all": "Todas",
-    "read": "Leídas",
-    "unread": "No leídas"
-  },
-  "actions": {
-    "markAllAsRead": "Marcar todo como leído",
-    "markAsRead": "Marcar como leído",
-    "delete": "Eliminar",
-    "deleteAll": "Eliminar todo",
-    "open": "Abrir"
-  },
-  "item": {
-    "showMore": "Mostrar más",
-    "showLess": "Mostrar menos",
-    "eventTypeFallback": "Actualización"
-  },
-  "empty": {
-    "title": "No hay notificaciones para mostrar",
-    "description": "Estás al día por ahora."
-  },
-  "confirm": {
-    "deleteAllTitle": "Eliminar todas las notificaciones",
-    "deleteAllDescription": "¿Seguro que deseas eliminar todas las notificaciones? Esta acción no se puede deshacer.",
-    "deleteAllConfirm": "Eliminar todo",
-    "deleting": "Eliminando..."
-  },
-  "toast": {
-    "deleteAllSuccess": "Se eliminaron todas las notificaciones",
-    "deleteAllError": "No se pudieron eliminar todas las notificaciones"
+    "all": "Todos",
+    "read": "Leer",
+    "unread": "Sin leer"
   },
   "search": {
     "placeholder": "Buscar notificaciones",
-    "noResults": "Ninguna notificacion coincide con tu busqueda."
+    "noResults": "Ninguna notificación coincide con su búsqueda."
   },
   "pagination": {
     "rowsPerPage": "Filas por página",
@@ -48,5 +22,31 @@
     "of": "de",
     "previous": "Anterior",
     "next": "Siguiente"
+  },
+  "actions": {
+    "markAllAsRead": "Marcar todo como leído",
+    "markAsRead": "Marcar como leído",
+    "delete": "Borrar",
+    "deleteAll": "Borrar todo",
+    "open": "Abrir"
+  },
+  "item": {
+    "showMore": "Ver más",
+    "showLess": "Mostrar menos",
+    "eventTypeFallback": "Actualización"
+  },
+  "empty": {
+    "title": "No se muestran notificaciones",
+    "description": "Ya estás al día por ahora."
+  },
+  "confirm": {
+    "deleteAllTitle": "Borrar todas las notificaciones",
+    "deleteAllDescription": "¿Estás seguro de que quieres borrar todas las notificaciones? Esta acción no se puede deshacer.",
+    "deleteAllConfirm": "Borrar todo",
+    "deleting": "Borrar..."
+  },
+  "toast": {
+    "deleteAllSuccess": "Todas las notificaciones eliminadas",
+    "deleteAllError": "No se han podido eliminar todas las notificaciones"
   }
 }

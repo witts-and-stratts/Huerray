@@ -3,11 +3,13 @@
 
 import { CampaignsTable } from '@/components/campaigns/campaigns-table';
 import { SubHeader } from '@/components/subheader';
-import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 export default function CampaignsPage() {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: response, isLoading, error } = useCampaigns( {
   } );
 
@@ -15,7 +17,7 @@ export default function CampaignsPage() {
     const campaignsData = response?.data;
 
     if ( !campaignsData || !Array.isArray( campaignsData ) ) {
-      return [];
+      return [] as ModelsCampaignResponse[];
     }
 
     return campaignsData.map( ( c: any ) => ( {
@@ -24,14 +26,15 @@ export default function CampaignsPage() {
       product_image: c.product_image?.asset,
       creators: c.creators || [],
       applications: c.applications || [],
+      brand_logo: c.brand?.logo,
     } as ModelsCampaignResponse ) );
   }, [ response ] );
 
   return (
     <>
       <SubHeader
-        title='Campaigns'
-        description='Manage and track all your marketing campaigns'
+        title={ t( 'campaignsPage.title' ) }
+        description={ t( 'campaignsPage.description' ) }
       />
       <CampaignsTable
         campaigns={ campaigns }

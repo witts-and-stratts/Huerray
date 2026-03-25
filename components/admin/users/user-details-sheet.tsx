@@ -21,7 +21,9 @@ import { UserStatusBadge } from './user-status-badge';
 import { useFormatDate } from '@/lib/hooks/format';
 import { cn } from '@/lib/dashboard-utils';
 import { Row } from '@/components/admin/creators/details-sheet/creator-details-shared';
-import { EmailStatusBadge, StatusBadge } from '@/components/dashboard-ui/status-badge';
+import { EmailStatusBadge } from '@/components/dashboard-ui/status-badge';
+import { useTranslations } from "next-intl";
+import { useMessage } from '@/lib/hooks/use-filter-label';
 
 interface UserDetailsSheetProps {
   user: ModelsUserResponse | null;
@@ -29,19 +31,18 @@ interface UserDetailsSheetProps {
   onOpenChange: ( open: boolean ) => void;
 }
 
-function toLabel( value?: string ) {
-  if ( !value ) return 'N/A';
+function toLabel( value: string | undefined, t: any ) {
+  if ( !value ) return t( 'userDetailsSheet.na' );
   return value
     .replace( /_/g, ' ' )
     .replace( /\b\w/g, ( char ) => char.toUpperCase() );
 }
 
 export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheetProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   const userId = user?.id || '';
   const { data: userDetails } = useUser( userId );
   const [ activeTab, setActiveTab ] = React.useState( 'account' );
-
-  if ( !user ) return null;
 
   const profile = userDetails || user;
   const {
@@ -56,9 +57,15 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
     created_at,
     updated_at,
     id,
-  } = profile;
+  } = profile || {};
 
-  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || username || 'Unknown';
+  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || username || t( 'userDetailsSheet.unknown' );
+  const userTypeLabel = useMessage( user_type || '' );
+  const joinedLabel = useFormatDate( created_at || '' );
+  const updatedLabel = useFormatDate( updated_at || '' );
+
+  if ( !user ) return null;
+
   const initials = fullName
     .split( ' ' )
     .filter( Boolean )
@@ -66,9 +73,6 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
     .map( ( part ) => part[ 0 ] )
     .join( '' )
     .toUpperCase() || 'U';
-
-  const joinedLabel = useFormatDate( created_at || '' );
-  const updatedLabel = useFormatDate( updated_at || '' );
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange } modal>
@@ -93,7 +97,7 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
 
             <div className="flex items-center pt-3 flex-wrap">
               <UserStatusBadge status={ user_status || 'unknown' } className='bg-white/80' />
-              <EmailStatusBadge status={ email_verified ? 'Email verified' : 'Email unverified' } className={ cn(
+              <EmailStatusBadge status={ email_verified ? t( 'userDetailsSheet.emailVerified' ) : t( 'userDetailsSheet.emailUnverified' ) } className={ cn(
                 "bg-background/10",
                 email_verified
                   ? "border-green-400/40 text-green-300"
@@ -103,50 +107,50 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
           </div>
 
           <SheetDescription className="sr-only">
-            Detailed information about user { fullName }.
+            { t( 'userDetailsSheet.detailedInformationAboutUser' ) }{ fullName }.
           </SheetDescription>
         </SheetHeader>
 
         { /* ── Tabs ── */ }
         <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-6">
           <TabsList className="w-full border">
-            <TabsTrigger value="account" className="text-sm font-normal">Account</TabsTrigger>
-            <TabsTrigger value="system" className="text-sm font-normal">System</TabsTrigger>
+            <TabsTrigger value="account" className="text-sm font-normal">{ t( 'userDetailsSheet.account' ) }</TabsTrigger>
+            <TabsTrigger value="system" className="text-sm font-normal">{ t( 'userDetailsSheet.system' ) }</TabsTrigger>
           </TabsList>
 
           { /* Account */ }
           <Activity mode={ activeTab === 'account' ? 'visible' : 'hidden' }>
             <div className="pt-4 space-y-3">
-              <WrappedCard title="Contact">
+              <WrappedCard title={ t( 'userDetailsSheet.contact' ) }>
                 <Row
-                  label="Email"
+                  label={ t( 'userDetailsSheet.email' ) }
                   value={
                     email ? (
-                      <CopyText text={ email } iconSide='left' copyMessage="Email copied">
+                      <CopyText text={ email } iconSide='left' copyMessage={ t( 'userDetailsSheet.emailCopied' ) }>
                         <span className="truncate">{ email }</span>
                       </CopyText>
-                    ) : 'N/A'
+                    ) : t( 'userDetailsSheet.na' )
                   }
                 />
                 <Separator />
                 <Row
-                  label="Username"
+                  label={ t( 'userDetailsSheet.username' ) }
                   value={
                     username ? (
-                      <CopyText text={ username } iconSide='left' copyMessage="Username copied">
+                      <CopyText text={ username } iconSide='left' copyMessage={ t( 'userDetailsSheet.usernameCopied' ) }>
                         @{ username }
                       </CopyText>
-                    ) : 'N/A'
+                    ) : t( 'userDetailsSheet.na' )
                   }
                 />
               </WrappedCard>
 
-              <WrappedCard title="Account Details">
-                <Row label="Type" value={ toLabel( user_type ) } />
+              <WrappedCard title={ t( 'userDetailsSheet.accountDetails' ) }>
+                <Row label={ t( 'userDetailsSheet.type' ) } value={ toLabel( userTypeLabel, t ) } />
                 <Separator />
-                <Row label="Status" value={ <UserStatusBadge status={ user_status || 'unknown' } className='-mr-3' /> } />
+                <Row label={ t( 'userDetailsSheet.status' ) } value={ <UserStatusBadge status={ user_status || 'unknown' } className='-mr-3' /> } />
                 <Separator />
-                <Row label="Email verified" value={ email_verified ? 'Yes' : 'No' } />
+                <Row label={ t( 'userDetailsSheet.emailVerified' ) } value={ email_verified ? t( 'userDetailsSheet.yes' ) : t( 'userDetailsSheet.no' ) } />
               </WrappedCard>
             </div>
           </Activity>
@@ -154,21 +158,21 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
           { /* System */ }
           <Activity mode={ activeTab === 'system' ? 'visible' : 'hidden' }>
             <div className="pt-4 space-y-3">
-              <WrappedCard title="System Details">
+              <WrappedCard title={ t( 'userDetailsSheet.systemDetails' ) }>
                 <Row
-                  label="User ID"
+                  label={ t( 'userDetailsSheet.userId' ) }
                   value={
                     id ? (
-                      <CopyText text={ id } copyMessage="User ID copied" iconSide='left'>
+                      <CopyText text={ id } copyMessage={ t( 'userDetailsSheet.userIdCopied' ) } iconSide='left'>
                         <span className="font-mono text-xs break-all">{ id }</span>
                       </CopyText>
-                    ) : 'N/A'
+                    ) : t( 'userDetailsSheet.na' )
                   }
                 />
                 <Separator />
-                <Row label="Joined" value={ joinedLabel } />
+                <Row label={ t( 'userDetailsSheet.joined' ) } value={ joinedLabel } />
                 <Separator />
-                <Row label="Last updated" value={ updatedLabel } />
+                <Row label={ t( 'userDetailsSheet.lastUpdated' ) } value={ updatedLabel } />
               </WrappedCard>
             </div>
           </Activity>

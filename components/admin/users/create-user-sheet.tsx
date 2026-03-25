@@ -12,30 +12,11 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/dashboard-ui/sheet";
-import {
-  Field,
-  FieldLabel,
-  FieldError,
-  FieldGroup,
-} from "@/components/dashboard-ui/field";
-import { Input } from "@/components/dashboard-ui/input";
+import { SuperField } from "@/components/dashboard-ui/super-field";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
-
-const createUserSchema = z.object( {
-  first_name: z.string().min( 1, "First name is required" ),
-  last_name: z.string().min( 1, "Last name is required" ),
-  username: z.string().min( 3, "Username must be at least 3 characters" ),
-  email: z.string().email( "Invalid email address" ),
-  password: z.string().min( 8, "Password must be at least 8 characters" ),
-  verify_password: z.string().min( 8, "Verify password must be at least 8 characters" ),
-} ).refine( ( data ) => data.password === data.verify_password, {
-  message: "Passwords do not match",
-  path: [ "verify_password" ],
-} );
-
-type CreateUserFormValues = z.infer<typeof createUserSchema>;
+import { useTranslations } from "next-intl";
 
 interface CreateUserSheetProps {
   open: boolean;
@@ -44,6 +25,22 @@ interface CreateUserSheetProps {
 
 export function CreateUserSheet( { open, onOpenChange }: CreateUserSheetProps ) {
   const createUser = useCreateUser();
+  const t = useTranslations( 'dashboard.admin.createUser' );
+  const tc = useTranslations( 'dashboard.common' );
+
+  const createUserSchema = z.object( {
+    first_name: z.string().min( 1, t( 'validation.firstNameRequired' ) ),
+    last_name: z.string().min( 1, t( 'validation.lastNameRequired' ) ),
+    username: z.string().min( 3, t( 'validation.usernameMin' ) ),
+    email: z.string().email( t( 'validation.invalidEmail' ) ),
+    password: z.string().min( 8, t( 'validation.passwordMin' ) ),
+    verify_password: z.string().min( 8, t( 'validation.verifyPasswordMin' ) ),
+  } ).refine( ( data ) => data.password === data.verify_password, {
+    message: t( 'validation.passwordsMismatch' ),
+    path: [ "verify_password" ],
+  } );
+
+  type CreateUserFormValues = z.infer<typeof createUserSchema>;
 
   const {
     register,
@@ -72,11 +69,11 @@ export function CreateUserSheet( { open, onOpenChange }: CreateUserSheetProps ) 
   const onSubmit = ( data: CreateUserFormValues ) => {
     createUser.mutate( data, {
       onSuccess: () => {
-        toast.success( "User created successfully" );
+        toast.success( t( 'successToast' ) );
         onOpenChange( false );
       },
       onError: ( error ) => {
-        toast.error( "Failed to create user" );
+        toast.error( t( 'errorToast' ) );
         console.error( error );
       },
     } );
@@ -84,61 +81,73 @@ export function CreateUserSheet( { open, onOpenChange }: CreateUserSheetProps ) 
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange }>
-      <SheetContent className="sm:max-w-[500px] bg-white">
-        <SheetHeader>
-          <SheetTitle>Add User</SheetTitle>
-          <SheetDescription>
-            Create a new user account. Fill in the details below.
+      <SheetContent className="w-[90%]! max-w-[520px]! flex flex-col overflow-hidden p-0!">
+        <SheetHeader className="px-6 pt-6 pb-4 shrink-0 border-b bg-background/80">
+          <SheetTitle className="dialog__title text-primary">{ t( 'title' ) }</SheetTitle>
+          <SheetDescription className="text-base">
+            { t( 'description' ) }
           </SheetDescription>
         </SheetHeader>
 
-        <form onSubmit={ handleSubmit( onSubmit ) } className="space-y-6 mt-6">
-          <FieldGroup>
+        <form onSubmit={ handleSubmit( onSubmit ) } className="flex flex-col flex-1 overflow-hidden">
+          <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
             <div className="grid grid-cols-2 gap-4">
-              <Field>
-                <FieldLabel>First Name</FieldLabel>
-                <Input placeholder="John" { ...register( "first_name" ) } />
-                <FieldError errors={ [ { message: errors.first_name?.message } ] } />
-              </Field>
-              <Field>
-                <FieldLabel>Last Name</FieldLabel>
-                <Input placeholder="Doe" { ...register( "last_name" ) } />
-                <FieldError errors={ [ { message: errors.last_name?.message } ] } />
-              </Field>
+              <SuperField
+                type="text"
+                label={ t( 'firstNameLabel' ) }
+                placeholder={ t( 'firstNamePlaceholder' ) }
+                { ...register( "first_name" ) }
+                error={ errors.first_name?.message }
+              />
+              <SuperField
+                type="text"
+                label={ t( 'lastNameLabel' ) }
+                placeholder={ t( 'lastNamePlaceholder' ) }
+                { ...register( "last_name" ) }
+                error={ errors.last_name?.message }
+              />
             </div>
 
-            <Field>
-              <FieldLabel>Username</FieldLabel>
-              <Input placeholder="johndoe" { ...register( "username" ) } />
-              <FieldError errors={ [ { message: errors.username?.message } ] } />
-            </Field>
+            <SuperField
+              type="text"
+              label={ t( 'usernameLabel' ) }
+              placeholder={ t( 'usernamePlaceholder' ) }
+              { ...register( "username" ) }
+              error={ errors.username?.message }
+            />
 
-            <Field>
-              <FieldLabel>Email</FieldLabel>
-              <Input placeholder="john@example.com" type="email" { ...register( "email" ) } />
-              <FieldError errors={ [ { message: errors.email?.message } ] } />
-            </Field>
+            <SuperField
+              type="email"
+              label={ t( 'emailLabel' ) }
+              placeholder={ t( 'emailPlaceholder' ) }
+              { ...register( "email" ) }
+              error={ errors.email?.message }
+            />
 
             <div className="grid grid-cols-2 gap-4">
-              <Field>
-                <FieldLabel>Password</FieldLabel>
-                <Input type="password" placeholder="********" { ...register( "password" ) } />
-                <FieldError errors={ [ { message: errors.password?.message } ] } />
-              </Field>
-              <Field>
-                <FieldLabel>Verify Password</FieldLabel>
-                <Input type="password" placeholder="********" { ...register( "verify_password" ) } />
-                <FieldError errors={ [ { message: errors.verify_password?.message } ] } />
-              </Field>
+              <SuperField
+                type="password"
+                label={ t( 'passwordLabel' ) }
+                placeholder="********"
+                { ...register( "password" ) }
+                error={ errors.password?.message }
+              />
+              <SuperField
+                type="password"
+                label={ t( 'verifyPasswordLabel' ) }
+                placeholder="********"
+                { ...register( "verify_password" ) }
+                error={ errors.verify_password?.message }
+              />
             </div>
-          </FieldGroup>
+          </div>
 
-          <div className="flex justify-end gap-2 pt-4">
+          <div className="shrink-0 border-t px-6 py-4 flex items-center justify-end gap-3 bg-background">
             <Button type="button" variant="outline" onClick={ () => onOpenChange( false ) }>
-              Cancel
+              { tc( 'cancel' ) }
             </Button>
             <Button type="submit" disabled={ isSubmitting || createUser.isPending } className="min-w-[100px]">
-              { createUser.isPending ? <Loader2 className="size-4 animate-spin" /> : "Create User" }
+              { createUser.isPending ? <Loader2 className="size-4 animate-spin" /> : t( 'create' ) }
             </Button>
           </div>
         </form>

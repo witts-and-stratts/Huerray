@@ -11,8 +11,10 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { Tabs, TabsList, TabsPanels, TabsPanel, TabsTab } from '@/components/animate-ui/components/base/tabs';
 import { useCreators } from '@/lib/api/hooks/creators';
 import type { ModelsCreatorResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 export function CreatorsStatsBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   const [ activeTab, setActiveTab ] = useState<'stats' | 'recent'>( 'stats' );
   const { data: creatorsResponse, isLoading, isError } = useCreators( { limit: 100, page: 1 } );
   const creators = useMemo( () => ( creatorsResponse?.data || [] ) as ModelsCreatorResponse[], [ creatorsResponse ] );
@@ -33,12 +35,12 @@ export function CreatorsStatsBlock() {
     } ).length;
 
     return [
-      { label: 'Total', value: `${ total }`, numeric: total },
-      { label: 'Approved', value: `${ approved }`, numeric: approved },
-      { label: 'Pending', value: `${ pending }`, numeric: pending },
-      { label: 'Returned', value: `${ returned }`, numeric: returned },
+      { label: t( 'dashboardBlocks.creators.stats.total' ), value: `${ total }`, numeric: total },
+      { label: t( 'dashboardBlocks.creators.stats.approved' ), value: `${ approved }`, numeric: approved },
+      { label: t( 'dashboardBlocks.creators.stats.pending' ), value: `${ pending }`, numeric: pending },
+      { label: t( 'dashboardBlocks.creators.stats.returned' ), value: `${ returned }`, numeric: returned },
     ];
-  }, [ creators, creatorsResponse?.pagination?.total ] );
+  }, [ creators, creatorsResponse?.pagination?.total, t ] );
 
   const recentCreators = useMemo( () => {
     return [ ...creators ]
@@ -62,20 +64,20 @@ export function CreatorsStatsBlock() {
   return (
     <Card className="ad-summary-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Creators</CardTitle>
-        <CardDescription className="ad-card-description">Creator base and approval status overview</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.creators.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.creators.description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTab value="stats" className={ 'text-xs font-normal' }>Stats</TabsTab>
-            <TabsTab value="recent" className={ 'text-xs font-normal' }>Recent Creators</TabsTab>
+            <TabsTab value="stats" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.creators.tabs.stats' ) }</TabsTab>
+            <TabsTab value="recent" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.creators.tabs.recent' ) }</TabsTab>
           </TabsList>
 
           <TabsPanels>
             <TabsPanel value="stats" keepMounted>
-              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading creator stats...</p> }
-              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load creator stats.</p> }
+              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.creators.states.loading' ) }</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.creators.states.error' ) }</p> }
               { !isLoading && !isError && (
                 <div className="grid grid-cols-2 gap-2">
                   { parsed.map( ( item ) => {
@@ -119,9 +121,9 @@ export function CreatorsStatsBlock() {
                   ) ) }
                 </div>
               ) }
-              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent creators.</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.creators.states.recentError' ) }</p> }
               { !isLoading && !isError && recentCreators.length === 0 && (
-                <p className="py-8 text-center text-xs text-muted-foreground">No creators yet</p>
+                <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.creators.states.empty' ) }</p>
               ) }
               { !isLoading && !isError && recentCreators.length > 0 && (
                 <ScrollArea className="h-[240px] pr-2" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
@@ -129,7 +131,7 @@ export function CreatorsStatsBlock() {
                     <AnimatePresence>
                       { recentCreators.map( ( creator, index ) => {
                         const creatorId = creator.id || creator.creator_id;
-                        const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || 'Unknown Creator';
+                        const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || t( 'dashboardBlocks.creators.labels.unknown' );
                         const status = String( creator.creator_status || 'draft' );
 
                         return (
@@ -184,7 +186,7 @@ export function CreatorsStatsBlock() {
           className="mt-2 w-full font-normal"
           render={ <Link href="/admin/creators" /> }
         >
-          View all Creators
+          { t( 'dashboardBlocks.creators.labels.viewAll' ) }
         </Button>
       </CardFooter>
     </Card>

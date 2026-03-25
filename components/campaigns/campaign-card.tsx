@@ -36,6 +36,7 @@ import { ApplicationCard } from './application-card';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { SubmissionViewDialog } from './submission-view-dialog';
 import { RoleGuard } from '../auth/role-guard';
+import { useTranslations } from 'next-intl';
 
 interface CampaignCardProps {
   campaign: ModelsCampaignResponse;
@@ -88,6 +89,7 @@ const CampaignAvatars = memo( ( { campaignId, onSelectMatch }: {
   campaignId: string;
   onSelectMatch: ( type: 'app' | 'inv' | 'sub', item: any ) => void;
 } ) => {
+  const t = useTranslations( 'dashboard.common' );
   const { data: applicationsData, isLoading: loadingApps } = useCampaignApplications( campaignId );
   const { data: invitationsData, isLoading: loadingInvitations } = useCampaignInvitations( campaignId );
   const { data: submissionsData, isLoading: loadingSubmissions } = useCampaignSubmissions( campaignId );
@@ -152,6 +154,7 @@ const CampaignModals = memo( ( { selectedItem, onSelectMatch }: {
   selectedItem: SelectedItem | null;
   onSelectMatch: ( item: SelectedItem | null ) => void;
 } ) => {
+  const tModals = useTranslations( 'dashboard.common' );
   const closeModals = useCallback( ( open: boolean ) => {
     if ( !open ) onSelectMatch( null );
   }, [ onSelectMatch ] );
@@ -165,7 +168,7 @@ const CampaignModals = memo( ( { selectedItem, onSelectMatch }: {
       <Sheet open={ !!selectedApp } onOpenChange={ closeModals }>
         <SheetContent className='w-[90%]! max-w-[420px]! overflow-y-auto'>
           <SheetHeader className='mb-4'>
-            <SheetTitle className='font-normal text-primary font-primary'>Application</SheetTitle>
+            <SheetTitle className='font-normal text-primary font-primary'>{ tModals( 'cards.application' ) }</SheetTitle>
           </SheetHeader>
           { selectedApp && <ApplicationCard application={ selectedApp } /> }
         </SheetContent>
@@ -193,6 +196,7 @@ CampaignModals.displayName = 'CampaignModals';
 
 export const CampaignGigsButton = memo( ( { campaignId, basePath }: { campaignId: string; basePath: string; } ) => {
   const role = useRole();
+  const tGigs = useTranslations( 'dashboard.common' );
   const { data, isLoading } = useGigsByCampaign( campaignId, role );
   const showLoading = useDelayedLoading( isLoading );
   const count = useMemo( () => data?.data?.length ?? 0, [ data ] );
@@ -217,7 +221,7 @@ export const CampaignGigsButton = memo( ( { campaignId, basePath }: { campaignId
           </Button>
         </Link>
       </TooltipTrigger>
-      <TooltipContent side="top">{ count } gig{ count !== 1 ? 's' : '' }</TooltipContent>
+      <TooltipContent side="top">{ tGigs( 'cards.gigCount', { count } ) }</TooltipContent>
     </Tooltip>
   );
 } );
@@ -225,6 +229,7 @@ CampaignGigsButton.displayName = 'CampaignGigsButton';
 
 export function CampaignCard( { campaign }: CampaignCardProps ) {
   const basePath = useBasePath();
+  const tCard = useTranslations( 'dashboard.common' );
   const { id, campaign_name, description, campaign_status, updated_at, brand_id } = campaign;
   const [ selectedItem, setSelectedItem ] = useState<SelectedItem | null>( null );
 
@@ -268,7 +273,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
                 <div className="size-12 bg-muted shrink-0 overflow-hidden rounded-full">
                   <img
                     src={ imgpresets.card( coverImage ) }
-                    alt={ campaign_name || 'Campaign cover' }
+                    alt={ campaign_name || tCard( 'cards.campaignCover' ) }
                     className="object-cover w-full h-full"
                   />
                 </div>
@@ -294,8 +299,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
           <div className="mt-auto flex flex-col gap-2">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span className='text-xs text-muted-foreground/60'>
-                Updated{ ' ' }
-                { formattedDate }
+                { formattedDate ? tCard( 'cards.updatedDate', { date: formattedDate } ) : '' }
               </span>
             </div>
 

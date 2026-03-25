@@ -6,12 +6,13 @@ import { Button } from '@/components/ui/button';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { FooterSignupForm } from '@/components/FooterSignupForm';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 const socialLinks = [
   { name: 'Facebook', icon: 'facebook', href: '#' },
-  { name: 'X', icon: 'x', href: '#' },
-  { name: 'Instagram', icon: 'instagram', href: '#' },
-  { name: 'TikTok', icon: 'tiktok', href: '#' },
+  { name: 'X', icon: 'x', href: 'https://x.com/huerray_de' },
+  { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/huerray_de/' },
+  { name: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@huerray' },
 ];
 
 export function Footer( { className }: { className?: string; } ) {
@@ -19,7 +20,7 @@ export function Footer( { className }: { className?: string; } ) {
 
   const footerLinks = {
     services: [
-      { label: t( 'links.prices' ), href: '#' },
+      { label: t( 'links.prices' ), href: '/pricing' },
       // { label: t( 'links.creditPacks' ), href: '#' },
       { label: t( 'links.managedService' ), href: '#' },
     ],
@@ -45,7 +46,7 @@ export function Footer( { className }: { className?: string; } ) {
       <div className='footer__cta'>
         <h2 className='footer__cta-title gradient-text'>{ t( 'cta.title' ) }</h2>
         <Button variant='heroAlt' className='min-w-70'>
-          { t( 'cta.button' ) }
+          <Link href="/signup" title={ t( 'cta.button' ) } className='flex-1'>{ t( 'cta.button' ) }</Link>
         </Button>
       </div>
 
@@ -130,6 +131,7 @@ export function Footer( { className }: { className?: string; } ) {
                 href={ social.href }
                 className='footer__social-link'
                 aria-label={ social.name }
+                target='_blank'
               >
                 <span className={ `icon icon-${ social.icon }` }></span>
               </a>

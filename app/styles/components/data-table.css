@@ -66,4 +66,22 @@
   .dt-table__checkbox {
     @apply mt-2;
   }
+
+  .dt-table__money {
+    @apply font-primary text-primary text-base font-normal;
+  }
+
+  .dt-pinned-border {
+    @apply relative after:border-r after:border-r-border after:absolute right-0 bg-red-300;
+  }
+
+  .dt-pinned-border::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: hsl(var(--border));
+  }
 }

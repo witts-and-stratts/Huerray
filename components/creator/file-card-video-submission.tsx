@@ -16,7 +16,7 @@ function resolveUploadUrl( url: string ): string {
 
 function dataUrlToFile( dataUrl: string, filename: string ): File {
   const [ header, data ] = dataUrl.split( ',' );
-  const mime = header.match( /:(.*?);/ )?.[1] ?? 'image/png';
+  const mime = header.match( /:(.*?);/ )?.[ 1 ] ?? 'image/png';
   const bytes = atob( data );
   const arr = new Uint8Array( bytes.length );
   for ( let i = 0; i < bytes.length; i++ ) arr[ i ] = bytes.charCodeAt( i );
@@ -131,13 +131,13 @@ export const FileCardVideoSubmission = memo( ( props: FileCardVideoSubmissionPro
       // Clean up: abort any in-flight request if the file/status changes underneath us
       return () => { controller.abort(); };
     }
-  // Callbacks are intentionally excluded — they live in refs updated above.
-  // Only the identity of the file being uploaded should trigger a new upload.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Callbacks are intentionally excluded — they live in refs updated above.
+    // Only the identity of the file being uploaded should trigger a new upload.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ item.status, item.file, item.url, item.id, item.name, item.type, item.preview, isOverlay ] );
 
   return (
-    <BaseFileCard { ...rest } item={ item } onRemove={ props.onRemove } onRetry={ props.onRetry } onPreview={ props.onPreview } onUploadSuccess={ () => { } } onUploadError={ onUploadError } isOverlay={ isOverlay } progress={ progress } showTitle={ props.showTitle } aspect={ props.aspect }>
+    <BaseFileCard { ...rest } item={ item } onRemove={ props.onRemove } onRetry={ props.onRetry } onPreview={ props.onPreview } onUploadSuccess={ () => { } } onUploadError={ onUploadError } isOverlay={ isOverlay } progress={ progress } showTitle={ props.showTitle } aspect={ props.aspect } onSelect={ ( id ) => props.onSelect?.( id, false ) }>
       { item.preview && (
         <>
           <Media url={ item.preview } alt={ item.name } className={ props.aspect ? "w-full h-full object-cover object-top" : "w-full max-h-40 object-cover object-top" } />

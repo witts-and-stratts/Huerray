@@ -7,7 +7,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 import { usePlatformAnalytics } from '@/lib/api/hooks/analytics';
 import { formatCurrency } from '@/lib/utils/format';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { financialSnapshot } from './dashboard-mock-data';
 
 const chartConfig = {
@@ -24,20 +24,21 @@ const chartConfig = {
 export function RevenueStatsBlock() {
   const { data: response, isLoading, isError } = usePlatformAnalytics();
   const locale = useLocale();
+  const t = useTranslations( 'dashboard.admin' );
   const analytics = response?.data;
 
   const stats = useMemo( () => [
-    { label: 'Total Revenue', value: formatCurrency( analytics?.total_revenue, 'EUR', locale ) },
-    { label: 'Net Revenue', value: formatCurrency( analytics?.net_revenue, 'EUR', locale ) },
-    { label: 'Total Payouts', value: formatCurrency( analytics?.total_payouts, 'EUR', locale ) },
-  ], [ analytics, locale ] );
+    { label: t( 'dashboardBlocks.revenueStats.stats.totalRevenue' ), value: formatCurrency( analytics?.total_revenue, 'EUR', locale ) },
+    { label: t( 'dashboardBlocks.revenueStats.stats.netRevenue' ), value: formatCurrency( analytics?.net_revenue, 'EUR', locale ) },
+    { label: t( 'dashboardBlocks.revenueStats.stats.totalPayouts' ), value: formatCurrency( analytics?.total_payouts, 'EUR', locale ) },
+  ], [ analytics, locale, t ] );
 
   return (
     <Card className="ad-summary-card justify-start">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Revenue</CardTitle>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.revenueStats.title' ) }</CardTitle>
         <CardDescription className="ad-card-description">
-          Revenue, payouts, and net earnings overview
+          { t( 'dashboardBlocks.revenueStats.description' ) }
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -53,7 +54,7 @@ export function RevenueStatsBlock() {
         ) }
 
         { isError && (
-          <p className="py-8 text-center text-xs text-destructive">Unable to load revenue data.</p>
+          <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.revenueStats.states.error' ) }</p>
         ) }
 
         { !isLoading && !isError && (
@@ -71,11 +72,11 @@ export function RevenueStatsBlock() {
               <div className="ad-chart-legend mb-2">
                 <span className="ad-chart-legend-item">
                   <span className="ad-chart-dot bg-chart-4" />
-                  Revenue
+                  { t( 'dashboardBlocks.revenueStats.labels.revenue' ) }
                 </span>
                 <span className="ad-chart-legend-item">
                   <span className="ad-chart-dot bg-chart-2" />
-                  Payouts
+                  { t( 'dashboardBlocks.revenueStats.labels.payouts' ) }
                 </span>
               </div>
               <ChartContainer config={ chartConfig } className="ad-chart-md">

@@ -12,6 +12,7 @@ import { CreatorDetailsSheetProps, ExpandableCategories, SOCIAL_PLATFORMS, Socia
 import { CreatorSheetHeader } from './creator-sheet-header';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { Content } from '@/components/dashboard-ui/content';
+import { useTranslations } from "next-intl";
 
 export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDetailsSheetProps ) {
   const c = creator as any;
@@ -22,7 +23,10 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
     instagram_handle, tiktok_handle, youtube_handle,
   } = c;
 
-  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || 'Unknown';
+  const tc = useTranslations( 'dashboard.common' );
+  const t = useTranslations( 'dashboard.admin' );
+
+  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || tc( 'cards.creatorFallback' );
   const initials = fullName.slice( 0, 2 ).toUpperCase();
   const isApproved = creator_status?.toLowerCase() === 'approved';
   const age = date_of_birth ? ageFromDate( date_of_birth ) : undefined;
@@ -44,16 +48,16 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
         <CreatorSheetHeader creator={ creator! } />
         {/* ── Brand View (Merged & Streamlined) ── */ }
         <div className="px-6 flex flex-col gap-4 pb-6">
-          <WrappedCard title="Bio & Introduction">
+          <WrappedCard title={ t('creatorDashboard.blocks.bio') }>
             { displayVideo && (
               <video src={ displayVideo } poster={ optimizedVideoPoster } controls className="w-full aspect-video rounded-md mb-4" />
             ) }
             <ExpandableContent maxHeightClass="max-h-24">
-              <Content content={ displayBio || 'No bio available' } />
+              <Content content={ displayBio || tc('sheets.noBioAvailable') } />
             </ExpandableContent>
           </WrappedCard>
 
-          <WrappedCard title="Social Media">
+          <WrappedCard title={ tc('sheets.socialMedia') }>
             { activeSocials.length > 0 ? (
               <div className="flex items-center gap-6">
                 { activeSocials.map( p => (
@@ -66,12 +70,12 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
                 ) ) }
               </div>
             ) : (
-              <p className="py-2 text-center text-sm text-muted-foreground italic">No social accounts connected</p>
+              <p className="py-2 text-center text-sm text-muted-foreground italic">{ tc('sheets.noSocialAccounts') }</p>
             ) }
           </WrappedCard>
 
           { c?.preferred_categories?.length > 0 && (
-            <WrappedCard title="Preferred Categories">
+            <WrappedCard title={ tc('sheets.preferredCategories') }>
               <ExpandableCategories categories={ c.preferred_categories } />
             </WrappedCard>
           ) }

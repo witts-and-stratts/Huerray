@@ -11,8 +11,8 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import { useState } from 'react';
-import { formatDate } from './campaign-overview-utils';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { useFormatDate } from '@/lib/hooks/format';
 
 
 function MetaRow( { icon: Icon, label, value, valueClassName }: { icon: LucideIcon; label: string; value: string; valueClassName?: string; } ) {
@@ -75,6 +75,7 @@ interface CampaignMetadataCardProps {
 
 export function CampaignMetadataCard( { campaign }: CampaignMetadataCardProps ) {
   const t = useTranslations( 'dashboard.admin.campaignOverview.metadata' );
+  const formatDate = useFormatDate;
 
   return (
     <Card className="ad-summary-card pt-0">
@@ -83,9 +84,9 @@ export function CampaignMetadataCard( { campaign }: CampaignMetadataCardProps ) 
         <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
         <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
       </CardHeader>
-      <CardContent className="text-sm bg-white *:border-b *:border-b-border/80 *:py-2 *:last-of-type:border-0">
-        <MetaRow icon={ CalendarDays } label={ t( 'labels.created' ) } value={ formatDate( campaign.created_at ) } />
-        <MetaRow icon={ Clock3 } label={ t( 'labels.updated' ) } value={ formatDate( campaign.updated_at ) } />
+      <CardContent className="text-sm bg-white *:py-2 *:last-of-type:border-0">
+        <MetaRow icon={ CalendarDays } label={ t( 'labels.created' ) } value={ formatDate( campaign.created_at! ) } />
+        <MetaRow icon={ Clock3 } label={ t( 'labels.updated' ) } value={ formatDate( campaign.updated_at! ) } />
         <MetaRow icon={ Video } label={ t( 'labels.format' ) } value={ campaign.video_format || t( 'labels.na' ) } valueClassName="uppercase" />
         <MetaRow icon={ Users } label={ t( 'labels.multiVideo' ) } value={ campaign.allow_multiple_videos ? t( 'values.allowed' ) : t( 'values.singleVideo' ) } />
         <MetaRow icon={ Tags } label={ t( 'labels.brand' ) } value={ campaign.brand?.company_name || campaign.brand_name || t( 'labels.na' ) } />

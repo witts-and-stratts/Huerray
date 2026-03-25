@@ -1,82 +1,82 @@
 {
   "hero": {
-    "title": "Arbeite mit Top-Creatorn zusammen",
-    "subtitle": "Arbeite mit Brands & echten Unternehmen. Verdienie Geld mit dem, was du liebst.",
-    "buttonText": "Loslegen"
+    "title": "Zusammenarbeit mit Spitzenkreativen",
+    "subtitle": "Arbeiten Sie mit Marken und echten Unternehmen. Verdienen Sie Geld für das, was Sie lieben.",
+    "buttonText": "Los geht's"
   },
   "scroller": {
-    "title": "Match mit erfahrenen Creatorn"
+    "title": "Abgleich mit erfahrenen Schöpfern"
   },
   "match": {
-    "pill": "Matching",
-    "title": "Finde die richtigen Creator für deine Brand",
-    "description": "Unser Matching-Prozess bedeutet, dass 92% der Creator-Matches in der ersten Runde genehmigt werden.",
+    "pill": "Passend dazu",
+    "title": "Finden Sie die richtigen Schöpfer für Ihre Marke",
+    "description": "Unser Matching-Verfahren bedeutet, dass 92 % der Ersteller-Treffer in der ersten Runde genehmigt werden.",
     "listItems": {
-      "item1": "Vollständig angemeldetes und verifiziertes Netzwerk von Creatorn",
-      "item2": "Ein großes Netzwerk diverser Creator aus unterrepräsentierten Communities und Nischenkategorien"
+      "item1": "Vollständig angemeldetes und verifiziertes Netzwerk von Urhebern",
+      "item2": "Ein großes Netzwerk von Künstlern aus unterrepräsentierten Gemeinschaften und Nischenkategorien"
     },
-    "paymentMade": "Zahlung erfolgt"
+    "paymentMade": "Geleistete Zahlung"
   },
   "contentObjective": {
-    "pill": "Qualitäts-Content",
-    "title": "Content für jedes Ziel",
-    "description": "Creator produzieren hochwertigen Content mit einer Reihe von Ergebnissen, die an deine Ziele und Anforderungen angepasst sind.",
+    "pill": "Qualität des Inhalts",
+    "title": "Inhalte für jedes Ziel",
+    "description": "Die Autoren produzieren qualitativ hochwertige Inhalte, die auf Ihre Ziele und Anforderungen abgestimmt sind.",
     "listItems": {
-      "item1": "Egal ob Beauty-Commercial, Review für Automotive oder Showcase von Babyprodukten, du findest den spezialisierten Creator-Content",
-      "item2": "Von UGC bis zu spezialisiertem Content, du kannst basierend auf deinen Zielen wählen",
-      "item3": "Von zusätzlichem Content bis zu Entertainment-Content, Produktbewertungen und Live-Events, Creator-Content ist vielseitig"
+      "item1": "Egal, ob es sich um einen Werbespot für Schönheitsprodukte, einen Testbericht für die Automobilindustrie oder eine Präsentation von Babyprodukten handelt, Sie werden die spezialisierten Inhalte der Autoren finden",
+      "item2": "Von UGC bis zu spezialisierten Inhalten können Sie je nach Ihren Zielen wählen",
+      "item3": "Von zusätzlichen Inhalten über Unterhaltungsinhalte bis hin zu Produktbesprechungen und Live-Events - die Inhalte der Autoren sind vielseitig"
     }
   },
   "expertSupport": {
-    "pill": "Dedizierter Support",
-    "title": "Support auf Expertenniveau",
-    "description": "Unser Team ist hier, um sicherzustellen, dass du mit den richtigen Creatorn gematcht wirst, Lieferungen pünktlich übergeben werden und sicherzustellen, dass deine Kampagne und Kreativstrategie ein Erfolg wird.",
+    "pill": "Engagierte Unterstützung",
+    "title": "Unterstützung auf Expertenebene",
+    "description": "Unser Team sorgt dafür, dass Sie mit den richtigen Kreativen zusammenarbeiten, dass die Ergebnisse pünktlich geliefert werden und dass Ihre Kampagne und kreative Strategie ein Erfolg wird.",
     "listItems": {
-      "item1": "Zu beschäftigt? Lass uns das Hin und Her mit Creatorn übernehmen",
-      "item2": "Kampagnenprüfungen vor deiner Genehmigung, damit du keine Anfragen durchgehen musst, die nicht abgestimmt sind",
-      "item3": "Wir managen Live-Kampagnen und Lieferungen für dich, damit du deinen Starttermin nicht verpasst"
+      "item1": "Zu viel zu tun? Überlassen Sie uns das Hin und Her mit den Erstellern",
+      "item2": "Kampagnenüberprüfungen vor der Genehmigung, so dass Sie nicht durch nicht abgestimmte Anträge gehen müssen",
+      "item3": "Wir verwalten Live-Kampagnen und Ergebnisse für Sie, damit Sie Ihren Starttermin nicht verpassen"
     }
   },
   "beyondFeed": {
     "pill": "Omni-Channel",
-    "title": "Jenseits deines Content-Feeds",
-    "description": "Von Creatorn erstellter Content wird dir zur Nutzung in allen deinen Marketingkanälen lizenziert. Von deiner Website, E-Commerce-Plattform, Youtube oder In-Flight-Entertainment, erstelle ein wirklich omni-channel Creator-Marketing-Erlebnis.",
+    "title": "Über Ihren Content Feed hinaus",
+    "description": "Von Creators erstellte Inhalte werden an Sie lizenziert, damit Sie sie in all Ihren Marketingkanälen nutzen können. Ob auf Ihrer Website, Ihrer E-Commerce-Plattform, auf Youtube oder im Inflight-Entertainment - schaffen Sie ein wahrhaft kanalübergreifendes Marketing-Erlebnis für Creators.",
     "listItems": {
-      "item1": "Verwende Creator-Content in allen deinen Marketingkanälen wieder",
-      "item2": "Kein Raten und ungeplante Ausgaben. Null Extrakosten für die Nutzung auf mehreren Plattformen"
+      "item1": "Wiederverwendung von Autoreninhalten über alle Ihre Marketingkanäle",
+      "item2": "Kein Rätselraten und keine ungeplanten Ausgaben. Keine zusätzlichen Kosten für die Nutzung mehrerer Plattformen"
     },
-    "contentUsageTitle": "Content-Nutzung",
+    "contentUsageTitle": "Inhalt Verwendung",
     "contentUsageItems": {
-      "item1": "Store auf Shopify",
+      "item1": "Laden auf Shopify",
       "item2": "Kino",
-      "item3": "Inflight-Entertainment",
-      "item4": "In-Game"
+      "item3": "Unterhaltung an Bord",
+      "item4": "Im Spiel"
     }
   },
   "stopAssuming": {
     "pill": "Messung",
-    "title": "Hör auf anzunehmen, was funktioniert",
-    "description": "Behalte den Überblick darüber, was während des kreativen Prozesses passiert, mit ständiem Feedback und Updates.",
+    "title": "Nicht mehr annehmen, was funktioniert",
+    "description": "Behalten Sie während des kreativen Prozesses durch ständiges Feedback und Aktualisierungen den Überblick über das Geschehen.",
     "listItems": {
-      "item1": "Verfolge deine Kampagne und sieh, wie sie performt",
-      "item2": "Kampagnen-Walkthroughs und Einblicke in alle deine Projekte/Briefings"
+      "item1": "Verfolgen Sie Ihre Kampagne und sehen Sie, wie sie abschneidet",
+      "item2": "Kampagnenüberblicke und Einblicke in alle Ihre Projekte/Briefe"
     },
-    "contentPerformance": "Content-Performance"
+    "contentPerformance": "Inhalt Leistung"
   },
   "cta": {
-    "subtitle": "Schließe dich Tausenden von Brands an, die fantastischen Content erhalten",
-    "title": "Tritt dem Marktplatz bei. Finde deine nächsten Markenbotschafter",
-    "buttonText": "Loslegen"
+    "subtitle": "Schließen Sie sich Tausenden von Marken an, die großartige Inhalte erhalten",
+    "title": "Werden Sie Teil des Marktplatzes. Finden Sie Ihre nächsten Markenbotschafter",
+    "buttonText": "Los geht's"
   },
   "industry": {
-    "title": "Content für jede Branche",
+    "title": "Inhalte für jede Branche",
     "categories": {
       "sport": "Sport",
-      "lifestyle": "Lifestyle",
+      "lifestyle": "Lebensstil",
       "fashion": "Mode",
-      "beauty": "Beauty",
+      "beauty": "Schönheit",
       "skincare": "Hautpflege",
-      "food": "Essen",
+      "food": "Lebensmittel",
       "tech": "Tech",
       "fitness": "Fitness"
     }
@@ -85,47 +85,47 @@
     "heading": "Häufig gestellte Fragen",
     "q1": {
       "question": "Was ist Huerray?",
-      "answer": "Huerray ist eine Plattform, die Brands mit Creatorn verbindet, um hochwertigen Content zu produzieren."
+      "answer": "Huerray ist eine Plattform, die Marken und Kreative zusammenbringt, um hochwertige Inhalte zu produzieren."
     },
     "q2": {
       "question": "Wie fange ich an?",
-      "answer": "Registriere dich für ein Konto und erstelle eine Kampagne, um mit dem Matching mit Creatorn zu beginnen."
+      "answer": "Melden Sie sich für ein Konto an und erstellen Sie eine Kampagne, um mit dem Matching mit Schöpfern zu beginnen."
     },
     "q3": {
-      "question": "Welche Art von Content kann ich bekommen?",
-      "answer": "Du kannst eine breite Palette von Content erhalten, von Social-Media-Posts bis hin zu professionellen Videos."
+      "question": "Welche Art von Inhalten kann ich bekommen?",
+      "answer": "Sie können eine breite Palette von Inhalten erhalten, von Beiträgen in sozialen Medien bis hin zu professionellen Videos."
     },
     "q4": {
-      "question": "Wie viel kostet es?",
-      "answer": "Die Kosten hängen vom Umfang deiner Kampagne und den Creatorn ab, mit denen du zusammenarbeitest."
+      "question": "Wie hoch sind die Kosten?",
+      "answer": "Die Kosten hängen vom Umfang Ihrer Kampagne und den Schöpfern ab, mit denen Sie zusammenarbeiten."
     },
     "q5": {
       "question": "Wie lange dauert es?",
-      "answer": "Der Zeitrahmen variiert je nach Projekt, aber du kannst typischerweise innerhalb weniger Wochen Content erhalten."
+      "answer": "Der Zeitrahmen hängt vom jeweiligen Projekt ab, aber in der Regel erhalten Sie die Inhalte innerhalb weniger Wochen."
     },
     "q6": {
-      "question": "Wie bezahle ich Creator?",
-      "answer": "Zahlungen werden sicher über unsere Plattform abgewickelt. Du kannst mit Kreditkarte oder Banküberweisung bezahlen."
+      "question": "Wie bezahle ich Schöpfer?",
+      "answer": "Die Zahlungen werden sicher über unsere Plattform abgewickelt. Sie können mit einer Kreditkarte oder per Banküberweisung bezahlen."
     },
     "q7": {
-      "question": "Kann ich den Content auf meinen eigenen Kanälen nutzen?",
-      "answer": "Ja, du hast die vollen Rechte, den Content auf deinen eigenen Marketingkanälen zu nutzen."
+      "question": "Kann ich die Inhalte auf meinen eigenen Kanälen verwenden?",
+      "answer": "Ja, Sie haben das volle Recht, die Inhalte auf Ihren eigenen Marketingkanälen zu verwenden."
     },
     "q8": {
-      "question": "Was ist, wenn ich mit dem Content nicht zufrieden bin?",
-      "answer": "Wir haben einen Überarbeitungsprozess, um sicherzustellen, dass du mit dem Endprodukt zufrieden bist. Wenn du immer noch nicht zufrieden bist, bieten wir eine Geld-zurück-Garantie."
+      "question": "Was ist, wenn ich mit dem Inhalt nicht zufrieden bin?",
+      "answer": "Wir haben ein Revisionsverfahren, um sicherzustellen, dass Sie mit dem Endprodukt zufrieden sind. Sollten Sie dennoch nicht zufrieden sein, bieten wir eine Geld-zurück-Garantie."
     },
     "q9": {
-      "question": "Wie prüft ihr Creator?",
-      "answer": "Wir haben einen strengen Prüfungsprozess, um sicherzustellen, dass alle Creator auf unserer Plattform professionell sind und hochwertige Arbeit leisten."
+      "question": "Wie überprüfen Sie die Schöpfer?",
+      "answer": "Wir haben ein strenges Prüfverfahren, um sicherzustellen, dass alle Schöpfer auf unserer Plattform professionell sind und qualitativ hochwertige Arbeiten produzieren."
     },
     "q10": {
-      "question": "Bietet ihr Managed Services an?",
-      "answer": "Ja, wir bieten Managed Services für Brands an, die einen weniger involvierten Ansatz wünschen. Unser Team kann alles von der Kampagnenstrategie bis zum Creator-Management übernehmen."
+      "question": "Bieten Sie verwaltete Dienste an?",
+      "answer": "Ja, wir bieten Managed Services für Marken an, die sich nicht so viel Mühe geben wollen. Unser Team kann sich um alles kümmern, von der Kampagnenstrategie bis zum Ersteller-Management."
     },
     "q11": {
-      "question": "Ich habe eine andere Frage",
-      "answer": "Bitte kontaktiere uns unter support@huerray.com für alle weiteren Fragen."
+      "question": "Ich habe eine weitere Frage",
+      "answer": "Bei weiteren Fragen kontaktieren Sie uns bitte unter support@huerray.com."
     }
   }
 }

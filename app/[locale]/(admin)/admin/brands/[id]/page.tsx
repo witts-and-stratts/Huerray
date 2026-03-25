@@ -17,8 +17,10 @@ import {
   toCurrency,
   type BrandStatRow,
 } from '@/components/admin/brands/dashboard';
+import { useTranslations } from "next-intl";
 
 export default function BrandDashboardPage() {
+  const t = useTranslations('dashboard.admin.brandDashboard');
   const params = useParams<{ id: string; }>();
   const brandId = params.id;
 
@@ -80,15 +82,15 @@ export default function BrandDashboardPage() {
   }, [ gigs ] );
 
   const financialRows = useMemo<BrandStatRow[]>( () => ( [
-    { label: 'Total Spend', value: toCurrency( spendMetrics.totalSpend ), numeric: spendMetrics.totalSpend || 0 },
-    { label: 'Avg Gig Spend', value: toCurrency( spendMetrics.avgGigSpend ), numeric: spendMetrics.avgGigSpend || 0 },
-  ] ), [ spendMetrics.avgGigSpend, spendMetrics.totalSpend ] );
+    { label: t('totalSpend'), value: toCurrency( spendMetrics.totalSpend ), numeric: spendMetrics.totalSpend || 0 },
+    { label: t('avgGigSpend'), value: toCurrency( spendMetrics.avgGigSpend ), numeric: spendMetrics.avgGigSpend || 0 },
+  ] ), [ spendMetrics.avgGigSpend, spendMetrics.totalSpend, t ] );
 
   const campaignRows = useMemo<BrandStatRow[]>( () => ( [
-    { label: 'Total', value: `${ campaignMetrics.total }`, numeric: campaignMetrics.total },
-    { label: 'Active', value: `${ campaignMetrics.active }`, numeric: campaignMetrics.active },
-    { label: 'Finished', value: `${ campaignMetrics.finished }`, numeric: campaignMetrics.finished },
-    { label: 'Draft', value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
+    { label: t('total'), value: `${ campaignMetrics.total }`, numeric: campaignMetrics.total },
+    { label: t('active'), value: `${ campaignMetrics.active }`, numeric: campaignMetrics.active },
+    { label: t('finished'), value: `${ campaignMetrics.finished }`, numeric: campaignMetrics.finished },
+    { label: t('draft'), value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
   ] ), [ campaignMetrics.active, campaignMetrics.draft, campaignMetrics.finished, campaignMetrics.total ] );
 
 
@@ -103,22 +105,22 @@ export default function BrandDashboardPage() {
   if ( brandError || ( !isBrandLoading && !brand ) ) {
     return (
       <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
-        <h3 className="text-lg font-medium text-red-800">Failed to load brand profile</h3>
-        <p className="text-sm text-red-600">{ ( brandError as Error )?.message || 'Brand not found' }</p>
+        <h3 className="text-lg font-medium text-red-800">{t('failedToLoad')}</h3>
+        <p className="text-sm text-red-600">{ ( brandError as Error )?.message || t('brandNotFound') }</p>
       </div>
     );
   }
 
-  const brandName = brand?.company_name || 'Brand Dashboard';
+  const brandName = brand?.company_name || t('brandDashboard');
   const brandLogo = brand?.profile_photo?.asset || brand?.logo_url || brand?.logo || '';
 
   return (
     <div className="flex flex-1 flex-col h-full">
       <SubHeader
         title={ brandName }
-        description="Overview of brand performance and details"
+        description={t('overview')}
         breadcrumbs={ [
-          { label: 'Brands', href: '/admin/brands' },
+          { label: t('brands'), href: '/admin/brands' },
           { label: brandName, href: `/admin/brands/${ brandId }` },
         ] }
       />

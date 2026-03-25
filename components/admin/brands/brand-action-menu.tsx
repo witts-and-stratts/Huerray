@@ -10,6 +10,7 @@ import { BrandStatusDialog } from "./brand-status-dialog";
 import { toast } from "sonner";
 import { useDeleteBrand } from "@/lib/api/hooks/brands";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
+import { useTranslations } from "next-intl";
 
 interface BrandActionMenuProps {
   brand: Brand;
@@ -26,6 +27,7 @@ export function BrandActionMenu( {
   align = "end",
   onViewDetails,
 }: BrandActionMenuProps ) {
+  const t = useTranslations('dashboard.admin');
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
   const deleteBrand = useDeleteBrand();
@@ -99,7 +101,7 @@ export function BrandActionMenu( {
         trigger={
           trigger || (
             <Button variant="ghost" className="size-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">{t('brandActionMenu.openMenu')}</span>
               <MoreVertical className="size-4" />
             </Button>
           )
@@ -117,8 +119,7 @@ export function BrandActionMenu( {
         title="Delete Brand"
         description={
           <span>
-            Are you sure you want to delete <span className="font-semibold">{ brand.name }</span>? This action cannot be undone.
-          </span>
+            {t('brandActionMenu.areYouSureYou')}<span className="font-semibold">{ brand.name }</span>{t('brandActionMenu.ThisActionCannot')}</span>
         }
         confirmLabel="Delete"
         variant="destructive"

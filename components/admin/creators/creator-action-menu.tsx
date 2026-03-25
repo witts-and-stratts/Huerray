@@ -11,6 +11,7 @@ import { Copy } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
 import { CreatorStatusDialog } from "./creator-status-dialog";
+import { useTranslations } from "next-intl";
 
 interface CreatorActionMenuProps {
   creator: ModelsCreatorResponse;
@@ -22,12 +23,14 @@ interface CreatorActionMenuProps {
 }
 
 export function CreatorActionMenu( { creator, onViewDetails, onApproveProfile, onRejectProfile, trigger }: CreatorActionMenuProps ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const resendVerification = useResendVerification();
 
   const handleReviewProfile = () => {
     if ( !creator.id ) {
-      toast.error( "Creator profile not found" );
+      toast.error( t( 'creatorStatus.missingId' ) );
       return;
     }
     setIsStatusDialogOpen( true );
@@ -52,39 +55,39 @@ export function CreatorActionMenu( { creator, onViewDetails, onApproveProfile, o
 
   const handleCopyId = () => {
     navigator.clipboard.writeText( creator.creator_id || "" );
-    toast.success( "ID copied to clipboard" );
+    toast.success( t( 'creatorStatus.idCopied' ) );
   };
 
   const actions: MenuAction<ModelsCreatorResponse>[] = [
     {
-      label: "Copy ID",
+      label: t( 'creatorStatus.copyId' ),
       icon: Copy,
       action: handleCopyId,
     },
     {
-      label: "View details",
+      label: tc( 'sheets.details' ),
       action: () => onViewDetails( creator ),
       separator: true,
     },
     ...( onApproveProfile ? [ {
-      label: "Approve Profile",
+      label: t( 'creatorStatus.approve' ),
       action: () => onApproveProfile( creator ),
       allowedRoles: [ 'admin' ] as AllowedRoles[],
       condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "approved",
     } ] : [] ),
     ...( onRejectProfile ? [ {
-      label: "Reject Profile",
+      label: t( 'creatorStatus.reject' ),
       action: () => onRejectProfile( creator ),
       allowedRoles: [ 'admin' ] as AllowedRoles[],
       condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "rejected",
     } ] : [] ),
     {
-      label: "Review Profile",
+      label: t( 'creatorStatus.reviewProfile' ),
       action: handleReviewProfile,
       allowedRoles: [ 'admin' ]
     },
     {
-      label: "Delete creator",
+      label: t( 'creatorStatus.deleteCreator' ),
       action: () => { console.log( "Delete creator clicked" ); }, // Placeholder as per original
       variant: "destructive",
       allowedRoles: [ 'admin' ],

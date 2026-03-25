@@ -18,6 +18,7 @@ import { formatDate } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { Clock01Icon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
+import { ComponentProps } from 'react';
 import { Separator } from '../dashboard-ui/separator';
 import { ApplicationCard } from './application-card';
 import { AvatarCollage } from './avatar-collage';
@@ -30,7 +31,7 @@ import { SubmissionViewDialog } from './submission-view-dialog';
 
 // ─── Details Cell ─────────────────────────────────────────────────────────────
 
-const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void; } ) => {
+const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ]; } ) => {
   const { title, gig_status, posting_start_date, posting_end_date } = row.original;
   const coverImage = row.original.campaign?.product_image?.asset ?? row.original.campaign?.campaign_images?.[ 0 ]?.asset;
 
@@ -45,7 +46,7 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
             <img
               src={ imgpresets.card( coverImage ) }
               alt={ title ?? 'Gig cover' }
-              className="object-cover w-full h-full cursor-pointer"
+              className="dt-table__avatar object-cover"
               onClick={ () => onViewGig( row.original ) }
             />
           ) }
@@ -60,17 +61,19 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
         ) }
       </div>
       <div className='flex flex-col gap-2'>
-        <h4
-          className='card__title capitalize text-[18px] font-normal text-primary font-primary hover:underline'
-          onClick={ () => onViewGig( row.original ) }
-        >
-          { title }
-        </h4>
-        { ( campaign?.campaign_name || campaign?.campaign_name ) && (
-          <p className='card__description line-clamp-2'>
-            <span className='text-slate-700'>{ campaign?.campaign_name ?? campaign?.campaign_name }</span>
-          </p>
-        ) }
+        <div>
+          <h4
+            className='dt-table__col-title'
+            onClick={ () => onViewGig( row.original ) }
+          >
+            { title }
+          </h4>
+          { ( campaign?.campaign_name || campaign?.campaign_name ) && (
+            <p className='card__description line-clamp-2'>
+              <span className='text-slate-700'>{ campaign?.campaign_name ?? campaign?.campaign_name }</span>
+            </p>
+          ) }
+        </div>
         {/* <div className='mt-4 flex flex-col gap-2'>
           { ( posting_start_date || posting_end_date ) && (
             <span className='text-xs text-muted-foreground/60'>
@@ -228,7 +231,7 @@ const RewardCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const amount = row.original.compensation?.value ?? row.original.gig_cost?.value;
   if ( amount == null ) return <span className="text-muted-foreground">—</span>;
   return (
-    <span className="font-primary text-primary text-lg">{ useFormatCurrency( amount, "EUR" ) }</span>
+    <span className="dt-table__money">{ useFormatCurrency( amount, "EUR" ) }</span>
   );
 };
 
@@ -238,7 +241,7 @@ const DeadlineCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const { posting_end_date } = row.original;
   if ( !posting_end_date ) return <span className="text-muted-foreground text-xs">—</span>;
   return (
-    <div className="flex items-center gap-1.5 text-muted-foreground mt-1.5">
+    <div className="flex items-center gap-1.5 text-muted-foreground">
       <span className="">{ formatDate( posting_end_date ) }</span>
     </div>
   );
@@ -248,7 +251,7 @@ const DeadlineCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 
 const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
   row: Row<ModelsGigResponse>;
-  onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void;
+  onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onEditGig?: ( gig: ModelsGigResponse ) => void;
   className?: string;
 } ) => {
@@ -281,11 +284,12 @@ const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
 // ─── Column definitions ───────────────────────────────────────────────────────
 
 export const getColumns = (
-  onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void,
+  onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ],
   onEditGig?: ( gig: ModelsGigResponse ) => void,
 ): ColumnDef<ModelsGigResponse>[] => [
     {
       id: 'select',
+      size: 24,
       header: ( { table } ) => (
         <Checkbox
           checked={ table.getIsAllPageRowsSelected() }
@@ -384,7 +388,7 @@ export const getColumns = (
       cell: ( { row } ) => {
         const amount = row.original.gig_cost?.value;
         if ( amount == null ) return <span className="text-muted-foreground text-base">—</span>;
-        return <span className="text-base font-primary text-primary text-lg">{ useFormatCurrency( amount, "EUR" ) }</span>;
+        return <span className="dt-table__money">{ useFormatCurrency( amount, "EUR" ) }</span>;
       },
     },
     {

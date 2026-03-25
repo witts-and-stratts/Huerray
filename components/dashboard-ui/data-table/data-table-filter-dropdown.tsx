@@ -15,12 +15,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/dashboard-ui/dropdown-menu';
 import { cn } from '@/lib/dashboard-utils';
+import { useTranslations } from 'next-intl';
 
 interface DataTableFilterDropdownProps<TData> {
   table: Table<TData>;
   columnId: string;
   options: string[];
   title?: string;
+  labelFn?: ( value: string ) => string;
 }
 
 export function DataTableFilterDropdown<TData>( {
@@ -28,9 +30,11 @@ export function DataTableFilterDropdown<TData>( {
   columnId,
   options,
   title,
+  labelFn,
 }: DataTableFilterDropdownProps<TData> ) {
   const column = table.getColumn( columnId );
   const filterValue = column?.getFilterValue() as string[] | undefined;
+  const t = useTranslations( 'dashboard.common' );
 
   return (
     <DropdownMenu>
@@ -50,7 +54,7 @@ export function DataTableFilterDropdown<TData>( {
             column.setFilterValue( undefined );
           } }
         >
-          Select All
+          { t( 'search.select_all' ) }
         </div>
         <DropdownMenuSeparator />
         { options.map( ( option ) => {
@@ -77,7 +81,7 @@ export function DataTableFilterDropdown<TData>( {
                 column.setFilterValue( nextFilters.size > 0 ? Array.from( nextFilters ) : undefined );
               } }
             >
-              { option.replace( /_/g, ' ' ) }
+              { labelFn ? labelFn( option ) : option.replace( /_/g, ' ' ) }
             </DropdownMenuCheckboxItem>
           );
         } ) }

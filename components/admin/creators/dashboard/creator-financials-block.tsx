@@ -1,16 +1,18 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { CreatorStatRow } from './creator-dashboard-utils';
+import { useTranslations } from 'next-intl';
 
 interface CreatorFinancialsBlockProps {
   rows: CreatorStatRow[];
 }
 
 export function CreatorFinancialsBlock( { rows }: CreatorFinancialsBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <Card className="ad-summary-card flex-1">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Financials</CardTitle>
-        <CardDescription className="ad-card-description">Earnings performance for this creator</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'creatorDashboard.blocks.financials' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'creatorDashboard.description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
         { rows.map( ( item ) => (

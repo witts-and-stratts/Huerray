@@ -1,20 +1,20 @@
 {
   "hero": {
-    "title": "Zahle für UGC, nicht für versteckte Gebühren",
-    "subtitle": "Jeder Dollar fließt in skalierbaren, markengerechten UGC, der Ergebnisse liefert, nicht in Plattformgebühren"
+    "title": "Bezahlen Sie für UGC, nicht für versteckte Gebühren",
+    "subtitle": "Jeder Dollar fließt in einen skalierbaren, markengerechten UGC, der zu Ergebnissen führt, nicht in Plattformgebühren."
   },
   "cards": {
-    "disclaimer": "Alle Preise gelten für ein Video, exklusive MwSt.",
-    "buttonText": "Briefing erstellen",
+    "disclaimer": "Alle Preise gelten für ein Video, ohne Mehrwertsteuer.",
+    "buttonText": "Einen Auftrag erstellen",
     "short": {
       "tag": "Kurz",
       "title": "15 Sekunden",
       "price": "€149.99",
       "features": [
         "TikTok-Video",
-        "Instagram-Story & Reels",
+        "Instagram-Geschichte & Reels",
         "Pinterest-Video",
-        "Snapchat-Ad"
+        "Snapchat-Anzeige"
       ]
     },
     "medium": {
@@ -22,11 +22,11 @@
       "title": "30 Sekunden",
       "price": "€269.99",
       "features": [
-        "Instagram-Reel",
-        "TikTok-Ads",
-        "Snapchat-Ad",
+        "Instagram-Rolle",
+        "TikTok-Anzeigen",
+        "Snapchat-Anzeige",
         "Live-Shopping",
-        "Landingpage"
+        "Landing-Page"
       ]
     },
     "long": {
@@ -35,89 +35,89 @@
       "price": "€349.99",
       "features": [
         "TikTok-Video",
-        "Instagram-Story & Reels",
+        "Instagram-Geschichte & Reels",
         "Pinterest-Video",
-        "Snapchat-Ad"
+        "Snapchat-Anzeige"
       ]
     }
   },
   "features": {
-    "title": "Die gleichen großartigen Funktionen für alle Pläne",
+    "title": "Gleiche großartige Funktionen für alle Pläne",
     "items": [
       {
         "title": "Unbegrenzte Projektanfragen",
-        "text": "Von Unboxing- & Testimonial-Videos bis hin zu Produkt- & Modelfotografie – erhalte den Content, den du brauchst."
+        "text": "Von Unboxing- und Testimonial-Videos bis hin zu Produkt- und Modellfotografie - holen Sie sich die Inhalte, die Sie brauchen."
       },
       {
-        "title": "Bewertungen von diversen Creatorn",
-        "text": "Jedes Alter, jede Rasse, jedes Geschlecht und jeder Vibe, Huerray hat den idealen Content Creator für deine Brand."
+        "title": "Überprüfung der Bewerbungen von verschiedenen Urhebern",
+        "text": "Für jedes Alter, jede Ethnie, jedes Geschlecht und jede Stimmung gibt es bei Huerray den idealen Content Creator für Ihre Marke."
       },
       {
-        "title": "Keine Verhandlungen mit Creatorn",
-        "text": "Huerray-Creator arbeiten mit einem festen Budget für alle deine Projekte."
+        "title": "Keine Verhandlungen mit dem Urheber",
+        "text": "Die Schöpfer von Huerray arbeiten mit einem festen Budget für alle Ihre Projekte."
       },
       {
-        "title": "Volle Lizenz- & Vertriebsrechte an deinem Content",
-        "text": "100% Lizenz- & Vertriebsrechte zur Nutzung auf Social Media, Websites, Anzeigen & mehr."
+        "title": "Volle Lizenz- und Vertriebsrechte für Ihre Inhalte",
+        "text": "100% Lizenz- und Vertriebsrechte für die Verwendung in sozialen Netzwerken, auf Websites, in Anzeigen und mehr."
       },
       {
-        "title": "Echtzeit-Feedback",
-        "text": "Tausche Feedback mit deinen Creatorn über unsere integrierte Kommunikationsfunktion aus. Nimm Anpassungen vor, wo nötig, oder verfeinere deine Anforderungen."
+        "title": "Feedback in Echtzeit",
+        "text": "Tauschen Sie sich mit Ihren Erstellern über unsere integrierte Kommunikationsfunktion aus. Nehmen Sie bei Bedarf Anpassungen vor oder verfeinern Sie Ihre Anforderungen."
       }
     ]
   },
   "extra": {
     "ai": {
-      "subtitle": "State of the Art/Next-Gen",
-      "title": "KI-generierte Videos",
-      "priceLabel": "Ab",
+      "subtitle": "Stand der Technik/Next-Generation",
+      "title": "AI-generierte Videos",
+      "priceLabel": "Von",
       "price": "€79.99",
-      "buttonText": "Briefing erstellen"
+      "buttonText": "Einen Auftrag erstellen"
     },
     "enterprise": {
-      "badge": "Extra + Managed",
-      "title": "Enterprise-Plan",
-      "description": "Benötigst du mehr generierten Content? Sprich mit unserem Team",
+      "badge": "Extra + Verwaltet",
+      "title": "Unternehmensplan",
+      "description": "Benötigen Sie mehr generierte Inhalte? Sprechen Sie mit unserem Team",
       "features": [
-        "Service anfordern",
+        "Dienst anfordern",
         "Anforderungen besprechen",
-        "Maßgeschneidertes Angebot erhalten",
-        "Bereit zum Abheben"
+        "Erhalten Sie ein individuelles Angebot",
+        "Bereit zum Abflug"
       ],
-      "buttonText": "Gespräch buchen"
+      "buttonText": "Buchen Sie einen Anruf"
     }
   },
   "faqs": {
-    "title": "Stell uns Fragen",
+    "title": "Stellen Sie uns Fragen",
     "items": [
       {
-        "question": "Wie lange dauert es, bis meine Creator-Bewerbung geprüft wird?",
-        "answer": "Aufgrund der hohen Anzahl an Bewerbungen, die wir erhalten, kann der Prüfungsprozess einige Zeit in Anspruch nehmen. Wir bemühen uns, Bewerbungen so schnell wie möglich zu bearbeiten, aber bitte beachte, dass dies je nach Nachfrage und unserer aktuellen Kapazität variieren kann. Sei versichert, wir benachrichtigen dich, sobald es ein Update zu deinem Bewerbungsstatus gibt. Vielen Dank für deine Geduld!"
+        "question": "Wie lange dauert es, bis mein Erstellerantrag geprüft wird?",
+        "answer": "Aufgrund der großen Anzahl von Bewerbungen, die bei uns eingehen, kann die Bearbeitung einige Zeit in Anspruch nehmen. Wir bemühen uns, Bewerbungen so schnell wie möglich zu bearbeiten, aber bitte beachten Sie, dass dies je nach Nachfrage und aktueller Kapazität variieren kann. Seien Sie versichert, dass wir Sie benachrichtigen werden, sobald es ein Update zum Status Ihrer Bewerbung gibt. Wir danken Ihnen für Ihre Geduld!"
       },
       {
         "question": "Brauche ich eine bestimmte Anzahl von Followern, um Huerray beizutreten?",
-        "answer": "Nein. Du musst nicht einmal Social Media haben, und das ist völlig in Ordnung. Alles, was du tun musst, ist Content zu drehen, um bezahlt zu werden."
+        "answer": "Nein. Vielleicht haben Sie nicht einmal soziale Medien und das ist völlig in Ordnung. Alles, was Sie tun müssen, ist Inhalte zu erstellen, um bezahlt zu werden."
       },
       {
         "question": "Muss ich auf sozialen Kanälen posten?",
-        "answer": "Nein. Alles, was du tun musst, ist den Content auf die Huerray-Plattform hochzuladen."
+        "answer": "Nein. Alles, was Sie tun müssen, ist, den Inhalt auf die Huerray-Plattform hochzuladen."
       },
       {
-        "question": "Muss ich bezahlen, um beizutreten?",
-        "answer": "Nein, Trend ist für Creator zu 100% kostenlos."
+        "question": "Muss ich für die Teilnahme bezahlen?",
+        "answer": "Nein, Trend ist für Ersteller zu 100 % kostenlos."
       },
       {
-        "question": "Wie finde ich Gigs?",
-        "answer": "Du wählst die Projekte von Brands aus, die zu deiner persönlichen Ästhetik passen, und bewirbst dich für diese Partnerschaften. Jeden Tag wird die Bewerbung mit neuen Partnerschaften aktualisiert. Arbeite nur mit Brands, die du willst!"
+        "question": "Wie finde ich Auftritte?",
+        "answer": "Sie wählen die Projekte von Marken aus, die zu Ihrer persönlichen Ästhetik passen, und bewerben sich für diese Partnerschaften. Jeden Tag wird die Anwendung mit neuen Partnerschaften aktualisiert. Arbeiten Sie nur mit Marken, mit denen Sie arbeiten möchten!"
       },
       {
-        "question": "Welche Art von Gigs kann ich auf Trend finden?",
-        "answer": "Foto- und Videojobs sind unsere Stärke. Produktfotografie, Lifestyle-Fotos, Produkt-in-Aktion-Videos, Unboxing-Videos, Testimonial-Videos, Porträt-Fotos. Aller Content, den E-Commerce-Brands nutzen können."
+        "question": "Welche Art von Auftritten kann ich bei Trend finden?",
+        "answer": "Foto- und Videoaufträge sind unsere Stärke. Produktfotografie, Lifestyle-Fotos, Videos von Produkten in Aktion, Unboxing-Videos, Testimonial-Videos, Porträtfotos. Alles Inhalte, die E-Commerce-Marken nutzen können."
       }
     ]
   },
   "cta": {
-    "title": "Bereit für dein erstes UGC-Video?",
-    "buttonText": "Jetzt registrieren"
+    "title": "Sind Sie bereit für Ihr erstes UGC-Video?",
+    "buttonText": "Jetzt anmelden"
   }
 }

@@ -12,6 +12,7 @@ import { VideoSubmissionsApi } from '@/lib/api/generated/api';
 import { apiClient, apiConfiguration } from '@/lib/api/client';
 import { SubmissionsStatsPanel } from './submissions-stats-panel';
 import { SubmissionsRecentPanel, type RecentSubmissionItem } from './submissions-recent-panel';
+import { useTranslations } from 'next-intl';
 
 const videoSubmissionsApi = new VideoSubmissionsApi( apiConfiguration, undefined, apiClient );
 
@@ -60,6 +61,7 @@ function SubmissionsRecentSkeleton() {
 }
 
 export function SubmissionsStatsBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   const [ activeTab, setActiveTab ] = useState<'stats' | 'recent'>( 'stats' );
   const { data: analyticsResponse, isLoading: isAnalyticsLoading, isError: isAnalyticsError } = usePlatformAnalytics();
   const { data: campaignsResponse, isLoading: isCampaignsLoading, isError: isCampaignsError } = useCampaigns( { limit: 20, page: 1 } );
@@ -119,11 +121,11 @@ export function SubmissionsStatsBlock() {
     const pending = total - approved;
 
     return [
-      { label: 'Total Submissions', value: `${ total }`, delta: '+0.0%', numeric: total },
-      { label: 'Pending Submissions', value: `${ pending }`, delta: pending > 0 ? '-0.0%' : '+0.0%', numeric: pending },
-      { label: 'Approved Submissions', value: `${ approved }`, delta: '+0.0%', numeric: approved },
+      { label: t( 'dashboardBlocks.submissions.stats.total' ), value: `${ total }`, delta: '+0.0%', numeric: total },
+      { label: t( 'dashboardBlocks.submissions.stats.pending' ), value: `${ pending }`, delta: pending > 0 ? '-0.0%' : '+0.0%', numeric: pending },
+      { label: t( 'dashboardBlocks.submissions.stats.approved' ), value: `${ approved }`, delta: '+0.0%', numeric: approved },
     ];
-  }, [ analyticsResponse ] );
+  }, [ analyticsResponse, t ] );
 
   const recentItems = useMemo<RecentSubmissionItem[]>( () => {
     return recentSubmissionsByCampaign.map( ( item ) => ( { raw: item } ) );
@@ -132,28 +134,28 @@ export function SubmissionsStatsBlock() {
   return (
     <Card className="ad-summary-card justify-start">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Submissions</CardTitle>
-        <CardDescription className="ad-card-description">Submission review status and throughput snapshot</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.submissions.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.submissions.description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTab value="stats" className={ 'text-xs font-normal' }>Stats</TabsTab>
-            <TabsTab value="recent" className={ 'text-xs font-normal' }>Recent Submissions</TabsTab>
+            <TabsTab value="stats" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.submissions.tabs.stats' ) }</TabsTab>
+            <TabsTab value="recent" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.submissions.tabs.recent' ) }</TabsTab>
           </TabsList>
 
           <TabsPanels>
             <TabsPanel value="stats" keepMounted>
               { isAnalyticsLoading && <SubmissionsStatsSkeleton /> }
-              { isAnalyticsError && <p className="py-8 text-center text-xs text-destructive">Unable to load submissions.</p> }
+              { isAnalyticsError && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.submissions.states.error' ) }</p> }
               { !isAnalyticsLoading && !isAnalyticsError && <SubmissionsStatsPanel items={ parsed } /> }
             </TabsPanel>
 
             <TabsPanel value="recent" keepMounted>
               { ( isCampaignsLoading || isRecentSubmissionsLoading ) && <SubmissionsRecentSkeleton /> }
-              { ( isCampaignsError || isRecentSubmissionsError ) && <p className="py-8 text-center text-xs text-destructive">Unable to load recent submissions.</p> }
+              { ( isCampaignsError || isRecentSubmissionsError ) && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.submissions.states.recentError' ) }</p> }
               { !isCampaignsLoading && !isRecentSubmissionsLoading && !isCampaignsError && !isRecentSubmissionsError && recentItems.length === 0 && (
-                <p className="py-8 text-center text-xs text-muted-foreground">No submissions found.</p>
+                <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.submissions.states.empty' ) }</p>
               ) }
               { !isCampaignsLoading && !isRecentSubmissionsLoading && !isCampaignsError && !isRecentSubmissionsError && recentItems.length > 0 && (
                 <SubmissionsRecentPanel items={ recentItems } />

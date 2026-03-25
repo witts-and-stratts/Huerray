@@ -1,16 +1,16 @@
 {
   "hero": {
-    "title": "Werde bezahlt für das, was du liebst",
-    "subtitle": "Arbeite mit Brands & echten Unternehmen. Verdienie Geld mit dem, was du liebst.",
-    "buttonText": "Werde Creator",
-    "paymentMade": "Zahlung erfolgt"
+    "title": "Werden Sie für das bezahlt, was Sie lieben",
+    "subtitle": "Arbeiten Sie mit Marken und echten Unternehmen. Verdienen Sie Geld für das, was Sie lieben.",
+    "buttonText": "Schöpfer werden",
+    "paymentMade": "Geleistete Zahlung"
   },
   "categories": {
     "fashion": "Mode",
-    "lifestyle": "Lifestyle",
-    "beauty": "Beauty",
+    "lifestyle": "Lebensstil",
+    "beauty": "Schönheit",
     "fitness": "Fitness",
-    "food": "Essen",
+    "food": "Lebensmittel",
     "travel": "Reisen",
     "tech": "Tech",
     "healthWellness": "Gesundheit & Wellness",
@@ -18,78 +18,78 @@
     "skincare": "Hautpflege"
   },
   "collaborations": {
-    "pill": "Matching",
-    "title": "Kooperationen, die zu deinem Stil passen",
-    "description": "Passende Brands basierend auf deinem Stil und deinen Content-Präferenzen."
+    "pill": "Passend dazu",
+    "title": "Kollaborationen, die zu Ihrem Stil passen",
+    "description": "Passende Marken auf der Grundlage Ihrer Präferenzen für Stil und Inhalt."
   },
   "director": {
     "pill": "Kreative Kontrolle",
-    "title": "Sei der Creative Director",
-    "description": "Erhalte kreative Autonomie über deine Kreationen. Sei der Mittelpunkt der Show."
+    "title": "Seien Sie der kreative Direktor",
+    "description": "Gewinnen Sie kreative Autonomie über Ihre Kreationen. Seien Sie der Mittelpunkt der Show."
   },
   "manage": {
     "pill": "Automatisierung",
-    "title": "Du kreierst. Wir managen alles andere",
-    "description": "Unser Team und unsere Technologie helfen dabei, die Erfahrung mit Brands zu managen, damit du dich auf die Erstellung des besten Contents konzentrieren kannst."
+    "title": "Sie schaffen. Wir verwalten alles andere",
+    "description": "Unser Team und unsere Technologie unterstützen Sie bei der Zusammenarbeit mit Marken, sodass Sie sich auf die Erstellung der besten Inhalte konzentrieren können."
   },
   "paid": {
     "pill": "Zahlungen",
-    "title": "Pünktliche Bezahlung, jedes Mal",
-    "description": "Du erhältst automatische Zahlungen, wenn die Kunden deine Kreation genehmigen. Keine Fragen gestellt."
+    "title": "Pünktlich bezahlt werden, jedes Mal",
+    "description": "Sie erhalten automatische Zahlungen, wenn die Kunden Ihre Kreation genehmigen. Es werden keine Fragen gestellt."
   },
   "testimonial": {
-    "quote": "Huerray setzt sich für seine Creator ein... von der Sicherstellung einer fairen Bezahlung bis hin zu ständigen Brand-Möglichkeiten, die zu unserem Lifestyle passen",
-    "author": "Baron McHennie – @baron_mchennie"
+    "quote": "Huerray setzt sich für seine Schöpfer ein... von der Sicherstellung, dass wir fair bezahlt werden, bis hin zur ständigen Bereitstellung von Markenmöglichkeiten, die zu unserem Lebensstil passen",
+    "author": "Baron McHennie - @baron_mchennie"
   },
   "cta": {
-    "subtitle": "Schließe dich Tausenden von Creatorn an",
-    "title": "Werde bezahlt für das, was du liebst"
+    "subtitle": "Schließen Sie sich Tausenden von Künstlern an",
+    "title": "Werden Sie für das bezahlt, was Sie lieben"
   },
   "faq": {
     "heading": "FAQs",
     "q1": {
-      "question": "Wie fange ich als Creator an?",
-      "answer": "Melde dich einfach an, vervollständige dein Profil und durchstöbere verfügbare Brand-Kooperationen. Sobald du genehmigt bist, kannst du mit der Erstellung von Content beginnen."
+      "question": "Wie fange ich als Schöpfer an?",
+      "answer": "Melden Sie sich einfach an, vervollständigen Sie Ihr Profil und beginnen Sie, die verfügbaren Markenkooperationen zu durchsuchen. Sobald Sie genehmigt sind, können Sie mit der Erstellung von Inhalten beginnen."
     },
     "q2": {
-      "question": "Was sind die Anforderungen für den Beitritt?",
-      "answer": "Wir heißen Creator aller Größen willkommen. Du benötigst eine aktive Social-Media-Präsenz und die Fähigkeit, qualitativ hochwertigen Content zu erstellen, der dein Publikum anspricht."
+      "question": "Was sind die Voraussetzungen für eine Mitgliedschaft?",
+      "answer": "Wir heißen Kreative jeder Größe willkommen. Sie brauchen eine aktive Präsenz in den sozialen Medien und die Fähigkeit, hochwertige Inhalte zu erstellen, die Ihr Publikum ansprechen."
     },
     "q3": {
       "question": "Wie viel kann ich verdienen?",
-      "answer": "Der Verdienst variiert je nach Größe deines Publikums, Engagement-Raten und dem Umfang jeder Kooperation. Du siehst die Vergütungsdetails für jede Gelegenheit im Voraus."
+      "answer": "Der Verdienst hängt von der Größe Ihrer Zielgruppe, den Engagement-Raten und dem Umfang der jeweiligen Zusammenarbeit ab. Die Details der Vergütung werden Ihnen für jede Gelegenheit im Voraus angezeigt."
     },
     "q4": {
       "question": "Wie funktionieren die Zahlungen?",
-      "answer": "Du erhältst die Zahlung, sobald dein Content von der Brand genehmigt wurde und die Kampagnenanforderungen erfüllt. Zahlungen werden sicher über unsere Plattform abgewickelt."
+      "answer": "Sie erhalten die Zahlung, sobald Ihr Inhalt von der Marke genehmigt wurde und die Anforderungen der Kampagne erfüllt. Die Zahlungen werden sicher über unsere Plattform abgewickelt."
     },
     "q5": {
-      "question": "Kann ich wählen, mit welchen Brands ich arbeite?",
-      "answer": "Absolut! Du hast die volle Kontrolle darüber, welche Kooperationen du annimmst. Arbeite nur mit Brands, die mit deinen Werten und deinem Publikum übereinstimmen."
+      "question": "Kann ich wählen, mit welchen Marken ich zusammenarbeite?",
+      "answer": "Ganz genau! Sie haben die volle Kontrolle darüber, welche Kooperationen Sie annehmen. Arbeiten Sie nur mit Marken zusammen, die mit Ihren Werten und Ihrem Publikum übereinstimmen."
     },
     "q6": {
-      "question": "Welche Art von Content muss ich erstellen?",
-      "answer": "Die Content-Typen variieren je nach Kampagne, umfassen aber typischerweise Fotos, Videos, Reels oder Storys. Jedes Briefing enthält detaillierte Anforderungen und kreative Richtlinien."
+      "question": "Welche Art von Inhalten muss ich erstellen?",
+      "answer": "Die Art der Inhalte variiert je nach Kampagne, umfasst aber in der Regel Fotos, Videos, Filmsequenzen oder Geschichten. Jedes Briefing enthält detaillierte Anforderungen und kreative Richtlinien."
     },
     "q7": {
-      "question": "Wie lange dauert es, bis ich bezahlt werde?",
-      "answer": "Zahlungen werden automatisch bearbeitet, sobald die Brand deinen Content genehmigt. Du erhältst die Zahlung in der Regel innerhalb von 3-5 Werktagen."
+      "question": "Wie lange dauert es, bis ich mein Geld bekomme?",
+      "answer": "Die Zahlungen werden automatisch abgewickelt, sobald die Marke Ihre Inhalte genehmigt hat. Sie erhalten die Zahlung in der Regel innerhalb von 3-5 Werktagen."
     },
     "q8": {
-      "question": "Kann ich mit mehreren Brands gleichzeitig arbeiten?",
-      "answer": "Ja! Du kannst mit so vielen Brands zusammenarbeiten, wie du möchtest, solange es keine Exklusivitätsklauseln in deinen Vereinbarungen gibt."
+      "question": "Kann ich mit mehreren Marken gleichzeitig arbeiten?",
+      "answer": "Ja! Sie können mit so vielen Marken zusammenarbeiten, wie Sie möchten, solange es keine Exklusivitätsklauseln in Ihren Vereinbarungen gibt."
     },
     "q9": {
-      "question": "Was passiert, wenn ich eine Kampagnenfrist nicht einhalte?",
-      "answer": "Wir verstehen, dass Dinge passieren. Kommuniziere frühzeitig mit uns, wenn du eine Verlängerung benötigst. Das Verpassen von Fristen ohne Ankündigung kann jedoch zukünftige Gelegenheiten beeinträchtigen."
+      "question": "Was ist, wenn ich eine Kampagnenfrist nicht einhalte?",
+      "answer": "Wir verstehen, dass Dinge passieren. Informieren Sie uns frühzeitig, wenn Sie eine Fristverlängerung benötigen. Das Versäumen von Fristen ohne Vorankündigung kann jedoch künftige Chancen beeinträchtigen."
     },
     "q10": {
-      "question": "Brauche ich professionelles Equipment?",
-      "answer": "Nicht unbedingt. Viele erfolgreiche Creator nutzen Smartphones. Was am meisten zählt, ist die Erstellung von authentischem, ansprechendem Content, der bei deinem Publikum ankommt."
+      "question": "Brauche ich eine professionelle Ausrüstung?",
+      "answer": "Nicht unbedingt. Viele erfolgreiche Kreative nutzen Smartphones. Das Wichtigste ist, dass Sie authentische, ansprechende Inhalte erstellen, die Ihr Publikum ansprechen."
     },
     "q11": {
-      "question": "Wie werden Brand-Matches bestimmt?",
-      "answer": "Unser Matching-Algorithmus berücksichtigt deinen Content-Stil, die Demografie deines Publikums, Engagement-Raten und Brand-Präferenzen, um die besten Kooperationen für dich vorzuschlagen."
+      "question": "Wie werden die Markenübereinstimmungen ermittelt?",
+      "answer": "Unser Matching-Algorithmus berücksichtigt Ihren Content-Stil, Ihre Publikumsdemografie, Engagement-Raten und Markenpräferenzen, um Ihnen die besten Kooperationen vorzuschlagen."
     }
   }
 }

@@ -4,12 +4,14 @@
 import { CampaignsTable } from '@/components/campaigns/campaigns-table';
 import { Button } from '@/components/dashboard-ui/button';
 import { SubHeader } from '@/components/subheader';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
-import { ModelCampaign } from '@/components/campaigns/types';
 import Link from 'next/link';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function CampaignsPage() {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const { data: response, isLoading, error } = useBrandCampaigns( {
   } );
 
@@ -26,17 +28,17 @@ export default function CampaignsPage() {
       product_image: c.product_image_url || c.product_image,
       creators: c.creators || [],
       applications: c.applications || [],
-    } as ModelCampaign ) );
+    } as ModelsCampaignResponse ) );
   }, [ response ] );
 
   return (
     <>
       <SubHeader
-        title='Campaigns'
-        description='Manage and track all your marketing campaigns'
+        title={ t( 'title' ) }
+        description={ t( 'description' ) }
       >
         <Link href='/brand/campaigns/new'>
-          <Button className='gap-2 rounded-md'>Create</Button>
+          <Button className='gap-2 rounded-md'>{ t( 'create' ) }</Button>
         </Link>
       </SubHeader>
       <CampaignsTable

@@ -8,8 +8,11 @@ import { UsersSearchGetUserTypeEnum } from "@/lib/api/generated/api/user-api";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { CreateUserSheet } from "@/components/admin/users/create-user-sheet";
 import * as React from "react";
+import { useTranslations } from "next-intl";
 
 export default function UsersPage() {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const { data: response, isLoading, error } = useUsers( {
     // userType: UsersSearchGetUserTypeEnum.Admin, // Viewing all users? Or just generic users? 
     // Usually 'users' implies all or platform users. Let's list all for now, or maybe exclude creators?
@@ -27,10 +30,10 @@ export default function UsersPage() {
   return (
     <>
       <SubHeader
-        title="Users"
-        description="Manage platform users"
+        title={ t( 'usersPage.title' ) }
+        description={ t( 'usersPage.description' ) }
       >
-        <Button className="gap-2 rounded-md" onClick={ () => setSheetOpen( true ) }>Add User</Button>
+        <Button className="gap-2 rounded-md" onClick={ () => setSheetOpen( true ) }>{ tc( 'createValue', { value: tc( 'cards.userFallback' ) } ) }</Button>
       </SubHeader>
       <CreateUserSheet open={ sheetOpen } onOpenChange={ setSheetOpen } />
       <UsersTable

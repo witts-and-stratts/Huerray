@@ -1,25 +1,25 @@
 {
   "hero": {
-    "title": "Tritt einer Bewegung bei, die die kreative Kultur voranbringt",
-    "subtitle": "Wir bringen Kultur, Kreativität und Technologie zusammen, um Kreativen und unterrepräsentierten Stimmen in der DACH-Region die Sichtbarkeit zu geben, die sie verdienen. Und hinter den Kulissen leben wir das, wofür wir stehen: Vielfalt, Offenheit, Mut und echte Zusammenarbeit.",
-    "buttonText": "Offene Stellen ansehen",
-    "videoAlt": "Junge Frau präsentiert Mode",
-    "imageAlt1": "Haupt-Creator",
-    "imageAlt2": "Creator-Content",
-    "imageAlt3": "Creator-Porträt"
+    "title": "Schließen Sie sich einer Bewegung an, die die kreative Kultur voranbringt",
+    "subtitle": "Wir bringen Kultur, Kreativität und Technologie zusammen, um Kreativen und unterrepräsentierten Stimmen in der DACH-Region die Sichtbarkeit zu geben, die sie verdienen. Und hinter den Kulissen leben wir, wofür wir stehen: Vielfalt, Offenheit, Mut und echte Zusammenarbeit.",
+    "buttonText": "Offene Stellen anzeigen",
+    "videoAlt": "Junge Frau, die Mode vorführt",
+    "imageAlt1": "Hauptverfasser",
+    "imageAlt2": "Inhalt des Erstellers",
+    "imageAlt3": "Schöpfer-Porträt"
   },
   "opportunities": {
-    "title": "Offene Stellen",
-    "subtitle": "Wenn du Besitzer eines aktiven Gehirns, interessanter Gedanken und einer guten Seele bist, würden wir gerne von dir hören.",
+    "title": "Offene Gelegenheiten",
+    "subtitle": "Wenn Sie ein aktives Gehirn, interessante Gedanken und eine gute Seele haben, würden wir gerne von Ihnen hören.",
     "button": "Mehr erfahren",
     "jobs": [
       {
         "category": "Produkt, Design & Daten",
-        "title": "Lead Product Designer",
+        "title": "Leitender Produktdesigner",
         "location": "Deutschland. Vollzeit - Remote"
       },
       {
-        "category": "Vertriebsunterstützung",
+        "category": "Förderung des Verkaufs",
         "title": "Sales Enablement Manager",
         "location": "Österreich. Vollzeit - Remote"
       },
@@ -35,19 +35,19 @@
     "values": [
       {
         "title": "Vielfalt",
-        "text": "Vielfalt ist kein Slogan. Es ist, wer wir sind, in unserem Team, unseren Partnern und unseren Ideen."
+        "text": "Vielfalt ist kein Schlagwort. Sie ist das, was wir sind, in unserem Team, unseren Partnern und unseren Ideen."
       },
       {
-        "title": "Immer authentisch",
-        "text": "Wir machen keine Fassaden. Wir wollen echte Menschen mit echten Geschichten und Perspektiven."
+        "title": "Authentizität immer",
+        "text": "Wir machen keine Fassade. Wir wollen echte Menschen mit echten Geschichten und Perspektiven."
       },
       {
-        "title": "Innovation mit Zweck",
-        "text": "Technologie ist nur aufregend, wenn sie Veränderung schafft. Wir nutzen sie, um Repräsentation sichtbar zu machen, nicht um sie zu ersetzen."
+        "title": "Innovation mit Sinn",
+        "text": "Technologie ist nur dann spannend, wenn sie Veränderungen bewirkt. Wir nutzen sie, um Repräsentation sichtbar zu machen, nicht um sie zu ersetzen."
       },
       {
-        "title": "Gemeinschaft über Wettbewerb",
-        "text": "Wir glauben an Zusammenarbeit, Austausch und Unterstützung, denn echte Veränderung geschieht nur gemeinsam."
+        "title": "Gemeinschaft vor Wettbewerb",
+        "text": "Wir glauben an Zusammenarbeit, Austausch und Unterstützung, denn wirkliche Veränderungen können nur gemeinsam erreicht werden."
       }
     ]
   },
@@ -55,44 +55,44 @@
     "title": "Unsere Teams",
     "teams": [
       {
-        "title": "Produkt, Design & Daten",
-        "text": "Wir bauen die Plattform, die die Content-Erstellung und -Verteilung für Marken weltweit antreibt. Unsere Mission ist es, der Creator Economy zu dienen und ihnen den besten Ort auf Erden zu bieten, um das zu tun, was sie lieben – kreieren."
+        "title": "Produkt, Design und Daten",
+        "text": "Wir bauen eine Plattform auf, die die Erstellung und Verbreitung von Inhalten für Marken auf der ganzen Welt ermöglicht. Unsere Mission ist es, der Kreativwirtschaft zu dienen und ihnen den besten Platz auf der Welt zu bieten, um das zu tun, was sie lieben - zu kreieren."
       },
       {
         "title": "Kundenerfahrung",
-        "text": "Wir sind die Geheimzutat von #paid – wir schaffen und ermöglichen Kunden- und Creator-Erlebnisse, die Ergebnisse, Wirkung und vor allem Freude liefern."
+        "text": "Wir sind die geheime Soße von #paid - wir kreieren und ermöglichen Kunden- und Kreativitätserlebnisse, die Ergebnisse, Wirkung und vor allem Freude bringen."
       },
       {
         "title": "Vertrieb",
-        "text": "Unser Ziel ist es, Marken und Agenturen beizubringen, wie man über Creator-Marketing denkt. Wir führen tiefe Entdeckungen durch und passen unser Angebot an, um Kunden zu helfen, ihre Ziele zu erreichen."
+        "text": "Unser Ziel ist es, Marken und Agenturen beizubringen, wie sie über Kreativitätsmarketing denken sollen. Wir gehen auf Entdeckungsreise und passen unser Angebot so an, dass unsere Kunden ihre Ziele erreichen können."
       },
       {
         "title": "Menschen",
-        "text": "Menschen sind die Seele unseres Unternehmens. Wir leben diesen Wert, indem wir die besten Menschen finden und dann das beste Umfeld bieten, damit unsere Leute karrierebestimmende Momente haben."
+        "text": "Die Menschen sind die Seele unseres Unternehmens. Wir leben diesen Wert, indem wir die besten Mitarbeiter suchen und dann das beste Umfeld für unsere Mitarbeiter schaffen, damit sie karriereentscheidende Momente erleben."
       },
       {
         "title": "Finanzen",
-        "text": "Unser Finanzteam arbeitet daran, Prozesse und Richtlinien zu erstellen, die genaue und zeitnahe Informationen gewährleisten, damit unsere anderen Teams unterstützt werden, fundierte Geschäftsentscheidungen zu treffen."
+        "text": "Unser Finanzteam arbeitet an der Entwicklung von Prozessen und Richtlinien, die genaue und zeitnahe Informationen gewährleisten, damit unsere anderen Teams fundierte Geschäftsentscheidungen treffen können."
       },
       {
-        "title": "Medien, Analytik & Strategie",
-        "text": "Wir haben eine Leidenschaft für Analytik und alles Digitale. Wir finden Lösungen für anspruchsvolle Herausforderungen, die sich über kreative, strategische, technische und analytische Dimensionen erstrecken."
+        "title": "Medien, Analytik und Strategie",
+        "text": "Wir haben eine Leidenschaft für Analytik und alles, was digital ist. Wir finden Lösungen für anspruchsvolle Herausforderungen, die sich über kreative, strategische, technische und analytische Dimensionen erstrecken."
       },
       {
         "title": "Marketing",
-        "text": "Unser Ziel ist es, eine Marke aufzubauen, die den Leuten nicht mehr aus dem Kopf geht. Gemeinsam streben wir danach, unvergessliche Momente mit Marken und Creatorn zu schaffen."
+        "text": "Unser Ziel ist es, eine Marke aufzubauen, die den Menschen nicht mehr aus dem Kopf geht. Gemeinsam streben wir danach, unvergessliche Momente mit Marken und Kreativen zu schaffen."
       },
       {
-        "title": "Engineering",
-        "text": "Wir entwerfen Tools und Funktionen, die das Fundament für die Zusammenarbeit von Marken und Creatorn bilden. Wir definieren die Zukunft von #paid und suchen nach Wegen, wie wir skalieren und die Zukunft der Creator Economy teilen können."
+        "title": "Technik",
+        "text": "Wir entwickeln Tools und Funktionen, die die Grundlage für die Zusammenarbeit zwischen Marken und Kreativen schaffen. Wir definieren die Zukunft von #paid und suchen nach Wegen, wie wir die Zukunft der Creator Economy skalieren und teilen können."
       }
     ]
   },
   "careerWhy": {
-    "mainTitle": "Wir stellen uns eine Welt vor, in der Creator leidenschaftlich daran arbeiten, etwas aufzubauen, das zählt",
-    "subtitle": "Huerray ist ein Raum für Menschen, die Ideen lieben, die an Kreativität mit Zweck glauben und die echte Veränderungen bewirken wollen.",
-    "description1": "Egal, ob dein Hintergrund in Marketing, Tech, Design, Geschäftsentwicklung oder Community liegt. Huerray ist ein Raum für Menschen, die Ideen lieben, die an Kreativität mit Zweck glauben und die echte Veränderungen bewirken wollen. Wir kümmern uns weniger um Titel und mehr darum, wer du bist, wofür du stehst und die Energie, die du mitbringst. Wir wachsen organisch, absichtlich und mit Zweck.",
-    "description2": "Wir sind immer offen dafür, Menschen zu treffen, die unsere Vision teilen und helfen wollen, sie zu gestalten.",
+    "mainTitle": "Wir stellen uns eine Welt vor, in der Schöpfer mit Leidenschaft etwas aufbauen, das von Bedeutung ist.",
+    "subtitle": "Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn glauben und die einen echten Wandel herbeiführen wollen.",
+    "description1": "Egal, ob Sie aus dem Marketing, der Technik, dem Design, der Geschäftsentwicklung oder der Gemeinschaft kommen. Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn glauben und die echte Veränderungen herbeiführen wollen, ganz gleich, ob Ihr Hintergrund im Marketing, in der Technik, im Design, in der Geschäftsentwicklung oder im Gemeinwesen liegt. Uns geht es weniger um Titel als vielmehr darum, wer du bist, wofür du stehst und welche Energie du mitbringst. Wir wachsen, organisch, absichtlich und mit Absicht.",
+    "description2": "Wir sind immer offen für Menschen, die unsere Vision teilen und sie mitgestalten wollen.",
     "imageAlt": "Warum Huerray"
   }
 }

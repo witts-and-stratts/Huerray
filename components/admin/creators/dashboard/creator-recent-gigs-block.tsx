@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useVideoSubmissionsSearch } from '@/lib/api/hooks/video-submissions';
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import { EmptySubmission } from '../../empty-states/empty-submissions';
 
 interface CreatorRecentGigsBlockProps {
@@ -43,6 +44,7 @@ function SubmissionSkeleton() {
 }
 
 export function CreatorRecentGigsBlock( { creatorId }: CreatorRecentGigsBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: submissionsData, isLoading, isError } = useVideoSubmissionsSearch( { creatorId, limit: 20 } );
 
   const recentItems = useMemo( () => {
@@ -59,13 +61,13 @@ export function CreatorRecentGigsBlock( { creatorId }: CreatorRecentGigsBlockPro
   return (
     <Card className="ad-summary-card grow">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Recent Submissions</CardTitle>
-        <CardDescription className="ad-card-description">Latest video submissions for this creator</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'creatorDashboard.blocks.recentGigs' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'creatorDashboard.description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="grow">
         { isLoading && <SubmissionSkeleton /> }
         { isError && (
-          <p className="py-8 text-center text-xs text-destructive">Unable to load submission activity.</p>
+          <p className="py-8 text-center text-xs text-destructive">{ t( 'campaignOverview.workflow.states.submissionsError' ) }</p>
         ) }
         { !isLoading && !isError && recentItems.length === 0 && <EmptySubmission /> }
 

@@ -22,8 +22,14 @@ import {
   TooltipTrigger,
 } from '@/components/dashboard-ui/tooltip';
 import { motion } from 'motion/react';
-import { Person } from './types';
 import { imgpresets } from '@/lib/utils/imgproxy';
+
+export type Person = {
+  first_name: string;
+  last_name: string;
+  avatar?: string;
+  email?: string;
+};
 
 export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' }: { people: Person[]; onPersonClick?: ( index: number ) => void; title: string; size?: 'sm' | 'default' | 'lg'; } ) => {
   const limit = 4;
@@ -31,6 +37,8 @@ export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' 
   const remainingCount = people?.length > limit ? people.length - limit : 0;
 
   const [ open, setOpen ] = useState( false );
+
+  console.log( "People", people );
 
   return (
     <div className='flex items-center'>
@@ -52,10 +60,10 @@ export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' 
             <Tooltip>
               <TooltipTrigger asChild>
                 <Avatar size={ size } className='border-2 border-white'>
-                  <AvatarImage src={ imgpresets.avatar( person.avatar ) } />
+                  <AvatarImage src={ imgpresets.avatar( person.avatar! ) } />
                   <AvatarFallback className='text-xs'>
-                    { person.first_name[ 0 ] }
-                    { person.last_name[ 0 ] }
+                    { person.first_name?.[ 0 ] }
+                    { person.last_name?.[ 0 ] }
                   </AvatarFallback>
                 </Avatar>
               </TooltipTrigger>
@@ -125,10 +133,10 @@ export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' 
                       transition={ { duration: 0.6, ease: 'easeOut' } }
                     >
                       <Avatar className='border border-border/50'>
-                        <AvatarImage src={ imgpresets.avatar( person.avatar ) } />
+                        <AvatarImage src={ imgpresets.avatar( person.avatar! ) } />
                         <AvatarFallback className='text-xs'>
-                          { person.first_name[ 0 ] }
-                          { person.last_name[ 0 ] }
+                          { person.first_name?.[ 0 ] }
+                          { person.last_name?.[ 0 ] }
                         </AvatarFallback>
                       </Avatar>
                       <div className='flex flex-col'>

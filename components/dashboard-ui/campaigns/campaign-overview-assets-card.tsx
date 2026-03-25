@@ -33,16 +33,13 @@ export function CampaignAssetsCard( { imageItems, documentItems, videoItems }: C
           <Tabs value={ assetsTab } onValueChange={ ( value ) => setAssetsTab( value as 'images' | 'documents' | 'videos' ) }>
             <TabsList variant="default" className="w-full">
               <TabsTab value="images" className="text-xs font-normal flex items-center gap-1.5">
-                Images
-                { imageItems.length > 0 && <Badge variant="secondary" className="h-4 px-1.5 text-[10px] font-normal">{ imageItems.length }</Badge> }
+                { t( 'tabs.images', { count: imageItems.length } ) }
               </TabsTab>
               <TabsTab value="documents" className="text-xs font-normal flex items-center gap-1.5">
-                Documents
-                { documentItems.length > 0 && <Badge variant="secondary" className="h-4 px-1.5 text-[10px] font-normal">{ documentItems.length }</Badge> }
+                { t( 'tabs.documents', { count: documentItems.length } ) }
               </TabsTab>
               <TabsTab value="videos" className="text-xs font-normal flex items-center gap-1.5">
-                Videos
-                { videoItems.length > 0 && <Badge variant="secondary" className="h-4 px-1.5 text-[10px] font-normal">{ videoItems.length }</Badge> }
+                { t( 'tabs.videos', { count: videoItems.length } ) }
               </TabsTab>
             </TabsList>
 

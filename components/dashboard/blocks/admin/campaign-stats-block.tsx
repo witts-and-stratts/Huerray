@@ -11,8 +11,10 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { Tabs, TabsList, TabsTab, TabsPanel, TabsPanels } from '@/components/animate-ui/components/base/tabs';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
 import type { ModelsCampaignResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 export function CampaignStatsBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   const [ activeTab, setActiveTab ] = useState<'stats' | 'recent'>( 'stats' );
   const { data: campaignsResponse, isLoading, isError } = useCampaigns( { limit: 100, page: 1 } );
   const campaigns = useMemo( () => ( campaignsResponse?.data || [] ) as ModelsCampaignResponse[], [ campaignsResponse ] );
@@ -33,12 +35,12 @@ export function CampaignStatsBlock() {
     } ).length;
 
     return [
-      { label: 'Total', value: `${ total }`, numeric: total },
-      { label: 'Active', value: `${ active }`, numeric: active },
-      { label: 'Finished', value: `${ finished }`, numeric: finished },
-      { label: 'Draft', value: `${ draft }`, numeric: draft },
+      { label: t( 'dashboardBlocks.campaigns.stats.total' ), value: `${ total }`, numeric: total },
+      { label: t( 'dashboardBlocks.campaigns.stats.active' ), value: `${ active }`, numeric: active },
+      { label: t( 'dashboardBlocks.campaigns.stats.finished' ), value: `${ finished }`, numeric: finished },
+      { label: t( 'dashboardBlocks.campaigns.stats.draft' ), value: `${ draft }`, numeric: draft },
     ];
-  }, [ campaigns, campaignsResponse?.pagination?.total ] );
+  }, [ campaigns, campaignsResponse?.pagination?.total, t ] );
 
   const recentCampaigns = useMemo( () => {
     return [ ...campaigns ]
@@ -62,20 +64,20 @@ export function CampaignStatsBlock() {
   return (
     <Card className="ad-summary-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Campaigns</CardTitle>
-        <CardDescription className="ad-card-description">Overall campaign lifecycle overview</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.campaigns.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.campaigns.description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTab value="stats" className={ 'text-xs font-normal' }>Stats</TabsTab>
-            <TabsTab value="recent" className={ 'text-xs font-normal' }>Recent Campaigns</TabsTab>
+            <TabsTab value="stats" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.campaigns.tabs.stats' ) }</TabsTab>
+            <TabsTab value="recent" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.campaigns.tabs.recent' ) }</TabsTab>
           </TabsList>
 
           <TabsPanels>
             <TabsPanel value="stats" keepMounted>
-              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading campaign stats...</p> }
-              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load campaign stats.</p> }
+              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.campaigns.states.loading' ) }</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.campaigns.states.error' ) }</p> }
               { !isLoading && !isError && (
                 <div className="grid grid-cols-2 gap-2">
                   { parsed.map( ( item ) => {
@@ -120,9 +122,9 @@ export function CampaignStatsBlock() {
                   ) ) }
                 </div>
               ) }
-              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent campaigns.</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.campaigns.states.recentError' ) }</p> }
               { !isLoading && !isError && recentCampaigns.length === 0 && (
-                <p className="py-8 text-center text-xs text-muted-foreground">No campaigns yet</p>
+                <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.campaigns.states.empty' ) }</p>
               ) }
               { !isLoading && !isError && recentCampaigns.length > 0 && (
                 <ScrollArea className="h-[240px] pr-2" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
@@ -130,11 +132,11 @@ export function CampaignStatsBlock() {
                     <AnimatePresence>
                       { recentCampaigns.map( ( campaign, index ) => {
                         const campaignId = campaign.id || campaign.campaign_id;
-                        const campaignName = campaign.campaign_name || 'Untitled Campaign';
+                        const campaignName = campaign.campaign_name || t( 'dashboardBlocks.campaigns.labels.untitled' );
                         const status = String( campaign.campaign_status || 'draft' );
                         const submittedAt = campaign.created_at
                           ? new Date( campaign.created_at ).toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } )
-                          : 'N/A';
+                          : t( 'campaignOverview.workflow.labels.na' );
 
                         return (
                           <motion.div
@@ -161,8 +163,8 @@ export function CampaignStatsBlock() {
                                   >
                                     { campaignName }
                                   </Link>
-                                  <p className="mt-0.5 text-sm text-muted-foreground line-clamp-2" dangerouslySetInnerHTML={ { __html: campaign.description?.replace( '<p>', '' ).replace( '</p>', '' ) || 'No description provided.' } } />
-                                  <p className="mt-0.5 text-xs text-muted-foreground/60">Created: { submittedAt }</p>
+                                  <p className="mt-0.5 text-sm text-muted-foreground line-clamp-2" dangerouslySetInnerHTML={ { __html: campaign.description?.replace( '<p>', '' ).replace( '</p>', '' ) || t( 'dashboardBlocks.campaigns.labels.noDescription' ) } } />
+                                  <p className="mt-0.5 text-xs text-muted-foreground/60">{ t( 'dashboardBlocks.campaigns.labels.created' ) } { submittedAt }</p>
                                 </div>
                               </div>
                               <Badge variant={ statusVariant( status ) } className="h-5 px-1.5 py-0 text-[10px] font-medium capitalize">
@@ -187,7 +189,7 @@ export function CampaignStatsBlock() {
           className="mt-2 w-full font-normal"
           render={ <Link href="/admin/campaigns" /> }
         >
-          View all Campaigns
+          { t( 'dashboardBlocks.campaigns.labels.viewAll' ) }
         </Button>
       </CardFooter>
     </Card>

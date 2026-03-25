@@ -1,0 +1,52 @@
+{
+  "title": "Notifications",
+  "description": "View and manage all notifications",
+  "descriptionBrand": "View and manage all your notifications",
+  "stats": {
+    "total": "Total Notifications",
+    "unread": "Unread",
+    "today": "Today"
+  },
+  "tabs": {
+    "all": "All",
+    "read": "Read",
+    "unread": "Unread"
+  },
+  "search": {
+    "placeholder": "Search notifications",
+    "noResults": "No notifications match your search."
+  },
+  "pagination": {
+    "rowsPerPage": "Rows per page",
+    "page": "Page",
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "actions": {
+    "markAllAsRead": "Mark all as read",
+    "markAsRead": "Mark as read",
+    "delete": "Delete",
+    "deleteAll": "Delete All",
+    "open": "Open"
+  },
+  "item": {
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "eventTypeFallback": "Update"
+  },
+  "empty": {
+    "title": "No notifications to show",
+    "description": "You're all caught up for now."
+  },
+  "confirm": {
+    "deleteAllTitle": "Delete All Notifications",
+    "deleteAllDescription": "Are you sure you want to delete all notifications? This action cannot be undone.",
+    "deleteAllConfirm": "Delete All",
+    "deleting": "Deleting..."
+  },
+  "toast": {
+    "deleteAllSuccess": "All notifications deleted",
+    "deleteAllError": "Failed to delete all notifications"
+  }
+}

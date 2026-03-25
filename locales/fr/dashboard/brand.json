@@ -1,15 +1,144 @@
 {
-  "welcome": "Bon retour !",
-  "overview": "Voici votre aperçu",
+  "welcome": "Bienvenue !",
+  "overview": "Voici une vue d'ensemble",
   "stats": {
     "activeCampaigns": "Campagnes actives",
-    "connectedCreators": "Créateurs connectés",
+    "connectedCreators": "Créateurs",
     "totalSpend": "Dépenses totales",
-    "averageRoi": "ROI moyen",
-    "fromLastMonth": "par rapport au mois dernier"
+    "averageRoi": "Avg. ROI",
+    "fromLastMonth": "du mois dernier"
+  },
+  "campaignsPage": {
+    "title": "Campagnes",
+    "description": "Gérez vos campagnes actives et passées.",
+    "create": "Créer une campagne",
+    "columns": {
+      "name": "Nom",
+      "status": "Statut",
+      "creators": "Créateurs",
+      "budget": "Budget",
+      "duration": "La durée",
+      "actions": "Actions"
+    }
+  },
+  "creatorsPage": {
+    "title": "Trouver des créateurs",
+    "description": "Découvrez et contactez les meilleurs créateurs pour vos campagnes.",
+    "search": "Recherche de créateurs...",
+    "filter": "Filtre",
+    "connect": "Connecter"
+  },
+  "gigsPage": {
+    "title": "Gigs",
+    "description": "Surveillez et gérez le statut de vos contrats actifs."
   },
   "recentCampaigns": "Campagnes récentes",
   "createCampaign": "Créer une campagne",
   "findCreators": "Trouver des créateurs",
-  "noCampaigns": "Aucune campagne récente"
+  "noCampaigns": "Pas de campagne récente",
+  "inviteCreators": {
+    "title": "Inviter les créateurs",
+    "description": "Recherchez des créateurs et invitez-les à postuler à votre concert.",
+    "searchPlaceholder": "Recherche par nom ou par nom d'utilisateur",
+    "noCreatorsFound": "Aucun créateur n'a été trouvé",
+    "noMatchingCreators": "Pas de créateurs correspondants",
+    "adjustSearch": "Essayez d'ajuster vos termes de recherche ou vérifiez l'orthographe.",
+    "noCreatorsMatchRequirements": "Aucun créateur ne correspond aux exigences du contrat. Pensez à ajuster la tranche d'âge ou le sexe requis dans les paramètres de votre contrat.",
+    "noCreatorsAvailable": "Aucun créateur n'est disponible pour le moment. Réessayez plus tard.",
+    "showingMatching": "Afficher les créateurs correspondant aux exigences de l'artiste :",
+    "status": {
+      "pending": "En attente",
+      "accepted": "Accepté",
+      "declined": "Refusé",
+      "invited": "Sur invitation"
+    },
+    "invite": "Invitation",
+    "inviting": "Invitant...",
+    "invitationSent": "Invitation envoyée à {name}",
+    "failedToInvite": "Échec de l'envoi de l'invitation",
+    "invalidGig": "Sélection d'un concert invalide"
+  },
+  "createProfileForm": {
+    "contactInformation": "Informations sur le contact",
+    "addressInformation": "Informations sur l'adresse",
+    "tellUsAboutYour": "Parlez-nous de votre entreprise pour démarrer avec Huerray.",
+    "completeYourBrandProfile": "Complétez votre profil de marque",
+    "companyName": "Nom de l'entreprise",
+    "websiteUrl": "URL du site web",
+    "industryCategory": "Catégorie d'industrie",
+    "companySize": "Taille de l'entreprise",
+    "vatId": "NUMÉRO D'IDENTIFICATION TVA",
+    "registrationNumber": "Numéro d'enregistrement",
+    "street": "Rue",
+    "numberSuite": "Nombre/Suite",
+    "city": "Ville",
+    "stateProvince": "État/Province",
+    "postalCode": "Code postal",
+    "country": "Pays",
+    "contactEmail": "Contact Email",
+    "contactPhone": "Téléphone de contact",
+    "description": "Description",
+    "brandLogo": "Logo de la marque",
+    "creatingProfile": "Création d'un profil...",
+    "completeProfile": "Profil complet",
+    "profileCreated": "Profil créé avec succès !",
+    "failedToCreate": "Échec de la création du profil : {error}",
+    "errorCompanyRequired": "Le nom de l'entreprise est requis",
+    "errorInvalidUrl": "URL invalide",
+    "errorStateRequired": "L'État/Province est requis"
+  },
+  "completeProfile": {
+    "title": "Complétez votre profil de marque",
+    "description": "Configurons les détails de votre marque pour commencer à lancer des campagnes.",
+    "companyAddress": "Société et adresse",
+    "branding": "L'image de marque",
+    "companyDetails": "Détails de l'entreprise",
+    "addressInformation": "Informations sur l'adresse",
+    "contactInformation": "Informations sur le contact",
+    "back": "Retour",
+    "nextStep": "Prochaine étape",
+    "creatingProfile": "Création d'un profil...",
+    "completeProfile": "Profil complet",
+    "profileCompleted": "Profil complété avec succès !",
+    "failedToComplete": "Échec de la mise à jour du profil : {error}",
+    "validationError": "Erreur de validation : {error}"
+  },
+  "invoicesPage": {
+    "title": "Factures",
+    "description": "Visualisez et téléchargez vos factures."
+  },
+  "paymentsPage": {
+    "title": "Paiements",
+    "description": "Consulter l'historique de vos paiements."
+  },
+  "settingsPage": {
+    "profileTitle": "Profil de la marque",
+    "profileDescription": "Mettez à jour les détails de votre marque et votre profil public.",
+    "securityTitle": "Sécurité",
+    "securityDescription": "Gérez votre mot de passe et vos sessions de sécurité.",
+    "breadcrumbs": {
+      "dashboard": "Tableau de bord",
+      "settings": "Paramètres"
+    },
+    "tabs": {
+      "profile": "Profil de la marque",
+      "security": "Sécurité"
+    },
+    "successUpdated": "Mise à jour réussie des paramètres",
+    "errorUpdateFailed": "Échec de la mise à jour des paramètres",
+    "errorUpdateFailedDesc": "Échec de la mise à jour des paramètres",
+    "errorLoadFailed": "Échec du chargement des paramètres de la marque",
+    "changesDiscarded": "Modifications rejetées",
+    "saving": "Économiser...",
+    "saveChanges": "Enregistrer les modifications",
+    "discardChanges": "Modifications de la mise au rebut",
+    "confirmTitle": "Confirmer la mise à jour du profil",
+    "confirmDescription": "L'enregistrement de votre profil nécessitera un examen et une approbation avant que vous ne puissiez effectuer certaines tâches.",
+    "continueAndSave": "Continuer et sauvegarder",
+    "passwordUpdated": "Mot de passe mis à jour avec succès",
+    "errorPasswordUpdate": "Échec de la modification du mot de passe",
+    "errorPasswordUpdateDesc": "Échec de la mise à jour du mot de passe : {error}.",
+    "updating": "Mise à jour...",
+    "updatePassword": "Mise à jour du mot de passe"
+  }
 }

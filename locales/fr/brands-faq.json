@@ -1,25 +1,25 @@
 {
-  "title": "FAQ des Marques",
-  "subtitle": "Voici quelques-unes de nos questions les plus fréquentes.",
+  "title": "FAQ des marques",
+  "subtitle": "Voici quelques-unes des questions les plus fréquemment posées.",
   "sections": [
     {
       "section": "Général",
       "faqs": [
         {
           "question": "Qu'est-ce que Huerray ?",
-          "answer": "Huerray est une plateforme UGC qui connecte les marques avec divers créateurs et des outils de narration basés sur l'IA. La plateforme se concentre sur un contenu authentique, la pertinence culturelle et une représentation significative, en particulier pour les personnes de couleur et les publics sous-représentés dans la région DACH."
+          "answer": "Huerray est une plateforme UGC qui met en relation les marques avec des créateurs divers et des outils de narration alimentés par l'IA. La plateforme se concentre sur le contenu authentique, la pertinence culturelle et la représentation significative, en particulier pour les personnes de couleur et les publics sous-représentés dans la région DACH."
         },
         {
-          "question": "Qu'est-ce que l'UGC et pourquoi cela fonctionne-t-il si bien ?",
-          "answer": "Le contenu généré par les utilisateurs (UGC) est un contenu créé par de vraies personnes, telles que des clients ou des créateurs. Il semble naturel et renforce la confiance, conduisant souvent à un engagement plus élevé et à une performance de campagne plus forte que les publicités traditionnelles."
+          "question": "Qu'est-ce que l'UGC et pourquoi fonctionne-t-il si bien ?",
+          "answer": "Le contenu généré par les utilisateurs (CGU) est un contenu créé par des personnes réelles, telles que des clients ou des créateurs. Il donne l'impression d'être naturel et renforce la confiance, ce qui se traduit souvent par un engagement plus important et des campagnes plus performantes que les publicités traditionnelles."
         },
         {
-          "question": "Les créateurs publient-ils le contenu sur leurs propres réseaux sociaux ?",
-          "answer": "Non. Les créateurs produisent du contenu pour votre marque mais ne le publient pas automatiquement sur leurs propres comptes. La portée du créateur peut être ajoutée en option."
+          "question": "Les créateurs publient-ils le contenu sur leurs propres canaux de médias sociaux ?",
+          "answer": "Les créateurs produisent du contenu pour votre marque mais ne le publient pas automatiquement sur leurs propres comptes. La portée des créateurs peut être ajoutée en option."
         },
         {
           "question": "Qu'est-ce qui différencie Huerray des autres plateformes UGC ?",
-          "answer": "Huerray combine diversité, intelligence culturelle et innovation IA pour offrir un contenu émotionnellement impactant. Contrairement aux plateformes traditionnelles qui mettent simplement en relation créateurs et marques, Huerray améliore la narration grâce aux capacités humaines et IA."
+          "answer": "Huerray associe la diversité, l'intelligence culturelle et l'innovation en matière d'IA pour proposer des contenus à fort impact émotionnel. Contrairement aux plateformes traditionnelles qui ne mettent en relation que les créateurs et les marques, Huerray améliore la narration grâce aux capacités humaines et à celles de l'IA."
         }
       ]
     },
@@ -28,85 +28,85 @@
       "faqs": [
         {
           "question": "Comment fonctionne une campagne avec Huerray ?",
-          "answer": "Après avoir créé un compte, vous pouvez commencer votre briefing de campagne en spécifiant les objectifs du produit, le message, le public, le ton, les formats et le style de narration. Vous recevez des recommandations de créateurs sélectionnées, et les créateurs peuvent également postuler. Une fois approuvé, le créateur produit le contenu, vous recevez un aperçu et pouvez demander une révision avant de recevoir les actifs finaux avec tous les droits d'utilisation."
+          "answer": "Après avoir créé un compte, vous pouvez commencer le briefing de votre campagne en précisant les objectifs du produit, le message, le public, le ton, les formats et le style de narration. Vous recevez des recommandations de créateurs, et les créateurs peuvent également poser leur candidature. Une fois approuvé, le créateur produit le contenu, vous recevez un aperçu et pouvez demander une révision avant de recevoir les ressources finales avec tous les droits d'utilisation."
         },
         {
-          "question": "Huerray utilise-t-il l'IA au lieu de vrais créateurs ?",
-          "answer": "Les marques peuvent choisir entre un contenu créé par des humains ou un contenu de créateur IA."
+          "question": "Huerray fait-il appel à l'IA plutôt qu'à de véritables créateurs ?",
+          "answer": "Les marques peuvent choisir entre du contenu créé par des humains et du contenu créé par l'IA."
         },
         {
-          "question": "Y a-t-il un budget minimum ou un engagement ?",
-          "answer": "Non. Vous pouvez collaborer par campagne ou sur le long terme sans engagements fixes."
+          "question": "Existe-t-il un budget ou un engagement minimum ?",
+          "answer": "Non. Vous pouvez collaborer par campagne ou à long terme sans engagement fixe."
         },
         {
-          "question": "Combien de temps prend la production ?",
-          "answer": "La production prend généralement 7 à 14 jours, incluant un tour de feedback. Une livraison plus rapide est disponible sur demande."
+          "question": "Combien de temps dure la production ?",
+          "answer": "La production prend généralement de 7 à 14 jours, y compris un cycle de retour d'information. Une livraison plus rapide est possible sur demande."
         },
         {
-          "question": "Que faire si je ne suis pas satisfait du contenu livré ?",
-          "answer": "Chaque campagne inclut une révision. Si le contenu ne correspond pas à votre briefing, vous pouvez demander une révision via le bouton 'Demander une révision'."
+          "question": "Que se passe-t-il si je ne suis pas satisfait du contenu fourni ?",
+          "answer": "Chaque campagne comprend une révision. Si le contenu ne correspond pas à votre briefing, vous pouvez demander une révision via le bouton \"Demander une révision\"."
         },
         {
-          "question": "Combien coûte le travail avec Huerray ?",
-          "answer": "Le prix dépend de l'envergure de la campagne. Les forfaits UGC commencent à partir de 149 €, et les campagnes de créateurs IA à partir de 89 €."
+          "question": "Quel est le coût d'une collaboration avec Huerray ?",
+          "answer": "Les prix dépendent de la portée de la campagne. Les forfaits UGC sont proposés à partir de 149 euros et les campagnes de création d'IA à partir de 89 euros."
         },
         {
-          "question": "Quels droits d'utilisation reçois-je ?",
-          "answer": "Après le paiement final, vous recevez des droits d'utilisation exclusifs et illimités dans le temps, la région et les médias, sous réserve des CGV de Huerray."
+          "question": "Quels sont les droits d'utilisation dont je bénéficie ?",
+          "answer": "Après le paiement final, vous recevez des droits d'utilisation exclusifs et illimités dans le temps, la région et les médias, sous réserve de l'AGB de Huerray."
         },
         {
-          "question": "Quels formats de fichiers vais-je recevoir ?",
-          "answer": "Les formats pris en charge incluent .mov, .avi, .mp4 et .mpeg4. Des exigences spécifiques peuvent être ajoutées au briefing de la campagne."
+          "question": "Quels sont les formats de fichiers que je recevrai ?",
+          "answer": "Les formats pris en charge sont les suivants : .mov, .avi, .mp4 et .mpeg4. Des exigences spécifiques peuvent être ajoutées au briefing de la campagne."
         },
         {
           "question": "Comment télécharger les vidéos ?",
-          "answer": "Approuvez le contenu dans votre gig de campagne, puis les fichiers deviennent disponibles pour un téléchargement immédiat."
+          "answer": "Approuver le contenu dans le concert de votre campagne, puis les fichiers seront disponibles pour un téléchargement immédiat."
         },
         {
-          "question": "Que faire si je veux commander une vidéo UGC supplémentaire à un créateur avec qui j'ai déjà travaillé ?",
-          "answer": "Vous pouvez soit créer un nouveau briefing et inviter le créateur, soit demander une mise à niveau au sein de la campagne existante en envoyant un e-mail à Huerray avec les détails de la campagne et du créateur."
+          "question": "Que se passe-t-il si je souhaite commander une vidéo UGC supplémentaire à un créateur avec lequel j'ai déjà travaillé ?",
+          "answer": "Vous pouvez soit créer un nouveau briefing et inviter le créateur, soit demander une mise à niveau de la campagne existante en envoyant un courrier électronique à Huerray avec les détails de la campagne et du créateur."
         },
         {
-          "question": "Que faire si je veux assigner plus de créateurs à une campagne que prévu initialement ?",
-          "answer": "Vous pouvez inviter des créateurs supplémentaires à partir de la liste des candidats. Si cela dépasse votre réservation initiale, envoyez un e-mail à Huerray pour mettre à jour la commande et la facture."
+          "question": "Que se passe-t-il si je souhaite affecter à une campagne un nombre de créateurs supérieur à celui qui avait été réservé à l'origine ?",
+          "answer": "Vous pouvez inviter des créateurs supplémentaires à partir de la liste des candidats. Si cela dépasse votre réservation initiale, envoyez un courriel à Huerray pour mettre à jour la commande et la facture."
         },
         {
           "question": "Puis-je modifier les spécifications de la campagne après avoir soumis le briefing ?",
-          "answer": "Les mises à niveau et ajouts sont autorisés après la création de la commande, mais les réductions ne le sont pas car le paiement est lié à la rémunération du créateur. Pour augmenter la portée, envoyez un e-mail à Huerray avec les détails."
+          "answer": "Les mises à niveau et les ajouts sont autorisés après la création de la commande, mais les réductions ne le sont pas puisque le paiement est lié à la rémunération du créateur. Pour augmenter la portée de la commande, envoyez un courriel à Huerray avec les détails."
         },
         {
           "question": "Comment puis-je annuler ma commande ?",
-          "answer": "Envoyez un e-mail à Huerray avec le lien de la commande et la raison de l'annulation. L'équipe examinera et traitera votre demande."
+          "answer": "Envoyez à Huerray un courriel contenant le lien de la commande et la raison de l'annulation. L'équipe examinera et traitera votre demande."
         }
       ]
     },
     {
-      "section": "Briefing & Candidatures de Créateurs",
+      "section": "Applications brèves et créatives",
       "faqs": [
         {
           "question": "Que dois-je faire pour commencer à recevoir des candidatures de créateurs ?",
-          "answer": "Complétez votre briefing et soumettez-le pour examen. Une fois approuvé, le briefing est publié sur la plateforme et les créateurs peuvent postuler. Toutes les candidatures apparaissent sur votre page de campagne pour examen."
+          "answer": "Complétez votre dossier et soumettez-le pour examen. Une fois approuvé, le briefing est publié sur la plateforme et les créateurs peuvent postuler. Toutes les candidatures apparaissent sur la page de votre campagne pour examen."
         },
         {
-          "question": "Mon briefing est en cours d'examen — qu'est-ce que cela signifie ?",
-          "answer": "Huerray vérifie que votre briefing inclut suffisamment de détails pour que les créateurs produisent un contenu aligné. Vous pouvez recevoir des suggestions si des ajustements sont nécessaires."
+          "question": "Mon dossier est en cours d'examen - qu'est-ce que cela signifie ?",
+          "answer": "Huerray vérifie que votre briefing contient suffisamment de détails pour que les créateurs puissent produire un contenu aligné. Vous pouvez recevoir des suggestions si des ajustements sont nécessaires."
         },
         {
-          "question": "Que se passe-t-il après approbation de mon briefing ?",
-          "answer": "Votre briefing est partagé avec les créateurs pertinents. Les candidatures commencent généralement à arriver dans les 3 jours."
+          "question": "Que se passe-t-il après l'approbation de mon briefing ?",
+          "answer": "Votre dossier est transmis aux créateurs concernés. Les demandes commencent généralement à arriver dans les trois jours."
         }
       ]
     },
     {
-      "section": "Délais & Calendrier de Livraison",
+      "section": "Dates limites et délais de livraison",
       "faqs": [
         {
-          "question": "Combien de temps faut-il pour recevoir mon UGC final ?",
-          "answer": "Une fois que le créateur reçoit le produit et les clarifications, la livraison standard est de 7 jours. Une révision gratuite est incluse."
+          "question": "Combien de temps faut-il pour recevoir les CGU définitives ?",
+          "answer": "Une fois que le créateur a reçu le produit et les clarifications, le délai de livraison standard est de 7 jours. Une révision gratuite est incluse."
         },
         {
           "question": "Combien de temps ai-je pour demander une révision ?",
-          "answer": "Les révisions doivent être demandées dans les 10 jours suivant la soumission du contenu. Si plus de temps est nécessaire, coordonnez-vous avec Huerray par e-mail."
+          "answer": "Les révisions doivent être demandées dans les 10 jours suivant la soumission du contenu. Si vous avez besoin de plus de temps, contactez Huerray par courrier électronique."
         }
       ]
     },
@@ -114,8 +114,8 @@
       "section": "Paiement",
       "faqs": [
         {
-          "question": "Vais-je recevoir des factures pour mes commandes ?",
-          "answer": "Oui. Chaque paiement traité via Huerray génère une facture. Toutes les factures sont accessibles à tout moment dans votre tableau de bord sous 'Factures'."
+          "question": "Recevrai-je des factures pour mes commandes ?",
+          "answer": "Oui. Chaque paiement traité via Huerray génère une facture. Toutes les factures sont accessibles à tout moment dans votre tableau de bord sous \"Factures\"."
         }
       ]
     },
@@ -123,27 +123,27 @@
       "section": "Compte",
       "faqs": [
         {
-          "question": "J'ai oublié mon mot de passe — que dois-je faire ?",
-          "answer": "Utilisez l'option 'Réinitialiser le mot de passe' sur la page de connexion. Si les problèmes persistent, envoyez un e-mail à Huerray pour obtenir de l'aide."
+          "question": "J'ai oublié mon mot de passe - que dois-je faire ?",
+          "answer": "Utilisez l'option \"Réinitialiser le mot de passe\" sur la page de connexion. Si le problème persiste, envoyez un courriel à Huerray pour obtenir de l'aide."
         },
         {
           "question": "Puis-je accorder l'accès à d'autres membres de l'équipe ?",
-          "answer": "Oui. Envoyez un e-mail à Huerray avec les noms et adresses e-mail des collègues que vous souhaitez ajouter. Ils activeront et confirmeront l'accès."
+          "answer": "Oui. Envoyez à Huerray les noms et adresses électroniques des collègues que vous souhaitez ajouter. Ils activeront et confirmeront l'accès."
         }
       ]
     },
     {
-      "section": "Support",
+      "section": "Soutien",
       "faqs": [
         {
           "question": "Vous avez encore des questions ?",
-          "answer": "Envoyez un e-mail à support@huerray.com pour de l'aide."
+          "answer": "Envoyez un courriel à support@huerray.com pour obtenir de l'aide."
         }
       ]
     }
   ],
   "seo": {
-    "title": "FAQ des Marques",
-    "description": "Questions fréquentes pour les marques sur les prix, les campagnes et l'UGC sur Huerray."
+    "title": "FAQ des marques",
+    "description": "Questions fréquemment posées par les marques sur la tarification, les campagnes et l'UGC sur Huerray."
   }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'motion/react';
 import { Badge } from '@/components/dashboard-ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
@@ -25,6 +26,7 @@ function statusVariant( status: string ) {
 }
 
 export function GigsRecentPanel( { items }: GigsRecentPanelProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <motion.div className="space-y-2">
       <AnimatePresence>
@@ -48,7 +50,7 @@ export function GigsRecentPanel( { items }: GigsRecentPanelProps ) {
                     { gig.title }
                   </Link>
                   <p className="text-xs text-muted-foreground">{ gig.brand }</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">Submitted: { gig.submittedAt }</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{ t( 'dashboardBlocks.gigs.labels.submitted' ) } { gig.submittedAt }</p>
                 </div>
               </div>
               <Badge variant={ statusVariant( gig.status ) } className="capitalize">

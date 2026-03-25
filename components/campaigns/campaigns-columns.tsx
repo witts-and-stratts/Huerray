@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
-import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { ModelsCampaignResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
@@ -20,7 +20,6 @@ import { Checkbox } from '@/components/dashboard-ui/checkbox';
 import { Row } from '@tanstack/react-table';
 import { AvatarCollage } from './avatar-collage';
 import { StatusBadge } from './status-badge';
-import { ModelCampaign } from './types';
 
 
 import { CampaignActionMenu } from './campaign-action-menu';
@@ -31,7 +30,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { cn } from '@/lib/dashboard-utils';
 import { useBasePath } from '@/lib/providers/path-provider';
 
-const CampaignActionsCell = ( { row, className }: { row: Row<ModelCampaign>, className?: string; } ) => {
+const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignResponse>, className?: string; } ) => {
   const basePath = useBasePath();
   return (
     <div className={ `flex justify-end items-center gap-2 ${ className }` }>
@@ -79,7 +78,7 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelCampaign>, cla
   );
 };
 
-const ApplicationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
   const { id } = row.original;
   const { data: applicationsData } = useCampaignApplications( id || '' );
   const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
@@ -114,7 +113,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   );
 };
 
-const InvitationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+const InvitationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
   const { id } = row.original;
   const { data: invitationsData } = useCampaignInvitations( id || '' );
   const invitations = ( invitationsData?.data || [] ) as ModelsGigInvitationResponse[];
@@ -148,7 +147,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   );
 };
 
-const SubmissionsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+const SubmissionsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
   const { id } = row.original;
   const { data: submissionsData } = useCampaignSubmissions( id || '' );
   const submissions = ( submissionsData?.data || [] ) as ModelsVideoSubmissionResponse[];
@@ -182,7 +181,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   );
 };
 
-const DetailsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
+const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
   const basePath = useBasePath();
   const { id, campaign_name, description, campaign_status, updated_at } = row.original;
   const rawImage = row.original.campaign_images?.[ 0 ]?.asset || row.original.product_image?.asset;
@@ -226,7 +225,7 @@ const DetailsCell = ( { row }: { row: Row<ModelCampaign>; } ) => {
   );
 };
 
-export const getColumns = (): ColumnDef<ModelCampaign>[] => [
+export const getColumns = (): ColumnDef<ModelsCampaignResponse>[] => [
   {
     id: 'select',
     header: ( { table } ) => (

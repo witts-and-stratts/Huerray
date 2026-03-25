@@ -13,9 +13,9 @@ import { RoleGuard } from '../auth/role-guard';
 import { Avatar, AvatarFallback, AvatarImage } from '../dashboard-ui/avatar';
 import { CampaignsCardsView } from './campaigns-cards-view';
 import { CamapignsTableView } from './campaigns-table-view';
-import { ModelCampaign } from './types';
 
 import { useBasePath } from '@/lib/providers/path-provider';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 function CampaignEmptyState() {
   const basePath = useBasePath();
@@ -46,7 +46,7 @@ export function CampaignsView( {
   table,
   view,
 }: {
-  table: TanstackTable<ModelCampaign>;
+  table: TanstackTable<ModelsCampaignResponse>;
   view: 'table' | 'cards';
 } ) {
   return (

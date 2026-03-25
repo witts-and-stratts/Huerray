@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from 'next-intl';
 import { Cancel01Icon, CheckmarkCircle01Icon, CircleIcon, Clock01Icon, Coins01Icon, InformationCircleIcon, User02Icon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import type { ComponentProps } from 'react';

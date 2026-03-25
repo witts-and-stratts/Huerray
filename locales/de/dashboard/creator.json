@@ -1,19 +1,239 @@
 {
-  "welcome": "Willkommen zurück, Creator!",
-  "overview": "Hier ist Ihre Auftragsübersicht",
-  "stats": {
-    "activeGigs": "Aktive Aufträge",
-    "completedGigs": "Abgeschlossene Aufträge",
-    "totalEarnings": "Gesamteinnahmen",
-    "avgRating": "Durchschnittsbewertung",
-    "fromLastMonth": "im Vergleich zum Vormonat"
+  "welcome": "Willkommen zurück, {name}!",
+  "overview": "Hier ist der Überblick über den Auftritt",
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Verfolgen Sie Einladungen, Auftritte, Einsendungen und voraussichtliche Einnahmen.",
+    "browseGigs": "Gigs durchsuchen",
+    "viewMyGigs": "Meine Gigs ansehen",
+    "creatorFallback": "Schöpfer"
   },
-  "recentGigs": "Aktuelle Aufträge",
-  "browseGigs": "Aufträge durchsuchen",
-  "updatePortfolio": "Portfolio aktualisieren",
-  "noGigs": "Keine aktuellen Aufträge",
   "earningsPage": {
-    "title": "Einnahmen",
-    "description": "Verfolgen Sie Ihren Zahlungsverlauf und Ihre Einnahmen aus abgeschlossenen Aufträgen."
+    "title": "Ergebnis",
+    "description": "Verfolgen Sie Ihr Zahlungsverhalten und Ihre Einnahmen aus abgeschlossenen Aufträgen."
+  },
+  "breadcrumbs": {
+    "dashboard": "Dashboard",
+    "gigs": "Auftritte",
+    "active": "Aktiv",
+    "invitations": "Einladungen",
+    "notifications": "Benachrichtigungen",
+    "earnings": "Ergebnis",
+    "portfolio": "Portfolio",
+    "settings": "Einstellungen",
+    "completeProfile": "Vollständiges Profil",
+    "account": "Konto",
+    "editBasicInfo": "Grundlegende Informationen bearbeiten",
+    "profile": "Profil",
+    "bio": "Biografie",
+    "socialMedia": "Soziale Medien",
+    "bankDetails": "Bankverbindung",
+    "loading": "Laden..."
+  },
+  "common": {
+    "details": "Einzelheiten",
+    "viewAllMyGigs": "Alle meine Gigs anzeigen",
+    "viewAllEarnings": "Alle Einnahmen anzeigen",
+    "viewAllInvitations": "Alle Einladungen anzeigen",
+    "viewAllSubmissions": "Alle Einsendungen anzeigen",
+    "untitledGig": "Unbetitelter Auftritt",
+    "unknownBrand": "Unbekannte Marke",
+    "reward": "Belohnung",
+    "gigCost": "Gig Kosten",
+    "deadline": "Deadline",
+    "endsOn": "Endet {date}",
+    "noActiveGigs": "Noch keine aktiven Auftritte.",
+    "noInvitations": "Noch keine Einladungen.",
+    "noEarnings": "Noch kein Verdienst. Vervollständige Gigs, um zu verdienen!",
+    "na": "K.A.",
+    "invitedCreator": "Eingeladener Ersteller",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Fehler beim Laden von {name}",
+    "somethingWentWrong": "Etwas ist schief gelaufen",
+    "product": "Produkt",
+    "srGigDetails": "Details für Auftritt: {title}",
+    "applicationPending": "Antrag anhängig",
+    "applying": "Die Bewerbung...",
+    "applyForGig": "Für Gig bewerben",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Einzelheiten",
+      "campaign": "Kampagne",
+      "mySubmissions": "Meine Einsendungen",
+      "submissions": "Einreichungen",
+      "overview": "Übersicht"
+    },
+    "toasts": {
+      "appliedSuccess": "Antrag erfolgreich eingereicht!",
+      "appliedError": "Antrag konnte nicht übermittelt werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "kpi": {
+    "gigsCompleted": "Abgeschlossene Gigs",
+    "gigsCompletedCaption": "Gesamtzahl der Gigs, die Sie erfolgreich abgeschlossen haben",
+    "totalEarned": "Verdiente Summe",
+    "totalEarnedCaption": "Lebenslanges Einkommen über alle Auftritte hinweg",
+    "approvalRate": "Bewilligungsquote",
+    "approvalRateCaption": "Prozentsatz der von den Marken genehmigten Videos",
+    "successRate": "Erfolgsquote",
+    "successRateCaption": "Anwendungen, die in aktive Auftritte umgewandelt wurden"
+  },
+  "activeGigs": {
+    "title": "Aktive Auftritte",
+    "description": "Laufende Verpflichtungen und nächste Fristen"
+  },
+  "invitations": {
+    "title": "Einladungen",
+    "description": "Verwalten Sie Ihre Auftrittseinladungen von Marken.",
+    "latestFromBrands": "Neueste Einladungen von Marken",
+    "noInvitationsYet": "Noch keine Einladungen",
+    "noInvitationsDesc": "Wenn Marken Sie zu ihren Auftritten einladen, werden sie hier erscheinen.",
+    "status": {
+      "pending": "Anhängig",
+      "accepted": "Angenommen",
+      "declined": "Abgelehnt",
+      "unknown": "Unbekannt"
+    },
+    "actions": {
+      "view": "Einladung ansehen",
+      "accept": "Einladung annehmen",
+      "decline": "Einladung ablehnen",
+      "reject": "Einladung ablehnen",
+      "createSubmission": "Einreichung erstellen",
+      "openMenu": "Menü öffnen",
+      "viewSubmissions": "Einreichungen ansehen"
+    },
+    "dialogs": {
+      "acceptTitle": "Einladung annehmen",
+      "acceptDesc": "Sind Sie sicher, dass Sie diese Einladung annehmen möchten? Dadurch wird die Marke benachrichtigt und Sie können mit der Arbeit an dem Auftritt beginnen.",
+      "acceptCommentPlaceholder": "Einen Kommentar zu dieser Zulassung hinzufügen",
+      "accepting": "Annehmen...",
+      "declineTitle": "Einladung ablehnen",
+      "declineDesc": "Sind Sie sicher, dass Sie diese Einladung ablehnen wollen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "declineCommentPlaceholder": "Erklären Sie, warum Sie ablehnen",
+      "declining": "Rückläufig...",
+      "rejectTitle": "Einladung ablehnen",
+      "rejectDesc": "Sind Sie sicher, dass Sie diese Einladung ablehnen wollen? Diese Aktion kann nicht rückgängig gemacht werden."
+    },
+    "toasts": {
+      "accepted": "Einladung erfolgreich angenommen",
+      "declined": "Einladung erfolgreich abgelehnt",
+      "error": "Aktualisierung des Einladungsstatus fehlgeschlagen"
+    }
+  },
+  "submissions": {
+    "title": "Jüngste Einreichungen",
+    "description": "Ihre zuletzt gelieferten Videos",
+    "noSubmissions": "Noch keine Einreichungen",
+    "noSubmissionsDesc": "Wenn Sie Beiträge für diesen Auftritt erstellen, werden sie hier angezeigt.",
+    "createTitle": "Einreichung erstellen",
+    "createDesc": "Laden Sie Ihr Video hoch und fügen Sie Details zu diesem Auftritt hinzu.",
+    "details": "Details zur Einreichung",
+    "form": {
+      "title": "Titel",
+      "titlePlaceholder": "Geben Sie Ihrem Beitrag einen Titel",
+      "notes": "Anmerkungen",
+      "notesPlaceholder": "Fügen Sie Anmerkungen zu Ihrem Beitrag hinzu...",
+      "submit": "Video einreichen",
+      "submitting": "Einreichen...",
+      "dropzoneTitle": "Ziehen Sie Ihr Video per Drag & Drop hierher",
+      "dropzoneDesc": "oder klicken Sie auf , um von Ihrem Computer aus zu browsen",
+      "dropzoneSpecs": "Unterstützt MP4, MOV, WEBM (maximal 500MB)"
+    },
+    "toasts": {
+      "success": "Einreichung erfolgreich erstellt",
+      "error": "Vorlage konnte nicht erstellt werden",
+      "missingGigId": "Gig ID fehlt",
+      "uploading": "Bitte warten Sie, bis das Video fertig hochgeladen ist"
+    },
+    "validation": {
+      "titleRequired": "Titel ist erforderlich",
+      "videoRequired": "Videodatei ist erforderlich",
+      "maxSize": "Die maximale Dateigröße beträgt 500 MB.",
+      "invalidFormat": "Es werden nur die Formate .mp4, .mov und .webm unterstützt"
+    }
+  },
+  "earnings": {
+    "title": "Ergebnis",
+    "description": "Verfolgen Sie Ihr Zahlungsverhalten und Ihre Einnahmen aus abgeschlossenen Aufträgen.",
+    "recentTotal": "Neueste Gesamt"
+  },
+  "availableGigs": {
+    "title": "Verfügbare Gigs",
+    "description": "Erkunden Sie neue Möglichkeiten, die zu Ihrem Profil passen, und bewerben Sie sich."
+  },
+  "myGigs": {
+    "title": "Auftritte",
+    "description": "Alle Auftritte, an denen Sie teilgenommen haben.",
+    "tabs": {
+      "all": "Alle Auftritte",
+      "available": "Verfügbare Gigs",
+      "active": "Aktive Auftritte"
+    }
+  },
+  "requirements": {
+    "title": "Anforderungen an den Ersteller",
+    "gender": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "ageRange": "Altersspanne",
+    "any": "Jede",
+    "compensation": "Entschädigung",
+    "guidelines": "Inhaltliche Leitlinien",
+    "ambience": "Ambiente",
+    "requirements": "Anforderungen"
+  },
+  "campaign": {
+    "aboutTitle": "Über diese Kampagne",
+    "dosDonts": "Do's & Don'ts",
+    "dos": "Do's",
+    "donts": "Was man nicht tun sollte",
+    "direction": "Richtung",
+    "toneOfVoice": "Tonfall der Stimme",
+    "keywords": "Schlüsselwörter",
+    "noKeywords": "Keine Schlüsselwörter definiert.",
+    "campaignBriefTitle": "Kampagnen-Brief",
+    "campaignBriefDesc": "Wesentliche Details und Anforderungen an die Nachrichtenübermittlung",
+    "description": "Beschreibung",
+    "category": "Kategorie",
+    "assets": "Vermögenswerte",
+    "images": "Bilder",
+    "documents": "Dokumente",
+    "videos": "Videos",
+    "task": "Aufgabe",
+    "recordVideos": "Rekord {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Dauer: {count} Sekunden"
+  },
+  "payments": {
+    "status": {
+      "completed": "Abgeschlossen",
+      "pending": "Anhängig",
+      "processing": "Verarbeitung",
+      "failed": "Gescheitert",
+      "cancelled": "Abgesagt"
+    },
+    "table": {
+      "payment": "Zahlung",
+      "creator": "Schöpfer",
+      "date": "Datum",
+      "method": "Methode",
+      "items": "Artikel",
+      "paid": "Bezahlt?",
+      "amount": "Betrag",
+      "actions": "Aktionen",
+      "noEarnings": "Noch keine Einnahmen",
+      "noEarningsFiltered": "Kein Verdienst entspricht Ihren aktuellen Filtern.",
+      "noEarningsDesc": "Ihre Zahlungen aus abgeschlossenen Auftritten werden hier angezeigt.",
+      "searchPlaceholder": "Suchergebnisse...",
+      "clearFilters": "Filter löschen"
+    },
+    "details": {
+      "paymentId": "Zahlungs-ID",
+      "accessibilityDesc": "Zahlungsbedingungen für {reference}.",
+      "created": "Erstellt",
+      "reference": "Referenz",
+      "notes": "Anmerkungen",
+      "totalAmount": "Gesamtbetrag"
+    }
   }
 }

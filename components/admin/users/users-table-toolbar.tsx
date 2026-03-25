@@ -8,6 +8,8 @@ import {
 import { DataTableSearch } from '@/components/dashboard-ui/data-table/data-table-search';
 import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
 import '@/app/styles/components/data-table.css';
+import { useTranslations } from 'next-intl';
+import { useFilterLabel } from '@/lib/hooks/use-filter-label';
 
 interface UsersTableToolbarProps<TData> {
   table: Table<TData>;
@@ -18,13 +20,15 @@ export function UsersTableToolbar<TData>( {
   table,
   statuses,
 }: UsersTableToolbarProps<TData> ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const getFilterLabel = useFilterLabel();
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
           table={ table }
           columnId='username'
-          placeholder='Filter users...'
+          placeholder={ t( 'filters.searchUsers' ) }
         />
       </div>
       <div className='flex items-center gap-2'>
@@ -32,19 +36,21 @@ export function UsersTableToolbar<TData>( {
           table={ table }
           columnId='user_type_filter'
           options={ [ 'Brand_user', 'Creator', 'Admin_user' ] }
-          title="User Type"
+          title={ t( 'filters.userType' ) }
+          labelFn={ getFilterLabel }
         />
         <DataTableFilterDropdown
           table={ table }
           columnId='user_status'
           options={ statuses }
-          title="Status"
+          title={ t( 'filters.status' ) }
+          labelFn={ getFilterLabel }
         />
         <DataTableViewOptions
           table={ table }
           labels={ {
-            user_status: 'Status',
-            created_at: 'Joined',
+            user_status: t( 'filters.status' ),
+            created_at: t( 'filters.joined' ),
           } }
         />
       </div>

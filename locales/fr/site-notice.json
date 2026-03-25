@@ -1,23 +1,23 @@
 {
   "page": {
-    "title": "Mentions Légales"
+    "title": "Avis de site"
   },
   "seo": {
-    "title": "Mentions Légales",
-    "description": "Mentions légales pour la plateforme Huerray.",
-    "keywords": "mentions légales, juridique, empreinte, Huerray"
+    "title": "Avis de site",
+    "description": "Avis juridique du site pour la plateforme Huerray.",
+    "keywords": "avis de site, mentions légales, mentions légales, Huerray"
   },
-  "effectiveDateTitle": "En vigueur à partir du",
+  "effectiveDateTitle": "En vigueur à partir de",
   "effectiveDate": "23 octobre 2025",
-  "tableOfContents": "Information",
+  "tableOfContents": "Informations",
   "sections": [
     {
       "id": "contact",
-      "title": "Coordonnées",
+      "title": "Informations sur le contact",
       "content": [
         "THRYPES GmbH <br />4ème étage, <br />Gontardstraße 11, <br />10178 Berlin, Allemagne <br />",
-        "<strong>Email :</strong> <a href='mailto:info@thyrpes.com'>info@thyrpes.com</a>",
-        "<strong>Tribunal d'enregistrement :</strong> Tribunal de district de Charlottenburg - Registre du commerce <br /><strong>Numéro d'enregistrement :</strong> HRB 256430 <br /><strong>Numéro de TVA :</strong> DE 363934690"
+        "<strong>Email:</strong> <a href='mailto:info@thyrpes.com'>info@thyrpes.com</a>",
+        "<strong>Tribunal d'enregistrement:</strong> Tribunal d'instance de Charlottenburg - Registre du commerce <br /><strong>Numéro d'enregistrement:</strong> HRB 256430 <br /><strong>Numéro d'identificationUST:</strong> DE 363934690"
       ],
       "subsections": []
     }

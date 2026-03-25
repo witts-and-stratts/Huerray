@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 import { financialSnapshot } from './dashboard-mock-data';
+import { useTranslations } from 'next-intl';
 
 const chartConfig = {
   revenue: {
@@ -17,19 +18,21 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function FinancialSnapshotBlock() {
+  const t = useTranslations( 'dashboard.admin' );
+
   return (
     <Card className="ad-card">
       <CardHeader>
-        <CardTitle className="ad-card-title">Financial Snapshot</CardTitle>
-        <CardDescription className="ad-card-description">Monthly revenue versus creator payouts</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.financialSnapshot.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.financialSnapshot.description' ) }</CardDescription>
         <div className="ad-chart-legend">
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-[var(--chart-4)]" />
-            Revenue
+            { t( 'dashboardBlocks.financialSnapshot.labels.revenue' ) }
           </span>
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-[var(--chart-2)]" />
-            Payouts
+            { t( 'dashboardBlocks.financialSnapshot.labels.payouts' ) }
           </span>
         </div>
       </CardHeader>

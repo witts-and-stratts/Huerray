@@ -2,19 +2,21 @@
 
 import Link from 'next/link';
 import { Activity, useMemo, useState } from 'react';
-import type { ModelCampaign } from '@/components/campaigns/types';
 import { Badge } from '@/components/dashboard-ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
+import { useTranslations } from "next-intl";
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 interface BrandCampaignsTableBlockProps {
   brandId: string;
-  campaigns: ModelCampaign[];
+  campaigns: ModelsCampaignResponse[];
   isLoading: boolean;
 }
 
 export function BrandCampaignsTableBlock( { brandId, campaigns, isLoading }: BrandCampaignsTableBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   const [ activeTab, setActiveTab ] = useState<'stats' | 'recent'>( 'stats' );
 
   const stats = useMemo( () => {
@@ -62,18 +64,18 @@ export function BrandCampaignsTableBlock( { brandId, campaigns, isLoading }: Bra
   return (
     <Card className="ad-summary-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Campaigns</CardTitle>
-        <CardDescription className="ad-card-description">Brand campaign activity and status</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'brandCampaignsTableBlock.campaigns' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'brandCampaignsTableBlock.brandCampaignActivityAnd' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTrigger value="stats" className={ 'text-xs font-normal' }>Stats</TabsTrigger>
-            <TabsTrigger value="recent" className={ 'text-xs font-normal' }>Recent Campaigns</TabsTrigger>
+            <TabsTrigger value="stats" className={ 'text-xs font-normal' }>{ t( 'brandCampaignsTableBlock.stats' ) }</TabsTrigger>
+            <TabsTrigger value="recent" className={ 'text-xs font-normal' }>{ t( 'brandCampaignsTableBlock.recentCampaigns' ) }</TabsTrigger>
           </TabsList>
 
           <Activity mode={ activeTab === 'stats' ? 'visible' : 'hidden' }>
-            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading campaign stats...</p> }
+            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'brandCampaignsTableBlock.loadingCampaignStats' ) }</p> }
             { !isLoading && (
               <div className="grid grid-cols-2 gap-2">
                 { stats.map( ( item ) => {
@@ -96,9 +98,9 @@ export function BrandCampaignsTableBlock( { brandId, campaigns, isLoading }: Bra
           </Activity>
 
           <Activity mode={ activeTab === 'recent' ? 'visible' : 'hidden' }>
-            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading recent campaigns...</p> }
+            { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'brandCampaignsTableBlock.loadingRecentCampaigns' ) }</p> }
             { !isLoading && recentCampaigns.length === 0 && (
-              <p className="py-8 text-center text-xs text-muted-foreground">No campaigns yet</p>
+              <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'brandCampaignsTableBlock.noCampaignsYet' ) }</p>
             ) }
             { !isLoading && recentCampaigns.length > 0 && (
               <ScrollArea className="h-[420px] pr-2" scrollbar={ {
@@ -107,7 +109,7 @@ export function BrandCampaignsTableBlock( { brandId, campaigns, isLoading }: Bra
               } }>
                 { recentCampaigns.map( ( campaign ) => {
                   const campaignId = campaign.id || campaign.campaign_id;
-                  const campaignName = campaign.campaign_name || 'Untitled Campaign';
+                  const campaignName = campaign.campaign_name || t( 'brandCampaignsTableBlock.untitledCampaign' );
                   const status = String( campaign.campaign_status || 'draft' );
                   const submittedAt = campaign.created_at
                     ? new Date( campaign.created_at ).toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } )
@@ -123,7 +125,7 @@ export function BrandCampaignsTableBlock( { brandId, campaigns, isLoading }: Bra
                           >
                             { campaignName }
                           </Link>
-                          <p className="mt-0.5 text-xs text-muted-foreground">Created: { submittedAt }</p>
+                          <p className="mt-0.5 text-xs text-muted-foreground">{ t( 'brandCampaignsTableBlock.created' ) }{ submittedAt }</p>
                         </div>
                         <Badge variant={ statusVariant( status ) } className="h-5 px-1.5 py-0 text-[10px] font-medium capitalize">
                           { status.replace( /_/g, ' ' ) }

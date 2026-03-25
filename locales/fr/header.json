@@ -1,8 +1,8 @@
 {
   "nav": {
-    "forCreators": "Pour les Créateurs",
-    "forBrands": "Pour les Marques",
-    "pricing": "Tarifs"
+    "forCreators": "Pour les créateurs",
+    "forBrands": "Pour les marques",
+    "pricing": "Tarification"
   },
   "userMenu": {
     "login": "Connexion",

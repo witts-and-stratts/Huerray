@@ -4,10 +4,12 @@ import { ModelsGigResponse } from '@/lib/api/generated/models';
 import { Table } from '@tanstack/react-table';
 import { motion, AnimatePresence } from 'motion/react';
 import { GigCard } from './gig-card';
+import { GigActionMenu } from './gig-action-menu';
+import { ComponentProps } from 'react';
 
 interface GigsCardsProps {
   table: Table<ModelsGigResponse>;
-  onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void;
+  onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 

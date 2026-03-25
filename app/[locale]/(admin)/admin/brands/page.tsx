@@ -1,12 +1,14 @@
 'use client';
 
 import { SubHeader } from "@/components/subheader";
-import { BrandsTable } from "@/components/admin/brands/brands-table";
 import { Brand } from "@/components/admin/brands/brands-data";
 import { useBrands } from "@/lib/api/hooks/brands";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
+import { BrandsTable } from "@/components/admin/brands/brands-table";
 
 export default function BrandsPage() {
+  const t = useTranslations( 'dashboard.admin' );
   const { data, isLoading, error } = useBrands();
 
   // Transform API response to Brand[] format expected by BrandsTable
@@ -48,8 +50,8 @@ export default function BrandsPage() {
   return (
     <>
       <SubHeader
-        title='Brands'
-        description='Manage and track all brands on the platform'
+        title={ t( 'brandsPage.title' ) }
+        description={ t( 'brandsPage.description' ) }
       />
       <BrandsTable
         brandsData={ brandsData }

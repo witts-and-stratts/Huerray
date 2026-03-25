@@ -1,13 +1,12 @@
 'use client';
 
-import * as React from 'react';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { Table } from '@tanstack/react-table';
-import { ModelCampaign } from './types';
-import { CampaignCard } from './campaign-card';
 import { AnimatePresence, motion } from 'motion/react';
+import { CampaignCard } from './campaign-card';
 
 interface CampaignsCardsProps {
-  table: Table<ModelCampaign>;
+  table: Table<ModelsCampaignResponse>;
 }
 
 export function CampaignsCardsView( { table }: CampaignsCardsProps ) {

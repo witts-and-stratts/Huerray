@@ -11,13 +11,15 @@ import {
 import { AdminDateRangePicker } from '@/components/dashboard/admin-date-range-picker';
 import { SubHeader } from '@/components/subheader';
 import '@/app/styles/components/dashboard-stats.css';
+import { useTranslations } from 'next-intl';
 
 export function AdminDashboard() {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <>
       <SubHeader
-        title='Dashboard'
-        description='Platform overview and operational monitoring'
+        title={ t( 'overview' ) }
+        description={ t( 'description' ) }
       >
         <AdminDateRangePicker />
       </SubHeader>

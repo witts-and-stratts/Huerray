@@ -17,6 +17,8 @@ import { RoleGuard } from "@/components/auth/role-guard";
 import { CreatorActionMenu } from "./creator-action-menu";
 import { CreatorStatusBadge } from "./creator-status-badge";
 import { imgpresets } from "@/lib/utils/imgproxy";
+import { useTranslations } from "next-intl";
+import { useMessage } from "@/lib/hooks/use-filter-label";
 
 interface CreatorCardProps {
   creator: ModelsCreatorResponse;
@@ -28,13 +30,15 @@ interface CreatorCardProps {
 export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejectProfile }: CreatorCardProps ) {
   const router = useRouter();
   const { locale } = useParams<{ locale: string; }>();
+  const t = useTranslations( 'dashboard.common' );
   const [ hovered, setHovered ] = useState( false );
-  const fullName = `${ creator.first_name || "" } ${ creator.last_name || "" }`.trim() || creator.email || "Creator";
+  const fullName = `${ creator.first_name || "" } ${ creator.last_name || "" }`.trim() || creator.email || t( 'cards.creatorFallback' );
   const imageUrl = creator.profile_image?.asset;
   const age = creator.date_of_birth ? ageFromDate( creator.date_of_birth ) : undefined;
   const location = [ creator.city, creator.country ].filter( Boolean ).join( ', ' );
   const flagName = creator.country ? getCountryFlag( creator.country ) : undefined;
-  const gender = creator.gender ? creator.gender.charAt( 0 ).toUpperCase() + creator.gender.slice( 1 ) : undefined;
+  const gender = creator.gender || undefined;
+  const genderLabel = useMessage( gender || '' );
   const email = creator.email;
 
   return (
@@ -139,7 +143,7 @@ export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejec
             ) }
             { gender && (
               <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-1.5 py-0.5 text-[10px] text-white/80 backdrop-blur-sm">
-                { gender }
+                { genderLabel }
               </span>
             ) }
             {/* { age && (

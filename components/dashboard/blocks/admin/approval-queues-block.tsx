@@ -14,8 +14,10 @@ import { CampaignsSearchGetStatusEnum } from '@/lib/api/generated/api/campaigns-
 import { useUsers } from '@/lib/api/hooks/users';
 import { useVideoSubmissionsSearch } from '@/lib/api/hooks/video-submissions';
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 
 export function ApprovalQueuesBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: usersPendingResponse, isLoading: isUsersPendingLoading } = useUsers( { status: 'pending_approval', page: 1, limit: 1 } );
   const { data: brandsPendingResponse, isLoading: isBrandsPendingLoading } = useBrands( { status: 'pending_approval', page: 1, limit: 1 } );
   const { data: creatorsPendingResponse, isLoading: isCreatorsPendingLoading } = useCreators( { status: 'pending_approval', page: 1, limit: 1 } );
@@ -34,11 +36,11 @@ export function ApprovalQueuesBlock() {
     const submissionsPending = submissionsPendingResponse?.pagination?.total ?? ( submissionsPendingResponse?.data?.length || 0 );
 
     return [
-      { label: 'Users Awaiting Approval', count: usersPending, slaHours: 18, href: '/admin/users' },
-      { label: 'Brand Profiles Awaiting Approval', count: brandsPending, slaHours: 24, href: '/admin/brands' },
-      { label: 'Creator Profiles Awaiting Approval', count: creatorsPending, slaHours: 24, href: '/admin/creators' },
-      { label: 'Campaigns Pending Admin Review', count: campaignsPending, slaHours: 12, href: '/admin/campaigns' },
-      { label: 'Video Submissions Pending Decision', count: submissionsPending, slaHours: 8, href: '/admin/submissions' },
+      { label: t( 'dashboardBlocks.approvalQueues.queues.users' ), count: usersPending, slaHours: 18, href: '/admin/users' },
+      { label: t( 'dashboardBlocks.approvalQueues.queues.brands' ), count: brandsPending, slaHours: 24, href: '/admin/brands' },
+      { label: t( 'dashboardBlocks.approvalQueues.queues.creators' ), count: creatorsPending, slaHours: 24, href: '/admin/creators' },
+      { label: t( 'dashboardBlocks.approvalQueues.queues.campaigns' ), count: campaignsPending, slaHours: 12, href: '/admin/campaigns' },
+      { label: t( 'dashboardBlocks.approvalQueues.queues.submissions' ), count: submissionsPending, slaHours: 8, href: '/admin/submissions' },
     ];
   }, [
     brandsPendingResponse?.data?.length,
@@ -65,10 +67,10 @@ export function ApprovalQueuesBlock() {
     <Card className="ad-card">
       <CardHeader className="ad-queue-header">
         <div>
-          <CardTitle className="ad-card-title">Approval Queues</CardTitle>
-          <CardDescription className="ad-card-description">Prioritize review queues to avoid blocking marketplace operations</CardDescription>
+          <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.approvalQueues.title' ) }</CardTitle>
+          <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.approvalQueues.description' ) }</CardDescription>
         </div>
-        <Button variant="outline" size="xs" render={ <Link href="/admin/notifications" /> }>View All Queues</Button>
+        <Button variant="outline" size="xs" render={ <Link href="/admin/notifications" /> }>{ t( 'dashboardBlocks.approvalQueues.labels.viewAll' ) }</Button>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[420px] pr-2" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
@@ -92,7 +94,7 @@ export function ApprovalQueuesBlock() {
                 <div className="ad-queue-top">
                   <p className="text-sm font-medium">{ queue.label }</p>
                   <Badge variant={ queue.slaHours <= 12 ? 'destructive' : queue.slaHours <= 24 ? 'secondary' : 'outline' }>
-                    SLA: { queue.slaHours }h
+                    { t( 'dashboardBlocks.approvalQueues.labels.sla' ) } { queue.slaHours }{ t( 'dashboardBlocks.approvalQueues.labels.h' ) }
                   </Badge>
                 </div>
                 <Progress
@@ -101,7 +103,7 @@ export function ApprovalQueuesBlock() {
                 />
                 <div className="ad-queue-bottom">
                   <p className="ad-queue-count">{ queue.count }</p>
-                  <Button variant="ghost" size="sm" render={ <Link href={ queue.href } /> }>Review Queue</Button>
+                  <Button variant="ghost" size="sm" render={ <Link href={ queue.href } /> }>{ t( 'dashboardBlocks.approvalQueues.labels.reviewQueue' ) }</Button>
                 </div>
               </div>
             ) ) }

@@ -1,17 +1,17 @@
 {
-  "title": "Creators' FAQ",
-  "subtitle": "Hier sind einige unserer häufigsten Fragen.",
+  "title": "Schöpfer-FAQ",
+  "subtitle": "Hier finden Sie einige der am häufigsten gestellten Fragen.",
   "sections": [
     {
       "section": "Über Huerray",
       "faqs": [
         {
           "question": "Was ist Huerray?",
-          "answer": "Huerray ist eine UGC-Plattform, die Marken mit diversen Creatorn verbindet und sich auf authentisches Storytelling, kulturelle Relevanz und sinnvolle Repräsentation konzentriert, insbesondere für People of Color und unterrepräsentierte Stimmen in der DACH-Region."
+          "answer": "Huerray ist eine UGC-Plattform, die Marken mit verschiedenen Kreativen verbindet und sich auf authentisches Storytelling, kulturelle Relevanz und sinnvolle Darstellung konzentriert, insbesondere für People of Color und unterrepräsentierte Stimmen in der DACH-Region."
         },
         {
-          "question": "Muss ich den Inhalt auf meinen eigenen Social-Media-Kanälen posten?",
-          "answer": "Nein. Du erstellst den Inhalt für die Marke; eine Veröffentlichung auf deinen eigenen Kanälen ist nicht erforderlich, es sei denn, dies ist ausdrücklich Teil des Kampagnenangebots."
+          "question": "Muss ich die Inhalte auf meinen eigenen Social-Media-Kanälen veröffentlichen?",
+          "answer": "Nein. Sie erstellen die Inhalte für die Marke; eine Veröffentlichung auf Ihren eigenen Kanälen ist nicht erforderlich, es sei denn, sie ist ausdrücklich Teil des Kampagnenangebots."
         }
       ]
     },
@@ -19,76 +19,76 @@
       "section": "Wie es funktioniert",
       "faqs": [
         {
-          "question": "Wie bewerbe ich mich für Kampagnen?",
-          "answer": "Vervollständige dein Creator-Profil und durchstöbere verfügbare Kampagnen, die zu deinem Stil passen. Bewirb dich direkt, wenn du interessiert bist. Die Marke prüft die Bewerbungen und wählt Creator aus. Sobald du den Auftrag annimmst, beginnt die Produktion."
+          "question": "Wie kann ich mich für Kampagnen bewerben?",
+          "answer": "Füllen Sie Ihr Erstellerprofil aus und durchsuchen Sie die verfügbaren Kampagnen, die Ihrem Stil entsprechen. Bewerben Sie sich direkt, wenn Sie interessiert sind. Die Marke prüft die Bewerbungen und wählt die Kreativen aus. Sobald Sie den Auftrag angenommen haben, beginnt die Produktion."
         },
         {
           "question": "Was passiert, nachdem ich ausgewählt wurde?",
-          "answer": "Du erhältst alle Details zum Briefing. Falls nötig, sendet dir der Kunde Produktionsmaterialien. Du erstellst und lädst den Inhalt dann über die Huerray-Plattform hoch."
+          "answer": "Sie erhalten ein ausführliches Briefing. Bei Bedarf schickt der Kunde Produktionsmaterial. Anschließend erstellen Sie den Inhalt und laden ihn über die Huerray-Plattform hoch."
         }
       ]
     },
     {
-      "section": "Content-Upload & Workflow",
+      "section": "Hochladen von Inhalten & Workflow",
       "faqs": [
         {
-          "question": "Wo lade ich meinen finalen Content hoch?",
-          "answer": "Lade deinen Content im vorgesehenen Liefer-Slot im Bereich 'Lieferung' deiner Kampagne hoch. Für zusätzliches Material nutze den Button 'Zusätzliche Lieferung'."
+          "question": "Wo lade ich meine endgültigen Inhalte hoch?",
+          "answer": "Laden Sie Ihre Inhalte in das dafür vorgesehene Feld im Abschnitt \"Lieferung\" Ihrer Kampagne hoch. Für zusätzliches Filmmaterial verwenden Sie die Schaltfläche \"Zusätzliche Lieferung\"."
         },
         {
-          "question": "Was ist, wenn eine Marke während einer laufenden Kampagne ein zusätzliches Video anfordert?",
-          "answer": "Kontaktiere Huerray per E-Mail. Wir richten ein Kampagnen-Upgrade ein, damit das zusätzliche Video bearbeitet und vergütet werden kann."
+          "question": "Was ist, wenn eine Marke während einer aktiven Kampagne ein zusätzliches Video anfordert?",
+          "answer": "Kontaktieren Sie Huerray per E-Mail. Sie werden ein Kampagnen-Upgrade einrichten, damit das zusätzliche Video verarbeitet und vergütet werden kann."
         },
         {
           "question": "Was ist, wenn ich nicht verfügbar oder im Urlaub bin?",
-          "answer": "Aktiviere den Urlaubsmodus und lege deinen Abwesenheitszeitraum fest oder schreibe Huerray eine E-Mail, um dein Konto zu pausieren. Du kannst deine Verfügbarkeit auch in Bewerbungen erwähnen. Wichtig: Kommuniziere frühzeitig."
+          "answer": "Aktivieren Sie den Urlaubsmodus und legen Sie Ihren Abwesenheitszeitraum fest, oder senden Sie eine E-Mail an Huerray, um Ihr Konto zu pausieren. Sie können Ihre Verfügbarkeit auch in Ihrer Bewerbung angeben. Wichtig: Frühzeitig kommunizieren."
         },
         {
           "question": "Kann ich das in Teilzeit machen?",
-          "answer": "Ja. Viele Creator arbeiten mit Huerray neben ihrem Job oder Studium. Dein Arbeitspensum hängt von deiner Verfügbarkeit und Workflow-Effizienz ab."
+          "answer": "Ja. Viele Kreative arbeiten mit Huerray neben ihren Jobs oder Studien. Ihr Arbeitspensum hängt von Ihrer Verfügbarkeit und der Effizienz Ihrer Arbeitsabläufe ab."
         },
         {
-          "question": "Brauche ich professionelles Equipment?",
-          "answer": "Professionelle Ausrüstung ist nicht erforderlich, aber empfohlene Tools sind ein Stativ, ein Mikrofon und ein Ringlicht."
+          "question": "Brauche ich eine professionelle Ausrüstung?",
+          "answer": "Eine professionelle Ausrüstung ist nicht erforderlich, empfohlen werden jedoch ein Stativ, ein Mikrofon und ein Ringlicht."
         },
         {
           "question": "Welche Kameraeinstellungen sollte ich verwenden?",
-          "answer": "Benutze dein Smartphone. Nimm in 4K auf, überprüfe die Belichtung und reinige die Linse vor dem Filmen."
+          "answer": "Verwenden Sie Ihr Smartphone. Nehmen Sie in 4K auf, prüfen Sie die Belichtung und reinigen Sie das Objektiv vor dem Filmen."
         }
       ]
     },
     {
-      "section": "Fristen & Lieferung",
+      "section": "Fristen und Lieferung",
       "faqs": [
         {
-          "question": "Wie viel Zeit habe ich, um den Content zu liefern?",
-          "answer": "Die Standardlieferzeit beträgt 7 Kalendertage nach Erhalt aller Assets und Klärungen. Kontaktiere Huerray vor Ablauf der Frist, falls mehr Zeit benötigt wird."
+          "question": "Wie viel Zeit habe ich für die Bereitstellung der Inhalte?",
+          "answer": "Die Standardlieferfrist beträgt 7 Kalendertage nach Erhalt aller Unterlagen und Abklärungen. Kontaktieren Sie Huerray vor Ablauf der Frist, wenn Sie mehr Zeit benötigen."
         },
         {
-          "question": "Können Marken Revisionen anfordern?",
-          "answer": "Ja. Eine Revisionsrunde ist pro Kampagne enthalten, vorausgesetzt, das Feedback erfolgt innerhalb von 10 Tagen und bleibt im Rahmen des Briefings."
+          "question": "Können Marken Revisionen beantragen?",
+          "answer": "Ja. Pro Kampagne ist eine Überarbeitungsrunde vorgesehen, sofern die Rückmeldung innerhalb von 10 Tagen erfolgt und im Rahmen des Briefings bleibt."
         }
       ]
     },
     {
-      "section": "Bezahlung",
+      "section": "Zahlung",
       "faqs": [
         {
           "question": "Wie viel verdiene ich pro Kampagne?",
-          "answer": "Dein Honorar wird vor der Bewerbung angezeigt. Zusätzliche Leistungen oder Services können als kostenpflichtige Upgrades angeboten werden, vorbehaltlich der Zustimmung der Marke."
+          "answer": "Ihr Honorar wird vor der Anmeldung angezeigt. Zusätzliche Leistungen oder Dienste können als kostenpflichtige Upgrades angeboten werden, sofern die Marke dies genehmigt."
         },
         {
           "question": "Wann werde ich bezahlt?",
-          "answer": "Die Zahlung wird ausgelöst, sobald der Content genehmigt ist. Huerray bearbeitet die Zahlung und stellt eine Rechnung für dich aus. Sobald dein Guthaben 50 € erreicht, wird die Zahlung innerhalb von 14 Tagen überwiesen."
+          "answer": "Die Zahlung wird ausgelöst, sobald der Inhalt genehmigt ist. Huerray bearbeitet die Zahlung und stellt eine Rechnung für Sie aus. Sobald Ihr Guthaben 50 € erreicht, wird die Zahlung innerhalb von 14 Tagen überwiesen."
         }
       ]
     },
     {
-      "section": "Nutzungsrechte",
+      "section": "Inhaltliche Rechte",
       "faqs": [
         {
-          "question": "Wem gehört der Content, den ich erstelle?",
-          "answer": "Nach Genehmigung und Bezahlung gehen die Nutzungsrechte für die exklusive kommerzielle Nutzung an Huerray über, einschließlich digitaler, gedruckter, OOH-Werbung und KI-Training. Du darfst den Content nicht wiederverwenden oder veröffentlichen, es sei denn, dies ist ausdrücklich erlaubt."
+          "question": "Wer ist Eigentümer der von mir erstellten Inhalte?",
+          "answer": "Nach Genehmigung und Bezahlung gehen die Nutzungsrechte an Huerray zur ausschließlichen kommerziellen Nutzung über, einschließlich digitaler, gedruckter, OOH-Werbung und AI-Schulungen. Sie dürfen den Inhalt nicht wiederverwenden oder veröffentlichen, es sei denn, dies ist ausdrücklich erlaubt."
         }
       ]
     },
@@ -96,8 +96,8 @@
       "section": "Produktionsmaterialien",
       "faqs": [
         {
-          "question": "Was ist, wenn ich Produkte von der Marke erhalte?",
-          "answer": "Produkte, die für die UGC-Erstellung bereitgestellt werden, bleiben Eigentum von Huerray, sofern nicht ausdrücklich anders angegeben. Sie müssen auf Anfrage zurückgegeben werden."
+          "question": "Was passiert, wenn ich Produkte von der Marke erhalte?",
+          "answer": "Produkte, die für die Erstellung von UGC zur Verfügung gestellt werden, bleiben Eigentum von Huerray, sofern nicht ausdrücklich anders angegeben. Sie müssen auf Anfrage zurückgegeben werden."
         }
       ]
     },
@@ -105,12 +105,12 @@
       "section": "Rechtliches & Verhalten",
       "faqs": [
         {
-          "question": "Kann ich mit der Marke außerhalb von Huerray arbeiten?",
-          "answer": "Nein. Eine direkte Zusammenarbeit außerhalb von Huerray ist für 3 Monate nach Abschluss der Kampagne untersagt. Verstöße können zu Kontosperrungen oder Strafen führen."
+          "question": "Kann ich mit der Marke auch außerhalb von Huerray arbeiten?",
+          "answer": "Nein. Direkte Zusammenarbeit außerhalb von Huerray ist für 3 Monate nach Abschluss der Kampagne verboten. Zuwiderhandlungen können zur Sperrung des Kontos oder zu Strafen führen."
         },
         {
-          "question": "Was sind meine Pflichten als Creator?",
-          "answer": "Du musst sicherstellen, dass alle Inhalte original sind, keine Rechte verletzen, von sichtbaren Dritten genehmigt wurden, frei von schädlichem oder illegalem Material sind und vollständig den Kampagnenrichtlinien entsprechen."
+          "question": "Was sind meine Pflichten als Schöpfer?",
+          "answer": "Sie müssen sicherstellen, dass alle Inhalte originell sind, keine Rechte Dritter verletzen, mit deren Zustimmung sichtbar sind, kein schädliches oder illegales Material enthalten und vollständig mit den Richtlinien der Kampagne übereinstimmen."
         }
       ]
     },
@@ -118,23 +118,23 @@
       "section": "Konto",
       "faqs": [
         {
-          "question": "Ich kann nicht auf mein Konto zugreifen – was soll ich tun?",
-          "answer": "Klicke auf der Login-Seite auf 'Passwort zurücksetzen'. Wenn das Problem weiterhin besteht, schreibe eine E-Mail an den Huerray-Support."
+          "question": "Ich kann nicht auf mein Konto zugreifen - was soll ich tun?",
+          "answer": "Klicken Sie auf \"Passwort zurücksetzen\" auf der Anmeldeseite. Sollten die Probleme weiterhin bestehen, wenden Sie sich bitte per E-Mail an den Huerray-Support, um Hilfe zu erhalten."
         }
       ]
     },
     {
-      "section": "Support",
+      "section": "Unterstützung",
       "faqs": [
         {
-          "question": "Hast du noch Fragen?",
-          "answer": "Schreibe eine E-Mail an support@huerray.com für sofortige Unterstützung."
+          "question": "Haben Sie noch Fragen?",
+          "answer": "Senden Sie eine E-Mail an support@huerray.com, um sofortige Unterstützung zu erhalten."
         }
       ]
     }
   ],
   "seo": {
-    "title": "Creator FAQ",
-    "description": "Finde Antworten auf häufige Fragen zum Creator-Dasein, Zahlungen und Kampagnen auf Huerray."
+    "title": "Schöpfer-FAQ",
+    "description": "Hier finden Sie Antworten auf häufig gestellte Fragen zu den Themen Schöpfer werden, Zahlungen und Kampagnen auf Huerray."
   }
 }

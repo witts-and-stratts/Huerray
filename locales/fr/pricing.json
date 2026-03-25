@@ -1,88 +1,88 @@
 {
   "hero": {
-    "title": "Payez pour l'UGC, pas pour des frais cachés",
-    "subtitle": "Chaque dollar va vers un UGC évolutif et conforme à la marque qui génère des résultats, pas vers des frais de plateforme"
+    "title": "Payer pour l'UGC, pas pour des frais cachés",
+    "subtitle": "Chaque dollar est consacré à un CGU évolutif et de marque qui génère des résultats, et non à des frais de plateforme."
   },
   "cards": {
-    "disclaimer": "Tous les prix sont pour une vidéo, hors TVA.",
-    "buttonText": "Créer un brief",
+    "disclaimer": "Tous les prix s'entendent pour une vidéo, hors TVA.",
+    "buttonText": "Créer un dossier",
     "short": {
       "tag": "Court",
-      "title": "15 Secondes",
+      "title": "15 secondes",
       "price": "€149.99",
       "features": [
-        "Vidéo TikTok",
-        "Story & Reels Instagram",
-        "Vidéo Pinterest",
-        "Publicité Snapchat"
+        "TikTok-Vidéo",
+        "Instagram-Story & Reels",
+        "Pinterest-Vidéo",
+        "Snapchat-Ad"
       ]
     },
     "medium": {
       "tag": "Moyen",
-      "title": "30 Secondes",
+      "title": "30 secondes",
       "price": "€269.99",
       "features": [
-        "Reel Instagram",
-        "Publicités TikTok",
-        "Publicité Snapchat",
-        "Live Shopping",
-        "Page de destination"
+        "Bobine Instagram",
+        "TikTok-Ads",
+        "Snapchat-Ad",
+        "Achats en direct",
+        "Page d'atterrissage"
       ]
     },
     "long": {
-      "tag": "Long",
-      "title": "60 Secondes",
+      "tag": "Longues",
+      "title": "60 secondes",
       "price": "€349.99",
       "features": [
-        "Vidéo TikTok",
-        "Story & Reels Instagram",
-        "Vidéo Pinterest",
-        "Publicité Snapchat"
+        "TikTok-Vidéo",
+        "Instagram-Story & Reels",
+        "Pinterest-Vidéo",
+        "Snapchat-Ad"
       ]
     }
   },
   "features": {
-    "title": "Les mêmes fonctionnalités exceptionnelles pour tous les plans",
+    "title": "Les mêmes caractéristiques pour tous les plans",
     "items": [
       {
-        "title": "Demandes de projets illimitées",
-        "text": "Des vidéos d'unboxing et de témoignages à la photographie de produits et de mannequins - obtenez le contenu dont vous avez besoin."
+        "title": "Nombre illimité de demandes de projets",
+        "text": "Des vidéos de déballage et de témoignages aux photographies de produits et de modèles, obtenez le contenu dont vous avez besoin."
       },
       {
-        "title": "Examinez les candidatures de divers créateurs",
-        "text": "Tout âge, race, sexe et ambiance, Huerray a un créateur de contenu idéal pour votre marque."
+        "title": "Examiner les candidatures de divers créateurs",
+        "text": "Quel que soit l'âge, la race, le sexe et l'ambiance, Huerray a un créateur de contenu idéal pour votre marque."
       },
       {
         "title": "Pas de négociations avec les créateurs",
-        "text": "Les créateurs Huerray travaillent avec un budget défini pour tous vos projets."
+        "text": "Les créateurs de Huerray travaillent sur la base d'un budget défini pour tous vos projets."
       },
       {
-        "title": "Droits de licence et de distribution complets sur votre contenu",
-        "text": "100% droits de licence et de distribution à utiliser sur les réseaux sociaux, sites web, publicités et plus encore."
+        "title": "Tous les droits de licence et de distribution de votre contenu",
+        "text": "100% des droits de licence et de distribution à utiliser sur les réseaux sociaux, les sites web, les publicités, etc."
       },
       {
-        "title": "Commentaires en temps réel",
-        "text": "Échangez des commentaires avec vos créateurs en utilisant notre fonction de communication intégrée. Faites des ajustements si nécessaire, ou affinez vos exigences."
+        "title": "Retour d'information en temps réel",
+        "text": "Échangez des commentaires avec vos créateurs à l'aide de notre fonction de communication intégrée. Apportez les ajustements nécessaires ou affinez vos exigences."
       }
     ]
   },
   "extra": {
     "ai": {
-      "subtitle": "Dernière génération",
-      "title": "Vidéos générées par IA",
-      "priceLabel": "À partir de",
+      "subtitle": "État de l'art/next-gen",
+      "title": "Vidéos générées par l'IA",
+      "priceLabel": "De",
       "price": "€79.99",
-      "buttonText": "Créer un brief"
+      "buttonText": "Créer un dossier"
     },
     "enterprise": {
       "badge": "Extra + Géré",
-      "title": "Plan Entreprise",
-      "description": "Besoin de plus de contenu généré ? Parlez à notre équipe",
+      "title": "Plan d'entreprise",
+      "description": "Besoin de plus de contenu généré ? Contactez notre équipe",
       "features": [
-        "Demander un service",
+        "Demande de service",
         "Discuter des exigences",
         "Recevoir une offre personnalisée",
-        "Prêt au décollage"
+        "Prêt pour le décollage"
       ],
       "buttonText": "Réserver un appel"
     }
@@ -91,33 +91,33 @@
     "title": "Posez-nous des questions",
     "items": [
       {
-        "question": "Combien de temps faut-il pour que ma candidature de créateur soit examinée ?",
-        "answer": "En raison du volume élevé de candidatures que nous recevons, le processus d'examen peut prendre un certain temps. Nous nous efforçons de traiter les candidatures aussi rapidement que possible, mais veuillez noter que cela peut varier en fonction de la demande et de notre capacité actuelle. Soyez assuré que nous vous informerons dès qu'il y aura une mise à jour sur le statut de votre candidature. Merci de votre patience !"
+        "question": "Combien de temps faut-il pour que ma demande de créateur soit examinée ?",
+        "answer": "En raison du grand nombre de demandes que nous recevons, le processus d'examen peut prendre un certain temps. Nous nous efforçons de traiter les demandes le plus rapidement possible, mais veuillez noter que cela peut varier en fonction de la demande et de notre capacité actuelle. Soyez assuré(e) que nous vous informerons dès que l'état de votre demande sera mis à jour. Nous vous remercions de votre patience !"
       },
       {
-        "question": "Ai-je besoin d'un certain nombre de followers pour rejoindre Huerray ?",
-        "answer": "Non. Vous n'avez même pas besoin d'avoir des réseaux sociaux et c'est tout à fait acceptable. Tout ce que vous avez à faire est de tourner du contenu pour être payé."
+        "question": "Dois-je avoir un certain nombre de followers pour rejoindre Huerray ?",
+        "answer": "Non. Vous n'avez peut-être même pas de médias sociaux et c'est tout à fait normal. Tout ce que vous avez à faire, c'est de publier du contenu pour être payé."
       },
       {
-        "question": "Dois-je poster sur les réseaux sociaux ?",
-        "answer": "Non. Tout ce que vous avez à faire est de télécharger le contenu sur la plateforme Huerray."
+        "question": "Dois-je publier sur les canaux sociaux ?",
+        "answer": "Tout ce que vous avez à faire, c'est de télécharger le contenu sur la plateforme Huerray."
       },
       {
-        "question": "Dois-je payer pour rejoindre ?",
-        "answer": "Non, Trend est 100% gratuit pour les créateurs."
+        "question": "Dois-je payer pour adhérer ?",
+        "answer": "Non, Trend est 100 % gratuit pour les créateurs."
       },
       {
-        "question": "Comment trouver des missions ?",
-        "answer": "Vous choisissez les projets de marques qui correspondent à votre esthétique personnelle et postulez pour ces partenariats. Chaque jour, l'application est mise à jour avec de nouveaux partenariats. Ne travaillez qu'avec des marques que vous voulez !"
+        "question": "Comment trouver des contrats ?",
+        "answer": "Vous choisissez les projets des marques qui correspondent à votre esthétique personnelle et vous postulez pour ces partenariats. Chaque jour, l'application est mise à jour avec de nouveaux partenariats. Ne travaillez qu'avec les marques qui vous intéressent !"
       },
       {
-        "question": "Quel genre de missions puis-je trouver sur Trend ?",
-        "answer": "Les emplois photo et vidéo sont notre point fort. Photographie de produits, photos lifestyle, vidéos de produits en action, vidéos d'unboxing, vidéos de témoignages, photos style portrait. Tout le contenu que les marques de e-commerce peuvent exploiter."
+        "question": "Quels types de contrats puis-je trouver sur Trend ?",
+        "answer": "Les travaux de photo et de vidéo sont notre point fort. Photographie de produits, photos de style de vie, vidéos de produits en action, vidéos d'unboxing, vidéos de témoignages, photos de style portrait. Autant de contenus que les marques de commerce électronique peuvent exploiter."
       }
     ]
   },
   "cta": {
     "title": "Prêt pour votre première vidéo UGC ?",
-    "buttonText": "S'inscrire maintenant"
+    "buttonText": "S'inscrire"
   }
 }

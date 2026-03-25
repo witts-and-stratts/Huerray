@@ -15,7 +15,7 @@ import { formatDate } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { Clock01Icon, InformationCircleIcon, PlayIcon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { memo, useCallback, useMemo, useState } from 'react';
+import { ComponentProps, memo, useCallback, useMemo, useState } from 'react';
 import { RoleGuard } from '../auth/role-guard';
 import { BrandAvatar } from './brand-avatar';
 import { BrandHoverCard } from './brand-hover-card';
@@ -29,7 +29,7 @@ import { Badge } from '../dashboard-ui/badge';
 
 export interface GigCardProps {
   gig: ModelsGigResponse;
-  onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'campaign' | 'submissions' ) => void;
+  onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 
@@ -56,7 +56,7 @@ const GigSubmissionsButton = memo( ( { gig, onSelectSubmission }: GigSubmissions
     <Dialog>
       <Tooltip>
         <TooltipTrigger asChild>
-          <DialogTrigger asChild>
+          <DialogTrigger>
             <Button
               variant={ 'outline' }
               size={ 'icon-sm' }

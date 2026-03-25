@@ -15,6 +15,7 @@ import { Copy } from "lucide-react";
 import { toast } from "sonner";
 import { memo } from "react";
 import { imgpresets } from "@/lib/utils/imgproxy";
+import { useTranslations } from "next-intl";
 
 interface DetailsGenderLocationProps {
   creator: ModelsCreatorResponse;
@@ -50,12 +51,13 @@ interface PreferredCategoriesProps {
 }
 
 const PreferredCategories = memo( ( { creator }: PreferredCategoriesProps ) => {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <>
       {
         creator.preferred_categories && creator.preferred_categories.length > 0 && ( <div className='flex flex-col gap-1'>
           <Separator className='my-1' />
-          <span className='text-[10px] text-muted-foreground/60 font-medium'>Preferred Categories</span>
+          <span className='text-[10px] text-muted-foreground/60 font-medium'>{t('creatorInfoBlock.preferredCategories')}</span>
           <CreatorCategories categories={ creator.preferred_categories } />
         </div> )
       }
@@ -70,10 +72,11 @@ interface CreatorIdCopyAndAgeProps {
 }
 
 const CreatorIdCopyAndAge = memo( ( { creator, hideAge, age }: CreatorIdCopyAndAgeProps ) => {
+  const t = useTranslations( 'dashboard.admin' );
   const handleCopyId = () => {
     if ( creator.creator_id ) {
       navigator.clipboard.writeText( creator.creator_id );
-      toast.success( "Creator ID copied to clipboard" );
+      toast.success( t( 'creatorStatus.idCopied' ) );
     }
   };
   return (
@@ -82,12 +85,12 @@ const CreatorIdCopyAndAge = memo( ( { creator, hideAge, age }: CreatorIdCopyAndA
         variant="outline"
         className="group rounded-sm px-1 font-normal text-muted-foreground/50 bg-muted/50 text-[10px] hover:bg-muted/80 border-border/70 cursor-pointer transition-colors"
         onClick={ handleCopyId }
-        title="Click to copy ID"
+        title={ t( 'creatorStatus.copyId' ) }
       >
         { creator.creator_id }
         <Copy className="ml-1 size-2.5 opacity-0 group-hover:opacity-100 transition-opacity" />
       </Badge>
-      { !hideAge && age && <span className="text-xs text-muted-foreground">{ age } y/o</span> }
+      { !hideAge && age && <span className="text-xs text-muted-foreground">{ age } {t('creatorInfoBlock.yo')}</span> }
     </div>
   );
 } );
@@ -98,7 +101,8 @@ interface CreatorHeaderProps {
 }
 
 const CreatorHeader = memo( ( { creator, onViewDetails }: CreatorHeaderProps ) => {
-  const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || 'Unknown';
+  const tc = useTranslations( 'dashboard.common' );
+  const fullName = `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || tc( 'cards.creatorFallback' );
   const basePath = useBasePath();
   const isAdmin = basePath.startsWith( '/admin' );
 

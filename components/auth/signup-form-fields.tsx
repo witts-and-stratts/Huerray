@@ -41,7 +41,7 @@ export function RoleSelection( { roles, onRoleSelect, className, ...props }: Rol
   return (
     <div className={ className } { ...props }>
       {/* Logo */ }
-      <div className="flex justify-center">
+      <Link href="/" title="Huerray" className="flex justify-center">
         <Image
           src="/images/huerray-symbol.svg"
           alt="Huerray"
@@ -49,7 +49,7 @@ export function RoleSelection( { roles, onRoleSelect, className, ...props }: Rol
           height={ 60 }
           className="dark:invert"
         />
-      </div>
+      </Link>
 
       <div className="text-center mb-4">
         <h1 className="text-2xl font-medium tracking-tight mb-2 font-primary text-primary">

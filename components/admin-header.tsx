@@ -37,10 +37,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/dashboard-ui/a
 import { Separator } from "@/components/dashboard-ui/separator";
 import { SidebarTrigger } from "@/components/dashboard-ui/sidebar";
 import { Badge } from "@/components/dashboard-ui/badge";
+import { useTranslations } from "next-intl";
 
 export function AdminHeader() {
   const router = useRouter();
   const [ open, setOpen ] = React.useState( false );
+  const t = useTranslations( 'dashboard.common' );
+  const ta = useTranslations( 'dashboard.admin' );
 
   // Toggle command dialog with Cmd+K
   React.useEffect( () => {
@@ -68,7 +71,7 @@ export function AdminHeader() {
             onClick={ () => setOpen( true ) }
           >
             <Search className="mr-2 h-4 w-4" />
-            <span>Search...</span>
+            <span>{ t( 'search.placeholder' ).split( ' ' )[ 0 ] }...</span>
             <kbd className="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
               <span className="text-xs">⌘</span>K
             </kbd>
@@ -87,12 +90,12 @@ export function AdminHeader() {
                   >
                     5
                   </Badge>
-                  <span className="sr-only">Notifications</span>
+                  <span className="sr-only">{ t( 'notifications' ) }</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-80">
                 <DropdownMenuGroup>
-                  <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+                  <DropdownMenuLabel>{ t( 'notifications' ) }</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <div className="max-h-[300px] overflow-y-auto">
                     <div className="px-2 py-3">
@@ -109,7 +112,7 @@ export function AdminHeader() {
                 <DropdownMenuSeparator />
                 <div className="p-2">
                   <Button variant="ghost" className="w-full justify-center text-sm">
-                    View all notifications
+                    { t( 'viewAllNotifications' ) }
                   </Button>
                 </div>
               </DropdownMenuContent>
@@ -130,36 +133,36 @@ export function AdminHeader() {
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden flex-col items-start text-left md:flex">
-                    <span className="text-sm font-medium">Admin User</span>
+                    <span className="text-sm font-medium">{ ta( 'welcome' ).split( ',' )[ 1 ] || 'Admin' }</span>
                     <span className="text-xs text-muted-foreground">admin@huerray.com</span>
                   </div>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuGroup>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuLabel>{ t( 'myAccount' ) }</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
+                    <span>{ t( 'profile' ) }</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <CreditCard className="mr-2 h-4 w-4" />
-                    <span>Billing</span>
+                    <span>{ t( 'billing' ) }</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
+                    <span>{ t( 'settings' ) }</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <HelpCircle className="mr-2 h-4 w-4" />
-                    <span>Support</span>
+                    <span>{ t( 'support' ) }</span>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="text-red-600">
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Log out</span>
+                  <span>{ t( 'logout' ) }</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -169,35 +172,35 @@ export function AdminHeader() {
 
       {/* Command Dialog */ }
       <CommandDialog open={ open } onOpenChange={ setOpen }>
-        <CommandInput placeholder="Search users, campaigns, logs..." />
+        <CommandInput placeholder={ t( 'searchPlaceholderHeader' ) } />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Quick Actions">
+          <CommandEmpty>{ t( 'search.noResultsDesc' ) }</CommandEmpty>
+          <CommandGroup heading={ t( 'quickActions' ) }>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin/users' ); } }>
-              <span>Manage Users</span>
+              <span>{ ta( 'manageUsers' ) }</span>
             </CommandItem>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin/moderation' ); } }>
-              <span>Review Reports</span>
+              <span>{ ta( 'reviewReports' ) }</span>
             </CommandItem>
           </CommandGroup>
-          <CommandGroup heading="Navigation">
+          <CommandGroup heading={ t( 'navigation' ) }>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin' ); } }>
-              <span>Dashboard</span>
+              <span>{ t( 'dashboard' ) }</span>
             </CommandItem>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin/users' ); } }>
-              <span>Users</span>
+              <span>{ t( 'cards.applications' ) }</span>
             </CommandItem>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin/campaigns' ); } }>
-              <span>Campaigns</span>
+              <span>{ t( 'cards.submissions' ) }</span>
             </CommandItem>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin/analytics' ); } }>
-              <span>Analytics</span>
+              <span>{ t( 'analytics' ) }</span>
             </CommandItem>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin/moderation' ); } }>
-              <span>Moderation</span>
+              <span>{ t( 'overview' ) }</span>
             </CommandItem>
             <CommandItem onSelect={ () => { setOpen( false ); router.push( '/en/dashboard/admin/settings' ); } }>
-              <span>Settings</span>
+              <span>{ t( 'settings' ) }</span>
             </CommandItem>
           </CommandGroup>
         </CommandList>

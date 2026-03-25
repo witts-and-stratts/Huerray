@@ -138,7 +138,7 @@ export default function LegalPageSidebar( {
     <div
       ref={ containerRef }
       className={ cn( {
-        "top-0 md:top-8 left-0 md:left-6 fixed z-40 w-screen! md:w-auto bg-white px-2 shadow-lg md:shadow-none transition-all duration-300":
+        "top-0 md:top-8 left-0 md:left-6 fixed z-40 max-md:w-screen! md:w-auto bg-white px-2 shadow-lg md:shadow-none transition-all duration-300":
           becomeFixed,
       } ) }
     >
@@ -148,7 +148,7 @@ export default function LegalPageSidebar( {
           onClick={ () => setIsMobileMenuOpen( !isMobileMenuOpen ) }
           className="w-full flex items-center justify-between p-2 bg-primary/5 rounded-lg border border-primary/10"
         >
-          <Typography type="h4" as={ "h5" } className="text-primary pl-1 text-md">
+          <Typography type="h4" as={ "h5" } className="text-primary pl-1">
             { title }
           </Typography>
           <ChevronDown

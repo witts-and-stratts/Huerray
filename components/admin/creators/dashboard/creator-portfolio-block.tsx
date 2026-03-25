@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { ExternalLink, Link as LinkIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { ModelsCreatorResponse } from '@/lib/api/generated/models';
 
 interface CreatorPortfolioBlockProps {
@@ -7,6 +8,8 @@ interface CreatorPortfolioBlockProps {
 }
 
 export function CreatorPortfolioBlock( { creator }: CreatorPortfolioBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   let portfolioUrls: string[] = [];
   if ( creator.portfolio ) {
     try {
@@ -26,8 +29,8 @@ export function CreatorPortfolioBlock( { creator }: CreatorPortfolioBlockProps )
   return (
     <Card className="pt-4">
       <CardHeader>
-        <CardTitle>Portfolio</CardTitle>
-        <CardDescription>External links and work examples</CardDescription>
+        <CardTitle>{ t( 'creatorDashboard.blocks.portfolio' ) }</CardTitle>
+        <CardDescription>{ t( 'creatorDashboard.description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         { portfolioUrls.length > 0 ? (
@@ -53,7 +56,7 @@ export function CreatorPortfolioBlock( { creator }: CreatorPortfolioBlockProps )
         ) : (
           <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border/60 bg-muted/20 py-8 text-muted-foreground gap-2">
             <LinkIcon className="size-8 opacity-20" />
-            <p className="text-sm">No portfolio links added</p>
+            <p className="text-sm">{ tc( 'sheets.noSocialAccounts' ) }</p>
           </div>
         ) }
       </CardContent>

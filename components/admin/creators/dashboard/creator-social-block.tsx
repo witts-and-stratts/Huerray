@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { ExternalLink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import type { ModelsCreatorResponse } from '@/lib/api/generated/models';
 
 interface CreatorSocialBlockProps {
@@ -28,6 +29,8 @@ function SocialRow( { label, handle, href, icon }: { label: string; handle: stri
 }
 
 export function CreatorSocialBlock( { creator }: CreatorSocialBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
 
   const socials = [
     {
@@ -60,8 +63,8 @@ export function CreatorSocialBlock( { creator }: CreatorSocialBlockProps ) {
     <Card className='pt-4'>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>Social Media</CardTitle>
-          <CardDescription>Connected accounts</CardDescription>
+          <CardTitle>{ t( 'creatorDashboard.blocks.social' ) }</CardTitle>
+          <CardDescription>{ t( 'creatorDashboard.description' ) }</CardDescription>
         </div>
       </CardHeader>
       <CardContent>
@@ -73,7 +76,7 @@ export function CreatorSocialBlock( { creator }: CreatorSocialBlockProps ) {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border/60 bg-muted/20 py-4 text-muted-foreground">
-            <p className="text-xs italic">No social accounts connected</p>
+            <p className="text-xs italic">{ tc( 'sheets.noSocialAccounts' ) }</p>
           </div>
         ) }
       </CardContent>

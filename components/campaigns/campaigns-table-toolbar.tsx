@@ -15,6 +15,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/dashboard-
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { useTranslations } from 'next-intl';
+import { useFilterLabel } from '@/lib/hooks/use-filter-label';
 
 interface CampaignsTableToolbarProps {
   table: Table<ModelsCampaignResponse>;
@@ -37,12 +39,14 @@ export function CampaignsTableToolbar( {
   dateRange,
   setDateRange,
 }: CampaignsTableToolbarProps ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const getFilterLabel = useFilterLabel();
   return (
     <div className='dt-toolbar'>
       <DataTableSearch
         table={ table }
         columnId='campaign_name'
-        placeholder='Search Campaign...'
+        placeholder={ t( 'campaignsPage.toolbar.search' ) }
       />
       <div className='flex items-center gap-2'>
         <Popover>
@@ -60,21 +64,21 @@ export function CampaignsTableToolbar( {
           <PopoverContent align="end" className="w-72 p-4 flex flex-col gap-3">
             <SuperField
               type="select"
-              label="Filter by date"
+              label={ t( 'campaignsPage.toolbar.filterByDate' ) }
               value={ dateFilterType }
               onValueChange={ ( v ) => setDateFilterType( ( v ?? 'created_at' ) as 'created_at' | 'updated_at' ) }
               options={ [
-                { value: 'created_at', label: 'Created Date' },
-                { value: 'updated_at', label: 'Updated Date' },
+                { value: 'created_at', label: t( 'campaignsPage.toolbar.createdDate' ) },
+                { value: 'updated_at', label: t( 'campaignsPage.toolbar.updatedDate' ) },
               ] }
             />
             <SuperField
               type="datepicker"
-              label="Date range"
+              label={ t( 'campaignsPage.toolbar.dateRange' ) }
               mode="range"
               value={ dateRange }
               onChange={ ( v ) => setDateRange( v as DateRange | undefined ) }
-              placeholder="Select date range"
+              placeholder={ t( 'campaignsPage.toolbar.selectDateRange' ) }
             />
             { dateRange?.from && (
               <Button
@@ -83,7 +87,7 @@ export function CampaignsTableToolbar( {
                 className="text-muted-foreground w-full"
                 onClick={ () => setDateRange( undefined ) }
               >
-                Clear dates
+                { t( 'campaignsPage.toolbar.clearDates' ) }
               </Button>
             ) }
           </PopoverContent>
@@ -93,6 +97,7 @@ export function CampaignsTableToolbar( {
           table={ table }
           columnId='campaign_status'
           options={ statuses }
+          labelFn={ getFilterLabel }
         />
         <DataTableViewOptions table={ table } />
       </div>

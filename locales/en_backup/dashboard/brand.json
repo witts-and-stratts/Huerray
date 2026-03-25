@@ -1,0 +1,61 @@
+{
+  "welcome": "Welcome back!",
+  "overview": "Here's your overview",
+  "stats": {
+    "activeCampaigns": "Active Campaigns",
+    "connectedCreators": "Creators",
+    "totalSpend": "Total Spend",
+    "averageRoi": "Avg. ROI",
+    "fromLastMonth": "from last month"
+  },
+  "campaignsPage": {
+    "title": "Campaigns",
+    "description": "Manage your active and past campaigns.",
+    "create": "Create Campaign",
+    "columns": {
+      "name": "Name",
+      "status": "Status",
+      "creators": "Creators",
+      "budget": "Budget",
+      "duration": "Duration",
+      "actions": "Actions"
+    }
+  },
+  "creatorsPage": {
+    "title": "Find Creators",
+    "description": "Discover and connect with top creators for your campaigns.",
+    "search": "Search creators...",
+    "filter": "Filter",
+    "connect": "Connect"
+  },
+  "gigsPage": {
+    "title": "Gigs",
+    "description": "Monitor and manage the status of your active gigs."
+  },
+  "recentCampaigns": "Recent Campaigns",
+  "createCampaign": "Create Campaign",
+  "findCreators": "Find Creators",
+  "noCampaigns": "No recent campaigns",
+  "inviteCreators": {
+    "title": "Invite Creators",
+    "description": "Search for creators and invite them to apply to your gig.",
+    "searchPlaceholder": "Search by name or username",
+    "noCreatorsFound": "No creators found",
+    "noMatchingCreators": "No matching creators",
+    "adjustSearch": "Try adjusting your search terms or check the spelling.",
+    "noCreatorsMatchRequirements": "No creators match the gig requirements. Consider adjusting the age range or gender requirement in your gig settings.",
+    "noCreatorsAvailable": "No creators available at the moment. Try again later.",
+    "showingMatching": "Showing creators matching gig requirements:",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "invited": "Invited"
+    },
+    "invite": "Invite",
+    "inviting": "Inviting...",
+    "invitationSent": "Invitation sent to {name}",
+    "failedToInvite": "Failed to send invitation",
+    "invalidGig": "Invalid gig selected"
+  }
+}

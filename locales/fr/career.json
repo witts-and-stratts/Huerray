@@ -1,98 +1,98 @@
 {
   "hero": {
     "title": "Rejoignez un mouvement qui fait avancer la culture créative",
-    "subtitle": "Nous rassemblons culture, créativité et technologie pour donner aux créateurs et aux voix sous-représentées de la région DACH la visibilité qu'ils méritent. Et en coulisses, nous vivons ce que nous défendons : diversité, ouverture, courage et véritable collaboration.",
-    "buttonText": "Voir les postes ouverts",
-    "videoAlt": "Jeune femme présentant la mode",
+    "subtitle": "Nous réunissons la culture, la créativité et la technologie pour donner aux créateurs et aux voix sous-représentées de la région DACH la visibilité qu'ils méritent. Et en coulisses, nous vivons ce que nous défendons : la diversité, l'ouverture, le courage et une véritable collaboration.",
+    "buttonText": "Voir les postes à pourvoir",
+    "videoAlt": "Jeune femme défilant dans la mode",
     "imageAlt1": "Créateur principal",
-    "imageAlt2": "Contenu du créateur",
+    "imageAlt2": "Contenu de la création",
     "imageAlt3": "Portrait du créateur"
   },
   "opportunities": {
-    "title": "Opportunités Ouvertes",
-    "subtitle": "Si vous êtes propriétaire d'un cerveau actif, de pensées intéressantes et d'une bonne âme, nous aimerions avoir de vos nouvelles.",
+    "title": "Opportunités ouvertes",
+    "subtitle": "Si vous avez un cerveau actif, des idées intéressantes et une bonne âme, nous aimerions vous entendre.",
     "button": "En savoir plus",
     "jobs": [
       {
-        "category": "Produit, Design & Données",
-        "title": "Lead Product Designer",
-        "location": "Allemagne. Temps plein - Télétravail"
+        "category": "Produit, conception et données",
+        "title": "Concepteur principal de produits",
+        "location": "Allemagne. Temps plein - A distance"
       },
       {
         "category": "Aide à la vente",
-        "title": "Sales Enablement Manager",
-        "location": "Autriche. Temps plein - Télétravail"
+        "title": "Responsable de l'aide à la vente",
+        "location": "Autriche. Temps plein - A distance"
       },
       {
-        "category": "Expérience Client",
-        "title": "Senior Client Success Manager",
-        "location": "Suisse. Temps plein - Télétravail"
+        "category": "Expérience client",
+        "title": "Gestionnaire principal de la réussite des clients",
+        "location": "Suisse. Temps plein - A distance"
       }
     ]
   },
   "ourValues": {
-    "title": "Nos Valeurs",
+    "title": "Nos valeurs",
     "values": [
       {
         "title": "Diversité",
-        "text": "La diversité n'est pas un slogan. C'est qui nous sommes, dans notre équipe, nos partenaires et nos idées."
+        "text": "La diversité n'est pas un slogan. C'est ce que nous sommes, dans notre équipe, nos partenaires et nos idées."
       },
       {
-        "title": "Authenticité toujours",
-        "text": "Nous ne faisons pas de façades. Nous voulons de vraies personnes avec de vraies histoires et perspectives."
+        "title": "L'authenticité toujours",
+        "text": "Nous ne voulons pas de façades. Nous voulons de vraies personnes avec de vraies histoires et de vraies perspectives."
       },
       {
-        "title": "Innovation avec un but",
-        "text": "La technologie n'est passionnante que lorsqu'elle crée du changement. Nous l'utilisons pour rendre la représentation visible, pas pour la remplacer."
+        "title": "L'innovation au service d'un objectif",
+        "text": "La technologie n'est passionnante que lorsqu'elle crée le changement. Nous l'utilisons pour rendre la représentation visible, pas pour la remplacer."
       },
       {
-        "title": "Communauté avant compétition",
-        "text": "Nous croyons en la collaboration, l'échange et le soutien, car le vrai changement ne se produit qu'ensemble."
+        "title": "La communauté plutôt que la concurrence",
+        "text": "Nous croyons en la collaboration, l'échange et le soutien, parce que les changements réels ne se produisent qu'ensemble."
       }
     ]
   },
   "ourTeams": {
-    "title": "Nos Équipes",
+    "title": "Nos équipes",
     "teams": [
       {
-        "title": "Produit, Design & Données",
-        "text": "Nous construisons la plateforme de référence qui alimente la création et la distribution de contenu pour les marques à l'échelle mondiale. Notre mission est de servir l'économie des créateurs et de leur fournir le meilleur endroit sur terre pour faire ce qu'ils aiment — créer."
+        "title": "Produit, conception et données",
+        "text": "Nous construisons la plateforme de référence qui alimente la création et la distribution de contenu pour les marques du monde entier. Notre mission est de servir l'économie des créateurs et de leur offrir le meilleur endroit au monde pour faire ce qu'ils aiment : créer."
       },
       {
-        "title": "Expérience Client",
-        "text": "Nous sommes l'ingrédient secret de #paid – créant et permettant des expériences client et créateur qui donnent des résultats, de l'impact et surtout, de la joie."
+        "title": "Expérience client",
+        "text": "Nous sommes la sauce secrète du #payé - créer et permettre aux clients et aux créateurs de vivre des expériences qui produisent des résultats, de l'impact et, surtout, de la joie."
       },
       {
-        "title": "Ventes",
-        "text": "Notre objectif est d'éduquer les marques et les agences sur la façon de penser le marketing des créateurs. Nous faisons une découverte approfondie, adaptant notre offre pour aider les clients à atteindre leurs objectifs."
+        "title": "Vente",
+        "text": "Notre objectif est d'enseigner aux marques et aux agences comment penser le marketing des créateurs. Nous effectuons des recherches approfondies et adaptons notre offre pour aider nos clients à atteindre leurs objectifs."
       },
       {
-        "title": "Personnes",
-        "text": "Les personnes sont l'âme de notre entreprise. Nous vivons cette valeur en recherchant les meilleurs humains, puis en fournissant le meilleur environnement pour que nos gens vivent des moments déterminants pour leur carrière."
+        "title": "Les personnes",
+        "text": "Les personnes sont l'âme de notre entreprise. Nous vivons cette valeur en recherchant les meilleures personnes et en leur offrant le meilleur environnement possible pour qu'elles puissent vivre des moments décisifs pour leur carrière."
       },
       {
-        "title": "Finance",
-        "text": "Notre équipe Finance travaille à établir des processus et des politiques qui garantissent des informations précises et opportunes afin que nos autres équipes soient soutenues pour prendre des décisions commerciales éclairées."
+        "title": "Finances",
+        "text": "Notre équipe financière s'efforce de mettre en place des processus et des politiques qui garantissent des informations précises et opportunes afin que nos autres équipes puissent prendre des décisions commerciales en toute connaissance de cause."
       },
       {
-        "title": "Médias, Analytique & Stratégie",
-        "text": "Nous avons une passion pour l'analytique et tout ce qui est numérique. Nous trouvons des solutions pour des défis sophistiqués qui couvrent les dimensions créatives, stratégiques, techniques et analytiques."
+        "title": "Médias, analyse et stratégie",
+        "text": "Nous sommes passionnés par l'analyse et tout ce qui touche au numérique. Nous trouvons des solutions à des problèmes complexes qui touchent à la créativité, à la stratégie, à la technique et à l'analyse."
       },
       {
         "title": "Marketing",
-        "text": "Notre objectif est de construire une marque que les gens ne peuvent pas oublier. Ensemble, nous nous efforçons de créer des moments mémorables avec les marques et les créateurs."
+        "text": "Notre objectif est de construire une marque que les gens ne pourront pas oublier. Ensemble, nous nous efforçons de créer des moments mémorables avec les marques et les créateurs."
       },
       {
         "title": "Ingénierie",
-        "text": "Nous concevons des outils et des fonctionnalités qui créent les bases pour que les marques et les créateurs collaborent ensemble. Nous définissons l'avenir de #paid et cherchons des moyens de faire évoluer et de partager l'avenir de l'économie des créateurs."
+        "text": "Nous concevons des outils et des fonctionnalités qui permettent aux marques et aux créateurs de collaborer. Nous définissons l'avenir de la #rémunération et cherchons des moyens d'étendre et de partager l'avenir de l'économie des créateurs."
       }
     ]
   },
   "careerWhy": {
-    "mainTitle": "Nous imaginons un monde où les créateurs sont passionnés par la construction de quelque chose qui compte",
-    "subtitle": "Huerray est un espace pour les gens qui aiment les idées, qui croient en la créativité avec un but et qui veulent faire changer les choses pour de vrai.",
-    "description1": "Que votre parcours soit dans le marketing, la tech, le design, le développement commercial ou la communauté. Huerray est un espace pour les gens qui aiment les idées, qui croient en la créativité avec un but et qui veulent faire changer les choses pour de vrai. Nous nous soucions moins des titres et plus de qui vous êtes, ce que vous défendez et l'énergie que vous apportez. Nous grandissons, organiquement, intentionnellement et avec un but.",
-    "description2": "Nous sommes toujours ouverts à rencontrer des gens qui partagent notre vision et veulent aider à la façonner.",
+    "mainTitle": "Nous imaginons un monde où les créateurs sont passionnés par la construction de quelque chose d'important.",
+    "subtitle": "Huerray est un espace pour les personnes qui aiment les idées, qui croient en la créativité dans un but précis et qui veulent faire bouger les choses.",
+    "description1": "Que vous soyez dans le marketing, la technologie, le design, le développement d'entreprise ou la communauté. Huerray est un espace pour les personnes qui aiment les idées, qui croient en la créativité dans un but précis et qui veulent apporter un réel changement. Que vous ayez une formation en marketing, en technologie, en design, en développement d'entreprise ou en communauté. Nous nous soucions moins des titres que de qui vous êtes, de ce que vous représentez et de l'énergie que vous apportez. Nous sommes en pleine croissance, de manière organique, intentionnelle et ciblée.",
+    "description2": "Nous sommes toujours prêts à rencontrer des personnes qui partagent notre vision et veulent contribuer à la façonner.",
     "imageAlt": "Pourquoi Huerray"
   }
 }

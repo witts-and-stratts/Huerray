@@ -1,0 +1,25 @@
+{
+  "page": {
+    "title": "Site Notice"
+  },
+  "seo": {
+    "title": "Site Notice",
+    "description": "Legal site notice for Huerray platform.",
+    "keywords": "site notice, legal, imprint, Huerray"
+  },
+  "effectiveDateTitle": "Effective as of",
+  "effectiveDate": "October 23, 2025",
+  "tableOfContents": "Information",
+  "sections": [
+    {
+      "id": "contact",
+      "title": "Contact Information",
+      "content": [
+        "THRYPES GmbH <br />4th Floor, <br />Gontardstraße 11, <br />10178 Berlin, Germany <br />",
+        "<strong>Email:</strong> <a href='mailto:info@thyrpes.com'>info@thyrpes.com</a>",
+        "<strong>Register court:</strong> Charlottenburg District Court - Commercial Register <br /><strong>Register number:</strong> HRB 256430 <br /><strong>UST-ID Number:</strong> DE 363934690"
+      ],
+      "subsections": []
+    }
+  ]
+}

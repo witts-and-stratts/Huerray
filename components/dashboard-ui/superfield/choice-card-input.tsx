@@ -44,7 +44,7 @@ export function ChoiceCardInput( {
     <RadioGroup
       value={ value }
       defaultValue={ defaultValue }
-      onValueChange={ onValueChange }
+      onValueChange={ ( value ) => onValueChange?.( value as string ) }
       disabled={ disabled }
       onBlur={ onBlur }
       className={ cn( "gap-2", containerClassName ) }

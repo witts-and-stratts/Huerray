@@ -18,6 +18,7 @@ import { CreatorSheetHeader } from './creator-sheet-header';
 import { Content } from '@/components/dashboard-ui/content';
 import { useFormatDate } from '@/lib/hooks/format';
 import { CopyText } from '@/components/dashboard-ui/copy-text';
+import { useTranslations } from 'next-intl';
 
 
 export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDetailsSheetProps ) {
@@ -42,6 +43,8 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
   const displayVideo = creatorDetails?.application_video?.asset || c.application_video?.asset;
   const videoPoster = creatorDetails?.application_video?.thumbnail || c.application_video?.thumbnail || undefined;
 
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const [ activeTab, setActiveTab ] = React.useState( 'overview' );
 
   const { data: bankDetails } = useCreatorBankDetails( id! );
@@ -61,28 +64,28 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
         {/* ── Admin View (Tabbed) ── */ }
         <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-6">
           <TabsList className="w-full border">
-            <TabsTrigger value="overview" className="text-sm font-normal">Overview</TabsTrigger>
-            <TabsTrigger value="bio" className="text-sm font-normal">Bio</TabsTrigger>
-            <TabsTrigger value="bank" className="text-sm font-normal">Bank Details</TabsTrigger>
-            <TabsTrigger value="user" className="text-sm font-normal">User</TabsTrigger>
+            <TabsTrigger value="overview" className="text-sm font-normal">{ t( 'creatorDetails.tabOverview' ) }</TabsTrigger>
+            <TabsTrigger value="bio" className="text-sm font-normal">{ t( 'creatorDetails.tabBio' ) }</TabsTrigger>
+            <TabsTrigger value="bank" className="text-sm font-normal">{ t( 'creatorDetails.tabBank' ) }</TabsTrigger>
+            <TabsTrigger value="user" className="text-sm font-normal">{ t( 'creatorDetails.tabUser' ) }</TabsTrigger>
           </TabsList>
 
           {/* Overview */ }
           <Activity mode={ activeTab === 'overview' ? 'visible' : 'hidden' }>
             <div className="space-y-3 rounded-lg">
-              <WrappedCard title="Contact & Personal Info">
-                <Row label="Email" value={
+              <WrappedCard title={ t( 'creatorDetails.contactPersonal' ) }>
+                <Row label={ tc( 'sheets.email' ) } value={
                   <CopyText text={ email } iconSide='left'>
-                    <span className='font-normal'>{ email || 'N/A' }</span>
+                    <span className='font-normal'>{ email || tc( 'sheets.na' ) }</span>
                   </CopyText> } />
                 <Separator />
-                <Row label="Phone" value={ <CopyText text={ phone } iconSide='left'>
-                  <span className='font-normal'>{ phone || 'N/A' }</span></CopyText> } />
+                <Row label={ tc( 'sheets.phone' ) } value={ <CopyText text={ phone } iconSide='left'>
+                  <span className='font-normal'>{ phone || tc( 'sheets.na' ) }</span></CopyText> } />
                 <Separator />
-                <Row label="Address" value={ address || 'N/A' } />
+                <Row label={ tc( 'sheets.address' ) } value={ address || tc( 'sheets.na' ) } />
               </WrappedCard>
 
-              <WrappedCard title="Social Media">
+              <WrappedCard title={ tc( 'sheets.socialMedia' ) }>
                 { activeSocials.length > 0 ? (
                   <div className="flex items-center gap-6">
                     { activeSocials.map( p => (
@@ -95,22 +98,22 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
                     ) ) }
                   </div>
                 ) : (
-                  <p className="py-2 text-center text-sm text-muted-foreground italic">No social accounts connected</p>
+                  <p className="py-2 text-center text-sm text-muted-foreground italic">{ tc( 'sheets.noSocialAccounts' ) }</p>
                 ) }
               </WrappedCard>
 
               { c?.preferred_categories?.length > 0 && (
-                <WrappedCard title="Preferred Categories">
+                <WrappedCard title={ tc( 'sheets.preferredCategories' ) }>
                   <ExpandableCategories categories={ c.preferred_categories } />
                 </WrappedCard>
               ) }
 
-              <WrappedCard title="System Details">
-                <Row label="Joined" value={ created_at ? useFormatDate( created_at as string ) : 'N/A' } />
+              <WrappedCard title={ t( 'creatorDetails.systemDetails' ) }>
+                <Row label={ tc( 'sheets.joined' ) } value={ created_at ? useFormatDate( created_at as string ) : tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Creator ID" value={ <CopyText text={ id } iconSide='left' className='font-mono text-[13px]'>{ id }</CopyText> } />
+                <Row label={ t( 'creatorDetails.creatorId' ) } value={ <CopyText text={ id } iconSide='left' className='font-mono text-[13px]'>{ id }</CopyText> } />
                 <Separator />
-                <Row label="User ID" value={ <CopyText text={ user_id } iconSide='left' className='font-mono text-[13px]'>{ user_id }</CopyText> } />
+                <Row label={ t( 'creatorDetails.userId' ) } value={ <CopyText text={ user_id } iconSide='left' className='font-mono text-[13px]'>{ user_id }</CopyText> } />
               </WrappedCard>
             </div>
           </Activity>
@@ -119,13 +122,13 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
           <Activity mode={ activeTab === 'bio' ? 'visible' : 'hidden' }>
             <div className="pt-4 flex flex-col gap-4">
               { displayVideo && (
-                <WrappedCard title="Application Video">
+                <WrappedCard title={ t( 'creatorDetails.applicationVideo' ) }>
                   <video src={ displayVideo } controls className="w-full aspect-video" poster={ videoPoster } />
                 </WrappedCard>
               ) }
-              <WrappedCard title="Bio">
+              <WrappedCard title={ tc( 'sheets.bio' ) }>
                 <ExpandableContent maxHeightClass="max-h-24">
-                  <Content content={ displayBio || 'No bio available' } />
+                  <Content content={ displayBio || tc( 'sheets.noBioAvailable' ) } />
                 </ExpandableContent>
               </WrappedCard>
             </div>
@@ -134,19 +137,19 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
           {/* Bank Details */ }
           <Activity mode={ activeTab === 'bank' ? 'visible' : 'hidden' }>
             <div className="pt-4 space-y-3">
-              <WrappedCard title="Bank Account">
-                <Row label="Account Name" value={ bankDetails?.bank_account_name || 'N/A' } />
+              <WrappedCard title={ t( 'creatorDetails.bankAccount' ) }>
+                <Row label={ t( 'creatorDetails.accountName' ) } value={ bankDetails?.bank_account_name || tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Account Number" value={ bankDetails?.bank_account_number || 'N/A' } />
+                <Row label={ t( 'creatorDetails.accountNumber' ) } value={ bankDetails?.bank_account_number || tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Bank Name" value={ bankDetails?.bank_name || 'N/A' } />
+                <Row label={ t( 'creatorDetails.bankName' ) } value={ bankDetails?.bank_name || tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Routing Number" value={ bankDetails?.bank_routing_number || 'N/A' } />
+                <Row label={ t( 'creatorDetails.routingNumber' ) } value={ bankDetails?.bank_routing_number || tc( 'sheets.na' ) } />
               </WrappedCard>
-              <WrappedCard title="Tax Details">
-                <Row label="Tax Country" value={ bankDetails?.tax_residence_country || 'N/A' } />
+              <WrappedCard title={ t( 'creatorDetails.taxDetails' ) }>
+                <Row label={ t( 'creatorDetails.taxCountry' ) } value={ bankDetails?.tax_residence_country || tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Tax ID" value={ bankDetails?.tax_id || 'N/A' } />
+                <Row label={ t( 'creatorDetails.taxId' ) } value={ bankDetails?.tax_id || tc( 'sheets.na' ) } />
               </WrappedCard>
             </div>
           </Activity>
@@ -154,34 +157,34 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
           {/* User */ }
           <Activity mode={ activeTab === 'user' ? 'visible' : 'hidden' }>
             <div className="pt-4 space-y-3">
-              <WrappedCard title="Account">
-                <Row label="Username" value={
-                  <CopyText text={ userDetails?.username || 'N/A' } iconSide='left'>
-                    <span className='font-normal'>{ userDetails?.username || 'N/A' }</span>
+              <WrappedCard title={ t( 'creatorDetails.accountSection' ) }>
+                <Row label={ t( 'creatorDetails.username' ) } value={
+                  <CopyText text={ userDetails?.username || tc( 'sheets.na' ) } iconSide='left'>
+                    <span className='font-normal'>{ userDetails?.username || tc( 'sheets.na' ) }</span>
                   </CopyText> } />
                 <Separator />
-                <Row label="Email" value={
-                  <CopyText text={ userDetails?.email || 'N/A' } iconSide='left'>
-                    <span className='font-normal'>{ userDetails?.email || 'N/A' }</span>
+                <Row label={ tc( 'sheets.email' ) } value={
+                  <CopyText text={ userDetails?.email || tc( 'sheets.na' ) } iconSide='left'>
+                    <span className='font-normal'>{ userDetails?.email || tc( 'sheets.na' ) }</span>
                   </CopyText> } />
                 <Separator />
-                <Row label="Phone" value={
-                  <CopyText text={ userDetails?.phone_number || 'N/A' } iconSide='left'>
-                    <span className='font-normal'>{ userDetails?.phone_number || 'N/A' }</span>
+                <Row label={ tc( 'sheets.phone' ) } value={
+                  <CopyText text={ userDetails?.phone_number || tc( 'sheets.na' ) } iconSide='left'>
+                    <span className='font-normal'>{ userDetails?.phone_number || tc( 'sheets.na' ) }</span>
                   </CopyText> } />
                 <Separator />
-                <Row label="Type" value={ userDetails?.user_type || 'N/A' } />
+                <Row label={ tc( 'sheets.type' ) } value={ userDetails?.user_type || tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Status" value={ userDetails?.user_status || 'N/A' } />
+                <Row label={ tc( 'status' ) } value={ userDetails?.user_status || tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Verified" value={ userDetails?.email_verified ? 'Yes' : 'No' } />
+                <Row label="Verified" value={ userDetails?.email_verified ? tc( 'sheets.yes' ) : tc( 'sheets.no' ) } />
               </WrappedCard>
-              <WrappedCard title="System">
-                <Row label="User ID" value={ <CopyText text={ userDetails?.id || user_id } iconSide='left' className='font-mono text-[13px]'>{ userDetails?.id || user_id }</CopyText> } />
+              <WrappedCard title={ t( 'creatorDetails.systemSection' ) }>
+                <Row label={ t( 'creatorDetails.userId' ) } value={ <CopyText text={ userDetails?.id || user_id } iconSide='left' className='font-mono text-[13px]'>{ userDetails?.id || user_id }</CopyText> } />
                 <Separator />
-                <Row label="Created" value={ userDetails?.created_at ? useFormatDate( userDetails.created_at ) : 'N/A' } />
+                <Row label={ t( 'creatorDetails.createdLabel' ) } value={ userDetails?.created_at ? useFormatDate( userDetails.created_at ) : tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label="Updated" value={ userDetails?.updated_at ? useFormatDate( userDetails.updated_at ) : 'N/A' } />
+                <Row label={ t( 'creatorDetails.updatedLabel' ) } value={ userDetails?.updated_at ? useFormatDate( userDetails.updated_at ) : tc( 'sheets.na' ) } />
               </WrappedCard>
             </div>
           </Activity>

@@ -1,95 +1,95 @@
 {
   "hero": {
-    "title": "Gana dinero haciendo lo que amas",
-    "subtitle": "Trabaja con marcas y empresas reales. Empieza a ganar dinero por lo que amas.",
-    "buttonText": "Conviértete en Creador",
-    "paymentMade": "Pago realizado"
+    "title": "Cobra por hacer lo que te gusta",
+    "subtitle": "Trabaja con marcas y empresas reales. Empieza a ganar dinero por lo que te gusta.",
+    "buttonText": "Conviértete en creador",
+    "paymentMade": "Pago efectuado"
   },
   "categories": {
     "fashion": "Moda",
     "lifestyle": "Estilo de vida",
     "beauty": "Belleza",
     "fitness": "Fitness",
-    "food": "Comida",
-    "travel": "Viajes",
+    "food": "Alimentación",
+    "travel": "Viajar",
     "tech": "Tecnología",
-    "healthWellness": "Salud y Bienestar",
+    "healthWellness": "Salud y bienestar",
     "sport": "Deporte",
     "skincare": "Cuidado de la piel"
   },
   "collaborations": {
-    "pill": "Emparejamiento",
-    "title": "Colaboraciones que se ajustan a tu estilo",
-    "description": "Emparejamiento con marcas basado en tu estilo y preferencia de contenido."
+    "pill": "A juego",
+    "title": "Colaboraciones que encajan con su estilo",
+    "description": "Emparejamiento de marcas en función de sus preferencias de estilo y contenido."
   },
   "director": {
-    "pill": "Control Creativo",
-    "title": "Sé el director creativo",
-    "description": "Obtén autonomía creativa sobre tus creaciones. Sé el centro del espectáculo."
+    "pill": "Control creativo",
+    "title": "Sea el director creativo",
+    "description": "Gane autonomía creativa sobre sus creaciones. Sé el centro del espectáculo."
   },
   "manage": {
     "pill": "Automatización",
     "title": "Tú creas. Nosotros gestionamos todo lo demás",
-    "description": "Nuestro equipo y tecnología ayudan a gestionar la experiencia con las marcas, para que puedas concentrarte en crear el mejor contenido."
+    "description": "Nuestro equipo y nuestra tecnología ayudan a gestionar la experiencia con las marcas, para que usted pueda centrarse en crear los mejores contenidos."
   },
   "paid": {
     "pill": "Pagos",
-    "title": "Recibe pagos a tiempo, siempre",
+    "title": "Cobre siempre a tiempo",
     "description": "Recibes pagos automáticos cuando los clientes aprueban tu creación. Sin preguntas."
   },
   "testimonial": {
-    "quote": "Huerray aboga por sus creadores... desde asegurar que nos paguen justamente hasta darnos constantemente oportunidades de marca que coinciden con nuestro estilo de vida",
-    "author": "Baron McHennie – @baron_mchennie"
+    "quote": "Huerray defiende a sus creadores... desde asegurarse de que recibimos una remuneración justa hasta ofrecernos constantemente oportunidades de marca que se ajusten a nuestro estilo de vida.",
+    "author": "Barón McHennie - @baron_mchennie"
   },
   "cta": {
     "subtitle": "Únete a miles de creadores",
-    "title": "Gana dinero haciendo lo que amas"
+    "title": "Cobra por hacer lo que te gusta"
   },
   "faq": {
-    "heading": "Preguntas Frecuentes",
+    "heading": "Preguntas frecuentes",
     "q1": {
-      "question": "¿Cómo empiezo como creador?",
-      "answer": "Simplemente regístrate, completa tu perfil y comienza a buscar colaboraciones de marca disponibles. Una vez aprobado, puedes comenzar a crear contenido."
+      "question": "¿Cómo puedo empezar como creador?",
+      "answer": "Sólo tienes que registrarte, completar tu perfil y empezar a buscar colaboraciones de marca disponibles. Una vez aprobadas, podrás empezar a crear contenidos."
     },
     "q2": {
-      "question": "¿Cuáles son los requisitos para unirse?",
-      "answer": "Damos la bienvenida a creadores de todos los tamaños. Necesitas una presencia activa en redes sociales y la capacidad de crear contenido de calidad que atraiga a tu audiencia."
+      "question": "¿Cuáles son los requisitos para afiliarse?",
+      "answer": "Acogemos a creadores de todos los tamaños. Necesitas una presencia activa en las redes sociales y la capacidad de crear contenidos de calidad que enganchen a tu audiencia."
     },
     "q3": {
       "question": "¿Cuánto puedo ganar?",
-      "answer": "Las ganancias varían según el tamaño de tu audiencia, tasas de participación y el alcance de cada colaboración. Verás los detalles de compensación por adelantado para cada oportunidad."
+      "answer": "Los ingresos varían en función del tamaño de la audiencia, los índices de participación y el alcance de cada colaboración. Verás los detalles de la compensación por adelantado para cada oportunidad."
     },
     "q4": {
       "question": "¿Cómo funcionan los pagos?",
-      "answer": "Recibirás el pago una vez que tu contenido sea aprobado por la marca y cumpla con los requisitos de la campaña. Los pagos se procesan de forma segura a través de nuestra plataforma."
+      "answer": "Recibirás el pago una vez que tu contenido haya sido aprobado por la marca y cumpla los requisitos de la campaña. Los pagos se procesan de forma segura a través de nuestra plataforma."
     },
     "q5": {
       "question": "¿Puedo elegir con qué marcas trabajar?",
-      "answer": "¡Absolutamente! Tienes control total sobre qué colaboraciones aceptas. Solo trabaja con marcas que se alineen con tus valores y audiencia."
+      "answer": "Por supuesto. Tienes pleno control sobre las colaboraciones que aceptas. Trabaja solo con marcas que coincidan con tus valores y tu público."
     },
     "q6": {
-      "question": "¿Qué tipo de contenido necesito crear?",
-      "answer": "Los tipos de contenido varían según la campaña, pero generalmente incluyen fotos, videos, reels o historias. Cada brief proporciona requisitos detallados y pautas creativas."
+      "question": "¿Qué tipo de contenidos debo crear?",
+      "answer": "Los tipos de contenido varían según la campaña, pero suelen incluir fotos, vídeos, reportajes o historias. Cada informe contiene requisitos detallados y directrices creativas."
     },
     "q7": {
-      "question": "¿Cuánto tiempo tarda en llegar el pago?",
-      "answer": "Los pagos se procesan automáticamente una vez que la marca aprueba tu contenido. Generalmente recibirás el pago dentro de 3-5 días hábiles."
+      "question": "¿Cuánto se tarda en cobrar?",
+      "answer": "Los pagos se procesan automáticamente una vez que la marca aprueba tu contenido. Normalmente recibirás el pago en un plazo de 3 a 5 días laborables."
     },
     "q8": {
-      "question": "¿Puedo trabajar con múltiples marcas a la vez?",
-      "answer": "¡Sí! Puedes colaborar con tantas marcas como desees, siempre que no haya cláusulas de exclusividad en tus acuerdos."
+      "question": "¿Puedo trabajar con varias marcas a la vez?",
+      "answer": "Sí, puedes colaborar con todas las marcas que quieras, siempre que no haya cláusulas de exclusividad en los acuerdos."
     },
     "q9": {
-      "question": "¿Qué pasa si no cumplo con una fecha límite de campaña?",
-      "answer": "Entendemos que suceden cosas. Comunícate con nosotros temprano si necesitas una extensión. Sin embargo, perder fechas límite sin aviso puede afectar oportunidades futuras."
+      "question": "¿Qué pasa si no cumplo un plazo de la campaña?",
+      "answer": "Entendemos que las cosas suceden. Comuníquenos con antelación si necesita una prórroga. Sin embargo, el incumplimiento de los plazos sin previo aviso puede afectar a futuras oportunidades."
     },
     "q10": {
-      "question": "¿Necesito equipo profesional?",
-      "answer": "No necesariamente. Muchos creadores exitosos usan teléfonos inteligentes. Lo que más importa es crear contenido auténtico y atractivo que resuene con tu audiencia."
+      "question": "¿Necesito un equipo profesional?",
+      "answer": "No necesariamente. Muchos creadores de éxito utilizan smartphones. Lo más importante es crear contenidos auténticos y atractivos que calen en tu audiencia."
     },
     "q11": {
-      "question": "¿Cómo se determinan las coincidencias de marca?",
-      "answer": "Nuestro algoritmo de emparejamiento considera tu estilo de contenido, demografía de audiencia, tasas de participación y preferencias de marca para sugerir las mejores colaboraciones para ti."
+      "question": "¿Cómo se determinan los partidos de marca?",
+      "answer": "Nuestro algoritmo de concordancia tiene en cuenta el estilo de tus contenidos, los datos demográficos de tu audiencia, los índices de participación y las preferencias de marca para sugerirte las mejores colaboraciones."
     }
   }
 }

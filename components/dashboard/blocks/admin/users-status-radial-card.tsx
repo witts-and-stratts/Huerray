@@ -8,6 +8,7 @@ import { LabelList, RadialBar, RadialBarChart } from 'recharts';
 import { useUsers } from '@/lib/api/hooks/users';
 import { usePlatformAnalytics } from '@/lib/api/hooks/analytics';
 import type { ModelsUserResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 const STATUS_COLORS = [
   'var(--chart-1)',
@@ -18,15 +19,16 @@ const STATUS_COLORS = [
 ];
 
 const USER_STATS_KEYS = [
-  { label: 'Total Users', key: 'total_users' as const },
-  { label: 'Total Brands', key: 'total_brands' as const },
-  { label: 'Total Creators', key: 'total_creators' as const },
-  { label: 'New Users Today', key: 'new_users_today' as const },
-  { label: 'Active Brands', key: 'active_brands' as const },
-  { label: 'Active Creators', key: 'active_creators' as const },
-];
+  'total_users',
+  'total_brands',
+  'total_creators',
+  'new_users_today',
+  'active_brands',
+  'active_creators',
+] as const;
 
 export function UsersStatusRadialCard() {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: response, isLoading } = useUsers( { limit: 1000, page: 1 } );
   const { data: analyticsResponse, isLoading: isAnalyticsLoading } = usePlatformAnalytics();
   const users = useMemo( () => ( response?.data?.data as unknown as ModelsUserResponse[] ) || [], [ response ] );
@@ -80,8 +82,8 @@ export function UsersStatusRadialCard() {
   return (
     <Card className="ad-users-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Users</CardTitle>
-        <CardDescription className="ad-card-description">Status distribution across all platform users</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.usersRadial.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.usersRadial.description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -92,11 +94,11 @@ export function UsersStatusRadialCard() {
                 <Skeleton className="h-7 w-16" />
               </div>
             ) )
-            : USER_STATS_KEYS.map( ( item ) => (
-              <div key={ item.key } className="rounded-lg border border-border/60 bg-white p-2.5">
-                <p className="ad-stat-label mb-1.5">{ item.label }</p>
+            : USER_STATS_KEYS.map( ( key ) => (
+              <div key={ key } className="rounded-lg border border-border/60 bg-white p-2.5">
+                <p className="ad-stat-label mb-1.5">{ t( `dashboardBlocks.usersRadial.stats.${ key }` ) }</p>
                 <p className="text-2xl leading-none font-primary font-medium">
-                  { ( analyticsResponse?.data?.[ item.key ] ?? 0 ).toLocaleString() }
+                  { ( analyticsResponse?.data?.[ key ] ?? 0 ).toLocaleString() }
                 </p>
               </div>
             ) )
@@ -160,7 +162,7 @@ export function UsersStatusRadialCard() {
 
               <div className="space-y-3">
                 <div>
-                  <p className="ad-total-label">Total users</p>
+                  <p className="ad-total-label">{ t( 'dashboardBlocks.usersRadial.totalUsers' ) }</p>
                   <p className="ad-total-value">{ totalUsers.toLocaleString() }</p>
                 </div>
                 <div className="ad-users-breakdown">

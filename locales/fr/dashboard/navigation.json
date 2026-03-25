@@ -2,9 +2,9 @@
   "brand": {
     "dashboard": "Tableau de bord",
     "campaigns": "Campagnes",
-    "gigs": "Missions",
+    "gigs": "Gigs",
     "creators": "Créateurs",
-    "analytics": "Analyses",
+    "analytics": "Analyse",
     "invoices": "Factures",
     "payments": "Paiements",
     "savedLists": "Listes enregistrées",
@@ -16,12 +16,12 @@
     "dashboard": "Tableau de bord",
     "invitations": "Invitations",
     "myGigs": "Gigs",
-    "allGigs": "Toutes les missions",
-    "availableGigs": "Missions disponibles",
-    "activeGigs": "Missions actives",
+    "allGigs": "Tous les concerts",
+    "availableGigs": "Soirées disponibles",
+    "activeGigs": "Gigs actifs",
     "profile": "Profil",
-    "analytics": "Analyses",
-    "earnings": "Revenus",
+    "analytics": "Analyse",
+    "earnings": "Les revenus",
     "account": "Compte",
     "settings": "Paramètres"
   },
@@ -31,18 +31,18 @@
     "creators": "Créateurs",
     "brands": "Marques",
     "campaigns": "Campagnes",
-    "gigs": "Missions",
+    "gigs": "Gigs",
     "invoices": "Factures",
-    "payments": "Versements",
-    "analytics": "Analyses",
-    "moderation": "Modération",
-    "platformReports": "Rapports de la plateforme",
-    "systemLogs": "Journaux système",
+    "payments": "Paiements",
+    "analytics": "Analyse",
+    "moderation": "La modération",
+    "platformReports": "Rapports sur les plates-formes",
+    "systemLogs": "Journaux du système",
     "alerts": "Alertes",
     "settings": "Paramètres"
   },
   "common": {
-    "getHelp": "Aide",
-    "search": "Rechercher"
+    "getHelp": "Obtenir de l'aide",
+    "search": "Recherche"
   }
 }

@@ -1,40 +1,435 @@
 {
-  "welcome": "¡Bienvenido de vuelta, Admin!",
-  "overview": "Resumen del sistema",
+  "welcome": "Bienvenido de nuevo, Admin.",
+  "overview": "Visión general del sistema",
+  "description": "Visión general de la plataforma y supervisión de su funcionamiento",
   "stats": {
     "totalUsers": "Usuarios totales",
     "activeCampaigns": "Campañas activas",
-    "pendingReports": "Reportes pendientes",
+    "pendingReports": "Informes pendientes",
     "systemHealth": "Salud del sistema",
-    "fromLastMonth": "respecto al mes pasado"
+    "fromLastMonth": "del mes pasado"
+  },
+  "dashboardBlocks": {
+    "usersRadial": {
+      "title": "Usuarios",
+      "description": "Distribución del estado entre todos los usuarios de la plataforma",
+      "totalUsers": "Total de usuarios",
+      "stats": {
+        "total_users": "Usuarios totales",
+        "total_brands": "Total Marcas",
+        "total_creators": "Total Creadores",
+        "new_users_today": "Nuevos usuarios hoy",
+        "active_brands": "Marcas activas",
+        "active_creators": "Creadores activos"
+      }
+    },
+    "campaigns": {
+      "title": "Campañas",
+      "description": "Visión general del ciclo de vida de la campaña",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Campañas recientes"
+      },
+      "stats": {
+        "total": "Total",
+        "active": "Activo",
+        "finished": "Terminado",
+        "draft": "Borrador"
+      },
+      "states": {
+        "loading": "Cargando estadísticas de campaña...",
+        "error": "No se pueden cargar las estadísticas de la campaña.",
+        "recentError": "No se pueden cargar las campañas recientes.",
+        "empty": "Todavía no hay campañas"
+      },
+      "labels": {
+        "created": "Creado:",
+        "viewAll": "Ver todas las campañas",
+        "untitled": "Campaña sin título",
+        "noDescription": "No se proporciona descripción."
+      }
+    },
+    "creators": {
+      "title": "Creadores",
+      "description": "Base de creadores y resumen del estado de aprobación",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Creadores recientes"
+      },
+      "stats": {
+        "total": "Total",
+        "approved": "Aprobado",
+        "pending": "Pendiente",
+        "returned": "Devuelto"
+      },
+      "states": {
+        "loading": "Cargando estadísticas del creador...",
+        "error": "No se pueden cargar las estadísticas del creador.",
+        "recentError": "No se pueden cargar los creadores recientes.",
+        "empty": "Aún no hay creadores"
+      },
+      "labels": {
+        "unknown": "Creador desconocido",
+        "viewAll": "Ver todos los creadores"
+      }
+    },
+    "gigs": {
+      "title": "Gigs",
+      "description": "Visión general del ciclo de vida del Gig y del progreso de la entrega",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Actuaciones recientes"
+      },
+      "stats": {
+        "total": "Total de gigas",
+        "open": "Conciertos abiertos",
+        "completed": "Conciertos finalizados"
+      },
+      "states": {
+        "loading": "Cargando gigas...",
+        "error": "No se pueden cargar gigas.",
+        "recentLoading": "Cargando conciertos recientes...",
+        "recentError": "No se pueden cargar gigas recientes.",
+        "empty": "No se han encontrado conciertos."
+      },
+      "labels": {
+        "brand": "Marca",
+        "na": "N/A",
+        "untitled": "Actuación sin título",
+        "viewAll": "Ver todos los conciertos",
+        "submitted": "Enviado:",
+        "trendingUp": "Tendencia al alza del 4,6% este mes",
+        "showingTotal": "Mostrar el total de conciertos en las principales fases del ciclo de vida"
+      }
+    },
+    "submissions": {
+      "title": "Envíos",
+      "description": "Estado de la revisión de los envíos e instantánea del rendimiento",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Envíos recientes"
+      },
+      "stats": {
+        "total": "Total de envíos",
+        "pending": "Envíos pendientes",
+        "approved": "Propuestas aprobadas"
+      },
+      "states": {
+        "error": "No se pueden cargar los envíos.",
+        "recentError": "No se pueden cargar los envíos recientes.",
+        "empty": "No se han encontrado propuestas."
+      }
+    },
+    "platformAnalytics": {
+      "title": "Plataforma de análisis",
+      "description": "Métricas en tiempo real de toda la plataforma desde el punto final de análisis",
+      "groups": {
+        "contentPipeline": "Canalización de contenidos"
+      },
+      "stats": {
+        "total_campaigns": "Total campañas",
+        "completed_campaigns": "Campañas finalizadas",
+        "total_gigs": "Total de gigas",
+        "completed_gigs": "Conciertos finalizados"
+      },
+      "states": {
+        "error": "No se pueden cargar los análisis de la plataforma."
+      }
+    },
+    "actionCenter": {
+      "title": "Centro de Acción",
+      "description": "Ir a las áreas que requieren una acción administrativa directa",
+      "actions": {
+        "reviewBrands": {
+          "label": "Perfiles de marca",
+          "detail": "Verificaciones pendientes y controles de calidad de los perfiles"
+        },
+        "reviewCreators": {
+          "label": "Revisar los perfiles de los creadores",
+          "detail": "Flujos de trabajo de aprobación y devolución para la incorporación de creadores"
+        },
+        "reviewCampaigns": {
+          "label": "Revisar el proceso de la campaña",
+          "detail": "Supervisar las aprobaciones, la actividad en directo y el ritmo de finalización"
+        },
+        "inspectNotifications": {
+          "label": "Inspeccionar notificaciones",
+          "detail": "Investigar la plataforma reciente y las señales de moderación"
+        },
+        "openUsers": {
+          "label": "Gestión abierta de usuarios",
+          "detail": "Estado de los usuarios, controles de acceso y mantenimiento de cuentas"
+        },
+        "checkPayments": {
+          "label": "Pagos con cheque",
+          "detail": "Salud de los pagos, anomalías en las transacciones y conciliación"
+        }
+      },
+      "labels": {
+        "open": "Abrir",
+        "priorityHigh": "HIGH",
+        "priorityMedium": "MEDIUM",
+        "priorityNormal": "NORMAL"
+      }
+    },
+    "approvalQueues": {
+      "title": "Colas de aprobación",
+      "description": "Priorizar las colas de revisión para evitar el bloqueo de las operaciones del mercado",
+      "queues": {
+        "users": "Usuarios pendientes de aprobación",
+        "brands": "Perfiles de marca pendientes de aprobación",
+        "creators": "Perfiles de creador pendientes de aprobación",
+        "campaigns": "Campañas pendientes de revisión administrativa",
+        "submissions": "Presentación de vídeos pendiente de decisión"
+      },
+      "labels": {
+        "viewAll": "Ver todas las colas",
+        "sla": "SLA:",
+        "reviewQueue": "Cola de revisión",
+        "h": "h"
+      }
+    },
+    "financialSnapshot": {
+      "title": "Panorama financiero",
+      "description": "Ingresos mensuales frente a pagos a los creadores",
+      "labels": {
+        "revenue": "Ingresos",
+        "payouts": "Pagos"
+      }
+    },
+    "pipelineBreakdown": {
+      "title": "Tuberías por estado",
+      "description": "Campañas, actuaciones y envíos agrupados por estado actual",
+      "labels": {
+        "campaigns": "Campañas",
+        "gigs": "Gigs",
+        "submissions": "Envíos"
+      }
+    },
+    "platformHealth": {
+      "title": "Plataforma Tendencia Salud",
+      "description": "Usuarios, campañas y envíos en los últimos 6 meses",
+      "labels": {
+        "users": "Usuarios",
+        "campaigns": "Campañas",
+        "submissions": "Envíos"
+      }
+    },
+    "recentActivityBlock": {
+      "title": "Actividad reciente",
+      "description": "Último flujo de eventos de la actividad de notificación",
+      "table": {
+        "eventName": "Nombre del evento",
+        "eventType": "Tipo de evento",
+        "actor": "Actor",
+        "when": "En",
+        "actions": "Acciones"
+      },
+      "states": {
+        "error": "No se puede cargar la actividad reciente.",
+        "empty": "Aún no hay actividad reciente."
+      },
+      "labels": {
+        "system": "Sistema",
+        "unknownEvent": "Evento desconocido",
+        "unknown": "Desconocido",
+        "na": "N/A"
+      },
+      "menu": {
+        "markAsRead": "Marcar como leído",
+        "view": "Ver",
+        "delete": "Borrar"
+      }
+    },
+    "revenueStats": {
+      "title": "Ingresos",
+      "description": "Resumen de ingresos, pagos y beneficios netos",
+      "stats": {
+        "totalRevenue": "Ingresos totales",
+        "netRevenue": "Ingresos netos",
+        "totalPayouts": "Pagos totales"
+      },
+      "labels": {
+        "revenue": "Ingresos",
+        "payouts": "Pagos"
+      },
+      "states": {
+        "error": "No se pueden cargar los datos de ingresos."
+      }
+    },
+    "platformUptime": {
+      "title": "Tiempo de actividad de la plataforma",
+      "description": "Instantánea de la disponibilidad actual del servicio",
+      "labels": {
+        "uptime": "Tiempo de actividad"
+      }
+    },
+    "operationalAlerts": {
+      "title": "Alertas operativas",
+      "description": "Señales del sistema y del flujo de trabajo que pueden requerir intervención"
+    }
   },
   "recentActivity": "Actividad reciente",
   "manageUsers": "Gestionar usuarios",
-  "reviewReports": "Revisar reportes",
-  "noActivity": "No hay actividad reciente",
+  "reviewReports": "Informes de revisión",
+  "noActivity": "Sin actividad reciente",
   "usersPage": {
     "title": "Gestionar usuarios",
     "description": "Ver y gestionar los usuarios del sistema.",
     "columns": {
       "name": "Nombre",
       "email": "Correo electrónico",
-      "role": "Rol",
+      "role": "Papel",
       "status": "Estado",
-      "joined": "Se unió",
+      "joined": "Se unió a",
       "actions": "Acciones"
     }
   },
   "gigsPage": {
-    "title": "Trabajos",
-    "description": "Ver y gestionar todos los trabajos de la plataforma."
+    "title": "Gigs",
+    "description": "Visualiza y gestiona todos los conciertos de la plataforma."
   },
   "invoicesPage": {
     "title": "Facturas",
-    "description": "Ver y gestionar todas las facturas de la plataforma."
+    "description": "Visualice y gestione todas las facturas a través de la plataforma.",
+    "toolbar": {
+      "search": "Buscar facturas..."
+    },
+    "columns": {
+      "invoice": "Factura",
+      "brand": "Marca",
+      "campaign": "Campaña",
+      "issued": "Publicado",
+      "paid": "¿Pagado?",
+      "amount": "Importe",
+      "actions": "Acciones"
+    },
+    "statuses": {
+      "paid": "Pagado",
+      "overdue": "Atrasado",
+      "cancelled": "Cancelado",
+      "draft": "Borrador",
+      "issued": "Publicado",
+      "sent": "Enviado"
+    },
+    "actions": {
+      "view": "Ver",
+      "downloadPdf": "Descargar PDF",
+      "generatingPdf": "Generar PDF...",
+      "cancelInvoice": "Anular factura",
+      "cancelInvoiceDesc": "¿Está seguro de que desea anular esta factura? Esta acción no se puede deshacer.",
+      "cancelling": "Cancelando...",
+      "generatePayment": "Generar pago",
+      "generatePaymentDesc": "Esto marcará la factura como pagada y generará un registro de pago. Esta acción no se puede deshacer.",
+      "generating": "Generar...",
+      "paymentNotes": "Pago efectuado",
+      "notes": "Notas",
+      "paymentSuccess": "Pago generado correctamente",
+      "paymentError": "No se ha podido generar el pago",
+      "updateSuccess": "Factura actualizada correctamente",
+      "updateError": "Error al actualizar la factura",
+      "issueInvoice": "Emitir factura",
+      "issueInvoiceDesc": "Marque esta factura como emitida. Se notificará a la marca.",
+      "issuing": "Emitiendo...",
+      "sendInvoice": "Enviar factura",
+      "sendInvoiceDesc": "Marque esta factura como enviada a la marca.",
+      "sending": "Enviando...",
+      "invoicePaid": "Factura pagada",
+      "invoicePaidDesc": "Marque esta factura como pagada por la marca.",
+      "markAsPaid": "Marcar como pagado",
+      "updating": "Actualizando..."
+    },
+    "detailsSheet": {
+      "invoiceLabel": "Factura",
+      "invoiceDetailsFor": "Detalles de la factura de {number}.",
+      "campaign": "Campaña",
+      "dates": "Fechas",
+      "issued": "Publicado",
+      "due": "Debido",
+      "paid": "Pagado",
+      "created": "Creado",
+      "notes": "Notas",
+      "lineItemsCount": "Partidas ({count})",
+      "noLineItems": "Sin partidas",
+      "overview": "Visión general",
+      "lineItems": "Partidas",
+      "total": "Total",
+      "amountDue": "Importe adeudado",
+      "downloadInvoice": "Descargar factura"
+    }
   },
   "paymentsPage": {
-    "title": "Pagos a creadores",
-    "description": "Ver y gestionar todos los pagos a creadores de la plataforma."
+    "title": "Pagos",
+    "description": "Vea y gestione todos los pagos de los creadores en toda la plataforma.",
+    "toolbar": {
+      "filterPlaceholder": "Filtra los pagos...",
+      "status": "Estado",
+      "dateRangeLabel": "Intervalo de fechas de pago",
+      "dateRangePlaceholder": "Seleccione el intervalo de fechas",
+      "clearDates": "Borrar fechas"
+    },
+    "actionMenu": {
+      "view": "Ver",
+      "confirmPayout": "Confirmar pago",
+      "confirming": "Confirmando...",
+      "confirmDialog": {
+        "title": "Confirmar pago",
+        "description": "¿Está seguro de que desea confirmar este pago? Esto creará un registro de elemento de pago.",
+        "descriptionWithCreator": "¿Está seguro de que desea confirmar este pago para {name}? Esto creará un registro de elemento de pago.",
+        "confirmLabel": "Confirmar pago"
+      },
+      "toasts": {
+        "confirmSuccess": "Pago confirmado con éxito.",
+        "confirmError": "No se ha podido confirmar el pago. Por favor, inténtelo de nuevo.",
+        "missingId": "Falta ID de pago."
+      }
+    },
+    "newBatchPayment": {
+      "title": "Pago de un nuevo lote",
+      "description": "Seleccione un creador y sus elementos de pago pendientes.",
+      "triggerButton": "Pago de un nuevo lote",
+      "creatorLabel": "Creador",
+      "creatorPlaceholder": "Seleccione un creador...",
+      "pendingItems": "Asuntos pendientes",
+      "deselectAll": "Deseleccionar todo",
+      "selectAll": "Seleccionar todo",
+      "noItems": "No hay partidas de pago pendientes para este creador.",
+      "paymentMethodLabel": "Forma de pago",
+      "paymentMethodPlaceholder": "Por ejemplo, transferencia bancaria, PayPal...",
+      "notesLabel": "Notas",
+      "notesPlaceholder": "Notas opcionales...",
+      "noItemsSelected": "No hay artículos seleccionados",
+      "itemUnit": "{count, plural, =1 {item} other {items}}",
+      "creating": "Crear...",
+      "createPayment": "Crear pago",
+      "toasts": {
+        "createSuccess": "Pago por lotes creado con éxito.",
+        "createSuccessDesc": "El pago por lotes se ha creado correctamente.",
+        "createError": "No se ha podido crear el pago por lotes. Inténtelo de nuevo.",
+        "selectItem": "Seleccione al menos un elemento de pago."
+      }
+    }
+  },
+  "brandsPage": {
+    "title": "Marcas",
+    "description": "Gestión y seguimiento de todas las marcas en la plataforma"
+  },
+  "campaignsPage": {
+    "title": "Campañas",
+    "description": "Ver y gestionar todas las campañas en la plataforma",
+    "toolbar": {
+      "search": "Campaña de búsqueda...",
+      "filterByDate": "Filtrar por fecha",
+      "createdDate": "Fecha de creación",
+      "updatedDate": "Fecha de actualización",
+      "dateRange": "Intervalo de fechas",
+      "selectDateRange": "Seleccione el intervalo de fechas",
+      "clearDates": "Borrar fechas"
+    }
+  },
+  "creatorsPage": {
+    "title": "Creadores",
+    "description": "Gestionar creadores de plataformas"
   },
   "campaignOverview": {
     "workflow": {
@@ -42,14 +437,14 @@
       "description": "Solicitudes, envíos e invitaciones",
       "tabs": {
         "submissions": "Envíos",
-        "applications": "Solicitudes",
+        "applications": "Aplicaciones",
         "invitations": "Invitaciones"
       },
       "states": {
-        "submissionsError": "No se pudieron cargar los envíos.",
-        "applicationsError": "No se pudieron cargar las solicitudes.",
-        "invitationsError": "No se pudieron cargar las invitaciones.",
-        "noSubmissions": "Aún no hay envíos.",
+        "submissionsError": "No se pueden cargar los envíos.",
+        "applicationsError": "No se pueden cargar las aplicaciones.",
+        "invitationsError": "No se pueden cargar las invitaciones.",
+        "noSubmissions": "Aún no se han presentado propuestas.",
         "noApplications": "Aún no hay solicitudes.",
         "noInvitations": "Aún no hay invitaciones."
       },
@@ -61,7 +456,7 @@
         "unknownApplicant": "Solicitante desconocido",
         "campaignApplication": "Solicitud de campaña",
         "creator": "Creador",
-        "campaignInvitation": "Invitación de campaña",
+        "campaignInvitation": "Invitación a la campaña",
         "na": "N/A"
       }
     },
@@ -72,31 +467,427 @@
         "created": "Creado",
         "updated": "Actualizado",
         "format": "Formato",
-        "multiVideo": "Multivídeo",
+        "multiVideo": "Vídeo múltiple",
         "brand": "Marca",
         "na": "N/A"
       },
       "values": {
         "allowed": "Permitido",
-        "singleVideo": "Vídeo único"
+        "singleVideo": "Vídeo individual"
       }
     },
     "assets": {
-      "title": "Recursos",
-      "description": "Imágenes y documentos de la campaña",
+      "title": "Activos",
+      "description": "Imágenes y documentos de campaña",
       "tabs": {
         "images": "Imágenes ({count})",
-        "documents": "Documentos ({count})"
+        "documents": "Documentos ({count})",
+        "videos": "Vídeos ({count})"
       },
       "states": {
-        "noImages": "Aún no hay imágenes cargadas.",
-        "noDocuments": "Aún no hay documentos adjuntos.",
-        "noVideos": "Aún no hay vídeos de muestra adjuntos."
+        "noImages": "No se han cargado imágenes.",
+        "noDocuments": "No se adjuntan documentos.",
+        "noVideos": "No se adjuntan vídeos de muestra."
       },
       "labels": {
-        "previewAsset": "Vista previa del recurso {index}",
-        "assetAlt": "Recurso de campaña {index}"
+        "previewAsset": "Vista previa del activo de campaña {index}",
+        "assetAlt": "Activo de la campaña {index}"
       }
     }
+  },
+  "brandDetails": {
+    "description": "Información detallada sobre la marca",
+    "companyDetails": "Datos de la empresa",
+    "contactInfo": "Información de contacto",
+    "systemDetails": "Detalles del sistema",
+    "brandId": "Marca ID",
+    "userId": "ID de usuario",
+    "category": "Categoría",
+    "companySize": "Tamaño de la empresa",
+    "vatId": "CIF",
+    "regNumber": "Reg. Número",
+    "descriptionLabel": "Descripción"
+  },
+  "brandStatus": {
+    "title": "Actualizar el estado de la marca",
+    "description": "Revise el perfil de la marca y actualice su estado.",
+    "statusLabel": "Estado",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "totalRejection": "Rechazo total",
+    "successToast": "Estado de la marca actualizado correctamente",
+    "errorToast": "No se ha podido actualizar el estado de la marca",
+    "missingId": "Falta el identificador de marca"
+  },
+  "creatorDetails": {
+    "tabOverview": "Visión general",
+    "tabBio": "Bio",
+    "tabBank": "Datos bancarios",
+    "tabUser": "Usuario",
+    "contactPersonal": "Contacto e información personal",
+    "systemDetails": "Detalles del sistema",
+    "creatorId": "Creador ID",
+    "userId": "ID de usuario",
+    "applicationVideo": "Vídeo de aplicación",
+    "bankAccount": "Cuenta bancaria",
+    "accountName": "Nombre de la cuenta",
+    "accountNumber": "Número de cuenta",
+    "bankName": "Nombre del banco",
+    "routingNumber": "Número de ruta",
+    "taxDetails": "Datos fiscales",
+    "taxCountry": "País fiscal",
+    "taxId": "NIF",
+    "accountSection": "Cuenta",
+    "username": "Nombre de usuario",
+    "emailVerified": "Correo electrónico verificado",
+    "emailUnverified": "Correo electrónico no verificado",
+    "systemSection": "Sistema",
+    "createdLabel": "Creado",
+    "updatedLabel": "Actualizado"
+  },
+  "creatorStatus": {
+    "title": "Actualizar el estado del creador",
+    "description": "Revisa el perfil del creador y actualiza su estado.",
+    "statusLabel": "Estado",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "totalRejection": "Rechazo total",
+    "successToast": "Estado del creador actualizado correctamente",
+    "errorToast": "Error al actualizar el estado del creador",
+    "missingId": "Falta el ID de creador",
+    "confirmApproveTitle": "¿Aprobar perfil de creador?",
+    "confirmApproveDesc": "El perfil de {name} será aprobado y se le notificará.",
+    "confirmRejectTitle": "¿Rechazar el perfil de creador?",
+    "confirmRejectDesc": "El perfil de {name} será rechazado y se le notificará.",
+    "commentLabel": "Comentario",
+    "commentPlaceholder": "Añadir un comentario",
+    "approving": "Aprobando...",
+    "rejecting": "Rechazando...",
+    "approvedToast": "{name} aprobado con éxito",
+    "rejectedToast": "{name} rechazado",
+    "idCopied": "ID copiado en el portapapeles",
+    "copyId": "Copiar ID",
+    "thisCreator": "Este creador",
+    "reviewProfile": "Revisar perfil",
+    "deleteCreator": "Borrar creador"
+  },
+  "userDetails": {
+    "description": "Información detallada sobre el usuario",
+    "accountSection": "Cuenta",
+    "systemDetails": "Detalles del sistema",
+    "contactSection": "Póngase en contacto con",
+    "username": "Nombre de usuario",
+    "accountDetails": "Detalles de la cuenta",
+    "emailVerified": "Correo electrónico verificado",
+    "emailUnverified": "Correo electrónico no verificado",
+    "userId": "ID de usuario",
+    "verification": "Verificación",
+    "lastUpdated": "Última actualización"
+  },
+  "userStatus": {
+    "title": "Actualizar el estado del usuario",
+    "description": "Revisar el perfil del usuario y actualizar su estado.",
+    "statusLabel": "Estado",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "successToast": "Estado de usuario actualizado correctamente",
+    "errorToast": "Error al actualizar el estado del usuario",
+    "missingId": "Falta el ID de usuario"
+  },
+  "createUser": {
+    "title": "Añadir usuario",
+    "description": "Cree una nueva cuenta de usuario. Rellene los siguientes datos.",
+    "firstNameLabel": "Nombre",
+    "firstNamePlaceholder": "John",
+    "lastNameLabel": "Apellido",
+    "lastNamePlaceholder": "Doe",
+    "usernameLabel": "Nombre de usuario",
+    "usernamePlaceholder": "johndoe",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "john@example.com",
+    "passwordLabel": "Contraseña",
+    "verifyPasswordLabel": "Verificar contraseña",
+    "create": "Crear usuario",
+    "successToast": "Usuario creado correctamente",
+    "errorToast": "Error al crear usuario",
+    "validation": {
+      "firstNameRequired": "El nombre es obligatorio",
+      "lastNameRequired": "Apellido obligatorio",
+      "usernameMin": "El nombre de usuario debe tener al menos 3 caracteres",
+      "invalidEmail": "Dirección de correo electrónico no válida",
+      "passwordMin": "La contraseña debe tener al menos 8 caracteres",
+      "verifyPasswordMin": "La contraseña de verificación debe tener al menos 8 caracteres",
+      "passwordsMismatch": "Las contraseñas no coinciden"
+    }
+  },
+  "filters": {
+    "searchCreators": "Creadores de filtros...",
+    "searchBrands": "Filtrar marcas...",
+    "searchUsers": "Filtrar usuarios...",
+    "searchGigs": "Filtra los conciertos...",
+    "status": "Estado",
+    "country": "País",
+    "sex": "Sexo",
+    "size": "Talla",
+    "userType": "Tipo de usuario",
+    "age": "Edad",
+    "min": "Min",
+    "max": "Max",
+    "apply": "Solicitar",
+    "clear": "Claro",
+    "selectAll": "Seleccionar todo",
+    "joined": "Se unió a",
+    "noCreators": "No se han encontrado creadores.",
+    "noBrands": "No se han encontrado marcas.",
+    "name": "Nombre",
+    "location": "Ciudad/País",
+    "actions": "Acciones",
+    "view": "Ver",
+    "search": "Filtrar facturas...",
+    "filterByDate": "Filtrar por fecha",
+    "issueDate": "Fecha de publicación",
+    "issuedDate": "Fecha de emisión",
+    "dueDate": "Fecha de vencimiento",
+    "dateRange": "Intervalo de fechas",
+    "selectDateRange": "Seleccione el intervalo de fechas",
+    "clearDates": "Borrar fechas",
+    "startDate": "Fecha de inicio",
+    "deadline": "Plazo",
+    "open": "Abrir",
+    "in_progress": "En curso",
+    "completed": "Completado",
+    "cancelled": "Cancelado",
+    "archived": "Archivado",
+    "pending": "Pendiente",
+    "rejected": "Rechazado",
+    "approved": "Aprobado",
+    "brand_name": "Marca",
+    "invoice_number": "Número de factura",
+    "amount": "Importe",
+    "issue_date": "Fecha de publicación",
+    "issued_date": "Fecha de emisión",
+    "due_date": "Fecha de vencimiento",
+    "creator_name": "Nombre del creador",
+    "total": "Total"
+  },
+  "creatorDashboard": {
+    "title": "Panel de control del creador",
+    "description": "Visión general del rendimiento de los creadores y detalles",
+    "failedLoad": "Error al cargar el perfil del creador",
+    "creatorNotFound": "Creador no encontrado",
+    "metrics": {
+      "totalEarned": "Total ganado",
+      "avgPerGig": "Media por Gig",
+      "total": "Total",
+      "paid": "Pagado",
+      "included": "Incluye",
+      "pending": "Pendiente"
+    },
+    "blocks": {
+      "financials": "Panorama financiero",
+      "gigMetrics": "Métricas Gig",
+      "recentGigs": "Actuaciones recientes",
+      "bio": "Biografía",
+      "portfolio": "Cartera",
+      "social": "Redes sociales",
+      "video": "Vídeo de aplicación"
+    }
+  },
+  "dataTable": {},
+  "activeGigsView": {},
+  "availableGigsView": {},
+  "createSubmissionSheet": {},
+  "creatorBreadcrumbs": {},
+  "fileCardVideoSubmission": {},
+  "invitationActionMenu": {},
+  "invitationCard": {},
+  "invitationsSkeleton": {},
+  "invitationsView": {},
+  "myGigsView": {},
+  "videoDropzone": {},
+  "brandActionMenu": {
+    "ThisActionCannot": "? Esta acción no se puede deshacer.",
+    "areYouSureYou": "¿Estás seguro de que quieres borrar",
+    "openMenu": "Abrir menú"
+  },
+  "brandCard": {},
+  "brandDetailsSheet": {
+    "company": "Empresa",
+    "overview": "Visión general",
+    "detailedInformationAboutBrand": "Información detallada sobre la marca"
+  },
+  "brandStatusBadge": {},
+  "brandStatusDialog": {
+    "updateStatus": "Estado de actualización",
+    "cancel": "Cancelar",
+    "reviewTheBrandsProfile": "Revise el perfil de la marca y actualice su estado.",
+    "updateBrandStatus": "Actualizar el estado de la marca"
+  },
+  "brandsCardsView": {},
+  "brandsColumns": {},
+  "brandsTableToolbar": {
+    "selectAll": "Seleccionar todo"
+  },
+  "brandsTableView": {},
+  "brandsTable": {},
+  "brandsView": {},
+  "creatorActionMenu": {},
+  "creatorCard": {},
+  "creatorCategories": {},
+  "creatorDetailsSheet": {},
+  "creatorInfoBlock": {
+    "yo": "y/o",
+    "preferredCategories": "Categorías preferidas"
+  },
+  "creatorSocialLinks": {},
+  "creatorStatusBadge": {},
+  "creatorStatusDialog": {},
+  "creatorsColumns": {},
+  "creatorsTableToolbar": {},
+  "creatorsTableView": {},
+  "creatorsTable": {},
+  "creatorsView": {},
+  "emptyApplications": {},
+  "emptyGigs": {},
+  "emptyInvitations": {},
+  "emptyInvoices": {},
+  "emptyPayments": {},
+  "emptyState": {},
+  "emptySubmissions": {},
+  "createUserSheet": {},
+  "userActionMenu": {
+    "failedToSendVerification": "No se ha podido enviar el correo electrónico de verificación"
+  },
+  "userCard": {},
+  "userDetailsSheet": {
+    "system": "Sistema",
+    "account": "Cuenta",
+    "detailedInformationAboutUser": "Información detallada sobre el usuario",
+    "na": "N/A",
+    "unknown": "Desconocido",
+    "emailVerified": "Correo electrónico verificado",
+    "emailUnverified": "Correo electrónico no verificado",
+    "contact": "Póngase en contacto con",
+    "email": "Correo electrónico",
+    "emailCopied": "Copia de correo electrónico",
+    "username": "Nombre de usuario",
+    "usernameCopied": "Nombre de usuario copiado",
+    "type": "Tipo",
+    "status": "Estado",
+    "yes": "Sí",
+    "no": "No",
+    "userIdCopied": "ID de usuario copiado",
+    "joined": "Se unió a",
+    "lastUpdated": "Última actualización",
+    "userId": "ID de usuario",
+    "accountDetails": "Detalles de la cuenta",
+    "systemDetails": "Detalles del sistema"
+  },
+  "userInfoBlock": {},
+  "userStatusBadge": {},
+  "userStatusDialog": {},
+  "usersColumns": {},
+  "usersTableToolbar": {},
+  "usersTableView": {
+    "noUsersFound": "No se han encontrado usuarios."
+  },
+  "usersTable": {},
+  "usersView": {},
+  "brandDashboard": {
+    "totalSpend": "Gasto total",
+    "avgGigSpend": "Gasto medio por Gigante",
+    "total": "Total",
+    "active": "Activo",
+    "finished": "Terminado",
+    "draft": "Borrador",
+    "failedToLoad": "No se ha podido cargar el perfil de la marca",
+    "brandNotFound": "Marca no encontrada",
+    "brandDashboard": "Cuadro de mandos de la marca",
+    "overview": "Visión general del rendimiento de la marca y detalles",
+    "brands": "Marcas"
+  },
+  "brandCampaignMetricsBlock": {
+    "campaignLifecycleOverview": "Resumen del ciclo de vida de la campaña",
+    "campaigns": "Campañas"
+  },
+  "brandCampaignsTableBlock": {
+    "created": "Creado:",
+    "noCampaignsYet": "Todavía no hay campañas",
+    "loadingRecentCampaigns": "Cargando campañas recientes...",
+    "loadingCampaignStats": "Cargando estadísticas de campaña...",
+    "recentCampaigns": "Campañas recientes",
+    "stats": "Estadísticas",
+    "brandCampaignActivityAnd": "Actividad y estado de las campañas de marca",
+    "campaigns": "Campañas",
+    "untitledCampaign": "Campaña sin título"
+  },
+  "brandContactBlock": {
+    "address": "Dirección",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "contactAddress": "Contacto y dirección"
+  },
+  "brandFinancialsBlock": {
+    "spendPerformanceForThis": "Rendimiento del gasto para esta marca",
+    "financials": "Finanzas"
+  },
+  "brandProfileBlock": {
+    "user": "Usuario",
+    "contact": "Póngase en contacto con",
+    "overview": "Visión general",
+    "failedToLoadUser": "Error al cargar los datos del usuario",
+    "identity": "Identidad",
+    "emailVerified": "Correo electrónico verificado",
+    "emailUnverified": "Correo electrónico no verificado",
+    "name": "Nombre",
+    "username": "Nombre de usuario",
+    "usernameCopied": "Nombre de usuario copiado",
+    "type": "Tipo",
+    "email": "Correo electrónico",
+    "system": "Sistema",
+    "userId": "ID de usuario",
+    "userIdCopied": "ID de usuario copiado",
+    "joined": "Se unió a",
+    "updated": "Actualizado",
+    "noContactEmail": "No hay correo electrónico de contacto",
+    "details": "Detalles",
+    "category": "Categoría",
+    "location": "Ubicación",
+    "country": "País",
+    "companySize": "Tamaño de la empresa",
+    "registered": "Registrado",
+    "vatId": "CIF",
+    "phone": "Teléfono",
+    "website": "Página web",
+    "addressTitle": "Dirección",
+    "noAddress": "No consta ninguna dirección",
+    "noLinkedUser": "Sin cuenta de usuario vinculada",
+    "na": "N/A"
+  },
+  "brandRecentCampaignsBlock": {
+    "noCampaignsYet": "Todavía no hay campañas.",
+    "unableToLoadRecent": "No se pueden cargar las campañas recientes.",
+    "latestCampaignsForThis": "Últimas campañas de esta marca",
+    "recentCampaigns": "Campañas recientes"
+  },
+  "brandRecentSubmissionsBlock": {
+    "unableToLoadRecent": "No se pueden cargar los envíos recientes.",
+    "latestVideoSubmissionsAcross": "Últimos vídeos enviados a las campañas",
+    "recentSubmissions": "Envíos recientes"
+  },
+  "creatorBioBlock": {},
+  "creatorFinancialsBlock": {},
+  "creatorGigMetricsBlock": {},
+  "creatorPortfolioBlock": {},
+  "creatorProfileBlock": {},
+  "creatorRecentGigsBlock": {},
+  "creatorSocialBlock": {},
+  "creatorVideoBlock": {},
+  "adminCreatorDetailsSheet": {},
+  "brandCreatorDetailsSheet": {},
+  "creatorDetailsShared": {},
+  "creatorSheetHeader": {
+    "detailedInformationAboutCreator": "Información detallada sobre el creador",
+    "yo": "y/o"
   }
 }

@@ -24,6 +24,7 @@ import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 import { BrandDetailsSheet } from './brand-details-sheet';
+import { useTranslations } from 'next-intl';
 
 const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -87,6 +88,9 @@ export function BrandsTable( {
     return Array.from( set );
   }, [ brandsData ] );
 
+  const tAdmin = useTranslations( 'dashboard.admin' );
+  const tCommon = useTranslations( 'dashboard.common' );
+
   const columns = React.useMemo(
     () =>
       getColumns( {
@@ -94,13 +98,18 @@ export function BrandsTable( {
           setSelectedBrand( brand );
           setIsSheetOpen( true );
         },
+        tAdmin,
+        tCommon,
       } ),
-    []
+    [ tAdmin, tCommon ]
   );
 
   const table = useReactTable( {
     data: brandsData || [],
     columns,
+    initialState: {
+      columnPinning: { left: [ 'select', 'name' ] },
+    },
     globalFilterFn: brandGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -138,7 +147,7 @@ export function BrandsTable( {
             <DataTablePagination table={ table } />
           </div>
           <BrandDetailsSheet
-            brand={ selectedBrand }
+            brand={ selectedBrand! }
             open={ isSheetOpen }
             onOpenChange={ setIsSheetOpen }
           />

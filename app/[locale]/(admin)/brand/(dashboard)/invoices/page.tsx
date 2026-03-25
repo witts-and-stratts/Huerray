@@ -5,8 +5,10 @@ import { SubHeader } from '@/components/subheader';
 import { InvoicesTable } from '@/components/invoices/invoices-table';
 import { useInvoices } from '@/lib/api/hooks/invoices';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 export default function InvoicesPage() {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const { data, isLoading } = useInvoices();
 
   const invoices = React.useMemo( (): ModelsInvoiceResponse[] => {
@@ -16,8 +18,8 @@ export default function InvoicesPage() {
   return (
     <>
       <SubHeader
-        title="Invoices"
-        description="View and download your invoices."
+        title={ t( 'title' ) }
+        description={ t( 'description' ) }
       />
       <InvoicesTable data={ invoices } isLoading={ isLoading } />
     </>

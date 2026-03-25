@@ -1,26 +1,239 @@
 {
-  "welcome": "Welcome back, Creator!",
+  "welcome": "Welcome back, {name}!",
   "overview": "Here's your gig overview",
-  "stats": {
-    "activeGigs": "Active Gigs",
-    "completedGigs": "Completed Gigs",
-    "totalEarnings": "Total Earnings",
-    "avgRating": "Average Rating",
-    "fromLastMonth": "from last month"
-  },
-  "recentGigs": "Recent Gigs",
-  "browseGigs": "Browse Gigs",
-  "updatePortfolio": "Update Portfolio",
-  "noGigs": "No recent gigs",
-  "gigsPage": {
-    "title": "Available Gigs",
-    "description": "Browse and apply for new opportunities.",
-    "apply": "Apply Now",
-    "budget": "Budget",
-    "deadline": "Deadline"
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Track invitations, gigs, submissions, and projected earnings.",
+    "browseGigs": "Browse Gigs",
+    "viewMyGigs": "View My Gigs",
+    "creatorFallback": "Creator"
   },
   "earningsPage": {
     "title": "Earnings",
     "description": "Track your payment history and earnings from completed gigs."
+  },
+  "breadcrumbs": {
+    "dashboard": "Dashboard",
+    "gigs": "Gigs",
+    "active": "Active",
+    "invitations": "Invitations",
+    "notifications": "Notifications",
+    "earnings": "Earnings",
+    "portfolio": "Portfolio",
+    "settings": "Settings",
+    "completeProfile": "Complete Profile",
+    "account": "Account",
+    "editBasicInfo": "Edit Basic Information",
+    "profile": "Profile",
+    "bio": "Biography",
+    "socialMedia": "Social Media",
+    "bankDetails": "Bank Details",
+    "loading": "Loading..."
+  },
+  "common": {
+    "details": "Details",
+    "viewAllMyGigs": "View all my gigs",
+    "viewAllEarnings": "View all earnings",
+    "viewAllInvitations": "View all invitations",
+    "viewAllSubmissions": "View all submissions",
+    "untitledGig": "Untitled gig",
+    "unknownBrand": "Unknown brand",
+    "reward": "Reward",
+    "gigCost": "Gig Cost",
+    "deadline": "Deadline",
+    "endsOn": "Ends {date}",
+    "noActiveGigs": "No active gigs yet.",
+    "noInvitations": "No invitations yet.",
+    "noEarnings": "No earnings yet. Complete gigs to start earning!",
+    "na": "N/A",
+    "invitedCreator": "Invited creator",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Failed to load {name}",
+    "somethingWentWrong": "Something went wrong",
+    "product": "Product",
+    "srGigDetails": "Details for gig: {title}",
+    "applicationPending": "Application Pending",
+    "applying": "Applying...",
+    "applyForGig": "Apply for Gig",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Details",
+      "campaign": "Campaign",
+      "mySubmissions": "My Submissions",
+      "submissions": "Submissions",
+      "overview": "Overview"
+    },
+    "toasts": {
+      "appliedSuccess": "Application submitted successfully!",
+      "appliedError": "Failed to submit application. Please try again."
+    }
+  },
+  "kpi": {
+    "gigsCompleted": "Gigs Completed",
+    "gigsCompletedCaption": "Total gigs you've successfully completed",
+    "totalEarned": "Total Earned",
+    "totalEarnedCaption": "Lifetime earnings across all gigs",
+    "approvalRate": "Approval Rate",
+    "approvalRateCaption": "Percentage of videos approved by brands",
+    "successRate": "Success Rate",
+    "successRateCaption": "Applications that converted to active gigs"
+  },
+  "activeGigs": {
+    "title": "Active Gigs",
+    "description": "Current commitments and next deadlines"
+  },
+  "invitations": {
+    "title": "Invitations",
+    "description": "Manage your gig invitations from brands.",
+    "latestFromBrands": "Latest invitations from brands",
+    "noInvitationsYet": "No invitations yet",
+    "noInvitationsDesc": "When brands invite you to their gigs, they will appear here.",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "unknown": "Unknown"
+    },
+    "actions": {
+      "view": "View Invitation",
+      "accept": "Accept Invitation",
+      "decline": "Decline Invitation",
+      "reject": "Reject Invitation",
+      "createSubmission": "Create Submission",
+      "openMenu": "Open menu",
+      "viewSubmissions": "View Submissions"
+    },
+    "dialogs": {
+      "acceptTitle": "Accept Invitation",
+      "acceptDesc": "Are you sure you want to accept this invitation? This will notify the brand and you can start working on the gig.",
+      "acceptCommentPlaceholder": "Add a comment for this approval",
+      "accepting": "Accepting...",
+      "declineTitle": "Decline Invitation",
+      "declineDesc": "Are you sure you want to decline this invitation? This action cannot be undone.",
+      "declineCommentPlaceholder": "Explain why you're declining",
+      "declining": "Declining...",
+      "rejectTitle": "Reject Invitation",
+      "rejectDesc": "Are you sure you want to reject this invitation? This action cannot be undone."
+    },
+    "toasts": {
+      "accepted": "Invitation accepted successfully",
+      "declined": "Invitation declined successfully",
+      "error": "Failed to update invitation status"
+    }
+  },
+  "submissions": {
+    "title": "Recent Submissions",
+    "description": "Your latest delivered videos",
+    "noSubmissions": "No submissions yet",
+    "noSubmissionsDesc": "When you create submissions for this gig, they will appear here.",
+    "createTitle": "Create Submission",
+    "createDesc": "Upload your video and add details for this gig.",
+    "details": "Submission Details",
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "Give your submission a title",
+      "notes": "Notes",
+      "notesPlaceholder": "Add any notes about your submission...",
+      "submit": "Submit Video",
+      "submitting": "Submitting...",
+      "dropzoneTitle": "Drag & drop your video here",
+      "dropzoneDesc": "or click to browse from your computer",
+      "dropzoneSpecs": "Supports MP4, MOV, WEBM (Max 500MB)"
+    },
+    "toasts": {
+      "success": "Submission created successfully",
+      "error": "Failed to create submission",
+      "missingGigId": "Gig ID is missing",
+      "uploading": "Please wait for the video to finish uploading"
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "videoRequired": "Video file is required",
+      "maxSize": "Max file size is 500MB",
+      "invalidFormat": "Only .mp4, .mov, and .webm formats are supported"
+    }
+  },
+  "earnings": {
+    "title": "Earnings",
+    "description": "Track your payment history and earnings from completed gigs.",
+    "recentTotal": "Recent Total"
+  },
+  "availableGigs": {
+    "title": "Available Gigs",
+    "description": "Explore and apply to new opportunities matched to your profile."
+  },
+  "myGigs": {
+    "title": "Gigs",
+    "description": "All gigs you have participated in.",
+    "tabs": {
+      "all": "All Gigs",
+      "available": "Available Gigs",
+      "active": "Active Gigs"
+    }
+  },
+  "requirements": {
+    "title": "Creator Requirements",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "ageRange": "Age range",
+    "any": "Any",
+    "compensation": "Compensation",
+    "guidelines": "Content Guidelines",
+    "ambience": "Ambience",
+    "requirements": "Requirements"
+  },
+  "campaign": {
+    "aboutTitle": "About this campaign",
+    "dosDonts": "Do's & Don'ts",
+    "dos": "Do's",
+    "donts": "Don'ts",
+    "direction": "Direction",
+    "toneOfVoice": "Tone of voice",
+    "keywords": "Keywords",
+    "noKeywords": "No keywords defined.",
+    "campaignBriefTitle": "Campaign Brief",
+    "campaignBriefDesc": "Core details and messaging requirements",
+    "description": "Description",
+    "category": "Category",
+    "assets": "Assets",
+    "images": "Images",
+    "documents": "Documents",
+    "videos": "Videos",
+    "task": "Task",
+    "recordVideos": "Record {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Duration: {count} seconds"
+  },
+  "payments": {
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "processing": "Processing",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "table": {
+      "payment": "Payment",
+      "creator": "Creator",
+      "date": "Date",
+      "method": "Method",
+      "items": "Items",
+      "paid": "Paid?",
+      "amount": "Amount",
+      "actions": "Actions",
+      "noEarnings": "No earnings yet",
+      "noEarningsFiltered": "No earnings match your current filters.",
+      "noEarningsDesc": "Your payments from completed gigs will appear here.",
+      "searchPlaceholder": "Search earnings...",
+      "clearFilters": "Clear Filters"
+    },
+    "details": {
+      "paymentId": "Payment ID",
+      "accessibilityDesc": "Payment details for {reference}.",
+      "created": "Created",
+      "reference": "Reference",
+      "notes": "Notes",
+      "totalAmount": "Total amount"
+    }
   }
 }

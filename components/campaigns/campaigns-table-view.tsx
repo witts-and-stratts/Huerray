@@ -14,12 +14,12 @@ import {
 } from '@tanstack/react-table';
 import { AnimatePresence } from 'motion/react';
 import { MotionTableRow } from '../dashboard-ui/motion-table';
-import { ModelCampaign } from './types';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 export function CamapignsTableView( {
   table,
 }: {
-  table: TanstackTable<ModelCampaign>;
+  table: TanstackTable<ModelsCampaignResponse>;
 } ) {
   return <div className='border border-border rounded-lg overflow-hidden'>
     <Table className='overflow-auto'>

@@ -51,7 +51,7 @@ export default function CreatorBankSettingsPage() {
     form.setFieldValue( 'bankAccountNumber', bankDetails.bank_account_number || '' );
     form.setFieldValue( 'bankRoutingNumber', bankDetails.bank_routing_number || '' );
     form.setFieldValue( 'taxId', bankDetails.tax_id || '' );
-    form.setFieldValue( 'taxCountry', bankDetails.tax_country || '' );
+    form.setFieldValue( 'taxCountry', bankDetails.tax_residence_country || '' );
     form.setFieldValue( 'bankAccountName', bankDetails.bank_account_name || '' );
     form.setFieldValue( 'bankAddress', bankDetails.bank_address || '' );
   }, [ bankDetails ] );

@@ -4,28 +4,27 @@ import { ActionMenu, MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
-import { useDeleteCampaign, useReplicateCampaign, useAdminCampaignApproval, useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
-import { useCreateInvoice } from "@/lib/api/hooks/invoices";
+import { ModelsCampaignResponse } from "@/lib/api/generated";
 import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsCampaignStatusUpdateRequestCampaignStatusEnum, UtilsCampaignStatus } from "@/lib/api/generated/models";
-import { MoreVertical } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { CampaignRenameDialog } from "./campaign-rename-dialog";
-import { CampaignDecisionDialog } from "./campaign-decision-dialog";
-import { toast } from "sonner";
-import React, { ReactNode } from "react";
-import { ModelCampaign } from "./types";
+import { useAdminCampaignApproval, useDeleteCampaign, useReplicateCampaign, useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
+import { useCreateInvoice } from "@/lib/api/hooks/invoices";
 import { ApiError } from "@/lib/api/hooks/types";
-import { SentenceCase } from "../text-case";
 import { cn } from "@/lib/dashboard-utils";
 import { useBasePath } from "@/lib/providers/path-provider";
+import { MoreVertical } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { ReactNode } from "react";
+import { toast } from "sonner";
+import { SentenceCase } from "../text-case";
+import { CampaignDecisionDialog } from "./campaign-decision-dialog";
+import { CampaignRenameDialog } from "./campaign-rename-dialog";
 
 interface CampaignActionMenuProps {
-  campaign: ModelCampaign;
+  campaign: ModelsCampaignResponse;
   className?: string;
   trigger?: ReactNode;
   align?: "center" | "start" | "end";
-  extraActions?: MenuAction<ModelCampaign>[];
+  extraActions?: MenuAction<ModelsCampaignResponse>[];
   hideViewDetails?: boolean;
 }
 
@@ -212,7 +211,7 @@ export function CampaignActionMenu( {
   const isCompleted = campaign.campaign_status === 'completed';
   const campaignStatus = campaign.campaign_status;
 
-  const defaultActions: MenuAction<ModelCampaign>[] = [
+  const defaultActions: MenuAction<ModelsCampaignResponse>[] = [
     {
       label: "View Details",
       href: `${ basePath }/campaigns/${ campaign.id }`,

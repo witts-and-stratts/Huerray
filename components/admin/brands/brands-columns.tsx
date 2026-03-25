@@ -9,7 +9,8 @@ import { getCountryFlag } from "@/lib/country-flags";
 import { cn } from "@/lib/dashboard-utils";
 import { imgpresets } from "@/lib/utils/imgproxy";
 import { ColumnDef, Row } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { BrandActionMenu } from "./brand-action-menu";
 import { BrandStatusBadge } from "./brand-status-badge";
@@ -18,6 +19,8 @@ import { TBadge, THead } from "../data-table";
 
 interface GetColumnsProps {
   onViewDetails: ( brand: Brand ) => void;
+  tAdmin?: any;
+  tCommon?: any;
 }
 
 function BrandInfoBlock( { brand }: { brand: Brand; } ) {
@@ -48,12 +51,13 @@ const BrandActionsCell = ( {
   onViewDetails: ( brand: Brand ) => void;
   className?: string;
 } ) => {
+  const t = useTranslations( 'dashboard.common' );
   const brand = row.original;
   return (
     <div className={ cn( "flex justify-end items-center gap-2", className ) }>
       <ButtonGroup className="flex justify-end">
         <Button variant="outline" size="sm" className="font-regular" onClick={ () => onViewDetails( brand ) }>
-          View
+          { t( 'view' ) }
         </Button>
         <BrandActionMenu
           brand={ brand }
@@ -69,9 +73,10 @@ const BrandActionsCell = ( {
   );
 };
 
-export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Brand>[] => [
+export const getColumns = ( { onViewDetails, tAdmin, tCommon }: GetColumnsProps ): ColumnDef<Brand>[] => [
   {
     id: "select",
+    size: 24,
     header: ( { table } ) => (
       <Checkbox
         checked={ table.getIsAllPageRowsSelected() }
@@ -94,7 +99,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Bran
     id: "name",
     accessorFn: ( row ) => row.name,
     header: ( { column } ) => (
-      <THead column={ column } title="Brand" className="pl-4" />
+      <THead column={ column } title={ tAdmin ? tAdmin( 'filters.name' ) : 'Brand' } className="pl-4" />
     ),
     cell: ( { row } ) => (
       <div className="pl-4 py-0">
@@ -104,7 +109,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Bran
   },
   {
     accessorKey: "category",
-    header: () => <THead title="Category" shouldSort={ false } />,
+    header: () => <THead title={ tAdmin ? tAdmin( 'brandDetails.category' ) : 'Category' } shouldSort={ false } />,
     cell: ( { row } ) => {
       const category = row.getValue( "category" ) as string;
       if ( !category ) return <div>-</div>;
@@ -113,7 +118,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Bran
   },
   {
     accessorKey: "company_size",
-    header: ( { column } ) => <THead column={ column } title="Size" />,
+    header: ( { column } ) => <THead column={ column } title={ tAdmin ? tAdmin( 'brandDetails.companySize' ) : 'Size' } />,
     cell: ( { row } ) => {
       const size = row.getValue( "company_size" ) as string;
       if ( !size ) return <div>-</div>;

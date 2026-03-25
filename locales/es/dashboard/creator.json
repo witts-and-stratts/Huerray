@@ -1,19 +1,239 @@
 {
-  "welcome": "¡Bienvenido de vuelta, Creador!",
-  "overview": "Aquí está el resumen de tus trabajos",
-  "stats": {
-    "activeGigs": "Trabajos activos",
-    "completedGigs": "Trabajos completados",
-    "totalEarnings": "Ganancias totales",
-    "avgRating": "Calificación promedio",
-    "fromLastMonth": "respecto al mes pasado"
+  "welcome": "¡Bienvenido de nuevo, {name}!",
+  "overview": "Aquí tienes un resumen del concierto",
+  "dashboard": {
+    "title": "Cuadro de mandos",
+    "description": "Realice un seguimiento de las invitaciones, las actuaciones, los envíos y los ingresos previstos.",
+    "browseGigs": "Buscar conciertos",
+    "viewMyGigs": "Ver mis conciertos",
+    "creatorFallback": "Creador"
   },
-  "recentGigs": "Trabajos recientes",
-  "browseGigs": "Explorar trabajos",
-  "updatePortfolio": "Actualizar portafolio",
-  "noGigs": "No hay trabajos recientes",
   "earningsPage": {
     "title": "Ganancias",
-    "description": "Consulta tu historial de pagos y las ganancias de los trabajos completados."
+    "description": "Haz un seguimiento de tu historial de pagos y de los ingresos de los trabajos realizados."
+  },
+  "breadcrumbs": {
+    "dashboard": "Cuadro de mandos",
+    "gigs": "Gigs",
+    "active": "Activo",
+    "invitations": "Invitaciones",
+    "notifications": "Notificaciones",
+    "earnings": "Ganancias",
+    "portfolio": "Cartera",
+    "settings": "Ajustes",
+    "completeProfile": "Perfil completo",
+    "account": "Cuenta",
+    "editBasicInfo": "Editar información básica",
+    "profile": "Perfil",
+    "bio": "Biografía",
+    "socialMedia": "Redes sociales",
+    "bankDetails": "Datos bancarios",
+    "loading": "Cargando..."
+  },
+  "common": {
+    "details": "Detalles",
+    "viewAllMyGigs": "Ver todos mis conciertos",
+    "viewAllEarnings": "Ver todos los ingresos",
+    "viewAllInvitations": "Ver todas las invitaciones",
+    "viewAllSubmissions": "Ver todos los envíos",
+    "untitledGig": "Actuación sin título",
+    "unknownBrand": "Marca desconocida",
+    "reward": "Recompensa",
+    "gigCost": "Coste del Gig",
+    "deadline": "Plazo",
+    "endsOn": "Fin {date}",
+    "noActiveGigs": "Aún no hay actuaciones activas.",
+    "noInvitations": "Aún no hay invitaciones.",
+    "noEarnings": "Aún no has ganado nada. ¡Completa los gigs para empezar a ganar!",
+    "na": "N/A",
+    "invitedCreator": "Creador invitado",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Error al cargar {name}",
+    "somethingWentWrong": "Algo salió mal",
+    "product": "Producto",
+    "srGigDetails": "Detalles del concierto: {title}",
+    "applicationPending": "Solicitud pendiente",
+    "applying": "Aplicando...",
+    "applyForGig": "Solicitar Gig",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Detalles",
+      "campaign": "Campaña",
+      "mySubmissions": "Mis propuestas",
+      "submissions": "Envíos",
+      "overview": "Visión general"
+    },
+    "toasts": {
+      "appliedSuccess": "Solicitud enviada correctamente",
+      "appliedError": "No se ha podido enviar la solicitud. Por favor, inténtelo de nuevo."
+    }
+  },
+  "kpi": {
+    "gigsCompleted": "Conciertos realizados",
+    "gigsCompletedCaption": "Total de actuaciones que ha completado con éxito",
+    "totalEarned": "Total ganado",
+    "totalEarnedCaption": "Ingresos de por vida en todos los conciertos",
+    "approvalRate": "Tasa de aprobación",
+    "approvalRateCaption": "Porcentaje de vídeos aprobados por las marcas",
+    "successRate": "Tasa de éxito",
+    "successRateCaption": "Solicitudes que se convirtieron en actuaciones activas"
+  },
+  "activeGigs": {
+    "title": "Activos",
+    "description": "Compromisos actuales y próximos plazos"
+  },
+  "invitations": {
+    "title": "Invitaciones",
+    "description": "Gestiona tus invitaciones a conciertos de marcas.",
+    "latestFromBrands": "Últimas invitaciones de marcas",
+    "noInvitationsYet": "Aún no hay invitaciones",
+    "noInvitationsDesc": "Cuando las marcas te inviten a sus conciertos, aparecerán aquí.",
+    "status": {
+      "pending": "Pendiente",
+      "accepted": "Aceptado",
+      "declined": "Rechazado",
+      "unknown": "Desconocido"
+    },
+    "actions": {
+      "view": "Ver invitación",
+      "accept": "Aceptar invitación",
+      "decline": "Rechazar invitación",
+      "reject": "Rechazar invitación",
+      "createSubmission": "Crear envío",
+      "openMenu": "Abrir menú",
+      "viewSubmissions": "Ver envíos"
+    },
+    "dialogs": {
+      "acceptTitle": "Aceptar invitación",
+      "acceptDesc": "¿Estás seguro de que quieres aceptar esta invitación? Esto notificará a la marca y podrás empezar a trabajar en el concierto.",
+      "acceptCommentPlaceholder": "Añadir un comentario para esta aprobación",
+      "accepting": "Aceptando...",
+      "declineTitle": "Rechazar invitación",
+      "declineDesc": "¿Estás seguro de que quieres rechazar esta invitación? Esta acción no se puede deshacer.",
+      "declineCommentPlaceholder": "Explique por qué declina",
+      "declining": "En declive...",
+      "rejectTitle": "Rechazar invitación",
+      "rejectDesc": "¿Estás seguro de que quieres rechazar esta invitación? Esta acción no se puede deshacer."
+    },
+    "toasts": {
+      "accepted": "Invitación aceptada con éxito",
+      "declined": "Invitación rechazada con éxito",
+      "error": "Error al actualizar el estado de la invitación"
+    }
+  },
+  "submissions": {
+    "title": "Envíos recientes",
+    "description": "Los últimos vídeos entregados",
+    "noSubmissions": "Aún no se han presentado propuestas",
+    "noSubmissionsDesc": "Cuando crees envíos para este concierto, aparecerán aquí.",
+    "createTitle": "Crear envío",
+    "createDesc": "Sube tu vídeo y añade detalles para este concierto.",
+    "details": "Detalles del envío",
+    "form": {
+      "title": "Título",
+      "titlePlaceholder": "Ponle un título a tu propuesta",
+      "notes": "Notas",
+      "notesPlaceholder": "Añada cualquier nota sobre su envío...",
+      "submit": "Enviar vídeo",
+      "submitting": "Presentar...",
+      "dropzoneTitle": "Arrastre y suelte su vídeo aquí",
+      "dropzoneDesc": "o haga clic para navegar desde su ordenador",
+      "dropzoneSpecs": "Admite MP4, MOV, WEBM (máx. 500 MB)"
+    },
+    "toasts": {
+      "success": "Presentación creada con éxito",
+      "error": "Error al crear el envío",
+      "missingGigId": "Falta el Gig ID",
+      "uploading": "Espere a que termine de cargarse el vídeo"
+    },
+    "validation": {
+      "titleRequired": "Título obligatorio",
+      "videoRequired": "Se requiere archivo de vídeo",
+      "maxSize": "El tamaño máximo de los archivos es de 500 MB",
+      "invalidFormat": "Sólo se admiten los formatos .mp4, .mov y .webm"
+    }
+  },
+  "earnings": {
+    "title": "Ganancias",
+    "description": "Haz un seguimiento de tu historial de pagos y de los ingresos de los trabajos realizados.",
+    "recentTotal": "Total reciente"
+  },
+  "availableGigs": {
+    "title": "Conciertos disponibles",
+    "description": "Explore y solicite nuevas oportunidades que se ajusten a su perfil."
+  },
+  "myGigs": {
+    "title": "Gigs",
+    "description": "Todos los conciertos en los que has participado.",
+    "tabs": {
+      "all": "Todos los conciertos",
+      "available": "Conciertos disponibles",
+      "active": "Activos"
+    }
+  },
+  "requirements": {
+    "title": "Requisitos del creador",
+    "gender": "Género",
+    "male": "Hombre",
+    "female": "Mujer",
+    "ageRange": "Edades",
+    "any": "Cualquier",
+    "compensation": "Compensación",
+    "guidelines": "Directrices sobre contenidos",
+    "ambience": "Ambiente",
+    "requirements": "Requisitos"
+  },
+  "campaign": {
+    "aboutTitle": "Acerca de esta campaña",
+    "dosDonts": "Qué hacer y qué no hacer",
+    "dos": "Qué hacer",
+    "donts": "No hacer",
+    "direction": "Dirección",
+    "toneOfVoice": "Tono de voz",
+    "keywords": "Palabras clave",
+    "noKeywords": "No se han definido palabras clave.",
+    "campaignBriefTitle": "Resumen de la campaña",
+    "campaignBriefDesc": "Detalles básicos y requisitos de mensajería",
+    "description": "Descripción",
+    "category": "Categoría",
+    "assets": "Activos",
+    "images": "Imágenes",
+    "documents": "Documentos",
+    "videos": "Vídeos",
+    "task": "Tarea",
+    "recordVideos": "Record {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Duración: {count} segundos"
+  },
+  "payments": {
+    "status": {
+      "completed": "Completado",
+      "pending": "Pendiente",
+      "processing": "Tratamiento",
+      "failed": "Fallido",
+      "cancelled": "Cancelado"
+    },
+    "table": {
+      "payment": "Pago",
+      "creator": "Creador",
+      "date": "Fecha",
+      "method": "Método",
+      "items": "Artículos",
+      "paid": "¿Pagado?",
+      "amount": "Importe",
+      "actions": "Acciones",
+      "noEarnings": "Aún no hay ganancias",
+      "noEarningsFiltered": "Ningún ingreso coincide con tus filtros actuales.",
+      "noEarningsDesc": "Aquí aparecerán los pagos de los conciertos realizados.",
+      "searchPlaceholder": "Buscar ganancias...",
+      "clearFilters": "Limpiar filtros"
+    },
+    "details": {
+      "paymentId": "ID de pago",
+      "accessibilityDesc": "Datos de pago para {reference}.",
+      "created": "Creado",
+      "reference": "Referencia",
+      "notes": "Notas",
+      "totalAmount": "Importe total"
+    }
   }
 }

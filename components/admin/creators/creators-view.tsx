@@ -5,6 +5,7 @@ import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { AnimatePresence, motion } from "motion/react";
 import { CreatorCard } from "./creator-card";
 import { CreatorsTableView } from "./creators-table-view";
+import { useTranslations } from "next-intl";
 
 interface CreatorsViewProps {
   table: Table<ModelsCreatorResponse>;
@@ -15,12 +16,13 @@ interface CreatorsViewProps {
 }
 
 export function CreatorsView( { table, view, onViewDetails, onApproveProfile, onRejectProfile }: CreatorsViewProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   if ( view === "cards" ) {
     // Check if there are rows to display in card view
     if ( table.getRowModel().rows.length === 0 ) {
       return (
         <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
-          <p className="text-muted-foreground">No creators found.</p>
+          <p className="text-muted-foreground">{ t( 'filters.noCreators' ) }</p>
         </div>
       );
     }

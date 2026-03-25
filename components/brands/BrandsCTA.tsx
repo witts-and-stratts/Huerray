@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export function BrandsCTA() {
   const t = useTranslations( 'brands.cta' );
@@ -15,9 +16,11 @@ export function BrandsCTA() {
         <h3 className='creators-cta__title text-white!'>
           { t( 'title' ) }
         </h3>
-        <Button variant='heroAlt' size='xl' className='bg-dark-burgundy w-100'>
-          { t( 'buttonText' ) }
-        </Button>
+        <Link href="/signup?role=brand" title={ t( 'buttonText' ) } className='cursor-pointer'>
+          <Button variant='heroAlt' size='xl' className='bg-dark-burgundy w-100'>
+            { t( 'buttonText' ) }
+          </Button>
+        </Link>
       </div>
     </section>
   );

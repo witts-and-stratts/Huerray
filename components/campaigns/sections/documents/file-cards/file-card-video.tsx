@@ -18,7 +18,7 @@ export const FileCardVideo = memo( ( props: FileCardProps ) => {
   const posterUrl = item.thumbnail ? imgpresets.card( item.thumbnail ) : item.preview ?? undefined;
 
   return (
-    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle } aspect="aspect-video">
+    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle } aspect="aspect-video" onSelect={ ( id ) => props.onSelect?.( id, false ) }>
       { posterUrl && (
         <>
           <video

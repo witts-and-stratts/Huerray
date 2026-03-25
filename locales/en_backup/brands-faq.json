@@ -1,0 +1,149 @@
+{
+  "title": "Brands' FAQ",
+  "subtitle": "Here are some of our most frequently asked questions.",
+  "sections": [
+    {
+      "section": "General",
+      "faqs": [
+        {
+          "question": "What is Huerray?",
+          "answer": "Huerray is a UGC platform that connects brands with diverse creators and AI-powered storytelling tools. The platform focuses on authentic content, cultural relevance, and meaningful representation, especially for People of Color and underrepresented audiences in the DACH region."
+        },
+        {
+          "question": "What is UGC and why does it work so well?",
+          "answer": "User-generated content (UGC) is content created by real people, such as customers or creators. It feels natural and builds trust, often leading to higher engagement and stronger campaign performance than traditional ads."
+        },
+        {
+          "question": "Do creators post the content on their own social media channels?",
+          "answer": "No. Creators produce content for your brand but do not automatically post it on their own accounts. Creator reach can be added as an optional add-on."
+        },
+        {
+          "question": "What makes Huerray different from other UGC platforms?",
+          "answer": "Huerray combines diversity, cultural intelligence, and AI innovation to deliver emotionally impactful content. Unlike traditional platforms that only match creators and brands, Huerray enhances storytelling through both human and AI capabilities."
+        }
+      ]
+    },
+    {
+      "section": "Processes",
+      "faqs": [
+        {
+          "question": "How does a campaign with Huerray work?",
+          "answer": "After creating an account, you can start your campaign briefing by specifying product goals, messaging, audience, tone, formats, and storytelling style. You receive curated creator recommendations, and creators may also apply. Once approved, the creator produces the content, you receive a preview, and can request one revision before receiving final assets with full usage rights."
+        },
+        {
+          "question": "Does Huerray use AI instead of real creators?",
+          "answer": "Brands can choose between human-created content or AI Creator content."
+        },
+        {
+          "question": "Is there a minimum budget or commitment?",
+          "answer": "No. You may collaborate per campaign or on a long-term basis without fixed commitments."
+        },
+        {
+          "question": "How long does production take?",
+          "answer": "Production typically takes 7–14 days, including one feedback round. Faster delivery is available upon request."
+        },
+        {
+          "question": "What if I'm not satisfied with the delivered content?",
+          "answer": "Each campaign includes one revision. If the content does not align with your briefing, you can request a revision via the 'Request revision' button."
+        },
+        {
+          "question": "How much does it cost to work with Huerray?",
+          "answer": "Pricing depends on the campaign scope. UGC packages start from €149, and AI-creator campaigns from €89."
+        },
+        {
+          "question": "What usage rights do I receive?",
+          "answer": "After final payment, you receive exclusive, unlimited usage rights across time, region, and media, subject to Huerray's AGB."
+        },
+        {
+          "question": "Which file formats will I receive?",
+          "answer": "Supported formats include .mov, .avi, .mp4, and .mpeg4. Specific requirements can be added to the campaign briefing."
+        },
+        {
+          "question": "How do I download the videos?",
+          "answer": "Approve the content in your campaign gig, then the files become available for immediate download."
+        },
+        {
+          "question": "What if I want to order an additional UGC video from a Creator I've already worked with?",
+          "answer": "You can either create a new briefing and invite the creator, or request an upgrade within the existing campaign by emailing Huerray with campaign and creator details."
+        },
+        {
+          "question": "What if I want to assign more Creators to a campaign than originally booked?",
+          "answer": "You may invite additional creators from the application list. If this exceeds your initial booking, email Huerray to update the order and invoice."
+        },
+        {
+          "question": "Can I change the campaign specifications after submitting the briefing?",
+          "answer": "Upgrades and additions are allowed after order creation, but reductions are not since payment is tied to creator compensation. To increase scope, email Huerray with details."
+        },
+        {
+          "question": "How can I cancel my order?",
+          "answer": "Send Huerray an email with the order link and reason for cancellation. The team will review and process your request."
+        }
+      ]
+    },
+    {
+      "section": "Brief & Creator Applications",
+      "faqs": [
+        {
+          "question": "What do I need to do to start receiving applications from Creators?",
+          "answer": "Complete your briefing and submit it for review. Once approved, the briefing is posted on the platform and creators can apply. All applications appear on your campaign page for review."
+        },
+        {
+          "question": "My briefing is under review — what does that mean?",
+          "answer": "Huerray checks that your briefing includes sufficient details for creators to produce aligned content. You may receive suggestions if adjustments are needed."
+        },
+        {
+          "question": "What happens after my briefing is approved?",
+          "answer": "Your briefing is shared with relevant creators. Applications typically begin arriving within 3 days."
+        }
+      ]
+    },
+    {
+      "section": "Deadlines & Delivery Timelines",
+      "faqs": [
+        {
+          "question": "How long does it take to receive my final UGC?",
+          "answer": "Once the creator receives the product and clarifications, standard delivery is 7 days. One free revision is included."
+        },
+        {
+          "question": "How long do I have to request a revision?",
+          "answer": "Revisions must be requested within 10 days of content submission. If more time is needed, coordinate with Huerray via email."
+        }
+      ]
+    },
+    {
+      "section": "Payment",
+      "faqs": [
+        {
+          "question": "Will I receive invoices for my orders?",
+          "answer": "Yes. Every payment processed via Huerray generates an invoice. All invoices are accessible anytime in your dashboard under 'Invoices'."
+        }
+      ]
+    },
+    {
+      "section": "Account",
+      "faqs": [
+        {
+          "question": "I forgot my password — what should I do?",
+          "answer": "Use the 'Reset password' option on the login page. If issues persist, email Huerray for assistance."
+        },
+        {
+          "question": "Can I grant access to other team members?",
+          "answer": "Yes. Email Huerray with the names and email addresses of colleagues you want to add. They will activate and confirm access."
+        }
+      ]
+    },
+    {
+      "section": "Support",
+      "faqs": [
+        {
+          "question": "Still have questions?",
+          "answer": "Email support@huerray.com for help."
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "title": "Brands' FAQ",
+    "description": "Frequently asked questions for brands about pricing, campaigns, and UGC on Huerray."
+  }
+}

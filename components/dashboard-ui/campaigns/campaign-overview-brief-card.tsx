@@ -2,16 +2,16 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
-import type { ModelCampaign } from '@/components/campaigns/types';
 import { WrappedCard } from '../wrapped-card';
 import { Badge } from '@/components/ui/badge';
 import { stripTags } from '@/lib/utils';
 import { SentenceCase } from '@/components/text-case';
 import { BrandHoverCard } from '@/components/campaigns/brand-hover-card';
 import { Content } from '../content';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 interface CampaignBriefCardProps {
-  campaign: ModelCampaign;
+  campaign: ModelsCampaignResponse;
   keywordList: string[];
 }
 

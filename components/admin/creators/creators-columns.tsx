@@ -13,6 +13,7 @@ import { TCheckboxCell, TCheckboxHead, THead } from "../data-table";
 import { CreatorActionMenu } from "@/components/admin/creators/creator-action-menu";
 import { CreatorInfoBlock } from "@/components/admin/creators/creator-info-block";
 import { CreatorStatusBadge } from "@/components/admin/creators/creator-status-badge";
+import { useTranslations } from "next-intl";
 
 interface GetColumnsProps {
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
@@ -20,11 +21,12 @@ interface GetColumnsProps {
 
 const CreatorActionsCell = ( { row, onViewDetails, className }: { row: Row<ModelsCreatorResponse>; onViewDetails: ( creator: ModelsCreatorResponse ) => void; className?: string; } ) => {
   const creator = row.original;
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <div className={ cn( "flex justify-end items-center gap-2", className ) }>
       <ButtonGroup className="flex justify-end">
         <Button variant="outline" size="sm" className="font-regular" onClick={ () => onViewDetails( creator ) }>
-          View
+          { t( 'filters.view' ) }
         </Button>
         <CreatorActionMenu
           creator={ creator }
@@ -41,7 +43,7 @@ const CreatorActionsCell = ( { row, onViewDetails, className }: { row: Row<Model
   );
 };
 
-export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<ModelsCreatorResponse>[] => [
+export const getColumns = ( { onViewDetails, t }: GetColumnsProps & { t: any; } ): ColumnDef<ModelsCreatorResponse>[] => [
   {
     id: "select",
     header: ( { table } ) => <TCheckboxHead table={ table } />,
@@ -52,11 +54,9 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
   {
     id: "name",
     accessorFn: ( row ) => `${ row.first_name || '' } ${ row.last_name || '' }`.trim() || row.email || 'Unknown',
-    header: ( { column } ) => {
-      return (
-        <THead column={ column } title="Name" className="pl-3" />
-      );
-    },
+    header: ( { column } ) => (
+      <THead column={ column } title={ t( 'filters.name' ) } className="pl-3" />
+    ),
     cell: ( { row } ) => {
       return (
         <div className="pl-4 py-0 min-w-[250px]">
@@ -68,11 +68,9 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
 
   {
     accessorKey: "date_of_birth",
-    header: ( { column } ) => {
-      return (
-        <THead column={ column } title="Age" />
-      );
-    },
+    header: ( { column } ) => (
+      <THead column={ column } title={ t( 'filters.age' ) } />
+    ),
     cell: ( { row } ) => {
       const dob = row.getValue( "date_of_birth" ) as string;
       const age = ageFromDate( dob );
@@ -96,11 +94,9 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
   },
   {
     accessorKey: "gender",
-    header: ( { column } ) => {
-      return (
-        <THead column={ column } title="Sex" />
-      );
-    },
+    header: ( { column } ) => (
+      <THead column={ column } title={ t( 'filters.sex' ) } />
+    ),
     cell: ( { row } ) => {
       const gender = row.getValue( "gender" ) as string;
       return (
@@ -130,11 +126,9 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
   {
     id: "location",
     accessorFn: ( row ) => [ row.city, row.country ].filter( Boolean ).join( ', ' ),
-    header: ( { column } ) => {
-      return (
-        <THead column={ column } title="City/Country" />
-      );
-    },
+    header: ( { column } ) => (
+      <THead column={ column } title={ t( 'filters.location' ) } />
+    ),
     cell: ( { row } ) => {
       const creator = row.original;
       const location = [ creator.city, creator.country ].filter( Boolean ).join( ', ' );
@@ -152,11 +146,9 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
   },
   {
     accessorKey: "creator_status",
-    header: ( { column } ) => {
-      return (
-        <THead column={ column } title="Status" />
-      );
-    },
+    header: ( { column } ) => (
+      <THead column={ column } title={ t( 'filters.status' ) } />
+    ),
     cell: ( { row } ) => <CreatorStatusBadge status={ row.getValue( "creator_status" ) as string } />,
     filterFn: ( row, id, filterValue ) => {
       if ( filterValue === undefined ) {
@@ -171,7 +163,7 @@ export const getColumns = ( { onViewDetails }: GetColumnsProps ): ColumnDef<Mode
   {
     id: "actions",
     header: () => (
-      <THead title="Actions" shouldSort={ false } className="flex justify-end pr-3 w-full" />
+      <THead title={ t( 'filters.actions' ) } shouldSort={ false } className="flex justify-end pr-3 w-full" />
     ),
     enableHiding: false,
     cell: ( { row } ) => <CreatorActionsCell row={ row } onViewDetails={ onViewDetails } className="pr-2" />,

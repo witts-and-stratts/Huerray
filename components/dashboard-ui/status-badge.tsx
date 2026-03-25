@@ -14,6 +14,7 @@ import {
   SentIcon,
   WalletDone01Icon,
 } from '@hugeicons/core-free-icons';
+import { useFilterLabel, useMessage } from '@/lib/hooks/use-filter-label';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IconType = any;
 
@@ -101,6 +102,7 @@ function getConfig(
 
 export function StatusBadge( { status, className, configOverride }: StatusBadgeProps ) {
   const config = getConfig( status, configOverride );
+  const filterLabel = useFilterLabel();
   return (
     <div className={ cn(
       'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border scale-90 origin-left whitespace-nowrap',
@@ -108,7 +110,7 @@ export function StatusBadge( { status, className, configOverride }: StatusBadgeP
       className
     ) }>
       <HugeiconsIcon icon={ config.icon } className="w-3 h-3 shrink-0" />
-      { config.label }
+      { status ? filterLabel( status ) : useMessage( config.label ) }
     </div>
   );
 }

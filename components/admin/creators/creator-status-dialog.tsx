@@ -17,6 +17,7 @@ import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+import { useTranslations } from "next-intl";
 
 const statusToEnum = {
   approved: ModelsCreatorStatusUpdateRequestCreatorStatusEnum.Approved,
@@ -44,6 +45,8 @@ export function CreatorStatusDialog( {
   currentStatus,
   onSuccess,
 }: CreatorStatusDialogProps ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const { mutateAsync: updateStatus, isPending } = useUpdateCreatorStatus( creatorId );
 
 
@@ -59,7 +62,7 @@ export function CreatorStatusDialog( {
       console.log( "creatorId inside onSubmit", creatorId );
 
       if ( !creatorId ) {
-        toast.error( "Creator ID is missing" );
+        toast.error( t( 'creatorStatus.missingId' ) );
         return;
       }
 
@@ -68,14 +71,14 @@ export function CreatorStatusDialog( {
           creator_status: statusToEnum[ value.status as keyof typeof statusToEnum ],
           comments: value.comment,
         } );
-        toast.success( "Creator status updated successfully", {
+        toast.success( t( 'creatorStatus.successToast' ), {
           richColors: true,
         } );
         onOpenChange( false );
         onSuccess?.();
       } catch ( error: any ) {
         console.error( "Failed to update status:", error );
-        toast.error( "Failed to update creator status", {
+        toast.error( t( 'creatorStatus.errorToast' ), {
           description: error?.response?.data?.message || error.message,
           richColors: true,
         } );
@@ -103,9 +106,9 @@ export function CreatorStatusDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className='font-primary text-h5 font-normal text-primary!'>Update Creator Status</DialogTitle>
+          <DialogTitle className='font-primary text-h5 font-normal text-primary!'>{ t( 'creatorStatus.title' ) }</DialogTitle>
           <DialogDescription>
-            Review the creator's profile and update their status.
+            { t( 'creatorStatus.description' ) }
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={ handleSubmit } className="grid gap-4 py-4">
@@ -114,13 +117,13 @@ export function CreatorStatusDialog( {
             children={ ( field ) => (
               <SuperField
                 type="select"
-                label="Status"
+                label={ t( 'creatorStatus.statusLabel' ) }
                 value={ field.state.value }
                 onValueChange={ ( value ) => field.handleChange( value! ) }
                 options={ [
-                  { value: "approved", label: "Approve" },
-                  { value: "returned", label: "Reject" },
-                  { value: "rejected", label: "Total Rejection" }
+                  { value: "approved", label: t( 'creatorStatus.approve' ) },
+                  { value: "returned", label: t( 'creatorStatus.reject' ) },
+                  { value: "rejected", label: t( 'creatorStatus.totalRejection' ) }
                 ] }
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
@@ -131,10 +134,10 @@ export function CreatorStatusDialog( {
             children={ ( field ) => (
               <SuperField
                 type="textarea"
-                label="Comments"
+                label={ tc( 'sheets.comments' ) }
                 value={ field.state.value || "" }
                 onChange={ ( e ) => field.handleChange( e.target.value ) }
-                placeholder="Add a comment or reason for this decision..."
+                placeholder={ tc( 'sheets.commentPlaceholder' ) }
                 fieldClassName="min-h-[100px]"
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
@@ -143,14 +146,14 @@ export function CreatorStatusDialog( {
 
           <DialogFooter>
             <Button variant="outline" type="button" onClick={ () => onOpenChange( false ) } disabled={ isPending }>
-              Cancel
+              { tc( 'cancel' ) }
             </Button>
             <form.Subscribe
               selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
               children={ ( [ canSubmit, isSubmitting ] ) => (
                 <Button type="submit" disabled={ !canSubmit || isSubmitting || isPending }>
                   { ( isSubmitting || isPending ) && <Loader2 className="mr-2 size-4 animate-spin" /> }
-                  Update Status
+                  { tc( 'sheets.updateStatus' ) }
                 </Button>
               ) }
             />

@@ -1,45 +1,19 @@
 {
   "title": "Benachrichtigungen",
-  "description": "Alle Benachrichtigungen anzeigen und verwalten",
-  "descriptionBrand": "Alle Ihre Benachrichtigungen anzeigen und verwalten",
+  "description": "Anzeigen und Verwalten aller Benachrichtigungen",
+  "descriptionBrand": "Anzeigen und Verwalten aller Ihrer Benachrichtigungen",
   "stats": {
-    "total": "Benachrichtigungen gesamt",
+    "total": "Total Notifikationen",
     "unread": "Ungelesen",
     "today": "Heute"
   },
   "tabs": {
     "all": "Alle",
-    "read": "Gelesen",
+    "read": "Lesen Sie",
     "unread": "Ungelesen"
   },
-  "actions": {
-    "markAllAsRead": "Alle als gelesen markieren",
-    "markAsRead": "Als gelesen markieren",
-    "delete": "Löschen",
-    "deleteAll": "Alle löschen",
-    "open": "Öffnen"
-  },
-  "item": {
-    "showMore": "Mehr anzeigen",
-    "showLess": "Weniger anzeigen",
-    "eventTypeFallback": "Aktualisierung"
-  },
-  "empty": {
-    "title": "Keine Benachrichtigungen vorhanden",
-    "description": "Sie sind aktuell auf dem neuesten Stand."
-  },
-  "confirm": {
-    "deleteAllTitle": "Alle Benachrichtigungen löschen",
-    "deleteAllDescription": "Möchten Sie wirklich alle Benachrichtigungen löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
-    "deleteAllConfirm": "Alle löschen",
-    "deleting": "Lösche..."
-  },
-  "toast": {
-    "deleteAllSuccess": "Alle Benachrichtigungen wurden gelöscht",
-    "deleteAllError": "Alle Benachrichtigungen konnten nicht gelöscht werden"
-  },
   "search": {
-    "placeholder": "Benachrichtigungen durchsuchen",
+    "placeholder": "Benachrichtigungen suchen",
     "noResults": "Keine Benachrichtigungen entsprechen Ihrer Suche."
   },
   "pagination": {
@@ -47,6 +21,32 @@
     "page": "Seite",
     "of": "von",
     "previous": "Vorherige",
-    "next": "Nächste"
+    "next": "Weiter"
+  },
+  "actions": {
+    "markAllAsRead": "Alle als gelesen markieren",
+    "markAsRead": "Als gelesen markieren",
+    "delete": "Löschen",
+    "deleteAll": "Alle löschen",
+    "open": "Öffnen Sie"
+  },
+  "item": {
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen",
+    "eventTypeFallback": "Update"
+  },
+  "empty": {
+    "title": "Es werden keine Benachrichtigungen angezeigt",
+    "description": "Das war's für den Moment."
+  },
+  "confirm": {
+    "deleteAllTitle": "Alle Benachrichtigungen löschen",
+    "deleteAllDescription": "Sind Sie sicher, dass Sie alle Benachrichtigungen löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleteAllConfirm": "Alle löschen",
+    "deleting": "Löschen..."
+  },
+  "toast": {
+    "deleteAllSuccess": "Alle Benachrichtigungen gelöscht",
+    "deleteAllError": "Alle Benachrichtigungen konnten nicht gelöscht werden"
   }
 }

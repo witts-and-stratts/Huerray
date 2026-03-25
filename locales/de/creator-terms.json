@@ -1,155 +1,183 @@
 {
   "page": {
-    "title": "Allgemeine Geschäftsbedingungen für Creator"
+    "title": "Bedingungen und Konditionen für Ersteller"
   },
   "seo": {
-    "title": "Allgemeine Geschäftsbedingungen für Creator",
-    "description": "Allgemeine Geschäftsbedingungen (AGB) für die Nutzung der Huerray-Plattform durch Content Creator.",
-    "keywords": "Creator Bedingungen, AGB, Plattformbedingungen, Huerray, rechtliche Vereinbarung, Content Creator"
+    "title": "Bedingungen und Konditionen für Ersteller",
+    "description": "Allgemeine Geschäftsbedingungen (AGB) für die Nutzung der Huerray-Plattform durch die Ersteller von Inhalten.",
+    "keywords": "Erstellerbedingungen, AGB, Plattformbedingungen, Huerray, rechtliche Vereinbarung, Ersteller von Inhalten"
   },
   "effectiveDateTitle": "Gültig ab",
-  "preInfo": "für die Nutzung der Plattform durch Creator <br /><br /><strong>Thrypes GmbH</strong><br /> 4. Etage, Gontardstr. 11,<br /> 10178 Berlin, Deutschland<br /> (im Folgenden \"Thrypes\" oder \"wir\", \"uns\", \"unser\")",
-  "effectiveDate": "23. Oktober 2025",
-  "tableOfContents": "Inhaltsverzeichnis",
+  "preInfo": "für die Nutzung der Plattform durch Creators <br /><br /><strong>Thrypes GmbH</strong><br /> 4th Floor, Gontardstr. 11,<br /> 10178 Berlin, Deutschland<br /> (nachfolgend \"Thrypes\" oder \"wir\", \"uns\", \"unser\" genannt)",
+  "effectiveDate": "Oktober 23, 2025",
+  "tableOfContents": "Inhaltsübersicht",
   "sections": [
     {
-      "id": "preamble",
+      "id": "Präambel",
       "title": "Präambel",
-      "content": ["Thrypes betreibt die Online-Plattform <strong>Huerray</strong> (im Folgenden \"Plattform\"). Der Zugang zur Plattform erfolgt über die Website <a href='www.huerray.de'>www.huerray.de</a>.", "Thrypes ermöglicht registrierten Content Creatorn (\"Creator\"), authentische Video- und Fotoinhalte (\"Content\") für Marken und Unternehmen (\"Brands\") zu produzieren. Der Content kann für Online-Marketing auf Social-Media-Plattformen oder anderen digitalen Kanälen verwendet werden.", "Brands können spezifische Projekte oder Briefings auf der Plattform erstellen, in denen Themen, Stile und Formate für den gewünschten Content definiert werden. Diese Projekte werden über die Plattform veröffentlicht und für Creator sichtbar gemacht. Creator können sich für einzelne Projekte bewerben, und sobald eine Brand einen Creator auswählt, übernimmt Thrypes die Projektkoordination und Qualitätskontrolle. Wir können sowohl mit menschlichen Creatorn als auch mit internen oder externen KI-Systemen zusammenarbeiten (z. B. zur Unterstützung bei der Content-Erstellung oder Bildbearbeitung).", "Diese Allgemeinen Geschäftsbedingungen (\"Huerray Creator AGB\") regeln die rechtliche Beziehung zwischen Thrypes und den Creatorn hinsichtlich der Nutzung der Plattform, der Durchführung von Projekten sowie der Erstellung und Vergütung von Content. Durch die Registrierung bei Thrypes und die Bestätigung dieser AGB erkennt der Creator diese als verbindlich an."],
+      "content": [
+        "Thrypes betreibt die Online-Plattform <strong>Huerray</strong> (nachfolgend \"Plattform\"). Der Zugang zur Plattform erfolgt über die Website <a href='www.huerray.de'>www.huerray.de</a>.",
+        "Thrypes ermöglicht registrierten Content-Erstellern (\"Creators\"), authentische Video- und Fotoinhalte (\"Content\") für Marken und Unternehmen (\"Brands\") zu produzieren. Die Inhalte können für das Online-Marketing auf Social-Media-Plattformen oder anderen digitalen Kanälen verwendet werden.",
+        "Marken können auf der Plattform spezifische Projekte oder Briefings erstellen und dabei Themen, Stile und Formate für die gewünschten Inhalte festlegen. Diese Projekte werden über die Plattform veröffentlicht und für Creators sichtbar gemacht. Creators können sich für einzelne Projekte bewerben, und sobald eine Marke einen Creator auswählt, übernimmt Thrypes die Projektkoordination und Qualitätskontrolle. Wir können sowohl mit menschlichen Creators als auch mit internen oder externen KI-Systemen zusammenarbeiten (z. B. zur Unterstützung der Content-Erstellung oder Bildbearbeitung).",
+        "Diese Allgemeinen Geschäftsbedingungen (\"Huerray Creator AGB\") regeln das Rechtsverhältnis zwischen Thrypes und den Creators hinsichtlich der Nutzung der Plattform, der Durchführung von Projekten sowie der Erstellung und Vergütung von Inhalten. Mit der Registrierung auf Thrypes und der Bestätigung dieser AGB erkennt der Creator diese als verbindlich an."
+      ],
       "subsections": []
     },
     {
       "id": "scope-application",
-      "title": "1. Geltungsbereich",
-      "content": ["(1) Diese Allgemeinen Geschäftsbedingungen (\"AGB\") regeln die rechtliche Beziehung zwischen Thrypes und den registrierten Content Creatorn (\"Creator\") im Zusammenhang mit der Nutzung der Plattform, der Durchführung von Projekten und der Erstellung und Einreichung von Inhalten (\"Content\").", "(2) Individuell ausgehandelte Vereinbarungen zwischen Thrypes und dem Creator haben Vorrang vor diesen AGB. Soweit nicht anders nachgewiesen, müssen solche Vereinbarungen schriftlich dokumentiert oder bestätigt werden.", "(3) Die Nutzung der Huerray-Plattform ist ausschließlich Unternehmern oder selbstständigen Personen im Sinne des § 14 BGB vorbehalten. Mit der Registrierung bestätigt der Creator, dass er gewerblich oder beruflich tätig ist oder sich ordnungsgemäß als selbstständig registriert hat.", "(4) Thrypes gewährt Creatorn eine nicht übertragbare, widerrufliche Lizenz zur Nutzung der Plattform ausschließlich im Rahmen dieser AGB und der darin bereitgestellten Funktionen.", "(5) Abweichende, entgegenstehende oder ergänzende Geschäftsbedingungen des Creators finden keine Anwendung, es sei denn, wir haben ihrer Geltung ausdrücklich schriftlich zugestimmt."]
-    },
-    {
-      "id": "scope-services",
-      "title": "2. Leistungsumfang",
-      "content": ["(1) Der Creator verpflichtet sich, den von der Brand über die Plattform beauftragten Content (z. B. Foto-, Video- oder Audioinhalte) gemäß dem über die Plattform bereitgestellten Briefing zu erstellen und die entsprechenden Rechte gemäß Abschnitt 6 dieser Creator-Bedingungen an Thrypes zu übertragen.", "(2) Der Creator erstellt den Content grundsätzlich persönlich, kann jedoch mit unserer vorherigen Zustimmung sorgfältig ausgewählte Dritte (\"Co-Creator\") auf eigene Verantwortung hinzuziehen. Der Creator ist allein verantwortlich für die Auswahl, Anleitung und Rechteübertragung solcher Co-Creator.", "(3) Der Creator erscheint persönlich im Content, sofern nicht anders vereinbart, oder kann andere von der Brand oder Thrypes ausgewählte Personen zeigen, vorausgesetzt, diese Personen haben der Rechteübertragung ausdrücklich zugestimmt.", "(4) Der fertige Content muss durch Hochladen über die vorgesehene Funktion auf der Plattform geliefert werden. Sofern nicht anders vereinbart, muss der Upload spätestens sieben (7) Kalendertage nach Vertragsschluss und Erhalt aller notwendigen Produktionsmaterialien (siehe Abschnitt 7) erfolgen.", "(5) Der Creator verpflichtet sich, bis zu zwei angemessene Überarbeitungen des Contents innerhalb einer (1) Feedback-Runde vorzunehmen, sofern Thrypes oder die Brand Änderungen innerhalb von sieben (7) Tagen nach dem Upload anfordert und diese Änderungen im Rahmen des ursprünglichen Briefings liegen. Diese Überarbeitungen sind durch das vereinbarte Honorar abgedeckt und müssen innerhalb von sieben (7) Kalendertagen nach Erhalt des Feedbacks umgesetzt werden.", "(6) Der Creator ist nicht verpflichtet, Überarbeitungen vorzunehmen, die einen unverhältnismäßigen Aufwand erfordern oder über das vereinbarte Briefing hinausgehen. Gesetzliche Gewährleistungsrechte (Abschnitt 10) bleiben unberührt.", "(7) Die Vertragsbeziehung zwischen dem Creator und uns ist unabhängig. Der Creator erbringt die vereinbarten Leistungen als selbstständiger Unternehmer, im eigenen Namen und auf eigene Rechnung. Aus der Vertragsbeziehung zwischen Thrypes und der Brand entstehen keine Rechte oder Ansprüche für den Creator.", "(8) Wir können eigene oder externe KI-Systeme zur Unterstützung der Content-Erstellung nutzen. In solchen Fällen wird der Creator entsprechend informiert; die vertraglichen Verpflichtungen des Creators bleiben unberührt."]
-    },
-    {
-      "id": "conclusion-contract",
-      "title": "3. Vertragsschluss",
-      "content": ["(1) Mit der Bewerbung auf ein auf der Plattform veröffentlichtes Projekt gibt der Creator ein verbindliches Angebot zum Abschluss eines Vertrags über die Erstellung des im Briefing beschriebenen Contents ab.", "(2) Der Vertrag kommt zustande, sobald Thrypes den Creator für das jeweilige Projekt auswählt oder wenn die Brand die Bewerbung des Creators annimmt und Thrypes das Projekt schriftlich oder auf der Plattform bestätigt. Es gilt eine Antwortfrist von vierzehn (14) Kalendertagen.", "(3) Wir sind nicht verpflichtet, eine eingereichte Bewerbung anzunehmen oder eine Vertragsbeziehung einzugehen. Bewerbungen können jederzeit ohne Angabe von Gründen abgelehnt oder zurückgezogen werden.", "(4) Nach Vertragsschluss erhält der Creator eine Projektbestätigung über die Plattform oder per E-Mail mit allen relevanten Details (Briefing, Fristen, Bezahlung, Produktionsmaterialien und Liefermethode).", "(5) Die Vertragsgrundlage besteht aus diesen Huerray Creator-Bedingungen, dem jeweiligen Briefing und etwaigen schriftlich an den Creator kommunizierten Zusatzvereinbarungen.", "(6) Der Creator handelt während der gesamten Vertragsdurchführung unabhängig und eigenverantwortlich. Es besteht kein Arbeitsverhältnis zwischen Thrypes und dem Creator. Der Creator ist allein verantwortlich für die Erfüllung seiner steuerlichen und sozialversicherungsrechtlichen Verpflichtungen aus seiner Tätigkeit."] },
-    {
-      "id": "compensation-payment",
-      "title": "4. Vergütung und Zahlung",
+      "title": "1. Anwendungsbereich",
       "content": [
-        "(1) Für die Erstellung des vereinbarten Contents erhält der Creator von Thrypes eine Vergütung wie im Vertrag festgelegt. Der geltende Zahlungsbetrag wird dem Creator vor Einreichung einer Bewerbung auf der Plattform angezeigt. Innerhalb eines laufenden Projekts kann der Creator zusätzliche oder erweiterte Leistungen vorschlagen. Akzeptiert die Brand ein solches Angebot, wird die Erweiterung als zusätzliches Projekt über die Plattform bestätigt und die Vergütung entsprechend angepasst.",
-        "(2) Zahlungen werden über ein Gutschriftensystem abgewickelt. Nach erfolgreicher Genehmigung des Contents stellt Thrypes im Namen des Creators eine Gutschrift aus, die in elektronischer Form (PDF) über das Thrypes-Konto des Creators bereitgestellt wird.",
-        "(3) Der Zahlungsanspruch des Creators entsteht mit der Genehmigung des Contents durch Thrypes. Die Genehmigung erfolgt in der Regel innerhalb von zehn (10) Tagen nach dem Upload des finalen Contents, sofern dieser den Anforderungen des Briefings und etwaigen vereinbarten Zusatzleistungen entspricht.",
-        "(4) Die Genehmigungsbestätigung wird elektronisch über die Plattform oder per E-Mail versendet. Die Zahlung wird mit Erhalt dieser Bestätigung fällig. Thrypes überweist den Betrag dann auf das registrierte Bank- oder Zahlungskonto des Creators.",
-        "(5) Der Creator ist für die ordnungsgemäße Versteuerung seiner Einkünfte verantwortlich. Mit der Annahme dieser Bedingungen bestätigt der Creator, dass er ein gewerbliches oder selbstständiges Unternehmen betreibt und eine gültige Steuernummer besitzt."
+        "(1) Diese Allgemeinen Geschäftsbedingungen (\"AGB\") regeln das Rechtsverhältnis zwischen Thrypes und den registrierten Content Creators (\"Creators\") im Zusammenhang mit der Nutzung der Plattform, der Durchführung von Projekten sowie der Erstellung und Einreichung von Inhalten (\"Content\").",
+        "(2) Individuell ausgehandelte Vereinbarungen zwischen Thrypes und dem Ersteller haben Vorrang vor diesen AGB. Solche Vereinbarungen müssen bis zum Beweis des Gegenteils schriftlich dokumentiert oder bestätigt werden.",
+        "(3) Die Nutzung der Huerray-Plattform ist ausschließlich Unternehmern oder Selbstständigen im Sinne des § 14 BGB vorbehalten. Mit der Registrierung bestätigt der Ersteller, dass er in Ausübung seiner beruflichen oder gewerblichen Tätigkeit handelt oder sich ordnungsgemäß als Selbständiger angemeldet hat.",
+        "(4) Thrypes gewährt den Creators eine nicht übertragbare, widerrufliche Lizenz zur Nutzung der Plattform ausschließlich im Rahmen dieser AGB und der darin vorgesehenen Funktionalitäten.",
+        "(5) Abweichende, entgegenstehende oder ergänzende Allgemeine Geschäftsbedingungen des Erstellers finden keine Anwendung, es sei denn, wir haben ihrer Geltung ausdrücklich schriftlich zugestimmt."
       ]
     },
     {
-      "id": "grant-of-rights",
-      "title": "5. Rechteeinräumung",
+      "id": "Umfang-Dienste",
+      "title": "2. Umfang der Dienstleistungen",
       "content": [
-        "(1) Mit vollständiger Zahlung der vereinbarten Vergütung räumt der Creator der Thrypes GmbH das ausschließliche, unbeschränkte Recht ein, den erstellten Content ohne zeitliche, räumliche oder inhaltliche Einschränkungen zu nutzen. Dieses Recht umfasst alle bekannten und zukünftigen Nutzungsarten. Es beinhaltet insbesondere die Rechte, den Content zu speichern, zu vervielfältigen, auszustellen, zu veröffentlichen, zu verbreiten, öffentlich vorzuführen und online zugänglich zu machen – einschließlich der Nutzung in sozialen Netzwerken, in digitalen Kampagnen, Print- und Online-Medien, PR-Materialien, audiovisuellen Werbeformaten und am Point of Sale.",
-        "(2) Thrypes ist berechtigt, den Content für redaktionelle, werbliche und interne Zwecke zu nutzen, zu bearbeiten oder zu kombinieren, sofern die berechtigten Interessen des Creators – insbesondere Persönlichkeitsrechte – gewahrt bleiben. Soweit gesetzlich zulässig, verzichtet der Creator auf das Recht zur Nennung als Urheber und auf jegliches Genehmigungsrecht hinsichtlich Bearbeitung, Kombination oder Veröffentlichung.",
-        "(3) Thrypes ist berechtigt, Unterlizenzen an Brands oder andere Dritte zu vergeben und die eingeräumten Rechte im eigenen Namen oder im Namen Dritter zu verwerten.",
-        "(4) Der Creator räumt Thrypes zudem das Recht ein, Verletzungen der eingeräumten Rechte durch Dritte im eigenen Namen gerichtlich und außergerichtlich zu verfolgen. Der Creator verpflichtet sich, uns durch Bereitstellung der erforderlichen Informationen und Beweise zu unterstützen.",
-        "(5) Thrypes ist berechtigt, den Content ganz oder teilweise im Zusammenhang mit KI-Systemen zu nutzen, insbesondere als Trainings-, Validierungs- oder Testdaten, als Input für generative Modelle oder die daraus resultierenden Outputs für eigene oder kommerzielle Zwecke zu verwerten.",
-        "(6) Der Creator überträgt Nutzungs-, Urheber- und Verwertungsrechte ausschließlich an Thrypes. Jede Nutzung des Contents durch den Creator oder Dritte außerhalb der Plattform ist nur mit unserer ausdrücklichen schriftlichen Zustimmung gestattet.",
-        "(7) Wir sind nicht verpflichtet, den erstellten Content zu veröffentlichen oder zu nutzen."
+        "(1) Der Creator verpflichtet sich, den von der Marke über die Plattform in Auftrag gegebenen Content (z.B. Foto-, Video- oder Audio-Content) gemäß dem über die Plattform erteilten Briefing zu produzieren und die entsprechenden Rechte gemäß § 6 dieser Creator Terms an Thrypes zu übertragen.",
+        "(2) Der Ersteller wird die Inhalte in der Regel selbst erstellen, kann aber nach vorheriger Zustimmung durch uns sorgfältig ausgewählte Dritte (\"Mitgestalter\") in eigener Verantwortung beauftragen. Der Schöpfer ist allein für die Auswahl, Anleitung und Rechteübertragung solcher Mitgestalter verantwortlich.",
+        "(3) Sofern nicht anders vereinbart, erscheint der Schöpfer persönlich in den Inhalten oder kann andere von der Marke oder Thrypes ausgewählte Personen darstellen, sofern diese Personen der Rechteübertragung ausdrücklich zugestimmt haben.",
+        "(4) Die Lieferung des endgültigen Inhalts muss durch Hochladen über die dafür vorgesehene Funktion auf der Plattform erfolgen. Sofern nicht anders vereinbart, muss der Upload spätestens sieben (7) Kalendertage nach Vertragsabschluss und Erhalt aller erforderlichen Produktionsmaterialien (siehe Abschnitt 7) erfolgen.",
+        "(5) Der Ersteller erklärt sich bereit, innerhalb einer (1) Feedback-Runde bis zu zwei angemessene Überarbeitungen des Inhalts vorzunehmen, sofern Thrypes oder die Marke innerhalb von sieben (7) Tagen nach dem Upload Änderungen verlangt und diese Änderungen in den Rahmen des ursprünglichen Briefings fallen. Diese Überarbeitungen sind durch das vereinbarte Honorar abgedeckt und müssen innerhalb von sieben (7) Kalendertagen nach Erhalt des Feedbacks umgesetzt werden.",
+        "(6) Der Ersteller ist nicht verpflichtet, Nachbesserungen vorzunehmen, die einen unverhältnismäßigen Aufwand erfordern oder über die vereinbarte Einweisung hinausgehen. Gesetzliche Gewährleistungsrechte (§ 10) bleiben unberührt.",
+        "(7) Das Vertragsverhältnis zwischen dem Ersteller und uns ist selbständig. Der Creator erbringt die vereinbarten Leistungen als Freiberufler, in eigenem Namen und auf eigene Rechnung. Aus dem Vertragsverhältnis zwischen Thrypes und der Marke ergeben sich für den Ersteller keine Rechte oder Ansprüche.",
+        "(8) Wir können eigene oder externe KI-Systeme zur Unterstützung der Inhaltserstellung einsetzen. In diesen Fällen wird der Ersteller entsprechend informiert; die vertraglichen Pflichten des Erstellers bleiben davon unberührt."
       ]
     },
     {
-      "id": "use-of-ai",
-      "title": "6. Nutzung von KI-Systemen",
+      "id": "Abschluss-Vertrag",
+      "title": "3. Vertragsabschluss",
       "content": [
-        "(1) Thrypes entwickelt eigene Systeme der künstlichen Intelligenz (KI), setzt KI-Modelle Dritter ein oder kombiniert beide Ansätze (zusammen \"Thrypes KI\"). Im Sinne dieser Bestimmung ist ein KI-System ein maschinengestütztes System, das mit unterschiedlichem Autonomiegrad arbeitet und Outputs – wie Inhalte, Empfehlungen oder Vorhersagen – basierend auf den erhaltenen Inputs generiert.",
-        "(2) Die gemäß Abschnitt 5 eingeräumten Rechte umfassen ausdrücklich die Nutzung des Contents des Creators für KI-Training, Weiterentwicklung und Anwendung von Thrypes KI. Dies beinhaltet insbesondere die Analyse, Verarbeitung, Speicherung und algorithmische Nutzung des Contents zur Verbesserung von Modellen, Generierung neuer Inhalte und Entwicklung automatisierter Funktionen.",
-        "(3) Der Creator stimmt ausdrücklich zu, dass Thrypes alle im Rahmen des Vertrags übermittelten oder generierten Daten und Inhalte – einschließlich etwaiger personenbezogener Daten – für die oben genannten Zwecke nutzen darf. Diese Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden, ohne die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung zu berühren.",
-        "(4) Thrypes verpflichtet sich, alle für das KI-Training genutzten Daten und Inhalte in Übereinstimmung mit der DSGVO und anderen geltenden Datenschutzgesetzen zu verarbeiten und geeignete technische und organisatorische Maßnahmen zum Schutz der Daten zu implementieren."
+        "(1) Mit der Bewerbung für ein auf der Plattform veröffentlichtes Projekt gibt der Creator ein verbindliches Angebot zum Abschluss eines Vertrages über die Erstellung der im Briefing beschriebenen Inhalte ab.",
+        "(2) Der Vertrag kommt zustande, wenn Thrypes den Creator für das jeweilige Projekt auswählt, oder wenn die Marke die Bewerbung des Creators annimmt und Thrypes das Projekt schriftlich oder auf der Plattform bestätigt. Es gilt eine Antwortfrist von vierzehn (14) Kalendertagen.",
+        "(3) Wir sind nicht verpflichtet, eine eingereichte Bewerbung anzunehmen oder ein Vertragsverhältnis einzugehen. Bewerbungen können jederzeit und ohne Angabe von Gründen abgelehnt oder zurückgezogen werden.",
+        "(4) Nach Vertragsabschluss erhält der Ersteller über die Plattform oder per E-Mail eine Projektbestätigung mit allen relevanten Details (Briefing, Termine, Bezahlung, Produktionsmaterial und Lieferart).",
+        "(5) Vertragsgrundlage sind diese Huerray Creator Bedingungen, die jeweilige Einweisung und etwaige ergänzende Vereinbarungen, die dem Creator schriftlich mitgeteilt werden.",
+        "(6) Der Ersteller handelt während der gesamten Vertragsdurchführung selbständig und in eigener Verantwortung. Es besteht kein Arbeitsverhältnis zwischen Thrypes und dem Ersteller. Der Ersteller ist für die Erfüllung seiner steuerlichen und sozialversicherungsrechtlichen Pflichten, die sich aus seiner Tätigkeit ergeben, allein verantwortlich."
       ]
     },
     {
-      "id": "representations-warranties",
-      "title": "7. Zusicherungen und Gewährleistungen",
+      "id": "Ausgleichszahlung",
+      "title": "4. Entschädigung und Bezahlung",
       "content": [
-        "(1) Der Creator sichert zu und gewährleistet, dass er alle erforderlichen Rechte an dem erstellten Content innehat und berechtigt ist, uns die in diesen AGB festgelegten Nutzungs- und Verwertungsrechte vollumfänglich einzuräumen.",
-        "(2) Soweit Dritte (z. B. Co-Creator, Modelle, Kameraleute, Audio- oder Bearbeitungsmitwirkende) am Content beteiligt oder darin erkennbar sind, sichert der Creator zu, dass alle erforderlichen Einwilligungen und Rechteübertragungen von diesen Personen eingeholt wurden. Dies umfasst insbesondere Persönlichkeitsrechte, Bildrechte, Leistungsschutzrechte und datenschutzrechtliche Einwilligungen.",
-        "(3) Der Creator gewährleistet, dass der von ihm erstellte Content frei von Rechten Dritter ist und dass dessen Nutzung durch Thrypes oder die Brand keine Rechte Dritter verletzt, insbesondere Urheberrechte, Markenrechte, Persönlichkeitsrechte oder Wettbewerbsrechte.",
-        "(4) Der Creator verpflichtet sich, uns unverzüglich zu informieren, sobald er Kenntnis von Hinweisen oder Mitteilungen über potenzielle Rechtsverletzungen Dritter im Zusammenhang mit dem erstellten Content erlangt."
+        "(1) Für die Erstellung der vereinbarten Inhalte erhält der Creator von Thrypes die im Vertrag festgelegte Vergütung. Die Höhe der Vergütung wird dem Creator vor der Bewerbung auf der Plattform angezeigt. Im Rahmen eines laufenden Projekts kann der Creator zusätzliche oder erweiterte Leistungen anbieten. Wenn die Marke ein solches Angebot annimmt, wird die Erweiterung als zusätzliches Projekt über die Plattform bestätigt und die Vergütung entsprechend angepasst.",
+        "(2) Die Abrechnung erfolgt über ein Gutschriftsverfahren. Nach erfolgreicher Freigabe des Inhalts stellt Thrypes im Namen des Urhebers eine Gutschrift aus, die in elektronischer Form (PDF) über das Thrypes-Konto des Urhebers verfügbar ist.",
+        "(3) Der Vergütungsanspruch des Creators entsteht mit der Freigabe des Contents durch Thrypes. Die Freigabe erfolgt in der Regel innerhalb von zehn (10) Tagen nach dem Upload des endgültigen Contents, sofern dieser den Anforderungen des Briefings und etwaiger vereinbarter Zusatzleistungen entspricht.",
+        "(4) Die Freigabebestätigung wird elektronisch über die Plattform oder per E-Mail versandt. Mit Erhalt dieser Bestätigung wird die Vergütung fällig. Thrypes überweist dann den Betrag auf das registrierte Bank- oder Zahlungskonto des Urhebers.",
+        "(5) Der Ersteller ist für die ordnungsgemäße Versteuerung seines Einkommens verantwortlich. Mit der Annahme dieser Bedingungen bestätigt der Ersteller, dass er eine gewerbliche oder selbständige Tätigkeit ausübt und über eine gültige Steuernummer verfügt."
       ]
     },
     {
-      "id": "production-materials",
-      "title": "9. Produktionsmaterialien",
+      "id": "Gewährung von Rechten",
+      "title": "5. Einräumung von Rechten",
       "content": [
-        "(1) Alle Gegenstände, Produkte, Muster oder Materialien, die von der Brand zum Zwecke der Content-Erstellung bereitgesteltt werden (\"Produktionsmaterialien\"), werden mit Übergabe an den Creator oder direkt an Thrypes Eigentum von Thrypes, auch wenn die Lieferung direkt durch die Brand erfolgt.",
-        "(2) Der Creator ist zur Rückgabe der Produktionsmaterialien nur verpflichtet, wenn Thrypes ihm den dauerhaften Besitz ausdrücklich nicht eingeräumt hat. Wird der vereinbarte Content nicht fristgerecht erstellt oder hochgeladen, oder verweigert der Creator erforderliche Überarbeitungen gemäß Abschnitt 2(5), muss der Creator alle Produktionsmaterialien an Thrypes zurückgeben, auch wenn diese ursprünglich für den dauerhaften Verbleib vorgesehen waren.",
-        "(3) Der Creator muss alle Produktionsmaterialien sorgfältig behandeln und ausschließlich zur Erfüllung des jeweiligen Projekts verwenden. Jede andere Nutzung, Weitergabe oder Bewerbung solcher Materialien ohne unsere vorherige schriftliche Zustimmung ist untersagt.",
-        "(4) Gibt der Creator Produktionsmaterialien nicht innerhalb der festgelegten Frist nach Aufforderung zurück, zahlt er an Thrypes eine Vertragsstrafe in Höhe des Einzelhandelswertes des jeweiligen Gegenstands, jedoch nicht weniger als 150 EUR. Diese Vertragsstrafe wird mit etwaigen weitergehenden Schadensersatzansprüchen verrechnet."
+        "(1) Mit der vollständigen Zahlung der vereinbarten Vergütung räumt der Urheber der Thrypes GmbH das ausschließliche, zeitlich, räumlich und sachlich unbeschränkte Recht ein, die erstellten Inhalte zu nutzen. Dieses Recht umfasst alle bekannten und zukünftigen Nutzungsformen. Es umfasst insbesondere das Recht, die Inhalte zu speichern, zu vervielfältigen, auszustellen, zu veröffentlichen, zu verbreiten, öffentlich aufzuführen und online zur Verfügung zu stellen - einschließlich der Nutzung in sozialen Netzwerken, in digitalen Kampagnen, Print- und Online-Medien, PR-Materialien, audiovisuellen Werbeformen und am Point of Sale.",
+        "(2) Thrypes ist berechtigt, die Inhalte für redaktionelle, werbliche und interne Zwecke zu nutzen, zu bearbeiten oder zusammenzufassen, sofern die berechtigten Interessen des Urhebers - insbesondere die Persönlichkeitsrechte - gewahrt bleiben. Der Ersteller verzichtet, soweit gesetzlich zulässig, auf das Recht, als Urheber genannt zu werden, und auf jedes Zustimmungsrecht hinsichtlich der Bearbeitung, Zusammenstellung oder Veröffentlichung.",
+        "(3) Thrypes ist berechtigt, Unterlizenzen an Marken oder sonstige Dritte zu vergeben und die eingeräumten Rechte im eigenen Namen oder im Namen Dritter zu verwerten.",
+        "(4) Der Schöpfer räumt Thrypes ferner das Recht ein, Verletzungen der eingeräumten Rechte durch Dritte im eigenen Namen gerichtlich und außergerichtlich zu verfolgen. Der Schöpfer verpflichtet sich, uns dabei mit den notwendigen Informationen und Beweisen zu unterstützen.",
+        "(5) Thrypes ist berechtigt, den Content ganz oder teilweise im Zusammenhang mit KI-Systemen zu nutzen, insbesondere als Trainings-, Validierungs- oder Testdaten, als Input für generative Modelle, oder die daraus resultierenden Outputs für eigene oder kommerzielle Zwecke zu verwerten.",
+        "(6) Der Ersteller überträgt die Nutzungs-, Urheber- und Verwertungsrechte ausschließlich an Thrypes. Eine Nutzung der Inhalte durch den Ersteller oder Dritte außerhalb der Plattform ist nur mit unserer ausdrücklichen schriftlichen Zustimmung zulässig.",
+        "(7) Wir sind nicht verpflichtet, die erstellten Inhalte zu veröffentlichen oder zu nutzen."
       ]
     },
     {
-      "id": "termination-rights",
+      "id": "verwendung von-ai",
+      "title": "6. Einsatz von KI-Systemen",
+      "content": [
+        "(1) Thrypes entwickelt eigene Systeme mit künstlicher Intelligenz (KI), setzt KI-Modelle von Dritten ein oder kombiniert beide Ansätze (zusammen \"Thrypes KI\"). Für die Zwecke dieser Bestimmung ist ein KI-System ein maschinenbasiertes System, das mit einem unterschiedlichen Grad an Autonomie arbeitet und auf der Grundlage von Eingaben, die es erhält, Ergebnisse wie Inhalte, Empfehlungen oder Vorhersagen erzeugt.",
+        "(2) Die in § 5 eingeräumten Rechte umfassen ausdrücklich die Nutzung der Inhalte des Urhebers für das KI-Training, die Weiterentwicklung und die Anwendung von Thrypes KI. Dies umfasst insbesondere die Analyse, Verarbeitung, Speicherung und algorithmische Nutzung der Inhalte, um Modelle zu verbessern, neue Inhalte zu generieren und automatisierte Funktionen zu entwickeln.",
+        "(3) Der Ersteller willigt ausdrücklich ein, dass Thrypes alle im Rahmen des Vertrages übermittelten oder generierten Daten und Inhalte - einschließlich personenbezogener Daten - für die vorgenannten Zwecke verwendet. Diese Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden, ohne dass die Rechtmäßigkeit der auf der Einwilligung beruhenden Verarbeitung vor deren Widerruf berührt wird.",
+        "(4) Thrypes verpflichtet sich, alle für das KI-Training verwendeten Daten und Inhalte in Übereinstimmung mit der DSGVO und anderen anwendbaren Datenschutzgesetzen zu verarbeiten und angemessene technische und organisatorische Maßnahmen zum Schutz der Daten zu treffen."
+      ]
+    },
+    {
+      "id": "Zusicherungen-Garantien",
+      "title": "7. Zusicherungen und Garantien",
+      "content": [
+        "(1) Der Ersteller sichert zu, dass er über alle erforderlichen Rechte an den erstellten Inhalten verfügt und berechtigt ist, uns die in diesen AGB genannten Nutzungs- und Verwertungsrechte in vollem Umfang einzuräumen.",
+        "(2) Soweit Dritte (z.B. Co-Creators, Models, Kameraleute, Audio- oder Schnittmitwirkende) an den Inhalten beteiligt oder darin erkennbar sind, sichert der Creator zu, dass alle erforderlichen Einwilligungen und Rechteübertragungen dieser Personen eingeholt wurden. Dazu gehören insbesondere Persönlichkeitsrechte, Bildrechte, Leistungsschutzrechte und datenschutzrechtliche Einwilligungen.",
+        "(3) Der Ersteller steht dafür ein, dass der von ihm erstellte Content frei von Rechten Dritter ist und seine Nutzung durch Thrypes oder die Marke nicht gegen Rechte Dritter, insbesondere Urheber-, Marken-, Persönlichkeits- oder Wettbewerbsrechte, verstößt.",
+        "(4) Der Ersteller verpflichtet sich, uns unverzüglich zu informieren, sobald ihm Anhaltspunkte oder Hinweise auf mögliche Rechtsverletzungen Dritter im Zusammenhang mit den erstellten Inhalten bekannt werden."
+      ]
+    },
+    {
+      "id": "Produktionsmaterialen",
+      "title": "9. Produktion Materialien",
+      "content": [
+        "(1) Alle Gegenstände, Produkte, Muster oder Materialien, die von der Marke zum Zweck der Erstellung des Inhalts zur Verfügung gestellt werden (\"Produktionsmaterialien\"), gehen mit der Lieferung an den Ersteller oder direkt an Thrypes in das Eigentum von Thrypes über, auch wenn die Lieferung direkt durch die Marke erfolgt.",
+        "(2) Der Ersteller ist zur Rückgabe des Produktionsmaterials nur dann verpflichtet, wenn Thrypes nicht ausdrücklich den dauerhaften Besitz an diesem eingeräumt hat. Wird der vereinbarte Content nicht rechtzeitig erstellt oder hochgeladen oder weigert sich der Ersteller, erforderliche Überarbeitungen gemäß § 2 Abs. 5 vorzunehmen, muss der Ersteller alle Produktionsmaterialien an Thrypes zurückgeben, auch wenn sie ursprünglich zur dauerhaften Aufbewahrung vorgesehen waren.",
+        "(3) Der Ersteller ist verpflichtet, alle Produktionsmaterialien sorgfältig zu behandeln und ausschließlich zum Zweck der Durchführung des jeweiligen Projekts zu verwenden. Jegliche andere Verwendung, Weitergabe oder Förderung dieser Materialien ohne unsere vorherige schriftliche Zustimmung ist untersagt.",
+        "(4) Gibt der Schöpfer das Produktionsmaterial nach Aufforderung nicht fristgerecht zurück, so hat er an Thrypes eine Vertragsstrafe in Höhe des Verkaufswertes des jeweiligen Gegenstandes, mindestens jedoch in Höhe von 150 EUR zu zahlen. Diese Vertragsstrafe wird auf weitergehende Schadensersatzansprüche angerechnet."
+      ]
+    },
+    {
+      "id": "Kündigungsrechte",
       "title": "10. Kündigungsrechte",
       "content": [
-        "(1) Thrypes und der Creator können das Vertragsverhältnis jederzeit fristlos aus wichtigem Grund kündigen. Ein wichtiger Grund liegt insbesondere vor, wenn: a) der Creator wesentliche vertragliche Pflichten oder gesetzliche Bestimmungen verletzt, b) der Creator die vereinbarte Leistung trotz Aufforderung nicht erbringt oder nicht ordnungsgemäß erfüllt, c) der Creator falsche Angaben zu seiner Identität, Tätigkeit oder seinem rechtlichen Status macht, d) der Creator Inhalte erstellt oder verbreitet, die gegen geltendes Recht, die guten Sitten oder Plattformrichtlinien verstoßen, oder e) über das Vermögen des Creators ein Insolvenzverfahren eröffnet oder mangels Masse abgewiesen wird.",
-        "(2) Die ordentliche Kündigung einzelner laufender Projekte ist ausgeschlossen. Der Creator muss alle angenommenen Projekte ordnungsgemäß erfüllen, es sei denn, Thrypes erstreckt die Kündigung ausdrücklich auf das jeweilige Projekt.",
-        "(3) Kündigungen bedürfen der Schriftform (z. B. per E-Mail).",
-        "(4) Im Falle einer berechtigten außerordentlichen Kündigung durch Thrypes verwirkt der Creator alle Ansprüche auf Vergütung für noch nicht erbrachte Leistungen."
+        "(1) Thrypes und der Creator können das Vertragsverhältnis jederzeit aus wichtigem Grund fristlos kündigen. Ein wichtiger Grund liegt insbesondere vor, wenn: a) der Creator gegen wesentliche vertragliche Pflichten oder gesetzliche Bestimmungen verstößt, b) der Creator die vereinbarte Leistung trotz Aufforderung nicht oder nicht ordnungsgemäß erbringt, c) der Creator falsche Angaben zu seiner Identität, Tätigkeit oder seinem rechtlichen Status macht, d) der Creator Inhalte erstellt oder verbreitet, die gegen geltendes Recht, die guten Sitten oder die Plattformrichtlinien verstoßen, oder e) über das Vermögen des Creators ein Insolvenzverfahren eröffnet oder ein solches mangels Masse abgewiesen wird.",
+        "(2) Eine ordentliche Kündigung von einzelnen laufenden Projekten ist ausgeschlossen. Der Ersteller hat alle angenommenen Projekte ordnungsgemäß zu erfüllen, es sei denn, Thrypes erstreckt die Kündigung ausdrücklich auf das jeweilige Projekt.",
+        "(3) Kündigungen müssen schriftlich erfolgen (z. B. per E-Mail).",
+        "(4) Im Falle einer berechtigten Kündigung aus wichtigem Grund durch Thrypes verwirkt der Schöpfer alle Ansprüche auf Vergütung für noch nicht erbrachte Leistungen."
       ]
     },
     {
-      "id": "non-solicitation",
-      "title": "11. Kundenschutzklausel",
+      "id": "Abwerbeverbot",
+      "title": "11. Abwerbeverbotsklausel",
       "content": [
-        "(1) Der Creator unterliegt einer Kundenschutzverpflichtung gegenüber Thrypes. Während der Dauer des Vertragsverhältnisses und für einen Zeitraum von drei (3) Monaten nach dessen Beendigung darf der Creator keine direkten oder indirekten Projekte von Brands annehmen oder durchführen, die ihm im Zusammenhang mit seiner Tätigkeit über Thrypes bekannt geworden sind.",
-        "(2) Diese Kundenschutzverpflichtung gilt in Deutschland, Österreich und der Schweiz und umfasst insbesondere alle Dienstleistungen im Zusammenhang mit User-Generated-Content, Marken-Kooperationen oder Werbeproduktion.",
-        "(3) Im Falle eines Verstoßes gegen diese Verpflichtung zahlt der Creator an Thrypes eine Vertragsstrafe in Höhe des Dreifachen der vereinbarten Vergütung für das jeweilige Projekt – auch wenn der Content nicht produziert wurde (\"hypothetische Vergütung\"). Wir behalten uns zudem das Recht vor, das Konto des Creators zu sperren und weitere Ansprüche auf Unterlassung oder Schadensersatz geltend zu machen.",
-        "(4) Besteht Unklarheit darüber, ob eine Brand dem Creator durch seine Tätigkeit bei uns bekannt geworden ist, trägt der Creator die Beweislast dafür, dass ihm die Brand unabhängig von Thrypes bekannt war.",
-        "(5) Wird der Creator ohne wichtigen Grund von der Nutzung der Plattform ausgeschlossen, kann er innerhalb eines Monats nach der Sperrung schriftlich erklären, dass er sich nicht mehr an die Kundenschutzklausel gebunden fühlt; in diesem Fall wird die Klausel unwirksam."
+        "(1) Der Creator unterliegt einer Kundenschutzpflicht gegenüber Thrypes. Während der Laufzeit des Vertragsverhältnisses und für einen Zeitraum von drei (3) Monaten nach dessen Beendigung darf der Creator keine direkten oder indirekten Projekte von Marken annehmen oder durchführen, die ihm im Zusammenhang mit ihrer Tätigkeit über Thrypes bekannt geworden sind.",
+        "(2) Diese Kundenschutzpflicht gilt innerhalb Deutschlands, Österreichs und der Schweiz und umfasst insbesondere alle Leistungen im Zusammenhang mit nutzergenerierten Inhalten, Markenkooperationen oder Werbeproduktionen.",
+        "(3) Im Falle eines Verstoßes gegen diese Verpflichtung hat der Creator an Thrypes eine Vertragsstrafe in Höhe des Dreifachen der vereinbarten Vergütung für das jeweilige Projekt zu zahlen - auch wenn der Content nicht produziert wurde (\"hypothetische Vergütung\"). Wir behalten uns außerdem das Recht vor, den Account des Creators zu sperren und weitere Unterlassungs- oder Schadensersatzansprüche geltend zu machen.",
+        "(4) Besteht Unklarheit darüber, ob eine Marke dem Schöpfer durch seine Tätigkeit bei uns bekannt wurde, trägt der Schöpfer die Beweislast dafür, dass ihm die Marke unabhängig von Thrypes bekannt war.",
+        "(5) Wird der Ersteller ohne wichtigen Grund von der Nutzung der Plattform ausgeschlossen, kann er innerhalb eines Monats nach dem Ausschluss schriftlich erklären, dass er sich nicht mehr an die Kundenschutzklausel gebunden sieht; in diesem Fall wird die Klausel unwirksam."
       ]
     },
     {
-      "id": "confidentiality",
+      "id": "Vertraulichkeit",
       "title": "12. Vertraulichkeit",
       "content": [
-        "(1) Beide Parteien verpflichten sich, alle vertraulichen Informationen, die ihnen im Zusammenhang mit der Erfüllung dieser Vereinbarung bekannt werden, streng vertraulich zu behandeln und solche Informationen nur für die vertraglich vereinbarten Zwecke zu verwenden.",
-        "(2) \"Vertrauliche Informationen\" sind alle Informationen, Dokumente, Daten und Materialien, die als vertraulich gekennzeichnet sind oder ihrer Natur nach als vertraulich anzusehen sind. Der Creator verpflichtet sich insbesondere, Zugang zu vertraulichen Informationen der Brand nur Personen zu gewähren, die direkt an der Erfüllung der vertraglichen Leistungen beteiligt sind. Beide Parteien vereinbaren zudem, keine Schutzrechtsanmeldungen auf Basis vertraulicher Informationen der anderen Partei einzureichen.",
-        "(3) Ist eine Partei gesetzlich oder durch behördliche Anordnung verpflichtet, vertrauliche Informationen offenzulegen, muss sie die andere Partei unverzüglich – und soweit rechtlich zulässig vor der Offenlegung – über eine solche Verpflichtung informieren.",
-        "(4) Die Vertraulichkeitsverpflichtungen gelten auch nach Beendigung dieser Vereinbarung fort. Nach Beendigung müssen beide Parteien auf Verlangen unverzüglich alle vertraulichen Informationen der anderen Partei zurückgeben oder – soweit keine gesetzlichen Aufbewahrungspflichten bestehen – vernichten, soweit diese nicht im Rahmen der Vertragserfüllung rechtmäßig verbraucht wurden."
+        "(1) Beide Parteien verpflichten sich, alle vertraulichen Informationen, die ihnen im Zusammenhang mit der Durchführung dieses Vertrages offenbart werden, streng vertraulich zu behandeln und nur für die in diesem Vertrag vereinbarten Zwecke zu verwenden.",
+        "(2) \"Vertrauliche Informationen\" sind alle Informationen, Unterlagen, Daten und Materialien, die als vertraulich gekennzeichnet sind oder ihrer Natur nach als vertraulich zu betrachten sind. Der Schöpfer verpflichtet sich insbesondere, den Zugang zu vertraulichen Informationen der Marke nur Personen zu gewähren, die unmittelbar an der Erfüllung der vertraglichen Leistungen beteiligt sind. Beide Parteien verpflichten sich außerdem, keine Anträge auf geistiges Eigentum zu stellen, die auf den vertraulichen Informationen der anderen Partei beruhen.",
+        "(3) Wenn eine Partei gesetzlich verpflichtet ist oder von einer Behörde zur Offenlegung vertraulicher Informationen aufgefordert wird, muss sie die andere Partei unverzüglich - und, soweit gesetzlich zulässig, vor der Offenlegung - über diese Verpflichtung informieren.",
+        "(4) Die Geheimhaltungsverpflichtungen gelten auch nach Beendigung dieses Vertrages fort. Bei Beendigung haben beide Parteien auf Verlangen alle vertraulichen Informationen der jeweils anderen Partei unverzüglich zurückzugeben oder - soweit keine gesetzlichen Aufbewahrungspflichten bestehen - zu vernichten, soweit sie nicht im Rahmen der Erfüllung dieses Vertrages rechtmäßig verbraucht wurden."
       ]
     },
     {
-      "id": "indemnification",
-      "title": "13. Freistellung",
+      "id": "Entschädigung",
+      "title": "13. Entschädigung",
       "content": [
-        "(1) Der Creator stellt Thrypes von allen angemessenen Kosten und Aufwendungen frei, die im Rahmen der Verteidigung gegen berechtigte Ansprüche Dritter entstehen, sofern solche Ansprüche darauf beruhen, dass: <ul class='ml-8'> <li class='mb-4'>a) Dritte eine Verletzung ihrer geistigen Eigentumsrechte gegenüber Thrypes im Zusammenhang mit vom Creator erstellten Content geltend machen und diese Verletzung auf einem schuldhaften Verhalten des Creators beruht; oder</li> <li class='mb-4'>b) Dritte Ansprüche geltend machen, die aus einem schuldhaften Verstoß des Creators gegen die in diesen Bedingungen festgelegten Zusicherungen und Gewährleistungen (insbesondere, aber nicht beschränkt auf Abschnitt 7) resultieren.</li></ul>",
-        "(2) Die Freistellungsverpflichtung entfällt, soweit der jeweilige Anspruch Dritter auf unser eigenes Verschulden zurückzuführen ist.",
-        "(3) Die Freistellungsverpflichtung des Creators gilt nur, wenn a) der jeweilige Anspruch Dritter rechtskräftig festgestellt wurde und b) Thrypes den Creator innerhalb einer angemessenen Frist nach einer solchen rechtskräftigen Feststellung schriftlich über den Anspruch informiert hat."
+        "(1) Der Ersteller stellt Thrypes von allen angemessenen Kosten und Aufwendungen frei, die bei der Abwehr berechtigter Ansprüche Dritter entstehen, sofern diese Ansprüche entstehen, weil: <ul class='ml-8'> <li class='mb-4'>a) Dritte gegenüber Thrypes eine Verletzung ihrer geistigen Eigentumsrechte im Zusammenhang mit vom Ersteller erstellten Inhalten geltend machen und diese Verletzung auf einem schuldhaften Verhalten des Erstellers beruht; oder</li> <li class='mb-4'>b) Dritte Ansprüche geltend machen, die sich aus einer schuldhaften Verletzung der in diesen Bedingungen (insbesondere, aber nicht ausschließlich, Ziffer 7) enthaltenen Zusicherungen und Gewährleistungen durch den Ersteller ergeben.</li></ul>",
+        "(2) Die Freistellungsverpflichtung gilt nicht, soweit der jeweilige Drittanspruch auf unser eigenes Verschulden zurückzuführen ist.",
+        "(3) Die Freistellungsverpflichtung des Erstellers gilt nur, wenn a) der betreffende Drittanspruch rechtskräftig festgestellt ist und b) Thrypes den Ersteller innerhalb einer angemessenen Frist nach der Rechtskraft des Urteils schriftlich über den Anspruch informiert hat."
       ]
     },
     {
-      "id": "data-protection",
+      "id": "datenschutz",
       "title": "14. Datenschutz",
       "content": [
-        "Soweit Thrypes personenbezogene Daten im Rahmen der Erbringung von Dienstleistungen verarbeitet, für die sie nicht Verantwortlicher im Sinne der DSGVO ist, oder wo ein Zugriff auf solche Daten nicht ausgeschlossen werden kann, schließen die Parteien vorab einen Auftragsverarbeitungsvertrag gemäß Artikel 28 DSGVO.",
-        "Werden personenbezogene Daten Dritter vom Creator an uns übermittelt, erfolgt eine solche Verarbeitung ausschließlich im Auftrag des Creators und in Übereinstimmung mit den geltenden gesetzlichen Bestimmungen. Der Creator bleibt für die Rechtmäßigkeit einer solchen Datenverarbeitung verantwortlich.",
-        "Eine Funktionsübertragung auf Thrypes findet nicht statt. Wir behalten uns das Recht vor, bestimmte Plattformfunktionen einzuschränken oder auszusetzen, wenn kein gültiger Auftragsverarbeitungsvertrag vorliegt."
+        "Wenn Thrypes personenbezogene Daten im Rahmen der Erbringung von Dienstleistungen verarbeitet, für die es nicht der für die Verarbeitung Verantwortliche im Sinne der DSGVO ist, oder wenn der Zugriff auf diese Daten nicht ausgeschlossen werden kann, schließen die Parteien im Voraus eine Datenverarbeitungsvereinbarung gemäß Artikel 28 der DSGVO ab.",
+        "Werden personenbezogene Daten Dritter vom Ersteller an uns übermittelt, so erfolgt die Verarbeitung ausschließlich im Auftrag des Erstellers und in Übereinstimmung mit den geltenden gesetzlichen Bestimmungen. Der Ersteller bleibt für die Rechtmäßigkeit einer solchen Datenverarbeitung verantwortlich.",
+        "Es findet keine Übertragung von Funktionen auf Thrypes statt. Wir behalten uns das Recht vor, bestimmte Funktionen der Plattform einzuschränken oder auszusetzen, wenn kein gültiger Datenverarbeitungsvertrag vorliegt."
       ]
     },
     {
-      "id": "amendments",
+      "id": "Änderungen",
       "title": "15. Änderungen der Bedingungen",
-      "content": "Wir behalten uns das Recht vor, diese Bedingungen zukünftig zu ändern, sofern berechtigte Gründe vorliegen (z. B. Gesetzesänderungen, neue Dienste oder technische Anpassungen). Der Creator wird über Änderungen mindestens vier Wochen vor deren Inkrafttreten per E-Mail informiert. Widerspricht der Creator nicht innerhalb dieser Frist, gelten die Änderungen als angenommen."
+      "content": "Wir behalten uns das Recht vor, diese Bedingungen bei Vorliegen berechtigter Gründe (z.B. gesetzliche Änderungen, neue Dienstleistungen oder technische Anpassungen) für die Zukunft zu ändern. Die Änderungen werden dem Ersteller mindestens vier Wochen vor ihrem Inkrafttreten per E-Mail mitgeteilt. Widerspricht der Ersteller nicht innerhalb dieser Frist, gelten die Änderungen als angenommen."
     },
     {
-      "id": "final-provisions",
+      "id": "Schlussbestimmungen",
       "title": "16. Schlussbestimmungen",
       "content": [
-        "(1) Diese Vereinbarung unterliegt dem Recht der Bundesrepublik Deutschland unter Ausschluss seiner Kollisionsnormen und des Übereinkommens der Vereinten Nationen über Verträge über den internationalen Warenkauf (CISG).",
-        "(2) Der Creator kann nur mit unbestrittenen oder rechtskräftig festgestellten Forderungen aufrechnen. Gleiches gilt für die Geltendmachung von Zurückbehaltungsrechten.",
-        "(3) Die Abtretung von Forderungen oder Rechten aus dieser Vereinbarung durch den Creator ist nur mit unserer vorherigen schriftlichen Zustimmung zulässig, vorbehaltlich § 354a HGB.",
-        "(4) Sollte eine Bestimmung dieser Vereinbarung unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt. Anstelle der unwirksamen Bestimmung gilt eine wirksame, die dem gewollten wirtschaftlichen Zweck am nächsten kommt. Gleiches gilt im Falle von Vertragslücken.",
-        "(5) Erfüllungsort und Gerichtsstand ist der eingetragene Sitz von Thrypes, sofern der Creator Kaufmann, eine juristische Person des öffentlichen Rechts oder ein öffentlich-rechtliches Sondervermögen ist oder keinen allgemeinen Gerichtsstand in Deutschland hat. Wir behalten uns das Recht vor, gegen den Creator an dessen allgemeinem Gerichtsstand zu klagen.",
-        "(6) Die Vertragssprache ist Deutsch. Übersetzungen dienen nur der Bequemlichkeit; im Falle von Abweichungen ist die deutsche Fassung dieser Allgemeinen Geschäftsbedingungen maßgebend."
+        "(1) Dieser Vertrag unterliegt dem Recht der Bundesrepublik Deutschland unter Ausschluss des Kollisionsrechts und des Übereinkommens der Vereinten Nationen über Verträge über den internationalen Warenkauf (CISG).",
+        "(2) Der Schöpfer kann nur mit unbestrittenen oder rechtskräftig festgestellten Forderungen aufrechnen. Das Gleiche gilt für die Geltendmachung von Zurückbehaltungsrechten.",
+        "(3) Die Abtretung von Ansprüchen oder Rechten aus diesem Vertrag durch den Ersteller ist nur mit unserer vorherigen schriftlichen Zustimmung unter Beachtung von § 354a HGB zulässig.",
+        "(4) Sollte eine Bestimmung dieses Vertrages unwirksam sein oder werden, so wird dadurch die Wirksamkeit der übrigen Bestimmungen nicht berührt. Anstelle der unwirksamen Bestimmung gilt eine wirksame, die dem angestrebten wirtschaftlichen Zweck am nächsten kommt. Das gleiche gilt im Falle von Vertragslücken.",
+        "(5) Erfüllungsort und Gerichtsstand ist der Sitz von Thrypes, sofern der Ersteller Kaufmann, eine juristische Person des öffentlichen Rechts oder ein öffentlich-rechtliches Sondervermögen ist oder keinen allgemeinen Gerichtsstand in Deutschland hat. Wir behalten uns das Recht vor, den Ersteller an seinem allgemeinen Gerichtsstand zu verklagen.",
+        "(6) Die Vertragssprache ist Deutsch. Übersetzungen werden nur aus Gründen der Übersichtlichkeit zur Verfügung gestellt; im Falle von Abweichungen ist die deutsche Fassung dieser Allgemeinen Geschäftsbedingungen maßgebend."
       ]
     }
   ]

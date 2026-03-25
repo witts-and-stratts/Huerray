@@ -1,18 +1,20 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { BrandStatRow } from './brand-dashboard-utils';
+import { useTranslations } from "next-intl";
 
 interface BrandCampaignMetricsBlockProps {
   rows: BrandStatRow[];
 }
 
 export function BrandCampaignMetricsBlock( { rows }: BrandCampaignMetricsBlockProps ) {
+  const t = useTranslations('dashboard.admin');
   const maxValue = Math.max( ...rows.map( ( row ) => row.numeric ), 1 );
 
   return (
     <Card className="ad-summary-card flex-1">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Campaigns</CardTitle>
-        <CardDescription className="ad-card-description">Campaign lifecycle overview</CardDescription>
+        <CardTitle className="ad-card-title">{t('brandCampaignMetricsBlock.campaigns')}</CardTitle>
+        <CardDescription className="ad-card-description">{t('brandCampaignMetricsBlock.campaignLifecycleOverview')}</CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2 space-y-0">
         { rows.map( ( item ) => {

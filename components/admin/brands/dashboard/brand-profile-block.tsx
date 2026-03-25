@@ -15,6 +15,7 @@ import { useFormatDate } from '@/lib/hooks/format';
 import { useUser } from '@/lib/api/hooks/users';
 import { cn } from '@/lib/dashboard-utils';
 import { Loader2 } from 'lucide-react';
+import { useTranslations } from "next-intl";
 
 interface BrandProfileBlockProps {
   brand: ModelsBrandResponse;
@@ -41,6 +42,7 @@ function EmptyState( { label }: { label: string; } ) {
 }
 
 function UserTab( { userId }: { userId: string; } ) {
+  const t = useTranslations('dashboard.admin');
   const { data: userDetails, isLoading } = useUser( userId );
   const joinedLabel = useFormatDate( userDetails?.created_at || '' );
   const updatedLabel = useFormatDate( userDetails?.updated_at || '' );
@@ -54,7 +56,7 @@ function UserTab( { userId }: { userId: string; } ) {
   }
 
   if ( !userDetails ) {
-    return <EmptyState label="Failed to load user details" />;
+    return <EmptyState label={t('brandProfileBlock.failedToLoadUser')} />;
   }
 
   const {
@@ -63,52 +65,53 @@ function UserTab( { userId }: { userId: string; } ) {
   } = userDetails;
 
   const toLabel = ( value?: string ) =>
-    value ? value.replace( /_/g, ' ' ).replace( /\b\w/g, c => c.toUpperCase() ) : 'N/A';
+    value ? value.replace( /_/g, ' ' ).replace( /\b\w/g, c => c.toUpperCase() ) : t('brandProfileBlock.na');
 
   return (
     <div className="space-y-3">
-      <WrappedCard title="Identity">
+      <WrappedCard title={t('brandProfileBlock.identity')}>
         <div className="flex items-center gap-2 flex-wrap pb-1">
           <UserStatusBadge status={ user_status || 'unknown' } />
           <EmailStatusBadge
-            status={ email_verified ? 'Email verified' : 'Email unverified' }
+            status={ email_verified ? t('brandProfileBlock.emailVerified') : t('brandProfileBlock.emailUnverified') }
             className={ email_verified ? 'border-green-400/40 text-green-600' : 'border-amber-400/40 text-amber-600' }
           />
         </div>
-        <Row label="Name" value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || username || 'N/A' } />
-        <Row label="Username" value={
-          <CopyText text={ username! } iconSide="left" copyMessage="Username copied" clamp={ true }>
-            { username ? `@${ username }` : 'N/A' }
+        <Row label={t('brandProfileBlock.name')} value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || username || t('brandProfileBlock.na') } />
+        <Row label={t('brandProfileBlock.username')} value={
+          <CopyText text={ username! } iconSide="left" copyMessage={t('brandProfileBlock.usernameCopied')} clamp={ true }>
+            { username ? `@${ username }` : t('brandProfileBlock.na') }
           </CopyText>
         } />
-        <Row label="Type" value={ toLabel( user_type ) } />
-        <Row label="Email" value={
+        <Row label={t('brandProfileBlock.type')} value={ toLabel( user_type ) } />
+        <Row label={t('brandProfileBlock.email')} value={
           <CopyText text={ email! } iconSide="left" clamp={ true }>
-            { email ?? 'N/A' }
+            { email ?? t('brandProfileBlock.na') }
           </CopyText>
         } />
       </WrappedCard>
 
-      <WrappedCard title="System">
+      <WrappedCard title={t('brandProfileBlock.system')}>
         <Row
-          label="User ID"
+          label={t('brandProfileBlock.userId')}
           col2ClassName="self-center"
           value={
             id ? (
-              <CopyText text={ id } iconSide="left" copyMessage="User ID copied" className="font-mono font-light text-[13px]" clamp={ true }>
+              <CopyText text={ id } iconSide="left" copyMessage={t('brandProfileBlock.userIdCopied')} className="font-mono font-light text-[13px]" clamp={ true }>
                 { id }
               </CopyText>
-            ) : 'N/A'
+            ) : t('brandProfileBlock.na')
           }
         />
-        <Row label="Joined" value={ joinedLabel } />
-        <Row label="Updated" value={ updatedLabel } />
+        <Row label={t('brandProfileBlock.joined')} value={ joinedLabel } />
+        <Row label={t('brandProfileBlock.updated')} value={ updatedLabel } />
       </WrappedCard>
     </div>
   );
 }
 
 export function BrandProfileBlock( { brand, brandName, brandLogo, children }: BrandProfileBlockProps ) {
+  const t = useTranslations('dashboard.admin');
   const status = ( brand as ModelsBrandResponse & { status?: string; } ).status || brand?.brand_status || 'inactive';
   const flagName = getCountryFlag( brand?.country );
   const location = [ brand?.city, brand?.country ].filter( Boolean ).join( ', ' );
@@ -128,7 +131,7 @@ export function BrandProfileBlock( { brand, brandName, brandLogo, children }: Br
           </Avatar>
           <div className="flex flex-col items-center">
             <span className="ad-card-title card__title font-medium text-foreground">{ brandName }</span>
-            <span className="ad-card-description text-muted-foreground text-sm">{ brand?.preferred_contact_email || 'No contact email' }</span>
+            <span className="ad-card-description text-muted-foreground text-sm">{ brand?.preferred_contact_email || t('brandProfileBlock.noContactEmail') }</span>
             <div className="mt-2 text-[10px] sm:text-xs">
               <BrandStatusBadge status={ status } />
             </div>
@@ -139,55 +142,55 @@ export function BrandProfileBlock( { brand, brandName, brandLogo, children }: Br
       <CardContent className="px-3 pb-4">
         <Tabs defaultValue="overview">
           <TabsList className="w-full mb-3">
-            <TabsTrigger value="overview" className="flex-1 text-xs">Overview</TabsTrigger>
-            <TabsTrigger value="contact" className="flex-1 text-xs">Contact</TabsTrigger>
-            <TabsTrigger value="user" className="flex-1 text-xs">User</TabsTrigger>
+            <TabsTrigger value="overview" className="flex-1 text-xs">{t('brandProfileBlock.overview')}</TabsTrigger>
+            <TabsTrigger value="contact" className="flex-1 text-xs">{t('brandProfileBlock.contact')}</TabsTrigger>
+            <TabsTrigger value="user" className="flex-1 text-xs">{t('brandProfileBlock.user')}</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
           <TabsContent value="overview">
-            <WrappedCard title="Details">
-              <Row label="Category" value={ brand?.category || 'N/A' } />
-              <Row label="Location" value={
+            <WrappedCard title={t('brandProfileBlock.details')}>
+              <Row label={t('brandProfileBlock.category')} value={ brand?.category || t('brandProfileBlock.na') } />
+              <Row label={t('brandProfileBlock.location')} value={
                 <span className="flex items-center gap-1.5 justify-end">
                   { flagName && (
                     <Image
                       src={ `/images/flags/${ flagName }.svg` }
-                      alt={ brand?.country || 'Country' }
+                      alt={ brand?.country || t('brandProfileBlock.country') }
                       width={ 14 }
                       height={ 10 }
                       className="h-3 w-auto"
                     />
                   ) }
-                  <span>{ location || 'N/A' }</span>
+                  <span>{ location || t('brandProfileBlock.na') }</span>
                 </span>
               } />
-              <Row label="Company Size" value={ String( brand?.company_size || 'N/A' ).replace( /_/g, ' ' ) } />
-              <Row label="Registered" value={ brand?.registration_number || 'N/A' } />
-              <Row label="VAT ID" value={ brand?.vat_id || 'N/A' } />
-              <Row label="Joined" value={ joinedLabel } />
+              <Row label={t('brandProfileBlock.companySize')} value={ String( brand?.company_size || t('brandProfileBlock.na') ).replace( /_/g, ' ' ) } />
+              <Row label={t('brandProfileBlock.registered')} value={ brand?.registration_number || t('brandProfileBlock.na') } />
+              <Row label={t('brandProfileBlock.vatId')} value={ brand?.vat_id || t('brandProfileBlock.na') } />
+              <Row label={t('brandProfileBlock.joined')} value={ joinedLabel } />
             </WrappedCard>
           </TabsContent>
 
           {/* Contact Tab */}
           <TabsContent value="contact" className="space-y-3">
-            <WrappedCard title="Contact">
-              <Row label="Email" value={
+            <WrappedCard title={t('brandProfileBlock.contact')}>
+              <Row label={t('brandProfileBlock.email')} value={
                 brand?.preferred_contact_email ? (
                   <CopyText text={ brand.preferred_contact_email } iconSide="left" clamp={ true }>
                     { brand.preferred_contact_email }
                   </CopyText>
-                ) : 'N/A'
+                ) : t('brandProfileBlock.na')
               } />
-              <Row label="Phone" value={ brand?.preferred_contact_phone || 'N/A' } />
-              <Row label="Website" value={ brand?.website_url || 'N/A' } />
+              <Row label={t('brandProfileBlock.phone')} value={ brand?.preferred_contact_phone || t('brandProfileBlock.na') } />
+              <Row label={t('brandProfileBlock.website')} value={ brand?.website_url || t('brandProfileBlock.na') } />
             </WrappedCard>
 
-            <WrappedCard title="Address">
+            <WrappedCard title={t('brandProfileBlock.addressTitle')}>
               { address ? (
                 <p className="text-sm leading-relaxed">{ address }</p>
               ) : (
-                <EmptyState label="No address on file" />
+                <EmptyState label={t('brandProfileBlock.noAddress')} />
               ) }
             </WrappedCard>
           </TabsContent>
@@ -197,7 +200,7 @@ export function BrandProfileBlock( { brand, brandName, brandLogo, children }: Br
             { brand?.user_id ? (
               <UserTab userId={ brand.user_id } />
             ) : (
-              <EmptyState label="No linked user account" />
+              <EmptyState label={t('brandProfileBlock.noLinkedUser')} />
             ) }
           </TabsContent>
         </Tabs>

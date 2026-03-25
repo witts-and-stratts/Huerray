@@ -1,6 +1,7 @@
 import { Badge } from '@/components/dashboard-ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { operationalAlerts } from './dashboard-mock-data';
+import { useTranslations } from 'next-intl';
 
 function severityVariant( severity: 'high' | 'medium' | 'low' ) {
   if ( severity === 'high' ) return 'destructive';
@@ -9,11 +10,12 @@ function severityVariant( severity: 'high' | 'medium' | 'low' ) {
 }
 
 export function OperationalAlertsBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <Card className="ad-card">
       <CardHeader>
-        <CardTitle className="ad-card-title">Operational Alerts</CardTitle>
-        <CardDescription className="ad-card-description">System and workflow signals that may require intervention</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.operationalAlerts.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.operationalAlerts.description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="ad-alert-list">
         { operationalAlerts.map( ( alert ) => (

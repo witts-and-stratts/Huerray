@@ -5,6 +5,7 @@ import { cn } from '@/lib/dashboard-utils';
 import { CreatorCategories } from '../creator-categories';
 import { ChevronDown } from 'lucide-react';
 import { ModelsCreatorResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 export interface CreatorDetailsSheetProps {
   creator: ModelsCreatorResponse | null;
@@ -32,6 +33,7 @@ export const SocialLink = ( { href, icon, alt }: { href: string; icon: string; a
 );
 
 export const ExpandableCategories = ( { categories }: { categories: string[]; } ) => {
+  const tc = useTranslations( 'dashboard.common' );
   const [ expanded, setExpanded ] = React.useState( false );
   const [ overflows, setOverflows ] = React.useState( false );
   const ref = React.useRef<HTMLDivElement>( null );
@@ -52,7 +54,7 @@ export const ExpandableCategories = ( { categories }: { categories: string[]; } 
           className="flex items-center gap-1 text-[10px] text-muted-foreground hover:text-primary transition-colors"
         >
           <ChevronDown className={ cn( 'size-3 transition-transform duration-300', expanded && 'rotate-180' ) } />
-          { expanded ? 'Show less' : 'Show all' }
+          { expanded ? tc( 'showLess' ) : tc( 'showAll' ) }
         </button>
       ) }
     </div>

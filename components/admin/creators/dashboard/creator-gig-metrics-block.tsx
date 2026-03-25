@@ -1,18 +1,20 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { CreatorStatRow } from './creator-dashboard-utils';
+import { useTranslations } from 'next-intl';
 
 interface CreatorGigMetricsBlockProps {
   rows: CreatorStatRow[];
 }
 
 export function CreatorGigMetricsBlock( { rows }: CreatorGigMetricsBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   const maxValue = Math.max( ...rows.map( ( row ) => row.numeric ), 1 );
 
   return (
     <Card className="ad-summary-card flex-1">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Gigs</CardTitle>
-        <CardDescription className="ad-card-description">Gig participation overview</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'creatorDashboard.blocks.gigMetrics' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'creatorDashboard.description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2 space-y-0">
         { rows.map( ( item ) => {

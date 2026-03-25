@@ -1,4 +1,4 @@
-.PHONY: add-dashboard add-marketing
+.PHONY: add-dashboard add-marketing add-animate translate
 
 # Add a component to the Dashboard UI (Vega style)
 # Usage: make add-dashboard c=component-name
@@ -51,3 +51,8 @@ add-marketing:
 	fi
 	@echo "Installing $(c) to Marketing UI..."
 	@npx shadcn@latest add $(c)
+
+# Translate language files using the backend API
+translate:
+	@echo "Translating language files..."
+	@node scripts/translate.js

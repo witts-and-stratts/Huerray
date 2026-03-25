@@ -1,0 +1,48 @@
+{
+  "brand": {
+    "dashboard": "Dashboard",
+    "campaigns": "Campaigns",
+    "gigs": "Gigs",
+    "creators": "Creators",
+    "analytics": "Analytics",
+    "invoices": "Invoices",
+    "payments": "Payments",
+    "savedLists": "Saved Lists",
+    "templates": "Templates",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "creator": {
+    "dashboard": "Dashboard",
+    "invitations": "Invitations",
+    "myGigs": "Gigs",
+    "allGigs": "All Gigs",
+    "availableGigs": "Available Gigs",
+    "activeGigs": "Active Gigs",
+    "profile": "Profile",
+    "analytics": "Analytics",
+    "earnings": "Earnings",
+    "account": "Account",
+    "settings": "Settings"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "creators": "Creators",
+    "brands": "Brands",
+    "campaigns": "Campaigns",
+    "gigs": "Gigs",
+    "invoices": "Invoices",
+    "payments": "Payouts",
+    "analytics": "Analytics",
+    "moderation": "Moderation",
+    "platformReports": "Platform Reports",
+    "systemLogs": "System Logs",
+    "alerts": "Alerts",
+    "settings": "Settings"
+  },
+  "common": {
+    "getHelp": "Get Help",
+    "search": "Search"
+  }
+}

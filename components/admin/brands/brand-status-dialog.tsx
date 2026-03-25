@@ -16,6 +16,7 @@ import { useForm } from "@tanstack/react-form";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 const statusToEnum = {
@@ -44,6 +45,7 @@ export function BrandStatusDialog( {
   currentStatus,
   onSuccess,
 }: BrandStatusDialogProps ) {
+  const t = useTranslations('dashboard.admin');
   const { mutateAsync: updateStatus, isPending } = useUpdateBrandStatus( brandId );
 
 
@@ -101,10 +103,9 @@ export function BrandStatusDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className='font-primary text-h5 font-normal text-primary!'>Update Brand Status</DialogTitle>
+          <DialogTitle className='font-primary text-h5 font-normal text-primary!'>{t('brandStatusDialog.updateBrandStatus')}</DialogTitle>
           <DialogDescription>
-            Review the brand's profile and update their status.
-          </DialogDescription>
+            {t('brandStatusDialog.reviewTheBrandsProfile')}</DialogDescription>
         </DialogHeader>
         <form onSubmit={ handleSubmit } className="grid gap-4 py-4">
           <form.Field
@@ -141,15 +142,13 @@ export function BrandStatusDialog( {
 
           <DialogFooter>
             <Button variant="outline" type="button" onClick={ () => onOpenChange( false ) } disabled={ isPending }>
-              Cancel
-            </Button>
+              {t('brandStatusDialog.cancel')}</Button>
             <form.Subscribe
               selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
               children={ ( [ canSubmit, isSubmitting ] ) => (
                 <Button type="submit" disabled={ !canSubmit || isSubmitting || isPending }>
                   { ( isSubmitting || isPending ) && <Loader2 className="mr-2 size-4 animate-spin" /> }
-                  Update Status
-                </Button>
+                  {t('brandStatusDialog.updateStatus')}</Button>
               ) }
             />
           </DialogFooter>

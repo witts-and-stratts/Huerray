@@ -20,7 +20,7 @@ export const FileCardDocument = memo( ( props: FileCardProps ) => {
 
   const uploadFn = useCallback( ( api: ReturnType<typeof UploadApiFactory>, file: File, onProgress: ( e: any ) => void, signal: AbortSignal ) =>
     api.uploadsDocumentsPost( { documents: file }, { headers: { 'Content-Type': undefined } as any, onUploadProgress: onProgress, signal } ),
-  [] );
+    [] );
 
   const progress = useFileUpload( item, isOverlay, onUploadSuccess, onUploadError, uploadFn );
 
@@ -50,7 +50,7 @@ export const FileCardDocument = memo( ( props: FileCardProps ) => {
   };
 
   return (
-    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle }>
+    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle } onSelect={ ( id ) => props.onSelect?.( id, false ) }>
       { isPdf && pdfFile ? (
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden w-full h-full p-2 pointer-events-none">
           { cachedCover ? (

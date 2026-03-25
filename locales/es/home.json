@@ -1,54 +1,54 @@
 {
-  "tagline": "Huerray une a creadores y marcas para crear el contenido perfecto para redes sociales, comercio electrónico, anuncios y más",
+  "tagline": "Huerray reúne a creadores y marcas para crear el contenido perfecto para redes sociales, comercio electrónico, anuncios y mucho más.",
   "hero": {
-    "title": "Contenido de video UGC auténtico que convierte",
-    "subtitle": "Colabora con creadores reales y verificados que hacen videos impactantes para TikTok, Reels y anuncios",
-    "description": "Sin suscripciones. Sin costos de plataforma.\nSolo UGC que impulsa las ventas"
+    "title": "Auténtico contenido de vídeo UGC que convierte",
+    "subtitle": "Colabora con verdaderos creadores que hacen vídeos para TikTok, Reels y Ads.",
+    "description": "Sin suscripciones. Sin costes de plataforma.\nSólo CGU que impulsa las ventas"
   },
   "howItWorks": {
     "step1": {
       "title": "Encuentra y conecta con creadores que encajen con tu marca",
-      "description": "Personaliza y publica tu brief, ajustando detalles como duración, formato y edición de video sobre la marcha"
+      "description": "Personalice y publique sus instrucciones, adaptando detalles como la duración, el formato y la edición de vídeo."
     },
     "step2": {
-      "title": "Encarga fotos y videos atractivos y originales",
-      "description": "Recibe solicitudes de los mejores creadores. Selecciona a tus creadores preferidos según criterios que se ajusten al contenido de tu marca o requisitos de campaña"
+      "title": "Encargar fotos y vídeos atractivos y originales",
+      "description": "Reciba solicitudes de los mejores creadores. Selecciona a tus creadores preferidos según los criterios que se ajusten a los requisitos del contenido de tu marca o campaña."
     },
     "step3": {
-      "title": "Envía y recibe comentarios",
-      "description": "Utiliza la función de comunicación integrada para intercambiar comentarios con tus creadores, hacerles preguntas sobre sus entregas, hacer ajustes donde sea necesario o refinar tus requisitos"
+      "title": "Enviar y recibir comentarios",
+      "description": "Utiliza la función de comunicación integrada para intercambiar opiniones con tus creadores, hacerles preguntas sobre sus entregas, realizar ajustes cuando sea necesario o afinar tus requisitos."
     },
     "step4": {
-      "title": "100% derechos de licencia sobre todo el contenido creado",
-      "description": "Usa tu contenido generado. Tu UGC se entregará en un plazo de 7 días. Luego puedes comenzar a implementarlo en tu campaña"
+      "title": "100% de derechos de licencia sobre todos los contenidos creados",
+      "description": "Utiliza el contenido que has generado. Su contenido generado por el usuario se entregará en un plazo de 7 días. A continuación, puede empezar a implementarlo en su campaña"
     }
   },
   "contentObjectives": {
-    "title": "Contenido para cada objetivo",
-    "subtitle": "Los creadores producen contenido de alta calidad todo el tiempo, desde lo-fi hasta hi-fi. Los creadores tienen rango y adaptan su producción para coincidir con tus objetivos",
+    "title": "Contenidos para cada objetivo",
+    "subtitle": "Los creadores producen contenidos de alta calidad todo el tiempo, desde lo-fi hasta hi-fi. Los creadores tienen variedad y adaptan su producción a tus objetivos.",
     "categories": {
       "product_shots": "Fotos de productos",
-      "testimonial_videos": "Videos testimoniales",
-      "unboxing_videos": "Videos de unboxing",
+      "testimonial_videos": "Vídeos testimoniales",
+      "unboxing_videos": "Vídeos Unboxing",
       "lifestyle_shots": "Fotos de estilo de vida",
-      "food_and_beverage": "Alimentos y Bebidas",
-      "travel_and_hospitality": "Viajes y Hospitalidad"
+      "food_and_beverage": "Alimentación y bebidas",
+      "travel_and_hospitality": "Viajes y hostelería"
     }
   },
   "creatorVideos": {
-    "title": "Empareja con creadores experimentados"
+    "title": "Emparejarse con creadores experimentados"
   },
   "testimonial": {
-    "company": "Intelligencia Media",
-    "quote": "Publicamos inmediatamente las primeras variaciones de anuncios con la estructura recomendada de Billo, no editamos nada y ya funcionó mejor que nuestros anuncios anteriores. Nuestro ROAS fue mejor y los costos de adquisición bajaron. Pudimos escalar más gracias a eso.",
-    "author": "Jorens, CEO"
+    "company": "Medios de comunicación inteligentes",
+    "quote": "Publicamos inmediatamente las primeras variaciones de anuncios con la estructura recomendada por Billo, no editamos nada, y ya funcionaba mejor que nuestros anuncios anteriores. Nuestro ROAS fue mejor y los costes de adquisición bajaron. Pudimos ampliar la escala gracias a ello.",
+    "author": "Jorens, Director General"
   },
   "creatorsSection": {
     "label": "Creadores",
-    "title": "Recibe pagos por hacer lo que amas",
-    "description": "Encuentra colaboraciones que te entusiasmen. Trabaja con marcas que se ajusten a tu estilo de contenido, con especial autonomía sobre cada campaña que produzcas"
+    "title": "Cobra por hacer lo que te gusta",
+    "description": "Encuentra colaboraciones que te entusiasmen. Trabaja con marcas que encajen con tu estilo de contenidos, con especial autonomía sobre cada campaña que produzcas."
   },
   "platformLogos": {
-    "title": "Disponible para ser usado en"
+    "title": "Disponible para su uso en"
   }
 }

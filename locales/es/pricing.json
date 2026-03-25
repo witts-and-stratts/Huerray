@@ -1,123 +1,123 @@
 {
   "hero": {
-    "title": "Paga por UGC, no por tarifas ocultas",
-    "subtitle": "Cada dólar se destina a un UGC escalable y de marca que impulsa resultados, no a tarifas de plataforma"
+    "title": "Pague por el CGU, no por comisiones ocultas",
+    "subtitle": "Cada dólar se destina a un CGU escalable y adaptado a la marca que genera resultados, no a tarifas de plataforma."
   },
   "cards": {
-    "disclaimer": "Todos los precios son por un video, excluyendo IVA.",
-    "buttonText": "Crear un brief",
+    "disclaimer": "Todos los precios son para un vídeo, sin IVA.",
+    "buttonText": "Crear un informe",
     "short": {
       "tag": "Corto",
-      "title": "15 Segundos",
+      "title": "15 segundos",
       "price": "€149.99",
       "features": [
-        "Video de TikTok",
-        "Historia y Reels de Instagram",
-        "Video de Pinterest",
-        "Anuncio de Snapchat"
+        "TikTok-Vídeo",
+        "Instagram-Story & Reels",
+        "Pinterest-Vídeo",
+        "Snapchat-Ad"
       ]
     },
     "medium": {
       "tag": "Medio",
-      "title": "30 Segundos",
+      "title": "30 segundos",
       "price": "€269.99",
       "features": [
-        "Reel de Instagram",
-        "Anuncios de TikTok",
-        "Anuncio de Snapchat",
-        "Compras en vivo",
+        "Instagram-Reel",
+        "TikTok-Ads",
+        "Snapchat-Ad",
+        "Live-Shopping",
         "Página de aterrizaje"
       ]
     },
     "long": {
       "tag": "Largo",
-      "title": "60 Segundos",
+      "title": "60 segundos",
       "price": "€349.99",
       "features": [
-        "Video de TikTok",
-        "Historia y Reels de Instagram",
-        "Video de Pinterest",
-        "Anuncio de Snapchat"
+        "TikTok-Vídeo",
+        "Instagram-Story & Reels",
+        "Pinterest-Vídeo",
+        "Snapchat-Ad"
       ]
     }
   },
   "features": {
-    "title": "Las mismas excelentes características para todos los planes",
+    "title": "Las mismas funciones para todos los planes",
     "items": [
       {
         "title": "Solicitudes de proyectos ilimitadas",
-        "text": "Desde videos de unboxing y testimonios hasta fotografía de productos y modelos: obtén el contenido que necesitas."
+        "text": "Desde vídeos de presentación y testimoniales hasta fotografías de productos y modelos: obtenga el contenido que necesita."
       },
       {
-        "title": "Revisar solicitudes de diversos creadores",
-        "text": "De cualquier edad, raza, género y estilo, Huerray tiene un creador de contenido ideal para tu marca."
+        "title": "Revisar las solicitudes de diversos creadores",
+        "text": "Para cada edad, raza, género y ambiente, Huerray tiene un creador de contenidos ideal para tu marca."
       },
       {
-        "title": "Sin negociaciones con creadores",
-        "text": "Los creadores de Huerray trabajan con un presupuesto establecido para todos tus proyectos."
+        "title": "Sin negociaciones con los creadores",
+        "text": "Los creadores de Huerray trabajan con un presupuesto fijo para todos sus proyectos."
       },
       {
-        "title": "Licencia completa y derechos de distribución de tu contenido",
-        "text": "100% derechos de licencia y distribución para usar en redes sociales, sitios web, anuncios y más."
+        "title": "Todos los derechos de licencia y distribución de sus contenidos",
+        "text": "100% de derechos de licencia y distribución para su uso en redes sociales, sitios web, anuncios y mucho más."
       },
       {
-        "title": "Comentarios en tiempo real",
-        "text": "Intercambia comentarios con tus creadores utilizando nuestra función de comunicación integrada. Haz ajustes donde sea necesario o refina tus requisitos."
+        "title": "Información en tiempo real",
+        "text": "Intercambie opiniones con sus creadores mediante nuestra función de comunicación integrada. Realice los ajustes necesarios o perfeccione sus requisitos."
       }
     ]
   },
   "extra": {
     "ai": {
       "subtitle": "Última generación",
-      "title": "Videos Generados por IA",
-      "priceLabel": "Desde",
+      "title": "Vídeos generados por IA",
+      "priceLabel": "En",
       "price": "€79.99",
-      "buttonText": "Crear un brief"
+      "buttonText": "Crear un informe"
     },
     "enterprise": {
       "badge": "Extra + Gestionado",
-      "title": "Plan Empresarial",
-      "description": "¿Necesitas más contenido generado? Habla con nuestro equipo",
+      "title": "Plan de empresa",
+      "description": "¿Necesita más contenidos generados? Hable con nuestro equipo",
       "features": [
         "Solicitar servicio",
-        "Discutir requisitos",
-        "Recibir una oferta personalizada",
+        "Discutir los requisitos",
+        "Reciba una oferta personalizada",
         "Listo para despegar"
       ],
       "buttonText": "Reservar una llamada"
     }
   },
   "faqs": {
-    "title": "Haznos preguntas",
+    "title": "Pregúntenos",
     "items": [
       {
-        "question": "¿Cuánto tiempo tarda en revisarse mi solicitud de creador?",
-        "answer": "Debido al alto volumen de solicitudes que recibimos, el proceso de revisión puede llevar algún tiempo. Nos esforzamos por procesar las solicitudes lo más rápido posible, pero ten en cuenta que puede variar según la demanda y nuestra capacidad actual. Ten la seguridad de que te notificaremos tan pronto como haya una actualización sobre el estado de tu solicitud. ¡Gracias por tu paciencia!"
+        "question": "¿Cuánto tarda en revisarse mi solicitud de creador?",
+        "answer": "Debido al gran volumen de solicitudes que recibimos, el proceso de revisión puede llevar algún tiempo. Nos esforzamos por tramitar las solicitudes lo más rápidamente posible, pero tenga en cuenta que puede variar en función de la demanda y de nuestra capacidad actual. Tenga la seguridad de que le avisaremos en cuanto haya novedades sobre el estado de su solicitud. Gracias por su paciencia."
       },
       {
-        "question": "¿Necesito una cierta cantidad de seguidores para unirme a Huerray?",
-        "answer": "No. Puede que ni siquiera tengas redes sociales y eso está totalmente bien. Todo lo que tienes que hacer es grabar contenido para recibir pagos."
+        "question": "¿Necesito un determinado número de seguidores para unirme a Huerray?",
+        "answer": "Puede que ni siquiera tengas redes sociales, y no pasa nada. Todo lo que tienes que hacer es grabar contenido para que te paguen."
       },
       {
-        "question": "¿Tengo que publicar en canales sociales?",
-        "answer": "No. Todo lo que tienes que hacer es subir el contenido a la plataforma Huerray."
+        "question": "¿Tengo que publicar en los canales sociales?",
+        "answer": "No. Todo lo que tienes que hacer es subir el contenido a la plataforma de Huerray."
       },
       {
-        "question": "¿Tengo que pagar para unirme?",
-        "answer": "No, Trend es 100% gratis para creadores."
+        "question": "¿Tengo que pagar para afiliarme?",
+        "answer": "No, Trend es 100% gratuito para los creadores."
       },
       {
-        "question": "¿Cómo encuentro trabajos?",
-        "answer": "Eliges los proyectos de marcas que se alinean con tu estética personal y solicitas esas asociaciones. Todos los días la aplicación se actualiza con nuevas asociaciones. ¡Solo trabaja con marcas que quieras!"
+        "question": "¿Cómo encuentro actuaciones?",
+        "answer": "Tú eliges los proyectos de las marcas que se alinean con tu estética personal y solicitas esas colaboraciones. Cada día la aplicación se actualiza con nuevas colaboraciones. ¡Trabaja solo con las marcas que quieras!"
       },
       {
-        "question": "¿Qué tipo de trabajos puedo encontrar en Trend?",
-        "answer": "Los trabajos de foto y video son nuestro fuerte. Fotografía de productos, fotos de estilo de vida, videos de productos en acción, videos de unboxing, videos testimoniales, fotos estilo retrato. Todo el contenido que las marcas de comercio electrónico pueden aprovechar."
+        "question": "¿Qué tipo de actuaciones puedo encontrar en Trend?",
+        "answer": "Los trabajos de fotografía y vídeo son nuestro fuerte. Fotografía de productos, fotos de estilo de vida, vídeos de productos en acción, vídeos de unboxing, vídeos testimoniales, fotos de estilo retrato. Todo contenido que las marcas de comercio electrónico pueden aprovechar."
       }
     ]
   },
   "cta": {
-    "title": "¿Listo para tu primer video UGC?",
-    "buttonText": "Regístrate ahora"
+    "title": "¿Listo para tu primer vídeo UGC?",
+    "buttonText": "Regístrese ahora"
   }
 }

@@ -22,6 +22,7 @@ import { Separator } from '@/components/dashboard-ui/separator';
 import { UserStatusBadge } from '@/components/admin/users/user-status-badge';
 import { EmailStatusBadge } from '@/components/dashboard-ui/status-badge';
 import { cn } from '@/lib/dashboard-utils';
+import { useTranslations } from 'next-intl';
 
 interface CreatorProfileBlockProps {
   creator: ModelsCreatorResponse;
@@ -49,6 +50,8 @@ function EmptyState( { label }: { label: string; } ) {
 }
 
 function UserTab( { userId, useProfileEndpoint }: { userId: string; useProfileEndpoint?: boolean; } ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const userQuery = useUser( userId, { enabled: !useProfileEndpoint && !!userId } );
   const profileQuery = useUserProfile();
   const { data: userDetails, isLoading } = useProfileEndpoint ? profileQuery : userQuery;
@@ -60,28 +63,28 @@ function UserTab( { userId, useProfileEndpoint }: { userId: string; useProfileEn
       <div className="space-y-3">
         <div className="space-y-2">
           <Skeleton className="h-4 w-24" />
-          {[ ...Array( 4 ) ].map( ( _, i ) => (
+          { [ ...Array( 4 ) ].map( ( _, i ) => (
             <div key={ i } className="flex justify-between gap-4">
               <Skeleton className="h-4 w-20" />
               <Skeleton className="h-4 w-28" />
             </div>
-          ) )}
+          ) ) }
         </div>
         <div className="space-y-2">
           <Skeleton className="h-4 w-16" />
-          {[ ...Array( 3 ) ].map( ( _, i ) => (
+          { [ ...Array( 3 ) ].map( ( _, i ) => (
             <div key={ i } className="flex justify-between gap-4">
               <Skeleton className="h-4 w-20" />
               <Skeleton className="h-4 w-28" />
             </div>
-          ) )}
+          ) ) }
         </div>
       </div>
     );
   }
 
   if ( !userDetails ) {
-    return <EmptyState label="Failed to load user details" />;
+    return <EmptyState label={ t( 'creatorDashboard.failedLoad' ) } />;
   }
 
   const {
@@ -90,42 +93,42 @@ function UserTab( { userId, useProfileEndpoint }: { userId: string; useProfileEn
   } = userDetails;
 
   const toLabel = ( value?: string ) =>
-    value ? value.replace( /_/g, ' ' ).replace( /\b\w/g, c => c.toUpperCase() ) : 'N/A';
+    value ? value.replace( /_/g, ' ' ).replace( /\b\w/g, c => c.toUpperCase() ) : tc( 'sheets.na' );
 
   return (
     <div className="space-y-3">
-      <WrappedCard title="Identity">
+      <WrappedCard title={ t( 'userDetails.accountSection' ) }>
         <div className="flex items-center gap-2 flex-wrap pb-1">
           <UserStatusBadge status={ user_status || 'unknown' } />
           <EmailStatusBadge
-            status={ email_verified ? 'Email verified' : 'Email unverified' }
+            status={ email_verified ? t( 'userDetails.emailVerified' ) : t( 'userDetails.emailUnverified' ) }
             className={ email_verified ? 'border-green-400/40 text-green-600' : 'border-amber-400/40 text-amber-600' }
           />
         </div>
-        <Row label="Name" value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || username || 'N/A' } />
-        <Row label="Username" value={
+        <Row label={ tc( 'sheets.details' ).split( ' ' )[ 0 ] } value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || username || tc( 'sheets.na' ) } />
+        <Row label={ t( 'userDetails.username' ) } value={
           <CopyText text={ username! }
             iconSide="left"
-            copyMessage="Username copied" clamp={ true }>
-            { username ? `@${ username }` : 'N/A' }
+            copyMessage={ t( 'creatorStatus.idCopied' ) } clamp={ true }>
+            { username ? `@${ username }` : tc( 'sheets.na' ) }
           </CopyText> } />
-        <Row label="Type" value={ toLabel( user_type ) } />
-        <Row label="Email"
+        <Row label={ tc( 'sheets.type' ) } value={ toLabel( user_type ) } />
+        <Row label={ tc( 'sheets.email' ) }
           value={
             <CopyText text={ email! } iconSide='left' clamp={ true }>
-              { email ? email : 'N/A' }
+              { email ? email : tc( 'sheets.na' ) }
             </CopyText> } />
       </WrappedCard>
 
-      <WrappedCard title="System">
-        <Row label="User ID"
+      <WrappedCard title={ t( 'userDetails.systemDetails' ) }>
+        <Row label={ t( 'userDetails.userId' ) }
           col2ClassName='self-center'
           value={
             id ? (
-              <CopyText text={ id } iconSide="left" copyMessage="User ID copied" className='font-mono font-light text-[13px]' clamp={ true }>
+              <CopyText text={ id } iconSide="left" copyMessage={ t( 'creatorStatus.idCopied' ) } className='font-mono font-light text-[13px]' clamp={ true }>
                 { id }
               </CopyText>
-            ) : 'N/A'
+            ) : tc( 'sheets.na' )
           } />
         <Row label="Joined" value={ joinedLabel } />
         <Row label="Updated" value={ updatedLabel } />
@@ -141,12 +144,12 @@ function BankTab( { creatorId }: { creatorId: string; } ) {
     return (
       <div className="space-y-2">
         <Skeleton className="h-4 w-24" />
-        {[ ...Array( 4 ) ].map( ( _, i ) => (
+        { [ ...Array( 4 ) ].map( ( _, i ) => (
           <div key={ i } className="flex justify-between gap-4">
             <Skeleton className="h-4 w-24" />
             <Skeleton className="h-4 w-32" />
           </div>
-        ) )}
+        ) ) }
       </div>
     );
   }
@@ -226,7 +229,7 @@ export function CreatorProfileBlock( { creator, creatorName, creatorAvatar, chil
               <Row label="Birthday" value={ creator?.date_of_birth ? useFormatDate( creator.date_of_birth ) : 'N/A' } />
               <Row label="Gender" value={ ( creator?.gender || 'N/A' ).toLowerCase() } />
               <Row label="Phone" value={ creator?.phone_number || 'N/A' } />
-              <Row label="Joined" value={ useFormatDate( creator?.created_at! ) } />
+              {/* <Row label="Joined" value={ useFormatDate( creator?.created_at! ) } /> */ }
             </WrappedCard>
           </TabsContent>
 

@@ -1,41 +1,41 @@
 {
   "hero": {
-    "title": "Únete a un movimiento que impulsa la cultura creativa",
-    "subtitle": "Unimos cultura, creatividad y tecnología para dar a los creativos y a las voces subrepresentadas en la región DACH la visibilidad que merecen. Y detrás de escena, vivimos lo que defendemos: diversidad, apertura, coraje y verdadera colaboración.",
+    "title": "Únase a un movimiento que hace avanzar la cultura creativa",
+    "subtitle": "Unimos cultura, creatividad y tecnología para dar a los creativos y a las voces infrarrepresentadas de toda la región DACH la visibilidad que merecen. Y entre bastidores, vivimos lo que defendemos: diversidad, apertura, valentía y auténtica colaboración.",
     "buttonText": "Ver puestos vacantes",
-    "videoAlt": "Mujer joven mostrando moda",
+    "videoAlt": "Joven exhibiendo moda",
     "imageAlt1": "Creador principal",
     "imageAlt2": "Contenido del creador",
     "imageAlt3": "Retrato del creador"
   },
   "opportunities": {
-    "title": "Oportunidades Abiertas",
-    "subtitle": "Si eres dueño de un cerebro activo, pensamientos interesantes y un buen alma, nos gustaría saber de ti.",
-    "button": "Saber Más",
+    "title": "Oportunidades abiertas",
+    "subtitle": "Si eres dueño de un cerebro activo, pensamientos interesantes y un alma buena, nos gustaría saber de ti.",
+    "button": "Más información",
     "jobs": [
       {
-        "category": "Producto, Diseño y Datos",
-        "title": "Diseñador de Producto Principal",
-        "location": "Alemania. Tiempo completo - Remoto"
+        "category": "Producto, diseño y datos",
+        "title": "Diseñador jefe de producto",
+        "location": "Alemania. Tiempo completo - A distancia"
       },
       {
-        "category": "Habilitación de Ventas",
-        "title": "Gerente de Habilitación de Ventas",
-        "location": "Austria. Tiempo completo - Remoto"
+        "category": "Facilitación de las ventas",
+        "title": "Responsable de ventas",
+        "location": "Austria. Tiempo completo - A distancia"
       },
       {
-        "category": "Experiencia del Cliente",
-        "title": "Gerente Senior de Éxito del Cliente",
-        "location": "Suiza. Tiempo completo - Remoto"
+        "category": "Experiencia del cliente",
+        "title": "Director de éxito de clientes",
+        "location": "Suiza. Tiempo completo - A distancia"
       }
     ]
   },
   "ourValues": {
-    "title": "Nuestros Valores",
+    "title": "Nuestros valores",
     "values": [
       {
         "title": "Diversidad",
-        "text": "La diversidad no es un eslogan. Es quiénes somos, en nuestro equipo, nuestros socios y nuestras ideas."
+        "text": "La diversidad no es un eslogan. Es lo que somos, en nuestro equipo, nuestros socios y nuestras ideas."
       },
       {
         "title": "Autenticidad siempre",
@@ -43,56 +43,56 @@
       },
       {
         "title": "Innovación con propósito",
-        "text": "La tecnología solo es emocionante cuando crea cambios. La usamos para hacer visible la representación, no para reemplazarla."
+        "text": "La tecnología sólo es apasionante cuando genera cambios. La utilizamos para hacer visible la representación, no para sustituirla."
       },
       {
-        "title": "Comunidad sobre competencia",
-        "text": "Creemos en la colaboración, el intercambio y el apoyo, porque el cambio real solo ocurre juntos."
+        "title": "La comunidad por encima de la competencia",
+        "text": "Creemos en la colaboración, el intercambio y el apoyo, porque el verdadero cambio sólo se produce juntos."
       }
     ]
   },
   "ourTeams": {
-    "title": "Nuestros Equipos",
+    "title": "Nuestros equipos",
     "teams": [
       {
-        "title": "Producto, Diseño y Datos",
-        "text": "Estamos construyendo la plataforma de registro que impulsa la creación y distribución de contenido para marcas a nivel mundial. Nuestra misión es servir a la economía de los creadores y proporcionarles el mejor lugar en la tierra para hacer lo que aman: crear."
+        "title": "Producto, diseño y datos",
+        "text": "Estamos construyendo la plataforma que impulsa la creación y distribución de contenidos para marcas de todo el mundo. Nuestra misión es servir a la economía de los creadores y ofrecerles el mejor lugar del mundo para hacer lo que les gusta: crear."
       },
       {
-        "title": "Experiencia del Cliente",
-        "text": "Somos el ingrediente secreto de #paid: creando y permitiendo experiencias de clientes y creadores que ofrecen resultados, impacto y, lo más importante, alegría."
+        "title": "Experiencia del cliente",
+        "text": "Somos la salsa secreta del #pago: creamos y facilitamos experiencias de clientes y creadores que ofrecen resultados, impacto y, lo que es más importante, alegría."
       },
       {
         "title": "Ventas",
-        "text": "Nuestro objetivo es educar a marcas y agencias sobre cómo pensar en el marketing de creadores. Hacemos un descubrimiento profundo, adaptando nuestra oferta para ayudar a los clientes a alcanzar sus objetivos."
+        "text": "Nuestro objetivo es enseñar a marcas y agencias a pensar en el marketing de creadores. Hacemos un descubrimiento profundo, adaptando nuestra oferta para ayudar a los clientes a alcanzar sus objetivos."
       },
       {
-        "title": "Personnes",
-        "text": "Las personas son el alma de nuestra empresa. Vivimos este valor buscando a los mejores humanos y luego proporcionando el mejor entorno para que nuestra gente tenga momentos decisivos en su carrera."
+        "title": "Personas",
+        "text": "Las personas son el alma de nuestra empresa. Vivimos este valor contratando a los mejores seres humanos y proporcionándoles el mejor entorno para que vivan momentos decisivos en su carrera profesional."
       },
       {
         "title": "Finanzas",
-        "text": "Nuestro equipo de Finanzas trabaja para construir procesos y políticas que garanticen información precisa y oportuna para que nuestros otros equipos tengan apoyo para tomar decisiones comerciales informadas."
+        "text": "Nuestro equipo de Finanzas trabaja para crear procesos y políticas que garanticen una información precisa y oportuna, de modo que los demás equipos puedan tomar decisiones empresariales con conocimiento de causa."
       },
       {
-        "title": "Medios, Analítica y Estrategia",
-        "text": "Tenemos pasión por la analítica y todo lo digital. Encontramos soluciones para desafíos sofisticados que abarcan dimensiones creativas, estratégicas, técnicas y analíticas."
+        "title": "Medios de comunicación, análisis y estrategia",
+        "text": "Nos apasiona la analítica y todo lo digital. Encontramos soluciones para retos sofisticados que abarcan dimensiones creativas, estratégicas, técnicas y analíticas."
       },
       {
         "title": "Marketing",
-        "text": "Nuestro objetivo es construir una marca que la gente no pueda sacar de sus mentes. Juntos, nos esforzamos por crear momentos memorables con marcas y creadores."
+        "text": "Nuestro objetivo es construir una marca que la gente no pueda quitarse de la cabeza. Juntos, nos esforzamos por crear momentos memorables con marcas y creadores."
       },
       {
         "title": "Ingeniería",
-        "text": "Diseñamos herramientas y características que crean la base para que marcas y creadores colaboren juntos. Definimos el futuro de #paid y buscamos formas en que podamos escalar y compartir el futuro de la Economía de los Creadores."
+        "text": "Diseñamos herramientas y funciones que sientan las bases para que marcas y creadores colaboren juntos. Definimos el futuro del #pago y buscamos formas de ampliar y compartir el futuro de la economía de los creadores."
       }
     ]
   },
   "careerWhy": {
-    "mainTitle": "Imaginamos un mundo donde los creadores sean apasionados por construir algo que importe",
-    "subtitle": "Huerray es un espacio para personas que aman las ideas, que creen en la creatividad con propósito y que quieren hacer que el cambio real suceda.",
-    "description1": "Ya sea que tu experiencia sea en marketing, tecnología, diseño, desarrollo comercial o comunidad. Huerray es un espacio para personas que aman las ideas, que creen en la creatividad con propósito y que quieren hacer que el cambio real suceda. Nos importan menos los títulos y más quiénes son, qué defienden y la energía que traen. Estamos creciendo, orgánicamente, intencionalmente y con propósito.",
-    "description2": "Siempre estamos abiertos a conocer personas que compartan nuestra visión y quieran ayudar a darle forma.",
+    "mainTitle": "Imaginamos un mundo en el que los creadores sientan pasión por construir algo importante.",
+    "subtitle": "Huerray es un espacio para personas que aman las ideas, que creen en la creatividad con propósito y que quieren hacer realidad un cambio real.",
+    "description1": "Tanto si tu formación es en marketing, tecnología, diseño, desarrollo empresarial o comunidad. Huerray es un espacio para personas que aman las ideas, que creen en la creatividad con propósito, y que quieren hacer realidad el cambio real. si su experiencia es en marketing, tecnología, diseño, desarrollo de negocios, o de la comunidad. Nos importan menos los títulos y más quién eres, qué representas y la energía que aportas. Estamos creciendo de forma orgánica, intencionada y con un propósito.",
+    "description2": "Siempre estamos abiertos a conocer gente que comparta nuestra visión y quiera ayudar a darle forma.",
     "imageAlt": "Por qué Huerray"
   }
 }

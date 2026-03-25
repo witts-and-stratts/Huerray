@@ -10,12 +10,14 @@ import { Table as TanstackTable, flexRender } from "@tanstack/react-table";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { AnimatePresence } from 'motion/react';
 import { MotionTableRow } from '@/components/dashboard-ui/motion-table';
+import { useTranslations } from 'next-intl';
 
 interface CreatorsTableViewProps {
   table: TanstackTable<ModelsCreatorResponse>;
 }
 
 export function CreatorsTableView( { table }: CreatorsTableViewProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <div className='border border-border rounded-lg overflow-hidden'>
       <Table className='overflow-auto'>
@@ -72,7 +74,7 @@ export function CreatorsTableView( { table }: CreatorsTableViewProps ) {
                   colSpan={ table.getVisibleLeafColumns().length }
                   className='h-24 text-center'
                 >
-                  No results.
+                  { t( 'creatorsTableView.noCreatorsFound' ) }
                 </TableCell>
               </TableRow>
             ) }

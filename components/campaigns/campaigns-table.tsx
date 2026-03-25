@@ -24,9 +24,10 @@ import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
 import { getColumns } from './campaigns-columns';
 import { CampaignsTableToolbar } from './campaigns-table-toolbar';
-import { ModelCampaign } from './types';
+import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { DEFAULT_PAGE } from '@/lib/constants';
 
-const campaignGlobalFilter: FilterFn<ModelCampaign> = ( row, _columnId, filterValue: string ) => {
+const campaignGlobalFilter: FilterFn<ModelsCampaignResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
   if ( !q ) return true;
   const c = row.original;
@@ -46,7 +47,7 @@ const campaignGlobalFilter: FilterFn<ModelCampaign> = ( row, _columnId, filterVa
 };
 
 type CampaignsTableProps = {
-  campaigns?: ModelCampaign[];
+  campaigns?: ModelsCampaignResponse[];
   isLoading?: boolean;
   error?: Error | null;
   emptyTitle?: string;
@@ -151,11 +152,12 @@ export function CampaignsTable( {
           ) }
           <CampaignsView table={ table } view={ view } />
           { campaigns.length > 0 && (
-            <DataTablePagination
-              table={ table }
-              pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
-              className="px-5"
-            />
+            <div className="px-4">
+              <DataTablePagination
+                table={ table }
+                pageSizeOptions={ DEFAULT_PAGE }
+              />
+            </div>
           ) }
         </div>
       ) }

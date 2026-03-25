@@ -214,7 +214,7 @@ export function SignupForm( {
             </Button>
           ) }
 
-          <div className="flex justify-center py-4">
+          <Link className="flex justify-center py-4" title="Huerray" href="/">
             <Image
               src="/images/huerray-symbol.svg"
               alt="Huerray"
@@ -222,7 +222,7 @@ export function SignupForm( {
               height={ 60 }
               className="dark:invert"
             />
-          </div>
+          </Link>
           <CardTitle className="text-2xl font-primary text-primary">{ t( `titles.${ selectedRole }` ) }</CardTitle>
           <CardDescription>{ t( `descriptions.${ selectedRole }` ) }</CardDescription>
         </CardHeader>

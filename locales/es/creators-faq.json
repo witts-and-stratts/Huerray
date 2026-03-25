@@ -1,17 +1,17 @@
 {
-  "title": "FAQ de Creadores",
-  "subtitle": "Aquí tienes algunas de nuestras preguntas más frecuentes.",
+  "title": "Preguntas frecuentes de los creadores",
+  "subtitle": "Estas son algunas de las preguntas más frecuentes.",
   "sections": [
     {
-      "section": "Sobre Huerray",
+      "section": "Acerca de Huerray",
       "faqs": [
         {
           "question": "¿Qué es Huerray?",
-          "answer": "Huerray es una plataforma de UGC que conecta marcas con diversos creadores, enfocándose en la narración auténtica, la relevancia cultural y la representación significativa, especialmente para Personas de Color y voces subrepresentadas en la región DACH."
+          "answer": "Huerray es una plataforma UGC que conecta marcas con diversos creadores, centrándose en la narración auténtica, la relevancia cultural y la representación significativa, especialmente para las personas de color y las voces subrepresentadas en la región DACH."
         },
         {
-          "question": "¿Necesito publicar el contenido en mis propios canales de redes sociales?",
-          "answer": "No. Creas el contenido para la marca; no es obligatorio publicarlo en tus propios canales a menos que sea explícitamente parte de la oferta de la campaña."
+          "question": "¿Tengo que publicar el contenido en mis propios canales de redes sociales?",
+          "answer": "No. Usted crea el contenido para la marca; no es necesario publicar en sus propios canales a menos que forme parte explícitamente de la oferta de la campaña."
         }
       ]
     },
@@ -19,41 +19,41 @@
       "section": "Cómo funciona",
       "faqs": [
         {
-          "question": "¿Cómo solicito campañas?",
-          "answer": "Completa tu perfil de creador y explora las campañas disponibles que coincidan con tu estilo. Solicita directamente si estás interesado. La marca revisa las solicitudes y selecciona a los creadores. Una vez que aceptas la asignación, comienza la producción."
+          "question": "¿Cómo se solicitan las campañas?",
+          "answer": "Completa tu perfil de creador y explora las campañas disponibles que encajen con tu estilo. Presenta tu candidatura directamente si estás interesado. La marca revisa las solicitudes y selecciona a los creadores. Una vez que aceptas el encargo, comienza la producción."
         },
         {
-          "question": "¿Qué sucede después de ser seleccionado?",
-          "answer": "Recibirás todos los detalles del briefing. Si es necesario, el cliente envía los materiales de producción. Luego creas y subes el contenido a través de la plataforma Huerray."
+          "question": "¿Qué ocurre después de ser seleccionado?",
+          "answer": "Recibirás todos los detalles del briefing. Si es necesario, el cliente envía materiales de producción. A continuación, creas y subes el contenido a través de la plataforma de Huerray."
         }
       ]
     },
     {
-      "section": "Carga de contenido y flujo de trabajo",
+      "section": "Carga de contenidos y flujo de trabajo",
       "faqs": [
         {
           "question": "¿Dónde subo mi contenido final?",
-          "answer": "Sube tu contenido en la ranura de entrega designada dentro de la sección 'Entrega' de tu campaña. Para material adicional, usa el botón 'Entrega adicional'."
+          "answer": "Cargue su contenido en el espacio de entrega designado dentro de la sección \"Entrega\" de su campaña. Para metraje adicional, utilice el botón \"Entrega adicional\"."
         },
         {
-          "question": "¿Qué pasa si una marca solicita un video adicional durante una campaña activa?",
-          "answer": "Contacta a Huerray por correo electrónico. Configuraremos una actualización de campaña para que el video adicional pueda ser procesado y compensado."
+          "question": "¿Qué ocurre si una marca solicita un vídeo adicional durante una campaña activa?",
+          "answer": "Ponte en contacto con Huerray por correo electrónico. Ellos establecerán una actualización de la campaña para que el vídeo adicional pueda ser procesado y compensado."
         },
         {
-          "question": "¿Qué pasa si no estoy disponible o estoy de vacaciones?",
-          "answer": "Activa el Modo Vacaciones y establece tu período de no disponibilidad, o envía un correo a Huerray para pausar tu cuenta. También puedes mencionar tu disponibilidad en las solicitudes. Clave: comunica con anticipación."
+          "question": "¿Y si no estoy disponible o estoy de vacaciones?",
+          "answer": "Active el Modo Vacaciones y establezca su periodo de no disponibilidad, o envíe un correo electrónico a Huerray para poner en pausa su cuenta. También puedes mencionar la disponibilidad en las solicitudes. Clave: comunícalo con tiempo."
         },
         {
-          "question": "¿Puedo hacer esto a tiempo parcial?",
-          "answer": "Sí. Muchos creadores trabajan con Huerray junto con sus trabajos o estudios. Tu carga de trabajo depende de tu disponibilidad y eficiencia en el flujo de trabajo."
+          "question": "¿Puedo hacerlo a tiempo parcial?",
+          "answer": "Sí. Muchos creadores trabajan con Huerray paralelamente a sus trabajos o estudios. Su carga de trabajo depende de su disponibilidad y de la eficiencia de su flujo de trabajo."
         },
         {
-          "question": "¿Necesito equipo profesional?",
-          "answer": "No se requiere equipo profesional, pero las herramientas recomendadas incluyen un trípode, micrófono y anillo de luz."
+          "question": "¿Necesito un equipo profesional?",
+          "answer": "No se requiere equipo profesional, pero se recomienda un trípode, un micrófono y un anillo de luz."
         },
         {
-          "question": "¿Qué configuración de cámara debo usar?",
-          "answer": "Usa tu teléfono inteligente. Graba en 4K, verifica la exposición y limpia la lente antes de filmar."
+          "question": "¿Qué ajustes de cámara debo utilizar?",
+          "answer": "Utiliza tu smartphone. Graba en 4K, comprueba la exposición y limpia el objetivo antes de filmar."
         }
       ]
     },
@@ -61,12 +61,12 @@
       "section": "Plazos y entrega",
       "faqs": [
         {
-          "question": "¿Cuánto tiempo tengo para entregar el contenido?",
-          "answer": "La entrega estándar es de 7 días naturales desde la recepción de todos los activos y aclaraciones. Contacta a Huerray antes de la fecha límite si necesitas más tiempo."
+          "question": "¿De cuánto tiempo dispongo para entregar los contenidos?",
+          "answer": "El plazo de entrega estándar es de 7 días naturales a partir de la recepción de todos los activos y aclaraciones. Póngase en contacto con Huerray antes de la fecha límite si necesita más tiempo."
         },
         {
           "question": "¿Pueden las marcas solicitar revisiones?",
-          "answer": "Sí. Se incluye una ronda de revisión por campaña, siempre que los comentarios se den dentro de los 10 días y permanezcan dentro del alcance del briefing."
+          "answer": "Sí. Se incluye una ronda de revisión por campaña, siempre que se envíen comentarios en un plazo de 10 días y se mantengan dentro del alcance del briefing."
         }
       ]
     },
@@ -75,11 +75,11 @@
       "faqs": [
         {
           "question": "¿Cuánto gano por campaña?",
-          "answer": "Tu tarifa se muestra antes de solicitar. Se pueden ofrecer entregables o servicios adicionales como actualizaciones pagas, sujetas a la aprobación de la marca."
+          "answer": "Su tarifa se muestra antes de solicitarlo. Pueden ofrecerse prestaciones o servicios adicionales como mejoras de pago, previa aprobación de la marca."
         },
         {
           "question": "¿Cuándo me pagan?",
-          "answer": "El pago se activa una vez que el contenido es aprobado. Huerray procesa el pago y emite una factura para ti. Una vez que tu saldo alcanza los 50 €, el pago se transfiere en un plazo de 14 días."
+          "answer": "El pago se activa una vez aprobado el contenido. Huerray procesa el pago y emite una factura para usted. Una vez que el saldo alcanza los 50 €, el pago se transfiere en un plazo de 14 días."
         }
       ]
     },
@@ -87,8 +87,8 @@
       "section": "Derechos de contenido",
       "faqs": [
         {
-          "question": "¿A quién pertenece el contenido que creo?",
-          "answer": "Tras la aprobación y el pago, los derechos de uso se transfieren a Huerray para uso comercial exclusivo, incluyendo publicidad digital, impresa, OOH y entrenamiento de IA. No puedes reutilizar ni publicar el contenido a menos que se permita explícitamente."
+          "question": "¿A quién pertenecen los contenidos que creo?",
+          "answer": "Tras la aprobación y el pago, los derechos de uso se transfieren a Huerray para su uso comercial exclusivo, incluidos los medios digitales, impresos, la publicidad OOH y la formación de AI. No está permitido reutilizar o publicar el contenido a menos que se permita explícitamente."
         }
       ]
     },
@@ -96,21 +96,21 @@
       "section": "Materiales de producción",
       "faqs": [
         {
-          "question": "¿Qué pasa si recibo productos de la marca?",
-          "answer": "Los productos proporcionados para la creación de UGC siguen siendo propiedad de Huerray a menos que se indique explícitamente lo contrario. Deben ser devueltos si se solicita."
+          "question": "¿Y si recibo productos de la marca?",
+          "answer": "Los productos proporcionados para la creación de CGU seguirán siendo propiedad de Huerray a menos que se indique explícitamente lo contrario. Deberán devolverse cuando se soliciten."
         }
       ]
     },
     {
-      "section": "Legal y conducta",
+      "section": "Legal & Conducta",
       "faqs": [
         {
           "question": "¿Puedo trabajar con la marca fuera de Huerray?",
-          "answer": "No. La colaboración directa fuera de Huerray está prohibida durante 3 meses después de la finalización de la campaña. Las violaciones pueden llevar a la suspensión de la cuenta o sanciones."
+          "answer": "No. La colaboración directa fuera de Huerray está prohibida durante los 3 meses siguientes a la finalización de la campaña. Las infracciones pueden conllevar la suspensión de la cuenta o sanciones."
         },
         {
           "question": "¿Cuáles son mis responsabilidades como Creador?",
-          "answer": "Debes asegurarte de que todo el contenido sea original, no infrinja derechos, cuente con el consentimiento de terceros visibles, esté libre de material dañino o ilegal y cumpla totalmente con las pautas de la campaña."
+          "answer": "Debe asegurarse de que todos los contenidos son originales, no infringen derechos, cuentan con el consentimiento de terceros visibles, están libres de material dañino o ilegal y se ajustan plenamente a las directrices de la campaña."
         }
       ]
     },
@@ -118,23 +118,23 @@
       "section": "Cuenta",
       "faqs": [
         {
-          "question": "No puedo acceder a mi cuenta, ¿qué debo hacer?",
-          "answer": "Haz clic en 'Restablecer contraseña' en la página de inicio de sesión. Si los problemas persisten, envía un correo al soporte de Huerray para obtener asistencia."
+          "question": "No puedo acceder a mi cuenta. ¿Qué debo hacer?",
+          "answer": "Haz clic en \"Restablecer contraseña\" en la página de inicio de sesión. Si el problema persiste, envía un correo electrónico al servicio de asistencia de Huerray."
         }
       ]
     },
     {
-      "section": "Soporte",
+      "section": "Ayuda",
       "faqs": [
         {
-          "question": "¿Aún tienes preguntas?",
-          "answer": "Envía un correo a support@huerray.com para asistencia inmediata."
+          "question": "¿Aún tiene preguntas?",
+          "answer": "Envíe un correo electrónico a support@huerray.com para obtener ayuda inmediata."
         }
       ]
     }
   ],
   "seo": {
-    "title": "FAQ de Creadores",
-    "description": "Encuentra respuestas a preguntas comunes sobre ser creador, pagos y campañas en Huerray."
+    "title": "Preguntas frecuentes de los creadores",
+    "description": "Encuentra respuestas a preguntas comunes sobre cómo convertirse en creador, pagos y campañas en Huerray."
   }
 }

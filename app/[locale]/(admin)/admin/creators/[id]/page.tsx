@@ -14,8 +14,10 @@ import { formatCurrency } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function CreatorDashboardPage() {
+  const t = useTranslations( 'dashboard.admin' );
   const params = useParams<{ id: string; }>();
   const creatorId = params.id;
 
@@ -54,16 +56,16 @@ export default function CreatorDashboardPage() {
   }, [ paymentItems ] );
 
   const financialRows = useMemo<CreatorStatRow[]>( () => ( [
-    { label: 'Total Earned', value: formatCurrency( spendMetrics.totalEarned ), numeric: spendMetrics.totalEarned },
-    { label: 'Avg per Gig', value: formatCurrency( spendMetrics.avgPerGig ), numeric: spendMetrics.avgPerGig },
-  ] ), [ spendMetrics ] );
+    { label: t( 'creatorDashboard.metrics.totalEarned' ), value: formatCurrency( spendMetrics.totalEarned ), numeric: spendMetrics.totalEarned },
+    { label: t( 'creatorDashboard.metrics.avgPerGig' ), value: formatCurrency( spendMetrics.avgPerGig ), numeric: spendMetrics.avgPerGig },
+  ] ), [ spendMetrics, t ] );
 
   const gigRows = useMemo<CreatorStatRow[]>( () => ( [
-    { label: 'Total', value: `${ gigMetrics.total }`, numeric: gigMetrics.total },
-    { label: 'Paid', value: `${ gigMetrics.paid }`, numeric: gigMetrics.paid },
-    { label: 'Included', value: `${ gigMetrics.included }`, numeric: gigMetrics.included },
-    { label: 'Pending', value: `${ gigMetrics.pending }`, numeric: gigMetrics.pending },
-  ] ), [ gigMetrics ] );
+    { label: t( 'creatorDashboard.metrics.total' ), value: `${ gigMetrics.total }`, numeric: gigMetrics.total },
+    { label: t( 'creatorDashboard.metrics.paid' ), value: `${ gigMetrics.paid }`, numeric: gigMetrics.paid },
+    { label: t( 'creatorDashboard.metrics.included' ), value: `${ gigMetrics.included }`, numeric: gigMetrics.included },
+    { label: t( 'creatorDashboard.metrics.pending' ), value: `${ gigMetrics.pending }`, numeric: gigMetrics.pending },
+  ] ), [ gigMetrics, t ] );
 
   if ( isCreatorLoading ) {
     return (
@@ -76,22 +78,22 @@ export default function CreatorDashboardPage() {
   if ( creatorError || ( !isCreatorLoading && !creator ) ) {
     return (
       <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
-        <h3 className="text-lg font-medium text-red-800">Failed to load creator profile</h3>
-        <p className="text-sm text-red-600">{ ( creatorError as Error )?.message || 'Creator not found' }</p>
+        <h3 className="text-lg font-medium text-red-800">{ t( 'creatorDashboard.failedLoad' ) }</h3>
+        <p className="text-sm text-red-600">{ ( creatorError as Error )?.message || t( 'creatorDashboard.creatorNotFound' ) }</p>
       </div>
     );
   }
 
-  const creatorName = [ creator?.first_name, creator?.last_name ].filter( Boolean ).join( ' ' ) || 'Creator Dashboard';
+  const creatorName = [ creator?.first_name, creator?.last_name ].filter( Boolean ).join( ' ' ) || t( 'creatorDashboard.title' );
   const creatorAvatar = ( creator as any )?.profile_image?.asset || ( creator as any )?.avatar_url || '';
 
   return (
     <div className="flex flex-1 flex-col h-full">
       <SubHeader
         title={ creatorName }
-        description="Overview of creator performance and details"
+        description={ t( 'creatorDashboard.description' ) }
         breadcrumbs={ [
-          { label: 'Creators', href: '/admin/creators' },
+          { label: t( 'creatorsPage.title' ), href: '/admin/creators' },
           { label: creatorName, href: `/admin/creators/${ creatorId }` },
         ] }
       />

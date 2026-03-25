@@ -2,12 +2,12 @@
 
 import { useMemo } from 'react';
 import { CampaignCard } from '@/components/campaigns/campaign-card';
-import type { ModelCampaign } from '@/components/campaigns/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import type { ModelsCampaignResponse } from '@/lib/api/generated/models';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
+import { useTranslations } from "next-intl";
 
 interface BrandRecentCampaignsBlockProps {
   brandId: string;
@@ -30,9 +30,10 @@ function CampaignCardSkeleton() {
 }
 
 export function BrandRecentCampaignsBlock( { brandId }: BrandRecentCampaignsBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: campaignsResponse, isLoading, isError } = useCampaigns( { brandId, limit: 20, page: 1 } );
 
-  const recentCampaigns = useMemo<ModelCampaign[]>( () => {
+  const recentCampaigns = useMemo<ModelsCampaignResponse[]>( () => {
     const campaigns = ( campaignsResponse?.data || [] ) as ModelsCampaignResponse[];
 
     return [ ...campaigns ]
@@ -42,18 +43,14 @@ export function BrandRecentCampaignsBlock( { brandId }: BrandRecentCampaignsBloc
         return bTime - aTime;
       } )
       .slice( 0, 6 )
-      .map( ( campaign ) => ( {
-        ...campaign,
-        creators: Array.isArray( ( campaign as { creators?: unknown[]; } ).creators ) ? ( campaign as { creators: ModelCampaign[ 'creators' ]; } ).creators : [],
-        applications: Array.isArray( ( campaign as { applications?: unknown[]; } ).applications ) ? ( campaign as { applications: ModelCampaign[ 'applications' ]; } ).applications : [],
-      } ) );
+      .map( ( campaign ) => ( { ...campaign } ) );
   }, [ campaignsResponse?.data ] );
 
   return (
     <Card className="ad-summary-card xl:col-span-2 grow">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Recent Campaigns</CardTitle>
-        <CardDescription className="ad-card-description">Latest campaigns for this brand</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'brandRecentCampaignsBlock.recentCampaigns' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'brandRecentCampaignsBlock.latestCampaignsForThis' ) }</CardDescription>
       </CardHeader>
       <CardContent className="grow">
         { isLoading && (
@@ -65,11 +62,11 @@ export function BrandRecentCampaignsBlock( { brandId }: BrandRecentCampaignsBloc
         ) }
 
         { isError && (
-          <p className="py-8 text-center text-xs text-destructive">Unable to load recent campaigns.</p>
+          <p className="py-8 text-center text-xs text-destructive">{ t( 'brandRecentCampaignsBlock.unableToLoadRecent' ) }</p>
         ) }
 
         { !isLoading && !isError && recentCampaigns.length === 0 && (
-          <p className="py-8 text-center text-xs text-muted-foreground">No campaigns yet.</p>
+          <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'brandRecentCampaignsBlock.noCampaignsYet' ) }</p>
         ) }
 
         { !isLoading && !isError && recentCampaigns.length > 0 && (

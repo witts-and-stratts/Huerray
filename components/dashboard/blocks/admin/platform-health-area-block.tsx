@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 import { platformHealthSeries } from './dashboard-mock-data';
+import { useTranslations } from 'next-intl';
 
 const chartConfig = {
   users: {
@@ -21,23 +22,24 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function PlatformHealthAreaBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   return (
     <Card className="ad-card h-full">
       <CardHeader>
-        <CardTitle className="ad-card-title">Platform Health Trend</CardTitle>
-        <CardDescription className="ad-card-description">Users, campaigns, and submissions over the last 6 months</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.platformHealth.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.platformHealth.description' ) }</CardDescription>
         <div className="ad-chart-legend">
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-chart-1" />
-            Users
+            { t( 'dashboardBlocks.platformHealth.labels.users' ) }
           </span>
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-chart-2" />
-            Campaigns
+            { t( 'dashboardBlocks.platformHealth.labels.campaigns' ) }
           </span>
           <span className="ad-chart-legend-item">
             <span className="ad-chart-dot bg-chart-3" />
-            Submissions
+            { t( 'dashboardBlocks.platformHealth.labels.submissions' ) }
           </span>
         </div>
       </CardHeader>

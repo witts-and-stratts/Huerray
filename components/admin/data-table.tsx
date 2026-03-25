@@ -5,6 +5,7 @@ import { Column, Row, Table } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Badge } from "../dashboard-ui/badge";
 import { Checkbox } from "../dashboard-ui/checkbox";
+import { useMessage } from "@/lib/hooks/use-filter-label";
 
 interface THeadProps<T> {
   column?: Column<T, unknown>;
@@ -42,7 +43,7 @@ interface TBadgeProps {
 export function TBadge( { title, variant, className }: TBadgeProps ) {
   return (
     <Badge variant={ variant } className={ cn( 'px-1.5 py-0 text-xs font-normal whitespace-nowrap', className ) }>
-      { title }
+      { useMessage( title ) }
     </Badge>
   );
 }

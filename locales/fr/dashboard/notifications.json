@@ -1,52 +1,52 @@
 {
   "title": "Notifications",
-  "description": "Afficher et gérer toutes les notifications",
-  "descriptionBrand": "Afficher et gérer toutes vos notifications",
+  "description": "Consulter et gérer toutes les notifications",
+  "descriptionBrand": "Consultez et gérez toutes vos notifications",
   "stats": {
-    "total": "Notifications totales",
-    "unread": "Non lues",
+    "total": "Total des notifications",
+    "unread": "Non lu",
     "today": "Aujourd'hui"
   },
   "tabs": {
-    "all": "Toutes",
-    "read": "Lues",
-    "unread": "Non lues"
+    "all": "Tous",
+    "read": "Lire",
+    "unread": "Non lu"
   },
   "search": {
-    "placeholder": "Rechercher des notifications",
+    "placeholder": "Notifications de recherche",
     "noResults": "Aucune notification ne correspond à votre recherche."
-  },
-  "actions": {
-    "markAllAsRead": "Tout marquer comme lu",
-    "markAsRead": "Marquer comme lu",
-    "delete": "Supprimer",
-    "deleteAll": "Tout supprimer",
-    "open": "Ouvrir"
-  },
-  "item": {
-    "showMore": "Afficher plus",
-    "showLess": "Afficher moins",
-    "eventTypeFallback": "Mise à jour"
-  },
-  "empty": {
-    "title": "Aucune notification à afficher",
-    "description": "Vous êtes à jour pour le moment."
-  },
-  "confirm": {
-    "deleteAllTitle": "Supprimer toutes les notifications",
-    "deleteAllDescription": "Voulez-vous vraiment supprimer toutes les notifications ? Cette action est irréversible.",
-    "deleteAllConfirm": "Tout supprimer",
-    "deleting": "Suppression..."
-  },
-  "toast": {
-    "deleteAllSuccess": "Toutes les notifications ont été supprimées",
-    "deleteAllError": "Échec de la suppression de toutes les notifications"
   },
   "pagination": {
     "rowsPerPage": "Lignes par page",
     "page": "Page",
-    "of": "sur",
-    "previous": "Précédente",
-    "next": "Suivante"
+    "of": "de",
+    "previous": "Précédent",
+    "next": "Suivant"
+  },
+  "actions": {
+    "markAllAsRead": "Marquer tous les textes comme lus",
+    "markAsRead": "Marquer comme lu",
+    "delete": "Supprimer",
+    "deleteAll": "Supprimer tout",
+    "open": "Ouvrir"
+  },
+  "item": {
+    "showMore": "Afficher plus",
+    "showLess": "Montrer moins",
+    "eventTypeFallback": "Mise à jour"
+  },
+  "empty": {
+    "title": "Aucune notification à afficher",
+    "description": "Vous êtes tous rattrapés pour l'instant."
+  },
+  "confirm": {
+    "deleteAllTitle": "Supprimer toutes les notifications",
+    "deleteAllDescription": "Êtes-vous sûr de vouloir supprimer toutes les notifications ? Cette action ne peut pas être annulée.",
+    "deleteAllConfirm": "Supprimer tout",
+    "deleting": "Suppression..."
+  },
+  "toast": {
+    "deleteAllSuccess": "Toutes les notifications sont supprimées",
+    "deleteAllError": "Échec de la suppression de toutes les notifications"
   }
 }

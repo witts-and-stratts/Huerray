@@ -20,9 +20,12 @@ import { getCountryFlag, getCountryName } from '@/lib/country-flags';
 import { ChevronDown, Globe } from 'lucide-react';
 import { Brand } from './brands-data';
 import '@/app/styles/components/data-table.css';
+import { useTranslations } from "next-intl";
+import { useFilterLabel } from '@/lib/hooks/use-filter-label';
 
 
 function CountryFilter( { table, countries }: { table: Table<Brand>; countries: string[]; } ) {
+  const t = useTranslations('dashboard.admin');
   const column = table.getColumn( 'country' );
   const filterValue = column?.getFilterValue() as string[] | undefined;
   const isActive = Array.isArray( filterValue ) && filterValue.length > 0;
@@ -44,8 +47,7 @@ function CountryFilter( { table, countries }: { table: Table<Brand>; countries: 
             column?.setFilterValue( countries.length > 0 ? [ ...countries ] : undefined );
           } }
         >
-          Select All
-        </div>
+          {t('brandsTableToolbar.selectAll')}</div>
         <DropdownMenuSeparator />
         { countries.map( ( code ) => {
           const name = getCountryName( code ) ?? code;
@@ -91,13 +93,15 @@ export function BrandsTableToolbar( {
   view,
   setView,
 }: BrandsTableToolbarProps ) {
+  const t = useTranslations('dashboard.admin');
+  const getFilterLabel = useFilterLabel();
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
           table={ table }
           columnId='name'
-          placeholder='Filter brands...'
+          placeholder={ t( 'filters.searchBrands' ) }
         />
       </div>
       <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
@@ -106,14 +110,16 @@ export function BrandsTableToolbar( {
           table={ table }
           columnId='brand_status'
           options={ statuses }
-          title='Status'
+          title={ t( 'filters.status' ) }
+          labelFn={ getFilterLabel }
         />
         <CountryFilter table={ table } countries={ countries } />
         <DataTableFilterDropdown
           table={ table }
           columnId='company_size'
           options={ sizes }
-          title='Size'
+          title={ t( 'filters.size' ) }
+          labelFn={ getFilterLabel }
         />
         <DataTableViewOptions table={ table } />
       </div>

@@ -9,8 +9,10 @@ import { useGigs } from '@/lib/api/hooks/gigs';
 import { GigsRecentPanel } from './gigs-recent-panel';
 import { GigsStatsPanel } from './gigs-stats-panel';
 import type { ModelsGigResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 export function GigsStatsBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   const [ activeTab, setActiveTab ] = useState<'stats' | 'recent'>( 'stats' );
   const { data: gigsResponse, isLoading, isError } = useGigs( { limit: 100, page: 1 } );
   const gigs = useMemo( () => ( gigsResponse?.data || [] ) as ModelsGigResponse[], [ gigsResponse ] );
@@ -21,11 +23,11 @@ export function GigsStatsBlock() {
     const completed = gigs.filter( ( gig ) => gig.gig_status === 'completed' ).length;
 
     return [
-      { label: 'Total Gigs', gigs: total },
-      { label: 'Open Gigs', gigs: open },
-      { label: 'Completed Gigs', gigs: completed },
+      { label: t( 'dashboardBlocks.gigs.stats.total' ), gigs: total },
+      { label: t( 'dashboardBlocks.gigs.stats.open' ), gigs: open },
+      { label: t( 'dashboardBlocks.gigs.stats.completed' ), gigs: completed },
     ];
-  }, [ gigs, gigsResponse?.pagination?.total ] );
+  }, [ gigs, gigsResponse?.pagination?.total, t ] );
 
   const recentGigItems = useMemo( () => {
     const sorted = [ ...gigs ].sort( ( a, b ) => {
@@ -35,16 +37,16 @@ export function GigsStatsBlock() {
     } );
 
     return sorted.slice( 0, 5 ).map( ( gig ) => {
-      const brand = gig.campaign_name || 'Brand';
+      const brand = gig.campaign_name || t( 'dashboardBlocks.gigs.labels.brand' );
       const brandLogo = '';
       const submittedAt = gig.created_at
         ? new Date( gig.created_at ).toLocaleDateString( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } )
-        : 'N/A';
+        : t( 'dashboardBlocks.gigs.labels.na' );
 
       return {
         brand,
         brandLogo,
-        title: gig.title || 'Untitled Gig',
+        title: gig.title || t( 'dashboardBlocks.gigs.labels.untitled' ),
         url: gig.campaign_id && gig.id ? `/admin/campaigns/${ gig.campaign_id }/gigs/${ gig.id }/edit` : '/admin/gigs',
         submittedAt,
         status: gig.gig_status || 'open',
@@ -55,28 +57,28 @@ export function GigsStatsBlock() {
   return (
     <Card className="ad-summary-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Gigs</CardTitle>
-        <CardDescription className="ad-card-description">Gig lifecycle and delivery progress overview</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.gigs.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.gigs.description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs value={ activeTab } onValueChange={ ( value ) => setActiveTab( value as 'stats' | 'recent' ) }>
           <TabsList variant="default" className="mb-2 w-full">
-            <TabsTab value="stats" className={ 'text-xs font-normal' }>Stats</TabsTab>
-            <TabsTab value="recent" className={ 'text-xs font-normal' }>Recent Gigs</TabsTab>
+            <TabsTab value="stats" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.gigs.tabs.stats' ) }</TabsTab>
+            <TabsTab value="recent" className={ 'text-xs font-normal' }>{ t( 'dashboardBlocks.gigs.tabs.recent' ) }</TabsTab>
           </TabsList>
 
           <TabsPanels>
             <TabsPanel value="stats" keepMounted>
-              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading gigs...</p> }
-              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load gigs.</p> }
+              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.gigs.states.loading' ) }</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.gigs.states.error' ) }</p> }
               { !isLoading && !isError && <GigsStatsPanel chartData={ chartData } /> }
             </TabsPanel>
 
             <TabsPanel value="recent" keepMounted>
-              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">Loading recent gigs...</p> }
-              { isError && <p className="py-8 text-center text-xs text-destructive">Unable to load recent gigs.</p> }
+              { isLoading && <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.gigs.states.recentLoading' ) }</p> }
+              { isError && <p className="py-8 text-center text-xs text-destructive">{ t( 'dashboardBlocks.gigs.states.recentError' ) }</p> }
               { !isLoading && !isError && recentGigItems.length === 0 && (
-                <p className="py-8 text-center text-xs text-muted-foreground">No gigs found.</p>
+                <p className="py-8 text-center text-xs text-muted-foreground">{ t( 'dashboardBlocks.gigs.states.empty' ) }</p>
               ) }
               { !isLoading && !isError && recentGigItems.length > 0 && <GigsRecentPanel items={ recentGigItems } /> }
             </TabsPanel>
@@ -90,7 +92,7 @@ export function GigsStatsBlock() {
           className="mt-2 w-full font-normal"
           render={ <Link href="/admin/gigs" /> }
         >
-          View all Gigs
+          { t( 'dashboardBlocks.gigs.labels.viewAll' ) }
         </Button>
       </CardFooter>
     </Card>

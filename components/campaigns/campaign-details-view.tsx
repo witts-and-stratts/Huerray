@@ -7,6 +7,7 @@ import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 import { useRole } from '@/contexts/role-context';
 import {
   ModelsAdminCampaignApprovalRequestCampaignStatusEnum,
+  ModelsCampaignResponse,
   ModelsCampaignStatusUpdateRequestCampaignStatusEnum,
 } from '@/lib/api/generated/models';
 import { useAdminCampaignApproval, useCampaignApplications, useCampaignInvitations, useCampaignSubmissions, useSubmitCampaign, useUpdateCampaignStatus } from '@/lib/api/hooks/campaigns';
@@ -36,7 +37,6 @@ import { CampaignInvitationsSection } from './sections/campaign-invitations-sect
 import { CampaignOverviewSection } from './sections/campaign-overview-section';
 import { CampaignSubmissionsSection } from './sections/campaign-submissions-section';
 import { StatusBadge } from './status-badge';
-import { ModelCampaign } from './types';
 import { cn } from '@/lib/dashboard-utils';
 
 const VALID_TABS = [ 'overview', 'applications', 'submissions', 'invitations', 'gigs', 'comments' ] as const;
@@ -49,7 +49,7 @@ function getTabFromHash(): TabValue {
 }
 
 interface CampaignDetailsViewProps {
-  campaign: ModelCampaign;
+  campaign: ModelsCampaignResponse;
 }
 
 function SubheaderActionButton( { item }: { item: ActionItem; } ) {

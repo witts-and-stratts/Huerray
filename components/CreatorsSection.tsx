@@ -3,53 +3,54 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export function CreatorsSection() {
-  const t = useTranslations('home.creatorsSection');
-  const tCommon = useTranslations('common');
+  const t = useTranslations( 'home.creatorsSection' );
+  const tCommon = useTranslations( 'common' );
 
   return (
     <section className='creators-section'>
       <div className='creators-section__container'>
         <div className='creators-section__content'>
-          <h2 className='creators-section__label'>{t('label')}</h2>
-          <h3 className='creators-section__title'>{t('title')}</h3>
+          <h2 className='creators-section__label'>{ t( 'label' ) }</h2>
+          <h3 className='creators-section__title'>{ t( 'title' ) }</h3>
           <p className='creators-section__description text-white!'>
-            {t('description')}
+            { t( 'description' ) }
           </p>
           <Button variant='hero' size='lg' className='min-w-80'>
-            {tCommon('button.joinForFree')}
+            <Link href="/signup?role=creator" title={ tCommon( 'button.joinForFree' ) }>{ tCommon( 'button.joinForFree' ) }</Link>
           </Button>
         </div>
 
-        {/* Creator Images */}
+        {/* Creator Images */ }
         <div className='creators-section__images'>
-          {/* Main girl image */}
+          {/* Main girl image */ }
           <div className='creators-section__main-image'>
             <Image
               src='/images/creators/main-girl.webp'
               alt='Creator'
-              width={500}
-              height={500}
+              width={ 500 }
+              height={ 500 }
             />
           </div>
-          {/* Makeup girl image - top right */}
+          {/* Makeup girl image - top right */ }
           <div className='creators-section__secondary-image'>
             <Image
               src='/images/creators/makeup-girl.webp'
               alt='Creator'
-              width={177}
-              height={153}
+              width={ 177 }
+              height={ 153 }
             />
           </div>
-          {/* Payment Card */}
+          {/* Payment Card */ }
           <div className='creators-section__payment-card'>
             <div className='creators-section__payment-avatar'>
               <Image
                 src='/images/creators/payment-avatar.webp'
                 alt='Avatar'
-                width={93}
-                height={93}
+                width={ 93 }
+                height={ 93 }
               />
             </div>
             <div className='creators-section__payment-content'>
@@ -58,13 +59,13 @@ export function CreatorsSection() {
               <div className='creators-section__payment-bar--short' />
             </div>
           </div>
-          {/* Sample teaser card - right side */}
+          {/* Sample teaser card - right side */ }
           <div className='creators-section__teaser-card'>
             <Image
-              src={'/images/creators/sample-teaser.svg'}
+              src={ '/images/creators/sample-teaser.svg' }
               alt='Teaser'
-              width={246}
-              height={150}
+              width={ 246 }
+              height={ 150 }
             />
           </div>
         </div>

@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "title": "Join a movement moving creative culture forward",
+    "subtitle": "We bring together culture, creativity, and technology to give creatives and underrepresented voices across the DACH region the visibility they deserve. And behind the scenes, we live what we stand for: diversity, openness, courage, and true collaboration.",
+    "buttonText": "See open positions",
+    "videoAlt": "Young woman showcasing fashion",
+    "imageAlt1": "Main creator",
+    "imageAlt2": "Creator content",
+    "imageAlt3": "Creator portrait"
+  },
+  "opportunities": {
+    "title": "Open Opportunities",
+    "subtitle": "If you're the owner of an active brain, interesting thoughts, and a good soul, we would like to hear from you.",
+    "button": "Learn More",
+    "jobs": [
+      {
+        "category": "Product, Design & Data",
+        "title": "Lead Product Designer",
+        "location": "Germany. Full time - Remote"
+      },
+      {
+        "category": "Sales Enablement",
+        "title": "Sales Enablement Manager",
+        "location": "Austria. Full time - Remote"
+      },
+      {
+        "category": "Customer Experience",
+        "title": "Senior Client Success Manager",
+        "location": "Switzerland. Full time - Remote"
+      }
+    ]
+  },
+  "ourValues": {
+    "title": "Our Values",
+    "values": [
+      {
+        "title": "Diversity",
+        "text": "Diversity isn't a slogan. It's who we are, in our team, our partners, and our ideas."
+      },
+      {
+        "title": "Authenticity always",
+        "text": "We don't do façades. We want real people with real stories and perspectives."
+      },
+      {
+        "title": "Innovation with purpose",
+        "text": "Technology is only exciting when it creates change. We use it to make representation visible, not to replace it."
+      },
+      {
+        "title": "Community over competition",
+        "text": "We believe in collaboration, exchange, and support, because real change only happens together."
+      }
+    ]
+  },
+  "ourTeams": {
+    "title": "Our Teams",
+    "teams": [
+      {
+        "title": "Product, Design, & Data",
+        "text": "We are building the platform of record that powers content creation and distribution for brands globally. Our mission is to serve the creator economy and provide them with the best place on earth to do what they love—create."
+      },
+      {
+        "title": "Customer Experience",
+        "text": "We are the secret sauce of #paid–creating and enabling customer and creator experiences that deliver results, impact, and most importantly, joy."
+      },
+      {
+        "title": "Sales",
+        "text": "Our goal is to educate brands and agencies how to think about creator marketing. We do deep discovery, tailoring our offering to help clients hit their objectives."
+      },
+      {
+        "title": "People",
+        "text": "People are the Soul of our company. We live this value by sourcing the best humans and then providing the best environment for our people to have career defining moments."
+      },
+      {
+        "title": "Finance",
+        "text": "Our Finance team works to build processes and policies that ensure accurate and timely information so that our other teams are supported to make informed business decisions."
+      },
+      {
+        "title": "Media, Analytics & Strategy",
+        "text": "We have a passion for analytics and all things digital. We find solutions for sophisticated challenges that span across creative, strategic and technical and analytical dimensions."
+      },
+      {
+        "title": "Marketing",
+        "text": "Our goal is to build a brand that people can't get off their minds. Together, we strive to create memorable moments with brands and creators."
+      },
+      {
+        "title": "Engineering",
+        "text": "We design tools and features that create the foundation for brands and creators to collaborate together. We define the future of #paid and look into ways we can scale and share the future of the Creator Economy."
+      }
+    ]
+  },
+  "careerWhy": {
+    "mainTitle": "We envision a world were creators are passionate about building something that matters",
+    "subtitle": "Huerray is a space for people who love ideas, who believe in creativity with purpose, and who want to make real change happen.",
+    "description1": "Whether your background is in marketing, tech, design, business development, or community. Huerray is a space for people who love ideas, who believe in creativity with purpose, and who want to make real change happen. whether your background is in marketing, tech, design, business development, or community. We care less about titles and more about who you are, what you stand for, and the energy you bring. We're growing, organically, intentionally, and with purpose.",
+    "description2": "We're always open to meeting people who share our vision and want to help shape it.",
+    "imageAlt": "Why Huerray"
+  }
+}

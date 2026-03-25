@@ -1,19 +1,239 @@
 {
-  "welcome": "Bon retour, Créateur !",
-  "overview": "Voici votre aperçu des missions",
-  "stats": {
-    "activeGigs": "Missions actives",
-    "completedGigs": "Missions terminées",
-    "totalEarnings": "Revenus totaux",
-    "avgRating": "Note moyenne",
-    "fromLastMonth": "par rapport au mois dernier"
+  "welcome": "Bienvenue, {name} !",
+  "overview": "Voici un aperçu de votre concert",
+  "dashboard": {
+    "title": "Tableau de bord",
+    "description": "Suivez les invitations, les concerts, les soumissions et les revenus prévus.",
+    "browseGigs": "Parcourir les offres d'emploi",
+    "viewMyGigs": "Voir mes concerts",
+    "creatorFallback": "Créateur"
   },
-  "recentGigs": "Missions récentes",
-  "browseGigs": "Parcourir les missions",
-  "updatePortfolio": "Mettre à jour le portfolio",
-  "noGigs": "Aucune mission récente",
   "earningsPage": {
-    "title": "Revenus",
-    "description": "Suivez votre historique de paiements et vos revenus issus des missions terminées."
+    "title": "Les revenus",
+    "description": "Suivez l'historique de vos paiements et de vos gains pour les contrats terminés."
+  },
+  "breadcrumbs": {
+    "dashboard": "Tableau de bord",
+    "gigs": "Gigs",
+    "active": "Actif",
+    "invitations": "Invitations",
+    "notifications": "Notifications",
+    "earnings": "Les revenus",
+    "portfolio": "Le portefeuille",
+    "settings": "Paramètres",
+    "completeProfile": "Profil complet",
+    "account": "Compte",
+    "editBasicInfo": "Modifier les informations de base",
+    "profile": "Profil",
+    "bio": "Biographie",
+    "socialMedia": "Médias sociaux",
+    "bankDetails": "Coordonnées bancaires",
+    "loading": "Chargement..."
+  },
+  "common": {
+    "details": "Détails",
+    "viewAllMyGigs": "Voir tous mes concerts",
+    "viewAllEarnings": "Voir tous les revenus",
+    "viewAllInvitations": "Voir toutes les invitations",
+    "viewAllSubmissions": "Voir toutes les soumissions",
+    "untitledGig": "Concert sans titre",
+    "unknownBrand": "Marque inconnue",
+    "reward": "Récompense",
+    "gigCost": "Coût de l'abonnement",
+    "deadline": "Date limite",
+    "endsOn": "Fin {date}",
+    "noActiveGigs": "Aucun contrat actif pour l'instant.",
+    "noInvitations": "Il n'y a pas encore d'invitations.",
+    "noEarnings": "Pas encore de gains. Complétez les missions pour commencer à gagner de l'argent !",
+    "na": "N/A",
+    "invitedCreator": "Créateur invité",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Échec du chargement de {name}",
+    "somethingWentWrong": "Quelque chose n'a pas fonctionné",
+    "product": "Produit",
+    "srGigDetails": "Détails pour gig : {title}",
+    "applicationPending": "Demande en cours",
+    "applying": "Postuler...",
+    "applyForGig": "Appliquer pour Gig",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Détails",
+      "campaign": "Campagne",
+      "mySubmissions": "Mes soumissions",
+      "submissions": "Soumissions",
+      "overview": "Vue d'ensemble"
+    },
+    "toasts": {
+      "appliedSuccess": "La demande a été envoyée avec succès !",
+      "appliedError": "L'envoi de la demande a échoué. Veuillez réessayer."
+    }
+  },
+  "kpi": {
+    "gigsCompleted": "Soirées terminées",
+    "gigsCompletedCaption": "Nombre total de concerts que vous avez effectués avec succès",
+    "totalEarned": "Total gagné",
+    "totalEarnedCaption": "Revenus à vie sur l'ensemble des concerts",
+    "approvalRate": "Taux d'approbation",
+    "approvalRateCaption": "Pourcentage de vidéos approuvées par les marques",
+    "successRate": "Taux de réussite",
+    "successRateCaption": "Demandes converties en contrats actifs"
+  },
+  "activeGigs": {
+    "title": "Gigs actifs",
+    "description": "Engagements actuels et prochaines échéances"
+  },
+  "invitations": {
+    "title": "Invitations",
+    "description": "Gérez les invitations à des concerts lancées par des marques.",
+    "latestFromBrands": "Dernières invitations des marques",
+    "noInvitationsYet": "Pas encore d'invitations",
+    "noInvitationsDesc": "Lorsque des marques vous inviteront à leurs concerts, ils apparaîtront ici.",
+    "status": {
+      "pending": "En attente",
+      "accepted": "Accepté",
+      "declined": "Refusé",
+      "unknown": "Inconnu"
+    },
+    "actions": {
+      "view": "Voir l'invitation",
+      "accept": "Accepter l'invitation",
+      "decline": "Refuser l'invitation",
+      "reject": "Rejeter l'invitation",
+      "createSubmission": "Créer une soumission",
+      "openMenu": "Ouvrir le menu",
+      "viewSubmissions": "Voir les soumissions"
+    },
+    "dialogs": {
+      "acceptTitle": "Accepter l'invitation",
+      "acceptDesc": "Êtes-vous sûr de vouloir accepter cette invitation ? La marque en sera informée et vous pourrez commencer à travailler sur le concert.",
+      "acceptCommentPlaceholder": "Ajouter un commentaire pour cette approbation",
+      "accepting": "Accepter...",
+      "declineTitle": "Refuser l'invitation",
+      "declineDesc": "Êtes-vous sûr de vouloir refuser cette invitation ? Cette action ne peut être annulée.",
+      "declineCommentPlaceholder": "Expliquez pourquoi vous déclinez",
+      "declining": "En déclin...",
+      "rejectTitle": "Rejeter l'invitation",
+      "rejectDesc": "Êtes-vous sûr de vouloir rejeter cette invitation ? Cette action ne peut être annulée."
+    },
+    "toasts": {
+      "accepted": "Invitation acceptée avec succès",
+      "declined": "Invitation refusée avec succès",
+      "error": "Échec de la mise à jour du statut de l'invitation"
+    }
+  },
+  "submissions": {
+    "title": "Soumissions récentes",
+    "description": "Vos dernières vidéos livrées",
+    "noSubmissions": "Aucune soumission pour l'instant",
+    "noSubmissionsDesc": "Lorsque vous créez des soumissions pour ce concert, elles apparaissent ici.",
+    "createTitle": "Créer une soumission",
+    "createDesc": "Téléchargez votre vidéo et ajoutez des détails pour ce concert.",
+    "details": "Détails de la soumission",
+    "form": {
+      "title": "Titre",
+      "titlePlaceholder": "Donnez un titre à votre demande",
+      "notes": "Notes",
+      "notesPlaceholder": "Ajoutez des notes sur votre soumission...",
+      "submit": "Soumettre une vidéo",
+      "submitting": "Soumettre...",
+      "dropzoneTitle": "Glissez-déposez votre vidéo ici",
+      "dropzoneDesc": "ou cliquez sur pour naviguer à partir de votre ordinateur",
+      "dropzoneSpecs": "Prend en charge les formats MP4, MOV, WEBM (Max 500MB)"
+    },
+    "toasts": {
+      "success": "Soumission créée avec succès",
+      "error": "Échec de la création de la soumission",
+      "missingGigId": "L'ID de la carte n'est pas disponible",
+      "uploading": "Veuillez attendre que la vidéo soit téléchargée"
+    },
+    "validation": {
+      "titleRequired": "Le titre est obligatoire",
+      "videoRequired": "Un fichier vidéo est nécessaire",
+      "maxSize": "La taille maximale des fichiers est de 500 Mo",
+      "invalidFormat": "Seuls les formats .mp4, .mov et .webm sont pris en charge."
+    }
+  },
+  "earnings": {
+    "title": "Les revenus",
+    "description": "Suivez l'historique de vos paiements et de vos gains pour les contrats terminés.",
+    "recentTotal": "Total récent"
+  },
+  "availableGigs": {
+    "title": "Soirées disponibles",
+    "description": "Explorez et postulez à de nouvelles opportunités correspondant à votre profil."
+  },
+  "myGigs": {
+    "title": "Gigs",
+    "description": "Tous les concerts auxquels vous avez participé.",
+    "tabs": {
+      "all": "Tous les concerts",
+      "available": "Soirées disponibles",
+      "active": "Gigs actifs"
+    }
+  },
+  "requirements": {
+    "title": "Exigences du créateur",
+    "gender": "Genre",
+    "male": "Homme",
+    "female": "Femme",
+    "ageRange": "Tranche d'âge",
+    "any": "Tous",
+    "compensation": "Compensation",
+    "guidelines": "Lignes directrices sur le contenu",
+    "ambience": "Ambiance",
+    "requirements": "Exigences"
+  },
+  "campaign": {
+    "aboutTitle": "À propos de cette campagne",
+    "dosDonts": "À faire et à ne pas faire",
+    "dos": "À faire",
+    "donts": "À ne pas faire",
+    "direction": "Direction",
+    "toneOfVoice": "Ton de la voix",
+    "keywords": "Mots clés",
+    "noKeywords": "Aucun mot-clé n'a été défini.",
+    "campaignBriefTitle": "Dossier de campagne",
+    "campaignBriefDesc": "Détails essentiels et exigences en matière de messages",
+    "description": "Description",
+    "category": "Catégorie",
+    "assets": "Actifs",
+    "images": "Images",
+    "documents": "Documents",
+    "videos": "Vidéos",
+    "task": "Tâche",
+    "recordVideos": "Enregistrement {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Durée : {count} secondes"
+  },
+  "payments": {
+    "status": {
+      "completed": "Terminé",
+      "pending": "En attente",
+      "processing": "Traitement",
+      "failed": "Échec",
+      "cancelled": "Annulé"
+    },
+    "table": {
+      "payment": "Paiement",
+      "creator": "Créateur",
+      "date": "Date",
+      "method": "Méthode",
+      "items": "Articles",
+      "paid": "Payé ?",
+      "amount": "Montant",
+      "actions": "Actions",
+      "noEarnings": "Pas encore de revenus",
+      "noEarningsFiltered": "Aucun revenu ne correspond à vos filtres actuels.",
+      "noEarningsDesc": "Vos paiements pour les contrats terminés apparaîtront ici.",
+      "searchPlaceholder": "Gains de recherche...",
+      "clearFilters": "Effacer les filtres"
+    },
+    "details": {
+      "paymentId": "ID de paiement",
+      "accessibilityDesc": "Détails de paiement pour {reference}.",
+      "created": "Créée",
+      "reference": "Référence",
+      "notes": "Notes",
+      "totalAmount": "Montant total"
+    }
   }
 }

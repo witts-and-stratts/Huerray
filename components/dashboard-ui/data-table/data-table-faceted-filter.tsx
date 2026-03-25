@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Check, PlusCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Column } from "@tanstack/react-table";
 
 import { cn } from "@/lib/dashboard-utils";
@@ -38,6 +39,7 @@ export function DataTableFacetedFilter<TData, TValue>( {
   title,
   options,
 }: DataTableFacetedFilterProps<TData, TValue> ) {
+  const t = useTranslations( 'dashboard.common' );
   const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set( column?.getFilterValue() as string[] );
 
@@ -61,7 +63,7 @@ export function DataTableFacetedFilter<TData, TValue>( {
                   variant="secondary"
                   className="rounded-sm px-1 font-normal"
                 >
-                  { selectedValues.size } selected
+                  { t( 'selectedCount', { count: selectedValues.size } ) }
                 </Badge>
               ) : (
                 options
@@ -84,7 +86,7 @@ export function DataTableFacetedFilter<TData, TValue>( {
         <Command>
           <CommandInput placeholder={ title } />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>{ t( 'noResultsFound' ) }</CommandEmpty>
             <CommandGroup>
               { options.map( ( option ) => {
                 const isSelected = selectedValues.has( option.value );
@@ -134,7 +136,7 @@ export function DataTableFacetedFilter<TData, TValue>( {
                     onSelect={ () => column?.setFilterValue( undefined ) }
                     className="justify-center text-center"
                   >
-                    Clear filters
+                    { t( 'clearFilters' ) }
                   </CommandItem>
                 </CommandGroup>
               </>

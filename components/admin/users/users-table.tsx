@@ -22,6 +22,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
 import { TableErrorState } from "@/components/dashboard-ui/table-error-state";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
+import { useTranslations } from "next-intl";
 
 const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -54,6 +55,8 @@ export function UsersTable( {
   error = null,
 }: UsersTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { user_type_filter: false } );
@@ -77,13 +80,21 @@ export function UsersTable( {
           setSelectedUser( user );
           setIsSheetOpen( true );
         },
+        t,
+        tc,
       } ),
-    []
+    [ t, tc ]
   );
 
   const table = useReactTable( {
     data: users,
     columns,
+    initialState: {
+      columnPinning: {
+        left: [ 'select', 'user_type', 'name' ],
+        right: [ 'actions' ]
+      }
+    },
     globalFilterFn: userGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

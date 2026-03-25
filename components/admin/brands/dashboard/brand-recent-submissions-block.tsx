@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useBrandVideoSubmissions } from '@/lib/api/hooks/brands';
 import { EmptySubmission } from '../../empty-states/empty-submissions';
+import { useTranslations } from "next-intl";
 
 interface BrandRecentSubmissionsBlockProps {
   brandId: string;
@@ -27,14 +28,15 @@ function RecentSubmissionItemSkeleton() {
 }
 
 export function BrandRecentSubmissionsBlock( { brandId: _brandId }: BrandRecentSubmissionsBlockProps ) {
+  const t = useTranslations('dashboard.admin');
   const { data, isLoading, isError } = useBrandVideoSubmissions( { page: 1, limit: 8 } );
   const recentSubmissions = data?.data ?? [];
 
   return (
     <Card className="ad-summary-card xl:col-span-2 grow">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Recent Submissions</CardTitle>
-        <CardDescription className="ad-card-description">Latest video submissions across campaigns</CardDescription>
+        <CardTitle className="ad-card-title">{t('brandRecentSubmissionsBlock.recentSubmissions')}</CardTitle>
+        <CardDescription className="ad-card-description">{t('brandRecentSubmissionsBlock.latestVideoSubmissionsAcross')}</CardDescription>
       </CardHeader>
       <CardContent className="grow">
         { isLoading && (
@@ -46,7 +48,7 @@ export function BrandRecentSubmissionsBlock( { brandId: _brandId }: BrandRecentS
         ) }
 
         { isError && (
-          <p className="py-8 text-center text-xs text-destructive">Unable to load recent submissions.</p>
+          <p className="py-8 text-center text-xs text-destructive">{t('brandRecentSubmissionsBlock.unableToLoadRecent')}</p>
         ) }
 
         { !isLoading && !isError && recentSubmissions.length === 0 && (

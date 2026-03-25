@@ -1,15 +1,144 @@
 {
   "welcome": "Willkommen zurück!",
-  "overview": "Hier ist Ihre Übersicht",
+  "overview": "Hier ist Ihr Überblick",
   "stats": {
     "activeCampaigns": "Aktive Kampagnen",
-    "connectedCreators": "Verbundene Creator",
+    "connectedCreators": "Schöpfer",
     "totalSpend": "Gesamtausgaben",
-    "averageRoi": "Durchschnittlicher ROI",
-    "fromLastMonth": "im Vergleich zum Vormonat"
+    "averageRoi": "Avg. ROI",
+    "fromLastMonth": "vom letzten Monat"
   },
-  "recentCampaigns": "Aktuelle Kampagnen",
+  "campaignsPage": {
+    "title": "Kampagnen",
+    "description": "Verwalten Sie Ihre aktiven und vergangenen Kampagnen.",
+    "create": "Kampagne erstellen",
+    "columns": {
+      "name": "Name",
+      "status": "Status",
+      "creators": "Schöpfer",
+      "budget": "Haushalt",
+      "duration": "Dauer",
+      "actions": "Aktionen"
+    }
+  },
+  "creatorsPage": {
+    "title": "Schöpfer finden",
+    "description": "Entdecken und verbinden Sie sich mit Top-Kreativen für Ihre Kampagnen.",
+    "search": "Schöpfer suchen...",
+    "filter": "Filter",
+    "connect": "Verbinden Sie"
+  },
+  "gigsPage": {
+    "title": "Auftritte",
+    "description": "Überwachen und verwalten Sie den Status Ihrer aktiven Gigs."
+  },
+  "recentCampaigns": "Neueste Kampagnen",
   "createCampaign": "Kampagne erstellen",
-  "findCreators": "Creator finden",
-  "noCampaigns": "Keine aktuellen Kampagnen"
+  "findCreators": "Schöpfer finden",
+  "noCampaigns": "Keine aktuellen Kampagnen",
+  "inviteCreators": {
+    "title": "Schöpfer einladen",
+    "description": "Suchen Sie nach Kreativen und laden Sie sie ein, sich für Ihren Auftritt zu bewerben.",
+    "searchPlaceholder": "Suche nach Namen oder Benutzernamen",
+    "noCreatorsFound": "Keine Ersteller gefunden",
+    "noMatchingCreators": "Keine passenden Schöpfer",
+    "adjustSearch": "Versuchen Sie, Ihre Suchbegriffe anzupassen oder die Rechtschreibung zu überprüfen.",
+    "noCreatorsMatchRequirements": "Kein Ersteller entspricht den Anforderungen für den Auftritt. Überlege dir, ob du die Altersgruppe oder das Geschlecht in deinen Gig-Einstellungen anpassen möchtest.",
+    "noCreatorsAvailable": "Im Moment sind keine Ersteller verfügbar. Versuchen Sie es später noch einmal.",
+    "showingMatching": "Anzeige der Ersteller, die den Anforderungen des Auftritts entsprechen:",
+    "status": {
+      "pending": "Anhängig",
+      "accepted": "Angenommen",
+      "declined": "Abgelehnt",
+      "invited": "Eingeladen"
+    },
+    "invite": "Einladen",
+    "inviting": "Einladend...",
+    "invitationSent": "Einladung an {name} gesendet",
+    "failedToInvite": "Einladung konnte nicht gesendet werden",
+    "invalidGig": "Ungültiger Gig ausgewählt"
+  },
+  "createProfileForm": {
+    "contactInformation": "Kontaktinformationen",
+    "addressInformation": "Informationen zur Adresse",
+    "tellUsAboutYour": "Erzählen Sie uns von Ihrem Unternehmen, um mit Huerray zu beginnen.",
+    "completeYourBrandProfile": "Vervollständigen Sie Ihr Markenprofil",
+    "companyName": "Name des Unternehmens",
+    "websiteUrl": "Website-URL",
+    "industryCategory": "Industrie-Kategorie",
+    "companySize": "Größe des Unternehmens",
+    "vatId": "UMSATZSTEUERIDENTIFIKATIONSNUMMER",
+    "registrationNumber": "Zulassungsnummer",
+    "street": "Straße",
+    "numberSuite": "Nummer/Suite",
+    "city": "Stadt",
+    "stateProvince": "Staat/Provinz",
+    "postalCode": "Postleitzahl",
+    "country": "Land",
+    "contactEmail": "Kontakt E-Mail",
+    "contactPhone": "Kontakt Telefon",
+    "description": "Beschreibung",
+    "brandLogo": "Logo der Marke",
+    "creatingProfile": "Profil erstellen...",
+    "completeProfile": "Vollständiges Profil",
+    "profileCreated": "Profil erfolgreich erstellt!",
+    "failedToCreate": "Profil kann nicht erstellt werden: {error}",
+    "errorCompanyRequired": "Firmenname ist erforderlich",
+    "errorInvalidUrl": "Ungültige URL",
+    "errorStateRequired": "Staat/Provinz ist erforderlich"
+  },
+  "completeProfile": {
+    "title": "Vervollständigen Sie Ihr Markenprofil",
+    "description": "Lassen Sie uns Ihre Markendaten einrichten, um mit der Durchführung von Kampagnen zu beginnen.",
+    "companyAddress": "Firma & Adresse",
+    "branding": "Branding",
+    "companyDetails": "Details zum Unternehmen",
+    "addressInformation": "Informationen zur Adresse",
+    "contactInformation": "Kontaktinformationen",
+    "back": "Zurück",
+    "nextStep": "Nächster Schritt",
+    "creatingProfile": "Profil erstellen...",
+    "completeProfile": "Vollständiges Profil",
+    "profileCompleted": "Profil erfolgreich abgeschlossen!",
+    "failedToComplete": "Profil kann nicht aktualisiert werden: {error}",
+    "validationError": "Überprüfungsfehler: {error}"
+  },
+  "invoicesPage": {
+    "title": "Rechnungen",
+    "description": "Zeigen Sie Ihre Rechnungen an und laden Sie sie herunter."
+  },
+  "paymentsPage": {
+    "title": "Zahlungen",
+    "description": "Ihr Zahlungsverhalten einsehen."
+  },
+  "settingsPage": {
+    "profileTitle": "Markenprofil",
+    "profileDescription": "Aktualisieren Sie Ihre Markendaten und Ihr öffentliches Profil.",
+    "securityTitle": "Sicherheit",
+    "securityDescription": "Verwalten Sie Ihr Passwort und Ihre Sicherheitssitzungen.",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "settings": "Einstellungen"
+    },
+    "tabs": {
+      "profile": "Markenprofil",
+      "security": "Sicherheit"
+    },
+    "successUpdated": "Einstellungen erfolgreich aktualisiert",
+    "errorUpdateFailed": "Aktualisierung der Einstellungen fehlgeschlagen",
+    "errorUpdateFailedDesc": "Aktualisierung der Einstellungen fehlgeschlagen",
+    "errorLoadFailed": "Markeneinstellungen konnten nicht geladen werden",
+    "changesDiscarded": "Verworfene Änderungen",
+    "saving": "Sparen...",
+    "saveChanges": "Änderungen speichern",
+    "discardChanges": "Änderungen verwerfen",
+    "confirmTitle": "Bestätigung der Profilaktualisierung",
+    "confirmDescription": "Das Speichern Ihres Profils erfordert eine Überprüfung und Genehmigung, bevor Sie bestimmte Aufgaben ausführen können.",
+    "continueAndSave": "Fortfahren und speichern",
+    "passwordUpdated": "Passwort erfolgreich aktualisiert",
+    "errorPasswordUpdate": "Passwortänderung fehlgeschlagen",
+    "errorPasswordUpdateDesc": "Aktualisierung des Passworts fehlgeschlagen: {error}",
+    "updating": "Aktualisieren...",
+    "updatePassword": "Passwort aktualisieren"
+  }
 }

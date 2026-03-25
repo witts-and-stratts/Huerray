@@ -28,6 +28,7 @@ import { toast } from "sonner";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+import { useTranslations } from "next-intl";
 
 const creatorGlobalFilter: FilterFn<ModelsCreatorResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -66,6 +67,8 @@ export function CreatorsTable( {
   error = null,
 }: CreatorsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const { view, setView } = usePersistedViewMode( 'creators', 'cards' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
@@ -100,12 +103,12 @@ export function CreatorsTable( {
         onSuccess: () => {
           setPendingAction( null );
           type === "approve"
-            ? toast.success( `${ creator.first_name || "Creator" } approved successfully` )
-            : toast.success( `${ creator.first_name || "Creator" } rejected` );
+            ? toast.success( t( 'creatorStatus.approvedToast', { name: creator.first_name || tc( 'cards.creatorFallback' ) } ) )
+            : toast.success( t( 'creatorStatus.rejectedToast', { name: creator.first_name || tc( 'cards.creatorFallback' ) } ) );
         },
         onError: () => {
           setPendingAction( null );
-          toast.error( `Failed to ${ type } creator` );
+          toast.error( t( 'creatorStatus.errorToast' ) );
         },
       }
     );
@@ -135,8 +138,9 @@ export function CreatorsTable( {
           setSelectedCreator( creator );
           setIsSheetOpen( true );
         },
+        t,
       } ),
-    []
+    [ t ]
   );
 
   const table = useReactTable( {
@@ -205,23 +209,23 @@ export function CreatorsTable( {
       <ConfirmDialog
         open={ !!pendingAction }
         onOpenChange={ ( open ) => { if ( !open ) setPendingAction( null ); } }
-        title={ pendingAction?.type === "approve" ? "Approve creator profile?" : "Reject creator profile?" }
+        title={ pendingAction?.type === "approve" ? t( 'creatorStatus.confirmApproveTitle' ) : t( 'creatorStatus.confirmRejectTitle' ) }
         description={
           pendingAction?.type === "approve"
-            ? `${ pendingAction.creator.first_name || "This creator" }'s profile will be approved and they will be notified.`
-            : `${ pendingAction?.creator.first_name || "This creator" }'s profile will be rejected and they will be notified.`
+            ? t( 'creatorStatus.confirmApproveDesc', { name: pendingAction.creator.first_name || t( 'creatorStatus.thisCreator' ) } )
+            : t( 'creatorStatus.confirmRejectDesc', { name: pendingAction?.creator.first_name || t( 'creatorStatus.thisCreator' ) } )
         }
-        confirmLabel={ pendingAction?.type === "approve" ? "Approve" : "Reject" }
+        confirmLabel={ pendingAction?.type === "approve" ? t( 'creatorStatus.approve' ) : t( 'creatorStatus.reject' ) }
         variant={ pendingAction?.type === "approve" ? "default" : "destructive" }
         onConfirm={ handleConfirm }
         isLoading={ updateStatus.isPending }
-        loadingText={ pendingAction?.type === "approve" ? "Approving..." : "Rejecting..." }
+        loadingText={ pendingAction?.type === "approve" ? t( 'creatorStatus.approving' ) : t( 'creatorStatus.rejecting' ) }
         className="w-[560px]"
       >
         <SuperField
           type="textarea"
-          label="Comment"
-          placeholder="Add a comment"
+          label={ t( 'creatorStatus.commentLabel' ) }
+          placeholder={ t( 'creatorStatus.commentPlaceholder' ) }
           value={ pendingAction?.comments }
           onChange={ ( e ) => {
             setPendingAction( {

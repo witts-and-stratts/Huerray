@@ -9,8 +9,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import type { ModelsNotificationResponse } from '@/lib/api/generated/models';
 import { useDeleteNotification, useMarkNotificationAsRead, useNotifications } from '@/lib/api/hooks/notifications';
 import { timeAgo } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 export function RecentActivityBlock() {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: response, isLoading, isError } = useNotifications( 1, 10, false );
   const markAsRead = useMarkNotificationAsRead();
   const deleteNotification = useDeleteNotification();
@@ -21,17 +23,17 @@ export function RecentActivityBlock() {
 
     return {
       id: notification.id || `${ notification.event_name }-${ notification.created_at }`,
-      eventName: notification.event_name || 'Unknown Event',
-      eventType: notification.event_type || 'Unknown',
-      actor: actorFromMessage || notification.title || 'System',
-      when: notification.created_at ? timeAgo( notification.created_at ) : 'N/A',
+      eventName: notification.event_name || t( 'dashboardBlocks.recentActivityBlock.labels.unknownEvent' ),
+      eventType: notification.event_type || t( 'dashboardBlocks.recentActivityBlock.labels.unknown' ),
+      actor: actorFromMessage || notification.title || t( 'dashboardBlocks.recentActivityBlock.labels.system' ),
+      when: notification.created_at ? timeAgo( notification.created_at ) : t( 'dashboardBlocks.recentActivityBlock.labels.na' ),
       notification,
     };
   } );
 
   const actions: MenuAction<ModelsNotificationResponse>[] = [
     {
-      label: 'Mark as read',
+      label: t( 'dashboardBlocks.recentActivityBlock.menu.markAsRead' ),
       action: ( item ) => {
         if ( !item.id ) return;
         markAsRead.mutate( item.id );
@@ -39,14 +41,14 @@ export function RecentActivityBlock() {
       condition: ( item ) => !item.is_read,
     },
     {
-      label: 'View',
+      label: t( 'dashboardBlocks.recentActivityBlock.menu.view' ),
       condition: ( item ) => !!item.action_url,
       action: ( item ) => {
         if ( item.action_url ) window.open( item.action_url, '_blank', 'noopener,noreferrer' );
       },
     },
     {
-      label: 'Delete',
+      label: t( 'dashboardBlocks.recentActivityBlock.menu.delete' ),
       variant: 'destructive',
       separator: true,
       condition: ( item ) => !!item.id,
@@ -60,19 +62,19 @@ export function RecentActivityBlock() {
   return (
     <Card className="ad-card">
       <CardHeader>
-        <CardTitle className="ad-card-title">Recent Activity</CardTitle>
-        <CardDescription className="ad-card-description">Latest event stream from notification activity</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.recentActivityBlock.title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.recentActivityBlock.description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[360px] rounded-lg border border-border/60" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
           <Table>
             <TableHeader className="bg-slate-50" sticky>
               <TableRow className="border-b border-border/60 bg-slate-50">
-                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">Event Name</TableHead>
-                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">Event Type</TableHead>
-                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">Actor</TableHead>
-                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">When</TableHead>
-                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground text-right">Actions</TableHead>
+                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">{ t( 'dashboardBlocks.recentActivityBlock.table.eventName' ) }</TableHead>
+                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">{ t( 'dashboardBlocks.recentActivityBlock.table.eventType' ) }</TableHead>
+                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">{ t( 'dashboardBlocks.recentActivityBlock.table.actor' ) }</TableHead>
+                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground">{ t( 'dashboardBlocks.recentActivityBlock.table.when' ) }</TableHead>
+                <TableHead className="px-4 py-3 text-xs uppercase tracking-wide text-muted-foreground text-right">{ t( 'dashboardBlocks.recentActivityBlock.table.actions' ) }</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -89,7 +91,7 @@ export function RecentActivityBlock() {
               { !isLoading && isError && (
                 <TableRow className="border-b border-border/40 bg-white">
                   <TableCell className="px-4 py-3 text-xs text-muted-foreground" colSpan={ 5 }>
-                    Unable to load recent activity.
+                    { t( 'dashboardBlocks.recentActivityBlock.states.error' ) }
                   </TableCell>
                 </TableRow>
               ) }
@@ -97,7 +99,7 @@ export function RecentActivityBlock() {
               { !isLoading && !isError && rows.length === 0 && (
                 <TableRow className="border-b border-border/40 bg-white">
                   <TableCell className="px-4 py-3 text-sm text-muted-foreground" colSpan={ 5 }>
-                    No recent activity yet.
+                    { t( 'dashboardBlocks.recentActivityBlock.states.empty' ) }
                   </TableCell>
                 </TableRow>
               ) }

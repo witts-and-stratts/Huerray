@@ -7,11 +7,14 @@ import { CreatorStatusBadge } from "../creator-status-badge";
 import { MetaBadge } from "./creator-details-shared";
 import Image from 'next/image';
 import { imgpresets } from "@/lib/utils/imgproxy";
+import { useTranslations } from "next-intl";
 
 export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorResponse; } ) {
+  const t = useTranslations('dashboard.admin');
+  const tc = useTranslations('dashboard.common');
   const { first_name, last_name, creator_status, email, date_of_birth, city, country, gender, profile_image } = creator;
 
-  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || 'Unknown';
+  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || tc( 'cards.creatorFallback' );
   const isApproved = creator_status?.toLowerCase() === 'approved';
   const initials = fullName.slice( 0, 2 ).toUpperCase();
   const age = date_of_birth ? ageFromDate( date_of_birth ) : undefined;
@@ -52,12 +55,12 @@ export function CreatorSheetHeader( { creator }: { creator: ModelsCreatorRespons
             </MetaBadge>
           ) }
           { formattedGender && <MetaBadge>{ formattedGender }</MetaBadge> }
-          { age && <MetaBadge>{ age } y/o</MetaBadge> }
+          { age && <MetaBadge>{ age } {t('creatorSheetHeader.yo')}</MetaBadge> }
         </div>
       </div>
 
       <SheetDescription className="sr-only">
-        Detailed information about creator { fullName }.
+        {t('creatorSheetHeader.detailedInformationAboutCreator')}{ fullName }.
       </SheetDescription>
     </SheetHeader>
   </>;

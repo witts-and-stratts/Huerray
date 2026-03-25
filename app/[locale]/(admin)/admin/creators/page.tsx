@@ -4,8 +4,10 @@ import { CreatorsTable } from "@/components/admin/creators/creators-table";
 import { SubHeader } from "@/components/subheader";
 import { useCreators } from "@/lib/api/hooks/creators";
 import * as React from "react";
+import { useTranslations } from "next-intl";
 
 export default function CreatorsPage() {
+  const t = useTranslations( 'dashboard.admin' );
   const { data: response, isLoading, error } = useCreators( {
     limit: 100,
   } );
@@ -17,8 +19,8 @@ export default function CreatorsPage() {
   return (
     <>
       <SubHeader
-        title="Creators"
-        description="Manage platform creators"
+        title={ t( 'creatorsPage.title' ) }
+        description={ t( 'creatorsPage.description' ) }
       >
         {/* <Button className="gap-2 rounded-md">Add Creator</Button> */ }
       </SubHeader>

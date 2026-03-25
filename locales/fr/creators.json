@@ -1,95 +1,95 @@
 {
   "hero": {
-    "title": "Soyez payé pour faire ce que vous aimez",
-    "subtitle": "Travaillez avec des marques et de vraies entreprises. Commencez à gagner de l'argent pour ce que vous aimez.",
-    "buttonText": "Devenir Créateur",
+    "title": "Être payé pour faire ce que l'on aime",
+    "subtitle": "Travaillez avec des marques et des entreprises réelles. Commencez à gagner de l'argent pour ce que vous aimez.",
+    "buttonText": "Devenir créateur",
     "paymentMade": "Paiement effectué"
   },
   "categories": {
-    "fashion": "Mode",
-    "lifestyle": "Art de vivre",
+    "fashion": "La mode",
+    "lifestyle": "Mode de vie",
     "beauty": "Beauté",
     "fitness": "Fitness",
-    "food": "Nourriture",
+    "food": "Alimentation",
     "travel": "Voyage",
     "tech": "Tech",
-    "healthWellness": "Santé & Bien-être",
-    "sport": "Sport",
+    "healthWellness": "Santé et bien-être",
+    "sport": "Le sport",
     "skincare": "Soins de la peau"
   },
   "collaborations": {
-    "pill": "Mise en relation",
+    "pill": "Correspondance",
     "title": "Des collaborations qui correspondent à votre style",
-    "description": "Correspondance avec des marques basée sur votre style et vos préférences de contenu."
+    "description": "Des marques qui correspondent à vos préférences en matière de style et de contenu."
   },
   "director": {
-    "pill": "Contrôle Créatif",
-    "title": "Soyez le directeur créatif",
-    "description": "Gagnez en autonomie créative sur vos créations. Soyez le centre du spectacle."
+    "pill": "Contrôle de la création",
+    "title": "Être le directeur de la création",
+    "description": "Gagnez en autonomie créative sur vos créations. Soyez au centre du spectacle."
   },
   "manage": {
     "pill": "Automatisation",
     "title": "Vous créez. Nous gérons tout le reste",
-    "description": "Notre équipe et notre technologie aident à gérer l'expérience avec les marques, afin que vous puissiez vous concentrer sur la création du meilleur contenu."
+    "description": "Notre équipe et notre technologie permettent de gérer l'expérience avec les marques, afin que vous puissiez vous concentrer sur la création du meilleur contenu."
   },
   "paid": {
     "pill": "Paiements",
-    "title": "Soyez payé à temps, à chaque fois",
-    "description": "Vous recevez des paiements automatiques lorsque les clients approuvent votre création. Aucune question posée."
+    "title": "Être payé à temps, à chaque fois",
+    "description": "Vous recevez des paiements automatiques lorsque les clients approuvent votre création. Aucune question n'est posée."
   },
   "testimonial": {
-    "quote": "Huerray défend ses créateurs... de s'assurer que nous soyons payés équitablement à nous donner constamment des opportunités de marque qui correspondent à notre mode de vie",
-    "author": "Baron McHennie – @baron_mchennie"
+    "quote": "Huerray défend les intérêts de ses créateurs... en veillant à ce que nous soyons rémunérés équitablement et en nous offrant constamment des opportunités de marque qui correspondent à notre style de vie.",
+    "author": "Baron McHennie - @baron_mchennie"
   },
   "cta": {
     "subtitle": "Rejoignez des milliers de créateurs",
-    "title": "Soyez payé pour faire ce que vous aimez"
+    "title": "Être payé pour faire ce que l'on aime"
   },
   "faq": {
     "heading": "FAQ",
     "q1": {
-      "question": "Comment commencer en tant que créateur ?",
-      "answer": "Inscrivez-vous simplement, complétez votre profil et commencez à parcourir les collaborations de marque disponibles. Une fois approuvé, vous pouvez commencer à créer du contenu."
+      "question": "Comment démarrer en tant que créateur ?",
+      "answer": "Il vous suffit de vous inscrire, de compléter votre profil et de commencer à parcourir les collaborations avec les marques disponibles. Une fois approuvé, vous pouvez commencer à créer du contenu."
     },
     "q2": {
-      "question": "Quelles sont les conditions pour rejoindre ?",
-      "answer": "Nous accueillons des créateurs de toutes tailles. Vous avez besoin d'une présence active sur les réseaux sociaux et de la capacité de créer un contenu de qualité qui engage votre public."
+      "question": "Quelles sont les conditions d'adhésion ?",
+      "answer": "Nous accueillons des créateurs de toutes tailles. Vous devez avoir une présence active sur les médias sociaux et la capacité de créer un contenu de qualité qui engage votre public."
     },
     "q3": {
       "question": "Combien puis-je gagner ?",
-      "answer": "Les gains varient en fonction de la taille de votre audience, des taux d'engagement et de la portée de chaque collaboration. Vous verrez les détails de la rémunération à l'avance pour chaque opportunité."
+      "answer": "Les gains varient en fonction de la taille de votre audience, des taux d'engagement et de la portée de chaque collaboration. Vous verrez les détails de la rémunération pour chaque opportunité."
     },
     "q4": {
       "question": "Comment fonctionnent les paiements ?",
-      "answer": "Vous recevrez le paiement une fois que votre contenu sera approuvé par la marque et répondra aux exigences de la campagne. Les paiements sont traités de manière sécurisée via notre plateforme."
+      "answer": "Vous recevrez un paiement une fois que votre contenu aura été approuvé par la marque et qu'il répondra aux exigences de la campagne. Les paiements sont traités de manière sécurisée via notre plateforme."
     },
     "q5": {
-      "question": "Puis-je choisir avec quelles marques travailler ?",
-      "answer": "Absolument ! Vous avez un contrôle total sur les collaborations que vous acceptez. Ne travaillez qu'avec des marques qui correspondent à vos valeurs et à votre audience."
+      "question": "Puis-je choisir les marques avec lesquelles je travaille ?",
+      "answer": "Absolument ! Vous avez le contrôle total des collaborations que vous acceptez. Ne travaillez qu'avec des marques qui correspondent à vos valeurs et à votre public."
     },
     "q6": {
       "question": "Quel type de contenu dois-je créer ?",
-      "answer": "Les types de contenu varient selon la campagne mais incluent généralement des photos, des vidéos, des reels ou des stories. Chaque brief fournit des exigences détaillées et des directives créatives."
+      "answer": "Les types de contenu varient d'une campagne à l'autre, mais comprennent généralement des photos, des vidéos, des bobines ou des histoires. Chaque briefing fournit des exigences détaillées et des lignes directrices créatives."
     },
     "q7": {
       "question": "Combien de temps faut-il pour être payé ?",
-      "answer": "Les paiements sont traités automatiquement une fois que la marque approuve votre contenu. Vous recevrez généralement le paiement sous 3 à 5 jours ouvrables."
+      "answer": "Les paiements sont traités automatiquement dès que la marque approuve votre contenu. Vous recevrez généralement votre paiement dans un délai de 3 à 5 jours ouvrables."
     },
     "q8": {
       "question": "Puis-je travailler avec plusieurs marques à la fois ?",
-      "answer": "Oui ! Vous pouvez collaborer avec autant de marques que vous le souhaitez, tant qu'il n'y a pas de clauses d'exclusivité dans vos accords."
+      "answer": "Oui, vous pouvez collaborer avec autant de marques que vous le souhaitez, à condition qu'il n'y ait pas de clauses d'exclusivité dans vos accords."
     },
     "q9": {
-      "question": "Que se passe-t-il si je ne respecte pas une date limite de campagne ?",
-      "answer": "Nous comprenons que des choses arrivent. Communiquez avec nous tôt si vous avez besoin d'une prolongation. Cependant, manquer des délais sans préavis peut affecter les opportunités futures."
+      "question": "Que se passe-t-il si je ne respecte pas la date limite de la campagne ?",
+      "answer": "Nous comprenons qu'il y a des imprévus. Communiquez avec nous rapidement si vous avez besoin d'un délai supplémentaire. Toutefois, si vous ne respectez pas les délais sans préavis, vous risquez d'avoir des difficultés à saisir de nouvelles opportunités."
     },
     "q10": {
-      "question": "Ai-je besoin d'équipement professionnel ?",
-      "answer": "Pas nécessairement. De nombreux créateurs à succès utilisent des smartphones. Ce qui compte le plus, c'est de créer un contenu authentique et engageant qui résonne avec votre audience."
+      "question": "Ai-je besoin d'un équipement professionnel ?",
+      "answer": "Pas nécessairement. De nombreux créateurs à succès utilisent des smartphones. Ce qui compte le plus, c'est de créer un contenu authentique et attrayant qui trouve un écho auprès de votre public."
     },
     "q11": {
-      "question": "Comment les correspondances de marque sont-elles déterminées ?",
-      "answer": "Notre algorithme de correspondance prend en compte votre style de contenu, les données démographiques de votre audience, les taux d'engagement et les préférences de la marque pour vous suggérer les meilleures collaborations."
+      "question": "Comment sont déterminées les correspondances entre les marques ?",
+      "answer": "Notre algorithme de correspondance prend en compte le style de votre contenu, les données démographiques de votre public, les taux d'engagement et les préférences de votre marque pour vous suggérer les meilleures collaborations."
     }
   }
 }

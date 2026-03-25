@@ -1,48 +1,48 @@
 {
   "brand": {
-    "dashboard": "Panel de control",
+    "dashboard": "Cuadro de mandos",
     "campaigns": "Campañas",
-    "gigs": "Trabajos",
+    "gigs": "Gigs",
     "creators": "Creadores",
-    "analytics": "Análisis",
+    "analytics": "Analítica",
     "invoices": "Facturas",
     "payments": "Pagos",
     "savedLists": "Listas guardadas",
     "templates": "Plantillas",
     "reports": "Informes",
-    "settings": "Configuración"
+    "settings": "Ajustes"
   },
   "creator": {
-    "dashboard": "Panel de control",
+    "dashboard": "Cuadro de mandos",
     "invitations": "Invitaciones",
     "myGigs": "Gigs",
-    "allGigs": "Todos los trabajos",
-    "availableGigs": "Trabajos disponibles",
-    "activeGigs": "Trabajos activos",
+    "allGigs": "Todos los conciertos",
+    "availableGigs": "Conciertos disponibles",
+    "activeGigs": "Activos",
     "profile": "Perfil",
-    "analytics": "Análisis",
+    "analytics": "Analítica",
     "earnings": "Ganancias",
     "account": "Cuenta",
-    "settings": "Configuración"
+    "settings": "Ajustes"
   },
   "admin": {
-    "dashboard": "Panel de control",
+    "dashboard": "Cuadro de mandos",
     "users": "Usuarios",
     "creators": "Creadores",
     "brands": "Marcas",
     "campaigns": "Campañas",
-    "gigs": "Trabajos",
+    "gigs": "Gigs",
     "invoices": "Facturas",
-    "payments": "Pagos a creadores",
-    "analytics": "Análisis",
+    "payments": "Pagos",
+    "analytics": "Analítica",
     "moderation": "Moderación",
-    "platformReports": "Informes de la plataforma",
+    "platformReports": "Informes de plataforma",
     "systemLogs": "Registros del sistema",
     "alerts": "Alertas",
-    "settings": "Configuración"
+    "settings": "Ajustes"
   },
   "common": {
-    "getHelp": "Ayuda",
-    "search": "Buscar"
+    "getHelp": "Obtener ayuda",
+    "search": "Buscar en"
   }
 }

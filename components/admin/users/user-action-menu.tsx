@@ -12,6 +12,7 @@ import { useResendVerification } from "@/lib/api/hooks/users";
 import { useState } from "react";
 import { toast } from "sonner";
 import { UserStatusDialog } from "./user-status-dialog";
+import { useTranslations } from "next-intl";
 
 interface UserActionMenuProps {
   user: ModelsUserResponse;
@@ -20,6 +21,7 @@ interface UserActionMenuProps {
 }
 
 export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenuProps ) {
+  const t = useTranslations('dashboard.admin');
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const resendVerification = useResendVerification();
 
@@ -42,7 +44,7 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
       {
         loading: 'Sending verification email...',
         success: 'Verification email sent',
-        error: ( error ) => <><span>Failed to send verification email</span><span>{ JSON.stringify( error.message ) }</span></>,
+        error: ( error ) => <><span>{t('userActionMenu.failedToSendVerification')}</span><span>{ JSON.stringify( error.message ) }</span></>,
         richColors: true,
       }
     );

@@ -1,16 +1,18 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { BrandStatRow } from './brand-dashboard-utils';
+import { useTranslations } from "next-intl";
 
 interface BrandFinancialsBlockProps {
   rows: BrandStatRow[];
 }
 
 export function BrandFinancialsBlock( { rows }: BrandFinancialsBlockProps ) {
+  const t = useTranslations('dashboard.admin');
   return (
     <Card className="ad-summary-card flex-1">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Financials</CardTitle>
-        <CardDescription className="ad-card-description">Spend performance for this brand</CardDescription>
+        <CardTitle className="ad-card-title">{t('brandFinancialsBlock.financials')}</CardTitle>
+        <CardDescription className="ad-card-description">{t('brandFinancialsBlock.spendPerformanceForThis')}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         { rows.map( ( item ) => (

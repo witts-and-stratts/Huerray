@@ -56,7 +56,7 @@ export const BaseFileCard = memo( ( {
   const handleClick = useCallback( ( e: React.MouseEvent ) => {
     e.stopPropagation();
     if ( isSelectionMode ) {
-      onSelect?.( item.id, e.shiftKey );
+      onSelect?.( item.id );
       return;
     }
     // In non-DnD contexts (no drag listeners) a single click opens the preview
@@ -128,7 +128,7 @@ export const BaseFileCard = memo( ( {
               ? "bg-primary border-primary"
               : "bg-background/80 border-muted-foreground/50 hover:border-primary"
           ) }
-          onClick={ ( e ) => { e.stopPropagation(); onSelect?.( item.id, e.shiftKey ); } }
+          onClick={ ( e ) => { e.stopPropagation(); onSelect?.( item.id ); } }
           onPointerDown={ ( e ) => e.stopPropagation() }
         >
           { isSelected && <Check size={ 10 } className="text-primary-foreground" strokeWidth={ 3 } /> }

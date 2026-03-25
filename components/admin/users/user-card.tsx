@@ -6,6 +6,7 @@ import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { cn } from "@/lib/dashboard-utils";
 import { UserActionMenu } from "./user-action-menu";
 import { UserStatusBadge } from "./user-status-badge";
+import { useTranslations } from "next-intl";
 
 interface UserCardProps {
   user: ModelsUserResponse;
@@ -13,7 +14,8 @@ interface UserCardProps {
 }
 
 export function UserCard( { user, onViewDetails }: UserCardProps ) {
-  const fullName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || user.username || "User";
+  const t = useTranslations( 'dashboard.common' );
+  const fullName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || user.username || t( 'cards.userFallback' );
   const initials = fullName
     .split( " " )
     .map( ( part ) => part.charAt( 0 ) || "" )
@@ -22,7 +24,7 @@ export function UserCard( { user, onViewDetails }: UserCardProps ) {
     .toUpperCase();
   const formattedType = user.user_type
     ? user.user_type.replace( /_user$/i, '' ).replace( /_/g, ' ' )
-    : 'User';
+    : t( 'cards.userFallback' );
   // const typeColors: Record<string, string> = {
   //   brand: 'bg-blue-100 text-blue-700 border-blue-200',
   //   creator: 'bg-pink-100 text-pink-700 border-pink-200',
@@ -63,7 +65,7 @@ export function UserCard( { user, onViewDetails }: UserCardProps ) {
         <div className="flex items-center gap-2"><UserStatusBadge status={ user.user_status || 'active' } />
           <UserStatusBadge status={ user.email_verified ? 'verified' : 'unverified' } /></div>
         <div className="flex items-center gap-2">
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60 font-normal">Joined</span>
+          <span className="text-[10px] uppercase tracking-wider text-muted-foreground/60 font-normal">{ t( 'cards.joined' ) }</span>
           <span className="text-xs font-regular text-muted-foreground">
             { user.created_at ? new Date( user.created_at ).toLocaleDateString( "en-US", {
               year: "numeric",

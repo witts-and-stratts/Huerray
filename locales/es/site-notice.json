@@ -1,23 +1,23 @@
 {
   "page": {
-    "title": "Aviso Legal"
+    "title": "Aviso del sitio"
   },
   "seo": {
-    "title": "Aviso Legal",
-    "description": "Aviso legal para la plataforma Huerray.",
-    "keywords": "aviso legal, legal, impronta, Huerray"
+    "title": "Aviso del sitio",
+    "description": "Aviso legal de la plataforma Huerray.",
+    "keywords": "aviso del sitio, legal, imprenta, Huerray"
   },
-  "effectiveDateTitle": "Vigente desde",
+  "effectiveDateTitle": "En vigor a partir del",
   "effectiveDate": "23 de octubre de 2025",
   "tableOfContents": "Información",
   "sections": [
     {
-      "id": "contact",
-      "title": "Información de Contacto",
+      "id": "póngase en contacto con",
+      "title": "Información de contacto",
       "content": [
-        "THRYPES GmbH <br />4to Piso, <br />Gontardstraße 11, <br />10178 Berlín, Alemania <br />",
+        "THRYPES GmbH <br />4ª planta, <br />Gontardstraße 11, <br />10178 Berlín, Alemania <br />",
         "<strong>Correo electrónico:</strong> <a href='mailto:info@thyrpes.com'>info@thyrpes.com</a>",
-        "<strong>Juzgado de registro:</strong> Tribunal de Distrito de Charlottenburg - Registro Mercantil <br /><strong>Número de registro:</strong> HRB 256430 <br /><strong>Número de identificación fiscal (UST-ID):</strong> DE 363934690"
+        "<strong>Tribunal competente:</strong> Juzgado de Primera Instancia de Charlottenburg - Registro Mercantil <br /><strong>Número de registro:</strong> HRB 256430 <br /><strong>Número de identificación en el Registro Mercantil:</strong> DE 363934690"
       ],
       "subsections": []
     }

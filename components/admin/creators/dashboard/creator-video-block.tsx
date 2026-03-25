@@ -2,20 +2,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Video } from 'lucide-react';
 import type { ModelsCreatorResponse } from '@/lib/api/generated/models';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { useTranslations } from 'next-intl';
 
 interface CreatorVideoBlockProps {
   creator: ModelsCreatorResponse;
 }
 
 export function CreatorVideoBlock( { creator }: CreatorVideoBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
   const videoUrl = creator.application_video?.asset;
   const poster = creator.application_video?.thumbnail ? imgpresets.large( creator.application_video.thumbnail ) : '';
 
   return (
     <Card className='pt-4'>
       <CardHeader>
-        <CardTitle>Application Video</CardTitle>
-        <CardDescription>Introduction or portfolio video</CardDescription>
+        <CardTitle>{ t( 'creatorDashboard.blocks.video' ) }</CardTitle>
+        <CardDescription>{ t( 'creatorDashboard.description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         { videoUrl ? (
@@ -31,7 +33,7 @@ export function CreatorVideoBlock( { creator }: CreatorVideoBlockProps ) {
         ) : (
           <div className="flex aspect-video w-full flex-col items-center justify-center rounded-lg border border-dashed border-border/60 bg-muted/20 text-muted-foreground gap-3">
             <Video className="size-10 opacity-20" />
-            <p className="text-sm font-medium">No Creator profile video uploaded</p>
+            <p className="text-sm font-medium">{ t( 'campaignOverview.assets.states.noVideos' ) }</p>
           </div>
         ) }
       </CardContent>

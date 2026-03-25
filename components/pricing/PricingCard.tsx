@@ -4,6 +4,7 @@ import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Badge } from '../ui/badge';
+import Link from 'next/link';
 
 interface PricingCardProps {
   tag: string;
@@ -75,12 +76,14 @@ export function PricingCard( {
 
         <p className='pricing-card__disclaimer'>{ disclaimer }</p>
 
-        <Button
-          variant='heroAlt'
-          className={ cn( 'w-full rounded-full py-6 text-lg font-medium' ) }
-        >
-          { buttonText }
-        </Button>
+        <Link href="/signup?role=brand" title={ buttonText } className='cursor-pointer'>
+          <Button
+            variant='heroAlt'
+            className={ cn( 'w-full rounded-full py-6 text-lg font-medium' ) }
+          >
+            { buttonText }
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 {
   "button": {
-    "registerNow": "S'inscrire maintenant",
+    "registerNow": "S'inscrire",
     "getStarted": "Commencer",
     "learnMore": "En savoir plus",
-    "joinForFree": "Rejoindre gratuitement"
+    "joinForFree": "S'inscrire gratuitement"
   },
   "from": "de"
 }

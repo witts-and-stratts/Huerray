@@ -35,5 +35,110 @@
   "recentCampaigns": "Recent Campaigns",
   "createCampaign": "Create Campaign",
   "findCreators": "Find Creators",
-  "noCampaigns": "No recent campaigns"
+  "noCampaigns": "No recent campaigns",
+  "inviteCreators": {
+    "title": "Invite Creators",
+    "description": "Search for creators and invite them to apply to your gig.",
+    "searchPlaceholder": "Search by name or username",
+    "noCreatorsFound": "No creators found",
+    "noMatchingCreators": "No matching creators",
+    "adjustSearch": "Try adjusting your search terms or check the spelling.",
+    "noCreatorsMatchRequirements": "No creators match the gig requirements. Consider adjusting the age range or gender requirement in your gig settings.",
+    "noCreatorsAvailable": "No creators available at the moment. Try again later.",
+    "showingMatching": "Showing creators matching gig requirements:",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "invited": "Invited"
+    },
+    "invite": "Invite",
+    "inviting": "Inviting...",
+    "invitationSent": "Invitation sent to {name}",
+    "failedToInvite": "Failed to send invitation",
+    "invalidGig": "Invalid gig selected"
+  },
+  "createProfileForm": {
+    "contactInformation": "Contact Information",
+    "addressInformation": "Address Information",
+    "tellUsAboutYour": "Tell us about your company to get started with Huerray.",
+    "completeYourBrandProfile": "Complete Your Brand Profile",
+    "companyName": "Company Name",
+    "websiteUrl": "Website URL",
+    "industryCategory": "Industry Category",
+    "companySize": "Company Size",
+    "vatId": "VAT ID",
+    "registrationNumber": "Registration Number",
+    "street": "Street",
+    "numberSuite": "Number/Suite",
+    "city": "City",
+    "stateProvince": "State/Province",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "contactEmail": "Contact Email",
+    "contactPhone": "Contact Phone",
+    "description": "Description",
+    "brandLogo": "Brand Logo",
+    "creatingProfile": "Creating Profile...",
+    "completeProfile": "Complete Profile",
+    "profileCreated": "Profile created successfully!",
+    "failedToCreate": "Failed to create profile: {error}",
+    "errorCompanyRequired": "Company name is required",
+    "errorInvalidUrl": "Invalid URL",
+    "errorStateRequired": "State/Province is required"
+  },
+  "completeProfile": {
+    "title": "Complete Your Brand Profile",
+    "description": "Let's set up your brand details to start launching campaigns.",
+    "companyAddress": "Company & Address",
+    "branding": "Branding",
+    "companyDetails": "Company Details",
+    "addressInformation": "Address Information",
+    "contactInformation": "Contact Information",
+    "back": "Back",
+    "nextStep": "Next Step",
+    "creatingProfile": "Creating Profile...",
+    "completeProfile": "Complete Profile",
+    "profileCompleted": "Profile completed successfully!",
+    "failedToComplete": "Failed to update profile: {error}",
+    "validationError": "Validation error: {error}"
+  },
+  "invoicesPage": {
+    "title": "Invoices",
+    "description": "View and download your invoices."
+  },
+  "paymentsPage": {
+    "title": "Payments",
+    "description": "View your payment history."
+  },
+  "settingsPage": {
+    "profileTitle": "Brand Profile",
+    "profileDescription": "Update your brand details and public profile.",
+    "securityTitle": "Security",
+    "securityDescription": "Manage your password and security sessions.",
+    "breadcrumbs": {
+      "dashboard": "Dashboard",
+      "settings": "Settings"
+    },
+    "tabs": {
+      "profile": "Brand Profile",
+      "security": "Security"
+    },
+    "successUpdated": "Settings updated successfully",
+    "errorUpdateFailed": "Failed to update settings",
+    "errorUpdateFailedDesc": "Failed to update settings",
+    "errorLoadFailed": "Failed to load brand settings",
+    "changesDiscarded": "Changes discarded",
+    "saving": "Saving...",
+    "saveChanges": "Save Changes",
+    "discardChanges": "Discard Changes",
+    "confirmTitle": "Confirm profile update",
+    "confirmDescription": "Saving your profile will require review and approval before you can perform certain tasks.",
+    "continueAndSave": "Continue and save",
+    "passwordUpdated": "Password updated successfully",
+    "errorPasswordUpdate": "Failed to change password",
+    "errorPasswordUpdateDesc": "Failed to update password: {error}",
+    "updating": "Updating...",
+    "updatePassword": "Update Password"
+  }
 }

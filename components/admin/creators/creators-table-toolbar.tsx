@@ -24,12 +24,15 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { ChevronDown, ChevronRight, Globe } from 'lucide-react';
 import * as React from 'react';
 import '@/app/styles/components/data-table.css';
+import { useTranslations } from 'next-intl';
+import { useFilterLabel } from '@/lib/hooks/use-filter-label';
 
 interface AgeRangeFilterProps<TData> {
   table: Table<TData>;
 }
 
 function CountryFilter<TData>( { table, countries }: { table: Table<TData>; countries: string[]; } ) {
+  const t = useTranslations( 'dashboard.admin' );
   const column = table.getColumn( 'country' );
   const filterValue = column?.getFilterValue() as string[] | undefined;
   const isActive = Array.isArray( filterValue ) && filterValue.length > 0;
@@ -51,7 +54,7 @@ function CountryFilter<TData>( { table, countries }: { table: Table<TData>; coun
             column?.setFilterValue( countries.length > 0 ? [ ...countries ] : undefined );
           } }
         >
-          Select All
+          { t( 'filters.selectAll' ) }
         </div>
         <DropdownMenuSeparator />
         { countries.map( ( code ) => {
@@ -81,6 +84,7 @@ function CountryFilter<TData>( { table, countries }: { table: Table<TData>; coun
 }
 
 function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
+  const t = useTranslations( 'dashboard.admin' );
   const column = table.getColumn( 'date_of_birth' );
   const filterValue = column?.getFilterValue() as [ number?, number?] | undefined;
 
@@ -106,7 +110,7 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
       <PopoverTrigger className='h-8' render={
         <Button variant='outline' size='sm' className={ `h-8${ isActive ? ' border-primary text-primary' : '' }` }>
           <HugeiconsIcon icon={ FilterHorizontalIcon } className='text-sm' />
-          <span className='font-regular'>Age</span>
+          <span className='font-regular'>{ t( 'filters.age' ) }</span>
           <ChevronDown className='size-4' strokeWidth={ 1 } />
         </Button>
       } />
@@ -114,7 +118,7 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
         <div className='flex items-end gap-2'>
           <SuperField
             type='number'
-            label='Min'
+            label={ t( 'filters.min' ) }
             placeholder='18'
             min={ 0 }
             max={ 100 }
@@ -126,7 +130,7 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
           </div>
           <SuperField
             type='number'
-            label='Max'
+            label={ t( 'filters.max' ) }
             placeholder='65'
             min={ 0 }
             max={ 100 }
@@ -136,9 +140,9 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
           />
         </div>
         <div className='flex gap-2'>
-          <Button size='sm' className='flex-1 h-7 text-xs' onClick={ apply }>Apply</Button>
+          <Button size='sm' className='flex-1 h-7 text-xs' onClick={ apply }>{ t( 'filters.apply' ) }</Button>
           { isActive && (
-            <Button size='sm' variant='ghost' className='h-7 text-xs' onClick={ clear }>Clear</Button>
+            <Button size='sm' variant='ghost' className='h-7 text-xs' onClick={ clear }>{ t( 'filters.clear' ) }</Button>
           ) }
         </div>
       </PopoverContent>
@@ -163,13 +167,15 @@ export function CreatorsTableToolbar<TData>( {
   view,
   setView,
 }: CreatorsTableToolbarProps<TData> ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const getFilterLabel = useFilterLabel();
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
           table={ table }
           columnId='name'
-          placeholder='Filter creators...'
+          placeholder={ t( 'filters.searchCreators' ) }
         />
       </div>
       <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
@@ -178,21 +184,23 @@ export function CreatorsTableToolbar<TData>( {
           table={ table }
           columnId='creator_status'
           options={ statuses }
-          title='Status'
+          title={ t( 'filters.status' ) }
+          labelFn={ getFilterLabel }
         />
         <CountryFilter table={ table } countries={ countries } />
         <DataTableFilterDropdown
           table={ table }
           columnId='gender'
           options={ genders }
-          title='Sex'
+          title={ t( 'filters.sex' ) }
+          labelFn={ getFilterLabel }
         />
         <AgeRangeFilter table={ table } />
         <DataTableViewOptions
           table={ table }
           labels={ {
-            creator_status: 'Status',
-            created_at: 'Joined'
+            creator_status: t( 'filters.status' ),
+            created_at: t( 'filters.joined' )
           } }
         />
       </div>
