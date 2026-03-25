@@ -37,7 +37,7 @@ export function SubmissionUpdateDialog( {
   onConfirm,
   isLoading,
 }: SubmissionUpdateDialogProps ) {
-  const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   return (
     <ConfirmDialog
       open={ open }

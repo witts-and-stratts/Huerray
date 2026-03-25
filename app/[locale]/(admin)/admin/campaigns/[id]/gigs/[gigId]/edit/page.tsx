@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
 import { useUpdateGig, useGig } from '@/lib/api/hooks/gigs';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
@@ -13,6 +14,7 @@ import { CreateGigSchema } from '@/components/gigs/schema';
 import { ModelsStandardCampaignResponse, ModelsStandardGigResponse } from '@/lib/api/generated/models';
 
 export default function EditGigPage() {
+  const t = useTranslations( 'dashboard.admin.gigForm' );
   const params = useParams<{ id: string; gigId: string; }>();
   const router = useRouter();
   const campaignId = params.id;
@@ -32,10 +34,10 @@ export default function EditGigPage() {
 
   const campaign = ( campaignResponse as ModelsStandardCampaignResponse )?.data;
   const gig = ( gigResponse as ModelsStandardGigResponse )?.data;
-  const campaignName = campaign?.campaign_name || 'Campaign';
+  const campaignName = campaign?.campaign_name || t( 'campaign' );
 
   if ( !gig ) {
-    return <div>Gig not found</div>;
+    return <div>{ t( 'gigNotFound' ) }</div>;
   }
 
   const initialData: Partial<CreateGigSchema> = {
@@ -76,11 +78,11 @@ export default function EditGigPage() {
 
     try {
       await updateGig.mutateAsync( { id: gigId, gig: requestData } );
-      toast.success( 'Gig updated successfully' );
+      toast.success( t( 'gigUpdatedSuccessfully' ) );
       router.push( `/admin/campaigns/${ campaignId }` );
     } catch ( error ) {
-      toast.error( 'Failed to update gig' );
-      console.error( 'Failed to update gig:', error );
+      toast.error( t( 'failedToUpdateGig' ) );
+      console.error( t( 'failedToUpdateGig' ), error );
     }
   };
 

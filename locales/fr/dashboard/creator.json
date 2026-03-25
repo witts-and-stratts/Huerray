@@ -13,6 +13,7 @@
     "description": "Suivez l'historique de vos paiements et de vos gains pour les contrats terminés."
   },
   "breadcrumbs": {
+    "creator": "Créateur",
     "dashboard": "Tableau de bord",
     "gigs": "Gigs",
     "active": "Actif",
@@ -23,7 +24,7 @@
     "settings": "Paramètres",
     "completeProfile": "Profil complet",
     "account": "Compte",
-    "editBasicInfo": "Modifier les informations de base",
+    "editBasicInfo": "Informations sur l'utilisateur",
     "profile": "Profil",
     "bio": "Biographie",
     "socialMedia": "Médias sociaux",
@@ -284,7 +285,7 @@
     "security": "Sécurité"
   },
   "accountEditPage": {
-    "title": "Modifier les informations de base",
+    "title": "Informations sur l'utilisateur",
     "description": "Mettez à jour vos données personnelles et vos coordonnées.",
     "saving": "Économiser...",
     "saveChanges": "Enregistrer les modifications",

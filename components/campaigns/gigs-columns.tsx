@@ -13,7 +13,7 @@ import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigRes
 import { useGigApplications, useGigInvitations } from '@/lib/api/hooks/gigs';
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
 import { cn } from '@/lib/dashboard-utils';
-import { useFormatCurrency } from '@/lib/hooks/format';
+import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
 import { formatDate } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { Clock01Icon, Video01Icon } from '@hugeicons/core-free-icons';
@@ -207,7 +207,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 // ─── Task Cell ────────────────────────────────────────────────────────────────
 
 const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
-  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const { number_of_videos, video_duration_in_seconds } = row.original;
   return (
     <div className="flex gap-3">
@@ -216,7 +216,7 @@ const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
           <div className="flex items-center gap-1.5">
             <HugeiconsIcon icon={ Video01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
             <span className="text-sm text-foreground">
-              { t( 'videoCountLabel', { count: number_of_videos } ) }
+              { t( 'recordVideos', { count: number_of_videos } ) }
             </span>
           </div>
           <Separator orientation="vertical" /></>
@@ -224,7 +224,7 @@ const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
       { video_duration_in_seconds != null && (
         <div className="flex items-center gap-1.5">
           <HugeiconsIcon icon={ Clock01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
-          <span className="text-sm text-foreground">{ t( 'durationLabel', { seconds: video_duration_in_seconds } ) }</span>
+          <span className="text-sm text-foreground">{ t( 'durationSeconds', { count: video_duration_in_seconds } ) }</span>
         </div>
       ) }
     </div>
@@ -248,7 +248,7 @@ const DeadlineCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   if ( !posting_end_date ) return <span className="text-muted-foreground text-xs">—</span>;
   return (
     <div className="flex items-center gap-1.5 text-muted-foreground">
-      <span className="">{ formatDate( posting_end_date ) }</span>
+      <span className="">{ useFormatDate( posting_end_date ) }</span>
     </div>
   );
 };
@@ -261,6 +261,8 @@ const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
   onEditGig?: ( gig: ModelsGigResponse ) => void;
   className?: string;
 } ) => {
+  const t = useTranslations( 'dashboard.common' );
+
   return (
     <div className={ `flex justify-end ${ className }` }>
       <ButtonGroup className='flex justify-end'>
@@ -270,7 +272,7 @@ const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
           className='font-regular'
           onClick={ () => onViewGig( row.original ) }
         >
-          View
+          { t( 'view' ) }
         </Button>
         <GigActionMenu
           gig={ row.original }

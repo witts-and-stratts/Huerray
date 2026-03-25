@@ -13,6 +13,7 @@
     "description": "Haz un seguimiento de tu historial de pagos y de los ingresos de los trabajos realizados."
   },
   "breadcrumbs": {
+    "creator": "Creador",
     "dashboard": "Cuadro de mandos",
     "gigs": "Gigs",
     "active": "Activo",
@@ -23,7 +24,7 @@
     "settings": "Ajustes",
     "completeProfile": "Perfil completo",
     "account": "Cuenta",
-    "editBasicInfo": "Editar información básica",
+    "editBasicInfo": "Información para el usuario",
     "profile": "Perfil",
     "bio": "Biografía",
     "socialMedia": "Redes sociales",
@@ -284,7 +285,7 @@
     "security": "Seguridad"
   },
   "accountEditPage": {
-    "title": "Editar información básica",
+    "title": "Información para el usuario",
     "description": "Actualice sus datos personales y de contacto.",
     "saving": "Ahorrar...",
     "saveChanges": "Guardar cambios",

@@ -22,6 +22,7 @@ interface UserActionMenuProps {
 
 export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenuProps ) {
   const t = useTranslations('dashboard.admin');
+  const menuT = useTranslations('dashboard.admin.userActionMenu');
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const resendVerification = useResendVerification();
 
@@ -42,9 +43,9 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
     toast.promise(
       resendVerification.mutateAsync( user.email ),
       {
-        loading: 'Sending verification email...',
-        success: 'Verification email sent',
-        error: ( error ) => <><span>{t('userActionMenu.failedToSendVerification')}</span><span>{ JSON.stringify( error.message ) }</span></>,
+        loading: menuT( 'sendingVerification' ),
+        success: menuT( 'verificationSent' ),
+        error: ( error ) => <><span>{ menuT( 'failedToSendVerification' ) }</span><span>{ JSON.stringify( error.message ) }</span></>,
         richColors: true,
       }
     );
@@ -61,10 +62,10 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
     toast.promise(
       authApi.authPasswordResetPost( { email: { email: user.email } } ),
       {
-        loading: 'Initiating password reset...',
-        success: 'Password reset email sent',
+        loading: menuT( 'initiatingPasswordReset' ),
+        success: menuT( 'passwordResetSent' ),
         error: ( error ) => {
-          const errorMessage = error.response?.data?.message || error.message || "Failed to initiate password reset";
+          const errorMessage = error.response?.data?.message || error.message || menuT( 'failedToInitiatePasswordReset' );
           return <span>{ errorMessage }</span>;
         },
         richColors: true,
@@ -74,57 +75,57 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
 
   const handleCopyId = () => {
     navigator.clipboard.writeText( user.id || "" );
-    toast.success( "ID copied to clipboard" );
+    toast.success( menuT( 'idCopied' ) );
   };
 
   const actions: MenuAction<ModelsUserResponse>[] = [
     {
-      label: "Copy ID",
+      label: menuT( 'copyId' ),
       action: handleCopyId,
     },
     {
-      label: "Copy Username",
+      label: menuT( 'copyUsername' ),
       action: () => {
         if ( user.username ) {
           navigator.clipboard.writeText( user.username );
-          toast.success( "Username copied to clipboard" );
+          toast.success( menuT( 'usernameCopied' ) );
         } else {
-          toast.error( "No username available" );
+          toast.error( menuT( 'noUsernameAvailable' ) );
         }
       },
     },
     {
-      label: "Copy Email",
+      label: menuT( 'copyEmail' ),
       action: () => {
         if ( user.email ) {
           navigator.clipboard.writeText( user.email );
-          toast.success( "Email copied to clipboard" );
+          toast.success( menuT( 'emailCopied' ) );
         } else {
-          toast.error( "No email available" );
+          toast.error( menuT( 'noEmailAvailable' ) );
         }
       },
     },
     {
-      label: "View details",
+      label: menuT( 'viewDetails' ),
       action: () => onViewDetails( user ),
       separator: true,
     },
     {
-      label: "Resend Email Verification",
+      label: menuT( 'resendEmailVerification' ),
       action: handleResendVerification,
       condition: () => !user.email_verified,
     },
     {
-      label: "Initiate Password Reset",
+      label: menuT( 'initiatePasswordReset' ),
       action: handleInitiatePasswordReset,
       condition: () => !!user.email,
     },
     {
-      label: "Review Profile",
+      label: menuT( 'reviewProfile' ),
       action: handleReviewProfile,
     },
     {
-      label: "Delete user",
+      label: menuT( 'deleteUser' ),
       action: () => { console.log( "Delete user clicked" ); }, // Placeholder as per original
       variant: "destructive",
       className: "text-red-600",

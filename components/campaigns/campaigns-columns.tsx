@@ -82,7 +82,7 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignRespo
 };
 
 const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
-  const t = useTranslations( 'dashboard.common' );
+  const t = useTranslations( 'dashboard.common.cards' );
   const { id } = row.original;
   const { data: applicationsData } = useCampaignApplications( id || '' );
   const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];

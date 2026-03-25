@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from '@/components/dashboard-ui/button';
+import { Button, buttonVariants } from '@/components/dashboard-ui/button';
 import { Card, CardContent } from '@/components/dashboard-ui/card';
 import { Separator } from '@/components/dashboard-ui/separator';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/dashboard-ui/dialog';
@@ -57,24 +57,28 @@ const GigSubmissionsButton = memo( ( { gig, onSelectSubmission }: GigSubmissions
     <Dialog>
       <Tooltip>
         <TooltipTrigger asChild>
-          <DialogTrigger>
-            <Button
-              variant={ 'outline' }
-              size={ 'icon-sm' }
-              className={ 'rounded-full relative' }
-            >
-              <HugeiconsIcon icon={ PlayIcon } className="size-3.5" strokeWidth={ 1.5 } />
-              <Badge
+          <DialogTrigger
+            render={
+              <button
+                type="button"
                 className={ cn(
-                  "absolute -top-1.5 -right-1.5 min-w-4 h-4 px-1",
-                  "flex items-center justify-center",
-                  "rounded-full bg-primary text-primary-foreground",
-                  "text-[9px] font-semibold leading-none"
-                ) }>
-                { count }
-              </Badge>
-            </Button>
-          </DialogTrigger>
+                  buttonVariants( { variant: 'outline', size: 'icon-sm' } ),
+                  'rounded-full relative'
+                ) }
+              >
+                <HugeiconsIcon icon={ PlayIcon } className="size-3.5" strokeWidth={ 1.5 } />
+                <Badge
+                  className={ cn(
+                    "absolute -top-1.5 -right-1.5 min-w-4 h-4 px-1",
+                    "flex items-center justify-center",
+                    "rounded-full bg-primary text-primary-foreground",
+                    "text-[9px] font-semibold leading-none"
+                  ) }>
+                  { count }
+                </Badge>
+              </button>
+            }
+          />
         </TooltipTrigger>
         <TooltipContent side="top">View submissions</TooltipContent>
       </Tooltip>

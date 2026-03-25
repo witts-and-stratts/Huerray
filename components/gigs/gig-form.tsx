@@ -24,6 +24,7 @@ import {
 
 import { CreateGigSchema, createGigSchema, createGigBaseSchema } from './schema';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
+import { useTranslations } from 'next-intl';
 
 function Activity( { mode, children }: { mode: 'visible' | 'hidden'; children: ReactNode; } ) {
   return (
@@ -45,6 +46,7 @@ interface GigFormProps {
 }
 
 export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = false, initialData, isEditing = false, layout = 'page' }: GigFormProps ) {
+  const t = useTranslations( 'dashboard.admin.gigForm' );
   const router = useRouter();
   const [ subheadTabValue, setSubheadTabValue ] = useState( 'overview' );
   const [ validationError, setValidationError ] = useState<{ title: string; message: string; tab: string; } | null>( null );
@@ -101,8 +103,8 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
         const targetTab = fieldToTab[ firstErrorField ] || 'overview';
         setSubheadTabValue( targetTab );
         setValidationError( {
-          title: 'Validation Error',
-          message: 'Please fix the errors in the form before saving.',
+          title: t( 'validationErrorTitle' ),
+          message: t( 'validationErrorMessage' ),
           tab: targetTab
         } );
       }
@@ -126,15 +128,15 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
   const dateSummary = useStore( form.store, ( state ) => {
     const start = state.values.posting_start_date;
     const end = state.values.posting_end_date;
-    const fmt = ( d?: Date ) => d ? format( d, 'MMM d, yyyy' ) : 'Not set';
+    const fmt = ( d?: Date ) => d ? format( d, 'MMM d, yyyy' ) : t( 'notSet' );
     return { startLabel: fmt( start ), endLabel: fmt( end ) };
   } );
 
   const creatorRequirements = useStore( form.store, ( state ) => {
     const { age_min, age_max, gender_requirement } = state.values;
     const genderLabel = gender_requirement
-      ? gender_requirement.charAt( 0 ).toUpperCase() + gender_requirement.slice( 1 )
-      : 'Any';
+      ? t( gender_requirement )
+      : t( 'any' );
     return { ageRange: `${ age_min ?? 18 } – ${ age_max ?? 65 }`, genderLabel };
   } );
 
@@ -151,10 +153,10 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
         { isSubmitting ? (
           <>
             <Loader2 className='size-4 animate-spin mr-2' />
-            { isEditing ? 'Updating...' : 'Creating...' }
+            { isEditing ? t( 'updating' ) : t( 'creating' ) }
           </>
         ) : (
-          isEditing ? 'Save changes' : 'Save and create'
+          isEditing ? t( 'saveChanges' ) : t( 'saveAndCreate' )
         ) }
       </Button>
       { layout === 'page' && (
@@ -166,11 +168,11 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuGroup>
-              <DropdownMenuLabel>Options</DropdownMenuLabel>
+              <DropdownMenuLabel>{ t( 'options' ) }</DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={ () => router.back() }>
-              Cancel
+              { t( 'cancel' ) }
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -186,29 +188,29 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
           <CardHeader className="pb-2">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <CardTitle className="uppercase text-xs tracking-widest font-normal text-muted-foreground">Live Brief</CardTitle>
-                <p className="card__title">Gig snapshot</p>
+                <CardTitle className="uppercase text-xs tracking-widest font-normal text-muted-foreground">{ t( 'liveBrief' ) }</CardTitle>
+                <p className="card__title">{ t( 'gigSnapshot' ) }</p>
               </div>
-              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs text-emerald-700 border border-emerald-200">Draft</span>
+              <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs text-emerald-700 border border-emerald-200">{ t( 'draft' ) }</span>
             </div>
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
-            <WrappedCard title="Gig Summary">
-              <SummaryRow label="Payout / video" value={ `$${ moneySummary.payout.toLocaleString() }` } />
-              <SummaryRow label="Budget" value={ `$${ moneySummary.budget.toLocaleString() }` } />
-              <SummaryRow label="Videos" value={ `${ moneySummary.videos }` } />
-              <SummaryRow label="Budget per video" value={ `$${ moneySummary.perVideoBudget.toFixed( 2 ) }` } />
-              <SummaryRow label="Margin" value={ `$${ moneySummary.margin.toLocaleString() }` } />
+            <WrappedCard title={ t( 'gigSummary' ) }>
+              <SummaryRow label={ t( 'payoutPerVideo' ) } value={ `$${ moneySummary.payout.toLocaleString() }` } />
+              <SummaryRow label={ t( 'budget' ) } value={ `$${ moneySummary.budget.toLocaleString() }` } />
+              <SummaryRow label={ t( 'videos' ) } value={ `${ moneySummary.videos }` } />
+              <SummaryRow label={ t( 'budgetPerVideo' ) } value={ `$${ moneySummary.perVideoBudget.toFixed( 2 ) }` } />
+              <SummaryRow label={ t( 'margin' ) } value={ `$${ moneySummary.margin.toLocaleString() }` } />
             </WrappedCard>
 
-            <WrappedCard title="Creator Requirements">
-              <SummaryRow label="Age range" value={ creatorRequirements.ageRange } />
-              <SummaryRow label="Gender" value={ creatorRequirements.genderLabel } />
+            <WrappedCard title={ t( 'creatorRequirements' ) }>
+              <SummaryRow label={ t( 'ageRange' ) } value={ creatorRequirements.ageRange } />
+              <SummaryRow label={ t( 'gender' ) } value={ creatorRequirements.genderLabel } />
             </WrappedCard>
 
-            <WrappedCard title="Timeline">
-              <SummaryRow label="Start" value={ dateSummary.startLabel } />
-              <SummaryRow label="End" value={ dateSummary.endLabel } />
+            <WrappedCard title={ t( 'timeline' ) }>
+              <SummaryRow label={ t( 'start' ) } value={ dateSummary.startLabel } />
+              <SummaryRow label={ t( 'end' ) } value={ dateSummary.endLabel } />
             </WrappedCard>
 
 
@@ -226,14 +228,14 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
     <div className='flex flex-col gap-4'>
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle>Gig Details</CardTitle>
-          <CardDescription>Define the scope and compensation for this gig</CardDescription>
+          <CardTitle>{ t( 'gigDetails' ) }</CardTitle>
+          <CardDescription>{ t( 'gigDetailsDescription' ) }</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <form.Field name="title" validators={ { onBlur: createGigBaseSchema.shape.title } }>
             { ( field ) => (
               <SuperField
-                label="Title"
+                label={ t( 'title' ) }
                 type="text"
                 value={ field.state.value }
                 onChange={ ( e ) => field.handleChange( e.target.value ) }
@@ -248,7 +250,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="compensation" validators={ { onBlur: createGigBaseSchema.shape.compensation } }>
               { ( field ) => (
                 <SuperField
-                  label="Compensation (per video)"
+                  label={ t( 'compensationPerVideo' ) }
                   type="number"
                   min={ 0 }
                   value={ field.state.value }
@@ -262,7 +264,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="gig_cost" validators={ { onBlur: createGigBaseSchema.shape.gig_cost } }>
               { ( field ) => (
                 <SuperField
-                  label="Total Gig Cost"
+                  label={ t( 'totalGigCost' ) }
                   type="number"
                   min={ 0 }
                   value={ field.state.value }
@@ -279,7 +281,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="number_of_videos" validators={ { onBlur: createGigBaseSchema.shape.number_of_videos } }>
               { ( field ) => (
                 <SuperField
-                  label="Number of Videos"
+                  label={ t( 'numberOfVideos' ) }
                   type="number"
                   min={ 1 }
                   value={ field.state.value }
@@ -293,13 +295,13 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="video_duration_in_seconds" validators={ { onBlur: createGigBaseSchema.shape.video_duration_in_seconds } }>
               { ( field ) => (
                 <SuperField
-                  label="Video Duration"
+                  label={ t( 'videoDuration' ) }
                   type="select"
                   options={ [
-                    { label: '15 seconds', value: '15' },
-                    { label: '30 seconds', value: '30' },
-                    { label: '60 seconds', value: '60' },
-                    { label: '90+ seconds', value: '90' },
+                    { label: t( 'duration15' ), value: '15' },
+                    { label: t( 'duration30' ), value: '30' },
+                    { label: t( 'duration60' ), value: '60' },
+                    { label: t( 'duration90Plus' ), value: '90' },
                   ] }
                   value={ field.state.value.toString() }
                   onValueChange={ ( val ) => field.handleChange( parseInt( val || '15' ) ) }
@@ -314,7 +316,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="posting_start_date" validators={ { onBlur: createGigBaseSchema.shape.posting_start_date } }>
               { ( field ) => (
                 <SuperField
-                  label="Posting Start Date"
+                  label={ t( 'postingStartDate' ) }
                   type="datepicker"
                   value={ field.state.value }
                   onChange={ ( date ) => { field.handleChange( date as Date ); field.handleBlur(); } }
@@ -328,7 +330,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="posting_end_date" validators={ { onBlur: createGigBaseSchema.shape.posting_end_date } }>
               { ( field ) => (
                 <SuperField
-                  label="Posting End Date"
+                  label={ t( 'postingEndDate' ) }
                   type="datepicker"
                   value={ field.state.value }
                   onChange={ ( date ) => { field.handleChange( date as Date ); field.handleBlur(); } }
@@ -345,15 +347,15 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle>Creator Requirements</CardTitle>
-          <CardDescription>Specify the creator requirements for this gig</CardDescription>
+          <CardTitle>{ t( 'creatorRequirements' ) }</CardTitle>
+          <CardDescription>{ t( 'creatorRequirementsDescription' ) }</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid md:grid-cols-3 gap-4">
             <form.Field name="age_min" validators={ { onBlur: createGigBaseSchema.shape.age_min } }>
               { ( field ) => (
                 <SuperField
-                  label="Minimum Age"
+                  label={ t( 'minimumAge' ) }
                   type="number"
                   min={ 18 }
                   value={ field.state.value }
@@ -366,7 +368,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="age_max" validators={ { onBlur: createGigBaseSchema.shape.age_max } }>
               { ( field ) => (
                 <SuperField
-                  label="Maximum Age"
+                  label={ t( 'maximumAge' ) }
                   type="number"
                   min={ 18 }
                   value={ field.state.value }
@@ -379,12 +381,12 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             <form.Field name="gender_requirement">
               { ( field ) => (
                 <SuperField
-                  label="Gender Requirement"
+                  label={ t( 'genderRequirement' ) }
                   type="select"
                   options={ [
-                    { label: 'Any', value: 'any' },
-                    { label: 'Male', value: 'male' },
-                    { label: 'Female', value: 'female' },
+                    { label: t( 'any' ), value: 'any' },
+                    { label: t( 'male' ), value: 'male' },
+                    { label: t( 'female' ), value: 'female' },
                   ] }
                   value={ field.state.value }
                   onValueChange={ ( val ) => field.handleChange( val as any ) }
@@ -396,9 +398,9 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
           <form.Field name="requirements" validators={ { onBlur: createGigBaseSchema.shape.requirements } }>
             { ( field ) => (
               <SuperField
-                label="Special Requirements"
+                label={ t( 'specialRequirements' ) }
                 type="textarea"
-                placeholder="Enter any special requirements for creators"
+                placeholder={ t( 'specialRequirementsPlaceholder' ) }
                 value={ field.state.value }
                 onChange={ ( e ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
@@ -411,13 +413,13 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
           <form.Field name="submission_enforcement" validators={ { onBlur: createGigBaseSchema.shape.submission_enforcement } }>
             { ( field ) => (
               <SuperField
-                label="Submission Enforcement"
+                label={ t( 'submissionEnforcement' ) }
                 type="choice-card"
                 value={ field.state.value }
                 onValueChange={ ( val ) => { field.handleChange( val as 'single' | 'unique' ); field.handleBlur(); } }
                 options={ [
-                  { value: 'single', label: 'Single Submission', description: 'Restrict each creator to submitting only one video for this gig.' },
-                  { value: 'unique', label: 'Unique Creator Submission', description: 'Ensure that each submission comes from a unique creator.' },
+                  { value: 'single', label: t( 'singleSubmission' ), description: t( 'singleSubmissionDescription' ) },
+                  { value: 'unique', label: t( 'uniqueCreatorSubmission' ), description: t( 'uniqueCreatorSubmissionDescription' ) },
                 ] }
                 error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                 containerClassName='grid grid-cols-2'
@@ -434,8 +436,8 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
     <div className="flex flex-col gap-4">
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle>Content Guidelines</CardTitle>
-          <CardDescription>Guidelines for the creators</CardDescription>
+          <CardTitle>{ t( 'contentGuidelines' ) }</CardTitle>
+          <CardDescription>{ t( 'contentGuidelinesDescription' ) }</CardDescription>
         </CardHeader>
         <CardContent>
           <form.Field name="content_guidelines" validators={ { onBlur: createGigBaseSchema.shape.content_guidelines } }>
@@ -443,7 +445,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
               <SuperField
                 // label="Content Guidelines"
                 type="editor"
-                placeholder="Describe the content guidelines for this gig"
+                placeholder={ t( 'contentGuidelinesPlaceholder' ) }
                 value={ field.state.value }
                 onChange={ ( val ) => field.handleChange( val ) }
                 onBlur={ field.handleBlur }
@@ -456,8 +458,8 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
       </Card>
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle>Ambience / Setting</CardTitle>
-          <CardDescription>Describe the desired ambience or setting</CardDescription>
+          <CardTitle>{ t( 'ambienceSetting' ) }</CardTitle>
+          <CardDescription>{ t( 'ambienceSettingDescription' ) }</CardDescription>
         </CardHeader>
         <CardContent>
           <form.Field name="ambience" validators={ { onBlur: createGigBaseSchema.shape.ambience } }>
@@ -465,7 +467,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
               <SuperField
                 // label="Ambience / Setting"
                 type="editor"
-                placeholder="Describe the desired ambience or setting for the video"
+                placeholder={ t( 'ambienceSettingPlaceholder' ) }
                 value={ field.state.value }
                 onChange={ ( val ) => field.handleChange( val ) }
                 onBlur={ field.handleBlur }
@@ -481,8 +483,8 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
 
   /* ── Page layout ── */
   const tabItems = [
-    { value: 'overview', label: 'Overview' },
-    { value: 'guidelines', label: 'Guidelines' },
+    { value: 'overview', label: t( 'overview' ) },
+    { value: 'guidelines', label: t( 'guidelines' ) },
   ];
 
   return (
@@ -490,11 +492,11 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
       { layout === 'page' ? (
         <>
           <SubHeader
-            title={ isEditing ? 'Edit Gig' : 'Create Gig' }
+            title={ isEditing ? t( 'editGig' ) : t( 'createGig' ) }
             breadcrumbs={ [
-              { label: 'Campaigns', href: '/admin/campaigns' },
+              { label: t( 'campaigns' ), href: '/admin/campaigns' },
               { label: campaignName, href: `/admin/campaigns/${ campaignId }` },
-              { label: isEditing ? 'Edit Gig' : 'Create Gig' },
+              { label: isEditing ? t( 'editGig' ) : t( 'createGig' ) },
             ] }
             tabs={
               <SubHeaderTabs value={ subheadTabValue } onChange={ setSubheadTabValue } tabItems={ tabItems } />
@@ -529,13 +531,13 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
               <div className="px-5 space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Gig Details</CardTitle>
+                    <CardTitle>{ t( 'gigDetails' ) }</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <form.Field name="title" validators={ { onBlur: createGigBaseSchema.shape.title } }>
                       { ( field ) => (
                         <SuperField
-                          label="Title"
+                          label={ t( 'title' ) }
                           type="text"
                           value={ field.state.value }
                           onChange={ ( e ) => field.handleChange( e.target.value ) }
@@ -550,7 +552,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="compensation" validators={ { onBlur: createGigBaseSchema.shape.compensation } }>
                         { ( field ) => (
                           <SuperField
-                            label="Compensation (per video)"
+                            label={ t( 'compensationPerVideo' ) }
                             type="number"
                             min={ 0 }
                             value={ field.state.value }
@@ -564,7 +566,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="gig_cost" validators={ { onBlur: createGigBaseSchema.shape.gig_cost } }>
                         { ( field ) => (
                           <SuperField
-                            label="Total Gig Cost"
+                            label={ t( 'totalGigCost' ) }
                             type="number"
                             min={ 0 }
                             value={ field.state.value }
@@ -581,7 +583,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="number_of_videos" validators={ { onBlur: createGigBaseSchema.shape.number_of_videos } }>
                         { ( field ) => (
                           <SuperField
-                            label="Number of Videos"
+                            label={ t( 'numberOfVideos' ) }
                             type="number"
                             min={ 1 }
                             value={ field.state.value }
@@ -595,13 +597,13 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="video_duration_in_seconds" validators={ { onBlur: createGigBaseSchema.shape.video_duration_in_seconds } }>
                         { ( field ) => (
                           <SuperField
-                            label="Video Duration"
+                            label={ t( 'videoDuration' ) }
                             type="select"
                             options={ [
-                              { label: '15 seconds', value: '15' },
-                              { label: '30 seconds', value: '30' },
-                              { label: '60 seconds', value: '60' },
-                              { label: '90+ seconds', value: '90' },
+                              { label: t( 'duration15' ), value: '15' },
+                              { label: t( 'duration30' ), value: '30' },
+                              { label: t( 'duration60' ), value: '60' },
+                              { label: t( 'duration90Plus' ), value: '90' },
                             ] }
                             value={ field.state.value.toString() }
                             onValueChange={ ( val ) => field.handleChange( parseInt( val || '15' ) ) }
@@ -616,7 +618,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="posting_start_date" validators={ { onBlur: createGigBaseSchema.shape.posting_start_date } }>
                         { ( field ) => (
                           <SuperField
-                            label="Posting Start Date"
+                            label={ t( 'postingStartDate' ) }
                             type="datepicker"
                             value={ field.state.value }
                             onChange={ ( date ) => field.handleChange( date as Date ) }
@@ -630,7 +632,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="posting_end_date" validators={ { onBlur: createGigBaseSchema.shape.posting_end_date } }>
                         { ( field ) => (
                           <SuperField
-                            label="Posting End Date"
+                            label={ t( 'postingEndDate' ) }
                             type="datepicker"
                             value={ field.state.value }
                             onChange={ ( date ) => field.handleChange( date as Date ) }
@@ -647,14 +649,14 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Creator Requirements</CardTitle>
+                    <CardTitle>{ t( 'creatorRequirements' ) }</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-3 gap-4">
                       <form.Field name="age_min" validators={ { onBlur: createGigBaseSchema.shape.age_min } }>
                         { ( field ) => (
                           <SuperField
-                            label="Minimum Age"
+                            label={ t( 'minimumAge' ) }
                             type="number"
                             min={ 18 }
                             value={ field.state.value }
@@ -667,7 +669,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="age_max" validators={ { onBlur: createGigBaseSchema.shape.age_max } }>
                         { ( field ) => (
                           <SuperField
-                            label="Maximum Age"
+                            label={ t( 'maximumAge' ) }
                             type="number"
                             min={ 18 }
                             value={ field.state.value }
@@ -680,12 +682,12 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                       <form.Field name="gender_requirement">
                         { ( field ) => (
                           <SuperField
-                            label="Gender Requirement"
+                            label={ t( 'genderRequirement' ) }
                             type="select"
                             options={ [
-                              { label: 'Any', value: 'any' },
-                              { label: 'Male', value: 'male' },
-                              { label: 'Female', value: 'female' },
+                              { label: t( 'any' ), value: 'any' },
+                              { label: t( 'male' ), value: 'male' },
+                              { label: t( 'female' ), value: 'female' },
                             ] }
                             value={ field.state.value }
                             onValueChange={ ( val ) => field.handleChange( val as any ) }
@@ -697,9 +699,9 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                     <form.Field name="requirements" validators={ { onBlur: createGigBaseSchema.shape.requirements } }>
                       { ( field ) => (
                         <SuperField
-                          label="Special Requirements"
+                          label={ t( 'specialRequirements' ) }
                           type="textarea"
-                          placeholder="Enter any special requirements for creators"
+                          placeholder={ t( 'specialRequirementsPlaceholder' ) }
                           value={ field.state.value }
                           onChange={ ( e ) => field.handleChange( e.target.value ) }
                           onBlur={ field.handleBlur }
@@ -712,13 +714,13 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                     <form.Field name="submission_enforcement" validators={ { onBlur: createGigBaseSchema.shape.submission_enforcement } }>
                       { ( field ) => (
                         <SuperField
-                          label="Submission Enforcement"
+                          label={ t( 'submissionEnforcement' ) }
                           type="choice-card"
                           value={ field.state.value }
                           onValueChange={ ( val ) => { field.handleChange( val as 'single' | 'unique' ); field.handleBlur(); } }
                           options={ [
-                            { value: 'single', label: 'Single Submission', description: 'Restrict each creator to submitting only one video for this gig.' },
-                            { value: 'unique', label: 'Unique Creator Submission', description: 'Ensure that each submission comes from a unique creator.' },
+                            { value: 'single', label: t( 'singleSubmission' ), description: t( 'singleSubmissionDescription' ) },
+                            { value: 'unique', label: t( 'uniqueCreatorSubmission' ), description: t( 'uniqueCreatorSubmissionDescription' ) },
                           ] }
                           error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                         />
@@ -733,15 +735,15 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
               <div className="px-5 space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Content Guidelines</CardTitle>
+                    <CardTitle>{ t( 'contentGuidelines' ) }</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <form.Field name="content_guidelines" validators={ { onBlur: createGigBaseSchema.shape.content_guidelines } }>
                       { ( field ) => (
                         <SuperField
-                          label="Content Guidelines"
+                          label={ t( 'contentGuidelines' ) }
                           type="textarea"
-                          placeholder="Describe the content guidelines for this gig"
+                          placeholder={ t( 'contentGuidelinesPlaceholder' ) }
                           value={ field.state.value }
                           onChange={ ( e ) => field.handleChange( e.target.value ) }
                           onBlur={ field.handleBlur }
@@ -753,9 +755,9 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                     <form.Field name="ambience" validators={ { onBlur: createGigBaseSchema.shape.ambience } }>
                       { ( field ) => (
                         <SuperField
-                          label="Ambience / Setting"
+                          label={ t( 'ambienceSetting' ) }
                           type="textarea"
-                          placeholder="Describe the desired ambience or setting for the video"
+                          placeholder={ t( 'ambienceSettingPlaceholder' ) }
                           value={ field.state.value }
                           onChange={ ( e ) => field.handleChange( e.target.value ) }
                           onBlur={ field.handleBlur }
@@ -793,7 +795,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
               }
               setValidationError( null );
             } }>
-              Go to { validationError?.tab }
+              { t( 'goToTab', { tab: validationError?.tab ?? '' } ) }
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

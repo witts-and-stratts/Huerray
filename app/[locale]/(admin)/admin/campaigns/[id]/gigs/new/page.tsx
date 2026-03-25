@@ -5,6 +5,7 @@ import { useBasePath } from '@/lib/providers/path-provider';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
 import { useCreateGig } from '@/lib/api/hooks/gigs';
 import type { ApiError } from '@/lib/api/hooks/types';
@@ -14,6 +15,7 @@ import { GigForm } from '@/components/gigs/gig-form';
 import { CreateGigSchema } from '@/components/gigs/schema';
 
 export default function CreateGigPage() {
+  const t = useTranslations( 'dashboard.admin.gigForm' );
   const params = useParams<{ id: string; }>();
   const router = useRouter();
   const basePath = useBasePath();
@@ -38,7 +40,7 @@ export default function CreateGigPage() {
     );
   }
 
-  const campaignName = campaignResponse?.campaign_name || 'Campaign';
+  const campaignName = campaignResponse?.campaign_name || t( 'campaign' );
 
   const handleSubmit = async ( data: CreateGigSchema ) => {
     const { submission_enforcement, compensation, gig_cost, ...rest } = data as any;
@@ -59,17 +61,17 @@ export default function CreateGigPage() {
 
     try {
       await createGig.mutateAsync( requestData );
-      toast.success( 'Gig created successfully', {
+      toast.success( t( 'gigCreatedSuccessfully' ), {
         richColors: true,
       } );
       router.push( `${ basePath }/campaigns/${ campaignId }#gigs` );
     } catch ( err ) {
       const error = err as ApiError;
-      toast.error( 'Failed to create gig', {
+      toast.error( t( 'failedToCreateGig' ), {
         description: error?.response?.data?.error?.message,
         richColors: true,
       } );
-      console.error( 'Failed to create gig:', error );
+      console.error( t( 'failedToCreateGig' ), error );
     }
   };
 

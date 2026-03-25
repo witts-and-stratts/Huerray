@@ -234,7 +234,7 @@ interface GigCampaignTabProps {
 
 function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasAssets, onPreview }: GigCampaignTabProps ) {
   const summaryT = useTranslations( 'dashboard.brand.newCampaignPage.summary' );
-  const brandT = useTranslations( 'dashboard.brand' );
+  const gigsT = useTranslations( 'dashboard.brand.gigsPage' );
   const keywords = React.useMemo(
     () => campaign.keywords?.split( ',' ).map( ( k ) => k.trim() ).filter( Boolean ) ?? [],
     [ campaign.keywords ]
@@ -272,7 +272,7 @@ function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasA
         <WrappedCard title={ summaryT( 'details' ) }>
           { campaign.tone_of_voice && (
             <>
-              <Row label={ summaryT( 'toneOfVoice' ) } value={ campaign.tone_of_voice } />
+              <Row label={ summaryT( 'toneOfVoice' ) } value={ <Content content={ campaign.tone_of_voice } /> } />
               { ( keywords.length > 0 || campaign.category ) && <Separator /> }
             </>
           ) }
@@ -287,7 +287,7 @@ function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasA
             </>
           ) }
           { campaign.category && (
-            <Row label={ brandT( 'category' ) } value={ <Badge variant="outline" className="capitalize text-xs font-normal">{ campaign.category }</Badge> } />
+            <Row label={ gigsT( 'category' ) } value={ <Badge variant="outline" className="capitalize text-xs font-normal">{ campaign.category }</Badge> } />
           ) }
         </WrappedCard>
       ) }

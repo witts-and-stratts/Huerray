@@ -113,7 +113,7 @@ export default function AdminSettingsPage() {
           title={ t( 'accountEditPage.title' ) }
           description={ t( 'accountEditPage.description' ) }
         />
-        <div className="flex h-full items-center justify-center bg-slate-50/50 p-6">
+        <div className="flex h-full items-center justify-center bg-slate-50/50 p-6 flex-1">
           <span className="loader"></span>
         </div>
       </>
@@ -158,7 +158,7 @@ export default function AdminSettingsPage() {
         />
       </AdminSettingsHeader>
 
-      <div className="bg-slate-50/50 p-6">
+      <div className="bg-slate-50/50 p-6 flex-1">
         <div className="max-w-[800px] space-y-6">
           <Card>
             <CardHeader>

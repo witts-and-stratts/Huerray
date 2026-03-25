@@ -28,6 +28,7 @@ export function BrandActionMenu( {
   onViewDetails,
 }: BrandActionMenuProps ) {
   const t = useTranslations('dashboard.admin');
+  const menuT = useTranslations('dashboard.admin.brandActionMenu');
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
   const deleteBrand = useDeleteBrand();
@@ -41,18 +42,18 @@ export function BrandActionMenu( {
 
     deleteBrand.mutate( brand.id, {
       onSuccess: () => {
-        toast.success( "Brand deleted successfully" );
+        toast.success( menuT( 'brandDeletedSuccessfully' ) );
         setIsDeleteDialogOpen( false );
       },
       onError: () => {
-        toast.error( "Failed to delete brand" );
+        toast.error( menuT( 'failedToDeleteBrand' ) );
       },
     } );
   };
 
   const handleReviewProfile = () => {
     if ( !brand.id ) {
-      toast.error( "Brand profile not found" );
+      toast.error( menuT( 'brandProfileNotFound' ) );
       return;
     }
     setIsStatusDialogOpen( true );
@@ -60,15 +61,15 @@ export function BrandActionMenu( {
 
   const actions: MenuAction<Brand>[] = [
     {
-      label: "Copy Brand ID",
+      label: menuT( 'copyBrandId' ),
       icon: Copy,
       action: () => {
         navigator.clipboard.writeText( brand.id );
-        toast.success( "Brand ID copied to clipboard", { richColors: true } );
+        toast.success( menuT( 'brandIdCopiedToClipboard' ), { richColors: true } );
       },
     },
     {
-      label: "Visit Website",
+      label: menuT( 'visitWebsite' ),
       href: brand.website,
       external: true,
       icon: SquareArrowOutUpRight,
@@ -76,16 +77,16 @@ export function BrandActionMenu( {
       condition: ( data ) => !!data.website,
     },
     {
-      label: "View Details",
+      label: menuT( 'viewDetails' ),
       action: () => onViewDetails?.( brand ),
       separator: true,
     },
     {
-      label: "Review Profile",
+      label: menuT( 'reviewProfile' ),
       action: handleReviewProfile,
     },
     {
-      label: "Delete Brand",
+      label: menuT( 'deleteBrand' ),
       variant: "destructive",
       className: "text-destructive",
       action: handleDelete,
@@ -101,7 +102,7 @@ export function BrandActionMenu( {
         trigger={
           trigger || (
             <Button variant="ghost" className="size-8 p-0">
-              <span className="sr-only">{t('brandActionMenu.openMenu')}</span>
+              <span className="sr-only">{ menuT( 'openMenu' ) }</span>
               <MoreVertical className="size-4" />
             </Button>
           )
@@ -116,12 +117,12 @@ export function BrandActionMenu( {
       <ConfirmDialog
         open={ isDeleteDialogOpen }
         onOpenChange={ setIsDeleteDialogOpen }
-        title="Delete Brand"
+        title={ menuT( 'deleteBrand' ) }
         description={
           <span>
-            {t('brandActionMenu.areYouSureYou')}<span className="font-semibold">{ brand.name }</span>{t('brandActionMenu.ThisActionCannot')}</span>
+            { menuT( 'areYouSureYou' ) }<span className="font-semibold">{ brand.name }</span>{ menuT( 'ThisActionCannot' ) }</span>
         }
-        confirmLabel="Delete"
+        confirmLabel={ menuT( 'confirmDelete' ) }
         variant="destructive"
         onConfirm={ confirmDelete }
         isLoading={ deleteBrand.isPending }

@@ -29,6 +29,7 @@ export function GigActionMenu( {
   onEditGig,
 }: GigActionMenuProps ) {
   const t = useTranslations( 'dashboard.brand.gigsPage' );
+  const commonT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const basePath = useBasePath();
   const router = useRouter();
   const { mutate: updateStatus } = useUpdateGigStatus();
@@ -135,7 +136,7 @@ export function GigActionMenu( {
     trigger === 'icon' ? (
       <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground">
         <EllipsisVertical className="size-5" strokeWidth={ 1 } />
-        <span className="sr-only">{ t( 'actions.openMenu' ) }</span>
+        <span className="sr-only">{ commonT( 'openMenu' ) }</span>
       </Button>
     ) : trigger === 'button' ? (
       <Button variant="outline" size="sm" className="font-regular">

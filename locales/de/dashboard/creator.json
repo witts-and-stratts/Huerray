@@ -13,6 +13,7 @@
     "description": "Verfolgen Sie Ihr Zahlungsverhalten und Ihre Einnahmen aus abgeschlossenen Aufträgen."
   },
   "breadcrumbs": {
+    "creator": "Schöpfer",
     "dashboard": "Dashboard",
     "gigs": "Auftritte",
     "active": "Aktiv",
@@ -23,7 +24,7 @@
     "settings": "Einstellungen",
     "completeProfile": "Vollständiges Profil",
     "account": "Konto",
-    "editBasicInfo": "Grundlegende Informationen bearbeiten",
+    "editBasicInfo": "Benutzerinformationen",
     "profile": "Profil",
     "bio": "Biografie",
     "socialMedia": "Soziale Medien",
@@ -284,7 +285,7 @@
     "security": "Sicherheit"
   },
   "accountEditPage": {
-    "title": "Grundlegende Informationen bearbeiten",
+    "title": "Benutzerinformationen",
     "description": "Aktualisieren Sie Ihre persönlichen Daten und Kontaktinformationen.",
     "saving": "Sparen...",
     "saveChanges": "Änderungen speichern",

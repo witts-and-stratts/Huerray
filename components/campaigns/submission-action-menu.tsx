@@ -29,6 +29,7 @@ interface SubmissionActionMenuProps {
 
 export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps ) {
   const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
+  const campaignActionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const updateSubmission = useUpdateVideoSubmission();
   const updateSubmissionStatus = useUpdateVideoSubmissionStatus();
   const submissionDecision = useVideoSubmissionDecision();
@@ -189,14 +190,14 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
       },
     },
     {
-      label: t( 'approve' ),
+      label: campaignActionsT( 'approve' ),
       icon: Check,
       allowedRoles: [ 'admin' ],
       condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
       action: () => setIsAdminApproveOpen( true ),
     },
     {
-      label: t( 'reject' ),
+      label: campaignActionsT( 'reject' ),
       icon: X,
       allowedRoles: [ 'admin' ],
       condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusRejected,
@@ -267,7 +268,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         onOpenChange={ setIsAcceptOpen }
         title={ t( 'acceptSubmissionTitle' ) }
         description={ t( 'acceptSubmissionDescription' ) }
-        confirmLabel={ t( 'accept' ) }
+        confirmLabel={ campaignActionsT( 'accept' ) }
         comment={ acceptComment }
         onCommentChange={ setAcceptComment }
         onConfirm={ async () => {
@@ -276,7 +277,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           setAcceptComment( '' );
         } }
         isLoading={ submissionDecision.isPending }
-        loadingText={ t( 'accepting' ) }
+        loadingText={ campaignActionsT( 'accepting' ) }
         fieldId="submission-accept-comment"
         fieldLabel={ t( 'commentOptional' ) }
         fieldPlaceholder={ t( 'addNoteForDecision' ) }
@@ -287,7 +288,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         onOpenChange={ setIsRejectOpen }
         title={ t( 'rejectSubmissionTitle' ) }
         description={ t( 'rejectSubmissionDescription' ) }
-        confirmLabel={ t( 'reject' ) }
+        confirmLabel={ campaignActionsT( 'reject' ) }
         variant="destructive"
         comment={ rejectComment }
         onCommentChange={ setRejectComment }
@@ -297,7 +298,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           setRejectComment( '' );
         } }
         isLoading={ submissionDecision.isPending }
-        loadingText={ t( 'rejecting' ) }
+        loadingText={ campaignActionsT( 'rejecting' ) }
         fieldId="submission-reject-comment"
         fieldLabel={ t( 'reasonOptional' ) }
         fieldPlaceholder={ t( 'addRejectionReason' ) }
@@ -343,7 +344,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         onOpenChange={ setIsAdminApproveOpen }
         title={ t( 'approveSubmissionTitle' ) }
         description={ t( 'approveSubmissionDescription' ) }
-        confirmLabel={ t( 'approve' ) }
+        confirmLabel={ campaignActionsT( 'approve' ) }
         comment={ adminApproveComment }
         onCommentChange={ setAdminApproveComment }
         onConfirm={ async () => {
@@ -365,7 +366,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           setAdminApproveComment( '' );
         } }
         isLoading={ updateSubmissionStatus.isPending }
-        loadingText={ t( 'approving' ) }
+        loadingText={ campaignActionsT( 'approving' ) }
         fieldId="admin-approve-comment"
         fieldLabel={ t( 'commentOptional' ) }
         fieldPlaceholder={ t( 'addNote' ) }
@@ -376,7 +377,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         onOpenChange={ setIsAdminRejectOpen }
         title={ t( 'rejectSubmissionTitle' ) }
         description={ t( 'rejectSubmissionShort' ) }
-        confirmLabel={ t( 'reject' ) }
+        confirmLabel={ campaignActionsT( 'reject' ) }
         variant="destructive"
         comment={ adminRejectComment }
         onCommentChange={ setAdminRejectComment }
@@ -399,7 +400,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           setAdminRejectComment( '' );
         } }
         isLoading={ updateSubmissionStatus.isPending }
-        loadingText={ t( 'rejecting' ) }
+        loadingText={ campaignActionsT( 'rejecting' ) }
         fieldId="admin-reject-comment"
         fieldLabel={ t( 'reasonOptional' ) }
         fieldPlaceholder={ t( 'addRejectionReason' ) }

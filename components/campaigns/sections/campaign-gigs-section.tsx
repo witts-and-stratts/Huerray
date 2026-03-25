@@ -19,6 +19,7 @@ import {
   EmptyContent,
 } from '@/components/dashboard-ui/empty';
 import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
+import { useTranslations } from 'next-intl';
 
 interface CampaignGigsSectionProps {
   campaignId: string;
@@ -27,6 +28,7 @@ interface CampaignGigsSectionProps {
 }
 
 export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: CampaignGigsSectionProps ) {
+  const t = useTranslations( 'dashboard.admin.gigForm' );
   const { data: gigsResponse, isLoading } = useGigsByCampaign( campaignId, role );
   const gigs = ( gigsResponse?.data || [] ) as ModelsGigResponse[];
 
@@ -45,7 +47,7 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   const createGigButton = role === 'admin' ? (
     <Button className="min-w-[200px]" size="sm">
       <Link href={ `${ basePath }/campaigns/${ campaignId }/gigs/new` }>
-        Create Gig
+        { t( 'createGig' ) }
       </Link>
     </Button>
   ) : undefined;
