@@ -63,6 +63,7 @@ import { resetCampaign, updateCampaign } from '@/lib/redux/features/campaign/cam
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import type { UploadedFile } from './sections/documents/types';
 import { ButtonGroup } from '../dashboard-ui/button-group';
+import { useTranslations } from 'next-intl';
 
 export interface CampaignFileItems {
   documents: UploadedFile[];
@@ -79,6 +80,7 @@ interface CampaignFormProps {
 }
 
 export function CampaignForm( { onSubmit, initialValues, initialDocuments, initialVideos, mode = 'create', campaignId }: CampaignFormProps ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   const dispatch = useAppDispatch();
   const reduxCampaign = useAppSelector( ( state: { campaign: CreateCampaignSchema; } ) => state.campaign );
 
@@ -115,8 +117,8 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
       const validateFilesState = ( state: ReturnType<typeof useCampaignFiles>, tabName: string, label: string ) => {
         const uploading = state.items.filter( i => i.status === 'uploading' ).length;
         const errors = state.items.filter( i => i.status === 'error' ).length;
-        if ( uploading > 0 ) return { title: 'Uploads in progress', message: `${ uploading } ${ label } are still uploading. Please wait.`, tab: tabName };
-        if ( errors > 0 ) return { title: 'Upload errors', message: `${ errors } ${ label } failed to upload. Please remove or retry them.`, tab: tabName };
+        if ( uploading > 0 ) return { title: t( 'validation.uploadsInProgressTitle' ), message: t( 'validation.uploadsInProgressMessage', { count: uploading, label } ), tab: tabName };
+        if ( errors > 0 ) return { title: t( 'validation.uploadErrorsTitle' ), message: t( 'validation.uploadErrorsMessage', { count: errors, label } ), tab: tabName };
         return null;
       };
 
@@ -135,7 +137,7 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
           await onSubmit( value as CreateCampaignSchema, { documents: documentsState.items, videos: videosState.items }, 'draft' );
           dispatch( resetCampaign() );
         } catch ( error ) {
-          console.error( 'Submission failed', error );
+          console.error( t( 'validation.submissionFailed' ), error );
         } finally {
           setIsSubmitting( false );
         }
@@ -146,10 +148,10 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
             await onSubmit( value as CreateCampaignSchema, { documents: documentsState.items, videos: videosState.items }, 'draft' );
           }
           dispatch( resetCampaign() );
-          toast.success( 'Draft saved successfully' );
+          toast.success( t( 'draftSaved' ) );
         } catch ( error ) {
-          console.error( 'Submission failed', error );
-          toast.error( 'Failed to save draft. Please try again.' );
+          console.error( t( 'validation.submissionFailed' ), error );
+          toast.error( t( 'draftSaveFailed' ) );
         } finally {
           setIsSubmitting( false );
         }
@@ -169,7 +171,7 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
         setSubheadTabValue( targetTab );
         const firstFieldErrors = errors[ firstErrorField as keyof typeof errors ];
         const firstMessage = firstFieldErrors?.errors?.[ 0 ];
-        toast.error( typeof firstMessage === 'string' ? firstMessage : 'Please fix the errors in the form.' );
+        toast.error( typeof firstMessage === 'string' ? firstMessage : t( 'validation.fixErrors' ) );
       }
     },
   } );
@@ -204,11 +206,11 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
     if ( !campaignId ) return;
     try {
       await deleteCampaign.mutateAsync( campaignId );
-      toast.success( 'Campaign deleted' );
+      toast.success( t( 'campaignDeleted' ) );
       dispatch( resetCampaign() );
       router.push( '/brand/campaigns' );
     } catch {
-      toast.error( 'Failed to delete campaign' );
+      toast.error( t( 'campaignDeleteFailed' ) );
     } finally {
       setShowDeleteConfirm( false );
     }
@@ -225,7 +227,7 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
       dispatch( resetCampaign() );
       setShowSummary( false );
     } catch ( error ) {
-      console.error( 'Submission failed', error );
+      console.error( t( 'validation.submissionFailed' ), error );
     } finally {
       setIsSubmitting( false );
     }
@@ -240,21 +242,21 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
   return (
     <>
       <SubHeader
-        title={ mode === 'edit' ? 'Edit Campaign' : 'New Campaign' }
+        title={ mode === 'edit' ? t( 'editCampaign' ) : t( 'newCampaign' ) }
         pre={
           <>
             <Breadcrumb className='flex gap-4 items-center mb-4'>
               <BreadcrumbList>
                 <BreadcrumbItem className='text-sm text-muted-foreground/70'>
                   <BreadcrumbLink href="/brand/campaigns">
-                    Campaigns
+                    { t( 'campaigns' ) }
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className='text-muted-foreground/40'>
                   <SlashIcon />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem className='text-muted-foreground/40 text-sm'>
-                  { mode === 'edit' ? 'Edit Campaign' : 'New Campaign' }
+                  { mode === 'edit' ? t( 'editCampaign' ) : t( 'newCampaign' ) }
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -262,11 +264,11 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
         }
         tabs={
           <SubHeaderTabs value={ subheadTabValue } onChange={ setSubheadTabValue } tabItems={ [
-            { value: 'overview', label: 'Overview' },
-            { value: 'instructions', label: 'Instructions' },
-            { value: 'documents', label: 'Documents' },
-            { value: 'images', label: 'Images' },
-            { value: 'videos', label: 'Videos' },
+            { value: 'overview', label: t( 'tabs.overview' ) },
+            { value: 'instructions', label: t( 'tabs.instructions' ) },
+            { value: 'documents', label: t( 'tabs.documents' ) },
+            { value: 'images', label: t( 'tabs.images' ) },
+            { value: 'videos', label: t( 'tabs.videos' ) },
           ] } />
         }
       >
@@ -282,9 +284,9 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
               { isSubmitting && submitIntent === 'draft' ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  { mode === 'edit' ? 'Saving changes...' : 'Saving draft...' }
+                  { mode === 'edit' ? t( 'savingChanges' ) : t( 'savingDraft' ) }
                 </>
-              ) : ( mode === 'edit' ? 'Save changes' : 'Save draft' ) }
+              ) : ( mode === 'edit' ? t( 'saveChanges' ) : t( 'saveDraft' ) ) }
             </Button>
             { mode === 'create' && (
               <Button
@@ -295,12 +297,12 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
                 disabled={ isSubmitting }
                 className="w-full md:w-40"
               >
-                { isSubmitting && submitIntent === 'publish' ? 'Publishing...' : 'Publish' }
+                { isSubmitting && submitIntent === 'publish' ? t( 'publishing' ) : t( 'publish' ) }
               </Button>
             ) }
             <ActionMenu
               data={ null }
-              label="Actions"
+              label={ t( 'actions' ) }
               trigger={
                 <Button variant="default" size="icon-sm" disabled={ isSubmitting }>
                   <ChevronDown className="size-4" />
@@ -308,17 +310,17 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
               }
               actions={ [
                 {
-                  label: 'Discard changes',
+                  label: t( 'discardChanges' ),
                   icon: Undo2,
                   action: handleDiscardChanges,
                 },
                 {
-                  label: 'Preview changes',
+                  label: t( 'previewChanges' ),
                   icon: Eye,
                   action: () => setShowPreview( true ),
                 },
                 {
-                  label: 'Delete',
+                  label: t( 'delete' ),
                   icon: Trash2,
                   variant: 'destructive',
                   separator: true,
@@ -341,8 +343,8 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
           </Card>
           <Card className='md:col-span-2'>
             <CardHeader>
-              <CardTitle>Creator Requirements</CardTitle>
-              <CardDescription>Specify the creator requirements for your campaign</CardDescription>
+              <CardTitle>{ t( 'creatorRequirementsTitle' ) }</CardTitle>
+              <CardDescription>{ t( 'creatorRequirementsDescription' ) }</CardDescription>
             </CardHeader>
             <CardContent>
               <CampaignCreatorRequirements form={ form } />
@@ -355,16 +357,16 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
         <div className='px-5 grid md:grid-cols-2 gap-4'>
           <Card>
             <CardHeader className='pb-2'>
-              <CardTitle>Instructions</CardTitle>
-              <CardDescription>Guidelines for the creators</CardDescription>
+              <CardTitle>{ t( 'instructionsTitle' ) }</CardTitle>
+              <CardDescription>{ t( 'instructionsDescription' ) }</CardDescription>
             </CardHeader>
             <CardContent className='space-y-4'>
               <form.Field name="dos">
                 { ( field ) => (
                   <SuperField
-                    label="Dos"
+                    label={ t( 'dos' ) }
                     type="editor"
-                    placeholder="What creators should do..."
+                    placeholder={ t( 'dosPlaceholder' ) }
                     value={ field.state.value }
                     onChange={ ( e: string ) => field.handleChange( e ) }
                   />
@@ -373,9 +375,9 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
               <form.Field name="donts">
                 { ( field ) => (
                   <SuperField
-                    label="Don'ts"
+                    label={ t( 'donts' ) }
                     type="editor"
-                    placeholder="What creators should avoid..."
+                    placeholder={ t( 'dontsPlaceholder' ) }
                     value={ field.state.value }
                     onChange={ ( e: string ) => field.handleChange( e ) }
                   />
@@ -385,16 +387,16 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
           </Card>
           <Card>
             <CardHeader className='pb-2'>
-              <CardTitle>Tone of Voice</CardTitle>
-              <CardDescription>Describe the desired tone for the content</CardDescription>
+              <CardTitle>{ t( 'toneTitle' ) }</CardTitle>
+              <CardDescription>{ t( 'toneDescription' ) }</CardDescription>
             </CardHeader>
             <CardContent>
               <form.Field name="tone_of_voice">
                 { ( field ) => (
                   <SuperField
-                    label="Tone of Voice"
+                    label={ t( 'toneLabel' ) }
                     type="editor"
-                    placeholder="e.g. Energetic, professional, casual..."
+                    placeholder={ t( 'tonePlaceholder' ) }
                     value={ field.state.value }
                     onChange={ ( e: string ) => field.handleChange( e ) }
                     className='min-h-[300px]'
@@ -437,7 +439,7 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
               }
               setValidationError( null );
             } }>
-              Go to { validationError?.tab }
+              { t( 'goToTab', { tab: validationError?.tab || '' } ) }
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -446,13 +448,13 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
       <ConfirmDialog
         open={ showDeleteConfirm }
         onOpenChange={ setShowDeleteConfirm }
-        title="Delete campaign?"
-        description="This action cannot be undone. The campaign and all its data will be permanently deleted."
-        confirmLabel="Delete campaign"
-        cancelLabel="Cancel"
+        title={ t( 'deleteConfirmTitle' ) }
+        description={ t( 'deleteConfirmDescription' ) }
+        confirmLabel={ t( 'deleteCampaign' ) }
+        cancelLabel={ t( 'cancel' ) }
         onConfirm={ handleDelete }
         isLoading={ deleteCampaign.isPending }
-        loadingText="Deleting..."
+        loadingText={ t( 'deleting' ) }
         variant="destructive"
       />
 
@@ -478,7 +480,7 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
           ? async () => { setShowPreview( false ); await handleSaveAndExit(); }
           : async () => { setShowPreview( false ); await handleSaveDraftFromSummary(); }
         }
-        saveDraftLabel={ mode === 'edit' ? 'Save changes' : 'Save draft' }
+        saveDraftLabel={ mode === 'edit' ? t( 'saveChanges' ) : t( 'saveDraft' ) }
         isSavingDraft={ isSubmitting && submitIntent === 'draft' }
         data={ form.state.values }
         documents={ documentsState.items }

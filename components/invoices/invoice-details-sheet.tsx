@@ -20,6 +20,7 @@ import { ModelsBrandResponse, ModelsInvoiceResponse } from '@/lib/api/generated/
 import { ModelsCampaignResponse } from '@/lib/api/generated/models/models-campaign-response';
 import { useBrand } from '@/lib/api/hooks/brands';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
+import { useInvoice } from '@/lib/api/hooks/invoices';
 import { config } from '@/lib/config';
 import { getCountryFlag } from '@/lib/country-flags';
 import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
@@ -28,6 +29,7 @@ import * as React from 'react';
 import { Activity } from 'react';
 import { InvoiceStatusBadge } from './invoice-status-badge';
 import { BrandHoverCard } from '../campaigns/brand-hover-card';
+import { useTranslations } from 'next-intl';
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -37,6 +39,7 @@ function getInitials( name?: string ) {
 // ─── Header ───────────────────────────────────────────────────────────────────
 
 function InvoiceSheetHeader( { invoice, total, brand }: { invoice: ModelsInvoiceResponse; total: string; brand?: ModelsBrandResponse; } ) {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const logo = brand?.profile_photo?.asset;
   const flagName = getCountryFlag( brand?.country );
   const location = [ brand?.city, brand?.state, brand?.country ].filter( Boolean ).join( ', ' );
@@ -45,7 +48,7 @@ function InvoiceSheetHeader( { invoice, total, brand }: { invoice: ModelsInvoice
     <SheetHeader className="relative flex flex-row items-start justify-between gap-3 bg-textured p-4 pb-8 m-6 rounded-lg mt-16 mb-0 text-center">
       <div className="flex flex-col items-start gap-1.5">
         <SheetTitle className="text-xl font-normal text-white font-primary tracking-tight">
-          { invoice.invoice_number || 'Invoice' }
+          { invoice.invoice_number || t( 'details.invoiceFallback' ) }
         </SheetTitle>
 
         { invoice.campaign_name && (
@@ -65,7 +68,7 @@ function InvoiceSheetHeader( { invoice, total, brand }: { invoice: ModelsInvoice
       ) }
 
       <SheetDescription className="sr-only">
-        Invoice details for { invoice.invoice_number }.
+        { t( 'details.invoiceDetailsFor' ) } { invoice.invoice_number }.
       </SheetDescription>
     </SheetHeader>
   );
@@ -90,6 +93,7 @@ function InvoiceOverviewTab( {
   formattedPaid: string;
   formattedCreated: string;
 } ) {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
 
   const campaignImage = campaign?.product_image?.asset || campaign?.campaign_images?.[ 0 ]?.asset;
 
@@ -97,7 +101,7 @@ function InvoiceOverviewTab( {
     <div className="space-y-3">
       { /* Campaign */ }
       { invoice.campaign_name && (
-        <WrappedCard title="Campaign">
+        <WrappedCard title={ t( 'details.campaign' ) }>
           <div className="flex items-center gap-3">
             <Avatar className="size-10 bg-muted-foreground/10">
               { campaignImage && (
@@ -113,20 +117,20 @@ function InvoiceOverviewTab( {
       ) }
 
       { /* Dates */ }
-      <WrappedCard title="Dates">
-        <Row label="Issued" value={ formattedIssued || '—' } />
-        <Row label="Due" value={ formattedDue || '—' } />
+      <WrappedCard title={ t( 'details.dates' ) }>
+        <Row label={ t( 'details.issued' ) } value={ formattedIssued || '—' } />
+        <Row label={ t( 'details.due' ) } value={ formattedDue || '—' } />
         { invoice.paid_date && (
           <>
-            <Row label="Paid" value={ formattedPaid } />
+            <Row label={ t( 'details.paid' ) } value={ formattedPaid } />
           </>
         ) }
-        <Row label="Created" value={ formattedCreated || '—' } />
+        <Row label={ t( 'details.created' ) } value={ formattedCreated || '—' } />
       </WrappedCard>
 
       { /* Notes */ }
       { invoice.notes && (
-        <WrappedCard title="Notes">
+        <WrappedCard title={ t( 'details.notes' ) }>
           <p className="text-sm text-muted-foreground leading-relaxed">{ invoice.notes }</p>
         </WrappedCard>
       ) }
@@ -138,11 +142,12 @@ function InvoiceOverviewTab( {
 
 function InvoiceItemsTab( { invoice, total }: { invoice: ModelsInvoiceResponse; total: string; } ) {
   const items = invoice.invoice_items || [];
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
 
   return (
     <div className="space-y-3">
       { items.length > 0 ? (
-        <WrappedCard title={ `Line Items (${ items.length })` }>
+        <WrappedCard title={ t( 'details.lineItems', { count: items.length } ) }>
           { items.map( ( item, i ) => (
             <React.Fragment key={ item.id || i }>
               { i > 0 && <Separator /> }
@@ -165,7 +170,7 @@ function InvoiceItemsTab( { invoice, total }: { invoice: ModelsInvoiceResponse; 
         </WrappedCard>
       ) : (
         <div className="flex items-center justify-center py-10 text-sm text-muted-foreground">
-          No line items
+          { t( 'details.noLineItems' ) }
         </div>
       ) }
 
@@ -182,18 +187,23 @@ interface InvoiceDetailsSheetProps {
 }
 
 export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDetailsSheetProps ) {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const [ activeTab, setActiveTab ] = React.useState( 'overview' );
+  const invoiceId = invoice?.id || invoice?.invoice_id || '';
 
-  const { data: brandData } = useBrand( invoice?.brand_id || '', { enabled: !!invoice?.brand_id && open } );
-  const { data: campaign } = useCampaign( invoice?.campaign_id || '', { enabled: !!invoice?.campaign_id && open } );
+  const { data: invoiceResponse } = useInvoice( invoiceId, { enabled: open && !!invoiceId } );
+  const resolvedInvoice = invoiceResponse?.data || invoice;
 
-  const formattedIssued = useFormatDate( invoice?.issued_date || '' );
-  const formattedDue = useFormatDate( invoice?.due_date || '' );
-  const formattedPaid = useFormatDate( invoice?.paid_date || '' );
-  const formattedCreated = useFormatDate( invoice?.created_at || '' );
-  const formattedTotal = useFormatCurrency( invoice?.total?.value ?? 0, invoice?.total?.currency || 'EUR' );
+  const { data: brandData } = useBrand( resolvedInvoice?.brand_id || '', { enabled: !!resolvedInvoice?.brand_id && open } );
+  const { data: campaign } = useCampaign( resolvedInvoice?.campaign_id || '', { enabled: !!resolvedInvoice?.campaign_id && open } );
 
-  if ( !invoice ) return null;
+  const formattedIssued = useFormatDate( resolvedInvoice?.issued_date || '' );
+  const formattedDue = useFormatDate( resolvedInvoice?.due_date || '' );
+  const formattedPaid = useFormatDate( resolvedInvoice?.paid_date || '' );
+  const formattedCreated = useFormatDate( resolvedInvoice?.created_at || '' );
+  const formattedTotal = useFormatCurrency( resolvedInvoice?.total?.value ?? 0, resolvedInvoice?.total?.currency || 'EUR' );
+
+  if ( !resolvedInvoice ) return null;
 
   const brand = brandData?.data;
 
@@ -202,16 +212,16 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
       <SheetContent className="w-[95%]! max-w-[500px]! flex flex-col overflow-hidden bg-background/90">
 
         <div className="flex-1 overflow-y-auto">
-          <InvoiceSheetHeader invoice={ invoice } total={ formattedTotal } brand={ brand } />
+          <InvoiceSheetHeader invoice={ resolvedInvoice } total={ formattedTotal } brand={ brand } />
 
           <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-6 mt-3">
             <TabsList className="w-full border">
-              <TabsTrigger value="overview" className="text-xs font-normal">Overview</TabsTrigger>
+              <TabsTrigger value="overview" className="text-xs font-normal">{ t( 'details.overviewTab' ) }</TabsTrigger>
               <TabsTrigger value="items" className="text-xs font-normal">
-                Line Items
-                { ( invoice.invoice_items?.length ?? 0 ) > 0 && (
+                { t( 'details.lineItemsTab' ) }
+                { ( resolvedInvoice.invoice_items?.length ?? 0 ) > 0 && (
                   <span className="ml-1.5 text-[10px] bg-muted text-muted-foreground rounded-full px-1.5 py-0.5">
-                    { invoice.invoice_items!.length }
+                    { resolvedInvoice.invoice_items!.length }
                   </span>
                 ) }
               </TabsTrigger>
@@ -219,7 +229,7 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
 
             <Activity mode={ activeTab === 'overview' ? 'visible' : 'hidden' }>
               <InvoiceOverviewTab
-                invoice={ invoice }
+                invoice={ resolvedInvoice }
                 brand={ brand }
                 campaign={ campaign }
                 formattedIssued={ formattedIssued }
@@ -230,25 +240,25 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
             </Activity>
 
             <Activity mode={ activeTab === 'items' ? 'visible' : 'hidden' }>
-              <InvoiceItemsTab invoice={ invoice } total={ formattedTotal } />
+              <InvoiceItemsTab invoice={ resolvedInvoice } total={ formattedTotal } />
             </Activity>
           </Tabs>
         </div>
 
         <div className="px-6 pb-6 pt-3 border-t space-y-3 bg-slate-50/50">
-          { invoice.total?.value != null && (
-            <WrappedCard title="Total">
+          { resolvedInvoice.total?.value != null && (
+            <WrappedCard title={ t( 'details.total' ) }>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Amount due</span>
+                <span className="text-sm text-muted-foreground">{ t( 'details.amountDue' ) }</span>
                 <span className="text-xl font-primary text-primary leading-none">{ formattedTotal }</span>
               </div>
             </WrappedCard>
           ) }
-          { invoice.pdf_path && (
+          { resolvedInvoice.pdf_path && (
             <Button variant="outline" className="w-full gap-2">
-              <a href={ `${ config.api.baseUrl }/${ invoice.pdf_path.replace( /^\//, '' ) }` } download target="_blank" rel="noreferrer" className='flex gap-2'>
+              <a href={ `${ config.api.baseUrl }/${ resolvedInvoice.pdf_path.replace( /^\//, '' ) }` } download target="_blank" rel="noreferrer" className='flex gap-2'>
                 <HugeiconsIcon icon={ DownloadIcon } size={ 16 } />
-                Download Invoice
+                { t( 'details.downloadInvoice' ) }
               </a>
             </Button>
           ) }

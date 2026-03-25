@@ -17,7 +17,7 @@ import { FilterHorizontalIcon, SearchIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ChevronDown } from 'lucide-react';
 
-import { getPaymentColumns } from './payments-columns';
+import { usePaymentColumns } from './payments-columns';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { SuperField } from '@/components/dashboard-ui/super-field';
@@ -66,7 +66,7 @@ export function EarningsTable( { data, isLoading = false }: EarningsTableProps )
     return Array.from( set );
   }, [ data ] );
 
-  const columns = React.useMemo( () => getPaymentColumns( false ), [] );
+  const columns = usePaymentColumns( false );
 
   const table = useReactTable( {
     data: data || [],

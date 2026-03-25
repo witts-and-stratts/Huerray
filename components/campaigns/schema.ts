@@ -9,17 +9,17 @@ function getEnumValues<T extends Record<string, any>>(obj: T) {
 }
 
 export const createCampaignSchema = z.object({
-  campaign_name: z.string().min(1, 'Campaign name is required'),
-  description: z.string().min(1, 'Description is required'),
+  campaign_name: z.string().min(1),
+  description: z.string().min(1),
   category: z.enum( getEnumValues( UtilsCampaignCategory ), {
-    message: 'A valid category is required',
+    message: '',
   }),
   keywords: z.array(z.string()).default([]),
-  product_url: z.url('Please enter a valid URL').optional().or(z.literal('')),
-  product_image: z.url('Please enter a valid URL').optional().or(z.literal('')),
-  number_of_creators_wanted: z.number().min(1, 'At least 1 creator is required'),
-  number_of_videos_wanted: z.number().min(1, 'At least 1 video is required'),
-  video_duration_in_seconds: z.number().min(1, 'Duration is required'),
+  product_url: z.url().optional().or(z.literal('')),
+  product_image: z.url().optional().or(z.literal('')),
+  number_of_creators_wanted: z.number().min(1),
+  number_of_videos_wanted: z.number().min(1),
+  video_duration_in_seconds: z.number().min(1),
   video_format: z.enum(getEnumValues(UtilsVideoFormat)),
   allow_multiple_videos: z.boolean().default(false),
   tone_of_voice: z.string().optional(),

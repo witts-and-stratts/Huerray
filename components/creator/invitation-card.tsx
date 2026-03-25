@@ -1,11 +1,11 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
 import { Cancel01Icon, CheckmarkCircle01Icon, CircleIcon, Clock01Icon, Coins01Icon, InformationCircleIcon, User02Icon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
 
+import { useTranslations } from 'next-intl';
 import { useRole } from '@/contexts/role-context';
 import { ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
@@ -30,27 +30,31 @@ import { WrappedCard } from '../dashboard-ui/wrapped-card';
 
 type StatusIcon = ComponentProps<typeof HugeiconsIcon>[ 'icon' ];
 
-const invitationStatusConfig: Record<string, { label: string; color: string; icon: StatusIcon; }> = {
-  pending: {
-    label: 'Pending',
-    color: 'bg-amber-500/20 text-amber-300 border-amber-400/30',
-    icon: Clock01Icon,
-  },
-  accepted: {
-    label: 'Accepted',
-    color: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/30',
-    icon: CheckmarkCircle01Icon,
-  },
-  declined: {
-    label: 'Declined',
-    color: 'bg-red-500/20 text-red-300 border-red-400/30',
-    icon: Cancel01Icon,
-  },
+const useInvitationStatusConfig = () => {
+  const t = useTranslations( 'dashboard.creator' );
+  return {
+    pending: {
+      label: t( 'invitations.status.pending' ),
+      color: 'bg-amber-500/20 text-amber-300 border-amber-400/30',
+      icon: Clock01Icon,
+    },
+    accepted: {
+      label: t( 'invitations.status.accepted' ),
+      color: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/30',
+      icon: CheckmarkCircle01Icon,
+    },
+    declined: {
+      label: t( 'invitations.status.declined' ),
+      color: 'bg-red-500/20 text-red-300 border-red-400/30',
+      icon: Cancel01Icon,
+    },
+  };
 };
 
 function InvitationStatusBadge( { status, className }: { status?: string; className?: string; } ) {
-  const config = invitationStatusConfig[ status?.toLowerCase() || '' ] || {
-    label: status || 'Unknown',
+  const t = useTranslations( 'dashboard.common' );
+  const config = useInvitationStatusConfig()[ status?.toLowerCase() as keyof ReturnType<typeof useInvitationStatusConfig> ] || {
+    label: status || t( 'na' ),
     color: 'bg-white/10 text-white/70 border-white/20',
     icon: CircleIcon,
   };
@@ -75,12 +79,12 @@ export interface InvitationCardProps {
   onViewCreatorDetails?: ( creator: ModelsCreatorResponse ) => void;
 }
 
-function getInvitationCreator( invitation: ModelsGigInvitationResponse ): ModelsCreatorResponse | null {
+function getInvitationCreator( invitation: ModelsGigInvitationResponse, fallback: string ): ModelsCreatorResponse | null {
   if ( invitation.creator ) return invitation.creator as ModelsCreatorResponse;
   if ( invitation.creator_id ) {
     return {
       creator_id: invitation.creator_id,
-      email: 'Unknown creator',
+      email: fallback,
       first_name: '',
       last_name: '',
     } as ModelsCreatorResponse;
@@ -129,10 +133,13 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
   const [ acceptComment, setAcceptComment ] = useState( '' );
   const [ rejectComment, setRejectComment ] = useState( '' );
   const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
+  const t = useTranslations( 'dashboard.creator' );
 
   const gig = invitation.gig;
-  const gigTitle = gig?.title || 'Untitled gig';
-  const brandName = gig?.brand_name || gig?.brand?.company_name || '';
+  const gigTitle = gig?.title || t( 'common.untitledGig' );
+  const requirementsTitle = t( 'requirements.title' );
+  const contentGuidelinesTitle = t( 'campaign.campaignBriefTitle' );
+  const brandName = gig?.brand?.company_name || gig?.brand_name || '';
   const brand = gig?.brand;
   const isPending = ( invitation.status || '' ).toLowerCase() === 'pending';
 
@@ -149,13 +156,13 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
       response: { status },
     }, {
       onSuccess: () => {
-        toast.success( `Invitation ${ status === 'accepted' ? 'accepted' : 'declined' } successfully` );
+        toast.success( t( `invitations.toasts.${ status === 'accepted' ? 'accepted' : 'declined' }` ) );
         setAcceptComment( '' );
         setRejectComment( '' );
         setShowAcceptDialog( false );
         setShowRejectDialog( false );
       },
-      onError: () => toast.error( "Failed to update invitation status" ),
+      onError: () => toast.error( t( "invitations.toasts.error" ) ),
     } );
   };
 
@@ -187,7 +194,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
             { numberOfVideos && (
               <span className="flex items-center gap-1">
                 <VideoIcon className="size-5" strokeWidth={ 1 } />
-                { numberOfVideos } { numberOfVideos !== 1 ? 'videos' : 'video' }
+                { t( 'common.videoCount', { count: numberOfVideos } ) }
               </span>
             ) }
             { numberOfVideos && durationSeconds && <Separator orientation='vertical' className={ 'opacity-30' } /> }
@@ -196,7 +203,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
 
           { compensation && (
             <p className="flex flex-col mt-1">
-              <span className="text-white/60 text-[10px] uppercase tracking-widest -mb-1.5">Reward</span>
+              <span className="text-white/60 text-[10px] uppercase tracking-widest -mb-1.5">{ t( 'common.reward' ) }</span>
               <span className='text-burgundy-100'>{ formattedCompensation }</span>
             </p>
           ) }
@@ -208,7 +215,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
                 <BrandAvatar brand={ brand } className="size-4 rounded-full border border-white/20 shrink-0" />
               </BrandHoverCard>
             ) }
-            <p className="text-white/60 text-xs line-clamp-1">{ brandName }</p>
+            <p className="text-white/60 text-xs line-clamp-1">{ brandName || t( 'common.unknownBrand' ) }</p>
           </div>
 
           {/* CTA */ }
@@ -221,7 +228,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
                 onClick={ () => setShowRejectDialog( true ) }
                 disabled={ isResponding }
               >
-                Decline
+                { t( 'invitations.actions.decline' ) }
               </Button>
               <Button
                 size="sm"
@@ -229,7 +236,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
                 onClick={ () => setShowAcceptDialog( true ) }
                 disabled={ isResponding }
               >
-                Accept <ArrowRight className="size-3.5 ml-1" />
+                { t( 'invitations.actions.accept' ) } <ArrowRight className="size-3.5 ml-1" />
               </Button>
             </div>
           ) }
@@ -239,18 +246,18 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
       <ConfirmDialog
         open={ showAcceptDialog }
         onOpenChange={ handleAcceptDialogChange }
-        title="Accept Invitation"
-        description="Are you sure you want to accept this invitation? This will notify the brand and you can start working on the gig."
-        confirmLabel="Accept"
+        title={ t( 'invitations.dialogs.acceptTitle' ) }
+        description={ t( 'invitations.dialogs.acceptDesc' ) }
+        confirmLabel={ t( 'invitations.actions.accept' ) }
         confirmDisabled={ !acceptComment.trim() }
         onConfirm={ () => handleRespond( 'accepted' ) }
         isLoading={ isResponding }
-        loadingText="Accepting..."
+        loadingText={ t( 'invitations.dialogs.accepting' ) }
         variant="default"
         className="max-w-sm"
       >
         <Textarea
-          placeholder="Add a comment for this approval"
+          placeholder={ t( 'invitations.dialogs.acceptCommentPlaceholder' ) }
           rows={ 3 }
           className="bg-muted/10"
           value={ acceptComment }
@@ -261,18 +268,18 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
       <ConfirmDialog
         open={ showRejectDialog }
         onOpenChange={ handleRejectDialogChange }
-        title="Decline Invitation"
-        description="Are you sure you want to decline this invitation? This action cannot be undone."
-        confirmLabel="Decline"
+        title={ t( 'invitations.dialogs.declineTitle' ) }
+        description={ t( 'invitations.dialogs.declineDesc' ) }
+        confirmLabel={ t( 'invitations.actions.decline' ) }
         confirmDisabled={ !rejectComment.trim() }
         onConfirm={ () => handleRespond( 'declined' ) }
         isLoading={ isResponding }
-        loadingText="Declining..."
+        loadingText={ t( 'invitations.dialogs.declining' ) }
         variant="destructive"
         className="max-w-sm"
       >
         <Textarea
-          placeholder="Explain why you're declining"
+          placeholder={ t( 'invitations.dialogs.declineCommentPlaceholder' ) }
           rows={ 3 }
           className="bg-muted/10"
           value={ rejectComment }
@@ -286,7 +293,10 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
 // ─── Gig info hover card ──────────────────────────────────────────────────────
 
 function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResponse; } ) {
+  const t = useTranslations( 'dashboard.creator' );
   const gig = invitation.gig;
+  const requirementsTitle = t( 'requirements.title' );
+  const contentGuidelinesTitle = t( 'campaign.campaignBriefTitle' );
   const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
   const compensation = gig?.compensation?.value;
@@ -346,13 +356,13 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
             <div className='flex gap-4'>
               <div>
                 {/* Gig title */ }
-                <p className="card__title leading-snug">{ gig?.title || 'Untitled gig' }</p>
+                <p className="card__title leading-snug">{ gig?.title || t( 'common.untitledGig' ) }</p>
                 {/* Meta pills */ }
                 <div className="flex flex-wrap gap-2">
                   { numberOfVideos && (
-                    <span className="inline-flex items-center gap-1 py-1">
+                    <span className="inline-flex items-center gap-1 py-1 text-sm">
                       <VideoIcon strokeWidth={ 1 } className='size-5' />
-                      { numberOfVideos } { numberOfVideos !== 1 ? 'videos' : 'video' }
+                      { t( 'common.videoCount', { count: numberOfVideos } ) }
                     </span>
                   ) }
                   { durationSeconds && (
@@ -368,7 +378,7 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
                 { ( startDate || endDate ) && (
                   <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
                     <Calendar className="size-3.5 shrink-0" strokeWidth={ 1.5 } />
-                    <span>Deadline / { formatShortDate( endDate ) }</span>
+                    <span>{ t( 'common.deadline' ) } / { formatShortDate( endDate ) }</span>
                   </div>
                 ) }
               </div>
@@ -385,19 +395,19 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
 
             {/* Creator Requirements — mirrors GigDetailsTab design */ }
             { hasRequirements && (
-              <WrappedCard title="Creator Requirements" className="border-0 shadow-none bg-transparent" contentClass="bg-muted/30">
+              <WrappedCard title={ requirementsTitle } className="border-0 shadow-none bg-transparent" contentClass="bg-muted/30">
                 <div className="flex items-start gap-3">
                   {/* Gender avatars */ }
                   <div className="flex flex-col gap-1 flex-1">
-                    <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Gender</span>
+                    <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">{ t( 'requirements.gender' ) }</span>
                     <div className="flex items-end gap-2">
                       <div className={ `flex flex-col items-center gap-0.5 transition-opacity ${ gender === 'female' ? 'opacity-20' : '' }` }>
                         <img src="/svg/avatar-male.svg" alt="Male" className="size-10" />
-                        <span className="text-[10px] text-muted-foreground">Male</span>
+                        <span className="text-[10px] text-muted-foreground">{ t( 'requirements.male' ) }</span>
                       </div>
                       <div className={ `flex flex-col items-center gap-0.5 transition-opacity ${ gender === 'male' ? 'opacity-20' : '' }` }>
                         <img src="/svg/avatar-female.svg" alt="Female" className="size-10" />
-                        <span className="text-[10px] text-muted-foreground">Female</span>
+                        <span className="text-[10px] text-muted-foreground">{ t( 'requirements.female' ) }</span>
                       </div>
                     </div>
                   </div>
@@ -439,7 +449,7 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
 
             {/* Content guidelines (if no requirements block already covered it) */ }
             { guidelines && !hasRequirements && (
-              <WrappedCard title="Content Guidelines" className="border-0 shadow-none bg-transparent" contentClass="bg-muted/30">
+              <WrappedCard title={ contentGuidelinesTitle } className="border-0 shadow-none bg-transparent" contentClass="bg-muted/30">
                 <p className="text-xs text-muted-foreground line-clamp-3">{ guidelines }</p>
               </WrappedCard>
             ) }
@@ -455,11 +465,12 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
 
 function AdminBrandInvitationCard( { invitation, onViewDetails, onViewCreatorDetails }: InvitationCardProps ) {
   const [ gigSheetOpen, setGigSheetOpen ] = useState( false );
-  const creator = getInvitationCreator( invitation );
-  const creatorName = `${ invitation.creator?.first_name || '' } ${ invitation.creator?.last_name || '' }`.trim() || invitation.creator?.email || 'Invited creator';
+  const t = useTranslations( 'dashboard.creator' );
+  const creator = getInvitationCreator( invitation, invitation.creator?.email || t( 'common.invitedCreator' ) );
+  const creatorName = `${ invitation.creator?.first_name || '' } ${ invitation.creator?.last_name || '' }`.trim() || invitation.creator?.email || t( 'common.invitedCreator' );
 
   const profileImage = invitation.creator?.profile_image?.asset;
-  const gigTitle = invitation.gig?.title || 'Untitled gig';
+  const gigTitle = invitation.gig?.title || t( 'common.untitledGig' );
 
   const handleCardClick = () => {
     if ( creator && onViewCreatorDetails ) {

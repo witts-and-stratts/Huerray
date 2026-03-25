@@ -6,6 +6,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { MessageSquare } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface OverlayVideoPlayerProps {
   videoUrl?: string;
@@ -26,6 +27,7 @@ export function OverlayVideoPlayer( {
   onCommentClick,
   poster,
 }: OverlayVideoPlayerProps ) {
+  const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   const videoRef = useRef<HTMLVideoElement>( null );
   const [ isPlaying, setIsPlaying ] = useState( false );
   const togglePlayback = () => {
@@ -43,7 +45,7 @@ export function OverlayVideoPlayer( {
   if ( !videoUrl ) {
     return (
       <div className="submission-video-player__fallback">
-        No video available
+        { t( 'noVideoAvailable' ) }
       </div>
     );
   }
@@ -71,7 +73,7 @@ export function OverlayVideoPlayer( {
             compact ? "submission-video-player__control--compact" : "submission-video-player__control--standard",
             showControl ? 'pointer-events-auto' : 'pointer-events-none'
           ) }
-          aria-label={ isPlaying ? 'Pause video' : 'Play video' }
+          aria-label={ isPlaying ? t( 'pauseVideo' ) : t( 'playVideo' ) }
           initial={ { opacity: 0, scale: 0.9 } }
           whileHover={ { scale: 1.1 } }
           whileFocus={ { scale: 1.1 } }
@@ -92,7 +94,7 @@ export function OverlayVideoPlayer( {
               compact ? "submission-video-player__expand--compact" : "submission-video-player__expand--standard",
               showControl ? 'pointer-events-auto' : 'pointer-events-none'
             ) }
-            aria-label="Expand"
+            aria-label={ t( 'expandVideo' ) }
             initial={ { opacity: 0, scale: 0.9 } }
             whileHover={ { scale: 1.1 } }
             whileFocus={ { scale: 1.1 } }

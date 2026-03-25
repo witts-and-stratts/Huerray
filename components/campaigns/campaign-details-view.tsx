@@ -38,6 +38,7 @@ import { CampaignOverviewSection } from './sections/campaign-overview-section';
 import { CampaignSubmissionsSection } from './sections/campaign-submissions-section';
 import { StatusBadge } from './status-badge';
 import { cn } from '@/lib/dashboard-utils';
+import { useTranslations } from 'next-intl';
 
 const VALID_TABS = [ 'overview', 'applications', 'submissions', 'invitations', 'gigs', 'comments' ] as const;
 type TabValue = typeof VALID_TABS[ number ];
@@ -82,6 +83,7 @@ import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { useBasePath } from '@/lib/providers/path-provider';
 
 export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const basePath = useBasePath();
   const [ activeTab, setActiveTab ] = useState<TabValue>( getTabFromHash );
 
@@ -140,10 +142,10 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   const handlePublishCampaign = async () => {
     try {
       await submitCampaign.mutateAsync( campaignId );
-      toast.success( 'Campaign published successfully' );
+      toast.success( t( 'campaignPublished' ) );
       setPublishDialogOpen( false );
     } catch {
-      toast.error( 'Failed to publish campaign' );
+      toast.error( t( 'publishCampaignFailed' ) );
     }
   };
 
@@ -167,8 +169,8 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
         id: campaignId,
         request: { campaign_status: ModelsCampaignStatusUpdateRequestCampaignStatusEnum.Completed },
       }, {
-        onSuccess: () => { toast.success( 'Campaign completed successfully' ); setApproveDialogOpen( false ); },
-        onError: () => toast.error( 'Failed to complete campaign' ),
+        onSuccess: () => { toast.success( t( 'campaignCompleted' ) ); setApproveDialogOpen( false ); },
+        onError: () => toast.error( t( 'completeCampaignFailed' ) ),
       } );
       return;
     }
@@ -180,19 +182,19 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
         campaign_status: isApprove
           ? ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved
           : ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned,
-        admin_comments: adminComment || ( isApprove ? 'Approved by admin' : 'Rejected by admin' ),
+        admin_comments: adminComment || ( isApprove ? t( 'approvedByAdmin' ) : t( 'rejectedByAdmin' ) ),
         number_of_gigs_validated: isApprove ? true : undefined,
       },
     }, {
       onSuccess: () => {
-        toast.success( isApprove ? 'Campaign approved successfully' : 'Campaign rejected successfully' );
+        toast.success( isApprove ? t( 'campaignApproved' ) : t( 'campaignRejected' ) );
         setApproveDialogOpen( false );
         setAdminComment( '' );
       },
       onError: ( err ) => {
         const error = err as ApiError;
         toast.error( isApprove ? 'Failed to approve campaign' : 'Failed to reject campaign', {
-          description: <SentenceCase>{ error?.response?.data?.error?.message || "Please try again later." }</SentenceCase>,
+          description: <SentenceCase>{ error?.response?.data?.error?.message || t( 'tryAgainLater' ) }</SentenceCase>,
           richColors: true,
         } );
       },
@@ -201,8 +203,8 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
 
   // Build the action list and take the top 2 for the subheader
   const allActions = role === 'admin'
-    ? buildAdminActions( status, basePath, campaignId, gigsValidated, pendingSubmissionCount, approvedSubmissionCount, openGigCount, openAdminDialog, changeTab )
-    : buildBrandActions( status, basePath, campaignId, submissionCount, pendingSubmissionCount, approvedSubmissionCount, acceptedSubmissionCount, openGigCount, inProgressGigCount, openBrandAccept, openInviteCreators, changeTab );
+    ? buildAdminActions( t, status, basePath, campaignId, gigsValidated, pendingSubmissionCount, approvedSubmissionCount, openGigCount, openAdminDialog, changeTab )
+    : buildBrandActions( t, status, basePath, campaignId, submissionCount, pendingSubmissionCount, approvedSubmissionCount, acceptedSubmissionCount, openGigCount, inProgressGigCount, openBrandAccept, openInviteCreators, changeTab );
 
   const subheaderActions = allActions.slice( 0, 1 );
   const dropdownVariant = subheaderActions[ 0 ]?.disabled ? 'outline' : 'default';
@@ -227,11 +229,11 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
 
   const tabItems = [
     { value: 'overview', label: 'Overview' },
-    { value: 'applications', label: <TabLabel label="Applications" count={ applicationCount } /> },
-    { value: 'submissions', label: <TabLabel label="Submissions" count={ submissionCount } /> },
-    { value: 'invitations', label: <TabLabel label="Invitations" count={ invitationCount } /> },
+    { value: 'applications', label: <TabLabel label={ t( 'applications' ) } count={ applicationCount } /> },
+    { value: 'submissions', label: <TabLabel label={ t( 'submissions' ) } count={ submissionCount } /> },
+    { value: 'invitations', label: <TabLabel label={ t( 'invitations' ) } count={ invitationCount } /> },
     { value: 'gigs', label: 'Gigs' },
-    ...( commentCount > 0 ? [ { value: 'comments', label: <TabLabel label="Comments" count={ commentCount } /> } ] : [] ),
+    ...( commentCount > 0 ? [ { value: 'comments', label: <TabLabel label={ t( 'comments' ) } count={ commentCount } /> } ] : [] ),
   ];
 
   return (
@@ -339,13 +341,13 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
       <ConfirmDialog
         open={ publishDialogOpen }
         onOpenChange={ setPublishDialogOpen }
-        title="Publish campaign?"
-        description="Are you sure you want to publish this campaign? It will be submitted for approval."
-        confirmLabel="Publish campaign"
-        cancelLabel="Cancel"
+        title={ t( 'publishCampaignTitle' ) }
+        description={ t( 'publishCampaignDescription' ) }
+        confirmLabel={ t( 'publishCampaign' ) }
+        cancelLabel={ t( 'cancel' ) }
         onConfirm={ handlePublishCampaign }
         isLoading={ submitCampaign.isPending }
-        loadingText="Publishing..."
+        loadingText={ t( 'publishing' ) }
         variant="default"
       />
 

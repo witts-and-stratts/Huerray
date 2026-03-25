@@ -1,19 +1,22 @@
+import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { SubHeader } from '@/components/subheader';
 
 export function CreatorBankSkeleton() {
+  const t = useTranslations( 'dashboard.creator.breadcrumbs' );
+  const tPage = useTranslations( 'dashboard.creator.bankPage' );
   const breadcrumbs = [
-    { label: 'Dashboard', href: '/creator' },
-    { label: 'Settings', href: '/creator/settings' },
-    { label: 'Bank Details' },
+    { label: t( 'dashboard' ), href: '/creator' },
+    { label: t( 'settings' ), href: '/creator/settings' },
+    { label: t( 'bankDetails' ) },
   ];
 
   return (
     <>
       <SubHeader
         breadcrumbs={ breadcrumbs }
-        title="Bank Details"
-        description="Manage your banking and tax information."
+        title={ tPage( 'title' ) }
+        description={ tPage( 'description' ) }
       />
       <div className='p-6 space-y-6 bg-slate-50/50 h-full'>
         <div className="space-y-8 animate-pulse">

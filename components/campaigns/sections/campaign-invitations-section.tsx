@@ -14,6 +14,7 @@ import { InviteCreatorsDialog } from '@/components/campaigns/invite-creators-dia
 import { InvitationCard } from '@/components/creator/invitation-card';
 import { Button } from '@/components/dashboard-ui/button';
 import { useRole } from '@/contexts/role-context';
+import { useTranslations } from 'next-intl';
 
 interface CampaignInvitationsSectionProps {
   campaignId: string;
@@ -22,6 +23,7 @@ interface CampaignInvitationsSectionProps {
 
 
 export function CampaignInvitationsSection( { campaignId, campaignStatus }: CampaignInvitationsSectionProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const role = useRole();
   const { data: invitationsData, isLoading, error } = useCampaignInvitations( campaignId );
   const [ selectedInvitation, setSelectedInvitation ] = useState<ModelsGigInvitationResponse | null>( null );
@@ -59,7 +61,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus }: Camp
   if ( error ) {
     return (
       <div className="p-4 text-red-500 bg-red-50 rounded-md border border-red-200">
-        Error loading invitations: { error.message }
+        { t( 'errorLoadingInvitations' ) }: { error.message }
       </div>
     );
   }
@@ -73,7 +75,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus }: Camp
           fill={ true }
         >
           { role === 'brand' && campaignStatus === 'running' && (
-            <Button size='lg' className='min-w-[200px]' onClick={ () => setSelectionOpen( true ) }>Invite Creators</Button>
+            <Button size='lg' className='min-w-[200px]' onClick={ () => setSelectionOpen( true ) }>{ t( 'inviteCreators' ) }</Button>
           ) }
         </EmptyInvitations>
 

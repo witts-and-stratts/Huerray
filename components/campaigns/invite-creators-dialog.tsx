@@ -35,6 +35,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { motion, variantProps, Variants } from 'motion/react';
 import { SuperField } from '../dashboard-ui/super-field';
 import { Badge } from '../dashboard-ui/badge';
+import { useTranslations } from 'next-intl';
 
 const statusConfig: Record<string, { label: string; color: string; icon: any; }> = {
   pending: {
@@ -74,6 +75,7 @@ function InvitationStatusIndicator( { status }: { status: string; } ) {
 }
 
 function EmptyState( { hasSearchQuery, hasFilters }: { hasSearchQuery: boolean; hasFilters: boolean; } ) {
+  const t = useTranslations( 'dashboard.brand.inviteCreators' );
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4">
       <div className="size-16 rounded-full bg-muted/50 flex items-center justify-center mb-4">
@@ -83,15 +85,15 @@ function EmptyState( { hasSearchQuery, hasFilters }: { hasSearchQuery: boolean; 
         />
       </div>
       <h3 className="text-base font-medium text-foreground mb-1">
-        { hasSearchQuery ? 'No creators found' : 'No matching creators' }
+        { hasSearchQuery ? t( 'noCreatorsFound' ) : t( 'noMatchingCreators' ) }
       </h3>
       <p className="text-sm text-muted-foreground text-center max-w-[280px]">
         { hasSearchQuery ? (
-          <>Try adjusting your search terms or check the spelling.</>
+          <>{ t( 'adjustSearch' ) }</>
         ) : hasFilters ? (
-          <>No creators match the gig requirements. Consider adjusting the age range or gender requirement in your gig settings.</>
+          <>{ t( 'noCreatorsMatchRequirements' ) }</>
         ) : (
-          <>No creators available at the moment. Try again later.</>
+          <>{ t( 'noCreatorsAvailable' ) }</>
         ) }
       </p>
     </div>
@@ -106,6 +108,7 @@ interface InviteCreatorsDialogProps {
 }
 
 export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }: InviteCreatorsDialogProps ) {
+  const t = useTranslations( 'dashboard.brand.inviteCreators' );
   const [ searchQuery, setSearchQuery ] = useState( '' );
   const [ selectedCreator, setSelectedCreator ] = useState<any>( null );
   const [ localInvitedCreators, setLocalInvitedCreators ] = useState<Set<string>>( new Set() );
@@ -155,7 +158,7 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
 
   const handleInvite = ( creatorId: string, creatorName: string ) => {
     if ( !gigId ) {
-      toast.error( "Invalid gig selected", { richColors: true } );
+      toast.error( t( 'invalidGig' ), { richColors: true } );
       return;
     }
 
@@ -163,18 +166,18 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
       id: gigId,
       invitation: {
         creator_id: creatorId,
-        message: "We'd love for you to apply to our gig!",
+        message: t( 'inviteMessage' ),
         number_of_videos: 1
       }
     }, {
       onSuccess: () => {
-        toast.success( `Invitation sent to ${ creatorName }`, { richColors: true } );
+        toast.success( t( 'invitationSent' ), { richColors: true } );
         setLocalInvitedCreators( prev => new Set( prev ).add( creatorId ) );
         queryClient.invalidateQueries( { queryKey: campaignsKeys.invitations( campaignId ) } );
         queryClient.invalidateQueries( { queryKey: campaignsKeys.detail( campaignId ) } );
       },
       onError: ( error ) => {
-        toast.error( "Failed to send invitation", { richColors: true } );
+        toast.error( t( 'failedToInvite' ), { richColors: true } );
         console.error( error );
       }
     } );
@@ -185,16 +188,12 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
       <Dialog open={ open } onOpenChange={ onOpenChange }>
         <DialogContent className="max-w-[400px] sm:max-w-[540px] flex flex-col p-0 gap-0 bg-background/30 overflow-hidden">
           <DialogHeader className="p-6 pb-2 bg-background/80">
-            <DialogTitle className={ 'dialog__title' }>Invite Creators</DialogTitle>
+            <DialogTitle className={ 'dialog__title' }>{ t( 'title' ) }</DialogTitle>
             <DialogDescription className={ 'font-regular' }>
-              Search for creators and invite them to apply to your gig.
+              { t( 'description' ) }
               { ( gig?.age_min || gig?.age_max || gig?.gender_requirement ) && (
                 <span className="block mt-2 text-xs text-muted-foreground">
-                  Showing creators matching gig requirements:
-                  { gig.age_min && gig.age_max && ` Age ${ gig.age_min }-${ gig.age_max }` }
-                  { gig.age_min && !gig.age_max && ` Age ${ gig.age_min }+` }
-                  { !gig.age_min && gig.age_max && ` Age up to ${ gig.age_max }` }
-                  { gig.gender_requirement && gig.gender_requirement !== 'any' && `, ${ gig.gender_requirement.charAt( 0 ).toUpperCase() + gig.gender_requirement.slice( 1 ) }` }
+                  { t( 'showingMatching' ) }
                 </span>
               ) }
             </DialogDescription>
@@ -205,7 +204,7 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
               <SuperField
                 type='search'
                 prefix={ <Search /> }
-                placeholder='Search by name or username'
+                placeholder={ t( 'searchPlaceholder' ) }
                 value={ searchQuery }
                 onValueChange={ setSearchQuery }
                 fieldClassName='placeholder:text-foreground/50'

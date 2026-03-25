@@ -19,6 +19,7 @@ import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { TextCapitalize } from '../text-case';
+import { useTranslations } from 'next-intl';
 
 type StatusIcon = ComponentProps<typeof HugeiconsIcon>[ 'icon' ];
 
@@ -95,6 +96,7 @@ interface ApplicationCardProps {
 }
 
 export function ApplicationCard( { application }: ApplicationCardProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const creator = application.creator;
   const gig = application.gig;
 
@@ -147,7 +149,7 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
             { numberOfVideos && (
               <span className="flex items-center gap-1">
                 <VideoIcon className="size-5" strokeWidth={ 1 } />
-                { numberOfVideos } { numberOfVideos !== 1 ? 'videos' : 'video' }
+                { numberOfVideos } { t( numberOfVideos === 1 ? 'videoSingular' : 'videoPlural' ) }
               </span>
             ) }
             { numberOfVideos && durationSeconds && <Separator orientation="vertical" className="opacity-30" /> }
@@ -158,7 +160,7 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
         { /* Compensation */ }
         { compensation && (
           <p className="flex flex-col mt-1">
-            <span className="text-white/60 text-[10px] uppercase tracking-widest -mb-1.5">Reward</span>
+            <span className="text-white/60 text-[10px] uppercase tracking-widest -mb-1.5">{ t( 'reward' ) }</span>
             <span className="text-burgundy-100">{ formattedCompensation }</span>
           </p>
         ) }
@@ -174,7 +176,7 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
 
         { /* Applied date */ }
         { appliedDate && (
-          <p className="text-white/40 text-[10px]">Applied { appliedDate }</p>
+          <p className="text-white/40 text-[10px]">{ t( 'applied' ) } { appliedDate }</p>
         ) }
 
         { /* Optional message */ }

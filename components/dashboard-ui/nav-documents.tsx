@@ -25,6 +25,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/dashboard-ui/sidebar";
+import { useTranslations } from "next-intl";
 
 // Type for HugeIcons icon data (it's an array)
 type HugeIconData = Parameters<typeof HugeiconsIcon>[ 0 ][ 'icon' ];
@@ -39,10 +40,11 @@ export function NavDocuments( {
   }[];
 } ) {
   const { isMobile } = useSidebar();
+  const t = useTranslations('dashboard.common');
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Documents</SidebarGroupLabel>
+      <SidebarGroupLabel>{t('documents')}</SidebarGroupLabel>
       <SidebarMenu>
         { items.map( ( item ) => (
           <SidebarMenuItem key={ item.name } className="font-regular">
@@ -68,7 +70,7 @@ export function NavDocuments( {
                     className="data-[state=open]:bg-accent rounded-sm"
                   >
                     <IconDots />
-                    <span className="sr-only">More</span>
+                    <span className="sr-only">{t('more')}</span>
                   </SidebarMenuAction>
                 }
               />
@@ -79,16 +81,16 @@ export function NavDocuments( {
               >
                 <DropdownMenuItem>
                   <IconFolder />
-                  <span>Open</span>
+                  <span>{t('open')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <IconShare3 />
-                  <span>Share</span>
+                  <span>{t('share')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem variant="destructive">
                   <IconTrash />
-                  <span>Delete</span>
+                  <span>{t('delete')}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

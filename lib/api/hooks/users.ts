@@ -117,6 +117,23 @@ export function useUpdateUserStatus() {
   });
 }
 
+export function useUpdateUserById() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ( { id, request }: { id: string; request: ModelsEditUserRequest } ) => {
+      const response = await userApi.usersIdPut( { id, request } );
+      const raw = response.data as any;
+      return raw.data || raw;
+    },
+    onSuccess: ( _data, variables ) => {
+      queryClient.invalidateQueries( { queryKey: usersKeys.detail( variables.id ) } );
+      queryClient.invalidateQueries( { queryKey: usersKeys.lists() } );
+      queryClient.invalidateQueries( { queryKey: [...usersKeys.all, 'profile'] } );
+    },
+  } );
+}
+
 export function useUserProfile() {
   return useQuery<any, ApiError>({
     queryKey: [...usersKeys.all, 'profile'],

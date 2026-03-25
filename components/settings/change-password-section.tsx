@@ -16,9 +16,17 @@ import { ViewIcon, ViewOffIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useCallback, useState } from 'react';
 import { ChangePasswordSettings, ReactFormApi } from './change-password-schema';
+import { useTranslations } from 'next-intl';
 
 
-export function ChangePasswordSection( { form }: { form: ReactFormApi<ChangePasswordSettings>; } ) {
+export function ChangePasswordSection( {
+  form,
+  namespace = 'dashboard.brand.settingsPage.security',
+}: {
+  form: ReactFormApi<ChangePasswordSettings>;
+  namespace?: string;
+} ) {
+  const t = useTranslations( namespace );
   const [ showCurrentPassword, setShowCurrentPassword ] = useState( false );
   const [ showNewPassword, setShowNewPassword ] = useState( false );
   const [ showConfirmPassword, setShowConfirmPassword ] = useState( false );
@@ -48,26 +56,26 @@ export function ChangePasswordSection( { form }: { form: ReactFormApi<ChangePass
   ), [] );
 
   return (
-    <Card className='max-w-xl mx-auto'>
+    <Card className='max-w-[600px]'>
       <CardHeader>
-        <CardTitle>Change Password</CardTitle>
+        <CardTitle>{ t( 'title' ) }</CardTitle>
         <CardDescription>
-          Ensure your account is using a long, random password to stay secure.
+          { t( 'description' ) }
         </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
           <form.Field
             name="currentPassword"
-            children={ ( field: any ) => renderPasswordField( field, "Current Password", showCurrentPassword, () => setShowCurrentPassword( !showCurrentPassword ) ) }
+            children={ ( field: any ) => renderPasswordField( field, t( 'currentPassword' ), showCurrentPassword, () => setShowCurrentPassword( !showCurrentPassword ) ) }
           />
           <form.Field
             name="newPassword"
-            children={ ( field: any ) => renderPasswordField( field, "New Password", showNewPassword, () => setShowNewPassword( !showNewPassword ) ) }
+            children={ ( field: any ) => renderPasswordField( field, t( 'newPassword' ), showNewPassword, () => setShowNewPassword( !showNewPassword ) ) }
           />
           <form.Field
             name="confirmPassword"
-            children={ ( field: any ) => renderPasswordField( field, "Confirm Password", showConfirmPassword, () => setShowConfirmPassword( !showConfirmPassword ) ) }
+            children={ ( field: any ) => renderPasswordField( field, t( 'confirmPassword' ), showConfirmPassword, () => setShowConfirmPassword( !showConfirmPassword ) ) }
           />
         </FieldGroup>
       </CardContent>

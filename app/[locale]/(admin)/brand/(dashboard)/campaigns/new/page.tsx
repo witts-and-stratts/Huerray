@@ -13,6 +13,7 @@ import { useCreateCampaign } from '@/lib/api/hooks/campaigns';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
 async function uploadThumbnailDataUrl( dataUrl: string ): Promise<string | undefined> {
   try {
@@ -43,6 +44,7 @@ const getHashCampaignType = (): CampaignType => {
 };
 
 export default function NewCampaignPage() {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   const [ campaignType, setCampaignType ] = React.useState<CampaignType>( getHashCampaignType );
   const router = useRouter();
   const createCampaign = useCreateCampaign();
@@ -124,8 +126,8 @@ export default function NewCampaignPage() {
       { !campaignType ? (
         <div className="max-w-5xl mx-auto py-12">
           <div className="text-center mb-12">
-            <h2 className="text-h4 font-primary font-normal mb-4">Create something that gets noticed</h2>
-            <p className='font-light'>Create UGC campaigns with our network of creators to produce authentic user-generated content for your brand.</p>
+            <h2 className="text-h4 font-primary font-normal mb-4">{ t( 'heroTitle' ) }</h2>
+            <p className='font-light'>{ t( 'heroDescription' ) }</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
@@ -136,19 +138,19 @@ export default function NewCampaignPage() {
                 <div className="w-3/4 bg-white rounded-md shadow-sm border border-gray-200 flex flex-col p-2">
                   <div className="h-4 w-full bg-gray-100 mb-2 rounded" />
                   <div className="flex-1 bg-green-50 rounded flex items-center justify-center">
-                    <Image src='/images/human-only-ugc.jpg' alt='Human Only UGC' width={ 800 } height={ 500 } />
+                    <Image src='/images/human-only-ugc.jpg' alt={ t( 'human.imageAlt' ) } width={ 800 } height={ 500 } />
                   </div>
                 </div>
               </div>
               <CardHeader className="text-center pt-8">
-                <CardTitle className="text-xl mb-2 font-primary text-primary">Human only UGC</CardTitle>
+                <CardTitle className="text-xl mb-2 font-primary text-primary">{ t( 'human.title' ) }</CardTitle>
                 <CardDescription className="text-base">
-                  Leverage our network of creators to produce authentic user-generated content for your brand.
+                  { t( 'human.description' ) }
                 </CardDescription>
               </CardHeader>
               <CardFooter className="mt-auto justify-center pb-8 pt-4">
                 <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Select Human UGC
+                  { t( 'human.select' ) }
                 </Button>
               </CardFooter>
             </Card>
@@ -160,21 +162,21 @@ export default function NewCampaignPage() {
                 <div className="w-3/4 bg-white rounded-md shadow-sm border border-gray-200 flex flex-col p-2 relative">
                   <div className="absolute bottom-2 right-0 scale-75 bg-white shadow-md rounded-lg px-3 py-2 border flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-xs font-normal">AI Enhancing...</span>
+                    <span className="text-xs font-normal">{ t( 'ai.enhancing' ) }</span>
 
                   </div>
-                  <Image src='/images/ai-enhanced-ugc.jpg' alt='AI Enhanced UGC' width={ 800 } height={ 500 } />
+                  <Image src='/images/ai-enhanced-ugc.jpg' alt={ t( 'ai.imageAlt' ) } width={ 800 } height={ 500 } />
                 </div>
               </div>
               <CardHeader className="text-center pt-8">
-                <CardTitle className="text-xl mb-2 font-primary text-primary">AI Enhanced UGC</CardTitle>
+                <CardTitle className="text-xl mb-2 font-primary text-primary">{ t( 'ai.title' ) }</CardTitle>
                 <CardDescription className="text-base">
-                  Leverage AI to generate or optimize and enhance creator content for maximum engagement and conversion.
+                  { t( 'ai.description' ) }
                 </CardDescription>
               </CardHeader>
               <CardFooter className="mt-auto justify-center pb-8 pt-4">
                 <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Select AI Enhanced
+                  { t( 'ai.select' ) }
                 </Button>
               </CardFooter>
             </Card>

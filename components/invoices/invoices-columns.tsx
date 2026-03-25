@@ -20,12 +20,11 @@ import { useRole } from '@/contexts/role-context';
 import { ModelsInvoiceResponse, UtilsInvoiceStatus } from '@/lib/api/generated/models';
 import { useBrand } from '@/lib/api/hooks/brands';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
-import { formatCurrency, formatDate } from '@/lib/utils';
 import { BrandDetailsSheet } from '../admin/brands/brand-details-sheet';
 import { TCheckboxCell, TCheckboxHead, THead } from '../admin/data-table';
 import { InvoiceActionMenu } from './invoice-action-menu';
 import { InvoiceDetailsSheet } from './invoice-details-sheet';
-import { useFormatCurrency } from '@/lib/hooks/format';
+import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
 
 const statusIconMap: Record<UtilsInvoiceStatus, { icon: IconSvgElement; className: string; label: string; }> = {
   paid: { icon: CheckmarkCircle02Icon, className: 'text-green-500', label: 'Paid' },
@@ -51,7 +50,7 @@ function InvoiceNumberCell( { invoice }: { invoice: ModelsInvoiceResponse; } ) {
     <>
       <button
         onClick={ () => setOpen( true ) }
-        className="text-[15px] font-medium text-primary hover:underline text-left"
+        className="dt-table__col-title"
       >
         { invoice_number || '—' }
       </button>
@@ -114,6 +113,7 @@ function BrandCell( { brand_id, brand_name }: { brand_id?: string; brand_name?: 
 // ── Column definitions ────────────────────────────────────────────────────────
 
 export const getColumns = (
+  t: ( key: string ) => string,
   isAdmin = false
 ): ColumnDef<ModelsInvoiceResponse>[] => [
     {
@@ -141,13 +141,13 @@ export const getColumns = (
     },
     {
       accessorKey: 'invoice_number',
-      header: () => <THead title="Invoice" />,
+      header: () => <THead title={ t( 'columns.invoice' ) } />,
       cell: ( { row } ) => <InvoiceNumberCell invoice={ row.original } />,
     },
     ...( isAdmin ? [
       {
         accessorKey: 'brand_name',
-        header: () => <THead title="Brand" />,
+        header: () => <THead title={ t( 'columns.brand' ) } />,
         cell: ( { row } ) => (
           <BrandCell brand_id={ row.original.brand_id } brand_name={ row.original.brand_name } />
         ),
@@ -156,7 +156,7 @@ export const getColumns = (
     {
       accessorKey: 'campaign_name',
       enableHiding: true,
-      header: () => <span className="font-normal" data-hidden-column="true">Campaign</span>,
+      header: () => <span className="font-normal" data-hidden-column="true">{ t( 'columns.campaign' ) }</span>,
       cell: ( { row } ) => (
         <div data-hidden-column="true"><CampaignInfo campaign_id={ row.original.campaign_id } campaign_name={ row.original.campaign_name } /></div>
       ),
@@ -164,11 +164,11 @@ export const getColumns = (
     {
       accessorKey: 'issued_date',
       header: ( { column } ) => (
-        <THead title="Issued" column={ column } />
+        <THead title={ t( 'columns.issued' ) } column={ column } />
       ),
       cell: ( { row } ) => (
         <div className="text-sm pl-2">
-          { row.original.issued_date ? formatDate( row.original.issued_date ) : '—' }
+          { row.original.issued_date ? useFormatDate( row.original.issued_date ) : '—' }
         </div>
       ),
       enableSorting: true,
@@ -176,7 +176,7 @@ export const getColumns = (
     {
       id: 'paid',
       accessorKey: 'invoice_status',
-      header: () => <THead title="Paid?" />,
+      header: () => <THead title={ t( 'columns.paid' ) } />,
       cell: ( { row } ) => {
         const status = row.original.invoice_status as UtilsInvoiceStatus | undefined;
         if ( !status ) return <div className="pl-2 text-muted-foreground">—</div>;
@@ -192,20 +192,20 @@ export const getColumns = (
     {
       accessorKey: 'total',
       header: ( { column } ) => (
-        <THead title="Amount" column={ column } />
+        <THead title={ t( 'columns.amount' ) } column={ column } />
       ),
       cell: ( { row } ) => {
         const amount = row.original.total?.value;
         const currency = row.original.total?.currency;
         if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
-        return <div className="pl-4 font-medium">{ useFormatCurrency( amount, currency ) }</div>;
+        return <div className="pl-4 dt-table__money">{ useFormatCurrency( amount, currency ) }</div>;
       },
       enableSorting: true,
     },
     {
       id: 'actions',
       header: () => (
-        <THead title="Actions" shouldSort={ false } className='justify-end text-right w-full' />
+        <THead title={ t( 'columns.actions' ) } shouldSort={ false } className='justify-end text-right w-full' />
       ),
       enableHiding: false,
       cell: ( { row } ) => <div className='flex justify-end mr-1'><InvoiceActionMenu invoice={ row.original } /></div>,

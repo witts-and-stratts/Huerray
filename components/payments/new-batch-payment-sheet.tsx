@@ -21,11 +21,10 @@ import { useCreators } from '@/lib/api/hooks/creators';
 import { usePaymentItems, useCreatePayment } from '@/lib/api/hooks/payments';
 import { ModelsCreatorResponse, ModelsPaymentItemResponse, UtilsPaymentStatus } from '@/lib/api/generated/models';
 import { type SelectOption } from '@/components/dashboard-ui/superfield/types';
-import { formatCurrency } from '@/lib/utils';
 import { cn } from '@/lib/dashboard-utils';
 import { Check } from 'lucide-react';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
-import { useFormatCurrency } from '@/lib/hooks/format';
+import { useLocale, useTranslations } from 'next-intl';
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -38,10 +37,12 @@ function PaymentItemRow( {
   item,
   selected,
   onToggle,
+  formatMoney,
 }: {
   item: ModelsPaymentItemResponse;
   selected: boolean;
   onToggle: () => void;
+  formatMoney: ( amount: number, currency?: string ) => string;
 } ) {
   const amount = item.amount?.value;
 
@@ -70,12 +71,12 @@ function PaymentItemRow( {
         ) }
         { item.item_count != null && item.cost_per_item?.value != null && (
           <p className="text-sm font-regular text-muted-foreground mt-0.5">
-            { item.item_count } × { useFormatCurrency( item.cost_per_item.value, item.cost_per_item.currency ) }
+            { item.item_count } × { formatMoney( item.cost_per_item.value, item.cost_per_item.currency ) }
           </p>
         ) }
       </div>
       { amount != null && (
-        <span className="text-base font-primary font-normal shrink-0">{ useFormatCurrency( amount, item?.amount?.currency ) }</span>
+        <span className="text-base font-primary font-normal shrink-0">{ formatMoney( amount, item?.amount?.currency ) }</span>
       ) }
     </div>
   );
@@ -89,6 +90,8 @@ interface NewBatchPaymentSheetProps {
 }
 
 export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentSheetProps ) {
+  const t = useTranslations( 'dashboard.common' );
+  const locale = useLocale();
   const [ selectedCreatorId, setSelectedCreatorId ] = React.useState<string>( '' );
   const [ selectedItemIds, setSelectedItemIds ] = React.useState<Set<string>>( new Set() );
   const [ paymentMethod, setPaymentMethod ] = React.useState( '' );
@@ -131,14 +134,14 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
 
   const { mutate: createPayment, isPending: isSubmitting } = useCreatePayment( {
     onSuccess: () => {
-      toast.success( 'Batch payment created successfully.', {
-        description: 'The batch payment has been created successfully.',
+      toast.success( t( 'batchPayment.successTitle' ), {
+        description: t( 'batchPayment.successDesc' ),
         richColors: true,
       } );
       onOpenChange( false );
     },
     onError: () => {
-      toast.error( 'Failed to create batch payment. Please try again.', {
+      toast.error( t( 'batchPayment.errorDesc' ), {
         richColors: true,
       } );
     },
@@ -169,11 +172,18 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
 
   const currency = paymentItems.find( ( i ) => i.id && selectedItemIds.has( i.id ) )?.amount?.currency;
 
+  const formatMoney = React.useCallback( ( amount: number, currencyCode?: string ) => {
+    return new Intl.NumberFormat( locale, {
+      style: 'currency',
+      currency: currencyCode || 'USD',
+    } ).format( amount );
+  }, [ locale ] );
+
   const handleSubmit = ( e: React.FormEvent ) => {
     e.preventDefault();
     if ( !selectedCreatorId ) return;
     if ( selectedItemIds.size === 0 ) {
-      toast.error( 'Select at least one payment item.' );
+      toast.error( t( 'batchPayment.selectAtLeastOne' ) );
       return;
     }
     createPayment( {
@@ -188,7 +198,7 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
 
   const renderCreatorTrigger = ( selected: SelectOption | undefined ) => {
     if ( !selected || typeof selected !== 'object' ) {
-      return <span className="text-muted-foreground">Select a creator...</span>;
+      return <span className="text-muted-foreground">{ t( 'batchPayment.creatorPlaceholder' ) }</span>;
     }
     const creator = creatorMap.get( selected.value );
     const photoUrl = creator?.profile_image?.asset;
@@ -236,8 +246,8 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
     <Sheet open={ open } onOpenChange={ onOpenChange } modal>
       <SheetContent className="w-[90%]! max-w-[520px]! flex flex-col overflow-hidden p-0!">
         <SheetHeader className="px-6 pt-6 pb-4 shrink-0 border-b bg-background/80">
-          <SheetTitle className="dialog__title text-primary">New batch payment</SheetTitle>
-          <SheetDescription className="text-base">Select a creator and their pending payment items.</SheetDescription>
+          <SheetTitle className="dialog__title text-primary">{ t( 'batchPayment.title' ) }</SheetTitle>
+          <SheetDescription className="text-base">{ t( 'batchPayment.description' ) }</SheetDescription>
         </SheetHeader>
 
         <form onSubmit={ handleSubmit } className="flex flex-col flex-1 overflow-hidden">
@@ -246,8 +256,8 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
             { /* Creator combobox */ }
             <SuperField
               type="searchable-select"
-              label="Creator"
-              placeholder="Select a creator..."
+              label={ t( 'batchPayment.creatorLabel' ) }
+              placeholder={ t( 'batchPayment.creatorPlaceholder' ) }
               required
               options={ creatorOptions }
               value={ selectedCreatorId }
@@ -266,7 +276,7 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
               <WrappedCard
                 variant='flush'
                 title={ <p className="text-sm font-medium">
-                  Pending items
+                  { t( 'batchPayment.pendingItems' ) }
                   { !itemsLoading && (
                     <span className="ml-1.5 text-xs text-muted-foreground font-normal">
                       ({ paymentItems.length })
@@ -276,7 +286,7 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
                 <div className="flex items-center justify-between">
                   { paymentItems.length > 0 && (
                     <button type="button" onClick={ toggleAll } className="text-xs text-primary hover:underline">
-                      { selectedItemIds.size === paymentItems.length ? 'Deselect all' : 'Select all' }
+                      { selectedItemIds.size === paymentItems.length ? t( 'batchPayment.deselectAll' ) : t( 'batchPayment.selectAll' ) }
                     </button>
                   ) }
                 </div>
@@ -289,7 +299,7 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
                   </div>
                 ) : paymentItems.length === 0 ? (
                   <p className="text-sm text-muted-foreground py-6 text-center border rounded-lg">
-                    No pending payment items for this creator.
+                    { t( 'batchPayment.noItems' ) }
                   </p>
                 ) : (
                   <div className="space-y-2">
@@ -299,6 +309,7 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
                         item={ item }
                         selected={ !!item.id && selectedItemIds.has( item.id ) }
                         onToggle={ () => item.id && toggleItem( item.id ) }
+                        formatMoney={ formatMoney }
                       />
                     ) ) }
                   </div>
@@ -311,15 +322,15 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
               <>
                 <SuperField
                   type="text"
-                  label="Payment method"
-                  placeholder="e.g. bank transfer, PayPal..."
+                  label={ t( 'batchPayment.methodLabel' ) }
+                  placeholder={ t( 'batchPayment.methodPlaceholder' ) }
                   value={ paymentMethod }
                   onChange={ ( e ) => setPaymentMethod( e.target.value ) }
                 />
                 <SuperField
                   type="textarea"
-                  label="Notes"
-                  placeholder="Optional notes..."
+                  label={ t( 'batchPayment.notesLabel' ) }
+                  placeholder={ t( 'batchPayment.notesPlaceholder' ) }
                   value={ notes }
                   onChange={ ( e ) => setNotes( e.target.value ) }
                 />
@@ -334,14 +345,14 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
                 <span>
                   <span className="font-semibold">{ selectedItemIds.size }</span>
                   <span className="text-muted-foreground"> item{ selectedItemIds.size !== 1 ? 's' : '' } · </span>
-                  <span className="font-normal font-primary text-primary text-xl">{ useFormatCurrency( totalSelected, currency ) }</span>
+                  <span className="font-normal font-primary text-primary text-xl">{ formatMoney( totalSelected, currency ) }</span>
                 </span>
               ) : (
-                <span className="text-muted-foreground text-xs">No items selected</span>
+                <span className="text-muted-foreground text-xs">{ t( 'batchPayment.noItemsSelected' ) }</span>
               ) }
             </div>
             <Button type="submit" size="sm" disabled={ !canSubmit }>
-              { isSubmitting ? 'Creating...' : 'Create payment' }
+              { isSubmitting ? t( 'batchPayment.creating' ) : t( 'batchPayment.create' ) }
             </Button>
           </div>
         </form>
@@ -353,13 +364,14 @@ export function NewBatchPaymentSheet( { open, onOpenChange }: NewBatchPaymentShe
 // ── Trigger button ────────────────────────────────────────────────────────────
 
 export function NewBatchPaymentButton() {
+  const t = useTranslations( 'dashboard.common' );
   const [ open, setOpen ] = React.useState( false );
 
   return (
     <>
       <Button size="sm" onClick={ () => setOpen( true ) }>
         <HugeiconsIcon icon={ Add01Icon } className="size-4" />
-        New batch payment
+        { t( 'batchPayment.title' ) }
       </Button>
       <NewBatchPaymentSheet open={ open } onOpenChange={ setOpen } />
     </>

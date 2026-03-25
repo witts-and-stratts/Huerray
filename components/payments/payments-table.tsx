@@ -15,7 +15,7 @@ import * as React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 
-import { getPaymentColumns } from './payments-columns';
+import { usePaymentColumns } from './payments-columns';
 import { PaymentsTableToolbar } from './payments-table-toolbar';
 import { PaymentsTableView } from './payments-table-view';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
@@ -75,7 +75,7 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
     return Array.from( set );
   }, [ filteredData ] );
 
-  const columns = React.useMemo( () => getPaymentColumns( isAdmin ), [ isAdmin ] );
+  const columns = usePaymentColumns( isAdmin );
 
   const table = useReactTable( {
     data: filteredData,

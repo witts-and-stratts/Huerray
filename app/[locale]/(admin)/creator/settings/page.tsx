@@ -21,8 +21,11 @@ import { toast } from 'sonner';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { fetchCreatorProfile } from '@/lib/redux/features/creator/creatorSlice';
 import { CreatorSettingsSkeleton } from '@/components/settings/creator-settings-skeleton';
+import { useTranslations } from 'next-intl';
 
 export default function CreatorSettingsPage() {
+  const t = useTranslations( 'dashboard.creator.settingsPage' );
+  const tTabs = useTranslations( 'dashboard.creator.settingsTabs' );
   const [ activeTab, setActiveTab ] = useState( 'profile' );
   const [ isLoading, setIsLoading ] = useState( true );
   const [ isSaving, setIsSaving ] = useState( false );
@@ -104,15 +107,15 @@ export default function CreatorSettingsPage() {
         // Refetch and update the cached creator profile in Redux
         dispatch( fetchCreatorProfile() );
 
-        toast.success( 'Settings updated successfully', {
+        toast.success( t( 'successUpdated' ), {
           richColors: true,
         } );
       } catch ( error: any ) {
-        console.error( 'Failed to update settings', error );
-        console.error( 'Response data:', JSON.stringify( error.response?.data ) );
+        console.error( t( 'errorUpdateFailed' ), error );
+        console.error( t( 'errorResponseData' ), JSON.stringify( error.response?.data ) );
         const rawError = error.response?.data?.error;
-        const errorMessage = ( typeof rawError === 'string' ? rawError : rawError?.message ) || error.response?.data?.message || error.message || 'Failed to update settings';
-        toast.error( `Failed to update settings`, {
+        const errorMessage = ( typeof rawError === 'string' ? rawError : rawError?.message ) || error.response?.data?.message || error.message || t( 'errorUpdateFailed' );
+        toast.error( t( 'errorUpdateFailed' ), {
           description: errorMessage,
           richColors: true,
         } );
@@ -196,8 +199,8 @@ export default function CreatorSettingsPage() {
         if ( e?.response?.status === 404 ) {
           return;
         }
-        console.error( 'Error fetching settings', e );
-        toast.error( 'Failed to load some settings' );
+        console.error( t( 'errorFetchFailed' ), e );
+        toast.error( t( 'errorLoadFailed' ) );
       } finally {
         setIsLoading( false );
       }
@@ -233,34 +236,36 @@ export default function CreatorSettingsPage() {
   }, [ form ] );
 
   const tabItems = [
-    { value: 'profile', label: 'Profile' },
-    { value: 'bio', label: 'Biography' },
-    { value: 'social-media', label: 'Social Media' },
+    { value: 'profile', label: tTabs( 'profile' ) },
+    { value: 'bio', label: tTabs( 'bio' ) },
+    { value: 'social-media', label: tTabs( 'socialMedia' ) },
+    { value: '/creator/settings/security', label: tTabs( 'security' ) },
   ];
 
   const pageDetails: Record<string, { title: string; description: string; }> = {
     profile: {
-      title: 'Profile Settings',
-      description: 'Manage your personal information and profile details.',
+      title: t( 'profileTitle' ),
+      description: t( 'profileDescription' ),
     },
     bio: {
-      title: 'Biography',
-      description: 'Tell us about yourself.',
+      title: t( 'bioTitle' ),
+      description: t( 'bioDescription' ),
     },
     'social-media': {
-      title: 'Social Media Settings',
-      description: 'Connect and manage your social media accounts.',
+      title: t( 'socialMediaTitle' ),
+      description: t( 'socialMediaDescription' ),
     },
   };
 
   // Safe fallback if activeTab is not in pageDetails (e.g. if we somehow landed here with #bank-details)
   const currentDetails = pageDetails[ activeTab ] || pageDetails.profile;
-  const activeLabel = tabItems.find( t => t.value === activeTab )?.label || 'Profile';
+  const tNav = useTranslations('dashboard.creator.breadcrumbs');
+  const activeLabel = tabItems.find( t => t.value === activeTab )?.label || tTabs( 'profile' );
 
   const breadcrumbs = [
-    { label: 'Dashboard', href: '/creator' },
-    { label: 'Settings', href: '/creator/settings' },
-    { label: activeLabel },
+    { label: tNav('dashboard'), href: '/creator' },
+    { label: tNav('settings'), href: '/creator/settings' },
+    { label: activeTab === 'profile' ? tNav('profile') : activeTab === 'bio' ? tNav('bio') : tNav('socialMedia') },
   ];
 
   const handleDiscard = useCallback( () => {
@@ -333,7 +338,7 @@ export default function CreatorSettingsPage() {
           children={ ( [ , isSubmitting ] ) => (
             <ButtonGroup>
               <Button type='submit' disabled={ isSubmitting || isSaving }>
-                { isSubmitting || isSaving ? 'Saving...' : 'Save Changes' }
+                { isSubmitting || isSaving ? t( 'saving' ) : t( 'saveChanges' ) }
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -343,7 +348,7 @@ export default function CreatorSettingsPage() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className={ 'min-w-40' }>
                   <DropdownMenuItem onClick={ handleDiscard }>
-                    Discard Changes
+                    { t( 'discardChanges' ) }
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -366,12 +371,12 @@ export default function CreatorSettingsPage() {
       <ConfirmDialog
         open={ isReviewConfirmOpen }
         onOpenChange={ setIsReviewConfirmOpen }
-        title="Confirm profile update"
-        description="Saving your profile will require review and approval before you can perform certain tasks."
-        confirmLabel="Continue and save"
+        title={ t( 'confirmTitle' ) }
+        description={ t( 'confirmDescription' ) }
+        confirmLabel={ t( 'continueAndSave' ) }
         onConfirm={ handleConfirmSave }
         isLoading={ isSaving }
-        loadingText="Saving..."
+        loadingText={ t( 'saving' ) }
       />
     </form>
   );

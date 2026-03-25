@@ -22,7 +22,7 @@ import {
 } from '@tanstack/react-table';
 import { AnimatePresence, motion } from 'motion/react';
 import * as React from 'react';
-import { getColumns } from './campaigns-columns';
+import { useCampaignColumns } from './campaigns-columns';
 import { CampaignsTableToolbar } from './campaigns-table-toolbar';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { DEFAULT_PAGE } from '@/lib/constants';
@@ -97,7 +97,7 @@ export function CampaignsTable( {
     return Array.from( statusSet );
   }, [ filteredData ] );
 
-  const columns = React.useMemo( () => getColumns(), [] );
+  const columns = useCampaignColumns();
 
   const table = useReactTable( {
     data: filteredData,

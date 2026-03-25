@@ -9,6 +9,7 @@ import { UploadedFile, VideoUploadResponseData } from '@/components/campaigns/se
 import { nanoid } from 'nanoid';
 import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny';
 import { PreviewDialog } from '@/components/campaigns/sections/documents/preview-dialog';
+import { useTranslations } from 'next-intl';
 
 interface VideoDropzoneProps {
   value?: File | null;
@@ -20,6 +21,7 @@ interface VideoDropzoneProps {
 }
 
 export function VideoDropzone( { value, onChange, onUploadSuccess, className, videoAspect, showTitle = true }: VideoDropzoneProps ) {
+  const t = useTranslations( 'dashboard.creator.submissions' );
   const [ fileItem, setFileItem ] = useState<UploadedFile | null>( null );
   const [ previewItem, setPreviewItem ] = useState<UploadedFile | null>( null );
 
@@ -49,7 +51,7 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, vi
               }
             }
           } catch ( e ) {
-            console.error( "Failed to generate video thumbnail", e );
+            console.error( t( 'videoThumbnailError' ), e );
           }
         }
 
@@ -81,7 +83,7 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, vi
 
   const handleUploadError = useCallback( ( id: string, error: Error ) => {
     setFileItem( prev => prev ? { ...prev, status: 'error', error: error.message } : null );
-    console.error( 'Upload failed:', error );
+    console.error( t( 'uploadFailedLog' ), error );
   }, [] );
 
   const handleRetry = useCallback( () => {
@@ -117,16 +119,10 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, vi
                   <VideoFileIcon className="w-8 h-8 text-primary" />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-base card__title">
-                    Drag & drop your video here
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    or click to browse from your computer
-                  </p>
-                </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Supports MP4, MOV, WEBM (Max 500MB)
-                </p>
+                    <p className="text-base card__title">{ t( 'dropzoneTitle' ) }</p>
+                    <p className="text-xs text-muted-foreground">{ t( 'dropzoneDesc' ) }</p>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2">{ t( 'dropzoneSpecs' ) }</p>
               </DropzoneEmptyState>
             </div>
           ) }

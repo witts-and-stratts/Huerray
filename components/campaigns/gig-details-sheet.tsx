@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { ModelsGigResponse } from '@/lib/api/generated';
 import type { ModelsBrandResponse } from '@/lib/api/generated';
@@ -63,6 +64,7 @@ export interface GigDetailsSheetProps {
 // ─── Cover image ──────────────────────────────────────────────────────────────
 
 function GigCoverImage( { src, productUrl, alt }: { src: string; productUrl?: string; alt?: string; } ) {
+  const t = useTranslations( 'dashboard.creator' );
   return (
     <div className="relative w-full aspect-4/3 shrink-0 overflow-hidden">
       <img src={ imgpresets.banner( src ) } alt={ alt } className="w-full h-full object-cover object-[50%_20%]" />
@@ -73,7 +75,7 @@ function GigCoverImage( { src, productUrl, alt }: { src: string; productUrl?: st
           rel="noopener noreferrer"
           className="absolute bottom-40 right-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
         >
-          Product <Globe className="size-3" />
+          { t( 'common.product' ) } <Globe className="size-3" />
         </a>
       ) }
     </div>
@@ -109,6 +111,7 @@ function GigSheetHeader( {
   formattedCompensation,
   formattedGigCost,
 }: GigSheetHeaderProps ) {
+  const t = useTranslations( 'dashboard.creator' );
   return (
     <SheetHeader className={ `relative flex flex-row items-start gap-4 bg-burgundy-50/70 mx-6 rounded-lg border border-primary/20 mb-0 ${ hasCoverImage ? '-mt-32 z-10 backdrop-blur-lg' : 'mt-16' }` }>
       <div className="flex flex-col gap-2 flex-1 min-w-0">
@@ -120,14 +123,14 @@ function GigSheetHeader( {
           { numberOfVideos && (
             <div className="flex items-center gap-2">
               <VideoIcon strokeWidth={ 1 } />
-              { numberOfVideos } video{ numberOfVideos > 1 ? 's' : '' }
+              { t( 'common.videoCount', { count: numberOfVideos } ) }
               { videoDuration ? ` · ${ videoDuration }s` : '' }
             </div>
           ) }
           <Separator orientation="vertical" className="bg-muted-foreground/30" />
           { postingEndDate && (
             <>
-              <span className="text-muted-foreground/70">Deadline </span>
+              <span className="text-muted-foreground/70">{ t( 'common.deadline' ) } </span>
               { formatDate( postingEndDate ) }
             </>
           ) }
@@ -145,7 +148,7 @@ function GigSheetHeader( {
         </BrandHoverCard>
       ) }
 
-      <SheetDescription className="sr-only">Details for gig: { title }</SheetDescription>
+      <SheetDescription className="sr-only">{ t( 'gigDetailsFor', { title: title! } ) }</SheetDescription>
     </SheetHeader>
   );
 }
@@ -162,21 +165,22 @@ interface GigDetailsTabProps {
 }
 
 function GigDetailsTab( { genderRequirement, ageMin, ageMax, ambience, requirements, contentGuidelines }: GigDetailsTabProps ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   return (
     <TabsPanel value="details" className="pt-0 gap-2 flex flex-col">
-      <WrappedCard title="Creator Requirements" className="m-1">
+      <WrappedCard title={ t( 'creatorRequirements' ) } className="m-1">
         <div className="flex items-start gap-3 py-2">
           { /* Gender */ }
           <div className="flex flex-col gap-2 flex-1">
-            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Gender</span>
+            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">{ t( 'gender' ) }</span>
             <div className="flex items-end gap-2">
               <div className={ `flex flex-col items-center gap-0.5 transition-opacity ${ genderRequirement === 'female' ? 'opacity-20' : '' }` }>
-                <img src="/svg/avatar-male.svg" alt="Male" className="size-16" />
-                <span className="text-xs text-muted-foreground mt-2">Male</span>
+                <img src="/svg/avatar-male.svg" alt={ t( 'male' ) } className="size-16" />
+                <span className="text-xs text-muted-foreground mt-2">{ t( 'male' ) }</span>
               </div>
               <div className={ `flex flex-col items-center gap-0.5 transition-opacity ${ genderRequirement === 'male' ? 'opacity-20' : '' }` }>
-                <img src="/svg/avatar-female.svg" alt="Female" className="size-16" />
-                <span className="text-xs text-muted-foreground mt-2">Female</span>
+                <img src="/svg/avatar-female.svg" alt={ t( 'female' ) } className="size-16" />
+                <span className="text-xs text-muted-foreground mt-2">{ t( 'female' ) }</span>
               </div>
             </div>
           </div>
@@ -185,7 +189,7 @@ function GigDetailsTab( { genderRequirement, ageMin, ageMax, ambience, requireme
 
           { /* Age range */ }
           <div className="flex flex-col gap-2 flex-1 items-end">
-            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Age range</span>
+            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">{ t( 'ageRange' ) }</span>
             { ( ageMin || ageMax ) ? (
               <div className="relative flex items-center">
                 <span className="relative z-10 text-xl mt-2 font-light bg-background px-2.5 py-1 rounded-md pr-5 border border-border shadow-md z-90">{ ageMin ?? '—' }</span>
@@ -193,23 +197,23 @@ function GigDetailsTab( { genderRequirement, ageMin, ageMax, ambience, requireme
                 <span className="relative z-10 text-xl mt-2 -ml-8 pl-10 font-light bg-background px-2.5 py-1 rounded-md border border-border shadow-md">{ ageMax ?? '—' }</span>
               </div>
             ) : (
-              <span className="text-xs text-muted-foreground">Any</span>
+              <span className="text-xs text-muted-foreground">{ t( 'any' ) }</span>
             ) }
           </div>
         </div>
 
         <Separator />
-        <Row label="Ambience" value={ ambience ? <span className="capitalize"><Content content={ ambience } /></span> : 'N/A' } />
+        <Row label={ t( 'ambience' ) } value={ ambience ? <span className="capitalize"><Content content={ ambience } /></span> : t( 'na' ) } />
         { requirements && (
           <>
             <Separator />
-            <Row label="Requirements" value={ requirements } />
+            <Row label={ t( 'requirements' ) } value={ requirements } />
           </>
         ) }
       </WrappedCard>
 
       { contentGuidelines && (
-        <WrappedCard title="Content Guidelines" className="m-1">
+        <WrappedCard title={ t( 'contentGuidelines' ) } className="m-1">
           <Content content={ contentGuidelines } />
         </WrappedCard>
       ) }
@@ -229,6 +233,8 @@ interface GigCampaignTabProps {
 }
 
 function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasAssets, onPreview }: GigCampaignTabProps ) {
+  const summaryT = useTranslations( 'dashboard.brand.newCampaignPage.summary' );
+  const brandT = useTranslations( 'dashboard.brand' );
   const keywords = React.useMemo(
     () => campaign.keywords?.split( ',' ).map( ( k ) => k.trim() ).filter( Boolean ) ?? [],
     [ campaign.keywords ]
@@ -239,23 +245,23 @@ function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasA
   return (
     <TabsPanel value="campaign" className="space-y-3 pt-0 m-1">
       { campaign.description && (
-        <WrappedCard title="About this campaign">
+        <WrappedCard title={ summaryT( 'campaignBriefTitle' ) }>
           <ExpandableContent><Content content={ campaign.description } /></ExpandableContent>
         </WrappedCard>
       ) }
 
       { ( campaign.dos || campaign.donts ) && (
-        <WrappedCard title="Do's & Don'ts">
+        <WrappedCard title={ summaryT( 'campaignBriefDescription' ) }>
           { campaign.dos && (
             <div className="space-y-1">
-              <p className="text-xs font-medium text-emerald-600">Do's</p>
+              <p className="text-xs font-medium text-emerald-600">{ summaryT( 'dos' ) }</p>
               <ExpandableContent><Content content={ campaign.dos } /></ExpandableContent>
             </div>
           ) }
           { campaign.dos && campaign.donts && <Separator /> }
           { campaign.donts && (
             <div className="space-y-1">
-              <p className="text-xs font-medium text-rose-500">Don'ts</p>
+              <p className="text-xs font-medium text-rose-500">{ summaryT( 'donts' ) }</p>
               <ExpandableContent><Content content={ campaign.donts } /></ExpandableContent>
             </div>
           ) }
@@ -263,16 +269,16 @@ function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasA
       ) }
 
       { ( campaign.tone_of_voice || keywords.length > 0 || campaign.category ) && (
-        <WrappedCard title="Direction">
+        <WrappedCard title={ summaryT( 'details' ) }>
           { campaign.tone_of_voice && (
             <>
-              <Row label="Tone of voice" value={ campaign.tone_of_voice } />
+              <Row label={ summaryT( 'toneOfVoice' ) } value={ campaign.tone_of_voice } />
               { ( keywords.length > 0 || campaign.category ) && <Separator /> }
             </>
           ) }
           { keywords.length > 0 && (
             <>
-              <Row label="Keywords" value={
+              <Row label={ summaryT( 'keywords' ) } value={
                 <div className="flex flex-wrap justify-end gap-1">
                   { keywords.map( ( kw ) => <Badge key={ kw } variant="secondary" className="text-xs font-normal">{ kw }</Badge> ) }
                 </div>
@@ -281,25 +287,25 @@ function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasA
             </>
           ) }
           { campaign.category && (
-            <Row label="Category" value={ <Badge variant="outline" className="capitalize text-xs font-normal">{ campaign.category }</Badge> } />
+            <Row label={ brandT( 'category' ) } value={ <Badge variant="outline" className="capitalize text-xs font-normal">{ campaign.category }</Badge> } />
           ) }
         </WrappedCard>
       ) }
 
       { hasAssets && (
-        <WrappedCard title="Assets">
+        <WrappedCard title={ summaryT( 'assets' ) }>
           <AnimTabs defaultValue={ assetsDefault }>
             <AnimTabsList variant="default" className="w-full mb-3">
               <TabsTab value="images" className="text-xs font-normal flex items-center gap-1.5">
-                Images
+                { summaryT( 'images' ) }
                 { imageItems.length > 0 && <Badge variant="secondary" className="h-4 px-1.5 text-[10px] font-normal">{ imageItems.length }</Badge> }
               </TabsTab>
               <TabsTab value="documents" className="text-xs font-normal flex items-center gap-1.5">
-                Documents
+                { summaryT( 'docs' ) }
                 { documentItems.length > 0 && <Badge variant="secondary" className="h-4 px-1.5 text-[10px] font-normal">{ documentItems.length }</Badge> }
               </TabsTab>
               <TabsTab value="videos" className="text-xs font-normal flex items-center gap-1.5">
-                Videos
+                { summaryT( 'videos' ) }
                 { videoItems.length > 0 && <Badge variant="secondary" className="h-4 px-1.5 text-[10px] font-normal">{ videoItems.length }</Badge> }
               </TabsTab>
             </AnimTabsList>
@@ -332,6 +338,7 @@ interface GigSubmissionsTabProps {
 }
 
 function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSubmission }: GigSubmissionsTabProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   if ( isLoading ) {
     return (
       <TabsPanel value="submissions" className="pt-0 flex-1 h-full">
@@ -346,7 +353,7 @@ function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSu
     return (
       <TabsPanel value="submissions" className="pt-0 flex-1 h-full">
         <div className="p-4 text-red-500 bg-red-50 rounded-md border border-red-200 text-sm">
-          Error loading submissions: { error.message }
+          { t( 'errorLoadingSubmissions' ) }: { error.message }
         </div>
       </TabsPanel>
     );
@@ -356,9 +363,9 @@ function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSu
     return (
       <TabsPanel value="submissions" className="pt-0 flex-1 h-full">
         <EmptySubmission
-          title="No submissions yet"
+          title={ t( 'noSubmissionsYet' ) }
           imageWidth={ 140 }
-          description="Submissions will appear here once creators start submitting."
+          description={ t( 'noSubmissionsYetDescription' ) }
         />
       </TabsPanel>
     );
@@ -419,6 +426,9 @@ function GigFooter( {
   onRespond,
   onOpenSubmission,
 }: GigFooterProps ) {
+  const commonT = useTranslations( 'dashboard.creator.common' );
+  const invitationActionsT = useTranslations( 'dashboard.creator.invitations.actions' );
+  const invitationDialogsT = useTranslations( 'dashboard.creator.invitations.dialogs' );
   return (
     <SheetFooter className="px-6 pb-6 pt-3 shrink-0 flex flex-col gap-3 border-t border-border/50">
       { ( compensationValue || gigCostValue ) && (
@@ -426,7 +436,7 @@ function GigFooter( {
           <CardContent className="flex flex-col gap-2 px-2">
             <RoleGuard excludedRoles={ [ 'brand' ] }>
               { compensationValue && (
-                <Row label="Reward" value={ <span className="text-xl font-primary text-primary leading-none">{ formattedCompensation }</span> } />
+                <Row label={ commonT( 'reward' ) } value={ <span className="text-xl font-primary text-primary leading-none">{ formattedCompensation }</span> } />
               ) }
             </RoleGuard>
             <RoleGuard allowedRoles={ [ 'admin' ] }>
@@ -434,7 +444,7 @@ function GigFooter( {
             </RoleGuard>
             <RoleGuard allowedRoles={ [ 'brand', 'admin' ] }>
               { gigCostValue && (
-                <Row label="Gig Cost" value={ <span className="text-xl font-primary text-primary leading-none">{ formattedGigCost }</span> } />
+                <Row label={ commonT( 'gigCost' ) } value={ <span className="text-xl font-primary text-primary leading-none">{ formattedGigCost }</span> } />
               ) }
             </RoleGuard>
           </CardContent>
@@ -445,21 +455,21 @@ function GigFooter( {
         { isFooterLoading ? null : invitationId && invitationStatus === 'pending' ? (
           <div className="flex flex-col gap-2 w-full">
             <Button variant="outline" className="w-full" onClick={ () => onRespond( 'declined' ) } disabled={ isResponding }>
-              Decline
+              { invitationActionsT( 'decline' ) }
             </Button>
             <Button className="w-full" onClick={ () => onRespond( 'accepted' ) } disabled={ isResponding }>
-              { isResponding ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Updating...</> : 'Accept Invitation' }
+              { isResponding ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{ invitationDialogsT( 'accepting' ) }</> : invitationActionsT( 'accept' ) }
             </Button>
           </div>
         ) : ( invitationId && invitationStatus === 'accepted' ) || isParticipating ? (
           submissionsCount === 0 && (
             <Button className="w-full" onClick={ onOpenSubmission }>
-              Create a Submission
+              { invitationActionsT( 'createSubmission' ) }
             </Button>
           )
         ) : invitationId && invitationStatus === 'declined' ? null : hasAppliedPending ? (
           <Button className="w-full" disabled>
-            Application Pending
+            { commonT( 'applicationPending' ) }
           </Button>
         ) : (
           <Button
@@ -467,7 +477,7 @@ function GigFooter( {
             onClick={ onApply }
             disabled={ isApplying || gigStatus !== 'open' }
           >
-            { isApplying ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Applying...</> : 'Apply for Gig' }
+            { isApplying ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{ commonT( 'applying' ) }</> : commonT( 'applyForGig' ) }
           </Button>
         ) }
       </RoleGuard>
@@ -478,6 +488,11 @@ function GigFooter( {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invitationStatus, initialTab, onCreateSubmission }: GigDetailsSheetProps ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
+  const campaignT = useTranslations( 'dashboard.brand.campaignsPage' );
+  const campaignActionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const creatorCommonT = useTranslations( 'dashboard.creator.common' );
+  const creatorInvitationToastsT = useTranslations( 'dashboard.creator.invitations.toasts' );
   const [ activeTab, setActiveTab ] = React.useState<Tab>( initialTab ?? 'details' );
   const [ gallery, setGallery ] = React.useState<{ index: number; items: ModelsContentMedia[]; } | null>( null );
   const [ submissionSheetOpen, setSubmissionSheetOpen ] = React.useState( false );
@@ -546,24 +561,27 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
       id: gig.id,
       application: { message: "I am interested in this gig!", number_of_videos: gig.number_of_videos || 1 },
     }, {
-      onSuccess: () => { toast.success( "Application submitted successfully!" ); onOpenChange( false ); },
+      onSuccess: () => { toast.success( creatorCommonT( 'toasts.appliedSuccess' ) ); onOpenChange( false ); },
       onError: ( error ) => {
-        toast.error( "Failed to submit application. Please try again.", {
+        toast.error( creatorCommonT( 'toasts.appliedError' ), {
           richColors: true,
-          description: <SentenceCase>{ error?.response?.data?.error?.message ?? "Failed to submit application. Please try again." }</SentenceCase>,
+          description: <SentenceCase>{ error?.response?.data?.error?.message ?? creatorCommonT( 'toasts.appliedError' ) }</SentenceCase>,
           dismissible: true,
         } );
       },
     } );
-  }, [ gig, applyToGig, onOpenChange ] );
+  }, [ gig, applyToGig, onOpenChange, creatorCommonT ] );
 
   const handleRespond = React.useCallback( ( status: 'accepted' | 'declined' ) => {
     if ( !effectiveInvitationId ) return;
     respondToInvitation( { invitationId: effectiveInvitationId, response: { status } }, {
-      onSuccess: () => { toast.success( `Invitation ${ status === 'accepted' ? 'accepted' : 'declined' } successfully` ); onOpenChange( false ); },
-      onError: () => { toast.error( "Failed to update invitation status" ); },
+      onSuccess: () => {
+        toast.success( status === 'accepted' ? creatorInvitationToastsT( 'accepted' ) : creatorInvitationToastsT( 'declined' ) );
+        onOpenChange( false );
+      },
+      onError: () => { toast.error( creatorInvitationToastsT( 'error' ) ); },
     } );
-  }, [ effectiveInvitationId, respondToInvitation, onOpenChange ] );
+  }, [ effectiveInvitationId, respondToInvitation, onOpenChange, creatorInvitationToastsT ] );
 
   const handlePreview = React.useCallback( ( index: number, items: ModelsContentMedia[] ) => {
     setGallery( { index, items } );
@@ -601,11 +619,11 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
             className="px-6 flex-1 flex flex-col min-h-0 overflow-hidden"
           >
             <AnimTabsList variant="default" className="w-full">
-              <TabsTab value="details" className="text-sm font-normal">Details</TabsTab>
-              { campaign && <TabsTab value="campaign" className="text-sm font-normal">Campaign</TabsTab> }
+              <TabsTab value="details" className="text-sm font-normal">{ t( 'details' ) }</TabsTab>
+              { campaign && <TabsTab value="campaign" className="text-sm font-normal">{ campaignT( 'title' ) }</TabsTab> }
               <TabsTab value="submissions" className="text-sm font-normal">
-                <RoleGuard allowedRoles={ [ 'creator' ] }>My Submissions</RoleGuard>
-                <RoleGuard excludedRoles={ [ 'creator' ] }>Submissions</RoleGuard>
+                <RoleGuard allowedRoles={ [ 'creator' ] }>{ campaignActionsT( 'submissions' ) }</RoleGuard>
+                <RoleGuard excludedRoles={ [ 'creator' ] }>{ campaignActionsT( 'submissions' ) }</RoleGuard>
               </TabsTab>
             </AnimTabsList>
 

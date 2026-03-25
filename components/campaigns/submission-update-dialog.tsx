@@ -6,6 +6,7 @@ import { Label } from '@/components/dashboard-ui/label';
 import { Textarea } from '@/components/dashboard-ui/textarea';
 import { VideoDropzone } from '@/components/creator/video-dropzone';
 import { VideoUploadResponseData } from '@/components/campaigns/sections/documents/types';
+import { useTranslations } from 'next-intl';
 
 interface SubmissionUpdateDialogProps {
   open: boolean;
@@ -36,40 +37,41 @@ export function SubmissionUpdateDialog( {
   onConfirm,
   isLoading,
 }: SubmissionUpdateDialogProps ) {
+  const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   return (
     <ConfirmDialog
       open={ open }
       onOpenChange={ onOpenChange }
-      title="Update Submission"
-      description="Update the submission details."
-      confirmLabel="Update"
+      title={ t( 'updateSubmissionTitle' ) }
+      description={ t( 'updateSubmissionDescription' ) }
+      confirmLabel={ t( 'updateSubmission' ) }
       onConfirm={ onConfirm }
       isLoading={ isLoading }
-      loadingText="Updating..."
+      loadingText={ t( 'updating' ) }
     >
       <div className="pt-2 space-y-2">
         <div>
-          <label htmlFor="submission-title" className="text-xs font-medium text-foreground">Title</label>
+          <label htmlFor="submission-title" className="text-xs font-medium text-foreground">{ t( 'title' ) }</label>
           <Input
             id="submission-title"
             value={ title }
             onChange={ ( e ) => onTitleChange( e.target.value ) }
-            placeholder="Submission title"
+            placeholder={ t( 'submissionTitlePlaceholder' ) }
             className="mt-1"
           />
         </div>
         <div>
-          <label htmlFor="submission-description" className="text-xs font-medium text-foreground">Description</label>
+          <label htmlFor="submission-description" className="text-xs font-medium text-foreground">{ t( 'description' ) }</label>
           <Textarea
             id="submission-description"
             value={ description }
             onChange={ ( e ) => onDescriptionChange( e.target.value ) }
-            placeholder="Submission description"
+            placeholder={ t( 'submissionDescriptionPlaceholder' ) }
             className="mt-1 min-h-20"
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="video">Video File</Label>
+          <Label htmlFor="video">{ t( 'videoFile' ) }</Label>
           <VideoDropzone
             value={ videoFile }
             videoAspect
@@ -81,7 +83,7 @@ export function SubmissionUpdateDialog( {
             <p className="text-sm text-destructive">{ updateSubmissionError }</p>
           ) }
           <p className="text-xs text-muted-foreground">
-            Upload is required. Submission cannot be updated without a newly uploaded video.
+            { t( 'uploadRequiredMessage' ) }
           </p>
         </div>
       </div>

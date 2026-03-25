@@ -230,6 +230,54 @@
     "amountDue": "Amount due",
     "downloadInvoice": "Download Invoice"
   },
+  "payments": {
+    "table": {
+      "payment": "Payment",
+      "creator": "Creator",
+      "date": "Date",
+      "method": "Method",
+      "items": "Items",
+      "paid": "Paid",
+      "amount": "Amount",
+      "actions": "Actions"
+    },
+    "filters": {
+      "searchPlaceholder": "Filter payouts...",
+      "dateRange": "Payment date range",
+      "selectDateRange": "Select date range",
+      "clearDates": "Clear dates"
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "processing": "Processing",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "actions": {
+      "view": "View",
+      "confirmPayout": "Confirm payout",
+      "confirming": "Confirming...",
+      "confirmSuccess": "Payout confirmed successfully.",
+      "confirmError": "Failed to confirm payout. Please try again.",
+      "missingPaymentId": "Missing payment ID.",
+      "confirmTitle": "Confirm payout",
+      "confirmDescription": "Are you sure you want to confirm this payout",
+      "confirmDescriptionWithCreator": "for {creator}",
+      "confirmDescriptionSuffix": "This will create a payment item record."
+    },
+    "details": {
+      "paymentId": "Payment ID",
+      "accessibilityDesc": "Payment details for {reference}.",
+      "created": "Created",
+      "reference": "Reference",
+      "notes": "Notes",
+      "noLineItems": "No line items",
+      "overview": "Overview",
+      "lineItems": "Line Items",
+      "totalAmount": "Total amount"
+    }
+  },
   "gigSelection": {
     "title": "Select a Gig",
     "description": "Choose a gig to invite creators to.",

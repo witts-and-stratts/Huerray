@@ -241,7 +241,7 @@ const SubmissionDetailsSection = memo( ( { submission, locale, open }: { submiss
               <Row label='Compensation' value={ <>{ formatCurrency( gig?.compensation?.value, 'EUR', locale ) }</> } />
             }
             { gig?.gig_cost?.value &&
-              <Row label="Gig Cost" value={ <>{ formatCurrency( gig?.gig_cost?.value, 'EUR', locale ) }</> } />
+              <Row label='Gig Cost' value={ <>{ formatCurrency( gig?.gig_cost?.value, 'EUR', locale ) }</> } />
             }
           </div>
         ) }

@@ -230,6 +230,54 @@
     "amountDue": "Importe adeudado",
     "downloadInvoice": "Descargar factura"
   },
+  "payments": {
+    "table": {
+      "payment": "Pago",
+      "creator": "Creador",
+      "date": "Fecha",
+      "method": "Método",
+      "items": "Artículos",
+      "paid": "Pagado",
+      "amount": "Importe",
+      "actions": "Acciones"
+    },
+    "filters": {
+      "searchPlaceholder": "Filtra los pagos...",
+      "dateRange": "Intervalo de fechas de pago",
+      "selectDateRange": "Seleccione el intervalo de fechas",
+      "clearDates": "Borrar fechas"
+    },
+    "status": {
+      "completed": "Completado",
+      "pending": "Pendiente",
+      "processing": "Tratamiento",
+      "failed": "Fallido",
+      "cancelled": "Cancelado"
+    },
+    "actions": {
+      "view": "Ver",
+      "confirmPayout": "Confirmar pago",
+      "confirming": "Confirmando...",
+      "confirmSuccess": "Pago confirmado con éxito.",
+      "confirmError": "No se ha podido confirmar el pago. Por favor, inténtelo de nuevo.",
+      "missingPaymentId": "Falta ID de pago.",
+      "confirmTitle": "Confirmar pago",
+      "confirmDescription": "¿Estás seguro de que quieres confirmar este pago?",
+      "confirmDescriptionWithCreator": "para {creator}",
+      "confirmDescriptionSuffix": "Esto creará un registro de partida de pago."
+    },
+    "details": {
+      "paymentId": "ID de pago",
+      "accessibilityDesc": "Datos de pago para {reference}.",
+      "created": "Creado",
+      "reference": "Referencia",
+      "notes": "Notas",
+      "noLineItems": "Sin partidas",
+      "overview": "Visión general",
+      "lineItems": "Partidas",
+      "totalAmount": "Importe total"
+    }
+  },
   "gigSelection": {
     "title": "Seleccione un concierto",
     "description": "Elige un concierto al que invitar a los creadores.",

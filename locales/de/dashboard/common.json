@@ -230,6 +230,54 @@
     "amountDue": "Fälliger Betrag",
     "downloadInvoice": "Rechnung herunterladen"
   },
+  "payments": {
+    "table": {
+      "payment": "Zahlung",
+      "creator": "Schöpfer",
+      "date": "Datum",
+      "method": "Methode",
+      "items": "Artikel",
+      "paid": "Bezahlt",
+      "amount": "Betrag",
+      "actions": "Aktionen"
+    },
+    "filters": {
+      "searchPlaceholder": "Auszahlungen filtern...",
+      "dateRange": "Bereich des Zahlungsdatums",
+      "selectDateRange": "Datumsbereich auswählen",
+      "clearDates": "Daten löschen"
+    },
+    "status": {
+      "completed": "Abgeschlossen",
+      "pending": "Anhängig",
+      "processing": "Verarbeitung",
+      "failed": "Gescheitert",
+      "cancelled": "Abgesagt"
+    },
+    "actions": {
+      "view": "Siehe",
+      "confirmPayout": "Bestätigung der Auszahlung",
+      "confirming": "Bestätigen Sie...",
+      "confirmSuccess": "Auszahlung erfolgreich bestätigt.",
+      "confirmError": "Auszahlung konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.",
+      "missingPaymentId": "Fehlende Zahlungs-ID.",
+      "confirmTitle": "Bestätigung der Auszahlung",
+      "confirmDescription": "Sind Sie sicher, dass Sie diese Auszahlung bestätigen wollen?",
+      "confirmDescriptionWithCreator": "für {creator}",
+      "confirmDescriptionSuffix": "Dadurch wird ein Zahlungsposten-Datensatz erstellt."
+    },
+    "details": {
+      "paymentId": "Zahlungs-ID",
+      "accessibilityDesc": "Zahlungsbedingungen für {reference}.",
+      "created": "Erstellt",
+      "reference": "Referenz",
+      "notes": "Anmerkungen",
+      "noLineItems": "Keine Einzelposten",
+      "overview": "Übersicht",
+      "lineItems": "Einzelposten",
+      "totalAmount": "Gesamtbetrag"
+    }
+  },
   "gigSelection": {
     "title": "Wählen Sie einen Gig",
     "description": "Wählen Sie einen Auftritt, zu dem Sie Schöpfer einladen.",

@@ -9,15 +9,18 @@ import {
 import { AdminSidebar } from '@/components/dashboard/admin-sidebar';
 import { RoleProvider } from '@/contexts/role-context';
 import { PathProvider } from '@/lib/providers/path-provider';
+import { useLocale } from 'next-intl';
 
 export default function AdminLayout( {
   children,
 }: {
   children: React.ReactNode;
 } ) {
+  const locale = useLocale();
+
   return (
     <RoleProvider>
-      <PathProvider basePath='/admin'>
+      <PathProvider basePath={ `/${locale}/admin` }>
         <SidebarProvider data-dashboard-theme='brand'>
           <AdminSidebar />
           <SidebarInset>

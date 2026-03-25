@@ -18,6 +18,7 @@ import { ImageFileIcon } from './sections/documents/image-file-icon';
 import { UploadedFile } from './sections/documents/types';
 import { cn } from '@/lib/dashboard-utils';
 import { SentenceCase } from '@/components/text-case';
+import { useTranslations } from 'next-intl';
 
 interface CampaignSummaryDialogProps {
   open: boolean;
@@ -87,11 +88,11 @@ const AuthenticatedImage = ( { url, alt }: { url: string; alt: string; } ) => {
   return <img src={ src } alt={ alt } className="w-full h-full object-cover" />;
 };
 
-const FileGrid = ( { files, onPreview }: { files: UploadedFile[]; onPreview: ( file: UploadedFile ) => void; } ) => {
+const FileGrid = ( { files, onPreview, emptyStateLabel }: { files: UploadedFile[]; onPreview: ( file: UploadedFile ) => void; emptyStateLabel: string; } ) => {
   if ( files.length === 0 ) {
     return (
       <div className="h-32 bg-muted/20 rounded-md border border-dashed flex items-center justify-center text-sm text-muted-foreground">
-        No files attached
+        { emptyStateLabel }
       </div>
     );
   }
@@ -132,7 +133,7 @@ export function CampaignSummaryDialog( {
   onOpenChange,
   onConfirm,
   onSaveDraft,
-  saveDraftLabel = 'Save draft',
+  saveDraftLabel,
   data,
   documents,
   images,
@@ -141,8 +142,10 @@ export function CampaignSummaryDialog( {
   isConfirming = false,
   isSavingDraft = false,
 }: CampaignSummaryDialogProps ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage.summary' );
   const [ previewItem, setPreviewItem ] = useState<UploadedFile | null>( null );
   const keywordList = data.keywords ?? [];
+  const resolvedSaveDraftLabel = saveDraftLabel ?? t( 'saveDraft' );
 
   return (
     <>
@@ -153,9 +156,9 @@ export function CampaignSummaryDialog( {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <DialogTitle className="text-h4 font-normal font-primary truncate">
-                  { data.campaign_name || 'Untitled Campaign' }
+                  { data.campaign_name || t( 'untitledCampaign' ) }
                 </DialogTitle>
-                <Badge variant="secondary" className="shrink-0">Draft</Badge>
+                <Badge variant="secondary" className="shrink-0">{ t( 'draft' ) }</Badge>
               </div>
               { data.category && (
                 <p className="text-sm text-muted-foreground mt-0.5 capitalize">
@@ -170,9 +173,9 @@ export function CampaignSummaryDialog( {
 
               {/* KPI row */ }
               <div className="grid grid-cols-3 gap-3">
-                <KpiCard label="Creators Wanted" value={ String( data.number_of_creators_wanted || 0 ) } icon={ Users } />
-                <KpiCard label="Videos per Creator" value={ String( data.number_of_videos_wanted || 0 ) } icon={ Video } />
-                <KpiCard label="Video Duration" value={ formatDuration( data.video_duration_in_seconds ) } icon={ Clock3 } />
+                <KpiCard label={ t( 'creatorsWanted' ) } value={ String( data.number_of_creators_wanted || 0 ) } icon={ Users } />
+                <KpiCard label={ t( 'videosPerCreator' ) } value={ String( data.number_of_videos_wanted || 0 ) } icon={ Video } />
+                <KpiCard label={ t( 'videoDuration' ) } value={ formatDuration( data.video_duration_in_seconds ) } icon={ Clock3 } />
               </div>
 
               {/* Main grid */ }
@@ -182,36 +185,36 @@ export function CampaignSummaryDialog( {
                 <div className="lg:col-span-8 space-y-4">
                   <Card>
                     <CardHeader className="pb-2">
-                      <CardTitle className="ad-card-title">Campaign Brief</CardTitle>
-                      <CardDescription className="ad-card-description">Core details and messaging requirements</CardDescription>
+                      <CardTitle className="ad-card-title">{ t( 'campaignBriefTitle' ) }</CardTitle>
+                      <CardDescription className="ad-card-description">{ t( 'campaignBriefDescription' ) }</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4 text-sm">
-                      <WrappedCard title="Description" variant="flush">
+                      <WrappedCard title={ t( 'description' ) } variant="flush">
                         { data.description
                           ? <Content content={ data.description } />
-                          : <p className="text-muted-foreground">No description provided.</p> }
+                          : <p className="text-muted-foreground">{ t( 'noDescription' ) }</p> }
                       </WrappedCard>
 
                       <div className="grid grid-cols-2 gap-4">
-                        <WrappedCard title="Do's" variant="flush">
+                        <WrappedCard title={ t( 'dos' ) } variant="flush">
                           { data.dos
                             ? <Content content={ data.dos } />
-                            : <p className="text-muted-foreground">None specified.</p> }
+                            : <p className="text-muted-foreground">{ t( 'noneSpecified' ) }</p> }
                         </WrappedCard>
-                        <WrappedCard title="Don'ts" variant="flush">
+                        <WrappedCard title={ t( 'donts' ) } variant="flush">
                           { data.donts
                             ? <Content content={ data.donts } />
-                            : <p className="text-muted-foreground">None specified.</p> }
+                            : <p className="text-muted-foreground">{ t( 'noneSpecified' ) }</p> }
                         </WrappedCard>
                       </div>
 
-                      <WrappedCard title="Tone of Voice" variant="flush">
+                      <WrappedCard title={ t( 'toneOfVoice' ) } variant="flush">
                         { data.tone_of_voice
                           ? <Content content={ data.tone_of_voice } />
-                          : <p className="text-muted-foreground">Not specified.</p> }
+                          : <p className="text-muted-foreground">{ t( 'notSpecified' ) }</p> }
                       </WrappedCard>
 
-                      <WrappedCard title="Keywords">
+                      <WrappedCard title={ t( 'keywords' ) }>
                         { keywordList.length > 0 ? (
                           <div className="mt-2 flex flex-wrap gap-1.5">
                             { keywordList.map( ( k, i ) => (
@@ -221,7 +224,7 @@ export function CampaignSummaryDialog( {
                             ) ) }
                           </div>
                         ) : (
-                          <p className="mt-1 text-sm text-muted-foreground">No keywords defined.</p>
+                          <p className="mt-1 text-sm text-muted-foreground">{ t( 'noKeywordsDefined' ) }</p>
                         ) }
                       </WrappedCard>
                     </CardContent>
@@ -235,7 +238,7 @@ export function CampaignSummaryDialog( {
                   <Card className="pt-0 overflow-hidden">
                     { data.product_image && (
                       <div className="w-full aspect-4/3 relative overflow-hidden">
-                        <AuthenticatedImage url={ data.product_image } alt={ data.campaign_name || 'Product' } />
+                        <AuthenticatedImage url={ data.product_image } alt={ data.campaign_name || t( 'product' ) } />
                         { data.product_url && (
                           <Link href={ data.product_url } target="_blank" title={ data.product_url }>
                             <Globe strokeWidth={ 1.5 } className="size-4 absolute top-2 right-2 text-white drop-shadow hover:scale-150 transition-transform duration-300" />
@@ -244,14 +247,14 @@ export function CampaignSummaryDialog( {
                       </div>
                     ) }
                     <CardHeader className={ cn( 'py-4', data.product_image && '-mt-10 z-20 rounded-t-lg bg-background' ) }>
-                      <CardTitle className="ad-card-title">Details</CardTitle>
+                      <CardTitle className="ad-card-title">{ t( 'details' ) }</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm">
-                      <MetaRow label="Video Format" value={ <span className="uppercase">{ data.video_format || 'N/A' }</span> } />
-                      <MetaRow label="Multiple Videos" value={ data.allow_multiple_videos ? 'Allowed' : 'Single video' } />
+                      <MetaRow label={ t( 'videoFormat' ) } value={ <span className="uppercase">{ data.video_format || t( 'na' ) }</span> } />
+                      <MetaRow label={ t( 'multipleVideos' ) } value={ data.allow_multiple_videos ? t( 'allowed' ) : t( 'singleVideo' ) } />
                       { data.product_url && (
                         <MetaRow
-                          label="Product URL"
+                          label={ t( 'productUrl' ) }
                           value={
                             <a href={ data.product_url } target="_blank" rel="noopener noreferrer" className="text-primary hover:underline truncate max-w-[140px] block text-right">
                               { data.product_url }
@@ -265,24 +268,24 @@ export function CampaignSummaryDialog( {
                   {/* Assets card */ }
                   <Card>
                     <CardHeader className="pb-2">
-                      <CardTitle className="ad-card-title">Assets</CardTitle>
-                      <CardDescription className="ad-card-description">Attached documents, images and videos</CardDescription>
+                      <CardTitle className="ad-card-title">{ t( 'assets' ) }</CardTitle>
+                      <CardDescription className="ad-card-description">{ t( 'assetsDescription' ) }</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <Tabs defaultValue="documents" className="w-full">
                         <TabsList className="w-full border mb-3">
-                          <TabsTrigger value="documents" className="flex-1 text-xs font-normal">Docs ({ documents.length })</TabsTrigger>
-                          <TabsTrigger value="images" className="flex-1 text-xs font-normal">Images ({ images.length })</TabsTrigger>
-                          <TabsTrigger value="videos" className="flex-1 text-xs font-normal">Videos ({ videos.length })</TabsTrigger>
+                          <TabsTrigger value="documents" className="flex-1 text-xs font-normal">{ t( 'docs' ) } ({ documents.length })</TabsTrigger>
+                          <TabsTrigger value="images" className="flex-1 text-xs font-normal">{ t( 'images' ) } ({ images.length })</TabsTrigger>
+                          <TabsTrigger value="videos" className="flex-1 text-xs font-normal">{ t( 'videos' ) } ({ videos.length })</TabsTrigger>
                         </TabsList>
                         <TabsContent value="documents">
-                          <FileGrid files={ documents } onPreview={ setPreviewItem } />
+                          <FileGrid files={ documents } onPreview={ setPreviewItem } emptyStateLabel={ t( 'noFilesAttached' ) } />
                         </TabsContent>
                         <TabsContent value="images">
-                          <FileGrid files={ images } onPreview={ setPreviewItem } />
+                          <FileGrid files={ images } onPreview={ setPreviewItem } emptyStateLabel={ t( 'noFilesAttached' ) } />
                         </TabsContent>
                         <TabsContent value="videos">
-                          <FileGrid files={ videos } onPreview={ setPreviewItem } />
+                          <FileGrid files={ videos } onPreview={ setPreviewItem } emptyStateLabel={ t( 'noFilesAttached' ) } />
                         </TabsContent>
                       </Tabs>
                     </CardContent>
@@ -295,20 +298,20 @@ export function CampaignSummaryDialog( {
 
           <DialogFooter className="px-6 py-4 shrink-0 border-t">
             <Button variant="ghost" onClick={ () => onOpenChange( false ) } disabled={ isConfirming || isSavingDraft }>
-              Back to Edit
+              { t( 'backToEdit' ) }
             </Button>
             { onSaveDraft && (
               <Button variant="outline" onClick={ onSaveDraft } disabled={ isConfirming || isSavingDraft }>
                 { isSavingDraft ? (
-                  <><Loader2 className="size-4 animate-spin" /> { saveDraftLabel }...</>
-                ) : saveDraftLabel }
+                  <><Loader2 className="size-4 animate-spin" /> { resolvedSaveDraftLabel }...</>
+                ) : resolvedSaveDraftLabel }
               </Button>
             ) }
             { !previewOnly && (
               <Button onClick={ onConfirm } disabled={ isConfirming || isSavingDraft }>
                 { isConfirming ? (
-                  <><Loader2 className="size-4 animate-spin" /> Publishing...</>
-                ) : 'Confirm & Publish' }
+                  <><Loader2 className="size-4 animate-spin" /> { t( 'publishing' ) }</>
+                ) : t( 'confirmPublish' ) }
               </Button>
             ) }
           </DialogFooter>

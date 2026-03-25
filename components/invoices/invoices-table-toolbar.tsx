@@ -13,6 +13,7 @@ import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-
 import { DataTableViewToggle } from '@/components/dashboard-ui/data-table/data-table-view-toggle';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 import '@/app/styles/components/data-table.css';
+import { useTranslations } from 'next-intl';
 
 interface InvoicesTableToolbarProps {
   table: Table<ModelsInvoiceResponse>;
@@ -39,12 +40,13 @@ export function InvoicesTableToolbar( {
   view,
   setView,
 }: InvoicesTableToolbarProps ) {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <SuperField
           type='search'
-          placeholder='Filter invoices...'
+          placeholder={ t( 'toolbar.searchPlaceholder' ) }
           prefix={ <HugeiconsIcon icon={ SearchIcon } /> }
           fieldClassName='placeholder:text-gray-400 font-regular'
           value={ searchValue }
@@ -59,7 +61,7 @@ export function InvoicesTableToolbar( {
           table={ table }
           columnId='invoice_status'
           options={ statuses }
-          title='Status'
+          title={ t( 'toolbar.status' ) }
         />
         <Popover>
           <PopoverTrigger
@@ -76,21 +78,21 @@ export function InvoicesTableToolbar( {
           <PopoverContent align='end' className='w-72 p-4 flex flex-col gap-3'>
             <SuperField
               type='select'
-              label='Filter by date'
+              label={ t( 'toolbar.filterByDate' ) }
               value={ dateFilterType }
               onValueChange={ ( v ) => setDateFilterType( ( v ?? 'issued_date' ) as 'issued_date' | 'due_date' ) }
               options={ [
-                { value: 'issued_date', label: 'Issue Date' },
-                { value: 'due_date', label: 'Due Date' },
+                { value: 'issued_date', label: t( 'toolbar.issueDate' ) },
+                { value: 'due_date', label: t( 'toolbar.dueDate' ) },
               ] }
             />
             <SuperField
               type='datepicker'
-              label='Date range'
+              label={ t( 'toolbar.dateRange' ) }
               mode='range'
               value={ dateRange }
               onChange={ ( v ) => setDateRange( v as DateRange | undefined ) }
-              placeholder='Select date range'
+              placeholder={ t( 'toolbar.selectDateRange' ) }
             />
             { dateRange?.from && (
               <Button
@@ -99,7 +101,7 @@ export function InvoicesTableToolbar( {
                 className='text-muted-foreground w-full'
                 onClick={ () => setDateRange( undefined ) }
               >
-                Clear dates
+                { t( 'toolbar.clearDates' ) }
               </Button>
             ) }
           </PopoverContent>

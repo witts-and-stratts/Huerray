@@ -1,35 +1,37 @@
 import { BriefcaseBusiness, CirclePlus, UsersRound } from 'lucide-react';
 import { ActionCenterCard, type ActionItem } from '@/components/dashboard/blocks/shared/action-center-card';
-
-const actions: ActionItem[] = [
-  {
-    label: 'Create Campaign',
-    href: '/brand/campaigns/new',
-    detail: 'Launch a new campaign briefing and approval request',
-    icon: CirclePlus,
-    priority: 'high',
-  },
-  {
-    label: 'Find Creators',
-    href: '/brand/creators',
-    detail: 'Search creators that match your campaign goals',
-    icon: UsersRound,
-    priority: 'medium',
-  },
-  {
-    label: 'Manage Gigs',
-    href: '/brand/campaigns',
-    detail: 'Track gig setup, status, and creator activity',
-    icon: BriefcaseBusiness,
-    priority: 'medium',
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export function BrandActionCenterBlock() {
+  const t = useTranslations( 'dashboard.brand.landing.actionCenter' );
+  const actions: ActionItem[] = [
+    {
+      label: t( 'createCampaign.label' ),
+      href: '/brand/campaigns/new',
+      detail: t( 'createCampaign.detail' ),
+      icon: CirclePlus,
+      priority: 'high',
+    },
+    {
+      label: t( 'findCreators.label' ),
+      href: '/brand/creators',
+      detail: t( 'findCreators.detail' ),
+      icon: UsersRound,
+      priority: 'medium',
+    },
+    {
+      label: t( 'manageGigs.label' ),
+      href: '/brand/campaigns',
+      detail: t( 'manageGigs.detail' ),
+      icon: BriefcaseBusiness,
+      priority: 'medium',
+    },
+  ];
+
   return (
     <ActionCenterCard
       actions={ actions }
-      description="Common actions for campaign operations"
+      description={ t( 'description' ) }
     />
   );
 }

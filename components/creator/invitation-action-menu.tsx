@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 interface InvitationActionMenuProps {
   invitation: ModelsGigInvitationResponse;
@@ -16,6 +17,9 @@ interface InvitationActionMenuProps {
 }
 
 export function InvitationActionMenu( { invitation, onViewDetails }: InvitationActionMenuProps ) {
+  const t = useTranslations( 'dashboard.creator.invitations.actions' );
+  const tDialogs = useTranslations( 'dashboard.creator.invitations.dialogs' );
+  const tToasts = useTranslations( 'dashboard.creator.invitations.toasts' );
   const [ showAcceptDialog, setShowAcceptDialog ] = useState( false );
   const [ showRejectDialog, setShowRejectDialog ] = useState( false );
   const [ showSubmissionSheet, setShowSubmissionSheet ] = useState( false );
@@ -30,12 +34,12 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
       response: { status }
     }, {
       onSuccess: () => {
-        toast.success( `Invitation ${ status === 'accepted' ? 'accepted' : 'declined' } successfully` );
+        toast.success( status === 'accepted' ? tToasts( 'accepted' ) : tToasts( 'declined' ) );
         setShowAcceptDialog( false );
         setShowRejectDialog( false );
       },
       onError: ( error ) => {
-        toast.error( "Failed to update invitation status" );
+        toast.error( tToasts( 'error' ) );
         console.error( error );
       }
     } );
@@ -44,26 +48,26 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
   const isPending = invitation.status === 'pending';
   const actions: MenuAction<ModelsGigInvitationResponse>[] = [
     {
-      label: "Create Submission",
+      label: t( 'createSubmission' ),
       icon: UploadCloud,
       condition: () => invitation.status === 'accepted',
       action: () => setShowSubmissionSheet( true ),
       allowedRoles: [ 'creator' ]
     },
     {
-      label: "View Invitation",
+      label: t( 'view' ),
       icon: Eye,
       action: () => onViewDetails( invitation ),
     },
     {
-      label: "Accept Invitation",
+      label: t( 'accept' ),
       condition: () => isPending,
       separator: true,
       action: () => setShowAcceptDialog( true ),
       allowedRoles: [ 'creator' ]
     },
     {
-      label: "Reject Invitation",
+      label: t( 'reject' ),
       condition: () => isPending,
       variant: "destructive",
       className: "text-destructive focus:text-destructive",
@@ -80,7 +84,7 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
         trigger={
           <Button variant="ghost" size="icon" className="h-8 w-8">
             <MoreVertical className="h-4 w-4" />
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">{ t( 'openMenu' ) }</span>
           </Button>
         }
       />
@@ -88,24 +92,24 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
       <ConfirmDialog
         open={ showAcceptDialog }
         onOpenChange={ setShowAcceptDialog }
-        title="Accept Invitation"
-        description="Are you sure you want to accept this invitation? This will notify the brand and you can start working on the gig."
-        confirmLabel="Accept"
+        title={ tDialogs( 'acceptTitle' ) }
+        description={ tDialogs( 'acceptDesc' ) }
+        confirmLabel={ t( 'accept' ) }
         onConfirm={ () => handleRespond( 'accepted' ) }
         isLoading={ isResponding }
-        loadingText="Accepting..."
+        loadingText={ tDialogs( 'accepting' ) }
         variant="default"
       />
 
       <ConfirmDialog
         open={ showRejectDialog }
         onOpenChange={ setShowRejectDialog }
-        title="Reject Invitation"
-        description="Are you sure you want to reject this invitation? This action cannot be undone."
-        confirmLabel="Reject"
+        title={ tDialogs( 'rejectTitle' ) }
+        description={ tDialogs( 'rejectDesc' ) }
+        confirmLabel={ t( 'reject' ) }
         onConfirm={ () => handleRespond( 'declined' ) }
         isLoading={ isResponding }
-        loadingText="Rejecting..."
+        loadingText={ tDialogs( 'declining' ) }
         variant="destructive"
       />
 

@@ -22,8 +22,10 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 export default function CompleteProfilePage() {
+  const t = useTranslations( 'dashboard.creator.completeProfilePage' );
   const router = useRouter();
   const params = useParams();
   const locale = params?.locale || 'en';
@@ -97,13 +99,13 @@ export default function CompleteProfilePage() {
         // Fetch and cache the newly created profile in Redux
         await dispatch( fetchCreatorProfile() );
 
-        toast.success( 'Profile created successfully!', { richColors: true } );
+        toast.success( t( 'successCreated' ), { richColors: true } );
         // After success, redirect to dashboard
         router.push( `/${ locale }/creator` );
       } catch ( error: any ) {
-        console.error( 'Failed to create profile', error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || 'Failed to create profile';
-        toast.error( `Failed to create profile: ${ errorMessage }`, { richColors: true } );
+        console.error( t( 'errorCreateFailed' ), error );
+        const errorMessage = error.response?.data?.error || error.response?.data?.message || t( 'errorCreateFailed' );
+        toast.error( t( 'errorCreateFailedWithError', { error: errorMessage } ), { richColors: true } );
       } finally {
         setIsSaving( false );
       }
@@ -146,17 +148,16 @@ export default function CompleteProfilePage() {
         const fieldMeta = errors[ firstErrorField as keyof typeof errors ];
         const errorMessages = fieldMeta?.errors || [];
         const firstError = errorMessages[ 0 ];
-        const errorMessage = typeof firstError === 'string' ? firstError : ( firstError as any )?.message || 'Please fix the validation errors';
-
-        toast.error( `Validation error: ${ errorMessage }`, { richColors: true } );
+        const errorMessage = typeof firstError === 'string' ? firstError : ( firstError as any )?.message || t( 'validationFixErrors' );
+        toast.error( t( 'validationErrorWithError', { error: errorMessage } ), { richColors: true } );
       }
     }
   } );
 
   const tabs = [
-    { value: 'profile', label: 'Profile' },
-    { value: 'social', label: 'Social Media' },
-    { value: 'bio', label: 'Bio & Intro' },
+    { value: 'profile', label: t( 'tabs.profile' ) },
+    { value: 'social', label: t( 'tabs.social' ) },
+    { value: 'bio', label: t( 'tabs.bio' ) },
   ];
 
   const handleTabChange = ( value: string ) => {
@@ -181,7 +182,7 @@ export default function CompleteProfilePage() {
   return (
     <div className="complete-profile__layout">
       <div className="complete-profile__image-col">
-        <Image src="/images/content/lifestyle-4.webp" alt="Huerray Lifestyle" width={ 1920 } height={ 1080 } className="complete-profile__image" />
+        <Image src="/images/content/lifestyle-4.webp" alt={ t( 'lifestyleAlt' ) } width={ 1920 } height={ 1080 } className="complete-profile__image" />
       </div>
       <div className="complete-profile__right-col">
         <div className="complete-profile__lang-selector">
@@ -194,16 +195,14 @@ export default function CompleteProfilePage() {
               <div className="flex justify-center py-2 md:py-4 mb-2">
                 <Image
                   src="/images/huerray-symbol.svg"
-                  alt="Huerray"
+                  alt={ t( 'brandAlt' ) }
                   width={ 60 }
                   height={ 60 }
                   className="complete-profile__logo"
                 />
               </div>
-              <CardTitle className="complete-profile__title">Complete Your Profile</CardTitle>
-              <CardDescription>
-                Let&apos;s get you set up to start working with brands.
-              </CardDescription>
+              <CardTitle className="complete-profile__title">{ t( 'title' ) }</CardTitle>
+              <CardDescription>{ t( 'description' ) }</CardDescription>
             </CardHeader>
 
             <Tabs value={ activeTab } onValueChange={ handleTabChange } className="complete-profile__tabs">
@@ -243,21 +242,21 @@ export default function CompleteProfilePage() {
                     <div>
                       { activeTab !== 'profile' && (
                         <Button type="button" variant="outline" onClick={ prevTab } size="lg">
-                          Back
+                          { t( 'back' ) }
                         </Button>
                       ) }
                     </div>
                     <div>
                       { activeTab !== 'bio' ? (
                         <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                          Next Step <ChevronRight className="w-4 h-4" />
+                          { t( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
                         </Button>
                       ) : (
                         <form.Subscribe
                           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
                           children={ ( [ , isSubmitting ] ) => (
                             <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2" onClick={ () => form.handleSubmit() }>
-                              { isSubmitting || isSaving ? 'Creating Profile...' : 'Complete Profile' }
+                              { isSubmitting || isSaving ? t( 'creatingProfile' ) : t( 'completeProfile' ) }
                               { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
                             </Button>
                           ) }

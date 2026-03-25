@@ -18,8 +18,12 @@ import { ChevronDown } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { BrandSettingsHeader } from '../_components/brand-settings-header';
+import { useTranslations } from 'next-intl';
+import { getBrandSettingsSchema } from '@/components/settings/brand-settings-schema';
 
 export default function GeneralSettingsPage() {
+  const t = useTranslations('dashboard.brand.settingsPage');
+  const tp = useTranslations('dashboard.brand.settingsPage.profile');
   const [ isLoading, setIsLoading ] = useState( true );
   const [ isSaving, setIsSaving ] = useState( false );
   const [ currentBrand, setCurrentBrand ] = useState<any>( null );
@@ -44,6 +48,18 @@ export default function GeneralSettingsPage() {
       postalCode: '',
       profilePhotoUrl: '',
     } as BrandSettings,
+    validators: {
+      onBlur: getBrandSettingsSchema( {
+        companyNameRequired: tp( 'companyNameRequired' ),
+        invalidUrl: tp( 'invalidUrl' ),
+        stateRequired: tp( 'stateRequired' ),
+      } ),
+      onSubmit: getBrandSettingsSchema( {
+        companyNameRequired: tp( 'companyNameRequired' ),
+        invalidUrl: tp( 'invalidUrl' ),
+        stateRequired: tp( 'stateRequired' ),
+      } ),
+    },
     onSubmit: async ( { value } ) => {
       setIsSaving( true );
       try {
@@ -92,13 +108,13 @@ export default function GeneralSettingsPage() {
         await brandApi.brandsPut( { request: safeUpdateRequest as any } );
 
 
-        toast.success( 'Settings updated successfully', {
+        toast.success( t('successUpdated'), {
           richColors: true,
         } );
       } catch ( error: any ) {
         console.error( 'Failed to update settings', error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update settings';
-        toast.error( `Failed to update settings`, {
+        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || t('errorUpdateFailed');
+        toast.error( t('errorUpdateFailedDesc'), {
           description: errorMessage,
           richColors: true,
         } );
@@ -152,7 +168,7 @@ export default function GeneralSettingsPage() {
         }
       } catch ( e ) {
         console.error( e );
-        toast.error( 'Failed to load brand settings' );
+        toast.error( t('errorLoadFailed') );
       } finally {
         setIsLoading( false );
       }
@@ -193,7 +209,7 @@ export default function GeneralSettingsPage() {
     const logo = brand.profile_photo?.asset || brand.logo_url || brand.logo || '';
     form.setFieldValue( 'profilePhotoUrl', logo );
 
-    toast.info( 'Changes discarded' );
+    toast.info( t('changesDiscarded') );
   }, [ currentBrand, form ] );
 
   const handleFormSubmit = useCallback( ( e: React.FormEvent ) => {
@@ -233,7 +249,7 @@ export default function GeneralSettingsPage() {
           children={ ( [ canSubmit, isSubmitting ] ) => (
             <ButtonGroup>
               <Button type='submit' disabled={ isSubmitting || isSaving }>
-                { isSubmitting || isSaving ? 'Saving...' : 'Save Changes' }
+                { isSubmitting || isSaving ? t('saving') : t('saveChanges') }
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -243,7 +259,7 @@ export default function GeneralSettingsPage() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className={ 'min-w-40' }>
                   <DropdownMenuItem onClick={ handleDiscard }>
-                    Discard Changes
+                    {t('discardChanges')}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -258,12 +274,12 @@ export default function GeneralSettingsPage() {
       <ConfirmDialog
         open={ isReviewConfirmOpen }
         onOpenChange={ setIsReviewConfirmOpen }
-        title="Confirm profile update"
-        description="Saving your profile will require review and approval before you can perform certain tasks."
-        confirmLabel="Continue and save"
+        title={t('confirmTitle')}
+        description={t('confirmDescription')}
+        confirmLabel={t('continueAndSave')}
         onConfirm={ handleConfirmSave }
         isLoading={ isSaving }
-        loadingText="Saving..."
+        loadingText={t('saving')}
       />
     </form>
   );

@@ -6,8 +6,10 @@ import { useCampaign } from '@/lib/api/hooks/campaigns';
 import { CampaignDetailsView } from '@/components/campaigns/campaign-details-view';
 import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/dashboard-ui/button';
+import { useTranslations } from 'next-intl';
 
 export default function CampaignPage() {
+  const t = useTranslations( 'dashboard.brand.campaignDetailPage' );
   const params = useParams<{ id: string; }>();
   const { data, isLoading, error, refetch } = useCampaign( params.id );
 
@@ -24,9 +26,9 @@ export default function CampaignPage() {
   if ( error || !data ) {
     return (
       <div className='flex flex-col items-center justify-center min-h-[400px] gap-2'>
-        <p className='text-destructive font-medium'>Failed to load campaign</p>
-        <p className='text-muted-foreground text-sm'>{ error?.message || 'Campaign not found' }</p>
-        <Button variant={ 'outline' } onClick={ handleRetry } className={ 'text-sm' }>Retry</Button>
+        <p className='text-destructive font-medium'>{ t( 'failedToLoad' ) }</p>
+        <p className='text-muted-foreground text-sm'>{ error?.message || t( 'notFound' ) }</p>
+        <Button variant={ 'outline' } onClick={ handleRetry } className={ 'text-sm' }>{ t( 'retry' ) }</Button>
       </div>
     );
   }

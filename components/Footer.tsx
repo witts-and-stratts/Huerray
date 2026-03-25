@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 const socialLinks = [
-  { name: 'Facebook', icon: 'facebook', href: '#' },
+  { name: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/profile.php?id=61577485322627&mibextid=wwXIfr&rdid=16XIHv5v2uXCkiGV#' },
   { name: 'X', icon: 'x', href: 'https://x.com/huerray_de' },
   { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/huerray_de/' },
   { name: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@huerray' },

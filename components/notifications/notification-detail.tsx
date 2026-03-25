@@ -7,18 +7,10 @@ import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 import { cn } from "@/lib/dashboard-utils";
 import { timeAgo } from "@/lib/utils";
-import { getNotificationActionLabel, getNotificationActionUrl } from "@/lib/notification-utils";
-import { useAuth } from "@/lib/auth/auth-context";
 import { ModelsNotificationResponse } from "@/lib/api/generated";
-import { useVideoSubmissionsByGig } from "@/lib/api/hooks/video-submissions";
-import { useBrandVideoSubmissions } from "@/lib/api/hooks/brands";
-import { SubmissionViewDialog } from "@/components/campaigns/submission-view-dialog";
-import { Dialog, DialogContent } from "@/components/dashboard-ui/dialog";
+import { useNotificationAction } from "./use-notification-action";
 import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useState, useMemo } from "react";
-import { ArrowLeft, Check, ChevronDown, Loader2, Megaphone } from "lucide-react";
+import { ArrowLeft, Check, ChevronDown, Megaphone } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -133,40 +125,8 @@ function NotificationDetailHeader( { notification, onMarkAsRead, onDelete, onBac
 }
 
 function NotificationDetailBody( { notification }: NotificationDetailBodyProps ) {
-  const { user } = useAuth();
-  const locale = useLocale();
-  const router = useRouter();
-  const [ submissionDialogOpen, setSubmissionDialogOpen ] = useState( false );
-
-  const isSubmission = notification.event_type?.toLowerCase().includes( "submission" ) ?? false;
-  const gigIdMatch = notification.action_url?.match( /\/gigs\/([^/]+)/ );
-  const gigId = gigIdMatch?.[1] ?? "";
-  const isBrand = user?.role === "brand";
-
-  const { data: submissionsDataByGig } = useVideoSubmissionsByGig( gigId, {
-    enabled: isSubmission && !!gigId && !isBrand,
-  } );
-
-  const { data: submissionsDataBrand } = useBrandVideoSubmissions(
-    { gigId, limit: 50 },
-    { enabled: isSubmission && !!gigId && isBrand }
-  );
-
-  const submission = useMemo( () => {
-    const list = ( isBrand ? submissionsDataBrand?.data : submissionsDataByGig?.data );
-    if ( !list?.length ) return null;
-    return list.find( s => s.id === notification.entity_id ) ?? list[ 0 ];
-  }, [ isBrand, submissionsDataBrand, submissionsDataByGig, notification.entity_id ] );
-
-  const actionUrl = getNotificationActionUrl( notification.action_url, user?.role, locale );
-
-  const handleAction = () => {
-    if ( isSubmission ) {
-      setSubmissionDialogOpen( true );
-    } else if ( actionUrl ) {
-      router.push( actionUrl );
-    }
-  };
+  const { action, handleAction, overlay } = useNotificationAction( notification );
+  const canAct = action.kind !== "none";
 
   return (
     <>
@@ -177,35 +137,20 @@ function NotificationDetailBody( { notification }: NotificationDetailBodyProps )
             dangerouslySetInnerHTML={ { __html: notification.message?.replace( /\n/g, "<br/>" ) ?? "" } }
           />
 
-          { ( actionUrl || isSubmission ) && (
+          { canAct && (
             <div className="mt-6">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={ handleAction }
               >
-                { getNotificationActionLabel( notification ) }
+                { action.label }
               </Button>
             </div>
           ) }
         </div>
       </ScrollArea>
-
-      { isSubmission && (
-        submission ? (
-          <SubmissionViewDialog
-            open={ submissionDialogOpen }
-            onOpenChange={ setSubmissionDialogOpen }
-            submission={ submission }
-          />
-        ) : (
-          <Dialog open={ submissionDialogOpen } onOpenChange={ setSubmissionDialogOpen }>
-            <DialogContent className="flex items-center justify-center min-h-48">
-              <Loader2 className="size-6 animate-spin text-muted-foreground" />
-            </DialogContent>
-          </Dialog>
-        )
-      ) }
+      { overlay }
     </>
   );
 }

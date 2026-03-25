@@ -23,6 +23,7 @@ import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton
 import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { usePersistedViewMode } from '@/lib/hooks/use-persisted-view-mode';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 const invoiceGlobalFilter: FilterFn<ModelsInvoiceResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -46,6 +47,7 @@ export interface InvoicesTableProps {
 }
 
 export function InvoicesTable( { data, isLoading = false, isAdmin = false }: InvoicesTableProps ) {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const showLoading = useDelayedLoading( isLoading, 250 );
   const { view, setView } = usePersistedViewMode( 'invoices', 'table' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
@@ -78,7 +80,7 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
     return Array.from( set );
   }, [ filteredData ] );
 
-  const columns = React.useMemo( () => getColumns( isAdmin ), [ isAdmin ] );
+  const columns = React.useMemo( () => getColumns( t, isAdmin ), [ t, isAdmin ] );
 
   const table = useReactTable( {
     data: filteredData,

@@ -45,6 +45,21 @@ export const videoSubmissionsKeys = {
   detail: ( id: string ) => [ ...videoSubmissionsKeys.details(), id ] as const,
 };
 
+export function useVideoSubmission(
+  id: string,
+  options?: Omit<UseQueryOptions<ModelsStandardVideoSubmissionResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardVideoSubmissionResponse, ApiError> {
+  return useQuery( {
+    queryKey: videoSubmissionsKeys.detail( id ),
+    queryFn: async () => {
+      const response = await videoSubmissionsApi.videosIdGet( { id } );
+      return response.data;
+    },
+    enabled: !!id,
+    ...options,
+  } );
+}
+
 /**
  * Hook to create a new video submission
  */

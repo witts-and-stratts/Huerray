@@ -27,6 +27,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { useTranslations } from 'next-intl';
 
 
 const formatEnumLabel = ( value: string ) => {
@@ -37,6 +38,7 @@ const formatEnumLabel = ( value: string ) => {
 };
 
 export default function BrandCompleteProfilePage() {
+  const t = useTranslations('dashboard.brand');
   const router = useRouter();
   const params = useParams();
   const locale = params?.locale || 'en';
@@ -45,8 +47,8 @@ export default function BrandCompleteProfilePage() {
   const dispatch = useAppDispatch();
 
   const brandProfileSchema = useMemo( () => z.object( {
-    companyName: z.string().min( 1, 'Company name is required' ),
-    websiteUrl: z.string().url( 'Invalid URL' ),
+    companyName: z.string().min( 1, t('createProfileForm.errorCompanyRequired') ),
+    websiteUrl: z.string().url( t('createProfileForm.errorInvalidUrl') ),
     companyDescription: z.string(),
     category: z.enum( UtilsBrandCategory ).optional(),
     companySize: z.enum( UtilsCompanySize ).optional(),
@@ -56,12 +58,12 @@ export default function BrandCompleteProfilePage() {
     building_number: z.string(),
     preferredContactEmail: z.email().or( z.literal( '' ) ),
     preferredContactPhone: z.string(),
-    state: z.string().min( 1, 'State/Province is required' ),
+    state: z.string().min( 1, t('createProfileForm.errorStateRequired') ),
     street: z.string(),
     vatId: z.string(),
     postalCode: z.string(),
     profilePhotoUrl: z.string().optional(),
-  } ), [] );
+  } ), [t] );
 
   const form = useForm( {
     defaultValues: {
@@ -111,12 +113,12 @@ export default function BrandCompleteProfilePage() {
         // Fetch and cache the newly created profile in Redux
         await dispatch( fetchBrandProfile() );
 
-        toast.success( 'Profile completed successfully!', { richColors: true } );
+        toast.success( t('completeProfile.profileCompleted'), { richColors: true } );
         router.push( `/${ locale }/brand` );
       } catch ( error: any ) {
         console.error( 'Failed to complete profile', error );
         const errorMessage = error.response?.data?.error || error.response?.data?.message || 'Failed to complete profile';
-        toast.error( `Failed to update profile: ${ errorMessage }`, { richColors: true } );
+        toast.error( t('completeProfile.failedToComplete', { error: errorMessage }), { richColors: true } );
       } finally {
         setIsSaving( false );
       }
@@ -160,14 +162,14 @@ export default function BrandCompleteProfilePage() {
         const firstError = errorMessages[ 0 ];
         const errorMessage = typeof firstError === 'string' ? firstError : ( firstError as any )?.message || 'Please fix the validation errors';
 
-        toast.error( `Validation error: ${ errorMessage }`, { richColors: true } );
+        toast.error( t('completeProfile.validationError', { error: errorMessage }), { richColors: true } );
       }
     }
   } );
 
   const tabs = [
-    { value: 'company', label: 'Company & Address' },
-    { value: 'contact', label: 'Branding' },
+    { value: 'company', label: t('completeProfile.companyAddress') },
+    { value: 'contact', label: t('completeProfile.branding') },
   ];
 
   const handleTabChange = ( value: string ) => {
@@ -211,9 +213,9 @@ export default function BrandCompleteProfilePage() {
                   className="complete-profile__logo"
                 />
               </div>
-              <CardTitle className="complete-profile__title">Complete Your Brand Profile</CardTitle>
+              <CardTitle className="complete-profile__title">{t('completeProfile.title')}</CardTitle>
               <CardDescription>
-                Let&apos;s set up your brand details to start launching campaigns.
+                {t('completeProfile.description')}
               </CardDescription>
             </CardHeader>
 
@@ -233,7 +235,7 @@ export default function BrandCompleteProfilePage() {
                     <TabsPanel value="company">
                       <Card className="m-px">
                         <CardContent>
-                          <h4 className="card__title mb-3">Company Details</h4>
+                          <h4 className="card__title mb-3">{t('completeProfile.companyDetails')}</h4>
                           <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <form.Field
                               name="companyName"
@@ -241,7 +243,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Company Name"
+                                  label={t('createProfileForm.companyName')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -257,7 +259,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Website URL"
+                                  label={t('createProfileForm.websiteUrl')}
                                   type="url"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -272,7 +274,7 @@ export default function BrandCompleteProfilePage() {
                                 <SuperField
                                   name={ field.name }
                                   type="searchable-select"
-                                  label="Industry Category"
+                                  label={t('createProfileForm.industryCategory')}
                                   value={ field.state.value }
                                   onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsBrandCategory ) }
                                   options={ Object.values( UtilsBrandCategory ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
@@ -285,7 +287,7 @@ export default function BrandCompleteProfilePage() {
                                 <SuperField
                                   name={ field.name }
                                   type="select"
-                                  label="Company Size"
+                                  label={t('createProfileForm.companySize')}
                                   value={ field.state.value }
                                   onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsCompanySize ) }
                                   options={ Object.values( UtilsCompanySize ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
@@ -297,7 +299,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="VAT ID"
+                                  label={t('createProfileForm.vatId')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -309,7 +311,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Registration Number"
+                                  label={t('createProfileForm.registrationNumber')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -318,14 +320,14 @@ export default function BrandCompleteProfilePage() {
                             />
                           </FieldGroup>
                           <Separator className="my-6" />
-                          <h4 className="card__title mb-3">Address Information</h4>
+                          <h4 className="card__title mb-3">{t('completeProfile.addressInformation')}</h4>
                           <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <form.Field
                               name="street"
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Street"
+                                  label={t('createProfileForm.street')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -337,7 +339,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Number/Suite"
+                                  label={t('createProfileForm.numberSuite')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -349,7 +351,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="City"
+                                  label={t('createProfileForm.city')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -362,7 +364,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="State/Province"
+                                  label={t('createProfileForm.stateProvince')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -377,7 +379,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Postal Code"
+                                  label={t('createProfileForm.postalCode')}
                                   type="text"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -389,7 +391,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Country"
+                                  label={t('createProfileForm.country')}
                                   value={ field.state.value }
                                   type="country"
                                   onValueChange={ ( val: string | null ) => field.handleChange( val || "" ) }
@@ -400,14 +402,14 @@ export default function BrandCompleteProfilePage() {
 
                           <Separator className="my-6" />
 
-                          <h4 className="card__title mb-3">Contact Information</h4>
+                          <h4 className="card__title mb-3">{t('completeProfile.contactInformation')}</h4>
                           <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <form.Field
                               name="preferredContactEmail"
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Contact Email"
+                                  label={t('createProfileForm.contactEmail')}
                                   type="email"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -419,7 +421,7 @@ export default function BrandCompleteProfilePage() {
                               children={ ( field ) => (
                                 <SuperField
                                   name={ field.name }
-                                  label="Contact Phone"
+                                  label={t('createProfileForm.contactPhone')}
                                   type="tel"
                                   value={ field.state.value }
                                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -442,7 +444,7 @@ export default function BrandCompleteProfilePage() {
                                 children={ ( field ) => (
                                   <SuperField
                                     name={ field.name }
-                                    label="Description"
+                                    label={t('createProfileForm.description')}
                                     type="editor"
                                     fieldClassName='h-[300px]'
                                     value={ field.state.value }
@@ -453,7 +455,7 @@ export default function BrandCompleteProfilePage() {
                             </div>
                             <div className="lg:col-span-1">
                               <div className="space-y-2 flex flex-col gap-2">
-                                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Brand Logo</label>
+                                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{t('createProfileForm.brandLogo')}</label>
                                 <form.Field
                                   name="profilePhotoUrl"
                                   children={ ( field ) => (
@@ -478,21 +480,21 @@ export default function BrandCompleteProfilePage() {
                     <div>
                       { activeTab !== 'company' && (
                         <Button type="button" variant="outline" onClick={ prevTab } size="lg">
-                          Back
+                          {t('completeProfile.back')}
                         </Button>
                       ) }
                     </div>
                     <div>
                       { activeTab === 'company' ? (
                         <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                          Next Step <ChevronRight className="w-4 h-4" />
+                          {t('completeProfile.nextStep')} <ChevronRight className="w-4 h-4" />
                         </Button>
                       ) : (
                         <form.Subscribe
                           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
                           children={ ( [ , isSubmitting ] ) => (
                             <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2" onClick={ () => form.handleSubmit() }>
-                              { isSubmitting || isSaving ? 'Creating Profile...' : 'Complete Profile' }
+                              { isSubmitting || isSaving ? t('completeProfile.creatingProfile') : t('completeProfile.completeProfile') }
                               { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
                             </Button>
                           ) }

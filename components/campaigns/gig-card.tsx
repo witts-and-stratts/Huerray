@@ -24,6 +24,7 @@ import { GigStatusBadge } from './gig-status-badge';
 import { SubmissionCard } from './submission-card';
 import { SubmissionViewDialog } from './submission-view-dialog';
 import { Badge } from '../dashboard-ui/badge';
+import { useTranslations } from 'next-intl';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -170,23 +171,26 @@ interface GigTaskBlockProps {
   videoDuration: number | undefined;
 }
 
-const GigTaskBlock = memo( ( { numberOfVideos, videoDuration }: GigTaskBlockProps ) => (
-  <div className="flex flex-col gap-1.5">
-    <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">Task</span>
-    <div className="flex items-center gap-1.5">
-      <HugeiconsIcon icon={ Video01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
-      <span className="text-xs text-foreground">
-        Record { numberOfVideos } video{ ( numberOfVideos ?? 1 ) !== 1 ? 's' : '' }
-      </span>
+const GigTaskBlock = memo( function GigTaskBlock( { numberOfVideos, videoDuration }: GigTaskBlockProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  return (
+    <div className="flex flex-col gap-1.5">
+      <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">{ t( 'task' ) }</span>
+      <div className="flex items-center gap-1.5">
+        <HugeiconsIcon icon={ Video01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
+        <span className="text-xs text-foreground">
+          { t( 'recordVideos', { count: numberOfVideos ?? 0 } ) }
+        </span>
+      </div>
+      <div className="flex items-center gap-1.5">
+        <HugeiconsIcon icon={ Clock01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
+        <span className="text-xs text-foreground">
+          { t( 'durationSeconds', { count: videoDuration ?? 0 } ) }
+        </span>
+      </div>
     </div>
-    <div className="flex items-center gap-1.5">
-      <HugeiconsIcon icon={ Clock01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
-      <span className="text-xs text-foreground">
-        Duration: { videoDuration } seconds
-      </span>
-    </div>
-  </div>
-) );
+  );
+} );
 GigTaskBlock.displayName = 'GigTaskBlock';
 
 // ─── Reward block ─────────────────────────────────────────────────────────────
@@ -195,19 +199,22 @@ interface GigRewardBlockProps {
   formattedReward: string;
 }
 
-const GigRewardBlock = memo( ( { formattedReward }: GigRewardBlockProps ) => (
-  <div className="flex flex-col gap-1.5 text-right">
-    <RoleGuard allowedRoles={ [ 'brand' ] }>
-      <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">Gig Cost</span>
-    </RoleGuard>
-    <RoleGuard excludedRoles={ [ 'brand' ] }>
-      <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">Reward</span>
-    </RoleGuard>
-    <span className="text-xl font-primary text-primary leading-none">
-      { formattedReward }
-    </span>
-  </div>
-) );
+const GigRewardBlock = memo( function GigRewardBlock( { formattedReward }: GigRewardBlockProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  return (
+    <div className="flex flex-col gap-1.5 text-right">
+      <RoleGuard allowedRoles={ [ 'brand' ] }>
+        <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">{ t( 'gigCost' ) }</span>
+      </RoleGuard>
+      <RoleGuard excludedRoles={ [ 'brand' ] }>
+        <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">{ t( 'reward' ) }</span>
+      </RoleGuard>
+      <span className="text-xl font-primary text-primary leading-none">
+        { formattedReward }
+      </span>
+    </div>
+  );
+} );
 GigRewardBlock.displayName = 'GigRewardBlock';
 
 // ─── Deadline row ─────────────────────────────────────────────────────────────

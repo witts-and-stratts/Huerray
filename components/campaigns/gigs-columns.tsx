@@ -28,6 +28,7 @@ import { GigActionMenu } from './gig-action-menu';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { GigStatusBadge } from './gig-status-badge';
 import { SubmissionViewDialog } from './submission-view-dialog';
+import { useTranslations } from 'next-intl';
 
 // ─── Details Cell ─────────────────────────────────────────────────────────────
 
@@ -93,6 +94,8 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
 // ─── Applications Cell ────────────────────────────────────────────────────────
 
 const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const pageT = useTranslations( 'dashboard.brand.campaignsPage' );
   const { id } = row.original;
   const { data: applicationsData } = useGigApplications( id ?? '' );
   const applications = ( applicationsData?.data ?? [] ) as ModelsGigApplicationResponse[];
@@ -111,14 +114,14 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( applications[ i ] ) }
-            title="Applications"
+            title={ t( 'applications' ) }
           />
         </AnimatePresence>
       </div>
       <Sheet open={ !!selected } onOpenChange={ ( open ) => !open && setSelected( null ) }>
         <SheetContent className='w-[90%]! max-w-[420px]! overflow-y-auto'>
           <SheetHeader className='mb-4'>
-            <SheetTitle className='font-normal text-primary font-primary'>Application</SheetTitle>
+            <SheetTitle className='font-normal text-primary font-primary'>{ pageT( 'application' ) }</SheetTitle>
           </SheetHeader>
           { selected && <ApplicationCard application={ selected } /> }
         </SheetContent>
@@ -130,6 +133,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 // ─── Invitations Cell ─────────────────────────────────────────────────────────
 
 const InvitationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const { id } = row.original;
   const { data: invitationsData } = useGigInvitations( id ?? '' );
   const invitations = ( invitationsData?.data ?? [] ) as ModelsGigInvitationResponse[];
@@ -148,7 +152,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( invitations[ i ] ) }
-            title="Invitations"
+            title={ t( 'invitations' ) }
           />
         </AnimatePresence>
       </div>
@@ -166,6 +170,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 // ─── Submissions Cell ─────────────────────────────────────────────────────────
 
 const SubmissionsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const { id } = row.original;
   const { data: submissionsData } = useVideoSubmissionsByGig( id ?? '' );
   const submissions = ( submissionsData?.data ?? [] ) as ModelsVideoSubmissionResponse[];
@@ -184,7 +189,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( submissions[ i ] ) }
-            title="Submissions"
+            title={ t( 'submissions' ) }
           />
         </AnimatePresence>
       </div>
@@ -202,6 +207,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 // ─── Task Cell ────────────────────────────────────────────────────────────────
 
 const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const { number_of_videos, video_duration_in_seconds } = row.original;
   return (
     <div className="flex gap-3">
@@ -210,7 +216,7 @@ const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
           <div className="flex items-center gap-1.5">
             <HugeiconsIcon icon={ Video01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
             <span className="text-sm text-foreground">
-              { number_of_videos } video{ number_of_videos !== 1 ? 's' : '' }
+              { t( 'videoCountLabel', { count: number_of_videos } ) }
             </span>
           </div>
           <Separator orientation="vertical" /></>
@@ -218,7 +224,7 @@ const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
       { video_duration_in_seconds != null && (
         <div className="flex items-center gap-1.5">
           <HugeiconsIcon icon={ Clock01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
-          <span className="text-sm text-foreground">{ video_duration_in_seconds }s duration</span>
+          <span className="text-sm text-foreground">{ t( 'durationLabel', { seconds: video_duration_in_seconds } ) }</span>
         </div>
       ) }
     </div>
@@ -284,6 +290,7 @@ const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
 // ─── Column definitions ───────────────────────────────────────────────────────
 
 export const getColumns = (
+  t: ( key: string, values?: Record<string, any> ) => string,
   onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ],
   onEditGig?: ( gig: ModelsGigResponse ) => void,
 ): ColumnDef<ModelsGigResponse>[] => [
@@ -357,14 +364,14 @@ export const getColumns = (
     },
     {
       accessorKey: 'details',
-      header: () => <span className='font-regular pl-4'>Details</span>,
+      header: () => <span className='font-regular pl-4'>{ t( 'details' ) }</span>,
       cell: ( { row } ) => <>
         <DetailsCell row={ row } onViewGig={ onViewGig } />
       </>,
     },
     {
       accessorKey: 'applications',
-      header: () => <span className='font-regular'>Applications</span>,
+      header: () => <span className='font-regular'>{ t( 'applications' ) }</span>,
       cell: ( { row } ) => <ApplicationsCell row={ row } />,
     },
     // {
@@ -374,17 +381,17 @@ export const getColumns = (
     // },
     {
       accessorKey: 'submissions',
-      header: () => <span className='font-regular'>Submissions</span>,
+      header: () => <span className='font-regular'>{ t( 'submissions' ) }</span>,
       cell: ( { row } ) => <SubmissionsCell row={ row } />,
     },
     {
       accessorKey: 'reward',
-      header: () => <span className='font-regular'>Reward</span>,
+      header: () => <span className='font-regular'>{ t( 'reward' ) }</span>,
       cell: ( { row } ) => <RewardCell row={ row } />,
     },
     {
       accessorKey: 'gig_cost',
-      header: () => <span className='font-regular'>Gig Cost</span>,
+      header: () => <span className='font-regular'>{ t( 'gigCost' ) }</span>,
       cell: ( { row } ) => {
         const amount = row.original.gig_cost?.value;
         if ( amount == null ) return <span className="text-muted-foreground text-base">—</span>;
@@ -393,14 +400,14 @@ export const getColumns = (
     },
     {
       accessorKey: 'deadline',
-      header: () => <span className='font-regular'>Deadline</span>,
+      header: () => <span className='font-regular'>{ t( 'deadline' ) }</span>,
       cell: ( { row } ) => <DeadlineCell row={ row } />,
     },
     {
       id: 'actions',
       header: () => (
         <div className='flex justify-end pr-2'>
-          <span className='font-regular text-right'>Actions</span>
+          <span className='font-regular text-right'>{ t( 'actions' ) }</span>
         </div>
       ),
       enableHiding: false,

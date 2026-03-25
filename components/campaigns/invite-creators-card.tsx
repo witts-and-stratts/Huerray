@@ -5,12 +5,14 @@ import { Button } from '@/components/dashboard-ui/button';
 import { InviteCreatorsDialog } from './invite-creators-dialog';
 import { GigSelectionDialog } from './gig-selection-dialog';
 import { Sparkles } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface InviteCreatorsCardProps {
   campaignId: string;
 }
 
 export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
+  const t = useTranslations( 'dashboard.brand.inviteCreators' );
   const [ sheetOpen, setSheetOpen ] = useState( false );
   const [ selectionOpen, setSelectionOpen ] = useState( false );
   const [ selectedGigId, setSelectedGigId ] = useState<string>( '' );
@@ -32,9 +34,9 @@ export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
           </div>
 
           <div>
-            <h3 className="font-bold text-xl font-primary">Invite Creators</h3>
+            <h3 className="font-bold text-xl font-primary">{ t( 'title' ) }</h3>
             <p className="text-white/80 mt-1 text-sm max-w-[80%]">
-              Find and invite the perfect creators for your campaign gigs directly.
+              { t( 'description' ) }
             </p>
           </div>
 
@@ -43,7 +45,7 @@ export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
             variant="secondary"
             className="w-full font-medium"
           >
-            Find Creators
+            { t( 'findCreators' ) }
           </Button>
         </div>
 

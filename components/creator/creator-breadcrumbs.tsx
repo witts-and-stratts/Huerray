@@ -4,18 +4,7 @@ import { Fragment, useMemo } from 'react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/dashboard-ui/breadcrumb';
 import { locales } from '@/i18n';
 import { usePathname } from 'next/navigation';
-
-const CREATOR_ADMIN_LABELS: Record<string, string> = {
-  'creator': 'Creator Dashboard',
-  'complete-profile': 'Complete profile',
-  gigs: 'Gigs',
-  'active': 'Active',
-  invitations: 'Invitations',
-  notifications: 'Notifications',
-  earnings: 'Earnings',
-  portfolio: 'Portfolio',
-  settings: 'Settings',
-};
+import { useTranslations } from 'next-intl';
 
 function toTitleCase( value: string ) {
   return value
@@ -24,7 +13,7 @@ function toTitleCase( value: string ) {
     .join( ' ' );
 }
 
-function buildBreadcrumbs( pathname?: string ) {
+function buildBreadcrumbs( pathname?: string, labels?: Record<string, string> ) {
   if ( !pathname ) return [];
   const segments = pathname.split( '/' ).filter( Boolean );
   if ( segments.length === 0 ) return [];
@@ -34,7 +23,7 @@ function buildBreadcrumbs( pathname?: string ) {
   if ( pathSegments.length === 0 ) return [];
 
   return pathSegments.map( ( segment, index ) => {
-    const label = CREATOR_ADMIN_LABELS[ segment ] || toTitleCase( segment );
+    const label = labels?.[ segment ] || toTitleCase( segment );
     const pathParts = [ ...( localeSegment ? [ localeSegment ] : [] ), ...pathSegments.slice( 0, index + 1 ) ];
     return {
       label,
@@ -45,7 +34,19 @@ function buildBreadcrumbs( pathname?: string ) {
 
 export function CreatorBreadcrumbs() {
   const pathname = usePathname();
-  const breadcrumbs = useMemo( () => buildBreadcrumbs( pathname ), [ pathname ] );
+  const t = useTranslations( 'dashboard.creator.breadcrumbs' );
+  const labels = {
+    creator: t( 'creator' ),
+    'complete-profile': t( 'completeProfile' ),
+    gigs: t( 'gigs' ),
+    active: t( 'active' ),
+    invitations: t( 'invitations' ),
+    notifications: t( 'notifications' ),
+    earnings: t( 'earnings' ),
+    portfolio: t( 'portfolio' ),
+    settings: t( 'settings' ),
+  };
+  const breadcrumbs = useMemo( () => buildBreadcrumbs( pathname, labels ), [ pathname, t ] );
 
   // Single-item = root dashboard; settings pages manage their own breadcrumbs via SubHeader
   if ( breadcrumbs.length <= 1 ) return null;

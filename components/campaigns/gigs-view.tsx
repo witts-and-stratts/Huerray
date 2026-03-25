@@ -23,9 +23,11 @@ import {
   EmptyTitle,
   EmptyContent,
 } from '@/components/dashboard-ui/empty';
+import { useTranslations } from 'next-intl';
 
 // Inline Table View Component (extracted from previous gigs-table.tsx)
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   return (
     <div className='border border-border rounded-lg overflow-hidden'>
       <Table className='overflow-auto'>
@@ -85,7 +87,7 @@ function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } 
                   colSpan={ table.getVisibleLeafColumns().length }
                   className='h-24 text-center'
                 >
-                  No results.
+                  { t( 'noResults' ) }
                 </TableCell>
               </TableRow>
             ) }
@@ -105,6 +107,7 @@ interface GigsViewProps {
 }
 
 function EmptyGigs( { actionButtons }: { actionButtons?: React.ReactNode; } ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   return (
     <Empty className='border py-20 my-6 flex-1 bg-white'>
       <EmptyHeader>
@@ -130,9 +133,9 @@ function EmptyGigs( { actionButtons }: { actionButtons?: React.ReactNode; } ) {
             </Avatar>
           </div>
         </EmptyMedia>
-        <EmptyTitle className='font-normal font-primary text-primary'>No gigs yet</EmptyTitle>
+        <EmptyTitle className='font-normal font-primary text-primary'>{ t( 'noGigsYet' ) }</EmptyTitle>
         <EmptyDescription>
-          There are no gigs yet for this campaign.
+          { t( 'noGigsYetDescription' ) }
         </EmptyDescription>
       </EmptyHeader>
       { actionButtons && (

@@ -11,6 +11,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { DataTableFilterDropdown } from '@/components/dashboard-ui/data-table/data-table-filter-dropdown';
 import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 import '@/app/styles/components/data-table.css';
 
 interface PaymentsTableToolbarProps {
@@ -30,12 +31,14 @@ export function PaymentsTableToolbar( {
   setDateRange,
   statuses,
 }: PaymentsTableToolbarProps ) {
+  const t = useTranslations( 'dashboard.common' );
+
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <SuperField
           type='search'
-          placeholder='Filter payouts...'
+          placeholder={ t( 'payments.filters.searchPlaceholder' ) }
           prefix={ <HugeiconsIcon icon={ SearchIcon } /> }
           fieldClassName='placeholder:text-gray-400 font-regular'
           value={ searchValue }
@@ -49,7 +52,8 @@ export function PaymentsTableToolbar( {
           table={ table }
           columnId='payment_status'
           options={ statuses }
-          title='Status'
+          title={ t( 'status' ) }
+          labelFn={ (status) => t( `payments.status.${ status }` ) }
         />
         <Popover>
           <PopoverTrigger
@@ -66,11 +70,11 @@ export function PaymentsTableToolbar( {
           <PopoverContent align='end' className='w-64 p-4 flex flex-col gap-3'>
             <SuperField
               type='datepicker'
-              label='Payment date range'
+              label={ t( 'payments.filters.dateRange' ) }
               mode='range'
               value={ dateRange }
               onChange={ ( v ) => setDateRange( v as DateRange | undefined ) }
-              placeholder='Select date range'
+              placeholder={ t( 'payments.filters.selectDateRange' ) }
             />
             { dateRange?.from && (
               <Button
@@ -79,7 +83,7 @@ export function PaymentsTableToolbar( {
                 className='text-muted-foreground w-full'
                 onClick={ () => setDateRange( undefined ) }
               >
-                Clear dates
+                { t( 'payments.filters.clearDates' ) }
               </Button>
             ) }
           </PopoverContent>

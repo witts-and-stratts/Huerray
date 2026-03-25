@@ -6,11 +6,12 @@ import { useDeleteNotification, useMarkAllNotificationsAsRead, useMarkNotificati
 import { config } from "@/lib/config";
 import { useAuth } from "@/lib/auth/auth-context";
 import { cn } from "@/lib/dashboard-utils";
-import { getNotificationActionLabel, getNotificationsPagePath } from "@/lib/notification-utils";
+import { getNotificationsPagePath } from "@/lib/notification-utils";
 import { timeAgo } from "@/lib/utils";
 import { Bell, Check, ChevronDown, ChevronUp, EllipsisVertical, MegaphoneOff } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useNotificationAction } from "../notifications/use-notification-action";
 import { Badge } from "../dashboard-ui/badge";
 import { Button, buttonVariants } from "../dashboard-ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../dashboard-ui/dropdown-menu";
@@ -175,11 +176,7 @@ interface DropdownNotificationItemProps {
 function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeAgo }: DropdownNotificationItemProps ) {
   const [ isExpanded, setIsExpanded ] = useState( false );
   const shouldTruncate = notification.message ? notification.message.length > 140 : false;
-  const actionUrl = notification.action_url;
-
-  const onAction = () => {
-    window.open( actionUrl, '_blank' );
-  };
+  const { action, handleAction, overlay } = useNotificationAction( notification );
 
   const actions: MenuAction<ModelsNotificationResponse>[] = [
     {
@@ -188,9 +185,9 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
       condition: ( data ) => !data.is_read,
     },
     {
-      label: "View",
-      action: onAction,
-      condition: () => Boolean( actionUrl ),
+      label: action.label,
+      action: handleAction,
+      condition: () => action.kind !== "none",
     },
     {
       label: "Delete",
@@ -245,9 +242,9 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
               { timeAgo( notification.created_at! ) }
             </p>
             <AnimatePresence>
-              { notification.action_url && (
-                <Button variant='outline' size='xs' onClick={ () => window.open( notification.action_url, '_blank' ) } className={ 'mt-2' }>
-                  { getNotificationActionLabel( notification ) }
+              { action.kind !== "none" && (
+                <Button variant='outline' size='xs' onClick={ handleAction } className={ 'mt-2' }>
+                  { action.label }
                 </Button>
               ) }
             </AnimatePresence>
@@ -284,6 +281,7 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
           </div>
         </div>
       </div>
+      { overlay }
       <DropdownMenuSeparator className="my-0" />
     </div>
   );

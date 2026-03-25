@@ -4,6 +4,7 @@ import { Separator } from '@/components/dashboard-ui/separator';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 interface ImportUrlDialogProps {
   open: boolean;
@@ -12,6 +13,7 @@ interface ImportUrlDialogProps {
 }
 
 export function ImportUrlDialog( { open, onOpenChange, onImport }: ImportUrlDialogProps ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   const [ importUrl, setImportUrl ] = useState( '' );
 
   const handleImport = () => {
@@ -23,7 +25,7 @@ export function ImportUrlDialog( { open, onOpenChange, onImport }: ImportUrlDial
       setImportUrl( '' );
       onOpenChange( false );
     } catch ( e ) {
-      toast.error( 'Please enter a valid URL' );
+      toast.error( t( 'importUrlInvalid' ) );
     }
   };
 
@@ -32,7 +34,7 @@ export function ImportUrlDialog( { open, onOpenChange, onImport }: ImportUrlDial
       <DialogContent className="w-[800px] lg:max-w-none! p-0">
         <DialogHeader className='px-4 pt-4 -mb-3'>
           <DialogTitle className='text-lg font-primary font-normal'>
-            Import URL
+            { t( 'importUrlTitle' ) }
           </DialogTitle>
         </DialogHeader>
         <Separator />
@@ -41,7 +43,7 @@ export function ImportUrlDialog( { open, onOpenChange, onImport }: ImportUrlDial
             <SuperField
               type='url'
               name='importUrl'
-              label='Import a file from a URL:'
+              label={ t( 'importUrlLabel' ) }
               onChange={ ( e ) => setImportUrl( e.target.value ) }
               value={ importUrl }
               placeholder="https://..."
@@ -57,10 +59,10 @@ export function ImportUrlDialog( { open, onOpenChange, onImport }: ImportUrlDial
         </div>
         <DialogFooter className="sm:justify-start p-8 pt-0">
           <Button type="button" onClick={ handleImport } className='min-w-25'>
-            Import
+            { t( 'importUrlImport' ) }
           </Button>
           <Button type="button" variant="secondary" onClick={ () => onOpenChange( false ) } className='min-w-25'>
-            Cancel
+            { t( 'cancel' ) }
           </Button>
         </DialogFooter>
       </DialogContent>

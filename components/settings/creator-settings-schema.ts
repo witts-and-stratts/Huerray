@@ -7,7 +7,12 @@ export type ReactFormApi<TData> = FormApi<TData, any, any, any, any, any, any, a
   Subscribe: any;
 };
 
-export const creatorSettingsSchema = z.object({
+export type CreatorSettingsMessages = {
+  zipcodeRequired: string;
+  applicationVideoRequired: string;
+};
+
+export const getCreatorSettingsSchema = ( messages: CreatorSettingsMessages ) => z.object({
   // Profile
   bio: z.string(),
   preferredCategories: z.array(z.string()).optional(),
@@ -17,7 +22,7 @@ export const creatorSettingsSchema = z.object({
   street: z.string(),
   city: z.string(),
   state: z.string(),
-  zipcode: z.string("Zipcode is required"),
+  zipcode: z.string( messages.zipcodeRequired ),
   country: z.string(),
 
   // Social
@@ -26,7 +31,7 @@ export const creatorSettingsSchema = z.object({
   youtubeHandle: z.string().optional(),
   twitterHandle: z.string().optional(),
   portfolio: z.string().optional(),
-  applicationVideo: z.string().min(1, 'Application video is required'),
+  applicationVideo: z.string().min( 1, messages.applicationVideoRequired ),
   applicationVideoThumbnail: z.string().optional(),
   profileImageUrl: z.string().optional(),
 
@@ -38,6 +43,11 @@ export const creatorSettingsSchema = z.object({
   taxCountry: z.string().optional(),
   bankAccountName: z.string().optional(),
   bankAddress: z.string().optional(),
-});
+} );
+
+export const creatorSettingsSchema = getCreatorSettingsSchema( {
+  zipcodeRequired: 'Zipcode is required',
+  applicationVideoRequired: 'Application video is required',
+} );
 
 export type CreatorSettings = z.infer<typeof creatorSettingsSchema>;

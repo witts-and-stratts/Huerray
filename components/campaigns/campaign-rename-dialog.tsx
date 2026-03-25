@@ -6,6 +6,7 @@ import { Input } from '@/components/dashboard-ui/input';
 import { useUpdateCampaign } from '@/lib/api/hooks/campaigns';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 interface CampaignRenameDialogProps {
   open: boolean;
@@ -22,6 +23,11 @@ export function CampaignRenameDialog( {
   currentName,
   onSuccess
 }: CampaignRenameDialogProps ) {
+  const actionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const pageT = useTranslations( 'dashboard.brand.campaignsPage' );
+  const t = ( key: string, values?: Record<string, any> ) => (
+    actionsT.has( key ) ? actionsT( key, values ) : pageT.has( key ) ? pageT( key, values ) : key
+  );
   const [ newName, setNewName ] = useState( currentName );
   const updateCampaign = useUpdateCampaign();
 
@@ -44,11 +50,11 @@ export function CampaignRenameDialog( {
         id: campaignId,
         data: { campaign_name: newName }
       } );
-      toast.success( 'Campaign renamed successfully' );
+      toast.success( t( 'campaignRenamed' ) );
       onSuccess?.();
       onOpenChange( false );
     } catch ( error ) {
-      toast.error( 'Failed to rename campaign' );
+      toast.error( t( 'renameFailed' ) );
       console.error( error );
     }
   };
@@ -57,10 +63,10 @@ export function CampaignRenameDialog( {
     <ConfirmDialog
       open={ open }
       onOpenChange={ onOpenChange }
-      title="Rename Campaign"
-      description="Enter a new name for this campaign."
-      confirmLabel="Rename"
-      cancelLabel="Cancel"
+      title={ t( 'renameCampaignTitle' ) }
+      description={ t( 'renameCampaignDescription' ) }
+      confirmLabel={ t( 'rename' ) }
+      cancelLabel={ t( 'cancel' ) }
       onConfirm={ handleRename }
       isLoading={ updateCampaign.isPending }
       confirmDisabled={ !newName.trim() || newName === currentName }
@@ -69,7 +75,7 @@ export function CampaignRenameDialog( {
         <Input
           value={ newName }
           onChange={ ( e ) => setNewName( e.target.value ) }
-          placeholder="Campaign Name"
+          placeholder={ t( 'campaignNamePlaceholder' ) }
           onKeyDown={ ( e ) => {
             if ( e.key === 'Enter' ) {
               e.preventDefault();

@@ -1,6 +1,7 @@
 import { KpiCard } from '@/components/dashboard/blocks/shared/kpi-card';
 import type { BrandDashboardSummary } from './types';
 import { toMoney } from './types';
+import { useTranslations } from 'next-intl';
 
 interface BrandKpiOverviewBlockProps {
   campaignsCount: number;
@@ -17,29 +18,30 @@ export function BrandKpiOverviewBlock( {
   isCampaignsLoading,
   isGigsLoading,
 }: BrandKpiOverviewBlockProps ) {
+  const t = useTranslations( 'dashboard.brand.landing.kpiOverview' );
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <KpiCard
-        title="Total Campaigns"
+        title={ t( 'totalCampaigns.title' ) }
         value={ `${ campaignsCount }` }
-        caption={ isCampaignsLoading ? 'Loading campaigns...' : 'Across all campaign statuses' }
+        caption={ isCampaignsLoading ? t( 'totalCampaigns.loading' ) : t( 'totalCampaigns.caption' ) }
         isLoading={ isCampaignsLoading }
       />
       <KpiCard
-        title="Active Campaigns"
+        title={ t( 'activeCampaigns.title' ) }
         value={ `${ summary.running }` }
-        caption="Campaigns currently in running state"
+        caption={ t( 'activeCampaigns.caption' ) }
       />
       <KpiCard
-        title="Total Gigs"
+        title={ t( 'totalGigs.title' ) }
         value={ `${ gigsCount }` }
-        caption={ isGigsLoading ? 'Loading gigs...' : 'All gigs linked to your campaigns' }
+        caption={ isGigsLoading ? t( 'totalGigs.loading' ) : t( 'totalGigs.caption' ) }
         isLoading={ isGigsLoading }
       />
       <KpiCard
-        title="Total Spend"
+        title={ t( 'totalSpend.title' ) }
         value={ toMoney( summary.totalSpend ) }
-        caption="Estimated from gig budgets and compensation"
+        caption={ t( 'totalSpend.caption' ) }
       />
     </section>
   );

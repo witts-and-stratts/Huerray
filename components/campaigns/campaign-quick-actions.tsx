@@ -19,6 +19,7 @@ import { Textarea } from '@/components/dashboard-ui/textarea';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { useCampaignDecision } from '@/lib/api/hooks/campaigns';
 import { SuperField } from '../dashboard-ui/super-field';
+import { useTranslations } from 'next-intl';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -144,6 +145,7 @@ function resolveBrandPhase(
 // ── Action builders ───────────────────────────────────────────────────────────
 
 export function buildAdminActions(
+  t: ( key: string ) => string,
   status: string,
   basePath: string,
   campaignId: string,
@@ -175,6 +177,7 @@ export function buildAdminActions(
 }
 
 export function buildBrandActions(
+  t: ( key: string ) => string,
   status: string,
   basePath: string,
   campaignId: string,
@@ -195,11 +198,11 @@ export function buildBrandActions(
     'created': { key: 'edit', label: 'Edit', icon: FilePen, variant: 'primary', href: editHref },
     'returned': { key: 'edit', label: 'Edit', icon: FilePen, variant: 'primary', href: editHref },
     'pending_approval': { key: '', label: 'Awaiting approval', variant: 'outline', disabled: true },
-    'gigs_approved': { key: 'accept', label: 'Accept Campaign', icon: ThumbsUp, variant: 'primary', onClick: openAccept },
+    'gigs_approved': { key: 'accept', label: t( 'acceptCampaign' ), icon: ThumbsUp, variant: 'primary', onClick: openAccept },
     'running:review': { key: 'review-submissions', label: 'Review Submissions', icon: FileSearch, variant: 'primary', onClick: () => onNavigateToTab( 'submissions' ) },
     'running:invite_more': { key: 'invite-more', label: 'Invite More Creators', icon: Users, variant: 'primary', onClick: openInviteCreators },
     'running:awaiting_submissions': { key: 'awaiting-submissions', label: 'Awaiting Submissions', icon: Clock, variant: 'outline', disabled: true },
-    'running:invite': { key: 'invite-creators', label: 'Invite Creators', icon: Users, variant: 'primary', onClick: openInviteCreators },
+    'running:invite': { key: 'invite-creators', label: t( 'inviteCreators' ), icon: Users, variant: 'primary', onClick: openInviteCreators },
     'completed': null,
   };
 
@@ -240,6 +243,11 @@ export function CampaignActionDialogs( {
   rejectDialogOpen,
   onRejectDialogChange,
 }: CampaignActionDialogsProps ) {
+  const actionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const pageT = useTranslations( 'dashboard.brand.campaignsPage' );
+  const t = ( key: string, values?: Record<string, any> ) => (
+    actionsT.has( key ) ? actionsT( key, values ) : pageT.has( key ) ? pageT( key, values ) : key
+  );
   const config = DECISION_CONFIG[ adminDecision ];
   const { mutate: submitDecision, isPending: isDecisionPending } = useCampaignDecision();
   const [ brandComment, setBrandComment ] = useState( '' );
@@ -249,24 +257,24 @@ export function CampaignActionDialogs( {
       { id: campaignId, decision: { brand_accepted: accepted, brand_decision_comments: brandComment } },
       {
         onSuccess: () => {
-          toast.success( accepted ? 'Campaign accepted successfully' : 'Campaign rejected successfully' );
+          toast.success( accepted ? t( 'campaignAccepted' ) : t( 'campaignRejected' ) );
           onClose( false );
           setBrandComment( '' );
         },
-        onError: () => toast.error( accepted ? 'Failed to accept campaign' : 'Failed to reject campaign' ),
+        onError: () => toast.error( accepted ? t( 'acceptCampaignFailed' ) : t( 'rejectCampaignFailed' ) ),
       },
     );
   };
 
   const brandCommentField = (
     <div className="flex flex-col gap-2 py-2">
-      <label htmlFor="brand-comment" className="text-sm font-medium">Comments (Optional)</label>
+      <label htmlFor="brand-comment" className="text-sm font-medium">{ t( 'commentsOptional' ) }</label>
       <SuperField
         type='textarea'
         id="brand-comment"
         value={ brandComment }
         onChange={ ( e: React.ChangeEvent<HTMLTextAreaElement> ) => setBrandComment( e.target.value ) }
-        placeholder="Add any comments or feedback..."
+        placeholder={ t( 'commentPlaceholder' ) }
         className="resize-none min-h-[80px]"
       />
     </div>
@@ -287,7 +295,7 @@ export function CampaignActionDialogs( {
           isLoading={ isAdminLoading }
         >
           <div className="flex flex-col gap-2 py-2">
-            <label htmlFor="admin-comment" className="text-sm font-medium">Admin Comments (Optional)</label>
+            <label htmlFor="admin-comment" className="text-sm font-medium">{ t( 'adminCommentsOptional' ) }</label>
             <Input
               id="admin-comment"
               value={ adminComment }
@@ -302,10 +310,10 @@ export function CampaignActionDialogs( {
         <ConfirmDialog
           open={ acceptDialogOpen }
           onOpenChange={ ( open ) => { onAcceptDialogChange( open ); if ( !open ) setBrandComment( '' ); } }
-          title="Accept Campaign"
-          description="Accepting this campaign means you agree to proceed. This action cannot be undone."
-          confirmLabel="Accept"
-          loadingText="Accepting..."
+          title={ t( 'acceptCampaignTitle' ) }
+          description={ t( 'acceptCampaignDescription' ) }
+          confirmLabel={ t( 'accept' ) }
+          loadingText={ t( 'accepting' ) }
           variant="default"
           onConfirm={ () => handleBrandDecision( true, onAcceptDialogChange ) }
           isLoading={ isDecisionPending }
@@ -316,10 +324,10 @@ export function CampaignActionDialogs( {
         <ConfirmDialog
           open={ rejectDialogOpen }
           onOpenChange={ ( open ) => { onRejectDialogChange( open ); if ( !open ) setBrandComment( '' ); } }
-          title="Reject Campaign"
-          description="Rejecting this campaign will return it for revision. This action cannot be undone."
-          confirmLabel="Reject"
-          loadingText="Rejecting..."
+          title={ t( 'rejectCampaignTitle' ) }
+          description={ t( 'rejectCampaignDescription' ) }
+          confirmLabel={ t( 'reject' ) }
+          loadingText={ t( 'rejecting' ) }
           variant="destructive"
           onConfirm={ () => handleBrandDecision( false, onRejectDialogChange ) }
           isLoading={ isDecisionPending }

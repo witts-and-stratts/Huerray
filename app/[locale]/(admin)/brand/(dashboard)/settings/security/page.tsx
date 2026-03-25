@@ -10,10 +10,19 @@ import { useForm } from '@tanstack/react-form';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 import { BrandSettingsHeader } from '../_components/brand-settings-header';
-import { ChangePasswordSettings, changePasswordSchema } from '@/components/settings/change-password-schema';
+import { ChangePasswordSettings, getChangePasswordSchema } from '@/components/settings/change-password-schema';
+import { useTranslations } from 'next-intl';
 
 export default function SecuritySettingsPage() {
+  const t = useTranslations('dashboard.brand.settingsPage');
+  const ts = useTranslations('dashboard.brand.settingsPage.security');
   const [ isLoading, setIsLoading ] = useState( false );
+  const changePasswordSchema = getChangePasswordSchema( {
+    currentPasswordRequired: ts( 'currentPasswordRequired' ),
+    newPasswordMin: ts( 'newPasswordMin' ),
+    confirmPasswordRequired: ts( 'confirmPasswordRequired' ),
+    passwordsDontMatch: ts( 'passwordsDontMatch' ),
+  } );
 
   const form = useForm( {
     defaultValues: {
@@ -36,12 +45,12 @@ export default function SecuritySettingsPage() {
           }
         } );
 
-        toast.success( 'Password updated successfully' );
+        toast.success( t('passwordUpdated') );
         form.reset();
       } catch ( error: any ) {
-        console.error( 'Failed to change password', error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update password';
-        toast.error( `Failed to update password: ${ errorMessage }` );
+        console.error( t('errorPasswordUpdate'), error );
+        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || t('errorPasswordUpdate');
+        toast.error( t('errorPasswordUpdateDesc', { error: errorMessage }) );
       } finally {
         setIsLoading( false );
       }
@@ -61,7 +70,7 @@ export default function SecuritySettingsPage() {
           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
           children={ ( [ canSubmit, isSubmitting ] ) => (
             <Button type='submit' disabled={ !canSubmit || isSubmitting || isLoading }>
-              { isSubmitting || isLoading ? 'Updating...' : 'Update Password' }
+              { isSubmitting || isLoading ? t('updating') : t('updatePassword') }
             </Button>
           ) }
         />

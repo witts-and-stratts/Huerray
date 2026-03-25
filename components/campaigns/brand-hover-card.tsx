@@ -9,6 +9,7 @@ import { SentenceCase } from '@/components/text-case';
 import Link from 'next/link';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { useTranslations } from 'next-intl';
 
 interface BrandHoverCardProps {
   brand?: ModelsCampaignBrandResponse;
@@ -28,6 +29,7 @@ function BrandDetailRow( { label, value }: { label: string; value?: string; } ) 
 }
 
 export function BrandHoverCard( { brand, brandName, children }: BrandHoverCardProps ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   const name = brand?.company_name || brandName || 'Unknown Brand';
   const photoUrl = brand?.profile_photo?.asset;
 
@@ -45,7 +47,7 @@ export function BrandHoverCard( { brand, brandName, children }: BrandHoverCardPr
         { children }
       </HoverCardTrigger>
       <HoverCardContent side="bottom" align="end" sideOffset={ 8 } className="w-80 p-0 shadow-none">
-        <WrappedCard title='Brand Details' titleClass='text-xs'>
+        <WrappedCard title={ t( 'brandDetails' ) } titleClass='text-xs'>
           <div className="flex items-center gap-3">
             <Avatar className="size-12 shrink-0 ring-0">
               { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ name } /> }
@@ -64,12 +66,12 @@ export function BrandHoverCard( { brand, brandName, children }: BrandHoverCardPr
           </div>
 
           <div className="border-t border-border/60 pt-2.5 space-y-1.5">
-            <BrandDetailRow label="Company" value={ brand.company_name } />
-            <BrandDetailRow label="Country" value={ brand.country } />
-            <BrandDetailRow label="Category" value={ brand.category ? brand.category.replaceAll( '_', ' ' ) : undefined } />
+            <BrandDetailRow label={ t( 'company' ) } value={ brand.company_name } />
+            <BrandDetailRow label={ t( 'country' ) } value={ brand.country } />
+            <BrandDetailRow label={ t( 'category' ) } value={ brand.category ? brand.category.replaceAll( '_', ' ' ) : undefined } />
             { brand.website_url && (
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-muted-foreground">Website:</span>
+                <span className="text-muted-foreground">{ t( 'website' ) }:</span>
                 <Link
                   href={ brand.website_url }
                   target="_blank"

@@ -1,14 +1,16 @@
+import { useTranslations } from 'next-intl';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 
 export function CreatorSettingsSkeleton({ activeTab, tabItems, handleTabChange, currentDetails }: any) {
+  const t = useTranslations( 'dashboard.creator.breadcrumbs' );
   return (
     <>
       <SubHeader
         breadcrumbs={[
-          { label: 'Dashboard', href: '/creator' },
-          { label: 'Settings', href: '/creator/settings' },
-          { label: 'Loading...' },
+          { label: t( 'dashboard' ), href: '/creator' },
+          { label: t( 'settings' ), href: '/creator/settings' },
+          { label: t( 'loading' ) },
         ]}
         title={currentDetails.title}
         description={currentDetails.description}

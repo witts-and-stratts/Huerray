@@ -25,6 +25,19 @@ const intlMiddleware = createMiddleware({
   localeDetection: true,
 });
 
+function getPreferredLocale(request: NextRequest, hasLocalePrefix: boolean, pathnameLocale: string) {
+  if (hasLocalePrefix) {
+    return pathnameLocale;
+  }
+
+  const localeCookie = request.cookies.get('NEXT_LOCALE')?.value;
+  if (localeCookie && (locales as readonly string[]).includes(localeCookie)) {
+    return localeCookie;
+  }
+
+  return defaultLocale;
+}
+
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -33,17 +46,11 @@ export default function middleware(request: NextRequest) {
   const segments = pathname.split('/');
   const firstSegment = segments[1] ?? '';
   const hasLocalePrefix = (locales as readonly string[]).includes(firstSegment);
-  const locale = hasLocalePrefix ? firstSegment : defaultLocale;
+  const locale = getPreferredLocale(request, hasLocalePrefix, firstSegment);
   let pathWithoutLocale = pathname;
   if (hasLocalePrefix) {
     pathWithoutLocale = '/' + segments.slice(2).join('/');
   }
-
-  // If there's no locale prefix but it looks like a known route, 
-  // we want pathWithoutLocale to be evaluated correctly.
-  // Actually, wait, if there's no locale prefix, the middleware will hit next-intl middleware at the end
-  // BUT we intercept it with our auth redirects first, which construct URLs like `/${locale}${redirectPath}`.
-  // We need to make sure that the pathWithoutLocale calculation handles paths like `/admin/creators/[id]` correctly.
 
   // Allow public routes (without auth check, but with i18n)
   const publicRoutes = ['/login', '/signup', '/forgot-password', '/reset-password'];

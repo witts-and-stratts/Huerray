@@ -2,16 +2,18 @@
 
 import { CreatorCard } from '@/components/admin/creators/creator-card';
 import { ModelsCreatorResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 interface CampaignCreatorsSectionProps {
   creators: ModelsCreatorResponse[];
 }
 
 export function CampaignCreatorsSection( { creators }: CampaignCreatorsSectionProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   if ( !creators || creators.length === 0 ) {
     return (
       <div className='flex items-center justify-center p-12 bg-muted/10 border-2 border-dashed rounded-xl'>
-        <p className='text-muted-foreground'>No creators assigned yet</p>
+        <p className='text-muted-foreground'>{ t( 'noCreatorsAssignedYet' ) }</p>
       </div>
     );
   }

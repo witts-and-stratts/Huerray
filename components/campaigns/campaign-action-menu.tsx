@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import { SentenceCase } from "../text-case";
 import { CampaignDecisionDialog } from "./campaign-decision-dialog";
 import { CampaignRenameDialog } from "./campaign-rename-dialog";
+import { useTranslations } from "next-intl";
 
 interface CampaignActionMenuProps {
   campaign: ModelsCampaignResponse;
@@ -36,6 +37,11 @@ export function CampaignActionMenu( {
   extraActions = [],
   hideViewDetails = false,
 }: CampaignActionMenuProps ) {
+  const actionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const pageT = useTranslations( 'dashboard.brand.campaignsPage' );
+  const t = ( key: string, values?: Record<string, any> ) => (
+    actionsT.has( key ) ? actionsT( key, values ) : pageT.has( key ) ? pageT( key, values ) : key
+  );
   const basePath = useBasePath();
   const router = useRouter();
   const deleteCampaign = useDeleteCampaign();
@@ -66,7 +72,7 @@ export function CampaignActionMenu( {
     if ( campaign.id && deleteConfirmation === campaign.campaign_name ) {
       deleteCampaign.mutate( campaign.id, {
         onSuccess: () => {
-          toast.success( "Campaign deleted successfully" );
+          toast.success( t( 'deletedCampaign' ) );
           setDeleteDialogOpen( false );
           if ( !hideViewDetails ) {
             router.push( basePath + "/campaigns" );
@@ -75,8 +81,8 @@ export function CampaignActionMenu( {
           }
         },
         onError: () => {
-          toast.error( "Failed to delete campaign", {
-            description: "Please try again later.",
+          toast.error( t( 'deleteFailed' ), {
+            description: t( 'tryAgainLater' ),
             richColors: true,
           } );
         }
@@ -95,11 +101,11 @@ export function CampaignActionMenu( {
         }
       }, {
         onSuccess: () => {
-          toast.success( "Campaign completed successfully" );
+          toast.success( t( 'completedCampaign' ) );
           setApproveDialogOpen( false );
         },
         onError: () => {
-          toast.error( "Failed to complete campaign" );
+          toast.error( t( 'completeFailed' ) );
         }
       } );
       return;
@@ -112,19 +118,19 @@ export function CampaignActionMenu( {
         campaign_status: isApprove
           ? ModelsAdminCampaignApprovalRequestCampaignStatusEnum.GigsApproved
           : ModelsAdminCampaignApprovalRequestCampaignStatusEnum.Returned,
-        admin_comments: adminComment || ( isApprove ? "Approved by admin" : "Rejected by admin" ),
+        admin_comments: adminComment || ( isApprove ? t( 'approvedByAdmin' ) : t( 'rejectedByAdmin' ) ),
         number_of_gigs_validated: isApprove ? true : undefined,
       }
     }, {
       onSuccess: () => {
-        toast.success( isApprove ? "Campaign approved successfully" : "Campaign rejected successfully" );
+        toast.success( isApprove ? t( 'approvedCampaign' ) : t( 'rejectedCampaign' ) );
         setApproveDialogOpen( false );
         setAdminComment( '' );
       },
       onError: ( err ) => {
         const error = err as ApiError;
-        toast.error( isApprove ? "Failed to approve campaign" : "Failed to reject campaign", {
-          description: <SentenceCase>{ error.response?.data?.error?.message || "Please try again later." }</SentenceCase>,
+        toast.error( isApprove ? t( 'approveFailed' ) : t( 'rejectFailed' ), {
+          description: <SentenceCase>{ error.response?.data?.error?.message || t( 'tryAgainLater' ) }</SentenceCase>,
           richColors: true,
         } );
       }
@@ -151,12 +157,12 @@ export function CampaignActionMenu( {
       }
     }, {
       onSuccess: () => {
-        toast.success( "Campaign deactivated successfully" );
+        toast.success( t( 'deactivatedCampaign' ) );
         setDeactivateDialogOpen( false );
       },
       onError: () => {
-        toast.error( "Failed to deactivate campaign", {
-          description: "Please try again later.",
+        toast.error( t( 'deactivateFailed' ), {
+          description: t( 'tryAgainLater' ),
           richColors: true,
         } );
       }
@@ -173,12 +179,12 @@ export function CampaignActionMenu( {
       }
     }, {
       onSuccess: () => {
-        toast.success( "Campaign re-activated successfully" );
+        toast.success( t( 'reactivatedCampaign' ) );
         setReactivateDialogOpen( false );
       },
       onError: () => {
-        toast.error( "Failed to re-activate campaign", {
-          description: "Please try again later.",
+        toast.error( t( 'reactivateFailed' ), {
+          description: t( 'tryAgainLater' ),
           richColors: true,
         } );
       }
@@ -191,15 +197,15 @@ export function CampaignActionMenu( {
         { campaign_id: campaign.id },
         {
           onSuccess: () => {
-            toast.success( "Invoice created successfully", {
+            toast.success( t( 'invoiceCreated' ), {
               richColors: true,
             } );
             setInvoiceDialogOpen( false );
           },
           onError: ( err ) => {
             const error = err as ApiError;
-            toast.error( "Failed to create invoice", {
-              description: <SentenceCase>{ error.response?.data?.error?.message || "Please try again later." }</SentenceCase>,
+            toast.error( t( 'invoiceFailed' ), {
+              description: <SentenceCase>{ error.response?.data?.error?.message || t( 'tryAgainLater' ) }</SentenceCase>,
               richColors: true,
             } );
           },
@@ -213,87 +219,87 @@ export function CampaignActionMenu( {
 
   const defaultActions: MenuAction<ModelsCampaignResponse>[] = [
     {
-      label: "View Details",
+      label: t( 'viewDetails' ),
       href: `${ basePath }/campaigns/${ campaign.id }`,
       condition: () => !hideViewDetails,
     },
     {
-      label: "Create Gig",
+      label: t( 'createGig' ),
       href: `${ basePath }/campaigns/${ campaign.id }/gigs/new`,
       allowedRoles: [ 'admin' ],
       condition: () => campaignStatus === 'pending_approval',
     },
     {
-      label: "Edit",
+      label: t( 'edit' ),
       action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
       condition: () => !isCompleted && ( campaignStatus === "draft" || campaignStatus === "returned" ),
     },
     {
-      label: "Rename",
+      label: t( 'rename' ),
       action: () => setRenameDialogOpen( true ),
       allowedRoles: [ "brand" ],
       condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusDraft || campaignStatus === UtilsCampaignStatus.CampaignStatusReturned,
     },
     {
-      label: "Replicate",
+      label: t( 'replicate' ),
       allowedRoles: [ "brand" ],
       condition: () => isCompleted,
       action: () => {
         if ( campaign.id ) {
           replicateCampaign.mutate( campaign.id, {
-            onSuccess: () => toast.success( "Campaign replicated successfully" ),
-            onError: () => toast.error( "Failed to replicate campaign" ),
+            onSuccess: () => toast.success( t( 'replicatedCampaign' ) ),
+            onError: () => toast.error( t( 'replicateFailed' ) ),
           } );
         }
       },
     },
     {
-      label: "Approve Campaign",
+      label: t( 'approveCampaign' ),
       action: () => openAdminDecisionDialog( 'approve' ),
       allowedRoles: [ "admin" ],
       condition: () => !isCompleted &&
         campaignStatus === UtilsCampaignStatus.CampaignStatusPendingApproval,
     },
     {
-      label: "Reject Campaign",
+      label: t( 'rejectCampaign' ),
       action: () => openAdminDecisionDialog( 'reject' ),
       allowedRoles: [ "admin" ],
       condition: () => !isCompleted &&
         campaignStatus === UtilsCampaignStatus.CampaignStatusPendingApproval,
     },
     {
-      label: "Complete Campaign",
+      label: t( 'completeCampaign' ),
       action: () => openAdminDecisionDialog( 'complete' ),
       allowedRoles: [ "admin" ],
       condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusRunning,
     },
     {
-      label: 'Accept Campaign',
+      label: t( 'acceptCampaign' ),
       action: () => handleDecision( 'yes' ),
       allowedRoles: [ 'brand' ],
       condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusGigsApproved,
     },
     {
-      label: 'Reject Campaign',
+      label: t( 'rejectCampaign' ),
       action: () => handleDecision( 'no' ),
       allowedRoles: [ 'brand' ],
       condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusGigsApproved,
     },
     {
-      label: "Re-activate",
+      label: t( 'reactivate' ),
       action: () => setReactivateDialogOpen( true ),
       allowedRoles: [ "admin" ],
       condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusDeactivated,
     },
     {
-      label: "Create Invoice",
+      label: t( 'createInvoice' ),
       action: () => setInvoiceDialogOpen( true ),
       allowedRoles: [ "admin" ],
       condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusCompleted
     },
     {
-      label: "Deactivate",
+      label: t( 'deactivate' ),
       action: () => setDeactivateDialogOpen( true ),
       className: "text-destructive focus:text-destructive",
       separator: true,
@@ -301,7 +307,7 @@ export function CampaignActionMenu( {
       condition: () => campaignStatus !== UtilsCampaignStatus.CampaignStatusDeactivated,
     },
     {
-      label: "Delete",
+      label: t( 'delete' ),
       action: () => setDeleteDialogOpen( true ),
       className: "text-destructive focus:text-destructive",
       allowedRoles: [ "admin" ],
@@ -324,7 +330,7 @@ export function CampaignActionMenu( {
               className={ cn( className, "px-1" ) }
               size="sm"
             >
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">{ t( 'openMenu' ) }</span>
               <MoreVertical className="size-5" strokeWidth={ 1 } />
             </Button>
           )
@@ -342,21 +348,21 @@ export function CampaignActionMenu( {
       <ConfirmDialog
         open={ deleteDialogOpen }
         onOpenChange={ setDeleteDialogOpen }
-        title="Delete Campaign"
-        description={ <>Are you sure you want to delete this campaign? This action cannot be undone. Type the campaign name: <span className="font-semibold text-foreground">{ campaign.campaign_name }</span> to confirm.</> }
-        confirmLabel="Delete"
+        title={ t( 'deleteCampaignTitle' ) }
+        description={ <> { t( 'deleteCampaignDescription' ) } <span className="font-semibold text-foreground">{ campaign.campaign_name }</span> { t( 'deleteCampaignDescriptionSuffix' ) }</> }
+        confirmLabel={ t( 'delete' ) }
         variant="destructive"
         onConfirm={ handleDelete }
         isLoading={ deleteCampaign.isPending }
-        loadingText="Deleting..."
+        loadingText={ t( 'deleting' ) }
         confirmDisabled={ deleteConfirmation !== campaign.campaign_name }
       >
         <div className="flex flex-col gap-2 py-2">
           <Input
             value={ deleteConfirmation }
             onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => setDeleteConfirmation( e.target.value ) }
-            placeholder="Type campaign name"
-            aria-label="Confirm campaign name"
+            placeholder={ t( 'confirmCampaignName' ) }
+            aria-label={ t( 'confirmCampaignName' ) }
           />
         </div>
       </ConfirmDialog>
@@ -364,26 +370,26 @@ export function CampaignActionMenu( {
       <ConfirmDialog
         open={ approveDialogOpen }
         onOpenChange={ setApproveDialogOpen }
-        title={ adminDecision === 'approve' ? "Approve Campaign" : ( adminDecision === 'complete' ? "Complete Campaign" : "Reject Campaign" ) }
+        title={ adminDecision === 'approve' ? t( 'approveCampaign' ) : ( adminDecision === 'complete' ? t( 'completeCampaign' ) : t( 'rejectCampaign' ) ) }
         description={
           adminDecision === 'approve'
-            ? "Are you sure you want to approve this campaign? This will make it active and visible to creators."
-            : ( adminDecision === 'complete' ? "Are you sure you want to complete this campaign? This will make it inactive and visible to creators." : "Are you sure you want to reject this campaign? The campaign will be returned to the brand." )
+            ? t( 'approveCampaignDescription' )
+            : ( adminDecision === 'complete' ? t( 'completeCampaignDescription' ) : t( 'rejectCampaignDescription' ) )
         }
-        confirmLabel={ adminDecision === 'approve' ? "Approve" : ( adminDecision === 'complete' ? "Complete" : "Reject" ) }
+        confirmLabel={ adminDecision === 'approve' ? t( 'approve' ) : ( adminDecision === 'complete' ? t( 'complete' ) : t( 'reject' ) ) }
         onConfirm={ handleAdminApproval }
         isLoading={ approveCampaign.isPending || updateCampaignStatus.isPending }
-        loadingText={ adminDecision === 'approve' ? "Approving..." : ( adminDecision === 'complete' ? "Completing..." : "Rejecting..." ) }
+        loadingText={ adminDecision === 'approve' ? t( 'approving' ) : ( adminDecision === 'complete' ? t( 'completing' ) : t( 'rejecting' ) ) }
       >
         <div className="flex flex-col gap-2 py-2">
           <label htmlFor="admin-comment" className="text-sm font-medium">
-            Admin Comments (Optional)
+            { t( 'adminCommentsOptional' ) }
           </label>
           <Input
             id="admin-comment"
             value={ adminComment }
             onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => setAdminComment( e.target.value ) }
-            placeholder="e.g. Approved for launch"
+            placeholder={ t( 'adminCommentPlaceholder' ) }
           />
         </div>
       </ConfirmDialog>
@@ -400,35 +406,35 @@ export function CampaignActionMenu( {
       <ConfirmDialog
         open={ invoiceDialogOpen }
         onOpenChange={ setInvoiceDialogOpen }
-        title="Create Invoice"
-        description={ <>Are you sure you want to create an invoice for <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>?</> }
-        confirmLabel="Create Invoice"
+        title={ t( 'createInvoice' ) }
+        description={ <> { t( 'createInvoiceDescription' ) } <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>?</> }
+        confirmLabel={ t( 'createInvoice' ) }
         onConfirm={ handleCreateInvoice }
         isLoading={ createInvoice.isPending }
-        loadingText="Creating..."
+        loadingText={ t( 'creating' ) }
       />
 
       <ConfirmDialog
         open={ deactivateDialogOpen }
         onOpenChange={ setDeactivateDialogOpen }
-        title="Deactivate Campaign"
-        description={ <>Are you sure you want to deactivate <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>? This will make it inactive.</> }
-        confirmLabel="Deactivate"
+        title={ t( 'deactivateCampaign' ) }
+        description={ <> { t( 'deactivateCampaignDescription' ) } <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>? { t( 'deactivateCampaignDescriptionSuffix' ) }</> }
+        confirmLabel={ t( 'deactivate' ) }
         variant="destructive"
         onConfirm={ handleDeactivate }
         isLoading={ updateCampaignStatus.isPending }
-        loadingText="Deactivating..."
+        loadingText={ t( 'deactivating' ) }
       />
 
       <ConfirmDialog
         open={ reactivateDialogOpen }
         onOpenChange={ setReactivateDialogOpen }
-        title="Re-activate Campaign"
-        description={ <>Are you sure you want to re-activate <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>? This will make it active again.</> }
-        confirmLabel="Re-activate"
+        title={ t( 'reactivateCampaignTitle' ) }
+        description={ <> { t( 'reactivateCampaignDescription' ) } <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>? { t( 'reactivateCampaignDescriptionSuffix' ) }</> }
+        confirmLabel={ t( 'reactivate' ) }
         onConfirm={ handleReactivate }
         isLoading={ updateCampaignStatus.isPending }
-        loadingText="Re-activating..."
+        loadingText={ t( 'reactivating' ) }
       />
     </>
   );

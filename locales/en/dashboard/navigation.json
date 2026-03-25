@@ -7,6 +7,9 @@
     "analytics": "Analytics",
     "invoices": "Invoices",
     "payments": "Payments",
+    "profileSettings": "Profile Settings",
+    "accountSettings": "Account Settings",
+    "changePassword": "Change Password",
     "savedLists": "Saved Lists",
     "templates": "Templates",
     "reports": "Reports",
@@ -22,7 +25,9 @@
     "profile": "Profile",
     "analytics": "Analytics",
     "earnings": "Earnings",
-    "account": "Account",
+    "profileSettings": "Profile Settings",
+    "account": "Account Settings",
+    "changePassword": "Change Password",
     "settings": "Settings"
   },
   "admin": {
@@ -39,6 +44,8 @@
     "platformReports": "Platform Reports",
     "systemLogs": "System Logs",
     "alerts": "Alerts",
+    "accountSettings": "Account Settings",
+    "changePassword": "Change Password",
     "settings": "Settings"
   },
   "common": {

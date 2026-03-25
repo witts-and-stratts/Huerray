@@ -10,6 +10,7 @@ import {
 } from '@/components/dashboard-ui/sidebar';
 import { CreatorSidebar } from '@/components/dashboard/creator-sidebar';
 import { RoleProvider } from '@/contexts/role-context';
+import { useLocale } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { CreatorBreadcrumbs } from '@/components/creator/creator-breadcrumbs';
 import { PathProvider } from '@/lib/providers/path-provider';
@@ -19,6 +20,7 @@ export default function CreatorAdminLayout( {
 }: {
   children: React.ReactNode;
 } ) {
+  const locale = useLocale();
   const pathname = usePathname();
   const isCompleteProfile = pathname?.includes( '/complete-profile' );
 
@@ -26,7 +28,7 @@ export default function CreatorAdminLayout( {
     return (
       <CreatorAuthGuard>
         <RoleProvider>
-          <PathProvider basePath="/creator">
+          <PathProvider basePath={ `/${locale}/creator` }>
             <div className="bg-background min-h-screen flex flex-col">
               <EmailVerificationBanner />
               <ProfileStatusBanner role="creator" />
@@ -42,7 +44,7 @@ export default function CreatorAdminLayout( {
     <SidebarProvider data-dashboard-theme='creator'>
       <CreatorAuthGuard>
         <RoleProvider>
-          <PathProvider basePath="/creator">
+          <PathProvider basePath={ `/${locale}/creator` }>
             <CreatorSidebar />
             <SidebarInset>
               <EmailVerificationBanner />

@@ -13,6 +13,7 @@ import { InvoiceStatusBadge } from './invoice-status-badge';
 import { InvoiceActionMenu } from './invoice-action-menu';
 import { InvoiceDetailsSheet } from './invoice-details-sheet';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
 interface InvoiceCardProps {
   invoice: ModelsInvoiceResponse;
@@ -20,6 +21,7 @@ interface InvoiceCardProps {
 }
 
 export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const [ open, setOpen ] = React.useState( false );
   const {
     invoice_number,
@@ -64,13 +66,13 @@ export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
           <div className='flex flex-col gap-1 text-xs text-muted-foreground'>
             { issued_date && (
               <div className='flex justify-between'>
-                <span>Issued</span>
+                <span>{ t( 'columns.issued' ) }</span>
                 <span>{ formatDate( issued_date ) }</span>
               </div>
             ) }
             { due_date && (
               <div className='flex justify-between'>
-                <span>Due</span>
+                <span>{ t( 'details.due' ) }</span>
                 <span>{ formatDate( due_date ) }</span>
               </div>
             ) }

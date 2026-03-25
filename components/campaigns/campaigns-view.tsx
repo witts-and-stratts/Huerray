@@ -16,25 +16,27 @@ import { CamapignsTableView } from './campaigns-table-view';
 
 import { useBasePath } from '@/lib/providers/path-provider';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { useTranslations } from 'next-intl';
 
 function CampaignEmptyState() {
   const basePath = useBasePath();
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   return (
     <Empty className='border py-20 my-6 flex-1'>
       <EmptyHeader>
-        <img src="/svg/content-creator-at-work.svg" alt="No campaigns yet" className='w-full h-full object-contain max-h-[320px]' />
-        <EmptyTitle className='font-normal font-primary text-primary'>No campaigns yet</EmptyTitle>
+        <img src="/svg/content-creator-at-work.svg" alt={ t( 'noCampaignsYetAlt' ) } className='w-full h-full object-contain max-h-[320px]' />
+        <EmptyTitle className='font-normal font-primary text-primary'>{ t( 'noCampaignsYet' ) }</EmptyTitle>
         <EmptyDescription>
           <RoleGuard allowedRoles={ [ 'admin' ] }>
-            There are no campaigns yet. When Brands start creating campaigns, you will see them here.
+            { t( 'noCampaignsYetAdmin' ) }
           </RoleGuard>
-          <RoleGuard allowedRoles={ [ 'brand' ] }>There are no campaigns yet. Start your first campaign and watch your brand reach new heights with top creators.</RoleGuard>
+          <RoleGuard allowedRoles={ [ 'brand' ] }>{ t( 'noCampaignsYetBrand' ) }</RoleGuard>
         </EmptyDescription>
       </EmptyHeader>
       <RoleGuard allowedRoles={ [ 'brand' ] }>
         <EmptyContent>
           <Link href={ `${ basePath }/campaigns/new` }>
-            <Button size='lg'>Create Your First Campaign</Button>
+            <Button size='lg'>{ t( 'createFirstCampaign' ) }</Button>
           </Link>
         </EmptyContent>
       </RoleGuard>

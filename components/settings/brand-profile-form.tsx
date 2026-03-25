@@ -27,6 +27,7 @@ import { Separator } from '../dashboard-ui/separator';
 import { ImageUploader } from './image-uploader';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { fetchBrandProfile } from '@/lib/redux/features/brand/brandSlice';
+import { useTranslations } from 'next-intl';
 
 
 const formatEnumLabel = ( value: string ) => {
@@ -37,14 +38,15 @@ const formatEnumLabel = ( value: string ) => {
 };
 
 export function GeneralSettingsForm() {
+  const t = useTranslations( 'dashboard.brand.settingsPage.profile' );
   const [ isLoading, setIsLoading ] = useState( true );
   const [ isSaving, setIsSaving ] = useState( false );
   const [ currentBrand, setCurrentBrand ] = useState<any>( null );
   const dispatch = useAppDispatch();
 
   const brandProfileSchema = useMemo( () => z.object( {
-    companyName: z.string().min( 1, 'Company name is required' ),
-    websiteUrl: z.string().url( 'Invalid URL' ),
+    companyName: z.string().min( 1, t( 'companyNameRequired' ) ),
+    websiteUrl: z.string().url( t( 'invalidUrl' ) ),
     companyDescription: z.string(),
     category: z.enum( UtilsBrandCategory ).optional(),
     companySize: z.enum( UtilsCompanySize ).optional(),
@@ -54,12 +56,12 @@ export function GeneralSettingsForm() {
     building_number: z.string(),
     preferredContactEmail: z.email().or( z.literal( '' ) ),
     preferredContactPhone: z.string(),
-    state: z.string().min( 1, 'State/Province is required' ),
+    state: z.string().min( 1, t( 'stateRequired' ) ),
     street: z.string(),
     vatId: z.string(),
     postalCode: z.string(),
     profilePhotoUrl: z.string().optional(),
-  } ), [] );
+  } ), [ t ] );
 
   const form = useForm( {
     defaultValues: {
@@ -130,13 +132,13 @@ export function GeneralSettingsForm() {
         // Refetch and update the cached brand profile in Redux
         dispatch( fetchBrandProfile() );
 
-        toast.success( 'Settings updated successfully', {
+        toast.success( t( 'successUpdated' ), {
           richColors: true,
         } );
       } catch ( error: any ) {
-        console.error( 'Failed to update settings', error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update settings';
-        toast.error( `Failed to update settings`, {
+        console.error( t( 'errorUpdateFailed' ), error );
+        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || t( 'errorUpdateFailed' );
+        toast.error( t( 'errorUpdateFailed' ), {
           description: errorMessage,
           richColors: true,
         } );
@@ -190,7 +192,7 @@ export function GeneralSettingsForm() {
         }
       } catch ( e ) {
         console.error( e );
-        toast.error( 'Failed to load brand settings' );
+        toast.error( t( 'errorLoadFailed' ) );
       } finally {
         setIsLoading( false );
       }
@@ -207,10 +209,8 @@ export function GeneralSettingsForm() {
   return (
     <Card className='max-w-5xl'>
       <CardHeader>
-        <CardTitle>Brand Profile</CardTitle>
-        <CardDescription>
-          Manage your brand details and public profile information.
-        </CardDescription>
+        <CardTitle>{ t( 'title' ) }</CardTitle>
+        <CardDescription>{ t( 'description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         { isLoading ? (
@@ -226,7 +226,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Company Name"
+                    label={ t( 'companyName' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -244,7 +244,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Website URL"
+                    label={ t( 'websiteUrl' ) }
                     type="url"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -263,7 +263,7 @@ export function GeneralSettingsForm() {
                     key="category"
                     name={ field.name }
                     type="searchable-select"
-                    label="Industry Category"
+                    label={ t( 'industryCategory' ) }
                     value={ field.state.value }
                     onValueChange={ ( val ) => field.handleChange( val as UtilsBrandCategory ) }
                     options={ Object.values( UtilsBrandCategory ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
@@ -281,7 +281,7 @@ export function GeneralSettingsForm() {
                     key="companySize"
                     name={ field.name }
                     type="select"
-                    label="Company Size"
+                    label={ t( 'companySize' ) }
                     value={ field.state.value }
                     onValueChange={ ( val ) => field.handleChange( val as UtilsCompanySize ) }
                     options={ Object.values( UtilsCompanySize ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
@@ -297,7 +297,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="VAT ID"
+                    label={ t( 'vatId' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -314,7 +314,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Registration Number"
+                    label={ t( 'registrationNumber' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -327,7 +327,7 @@ export function GeneralSettingsForm() {
             </FieldGroup>
             <Separator className='my-6' />
             <div className="col-span-1 md:col-span-2">
-              <h4 className="text-sm font-medium tracking-widest uppercase mb-3">Address Information</h4>
+              <h4 className="text-sm font-medium tracking-widest uppercase mb-3">{ t( 'addressInformation' ) }</h4>
             </div>
             <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <form.Field
@@ -338,7 +338,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Street"
+                    label={ t( 'street' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -355,7 +355,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Number/Suite"
+                    label={ t( 'numberSuite' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -372,7 +372,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="City"
+                    label={ t( 'city' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -389,7 +389,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="State/Province"
+                    label={ t( 'stateProvince' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -407,7 +407,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Postal Code"
+                    label={ t( 'postalCode' ) }
                     type="text"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -424,7 +424,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Country"
+                    label={ t( 'country' ) }
                     value={ field.state.value }
                     type="country"
                     onValueChange={ ( val ) => field.handleChange( val || "" ) }
@@ -437,7 +437,7 @@ export function GeneralSettingsForm() {
             <Separator className='my-6' />
 
             <div className="col-span-1 md:col-span-2">
-              <h4 className="text-sm font-medium mb-3 uppercase tracking-widest">Contact Information</h4>
+              <h4 className="text-sm font-medium mb-3 uppercase tracking-widest">{ t( 'contactInformation' ) }</h4>
             </div>
 
             <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -449,7 +449,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Contact Email"
+                    label={ t( 'contactEmail' ) }
                     type="email"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -466,7 +466,7 @@ export function GeneralSettingsForm() {
                 children={ ( field ) => (
                   <SuperField
                     name={ field.name }
-                    label="Contact Phone"
+                    label={ t( 'contactPhone' ) }
                     type="tel"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -486,7 +486,7 @@ export function GeneralSettingsForm() {
                     children={ ( field ) => (
                       <SuperField
                         name={ field.name }
-                        label="Description"
+                    label={ t( 'descriptionField' ) }
                         type="editor"
                         fieldClassName='h-[350px]'
                         value={ field.state.value }
@@ -499,14 +499,14 @@ export function GeneralSettingsForm() {
                 </div>
                 <div className="lg:col-span-1">
                   <div className="space-y-2 flex flex-col gap-2">
-                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Brand Logo</label>
+                  <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{ t( 'brandLogo' ) }</label>
                     <form.Field
                       name="profilePhotoUrl"
                       children={ ( field ) => (
                         <ImageUploader
                           value={ field.state.value }
                           onChange={ ( url ) => field.handleChange( url ) }
-                          previewTitle={ form.getFieldValue( 'companyName' ) || "Brand Logo" }
+                        previewTitle={ form.getFieldValue( 'companyName' ) || t( 'brandLogo' ) }
                           className='h-[350px]'
                         />
                       ) }
@@ -521,7 +521,7 @@ export function GeneralSettingsForm() {
                   children={ ( [ canSubmit, isSubmitting ] ) => (
                     <div className="col-span-1 md:col-span-2 flex justify-end mt-4">
                       <Button type='submit' disabled={ !canSubmit || isSubmitting || isSaving } className='min-w-full'>
-                        { isSubmitting || isSaving ? 'Saving...' : 'Save Changes' }
+                        { isSubmitting || isSaving ? t( 'saving' ) : t( 'saveChanges' ) }
                       </Button>
                     </div>
                   ) }

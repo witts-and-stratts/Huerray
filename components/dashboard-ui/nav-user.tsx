@@ -31,7 +31,7 @@ import {
 import { useAuth } from "@/lib/auth/auth-context";
 import { getNotificationsPagePath } from "@/lib/notification-utils";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { apiClient } from "@/lib/api/client";
 import { useAppDispatch } from "@/lib/redux/hooks";
@@ -49,6 +49,8 @@ export function NavUser( {
 } ) {
   const { isMobile } = useSidebar();
   const { setUser, user: authUser } = useAuth();
+  const t = useTranslations('dashboard.common');
+  const tNav = useTranslations('dashboard.navigation');
   const router = useRouter();
   const locale = useLocale();
   const dispatch = useAppDispatch();
@@ -121,23 +123,68 @@ export function NavUser( {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               { authUser?.role && (
-                <DropdownMenuItem onClick={ () => {
-                  const rolePath = authUser.role === 'creator' ? '/account' : authUser.role === 'brand' ? '/settings' : '/settings';
-                  router.push( `/${ locale }/${ authUser.role }${ rolePath }` );
-                } }>
-                  <IconUserCircle />
-                  Account
-                </DropdownMenuItem>
+                <>
+                  { authUser.role === 'creator' ? (
+                    <>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/creator/settings` ) }>
+                        <IconUserCircle />
+                        { tNav( 'creator.profileSettings' ) }
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/creator/account` ) }>
+                        <IconUserCircle />
+                        { tNav( 'creator.account' ) }
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/creator/account/change-password` ) }>
+                        <IconUserCircle />
+                        { tNav( 'creator.changePassword' ) }
+                      </DropdownMenuItem>
+                    </>
+                  ) : authUser.role === 'brand' ? (
+                    <>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/brand/settings/profile` ) }>
+                        <IconUserCircle />
+                        { tNav( 'brand.profileSettings' ) }
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/brand/settings/user-information` ) }>
+                        <IconUserCircle />
+                        { tNav( 'brand.accountSettings' ) }
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/brand/settings/security` ) }>
+                        <IconUserCircle />
+                        { tNav( 'brand.changePassword' ) }
+                      </DropdownMenuItem>
+                    </>
+                  ) : authUser.role === 'admin' ? (
+                    <>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/admin/settings` ) }>
+                        <IconUserCircle />
+                        { tNav( 'admin.accountSettings' ) }
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={ () => router.push( `/${ locale }/admin/settings/security` ) }>
+                        <IconUserCircle />
+                        { tNav( 'admin.changePassword' ) }
+                      </DropdownMenuItem>
+                    </>
+                  ) : (
+                    <DropdownMenuItem onClick={ () => {
+                      const rolePath = '/settings';
+                      router.push( `/${ locale }/${ authUser.role }${ rolePath }` );
+                    } }>
+                      <IconUserCircle />
+                      { t( 'account' ) }
+                    </DropdownMenuItem>
+                  ) }
+                </>
               ) }
               <DropdownMenuItem onClick={ () => router.push( `/${ locale }${ getNotificationsPagePath( authUser?.role ) }` ) }>
                 <IconNotification />
-                Notifications
+                {t('notifications')}
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={ handleLogout }>
               <IconLogout />
-              Log out
+              {t('logout')}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

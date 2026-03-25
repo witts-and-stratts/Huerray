@@ -3,6 +3,7 @@ import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { memo } from 'react';
 import { CampaignFormApi, createCampaignSchema } from '../schema';
+import { useTranslations } from 'next-intl';
 
 interface CampaignRequirementsProps {
   form: CampaignFormApi;
@@ -16,14 +17,15 @@ const videoDurationOptions = [
 ];
 
 export const CampaignCreatorRequirements = memo( function CampaignCreatorRequirements( { form }: CampaignRequirementsProps ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   return (
     <FieldGroup className='gap-2'>
       <div className='flex gap-2'>
         <form.Field name="number_of_creators_wanted" validators={ { onChange: createCampaignSchema.shape.number_of_creators_wanted, onBlur: createCampaignSchema.shape.number_of_creators_wanted } }>
           { ( field ) => (
             <SuperField
-              label="Creators Needed"
-              placeholder="e.g. 10"
+              label={ t( 'creatorsNeeded' ) }
+              placeholder={ t( 'creatorsNeededPlaceholder' ) }
               value={ field.state.value }
               onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => field.handleChange( parseInt( e.target.value ) ?? 0 ) }
               onBlur={ field.handleBlur }
@@ -37,8 +39,8 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
         <form.Field name="number_of_videos_wanted" validators={ { onChange: createCampaignSchema.shape.number_of_videos_wanted, onBlur: createCampaignSchema.shape.number_of_videos_wanted } }>
           { ( field ) => (
             <SuperField
-              label="Videos per Creator"
-              placeholder="e.g. 10"
+              label={ t( 'videosPerCreator' ) }
+              placeholder={ t( 'videosPerCreatorPlaceholder' ) }
               value={ field.state.value }
               onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => field.handleChange( parseInt( e.target.value ) ?? 0 ) }
               onBlur={ field.handleBlur }
@@ -54,7 +56,7 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
         <form.Field name="video_duration_in_seconds" validators={ { onChange: createCampaignSchema.shape.video_duration_in_seconds, onBlur: createCampaignSchema.shape.video_duration_in_seconds } }>
           { ( field ) => (
             <SuperField
-              label="Video Duration (sec)"
+              label={ t( 'videoDuration' ) }
               type="select"
               value={ field.state.value.toString() }
               onValueChange={ ( val ) => { field.handleChange( parseInt( val || '15' ) ); field.handleBlur(); } }
@@ -68,13 +70,13 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
         >
           { ( field ) => (
             <SuperField
-              label="Allow multiple videos"
+              label={ t( 'allowMultipleVideos' ) }
               type="choice-card"
               value={ field.state.value ? 'yes' : 'no' }
               onValueChange={ ( val ) => field.handleChange( val === 'yes' ) }
               options={ [
-                { value: 'yes', label: 'Yes', description: 'Creators can submit more than one video' },
-                { value: 'no', label: 'No', description: 'Creators submit a single video only' },
+                { value: 'yes', label: t( 'yes' ), description: t( 'multipleVideosYes' ) },
+                { value: 'no', label: t( 'no' ), description: t( 'multipleVideosNo' ) },
               ] }
               containerClassName='w-full grid grid-cols-2'
             />

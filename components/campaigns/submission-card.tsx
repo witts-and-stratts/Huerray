@@ -10,6 +10,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { MessageSquare } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { TextCapitalize } from '../text-case';
 import { SubmissionActionMenu } from './submission-action-menu';
 import { SubmissionViewDialog } from './submission-view-dialog';
@@ -32,6 +33,7 @@ export function SubmissionCard( {
   overlayDetailsMode = 'hover',
   onExpand,
 }: SubmissionCardProps ) {
+  const t = useTranslations( 'dashboard.common' );
   const status = submission.status?.toLowerCase() || 'unknown';
   const creatorName = getCreatorName( submission.creator );
   const creatorLocationOrEmail = getCreatorLocationOrEmail( submission.creator );
@@ -153,10 +155,10 @@ export function SubmissionCard( {
                   <div className="submission-card__details-footer">
                     <div className="min-w-0">
                       <CardTitle className="submission-card__title">
-                        <TextCapitalize>{ submission.title || submission.video_filename || 'Untitled Submission' }</TextCapitalize>
+                        <TextCapitalize>{ submission.title || submission.video_filename || t( 'cards.untitledSubmission' ) }</TextCapitalize>
                       </CardTitle>
                       <CardDescription className="submission-card__description">
-                        { submission.description || 'No description provided' }
+                        { submission.description || t( 'cards.noDescription' ) }
                       </CardDescription>
                     </div>
                     <div className="submission-card__actions">

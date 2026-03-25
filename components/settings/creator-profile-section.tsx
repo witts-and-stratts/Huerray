@@ -7,12 +7,7 @@ import { Separator } from '../dashboard-ui/separator';
 import { creatorSettingsSchema, CreatorSettings, ReactFormApi } from './creator-settings-schema';
 import { ImageUploader } from './image-uploader';
 import { memo } from 'react';
-
-const genderOptions = [
-  { label: 'Male', value: 'male' },
-  { label: 'Female', value: 'female' },
-  { label: 'Other', value: 'other' },
-];
+import { useTranslations } from 'next-intl';
 
 function toFieldError( errors: any[] | undefined ): string | undefined {
   return errors?.length
@@ -21,11 +16,18 @@ function toFieldError( errors: any[] | undefined ): string | undefined {
 }
 
 export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
+  const t = useTranslations( 'dashboard.creator.settings.profile' );
   const DummyProfileAvatar = memo( ( { gender }: { gender: string; } ) => <img
     src={ gender === 'male' ? '/svg/avatar-male.svg' : '/svg/avatar-female.svg' }
-    alt="Default Profile"
+    alt={ t( 'defaultProfile' ) }
     className="w-full h-full object-cover"
   /> );
+
+  const genderOptions = [
+    { label: t( 'male' ), value: 'male' },
+    { label: t( 'female' ), value: 'female' },
+    { label: t( 'other' ), value: 'other' },
+  ];
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl m-px">
@@ -40,7 +42,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }
-                    label="Date of Birth"
+                    label={ t( 'dateOfBirth' ) }
                     type="datepicker"
                     value={ field.state.value }
                     onChange={ ( date ) => {
@@ -60,7 +62,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }
-                    label="Gender"
+                    label={ t( 'gender' ) }
                     type="select"
                     value={ field.state.value }
                     onValueChange={ ( val: any ) => field.handleChange( val ) }
@@ -76,7 +78,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }
-                    label="Phone Number"
+                    label={ t( 'phoneNumber' ) }
                     type="tel"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -88,14 +90,14 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
 
               <div className="col-span-1 md:col-span-2 mt-2">
                 <Separator className="mb-6" />
-                <h4 className="text-sm font-medium tracking-widest uppercase mb-3">Address Information</h4>
+                <h4 className="text-sm font-medium tracking-widest uppercase mb-3">{ t( 'addressInformation' ) }</h4>
               </div>
 
               { ( [
-                [ 'street', 'Street' ],
-                [ 'city', 'City' ],
-                [ 'state', 'State/Province' ],
-                [ 'zipcode', 'Zip/Postal Code' ],
+                [ 'street', t( 'street' ) ],
+                [ 'city', t( 'city' ) ],
+                [ 'state', t( 'stateProvince' ) ],
+                [ 'zipcode', t( 'zipPostalCode' ) ],
               ] as const ).map( ( [ name, label ] ) => (
                 <form.Field
                   key={ name }
@@ -121,7 +123,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }
-                    label="Country"
+                    label={ t( 'country' ) }
                     type="country"
                     value={ field.state.value }
                     onValueChange={ ( val: any ) => field.handleChange( val || '' ) }
@@ -151,13 +153,13 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                         <DummyProfileAvatar gender={ gender } />
                       </div>
                       <p className="text-sm font-medium text-center">
-                        { isDragActive ? 'Drop your image here' : 'Upload Profile Image' }
+                        { isDragActive ? t( 'dropImage' ) : t( 'uploadProfileImage' ) }
                       </p>
                       <p className="text-xs text-muted-foreground text-center mt-1">
-                        Drag and drop or click to upload
+                        { t( 'uploadHint' ) }
                       </p>
                       <p className="text-xs text-muted-foreground text-center mt-1">
-                        PNG, JPG, GIF up to 5MB
+                        { t( 'uploadSpecs' ) }
                       </p>
                     </>
                   ) }

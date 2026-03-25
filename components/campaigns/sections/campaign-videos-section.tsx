@@ -9,11 +9,13 @@ import { PreviewDialog } from './documents/preview-dialog';
 import { UploadedFile } from './documents/types';
 import { useCampaignFiles } from './documents/use-campaign-files';
 import { VideoFileIcon } from './documents/video-file-icon';
+import { useTranslations } from 'next-intl';
 
 export const CampaignVideosSection = memo( function CampaignVideosSection( {
   form,
   fileState
 }: { form: CampaignFormApi; fileState: ReturnType<typeof useCampaignFiles>; } ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   const {
     items,
     activeId,
@@ -65,8 +67,8 @@ export const CampaignVideosSection = memo( function CampaignVideosSection( {
               accept={ { 'video/*': [ '.mp4', '.mov', '.webm', '.avi' ] } }
               showTitle={ false }
               gridClassName="grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
-              title="Upload Videos"
-              description={ <>Drag and drop files here<br />Support for Video files</> }
+              title={ t( 'uploadVideosTitle' ) }
+              description={ <>{ t( 'uploadVideosDescription' ) }<br />{ t( 'uploadVideosSupport' ) }</> }
               icon={ <VideoFileIcon className="text-primary w-20! h-20! mt-4" /> }
               onDragStart={ handleDragStart }
               onDragEnd={ handleDragEnd }

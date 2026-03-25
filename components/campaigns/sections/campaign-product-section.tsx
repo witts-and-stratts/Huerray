@@ -15,6 +15,7 @@ import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { CampaignFormApi } from '../schema';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { useTranslations } from 'next-intl';
 
 const DEFAULT_FILE_PREVIEW = '/images/product-placeholder.jpg';
 
@@ -26,16 +27,15 @@ const ACCEPTED_FILE_TYPES = { 'image/*': [ '.png', '.jpg', '.jpeg', '.gif', '.we
 const PLACEHOLDER_PRODUCT_LINK = 'https://yourstore.com/product';
 
 const EmptyState = memo( function EmptyState() {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage.product' );
   return (
     <div className='flex flex-col gap-2 justify-center items-center py-4 px-10'>
       <div className="size-8 items-center justify-center rounded-lg bg-muted text-muted-foreground flex">
         <UploadIcon size={ 20 } strokeWidth={ 1.2 } />
       </div>
       <div className="text-center">
-        <p className="font-medium text-sm">Upload product image</p>
-        <p className="text-muted-foreground text-xs">
-          Drag and drop or click to upload or enter product image url
-        </p>
+        <p className="font-medium text-sm">{ t( 'uploadProductImage' ) }</p>
+        <p className="text-muted-foreground text-xs">{ t( 'productImageInstructions' ) }</p>
       </div>
     </div>
   );
@@ -52,13 +52,14 @@ const ImagePreview = memo( function ImagePreview( {
   isUploading,
   uploadProgress,
 }: ImagePreviewProps ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage.product' );
   const isDefaultPreview = filePreview === DEFAULT_FILE_PREVIEW;
 
   return (
     <div className='flex p-0 gap-4 rounded-lg overflow-hidden h-full relative w-full'>
       <div className='w-[160px] aspect-square flex shrink-0 relative'>
         <motion.img
-          alt="Preview"
+          alt={ t( 'preview' ) }
           className="w-full h-full object-cover object-top"
           src={ filePreview.startsWith( 'http' ) ? imgpresets.card( filePreview ) : filePreview }
           animate={ { opacity: 1 } }
@@ -95,6 +96,7 @@ const ProductImageUploader = memo( function ProductImageUploader( {
   onUploadComplete,
   onPreviewChange,
 }: ProductImageUploaderProps ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage.product' );
   const [ files, setFiles ] = useState<File[] | undefined>();
   const [ uploadProgress, setUploadProgress ] = useState( 0 );
   const [ isUploading, setIsUploading ] = useState( false );
@@ -131,8 +133,8 @@ const ProductImageUploader = memo( function ProductImageUploader( {
           onUploadComplete( serverPreview( firstImage.url ) );
         }
       } catch ( error ) {
-        console.error( 'Upload failed', error );
-        toast.error( `Upload failed ${ error }` );
+        console.error( t( 'uploadFailed' ), error );
+        toast.error( `${ t( 'uploadFailed' ) } ${ error }` );
       } finally {
         setIsUploading( false );
       }
@@ -177,6 +179,7 @@ const LinkIcon = memo( function LinkIcon() {
 export const CampaignProductSection = memo( function CampaignProductSection( {
   form,
 }: { form: CampaignFormApi; } ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage.product' );
   const [ filePreview, setFilePreview ] = useState<string>(
     form.getFieldValue( 'product_image' ) || DEFAULT_FILE_PREVIEW
   );
@@ -203,8 +206,8 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
 
   return (
     <Field className='mt-4'>
-      <FieldLabel>Product</FieldLabel>
-      <FieldDescription>Upload an image or specify the image url for the product</FieldDescription>
+      <FieldLabel>{ t( 'product' ) }</FieldLabel>
+      <FieldDescription>{ t( 'productDescription' ) }</FieldDescription>
       <FieldContent>
         <Card className='p-0 overflow-hidden'>
           <CardContent className='px-0 flex gap-4'>
@@ -235,7 +238,7 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
                 <form.Field name="product_url">
                   { ( field ) => (
                     <SuperField
-                      label="Product Link"
+                      label={ t( 'productLink' ) }
                       placeholder={ PLACEHOLDER_PRODUCT_LINK }
                       prefix={ <LinkIcon /> }
                       value={ field.state.value }

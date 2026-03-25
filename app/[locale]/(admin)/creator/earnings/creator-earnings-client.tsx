@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useCreatorEarnings } from '@/lib/api/hooks/payments';
-import { EarningsTable } from '@/components/payments/earnings-table';
+import { PaymentsTable } from '@/components/payments/payments-table';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
 
 export function CreatorEarningsClient() {
@@ -12,5 +12,5 @@ export function CreatorEarningsClient() {
     return data?.data || [];
   }, [ data ] );
 
-  return <EarningsTable data={ earnings } isLoading={ isLoading } />;
+  return <PaymentsTable data={ earnings } isLoading={ isLoading } />;
 }

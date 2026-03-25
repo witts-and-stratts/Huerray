@@ -3,6 +3,7 @@
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { creatorSettingsSchema, CreatorSettings, ReactFormApi } from './creator-settings-schema';
 import { Card, CardContent } from '@/components/dashboard-ui/card';
+import { useTranslations } from 'next-intl';
 
 // Social media brand icons as SVG components
 const InstagramIcon = ( { className }: { className?: string; } ) => (
@@ -46,6 +47,7 @@ const SocialCard = ( { icon, children }: SocialCardProps ) => (
 );
 
 export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
+  const t = useTranslations( 'dashboard.creator.settings.social' );
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl md:m-px max-md:m-2">
       {/* Instagram */ }
@@ -59,12 +61,12 @@ export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSett
           } }
           children={ ( field: any ) => (
             <SuperField
-              label="Instagram"
+              label={ t( 'instagram' ) }
               type="text"
               value={ field.state.value }
               onChange={ ( e: any ) => field.handleChange( e.target.value ) }
               onBlur={ field.handleBlur }
-              placeholder="@username"
+              placeholder={ t( 'handlePlaceholder' ) }
               error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
             />
           ) }
@@ -82,12 +84,12 @@ export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSett
           } }
           children={ ( field: any ) => (
             <SuperField
-              label="TikTok"
+              label={ t( 'tiktok' ) }
               type="text"
               value={ field.state.value }
               onChange={ ( e: any ) => field.handleChange( e.target.value ) }
               onBlur={ field.handleBlur }
-              placeholder="@username"
+              placeholder={ t( 'handlePlaceholder' ) }
               error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
             />
           ) }
@@ -105,12 +107,12 @@ export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSett
           } }
           children={ ( field: any ) => (
             <SuperField
-              label="YouTube"
+              label={ t( 'youtube' ) }
               type="text"
               value={ field.state.value }
               onChange={ ( e: any ) => field.handleChange( e.target.value ) }
               onBlur={ field.handleBlur }
-              placeholder="@channel"
+              placeholder={ t( 'channelPlaceholder' ) }
               error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
             />
           ) }
@@ -128,12 +130,12 @@ export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSett
           } }
           children={ ( field: any ) => (
             <SuperField
-              label="X (Twitter)"
+              label={ t( 'twitter' ) }
               type="text"
               value={ field.state.value }
               onChange={ ( e: any ) => field.handleChange( e.target.value ) }
               onBlur={ field.handleBlur }
-              placeholder="@username"
+              placeholder={ t( 'handlePlaceholder' ) }
               error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
             />
           ) }
@@ -152,13 +154,13 @@ export function CreatorSocialSection( { form }: { form: ReactFormApi<CreatorSett
             } }
             children={ ( field: any ) => (
               <SuperField
-                label="Portfolio URLs"
+                label={ t( 'portfolioUrls' ) }
                 type="textarea"
                 value={ field.state.value }
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
-                placeholder="https://portfolio.com, https://dribbble.com/user"
-                description="Enter multiple URLs separated by commas."
+                placeholder={ t( 'portfolioPlaceholder' ) }
+                description={ t( 'portfolioDescription' ) }
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }

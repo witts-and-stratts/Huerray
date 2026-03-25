@@ -2,6 +2,7 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/dashboard-ui/button';
 import { CreatorBankSection } from '@/components/settings/creator-bank-section';
 import { SubHeader } from '@/components/subheader';
@@ -13,6 +14,8 @@ import { toast } from 'sonner';
 import { CreatorBankSkeleton } from '@/components/settings/creator-bank-skeleton';
 
 export default function CreatorBankSettingsPage() {
+  const t = useTranslations('dashboard.creator.bankPage');
+  const tNav = useTranslations('dashboard.creator.breadcrumbs');
   const { data: bankDetails, isLoading } = useOwnBankDetails();
   const { mutateAsync: updateBankDetails, isPending: isSaving } = useUpdateOwnBankDetails();
 
@@ -37,10 +40,10 @@ export default function CreatorBankSettingsPage() {
           bank_account_name: value.bankAccountName,
           bank_address: value.bankAddress,
         } );
-        toast.success( 'Bank details updated successfully' );
+        toast.success( t( 'successUpdated' ) );
       } catch ( error: any ) {
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update settings';
-        toast.error( `Failed to update: ${ errorMessage }` );
+        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || t( 'errorUpdateFailed' );
+        toast.error( t( 'errorUpdateFailedWithError', { error: errorMessage } ) );
       }
     }
   } );
@@ -63,9 +66,9 @@ export default function CreatorBankSettingsPage() {
   }, [ form ] );
 
   const breadcrumbs = [
-    { label: 'Dashboard', href: '/creator' },
-    { label: 'Settings', href: '/creator/settings' },
-    { label: 'Bank Details' },
+    { label: tNav('dashboard'), href: '/creator' },
+    { label: tNav('settings'), href: '/creator/settings' },
+    { label: tNav('bankDetails') },
   ];
 
   if ( isLoading ) {
@@ -76,14 +79,14 @@ export default function CreatorBankSettingsPage() {
     <form onSubmit={ handleFormSubmit } className="contents">
       <SubHeader
         breadcrumbs={ breadcrumbs }
-        title="Bank Details"
-        description="Manage your banking and tax information."
+        title={ t( 'title' ) }
+        description={ t( 'description' ) }
       >
         <form.Subscribe
           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
           children={ ( [ , isSubmitting ] ) => (
             <Button type='submit' disabled={ isSubmitting || isSaving }>
-              { isSubmitting || isSaving ? 'Saving...' : 'Save Changes' }
+              { isSubmitting || isSaving ? t( 'saving' ) : t( 'saveChanges' ) }
             </Button>
           ) }
         />

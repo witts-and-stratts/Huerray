@@ -171,6 +171,7 @@ export function usePaymentItems(
 export const earningsKeys = {
   all: [ 'earnings' ] as const,
   list: ( params?: object ) => [ ...earningsKeys.all, 'list', params ] as const,
+  detail: ( id: string ) => [ ...earningsKeys.all, 'detail', id ] as const,
 };
 
 export interface UseCreatorEarningsParams {
@@ -199,6 +200,21 @@ export function useCreatorEarnings(
       } );
       return response.data;
     },
+    ...options,
+  } );
+}
+
+export function useCreatorPayment(
+  id: string,
+  options?: Omit<UseQueryOptions<ModelsStandardPaymentResponse, ApiError>, 'queryKey' | 'queryFn'>
+): UseQueryResult<ModelsStandardPaymentResponse, ApiError> {
+  return useQuery( {
+    queryKey: earningsKeys.detail( id ),
+    queryFn: async () => {
+      const response = await creatorApi.creatorsPaymentsIdGet( { id } );
+      return response.data;
+    },
+    enabled: !!id,
     ...options,
   } );
 }

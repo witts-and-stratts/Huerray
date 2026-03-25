@@ -5,10 +5,12 @@ import { useActiveGigs, useCreatorGigs, useMatchingGigs } from '@/lib/api/hooks/
 import { GigsTable } from '@/components/campaigns/gigs-table';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 type Tab = 'available' | 'active' | 'all';
 
 export function MyGigsView() {
+  const t = useTranslations( 'dashboard.creator.myGigs' );
   const [ tab, setTab ] = useState<Tab>( 'all' );
 
   const matchingQuery = useMatchingGigs();
@@ -29,16 +31,16 @@ export function MyGigsView() {
   return (
     <div className="flex flex-col flex-1 h-full">
       <SubHeader
-        title="Gigs"
-        description="All gigs you have participated in."
+        title={ t( 'title' ) }
+        description={ t( 'description' ) }
         tabs={
           <SubHeaderTabs
             value={ tab }
             onChange={ ( value ) => setTab( value as Tab ) }
             tabItems={ [
-              { value: 'all', label: 'All Gigs' },
-              { value: 'available', label: 'Available Gigs' },
-              { value: 'active', label: 'Active Gigs' },
+              { value: 'all', label: t( 'tabs.all' ) },
+              { value: 'available', label: t( 'tabs.available' ) },
+              { value: 'active', label: t( 'tabs.active' ) },
             ] }
           />
         }

@@ -29,8 +29,11 @@ import { RoleGuard } from '../auth/role-guard';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { cn } from '@/lib/dashboard-utils';
 import { useBasePath } from '@/lib/providers/path-provider';
+import { useLocale, useTranslations } from 'next-intl';
 
 const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignResponse>, className?: string; } ) => {
+  const commonT = useTranslations( 'dashboard.common' );
+  const actionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const basePath = useBasePath();
   return (
     <div className={ `flex justify-end items-center gap-2 ${ className }` }>
@@ -41,7 +44,7 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignRespo
         <RoleGuard allowedRoles={ [ 'admin' ] }>
           <Button variant='outline' size='sm' className='font-regular' render={
             <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
-              View
+              { commonT( 'view' ) }
             </Link>
           }>
           </Button>
@@ -51,14 +54,14 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignRespo
             ( row.original.campaign_status === 'draft' || row.original.campaign_status === 'returned' ) ? (
               <Button variant='outline' size='sm' className='font-regular' render={
                 <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
-                  Edit
+                  { actionsT( 'edit' ) }
                 </Link>
               }>
               </Button>
             ) : (
               <Button variant='outline' size='sm' className='font-regular' render={
                 <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
-                  View
+                  { commonT( 'view' ) }
                 </Link>
               }>
               </Button>
@@ -79,6 +82,7 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignRespo
 };
 
 const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
+  const t = useTranslations( 'dashboard.common' );
   const { id } = row.original;
   const { data: applicationsData } = useCampaignApplications( id || '' );
   const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
@@ -97,14 +101,14 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( applications[ i ] ) }
-            title="Applications"
+            title={ t( 'applications' ) }
           />
         </AnimatePresence>
       </div>
       <Sheet open={ !!selected } onOpenChange={ ( open ) => !open && setSelected( null ) }>
         <SheetContent className='w-[90%]! max-w-[420px]! overflow-y-auto'>
           <SheetHeader className='mb-4'>
-            <SheetTitle className='font-normal text-primary font-primary'>Application</SheetTitle>
+            <SheetTitle className='font-normal text-primary font-primary'>{ t( 'application' ) }</SheetTitle>
           </SheetHeader>
           { selected && <ApplicationCard application={ selected } /> }
         </SheetContent>
@@ -114,6 +118,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
 };
 
 const InvitationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const { id } = row.original;
   const { data: invitationsData } = useCampaignInvitations( id || '' );
   const invitations = ( invitationsData?.data || [] ) as ModelsGigInvitationResponse[];
@@ -132,7 +137,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( invitations[ i ] ) }
-            title="Invitations"
+            title={ t( 'invitations' ) }
           />
         </AnimatePresence>
       </div>
@@ -148,6 +153,7 @@ const InvitationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
 };
 
 const SubmissionsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const { id } = row.original;
   const { data: submissionsData } = useCampaignSubmissions( id || '' );
   const submissions = ( submissionsData?.data || [] ) as ModelsVideoSubmissionResponse[];
@@ -166,7 +172,7 @@ const SubmissionsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
           <AvatarCollage
             people={ people }
             onPersonClick={ ( i ) => setSelected( submissions[ i ] ) }
-            title="Submissions"
+            title={ t( 'submissions' ) }
           />
         </AnimatePresence>
       </div>
@@ -182,10 +188,20 @@ const SubmissionsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
 };
 
 const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  const sheetsT = useTranslations( 'dashboard.common.sheets' );
+  const locale = useLocale();
   const basePath = useBasePath();
   const { id, campaign_name, description, campaign_status, updated_at } = row.original;
   const rawImage = row.original.campaign_images?.[ 0 ]?.asset || row.original.product_image?.asset;
   const coverImage = typeof rawImage === 'string' && rawImage ? rawImage : undefined;
+  const formattedUpdatedAt = updated_at
+    ? Intl.DateTimeFormat( locale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    } ).format( new Date( updated_at ) )
+    : null;
 
   return (
     <div className='flex gap-4 pl-4 min-w-[300px]'>
@@ -194,7 +210,7 @@ const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
           <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
             <img
               src={ imgpresets.card( coverImage ) }
-              alt={ campaign_name || 'Campaign cover' }
+              alt={ campaign_name || t( 'campaignCover' ) }
               className="object-cover w-full h-full"
             />
           </Link>
@@ -211,12 +227,7 @@ const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
         </p>
         <div className='mt-4 flex flex-col gap-2'>
           <span className='text-xs text-muted-foreground/60'>
-            <span>Updated on{ ' ' }</span>
-            { Intl.DateTimeFormat( 'en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            } ).format( new Date( updated_at as string ) ) }
+            { formattedUpdatedAt ? `${ sheetsT( 'updated' ) } ${ formattedUpdatedAt }` : '' }
           </span>
           <StatusBadge status={ campaign_status! } className='w-fit' />
         </div>
@@ -225,121 +236,125 @@ const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
   );
 };
 
-export const getColumns = (): ColumnDef<ModelsCampaignResponse>[] => [
-  {
-    id: 'select',
-    header: ( { table } ) => (
-      <Checkbox
-        checked={ table.getIsAllPageRowsSelected() }
-        onCheckedChange={ ( value ) => table.toggleAllPageRowsSelected( !!value ) }
-        aria-label='Select all'
-        className={ 'bg-background' }
-      />
-    ),
-    cell: ( { row } ) => (
-      <Checkbox
-        checked={ row.getIsSelected() }
-        onCheckedChange={ ( value ) => row.toggleSelected( !!value ) }
-        aria-label='Select row'
-        className={ 'mt-1' }
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    id: 'campaign_name',
-    accessorKey: 'campaign_name',
-    cell: () => <span data-hidden-column="true" />,
-    enableSorting: true,
-    enableHiding: true,
-    header: () => <span data-hidden-column="true" />,
-    size: 0,
-    minSize: 0,
-    maxSize: 0,
-  },
-  {
-    id: 'campaign_status',
-    accessorKey: 'campaign_status',
-    cell: () => <span data-hidden-column="true" />,
-    enableSorting: false,
-    enableHiding: false,
-    header: () => <span data-hidden-column="true" />,
-    size: 0,
-    minSize: 0,
-    maxSize: 0,
-    filterFn: ( row, id, filterValue ) => {
-      if ( filterValue === undefined ) {
-        return true;
-      }
-      if ( !Array.isArray( filterValue ) ) return true;
-      if ( filterValue.length === 0 ) return false;
-      // Check if the row's status is in the filter array
-      const rowValue = row.getValue( id ) as string;
-      return filterValue.includes( rowValue );
+export function useCampaignColumns(): ColumnDef<ModelsCampaignResponse>[] {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  const actionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+
+  return React.useMemo( () => [
+    {
+      id: 'select',
+      header: ( { table } ) => (
+        <Checkbox
+          checked={ table.getIsAllPageRowsSelected() }
+          onCheckedChange={ ( value ) => table.toggleAllPageRowsSelected( !!value ) }
+          aria-label='Select all'
+          className={ 'bg-background' }
+        />
+      ),
+      cell: ( { row } ) => (
+        <Checkbox
+          checked={ row.getIsSelected() }
+          onCheckedChange={ ( value ) => row.toggleSelected( !!value ) }
+          aria-label='Select row'
+          className={ 'mt-1' }
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
     },
-  },
-  {
-    id: 'created_at',
-    accessorKey: 'created_at',
-    cell: () => <span data-hidden-column="true" />,
-    enableSorting: false,
-    enableHiding: false,
-    header: () => <span data-hidden-column="true" />,
-    size: 0,
-    minSize: 0,
-    maxSize: 0,
-  },
-  {
-    id: 'updated_at',
-    accessorKey: 'updated_at',
-    cell: () => <span data-hidden-column="true" />,
-    enableSorting: false,
-    enableHiding: false,
-    header: () => <span data-hidden-column="true" />,
-    size: 0,
-    minSize: 0,
-    maxSize: 0,
-  },
-  {
-    accessorKey: 'details',
-    header: () => <span className='font-regular pl-4'>Details</span>,
-    cell: ( { row } ) => <DetailsCell row={ row } />,
-  },
-  {
-    accessorKey: 'applications',
-    header: ( { column } ) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={ () => column.toggleSorting( column.getIsSorted() === 'asc' ) }
-          className={ 'pl-0' }
-        >
-          <span className='font-regular'>Applications</span>
-          <ArrowUpDown />
-        </Button>
-      );
+    {
+      id: 'campaign_name',
+      accessorKey: 'campaign_name',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: true,
+      enableHiding: true,
+      header: () => <span data-hidden-column="true" />,
+      size: 0,
+      minSize: 0,
+      maxSize: 0,
     },
-    cell: ( { row } ) => <ApplicationsCell row={ row } />,
-  },
-  {
-    accessorKey: 'invitations',
-    header: () => <span className='font-regular'>Invitations</span>,
-    cell: ( { row } ) => <InvitationsCell row={ row } />,
-  },
-  {
-    accessorKey: 'submissions',
-    header: () => <span className='font-regular'>Submissions</span>,
-    cell: ( { row } ) => <SubmissionsCell row={ row } />,
-  },
-  {
-    id: 'actions',
-    header: () => (
-      <div className='flex justify-end pr-2'>
-        <span className='font-regular text-right'>Actions</span>
-      </div>
-    ),
-    enableHiding: false,
-    cell: ( { row } ) => <CampaignActionsCell row={ row } className='pr-2' />,
-  },
-];
+    {
+      id: 'campaign_status',
+      accessorKey: 'campaign_status',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+      size: 0,
+      minSize: 0,
+      maxSize: 0,
+      filterFn: ( row, id, filterValue ) => {
+        if ( filterValue === undefined ) {
+          return true;
+        }
+        if ( !Array.isArray( filterValue ) ) return true;
+        if ( filterValue.length === 0 ) return false;
+        const rowValue = row.getValue( id ) as string;
+        return filterValue.includes( rowValue );
+      },
+    },
+    {
+      id: 'created_at',
+      accessorKey: 'created_at',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+      size: 0,
+      minSize: 0,
+      maxSize: 0,
+    },
+    {
+      id: 'updated_at',
+      accessorKey: 'updated_at',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+      size: 0,
+      minSize: 0,
+      maxSize: 0,
+    },
+    {
+      accessorKey: 'details',
+      header: () => <span className='font-regular pl-4'>{ t( 'details' ) }</span>,
+      cell: ( { row } ) => <DetailsCell row={ row } />,
+    },
+    {
+      accessorKey: 'applications',
+      header: ( { column } ) => {
+        return (
+          <Button
+            variant='ghost'
+            onClick={ () => column.toggleSorting( column.getIsSorted() === 'asc' ) }
+            className={ 'pl-0' }
+          >
+            <span className='font-regular'>{ t( 'applications' ) }</span>
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ( { row } ) => <ApplicationsCell row={ row } />,
+    },
+    {
+      accessorKey: 'invitations',
+      header: () => <span className='font-regular'>{ t( 'invitations' ) }</span>,
+      cell: ( { row } ) => <InvitationsCell row={ row } />,
+    },
+    {
+      accessorKey: 'submissions',
+      header: () => <span className='font-regular'>{ t( 'submissions' ) }</span>,
+      cell: ( { row } ) => <SubmissionsCell row={ row } />,
+    },
+    {
+      id: 'actions',
+      header: () => (
+        <div className='flex justify-end pr-2'>
+          <span className='font-regular text-right'>{ actionsT( 'actions' ) }</span>
+        </div>
+      ),
+      enableHiding: false,
+      cell: ( { row } ) => <CampaignActionsCell row={ row } className='pr-2' />,
+    },
+  ], [ t, actionsT ] );
+}

@@ -15,8 +15,10 @@ import { Loader2 } from "lucide-react";
 import { GigSelectionItem } from "./gig-selection/gig-selection-item";
 import { FolderVideoIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { useTranslations } from "next-intl";
 
 function EmptyGigsState() {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4">
       <div className="size-16 rounded-full bg-muted/50 flex items-center justify-center mb-4">
@@ -26,10 +28,10 @@ function EmptyGigsState() {
         />
       </div>
       <h3 className="text-base font-medium text-foreground mb-1">
-        No gigs yet
+        { t( 'noGigsYet' ) }
       </h3>
       <p className="text-sm text-muted-foreground text-center max-w-[320px] mb-4">
-        This campaign doesn't have any gigs yet. Create a gig first before inviting creators.
+        { t( 'noGigsYetDescription' ) }
       </p>
     </div>
   );
@@ -48,6 +50,7 @@ export function GigSelectionDialog( {
   onOpenChange,
   onSelect,
 }: GigSelectionDialogProps ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   const { data: gigsData, isLoading } = useGigsByCampaign( campaignId, "brand" );
   const gigs = ( gigsData?.data || [] ) as ModelsGigResponse[];
 
@@ -55,9 +58,9 @@ export function GigSelectionDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle className="dialog__title">Select a Gig</DialogTitle>
+          <DialogTitle className="dialog__title">{ t( 'selectGigTitle' ) }</DialogTitle>
           <DialogDescription className="dialog__description">
-            Choose a gig to invite creators to.
+            { t( 'selectGigDescription' ) }
           </DialogDescription>
         </DialogHeader>
 

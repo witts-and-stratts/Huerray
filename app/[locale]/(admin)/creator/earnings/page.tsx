@@ -11,7 +11,9 @@ export default async function CreatorEarningsPage() {
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       />
-      <CreatorEarningsClient />
+      <div className='bg-slate-50/50 flex-1'>
+        <CreatorEarningsClient />
+      </div>
     </>
   );
 }

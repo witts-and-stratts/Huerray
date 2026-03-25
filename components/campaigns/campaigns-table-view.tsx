@@ -15,12 +15,14 @@ import {
 import { AnimatePresence } from 'motion/react';
 import { MotionTableRow } from '../dashboard-ui/motion-table';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { useTranslations } from 'next-intl';
 
 export function CamapignsTableView( {
   table,
 }: {
   table: TanstackTable<ModelsCampaignResponse>;
 } ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   return <div className='border border-border rounded-lg overflow-hidden'>
     <Table className='overflow-auto'>
       <TableHeader sticky>
@@ -79,7 +81,7 @@ export function CamapignsTableView( {
                 colSpan={ table.getVisibleLeafColumns().length }
                 className='h-24 text-center'
               >
-                No results.
+                { t( 'noResults' ) }
               </TableCell>
             </TableRow>
           ) }
@@ -88,4 +90,3 @@ export function CamapignsTableView( {
     </Table>
   </div>;
 }
-

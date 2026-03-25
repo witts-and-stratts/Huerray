@@ -8,23 +8,35 @@ export type ReactFormApi<TData> = FormApi<TData, any, any, any, any, any, any, a
   Subscribe: any;
 };
 
-export const brandSettingsSchema = z.object({
-  companyName: z.string().min(1, 'Company name is required'),
-  websiteUrl: z.string().url('Invalid URL'),
+export type BrandSettingsMessages = {
+  companyNameRequired: string;
+  invalidUrl: string;
+  stateRequired: string;
+};
+
+export const getBrandSettingsSchema = ( messages: BrandSettingsMessages ) => z.object({
+  companyName: z.string().min( 1, messages.companyNameRequired ),
+  websiteUrl: z.string().url( messages.invalidUrl ),
   companyDescription: z.string(),
-  category: z.nativeEnum(UtilsBrandCategory).optional(),
-  companySize: z.nativeEnum(UtilsCompanySize).optional(),
+  category: z.nativeEnum( UtilsBrandCategory ).optional(),
+  companySize: z.nativeEnum( UtilsCompanySize ).optional(),
   registrationNumber: z.string(),
   city: z.string(),
   country: z.string(),
   building_number: z.string(),
-  preferredContactEmail: z.email().or(z.literal('')),
+  preferredContactEmail: z.email().or( z.literal( '' ) ),
   preferredContactPhone: z.string(),
-  state: z.string().min(1, 'State/Province is required'),
+  state: z.string().min( 1, messages.stateRequired ),
   street: z.string(),
   vatId: z.string(),
   postalCode: z.string(),
   profilePhotoUrl: z.string().optional(),
-});
+} );
+
+export const brandSettingsSchema = getBrandSettingsSchema( {
+  companyNameRequired: 'Company name is required',
+  invalidUrl: 'Invalid URL',
+  stateRequired: 'State/Province is required',
+} );
 
 export type BrandSettings = z.infer<typeof brandSettingsSchema>;

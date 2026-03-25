@@ -116,10 +116,11 @@ export function UsersTable( {
 
   return (
     <AnimatePresence>
-      { showLoading && <DataTableSkeleton /> }
-      { error && <TableErrorState entity="users" message={ error.message } /> }
+      { showLoading && <DataTableSkeleton key="users-loading" /> }
+      { error && <TableErrorState key="users-error" entity="users" message={ error.message } /> }
       { !isLoading && !error && (
         <motion.div
+          key="users-table"
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }

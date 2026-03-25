@@ -16,12 +16,14 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/components/dashboard-ui/dialog';
+import { useTranslations } from 'next-intl';
 
 interface CampaignDocumentsViewProps {
   documents: string[];
 }
 
 export function CampaignDocumentsView( { documents }: CampaignDocumentsViewProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const [ previewUrl, setPreviewUrl ] = useState<string | null>( null );
 
   if ( !documents || documents.length === 0 ) {
@@ -50,9 +52,9 @@ export function CampaignDocumentsView( { documents }: CampaignDocumentsViewProps
               </Avatar>
             </div>
           </EmptyMedia>
-          <EmptyTitle className='font-normal font-primary text-primary'>No documents uploaded</EmptyTitle>
+          <EmptyTitle className='font-normal font-primary text-primary'>{ t( 'noDocumentsUploaded' ) }</EmptyTitle>
           <EmptyDescription>
-            There are no documents uploaded for this campaign yet.
+            { t( 'noDocumentsUploadedDescription' ) }
           </EmptyDescription>
         </EmptyHeader>
       </Empty>
@@ -84,7 +86,7 @@ export function CampaignDocumentsView( { documents }: CampaignDocumentsViewProps
 
       <Dialog open={ !!previewUrl } onOpenChange={ () => setPreviewUrl( null ) }>
         <DialogContent className="max-w-4xl max-h-[90vh]">
-          <DialogTitle className="sr-only">Document Preview</DialogTitle>
+          <DialogTitle className="sr-only">{ t( 'documentPreview' ) }</DialogTitle>
           { previewUrl && ( previewUrl.toLowerCase().endsWith( '.pdf' ) || getFileName( previewUrl, 0 ).toLowerCase().endsWith( '.pdf' ) ) ? (
             <div className="h-[80vh]">
               <PdfPreview src={ previewUrl } />
@@ -93,7 +95,7 @@ export function CampaignDocumentsView( { documents }: CampaignDocumentsViewProps
             <iframe
               src={ previewUrl }
               className="w-full h-[80vh]"
-              title="Document Preview"
+              title={ t( 'documentPreview' ) }
             />
           ) : null }
         </DialogContent>

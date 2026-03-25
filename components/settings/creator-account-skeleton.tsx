@@ -2,6 +2,7 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { Card, CardContent, CardHeader } from '@/components/dashboard-ui/card';
 import { SubHeader } from '@/components/subheader';
 import { Separator } from '@/components/dashboard-ui/separator';
+import { useTranslations } from 'next-intl';
 
 function RowSkeleton() {
   return (
@@ -15,14 +16,16 @@ function RowSkeleton() {
 }
 
 export function CreatorAccountSkeleton() {
+  const t = useTranslations( 'dashboard.creator.accountEditPage' );
+  const tBread = useTranslations( 'dashboard.creator.breadcrumbs' );
   return (
     <div className="flex flex-1 flex-col h-full">
       <SubHeader
-        title="Account Settings"
-        description="Manage your account preferences and banking information"
+        title={ t( 'title' ) }
+        description={ t( 'description' ) }
         breadcrumbs={ [
-          { label: 'Dashboard', href: '/creator' },
-          { label: 'Account' },
+          { label: tBread( 'dashboard' ), href: '/creator' },
+          { label: tBread( 'account' ) },
         ] }
       />
 

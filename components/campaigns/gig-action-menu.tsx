@@ -11,6 +11,7 @@ import { ChevronDown, EllipsisVertical } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 import { useBasePath } from "@/lib/providers/path-provider";
 
@@ -27,6 +28,7 @@ export function GigActionMenu( {
   trigger = 'button',
   onEditGig,
 }: GigActionMenuProps ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   const basePath = useBasePath();
   const router = useRouter();
   const { mutate: updateStatus } = useUpdateGigStatus();
@@ -38,13 +40,13 @@ export function GigActionMenu( {
     if ( !gig.id || confirmName !== gig.title ) return;
     deleteGig( gig.id, {
       onSuccess: () => {
-        toast.success( "Gig deleted successfully", {
+        toast.success( t( 'actions.deletedGig' ), {
           richColors: true,
         } );
         setIsDeleteDialogOpen( false );
       },
       onError: ( error ) => {
-        toast.error( "Failed to delete gig", { richColors: true } );
+        toast.error( t( 'actions.deleteFailed' ), { richColors: true } );
         console.error( error );
       },
     } );
@@ -52,15 +54,15 @@ export function GigActionMenu( {
 
   const handleApproveGig = () => {
     if ( !gig.id ) {
-      toast.error( "Cannot approve gig: Missing ID" );
+      toast.error( t( 'actions.missingId' ) );
       return;
     }
     updateStatus(
       { id: gig.id, status: { gig_status: UtilsGigStatus.GigStatusOpen } },
       {
-        onSuccess: () => toast.success( "Gig approved successfully" ),
+        onSuccess: () => toast.success( t( 'actions.approvedGig' ) ),
         onError: ( error ) => {
-          toast.error( "Failed to approve gig" );
+          toast.error( t( 'actions.approveFailed' ) );
           console.error( error );
         },
       }
@@ -69,15 +71,15 @@ export function GigActionMenu( {
 
   const handleValidateGig = () => {
     if ( !gig.id ) {
-      toast.error( "Cannot validate gig: Missing ID" );
+      toast.error( t( 'actions.missingId' ) );
       return;
     }
     updateStatus(
       { id: gig.id, status: { gig_status: UtilsGigStatus.GigStatusValidated } },
       {
-        onSuccess: () => toast.success( "Gig validated successfully" ),
+        onSuccess: () => toast.success( t( 'actions.validatedGig' ) ),
         onError: ( error ) => {
-          toast.error( "Failed to validate gig" );
+          toast.error( t( 'actions.validateFailed' ) );
           console.error( error );
         },
       }
@@ -86,11 +88,11 @@ export function GigActionMenu( {
 
   const actions: MenuAction<ModelsGigResponse>[] = [
     {
-      label: "View Gig",
+      label: t( 'actions.viewGig' ),
       action: () => onViewGig( gig ),
     },
     {
-      label: "Edit Gig",
+      label: t( 'actions.editGig' ),
       action: () => onEditGig
         ? onEditGig( gig )
         : router.push( `${ basePath }/campaigns/${ gig.campaign_id }/gigs/${ gig.id }/edit` ),
@@ -103,25 +105,25 @@ export function GigActionMenu( {
     //   condition: () => gig.gig_status === UtilsGigStatus.GigStatusDraft || gig.gig_status === UtilsGigStatus.GigStatusInProgress,
     // },
     {
-      label: "Validate Gig",
+      label: t( 'actions.validateGig' ),
       action: handleValidateGig,
       allowedRoles: [ 'admin' ],
       condition: () => gig.gig_status === UtilsGigStatus.GigStatusDraft
     },
     {
-      label: "Submissions",
+      label: t( 'actions.submissions' ),
       action: () => onViewGig( gig, 'submissions' ),
       allowedRoles: [ 'admin', 'brand' ],
       condition: () => gig.gig_status === UtilsGigStatus.GigStatusOpen
     },
     {
-      label: "My Submissions",
+      label: t( 'actions.mySubmissions' ),
       action: () => onViewGig( gig, 'submissions' ),
       allowedRoles: [ 'creator' ],
       condition: () => gig.gig_status === UtilsGigStatus.GigStatusOpen
     },
     {
-      label: "Delete Gig",
+      label: t( 'actions.deleteGig' ),
       action: () => { setIsDeleteDialogOpen( true ); setConfirmName( '' ); },
       allowedRoles: [ 'admin' ],
       variant: 'destructive',
@@ -133,7 +135,7 @@ export function GigActionMenu( {
     trigger === 'icon' ? (
       <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground">
         <EllipsisVertical className="size-5" strokeWidth={ 1 } />
-        <span className="sr-only">Open menu</span>
+        <span className="sr-only">{ t( 'actions.openMenu' ) }</span>
       </Button>
     ) : trigger === 'button' ? (
       <Button variant="outline" size="sm" className="font-regular">
@@ -154,14 +156,13 @@ export function GigActionMenu( {
       <ConfirmDialog
         open={ isDeleteDialogOpen }
         onOpenChange={ setIsDeleteDialogOpen }
-        title="Delete Gig"
+        title={ t( 'actions.deleteGigTitle' ) }
         description={
           <>
-            Are you sure you want to delete this gig? This action cannot be undone.
-            To confirm, please type <strong>{ gig.title }</strong> below.
+            { t( 'actions.deleteGigDescription' ) } <strong>{ gig.title }</strong> { t( 'actions.deleteGigDescriptionSuffix' ) }
           </>
         }
-        confirmLabel={ isDeleting ? "Deleting..." : "Delete Gig" }
+        confirmLabel={ isDeleting ? t( 'actions.deletingGig' ) : t( 'actions.deleteGig' ) }
         onConfirm={ handleConfirmDelete }
         confirmDisabled={ confirmName !== gig.title }
         isLoading={ isDeleting }
@@ -173,7 +174,7 @@ export function GigActionMenu( {
             name="confirm-name"
             value={ confirmName }
             onChange={ ( e ) => setConfirmName( e.target.value ) }
-            placeholder="Type the gig name to confirm"
+            placeholder={ t( 'actions.confirmGigName' ) }
           />
         </div>
       </ConfirmDialog>

@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/components/dashboard-ui/dialog';
+import { useTranslations } from 'next-intl';
 import {
   Empty,
   EmptyDescription,
@@ -22,6 +23,7 @@ interface CampaignImagesViewProps {
 }
 
 export function CampaignImagesView( { images }: CampaignImagesViewProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const [ previewImage, setPreviewImage ] = useState<string | null>( null );
 
   if ( !images || images.length === 0 ) {
@@ -31,9 +33,9 @@ export function CampaignImagesView( { images }: CampaignImagesViewProps ) {
           <EmptyMedia variant='icon'>
             <ImageIcon />
           </EmptyMedia>
-          <EmptyTitle className='font-normal font-primary text-primary'>No images uploaded</EmptyTitle>
+          <EmptyTitle className='font-normal font-primary text-primary'>{ t( 'noImagesUploaded' ) }</EmptyTitle>
           <EmptyDescription>
-            Images for this campaign will appear here.
+            { t( 'noImagesUploadedDescription' ) }
           </EmptyDescription>
         </EmptyHeader>
       </Empty>
@@ -65,11 +67,11 @@ export function CampaignImagesView( { images }: CampaignImagesViewProps ) {
 
       <Dialog open={ !!previewImage } onOpenChange={ () => setPreviewImage( null ) }>
         <DialogContent className="max-w-4xl">
-          <DialogTitle className="sr-only">Image Preview</DialogTitle>
+          <DialogTitle className="sr-only">{ t( 'imagePreview' ) }</DialogTitle>
           { previewImage && (
             <Media
               url={ previewImage }
-              alt="Preview"
+              alt={ t( 'preview' ) }
               className="w-full h-auto max-h-[80vh] object-contain"
             />
           ) }

@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/dashboard-ui/textarea';
 import { UtilsVideoSubmissionStatus } from '@/lib/api/generated/models';
 import { TextCapitalize } from '../text-case';
+import { useTranslations } from 'next-intl';
 
 interface SubmissionStatusUpdateDialogProps {
   open: boolean;
@@ -29,20 +30,21 @@ export function SubmissionStatusUpdateDialog( {
   onConfirm,
   isLoading,
 }: SubmissionStatusUpdateDialogProps ) {
+  const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   return (
     <ConfirmDialog
       open={ open }
       onOpenChange={ onOpenChange }
-      title="Update Submission Status"
-      description="Update the current status for this submission."
-      confirmLabel="Update Status"
+      title={ t( 'updateStatusTitle' ) }
+      description={ t( 'updateStatusDescription' ) }
+      confirmLabel={ t( 'updateStatus' ) }
       onConfirm={ onConfirm }
       isLoading={ isLoading }
-      loadingText="Updating..."
+      loadingText={ t( 'updating' ) }
     >
       <div className="pt-2 space-y-2">
         <div>
-          <label className="text-xs font-medium text-foreground">Status</label>
+          <label className="text-xs font-medium text-foreground">{ t( 'status' ) }</label>
           <Select value={ statusValue } onValueChange={ ( value ) => onStatusChange( value as UtilsVideoSubmissionStatus ) }>
             <SelectTrigger className="mt-1">
               <SelectValue>
@@ -59,12 +61,12 @@ export function SubmissionStatusUpdateDialog( {
           </Select>
         </div>
         <div>
-          <label htmlFor="submission-status-comment" className="text-xs font-medium text-foreground">Comment (Optional)</label>
+          <label htmlFor="submission-status-comment" className="text-xs font-medium text-foreground">{ t( 'commentOptional' ) }</label>
           <Textarea
             id="submission-status-comment"
             value={ statusComment }
             onChange={ ( e ) => onStatusCommentChange( e.target.value ) }
-            placeholder="Add status update note"
+            placeholder={ t( 'statusUpdateNotePlaceholder' ) }
             className="mt-1 min-h-20"
           />
         </div>

@@ -46,6 +46,7 @@ import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
+import { useTranslations } from 'next-intl';
 
 export interface GigsTableProps {
   data: ModelsGigResponse[];
@@ -70,6 +71,7 @@ export function GigsTable( {
   hidePagination = false,
   onCreateSubmission,
 }: GigsTableProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const showLoading = useDelayedLoading( isLoading, 50 );
   const { view, setView } = usePersistedViewMode( 'gigs', defaultView );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
@@ -114,7 +116,7 @@ export function GigsTable( {
   }, [ filteredData ] );
 
   const columns = React.useMemo(
-    () => getColumns( ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); }, ( gig ) => setEditingGig( gig ) ),
+    () => getColumns( t, ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); }, ( gig ) => setEditingGig( gig ) ),
     []
   );
 

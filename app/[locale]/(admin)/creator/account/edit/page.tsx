@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/dashboard-ui/dropdown-menu';
 import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { SubHeader } from '@/components/subheader';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useUpdateUserProfile, useUserProfile } from '@/lib/api/hooks/users';
 import { useForm } from '@tanstack/react-form';
@@ -14,10 +13,13 @@ import { ChevronDown } from 'lucide-react';
 import { useCallback, useEffect } from 'react';
 import { toast } from 'sonner';
 import Cookies from 'js-cookie';
+import { useTranslations } from 'next-intl';
+import { CreatorAccountHeader } from '../_components/creator-account-header';
 
 const USER_COOKIE_NAME = 'userData';
 
 export default function CreatorBasicInfoEditPage() {
+  const t = useTranslations( 'dashboard.creator.accountEditPage' );
   const { user, setUser } = useAuth();
   const { data: profile, isLoading } = useUserProfile();
   const { mutateAsync: updateProfile } = useUpdateUserProfile();
@@ -53,10 +55,10 @@ export default function CreatorBasicInfoEditPage() {
           setUser( updatedUser );
         }
 
-        toast.success( 'Basic information updated successfully', { richColors: true } );
+        toast.success( t( 'successUpdated' ), { richColors: true } );
       } catch ( error: any ) {
-        const msg = error?.response?.data?.error || error?.response?.data?.message || error?.message || 'Failed to update';
-        toast.error( `Failed to update: ${ msg }` );
+        const msg = error?.response?.data?.error || error?.response?.data?.message || error?.message || t( 'errorUpdateFailed' );
+        toast.error( t( 'errorUpdateFailedWithError', { error: msg } ) );
       }
     },
   } );
@@ -85,13 +87,14 @@ export default function CreatorBasicInfoEditPage() {
     form.setFieldValue( 'email', ( source as any ).email || '' );
     form.setFieldValue( 'phone_number', ( source as any ).phone_number || '' );
     form.setFieldValue( 'username', ( source as any ).username || '' );
-    toast.info( 'Changes discarded' );
+    toast.info( t( 'changesDiscarded' ) );
   }, [ profile, user, form ] );
 
+  const tNav = useTranslations( 'dashboard.creator.breadcrumbs' );
   const breadcrumbs = [
-    { label: 'Dashboard', href: '/creator' },
-    { label: 'Account', href: '/creator/account' },
-    { label: 'Edit Basic Information' },
+    { label: tNav( 'dashboard' ), href: '/creator' },
+    { label: tNav( 'account' ), href: '/creator/account' },
+    { label: tNav( 'editBasicInfo' ) },
   ];
 
   return (
@@ -103,17 +106,17 @@ export default function CreatorBasicInfoEditPage() {
       } }
       className="contents"
     >
-      <SubHeader
+      <CreatorAccountHeader
         breadcrumbs={ breadcrumbs }
-        title="Edit Basic Information"
-        description="Update your personal details and contact information."
+        title={ t( 'title' ) }
+        description={ t( 'description' ) }
       >
         <form.Subscribe
           selector={ ( state ) => [ state.isSubmitting ] }
           children={ ( [ isSubmitting ] ) => (
             <ButtonGroup>
               <Button type="submit" disabled={ isSubmitting }>
-                { isSubmitting ? 'Saving...' : 'Save Changes' }
+                { isSubmitting ? t( 'saving' ) : t( 'saveChanges' ) }
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -123,131 +126,130 @@ export default function CreatorBasicInfoEditPage() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="min-w-40">
                   <DropdownMenuItem onClick={ handleDiscard }>
-                    Discard Changes
+                    { t( 'discardChanges' ) }
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </ButtonGroup>
           ) }
         />
-      </SubHeader>
+      </CreatorAccountHeader>
 
       <div className="p-6 space-y-6 bg-slate-50/50 h-full">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl m-px">
-          <div className="lg:col-span-2 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Personal Details</CardTitle>
-                <CardDescription>Your name and account identity.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <form.Field
-                    name="first_name"
-                    children={ ( field ) => (
-                      <SuperField
-                        name={ field.name }
-                        label="First Name"
-                        type="text"
-                        value={ field.state.value }
-                        onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                        onBlur={ field.handleBlur }
-                        placeholder="Enter first name"
-                        required
-                      />
-                    ) }
-                  />
+        <div className="max-w-[800px] m-px space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>{ t( 'personalDetailsTitle' ) }</CardTitle>
+              <CardDescription>{ t( 'personalDetailsDescription' ) }</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form.Field
+                  name="first_name"
+                  children={ ( field ) => (
+                    <SuperField
+                      name={ field.name }
+                      label={ t( 'firstName' ) }
+                      type="text"
+                      value={ field.state.value }
+                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                      onBlur={ field.handleBlur }
+                      placeholder={ t( 'firstNamePlaceholder' ) }
+                      required
+                    />
+                  ) }
+                />
 
-                  <form.Field
-                    name="last_name"
-                    children={ ( field ) => (
-                      <SuperField
-                        name={ field.name }
-                        label="Last Name"
-                        type="text"
-                        value={ field.state.value }
-                        onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                        onBlur={ field.handleBlur }
-                        placeholder="Enter last name"
-                        required
-                      />
-                    ) }
-                  />
+                <form.Field
+                  name="last_name"
+                  children={ ( field ) => (
+                    <SuperField
+                      name={ field.name }
+                      label={ t( 'lastName' ) }
+                      type="text"
+                      value={ field.state.value }
+                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                      onBlur={ field.handleBlur }
+                      placeholder={ t( 'lastNamePlaceholder' ) }
+                      required
+                    />
+                  ) }
+                />
 
-                  <form.Field
-                    name="middle_name"
-                    children={ ( field ) => (
-                      <SuperField
-                        name={ field.name }
-                        label="Middle Name"
-                        type="text"
-                        value={ field.state.value }
-                        onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                        onBlur={ field.handleBlur }
-                        placeholder="Enter middle name (optional)"
-                      />
-                    ) }
-                  />
+                <form.Field
+                  name="middle_name"
+                  children={ ( field ) => (
+                    <SuperField
+                      name={ field.name }
+                      label={ t( 'middleName' ) }
+                      type="text"
+                      value={ field.state.value }
+                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                      onBlur={ field.handleBlur }
+                      placeholder={ t( 'middleNamePlaceholder' ) }
+                    />
+                  ) }
+                />
 
-                  <form.Field
-                    name="username"
-                    children={ ( field ) => (
-                      <SuperField
-                        name={ field.name }
-                        label="Username"
-                        type="text"
-                        value={ field.state.value }
-                        onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                        onBlur={ field.handleBlur }
-                        placeholder="Enter username"
-                      />
-                    ) }
-                  />
-                </FieldGroup>
-              </CardContent>
-            </Card>
+                <form.Field
+                  name="username"
+                  children={ ( field ) => (
+                    <SuperField
+                      name={ field.name }
+                      label={ t( 'username' ) }
+                      type="text"
+                      disabled
+                      value={ field.state.value }
+                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                      onBlur={ field.handleBlur }
+                      placeholder={ t( 'usernamePlaceholder' ) }
+                    />
+                  ) }
+                />
+              </FieldGroup>
+            </CardContent>
+          </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Contact Information</CardTitle>
-                <CardDescription>Your email and phone number.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <form.Field
-                    name="email"
-                    children={ ( field ) => (
-                      <SuperField
-                        name={ field.name }
-                        label="Email Address"
-                        type="email"
-                        value={ field.state.value }
-                        onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                        onBlur={ field.handleBlur }
-                        placeholder="Enter email address"
-                        required
-                      />
-                    ) }
-                  />
+          <Card>
+            <CardHeader>
+              <CardTitle>{ t( 'contactInformationTitle' ) }</CardTitle>
+              <CardDescription>{ t( 'contactInformationDescription' ) }</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <form.Field
+                  name="email"
+                  children={ ( field ) => (
+                    <SuperField
+                      name={ field.name }
+                      label="Email Address"
+                      type="email"
+                      value={ field.state.value }
+                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                      onBlur={ field.handleBlur }
+                      placeholder="Enter email address"
+                      required
+                    />
+                  ) }
+                />
 
-                  <form.Field
-                    name="phone_number"
-                    children={ ( field ) => (
-                      <SuperField
-                        name={ field.name }
-                        label="Phone Number"
-                        type="text"
-                        value={ field.state.value }
-                        onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                        onBlur={ field.handleBlur }
-                        placeholder="+1 234 567 8900"
-                      />
-                    ) }
-                  />
-                </FieldGroup>
-              </CardContent>
-            </Card>
-          </div>
+                <form.Field
+                  name="phone_number"
+                  children={ ( field ) => (
+                    <SuperField
+                      name={ field.name }
+                      label="Phone Number"
+                      type="text"
+                      value={ field.state.value }
+                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                      onBlur={ field.handleBlur }
+                      placeholder="+1 234 567 8900"
+                    />
+                  ) }
+                />
+              </FieldGroup>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </form>

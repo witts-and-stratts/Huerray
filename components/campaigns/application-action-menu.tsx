@@ -10,6 +10,7 @@ import { MoreVertical } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { toast } from 'sonner';
 import { SentenceCase } from '../text-case';
+import { useTranslations } from 'next-intl';
 
 interface ApplicationActionMenuProps {
   application: ModelsGigApplicationResponse;
@@ -22,6 +23,7 @@ export function ApplicationActionMenu( {
   trigger,
   align = "end",
 }: ApplicationActionMenuProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const updateStatus = useUpdateApplicationStatus();
   const [ acceptDialogOpen, setAcceptDialogOpen ] = React.useState( false );
   const [ declineDialogOpen, setDeclineDialogOpen ] = React.useState( false );
@@ -35,11 +37,11 @@ export function ApplicationActionMenu( {
         request: { application_status: status },
       },
       {
-        onSuccess: () => {
-          toast.success(
-            status === UtilsGigApplicationStatus.ApplicationStatusAccepted
-              ? "Application accepted"
-              : "Application declined",
+          onSuccess: () => {
+            toast.success(
+              status === UtilsGigApplicationStatus.ApplicationStatusAccepted
+              ? t( 'applicationAccepted' )
+              : t( 'applicationDeclined' ),
             { richColors: true }
           );
           setAcceptDialogOpen( false );
@@ -47,7 +49,7 @@ export function ApplicationActionMenu( {
         },
         onError: ( error ) => {
           console.log( "Error", error );
-          toast.error( "Failed to update application status", {
+          toast.error( t( 'applicationStatusUpdateFailed' ), {
             description: <SentenceCase>{ error.response?.data?.error?.message! }</SentenceCase>,
             richColors: true,
           } );
@@ -60,13 +62,13 @@ export function ApplicationActionMenu( {
 
   const actions: MenuAction<ModelsGigApplicationResponse>[] = [
     {
-      label: "Accept",
+      label: t( 'accept' ),
       action: () => setAcceptDialogOpen( true ),
       condition: () => isPending,
       allowedRoles: [ "brand" ],
     },
     {
-      label: "Decline",
+      label: t( 'decline' ),
       action: () => setDeclineDialogOpen( true ),
       condition: () => isPending,
       allowedRoles: [ "brand" ],
@@ -83,7 +85,7 @@ export function ApplicationActionMenu( {
         trigger={
           trigger || (
             <Button variant="ghost" size="sm">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">{ t( 'openMenu' ) }</span>
               <MoreVertical className="size-5" strokeWidth={ 1 } />
             </Button>
           )
@@ -93,23 +95,23 @@ export function ApplicationActionMenu( {
       <ConfirmDialog
         open={ acceptDialogOpen }
         onOpenChange={ setAcceptDialogOpen }
-        title="Accept Application"
-        description="Are you sure you want to accept this application? The creator will be notified and can start working on the gig."
-        confirmLabel="Accept"
+        title={ t( 'acceptApplicationTitle' ) }
+        description={ t( 'acceptApplicationDescription' ) }
+        confirmLabel={ t( 'accept' ) }
         onConfirm={ () => handleUpdateStatus( UtilsGigApplicationStatus.ApplicationStatusAccepted ) }
         isLoading={ updateStatus.isPending }
-        loadingText="Accepting..."
+        loadingText={ t( 'accepting' ) }
       />
 
       <ConfirmDialog
         open={ declineDialogOpen }
         onOpenChange={ setDeclineDialogOpen }
-        title="Decline Application"
-        description="Are you sure you want to decline this application? This action cannot be undone."
-        confirmLabel="Decline"
+        title={ t( 'declineApplicationTitle' ) }
+        description={ t( 'declineApplicationDescription' ) }
+        confirmLabel={ t( 'decline' ) }
         onConfirm={ () => handleUpdateStatus( UtilsGigApplicationStatus.ApplicationStatusDeclined ) }
         isLoading={ updateStatus.isPending }
-        loadingText="Declining..."
+        loadingText={ t( 'declining' ) }
         variant="destructive"
       />
     </>

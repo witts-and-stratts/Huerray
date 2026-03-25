@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { Link } from '@/lib/navigation';
+import Link from 'next/link';
 import { CampaignActionMenu } from './campaign-action-menu';
 
 import {

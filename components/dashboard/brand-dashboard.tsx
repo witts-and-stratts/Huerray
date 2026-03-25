@@ -22,8 +22,10 @@ import {
 } from '@/components/dashboard/blocks/brand';
 import { CampaignStatsBlock } from '@/components/dashboard/blocks/admin/campaign-stats-block';
 import { RecentActivityBlock } from '@/components/dashboard/blocks/admin/recent-activity-block';
+import { useTranslations } from 'next-intl';
 
 export function BrandDashboard() {
+  const t = useTranslations( 'dashboard.brand.landing' );
   const { user } = useAuth();
   const brandId = user?.id || '';
 
@@ -51,18 +53,18 @@ export function BrandDashboard() {
   return (
     <>
       <SubHeader
-        title="Dashboard"
-        description="Campaign performance and operational view for your brand account"
+        title={ t( 'title' ) }
+        description={ t( 'description' ) }
       >
         <Link href="/brand/campaigns/new">
           <Button className="gap-2">
             <CirclePlus className="size-4" />
-            Create Campaign
+            { t( 'createCampaign' ) }
           </Button>
         </Link>
         <Link href="/brand/campaigns">
           <Button variant="outline" className="gap-2">
-            View Campaigns
+            { t( 'viewCampaigns' ) }
             <ArrowUpRight className="size-4" />
           </Button>
         </Link>
@@ -112,4 +114,3 @@ export function BrandDashboard() {
     </>
   );
 }
-

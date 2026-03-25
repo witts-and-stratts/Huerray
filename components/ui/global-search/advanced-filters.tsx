@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Calendar04Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 import { Input } from '@/components/dashboard-ui/input';
@@ -15,6 +16,7 @@ interface AdvancedFiltersProps {
 }
 
 export function AdvancedFilters( { filters, onChange, entityTypes }: AdvancedFiltersProps ) {
+  const t = useTranslations( 'dashboard.common' );
   const statusOptions = Array.from( entityTypes ).flatMap( ( t ) => STATUS_OPTIONS[ t ] ?? [] );
   const uniqueStatuses = Array.from(
     new Map( statusOptions.map( ( s ) => [ s.value, s ] ) ).values(),
@@ -33,7 +35,7 @@ export function AdvancedFilters( { filters, onChange, entityTypes }: AdvancedFil
           {/* Date after */}
           <div className="flex flex-col gap-1">
             <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
-              After
+              { t( 'search.after' ) }
             </label>
             <div className="relative">
               <HugeiconsIcon
@@ -55,7 +57,7 @@ export function AdvancedFilters( { filters, onChange, entityTypes }: AdvancedFil
           {/* Date before */}
           <div className="flex flex-col gap-1">
             <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
-              Before
+              { t( 'search.before' ) }
             </label>
             <div className="relative">
               <HugeiconsIcon
@@ -78,7 +80,7 @@ export function AdvancedFilters( { filters, onChange, entityTypes }: AdvancedFil
           { uniqueStatuses.length > 0 && (
             <div className="flex flex-col gap-1">
               <label className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">
-                Status
+                { t( 'status' ) }
               </label>
               <select
                 value={ filters.status ?? '' }
@@ -87,7 +89,7 @@ export function AdvancedFilters( { filters, onChange, entityTypes }: AdvancedFil
                 }
                 className="h-8 rounded-md border border-input bg-background px-2 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-ring"
               >
-                <option value="">Any status</option>
+                <option value="">{ t( 'search.anyStatus' ) }</option>
                 { uniqueStatuses.map( ( s ) => (
                   <option key={ s.value } value={ s.value }>
                     { s.label }
@@ -106,7 +108,7 @@ export function AdvancedFilters( { filters, onChange, entityTypes }: AdvancedFil
               className="h-8 text-xs text-muted-foreground"
             >
               <HugeiconsIcon icon={ Cancel01Icon } className="size-3 mr-1" strokeWidth={ 2 } />
-              Clear filters
+              { t( 'clearFilters' ) }
             </Button>
           ) }
         </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/dashboard-utils";
 import {
   Popover,
@@ -50,6 +51,7 @@ export const SearchableSelect = ( {
   const [ open, setOpen ] = useState( false );
   const [ width, setWidth ] = useState( 0 );
   const triggerRef = useRef<HTMLDivElement>( null );
+  const t = useTranslations( 'dashboard.common' );
 
   const selectedOption = options.find( ( option ) => {
     if ( typeof option === 'object' && option !== null && 'value' in option ) {
@@ -97,7 +99,7 @@ export const SearchableSelect = ( {
           <span className="flex flex-1 text-left line-clamp-1 items-center">
             { renderTrigger
               ? renderTrigger( selectedOption )
-              : ( selectedLabel || placeholder || "Select..." )
+              : ( selectedLabel || placeholder || t( 'view' ) )
             }
           </span>
           <HugeiconsIcon icon={ UnfoldMoreIcon } strokeWidth={ 2 } className="text-muted-foreground size-4 pointer-events-none" />

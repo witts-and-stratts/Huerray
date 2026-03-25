@@ -1,15 +1,16 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { useAuth } from '@/lib/auth/auth-context';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, usePathname } from 'next/navigation';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   ENTITIES_BY_ROLE,
-  ENTITY_LABELS,
   useGlobalSearch,
   type EntityType,
   type SearchFilters,
+  type SearchGroup,
   type SearchResult,
 } from '@/lib/api/hooks/search';
 import {
@@ -60,9 +61,39 @@ interface SearchDialogProps {
   onOpenChange: ( open: boolean ) => void;
 }
 
+function areGroupsEqual( a: SearchGroup[], b: SearchGroup[] ) {
+  if ( a === b ) return true;
+  if ( a.length !== b.length ) return false;
+
+  return a.every( ( group, index ) => {
+    const other = b[ index ];
+
+    if ( !other ) return false;
+    if ( group.type !== other.type ) return false;
+    if ( group.isLoading !== other.isLoading || group.isError !== other.isError ) return false;
+    if ( group.items.length !== other.items.length ) return false;
+
+    return group.items.every( ( item, itemIndex ) => {
+      const otherItem = other.items[ itemIndex ];
+
+      return (
+        otherItem != null
+        && item.id === otherItem.id
+        && item.type === otherItem.type
+        && item.title === otherItem.title
+        && item.subtitle === otherItem.subtitle
+        && item.status === otherItem.status
+        && item.createdAt === otherItem.createdAt
+      );
+    } );
+  } );
+}
+
 export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
+  const t = useTranslations( 'dashboard.common' );
   const { user } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const params = useParams();
   const locale = ( params?.locale as string ) ?? 'en';
   const role = ( user?.role ?? 'admin' ) as 'admin' | 'brand' | 'creator';
@@ -75,7 +106,9 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
   );
   const [ showAdvanced, setShowAdvanced ] = useState( false );
   const [ filters, setFilters ] = useState<SearchFilters>( {} );
+  const [ settledGroups, setSettledGroups ] = useState<SearchGroup[]>( [] );
   const inputRef = useRef<HTMLInputElement>( null );
+  const previousPathnameRef = useRef( pathname );
 
   // Debounce
   useEffect( () => {
@@ -94,6 +127,13 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
       setShowAdvanced( false );
     }
   }, [ open ] );
+
+  useEffect( () => {
+    if ( open && previousPathnameRef.current !== pathname ) {
+      onOpenChange( false );
+    }
+    previousPathnameRef.current = pathname;
+  }, [ open, onOpenChange, pathname ] );
 
   const toggleEntity = useCallback( ( type: EntityType ) => {
     setSelectedEntities( ( prev ) => {
@@ -120,23 +160,40 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
     enabled: open,
   } );
 
+  useEffect( () => {
+    if ( debouncedQuery.length < 2 ) {
+      setSettledGroups( ( previousGroups ) => ( previousGroups.length === 0 ? previousGroups : [] ) );
+      return;
+    }
+
+    if ( !isAnyLoading ) {
+      setSettledGroups( ( previousGroups ) => (
+        areGroupsEqual( previousGroups, groups ) ? previousGroups : groups
+      ) );
+    }
+  }, [ debouncedQuery, groups, isAnyLoading ] );
+
   const handleSelect = useCallback(
     ( result: SearchResult ) => {
+      onOpenChange( false );
       router.push( buildUrl( locale, role, result ) );
     },
-    [ locale, role, router ],
+    [ locale, onOpenChange, role, router ],
   );
 
+  const settledHasResults = settledGroups.some( ( group ) => group.items.length > 0 );
+  const visibleGroups = isAnyLoading && settledHasResults ? settledGroups : groups;
+  const visibleResultCount = visibleGroups.reduce( ( sum, group ) => sum + group.items.length, 0 );
   const showHint = debouncedQuery.length < 2;
-  const showResults = debouncedQuery.length >= 2 && hasResults;
+  const showResults = debouncedQuery.length >= 2 && visibleResultCount > 0;
   const showEmpty = debouncedQuery.length >= 2 && !isAnyLoading && !hasResults;
-  const showLoading = debouncedQuery.length >= 2 && isAnyLoading && !hasResults;
+  const showLoading = debouncedQuery.length >= 2 && isAnyLoading && !settledHasResults;
 
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogHeader className="sr-only">
-        <DialogTitle>Global Search</DialogTitle>
-        <DialogDescription>Search across your dashboard</DialogDescription>
+        <DialogTitle>{ t( 'search.title' ) }</DialogTitle>
+        <DialogDescription>{ t( 'search.description' ) }</DialogDescription>
       </DialogHeader>
       <DialogContent className="max-w-[90%] overflow-hidden p-0 rounded-xl! gap-1">
 
@@ -158,7 +215,7 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
               />
             }
             onChange={ ( e ) => setInputValue( e.target.value ) }
-            placeholder="Search campaigns, creators, gigs…"
+            placeholder={ t( 'search.placeholder' ) }
             className="max-w-xl self-center"
             fieldClassName="placeholder:text-gray-400 cursor-pointer md:h-12 md:text-base!"
             suffix={
@@ -186,7 +243,7 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
             ) }
           >
             { allSelected && <HugeiconsIcon icon={ Tick01Icon } className="size-3" strokeWidth={ 2 } /> }
-            All
+            { t( 'search.all' ) }
           </button>
           <div className="h-4 w-px bg-border shrink-0" />
           { availableEntities.map( ( type ) => (
@@ -208,7 +265,7 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
               ) }
             >
               <HugeiconsIcon icon={ FilterHorizontalIcon } className="size-3" strokeWidth={ 2 } />
-              Filters
+              { t( 'search.filters' ) }
               { hasActiveFilters && (
                 <span className="flex size-4 items-center justify-center rounded-full bg-background text-foreground text-[9px] font-bold">
                   { [ filters.createdAfter, filters.createdBefore, filters.status ].filter( Boolean ).length }
@@ -241,12 +298,12 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
             className="py-2 relative min-h-[100px]"
             transition={ { duration: 0.2, ease: 'easeInOut' } }
           >
-            <AnimatePresence>
+            <AnimatePresence mode="popLayout">
               { showHint && (
                 <SearchPlaceholderState key="hint">
-                  <p className="text-sm font-medium text-foreground">Search across your dashboard</p>
+                  <p className="text-sm font-medium text-foreground">{ t( 'search.description' ) }</p>
                   <p className="mt-1 text-xs text-muted-foreground uppercase tracking-wider text-[10px]">
-                    Type at least 2 characters to search
+                    { t( 'search.typeToSearch' ) }
                   </p>
                 </SearchPlaceholderState>
               ) }
@@ -254,17 +311,17 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
                 <SearchPlaceholderState key="loading">
                   <div className="flex flex-col items-center gap-3">
                     <div className="size-6 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
-                    <p className="text-sm text-muted-foreground">Searching...</p>
+                    <p className="text-sm text-muted-foreground">{ t( 'search.searching' ) }</p>
                   </div>
                 </SearchPlaceholderState>
               ) }
               { showEmpty && (
                 <SearchPlaceholderState key="empty">
                   <p className="text-sm font-medium text-foreground">
-                    No results for "{ debouncedQuery }"
+                    { t( 'search.noResultsFor', { query: debouncedQuery } ) }
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Try a different search term or adjust your filters
+                    { t( 'search.noResultsDesc' ) }
                   </p>
                 </SearchPlaceholderState>
               ) }
@@ -277,7 +334,7 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
                   exit={ { opacity: 0, y: -4, position: 'absolute', top: 0, left: 0, right: 0 } }
                   transition={ { duration: 0.22, ease: 'easeOut' } }
                 >
-                  { groups.map( ( group, i ) => (
+                  { visibleGroups.map( ( group, i ) => (
                     <ResultGroup key={ group.type } group={ group } groupIndex={ i } onSelect={ handleSelect } />
                   ) ) }
                 </motion.div>
@@ -294,24 +351,24 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
           transition={ { duration: 0.2, ease: 'easeOut', delay: 0.15 } }
         >
           <p className="text-sm text-muted-foreground font-regular">
-            { showResults && hasResults
-              ? `Showing top ${ groups.reduce( ( sum, g ) => sum + g.items.length, 0 ) } results`
-              : 'Press Enter to search' }
+            { showResults && visibleResultCount > 0
+              ? t( 'search.showingTop', { count: visibleResultCount } )
+              : t( 'search.pressEnter' ) }
           </p>
           <div className="flex items-center gap-2">
             <KbdGroup>
               <Kbd className='text-sm font-regular'>↑</Kbd>
               <Kbd className='text-sm font-regular'>↓</Kbd>
             </KbdGroup>
-            <span className="text-xs text-muted-foreground">navigate</span>
+            <span className="text-xs text-muted-foreground">{ t( 'search.navigate' ) }</span>
             <KbdGroup>
               <Kbd className='text-sm font-regular'>↵</Kbd>
             </KbdGroup>
-            <span className="text-xs text-muted-foreground">select</span>
+            <span className="text-xs text-muted-foreground">{ t( 'search.select' ) }</span>
             <KbdGroup>
               <Kbd className='text-sm font-regular'>Esc</Kbd>
             </KbdGroup>
-            <span className="text-xs text-muted-foreground">close</span>
+            <span className="text-xs text-muted-foreground">{ t( 'search.close' ) }</span>
           </div>
         </motion.div>
       </DialogContent>

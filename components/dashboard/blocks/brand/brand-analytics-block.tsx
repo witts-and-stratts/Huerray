@@ -5,47 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useBrandAnalytics } from '@/lib/api/hooks/analytics';
 import type { ModelsBrandAnalyticsResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 type StatItem = {
   label: string;
   value: string;
   key: keyof ModelsBrandAnalyticsResponse;
 };
-
-const STAT_GROUPS: { title: string; items: StatItem[]; }[] = [
-  {
-    title: 'Campaigns',
-    items: [
-      { label: 'Campaigns Created', value: '0', key: 'campaigns_created' },
-      { label: 'Campaigns Completed', value: '0', key: 'campaigns_completed' },
-      { label: 'Completion Rate', value: '0%', key: 'completion_rate' },
-    ],
-  },
-  {
-    title: 'Gigs',
-    items: [
-      { label: 'Gigs Created', value: '0', key: 'gigs_created' },
-      { label: 'Gigs Accepted', value: '0', key: 'gigs_accepted' },
-      { label: 'Gigs Completed', value: '0', key: 'gigs_completed' },
-    ],
-  },
-  {
-    title: 'Outreach',
-    items: [
-      { label: 'Invitations Sent', value: '0', key: 'invitations_sent' },
-      { label: 'Applications Received', value: '0', key: 'applications_received' },
-      { label: 'Approval Rate', value: '0%', key: 'approval_rate' },
-    ],
-  },
-  {
-    title: 'Content & Spend',
-    items: [
-      { label: 'Videos Received', value: '0', key: 'videos_received' },
-      { label: 'Videos Approved', value: '0', key: 'videos_approved' },
-      { label: 'Total Spent', value: '€0', key: 'total_spent' },
-    ],
-  },
-];
 
 const CURRENCY_KEYS = new Set<string>( [ 'total_spent' ] );
 const PERCENT_KEYS = new Set<string>( [ 'completion_rate', 'approval_rate' ] );
@@ -67,27 +33,61 @@ function formatValue( key: string, raw?: number ): string {
 }
 
 export function BrandAnalyticsBlock() {
+  const t = useTranslations( 'dashboard.brand.landing.analytics' );
   const { data: response, isLoading, isError } = useBrandAnalytics();
   const analytics = response?.data;
 
   const groups = useMemo( () => {
-    if ( !analytics ) return STAT_GROUPS;
-    return STAT_GROUPS.map( ( group ) => ( {
+    const groupsConfig: { title: string; items: StatItem[]; }[] = [
+      {
+        title: t( 'groups.campaigns' ),
+        items: [
+          { label: t( 'items.campaignsCreated' ), value: '0', key: 'campaigns_created' },
+          { label: t( 'items.campaignsCompleted' ), value: '0', key: 'campaigns_completed' },
+          { label: t( 'items.completionRate' ), value: '0%', key: 'completion_rate' },
+        ],
+      },
+      {
+        title: t( 'groups.gigs' ),
+        items: [
+          { label: t( 'items.gigsCreated' ), value: '0', key: 'gigs_created' },
+          { label: t( 'items.gigsAccepted' ), value: '0', key: 'gigs_accepted' },
+          { label: t( 'items.gigsCompleted' ), value: '0', key: 'gigs_completed' },
+        ],
+      },
+      {
+        title: t( 'groups.outreach' ),
+        items: [
+          { label: t( 'items.invitationsSent' ), value: '0', key: 'invitations_sent' },
+          { label: t( 'items.applicationsReceived' ), value: '0', key: 'applications_received' },
+          { label: t( 'items.approvalRate' ), value: '0%', key: 'approval_rate' },
+        ],
+      },
+      {
+        title: t( 'groups.contentSpend' ),
+        items: [
+          { label: t( 'items.videosReceived' ), value: '0', key: 'videos_received' },
+          { label: t( 'items.videosApproved' ), value: '0', key: 'videos_approved' },
+          { label: t( 'items.totalSpent' ), value: '€0', key: 'total_spent' },
+        ],
+      },
+    ];
+
+    if ( !analytics ) return groupsConfig;
+    return groupsConfig.map( ( group ) => ( {
       ...group,
       items: group.items.map( ( item ) => ( {
         ...item,
-        value: formatValue( item.key, analytics[ item.key ] ),
+        value: formatValue( item.key, analytics[ item.key ] as number | undefined ),
       } ) ),
     } ) );
-  }, [ analytics ] );
+  }, [ analytics, t ] );
 
   return (
     <Card className="ad-card">
       <CardHeader>
-        <CardTitle className="ad-card-title">Brand Analytics</CardTitle>
-        <CardDescription className="ad-card-description">
-          Performance metrics for your brand account
-        </CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         { isLoading && (
@@ -102,7 +102,7 @@ export function BrandAnalyticsBlock() {
         ) }
 
         { isError && (
-          <p className="py-8 text-center text-xs text-destructive">Unable to load brand analytics.</p>
+          <p className="py-8 text-center text-xs text-destructive">{ t( 'error' ) }</p>
         ) }
 
         { !isLoading && !isError && (

@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { LabelList, RadialBar, RadialBarChart } from 'recharts';
 import type { ModelsCampaignResponse } from '@/lib/api/generated/models';
+import { useTranslations } from 'next-intl';
 
 const STATUS_COLORS = [
   'var(--chart-1)',
@@ -21,6 +22,7 @@ interface BrandCampaignsRadialBlockProps {
 }
 
 export function BrandCampaignsRadialBlock( { campaigns, isLoading }: BrandCampaignsRadialBlockProps ) {
+  const t = useTranslations( 'dashboard.brand.landing.campaignsRadial' );
   const { chartConfig, campaignsStatusBreakdown, chartData } = useMemo( () => {
     const counts = new Map<string, number>();
 
@@ -40,7 +42,7 @@ export function BrandCampaignsRadialBlock( { campaigns, isLoading }: BrandCampai
 
     const dynamicChartConfig: ChartConfig = {
       campaigns: {
-        label: 'Campaigns',
+        label: t( 'chartCampaignsLabel' ),
       },
     };
 
@@ -63,15 +65,15 @@ export function BrandCampaignsRadialBlock( { campaigns, isLoading }: BrandCampai
       campaignsStatusBreakdown: breakdown,
       chartData: radialData,
     };
-  }, [ campaigns ] );
+  }, [ campaigns, t ] );
 
   const totalCampaigns = campaigns.length;
 
   return (
     <Card className="ad-users-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Campaigns State</CardTitle>
-        <CardDescription className="ad-card-description">Status distribution across your campaigns</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="ad-users-content">
         { isLoading ? (
@@ -131,13 +133,13 @@ export function BrandCampaignsRadialBlock( { campaigns, isLoading }: BrandCampai
 
             <div className="space-y-3">
               <div>
-                <p className="ad-total-label">Total campaigns</p>
+                <p className="ad-total-label">{ t( 'totalCampaigns' ) }</p>
                 <p className="ad-total-value">{ totalCampaigns.toLocaleString() }</p>
               </div>
               <div className="ad-users-breakdown">
                 { campaignsStatusBreakdown.length === 0 && (
                   <div className="ad-users-breakdown-item">
-                    <span className="text-sm text-muted-foreground">No campaigns available yet.</span>
+                    <span className="text-sm text-muted-foreground">{ t( 'emptyState' ) }</span>
                   </div>
                 ) }
                 { campaignsStatusBreakdown.map( ( item ) => {

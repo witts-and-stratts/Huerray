@@ -9,11 +9,13 @@ import { ImportUrlDialog } from './documents/import-url-dialog';
 import { PreviewDialog } from './documents/preview-dialog';
 import { UploadedFile } from './documents/types';
 import { useCampaignFiles } from './documents/use-campaign-files';
+import { useTranslations } from 'next-intl';
 
 export const CampaignImagesSection = memo( function CampaignImagesSection( {
   form,
   fileState
 }: { form: CampaignFormApi; fileState: ReturnType<typeof useCampaignFiles>; } ) {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   const {
     items,
     activeId,
@@ -69,8 +71,8 @@ export const CampaignImagesSection = memo( function CampaignImagesSection( {
               } }
               showTitle={ false }
               maxSize={ 10 * 1024 * 1024 }
-              title="Upload Images"
-              description={ <>Drag and drop files here<br />Support for Image files</> }
+              title={ t( 'uploadImagesTitle' ) }
+              description={ <>{ t( 'uploadImagesDescription' ) }<br />{ t( 'uploadImagesSupport' ) }</> }
               icon={ <ImageFileIcon className="text-primary w-20! h-20! mt-4 stroke-primary" /> }
               onDragStart={ handleDragStart }
               onDragEnd={ handleDragEnd }

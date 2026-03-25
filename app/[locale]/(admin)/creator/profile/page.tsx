@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Pencil } from 'lucide-react';
 import { SubHeader } from '@/components/subheader';
@@ -107,6 +108,7 @@ function CreatorProfileSkeleton() {
 }
 
 export default function CreatorProfilePage() {
+  const tNav = useTranslations('dashboard.creator.breadcrumbs');
   const { user } = useAuth();
 
   const { data: creatorData, isLoading: isCreatorLoading, error: creatorError } = useCreatorProfile();
@@ -135,7 +137,7 @@ export default function CreatorProfilePage() {
         title={ creatorName }
         description="Your profile overview and details"
         breadcrumbs={ [
-          { label: 'Profile', href: '/creator/profile' },
+          { label: tNav('profile'), href: '/creator/profile' },
         ] }
       >
         <Link href="/creator/settings">

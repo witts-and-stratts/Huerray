@@ -12,12 +12,14 @@ import {
   EmptyTitle,
 } from '@/components/dashboard-ui/empty';
 import { EmptySubmission } from '@/components/admin/empty-states/empty-submissions';
+import { useTranslations } from 'next-intl';
 
 interface CampaignSubmissionsSectionProps {
   campaignId: string;
 }
 
 export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsSectionProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const { data: submissionsData, isLoading, error } = useCampaignSubmissions( campaignId );
 
   if ( isLoading ) {
@@ -31,7 +33,7 @@ export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsS
   if ( error ) {
     return (
       <div className="p-4 text-red-500 bg-red-50 rounded-md border border-red-200">
-        Error loading submissions: { error.message }
+        { t( 'errorLoadingSubmissions' ) }: { error.message }
       </div>
     );
   }
@@ -41,8 +43,8 @@ export function CampaignSubmissionsSection( { campaignId }: CampaignSubmissionsS
   if ( submissions.length === 0 ) {
     return (
       <EmptySubmission
-        title='No submissions yet'
-        description='Video submissions for this campaign will appear here.'
+        title={ t( 'noSubmissionsYet' ) }
+        description={ t( 'noSubmissionsYetDescription' ) }
         fill={ true }
       />
     );

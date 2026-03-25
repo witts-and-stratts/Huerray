@@ -10,6 +10,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { Trash2, UploadIcon, ZoomIn, Loader2 } from 'lucide-react';
 import { useCallback, useState, ReactNode, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'next-intl';
 
 interface ImageUploaderProps {
   value?: string | null;
@@ -28,6 +29,7 @@ export function ImageUploader( {
   renderDefault,
   previewTitle = "Image Preview"
 }: ImageUploaderProps ) {
+  const t = useTranslations( 'dashboard.creator.settings.media' );
   const [ previewUrl, setPreviewUrl ] = useState<string | null>( null );
   const [ file, setFile ] = useState<File | null>( null );
   const [ isPreviewOpen, setIsPreviewOpen ] = useState( false );
@@ -95,16 +97,16 @@ export function ImageUploader( {
         if ( fullUrl ) {
           lastUploadedUrlRef.current = fullUrl;
           onChange( fullUrl );
-          toast.success( 'Image uploaded successfully' );
+          toast.success( t( 'imageUploadedSuccessfully' ) );
           // Once successfully uploaded and parent updated, we can potentially clear local previewUrl 
           // and let parent value take over, but keeping previewUrl is fine too.
         }
       }
 
     } catch ( error: any ) {
-      console.error( 'Upload failed:', error );
+      console.error( t( 'uploadFailedLog' ), error );
       setUploadError( true );
-      toast.error( 'Failed to upload image' );
+      toast.error( t( 'failedToUploadImage' ) );
     } finally {
       setIsUploading( false );
     }
@@ -124,13 +126,13 @@ export function ImageUploader( {
   const handleDropError = useCallback( ( error: Error ) => {
     const message = error.message || 'Failed to upload image';
     if ( message.toLowerCase().includes( 'larger' ) || message.toLowerCase().includes( 'size' ) ) {
-      toast.error( 'File too large', {
-        description: 'Please select an image smaller than 5MB.',
+      toast.error( t( 'fileTooLarge' ), {
+        description: t( 'imageSizeHint' ),
         richColors: true,
         cancel: true,
       } );
     } else {
-      toast.error( 'Upload failed', {
+      toast.error( t( 'uploadFailed' ), {
         description: message,
         richColors: true,
         cancel: true,
@@ -174,7 +176,7 @@ export function ImageUploader( {
                   {/* eslint-disable-next-line @next/next/no-img-element */ }
                   <img
                     src={ currentImageUrl.startsWith( 'blob:' ) || currentImageUrl.startsWith( 'data:' ) ? currentImageUrl : imgpresets.card( currentImageUrl ) }
-                    alt="Preview"
+                    alt={ t( 'preview' ) }
                     className={ cn(
                       "w-full h-full object-cover",
                       isUploading && "opacity-50"
@@ -207,7 +209,7 @@ export function ImageUploader( {
                             e.stopPropagation();
                             setIsPreviewOpen( true );
                           } }
-                          title="Preview"
+                          title={ t( 'preview' ) }
                         >
                           <ZoomIn className="w-4 h-4" />
                         </Button>
@@ -220,7 +222,7 @@ export function ImageUploader( {
                         onClick={ ( e ) => {
                           handleRemoveImage( e );
                         } }
-                        title="Remove"
+                        title={ t( 'remove' ) }
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -229,7 +231,7 @@ export function ImageUploader( {
                 </div>
 
                 <p className="text-xs text-muted-foreground/60 text-center mt-3">
-                  { isUploading ? 'Uploading...' : ( uploadError ? 'Upload failed' : 'Click or drag to replace' ) }
+                  { isUploading ? t( 'uploading' ) : ( uploadError ? t( 'uploadFailed' ) : t( 'clickOrDragToReplace' ) ) }
                 </p>
               </div>
             ) : (
@@ -242,13 +244,13 @@ export function ImageUploader( {
                     <UploadIcon className="w-8 h-8 text-primary" />
                   </div>
                   <p className="text-sm font-medium text-center">
-                    { isDragActive ? 'Drop your image here' : 'Upload Image' }
+                    { isDragActive ? t( 'dropImageHere' ) : t( 'uploadImage' ) }
                   </p>
                   <p className="text-xs text-muted-foreground text-center mt-1">
-                    Drag and drop or click to upload
+                    { t( 'uploadHint' ) }
                   </p>
                   <p className="text-xs text-muted-foreground text-center mt-1">
-                    PNG, JPG, GIF up to 5MB
+                    { t( 'imageSpecs' ) }
                   </p>
                 </>
               )

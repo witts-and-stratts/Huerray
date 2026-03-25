@@ -10,6 +10,7 @@ import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { ModelsPaymentResponse } from "@/lib/api/generated/models";
 import { useUpdatePaymentStatus } from "@/lib/api/hooks/payments";
+import { useTranslations } from "next-intl";
 import { PaymentDetailsSheet } from "./payment-details-sheet";
 
 interface PaymentActionMenuProps {
@@ -18,22 +19,23 @@ interface PaymentActionMenuProps {
 }
 
 export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps ) {
+  const t = useTranslations( 'dashboard.common' );
   const [ viewOpen, setViewOpen ] = useState( false );
   const [ confirmOpen, setConfirmOpen ] = useState( false );
 
   const { mutate: updatePaymentStatus, isPending } = useUpdatePaymentStatus( {
     onSuccess: () => {
-      toast.success( "Payout confirmed successfully." );
+      toast.success( t( 'payments.actions.confirmSuccess' ) );
       setConfirmOpen( false );
     },
     onError: () => {
-      toast.error( "Failed to confirm payout. Please try again." );
+      toast.error( t( 'payments.actions.confirmError' ) );
     },
   } );
 
   const handleConfirm = () => {
     if ( !payment.id ) {
-      toast.error( "Missing payment ID." );
+      toast.error( t( 'payments.actions.missingPaymentId' ) );
       return;
     }
     updatePaymentStatus( {
@@ -45,7 +47,7 @@ export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps 
   const actions: MenuAction<ModelsPaymentResponse>[] = [
     ...( isAdmin ? [
       {
-        label: "Confirm payout",
+        label: t( 'payments.actions.confirmPayout' ),
         action: () => setConfirmOpen( true ),
         condition: ( p: ModelsPaymentResponse ) =>
           p.payment_status !== 'completed',
@@ -63,7 +65,7 @@ export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps 
             className="font-regular gap-1.5"
             onClick={ () => setViewOpen( true ) }
           >
-            View
+            { t( 'payments.actions.view' ) }
           </Button>
           <ActionMenu
             actions={ actions }
@@ -79,21 +81,22 @@ export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps 
         </ButtonGroup>
       </div>
 
-      <PaymentDetailsSheet payment={ payment } open={ viewOpen } onOpenChange={ setViewOpen } />
+      <PaymentDetailsSheet payment={ payment } open={ viewOpen } onOpenChange={ setViewOpen } isAdmin={ isAdmin } />
+      
 
       <ConfirmDialog
         open={ confirmOpen }
         onOpenChange={ setConfirmOpen }
-        title="Confirm payout"
+        title={ t( 'payments.actions.confirmTitle' ) }
         description={
           <>
-            Are you sure you want to confirm this payout
-            { payment.creator_name ? <> for <strong>{ payment.creator_name }</strong></> : '' }?
-            This will create a payment item record.
+            { t( 'payments.actions.confirmDescription' ) }
+            { payment.creator_name ? <> { t( 'payments.actions.confirmDescriptionWithCreator', { creator: payment.creator_name } ) }</> : '' }?
+            {' '}{ t( 'payments.actions.confirmDescriptionSuffix' ) }
           </>
         }
-        confirmLabel="Confirm payout"
-        loadingText="Confirming..."
+        confirmLabel={ t( 'payments.actions.confirmPayout' ) }
+        loadingText={ t( 'payments.actions.confirming' ) }
         isLoading={ isPending }
         onConfirm={ handleConfirm }
       />

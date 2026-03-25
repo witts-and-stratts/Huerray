@@ -1,5 +1,6 @@
 "use client";
 
+import { LanguageSelector } from "@/components/LanguageSelector";
 import { NavDocuments } from "@/components/dashboard-ui/nav-documents";
 import { NavMain } from "@/components/dashboard-ui/nav-main";
 import { NavSecondary } from "@/components/dashboard-ui/nav-secondary";
@@ -74,6 +75,9 @@ export function AppSidebar( { navigationData, ...props }: AppSidebarProps ) {
         <NavSecondary items={ navigationData.navSecondary } className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
+        <div className="md:hidden px-2 pb-2">
+          <LanguageSelector />
+        </div>
         <NavUser user={ navigationData.user } />
       </SidebarFooter>
     </Sidebar>

@@ -13,6 +13,7 @@ import { ModelsUploadsImagePost200Response } from '@/lib/api/models/models-uploa
 import { VideoFileIcon } from '../campaigns/sections/documents/video-file-icon';
 import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { useTranslations } from 'next-intl';
 
 interface UseVideoUploadOptions {
   onSuccess: ( url: string ) => void;
@@ -49,6 +50,7 @@ async function generateAndUploadThumbnail( file: File ): Promise<string | null> 
 }
 
 function useVideoUpload( { onSuccess, onThumbnailReady }: UseVideoUploadOptions ) {
+  const t = useTranslations( 'dashboard.creator.settings.media' );
   const [ videoFile, setVideoFile ] = useState<File | null>( null );
   const [ videoPreviewUrl, setVideoPreviewUrl ] = useState<string | null>( null );
   const [ isUploading, setIsUploading ] = useState( false );
@@ -77,7 +79,7 @@ function useVideoUpload( { onSuccess, onThumbnailReady }: UseVideoUploadOptions 
       const uploadedFile = ( ( response.data as any )?.data as any[] )?.[ 0 ];
 
       if ( !uploadedFile ) {
-        toast.error( 'Upload response invalid' );
+        toast.error( t( 'uploadResponseInvalid' ) );
         setUploadError( true );
         return;
       }
@@ -87,23 +89,23 @@ function useVideoUpload( { onSuccess, onThumbnailReady }: UseVideoUploadOptions 
 
       if ( fullUrl ) {
         onSuccess( fullUrl );
-        toast.success( 'Video uploaded successfully' );
+        toast.success( t( 'videoUploadedSuccessfully' ) );
         generateAndUploadThumbnail( file ).then( ( thumbUrl ) => {
           if ( thumbUrl ) onThumbnailReady?.( thumbUrl );
         } );
       } else {
-        toast.error( 'Upload verification failed' );
+        toast.error( t( 'uploadVerificationFailed' ) );
         setUploadError( true );
       }
     } catch ( error: any ) {
-      const msg = error.response?.data?.message || error.message || 'Failed to upload video';
+      const msg = error.response?.data?.message || error.message || t( 'failedToUploadVideo' );
       toast.error( msg );
       setUploadError( true );
     } finally {
       setIsUploading( false );
       setUploadProgress( 0 );
     }
-  }, [ onSuccess ] );
+  }, [ onSuccess, onThumbnailReady, t ] );
 
   const handleDrop = useCallback( async ( acceptedFiles: File[] ) => {
     const file = acceptedFiles[ 0 ];
@@ -130,13 +132,13 @@ function useVideoUpload( { onSuccess, onThumbnailReady }: UseVideoUploadOptions 
   }, [ videoPreviewUrl, onSuccess ] );
 
   const handleDropError = useCallback( ( error: Error ) => {
-    const msg = error.message || 'Failed to upload video';
+    const msg = error.message || t( 'failedToUploadVideo' );
     if ( /larger|size/i.test( msg ) ) {
-      toast.error( 'File too large', { description: 'Please select a video smaller than 100MB.' } );
+      toast.error( t( 'fileTooLarge' ), { description: t( 'videoSizeHint' ) } );
     } else {
-      toast.error( 'Upload failed', { description: msg } );
+      toast.error( t( 'uploadFailed' ), { description: msg } );
     }
-  }, [] );
+  }, [ t ] );
 
   return {
     videoFile,
@@ -170,6 +172,7 @@ function VideoThumbnail( {
   src, poster: poster, fileName, isUploading, uploadProgress, uploadError,
   isHovering, onRetry, onRemove, onPlay,
 }: VideoThumbnailProps ) {
+  const t = useTranslations( 'dashboard.creator.settings.media' );
   const optimisedPoster = poster ? imgpresets.banner( poster ) : undefined;
   return (
     <div className="flex flex-col items-center w-full">
@@ -182,7 +185,7 @@ function VideoThumbnail( {
         { isUploading && (
           <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center gap-2 z-20">
             <Loader2 className="w-8 h-8 animate-spin text-white" />
-            <p className="text-sm font-medium text-white">Uploading… { uploadProgress }%</p>
+            <p className="text-sm font-medium text-white">{ t( 'uploading' ) } { uploadProgress }%</p>
             <div className="w-32 h-1 bg-white/20 rounded-full overflow-hidden mt-1">
               <div className="h-full bg-primary transition-all duration-300 ease-out" style={ { width: `${ uploadProgress }%` } } />
             </div>
@@ -191,12 +194,12 @@ function VideoThumbnail( {
 
         { !isUploading && uploadError && (
           <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center gap-3 z-10 p-4">
-            <p className="text-white text-sm font-medium text-center">Upload Failed</p>
+            <p className="text-white text-sm font-medium text-center">{ t( 'uploadFailed' ) }</p>
             <div className="flex items-center gap-2">
               <Button type="button" variant="secondary" size="sm" className="h-8 gap-2" onClick={ onRetry }>
-                <RefreshCcw className="w-4 h-4" /> Retry
+                <RefreshCcw className="w-4 h-4" /> { t( 'retry' ) }
               </Button>
-              <Button type="button" variant="destructive" size="icon" className="h-8 w-8" onClick={ onRemove } title="Remove">
+              <Button type="button" variant="destructive" size="icon" className="h-8 w-8" onClick={ onRemove } title={ t( 'remove' ) }>
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
@@ -210,12 +213,12 @@ function VideoThumbnail( {
           ) }>
             <Button type="button" variant="ghost" size="icon"
               className="bg-background/80 hover:bg-background rounded-full h-10 w-10"
-              onClick={ onPlay } title="Play">
+              onClick={ onPlay } title={ t( 'play' ) }>
               <Play className="w-5 h-5" />
             </Button>
             <Button type="button" variant="ghost" size="icon"
               className="bg-background/80 hover:bg-background hover:text-destructive rounded-full h-10 w-10"
-              onClick={ onRemove } title="Remove">
+              onClick={ onRemove } title={ t( 'remove' ) }>
               <Trash2 className="w-5 h-5" />
             </Button>
           </div>
@@ -223,16 +226,17 @@ function VideoThumbnail( {
       </div>
 
       <p className="text-xs text-muted-foreground text-center mt-3 max-w-full truncate px-4">
-        { fileName || 'Current Video' }
+        { fileName || t( 'currentVideo' ) }
       </p>
       <p className="text-xs text-muted-foreground/60 text-center mt-1">
-        { isUploading ? 'Please wait…' : 'Click or drag to replace' }
+        { isUploading ? t( 'pleaseWait' ) : t( 'clickOrDragToReplace' ) }
       </p>
     </div>
   );
 }
 
 function DropPlaceholder( { isDragActive, hasError }: { isDragActive: boolean; hasError: boolean; } ) {
+  const t = useTranslations( 'dashboard.creator.settings.media' );
   return (
     <>
       <div className={ cn(
@@ -245,10 +249,10 @@ function DropPlaceholder( { isDragActive, hasError }: { isDragActive: boolean; h
         }
       </div>
       <p className={ cn( 'text-sm font-medium text-center', hasError && 'text-destructive' ) }>
-        { isDragActive ? 'Drop your video here' : 'Upload Application Video' }
+        { isDragActive ? t( 'dropVideoHere' ) : t( 'uploadApplicationVideo' ) }
       </p>
-      <p className="text-xs text-muted-foreground text-center mt-1">Drag and drop or click to upload</p>
-      <p className="text-xs text-muted-foreground text-center mt-1">MP4, MOV, AVI, WebM up to 100MB</p>
+      <p className="text-xs text-muted-foreground text-center mt-1">{ t( 'uploadHint' ) }</p>
+      <p className="text-xs text-muted-foreground text-center mt-1">{ t( 'videoSpecs' ) }</p>
     </>
   );
 }

@@ -7,6 +7,7 @@ import {
   Settings01Icon,
   HelpCircleIcon,
   Search01Icon,
+  SettingsIcon,
   Task02Icon,
   WalletDone01Icon,
   ImageUpload01Icon,
@@ -227,7 +228,7 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
   //   { name: withFallback( t, "admin.alerts", "Alerts" ), url: "/admin/notifications", icon: AlertCircleIcon },
   // ],
   navSecondary: [
-    { title: withFallback( t, "admin.settings", "Settings" ), url: "/admin/settings", icon: Settings01Icon },
+    { title: withFallback( t, "admin.accountSettings", "Account Settings" ), url: "/admin/settings", icon: SettingsIcon },
     { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],

@@ -28,23 +28,24 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod/v4';
 import { SentenceCase, TextCapitalize } from '../text-case';
+import { useTranslations } from 'next-intl';
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
 
-const submissionSchema = z.object( {
-  title: z.string().min( 1, 'Title is required' ),
+const getSubmissionSchema = ( t: ( key: string ) => string ) => z.object( {
+  title: z.string().min( 1, t( 'validation.titleRequired' ) ),
   description: z.union( [ z.string(), z.undefined() ] ),
   video: z
     .any()
-    .refine( ( file ) => file instanceof File, 'Video file is required' )
-    .refine( ( file ) => file?.size <= 500 * 1024 * 1024, 'Max file size is 500MB' )
+    .refine( ( file ) => file instanceof File, t( 'validation.videoRequired' ) )
+    .refine( ( file ) => file?.size <= 500 * 1024 * 1024, t( 'validation.maxSize' ) )
     .refine(
       ( file ) => [ 'video/mp4', 'video/quicktime', 'video/webm' ].includes( file?.type ),
-      'Only .mp4, .mov, and .webm formats are supported'
+      t( 'validation.invalidFormat' )
     ),
 } );
 
-type SubmissionValues = z.infer<typeof submissionSchema>;
+type SubmissionValues = z.infer<ReturnType<typeof getSubmissionSchema>>;
 
 type ValidationError = string | { message?: string; } | undefined;
 
@@ -144,6 +145,8 @@ export function CreateSubmissionSheet( {
   onOpenChange,
   gigId,
 }: CreateSubmissionSheetProps ) {
+  const t = useTranslations( 'dashboard.creator.submissions' );
+  const submissionSchema = getSubmissionSchema( t );
   const { mutate: createSubmission, isPending: isCreating } = useCreateVideoSubmission();
   const { data: gigResponse } = useGig( gigId, { enabled: open && !!gigId } );
   const gig = gigResponse?.data;
@@ -160,11 +163,11 @@ export function CreateSubmissionSheet( {
     },
     onSubmit: async ( { value } ) => {
       if ( !gigId ) {
-        toast.error( 'Gig ID is missing' );
+        toast.error( t( 'missingGigId' ) );
         return;
       }
       if ( !videoData ) {
-        toast.error( 'Please wait for the video to finish uploading' );
+        toast.error( t( 'uploading' ) );
         return;
       }
 
@@ -178,13 +181,13 @@ export function CreateSubmissionSheet( {
         },
         {
           onSuccess: () => {
-            toast.success( 'Submission created successfully' );
+            toast.success( t( 'success' ) );
             onOpenChange( false );
             form.reset();
             setVideoData( null );
           },
           onError: ( error ) => {
-            toast.error( 'Failed to create submission', {
+            toast.error( t( 'error' ), {
               description: <SentenceCase>{ error.response?.data?.error?.message ?? "" }</SentenceCase>,
               richColors: true,
             } );
@@ -208,10 +211,10 @@ export function CreateSubmissionSheet( {
         { /* ── Header ── */ }
         <SheetHeader className="relative flex flex-col gap-2 mx-3 rounded-lg pb-0">
           <SheetTitle className="text-xl font-normal text-primary font-primary tracking-tight leading-snug">
-            Create Submission
+            { t( 'createTitle' ) }
           </SheetTitle>
           <SheetDescription>
-            Upload your video and add details for this gig.
+            { t( 'createDesc' ) }
           </SheetDescription>
         </SheetHeader>
 
@@ -253,15 +256,15 @@ export function CreateSubmissionSheet( {
             </div>
 
             { /* Submission details */ }
-            <WrappedCard title="Submission Details" className="m-1">
+            <WrappedCard title={ t( 'details' ) } className="m-1">
               <FieldGroup>
                 <form.Field name="title">
                   { ( field ) => (
                     <SuperField
                       type="text"
-                      label="Title"
+                      label={ t( 'form.title' ) }
                       required
-                      placeholder="Give your submission a title"
+                      placeholder={ t( 'form.titlePlaceholder' ) }
                       value={ field.state.value }
                       onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => field.handleChange( e.target.value ) }
                       onBlur={ field.handleBlur }
@@ -274,8 +277,8 @@ export function CreateSubmissionSheet( {
                   { ( field ) => (
                     <SuperField
                       type="textarea"
-                      label="Notes"
-                      placeholder="Add any notes about your submission..."
+                      label={ t( 'form.notes' ) }
+                      placeholder={ t( 'form.notesPlaceholder' ) }
                       fieldClassName="resize-none min-h-[90px]"
                       value={ field.state.value }
                       onChange={ ( e: React.ChangeEvent<HTMLTextAreaElement> ) => field.handleChange( e.target.value ) }
@@ -302,8 +305,8 @@ export function CreateSubmissionSheet( {
                     className="w-full"
                   >
                     { isPending
-                      ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting...</>
-                      : <><Upload className="mr-2 h-4 w-4" />Submit Video</>
+                      ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{ t( 'form.submitting' ) }</>
+                      : <><Upload className="mr-2 h-4 w-4" />{ t( 'form.submit' ) }</>
                     }
                   </Button>
                 );
@@ -316,7 +319,7 @@ export function CreateSubmissionSheet( {
               onClick={ () => onOpenChange( false ) }
               disabled={ isCreating }
             >
-              Cancel
+              { t( 'cancel' ) }
             </Button>
           </SheetFooter>
         </form>

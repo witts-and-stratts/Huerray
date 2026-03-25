@@ -1,8 +1,7 @@
 'use client';
 
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ENTITY_ICONS } from './constants';
-import { ENTITY_LABELS, type EntityType } from '@/lib/api/hooks/search';
+import { useTranslations } from 'next-intl';
+import { type EntityType } from '@/lib/api/hooks/search';
 import { cn } from '@/lib/dashboard-utils';
 
 interface EntityChipProps {
@@ -12,6 +11,8 @@ interface EntityChipProps {
 }
 
 export function EntityChip( { type, active, onToggle }: EntityChipProps ) {
+  const t = useTranslations( 'dashboard.common' );
+
   return (
     <button
       onClick={ () => onToggle( type ) }
@@ -22,8 +23,7 @@ export function EntityChip( { type, active, onToggle }: EntityChipProps ) {
           : 'bg-background text-muted-foreground border-input hover:border-primary/20 hover:text-primary',
       ) }
     >
-      {/* <HugeiconsIcon icon={ ENTITY_ICONS[ type ] } className="size-3" strokeWidth={ 2 } /> */ }
-      { ENTITY_LABELS[ type ] }
+      { t( `searchEntities.${ type }` ) }
     </button>
   );
 }

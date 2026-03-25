@@ -21,12 +21,14 @@ import { SubmissionViewDialog } from './submission-view-dialog';
 import { SubmissionDecisionDialog } from './submission-decision-dialog';
 import { SubmissionUpdateDialog } from './submission-update-dialog';
 import { ConfirmDialog } from '../dashboard-ui/confirm-dialog';
+import { useTranslations } from 'next-intl';
 
 interface SubmissionActionMenuProps {
   submission: ModelsVideoSubmissionResponse;
 }
 
 export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps ) {
+  const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   const updateSubmission = useUpdateVideoSubmission();
   const updateSubmissionStatus = useUpdateVideoSubmissionStatus();
   const submissionDecision = useVideoSubmissionDecision();
@@ -64,7 +66,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
 
   const handleViewSubmission = () => {
     if ( !submission.video?.asset ) {
-      toast.error( 'No video available for this submission' );
+      toast.error( t( 'noVideoAvailable' ) );
       return;
     }
     setIsViewOpen( true );
@@ -80,9 +82,9 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
     await toast.promise(
       submitVideoSubmission.mutateAsync( { id: submission.id } ),
       {
-        loading: 'Submitting for approval...',
-        success: 'Submission sent for approval',
-        error: 'Failed to submit for approval',
+        loading: t( 'submittingForApproval' ),
+        success: t( 'submissionSentForApproval' ),
+        error: t( 'submitForApprovalFailed' ),
       }
     );
     setIsConfirmOpen( false );
@@ -101,9 +103,9 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         },
       } ),
       {
-        loading: `${ decision === ModelsBrandVideoDecisionRequestStatusEnum.Accepted ? 'Accepting' : 'Rejecting' } submission...`,
-        success: `Submission ${ decision === ModelsBrandVideoDecisionRequestStatusEnum.Accepted ? 'accepted' : 'rejected' }`,
-        error: 'Failed to update submission decision',
+        loading: decision === ModelsBrandVideoDecisionRequestStatusEnum.Accepted ? t( 'acceptingSubmission' ) : t( 'rejectingSubmission' ),
+        success: decision === ModelsBrandVideoDecisionRequestStatusEnum.Accepted ? t( 'submissionAccepted' ) : t( 'submissionRejected' ),
+        error: t( 'updateDecisionFailed' ),
       }
     );
   };
@@ -111,12 +113,12 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
   const handleUpdateSubmission = async () => {
     if ( !submission.id ) return;
     if ( isApprovedSubmission ) {
-      setUpdateSubmissionError( 'Approved submissions cannot be updated.' );
+      setUpdateSubmissionError( t( 'approvedCannotBeUpdated' ) );
       return false;
     }
 
     if ( !uploadedVideoData?.url ) {
-      setUpdateSubmissionError( 'Please upload a video file before updating submission.' );
+      setUpdateSubmissionError( t( 'uploadVideoBeforeUpdating' ) );
       return false;
     }
 
@@ -124,12 +126,12 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
     try {
       parsedUrl = new URL( uploadedVideoData.url );
     } catch {
-      setUpdateSubmissionError( 'Uploaded video URL is invalid. Please upload again.' );
+      setUpdateSubmissionError( t( 'uploadedUrlInvalid' ) );
       return false;
     }
 
     if ( ![ 'http:', 'https:' ].includes( parsedUrl.protocol ) ) {
-      setUpdateSubmissionError( 'Uploaded video URL must be a valid HTTP(S) URL.' );
+      setUpdateSubmissionError( t( 'uploadedUrlMustBeHttp' ) );
       return false;
     }
 
@@ -146,9 +148,9 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         },
       } ),
       {
-        loading: 'Updating submission...',
-        success: 'Submission updated',
-        error: 'Failed to update submission',
+        loading: t( 'updatingSubmission' ),
+        success: t( 'submissionUpdated' ),
+        error: t( 'updateSubmissionFailed' ),
       }
     );
 
@@ -157,27 +159,27 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
 
   const actions: MenuAction<ModelsVideoSubmissionResponse>[] = [
     {
-      label: 'View Submission',
+      label: t( 'viewSubmission' ),
       icon: ExternalLink,
       condition: ( current ) => !!current.video?.asset,
       action: () => handleViewSubmission(),
     },
     {
-      label: 'Accept Submission',
+      label: t( 'acceptSubmission' ),
       icon: Check,
       allowedRoles: [ 'brand' ],
       condition: ( current ) => !!current.id,
       action: () => setIsAcceptOpen( true ),
     },
     {
-      label: 'Reject Submission',
+      label: t( 'rejectSubmission' ),
       icon: X,
       allowedRoles: [ 'brand' ],
       condition: ( current ) => !!current.id,
       action: () => setIsRejectOpen( true ),
     },
     {
-      label: 'Update Submission',
+      label: t( 'updateSubmission' ),
       icon: Pencil,
       allowedRoles: [ 'creator' ],
       condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
@@ -187,56 +189,56 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
       },
     },
     {
-      label: 'Approve',
+      label: t( 'approve' ),
       icon: Check,
       allowedRoles: [ 'admin' ],
       condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
       action: () => setIsAdminApproveOpen( true ),
     },
     {
-      label: 'Reject',
+      label: t( 'reject' ),
       icon: X,
       allowedRoles: [ 'admin' ],
       condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusRejected,
       action: () => setIsAdminRejectOpen( true ),
     },
     {
-      label: 'Return',
+      label: t( 'return' ),
       icon: Undo2,
       allowedRoles: [ 'admin' ],
       condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusReturned,
       action: () => setIsAdminReturnOpen( true ),
     },
     {
-      label: 'Confirm Submission',
+      label: t( 'confirmSubmission' ),
       icon: Check,
       allowedRoles: [ 'creator' ],
       condition: ( current ) => !!current.id && ( current.status === UtilsVideoSubmissionStatus.VideoStatusCreated ),
       action: () => handleConfirmSubmission(),
     },
     {
-      label: 'Copy Submission ID',
+      label: t( 'copySubmissionId' ),
       separator: true,
       condition: ( current ) => !!current.id,
       action: async ( current ) => {
         if ( current.id ) {
           await navigator.clipboard.writeText( current.id );
-          toast.success( 'Submission ID copied' );
+          toast.success( t( 'submissionIdCopied' ) );
         }
       },
     },
     {
-      label: 'Copy Creator ID',
+      label: t( 'copyCreatorId' ),
       condition: ( current ) => !!current.creator_id,
       action: async ( current ) => {
         if ( current.creator_id ) {
           await navigator.clipboard.writeText( current.creator_id );
-          toast.success( 'Creator ID copied' );
+          toast.success( t( 'creatorIdCopied' ) );
         }
       },
     },
     {
-      label: 'Delete Submission',
+      label: t( 'deleteSubmission' ),
       icon: Trash2,
       separator: true,
       variant: 'destructive',
@@ -255,7 +257,7 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         trigger={
           <Button variant="ghost" size="icon-sm" className="shrink-0 -mb-1 hover:bg-background/70">
             <MoreVertical className="size-4" />
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">{ t( 'openMenu' ) }</span>
           </Button>
         }
       />
@@ -263,9 +265,9 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
       <SubmissionDecisionDialog
         open={ isAcceptOpen }
         onOpenChange={ setIsAcceptOpen }
-        title="Accept Submission"
-        description="Accept this submission as a brand decision?"
-        confirmLabel="Accept"
+        title={ t( 'acceptSubmissionTitle' ) }
+        description={ t( 'acceptSubmissionDescription' ) }
+        confirmLabel={ t( 'accept' ) }
         comment={ acceptComment }
         onCommentChange={ setAcceptComment }
         onConfirm={ async () => {
@@ -274,18 +276,18 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           setAcceptComment( '' );
         } }
         isLoading={ submissionDecision.isPending }
-        loadingText="Accepting..."
+        loadingText={ t( 'accepting' ) }
         fieldId="submission-accept-comment"
-        fieldLabel="Comment (Optional)"
-        fieldPlaceholder="Add a note for this decision"
+        fieldLabel={ t( 'commentOptional' ) }
+        fieldPlaceholder={ t( 'addNoteForDecision' ) }
       />
 
       <SubmissionDecisionDialog
         open={ isRejectOpen }
         onOpenChange={ setIsRejectOpen }
-        title="Reject Submission"
-        description="Reject this submission as a brand decision?"
-        confirmLabel="Reject"
+        title={ t( 'rejectSubmissionTitle' ) }
+        description={ t( 'rejectSubmissionDescription' ) }
+        confirmLabel={ t( 'reject' ) }
         variant="destructive"
         comment={ rejectComment }
         onCommentChange={ setRejectComment }
@@ -295,10 +297,10 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
           setRejectComment( '' );
         } }
         isLoading={ submissionDecision.isPending }
-        loadingText="Rejecting..."
+        loadingText={ t( 'rejecting' ) }
         fieldId="submission-reject-comment"
-        fieldLabel="Reason (Optional)"
-        fieldPlaceholder="Add rejection reason"
+        fieldLabel={ t( 'reasonOptional' ) }
+        fieldPlaceholder={ t( 'addRejectionReason' ) }
       />
 
       <SubmissionViewDialog
@@ -339,9 +341,9 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
       <SubmissionDecisionDialog
         open={ isAdminApproveOpen }
         onOpenChange={ setIsAdminApproveOpen }
-        title="Approve Submission"
-        description="Approve this submission?"
-        confirmLabel="Approve"
+        title={ t( 'approveSubmissionTitle' ) }
+        description={ t( 'approveSubmissionDescription' ) }
+        confirmLabel={ t( 'approve' ) }
         comment={ adminApproveComment }
         onCommentChange={ setAdminApproveComment }
         onConfirm={ async () => {
@@ -354,27 +356,27 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
               },
             } ),
             {
-              loading: 'Approving submission...',
-              success: 'Submission approved',
-              error: 'Failed to approve submission',
+              loading: t( 'approvingSubmission' ),
+              success: t( 'submissionApproved' ),
+              error: t( 'approveSubmissionFailed' ),
             }
           );
           setIsAdminApproveOpen( false );
           setAdminApproveComment( '' );
         } }
         isLoading={ updateSubmissionStatus.isPending }
-        loadingText="Approving..."
+        loadingText={ t( 'approving' ) }
         fieldId="admin-approve-comment"
-        fieldLabel="Comment (Optional)"
-        fieldPlaceholder="Add a note"
+        fieldLabel={ t( 'commentOptional' ) }
+        fieldPlaceholder={ t( 'addNote' ) }
       />
 
       <SubmissionDecisionDialog
         open={ isAdminRejectOpen }
         onOpenChange={ setIsAdminRejectOpen }
-        title="Reject Submission"
-        description="Reject this submission?"
-        confirmLabel="Reject"
+        title={ t( 'rejectSubmissionTitle' ) }
+        description={ t( 'rejectSubmissionShort' ) }
+        confirmLabel={ t( 'reject' ) }
         variant="destructive"
         comment={ adminRejectComment }
         onCommentChange={ setAdminRejectComment }
@@ -388,27 +390,27 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
               },
             } ),
             {
-              loading: 'Rejecting submission...',
-              success: 'Submission rejected',
-              error: 'Failed to reject submission',
+              loading: t( 'rejectingSubmission' ),
+              success: t( 'submissionRejected' ),
+              error: t( 'rejectSubmissionFailed' ),
             }
           );
           setIsAdminRejectOpen( false );
           setAdminRejectComment( '' );
         } }
         isLoading={ updateSubmissionStatus.isPending }
-        loadingText="Rejecting..."
+        loadingText={ t( 'rejecting' ) }
         fieldId="admin-reject-comment"
-        fieldLabel="Reason (Optional)"
-        fieldPlaceholder="Add rejection reason"
+        fieldLabel={ t( 'reasonOptional' ) }
+        fieldPlaceholder={ t( 'addRejectionReason' ) }
       />
 
       <SubmissionDecisionDialog
         open={ isAdminReturnOpen }
         onOpenChange={ setIsAdminReturnOpen }
-        title="Return Submission"
-        description="Return this submission to the creator for revision?"
-        confirmLabel="Return"
+        title={ t( 'returnSubmissionTitle' ) }
+        description={ t( 'returnSubmissionDescription' ) }
+        confirmLabel={ t( 'return' ) }
         comment={ adminReturnComment }
         onCommentChange={ setAdminReturnComment }
         onConfirm={ async () => {
@@ -421,56 +423,55 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
               },
             } ),
             {
-              loading: 'Returning submission...',
-              success: 'Submission returned',
-              error: 'Failed to return submission',
+              loading: t( 'returningSubmission' ),
+              success: t( 'submissionReturned' ),
+              error: t( 'returnSubmissionFailed' ),
             }
           );
           setIsAdminReturnOpen( false );
           setAdminReturnComment( '' );
         } }
         isLoading={ updateSubmissionStatus.isPending }
-        loadingText="Returning..."
+        loadingText={ t( 'returning' ) }
         fieldId="admin-return-comment"
-        fieldLabel="Comment (Optional)"
-        fieldPlaceholder="Add a note for the creator"
+        fieldLabel={ t( 'commentOptional' ) }
+        fieldPlaceholder={ t( 'addNoteForCreator' ) }
       />
 
 
       <ConfirmDialog
         open={ isConfirmOpen }
         onOpenChange={ setIsConfirmOpen }
-        title="Confirm Submission"
-        description="Submit this video for approval? Once submitted, it will be reviewed by an admin."
-        confirmLabel="Submit for Approval"
+        title={ t( 'confirmSubmissionTitle' ) }
+        description={ t( 'confirmSubmissionDescription' ) }
+        confirmLabel={ t( 'submitForApproval' ) }
         onConfirm={ handleConfirmSubmissionSubmit }
         isLoading={ submitVideoSubmission.isPending }
-        loadingText="Submitting..."
+        loadingText={ t( 'submitting' ) }
       />
 
       <ConfirmDialog
         open={ isDeleteOpen }
         onOpenChange={ setIsDeleteOpen }
-        title="Delete Submission"
-        description="Are you sure you want to delete this submission? This action cannot be undone and will also remove the associated video."
-        confirmLabel="Delete"
+        title={ t( 'deleteSubmissionTitle' ) }
+        description={ t( 'deleteSubmissionDescription' ) }
+        confirmLabel={ t( 'delete' ) }
         variant="destructive"
         onConfirm={ async () => {
           if ( !submission.id ) return;
           await toast.promise(
             deleteSubmission.mutateAsync( { id: submission.id } ),
             {
-              loading: 'Deleting submission...',
-              success: 'Submission deleted',
-              error: 'Failed to delete submission',
+              loading: t( 'deletingSubmission' ),
+              success: t( 'submissionDeleted' ),
+              error: t( 'deleteSubmissionFailed' ),
             }
           );
           setIsDeleteOpen( false );
         } }
         isLoading={ deleteSubmission.isPending }
-        loadingText="Deleting..."
+        loadingText={ t( 'deleting' ) }
       />
     </>
   );
 }
-

@@ -32,6 +32,7 @@ import React, { useState } from 'react';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import type { UploadedFile } from '@/components/campaigns/sections/documents/types';
+import { useTranslations } from 'next-intl';
 
 interface EditCampaignPageProps {
   params: Promise<{
@@ -41,6 +42,7 @@ interface EditCampaignPageProps {
 }
 
 export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignEditPage' );
   const resolvedParams = React.use( params );
   const router = useRouter();
   const { data: campaignResponse, isLoading, error } = useCampaign( resolvedParams.id );
@@ -50,14 +52,14 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
   const [ showSubmitConfirm, setShowSubmitConfirm ] = useState( false );
 
   if ( isLoading ) {
-    return <div className="p-8 text-center text-muted-foreground">Loading campaign...</div>;
+    return <div className="p-8 text-center text-muted-foreground">{ t( 'loading' ) }</div>;
   }
 
   if ( error || !campaignResponse?.campaign_id ) {
     if ( error?.message?.includes( '404' ) ) { // Simple check, adjust based on actual API error structure
       notFound();
     }
-    return <div className="p-8 text-center text-destructive">Failed to load campaign</div>;
+    return <div className="p-8 text-center text-destructive">{ t( 'failedToLoad' ) }</div>;
   }
 
   const campaign = campaignResponse;
@@ -121,10 +123,10 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
           sample_videos: sampleVideos.length > 0 ? sampleVideos : undefined,
         }
       } );
-      toast.success( 'Campaign updated successfully' );
+      toast.success( t( 'updatedSuccess' ) );
       setShowSubmitConfirm( true );
     } catch ( e ) {
-      toast.error( 'Failed to update campaign' );
+      toast.error( t( 'updateFailed' ) );
       console.error( e );
     }
   };
@@ -132,10 +134,10 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
   const handleSendForApproval = async () => {
     try {
       await submitCampaign.mutateAsync( resolvedParams.id );
-      toast.success( 'Campaign sent for approval successfully' );
+      toast.success( t( 'sentForApprovalSuccess' ) );
       router.push( '/brand/campaigns' );
     } catch ( e ) {
-      toast.error( 'Failed to send campaign for approval' );
+      toast.error( t( 'sendForApprovalFailed' ) );
       console.error( e );
     } finally {
       setShowSubmitConfirm( false );
@@ -153,7 +155,7 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
       id: `video-${ idx }`,
       url: i.asset!,
       status: 'success' as const,
-      name: i.asset!.split( '/' ).pop() || 'Video',
+      name: i.asset!.split( '/' ).pop() || t( 'fallbackVideoName' ),
       type: 'video/mp4',
       thumbnail: i.thumbnail ? imgpresets.card( i.thumbnail ) : undefined,
     } ) );
@@ -164,7 +166,7 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
       id: `doc-${ idx }`,
       url: i.asset!,
       status: 'success' as const,
-      name: i.asset!.split( '/' ).pop() || 'Document',
+      name: i.asset!.split( '/' ).pop() || t( 'fallbackDocumentName' ),
       type: 'application/pdf',
       thumbnail: i.thumbnail ? imgpresets.card( i.thumbnail ) : undefined,
     } ) );
@@ -183,14 +185,14 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
       <ConfirmDialog
         open={ showSubmitConfirm }
         onOpenChange={ ( open ) => !open && handleDeclineSubmit() }
-        title="Send for approval?"
-        description="Your campaign has been successfully saved. Would you like to submit it for approval now?"
-        cancelLabel="No, maybe later"
-        confirmLabel="Yes, send for approval"
+        title={ t( 'confirm.title' ) }
+        description={ t( 'confirm.description' ) }
+        cancelLabel={ t( 'confirm.cancelLabel' ) }
+        confirmLabel={ t( 'confirm.confirmLabel' ) }
         onCancel={ handleDeclineSubmit }
         onConfirm={ handleSendForApproval }
         isLoading={ submitCampaign.isPending }
-        loadingText="Sending..."
+        loadingText={ t( 'confirm.loading' ) }
         variant="default"
       />
     </>

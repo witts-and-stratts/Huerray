@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { UtilsBrandCategory } from '@/lib/api/generated';
 import { CreatorSettings, creatorSettingsSchema, ReactFormApi } from './creator-settings-schema';
 import { VideoUploadDropzone } from './video-upload-dropzone';
+import { useTranslations } from 'next-intl';
 
 const categoryOptions = Object.values( UtilsBrandCategory ).map( ( category ) => ( {
   label: category.replace( /_/g, ' ' ),
@@ -18,12 +19,13 @@ function toFieldError( errors: any[] | undefined ): string | undefined {
 }
 
 export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSettings> } ) {
+  const t = useTranslations( 'dashboard.creator.settings.bio' );
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 max-w-5xl m-px max-md:m-2">
       <Card className="md:col-span-3 py-4">
         <CardHeader>
-          <CardTitle>Biography</CardTitle>
-          <CardDescription>Tell us about yourself. This will be shown on your public profile.</CardDescription>
+          <CardTitle>{ t( 'title' ) }</CardTitle>
+          <CardDescription>{ t( 'description' ) }</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <form.Field
@@ -34,7 +36,7 @@ export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSetting
                 type="editor"
                 value={ field.state.value }
                 onChange={ ( value ) => field.handleChange( value ) }
-                placeholder="Write something about yourself..."
+                placeholder={ t( 'bioPlaceholder' ) }
                 fieldClassName="min-h-[250px]"
                 error={ toFieldError( field.state.meta.errors ) }
               />
@@ -48,12 +50,12 @@ export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSetting
               <SuperField
                 type="multi-select"
                 allowCustom={ true }
-                label="Preferred Categories"
-                description="Select the categories that best describe your content."
+                label={ t( 'preferredCategories' ) }
+                description={ t( 'preferredCategoriesDescription' ) }
                 value={ field.state.value || [] }
                 onValueChange={ ( val: string[] ) => field.handleChange( val ) }
                 options={ categoryOptions }
-                placeholder="Select categories..."
+                placeholder={ t( 'selectCategories' ) }
                 error={ toFieldError( field.state.meta.errors ) }
               />
             ) }
@@ -63,8 +65,8 @@ export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSetting
 
       <Card className="md:col-span-2 py-4">
         <CardHeader>
-          <CardTitle>Application Video</CardTitle>
-          <CardDescription>Upload a short video introducing yourself to brands.</CardDescription>
+          <CardTitle>{ t( 'applicationVideoTitle' ) }</CardTitle>
+          <CardDescription>{ t( 'applicationVideoDescription' ) }</CardDescription>
         </CardHeader>
         <CardContent>
           <form.Field

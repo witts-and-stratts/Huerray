@@ -22,21 +22,23 @@ import { toast } from 'sonner';
 import { useForm } from '@tanstack/react-form';
 import { useCallback, useMemo, useState } from 'react';
 import { z } from 'zod';
+import { useTranslations } from 'next-intl';
 
 export function ChangePasswordForm() {
+  const t = useTranslations( 'dashboard.creator.settings.password' );
   const [ isLoading, setIsLoading ] = useState( false );
   const [ showCurrentPassword, setShowCurrentPassword ] = useState( false );
   const [ showNewPassword, setShowNewPassword ] = useState( false );
   const [ showConfirmPassword, setShowConfirmPassword ] = useState( false );
 
   const schema = useMemo( () => z.object( {
-    currentPassword: z.string().min( 1, 'Current password is required' ),
-    newPassword: z.string().min( 8, 'Password must be at least 8 characters' ),
-    confirmPassword: z.string().min( 1, 'Please confirm your new password' ),
+    currentPassword: z.string().min( 1, t( 'currentPasswordRequired' ) ),
+    newPassword: z.string().min( 8, t( 'newPasswordMin' ) ),
+    confirmPassword: z.string().min( 1, t( 'confirmPasswordRequired' ) ),
   } ).refine( ( data ) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
+    message: t( 'passwordsDontMatch' ),
     path: [ "confirmPassword" ],
-  } ), [] );
+  } ), [ t ] );
 
   const form = useForm( {
     defaultValues: {
@@ -59,12 +61,12 @@ export function ChangePasswordForm() {
           }
         } );
 
-        toast.success( 'Password updated successfully' );
+        toast.success( t( 'updatedSuccess' ) );
         form.reset();
       } catch ( error: any ) {
-        console.error( 'Failed to change password', error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || 'Failed to update password';
-        toast.error( `Failed to update password: ${ errorMessage }` );
+        console.error( t( 'updateFailed' ), error );
+        const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message || t( 'updateFailed' );
+        toast.error( t( 'updateFailedWithError', { error: errorMessage } ) );
       } finally {
         setIsLoading( false );
       }
@@ -102,27 +104,25 @@ export function ChangePasswordForm() {
   ), [] );
 
   return (
-    <Card className='max-w-xl'>
+    <Card className='max-w-lg'>
       <CardHeader>
-        <CardTitle>Change Password</CardTitle>
-        <CardDescription>
-          Ensure your account is using a long, random password to stay secure.
-        </CardDescription>
+        <CardTitle>{ t( 'title' ) }</CardTitle>
+        <CardDescription>{ t( 'description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={ handleFormSubmit }>
           <FieldGroup>
             <form.Field
               name="currentPassword"
-              children={ ( field ) => renderPasswordField( field, "Current Password", showCurrentPassword, () => setShowCurrentPassword( !showCurrentPassword ) ) }
+              children={ ( field ) => renderPasswordField( field, t( 'currentPassword' ), showCurrentPassword, () => setShowCurrentPassword( !showCurrentPassword ) ) }
             />
             <form.Field
               name="newPassword"
-              children={ ( field ) => renderPasswordField( field, "New Password", showNewPassword, () => setShowNewPassword( !showNewPassword ) ) }
+              children={ ( field ) => renderPasswordField( field, t( 'newPassword' ), showNewPassword, () => setShowNewPassword( !showNewPassword ) ) }
             />
             <form.Field
               name="confirmPassword"
-              children={ ( field ) => renderPasswordField( field, "Confirm Password", showConfirmPassword, () => setShowConfirmPassword( !showConfirmPassword ) ) }
+              children={ ( field ) => renderPasswordField( field, t( 'confirmPassword' ), showConfirmPassword, () => setShowConfirmPassword( !showConfirmPassword ) ) }
             />
 
             <Field>
@@ -131,7 +131,7 @@ export function ChangePasswordForm() {
                 children={ ( [ canSubmit, isSubmitting ] ) => (
                   <div className="flex justify-end">
                     <Button type='submit' disabled={ !canSubmit || isSubmitting || isLoading }>
-                      { isSubmitting || isLoading ? 'Updating...' : 'Update Password' }
+                      { isSubmitting || isLoading ? t( 'updating' ) : t( 'updatePassword' ) }
                     </Button>
                   </div>
                 ) }

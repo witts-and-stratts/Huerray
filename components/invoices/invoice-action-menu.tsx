@@ -13,6 +13,7 @@ import { InvoiceDetailsSheet } from "./invoice-details-sheet";
 import { ButtonGroup } from "../dashboard-ui/button-group";
 import { BASE_URL } from "@/lib/api/client";
 import { toast } from "sonner";
+import { useTranslations } from 'next-intl';
 
 interface InvoiceActionMenuProps {
   invoice: ModelsInvoiceResponse;
@@ -21,6 +22,7 @@ interface InvoiceActionMenuProps {
 type DialogKey = 'generatePayment' | 'issueInvoice' | 'sendInvoice' | 'invoicePaid' | 'cancelInvoice';
 
 export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
+  const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const [ viewOpen, setViewOpen ] = useState( false );
   const [ openDialog, setOpenDialog ] = useState<DialogKey | null>( null );
   const [ paymentNotes, setPaymentNotes ] = useState( 'Payment made' );
@@ -34,21 +36,21 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
 
   const { mutate: updateInvoiceStatus, isPending: isInvoiceStatusPending } = useUpdateInvoiceStatus( {
     onSuccess: () => {
-      toast.success( "Payment generated successfully" );
+      toast.success( t( 'actions.paymentGeneratedSuccess' ) );
       setOpenDialog( null );
     },
     onError: () => {
-      toast.error( "Failed to generate payment" );
+      toast.error( t( 'actions.paymentGeneratedError' ) );
     },
   } );
 
   const { mutate: updateInvoiceStatusAction, isPending: isStatusActionPending } = useUpdateInvoiceStatus( {
     onSuccess: () => {
-      toast.success( "Invoice updated successfully" );
+      toast.success( t( 'actions.invoiceUpdatedSuccess' ) );
       setOpenDialog( null );
     },
     onError: () => {
-      toast.error( "Failed to update invoice" );
+      toast.error( t( 'actions.invoiceUpdatedError' ) );
     },
   } );
 
@@ -58,7 +60,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
 
   const actions: MenuAction<ModelsInvoiceResponse>[] = [
     {
-      label: isPdfPending ? "Generating PDF..." : "Download PDF",
+      label: isPdfPending ? t( 'actions.generatingPdf' ) : t( 'actions.downloadPdf' ),
       icon: Download,
       disabled: isPdfPending,
       action: ( inv ) => {
@@ -86,7 +88,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
     //   action: () => setOpenDialog( 'invoicePaid' ),
     // },
     {
-      label: "Cancel Invoice",
+      label: t( 'actions.cancelInvoice' ),
       icon: Ban,
       action: () => setOpenDialog( 'cancelInvoice' ),
       className: "text-destructive focus:text-destructive",
@@ -103,7 +105,7 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
           className="font-regular gap-1.5"
           onClick={ () => setViewOpen( true ) }
         >
-          View
+          { t( 'actions.view' ) }
         </Button>
         <ActionMenu
           actions={ actions }
@@ -123,9 +125,9 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
       <ConfirmDialog
         open={ openDialog === 'generatePayment' }
         onOpenChange={ ( open ) => { if ( !open ) { setOpenDialog( null ); setPaymentNotes( 'Payment made' ); } } }
-        title="Generate payment"
-        description="This will mark the invoice as paid and generate a payment record. This action cannot be undone."
-        confirmLabel="Generate payment"
+        title={ t( 'dialogs.generatePayment.title' ) }
+        description={ t( 'dialogs.generatePayment.description' ) }
+        confirmLabel={ t( 'dialogs.generatePayment.confirmLabel' ) }
         onConfirm={ () => {
           if ( invoice.id ) updateInvoiceStatus( {
             id: invoice.id,
@@ -138,11 +140,11 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
           } );
         } }
         isLoading={ isInvoiceStatusPending }
-        loadingText="Generating..."
+        loadingText={ t( 'dialogs.generatePayment.loading' ) }
       >
         <SuperField
           type="textarea"
-          label="Notes"
+          label={ t( 'dialogs.generatePayment.notes' ) }
           value={ paymentNotes }
           onChange={ ( e ) => setPaymentNotes( e.target.value ) }
           rows={ 3 }
@@ -152,45 +154,45 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
       <ConfirmDialog
         open={ openDialog === 'issueInvoice' }
         onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
-        title="Issue Invoice"
-        description="Mark this invoice as issued. The brand will be notified."
-        confirmLabel="Issue Invoice"
+        title={ t( 'dialogs.issueInvoice.title' ) }
+        description={ t( 'dialogs.issueInvoice.description' ) }
+        confirmLabel={ t( 'dialogs.issueInvoice.confirmLabel' ) }
         onConfirm={ () => handleInvoiceStatusUpdate( 'issued' ) }
         isLoading={ isStatusActionPending }
-        loadingText="Issuing..."
+        loadingText={ t( 'dialogs.issueInvoice.loading' ) }
       />
 
       <ConfirmDialog
         open={ openDialog === 'sendInvoice' }
         onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
-        title="Send Invoice"
-        description="Mark this invoice as sent to the brand."
-        confirmLabel="Send Invoice"
+        title={ t( 'dialogs.sendInvoice.title' ) }
+        description={ t( 'dialogs.sendInvoice.description' ) }
+        confirmLabel={ t( 'dialogs.sendInvoice.confirmLabel' ) }
         onConfirm={ () => handleInvoiceStatusUpdate( 'sent' ) }
         isLoading={ isStatusActionPending }
-        loadingText="Sending..."
+        loadingText={ t( 'dialogs.sendInvoice.loading' ) }
       />
 
       <ConfirmDialog
         open={ openDialog === 'invoicePaid' }
         onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
-        title="Invoice Paid"
-        description="Mark this invoice as paid by the brand."
-        confirmLabel="Mark as Paid"
+        title={ t( 'dialogs.invoicePaid.title' ) }
+        description={ t( 'dialogs.invoicePaid.description' ) }
+        confirmLabel={ t( 'dialogs.invoicePaid.confirmLabel' ) }
         onConfirm={ () => handleInvoiceStatusUpdate( 'paid' ) }
         isLoading={ isStatusActionPending }
-        loadingText="Updating..."
+        loadingText={ t( 'dialogs.invoicePaid.loading' ) }
       />
 
       <ConfirmDialog
         open={ openDialog === 'cancelInvoice' }
         onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
-        title="Cancel Invoice"
-        description="Are you sure you want to cancel this invoice? This action cannot be undone."
-        confirmLabel="Cancel Invoice"
+        title={ t( 'dialogs.cancelInvoice.title' ) }
+        description={ t( 'dialogs.cancelInvoice.description' ) }
+        confirmLabel={ t( 'dialogs.cancelInvoice.confirmLabel' ) }
         onConfirm={ () => handleInvoiceStatusUpdate( 'cancelled' ) }
         isLoading={ isStatusActionPending }
-        loadingText="Cancelling..."
+        loadingText={ t( 'dialogs.cancelInvoice.loading' ) }
         variant="destructive"
       />
     </div>

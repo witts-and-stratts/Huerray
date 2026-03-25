@@ -1,24 +1,26 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { BrandDashboardSummary } from './types';
+import { useTranslations } from 'next-intl';
 
 interface BrandPipelineBreakdownBlockProps {
   summary: BrandDashboardSummary;
 }
 
 export function BrandPipelineBreakdownBlock( { summary }: BrandPipelineBreakdownBlockProps ) {
+  const t = useTranslations( 'dashboard.brand.landing.pipelineBreakdown' );
   const campaignBars = [
-    { label: 'Pending Approval', value: summary.pending },
-    { label: 'Approved', value: summary.approved },
-    { label: 'Running', value: summary.running },
-    { label: 'Returned', value: summary.returned },
+    { label: t( 'pendingApproval' ), value: summary.pending },
+    { label: t( 'approved' ), value: summary.approved },
+    { label: t( 'running' ), value: summary.running },
+    { label: t( 'returned' ), value: summary.returned },
   ];
   const maxCampaignBar = Math.max( ...campaignBars.map( ( item ) => item.value ), 1 );
 
   return (
     <Card className="ad-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Campaign Pipeline</CardTitle>
-        <CardDescription className="ad-card-description">How your campaigns are distributed by status</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
         { campaignBars.map( ( item ) => {
