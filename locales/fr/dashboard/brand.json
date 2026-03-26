@@ -110,6 +110,7 @@
       "applications": "Applications",
       "submissions": "Soumissions",
       "invitations": "Invitations",
+      "inviteCreators": "Inviter les créateurs",
       "comments": "Commentaires",
       "videoCountLabel": "{count} vidéos",
       "durationLabel": "Durée {seconds}s",
@@ -440,6 +441,12 @@
     "videosPerCreator": "Vidéos par créateur",
     "videosPerCreatorPlaceholder": "Nombre de vidéos",
     "videoDuration": "Durée de la vidéo",
+    "videoDurationOptions": {
+      "15": "15 secondes",
+      "30": "30 secondes",
+      "60": "60 secondes",
+      "90": "90+ secondes"
+    },
     "allowMultipleVideos": "Autoriser les vidéos multiples",
     "yes": "Oui",
     "no": "Non",

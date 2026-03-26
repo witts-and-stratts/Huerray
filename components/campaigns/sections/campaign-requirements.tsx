@@ -9,15 +9,15 @@ interface CampaignRequirementsProps {
   form: CampaignFormApi;
 }
 
-const videoDurationOptions = [
-  { label: '15 seconds', value: '15' },
-  { label: '30 seconds', value: '30' },
-  { label: '60 seconds', value: '60' },
-  { label: '90+ seconds', value: '90' },
-];
+const videoDurationValues = [ '15', '30', '60', '90' ] as const;
 
 export const CampaignCreatorRequirements = memo( function CampaignCreatorRequirements( { form }: CampaignRequirementsProps ) {
   const t = useTranslations( 'dashboard.brand.newCampaignPage' );
+  const videoDurationOptions = videoDurationValues.map( ( value ) => ( {
+    label: t( `videoDurationOptions.${ value }` ),
+    value,
+  } ) );
+
   return (
     <FieldGroup className='gap-2'>
       <div className='flex gap-2'>

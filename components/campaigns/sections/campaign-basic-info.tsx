@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { UtilsCampaignCategory } from '@/lib/api/generated/models/utils-campaign-category';
+import { useFilterLabel } from '@/lib/hooks/use-filter-label';
 import { CampaignFormApi, createCampaignSchema } from '../schema';
 import { useTranslations } from 'next-intl';
 
@@ -10,16 +11,10 @@ interface CampaignBasicInfoProps {
   form: CampaignFormApi;
 }
 
-const formatEnumLabel = ( value: string | undefined ) => {
-  if ( !value ) return '';
-  return value
-    .split( /[_\- ]+/ )
-    .map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ).toLowerCase() )
-    .join( " " );
-};
-
 export const CampaignBasicInfo = memo( function CampaignBasicInfo( { form }: CampaignBasicInfoProps ) {
   const t = useTranslations( 'dashboard.brand.newCampaignPage' );
+  const getFilterLabel = useFilterLabel();
+
   return (
     <FieldGroup>
       <form.Field name="campaign_name" validators={ { onChange: createCampaignSchema.shape.campaign_name, onBlur: createCampaignSchema.shape.campaign_name } }>
@@ -60,7 +55,7 @@ export const CampaignBasicInfo = memo( function CampaignBasicInfo( { form }: Cam
               value={ field.state.value }
               onValueChange={ ( val ) => { field.handleChange( val as UtilsCampaignCategory ); field.handleBlur(); } }
               options={ Object.values( UtilsCampaignCategory ).map( ( val ) => ( {
-                label: formatEnumLabel( val ),
+                label: getFilterLabel( val ),
                 value: val
               } ) ) }
               error={ field.state.meta.errors?.length ? field.state.meta.errors.map( ( e ) => e.message ).join( ', ' ) : undefined }

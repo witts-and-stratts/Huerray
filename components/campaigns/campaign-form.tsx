@@ -314,7 +314,7 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
               onClick={ handleSaveAndExit }
               size="sm"
               disabled={ isSubmitting }
-              className="w-full md:w-40"
+              className=""
             >
               { isSubmitting && submitIntent === 'draft' ? (
                 <>
