@@ -18,6 +18,9 @@ export interface ModelsCreatorAnalyticsResponse {
     'applications_accepted'?: number;
     'applications_sent'?: number;
     'approval_rate'?: number;
+    'case_resolution_rate'?: number;
+    'cases_reported'?: number;
+    'cases_resolved'?: number;
     'gigs_completed'?: number;
     'invitations_accepted'?: number;
     'invitations_received'?: number;

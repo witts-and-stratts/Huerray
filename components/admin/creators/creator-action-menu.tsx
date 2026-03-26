@@ -5,35 +5,75 @@ import {
   AllowedRoles,
   MenuAction
 } from "@/components/dashboard-ui/action-menu";
-import { ModelsCreatorResponse } from "@/lib/api/generated/models";
-import { useResendVerification } from "@/lib/api/hooks/users";
+import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
+import { SuperField } from "@/components/dashboard-ui/super-field";
+import { useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
+import { ModelsCreatorResponse, UtilsCreatorStatus } from "@/lib/api/generated/models";
 import { Copy } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
-import { CreatorStatusDialog } from "./creator-status-dialog";
 import { useTranslations } from "next-intl";
+
+type CreatorActionStatus = "approved" | "rejected" | "returned";
 
 interface CreatorActionMenuProps {
   creator: ModelsCreatorResponse;
   creatorId?: string;
-  onViewDetails: ( creator: ModelsCreatorResponse ) => void;
+  onViewDetails?: ( creator: ModelsCreatorResponse ) => void;
   onApproveProfile?: ( creator: ModelsCreatorResponse ) => void;
   onRejectProfile?: ( creator: ModelsCreatorResponse ) => void;
   trigger?: ReactNode;
 }
 
-export function CreatorActionMenu( { creator, onViewDetails, onApproveProfile, onRejectProfile, trigger }: CreatorActionMenuProps ) {
+export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorActionMenuProps ) {
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
-  const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
-  const resendVerification = useResendVerification();
+  const updateStatus = useUpdateCreatorProfileStatus();
+  const [ pendingAction, setPendingAction ] = useState<{
+    status: CreatorActionStatus;
+    comments: string;
+  } | null>( null );
 
-  const handleReviewProfile = () => {
+  const handleStatusAction = ( status: CreatorActionStatus ) => {
     if ( !creator.id ) {
       toast.error( t( 'creatorStatus.missingId' ) );
       return;
     }
-    setIsStatusDialogOpen( true );
+    setPendingAction( { status, comments: "" } );
+  };
+
+  const handleConfirmStatusAction = () => {
+    if ( !creator.id || !pendingAction ) return;
+
+    updateStatus.mutate(
+      {
+        id: creator.id,
+        creator_status: pendingAction.status,
+        comments: pendingAction.comments,
+      },
+      {
+        onSuccess: () => {
+          const creatorName = creator.first_name || tc( 'cards.creatorFallback' );
+          setPendingAction( null );
+
+          if ( pendingAction.status === "approved" ) {
+            toast.success( t( 'creatorStatus.approvedToast', { name: creatorName } ) );
+            return;
+          }
+
+          if ( pendingAction.status === "returned" ) {
+            toast.success( t( 'creatorStatus.returnedToast', { name: creatorName } ) );
+            return;
+          }
+
+          toast.success( t( 'creatorStatus.rejectedToast', { name: creatorName } ) );
+        },
+        onError: () => {
+          setPendingAction( null );
+          toast.error( t( 'creatorStatus.errorToast' ) );
+        },
+      }
+    );
   };
 
   // const handleResendVerification = async () => {
@@ -64,27 +104,28 @@ export function CreatorActionMenu( { creator, onViewDetails, onApproveProfile, o
       icon: Copy,
       action: handleCopyId,
     },
-    {
+    ...( onViewDetails ? [ {
       label: tc( 'sheets.details' ),
       action: () => onViewDetails( creator ),
       separator: true,
-    },
-    ...( onApproveProfile ? [ {
-      label: t( 'creatorStatus.approve' ),
-      action: () => onApproveProfile( creator ),
-      allowedRoles: [ 'admin' ] as AllowedRoles[],
-      condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "approved",
-    } ] : [] ),
-    ...( onRejectProfile ? [ {
-      label: t( 'creatorStatus.reject' ),
-      action: () => onRejectProfile( creator ),
-      allowedRoles: [ 'admin' ] as AllowedRoles[],
-      condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "rejected",
     } ] : [] ),
     {
-      label: t( 'creatorStatus.reviewProfile' ),
-      action: handleReviewProfile,
-      allowedRoles: [ 'admin' ]
+      label: t( 'creatorStatus.approve' ),
+      action: () => handleStatusAction( "approved" ),
+      allowedRoles: [ 'admin' ],
+      condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "approved",
+    },
+    {
+      label: t( 'creatorStatus.reject' ),
+      action: () => handleStatusAction( "rejected" ),
+      allowedRoles: [ 'admin' ],
+      condition: ( creator: ModelsCreatorResponse ) => creator.creator_status !== "rejected",
+    },
+    {
+      label: t( 'creatorStatus.return' ),
+      action: () => handleStatusAction( "returned" ),
+      allowedRoles: [ 'admin' ],
+      condition: ( creator: ModelsCreatorResponse ) => creator.creator_status === UtilsCreatorStatus.CreatorStatusPendingApproval,
     },
     {
       label: t( 'creatorStatus.deleteCreator' ),
@@ -102,11 +143,55 @@ export function CreatorActionMenu( { creator, onViewDetails, onApproveProfile, o
         data={ creator }
         trigger={ trigger }
       />
-      <CreatorStatusDialog
-        open={ isStatusDialogOpen }
-        onOpenChange={ setIsStatusDialogOpen }
-        creatorId={ creator.id! }
-      />
+      <ConfirmDialog
+        open={ !!pendingAction }
+        onOpenChange={ ( open ) => {
+          if ( !open ) setPendingAction( null );
+        } }
+        title={
+          pendingAction?.status === "approved"
+            ? t( 'creatorStatus.confirmApproveTitle' )
+            : pendingAction?.status === "returned"
+              ? t( 'creatorStatus.confirmReturnTitle' )
+              : t( 'creatorStatus.confirmRejectTitle' )
+        }
+        description={
+          pendingAction?.status === "approved"
+            ? t( 'creatorStatus.confirmApproveDesc', { name: creator.first_name || t( 'creatorStatus.thisCreator' ) } )
+            : pendingAction?.status === "returned"
+              ? t( 'creatorStatus.confirmReturnDesc', { name: creator.first_name || t( 'creatorStatus.thisCreator' ) } )
+              : t( 'creatorStatus.confirmRejectDesc', { name: creator.first_name || t( 'creatorStatus.thisCreator' ) } )
+        }
+        confirmLabel={
+          pendingAction?.status === "approved"
+            ? t( 'creatorStatus.approve' )
+            : pendingAction?.status === "returned"
+              ? t( 'creatorStatus.return' )
+              : t( 'creatorStatus.reject' )
+        }
+        variant={ pendingAction?.status === "approved" ? "default" : "destructive" }
+        onConfirm={ handleConfirmStatusAction }
+        isLoading={ updateStatus.isPending }
+        loadingText={
+          pendingAction?.status === "approved"
+            ? t( 'creatorStatus.approving' )
+            : pendingAction?.status === "returned"
+              ? t( 'creatorStatus.returning' )
+              : t( 'creatorStatus.rejecting' )
+        }
+        className="w-[560px]"
+      >
+        <SuperField
+          type="textarea"
+          label={ t( 'creatorStatus.commentLabel' ) }
+          placeholder={ t( 'creatorStatus.commentPlaceholder' ) }
+          value={ pendingAction?.comments || "" }
+          onChange={ ( e ) => {
+            setPendingAction( current => current ? { ...current, comments: e.target.value } : current );
+          } }
+          fieldClassName="min-h-40"
+        />
+      </ConfirmDialog>
     </>
   );
 }

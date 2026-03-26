@@ -3,6 +3,7 @@
 import {
   IconCreditCard,
   IconDotsVertical,
+  IconKey,
   IconLogout,
   IconNotification,
   IconUserCircle,
@@ -37,6 +38,7 @@ import { apiClient } from "@/lib/api/client";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { clearBrandProfile } from "@/lib/redux/features/brand/brandSlice";
 import { clearCreatorProfile } from "@/lib/redux/features/creator/creatorSlice";
+import { Bell, KeyIcon } from "lucide-react";
 
 export function NavUser( {
   user,
@@ -49,8 +51,8 @@ export function NavUser( {
 } ) {
   const { isMobile } = useSidebar();
   const { setUser, user: authUser } = useAuth();
-  const t = useTranslations('dashboard.common');
-  const tNav = useTranslations('dashboard.navigation');
+  const t = useTranslations( 'dashboard.common' );
+  const tNav = useTranslations( 'dashboard.navigation' );
   const router = useRouter();
   const locale = useLocale();
   const dispatch = useAppDispatch();
@@ -127,41 +129,41 @@ export function NavUser( {
                   { authUser.role === 'creator' ? (
                     <>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/creator/settings` ) }>
-                        <IconUserCircle />
+                        {/* <IconUserCircle /> */ }
                         { tNav( 'creator.profileSettings' ) }
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/creator/account` ) }>
-                        <IconUserCircle />
+                        {/* <IconUserCircle /> */ }
                         { tNav( 'creator.account' ) }
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/creator/account/change-password` ) }>
-                        <IconUserCircle />
+                        <KeyIcon />
                         { tNav( 'creator.changePassword' ) }
                       </DropdownMenuItem>
                     </>
                   ) : authUser.role === 'brand' ? (
                     <>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/brand/settings/profile` ) }>
-                        <IconUserCircle />
+                        {/* <IconUserCircle /> */ }
                         { tNav( 'brand.profileSettings' ) }
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/brand/settings/user-information` ) }>
-                        <IconUserCircle />
+                        {/* <IconUserCircle /> */ }
                         { tNav( 'brand.accountSettings' ) }
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/brand/settings/security` ) }>
-                        <IconUserCircle />
+                        <KeyIcon />
                         { tNav( 'brand.changePassword' ) }
                       </DropdownMenuItem>
                     </>
                   ) : authUser.role === 'admin' ? (
                     <>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/admin/settings` ) }>
-                        <IconUserCircle />
+                        {/* <IconUserCircle /> */ }
                         { tNav( 'admin.accountSettings' ) }
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={ () => router.push( `/${ locale }/admin/settings/security` ) }>
-                        <IconUserCircle />
+                        <KeyIcon />
                         { tNav( 'admin.changePassword' ) }
                       </DropdownMenuItem>
                     </>
@@ -177,14 +179,14 @@ export function NavUser( {
                 </>
               ) }
               <DropdownMenuItem onClick={ () => router.push( `/${ locale }${ getNotificationsPagePath( authUser?.role ) }` ) }>
-                <IconNotification />
-                {t('notifications')}
+                <Bell />
+                { t( 'notifications' ) }
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={ handleLogout }>
               <IconLogout />
-              {t('logout')}
+              { t( 'logout' ) }
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

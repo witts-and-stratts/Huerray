@@ -276,12 +276,21 @@
     "socialMediaTitle": "Paramètres des médias sociaux",
     "socialMediaDescription": "Connectez et gérez vos comptes de médias sociaux.",
     "securityTitle": "Modifier le mot de passe",
-    "securityDescription": "Mettez à jour votre mot de passe et assurez la sécurité de votre compte."
+    "securityDescription": "Mettez à jour votre mot de passe et assurez la sécurité de votre compte.",
+    "returnedComments": {
+      "title": "Commentaires sur le profil",
+      "description": "Examinez le retour d'information joint à votre profil renvoyé.",
+      "label": "Commentaire de l'administrateur",
+      "empty": "Aucun commentaire n'a été joint à ce profil renvoyé.",
+      "openAriaLabel": "Ouvrir les commentaires du profil",
+      "fallbackLabel": "Commentaires"
+    }
   },
   "settingsTabs": {
     "profile": "Profil",
     "bio": "Biographie",
     "socialMedia": "Médias sociaux",
+    "bankDetails": "Coordonnées bancaires",
     "security": "Sécurité"
   },
   "accountEditPage": {
@@ -334,7 +343,11 @@
     "saveChanges": "Enregistrer les modifications",
     "successUpdated": "Mise à jour réussie des coordonnées bancaires",
     "errorUpdateFailed": "Échec de la mise à jour des paramètres",
-    "errorUpdateFailedWithError": "Échec de la mise à jour : {error}"
+    "errorUpdateFailedWithError": "Échec de la mise à jour : {error}",
+    "bankNameRequired": "Le nom de la banque est requis",
+    "bankAccountNameRequired": "Le nom du titulaire du compte est requis",
+    "bankAccountNumberRequired": "Le numéro de compte est requis",
+    "bankRoutingNumberRequired": "Le numéro de routage ou le code SWIFT est requis"
   },
   "gigDetailsFor": "Détails pour gig : {title}",
   "myGigs": {

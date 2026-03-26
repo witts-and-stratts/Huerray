@@ -7,6 +7,7 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
 } from '@/components/dashboard-ui/sheet';
@@ -26,6 +27,11 @@ import Image from 'next/image';
 import { Content } from '@/components/dashboard-ui/content';
 import { SentenceCase } from '@/components/text-case';
 import { useTranslations } from "next-intl";
+import { RoleGuard } from '@/components/auth/role-guard';
+import { BrandActionMenu } from './brand-action-menu';
+import { Button } from '@/components/dashboard-ui/button';
+import { ChevronDown } from 'lucide-react';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 
 interface BrandDetailsSheetProps {
   brand?: Brand;
@@ -87,6 +93,7 @@ function BrandSheetHeader( { brand, brandId }: { brand?: Brand; brandId?: string
 
 export function BrandDetailsSheet( { brand, brandId, open, onOpenChange }: BrandDetailsSheetProps ) {
   const t = useTranslations('dashboard.admin');
+  const tc = useTranslations( 'dashboard.common' );
   const [ activeTab, setActiveTab ] = React.useState( 'overview' );
 
   const { data } = useBrand( brand?.id || brandId || '', { enabled: open && !!( brand?.id || brandId ) } );
@@ -95,6 +102,20 @@ export function BrandDetailsSheet( { brand, brandId, open, onOpenChange }: Brand
   const address = `${ details?.building_number } ${ details?.street }, ${ details?.city },<br /> ${ details?.state }, ${ details?.postal_code }.`;
 
   const formattedCreatedAt = useFormatDate( details?.created_at || '' );
+  const menuBrand = brand || {
+    id: details?.brand_id || brandId || '',
+    name: details?.company_name || '',
+    logo: details?.profile_photo?.asset || '',
+    brand_status: details?.brand_status || 'active',
+    total_campaigns: 0,
+    website: details?.website_url || '',
+    joined_date: details?.created_at || '',
+    contact_email: details?.preferred_contact_email || '',
+    category: details?.category || undefined,
+    company_size: details?.company_size || undefined,
+    city: details?.city || undefined,
+    country: details?.country || undefined,
+  };
 
   if ( !brand && !brandId ) return null;
 
@@ -170,6 +191,24 @@ export function BrandDetailsSheet( { brand, brandId, open, onOpenChange }: Brand
             </div>
           </Activity>
         </Tabs>
+
+        <RoleGuard allowedRoles={ [ 'admin' ] }>
+          <SheetFooter className="sticky bottom-0 px-6 pb-6 pt-3 shrink-0 border-t border-border/50 bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur">
+            <BrandActionMenu
+              brand={ menuBrand }
+              trigger={
+                <ButtonGroup className="self-start min-w-[240px]">
+                  <Button variant="outline" size="sm" className="font-regular flex-1">
+                    { tc( 'actions' ) }
+                  </Button>
+                  <Button variant="outline" size="sm" className="font-regular shrink-0">
+                    <ChevronDown className="size-4" />
+                  </Button>
+                </ButtonGroup>
+              }
+            />
+          </SheetFooter>
+        </RoleGuard>
 
       </SheetContent>
     </Sheet>

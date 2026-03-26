@@ -15,7 +15,7 @@ import React from 'react';
 import { ScrollArea } from './dashboard-ui/scroll-area';
 
 interface SubHeaderProps {
-  title: string;
+  title: React.ReactNode;
   description?: string;
   children?: React.ReactNode;
   pre?: React.ReactNode;

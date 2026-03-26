@@ -18,6 +18,7 @@ export interface ModelsNotificationResponse {
     'action_url'?: string;
     'created_at'?: string;
     'entity_id'?: string;
+    'entity_type'?: string;
     'event_name'?: string;
     'event_type'?: string;
     'id'?: string;

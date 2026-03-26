@@ -1,12 +1,14 @@
-# UtilsContentTypeOption
+# UtilsPriority
 
 
 ## Enum
 
-* `ContentTypeVideoOption` (value: `'video'`)
+* `PriorityLow` (value: `'low'`)
 
-* `ContentTypeImageOption` (value: `'image'`)
+* `PriorityNormal` (value: `'normal'`)
 
-* `ContentTypePDFOption` (value: `'pdf'`)
+* `PriorityHigh` (value: `'high'`)
+
+* `PriorityUrgent` (value: `'urgent'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

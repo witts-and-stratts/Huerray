@@ -115,7 +115,7 @@ export function Footer( { className }: { className?: string; } ) {
             height={ 60 }
             className='footer__logo'
           />
-          <p className='footer__copyright'>{ t( 'copyright' ) }</p>
+          <p className='footer__copyright'>{ t( 'copyright', { date: new Date().getFullYear() } ) }</p>
         </div>
 
         {/* Language Selector and Social Icons */ }

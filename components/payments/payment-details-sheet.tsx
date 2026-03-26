@@ -5,11 +5,13 @@ import { Activity } from 'react';
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetDescription,
 } from '@/components/dashboard-ui/sheet';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Button } from '@/components/dashboard-ui/button';
 import { Separator } from '@/components/dashboard-ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
@@ -22,6 +24,9 @@ import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { CopyText } from '../dashboard-ui/copy-text';
 import { useTranslations, useLocale } from 'next-intl';
+import { PaymentActionMenu } from './payment-action-menu';
+import { ChevronDown } from 'lucide-react';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -223,6 +228,23 @@ export function PaymentDetailsSheet( { payment, open, onOpenChange, isAdmin = fa
               </div>
             </WrappedCard>
           ) }
+          <SheetFooter className="sticky bottom-0 px-0 pb-0 pt-0 border-0 bg-transparent">
+            <PaymentActionMenu
+              payment={ resolvedPayment }
+              isAdmin={ isAdmin }
+              showViewButton={ false }
+              trigger={
+                <ButtonGroup className="self-start min-w-[240px]">
+                  <Button variant="outline" size="sm" className="font-regular flex-1">
+                    { t( 'actions' ) }
+                  </Button>
+                  <Button variant="outline" size="sm" className="font-regular shrink-0">
+                    <ChevronDown className="size-4" />
+                  </Button>
+                </ButtonGroup>
+              }
+            />
+          </SheetFooter>
         </div>
       </SheetContent>
     </Sheet>

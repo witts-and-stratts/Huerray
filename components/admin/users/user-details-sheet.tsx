@@ -8,6 +8,7 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
 } from '@/components/dashboard-ui/sheet';
@@ -16,7 +17,6 @@ import { CopyText } from '@/components/dashboard-ui/copy-text';
 import { Separator } from '@/components/dashboard-ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
-import { Badge } from '@/components/dashboard-ui/badge';
 import { UserStatusBadge } from './user-status-badge';
 import { useFormatDate } from '@/lib/hooks/format';
 import { cn } from '@/lib/dashboard-utils';
@@ -24,6 +24,11 @@ import { Row } from '@/components/admin/creators/details-sheet/creator-details-s
 import { EmailStatusBadge } from '@/components/dashboard-ui/status-badge';
 import { useTranslations } from "next-intl";
 import { useMessage } from '@/lib/hooks/use-filter-label';
+import { RoleGuard } from '@/components/auth/role-guard';
+import { UserActionMenu } from './user-action-menu';
+import { Button } from '@/components/dashboard-ui/button';
+import { ChevronDown } from 'lucide-react';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 
 interface UserDetailsSheetProps {
   user: ModelsUserResponse | null;
@@ -40,6 +45,7 @@ function toLabel( value: string | undefined, t: any ) {
 
 export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheetProps ) {
   const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const userId = user?.id || '';
   const { data: userDetails } = useUser( userId );
   const [ activeTab, setActiveTab ] = React.useState( 'account' );
@@ -177,6 +183,24 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
             </div>
           </Activity>
         </Tabs>
+
+        <RoleGuard allowedRoles={ [ 'admin' ] }>
+          <SheetFooter className="sticky bottom-0 px-6 pb-6 pt-3 shrink-0 border-t border-border/50 bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur">
+            <UserActionMenu
+              user={ profile as ModelsUserResponse }
+              trigger={
+                <ButtonGroup className="self-start min-w-[240px]">
+                  <Button variant="outline" size="sm" className="font-regular flex-1">
+                    { tc( 'actions' ) }
+                  </Button>
+                  <Button variant="outline" size="sm" className="font-regular shrink-0">
+                    <ChevronDown className="size-4" />
+                  </Button>
+                </ButtonGroup>
+              }
+            />
+          </SheetFooter>
+        </RoleGuard>
 
       </SheetContent>
     </Sheet>

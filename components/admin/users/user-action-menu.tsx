@@ -5,10 +5,7 @@ import {
   ActionMenu,
   MenuAction
 } from "@/components/dashboard-ui/action-menu";
-import { apiClient } from "@/lib/api/client";
-import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
-import { useResendVerification } from "@/lib/api/hooks/users";
 import { useState } from "react";
 import { toast } from "sonner";
 import { UserStatusDialog } from "./user-status-dialog";
@@ -16,61 +13,23 @@ import { useTranslations } from "next-intl";
 
 interface UserActionMenuProps {
   user: ModelsUserResponse;
-  onViewDetails: ( user: ModelsUserResponse ) => void;
+  onViewDetails?: ( user: ModelsUserResponse ) => void;
   trigger?: React.ReactNode;
 }
 
 export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenuProps ) {
-  const t = useTranslations('dashboard.admin');
-  const menuT = useTranslations('dashboard.admin.userActionMenu');
+  const menuT = useTranslations( 'dashboard.admin.userActionMenu' );
+  const t = useTranslations( 'dashboard.admin.userStatus' );
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
-  const resendVerification = useResendVerification();
+  const [ pendingStatus, setPendingStatus ] = useState<"approved" | "rejected">( "approved" );
 
-  const handleReviewProfile = () => {
+  const handleStatusAction = ( status: "approved" | "rejected" ) => {
     if ( !user.id ) {
       toast.error( "User profile not found" );
       return;
     }
+    setPendingStatus( status );
     setIsStatusDialogOpen( true );
-  };
-
-  const handleResendVerification = async () => {
-    if ( !user.email ) {
-      toast.error( "User has no email address" );
-      return;
-    }
-
-    toast.promise(
-      resendVerification.mutateAsync( user.email ),
-      {
-        loading: menuT( 'sendingVerification' ),
-        success: menuT( 'verificationSent' ),
-        error: ( error ) => <><span>{ menuT( 'failedToSendVerification' ) }</span><span>{ JSON.stringify( error.message ) }</span></>,
-        richColors: true,
-      }
-    );
-  };
-
-  const handleInitiatePasswordReset = async () => {
-    if ( !user.email ) {
-      toast.error( "User has no email address" );
-      return;
-    }
-
-    const authApi = new AuthenticationApi( undefined, undefined, apiClient );
-
-    toast.promise(
-      authApi.authPasswordResetPost( { email: { email: user.email } } ),
-      {
-        loading: menuT( 'initiatingPasswordReset' ),
-        success: menuT( 'passwordResetSent' ),
-        error: ( error ) => {
-          const errorMessage = error.response?.data?.message || error.message || menuT( 'failedToInitiatePasswordReset' );
-          return <span>{ errorMessage }</span>;
-        },
-        richColors: true,
-      }
-    );
   };
 
   const handleCopyId = () => {
@@ -105,24 +64,30 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
         }
       },
     },
-    {
+    ...( onViewDetails ? [ {
       label: menuT( 'viewDetails' ),
       action: () => onViewDetails( user ),
       separator: true,
+    } ] : [] ),
+    // {
+    //   label: menuT( 'resendEmailVerification' ),
+    //   action: handleResendVerification,
+    //   condition: () => !user.email_verified,
+    // },
+    // {
+    //   label: menuT( 'initiatePasswordReset' ),
+    //   action: handleInitiatePasswordReset,
+    //   condition: () => !!user.email,
+    // },
+    {
+      label: t( 'approve' ),
+      action: () => handleStatusAction( "approved" ),
+      condition: ( current ) => current.user_status !== "approved",
     },
     {
-      label: menuT( 'resendEmailVerification' ),
-      action: handleResendVerification,
-      condition: () => !user.email_verified,
-    },
-    {
-      label: menuT( 'initiatePasswordReset' ),
-      action: handleInitiatePasswordReset,
-      condition: () => !!user.email,
-    },
-    {
-      label: menuT( 'reviewProfile' ),
-      action: handleReviewProfile,
+      label: t( 'reject' ),
+      action: () => handleStatusAction( "rejected" ),
+      condition: ( current ) => current.user_status !== "rejected",
     },
     {
       label: menuT( 'deleteUser' ),
@@ -143,6 +108,7 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
         open={ isStatusDialogOpen }
         onOpenChange={ setIsStatusDialogOpen }
         user={ user }
+        initialStatus={ pendingStatus }
       />
     </>
   );

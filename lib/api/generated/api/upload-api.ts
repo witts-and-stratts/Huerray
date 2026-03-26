@@ -160,10 +160,11 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
          * Preview a document file without allowing download
          * @summary Preview a document
          * @param {string} filename Document filename
+         * @param {string} [documentType] Document type (generic or invoice)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsPreviewDocumentsFilenameGet: async (filename: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadsPreviewDocumentsFilenameGet: async (filename: string, documentType?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'filename' is not null or undefined
             assertParamExists('uploadsPreviewDocumentsFilenameGet', 'filename', filename)
             const localVarPath = `/uploads/preview/documents/{filename}`
@@ -178,6 +179,10 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (documentType !== undefined) {
+                localVarQueryParameter['document_type'] = documentType;
+            }
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -397,11 +402,12 @@ export const UploadApiFp = function(configuration?: Configuration) {
          * Preview a document file without allowing download
          * @summary Preview a document
          * @param {string} filename Document filename
+         * @param {string} [documentType] Document type (generic or invoice)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsPreviewDocumentsFilenameGet(filename: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFilePreviewResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsPreviewDocumentsFilenameGet(filename, options);
+        async uploadsPreviewDocumentsFilenameGet(filename: string, documentType?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFilePreviewResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsPreviewDocumentsFilenameGet(filename, documentType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsPreviewDocumentsFilenameGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -506,7 +512,7 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         uploadsPreviewDocumentsFilenameGet(requestParameters: UploadApiUploadsPreviewDocumentsFilenameGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFilePreviewResponse> {
-            return localVarFp.uploadsPreviewDocumentsFilenameGet(requestParameters.filename, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadsPreviewDocumentsFilenameGet(requestParameters.filename, requestParameters.documentType, options).then((request) => request(axios, basePath));
         },
         /**
          * Preview an image file without allowing download
@@ -589,6 +595,11 @@ export interface UploadApiUploadsPreviewDocumentsFilenameGetRequest {
      * Document filename
      */
     readonly filename: string
+
+    /**
+     * Document type (generic or invoice)
+     */
+    readonly documentType?: string
 }
 
 /**
@@ -681,7 +692,7 @@ export class UploadApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public uploadsPreviewDocumentsFilenameGet(requestParameters: UploadApiUploadsPreviewDocumentsFilenameGetRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsPreviewDocumentsFilenameGet(requestParameters.filename, options).then((request) => request(this.axios, this.basePath));
+        return UploadApiFp(this.configuration).uploadsPreviewDocumentsFilenameGet(requestParameters.filename, requestParameters.documentType, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

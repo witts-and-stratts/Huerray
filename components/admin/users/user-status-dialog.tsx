@@ -23,11 +23,12 @@ interface UserStatusDialogProps {
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
   user: ModelsUserResponse;
+  initialStatus?: "approved" | "rejected";
   onSuccess?: () => void;
 }
 
 const statusSchema = z.object( {
-  status: z.string().min( 1, "Status is required" ),
+  status: z.enum( [ "approved", "rejected" ] ),
   comment: z.string(),
 } );
 
@@ -35,16 +36,21 @@ export function UserStatusDialog( {
   open,
   onOpenChange,
   user,
+  initialStatus = "approved",
   onSuccess,
 }: UserStatusDialogProps ) {
   const t = useTranslations( 'dashboard.admin.userStatus' );
   const tc = useTranslations( 'dashboard.common' );
   const { mutateAsync: updateStatus, isPending } = useUpdateUserStatus();
 
+  const resolveUserStatusMessage = ( key: string, fallback: string, values?: Record<string, string> ) => (
+    t.has( key ) ? t( key, values ) : fallback
+  );
+
 
   const form = useForm( {
     defaultValues: {
-      status: user.user_status || "approved",
+      status: initialStatus,
       comment: "",
     },
     validators: {
@@ -62,7 +68,8 @@ export function UserStatusDialog( {
           status: value.status,
           user: user, // Pass full user object for API reconstruction
         } );
-        toast.success( t( 'successToast' ), {
+        const userName = user.first_name || user.username || t( 'thisUser' );
+        toast.success( value.status === "approved" ? t( 'approvedToast', { name: userName } ) : t( 'rejectedToast', { name: userName } ), {
           richColors: true,
         } );
         onOpenChange( false );
@@ -81,11 +88,11 @@ export function UserStatusDialog( {
   useEffect( () => {
     if ( open ) {
       form.reset( {
-        status: user.user_status || "approved",
+        status: initialStatus,
         comment: "",
       } );
     }
-  }, [ open, user.user_status, form ] );
+  }, [ open, initialStatus, form ] );
 
   const handleSubmit = ( e: React.FormEvent ) => {
     e.preventDefault();
@@ -97,28 +104,26 @@ export function UserStatusDialog( {
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className='font-primary text-h5 font-normal text-primary!'>{ t('title') }</DialogTitle>
+          <DialogTitle className='font-primary text-h5 font-normal text-primary!'>
+            { initialStatus === "approved"
+              ? resolveUserStatusMessage( 'confirmApproveTitle', 'Approve user profile?' )
+              : resolveUserStatusMessage( 'confirmRejectTitle', 'Reject user profile?' ) }
+          </DialogTitle>
           <DialogDescription>
-            { t('description') }
+            { initialStatus === "approved"
+              ? resolveUserStatusMessage(
+                'confirmApproveDesc',
+                `${ user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }'s profile will be approved and they will be notified.`,
+                { name: user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }
+              )
+              : resolveUserStatusMessage(
+                'confirmRejectDesc',
+                `${ user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }'s profile will be rejected and they will be notified.`,
+                { name: user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }
+              ) }
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={ handleSubmit } className="grid gap-4 py-4">
-          <form.Field
-            name="status"
-            children={ ( field ) => (
-              <SuperField
-                type="select"
-                label={ t('statusLabel') }
-                value={ field.state.value }
-                onValueChange={ ( value ) => field.handleChange( value! ) }
-                options={ [
-                  { value: "approved", label: t('approve') },
-                  { value: "rejected", label: t('reject') },
-                ] }
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-              />
-            ) }
-          />
           <form.Field
             name="comment"
             children={ ( field ) => (
@@ -143,7 +148,11 @@ export function UserStatusDialog( {
               children={ ( [ canSubmit, isSubmitting ] ) => (
                 <Button type="submit" disabled={ !canSubmit || isSubmitting || isPending }>
                   { ( isSubmitting || isPending ) && <Loader2 className="mr-2 size-4 animate-spin" /> }
-                  { tc('sheets.updateStatus') }
+                  { isPending
+                    ? ( initialStatus === "approved"
+                      ? resolveUserStatusMessage( 'approving', 'Approving...' )
+                      : resolveUserStatusMessage( 'rejecting', 'Rejecting...' ) )
+                    : ( initialStatus === "approved" ? t( 'approve' ) : t( 'reject' ) ) }
                 </Button>
               ) }
             />

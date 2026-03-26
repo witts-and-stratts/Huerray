@@ -13,16 +13,28 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsEventType } from './utils-event-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsNotificationEntityType } from './utils-notification-entity-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsPriority } from './utils-priority';
 
 export interface ModelsCreateNotificationRequest {
     'action_url'?: string;
     'entity_id': string;
+    'entity_type': UtilsNotificationEntityType;
     'event_name': string;
-    'event_type': string;
+    'event_type': UtilsEventType;
     'message': string;
     'metadata'?: string;
-    'priority'?: string;
+    'priority'?: UtilsPriority;
     'title': string;
     'user_id': string;
 }
+
+
 

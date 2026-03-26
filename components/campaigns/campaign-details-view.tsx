@@ -10,12 +10,13 @@ import {
   ModelsCampaignResponse,
   ModelsCampaignStatusUpdateRequestCampaignStatusEnum,
 } from '@/lib/api/generated/models';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { useAdminCampaignApproval, useCampaignApplications, useCampaignInvitations, useCampaignSubmissions, useSubmitCampaign, useUpdateCampaignStatus } from '@/lib/api/hooks/campaigns';
 import { useMultipleComments } from '@/lib/api/hooks/comments';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
 import { ApiError } from '@/lib/api/hooks/types';
-import { ChevronDown, Loader2 } from 'lucide-react';
+import { Brain, ChevronDown, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Activity, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -84,6 +85,7 @@ import { useBasePath } from '@/lib/providers/path-provider';
 
 export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const newCampaignT = useTranslations( 'dashboard.brand.newCampaignPage' );
   const basePath = useBasePath();
   const [ activeTab, setActiveTab ] = useState<TabValue>( getTabFromHash );
 
@@ -239,7 +241,17 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   return (
     <>
       <SubHeader
-        title={ campaign.campaign_name! }
+        title={
+          <span className="flex items-center gap-2">
+            <span className='font-normal'>{ campaign.campaign_name! }</span>
+            { campaign.content_type === UtilsContentType.ContentTypeAIGenerated && (
+              <Badge variant="outline" className="gap-1.5 border-maroon-400 bg-maroon-50 text-maroon-500 mt-2">
+                <Brain className="size-4" />
+                { newCampaignT( 'aiBadge' ) }
+              </Badge>
+            ) }
+          </span>
+        }
         // description={ campaign.description! }
         status={ <StatusBadge status={ campaign.campaign_status! } /> }
         pre={ <span className='font-medium text-muted-foreground'>Campaign</span> }
@@ -259,7 +271,7 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
           { subheaderActions.map( item => (
             <SubheaderActionButton key={ item.key } item={ item } />
           ) ) }
-          { status === 'draft' && role === 'brand' && (
+          {/* { status === 'draft' && role === 'brand' && (
             <Button
               variant="default"
               size="default"
@@ -273,7 +285,7 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
                 </>
               ) : 'Publish' }
             </Button>
-          ) }
+          ) } */}
           <CampaignActionMenu
             campaign={ campaign }
             hideViewDetails={ true }

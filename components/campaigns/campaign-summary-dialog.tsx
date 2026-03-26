@@ -43,6 +43,14 @@ function formatDuration( seconds?: number ) {
   return rem > 0 ? `${ minutes }m ${ rem }s` : `${ minutes }m`;
 }
 
+function formatContentType( value?: string ) {
+  if ( !value ) return 'N/A';
+  return value
+    .split( '-' )
+    .map( ( part ) => part.charAt( 0 ).toUpperCase() + part.slice( 1 ) )
+    .join( ' ' );
+}
+
 const KpiCard = ( { label, value, icon: Icon }: { label: string; value: string; icon: any; } ) => (
   <Card className="flex flex-col gap-1 p-4">
     <div className="flex items-center gap-1.5 text-muted-foreground/70">
@@ -250,6 +258,7 @@ export function CampaignSummaryDialog( {
                       <CardTitle className="ad-card-title">{ t( 'details' ) }</CardTitle>
                     </CardHeader>
                     <CardContent className="text-sm">
+                      <MetaRow label={ t( 'contentType' ) } value={ formatContentType( data.content_type ) } />
                       <MetaRow label={ t( 'videoFormat' ) } value={ <span className="uppercase">{ data.video_format || t( 'na' ) }</span> } />
                       <MetaRow label={ t( 'multipleVideos' ) } value={ data.allow_multiple_videos ? t( 'allowed' ) : t( 'singleVideo' ) } />
                       { data.product_url && (

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **campaign_name** | **string** |  | [optional] [default to undefined]
 **campaign_status** | [**UtilsCampaignStatus**](UtilsCampaignStatus.md) |  | [optional] [default to undefined]
 **category** | [**UtilsCampaignCategory**](UtilsCampaignCategory.md) |  | [optional] [default to undefined]
+**content_type** | [**UtilsContentType**](UtilsContentType.md) |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **donts** | **string** |  | [optional] [default to undefined]
@@ -54,6 +55,7 @@ const instance: ModelsCampaignResponse = {
     campaign_name,
     campaign_status,
     category,
+    content_type,
     created_at,
     description,
     donts,

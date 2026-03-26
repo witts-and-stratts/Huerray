@@ -29,6 +29,7 @@ import type {
   ModelsStandardGigInvitationResponse,
   ModelsStandardVideoSubmissionResponses,
 } from '../generated/models';
+import { UtilsContentType } from '../generated/models/utils-content-type';
 import type { ApiError } from './types';
 
 /**
@@ -459,6 +460,7 @@ export function useReplicateCampaign(
       const payload: ModelsCreateCampaignRequest = {
         campaign_name: `${campaign.campaign_name} (Copy)`,
         category: campaign.category!,
+        content_type: campaign.content_type || UtilsContentType.ContentTypeHumanGenerated,
         description: campaign.description || '',
         number_of_creators_wanted: campaign.number_of_creators_wanted || 1,
         number_of_videos_wanted: campaign.number_of_videos_wanted || 1,

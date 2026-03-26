@@ -11,6 +11,8 @@ export interface CreatorDetailsSheetProps {
   creator: ModelsCreatorResponse | null;
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
+  onApproveProfile?: ( creator: ModelsCreatorResponse ) => void;
+  onRejectProfile?: ( creator: ModelsCreatorResponse ) => void;
 }
 
 export const Row = ( { label, value }: { label: string; value: ReactNode; } ) => (

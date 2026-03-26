@@ -8,12 +8,15 @@ Name | Type | Description | Notes
 **active_brands** | **number** |  | [optional] [default to undefined]
 **active_creators** | **number** |  | [optional] [default to undefined]
 **approved_video_submissions** | **number** |  | [optional] [default to undefined]
+**case_resolution_rate** | **number** |  | [optional] [default to undefined]
 **completed_campaigns** | **number** |  | [optional] [default to undefined]
 **completed_gigs** | **number** |  | [optional] [default to undefined]
 **net_revenue** | **number** |  | [optional] [default to undefined]
 **new_users_today** | **number** |  | [optional] [default to undefined]
+**resolved_cases** | **number** |  | [optional] [default to undefined]
 **total_brands** | **number** |  | [optional] [default to undefined]
 **total_campaigns** | **number** |  | [optional] [default to undefined]
+**total_cases** | **number** |  | [optional] [default to undefined]
 **total_creators** | **number** |  | [optional] [default to undefined]
 **total_gigs** | **number** |  | [optional] [default to undefined]
 **total_payouts** | **number** |  | [optional] [default to undefined]
@@ -30,12 +33,15 @@ const instance: ModelsPlatformAnalyticsResponse = {
     active_brands,
     active_creators,
     approved_video_submissions,
+    case_resolution_rate,
     completed_campaigns,
     completed_gigs,
     net_revenue,
     new_users_today,
+    resolved_cases,
     total_brands,
     total_campaigns,
+    total_cases,
     total_creators,
     total_gigs,
     total_payouts,

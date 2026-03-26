@@ -4,11 +4,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CreateCampaignSchema } from '@/components/campaigns/schema';
 import { UtilsCampaignCategory } from '@/lib/api/generated/models/utils-campaign-category';
 import { UtilsVideoFormat } from '@/lib/api/generated/models';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 
 const initialState: CreateCampaignSchema = {
   campaign_name: '',
   description: '',
   category: undefined as unknown as UtilsCampaignCategory,
+  content_type: UtilsContentType.ContentTypeHumanGenerated,
   keywords: [],
   product_url: '',
   product_image: '',

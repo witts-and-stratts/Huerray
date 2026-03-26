@@ -17,7 +17,7 @@ export const FileCardImage = memo( ( props: FileCardProps ) => {
   const progress = useFileUpload( item, isOverlay, onUploadSuccess, onUploadError, uploadFn );
 
   return (
-    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle } onSelect={ ( id ) => props.onSelect?.( id, false ) }>
+    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle } onSelect={ props.onSelect }>
       { ( item.preview || item.url ) && (
         <Media url={ item.preview || imgpresets.card( item.url! ) } alt={ item.name } className="w-full max-h-60 object-contain object-top" type='image' />
       ) }

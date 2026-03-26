@@ -4,18 +4,22 @@
 
 import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { CommentsThread } from '@/components/dashboard-ui/comments-thread';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/dashboard-ui/dropdown-menu';
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { CreatorBioSection } from '@/components/settings/creator-bio-section';
 import { CreatorProfileSection } from '@/components/settings/creator-profile-section';
 import { CreatorSettings } from '@/components/settings/creator-settings-schema';
 import { CreatorSocialSection } from '@/components/settings/creator-social-section';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
+import { useComments } from '@/lib/api/hooks/comments';
 import { apiClient } from '@/lib/api/client';
-import { ModelsUpdateCreatorRequestGenderEnum, UtilsCountryCode } from '@/lib/api/generated';
+import { ModelsUpdateCreatorRequestGenderEnum, UtilsCountryCode, UtilsEntityType } from '@/lib/api/generated';
 import { CreatorApi } from '@/lib/api/generated/api/creator-api';
 import { useForm } from '@tanstack/react-form';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, MessageSquare } from 'lucide-react';
+import { cn } from '@/lib/dashboard-utils';
 import { Activity, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { useAppDispatch } from '@/lib/redux/hooks';
@@ -31,6 +35,7 @@ export default function CreatorSettingsPage() {
   const [ isSaving, setIsSaving ] = useState( false );
   const [ currentProfile, setCurrentProfile ] = useState<any>( null );
   const [ isReviewConfirmOpen, setIsReviewConfirmOpen ] = useState( false );
+  const [ isCommentsSheetOpen, setIsCommentsSheetOpen ] = useState( false );
   const dispatch = useAppDispatch();
 
   const form = useForm( {
@@ -76,19 +81,19 @@ export default function CreatorSettingsPage() {
         const profileRequest = {
           bio: value.bio,
           date_of_birth: value.dateOfBirth,
-          ...(value.gender ? { gender: value.gender as ModelsUpdateCreatorRequestGenderEnum } : {}),
+          ...( value.gender ? { gender: value.gender as ModelsUpdateCreatorRequestGenderEnum } : {} ),
           phone_number: value.phoneNumber,
           street: value.street,
           city: value.city,
           state: value.state,
           zipcode: value.zipcode,
-          ...(value.country ? { country: value.country as UtilsCountryCode } : {}),
+          ...( value.country ? { country: value.country as UtilsCountryCode } : {} ),
           instagram_handle: value.instagramHandle,
           tiktok_handle: value.tiktokHandle,
           youtube_handle: value.youtubeHandle,
           twitter_handle: value.twitterHandle,
           portfolio: portfolioJson,
-          ...(value.applicationVideo ? { application_video: { asset: value.applicationVideo, thumbnail: value.applicationVideoThumbnail || undefined } } : {}),
+          ...( value.applicationVideo ? { application_video: { asset: value.applicationVideo, thumbnail: value.applicationVideoThumbnail || undefined } } : {} ),
           profile_image: value.profileImageUrl ? { asset: value.profileImageUrl } : undefined,
           preferred_categories: value.preferredCategories || [],
         };
@@ -239,6 +244,7 @@ export default function CreatorSettingsPage() {
     { value: 'profile', label: tTabs( 'profile' ) },
     { value: 'bio', label: tTabs( 'bio' ) },
     { value: 'social-media', label: tTabs( 'socialMedia' ) },
+    { value: '/creator/settings/bank', label: tTabs( 'bankDetails' ) },
     { value: '/creator/settings/security', label: tTabs( 'security' ) },
   ];
 
@@ -259,13 +265,18 @@ export default function CreatorSettingsPage() {
 
   // Safe fallback if activeTab is not in pageDetails (e.g. if we somehow landed here with #bank-details)
   const currentDetails = pageDetails[ activeTab ] || pageDetails.profile;
-  const tNav = useTranslations('dashboard.creator.breadcrumbs');
+  const tNav = useTranslations( 'dashboard.creator.breadcrumbs' );
   const activeLabel = tabItems.find( t => t.value === activeTab )?.label || tTabs( 'profile' );
+  const normalizedStatus = currentProfile?.creator_status?.toLowerCase();
+  const showReturnedComments = normalizedStatus === 'returned';
+  const creatorProfileId = currentProfile?.id || '';
+  const creatorComments = useComments( UtilsEntityType.EntityTypeCreator, creatorProfileId );
+  const returnedCommentCount = creatorComments.data?.data?.length ?? 0;
 
   const breadcrumbs = [
-    { label: tNav('dashboard'), href: '/creator' },
-    { label: tNav('settings'), href: '/creator/settings' },
-    { label: activeTab === 'profile' ? tNav('profile') : activeTab === 'bio' ? tNav('bio') : tNav('socialMedia') },
+    { label: tNav( 'dashboard' ), href: '/creator' },
+    { label: tNav( 'settings' ), href: '/creator/settings' },
+    { label: activeTab === 'profile' ? tNav( 'profile' ) : activeTab === 'bio' ? tNav( 'bio' ) : tNav( 'socialMedia' ) },
   ];
 
   const handleDiscard = useCallback( () => {
@@ -336,23 +347,41 @@ export default function CreatorSettingsPage() {
         <form.Subscribe
           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
           children={ ( [ , isSubmitting ] ) => (
-            <ButtonGroup>
-              <Button type='submit' disabled={ isSubmitting || isSaving }>
-                { isSubmitting || isSaving ? t( 'saving' ) : t( 'saveChanges' ) }
-              </Button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button size="icon" className="px-2" disabled={ isSubmitting || isSaving }>
-                    <ChevronDown className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className={ 'min-w-40' }>
-                  <DropdownMenuItem onClick={ handleDiscard }>
-                    { t( 'discardChanges' ) }
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </ButtonGroup>
+            <div className="flex items-center gap-2">
+              { showReturnedComments && (
+                <button
+                  type="button"
+                  onClick={ () => setIsCommentsSheetOpen( true ) }
+                  aria-label={ t( 'returnedComments.openAriaLabel' ) }
+                  className={ cn(
+                    "flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full shrink-0 transition-colors cursor-pointer hover:bg-primary/20",
+                    returnedCommentCount > 0 ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground",
+                    isCommentsSheetOpen && "bg-primary text-primary-foreground hover:bg-primary/90"
+                  ) }
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>{ returnedCommentCount > 0 ? returnedCommentCount : t( 'returnedComments.fallbackLabel' ) }</span>
+                </button>
+              ) }
+
+              <ButtonGroup>
+                <Button type='submit' disabled={ isSubmitting || isSaving }>
+                  { isSubmitting || isSaving ? t( 'saving' ) : t( 'saveChanges' ) }
+                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button size="icon" className="px-2" disabled={ isSubmitting || isSaving }>
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className={ 'min-w-40' }>
+                    <DropdownMenuItem onClick={ handleDiscard }>
+                      { t( 'discardChanges' ) }
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </ButtonGroup>
+            </div>
           ) }
         />
       </SubHeader>
@@ -378,6 +407,31 @@ export default function CreatorSettingsPage() {
         isLoading={ isSaving }
         loadingText={ t( 'saving' ) }
       />
+
+      <Sheet open={ isCommentsSheetOpen } onOpenChange={ setIsCommentsSheetOpen }>
+        <SheetContent className="w-[92%]! max-w-[420px]! p-0 pb-4 flex-1 h-full" side="right">
+          <SheetHeader className="border-b px-6 py-5">
+            <SheetTitle className={ 'dialog__title text-primary' }>{ t( 'returnedComments.title' ) }</SheetTitle>
+            <SheetDescription className={ 'dialog__description' }>{ t( 'returnedComments.description' ) }</SheetDescription>
+          </SheetHeader>
+
+          <div className="px-6 h-full">
+            { showReturnedComments && creatorProfileId && (
+              <div className="flex-1 h-full">
+                <CommentsThread
+                  entities={ [ {
+                    entityType: UtilsEntityType.EntityTypeCreator,
+                    entityId: creatorProfileId,
+                  } ] }
+                  disableComment
+                  className='flex-1'
+
+                />
+              </div>
+            ) }
+          </div>
+        </SheetContent>
+      </Sheet>
     </form>
   );
 }

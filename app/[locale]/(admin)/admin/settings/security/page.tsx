@@ -85,7 +85,7 @@ export default function AdminSecuritySettingsPage() {
         />
       </AdminSettingsHeader>
 
-      <div className="bg-slate-50/50 p-6">
+      <div className="bg-slate-50/50 p-6 flex-1">
         <ChangePasswordSection form={ form } namespace="dashboard.admin.settings.password" />
       </div>
     </form>

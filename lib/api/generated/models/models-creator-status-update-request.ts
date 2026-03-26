@@ -13,9 +13,13 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsContentType } from './utils-content-type';
 
 export interface ModelsCreatorStatusUpdateRequest {
     'comments'?: string;
+    'content_type'?: UtilsContentType;
     'creator_status': ModelsCreatorStatusUpdateRequestCreatorStatusEnum;
 }
 

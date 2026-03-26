@@ -19,6 +19,9 @@ export interface ModelsBrandAnalyticsResponse {
     'approval_rate'?: number;
     'campaigns_completed'?: number;
     'campaigns_created'?: number;
+    'case_resolution_rate'?: number;
+    'cases_reported'?: number;
+    'cases_resolved'?: number;
     'completion_rate'?: number;
     'gigs_accepted'?: number;
     'gigs_completed'?: number;

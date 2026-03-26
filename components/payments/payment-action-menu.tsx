@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Eye, MoreVertical } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
+import { ReactNode } from "react";
 
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
@@ -16,9 +17,11 @@ import { PaymentDetailsSheet } from "./payment-details-sheet";
 interface PaymentActionMenuProps {
   payment: ModelsPaymentResponse;
   isAdmin?: boolean;
+  trigger?: ReactNode;
+  showViewButton?: boolean;
 }
 
-export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps ) {
+export function PaymentActionMenu( { payment, isAdmin, trigger, showViewButton = true }: PaymentActionMenuProps ) {
   const t = useTranslations( 'dashboard.common' );
   const [ viewOpen, setViewOpen ] = useState( false );
   const [ confirmOpen, setConfirmOpen ] = useState( false );
@@ -59,29 +62,33 @@ export function PaymentActionMenu( { payment, isAdmin }: PaymentActionMenuProps 
     <>
       <div className="flex justify-end">
         <ButtonGroup>
-          <Button
-            variant="outline"
-            size="sm"
-            className="font-regular gap-1.5"
-            onClick={ () => setViewOpen( true ) }
-          >
-            { t( 'payments.actions.view' ) }
-          </Button>
+          { showViewButton && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="font-regular gap-1.5"
+              onClick={ () => setViewOpen( true ) }
+            >
+              { t( 'payments.actions.view' ) }
+            </Button>
+          ) }
           <ActionMenu
             actions={ actions }
             data={ payment }
             align="end"
             label=""
             trigger={
+              trigger || (
               <Button variant="outline" size="icon-sm">
                 <ChevronDown className="h-4 w-4" />
               </Button>
+              )
             }
           />
         </ButtonGroup>
       </div>
 
-      <PaymentDetailsSheet payment={ payment } open={ viewOpen } onOpenChange={ setViewOpen } isAdmin={ isAdmin } />
+      { showViewButton && <PaymentDetailsSheet payment={ payment } open={ viewOpen } onOpenChange={ setViewOpen } isAdmin={ isAdmin } />}
       
 
       <ConfirmDialog

@@ -1261,9 +1261,8 @@ export const CampaignsSearchGetCategoryEnum = {
 } as const;
 export type CampaignsSearchGetCategoryEnum = typeof CampaignsSearchGetCategoryEnum[keyof typeof CampaignsSearchGetCategoryEnum];
 export const CampaignsSearchGetContentTypeEnum = {
-    ContentTypeVideoOption: 'video',
-    ContentTypeImageOption: 'image',
-    ContentTypePDFOption: 'pdf'
+    ContentTypeHumanGenerated: 'human-generated',
+    ContentTypeAIGenerated: 'ai-generated'
 } as const;
 export type CampaignsSearchGetContentTypeEnum = typeof CampaignsSearchGetContentTypeEnum[keyof typeof CampaignsSearchGetContentTypeEnum];
 export const CampaignsSearchGetStatusEnum = {

@@ -1,6 +1,6 @@
 import { Progress } from '@/components/dashboard-ui/progress';
 import { cn } from '@/lib/dashboard-utils';
-import { Check, CheckCircle2, RefreshCw, Trash2 } from 'lucide-react';
+import { Check, CheckCheckIcon, CheckCircle, CheckCircle2, RefreshCw, Trash2 } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { memo, useCallback, useState } from 'react';
 import { FileCardProps } from './file-card-types';
@@ -13,7 +13,7 @@ interface BaseFileCardProps extends FileCardProps {
   aspect?: string;
   isSelected?: boolean;
   isSelectionMode?: boolean;
-  onSelect?: ( id: string ) => void;
+  onSelect?: ( id: string, shiftKey: boolean ) => void;
 }
 
 export const BaseFileCard = memo( ( {
@@ -56,7 +56,7 @@ export const BaseFileCard = memo( ( {
   const handleClick = useCallback( ( e: React.MouseEvent ) => {
     e.stopPropagation();
     if ( isSelectionMode ) {
-      onSelect?.( item.id );
+      onSelect?.( item.id, e.shiftKey );
       return;
     }
     // In non-DnD contexts (no drag listeners) a single click opens the preview
@@ -123,15 +123,15 @@ export const BaseFileCard = memo( ( {
       { ( isHovering || isSelected || isSelectionMode ) && (
         <div
           className={ cn(
-            "absolute top-1.5 left-1.5 z-20 w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center transition-all cursor-pointer",
+            "absolute top-1.5 left-1.5 z-20 w-4.5 h-4.5 rounded-full border-1.5 flex items-center justify-center transition-all cursor-pointer",
             isSelected
               ? "bg-primary border-primary"
               : "bg-background/80 border-muted-foreground/50 hover:border-primary"
           ) }
-          onClick={ ( e ) => { e.stopPropagation(); onSelect?.( item.id ); } }
+          onClick={ ( e ) => { e.stopPropagation(); onSelect?.( item.id, e.shiftKey ); } }
           onPointerDown={ ( e ) => e.stopPropagation() }
         >
-          { isSelected && <Check size={ 10 } className="text-primary-foreground" strokeWidth={ 3 } /> }
+          { isSelected && <Check className="text-primary-foreground size-3" strokeWidth={ 2 } /> }
         </div>
       ) }
 
@@ -139,14 +139,14 @@ export const BaseFileCard = memo( ( {
         { item.status === 'success' && (
           <motion.div
             key={ `success-${ item.id }` }
-            className="absolute top-1.5 right-1.5 z-20 pointer-events-none"
+            className="absolute bottom-1.5 left-1.5 z-20 pointer-events-none"
             initial={ { opacity: 0, scale: 0.4 } }
             animate={ { opacity: 1, scale: 1 } }
             exit={ { opacity: 0, scale: 0.4 } }
             transition={ { type: 'spring', stiffness: 400, damping: 20 } }
           >
-            <div className="rounded-full bg-background/90 p-0.5 shadow-sm">
-              <CheckCircle2 size={ 16 } className="text-green-500" strokeWidth={ 2 } />
+            <div className="rounded-full bg-green-500/50 p-0.5">
+              <Check size={ 16 } className="text-white" strokeWidth={ 2 } />
             </div>
           </motion.div>
         ) }

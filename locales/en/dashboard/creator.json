@@ -276,12 +276,21 @@
     "socialMediaTitle": "Social Media Settings",
     "socialMediaDescription": "Connect and manage your social media accounts.",
     "securityTitle": "Change Password",
-    "securityDescription": "Update your password and keep your account secure."
+    "securityDescription": "Update your password and keep your account secure.",
+    "returnedComments": {
+      "title": "Profile comments",
+      "description": "Review the feedback attached to your returned profile.",
+      "label": "Admin comment",
+      "empty": "No comment was included with this returned profile.",
+      "openAriaLabel": "Open profile comments",
+      "fallbackLabel": "Comments"
+    }
   },
   "settingsTabs": {
     "profile": "Profile",
     "bio": "Biography",
     "socialMedia": "Social Media",
+    "bankDetails": "Bank Details",
     "security": "Security"
   },
   "accountEditPage": {
@@ -334,7 +343,11 @@
     "saveChanges": "Save Changes",
     "successUpdated": "Bank details updated successfully",
     "errorUpdateFailed": "Failed to update settings",
-    "errorUpdateFailedWithError": "Failed to update: {error}"
+    "errorUpdateFailedWithError": "Failed to update: {error}",
+    "bankNameRequired": "Bank name is required",
+    "bankAccountNameRequired": "Account holder name is required",
+    "bankAccountNumberRequired": "Account number is required",
+    "bankRoutingNumberRequired": "Routing number or SWIFT code is required"
   },
   "gigDetailsFor": "Details for gig: {title}",
   "myGigs": {

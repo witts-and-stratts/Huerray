@@ -924,6 +924,7 @@ const apiInstance = new CreatorApi(configuration);
 let ageMax: number; // (optional) (default to undefined)
 let ageMin: number; // (optional) (default to undefined)
 let city: string; // (optional) (default to undefined)
+let contentType: 'human-generated' | 'ai-generated'; // (optional) (default to undefined)
 let country: string; // (optional) (default to undefined)
 let createdAfter: string; // (optional) (default to undefined)
 let createdBefore: string; // (optional) (default to undefined)
@@ -937,6 +938,7 @@ const { status, data } = await apiInstance.creatorsSearchGet(
     ageMax,
     ageMin,
     city,
+    contentType,
     country,
     createdAfter,
     createdBefore,
@@ -955,6 +957,7 @@ const { status, data } = await apiInstance.creatorsSearchGet(
 | **ageMax** | [**number**] |  | (optional) defaults to undefined|
 | **ageMin** | [**number**] |  | (optional) defaults to undefined|
 | **city** | [**string**] |  | (optional) defaults to undefined|
+| **contentType** | [**&#39;human-generated&#39; | &#39;ai-generated&#39;**]**Array<&#39;human-generated&#39; &#124; &#39;ai-generated&#39;>** |  | (optional) defaults to undefined|
 | **country** | [**string**] |  | (optional) defaults to undefined|
 | **createdAfter** | [**string**] |  | (optional) defaults to undefined|
 | **createdBefore** | [**string**] |  | (optional) defaults to undefined|
@@ -1010,6 +1013,7 @@ let brandId: string; // (optional) (default to undefined)
 let campaignId: string; // (optional) (default to undefined)
 let compensationMax: number; // (optional) (default to undefined)
 let compensationMin: number; // (optional) (default to undefined)
+let contentType: 'human-generated' | 'ai-generated'; // (optional) (default to undefined)
 let endDate: string; // (optional) (default to undefined)
 let enforceSingleCreatorSubmission: boolean; // (optional) (default to undefined)
 let enforceUniqueCreatorSubmission: boolean; // (optional) (default to undefined)
@@ -1029,6 +1033,7 @@ const { status, data } = await apiInstance.creatorsSearchGigsGet(
     campaignId,
     compensationMax,
     compensationMin,
+    contentType,
     endDate,
     enforceSingleCreatorSubmission,
     enforceUniqueCreatorSubmission,
@@ -1053,6 +1058,7 @@ const { status, data } = await apiInstance.creatorsSearchGigsGet(
 | **campaignId** | [**string**] |  | (optional) defaults to undefined|
 | **compensationMax** | [**number**] |  | (optional) defaults to undefined|
 | **compensationMin** | [**number**] |  | (optional) defaults to undefined|
+| **contentType** | [**&#39;human-generated&#39; | &#39;ai-generated&#39;**]**Array<&#39;human-generated&#39; &#124; &#39;ai-generated&#39;>** |  | (optional) defaults to undefined|
 | **endDate** | [**string**] |  | (optional) defaults to undefined|
 | **enforceSingleCreatorSubmission** | [**boolean**] |  | (optional) defaults to undefined|
 | **enforceUniqueCreatorSubmission** | [**boolean**] |  | (optional) defaults to undefined|

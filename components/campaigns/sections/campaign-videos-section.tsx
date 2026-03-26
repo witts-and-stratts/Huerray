@@ -57,7 +57,7 @@ export const CampaignVideosSection = memo( function CampaignVideosSection( {
 
   return (
     <AnimatePresence>
-      <div key="videos-content" className='mt-2 flex gap-2'>
+      <div key="videos-content" className='flex gap-2'>
         <div className={ cn( 'flex flex-col gap-4', !items ? 'flex-auto' : 'w-full' ) }>
           <Card className='p-0 overflow-hidden h-full min-h-[calc(100vh-16rem)] ring-0 border-dashed border border-burgundy-200 ring-transparent hover:ring-8 hover:ring-burgundy-600/20 shadow-none'>
             <FilesDropzone

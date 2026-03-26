@@ -5,7 +5,7 @@ import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
 import { Button } from '@/components/dashboard-ui/button';
 import { CreateSubmissionSheet } from './create-submission-sheet';
 import { Eye, MoreVertical, UploadCloud } from 'lucide-react';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { toast } from 'sonner';
@@ -13,10 +13,11 @@ import { useTranslations } from 'next-intl';
 
 interface InvitationActionMenuProps {
   invitation: ModelsGigInvitationResponse;
-  onViewDetails: ( invitation: ModelsGigInvitationResponse ) => void;
+  onViewDetails?: ( invitation: ModelsGigInvitationResponse ) => void;
+  trigger?: ReactNode;
 }
 
-export function InvitationActionMenu( { invitation, onViewDetails }: InvitationActionMenuProps ) {
+export function InvitationActionMenu( { invitation, onViewDetails, trigger }: InvitationActionMenuProps ) {
   const t = useTranslations( 'dashboard.creator.invitations.actions' );
   const tDialogs = useTranslations( 'dashboard.creator.invitations.dialogs' );
   const tToasts = useTranslations( 'dashboard.creator.invitations.toasts' );
@@ -54,11 +55,11 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
       action: () => setShowSubmissionSheet( true ),
       allowedRoles: [ 'creator' ]
     },
-    {
+    ...( onViewDetails ? [ {
       label: t( 'view' ),
       icon: Eye,
       action: () => onViewDetails( invitation ),
-    },
+    } ] : [] ),
     {
       label: t( 'accept' ),
       condition: () => isPending,
@@ -82,7 +83,7 @@ export function InvitationActionMenu( { invitation, onViewDetails }: InvitationA
         actions={ actions }
         data={ invitation }
         trigger={
-          <Button variant="ghost" size="icon" className="h-8 w-8">
+          trigger || <Button variant="ghost" size="icon" className="h-8 w-8">
             <MoreVertical className="h-4 w-4" />
             <span className="sr-only">{ t( 'openMenu' ) }</span>
           </Button>

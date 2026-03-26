@@ -26,5 +26,5 @@
     "title": "Signup for updates",
     "placeholder": "Email address"
   },
-  "copyright": "© 2025 Huerray. All rights reserved"
+  "copyright": "© {date} Huerray. All rights reserved"
 }

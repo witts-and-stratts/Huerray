@@ -21,6 +21,9 @@ import type { ModelsContentMedia } from './models-content-media';
 import type { UtilsBrandCategory } from './utils-brand-category';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { UtilsContentType } from './utils-content-type';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsCountryCode } from './utils-country-code';
 
 export interface ModelsCreatorResponse {
@@ -34,6 +37,7 @@ export interface ModelsCreatorResponse {
     'bank_routing_number'?: string;
     'bio'?: string;
     'city'?: string;
+    'content_type'?: UtilsContentType;
     'country'?: UtilsCountryCode;
     'creator_id'?: string;
     'creator_status'?: string;

@@ -26,5 +26,5 @@
     "title": "S'inscrire aux mises à jour",
     "placeholder": "Adresse électronique"
   },
-  "copyright": "© 2025 Huerray. Tous droits réservés"
+  "copyright": "© {date} Huerray. Tous droits réservés"
 }

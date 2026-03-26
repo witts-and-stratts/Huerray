@@ -2,14 +2,13 @@
 
 import Link from 'next/link';
 
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { ModelsCampaignResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import * as React from 'react';
-import { ApplicationCard } from './application-card';
+import { ApplicationDetailsSheet } from './application-details-sheet';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { SubmissionViewDialog } from './submission-view-dialog';
 
@@ -30,6 +29,9 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { cn } from '@/lib/dashboard-utils';
 import { useBasePath } from '@/lib/providers/path-provider';
 import { useLocale, useTranslations } from 'next-intl';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
+import { Badge } from '@/components/dashboard-ui/badge';
+import { Brain } from 'lucide-react';
 
 const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignResponse>, className?: string; } ) => {
   const commonT = useTranslations( 'dashboard.common' );
@@ -105,14 +107,11 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
           />
         </AnimatePresence>
       </div>
-      <Sheet open={ !!selected } onOpenChange={ ( open ) => !open && setSelected( null ) }>
-        <SheetContent className='w-[90%]! max-w-[420px]! overflow-y-auto'>
-          <SheetHeader className='mb-4'>
-            <SheetTitle className='font-normal text-primary font-primary'>{ t( 'application' ) }</SheetTitle>
-          </SheetHeader>
-          { selected && <ApplicationCard application={ selected } /> }
-        </SheetContent>
-      </Sheet>
+      <ApplicationDetailsSheet
+        application={ selected }
+        open={ !!selected }
+        onOpenChange={ ( open ) => !open && setSelected( null ) }
+      />
     </>
   );
 };
@@ -192,7 +191,7 @@ const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
   const sheetsT = useTranslations( 'dashboard.common.sheets' );
   const locale = useLocale();
   const basePath = useBasePath();
-  const { id, campaign_name, description, campaign_status, updated_at } = row.original;
+  const { id, campaign_name, description, campaign_status, updated_at, content_type } = row.original;
   const rawImage = row.original.campaign_images?.[ 0 ]?.asset || row.original.product_image?.asset;
   const coverImage = typeof rawImage === 'string' && rawImage ? rawImage : undefined;
   const formattedUpdatedAt = updated_at
@@ -218,8 +217,14 @@ const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
       </div>
       <div>
         <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
-          <h4 className='card__title capitalize text-[18px] font-normal text-primary font-primary'>
-            { campaign_name }
+          <h4 className='card__title capitalize text-[18px] font-normal text-primary font-primary flex items-center gap-2'>
+            <span className='font-normal'>{ campaign_name }</span>
+            { content_type === UtilsContentType.ContentTypeAIGenerated && (
+              <Badge variant="outline" className="gap-1.5 border-maroon-400 bg-maroon-50 text-maroon-500 scale-75 origin-left mt-0.5">
+                <Brain className="size-3" />
+                AI
+              </Badge>
+            ) }
           </h4>
         </Link>
         <p className='card__description line-clamp-2'>

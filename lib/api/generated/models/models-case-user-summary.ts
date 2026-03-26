@@ -14,14 +14,11 @@
 
 
 
-
-export const UtilsContentTypeOption = {
-    ContentTypeVideoOption: 'video',
-    ContentTypeImageOption: 'image',
-    ContentTypePDFOption: 'pdf'
-} as const;
-
-export type UtilsContentTypeOption = typeof UtilsContentTypeOption[keyof typeof UtilsContentTypeOption];
-
-
+export interface ModelsCaseUserSummary {
+    'email'?: string;
+    'first_name'?: string;
+    'id'?: string;
+    'last_name'?: string;
+    'user_type'?: string;
+}
 

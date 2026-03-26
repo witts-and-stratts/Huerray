@@ -8,7 +8,6 @@ import * as React from 'react';
 import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { Checkbox } from '@/components/dashboard-ui/checkbox';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useGigApplications, useGigInvitations } from '@/lib/api/hooks/gigs';
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
@@ -20,7 +19,7 @@ import { Clock01Icon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ComponentProps } from 'react';
 import { Separator } from '../dashboard-ui/separator';
-import { ApplicationCard } from './application-card';
+import { ApplicationDetailsSheet } from './application-details-sheet';
 import { AvatarCollage } from './avatar-collage';
 import { BrandAvatar } from './brand-avatar';
 import { BrandHoverCard } from './brand-hover-card';
@@ -95,7 +94,6 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
 
 const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
-  const pageT = useTranslations( 'dashboard.brand.campaignsPage' );
   const { id } = row.original;
   const { data: applicationsData } = useGigApplications( id ?? '' );
   const applications = ( applicationsData?.data ?? [] ) as ModelsGigApplicationResponse[];
@@ -118,14 +116,11 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
           />
         </AnimatePresence>
       </div>
-      <Sheet open={ !!selected } onOpenChange={ ( open ) => !open && setSelected( null ) }>
-        <SheetContent className='w-[90%]! max-w-[420px]! overflow-y-auto'>
-          <SheetHeader className='mb-4'>
-            <SheetTitle className='font-normal text-primary font-primary'>{ pageT( 'application' ) }</SheetTitle>
-          </SheetHeader>
-          { selected && <ApplicationCard application={ selected } /> }
-        </SheetContent>
-      </Sheet>
+      <ApplicationDetailsSheet
+        application={ selected }
+        open={ !!selected }
+        onOpenChange={ ( open ) => !open && setSelected( null ) }
+      />
     </>
   );
 };

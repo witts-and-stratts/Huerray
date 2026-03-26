@@ -8,15 +8,17 @@ import {
   AlertDialogTitle,
 } from '@/components/dashboard-ui/alert-dialog';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/dashboard-ui/breadcrumb';
+import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { ActionMenu, type MenuAction } from '@/components/dashboard-ui/action-menu';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { useDeleteCampaign } from '@/lib/api/hooks/campaigns';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 import { useForm, useStore } from '@tanstack/react-form';
-import { ChevronDown, Eye, Loader2, SlashIcon, Trash2, Undo2 } from 'lucide-react';
+import { Bot, Brain, ChevronDown, Eye, Loader2, SlashIcon, Trash2, Undo2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { ReactNode, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -107,9 +109,10 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
 
   const [ validationError, setValidationError ] = useState<{ title: string; message: string; tab: string; } | null>( null );
   const [ showSummary, setShowSummary ] = useState( false );
+  const defaultValues = initialValues ? { ...reduxCampaign, ...initialValues } : reduxCampaign;
 
   const form = useForm( {
-    defaultValues: mode === 'edit' && initialValues ? { ...reduxCampaign, ...initialValues } : reduxCampaign,
+    defaultValues,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     validators: { onSubmit: createCampaignSchema as any },
     onSubmit: async ( { value } ) => {
@@ -242,7 +245,17 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
   return (
     <>
       <SubHeader
-        title={ mode === 'edit' ? t( 'editCampaign' ) : t( 'newCampaign' ) }
+        title={
+          <span className="flex items-center gap-2">
+            <span className='font-normal'>{ mode === 'edit' ? t( 'editCampaign' ) : t( 'newCampaign' ) }</span>
+            { form.state.values.content_type === UtilsContentType.ContentTypeAIGenerated && (
+              <Badge variant="outline" className="gap-1.5 border-maroon-400 bg-maroon-50 text-maroon-500 mt-2">
+                <Brain className="size-4" />
+                { t( 'aiBadge' ) }
+              </Badge>
+            ) }
+          </span>
+        }
         pre={
           <>
             <Breadcrumb className='flex gap-4 items-center mb-4'>
@@ -272,8 +285,30 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
           ] } />
         }
       >
+        <form.Field name="content_type">
+          { ( field ) => (
+            <input
+              type="hidden"
+              name={ field.name }
+              value={ field.state.value }
+              readOnly
+            />
+          ) }
+        </form.Field>
         <div className="flex items-center gap-2">
           <ButtonGroup>
+            { mode === 'create' && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={ handlePublish }
+                size="sm"
+                disabled={ isSubmitting }
+                className="w-full md:w-40"
+              >
+                { isSubmitting && submitIntent === 'publish' ? t( 'publishing' ) : t( 'publish' ) }
+              </Button>
+            ) }
             <Button
               type="button"
               onClick={ handleSaveAndExit }
@@ -288,18 +323,6 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
                 </>
               ) : ( mode === 'edit' ? t( 'saveChanges' ) : t( 'saveDraft' ) ) }
             </Button>
-            { mode === 'create' && (
-              <Button
-                type="button"
-                variant="default"
-                onClick={ handlePublish }
-                size="sm"
-                disabled={ isSubmitting }
-                className="w-full md:w-40"
-              >
-                { isSubmitting && submitIntent === 'publish' ? t( 'publishing' ) : t( 'publish' ) }
-              </Button>
-            ) }
             <ActionMenu
               data={ null }
               label={ t( 'actions' ) }
@@ -333,96 +356,90 @@ export function CampaignForm( { onSubmit, initialValues, initialDocuments, initi
         </div>
       </SubHeader>
 
-      <Activity mode={ subheadTabValue === 'overview' ? 'visible' : 'hidden' }>
-        <div className='px-5 grid md:grid-cols-5 gap-4 '>
-          <Card className='md:col-span-3'>
-            <CardContent>
-              <CampaignBasicInfo form={ form } />
-              <CampaignProductSection form={ form } />
-            </CardContent>
-          </Card>
-          <Card className='md:col-span-2'>
-            <CardHeader>
-              <CardTitle>{ t( 'creatorRequirementsTitle' ) }</CardTitle>
-              <CardDescription>{ t( 'creatorRequirementsDescription' ) }</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <CampaignCreatorRequirements form={ form } />
-            </CardContent>
-          </Card>
-        </div>
-      </Activity>
-
-      <Activity mode={ subheadTabValue === 'instructions' ? 'visible' : 'hidden' }>
-        <div className='px-5 grid md:grid-cols-2 gap-4'>
-          <Card>
-            <CardHeader className='pb-2'>
-              <CardTitle>{ t( 'instructionsTitle' ) }</CardTitle>
-              <CardDescription>{ t( 'instructionsDescription' ) }</CardDescription>
-            </CardHeader>
-            <CardContent className='space-y-4'>
-              <form.Field name="dos">
-                { ( field ) => (
-                  <SuperField
-                    label={ t( 'dos' ) }
-                    type="editor"
-                    placeholder={ t( 'dosPlaceholder' ) }
-                    value={ field.state.value }
-                    onChange={ ( e: string ) => field.handleChange( e ) }
-                  />
-                ) }
-              </form.Field>
-              <form.Field name="donts">
-                { ( field ) => (
-                  <SuperField
-                    label={ t( 'donts' ) }
-                    type="editor"
-                    placeholder={ t( 'dontsPlaceholder' ) }
-                    value={ field.state.value }
-                    onChange={ ( e: string ) => field.handleChange( e ) }
-                  />
-                ) }
-              </form.Field>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className='pb-2'>
-              <CardTitle>{ t( 'toneTitle' ) }</CardTitle>
-              <CardDescription>{ t( 'toneDescription' ) }</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form.Field name="tone_of_voice">
-                { ( field ) => (
-                  <SuperField
-                    label={ t( 'toneLabel' ) }
-                    type="editor"
-                    placeholder={ t( 'tonePlaceholder' ) }
-                    value={ field.state.value }
-                    onChange={ ( e: string ) => field.handleChange( e ) }
-                    className='min-h-[300px]'
-                  />
-                ) }
-              </form.Field>
-            </CardContent>
-          </Card>
-        </div>
-      </Activity>
-
-      <Activity mode={ subheadTabValue === 'documents' ? 'visible' : 'hidden' }>
-        <div className='px-5'>
+      <div className='flex-1 p-5'>
+        <Activity mode={ subheadTabValue === 'overview' ? 'visible' : 'hidden' }>
+          <div className='grid md:grid-cols-5 gap-4'>
+            <Card className='md:col-span-3'>
+              <CardContent>
+                <CampaignBasicInfo form={ form } />
+                <CampaignProductSection form={ form } />
+              </CardContent>
+            </Card>
+            <Card className='md:col-span-2'>
+              <CardHeader>
+                <CardTitle>{ t( 'creatorRequirementsTitle' ) }</CardTitle>
+                <CardDescription>{ t( 'creatorRequirementsDescription' ) }</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CampaignCreatorRequirements form={ form } />
+              </CardContent>
+            </Card>
+          </div>
+        </Activity>
+        <Activity mode={ subheadTabValue === 'instructions' ? 'visible' : 'hidden' }>
+          <div className='grid md:grid-cols-2 gap-4'>
+            <Card>
+              <CardHeader className='pb-2'>
+                <CardTitle>{ t( 'instructionsTitle' ) }</CardTitle>
+                <CardDescription>{ t( 'instructionsDescription' ) }</CardDescription>
+              </CardHeader>
+              <CardContent className='space-y-4'>
+                <form.Field name="dos">
+                  { ( field ) => (
+                    <SuperField
+                      label={ t( 'dos' ) }
+                      type="editor"
+                      placeholder={ t( 'dosPlaceholder' ) }
+                      value={ field.state.value }
+                      onChange={ ( e: string ) => field.handleChange( e ) }
+                    />
+                  ) }
+                </form.Field>
+                <form.Field name="donts">
+                  { ( field ) => (
+                    <SuperField
+                      label={ t( 'donts' ) }
+                      type="editor"
+                      placeholder={ t( 'dontsPlaceholder' ) }
+                      value={ field.state.value }
+                      onChange={ ( e: string ) => field.handleChange( e ) }
+                    />
+                  ) }
+                </form.Field>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className='pb-2'>
+                <CardTitle>{ t( 'toneTitle' ) }</CardTitle>
+                <CardDescription>{ t( 'toneDescription' ) }</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form.Field name="tone_of_voice">
+                  { ( field ) => (
+                    <SuperField
+                      label={ t( 'toneLabel' ) }
+                      type="editor"
+                      placeholder={ t( 'tonePlaceholder' ) }
+                      value={ field.state.value }
+                      onChange={ ( e: string ) => field.handleChange( e ) }
+                      className='min-h-[300px]'
+                    />
+                  ) }
+                </form.Field>
+              </CardContent>
+            </Card>
+          </div>
+        </Activity>
+        <Activity mode={ subheadTabValue === 'documents' ? 'visible' : 'hidden' }>
           <CampaignDocumentsSection form={ form } fileState={ documentsState } />
-        </div>
-      </Activity>
-      <Activity mode={ subheadTabValue === 'images' ? 'visible' : 'hidden' }>
-        <div className='px-5'>
+        </Activity>
+        <Activity mode={ subheadTabValue === 'images' ? 'visible' : 'hidden' }>
           <CampaignImagesSection form={ form } fileState={ imagesState } />
-        </div>
-      </Activity>
-      <Activity mode={ subheadTabValue === 'videos' ? 'visible' : 'hidden' }>
-        <div className='px-5'>
+        </Activity>
+        <Activity mode={ subheadTabValue === 'videos' ? 'visible' : 'hidden' }>
           <CampaignVideosSection form={ form } fileState={ videosState } />
-        </div>
-      </Activity>
+        </Activity>
+      </div>
 
       <AlertDialog open={ !!validationError } onOpenChange={ ( open ) => !open && setValidationError( null ) }>
         <AlertDialogContent>

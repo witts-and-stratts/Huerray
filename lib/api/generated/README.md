@@ -92,6 +92,13 @@ Class | Method | HTTP request | Description
 *CampaignsApi* | [**campaignsIdVideoSubmissionsGet**](docs/CampaignsApi.md#campaignsidvideosubmissionsget) | **GET** /campaigns/{id}/video-submissions | Get video submissions by campaign ID
 *CampaignsApi* | [**campaignsPost**](docs/CampaignsApi.md#campaignspost) | **POST** /campaigns | Create a new campaign
 *CampaignsApi* | [**campaignsSearchGet**](docs/CampaignsApi.md#campaignssearchget) | **GET** /campaigns/search | Search campaigns
+*CasesApi* | [**casesGet**](docs/CasesApi.md#casesget) | **GET** /cases | Search cases
+*CasesApi* | [**casesIdAssignPut**](docs/CasesApi.md#casesidassignput) | **PUT** /cases/{id}/assign | Assign case to admin
+*CasesApi* | [**casesIdGet**](docs/CasesApi.md#casesidget) | **GET** /cases/{id} | Get case by ID
+*CasesApi* | [**casesIdMessagesGet**](docs/CasesApi.md#casesidmessagesget) | **GET** /cases/{id}/messages | Get case messages
+*CasesApi* | [**casesIdMessagesPost**](docs/CasesApi.md#casesidmessagespost) | **POST** /cases/{id}/messages | Add message to case
+*CasesApi* | [**casesIdStatusPut**](docs/CasesApi.md#casesidstatusput) | **PUT** /cases/{id}/status | Update case status
+*CasesApi* | [**casesPost**](docs/CasesApi.md#casespost) | **POST** /cases | Create a new case
 *CommentsApi* | [**commentsGet**](docs/CommentsApi.md#commentsget) | **GET** /comments | Get comments for an entity
 *CommentsApi* | [**commentsIdDelete**](docs/CommentsApi.md#commentsiddelete) | **DELETE** /comments/{id} | Delete a comment
 *CommentsApi* | [**commentsIdPut**](docs/CommentsApi.md#commentsidput) | **PUT** /comments/{id} | Update a comment
@@ -184,6 +191,7 @@ Class | Method | HTTP request | Description
  - [ModelsAnalyticsTimeSeriesData](docs/ModelsAnalyticsTimeSeriesData.md)
  - [ModelsAnalyticsTimeSeriesResponse](docs/ModelsAnalyticsTimeSeriesResponse.md)
  - [ModelsApplicationVideoUploadResponse](docs/ModelsApplicationVideoUploadResponse.md)
+ - [ModelsAssignCaseRequest](docs/ModelsAssignCaseRequest.md)
  - [ModelsAuthResponse](docs/ModelsAuthResponse.md)
  - [ModelsBrandAnalyticsResponse](docs/ModelsBrandAnalyticsResponse.md)
  - [ModelsBrandCampaignDecisionRequest](docs/ModelsBrandCampaignDecisionRequest.md)
@@ -195,6 +203,9 @@ Class | Method | HTTP request | Description
  - [ModelsCampaignBrandResponse](docs/ModelsCampaignBrandResponse.md)
  - [ModelsCampaignResponse](docs/ModelsCampaignResponse.md)
  - [ModelsCampaignStatusUpdateRequest](docs/ModelsCampaignStatusUpdateRequest.md)
+ - [ModelsCaseMessageResponse](docs/ModelsCaseMessageResponse.md)
+ - [ModelsCaseResponse](docs/ModelsCaseResponse.md)
+ - [ModelsCaseUserSummary](docs/ModelsCaseUserSummary.md)
  - [ModelsChangePasswordRequest](docs/ModelsChangePasswordRequest.md)
  - [ModelsCommentEditRequest](docs/ModelsCommentEditRequest.md)
  - [ModelsCommentRequest](docs/ModelsCommentRequest.md)
@@ -202,6 +213,8 @@ Class | Method | HTTP request | Description
  - [ModelsContentMedia](docs/ModelsContentMedia.md)
  - [ModelsCreateAdminRequest](docs/ModelsCreateAdminRequest.md)
  - [ModelsCreateCampaignRequest](docs/ModelsCreateCampaignRequest.md)
+ - [ModelsCreateCaseMessageRequest](docs/ModelsCreateCaseMessageRequest.md)
+ - [ModelsCreateCaseRequest](docs/ModelsCreateCaseRequest.md)
  - [ModelsCreateCreatorRequest](docs/ModelsCreateCreatorRequest.md)
  - [ModelsCreateGigRequest](docs/ModelsCreateGigRequest.md)
  - [ModelsCreateInvoiceRequest](docs/ModelsCreateInvoiceRequest.md)
@@ -241,6 +254,7 @@ Class | Method | HTTP request | Description
  - [ModelsNotificationResponse](docs/ModelsNotificationResponse.md)
  - [ModelsPaginatedBrandResponses](docs/ModelsPaginatedBrandResponses.md)
  - [ModelsPaginatedCampaignResponse](docs/ModelsPaginatedCampaignResponse.md)
+ - [ModelsPaginatedCaseResponse](docs/ModelsPaginatedCaseResponse.md)
  - [ModelsPaginatedCreatorResponse](docs/ModelsPaginatedCreatorResponse.md)
  - [ModelsPaginatedGigBrandResponse](docs/ModelsPaginatedGigBrandResponse.md)
  - [ModelsPaginatedGigCreatorResponse](docs/ModelsPaginatedGigCreatorResponse.md)
@@ -266,6 +280,9 @@ Class | Method | HTTP request | Description
  - [ModelsStandardBrandResponse](docs/ModelsStandardBrandResponse.md)
  - [ModelsStandardBrandStatusUpdateResponse](docs/ModelsStandardBrandStatusUpdateResponse.md)
  - [ModelsStandardCampaignResponse](docs/ModelsStandardCampaignResponse.md)
+ - [ModelsStandardCaseMessageListResponse](docs/ModelsStandardCaseMessageListResponse.md)
+ - [ModelsStandardCaseMessageResponse](docs/ModelsStandardCaseMessageResponse.md)
+ - [ModelsStandardCaseResponse](docs/ModelsStandardCaseResponse.md)
  - [ModelsStandardCreatorAnalyticsResponse](docs/ModelsStandardCreatorAnalyticsResponse.md)
  - [ModelsStandardCreatorBankTaxDetailsResponse](docs/ModelsStandardCreatorBankTaxDetailsResponse.md)
  - [ModelsStandardCreatorResponse](docs/ModelsStandardCreatorResponse.md)
@@ -295,6 +312,7 @@ Class | Method | HTTP request | Description
  - [ModelsStandardVideoSubmissionResponses](docs/ModelsStandardVideoSubmissionResponses.md)
  - [ModelsStandardVideoSubmissionUploadResponse](docs/ModelsStandardVideoSubmissionUploadResponse.md)
  - [ModelsUpdateCampaignRequest](docs/ModelsUpdateCampaignRequest.md)
+ - [ModelsUpdateCaseStatusRequest](docs/ModelsUpdateCaseStatusRequest.md)
  - [ModelsUpdateCreatorBankDetailsRequest](docs/ModelsUpdateCreatorBankDetailsRequest.md)
  - [ModelsUpdateCreatorRequest](docs/ModelsUpdateCreatorRequest.md)
  - [ModelsUpdateGigApplicationRequest](docs/ModelsUpdateGigApplicationRequest.md)
@@ -319,18 +337,21 @@ Class | Method | HTTP request | Description
  - [UtilsCampaignCategory](docs/UtilsCampaignCategory.md)
  - [UtilsCampaignStatus](docs/UtilsCampaignStatus.md)
  - [UtilsCompanySize](docs/UtilsCompanySize.md)
- - [UtilsContentTypeOption](docs/UtilsContentTypeOption.md)
+ - [UtilsContentType](docs/UtilsContentType.md)
  - [UtilsCountryCode](docs/UtilsCountryCode.md)
  - [UtilsCreatorStatus](docs/UtilsCreatorStatus.md)
  - [UtilsCurrency](docs/UtilsCurrency.md)
  - [UtilsEntityType](docs/UtilsEntityType.md)
+ - [UtilsEventType](docs/UtilsEventType.md)
  - [UtilsGender](docs/UtilsGender.md)
  - [UtilsGigApplicationStatus](docs/UtilsGigApplicationStatus.md)
  - [UtilsGigInvitationStatus](docs/UtilsGigInvitationStatus.md)
  - [UtilsGigStatus](docs/UtilsGigStatus.md)
  - [UtilsInvoiceStatus](docs/UtilsInvoiceStatus.md)
+ - [UtilsNotificationEntityType](docs/UtilsNotificationEntityType.md)
  - [UtilsPaymentItemStatus](docs/UtilsPaymentItemStatus.md)
  - [UtilsPaymentStatus](docs/UtilsPaymentStatus.md)
+ - [UtilsPriority](docs/UtilsPriority.md)
  - [UtilsVideoFormat](docs/UtilsVideoFormat.md)
  - [UtilsVideoFormatOption](docs/UtilsVideoFormatOption.md)
  - [UtilsVideoSubmissionStatus](docs/UtilsVideoSubmissionStatus.md)

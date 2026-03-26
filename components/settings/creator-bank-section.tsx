@@ -4,7 +4,7 @@ import {
   FieldGroup
 } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { creatorSettingsSchema } from './creator-settings-schema';
+import { creatorBankSchema } from './creator-bank-schema';
 import { Separator } from '../dashboard-ui/separator';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/dashboard-ui/card';
 
@@ -16,7 +16,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
           <form.Field
             name="bankName"
             validators={ {
-              onBlur: creatorSettingsSchema.shape.bankName,
+              onBlur: creatorBankSchema.shape.bankName,
             } }
             children={ ( field: any ) => (
               <SuperField
@@ -26,6 +26,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
+                required
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
@@ -34,7 +35,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
           <form.Field
             name="bankAccountName"
             validators={ {
-              onBlur: creatorSettingsSchema.shape.bankAccountName,
+              onBlur: creatorBankSchema.shape.bankAccountName,
             } }
             children={ ( field: any ) => (
               <SuperField
@@ -44,6 +45,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
+                required
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
@@ -52,7 +54,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
           <form.Field
             name="bankAccountNumber"
             validators={ {
-              onBlur: creatorSettingsSchema.shape.bankAccountNumber,
+              onBlur: creatorBankSchema.shape.bankAccountNumber,
             } }
             children={ ( field: any ) => (
               <SuperField
@@ -62,6 +64,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
+                required
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
@@ -70,7 +73,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
           <form.Field
             name="bankRoutingNumber"
             validators={ {
-              onBlur: creatorSettingsSchema.shape.bankRoutingNumber,
+              onBlur: creatorBankSchema.shape.bankRoutingNumber,
             } }
             children={ ( field: any ) => (
               <SuperField
@@ -80,6 +83,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
+                required
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
@@ -89,7 +93,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
             <form.Field
               name="bankAddress"
               validators={ {
-                onBlur: creatorSettingsSchema.shape.bankAddress,
+                onBlur: creatorBankSchema.shape.bankAddress,
               } }
               children={ ( field: any ) => (
                 <SuperField
@@ -116,7 +120,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
           <form.Field
             name="taxId"
             validators={ {
-              onBlur: creatorSettingsSchema.shape.taxId,
+              onBlur: creatorBankSchema.shape.taxId,
             } }
             children={ ( field: any ) => (
               <SuperField
@@ -133,7 +137,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
           <form.Field
             name="taxCountry"
             validators={ {
-              onBlur: creatorSettingsSchema.shape.taxCountry,
+              onBlur: creatorBankSchema.shape.taxCountry,
             } }
             children={ ( field: any ) => (
               <SuperField

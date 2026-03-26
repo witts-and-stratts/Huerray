@@ -4,13 +4,13 @@ import { ExpandableContent } from '@/components/dashboard-ui/expandable-content'
 import { Separator } from '@/components/dashboard-ui/separator';
 import {
   Sheet,
-  SheetContent
+  SheetContent,
+  SheetFooter
 } from '@/components/dashboard-ui/sheet';
 import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
 import { useCreator, useCreatorBankDetails } from '@/lib/api/hooks/creators';
 import { useUser } from '@/lib/api/hooks/users';
-import { stripTags } from '@/lib/utils';
 import * as React from 'react';
 import { Activity } from 'react';
 import { CreatorDetailsSheetProps, ExpandableCategories, Row, SOCIAL_PLATFORMS, SocialLink } from './creator-details-shared';
@@ -19,9 +19,15 @@ import { Content } from '@/components/dashboard-ui/content';
 import { useFormatDate } from '@/lib/hooks/format';
 import { CopyText } from '@/components/dashboard-ui/copy-text';
 import { useTranslations } from 'next-intl';
+import { CreatorActionMenu } from '../creator-action-menu';
+import { Button } from '@/components/dashboard-ui/button';
+import { ChevronDown } from 'lucide-react';
+import { RoleGuard } from '@/components/auth/role-guard';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { cn } from '@/lib/dashboard-utils';
 
 
-export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: CreatorDetailsSheetProps ) {
+export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onApproveProfile, onRejectProfile }: CreatorDetailsSheetProps ) {
   const c = creator as any;
   let {
     email,
@@ -51,6 +57,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
 
   const handles: Record<string, string> = { instagram_handle, tiktok_handle, youtube_handle };
   const activeSocials = SOCIAL_PLATFORMS.filter( p => handles[ p.handleKey ] );
+  const isPendingApproval = creator?.creator_status === 'pending_approval';
 
 
 
@@ -189,6 +196,47 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
             </div>
           </Activity>
         </Tabs>
+
+        <RoleGuard allowedRoles={ [ 'admin' ] }>
+          <SheetFooter className="sticky bottom-0 px-6 pb-6 pt-3 shrink-0 border-t border-border/50 bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur">
+            <CreatorActionMenu
+              creator={ creator! }
+              onApproveProfile={ onApproveProfile }
+              onRejectProfile={ onRejectProfile }
+              trigger={
+                <ButtonGroup className={ cn( "self-start min-w-[240px]", { "w-full": isPendingApproval } ) }>
+                  { isPendingApproval && onApproveProfile ? (
+                    <Button
+                      size="sm"
+                      className="font-regular flex-1"
+                      onClick={ () => onApproveProfile( creator! ) }
+                    >
+                      { t( 'creatorStatus.approve' ) }
+                    </Button>
+                  ) : null }
+                  { isPendingApproval && onRejectProfile ? (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="font-regular text-destructive flex-1"
+                      onClick={ () => onRejectProfile( creator! ) }
+                    >
+                      { t( 'creatorStatus.return' ) }
+                    </Button>
+                  ) : null }
+                  { !isPendingApproval ? (
+                    <Button variant="outline" size="sm" className="font-regular flex-1">
+                      { tc( 'actions' ) }
+                    </Button>
+                  ) : null }
+                  <Button variant="outline" size="sm" className="font-regular">
+                    <ChevronDown className="size-4" />
+                  </Button>
+                </ButtonGroup>
+              }
+            />
+          </SheetFooter>
+        </RoleGuard>
 
       </SheetContent>
     </Sheet>

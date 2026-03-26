@@ -3,7 +3,7 @@
 import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Badge } from '@/components/dashboard-ui/badge';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/dashboard-ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/dashboard-ui/dialog';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useGig } from '@/lib/api/hooks/gigs';
@@ -17,7 +17,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { useUpdateVideoSubmissionStatus, useVideoSubmissionDecision } from '@/lib/api/hooks/video-submissions';
 import { UtilsVideoSubmissionStatus, ModelsBrandVideoDecisionRequestStatusEnum } from '@/lib/api/generated/models';
 import { toast } from 'sonner';
-import { Loader2 } from 'lucide-react';
+import { ChevronDown, Loader2 } from 'lucide-react';
 import { ConfirmDialog } from '../dashboard-ui/confirm-dialog';
 import { SuperField } from '../dashboard-ui/super-field';
 import { ExpandableContent } from '../dashboard-ui/expandable-content';
@@ -28,6 +28,8 @@ import { CommentsThread } from '../dashboard-ui/comments-thread';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { cn } from '@/lib/dashboard-utils';
 import { motion } from 'motion/react';
+import { SubmissionActionMenu } from './submission-action-menu';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 
 interface SubmissionViewDialogProps {
   open: boolean;
@@ -469,24 +471,43 @@ export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, in
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="p-0 gap-0 overflow-hidden max-w-6xl! min-w-[300px] w-[95vw] bg-burgundy-50/80 max-h-[90vh] flex flex-row">
-        <div className={ cn( "flex flex-col transition-all duration-300 ease-in-out overflow-y-auto w-full", isCommentsOpen && "md:pr-[416px]" ) }>
-          <SubmissionVideo videoUrl={ submission.video?.asset || '' } poster={ submission.video?.thumbnail || '' } />
+        <div className={ cn( "flex flex-col transition-all duration-300 ease-in-out w-full min-h-0", isCommentsOpen && "md:pr-[416px]" ) }>
+          <div className="flex-1 overflow-y-auto">
+            <SubmissionVideo videoUrl={ submission.video?.asset || '' } poster={ submission.video?.thumbnail || '' } />
 
-          <div className="p-4 border-t bg-muted/20 space-y-4 flex-1">
-            <SubmissionHeader
-              title={ submission.title || submission.video_filename || "Untitled Submission" }
-              description={ submission.description }
-              commentCount={ commentCount }
-              isCommentsOpen={ isCommentsOpen }
-              onToggleComments={ handleToggleComments }
-            />
+            <div className="p-4 border-t bg-muted/20 space-y-4 flex-1">
+              <SubmissionHeader
+                title={ submission.title || submission.video_filename || "Untitled Submission" }
+                description={ submission.description }
+                commentCount={ commentCount }
+                isCommentsOpen={ isCommentsOpen }
+                onToggleComments={ handleToggleComments }
+              />
 
-            <CreatorTrigger creatorProfile={ submission.creator } />
+              <CreatorTrigger creatorProfile={ submission.creator } />
 
-            <SubmissionDetailsSection submission={ submission } locale={ locale } open={ open } />
+              <SubmissionDetailsSection submission={ submission } locale={ locale } open={ open } />
 
-            <SubmissionActions submission={ submission } onOpenChange={ onOpenChange } />
+              <SubmissionActions submission={ submission } onOpenChange={ onOpenChange } />
+            </div>
           </div>
+
+          <DialogFooter className="px-4 py-4 shrink-0 border-t bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur sm:justify-start">
+            <SubmissionActionMenu
+              submission={ submission }
+              showViewAction={ false }
+              trigger={
+                <ButtonGroup className="self-start">
+                  <Button variant="outline" size="sm" className="font-regular flex-1">
+                    Actions
+                  </Button>
+                  <Button variant="outline" size="sm" className="font-regular shrink-0">
+                    <ChevronDown className="size-4" />
+                  </Button>
+                </ButtonGroup>
+              }
+            />
+          </DialogFooter>
         </div>
 
         <SubmissionCommentsPanel

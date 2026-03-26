@@ -276,12 +276,21 @@
     "socialMediaTitle": "Configuración de las redes sociales",
     "socialMediaDescription": "Conecta y gestiona tus cuentas de redes sociales.",
     "securityTitle": "Cambiar contraseña",
-    "securityDescription": "Actualice su contraseña y mantenga su cuenta segura."
+    "securityDescription": "Actualice su contraseña y mantenga su cuenta segura.",
+    "returnedComments": {
+      "title": "Comentarios sobre el perfil",
+      "description": "Revise los comentarios adjuntos a su perfil devuelto.",
+      "label": "Comentario del administrador",
+      "empty": "No se incluyó ningún comentario con este perfil devuelto.",
+      "openAriaLabel": "Comentarios sobre el perfil abierto",
+      "fallbackLabel": "Comentarios"
+    }
   },
   "settingsTabs": {
     "profile": "Perfil",
     "bio": "Biografía",
     "socialMedia": "Redes sociales",
+    "bankDetails": "Datos bancarios",
     "security": "Seguridad"
   },
   "accountEditPage": {
@@ -334,7 +343,11 @@
     "saveChanges": "Guardar cambios",
     "successUpdated": "Datos bancarios actualizados correctamente",
     "errorUpdateFailed": "Error al actualizar la configuración",
-    "errorUpdateFailedWithError": "Error de actualización: {error}"
+    "errorUpdateFailedWithError": "Error de actualización: {error}",
+    "bankNameRequired": "Se requiere el nombre del banco",
+    "bankAccountNameRequired": "Se requiere el nombre del titular de la cuenta",
+    "bankAccountNumberRequired": "Número de cuenta obligatorio",
+    "bankRoutingNumberRequired": "Se requiere el número de ruta o el código SWIFT"
   },
   "gigDetailsFor": "Detalles del concierto: {title}",
   "myGigs": {

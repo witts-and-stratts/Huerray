@@ -10,6 +10,7 @@ import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import { ChevronDown, Trash2 } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { EmptyState } from './empty-state';
 import { FileCard, SortableFileItem } from './file-cards';
 import { UploadedFile } from './types';
@@ -37,23 +38,27 @@ interface FilesDropzoneProps {
   gridClassName?: string;
 }
 
-const DropZoneFooter = memo( ( { open, onImportUrlClick }: { open: () => void; onImportUrlClick: () => void; } ) => (
-  <div className='flex justify-end p-2' onClick={ ( e ) => e.stopPropagation() }>
-    <ButtonGroup>
-      <Button className='min-w-30' onClick={ open }>Upload</Button>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button size='icon'>
-            <ChevronDown />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className='w-56'>
-          <DropdownMenuItem onClick={ ( e ) => { e.stopPropagation(); onImportUrlClick(); } }>Import from URL</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </ButtonGroup>
-  </div>
-) );
+const DropZoneFooter = memo( ( { open, onImportUrlClick }: { open: () => void; onImportUrlClick: () => void; } ) => {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
+
+  return (
+    <div className='flex justify-end p-2' onClick={ ( e ) => e.stopPropagation() }>
+      <ButtonGroup>
+        <Button className='min-w-30' onClick={ open }>{ t( 'upload' ) }</Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button size='icon'>
+              <ChevronDown />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className='w-56'>
+            <DropdownMenuItem onClick={ ( e ) => { e.stopPropagation(); onImportUrlClick(); } }>{ t( 'importFromUrl' ) }</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </ButtonGroup>
+    </div>
+  );
+} );
 
 export const FilesDropzone = memo( ( {
   items,
@@ -77,6 +82,7 @@ export const FilesDropzone = memo( ( {
   showTitle,
   gridClassName,
 }: FilesDropzoneProps ) => {
+  const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   const [ selectedIds, setSelectedIds ] = useState<Set<string>>( new Set() );
   const lastSelectedIdxRef = useRef<number | null>( null );
 
@@ -154,7 +160,7 @@ export const FilesDropzone = memo( ( {
                 onDragEnd={ onDragEnd }
               >
                 <SortableContext items={ items.map( i => i.id ) } strategy={ rectSortingStrategy }>
-                  <div className={ cn( 'grid gap-1 p-2 items-start h-full content-start', gridClassName ?? 'grid-cols-3 md:grid-cols-4 lg:grid-cols-5' ) }>
+                  <div className={ cn( 'grid gap-3 p-2 items-start h-full content-start', gridClassName ?? 'grid-cols-3 md:grid-cols-4 lg:grid-cols-5' ) }>
                     <AnimatePresence>
                       { items.map( ( item ) => (
                         <SortableFileItem
@@ -191,13 +197,13 @@ export const FilesDropzone = memo( ( {
               </DndContext>
               { isSelectionMode && (
                 <div className="absolute bottom-14 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/90 backdrop-blur-sm border border-border shadow-lg pointer-events-auto" onClick={ ( e ) => e.stopPropagation() }>
-                  <span className="text-muted-foreground pr-1 whitespace-nowrap">{ selectedIds.size } selected</span>
+                  <span className="text-muted-foreground pr-1 whitespace-nowrap">{ t( 'itemsSelected', { count: String( selectedIds.size ) } ) }</span>
                   <ButtonGroup>
                     <Button variant="outline" size="sm" onClick={ handleClearSelection } className={ 'font-normal text-slate-700' }>
-                      Clear
+                      { t( 'clear' ) }
                     </Button>
                     <Button variant="outline" size="sm" onClick={ handleDeleteSelected } className={ 'font-normal text-slate-700' }>
-                      <Trash2 size={ 12 } /> Delete
+                      <Trash2 size={ 12 } /> { t( 'delete' ) }
                     </Button>
                   </ButtonGroup>
                 </div>

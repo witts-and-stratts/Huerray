@@ -534,6 +534,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} [campaignId] 
          * @param {number} [compensationMax] 
          * @param {number} [compensationMin] 
+         * @param {GigsSearchGetContentTypeEnum} [contentType] 
          * @param {string} [endDate] 
          * @param {boolean} [enforceSingleCreatorSubmission] 
          * @param {boolean} [enforceUniqueCreatorSubmission] 
@@ -548,7 +549,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        gigsSearchGet: async (ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: GigsSearchGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: GigsSearchGetStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        gigsSearchGet: async (ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, contentType?: GigsSearchGetContentTypeEnum, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: GigsSearchGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: GigsSearchGetStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/gigs/search`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -583,6 +584,10 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (compensationMin !== undefined) {
                 localVarQueryParameter['compensation_min'] = compensationMin;
+            }
+
+            if (contentType !== undefined) {
+                localVarQueryParameter['content_type'] = contentType;
             }
 
             if (endDate !== undefined) {
@@ -832,6 +837,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {string} [campaignId] 
          * @param {number} [compensationMax] 
          * @param {number} [compensationMin] 
+         * @param {GigsSearchGetContentTypeEnum} [contentType] 
          * @param {string} [endDate] 
          * @param {boolean} [enforceSingleCreatorSubmission] 
          * @param {boolean} [enforceUniqueCreatorSubmission] 
@@ -846,8 +852,8 @@ export const GigsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async gigsSearchGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: GigsSearchGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: GigsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsSearchGet(ageMax, ageMin, brandId, campaignId, compensationMax, compensationMin, endDate, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, genderRequirement, gigCostMax, gigCostMin, limit, page, q, startDate, status, options);
+        async gigsSearchGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, contentType?: GigsSearchGetContentTypeEnum, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: GigsSearchGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: GigsSearchGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsSearchGet(ageMax, ageMin, brandId, campaignId, compensationMax, compensationMin, contentType, endDate, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, genderRequirement, gigCostMax, gigCostMin, limit, page, q, startDate, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsSearchGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -998,7 +1004,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          * @throws {RequiredError}
          */
         gigsSearchGet(requestParameters: GigsApiGigsSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedGigResponse> {
-            return localVarFp.gigsSearchGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(axios, basePath));
+            return localVarFp.gigsSearchGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.contentType, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1168,6 +1174,8 @@ export interface GigsApiGigsSearchGetRequest {
     readonly compensationMax?: number
 
     readonly compensationMin?: number
+
+    readonly contentType?: GigsSearchGetContentTypeEnum
 
     readonly endDate?: string
 
@@ -1346,10 +1354,15 @@ export class GigsApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public gigsSearchGet(requestParameters: GigsApiGigsSearchGetRequest = {}, options?: RawAxiosRequestConfig) {
-        return GigsApiFp(this.configuration).gigsSearchGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
+        return GigsApiFp(this.configuration).gigsSearchGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.contentType, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
+export const GigsSearchGetContentTypeEnum = {
+    ContentTypeHumanGenerated: 'human-generated',
+    ContentTypeAIGenerated: 'ai-generated'
+} as const;
+export type GigsSearchGetContentTypeEnum = typeof GigsSearchGetContentTypeEnum[keyof typeof GigsSearchGetContentTypeEnum];
 export const GigsSearchGetGenderRequirementEnum = {
     GenderMale: 'male',
     GenderFemale: 'female',

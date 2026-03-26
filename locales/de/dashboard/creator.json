@@ -276,12 +276,21 @@
     "socialMediaTitle": "Einstellungen für soziale Medien",
     "socialMediaDescription": "Verbinden und verwalten Sie Ihre Konten in den sozialen Medien.",
     "securityTitle": "Passwort ändern",
-    "securityDescription": "Aktualisieren Sie Ihr Passwort und halten Sie Ihr Konto sicher."
+    "securityDescription": "Aktualisieren Sie Ihr Passwort und halten Sie Ihr Konto sicher.",
+    "returnedComments": {
+      "title": "Kommentare zum Profil",
+      "description": "Überprüfen Sie das Feedback zu Ihrem zurückgegebenen Profil.",
+      "label": "Kommentar der Verwaltung",
+      "empty": "Zu diesem zurückgesandten Profil wurde kein Kommentar abgegeben.",
+      "openAriaLabel": "Kommentare zum Profil öffnen",
+      "fallbackLabel": "Kommentare"
+    }
   },
   "settingsTabs": {
     "profile": "Profil",
     "bio": "Biografie",
     "socialMedia": "Soziale Medien",
+    "bankDetails": "Bankverbindung",
     "security": "Sicherheit"
   },
   "accountEditPage": {
@@ -334,7 +343,11 @@
     "saveChanges": "Änderungen speichern",
     "successUpdated": "Bankverbindung erfolgreich aktualisiert",
     "errorUpdateFailed": "Aktualisierung der Einstellungen fehlgeschlagen",
-    "errorUpdateFailedWithError": "Aktualisierung fehlgeschlagen: {error}"
+    "errorUpdateFailedWithError": "Aktualisierung fehlgeschlagen: {error}",
+    "bankNameRequired": "Bankname ist erforderlich",
+    "bankAccountNameRequired": "Name des Kontoinhabers ist erforderlich",
+    "bankAccountNumberRequired": "Kontonummer ist erforderlich",
+    "bankRoutingNumberRequired": "Routing-Nummer oder SWIFT-Code ist erforderlich"
   },
   "gigDetailsFor": "Details für Auftritt: {title}",
   "myGigs": {

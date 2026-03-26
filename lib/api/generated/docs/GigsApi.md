@@ -774,6 +774,7 @@ let brandId: string; // (optional) (default to undefined)
 let campaignId: string; // (optional) (default to undefined)
 let compensationMax: number; // (optional) (default to undefined)
 let compensationMin: number; // (optional) (default to undefined)
+let contentType: 'human-generated' | 'ai-generated'; // (optional) (default to undefined)
 let endDate: string; // (optional) (default to undefined)
 let enforceSingleCreatorSubmission: boolean; // (optional) (default to undefined)
 let enforceUniqueCreatorSubmission: boolean; // (optional) (default to undefined)
@@ -793,6 +794,7 @@ const { status, data } = await apiInstance.gigsSearchGet(
     campaignId,
     compensationMax,
     compensationMin,
+    contentType,
     endDate,
     enforceSingleCreatorSubmission,
     enforceUniqueCreatorSubmission,
@@ -817,6 +819,7 @@ const { status, data } = await apiInstance.gigsSearchGet(
 | **campaignId** | [**string**] |  | (optional) defaults to undefined|
 | **compensationMax** | [**number**] |  | (optional) defaults to undefined|
 | **compensationMin** | [**number**] |  | (optional) defaults to undefined|
+| **contentType** | [**&#39;human-generated&#39; | &#39;ai-generated&#39;**]**Array<&#39;human-generated&#39; &#124; &#39;ai-generated&#39;>** |  | (optional) defaults to undefined|
 | **endDate** | [**string**] |  | (optional) defaults to undefined|
 | **enforceSingleCreatorSubmission** | [**boolean**] |  | (optional) defaults to undefined|
 | **enforceUniqueCreatorSubmission** | [**boolean**] |  | (optional) defaults to undefined|

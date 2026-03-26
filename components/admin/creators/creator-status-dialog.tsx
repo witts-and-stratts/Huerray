@@ -122,7 +122,7 @@ export function CreatorStatusDialog( {
                 onValueChange={ ( value ) => field.handleChange( value! ) }
                 options={ [
                   { value: "approved", label: t( 'creatorStatus.approve' ) },
-                  { value: "returned", label: t( 'creatorStatus.reject' ) },
+                  { value: "returned", label: t( 'creatorStatus.return' ) },
                   { value: "rejected", label: t( 'creatorStatus.totalRejection' ) }
                 ] }
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }

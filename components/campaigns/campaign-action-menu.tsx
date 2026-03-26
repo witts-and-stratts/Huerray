@@ -6,7 +6,7 @@ import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
 import { ModelsCampaignResponse } from "@/lib/api/generated";
 import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsCampaignStatusUpdateRequestCampaignStatusEnum, UtilsCampaignStatus } from "@/lib/api/generated/models";
-import { useAdminCampaignApproval, useDeleteCampaign, useReplicateCampaign, useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
+import { useAdminCampaignApproval, useDeleteCampaign, useReplicateCampaign, useSubmitCampaign, useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
 import { useCreateInvoice } from "@/lib/api/hooks/invoices";
 import { ApiError } from "@/lib/api/hooks/types";
 import { cn } from "@/lib/dashboard-utils";
@@ -47,6 +47,7 @@ export function CampaignActionMenu( {
   const deleteCampaign = useDeleteCampaign();
   const replicateCampaign = useReplicateCampaign();
   const approveCampaign = useAdminCampaignApproval();
+  const submitCampaign = useSubmitCampaign();
   const updateCampaignStatus = useUpdateCampaignStatus();
   const createInvoice = useCreateInvoice();
   const [ approveDialogOpen, setApproveDialogOpen ] = React.useState( false );
@@ -59,6 +60,7 @@ export function CampaignActionMenu( {
   const [ invoiceDialogOpen, setInvoiceDialogOpen ] = React.useState( false );
   const [ deactivateDialogOpen, setDeactivateDialogOpen ] = React.useState( false );
   const [ reactivateDialogOpen, setReactivateDialogOpen ] = React.useState( false );
+  const [ publishDialogOpen, setPublishDialogOpen ] = React.useState( false );
 
   const [ deleteConfirmation, setDeleteConfirmation ] = React.useState( '' );
 
@@ -214,6 +216,18 @@ export function CampaignActionMenu( {
     }
   };
 
+  const handlePublishCampaign = async () => {
+    if ( !campaign.id ) return;
+
+    try {
+      await submitCampaign.mutateAsync( campaign.id );
+      toast.success( t( 'campaignPublished' ) );
+      setPublishDialogOpen( false );
+    } catch {
+      toast.error( t( 'publishCampaignFailed' ) );
+    }
+  };
+
   const isCompleted = campaign.campaign_status === 'completed';
   const campaignStatus = campaign.campaign_status;
 
@@ -234,6 +248,12 @@ export function CampaignActionMenu( {
       action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
       allowedRoles: [ "brand" ],
       condition: () => !isCompleted && ( campaignStatus === "draft" || campaignStatus === "returned" ),
+    },
+    {
+      label: t( 'publishCampaign' ),
+      action: () => setPublishDialogOpen( true ),
+      allowedRoles: [ "brand" ],
+      condition: () => !isCompleted && ( campaignStatus === UtilsCampaignStatus.CampaignStatusDraft || campaignStatus === UtilsCampaignStatus.CampaignStatusReturned ),
     },
     {
       label: t( 'rename' ),
@@ -345,6 +365,19 @@ export function CampaignActionMenu( {
           onSuccess={ () => router.refresh() }
         />
       ) }
+      <ConfirmDialog
+        open={ publishDialogOpen }
+        onOpenChange={ setPublishDialogOpen }
+        title={ t( 'publishCampaignTitle' ) }
+        description={ t( 'publishCampaignDescription' ) }
+        confirmLabel={ t( 'publishCampaign' ) }
+        cancelLabel={ t( 'cancel' ) }
+        onConfirm={ handlePublishCampaign }
+        isLoading={ submitCampaign.isPending }
+        loadingText={ t( 'publishing' ) }
+        variant="default"
+      />
+
       <ConfirmDialog
         open={ deleteDialogOpen }
         onOpenChange={ setDeleteDialogOpen }

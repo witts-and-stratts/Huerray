@@ -202,6 +202,8 @@ export function CreatorsTable( {
             creator={ selectedCreator }
             open={ isSheetOpen }
             onOpenChange={ setIsSheetOpen }
+            onApproveProfile={ handleOnApproveProfile }
+            onRejectProfile={ handleOnRejectProfile }
           />
         </motion.div>
       ) }

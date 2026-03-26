@@ -15,7 +15,7 @@ import {
   useDeleteVideoSubmission,
 } from '@/lib/api/hooks/video-submissions';
 import { Check, ExternalLink, MoreVertical, Pencil, Trash2, Undo2, X } from 'lucide-react';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { toast } from 'sonner';
 import { SubmissionViewDialog } from './submission-view-dialog';
 import { SubmissionDecisionDialog } from './submission-decision-dialog';
@@ -25,9 +25,11 @@ import { useTranslations } from 'next-intl';
 
 interface SubmissionActionMenuProps {
   submission: ModelsVideoSubmissionResponse;
+  trigger?: ReactNode;
+  showViewAction?: boolean;
 }
 
-export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps ) {
+export function SubmissionActionMenu( { submission, trigger, showViewAction = true }: SubmissionActionMenuProps ) {
   const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   const campaignActionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const updateSubmission = useUpdateVideoSubmission();
@@ -159,12 +161,12 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
   };
 
   const actions: MenuAction<ModelsVideoSubmissionResponse>[] = [
-    {
+    ...( showViewAction ? [ {
       label: t( 'viewSubmission' ),
       icon: ExternalLink,
-      condition: ( current ) => !!current.video?.asset,
+      condition: ( current: ModelsVideoSubmissionResponse ) => !!current.video?.asset,
       action: () => handleViewSubmission(),
-    },
+    } ] : [] ),
     {
       label: t( 'acceptSubmission' ),
       icon: Check,
@@ -256,10 +258,12 @@ export function SubmissionActionMenu( { submission }: SubmissionActionMenuProps 
         data={ submission }
         label=""
         trigger={
+          trigger || (
           <Button variant="ghost" size="icon-sm" className="shrink-0 -mb-1 hover:bg-background/70">
             <MoreVertical className="size-4" />
             <span className="sr-only">{ t( 'openMenu' ) }</span>
           </Button>
+          )
         }
       />
 

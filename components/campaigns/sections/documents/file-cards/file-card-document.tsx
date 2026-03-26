@@ -50,7 +50,7 @@ export const FileCardDocument = memo( ( props: FileCardProps ) => {
   };
 
   return (
-    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle } onSelect={ ( id ) => props.onSelect?.( id, false ) }>
+    <BaseFileCard { ...props } progress={ progress } showTitle={ showTitle } onSelect={ props.onSelect }>
       { isPdf && pdfFile ? (
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden w-full h-full p-2 pointer-events-none">
           { cachedCover ? (

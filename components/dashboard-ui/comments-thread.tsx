@@ -26,6 +26,7 @@ export interface CommentsThreadProps {
   postTo?: EntityRef;
   disableComment?: boolean;
   size?: 'default' | 'sm';
+  className?: string;
 }
 
 function getInitials( firstName?: string, lastName?: string ) {
@@ -248,7 +249,7 @@ const MessageGroup = memo( ( { group, user, size }: { group: MessageGroup[]; use
 } );
 MessageGroup.displayName = 'MessageGroup';
 
-export function CommentsThread( { entities, postTo, disableComment = false, size = 'default' }: CommentsThreadProps ) {
+export function CommentsThread( { entities, postTo, disableComment = false, size = 'default', className }: CommentsThreadProps ) {
   const { user } = useAuth();
   const results = useMultipleComments( entities );
   const messagesEndRef = useRef<HTMLDivElement>( null );
@@ -294,7 +295,7 @@ export function CommentsThread( { entities, postTo, disableComment = false, size
   }
 
   return (
-    <div className="flex flex-col flex-1 min-h-0 h-full bg-background/70 rounded-xl border overflow-hidden relative">
+    <div className={ cn( "flex flex-col flex-1 min-h-0 h-full bg-background/70 rounded-xl border overflow-hidden relative", className ) }>
       <Button
         variant="outline"
         size="icon"

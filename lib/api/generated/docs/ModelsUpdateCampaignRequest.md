@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **campaign_images** | [**Array&lt;ModelsContentMedia&gt;**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
 **category** | [**UtilsCampaignCategory**](UtilsCampaignCategory.md) |  | [optional] [default to undefined]
+**content_type** | [**UtilsContentType**](UtilsContentType.md) |  | [optional] [default to undefined]
 **description** | **string** |  | [optional] [default to undefined]
 **donts** | **string** |  | [optional] [default to undefined]
 **dos** | **string** |  | [optional] [default to undefined]
@@ -34,6 +35,7 @@ const instance: ModelsUpdateCampaignRequest = {
     campaign_images,
     campaign_name,
     category,
+    content_type,
     description,
     donts,
     dos,

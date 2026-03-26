@@ -84,6 +84,7 @@ let brandId: string; // (optional) (default to undefined)
 let campaignId: string; // (optional) (default to undefined)
 let compensationMax: number; // (optional) (default to undefined)
 let compensationMin: number; // (optional) (default to undefined)
+let contentType: 'human-generated' | 'ai-generated'; // (optional) (default to undefined)
 let endDate: string; // (optional) (default to undefined)
 let enforceSingleCreatorSubmission: boolean; // (optional) (default to undefined)
 let enforceUniqueCreatorSubmission: boolean; // (optional) (default to undefined)
@@ -103,6 +104,7 @@ const { status, data } = await apiInstance.brandsGigsGet(
     campaignId,
     compensationMax,
     compensationMin,
+    contentType,
     endDate,
     enforceSingleCreatorSubmission,
     enforceUniqueCreatorSubmission,
@@ -127,6 +129,7 @@ const { status, data } = await apiInstance.brandsGigsGet(
 | **campaignId** | [**string**] |  | (optional) defaults to undefined|
 | **compensationMax** | [**number**] |  | (optional) defaults to undefined|
 | **compensationMin** | [**number**] |  | (optional) defaults to undefined|
+| **contentType** | [**&#39;human-generated&#39; | &#39;ai-generated&#39;**]**Array<&#39;human-generated&#39; &#124; &#39;ai-generated&#39;>** |  | (optional) defaults to undefined|
 | **endDate** | [**string**] |  | (optional) defaults to undefined|
 | **enforceSingleCreatorSubmission** | [**boolean**] |  | (optional) defaults to undefined|
 | **enforceUniqueCreatorSubmission** | [**boolean**] |  | (optional) defaults to undefined|
@@ -455,7 +458,7 @@ const apiInstance = new BrandApi(configuration);
 let allowMultiple: boolean; // (optional) (default to undefined)
 let brandId: string; // (optional) (default to undefined)
 let category: 'mobile_phones' | 'laptops' | 'gadgets' | 'electronics' | 'smart_watch' | 'headphones' | 'gaming' | 'software' | 'fashion' | 'clothing' | 'footwear' | 'accessories' | 'jewelry' | 'watches' | 'bags' | 'sunglasses' | 'beauty' | 'perfumes' | 'cosmetics' | 'skincare' | 'haircare' | 'makeup' | 'nail_care' | 'personal_care' | 'food' | 'beverage' | 'snacks' | 'restaurant' | 'alcohol' | 'coffee' | 'tea' | 'health_food' | 'fitness' | 'wellness' | 'supplements' | 'medical' | 'yoga' | 'gym' | 'sports' | 'home' | 'decor' | 'furniture' | 'kitchen' | 'appliances' | 'gardening' | 'pets' | 'books' | 'travel' | 'hotels' | 'tourism' | 'events' | 'entertainment' | 'movies' | 'music' | 'finance' | 'banking' | 'insurance' | 'education' | 'services' | 'cars' | 'motorcycles' | 'auto_parts' | 'other'; // (optional) (default to undefined)
-let contentType: 'video' | 'image' | 'pdf'; // (optional) (default to undefined)
+let contentType: 'human-generated' | 'ai-generated'; // (optional) (default to undefined)
 let createdAfter: string; // (optional) (default to undefined)
 let createdBefore: string; // (optional) (default to undefined)
 let limit: number; // (optional) (default to undefined)
@@ -498,7 +501,7 @@ const { status, data } = await apiInstance.brandsSearchCampaignsGet(
 | **allowMultiple** | [**boolean**] |  | (optional) defaults to undefined|
 | **brandId** | [**string**] |  | (optional) defaults to undefined|
 | **category** | [**&#39;mobile_phones&#39; | &#39;laptops&#39; | &#39;gadgets&#39; | &#39;electronics&#39; | &#39;smart_watch&#39; | &#39;headphones&#39; | &#39;gaming&#39; | &#39;software&#39; | &#39;fashion&#39; | &#39;clothing&#39; | &#39;footwear&#39; | &#39;accessories&#39; | &#39;jewelry&#39; | &#39;watches&#39; | &#39;bags&#39; | &#39;sunglasses&#39; | &#39;beauty&#39; | &#39;perfumes&#39; | &#39;cosmetics&#39; | &#39;skincare&#39; | &#39;haircare&#39; | &#39;makeup&#39; | &#39;nail_care&#39; | &#39;personal_care&#39; | &#39;food&#39; | &#39;beverage&#39; | &#39;snacks&#39; | &#39;restaurant&#39; | &#39;alcohol&#39; | &#39;coffee&#39; | &#39;tea&#39; | &#39;health_food&#39; | &#39;fitness&#39; | &#39;wellness&#39; | &#39;supplements&#39; | &#39;medical&#39; | &#39;yoga&#39; | &#39;gym&#39; | &#39;sports&#39; | &#39;home&#39; | &#39;decor&#39; | &#39;furniture&#39; | &#39;kitchen&#39; | &#39;appliances&#39; | &#39;gardening&#39; | &#39;pets&#39; | &#39;books&#39; | &#39;travel&#39; | &#39;hotels&#39; | &#39;tourism&#39; | &#39;events&#39; | &#39;entertainment&#39; | &#39;movies&#39; | &#39;music&#39; | &#39;finance&#39; | &#39;banking&#39; | &#39;insurance&#39; | &#39;education&#39; | &#39;services&#39; | &#39;cars&#39; | &#39;motorcycles&#39; | &#39;auto_parts&#39; | &#39;other&#39;**]**Array<&#39;mobile_phones&#39; &#124; &#39;laptops&#39; &#124; &#39;gadgets&#39; &#124; &#39;electronics&#39; &#124; &#39;smart_watch&#39; &#124; &#39;headphones&#39; &#124; &#39;gaming&#39; &#124; &#39;software&#39; &#124; &#39;fashion&#39; &#124; &#39;clothing&#39; &#124; &#39;footwear&#39; &#124; &#39;accessories&#39; &#124; &#39;jewelry&#39; &#124; &#39;watches&#39; &#124; &#39;bags&#39; &#124; &#39;sunglasses&#39; &#124; &#39;beauty&#39; &#124; &#39;perfumes&#39; &#124; &#39;cosmetics&#39; &#124; &#39;skincare&#39; &#124; &#39;haircare&#39; &#124; &#39;makeup&#39; &#124; &#39;nail_care&#39; &#124; &#39;personal_care&#39; &#124; &#39;food&#39; &#124; &#39;beverage&#39; &#124; &#39;snacks&#39; &#124; &#39;restaurant&#39; &#124; &#39;alcohol&#39; &#124; &#39;coffee&#39; &#124; &#39;tea&#39; &#124; &#39;health_food&#39; &#124; &#39;fitness&#39; &#124; &#39;wellness&#39; &#124; &#39;supplements&#39; &#124; &#39;medical&#39; &#124; &#39;yoga&#39; &#124; &#39;gym&#39; &#124; &#39;sports&#39; &#124; &#39;home&#39; &#124; &#39;decor&#39; &#124; &#39;furniture&#39; &#124; &#39;kitchen&#39; &#124; &#39;appliances&#39; &#124; &#39;gardening&#39; &#124; &#39;pets&#39; &#124; &#39;books&#39; &#124; &#39;travel&#39; &#124; &#39;hotels&#39; &#124; &#39;tourism&#39; &#124; &#39;events&#39; &#124; &#39;entertainment&#39; &#124; &#39;movies&#39; &#124; &#39;music&#39; &#124; &#39;finance&#39; &#124; &#39;banking&#39; &#124; &#39;insurance&#39; &#124; &#39;education&#39; &#124; &#39;services&#39; &#124; &#39;cars&#39; &#124; &#39;motorcycles&#39; &#124; &#39;auto_parts&#39; &#124; &#39;other&#39;>** |  | (optional) defaults to undefined|
-| **contentType** | [**&#39;video&#39; | &#39;image&#39; | &#39;pdf&#39;**]**Array<&#39;video&#39; &#124; &#39;image&#39; &#124; &#39;pdf&#39;>** |  | (optional) defaults to undefined|
+| **contentType** | [**&#39;human-generated&#39; | &#39;ai-generated&#39;**]**Array<&#39;human-generated&#39; &#124; &#39;ai-generated&#39;>** |  | (optional) defaults to undefined|
 | **createdAfter** | [**string**] |  | (optional) defaults to undefined|
 | **createdBefore** | [**string**] |  | (optional) defaults to undefined|
 | **limit** | [**number**] |  | (optional) defaults to undefined|
@@ -556,6 +559,7 @@ const apiInstance = new BrandApi(configuration);
 let ageMax: number; // (optional) (default to undefined)
 let ageMin: number; // (optional) (default to undefined)
 let city: string; // (optional) (default to undefined)
+let contentType: 'human-generated' | 'ai-generated'; // (optional) (default to undefined)
 let country: string; // (optional) (default to undefined)
 let gender: 'male' | 'female' | 'any'; // (optional) (default to undefined)
 let limit: number; // (optional) (default to undefined)
@@ -567,6 +571,7 @@ const { status, data } = await apiInstance.brandsSearchCreatorsGet(
     ageMax,
     ageMin,
     city,
+    contentType,
     country,
     gender,
     limit,
@@ -583,6 +588,7 @@ const { status, data } = await apiInstance.brandsSearchCreatorsGet(
 | **ageMax** | [**number**] |  | (optional) defaults to undefined|
 | **ageMin** | [**number**] |  | (optional) defaults to undefined|
 | **city** | [**string**] |  | (optional) defaults to undefined|
+| **contentType** | [**&#39;human-generated&#39; | &#39;ai-generated&#39;**]**Array<&#39;human-generated&#39; &#124; &#39;ai-generated&#39;>** |  | (optional) defaults to undefined|
 | **country** | [**string**] |  | (optional) defaults to undefined|
 | **gender** | [**&#39;male&#39; | &#39;female&#39; | &#39;any&#39;**]**Array<&#39;male&#39; &#124; &#39;female&#39; &#124; &#39;any&#39;>** |  | (optional) defaults to undefined|
 | **limit** | [**number**] |  | (optional) defaults to undefined|

@@ -18,12 +18,15 @@ export interface ModelsPlatformAnalyticsResponse {
     'active_brands'?: number;
     'active_creators'?: number;
     'approved_video_submissions'?: number;
+    'case_resolution_rate'?: number;
     'completed_campaigns'?: number;
     'completed_gigs'?: number;
     'net_revenue'?: number;
     'new_users_today'?: number;
+    'resolved_cases'?: number;
     'total_brands'?: number;
     'total_campaigns'?: number;
+    'total_cases'?: number;
     'total_creators'?: number;
     'total_gigs'?: number;
     'total_payouts'?: number;

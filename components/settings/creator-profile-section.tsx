@@ -17,6 +17,8 @@ function toFieldError( errors: any[] | undefined ): string | undefined {
 
 export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
   const t = useTranslations( 'dashboard.creator.settings.profile' );
+  const latestAllowedDateOfBirth = new Date();
+  latestAllowedDateOfBirth.setFullYear( latestAllowedDateOfBirth.getFullYear() - 18 );
   const DummyProfileAvatar = memo( ( { gender }: { gender: string; } ) => <img
     src={ gender === 'male' ? '/svg/avatar-male.svg' : '/svg/avatar-female.svg' }
     alt={ t( 'defaultProfile' ) }
@@ -38,13 +40,17 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
             <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <form.Field
                 name="dateOfBirth"
-                validators={ { onBlur: creatorSettingsSchema.shape.dateOfBirth } }
+                validators={ {
+                  onBlur: creatorSettingsSchema.shape.dateOfBirth,
+                  onSubmit: creatorSettingsSchema.shape.dateOfBirth,
+                } }
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }
                     label={ t( 'dateOfBirth' ) }
                     type="datepicker"
                     value={ field.state.value }
+                    maxDate={ latestAllowedDateOfBirth }
                     onChange={ ( date ) => {
                       if ( !date || date instanceof Date ) {
                         field.handleChange( date ? date.toISOString() : '' );

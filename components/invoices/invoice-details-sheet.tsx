@@ -30,6 +30,9 @@ import { Activity } from 'react';
 import { InvoiceStatusBadge } from './invoice-status-badge';
 import { BrandHoverCard } from '../campaigns/brand-hover-card';
 import { useTranslations } from 'next-intl';
+import { InvoiceActionMenu } from './invoice-action-menu';
+import { ChevronDown } from 'lucide-react';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -188,6 +191,7 @@ interface InvoiceDetailsSheetProps {
 
 export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDetailsSheetProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
+  const tc = useTranslations( 'dashboard.common' );
   const [ activeTab, setActiveTab ] = React.useState( 'overview' );
   const invoiceId = invoice?.id || invoice?.invoice_id || '';
 
@@ -255,12 +259,24 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
             </WrappedCard>
           ) }
           { resolvedInvoice.pdf_path && (
-            <Button variant="outline" className="w-full gap-2">
-              <a href={ `${ config.api.baseUrl }/${ resolvedInvoice.pdf_path.replace( /^\//, '' ) }` } download target="_blank" rel="noreferrer" className='flex gap-2'>
-                <HugeiconsIcon icon={ DownloadIcon } size={ 16 } />
-                { t( 'details.downloadInvoice' ) }
-              </a>
-            </Button>
+            <ButtonGroup className="w-full">
+              <Button variant="outline" className="flex-1 gap-2">
+                <a href={ `${ config.api.baseUrl }/${ resolvedInvoice.pdf_path.replace( /^\//, '' ) }` } download target="_blank" rel="noreferrer" className='flex gap-2'>
+                  <HugeiconsIcon icon={ DownloadIcon } size={ 16 } />
+                  { t( 'details.downloadInvoice' ) }
+                </a>
+              </Button>
+              <InvoiceActionMenu
+                invoice={ resolvedInvoice }
+                showViewButton={ false }
+                bareTrigger
+                trigger={
+                  <Button variant="outline" size="sm" className="font-regular shrink-0">
+                    <ChevronDown className="size-4" />
+                  </Button>
+                }
+              />
+            </ButtonGroup>
           ) }
         </div>
 

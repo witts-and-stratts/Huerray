@@ -2,6 +2,7 @@
 import { z } from 'zod';
 import { UtilsCampaignCategory } from '@/lib/api/generated/models/utils-campaign-category';
 import { UtilsVideoFormat } from '@/lib/api/generated/models';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 
 // Helper to extract values for z.enum
 function getEnumValues<T extends Record<string, any>>(obj: T) {
@@ -14,6 +15,7 @@ export const createCampaignSchema = z.object({
   category: z.enum( getEnumValues( UtilsCampaignCategory ), {
     message: '',
   }),
+  content_type: z.enum(getEnumValues(UtilsContentType)),
   keywords: z.array(z.string()).default([]),
   product_url: z.url().optional().or(z.literal('')),
   product_image: z.url().optional().or(z.literal('')),

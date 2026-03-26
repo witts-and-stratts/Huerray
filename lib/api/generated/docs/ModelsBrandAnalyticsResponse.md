@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **approval_rate** | **number** |  | [optional] [default to undefined]
 **campaigns_completed** | **number** |  | [optional] [default to undefined]
 **campaigns_created** | **number** |  | [optional] [default to undefined]
+**case_resolution_rate** | **number** |  | [optional] [default to undefined]
+**cases_reported** | **number** |  | [optional] [default to undefined]
+**cases_resolved** | **number** |  | [optional] [default to undefined]
 **completion_rate** | **number** |  | [optional] [default to undefined]
 **gigs_accepted** | **number** |  | [optional] [default to undefined]
 **gigs_completed** | **number** |  | [optional] [default to undefined]
@@ -28,6 +31,9 @@ const instance: ModelsBrandAnalyticsResponse = {
     approval_rate,
     campaigns_completed,
     campaigns_created,
+    case_resolution_rate,
+    cases_reported,
+    cases_resolved,
     completion_rate,
     gigs_accepted,
     gigs_completed,

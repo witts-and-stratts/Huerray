@@ -26,7 +26,7 @@ import { useRole } from '@/contexts/role-context';
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
 import { SubmissionCard } from './submission-card';
 import { toast } from 'sonner';
-import { ArrowRight, Globe, Loader2, VideoIcon } from 'lucide-react';
+import { ArrowRight, ChevronDown, Globe, Loader2, VideoIcon } from 'lucide-react';
 import { RoleGuard } from '../auth/role-guard';
 import { Badge } from '@/components/dashboard-ui/badge';
 import { Separator } from '@/components/dashboard-ui/separator';
@@ -46,6 +46,9 @@ import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from '
 import { SentenceCase } from '../text-case';
 import { CreateSubmissionSheet } from '@/components/creator/create-submission-sheet';
 import { EmptySubmission } from '../admin/empty-states/empty-submissions';
+import { GigActionMenu } from './gig-action-menu';
+import { InvitationActionMenu } from '@/components/creator/invitation-action-menu';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -390,6 +393,7 @@ function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSu
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
 interface GigFooterProps {
+  gig: ModelsGigResponse;
   compensationValue?: number;
   gigCostValue?: number;
   formattedCompensation: string;
@@ -406,9 +410,11 @@ interface GigFooterProps {
   onApply: () => void;
   onRespond: ( status: 'accepted' | 'declined' ) => void;
   onOpenSubmission: () => void;
+  onSelectTab: ( tab: Tab ) => void;
 }
 
 function GigFooter( {
+  gig,
   compensationValue,
   gigCostValue,
   formattedCompensation,
@@ -425,10 +431,12 @@ function GigFooter( {
   onApply,
   onRespond,
   onOpenSubmission,
+  onSelectTab,
 }: GigFooterProps ) {
   const commonT = useTranslations( 'dashboard.creator.common' );
   const invitationActionsT = useTranslations( 'dashboard.creator.invitations.actions' );
   const invitationDialogsT = useTranslations( 'dashboard.creator.invitations.dialogs' );
+  const tc = useTranslations( 'dashboard.common' );
   return (
     <SheetFooter className="px-6 pb-6 pt-3 shrink-0 flex flex-col gap-3 border-t border-border/50">
       { ( compensationValue || gigCostValue ) && (
@@ -480,6 +488,45 @@ function GigFooter( {
             { isApplying ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{ commonT( 'applying' ) }</> : commonT( 'applyForGig' ) }
           </Button>
         ) }
+      </RoleGuard>
+
+      <RoleGuard allowedRoles={ [ 'admin' ] }>
+        <GigActionMenu
+          gig={ gig }
+          onViewGig={ ( _, tab ) => onSelectTab( tab ?? 'details' ) }
+          trigger={
+            <ButtonGroup className="self-start min-w-[240px]">
+              <Button variant="outline" size="sm" className="font-regular flex-1">
+                { tc( 'actions' ) }
+              </Button>
+              <Button variant="outline" size="sm" className="font-regular shrink-0">
+                <ChevronDown className="size-4" />
+              </Button>
+            </ButtonGroup>
+          }
+        />
+      </RoleGuard>
+
+      <RoleGuard allowedRoles={ [ 'creator' ] }>
+        { invitationId ? (
+          <InvitationActionMenu
+            invitation={ {
+              id: invitationId,
+              gig_id: gig.id,
+              status: invitationStatus,
+            } as any }
+            trigger={
+              <ButtonGroup className="self-start min-w-[240px]">
+                <Button variant="outline" size="sm" className="font-regular flex-1">
+                  { tc( 'actions' ) }
+                </Button>
+                <Button variant="outline" size="sm" className="font-regular shrink-0">
+                  <ChevronDown className="size-4" />
+                </Button>
+              </ButtonGroup>
+            }
+          />
+        ) : null }
       </RoleGuard>
     </SheetFooter>
   );
@@ -659,6 +706,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
           </AnimTabs>
 
           <GigFooter
+            gig={ gig }
             compensationValue={ compensationMoney?.value }
             gigCostValue={ gig.gig_cost?.value }
             formattedCompensation={ formattedCompensation }
@@ -675,6 +723,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
             onApply={ handleApply }
             onRespond={ handleRespond }
             onOpenSubmission={ () => setSubmissionSheetOpen( true ) }
+            onSelectTab={ setActiveTab }
           />
         </SheetContent>
       </Sheet>

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Ban, CheckCircle, ChevronDown, Download, Eye, FileCheck, MoreVertical, Send, Wallet } from "lucide-react";
+import { Ban, CheckCircle, ChevronDown, Download, FileCheck, Send, Wallet } from "lucide-react";
 import { SuperField } from "@/components/dashboard-ui/super-field";
+import { ReactNode } from "react";
 
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
@@ -17,11 +18,14 @@ import { useTranslations } from 'next-intl';
 
 interface InvoiceActionMenuProps {
   invoice: ModelsInvoiceResponse;
+  trigger?: ReactNode;
+  showViewButton?: boolean;
+  bareTrigger?: boolean;
 }
 
 type DialogKey = 'generatePayment' | 'issueInvoice' | 'sendInvoice' | 'invoicePaid' | 'cancelInvoice';
 
-export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
+export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, bareTrigger = false }: InvoiceActionMenuProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const [ viewOpen, setViewOpen ] = useState( false );
   const [ openDialog, setOpenDialog ] = useState<DialogKey | null>( null );
@@ -96,31 +100,45 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
     },
   ];
 
-  return (
-    <div className="flex justify-end">
-      <ButtonGroup>
-        <Button
-          variant="outline"
-          size="sm"
-          className="font-regular gap-1.5"
-          onClick={ () => setViewOpen( true ) }
-        >
-          { t( 'actions.view' ) }
-        </Button>
-        <ActionMenu
-          actions={ actions }
-          data={ invoice }
-          align="end"
-          label=""
-          trigger={
-            <Button variant="outline" size="icon-sm">
-              <ChevronDown className="h-4 w-4" />
-            </Button>
-          }
-        />
-      </ButtonGroup>
+  const triggerMenu = (
+    <ActionMenu
+      actions={ actions }
+      data={ invoice }
+      align="end"
+      label=""
+      trigger={
+        trigger || (
+          <Button variant="outline" size="icon-sm">
+            <ChevronDown className="h-4 w-4" />
+          </Button>
+        )
+      }
+    />
+  );
 
-      <InvoiceDetailsSheet invoice={ invoice } open={ viewOpen } onOpenChange={ setViewOpen } />
+  return (
+    <>
+      { bareTrigger ? (
+        triggerMenu
+      ) : (
+        <div className="flex justify-end">
+          <ButtonGroup>
+            { showViewButton && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="font-regular gap-1.5"
+                onClick={ () => setViewOpen( true ) }
+              >
+                { t( 'actions.view' ) }
+              </Button>
+            ) }
+            { triggerMenu }
+          </ButtonGroup>
+        </div>
+      ) }
+
+      { showViewButton && <InvoiceDetailsSheet invoice={ invoice } open={ viewOpen } onOpenChange={ setViewOpen } /> }
 
       <ConfirmDialog
         open={ openDialog === 'generatePayment' }
@@ -195,6 +213,6 @@ export function InvoiceActionMenu( { invoice }: InvoiceActionMenuProps ) {
         loadingText={ t( 'dialogs.cancelInvoice.loading' ) }
         variant="destructive"
       />
-    </div>
+    </>
   );
 }

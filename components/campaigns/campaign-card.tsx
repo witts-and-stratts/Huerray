@@ -18,10 +18,10 @@ import { StatusBadge } from './status-badge';
 
 import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/dashboard-ui/sheet';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 import { useRole } from '@/contexts/role-context';
 import { ModelsBrandResponse, ModelsCampaignResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
@@ -31,8 +31,9 @@ import { stripTags } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { AddToListIcon } from '@hugeicons/core-free-icons';
+import { Brain } from 'lucide-react';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { ApplicationCard } from './application-card';
+import { ApplicationDetailsSheet } from './application-details-sheet';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { SubmissionViewDialog } from './submission-view-dialog';
 import { RoleGuard } from '../auth/role-guard';
@@ -154,7 +155,6 @@ const CampaignModals = memo( ( { selectedItem, onSelectMatch }: {
   selectedItem: SelectedItem | null;
   onSelectMatch: ( item: SelectedItem | null ) => void;
 } ) => {
-  const tModals = useTranslations( 'dashboard.common' );
   const closeModals = useCallback( ( open: boolean ) => {
     if ( !open ) onSelectMatch( null );
   }, [ onSelectMatch ] );
@@ -165,14 +165,7 @@ const CampaignModals = memo( ( { selectedItem, onSelectMatch }: {
 
   return (
     <>
-      <Sheet open={ !!selectedApp } onOpenChange={ closeModals }>
-        <SheetContent className='w-[90%]! max-w-[420px]! overflow-y-auto'>
-          <SheetHeader className='mb-4'>
-            <SheetTitle className='font-normal text-primary font-primary'>{ tModals( 'cards.application' ) }</SheetTitle>
-          </SheetHeader>
-          { selectedApp && <ApplicationCard application={ selectedApp } /> }
-        </SheetContent>
-      </Sheet>
+      <ApplicationDetailsSheet application={ selectedApp } open={ !!selectedApp } onOpenChange={ closeModals } />
 
       <GigDetailsSheet
         gig={ ( selectedInvitation?.gig as unknown as ModelsGigResponse ) || null }
@@ -256,8 +249,14 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
         <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
           <div className="flex flex-col flex-1 min-w-0">
             <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
-              <CardTitle className='truncate'>
-                { campaign_name }
+              <CardTitle className='truncate flex items-center gap-2'>
+                <span className='truncate font-normal'>{ campaign_name }</span>
+                { campaign.content_type === UtilsContentType.ContentTypeAIGenerated && (
+                  <Badge variant="outline" className="gap-1.5 border-maroon-400 bg-maroon-50 text-maroon-500 shrink-0 scale-75 origin-left mt-0.5">
+                    <Brain className="size-3" />
+                    AI
+                  </Badge>
+                ) }
               </CardTitle>
             </Link>
             <CardDescription

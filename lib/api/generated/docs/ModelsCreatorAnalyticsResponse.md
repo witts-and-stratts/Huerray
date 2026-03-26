@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 **applications_accepted** | **number** |  | [optional] [default to undefined]
 **applications_sent** | **number** |  | [optional] [default to undefined]
 **approval_rate** | **number** |  | [optional] [default to undefined]
+**case_resolution_rate** | **number** |  | [optional] [default to undefined]
+**cases_reported** | **number** |  | [optional] [default to undefined]
+**cases_resolved** | **number** |  | [optional] [default to undefined]
 **gigs_completed** | **number** |  | [optional] [default to undefined]
 **invitations_accepted** | **number** |  | [optional] [default to undefined]
 **invitations_received** | **number** |  | [optional] [default to undefined]
@@ -25,6 +28,9 @@ const instance: ModelsCreatorAnalyticsResponse = {
     applications_accepted,
     applications_sent,
     approval_rate,
+    case_resolution_rate,
+    cases_reported,
+    cases_resolved,
     gigs_completed,
     invitations_accepted,
     invitations_received,

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **action_url** | **string** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **entity_id** | **string** |  | [optional] [default to undefined]
+**entity_type** | **string** |  | [optional] [default to undefined]
 **event_name** | **string** |  | [optional] [default to undefined]
 **event_type** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
@@ -26,6 +27,7 @@ const instance: ModelsNotificationResponse = {
     action_url,
     created_at,
     entity_id,
+    entity_type,
     event_name,
     event_type,
     id,

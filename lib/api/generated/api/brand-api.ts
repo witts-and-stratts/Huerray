@@ -87,6 +87,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [campaignId] 
          * @param {number} [compensationMax] 
          * @param {number} [compensationMin] 
+         * @param {BrandsGigsGetContentTypeEnum} [contentType] 
          * @param {string} [endDate] 
          * @param {boolean} [enforceSingleCreatorSubmission] 
          * @param {boolean} [enforceUniqueCreatorSubmission] 
@@ -101,7 +102,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsGigsGet: async (ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: BrandsGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: BrandsGigsGetStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        brandsGigsGet: async (ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, contentType?: BrandsGigsGetContentTypeEnum, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: BrandsGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: BrandsGigsGetStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/brands/gigs`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -136,6 +137,10 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
 
             if (compensationMin !== undefined) {
                 localVarQueryParameter['compensation_min'] = compensationMin;
+            }
+
+            if (contentType !== undefined) {
+                localVarQueryParameter['content_type'] = contentType;
             }
 
             if (endDate !== undefined) {
@@ -491,6 +496,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
          * @param {number} [ageMax] 
          * @param {number} [ageMin] 
          * @param {string} [city] 
+         * @param {BrandsSearchCreatorsGetContentTypeEnum} [contentType] 
          * @param {string} [country] 
          * @param {BrandsSearchCreatorsGetGenderEnum} [gender] 
          * @param {number} [limit] 
@@ -500,7 +506,7 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        brandsSearchCreatorsGet: async (ageMax?: number, ageMin?: number, city?: string, country?: string, gender?: BrandsSearchCreatorsGetGenderEnum, limit?: number, page?: number, preferredCategory?: string, q?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        brandsSearchCreatorsGet: async (ageMax?: number, ageMin?: number, city?: string, contentType?: BrandsSearchCreatorsGetContentTypeEnum, country?: string, gender?: BrandsSearchCreatorsGetGenderEnum, limit?: number, page?: number, preferredCategory?: string, q?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/brands/search/creators`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -523,6 +529,10 @@ export const BrandApiAxiosParamCreator = function (configuration?: Configuration
 
             if (city !== undefined) {
                 localVarQueryParameter['city'] = city;
+            }
+
+            if (contentType !== undefined) {
+                localVarQueryParameter['content_type'] = contentType;
             }
 
             if (country !== undefined) {
@@ -750,6 +760,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {string} [campaignId] 
          * @param {number} [compensationMax] 
          * @param {number} [compensationMin] 
+         * @param {BrandsGigsGetContentTypeEnum} [contentType] 
          * @param {string} [endDate] 
          * @param {boolean} [enforceSingleCreatorSubmission] 
          * @param {boolean} [enforceUniqueCreatorSubmission] 
@@ -764,8 +775,8 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsGigsGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: BrandsGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: BrandsGigsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigBrandResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.brandsGigsGet(ageMax, ageMin, brandId, campaignId, compensationMax, compensationMin, endDate, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, genderRequirement, gigCostMax, gigCostMin, limit, page, q, startDate, status, options);
+        async brandsGigsGet(ageMax?: number, ageMin?: number, brandId?: string, campaignId?: string, compensationMax?: number, compensationMin?: number, contentType?: BrandsGigsGetContentTypeEnum, endDate?: string, enforceSingleCreatorSubmission?: boolean, enforceUniqueCreatorSubmission?: boolean, genderRequirement?: BrandsGigsGetGenderRequirementEnum, gigCostMax?: number, gigCostMin?: number, limit?: number, page?: number, q?: string, startDate?: string, status?: BrandsGigsGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedGigBrandResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.brandsGigsGet(ageMax, ageMin, brandId, campaignId, compensationMax, compensationMin, contentType, endDate, enforceSingleCreatorSubmission, enforceUniqueCreatorSubmission, genderRequirement, gigCostMax, gigCostMin, limit, page, q, startDate, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsGigsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -871,6 +882,7 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {number} [ageMax] 
          * @param {number} [ageMin] 
          * @param {string} [city] 
+         * @param {BrandsSearchCreatorsGetContentTypeEnum} [contentType] 
          * @param {string} [country] 
          * @param {BrandsSearchCreatorsGetGenderEnum} [gender] 
          * @param {number} [limit] 
@@ -880,8 +892,8 @@ export const BrandApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async brandsSearchCreatorsGet(ageMax?: number, ageMin?: number, city?: string, country?: string, gender?: BrandsSearchCreatorsGetGenderEnum, limit?: number, page?: number, preferredCategory?: string, q?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedCreatorResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.brandsSearchCreatorsGet(ageMax, ageMin, city, country, gender, limit, page, preferredCategory, q, options);
+        async brandsSearchCreatorsGet(ageMax?: number, ageMin?: number, city?: string, contentType?: BrandsSearchCreatorsGetContentTypeEnum, country?: string, gender?: BrandsSearchCreatorsGetGenderEnum, limit?: number, page?: number, preferredCategory?: string, q?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedCreatorResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.brandsSearchCreatorsGet(ageMax, ageMin, city, contentType, country, gender, limit, page, preferredCategory, q, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BrandApi.brandsSearchCreatorsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -956,7 +968,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         brandsGigsGet(requestParameters: BrandApiBrandsGigsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedGigBrandResponse> {
-            return localVarFp.brandsGigsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(axios, basePath));
+            return localVarFp.brandsGigsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.contentType, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
          * Delete a brand profile
@@ -1026,7 +1038,7 @@ export const BrandApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         brandsSearchCreatorsGet(requestParameters: BrandApiBrandsSearchCreatorsGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedCreatorResponse> {
-            return localVarFp.brandsSearchCreatorsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.city, requestParameters.country, requestParameters.gender, requestParameters.limit, requestParameters.page, requestParameters.preferredCategory, requestParameters.q, options).then((request) => request(axios, basePath));
+            return localVarFp.brandsSearchCreatorsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.city, requestParameters.contentType, requestParameters.country, requestParameters.gender, requestParameters.limit, requestParameters.page, requestParameters.preferredCategory, requestParameters.q, options).then((request) => request(axios, basePath));
         },
         /**
          * Search brands with advanced filters (unrestricted for admins, restricted for others)
@@ -1066,6 +1078,8 @@ export interface BrandApiBrandsGigsGetRequest {
     readonly compensationMax?: number
 
     readonly compensationMin?: number
+
+    readonly contentType?: BrandsGigsGetContentTypeEnum
 
     readonly endDate?: string
 
@@ -1194,6 +1208,8 @@ export interface BrandApiBrandsSearchCreatorsGetRequest {
 
     readonly city?: string
 
+    readonly contentType?: BrandsSearchCreatorsGetContentTypeEnum
+
     readonly country?: string
 
     readonly gender?: BrandsSearchCreatorsGetGenderEnum
@@ -1279,7 +1295,7 @@ export class BrandApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public brandsGigsGet(requestParameters: BrandApiBrandsGigsGetRequest = {}, options?: RawAxiosRequestConfig) {
-        return BrandApiFp(this.configuration).brandsGigsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
+        return BrandApiFp(this.configuration).brandsGigsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.brandId, requestParameters.campaignId, requestParameters.compensationMax, requestParameters.compensationMin, requestParameters.contentType, requestParameters.endDate, requestParameters.enforceSingleCreatorSubmission, requestParameters.enforceUniqueCreatorSubmission, requestParameters.genderRequirement, requestParameters.gigCostMax, requestParameters.gigCostMin, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.startDate, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1356,7 +1372,7 @@ export class BrandApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public brandsSearchCreatorsGet(requestParameters: BrandApiBrandsSearchCreatorsGetRequest = {}, options?: RawAxiosRequestConfig) {
-        return BrandApiFp(this.configuration).brandsSearchCreatorsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.city, requestParameters.country, requestParameters.gender, requestParameters.limit, requestParameters.page, requestParameters.preferredCategory, requestParameters.q, options).then((request) => request(this.axios, this.basePath));
+        return BrandApiFp(this.configuration).brandsSearchCreatorsGet(requestParameters.ageMax, requestParameters.ageMin, requestParameters.city, requestParameters.contentType, requestParameters.country, requestParameters.gender, requestParameters.limit, requestParameters.page, requestParameters.preferredCategory, requestParameters.q, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1382,6 +1398,11 @@ export class BrandApi extends BaseAPI {
     }
 }
 
+export const BrandsGigsGetContentTypeEnum = {
+    ContentTypeHumanGenerated: 'human-generated',
+    ContentTypeAIGenerated: 'ai-generated'
+} as const;
+export type BrandsGigsGetContentTypeEnum = typeof BrandsGigsGetContentTypeEnum[keyof typeof BrandsGigsGetContentTypeEnum];
 export const BrandsGigsGetGenderRequirementEnum = {
     GenderMale: 'male',
     GenderFemale: 'female',
@@ -1464,9 +1485,8 @@ export const BrandsSearchCampaignsGetCategoryEnum = {
 } as const;
 export type BrandsSearchCampaignsGetCategoryEnum = typeof BrandsSearchCampaignsGetCategoryEnum[keyof typeof BrandsSearchCampaignsGetCategoryEnum];
 export const BrandsSearchCampaignsGetContentTypeEnum = {
-    ContentTypeVideoOption: 'video',
-    ContentTypeImageOption: 'image',
-    ContentTypePDFOption: 'pdf'
+    ContentTypeHumanGenerated: 'human-generated',
+    ContentTypeAIGenerated: 'ai-generated'
 } as const;
 export type BrandsSearchCampaignsGetContentTypeEnum = typeof BrandsSearchCampaignsGetContentTypeEnum[keyof typeof BrandsSearchCampaignsGetContentTypeEnum];
 export const BrandsSearchCampaignsGetStatusEnum = {
@@ -1492,6 +1512,11 @@ export const BrandsSearchCampaignsGetVideoFormatEnum = {
     VideoFormatWEBM: 'webm'
 } as const;
 export type BrandsSearchCampaignsGetVideoFormatEnum = typeof BrandsSearchCampaignsGetVideoFormatEnum[keyof typeof BrandsSearchCampaignsGetVideoFormatEnum];
+export const BrandsSearchCreatorsGetContentTypeEnum = {
+    ContentTypeHumanGenerated: 'human-generated',
+    ContentTypeAIGenerated: 'ai-generated'
+} as const;
+export type BrandsSearchCreatorsGetContentTypeEnum = typeof BrandsSearchCreatorsGetContentTypeEnum[keyof typeof BrandsSearchCreatorsGetContentTypeEnum];
 export const BrandsSearchCreatorsGetGenderEnum = {
     GenderMale: 'male',
     GenderFemale: 'female',

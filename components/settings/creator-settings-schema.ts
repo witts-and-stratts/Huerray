@@ -10,13 +10,36 @@ export type ReactFormApi<TData> = FormApi<TData, any, any, any, any, any, any, a
 export type CreatorSettingsMessages = {
   zipcodeRequired: string;
   applicationVideoRequired: string;
+  creatorMustBeAdult: string;
 };
+
+const MINIMUM_CREATOR_AGE = 18;
+
+function isAtLeastMinimumAge( dateOfBirth: string, minimumAge: number ) {
+  if ( !dateOfBirth ) return true;
+
+  const birthDate = new Date( dateOfBirth );
+  if ( Number.isNaN( birthDate.getTime() ) ) return false;
+
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthOffset = today.getMonth() - birthDate.getMonth();
+
+  if ( monthOffset < 0 || ( monthOffset === 0 && today.getDate() < birthDate.getDate() ) ) {
+    age--;
+  }
+
+  return age >= minimumAge;
+}
 
 export const getCreatorSettingsSchema = ( messages: CreatorSettingsMessages ) => z.object({
   // Profile
   bio: z.string(),
   preferredCategories: z.array(z.string()).optional(),
-  dateOfBirth: z.string(),
+  dateOfBirth: z.string().refine(
+    ( value ) => isAtLeastMinimumAge( value, MINIMUM_CREATOR_AGE ),
+    messages.creatorMustBeAdult
+  ),
   gender: z.string(),
   phoneNumber: z.string(),
   street: z.string(),
@@ -48,6 +71,7 @@ export const getCreatorSettingsSchema = ( messages: CreatorSettingsMessages ) =>
 export const creatorSettingsSchema = getCreatorSettingsSchema( {
   zipcodeRequired: 'Zipcode is required',
   applicationVideoRequired: 'Application video is required',
+  creatorMustBeAdult: 'Creators must be at least 18 years old',
 } );
 
 export type CreatorSettings = z.infer<typeof creatorSettingsSchema>;

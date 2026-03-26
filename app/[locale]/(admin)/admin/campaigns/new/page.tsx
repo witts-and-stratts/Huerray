@@ -6,6 +6,7 @@ import { CreateCampaignSchema } from '@/components/campaigns/schema';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { ModelsCreateCampaignRequest } from '@/lib/api/generated/models';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { useCreateCampaign } from '@/lib/api/hooks/campaigns';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -22,6 +23,7 @@ export default function NewCampaignPage() {
       campaign_name: values.campaign_name,
       description: values.description,
       category: values.category as any,
+      content_type: values.content_type as ModelsCreateCampaignRequest['content_type'],
       keywords: values.keywords.join( ', ' ),
       product_url: values.product_url || undefined,
       product_image: values.product_image ? { asset: values.product_image } : undefined,
@@ -113,7 +115,14 @@ export default function NewCampaignPage() {
           </div>
         </div>
       ) : (
-        <CampaignForm onSubmit={ handleSubmit } />
+        <CampaignForm
+          onSubmit={ handleSubmit }
+          initialValues={ {
+            content_type: campaignType === 'ai'
+              ? UtilsContentType.ContentTypeAIGenerated
+              : UtilsContentType.ContentTypeHumanGenerated
+          } }
+        />
       ) }
     </>
   );

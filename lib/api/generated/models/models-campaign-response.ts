@@ -27,6 +27,9 @@ import type { UtilsCampaignCategory } from './utils-campaign-category';
 import type { UtilsCampaignStatus } from './utils-campaign-status';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { UtilsContentType } from './utils-content-type';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsVideoFormat } from './utils-video-format';
 
 export interface ModelsCampaignResponse {
@@ -43,6 +46,7 @@ export interface ModelsCampaignResponse {
     'campaign_name'?: string;
     'campaign_status'?: UtilsCampaignStatus;
     'category'?: UtilsCampaignCategory;
+    'content_type'?: UtilsContentType;
     'created_at'?: string;
     'description'?: string;
     'donts'?: string;

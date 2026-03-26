@@ -21,6 +21,9 @@ import type { ModelsContentMedia } from './models-content-media';
 import type { UtilsCampaignCategory } from './utils-campaign-category';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { UtilsContentType } from './utils-content-type';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsVideoFormat } from './utils-video-format';
 
 export interface ModelsCreateCampaignRequest {
@@ -29,6 +32,7 @@ export interface ModelsCreateCampaignRequest {
     'campaign_images'?: Array<ModelsContentMedia>;
     'campaign_name': string;
     'category': UtilsCampaignCategory;
+    'content_type': UtilsContentType;
     'description': string;
     'donts'?: string;
     'dos'?: string;
