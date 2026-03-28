@@ -167,6 +167,7 @@ export * from './utils-gig-status';
 export * from './utils-invoice-status';
 export * from './utils-notification-entity-type';
 export * from './utils-payment-item-status';
+export * from './utils-payment-method';
 export * from './utils-payment-status';
 export * from './utils-priority';
 export * from './utils-video-format';

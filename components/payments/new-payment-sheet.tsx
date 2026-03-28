@@ -26,6 +26,7 @@ import {
   ModelsPaymentItemResponse,
   UtilsCurrency,
   UtilsPaymentItemStatus,
+  UtilsPaymentMethod,
 } from '@/lib/api/generated/models';
 import { type SelectOption } from '@/components/dashboard-ui/superfield/types';
 import { cn } from '@/lib/dashboard-utils';
@@ -61,6 +62,17 @@ const EMPTY_ADD_FORM = {
 };
 
 const CURRENCY_OPTIONS: SelectOption[] = Object.values( UtilsCurrency ).map( c => ( { value: c, label: c } ) );
+
+const PAYMENT_METHOD_LABELS: Record<string, string> = {
+  [ UtilsPaymentMethod.PaymentMethodBankTransfer ]: 'Bank Transfer',
+  [ UtilsPaymentMethod.PaymentMethodPayPal ]: 'PayPal',
+  [ UtilsPaymentMethod.PaymentMethodOther ]: 'Other',
+};
+
+const PAYMENT_METHOD_OPTIONS: SelectOption[] = Object.values( UtilsPaymentMethod ).map( v => ( {
+  value: v,
+  label: PAYMENT_METHOD_LABELS[ v ] || v,
+} ) );
 
 // ── Payment item row ──────────────────────────────────────────────────────────
 
@@ -584,11 +596,12 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
             { ( selectedItemIds.size > 0 || draftItems.length > 0 ) && (
               <>
                 <SuperField
-                  type="text"
+                  type="select"
                   label={ t( 'batchPayment.methodLabel' ) }
                   placeholder={ t( 'batchPayment.methodPlaceholder' ) }
+                  options={ PAYMENT_METHOD_OPTIONS }
                   value={ paymentMethod }
-                  onChange={ ( e ) => setPaymentMethod( e.target.value ) }
+                  onValueChange={ ( v ) => setPaymentMethod( v || '' ) }
                 />
                 <SuperField
                   type="textarea"

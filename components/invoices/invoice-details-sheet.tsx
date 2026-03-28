@@ -1,6 +1,6 @@
 'use client';
 
-import { MetaBadge, Row } from '@/components/admin/creators/details-sheet/creator-details-shared';
+import { Row } from '@/components/admin/creators/details-sheet/creator-details-shared';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Separator } from '@/components/dashboard-ui/separator';
 import {
@@ -11,17 +11,13 @@ import {
   SheetTitle,
 } from '@/components/dashboard-ui/sheet';
 import { Button } from '@/components/dashboard-ui/button';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/dashboard-ui/hover-card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
-import { DownloadIcon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { ModelsBrandResponse, ModelsInvoiceResponse } from '@/lib/api/generated/models';
 import { ModelsCampaignResponse } from '@/lib/api/generated/models/models-campaign-response';
 import { useBrand } from '@/lib/api/hooks/brands';
 import { useCampaign } from '@/lib/api/hooks/campaigns';
 import { useInvoice } from '@/lib/api/hooks/invoices';
-import { config } from '@/lib/config';
 import { getCountryFlag } from '@/lib/country-flags';
 import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
 import { imgpresets } from '@/lib/utils/imgproxy';
@@ -258,26 +254,21 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
               </div>
             </WrappedCard>
           ) }
-          { resolvedInvoice.pdf_path && (
-            <ButtonGroup className="w-full">
-              <Button variant="outline" className="flex-1 gap-2">
-                <a href={ `${ config.api.baseUrl }/${ resolvedInvoice.pdf_path.replace( /^\//, '' ) }` } download target="_blank" rel="noreferrer" className='flex gap-2'>
-                  <HugeiconsIcon icon={ DownloadIcon } size={ 16 } />
-                  { t( 'details.downloadInvoice' ) }
-                </a>
-              </Button>
-              <InvoiceActionMenu
-                invoice={ resolvedInvoice }
-                showViewButton={ false }
-                bareTrigger
-                trigger={
-                  <Button variant="outline" size="sm" className="font-regular shrink-0">
-                    <ChevronDown className="size-4" />
-                  </Button>
-                }
-              />
-            </ButtonGroup>
-          ) }
+          <InvoiceActionMenu
+            invoice={ resolvedInvoice }
+            showViewButton={ false }
+            bareTrigger
+            trigger={
+              <ButtonGroup className="self-start min-w-[240px]">
+                <Button variant="outline" size="sm" className="font-regular flex-1">
+                  { tc( 'actions' ) }
+                </Button>
+                <Button variant="outline" size="sm" className="font-regular shrink-0">
+                  <ChevronDown className="size-4" />
+                </Button>
+              </ButtonGroup>
+            }
+          />
         </div>
 
       </SheetContent>
