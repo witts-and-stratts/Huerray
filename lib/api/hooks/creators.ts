@@ -233,8 +233,25 @@ export function useUpdateCreatorProfileStatus() {
 
   return useMutation({
     mutationFn: async ({ id, creator_status, comments }: { id: string } & ModelsCreatorStatusUpdateRequest) => {
-      // @ts-ignore
       const response = await creatorsApi.creatorsIdProfileStatusPut({ id, request: { creator_status, comments } });
+      return response.data;
+    },
+    onSuccess: ( _, variables ) => {
+      queryClient.invalidateQueries({ queryKey: creatorsKeys.all });
+      queryClient.invalidateQueries({ queryKey: [ ...creatorsKeys.all, 'detail', variables.id ] });
+    },
+  });
+}
+
+/**
+ * Hook to update a creator's content type via PUT /creators/profile
+ */
+export function useUpdateCreatorContentType() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, content_type }: { id: string; content_type: string }) => {
+      const response = await apiClient.put(`/creators/${id}/profile`, { content_type });
       return response.data;
     },
     onSuccess: ( _, variables ) => {

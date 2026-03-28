@@ -740,6 +740,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
           open={ submissionSheetOpen }
           onOpenChange={ setSubmissionSheetOpen }
           gigId={ gig.id }
+          onSuccess={ () => setActiveTab( 'submissions' ) }
         />
       ) }
     </>

@@ -4,6 +4,7 @@ import { ActionMenu, MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
+import { SuperField } from "@/components/dashboard-ui/super-field";
 import { ModelsCampaignResponse } from "@/lib/api/generated";
 import { ModelsAdminCampaignApprovalRequestCampaignStatusEnum, ModelsCampaignStatusUpdateRequestCampaignStatusEnum, UtilsCampaignStatus } from "@/lib/api/generated/models";
 import { useAdminCampaignApproval, useDeleteCampaign, useReplicateCampaign, useSubmitCampaign, useUpdateCampaignStatus } from "@/lib/api/hooks/campaigns";
@@ -59,6 +60,7 @@ export function CampaignActionMenu( {
   const [ initialDecision, setInitialDecision ] = React.useState<'yes' | 'no'>( 'yes' );
   const [ invoiceDialogOpen, setInvoiceDialogOpen ] = React.useState( false );
   const [ deactivateDialogOpen, setDeactivateDialogOpen ] = React.useState( false );
+  const [ deactivateConfirmation, setDeactivateConfirmation ] = React.useState( '' );
   const [ reactivateDialogOpen, setReactivateDialogOpen ] = React.useState( false );
   const [ publishDialogOpen, setPublishDialogOpen ] = React.useState( false );
 
@@ -69,6 +71,12 @@ export function CampaignActionMenu( {
       setDeleteConfirmation( '' );
     }
   }, [ deleteDialogOpen ] );
+
+  React.useEffect( () => {
+    if ( !deactivateDialogOpen ) {
+      setDeactivateConfirmation( '' );
+    }
+  }, [ deactivateDialogOpen ] );
 
   const handleDelete = () => {
     if ( campaign.id && deleteConfirmation === campaign.campaign_name ) {
@@ -150,7 +158,7 @@ export function CampaignActionMenu( {
   };
 
   const handleDeactivate = () => {
-    if ( !campaign.id ) return;
+    if ( !campaign.id || deactivateConfirmation !== campaign.campaign_name ) return;
 
     updateCampaignStatus.mutate( {
       id: campaign.id,
@@ -177,7 +185,7 @@ export function CampaignActionMenu( {
     updateCampaignStatus.mutate( {
       id: campaign.id,
       request: {
-        campaign_status: ModelsCampaignStatusUpdateRequestCampaignStatusEnum.Running,
+        campaign_status: ModelsCampaignStatusUpdateRequestCampaignStatusEnum.Returned,
       }
     }, {
       onSuccess: () => {
@@ -306,12 +314,12 @@ export function CampaignActionMenu( {
       allowedRoles: [ 'brand' ],
       condition: () => !isCompleted && campaignStatus === UtilsCampaignStatus.CampaignStatusGigsApproved,
     },
-    {
-      label: t( 'reactivate' ),
-      action: () => setReactivateDialogOpen( true ),
-      allowedRoles: [ "admin" ],
-      condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusDeactivated,
-    },
+    // {
+    //   label: t( 'reactivate' ),
+    //   action: () => setReactivateDialogOpen( true ),
+    //   allowedRoles: [ "admin" ],
+    //   condition: () => campaignStatus === UtilsCampaignStatus.CampaignStatusDeactivated,
+    // },
     {
       label: t( 'createInvoice' ),
       action: () => setInvoiceDialogOpen( true ),
@@ -324,7 +332,7 @@ export function CampaignActionMenu( {
       className: "text-destructive focus:text-destructive",
       separator: true,
       allowedRoles: [ "admin" ],
-      condition: () => campaignStatus !== UtilsCampaignStatus.CampaignStatusDeactivated,
+      condition: () => campaignStatus !== UtilsCampaignStatus.CampaignStatusDeactivated && campaignStatus !== UtilsCampaignStatus.CampaignStatusDraft && campaignStatus !== UtilsCampaignStatus.CampaignStatusCompleted,
     },
     {
       label: t( 'delete' ),
@@ -457,9 +465,24 @@ export function CampaignActionMenu( {
         onConfirm={ handleDeactivate }
         isLoading={ updateCampaignStatus.isPending }
         loadingText={ t( 'deactivating' ) }
-      />
+        confirmDisabled={ deactivateConfirmation !== campaign.campaign_name }
+      >
+        <div className="grid gap-2">
+          <label htmlFor="deactivate-confirm-name" className="text-sm text-muted-foreground">
+            { t( 'deactivateCampaignConfirmLabel' ) }: <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>
+          </label>
+          <SuperField
+            id="deactivate-confirm-name"
+            type="text"
+            name="deactivate-confirm-name"
+            value={ deactivateConfirmation }
+            onChange={ ( e ) => setDeactivateConfirmation( e.target.value ) }
+            placeholder={ campaign.campaign_name }
+          />
+        </div>
+      </ConfirmDialog>
 
-      <ConfirmDialog
+      {/* <ConfirmDialog
         open={ reactivateDialogOpen }
         onOpenChange={ setReactivateDialogOpen }
         title={ t( 'reactivateCampaignTitle' ) }
@@ -468,7 +491,7 @@ export function CampaignActionMenu( {
         onConfirm={ handleReactivate }
         isLoading={ updateCampaignStatus.isPending }
         loadingText={ t( 'reactivating' ) }
-      />
+      /> */}
     </>
   );
 }

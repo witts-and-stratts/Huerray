@@ -42,6 +42,7 @@ import { GigEditSheet } from '../gigs/gig-edit-sheet';
 import { ModelsGigResponse } from '@/lib/api/generated';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
@@ -74,6 +75,7 @@ export function GigsTable( {
   const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const showLoading = useDelayedLoading( isLoading, 50 );
   const { view, setView } = usePersistedViewMode( 'gigs', defaultView );
+  const { pagination, setPagination } = usePersistedPagination( 'gigs' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
@@ -133,12 +135,14 @@ export function GigsTable( {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
       globalFilter,
+      pagination,
     },
   } );
 
@@ -153,9 +157,9 @@ export function GigsTable( {
         { error && <TableErrorState key="error" entity="gigs" message={ error.message } /> }
         { !isLoading && !error && (
           <div
-            className="bg-slate-50/50 grow relative overflow-auto flex-1 h-full"
+            className="bg-slate-50/50 grow relative flex flex-col min-h-0"
           >
-            <div className='flex flex-col w-full flex-1 h-full'>
+            <div className='flex-1 min-h-0 overflow-auto'>
               { !hideToolbar && ( data?.length ?? 0 ) > 0 && (
                 <GigsTableToolbar
                   table={ table }
@@ -169,24 +173,22 @@ export function GigsTable( {
                   setDateRange={ setDateRange }
                 />
               ) }
-              <div className='flex-1'>
-                <GigsView
+              <GigsView
+                table={ table }
+                view={ view }
+                onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
+                onCreateSubmission={ onCreateSubmission }
+                actionButtons={ actionButtons }
+              />
+            </div>
+            { !hidePagination && ( data?.length ?? 0 ) > 0 && (
+              <div className='px-2 md:px-5 shrink-0 border-t bg-slate-50/50'>
+                <DataTablePagination
                   table={ table }
-                  view={ view }
-                  onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
-                  onCreateSubmission={ onCreateSubmission }
-                  actionButtons={ actionButtons }
+                  pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
                 />
               </div>
-              { !hidePagination && ( data?.length ?? 0 ) > 0 && (
-                <div className='px-2 md:px-5 mt-auto'>
-                  <DataTablePagination
-                    table={ table }
-                    pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
-                  />
-                </div>
-              ) }
-            </div>
+            ) }
           </div>
         ) }
       </AnimatePresence>

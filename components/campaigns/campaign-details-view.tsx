@@ -234,7 +234,19 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
     { value: 'applications', label: <TabLabel label={ t( 'applications' ) } count={ applicationCount } /> },
     { value: 'submissions', label: <TabLabel label={ t( 'submissions' ) } count={ submissionCount } /> },
     { value: 'invitations', label: <TabLabel label={ t( 'invitations' ) } count={ invitationCount } /> },
-    { value: 'gigs', label: 'Gigs' },
+    {
+      value: 'gigs', label: status === 'gigs_approved'
+        ? (
+          <span className="flex items-center gap-1.5">
+            Gigs
+            <span className="relative flex size-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-500 opacity-75" />
+              <span className="relative inline-flex rounded-full size-2 bg-purple-500" />
+            </span>
+          </span>
+        )
+        : 'Gigs',
+    },
     ...( commentCount > 0 ? [ { value: 'comments', label: <TabLabel label={ t( 'comments' ) } count={ commentCount } /> } ] : [] ),
   ];
 

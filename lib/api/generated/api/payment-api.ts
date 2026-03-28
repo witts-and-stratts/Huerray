@@ -32,6 +32,8 @@ import type { ModelsStandardGenericResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardPaymentResponse } from '../models';
 // @ts-ignore
+import type { ModelsUpdatePaymentRequest } from '../models';
+// @ts-ignore
 import type { ModelsUpdatePaymentStatusRequest } from '../models';
 /**
  * PaymentApi - axios parameter creator
@@ -100,6 +102,45 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Admin updates a payment\'s details and adds or removes payment items
+         * @summary Update payment
+         * @param {string} id Payment ID
+         * @param {ModelsUpdatePaymentRequest} request Payment update request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentsIdPut: async (id: string, request: ModelsUpdatePaymentRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paymentsIdPut', 'id', id)
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('paymentsIdPut', 'request', request)
+            const localVarPath = `/payments/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -281,6 +322,20 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Admin updates a payment\'s details and adds or removes payment items
+         * @summary Update payment
+         * @param {string} id Payment ID
+         * @param {ModelsUpdatePaymentRequest} request Payment update request
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paymentsIdPut(id: string, request: ModelsUpdatePaymentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPaymentResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentsIdPut(id, request, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.paymentsIdPut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Admin updates payment status
          * @summary Update payment status
          * @param {string} id Payment ID
@@ -356,6 +411,16 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.paymentsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Admin updates a payment\'s details and adds or removes payment items
+         * @summary Update payment
+         * @param {PaymentApiPaymentsIdPutRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentsIdPut(requestParameters: PaymentApiPaymentsIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPaymentResponse> {
+            return localVarFp.paymentsIdPut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Admin updates payment status
          * @summary Update payment status
          * @param {PaymentApiPaymentsIdStatusPutRequest} requestParameters Request parameters.
@@ -406,6 +471,21 @@ export interface PaymentApiPaymentsIdGetRequest {
      * Payment ID
      */
     readonly id: string
+}
+
+/**
+ * Request parameters for paymentsIdPut operation in PaymentApi.
+ */
+export interface PaymentApiPaymentsIdPutRequest {
+    /**
+     * Payment ID
+     */
+    readonly id: string
+
+    /**
+     * Payment update request
+     */
+    readonly request: ModelsUpdatePaymentRequest
 }
 
 /**
@@ -476,6 +556,17 @@ export class PaymentApi extends BaseAPI {
      */
     public paymentsIdGet(requestParameters: PaymentApiPaymentsIdGetRequest, options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).paymentsIdGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Admin updates a payment\'s details and adds or removes payment items
+     * @summary Update payment
+     * @param {PaymentApiPaymentsIdPutRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public paymentsIdPut(requestParameters: PaymentApiPaymentsIdPutRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).paymentsIdPut(requestParameters.id, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

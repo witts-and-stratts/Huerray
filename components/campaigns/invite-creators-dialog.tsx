@@ -36,6 +36,7 @@ import { motion, variantProps, Variants } from 'motion/react';
 import { SuperField } from '../dashboard-ui/super-field';
 import { Badge } from '../dashboard-ui/badge';
 import { useTranslations } from 'next-intl';
+import { SentenceCase } from '../text-case';
 
 const statusConfig: Record<string, { label: string; color: string; icon: any; }> = {
   pending: {
@@ -103,11 +104,12 @@ function EmptyState( { hasSearchQuery, hasFilters }: { hasSearchQuery: boolean; 
 interface InviteCreatorsDialogProps {
   campaignId: string;
   gigId: string;
+  contentType?: string;
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
 }
 
-export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }: InviteCreatorsDialogProps ) {
+export function InviteCreatorsDialog( { campaignId, gigId, contentType, open, onOpenChange }: InviteCreatorsDialogProps ) {
   const t = useTranslations( 'dashboard.brand.inviteCreators' );
   const [ searchQuery, setSearchQuery ] = useState( '' );
   const [ selectedCreator, setSelectedCreator ] = useState<any>( null );
@@ -128,8 +130,9 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
       ageMin: gig?.age_min,
       ageMax: gig?.age_max,
       gender: gig?.gender_requirement as 'male' | 'female' | 'any' | undefined,
+      contentType: contentType as 'human-generated' | 'ai-generated' | undefined,
     },
-    { enabled: !isAdmin && open }
+    { enabled: !isAdmin && open && (!gigId || gigData !== undefined) }
   );
   const creators = brandCreatorsData?.data;
 
@@ -171,13 +174,16 @@ export function InviteCreatorsDialog( { campaignId, gigId, open, onOpenChange }:
       }
     }, {
       onSuccess: () => {
-        toast.success( t( 'invitationSent' ), { richColors: true } );
+        toast.success( t( 'invitationSent', { "name": creatorName } ), { richColors: true } );
         setLocalInvitedCreators( prev => new Set( prev ).add( creatorId ) );
         queryClient.invalidateQueries( { queryKey: campaignsKeys.invitations( campaignId ) } );
         queryClient.invalidateQueries( { queryKey: campaignsKeys.detail( campaignId ) } );
       },
       onError: ( error ) => {
-        toast.error( t( 'failedToInvite' ), { richColors: true } );
+        toast.error( t( 'failedToInvite' ), {
+          description: <SentenceCase>{ error?.response?.data?.error?.message || '' }</SentenceCase>,
+          richColors: true
+        } );
         console.error( error );
       }
     } );

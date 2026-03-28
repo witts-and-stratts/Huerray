@@ -19,6 +19,7 @@ import { CreatorStatusBadge } from "./creator-status-badge";
 import { imgpresets } from "@/lib/utils/imgproxy";
 import { useTranslations } from "next-intl";
 import { useMessage } from "@/lib/hooks/use-filter-label";
+import { AiContentBadge } from "@/components/dashboard-ui/ai-content-badge";
 
 interface CreatorCardProps {
   creator: ModelsCreatorResponse;
@@ -115,9 +116,12 @@ export function CreatorCard( { creator, onViewDetails, onApproveProfile, onRejec
       { /* Bottom content panel */ }
       <div className="absolute bottom-0 left-0 right-0 py-2 px-4 flex flex-col gap-1 bg-black/5 backdrop-blur m-2 rounded-xl border border-white/10">
         { /* Name */ }
-        <h3 className="text-white text-base font-primary font-normal leading-tight line-clamp-1 capitalize">
-          { fullName }
-        </h3>
+        <div className="flex items-center gap-1.5">
+          <h3 className="text-white text-base font-primary font-normal leading-tight line-clamp-1 capitalize">
+            { fullName }
+          </h3>
+          { creator.content_type === 'ai-generated' && <AiContentBadge className="mt-1 scale-70" variant="outline" /> }
+        </div>
 
         { /* Email */ }
         { email && (

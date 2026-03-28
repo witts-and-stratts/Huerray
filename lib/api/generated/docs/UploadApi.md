@@ -190,11 +190,9 @@ const configuration = new Configuration();
 const apiInstance = new UploadApi(configuration);
 
 let filename: string; //Document filename (default to undefined)
-let documentType: string; //Document type (generic or invoice) (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadsPreviewDocumentsFilenameGet(
-    filename,
-    documentType
+    filename
 );
 ```
 
@@ -203,7 +201,6 @@ const { status, data } = await apiInstance.uploadsPreviewDocumentsFilenameGet(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **filename** | [**string**] | Document filename | defaults to undefined|
-| **documentType** | [**string**] | Document type (generic or invoice) | (optional) defaults to undefined|
 
 
 ### Return type

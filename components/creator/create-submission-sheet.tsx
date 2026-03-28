@@ -138,12 +138,14 @@ interface CreateSubmissionSheetProps {
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
   gigId: string;
+  onSuccess?: () => void;
 }
 
 export function CreateSubmissionSheet( {
   open,
   onOpenChange,
   gigId,
+  onSuccess,
 }: CreateSubmissionSheetProps ) {
   const t = useTranslations( 'dashboard.creator.submissions' );
   const submissionSchema = getSubmissionSchema( t );
@@ -185,6 +187,7 @@ export function CreateSubmissionSheet( {
             onOpenChange( false );
             form.reset();
             setVideoData( null );
+            onSuccess?.();
           },
           onError: ( error ) => {
             toast.error( t( 'error' ), {

@@ -16,12 +16,12 @@ export default function InvoicesPage() {
   }, [ data ] );
 
   return (
-    <>
+    <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
       <SubHeader
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       />
       <InvoicesTable data={ invoices } isLoading={ isLoading } />
-    </>
+    </div>
   );
 }

@@ -4,8 +4,63 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**paymentItemsIdDelete**](#paymentitemsiddelete) | **DELETE** /payment-items/{id} | Delete payment item by ID|
 |[**paymentItemsPost**](#paymentitemspost) | **POST** /payment-items | Create payment item|
 |[**paymentItemsSearchGet**](#paymentitemssearchget) | **GET** /payment-items/search | Search payment items|
+
+# **paymentItemsIdDelete**
+> ModelsStandardGenericResponse paymentItemsIdDelete()
+
+Admin deletes a payment item; recalculates the parent payment total if linked
+
+### Example
+
+```typescript
+import {
+    PaymentItemsApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new PaymentItemsApi(configuration);
+
+let id: string; //Payment Item ID (default to undefined)
+
+const { status, data } = await apiInstance.paymentItemsIdDelete(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Payment Item ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGenericResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment item deleted successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Payment item not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **paymentItemsPost**
 > ModelsStandardPaymentItemResponse paymentItemsPost(request)

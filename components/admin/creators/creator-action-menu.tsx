@@ -7,14 +7,15 @@ import {
 } from "@/components/dashboard-ui/action-menu";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { SuperField } from "@/components/dashboard-ui/super-field";
-import { useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
-import { ModelsCreatorResponse, UtilsCreatorStatus } from "@/lib/api/generated/models";
+import { useUpdateCreatorContentType, useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
+import { ModelsCreatorResponse, UtilsContentType, UtilsCreatorStatus } from "@/lib/api/generated/models";
 import { Copy } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
 type CreatorActionStatus = "approved" | "rejected" | "returned";
+type CreatorProfileType = "ai-generated" | "human-generated";
 
 interface CreatorActionMenuProps {
   creator: ModelsCreatorResponse;
@@ -29,10 +30,13 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
   const updateStatus = useUpdateCreatorProfileStatus();
+  const updateContentType = useUpdateCreatorContentType();
   const [ pendingAction, setPendingAction ] = useState<{
     status: CreatorActionStatus;
     comments: string;
   } | null>( null );
+  const [ pendingProfileType, setPendingProfileType ] = useState<CreatorProfileType | null>( null );
+  const [ firstNameInput, setFirstNameInput ] = useState( "" );
 
   const handleStatusAction = ( status: CreatorActionStatus ) => {
     if ( !creator.id ) {
@@ -98,6 +102,38 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
     toast.success( t( 'creatorStatus.idCopied' ) );
   };
 
+  const handleProfileTypeAction = ( contentType: CreatorProfileType ) => {
+    if ( !creator.id ) {
+      toast.error( t( 'creatorStatus.missingId' ) );
+      return;
+    }
+    setFirstNameInput( "" );
+    setPendingProfileType( contentType );
+  };
+
+  const handleConfirmProfileType = () => {
+    if ( !creator.id || !pendingProfileType ) return;
+
+    updateContentType.mutate(
+      { id: creator.id, content_type: pendingProfileType },
+      {
+        onSuccess: () => {
+          const creatorName = creator.first_name || tc( 'cards.creatorFallback' );
+          setPendingProfileType( null );
+          toast.success(
+            pendingProfileType === UtilsContentType.ContentTypeAIGenerated
+              ? t( 'creatorStatus.madeAiToast', { name: creatorName } )
+              : t( 'creatorStatus.madeHumanToast', { name: creatorName } )
+          );
+        },
+        onError: () => {
+          setPendingProfileType( null );
+          toast.error( t( 'creatorStatus.errorToast' ) );
+        },
+      }
+    );
+  };
+
   const actions: MenuAction<ModelsCreatorResponse>[] = [
     {
       label: t( 'creatorStatus.copyId' ),
@@ -126,6 +162,18 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
       action: () => handleStatusAction( "returned" ),
       allowedRoles: [ 'admin' ],
       condition: ( creator: ModelsCreatorResponse ) => creator.creator_status === UtilsCreatorStatus.CreatorStatusPendingApproval,
+    },
+    {
+      label: t( 'creatorStatus.makeAiCreator' ),
+      action: () => handleProfileTypeAction( 'ai-generated' ),
+      allowedRoles: [ 'admin' ],
+      condition: ( creator: ModelsCreatorResponse ) => creator.content_type !== UtilsContentType.ContentTypeAIGenerated,
+    },
+    {
+      label: t( 'creatorStatus.makeHumanCreator' ),
+      action: () => handleProfileTypeAction( 'human-generated' ),
+      allowedRoles: [ 'admin' ],
+      condition: ( creator: ModelsCreatorResponse ) => creator.content_type !== UtilsContentType.ContentTypeHumanGenerated,
     },
     {
       label: t( 'creatorStatus.deleteCreator' ),
@@ -190,6 +238,41 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
             setPendingAction( current => current ? { ...current, comments: e.target.value } : current );
           } }
           fieldClassName="min-h-40"
+        />
+      </ConfirmDialog>
+      <ConfirmDialog
+        open={ !!pendingProfileType }
+        onOpenChange={ ( open ) => {
+          if ( !open ) setPendingProfileType( null );
+        } }
+        title={
+          pendingProfileType === 'ai-generated'
+            ? t( 'creatorStatus.confirmMakeAiTitle' )
+            : t( 'creatorStatus.confirmMakeHumanTitle' )
+        }
+        description={
+          pendingProfileType === 'ai-generated'
+            ? t( 'creatorStatus.confirmMakeAiDesc', { name: creator.first_name || t( 'creatorStatus.thisCreator' ) } )
+            : t( 'creatorStatus.confirmMakeHumanDesc', { name: creator.first_name || t( 'creatorStatus.thisCreator' ) } )
+        }
+        confirmLabel={
+          pendingProfileType === 'ai-generated'
+            ? t( 'creatorStatus.makeAiCreator' )
+            : t( 'creatorStatus.makeHumanCreator' )
+        }
+        variant="default"
+        onConfirm={ handleConfirmProfileType }
+        isLoading={ updateContentType.isPending }
+        loadingText={ t( 'creatorStatus.updatingProfileType' ) }
+        confirmDisabled={ firstNameInput.trim() !== ( creator.first_name || '' ).trim() }
+        className="w-[560px]"
+      >
+        <SuperField
+          type="text"
+          label={ t( 'creatorStatus.confirmFirstNameLabel', { name: creator.first_name || t( 'creatorStatus.thisCreator' ) } ) }
+          placeholder={ t( 'creatorStatus.confirmFirstNamePlaceholder' ) }
+          value={ firstNameInput }
+          onChange={ ( e ) => setFirstNameInput( e.target.value ) }
         />
       </ConfirmDialog>
     </>

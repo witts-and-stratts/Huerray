@@ -408,6 +408,23 @@
   "invoicesPage": {
     "title": "Invoices",
     "description": "View and manage all invoices across the platform.",
+    "createInvoice": {
+      "trigger": "New Invoice",
+      "title": "Create Invoice",
+      "description": "Create a new invoice for a completed campaign.",
+      "confirm": "Create Invoice",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "campaignLabel": "Campaign",
+      "campaignPlaceholder": "Select a completed campaign...",
+      "campaignLoading": "Loading completed campaigns...",
+      "dueDateLabel": "Due date",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Optional notes for this invoice...",
+      "success": "Invoice created successfully",
+      "error": "Failed to create invoice",
+      "errorDescription": "Please try again later."
+    },
     "toolbar": {
       "search": "Search invoices..."
     },
@@ -416,7 +433,7 @@
       "brand": "Brand",
       "campaign": "Campaign",
       "issued": "Issued",
-      "paid": "Paid?",
+      "paid": "Status",
       "amount": "Amount",
       "actions": "Actions"
     },
@@ -503,7 +520,7 @@
     "newBatchPayment": {
       "title": "New batch payment",
       "description": "Select a creator and their pending payment items.",
-      "triggerButton": "New batch payment",
+      "triggerButton": "New Payment",
       "creatorLabel": "Creator",
       "creatorPlaceholder": "Select a creator...",
       "pendingItems": "Pending items",
@@ -705,7 +722,18 @@
     "copyId": "Copy ID",
     "thisCreator": "This creator",
     "deleteCreator": "Delete creator",
-    "return": "Return"
+    "return": "Return",
+    "makeAiCreator": "Make AI Creator",
+    "makeHumanCreator": "Make Human Creator",
+    "confirmMakeAiTitle": "Make AI Creator?",
+    "confirmMakeAiDesc": "{name} will be marked as an AI-generated content creator.",
+    "confirmMakeHumanTitle": "Make Human Creator?",
+    "confirmMakeHumanDesc": "{name} will be marked as a human-generated content creator.",
+    "confirmFirstNameLabel": "Type \"{name}\" to confirm",
+    "confirmFirstNamePlaceholder": "Enter first name",
+    "updatingProfileType": "Updating...",
+    "madeAiToast": "{name} is now an AI creator",
+    "madeHumanToast": "{name} is now a human creator"
   },
   "userDetails": {
     "description": "Detailed information about user",
@@ -776,6 +804,7 @@
     "size": "Size",
     "userType": "User Type",
     "age": "Age",
+    "contentType": "Content Type",
     "min": "Min",
     "max": "Max",
     "apply": "Apply",
@@ -1061,5 +1090,75 @@
   "creatorSheetHeader": {
     "detailedInformationAboutCreator": "Detailed information about creator",
     "yo": "y/o"
+  },
+  "casesPage": {
+    "title": "Support Cases",
+    "description": "View and manage all support cases across the platform.",
+    "empty": "No cases found.",
+    "tabs": {
+      "all": "All",
+      "open": "Open",
+      "inProgress": "In Progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search cases...",
+      "status": "Status",
+      "priority": "Priority"
+    },
+    "columns": {
+      "caseNumber": "Case #",
+      "caseNumberCopied": "Case number copied",
+      "title": "Title",
+      "status": "Status",
+      "priority": "Priority",
+      "reporter": "Reporter",
+      "entity": "Entity",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "actionMenu": {
+      "viewDetails": "View details",
+      "copyId": "Copy ID",
+      "markInProgress": "Mark as In Progress",
+      "markResolved": "Mark as Resolved",
+      "reopen": "Reopen",
+      "close": "Close case",
+      "toasts": {
+        "idCopied": "Case ID copied",
+        "missingId": "Missing case ID",
+        "statusUpdated": "Case status updated",
+        "statusUpdateError": "Failed to update case status"
+      }
+    },
+    "details": {
+      "tab": "Details",
+      "description": "Detailed information about case",
+      "untitled": "Untitled Case",
+      "descriptionLabel": "Description",
+      "caseInfo": "Case Information",
+      "systemInfo": "System Details",
+      "status": "Status",
+      "priority": "Priority",
+      "reporter": "Reporter",
+      "assignee": "Assignee",
+      "relatedEntity": "Related Entity",
+      "caseId": "Case ID",
+      "idCopied": "Case ID copied",
+      "created": "Created",
+      "updated": "Last Updated",
+      "resolved": "Resolved At",
+      "unknown": "Unknown",
+      "unassigned": "Unassigned",
+      "na": "N/A"
+    },
+    "messages": {
+      "tab": "Messages",
+      "empty": "No messages yet. Start the conversation.",
+      "placeholder": "Type a message... (Enter to send)",
+      "sent": "Message sent",
+      "sendError": "Failed to send message"
+    }
   }
 }

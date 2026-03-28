@@ -145,6 +145,23 @@ export const getColumns = ( { onViewDetails, t }: GetColumnsProps & { t: any; } 
     },
   },
   {
+    accessorKey: "content_type",
+    header: ( { column } ) => (
+      <THead column={ column } title={ t( 'filters.contentType' ) } />
+    ),
+    cell: ( { row } ) => {
+      const value = row.getValue( "content_type" ) as string | undefined;
+      return value ? <span className="capitalize">{ value.replace( /-/g, ' ' ) }</span> : null;
+    },
+    filterFn: ( row, id, filterValue ) => {
+      if ( filterValue === undefined ) return true;
+      if ( !Array.isArray( filterValue ) ) return true;
+      if ( filterValue.length === 0 ) return false;
+      const rowValue = row.getValue( id ) as string;
+      return filterValue.includes( rowValue );
+    }
+  },
+  {
     accessorKey: "creator_status",
     header: ( { column } ) => (
       <THead column={ column } title={ t( 'filters.status' ) } />

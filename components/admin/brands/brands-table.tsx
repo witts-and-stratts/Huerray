@@ -23,6 +23,7 @@ import { BrandsTableToolbar } from './brands-table-toolbar';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { BrandDetailsSheet } from './brand-details-sheet';
 import { useTranslations } from 'next-intl';
 
@@ -56,6 +57,7 @@ export function BrandsTable( {
 }: BrandsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
   const { view, setView } = usePersistedViewMode( 'brands', 'cards' );
+  const { pagination, setPagination } = usePersistedPagination( 'brands' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
@@ -120,12 +122,14 @@ export function BrandsTable( {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
       globalFilter,
+      pagination,
     },
   } );
 
@@ -139,11 +143,13 @@ export function BrandsTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="flex flex-col bg-slate-50/50 grow relative overflow-auto"
+          className="flex flex-col bg-slate-50/50 grow relative min-h-0"
         >
-          <BrandsTableToolbar table={ table } view={ view } setView={ setView } statuses={ statuses } countries={ countries } sizes={ sizes } />
-          <BrandsView table={ table } view={ view } onViewDetails={ ( brand ) => { setSelectedBrand( brand ); setIsSheetOpen( true ); } } />
-          <div className="px-3 mt-auto">
+          <div className="flex-1 min-h-0 overflow-auto">
+            <BrandsTableToolbar table={ table } view={ view } setView={ setView } statuses={ statuses } countries={ countries } sizes={ sizes } />
+            <BrandsView table={ table } view={ view } onViewDetails={ ( brand ) => { setSelectedBrand( brand ); setIsSheetOpen( true ); } } />
+          </div>
+          <div className="px-3 shrink-0 border-t bg-slate-50/50">
             <DataTablePagination table={ table } />
           </div>
           <BrandDetailsSheet

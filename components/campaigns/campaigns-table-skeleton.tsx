@@ -31,7 +31,7 @@ export function CampaignsTableSkeleton( {
       initial={ { opacity: 0 } }
       animate={ { opacity: 1 } }
       transition={ { duration: 0.2 } }
-      className={ cn( "w-full space-y-4 px-5 pt-4", className ) }
+      className={ cn( "w-full space-y-2 md:space-y-4 px-2 md:px-5 py-2 md:py-4", className ) }
     >
       { /* Toolbar */ }
       <div className="flex items-center justify-between gap-3">

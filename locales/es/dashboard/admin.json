@@ -416,7 +416,7 @@
       "brand": "Marca",
       "campaign": "Campaña",
       "issued": "Publicado",
-      "paid": "¿Pagado?",
+      "paid": "Estado",
       "amount": "Importe",
       "actions": "Acciones"
     },
@@ -503,7 +503,7 @@
     "newBatchPayment": {
       "title": "Pago de un nuevo lote",
       "description": "Seleccione un creador y sus elementos de pago pendientes.",
-      "triggerButton": "Pago de un nuevo lote",
+      "triggerButton": "Nuevo pago",
       "creatorLabel": "Creador",
       "creatorPlaceholder": "Seleccione un creador...",
       "pendingItems": "Asuntos pendientes",
@@ -705,7 +705,18 @@
     "copyId": "Copiar ID",
     "thisCreator": "Este creador",
     "deleteCreator": "Borrar creador",
-    "return": "Devolución"
+    "return": "Devolución",
+    "makeAiCreator": "Creador de IA",
+    "makeHumanCreator": "Hacer Creador Humano",
+    "confirmMakeAiTitle": "¿Creador de IA?",
+    "confirmMakeAiDesc": "{name} será marcado como creador de contenidos generados por IA.",
+    "confirmMakeHumanTitle": "¿Hacer Creador Humano?",
+    "confirmMakeHumanDesc": "{name} será marcado como creador de contenidos generados por humanos.",
+    "confirmFirstNameLabel": "Escribe \"{name}\" para confirmar",
+    "confirmFirstNamePlaceholder": "Introduzca el nombre",
+    "updatingProfileType": "Actualizando...",
+    "madeAiToast": "{name} es ahora un creador de IA",
+    "madeHumanToast": "{name} es ahora un creador humano"
   },
   "userDetails": {
     "description": "Información detallada sobre el usuario",
@@ -776,6 +787,7 @@
     "size": "Talla",
     "userType": "Tipo de usuario",
     "age": "Edad",
+    "contentType": "Tipo de contenido",
     "min": "Min",
     "max": "Max",
     "apply": "Solicitar",
@@ -1061,5 +1073,75 @@
   "creatorSheetHeader": {
     "detailedInformationAboutCreator": "Información detallada sobre el creador",
     "yo": "y/o"
+  },
+  "casesPage": {
+    "title": "Casos de apoyo",
+    "description": "Visualice y gestione todos los casos de asistencia en toda la plataforma.",
+    "empty": "No se han encontrado casos.",
+    "tabs": {
+      "all": "Todos",
+      "open": "Abrir",
+      "inProgress": "En curso",
+      "resolved": "Resuelto",
+      "closed": "Cerrado"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Buscar casos...",
+      "status": "Estado",
+      "priority": "Prioridad"
+    },
+    "columns": {
+      "caseNumber": "Caso #",
+      "caseNumberCopied": "Número de caso copiado",
+      "title": "Título",
+      "status": "Estado",
+      "priority": "Prioridad",
+      "reporter": "Reportero",
+      "entity": "Entidad",
+      "created": "Creado",
+      "actions": "Acciones"
+    },
+    "actionMenu": {
+      "viewDetails": "Ver detalles",
+      "copyId": "Copiar ID",
+      "markInProgress": "Marcar como En curso",
+      "markResolved": "Marcar como resuelto",
+      "reopen": "Vuelva a abrir",
+      "close": "Cerrar caso",
+      "toasts": {
+        "idCopied": "Caso ID copiado",
+        "missingId": "Falta la identificación del caso",
+        "statusUpdated": "Estado del caso actualizado",
+        "statusUpdateError": "Error al actualizar el estado del caso"
+      }
+    },
+    "details": {
+      "tab": "Detalles",
+      "description": "Información detallada sobre el caso",
+      "untitled": "Caso sin título",
+      "descriptionLabel": "Descripción",
+      "caseInfo": "Información sobre el caso",
+      "systemInfo": "Detalles del sistema",
+      "status": "Estado",
+      "priority": "Prioridad",
+      "reporter": "Reportero",
+      "assignee": "Cesionario",
+      "relatedEntity": "Entidad relacionada",
+      "caseId": "Identificación del caso",
+      "idCopied": "Caso ID copiado",
+      "created": "Creado",
+      "updated": "Última actualización",
+      "resolved": "Resuelto en",
+      "unknown": "Desconocido",
+      "unassigned": "Sin asignar",
+      "na": "N/A"
+    },
+    "messages": {
+      "tab": "Mensajes",
+      "empty": "Aún no hay mensajes. Inicia la conversación.",
+      "placeholder": "Escriba un mensaje... (Intro para enviar)",
+      "sent": "Mensaje enviado",
+      "sendError": "Error al enviar el mensaje"
+    }
   }
 }

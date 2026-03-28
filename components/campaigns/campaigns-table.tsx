@@ -9,6 +9,7 @@ import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -63,6 +64,7 @@ export function CampaignsTable( {
 }: CampaignsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 50 );
   const { view, setView } = usePersistedViewMode( 'campaigns', 'table' );
+  const { pagination, setPagination } = usePersistedPagination( 'campaigns' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
@@ -112,22 +114,24 @@ export function CampaignsTable( {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
       globalFilter,
+      pagination,
     },
   } );
 
   return (
-    <div className="grow relative overflow-auto bg-slate-50/50">
+    <div className="grow relative flex flex-col min-h-0 bg-slate-50/50">
       <AnimatePresence>
         { ( showLoading || isLoading ) && (
           <motion.div
             key="skeleton"
-            className="absolute inset-0 z-10 bg-slate-50/50"
+            className="absolute inset-0 z-30 bg-slate-50/50"
             exit={ { opacity: 0 } }
             transition={ { duration: 0.3 } }
           >
@@ -137,29 +141,33 @@ export function CampaignsTable( {
       </AnimatePresence>
       { error && <TableErrorState entity="campaigns" message={ error.message } /> }
       { !isLoading && !error && (
-        <div className="space-y-4">
+        <>
+          <div className="flex-1 min-h-0 overflow-auto">
+            <div className="space-y-4">
+              { campaigns.length > 0 && (
+                <CampaignsTableToolbar
+                  table={ table }
+                  statuses={ statuses }
+                  view={ view }
+                  setView={ setView }
+                  dateFilterType={ dateFilterType }
+                  setDateFilterType={ setDateFilterType }
+                  dateRange={ dateRange }
+                  setDateRange={ setDateRange }
+                />
+              ) }
+              <CampaignsView table={ table } view={ view } />
+            </div>
+          </div>
           { campaigns.length > 0 && (
-            <CampaignsTableToolbar
-              table={ table }
-              statuses={ statuses }
-              view={ view }
-              setView={ setView }
-              dateFilterType={ dateFilterType }
-              setDateFilterType={ setDateFilterType }
-              dateRange={ dateRange }
-              setDateRange={ setDateRange }
-            />
-          ) }
-          <CampaignsView table={ table } view={ view } />
-          { campaigns.length > 0 && (
-            <div className="px-4">
+            <div className="px-2 md:px-4 shrink-0 border-t bg-slate-50/50">
               <DataTablePagination
                 table={ table }
                 pageSizeOptions={ DEFAULT_PAGE }
               />
             </div>
           ) }
-        </div>
+        </>
       ) }
     </div>
   );

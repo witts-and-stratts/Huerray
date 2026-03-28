@@ -19,7 +19,7 @@ export function CardGridSkeleton( {
       initial={ { opacity: 0 } }
       animate={ { opacity: 1 } }
       transition={ { duration: 0.2 } }
-      className="w-full space-y-4 px-5 py-5"
+      className="w-full space-y-4 px-2 md:px-5 py-2 md:py-5"
     >
       <div className="flex items-center justify-between">
         <Skeleton className="h-10 w-[600px] max-w-full" />

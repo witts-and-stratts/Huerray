@@ -9,10 +9,12 @@ import { useTranslations } from 'next-intl';
 
 interface InviteCreatorsCardProps {
   campaignId: string;
+  contentType?: string;
 }
 
-export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
+export function InviteCreatorsCard( { campaignId, contentType }: InviteCreatorsCardProps ) {
   const t = useTranslations( 'dashboard.brand.inviteCreators' );
+  const findCreatorsLabel = t.has( 'findCreators' ) ? t( 'findCreators' ) : 'Find Creators';
   const [ sheetOpen, setSheetOpen ] = useState( false );
   const [ selectionOpen, setSelectionOpen ] = useState( false );
   const [ selectedGigId, setSelectedGigId ] = useState<string>( '' );
@@ -45,7 +47,7 @@ export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
             variant="secondary"
             className="w-full font-medium"
           >
-            { t( 'findCreators' ) }
+            { findCreatorsLabel }
           </Button>
         </div>
 
@@ -64,6 +66,7 @@ export function InviteCreatorsCard( { campaignId }: InviteCreatorsCardProps ) {
       <InviteCreatorsDialog
         campaignId={ campaignId }
         gigId={ selectedGigId }
+        contentType={ contentType }
         open={ sheetOpen }
         onOpenChange={ setSheetOpen }
       />

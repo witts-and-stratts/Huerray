@@ -6,6 +6,7 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 |[**paymentsIdDelete**](#paymentsiddelete) | **DELETE** /payments/{id} | Delete payment by ID|
 |[**paymentsIdGet**](#paymentsidget) | **GET** /payments/{id} | Get payment by ID|
+|[**paymentsIdPut**](#paymentsidput) | **PUT** /payments/{id} | Update payment|
 |[**paymentsIdStatusPut**](#paymentsidstatusput) | **PUT** /payments/{id}/status | Update payment status|
 |[**paymentsPost**](#paymentspost) | **POST** /payments | Create payment batch|
 |[**paymentsSearchGet**](#paymentssearchget) | **GET** /payments/search | Search payments|
@@ -114,6 +115,64 @@ No authorization required
 |**200** | Payment retrieved successfully |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **paymentsIdPut**
+> ModelsStandardPaymentResponse paymentsIdPut(request)
+
+Admin updates a payment\'s details and adds or removes payment items
+
+### Example
+
+```typescript
+import {
+    PaymentApi,
+    Configuration,
+    ModelsUpdatePaymentRequest
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new PaymentApi(configuration);
+
+let id: string; //Payment ID (default to undefined)
+let request: ModelsUpdatePaymentRequest; //Payment update request
+
+const { status, data } = await apiInstance.paymentsIdPut(
+    id,
+    request
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **request** | **ModelsUpdatePaymentRequest**| Payment update request | |
+| **id** | [**string**] | Payment ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardPaymentResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment updated successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Payment not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

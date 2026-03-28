@@ -24,6 +24,13 @@ export function InvitationsView() {
     setSheetOpen( true );
   };
 
+  const selectedGigForSheet = selectedGig ? {
+    ...selectedGig.gig,
+    brand: selectedGig.gig?.brand || ( selectedGig as ModelsGigInvitationResponse & { brand?: unknown; } ).brand,
+    brand_name: selectedGig.gig?.brand_name || ( selectedGig as ModelsGigInvitationResponse & { brand?: { company_name?: string; }; } ).brand?.company_name,
+    brand_logo_url: selectedGig.gig?.brand_logo_url || ( selectedGig as ModelsGigInvitationResponse & { brand?: { profile_photo?: { asset?: string; }; }; } ).brand?.profile_photo?.asset,
+  } : null;
+
   if ( isLoading ) {
     return <InvitationsSkeleton />;
   }
@@ -74,7 +81,7 @@ export function InvitationsView() {
 
 
       <GigDetailsSheet
-        gig={ selectedGig?.gig as any }
+        gig={ selectedGigForSheet as any }
         open={ sheetOpen }
         onOpenChange={ setSheetOpen }
         invitationId={ selectedGig?.id }

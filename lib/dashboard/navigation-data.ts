@@ -17,6 +17,7 @@ import {
   Store01Icon,
   AiUserIcon,
   CreditCardAcceptIcon,
+  CustomerSupportIcon,
 } from "@hugeicons/core-free-icons";
 import { IconReport } from "@tabler/icons-react";
 import type { SidebarNavigationData } from "@/components/app-sidebar";
@@ -137,11 +138,11 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
         },
         {
           title: withFallback( t, "creator.availableGigs", "Available Gigs" ),
-          url: "/creator/gigs",
+          url: "/creator/gigs?tab=available",
         },
         {
           title: withFallback( t, "creator.activeGigs", "Active Gigs" ),
-          url: "/creator/gigs/active",
+          url: "/creator/gigs?tab=active",
         },
       ],
     },
@@ -210,6 +211,11 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       title: withFallback( t, "admin.payments", "Payments" ),
       url: "/admin/payouts",
       icon: CreditCardAcceptIcon,
+    },
+    {
+      title: withFallback( t, "admin.cases", "Cases" ),
+      url: "/admin/cases",
+      icon: CustomerSupportIcon,
     },
     // {
     //   title: withFallback( t, "admin.analytics", "Analytics" ),

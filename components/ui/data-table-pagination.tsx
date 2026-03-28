@@ -56,7 +56,7 @@ function NavButton( {
 
 function PaginationSelectionCount<TData>( { table }: { table: Table<TData>; } ) {
   return (
-    <div className="pagination-selection-count">
+    <div className="pagination-selection-count max-md:hidden">
       { table.getFilteredSelectedRowModel().rows.length } of{ " " }
       { table.getFilteredRowModel().rows.length } row(s) selected.
     </div>

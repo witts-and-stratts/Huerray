@@ -16,8 +16,10 @@ import type {
   ModelsPaginatedPaymentResponse,
   ModelsStandardPaymentResponse,
   ModelsStandardPaymentItemResponse,
+  ModelsStandardGenericResponse,
   ModelsCreatePaymentRequest,
   ModelsCreatePaymentItemRequest,
+  ModelsUpdatePaymentRequest,
   ModelsUpdatePaymentStatusRequest,
   ModelsPaginatedPaymentItemResponse,
 } from '../generated/models';
@@ -86,17 +88,77 @@ export function useUpdatePaymentStatus(
   options?: UseMutationOptions<ModelsStandardPaymentResponse, ApiError, { id: string; request: ModelsUpdatePaymentStatusRequest }>
 ) {
   const queryClient = useQueryClient();
+  const { onSuccess, onError, onSettled, ...restOptions } = options ?? {};
 
   return useMutation( {
     mutationFn: async ( { id, request } ) => {
       const response = await paymentApi.paymentsIdStatusPut( { id, request } );
       return response.data;
     },
-    onSuccess: ( _, variables ) => {
+    onSuccess: async ( data, variables, onMutateResult, context ) => {
       queryClient.invalidateQueries( { queryKey: paymentsKeys.lists() } );
       queryClient.invalidateQueries( { queryKey: paymentsKeys.detail( variables.id ) } );
+      await onSuccess?.( data, variables, onMutateResult, context );
     },
-    ...options,
+    onError: async ( error, variables, onMutateResult, context ) => {
+      await onError?.( error, variables, onMutateResult, context );
+    },
+    onSettled: async ( data, error, variables, onMutateResult, context ) => {
+      await onSettled?.( data, error, variables, onMutateResult, context );
+    },
+    ...restOptions,
+  } );
+}
+
+export function useUpdatePayment(
+  options?: UseMutationOptions<ModelsStandardPaymentResponse, ApiError, { id: string; request: ModelsUpdatePaymentRequest }>
+) {
+  const queryClient = useQueryClient();
+  const { onSuccess, onError, onSettled, ...restOptions } = options ?? {};
+
+  return useMutation( {
+    mutationFn: async ( { id, request } ) => {
+      const response = await paymentApi.paymentsIdPut( { id, request } );
+      return response.data;
+    },
+    onSuccess: async ( data, variables, onMutateResult, context ) => {
+      queryClient.invalidateQueries( { queryKey: paymentsKeys.lists() } );
+      queryClient.invalidateQueries( { queryKey: paymentsKeys.detail( variables.id ) } );
+      await onSuccess?.( data, variables, onMutateResult, context );
+    },
+    onError: async ( error, variables, onMutateResult, context ) => {
+      await onError?.( error, variables, onMutateResult, context );
+    },
+    onSettled: async ( data, error, variables, onMutateResult, context ) => {
+      await onSettled?.( data, error, variables, onMutateResult, context );
+    },
+    ...restOptions,
+  } );
+}
+
+export function useDeletePayment(
+  options?: UseMutationOptions<ModelsStandardGenericResponse, ApiError, string>
+) {
+  const queryClient = useQueryClient();
+  const { onSuccess, onError, onSettled, ...restOptions } = options ?? {};
+
+  return useMutation( {
+    mutationFn: async ( id: string ) => {
+      const response = await paymentApi.paymentsIdDelete( { id } );
+      return response.data;
+    },
+    onSuccess: async ( data, id, onMutateResult, context ) => {
+      queryClient.invalidateQueries( { queryKey: paymentsKeys.lists() } );
+      queryClient.removeQueries( { queryKey: paymentsKeys.detail( id ) } );
+      await onSuccess?.( data, id, onMutateResult, context );
+    },
+    onError: async ( error, variables, onMutateResult, context ) => {
+      await onError?.( error, variables, onMutateResult, context );
+    },
+    onSettled: async ( data, error, variables, onMutateResult, context ) => {
+      await onSettled?.( data, error, variables, onMutateResult, context );
+    },
+    ...restOptions,
   } );
 }
 
@@ -104,16 +166,24 @@ export function useCreatePayment(
   options?: UseMutationOptions<ModelsStandardPaymentResponse, ApiError, ModelsCreatePaymentRequest>
 ) {
   const queryClient = useQueryClient();
+  const { onSuccess, onError, onSettled, ...restOptions } = options ?? {};
 
   return useMutation( {
     mutationFn: async ( request: ModelsCreatePaymentRequest ) => {
       const response = await paymentApi.paymentsPost( { request } );
       return response.data;
     },
-    onSuccess: () => {
+    onSuccess: async ( data, variables, onMutateResult, context ) => {
       queryClient.invalidateQueries( { queryKey: paymentsKeys.lists() } );
+      await onSuccess?.( data, variables, onMutateResult, context );
     },
-    ...options,
+    onError: async ( error, variables, onMutateResult, context ) => {
+      await onError?.( error, variables, onMutateResult, context );
+    },
+    onSettled: async ( data, error, variables, onMutateResult, context ) => {
+      await onSettled?.( data, error, variables, onMutateResult, context );
+    },
+    ...restOptions,
   } );
 }
 
@@ -121,16 +191,24 @@ export function useCreatePaymentItem(
   options?: UseMutationOptions<ModelsStandardPaymentItemResponse, ApiError, ModelsCreatePaymentItemRequest>
 ) {
   const queryClient = useQueryClient();
+  const { onSuccess, onError, onSettled, ...restOptions } = options ?? {};
 
   return useMutation( {
     mutationFn: async ( request: ModelsCreatePaymentItemRequest ) => {
       const response = await paymentItemsApi.paymentItemsPost( { request } );
       return response.data;
     },
-    onSuccess: () => {
+    onSuccess: async ( data, variables, onMutateResult, context ) => {
       queryClient.invalidateQueries( { queryKey: paymentsKeys.all } );
+      await onSuccess?.( data, variables, onMutateResult, context );
     },
-    ...options,
+    onError: async ( error, variables, onMutateResult, context ) => {
+      await onError?.( error, variables, onMutateResult, context );
+    },
+    onSettled: async ( data, error, variables, onMutateResult, context ) => {
+      await onSettled?.( data, error, variables, onMutateResult, context );
+    },
+    ...restOptions,
   } );
 }
 

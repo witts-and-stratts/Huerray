@@ -31,7 +31,7 @@ import { stripTags } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { AddToListIcon } from '@hugeicons/core-free-icons';
-import { Brain } from 'lucide-react';
+import { AiContentBadge } from '@/components/dashboard-ui/ai-content-badge';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ApplicationDetailsSheet } from './application-details-sheet';
 import { GigDetailsSheet } from './gig-details-sheet';
@@ -245,18 +245,15 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
 
   return (
     <>
-      <Card className='flex flex-col h-full overflow-hidden relative py-4'>
+      <Card className={ cn( 'flex flex-col h-full overflow-hidden relative py-4', {
+        'opacity-50 grayscale': campaign_status === 'deactivated',
+      } ) }>
         <CardHeader className="flex items-start justify-between gap-4 mb-2 pr-1">
           <div className="flex flex-col flex-1 min-w-0">
             <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
               <CardTitle className='truncate flex items-center gap-2'>
                 <span className='truncate font-normal'>{ campaign_name }</span>
-                { campaign.content_type === UtilsContentType.ContentTypeAIGenerated && (
-                  <Badge variant="outline" className="gap-1.5 border-maroon-400 bg-maroon-50 text-maroon-500 shrink-0 scale-75 origin-left mt-0.5">
-                    <Brain className="size-3" />
-                    AI
-                  </Badge>
-                ) }
+                { campaign.content_type === UtilsContentType.ContentTypeAIGenerated && <AiContentBadge /> }
               </CardTitle>
             </Link>
             <CardDescription

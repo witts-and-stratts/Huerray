@@ -50,8 +50,10 @@ export default function CreatorAdminLayout( {
               <EmailVerificationBanner />
               <ProfileStatusBanner role="creator" />
               <DashboardHeader />
-              <CreatorBreadcrumbs />
-              { children }
+              <div className="flex-1 overflow-y-auto min-h-0 flex flex-col">
+                <CreatorBreadcrumbs />
+                { children }
+              </div>
             </SidebarInset>
           </PathProvider>
         </RoleProvider>

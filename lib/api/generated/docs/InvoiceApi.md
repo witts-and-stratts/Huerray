@@ -4,66 +4,12 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**invoicesIdGeneratePdfPost**](#invoicesidgeneratepdfpost) | **POST** /invoices/{id}/generate-pdf | Generate PDF for existing invoice|
 |[**invoicesIdGet**](#invoicesidget) | **GET** /invoices/{id} | Get invoice by ID|
+|[**invoicesIdPdfGet**](#invoicesidpdfget) | **GET** /invoices/{id}/pdf | Get invoice as PDF|
+|[**invoicesIdResendPdfPost**](#invoicesidresendpdfpost) | **POST** /invoices/{id}/resend-pdf | Resend invoice PDF via email|
 |[**invoicesIdStatusPut**](#invoicesidstatusput) | **PUT** /invoices/{id}/status | Update invoice status|
 |[**invoicesPost**](#invoicespost) | **POST** /invoices | Create invoice for campaign|
 |[**invoicesSearchGet**](#invoicessearchget) | **GET** /invoices/search | Search invoices (Admin &amp; Brands)|
-
-# **invoicesIdGeneratePdfPost**
-> ModelsStandardInvoicePDFGeneratedResponse invoicesIdGeneratePdfPost()
-
-Generate PDF for an existing invoice and send via email to brand
-
-### Example
-
-```typescript
-import {
-    InvoiceApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new InvoiceApi(configuration);
-
-let id: string; //Invoice ID (default to undefined)
-
-const { status, data } = await apiInstance.invoicesIdGeneratePdfPost(
-    id
-);
-```
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | Invoice ID | defaults to undefined|
-
-
-### Return type
-
-**ModelsStandardInvoicePDFGeneratedResponse**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | PDF generated and sent successfully |  -  |
-|**400** | Bad request |  -  |
-|**401** | Unauthorized |  -  |
-|**404** | Invoice not found |  -  |
-|**500** | Internal server error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **invoicesIdGet**
 > ModelsStandardInvoiceResponse invoicesIdGet()
@@ -116,6 +62,116 @@ No authorization required
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**404** | Invoice not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **invoicesIdPdfGet**
+> File invoicesIdPdfGet()
+
+Generate and stream the invoice as a PDF file
+
+### Example
+
+```typescript
+import {
+    InvoiceApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new InvoiceApi(configuration);
+
+let id: string; //Invoice ID (default to undefined)
+
+const { status, data } = await apiInstance.invoicesIdPdfGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Invoice ID | defaults to undefined|
+
+
+### Return type
+
+**File**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/pdf
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Invoice PDF |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Invoice not found |  -  |
+|**500** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **invoicesIdResendPdfPost**
+> ModelsStandardInvoicePDFGeneratedResponse invoicesIdResendPdfPost()
+
+Generate a PDF for an existing invoice and send it via email to the brand
+
+### Example
+
+```typescript
+import {
+    InvoiceApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new InvoiceApi(configuration);
+
+let id: string; //Invoice ID (default to undefined)
+
+const { status, data } = await apiInstance.invoicesIdResendPdfPost(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Invoice ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardInvoicePDFGeneratedResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | PDF sent successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Invoice not found |  -  |
+|**500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

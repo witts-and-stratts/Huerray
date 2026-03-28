@@ -101,7 +101,9 @@
     "actions": {
       "view": "Voir l'invitation",
       "accept": "Accepter l'invitation",
+      "acceptShort": "Accepter",
       "decline": "Refuser l'invitation",
+      "declineShort": "Déclin",
       "reject": "Rejeter l'invitation",
       "createSubmission": "Créer une soumission",
       "openMenu": "Ouvrir le menu",

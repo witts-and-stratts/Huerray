@@ -24,6 +24,7 @@ export * from './api/comments-api';
 export * from './api/creator-api';
 export * from './api/gigs-api';
 export * from './api/invoice-api';
+export * from './api/newsletter-api';
 export * from './api/notifications-api';
 export * from './api/payment-api';
 export * from './api/payment-items-api';

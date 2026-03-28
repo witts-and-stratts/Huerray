@@ -6,7 +6,7 @@ import { Badge } from '@/components/dashboard-ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import type { ModelsContentMedia } from '@/lib/api/generated/models/models-content-media';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { DocumentsTabContent } from './assets-block/documents-tab-content';
 import { ImagesTabContent } from './assets-block/images-tab-content';
 import { VideosTabContent } from './assets-block/videos-tab-content';
@@ -21,6 +21,14 @@ export function CampaignAssetsCard( { imageItems, documentItems, videoItems }: C
   const t = useTranslations( 'dashboard.admin.campaignOverview.assets' );
   const [ assetsTab, setAssetsTab ] = useState<'images' | 'documents' | 'videos'>( 'images' );
   const [ gallery, setGallery ] = useState<{ index: number; type: 'images' | 'documents' | 'videos'; } | null>( null );
+  const previewableImageItems = useMemo( () => imageItems.filter( ( item ) => item.asset ), [ imageItems ] );
+  const previewableDocumentItems = useMemo( () => documentItems.filter( ( item ) => item.asset ), [ documentItems ] );
+  const previewableVideoItems = useMemo( () => videoItems.filter( ( item ) => item.asset ), [ videoItems ] );
+  const galleryItems = gallery?.type === 'images'
+    ? previewableImageItems
+    : gallery?.type === 'videos'
+      ? previewableVideoItems
+      : previewableDocumentItems;
 
   return (
     <>
@@ -45,15 +53,15 @@ export function CampaignAssetsCard( { imageItems, documentItems, videoItems }: C
 
             <TabsPanels>
               <TabsPanel value="images" keepMounted>
-                <ImagesTabContent imageItems={ imageItems } onPreview={ ( i ) => setGallery( { index: i, type: 'images' } ) } />
+                <ImagesTabContent imageItems={ previewableImageItems } onPreview={ ( i ) => setGallery( { index: i, type: 'images' } ) } />
               </TabsPanel>
 
               <TabsPanel value="documents" keepMounted>
-                <DocumentsTabContent documentItems={ documentItems } onPreview={ ( i ) => setGallery( { index: i, type: 'documents' } ) } />
+                <DocumentsTabContent documentItems={ previewableDocumentItems } onPreview={ ( i ) => setGallery( { index: i, type: 'documents' } ) } />
               </TabsPanel>
 
               <TabsPanel value="videos" keepMounted>
-                <VideosTabContent videoItems={ videoItems } onPreview={ ( i ) => setGallery( { index: i, type: 'videos' } ) } />
+                <VideosTabContent videoItems={ previewableVideoItems } onPreview={ ( i ) => setGallery( { index: i, type: 'videos' } ) } />
               </TabsPanel>
             </TabsPanels>
           </Tabs>
@@ -61,7 +69,7 @@ export function CampaignAssetsCard( { imageItems, documentItems, videoItems }: C
       </Card>
 
       <MediaPreview
-        items={ ( gallery?.type === 'images' ? imageItems : gallery?.type === 'videos' ? videoItems : documentItems ).map( ( m ): LegacyMediaItem => ( { url: m.asset ?? '', thumbnail: m.thumbnail } ) ) }
+        items={ galleryItems.map( ( m ): LegacyMediaItem => ( { url: m.asset ?? '', thumbnail: m.thumbnail } ) ) }
         initialIndex={ gallery?.index ?? null }
         onOpenChange={ ( open ) => { if ( !open ) setGallery( null ); } }
         animation={ {

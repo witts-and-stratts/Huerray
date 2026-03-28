@@ -31,7 +31,7 @@ export function UsersTableToolbar<TData>( {
           placeholder={ t( 'filters.searchUsers' ) }
         />
       </div>
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-2 overflow-x-auto'>
         <DataTableFilterDropdown
           table={ table }
           columnId='user_type_filter'

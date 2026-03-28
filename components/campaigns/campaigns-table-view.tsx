@@ -12,6 +12,7 @@ import {
   flexRender,
   type Table as TanstackTable
 } from '@tanstack/react-table';
+import { cn } from '@/lib/dashboard-utils';
 import { AnimatePresence } from 'motion/react';
 import { MotionTableRow } from '../dashboard-ui/motion-table';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
@@ -56,7 +57,12 @@ export function CamapignsTableView( {
                   y: 20,
                   borderColor: 'transparent',
                 } }
-                animate={ { opacity: 1, y: 0, borderColor: 'inherit' } }
+                animate={ {
+                  opacity: row.original.campaign_status === 'deactivated' ? 0.45 : 1,
+                  filter: row.original.campaign_status === 'deactivated' ? 'grayscale(1)' : 'grayscale(0)',
+                  y: 0,
+                  borderColor: 'inherit',
+                } }
                 exit={ { opacity: 0, y: 20, transition: { duration: 0.1 } } }
                 transition={ {
                   duration: 0.4,

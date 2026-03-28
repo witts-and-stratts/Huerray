@@ -121,7 +121,6 @@ export function GigActionMenu( {
       label: t( 'actions.mySubmissions' ),
       action: () => onViewGig( gig, 'submissions' ),
       allowedRoles: [ 'creator' ],
-      condition: () => gig.gig_status === UtilsGigStatus.GigStatusOpen
     },
     {
       label: t( 'actions.deleteGig' ),

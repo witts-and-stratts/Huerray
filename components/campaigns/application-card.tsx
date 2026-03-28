@@ -149,7 +149,7 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
             { numberOfVideos && (
               <span className="flex items-center gap-1">
                 <VideoIcon className="size-5" strokeWidth={ 1 } />
-                { numberOfVideos } { t( numberOfVideos === 1 ? 'videoSingular' : 'videoPlural' ) }
+                { t( 'videoCountLabel', { count: numberOfVideos } ) }
               </span>
             ) }
             { numberOfVideos && durationSeconds && <Separator orientation="vertical" className="opacity-30" /> }

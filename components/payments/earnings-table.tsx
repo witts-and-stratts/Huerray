@@ -47,6 +47,7 @@ import {
 } from '@/components/dashboard-ui/empty';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
+import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 
 export interface EarningsTableProps {
   data: ModelsPaymentResponse[];
@@ -59,6 +60,7 @@ export function EarningsTable( { data, isLoading = false }: EarningsTableProps )
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ searchValue, setSearchValue ] = React.useState( '' );
+  const { pagination, setPagination } = usePersistedPagination( 'earnings' );
 
   const statuses = React.useMemo( () => {
     const set = new Set<string>();
@@ -79,6 +81,7 @@ export function EarningsTable( { data, isLoading = false }: EarningsTableProps )
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     globalFilterFn: 'includesString',
     state: {
       sorting,
@@ -86,6 +89,7 @@ export function EarningsTable( { data, isLoading = false }: EarningsTableProps )
       columnVisibility,
       rowSelection,
       globalFilter: searchValue,
+      pagination,
     },
   } );
 

@@ -7,6 +7,7 @@ import {
   Clock01Icon,
   File01Icon,
   FileEditIcon,
+  Sent02Icon,
   SentIcon,
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon, IconSvgElement } from '@hugeicons/react';
@@ -32,7 +33,7 @@ const statusIconMap: Record<UtilsInvoiceStatus, { icon: IconSvgElement; classNam
   cancelled: { icon: Cancel01Icon, className: 'text-red-400', label: 'Cancelled' },
   draft: { icon: FileEditIcon, className: 'text-gray-400', label: 'Draft' },
   issued: { icon: File01Icon, className: 'text-blue-400', label: 'Issued' },
-  sent: { icon: SentIcon, className: 'text-blue-500', label: 'Sent' },
+  sent: { icon: Sent02Icon, className: 'text-maroon-500', label: 'Sent' },
 };
 
 function getInitials( name?: string ) {
@@ -167,7 +168,7 @@ export const getColumns = (
         <THead title={ t( 'columns.issued' ) } column={ column } />
       ),
       cell: ( { row } ) => (
-        <div className="text-sm pl-2">
+        <div className="text-sm">
           { row.original.issued_date ? useFormatDate( row.original.issued_date ) : '—' }
         </div>
       ),

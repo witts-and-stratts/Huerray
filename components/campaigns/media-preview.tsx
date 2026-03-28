@@ -9,7 +9,6 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { AnimatePresence, motion, type Variants, type Easing } from 'motion/react';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { cn } from '@/lib/utils';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${ pdfjs.version }/build/pdf.worker.min.mjs`;
 
@@ -183,7 +182,7 @@ function VideoRenderer( { item, index, isLoaded, onLoad, poster }: MediaRenderer
           src={ item.url }
           poster={ poster }
           className={ cn(
-            'max-h-full max-w-full object-contain',
+            'max-h-[60vh] w-full object-contain',
             !isLoaded ? 'opacity-0' : 'opacity-100'
           ) }
           controls
@@ -221,7 +220,7 @@ function ImageRenderer( { item, index, isLoaded, onLoad }: MediaRendererProps & 
       <img
         src={ resolveImageUrl( item.url ) }
         alt={ item.name ?? `Asset ${ index + 1 }` }
-        className="max-h-full max-w-full object-contain"
+        className="max-h-[60vh] w-full object-contain"
         onLoad={ ( e: React.SyntheticEvent<HTMLImageElement> ) => {
           const img = e.currentTarget;
           onLoad( { w: img.naturalWidth, h: img.naturalHeight } );
@@ -278,7 +277,6 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
 
   const open = initialIndex != null;
   const single = items.length <= 1;
-  const isMobile = useIsMobile();
 
   const [ index, setIndex ] = useState( initialIndex ?? 0 );
   const [ loadedSet, setLoadedSet ] = useState<Set<number>>( () => new Set() );
@@ -317,7 +315,7 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
 
   // Auto-height for images and videos in multi-item mode
   useEffect( () => {
-    if ( isMobile || single || ( kind !== 'image' && kind !== 'video' ) || !wrapperRef.current ) return;
+    if ( single || ( kind !== 'image' && kind !== 'video' ) || !wrapperRef.current ) return;
     const size = sizesRef.current.get( index );
     if ( !size ) return;
 
@@ -332,7 +330,7 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
     if ( calculatedH > maxH ) calculatedH = maxH;
 
     setHeight( Math.round( calculatedH ) );
-  }, [ index, loadedSet, kind, single, isMobile ] );
+  }, [ index, loadedSet, kind, single ] );
 
   // Preload nearby images in multi-item mode
   useEffect( () => {
@@ -403,7 +401,7 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
   if ( single ) {
     return (
       <Dialog open={ open } onOpenChange={ onOpenChange } modal>
-        <DialogContent className="w-screen max-w-none h-[100dvh] rounded-none border-0 p-0 overflow-hidden flex flex-col bg-background/95 backdrop-blur-sm gap-0 sm:h-[80vh] sm:max-w-[calc(100%-2rem)] sm:rounded-xl sm:border md:w-[1000px] md:max-w-none">
+        <DialogContent className="w-full md:w-[1000px] md:max-w-none h-[80vh] p-0 overflow-hidden flex flex-col bg-background/95 backdrop-blur-sm gap-0">
           { current.name && (
             <DialogHeader className="p-4 border-b shrink-0 flex flex-row items-center justify-between">
               <DialogTitle className="truncate pr-8 text-h6! font-primary font-normal text-muted-foreground/78">
@@ -411,7 +409,7 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
               </DialogTitle>
             </DialogHeader>
           ) }
-          <div className="flex-1 min-h-0 overflow-hidden relative bg-muted/20 flex items-center justify-center p-3 sm:p-4">
+          <div className="flex-1 overflow-hidden relative bg-muted/20 flex items-center justify-center p-4">
             { kind === 'image' && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -452,21 +450,21 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent
         className={ cn(
-          'w-screen max-w-none h-[100dvh] rounded-none border-0 p-0 overflow-hidden gap-0 outline-none flex flex-col sm:h-auto sm:max-w-[calc(100%-2rem)] sm:rounded-xl sm:border',
-          isDocOrUnknown ? 'sm:max-w-4xl' : 'sm:max-w-2xl'
+          'p-0 overflow-hidden gap-0 outline-none',
+          isDocOrUnknown ? 'max-w-4xl' : 'max-w-2xl'
         ) }
         showCloseButton
         onKeyDown={ handleKeyDown }
       >
-        <div className="relative group/arrows flex min-h-0 flex-1 flex-col">
+        <div className="relative group/arrows">
           <motion.div
             ref={ wrapperRef }
             className={ cn(
-              'relative overflow-hidden bg-black/5 w-full flex-1 min-h-0',
-              isDocOrUnknown && !isMobile ? 'h-[75vh]' : ''
+              'relative overflow-hidden bg-black/5 w-full',
+              isDocOrUnknown ? 'h-[75vh]' : ''
             ) }
-            style={ !isDocOrUnknown && !isMobile ? { minHeight: MIN_PREVIEW_HEIGHT } : undefined }
-            animate={ isDocOrUnknown || isMobile ? {} : { height: height ?? MIN_PREVIEW_HEIGHT } }
+            style={ !isDocOrUnknown ? { minHeight: MIN_PREVIEW_HEIGHT } : undefined }
+            animate={ isDocOrUnknown ? {} : { height: height ?? MIN_PREVIEW_HEIGHT } }
             transition={ heightTransition }
           >
             <div className="relative flex items-center justify-center w-full h-full pointer-events-none">
@@ -550,7 +548,7 @@ export function MediaPreview( { items: rawItems, initialIndex, onOpenChange, ani
           </motion.div>
         </div>
 
-        <div className="shrink-0 flex flex-col items-center gap-2 px-3 py-3 border-t bg-background sm:px-4">
+        <div className="flex flex-col items-center gap-2 px-4 py-3 border-t bg-background">
           <p className="text-xs text-muted-foreground">{ index + 1 } / { items.length }</p>
           <div className="flex gap-1.5 overflow-x-auto max-w-full pb-1">
             { items.map( ( item, i ) => (

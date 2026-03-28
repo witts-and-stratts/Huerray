@@ -3,10 +3,10 @@
 import { HugeiconsIcon } from '@hugeicons/react';
 import { type Icon } from "@tabler/icons-react";
 import { ChevronRight } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { locales } from '@/i18n';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import {
   SidebarGroup,
@@ -33,6 +33,7 @@ export function NavMain( {
 } ) {
   const locale = useLocale();
   const rawPathname = usePathname();
+  const searchParams = useSearchParams();
   // Strip locale prefix so nav URLs (/brand/...) match regardless of locale (/en/brand/...)
   const segments = rawPathname?.split( '/' ) ?? [];
   const pathname = locales.includes( segments[ 1 ] as typeof locales[ number ] )
@@ -41,13 +42,27 @@ export function NavMain( {
   // Prefix every nav URL with the current locale so the middleware always
   // receives a locale-prefixed path (e.g. /en/admin/creators, not /admin/creators)
   const localisedUrl = ( url: string ) => `/${ locale }${ url }`;
+  const hasMatchingQueryParams = ( url: string ) => {
+    const [ targetPath, targetQuery = '' ] = url.split( '?' );
+    const targetParams = new URLSearchParams( targetQuery );
+
+    if ( targetParams.size === 0 ) {
+      return pathname === targetPath || pathname.startsWith( `${ targetPath }/` );
+    }
+
+    if ( pathname !== targetPath ) {
+      return false;
+    }
+
+    return Array.from( targetParams.entries() ).every( ( [ key, value ] ) => searchParams.get( key ) === value );
+  };
 
   // Find the longest nav URL that matches the current pathname so that
   // e.g. /brand/campaigns wins over /brand, preventing Dashboard from
   // always appearing active.
   const allNavUrls = items.flatMap( item => [ item.url, ...( item.items?.map( s => s.url ) ?? [] ) ] );
   const longestMatchUrl = allNavUrls
-    .filter( url => pathname === url || pathname.startsWith( `${ url }/` ) )
+    .filter( hasMatchingQueryParams )
     .reduce( ( longest, url ) => url.length > longest.length ? url : longest, '' );
   const isActivePath = ( url: string ) => url === longestMatchUrl;
 
@@ -65,6 +80,22 @@ export function NavMain( {
     } );
     return initial;
   } );
+
+  useEffect( () => {
+    setOpenItems( prev => {
+      const next = { ...prev };
+      items.forEach( item => {
+        if ( item.items?.length ) {
+          const isParentActive = item.url === longestMatchUrl;
+          const isAnyChildActive = item.items.some( s => s.url === longestMatchUrl );
+          if ( isParentActive || isAnyChildActive ) {
+            next[ item.title ] = true;
+          }
+        }
+      } );
+      return next;
+    } );
+  }, [ items, longestMatchUrl ] );
 
   const toggleItem = useCallback( ( title: string ) => {
     setOpenItems( prev => ( { ...prev, [ title ]: !prev[ title ] } ) );

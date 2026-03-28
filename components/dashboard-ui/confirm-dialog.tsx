@@ -62,7 +62,7 @@ export function ConfirmDialog( {
     <AlertDialog open={ open } onOpenChange={ onOpenChange }>
       <AlertDialogContent className={ cn( 'w-[500px]', className ) }>
         <AlertDialogHeader>
-          <AlertDialogTitle className='dialog__title'>
+          <AlertDialogTitle className='dialog__title text-xl'>
             { title }
           </AlertDialogTitle>
           { description && (

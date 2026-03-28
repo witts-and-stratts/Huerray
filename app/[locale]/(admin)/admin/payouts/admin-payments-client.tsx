@@ -12,5 +12,9 @@ export function AdminPaymentsClient() {
     return data?.data || [];
   }, [ data ] );
 
-  return <PaymentsTable data={ payments } isLoading={ isLoading } isAdmin />;
+  return (
+    <div className='flex flex-col flex-1 min-h-0 overflow-hidden'>
+      <PaymentsTable data={ payments } isLoading={ isLoading } isAdmin />
+    </div>
+  );
 }

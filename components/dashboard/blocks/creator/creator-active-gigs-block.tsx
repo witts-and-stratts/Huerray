@@ -83,11 +83,11 @@ export function CreatorActiveGigsBlock() {
         <Button
           variant="outline"
           size="sm"
-          className="mt-2 w-full font-normal"
-          nativeButton={false}
-          render={ <Link href="/creator/my-gigs" /> }
+          className="w-full font-normal mt-2"
         >
-          View all my gigs
+          <Link href="/creator/gigs" title='View all my gigs'>
+            View all my gigs
+          </Link>
         </Button>
       </CardFooter>
     </Card>

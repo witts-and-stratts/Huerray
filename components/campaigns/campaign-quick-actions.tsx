@@ -274,7 +274,7 @@ export function CampaignActionDialogs( {
         id="brand-comment"
         value={ brandComment }
         onChange={ ( e: React.ChangeEvent<HTMLTextAreaElement> ) => setBrandComment( e.target.value ) }
-        placeholder={ t( 'commentPlaceholder' ) }
+        placeholder={ t( 'commentsPlaceholder' ) }
         className="resize-none min-h-[80px]"
       />
     </div>

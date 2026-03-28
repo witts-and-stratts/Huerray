@@ -98,7 +98,7 @@ export default function CreatorDashboardPage() {
         ] }
       />
 
-      <div className="ad-shell py-4 bg-slate-50/50 mt-0 flex-1 px-5">
+      <div className="ad-shell bg-slate-50/50 mt-0 flex-1 p-2 md:p-5">
         <section className="grid gap-4 md:grid-cols-12 lg:h-full">
           <aside className="space-y-4 md:col-span-5 md:sticky md:top-24 md:self-start h-full">
             <CreatorProfileBlock creator={ creator! } creatorName={ creatorName } creatorAvatar={ creatorAvatar } />

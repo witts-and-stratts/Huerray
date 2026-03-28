@@ -14,16 +14,8 @@ import {
   TableRow,
 } from '@/components/dashboard-ui/table';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  EmptyContent,
-} from '@/components/dashboard-ui/empty';
 import { useTranslations } from 'next-intl';
+import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
 
 // Inline Table View Component (extracted from previous gigs-table.tsx)
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
@@ -106,53 +98,14 @@ interface GigsViewProps {
   actionButtons?: React.ReactNode;
 }
 
-function EmptyGigs( { actionButtons }: { actionButtons?: React.ReactNode; } ) {
-  const t = useTranslations( 'dashboard.brand.gigsPage' );
-  return (
-    <Empty className='border py-20 my-6 flex-1 bg-white'>
-      <EmptyHeader>
-        <EmptyMedia>
-          <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:size-12 *:data-[slot=avatar]:ring-2">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/maxleiter.png"
-                alt="@maxleiter"
-              />
-              <AvatarFallback>LR</AvatarFallback>
-            </Avatar>
-            <Avatar>
-              <AvatarImage
-                src="https://github.com/evilrabbit.png"
-                alt="@evilrabbit"
-              />
-              <AvatarFallback>ER</AvatarFallback>
-            </Avatar>
-          </div>
-        </EmptyMedia>
-        <EmptyTitle className='font-normal font-primary text-primary'>{ t( 'noGigsYet' ) }</EmptyTitle>
-        <EmptyDescription>
-          { t( 'noGigsYetDescription' ) }
-        </EmptyDescription>
-      </EmptyHeader>
-      { actionButtons && (
-        <EmptyContent>
-          { actionButtons }
-        </EmptyContent>
-      ) }
-    </Empty>
-  );
-}
-
 
 export function GigsView( { table, view, onViewGig, onCreateSubmission, actionButtons }: GigsViewProps ) {
   return (
     <div className='px-2 md:px-5 flex flex-col flex-1 h-full'>
       { table.getRowModel().rows.length === 0 ? (
-        <EmptyGigs actionButtons={ actionButtons } />
+        <EmptyGigs>
+          { actionButtons }
+        </EmptyGigs>
       ) : view === 'table' ? (
         <GigsTableView table={ table } />
       ) : (

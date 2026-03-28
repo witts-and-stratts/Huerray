@@ -136,11 +136,14 @@ Class | Method | HTTP request | Description
 *GigsApi* | [**gigsInvitationsInvitationIdRespondPut**](docs/GigsApi.md#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to gig invitation
 *GigsApi* | [**gigsPost**](docs/GigsApi.md#gigspost) | **POST** /gigs | Create a new gig
 *GigsApi* | [**gigsSearchGet**](docs/GigsApi.md#gigssearchget) | **GET** /gigs/search | Search gigs
-*InvoiceApi* | [**invoicesIdGeneratePdfPost**](docs/InvoiceApi.md#invoicesidgeneratepdfpost) | **POST** /invoices/{id}/generate-pdf | Generate PDF for existing invoice
 *InvoiceApi* | [**invoicesIdGet**](docs/InvoiceApi.md#invoicesidget) | **GET** /invoices/{id} | Get invoice by ID
+*InvoiceApi* | [**invoicesIdPdfGet**](docs/InvoiceApi.md#invoicesidpdfget) | **GET** /invoices/{id}/pdf | Get invoice as PDF
+*InvoiceApi* | [**invoicesIdResendPdfPost**](docs/InvoiceApi.md#invoicesidresendpdfpost) | **POST** /invoices/{id}/resend-pdf | Resend invoice PDF via email
 *InvoiceApi* | [**invoicesIdStatusPut**](docs/InvoiceApi.md#invoicesidstatusput) | **PUT** /invoices/{id}/status | Update invoice status
 *InvoiceApi* | [**invoicesPost**](docs/InvoiceApi.md#invoicespost) | **POST** /invoices | Create invoice for campaign
 *InvoiceApi* | [**invoicesSearchGet**](docs/InvoiceApi.md#invoicessearchget) | **GET** /invoices/search | Search invoices (Admin &amp; Brands)
+*NewsletterApi* | [**newsletterSignupPost**](docs/NewsletterApi.md#newslettersignuppost) | **POST** /newsletter/signup | Newsletter signup
+*NewsletterApi* | [**newsletterUnsubscribeGet**](docs/NewsletterApi.md#newsletterunsubscribeget) | **GET** /newsletter/unsubscribe | Unsubscribe from newsletter
 *NotificationsApi* | [**notificationsGet**](docs/NotificationsApi.md#notificationsget) | **GET** /notifications | Get user notifications
 *NotificationsApi* | [**notificationsIdDelete**](docs/NotificationsApi.md#notificationsiddelete) | **DELETE** /notifications/{id} | Delete notification
 *NotificationsApi* | [**notificationsIdReadPut**](docs/NotificationsApi.md#notificationsidreadput) | **PUT** /notifications/{id}/read | Mark notification as read
@@ -149,9 +152,11 @@ Class | Method | HTTP request | Description
 *NotificationsApi* | [**notificationsStatsGet**](docs/NotificationsApi.md#notificationsstatsget) | **GET** /notifications/stats | Get notification statistics
 *PaymentApi* | [**paymentsIdDelete**](docs/PaymentApi.md#paymentsiddelete) | **DELETE** /payments/{id} | Delete payment by ID
 *PaymentApi* | [**paymentsIdGet**](docs/PaymentApi.md#paymentsidget) | **GET** /payments/{id} | Get payment by ID
+*PaymentApi* | [**paymentsIdPut**](docs/PaymentApi.md#paymentsidput) | **PUT** /payments/{id} | Update payment
 *PaymentApi* | [**paymentsIdStatusPut**](docs/PaymentApi.md#paymentsidstatusput) | **PUT** /payments/{id}/status | Update payment status
 *PaymentApi* | [**paymentsPost**](docs/PaymentApi.md#paymentspost) | **POST** /payments | Create payment batch
 *PaymentApi* | [**paymentsSearchGet**](docs/PaymentApi.md#paymentssearchget) | **GET** /payments/search | Search payments
+*PaymentItemsApi* | [**paymentItemsIdDelete**](docs/PaymentItemsApi.md#paymentitemsiddelete) | **DELETE** /payment-items/{id} | Delete payment item by ID
 *PaymentItemsApi* | [**paymentItemsPost**](docs/PaymentItemsApi.md#paymentitemspost) | **POST** /payment-items | Create payment item
 *PaymentItemsApi* | [**paymentItemsSearchGet**](docs/PaymentItemsApi.md#paymentitemssearchget) | **GET** /payment-items/search | Search payment items
 *SystemApi* | [**healthGet**](docs/SystemApi.md#healthget) | **GET** /health | Health check
@@ -250,6 +255,9 @@ Class | Method | HTTP request | Description
  - [ModelsLoginRequest](docs/ModelsLoginRequest.md)
  - [ModelsMessage](docs/ModelsMessage.md)
  - [ModelsMoney](docs/ModelsMoney.md)
+ - [ModelsNewsletterSignupRequest](docs/ModelsNewsletterSignupRequest.md)
+ - [ModelsNewsletterSignupResponse](docs/ModelsNewsletterSignupResponse.md)
+ - [ModelsNewsletterUnsubscribeResponse](docs/ModelsNewsletterUnsubscribeResponse.md)
  - [ModelsNotificationListResponse](docs/ModelsNotificationListResponse.md)
  - [ModelsNotificationResponse](docs/ModelsNotificationResponse.md)
  - [ModelsPaginatedBrandResponses](docs/ModelsPaginatedBrandResponses.md)
@@ -299,6 +307,8 @@ Class | Method | HTTP request | Description
  - [ModelsStandardGigResponse](docs/ModelsStandardGigResponse.md)
  - [ModelsStandardInvoicePDFGeneratedResponse](docs/ModelsStandardInvoicePDFGeneratedResponse.md)
  - [ModelsStandardInvoiceResponse](docs/ModelsStandardInvoiceResponse.md)
+ - [ModelsStandardNewsletterSignupResponse](docs/ModelsStandardNewsletterSignupResponse.md)
+ - [ModelsStandardNewsletterUnsubscribeResponse](docs/ModelsStandardNewsletterUnsubscribeResponse.md)
  - [ModelsStandardNotificationListResponse](docs/ModelsStandardNotificationListResponse.md)
  - [ModelsStandardNotificationResponse](docs/ModelsStandardNotificationResponse.md)
  - [ModelsStandardPaymentItemResponse](docs/ModelsStandardPaymentItemResponse.md)
@@ -318,6 +328,7 @@ Class | Method | HTTP request | Description
  - [ModelsUpdateGigApplicationRequest](docs/ModelsUpdateGigApplicationRequest.md)
  - [ModelsUpdateGigRequest](docs/ModelsUpdateGigRequest.md)
  - [ModelsUpdateInvoiceRequest](docs/ModelsUpdateInvoiceRequest.md)
+ - [ModelsUpdatePaymentRequest](docs/ModelsUpdatePaymentRequest.md)
  - [ModelsUpdatePaymentStatusRequest](docs/ModelsUpdatePaymentStatusRequest.md)
  - [ModelsUpdateUserRequest](docs/ModelsUpdateUserRequest.md)
  - [ModelsUpdateVideoSubmissionRequest](docs/ModelsUpdateVideoSubmissionRequest.md)

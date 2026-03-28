@@ -8,14 +8,14 @@ Name | Type | Description | Notes
 **action_url** | **string** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **entity_id** | **string** |  | [optional] [default to undefined]
-**entity_type** | **string** |  | [optional] [default to undefined]
+**entity_type** | [**UtilsNotificationEntityType**](UtilsNotificationEntityType.md) |  | [optional] [default to undefined]
 **event_name** | **string** |  | [optional] [default to undefined]
-**event_type** | **string** |  | [optional] [default to undefined]
+**event_type** | [**UtilsEventType**](UtilsEventType.md) |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **is_read** | **boolean** |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **metadata** | **string** |  | [optional] [default to undefined]
-**priority** | **string** |  | [optional] [default to undefined]
+**priority** | [**UtilsPriority**](UtilsPriority.md) |  | [optional] [default to undefined]
 **title** | **string** |  | [optional] [default to undefined]
 
 ## Example

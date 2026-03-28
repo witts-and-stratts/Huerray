@@ -17,6 +17,5 @@
 export interface ModelsInvoicePDFGeneratedResponse {
     'email_sent'?: boolean;
     'invoice_id'?: string;
-    'pdf_path'?: string;
 }
 

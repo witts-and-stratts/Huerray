@@ -36,7 +36,7 @@
 
   /* Table Toolbar - Usually above the table for search/filters */
   .dt-toolbar {
-    @apply flex flex-col md:flex-row md:items-center justify-between py-4 sticky top-0 bg-background z-20 border-b gap-4 px-5 mb-3 transition-all duration-500;
+    @apply flex flex-col md:flex-row md:items-center justify-between py-4 sticky top-0 bg-background z-20 border-b gap-4 px-5 transition-all duration-500 mb-2! md:mb-4!;
   }
 
   /* Hide columns that are used for filtering but shouldn't render visually */

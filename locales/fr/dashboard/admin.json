@@ -416,7 +416,7 @@
       "brand": "Marque",
       "campaign": "Campagne",
       "issued": "Délivré",
-      "paid": "Payé ?",
+      "paid": "Statut",
       "amount": "Montant",
       "actions": "Actions"
     },
@@ -503,7 +503,7 @@
     "newBatchPayment": {
       "title": "Paiement d'un nouveau lot",
       "description": "Sélectionnez un créateur et ses éléments de paiement en attente.",
-      "triggerButton": "Paiement d'un nouveau lot",
+      "triggerButton": "Nouveau paiement",
       "creatorLabel": "Créateur",
       "creatorPlaceholder": "Sélectionnez un créateur...",
       "pendingItems": "Postes en suspens",
@@ -705,7 +705,18 @@
     "copyId": "Copie de l'ID",
     "thisCreator": "Ce créateur",
     "deleteCreator": "Supprimer le créateur",
-    "return": "Retour"
+    "return": "Retour",
+    "makeAiCreator": "Make AI Creator",
+    "makeHumanCreator": "Rendre humain le créateur",
+    "confirmMakeAiTitle": "Faire de l'IA un créateur ?",
+    "confirmMakeAiDesc": "{name} sera marqué comme créateur de contenu généré par l'IA.",
+    "confirmMakeHumanTitle": "Faire de l'homme un créateur ?",
+    "confirmMakeHumanDesc": "{name} sera marqué comme un créateur de contenu généré par l'homme.",
+    "confirmFirstNameLabel": "Tapez \"{name}\" pour confirmer.",
+    "confirmFirstNamePlaceholder": "Saisir le prénom",
+    "updatingProfileType": "Mise à jour...",
+    "madeAiToast": "{name} est désormais un créateur d'IA",
+    "madeHumanToast": "{name} est maintenant un créateur humain"
   },
   "userDetails": {
     "description": "Informations détaillées sur l'utilisateur",
@@ -776,6 +787,7 @@
     "size": "Taille",
     "userType": "Type d'utilisateur",
     "age": "L'âge",
+    "contentType": "Type de contenu",
     "min": "Min",
     "max": "Max",
     "apply": "Appliquer",
@@ -1061,5 +1073,75 @@
   "creatorSheetHeader": {
     "detailedInformationAboutCreator": "Informations détaillées sur le créateur",
     "yo": "an/o"
+  },
+  "casesPage": {
+    "title": "Cas de soutien",
+    "description": "Visualiser et gérer tous les cas d'assistance sur la plateforme.",
+    "empty": "Aucun cas n'a été trouvé.",
+    "tabs": {
+      "all": "Tous",
+      "open": "Ouvrir",
+      "inProgress": "En cours",
+      "resolved": "Résolu",
+      "closed": "Fermé"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Recherche de cas...",
+      "status": "Statut",
+      "priority": "Priorité"
+    },
+    "columns": {
+      "caseNumber": "Cas #",
+      "caseNumberCopied": "Numéro de dossier copié",
+      "title": "Titre",
+      "status": "Statut",
+      "priority": "Priorité",
+      "reporter": "Reporter",
+      "entity": "Entité",
+      "created": "Créée",
+      "actions": "Actions"
+    },
+    "actionMenu": {
+      "viewDetails": "Voir les détails",
+      "copyId": "Copie de l'ID",
+      "markInProgress": "Marquer comme en cours",
+      "markResolved": "Marquer comme résolu",
+      "reopen": "Réouverture",
+      "close": "Fermer le dossier",
+      "toasts": {
+        "idCopied": "Cas d'espèce copié",
+        "missingId": "ID du cas manquant",
+        "statusUpdated": "Mise à jour de l'état d'avancement du dossier",
+        "statusUpdateError": "Échec de la mise à jour du statut du dossier"
+      }
+    },
+    "details": {
+      "tab": "Détails",
+      "description": "Informations détaillées sur le cas",
+      "untitled": "Affaire sans titre",
+      "descriptionLabel": "Description",
+      "caseInfo": "Informations sur le cas",
+      "systemInfo": "Détails du système",
+      "status": "Statut",
+      "priority": "Priorité",
+      "reporter": "Reporter",
+      "assignee": "Cessionnaire",
+      "relatedEntity": "Entité apparentée",
+      "caseId": "Numéro d'identification du cas",
+      "idCopied": "Cas d'espèce copié",
+      "created": "Créée",
+      "updated": "Dernière mise à jour",
+      "resolved": "Résolu à",
+      "unknown": "Inconnu",
+      "unassigned": "Non attribué",
+      "na": "N/A"
+    },
+    "messages": {
+      "tab": "Messages",
+      "empty": "Aucun message pour l'instant. Commencer la conversation.",
+      "placeholder": "Tapez un message... (Entrez pour envoyer)",
+      "sent": "Message envoyé",
+      "sendError": "Échec de l'envoi du message"
+    }
   }
 }

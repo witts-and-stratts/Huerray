@@ -28,7 +28,8 @@ export const UtilsEventType = {
     EventTypeAcceptance: 'Acceptance',
     EventTypeDecision: 'Decision',
     EventTypeReturn: 'Return',
-    EventTypeRegistration: 'Registration'
+    EventTypeRegistration: 'Registration',
+    EventTypeGeneric: 'Generic'
 } as const;
 
 export type UtilsEventType = typeof UtilsEventType[keyof typeof UtilsEventType];

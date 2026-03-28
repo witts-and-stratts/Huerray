@@ -22,6 +22,7 @@ import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { usePersistedViewMode } from '@/lib/hooks/use-persisted-view-mode';
+import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
 
@@ -50,6 +51,7 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const showLoading = useDelayedLoading( isLoading, 250 );
   const { view, setView } = usePersistedViewMode( 'invoices', 'table' );
+  const { pagination, setPagination } = usePersistedPagination( 'invoices' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
@@ -95,12 +97,14 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
       globalFilter: searchValue,
+      pagination,
     },
   } );
 
@@ -113,22 +117,24 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className='flex flex-col bg-slate-50/50 grow relative overflow-auto h-full'
+          className='flex flex-col flex-1 bg-slate-50/50 grow relative min-h-0 overflow-hidden'
         >
-          <InvoicesTableToolbar
-            table={ table }
-            searchValue={ searchValue }
-            setSearchValue={ setSearchValue }
-            dateFilterType={ dateFilterType }
-            setDateFilterType={ setDateFilterType }
-            dateRange={ dateRange }
-            setDateRange={ setDateRange }
-            statuses={ statuses }
-            view={ view }
-            setView={ setView }
-          />
-          <InvoicesView table={ table } view={ view } isAdmin={ isAdmin } />
-          <div className='px-3 mt-auto'>
+          <div className="flex-1 min-h-0 overflow-auto">
+            <InvoicesTableToolbar
+              table={ table }
+              searchValue={ searchValue }
+              setSearchValue={ setSearchValue }
+              dateFilterType={ dateFilterType }
+              setDateFilterType={ setDateFilterType }
+              dateRange={ dateRange }
+              setDateRange={ setDateRange }
+              statuses={ statuses }
+              view={ view }
+              setView={ setView }
+            />
+            <InvoicesView table={ table } view={ view } isAdmin={ isAdmin } />
+          </div>
+          <div className='px-3 shrink-0 border-t bg-slate-50/50'>
             <DataTablePagination table={ table } />
           </div>
         </motion.div>

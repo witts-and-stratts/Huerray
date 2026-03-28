@@ -28,6 +28,7 @@ import { toast } from "sonner";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
+import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
 
 const creatorGlobalFilter: FilterFn<ModelsCreatorResponse> = ( row, _columnId, filterValue: string ) => {
@@ -70,6 +71,7 @@ export function CreatorsTable( {
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
   const { view, setView } = usePersistedViewMode( 'creators', 'cards' );
+  const { pagination, setPagination } = usePersistedPagination( 'creators' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
@@ -131,6 +133,7 @@ export function CreatorsTable( {
     [ creators ]
   );
 
+
   const columns = React.useMemo(
     () =>
       getColumns( {
@@ -156,46 +159,51 @@ export function CreatorsTable( {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
       globalFilter,
+      pagination,
     },
   } );
 
   return (
     <AnimatePresence>
-      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
-      { error && <TableErrorState entity="creators" message={ error.message } /> }
+      { showLoading && ( view === 'table' ? <DataTableSkeleton key="skeleton-table" /> : <TableSkeleton key="skeleton-cards" /> ) }
+      { error && <TableErrorState key="error" entity="creators" message={ error.message } /> }
       { !isLoading && !error && (
         <motion.div
+          key="content"
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="flex flex-col bg-slate-50/50 grow relative overflow-auto"
+          className="flex flex-col bg-slate-50/50 grow relative min-h-0"
         >
-          <CreatorsTableToolbar
-            table={ table }
-            statuses={ statuses }
-            countries={ countries }
-            genders={ genders }
-            view={ view }
-            setView={ setView }
-          />
-          <CreatorsView
-            table={ table }
-            view={ view }
-            onViewDetails={ ( creator ) => {
-              setSelectedCreator( creator );
-              setIsSheetOpen( true );
-            } }
-            onApproveProfile={ handleOnApproveProfile }
-            onRejectProfile={ handleOnRejectProfile }
-          />
-          <div className="px-3 mt-auto">
+          <div className="flex-1 min-h-0 overflow-auto">
+            <CreatorsTableToolbar
+              table={ table }
+              statuses={ statuses }
+              countries={ countries }
+              genders={ genders }
+              view={ view }
+              setView={ setView }
+            />
+            <CreatorsView
+              table={ table }
+              view={ view }
+              onViewDetails={ ( creator ) => {
+                setSelectedCreator( creator );
+                setIsSheetOpen( true );
+              } }
+              onApproveProfile={ handleOnApproveProfile }
+              onRejectProfile={ handleOnRejectProfile }
+            />
+          </div>
+          <div className="px-3 shrink-0 border-t bg-slate-50/50">
             <DataTablePagination table={ table } />
           </div>
           <CreatorDetailsSheet

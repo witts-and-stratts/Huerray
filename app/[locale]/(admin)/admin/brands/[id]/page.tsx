@@ -20,7 +20,7 @@ import {
 import { useTranslations } from "next-intl";
 
 export default function BrandDashboardPage() {
-  const t = useTranslations('dashboard.admin.brandDashboard');
+  const t = useTranslations( 'dashboard.admin.brandDashboard' );
   const params = useParams<{ id: string; }>();
   const brandId = params.id;
 
@@ -82,15 +82,15 @@ export default function BrandDashboardPage() {
   }, [ gigs ] );
 
   const financialRows = useMemo<BrandStatRow[]>( () => ( [
-    { label: t('totalSpend'), value: toCurrency( spendMetrics.totalSpend ), numeric: spendMetrics.totalSpend || 0 },
-    { label: t('avgGigSpend'), value: toCurrency( spendMetrics.avgGigSpend ), numeric: spendMetrics.avgGigSpend || 0 },
+    { label: t( 'totalSpend' ), value: toCurrency( spendMetrics.totalSpend ), numeric: spendMetrics.totalSpend || 0 },
+    { label: t( 'avgGigSpend' ), value: toCurrency( spendMetrics.avgGigSpend ), numeric: spendMetrics.avgGigSpend || 0 },
   ] ), [ spendMetrics.avgGigSpend, spendMetrics.totalSpend, t ] );
 
   const campaignRows = useMemo<BrandStatRow[]>( () => ( [
-    { label: t('total'), value: `${ campaignMetrics.total }`, numeric: campaignMetrics.total },
-    { label: t('active'), value: `${ campaignMetrics.active }`, numeric: campaignMetrics.active },
-    { label: t('finished'), value: `${ campaignMetrics.finished }`, numeric: campaignMetrics.finished },
-    { label: t('draft'), value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
+    { label: t( 'total' ), value: `${ campaignMetrics.total }`, numeric: campaignMetrics.total },
+    { label: t( 'active' ), value: `${ campaignMetrics.active }`, numeric: campaignMetrics.active },
+    { label: t( 'finished' ), value: `${ campaignMetrics.finished }`, numeric: campaignMetrics.finished },
+    { label: t( 'draft' ), value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
   ] ), [ campaignMetrics.active, campaignMetrics.draft, campaignMetrics.finished, campaignMetrics.total ] );
 
 
@@ -105,27 +105,27 @@ export default function BrandDashboardPage() {
   if ( brandError || ( !isBrandLoading && !brand ) ) {
     return (
       <div className="flex min-h-[400px] flex-col items-center justify-center gap-4">
-        <h3 className="text-lg font-medium text-red-800">{t('failedToLoad')}</h3>
-        <p className="text-sm text-red-600">{ ( brandError as Error )?.message || t('brandNotFound') }</p>
+        <h3 className="text-lg font-medium text-red-800">{ t( 'failedToLoad' ) }</h3>
+        <p className="text-sm text-red-600">{ ( brandError as Error )?.message || t( 'brandNotFound' ) }</p>
       </div>
     );
   }
 
-  const brandName = brand?.company_name || t('brandDashboard');
+  const brandName = brand?.company_name || t( 'brandDashboard' );
   const brandLogo = brand?.profile_photo?.asset || brand?.logo_url || brand?.logo || '';
 
   return (
     <div className="flex flex-1 flex-col h-full">
       <SubHeader
         title={ brandName }
-        description={t('overview')}
+        description={ t( 'overview' ) }
         breadcrumbs={ [
-          { label: t('brands'), href: '/admin/brands' },
+          { label: t( 'brands' ), href: '/admin/brands' },
           { label: brandName, href: `/admin/brands/${ brandId }` },
         ] }
       />
 
-      <div className="ad-shell py-4 bg-slate-50/50 mt-0 flex-1 px-5">
+      <div className="ad-shell bg-slate-50/50 mt-0 flex-1 p-2 md:p-5">
         <section className="grid gap-4 md:grid-cols-12 lg:h-full">
           <aside className="space-y-4 md:col-span-5 md:sticky md:top-24 md:self-start h-full">
             <BrandProfileBlock brand={ brand } brandName={ brandName } brandLogo={ brandLogo } />

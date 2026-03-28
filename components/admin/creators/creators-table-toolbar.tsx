@@ -21,7 +21,7 @@ import { SuperField } from '@/components/dashboard-ui/super-field';
 import { getCountryFlag, getCountryName } from '@/lib/country-flags';
 import { FilterHorizontalIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ChevronDown, ChevronRight, Globe } from 'lucide-react';
+import { Brain, ChevronDown, ChevronRight, Globe } from 'lucide-react';
 import * as React from 'react';
 import '@/app/styles/components/data-table.css';
 import { useTranslations } from 'next-intl';
@@ -150,6 +150,43 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
   );
 }
 
+const CONTENT_TYPE_OPTIONS = ['human-generated', 'ai-generated'];
+
+function ContentTypeFilter<TData>( { table }: { table: Table<TData>; } ) {
+  const column = table.getColumn( 'content_type' );
+  const filterValue = column?.getFilterValue() as string[] | undefined;
+  const isActive = Array.isArray( filterValue ) && filterValue.length > 0;
+  const getFilterLabel = useFilterLabel();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild className='h-8'>
+        <Button variant='outline' size='sm' className={ `h-8${ isActive ? ' border-primary text-primary' : '' }` }>
+          <Brain className='size-4' strokeWidth={ 1 } />
+          { isActive && <span className='font-regular text-xs'>{ filterValue!.length }</span> }
+          <ChevronDown className='size-4' strokeWidth={ 1 } />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end' className='min-w-48'>
+        { CONTENT_TYPE_OPTIONS.map( ( option ) => (
+          <DropdownMenuCheckboxItem
+            key={ option }
+            checked={ Array.isArray( filterValue ) && filterValue.includes( option ) }
+            onCheckedChange={ ( value ) => {
+              const current = ( column?.getFilterValue() as string[] ) ?? [];
+              const next = new Set( current );
+              value ? next.add( option ) : next.delete( option );
+              column?.setFilterValue( next.size > 0 ? Array.from( next ) : undefined );
+            } }
+          >
+            { getFilterLabel( option ) }
+          </DropdownMenuCheckboxItem>
+        ) ) }
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 interface CreatorsTableToolbarProps<TData> {
   table: Table<TData>;
   statuses: string[];
@@ -195,6 +232,7 @@ export function CreatorsTableToolbar<TData>( {
           title={ t( 'filters.sex' ) }
           labelFn={ getFilterLabel }
         />
+        <ContentTypeFilter table={ table } />
         <AgeRangeFilter table={ table } />
         <DataTableViewOptions
           table={ table }

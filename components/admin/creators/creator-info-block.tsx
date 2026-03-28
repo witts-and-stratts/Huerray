@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { memo } from "react";
 import { imgpresets } from "@/lib/utils/imgproxy";
 import { useTranslations } from "next-intl";
+import { AiContentBadge } from "@/components/dashboard-ui/ai-content-badge";
 
 interface DetailsGenderLocationProps {
   creator: ModelsCreatorResponse;
@@ -57,7 +58,7 @@ const PreferredCategories = memo( ( { creator }: PreferredCategoriesProps ) => {
       {
         creator.preferred_categories && creator.preferred_categories.length > 0 && ( <div className='flex flex-col gap-1'>
           <Separator className='my-1' />
-          <span className='text-[10px] text-muted-foreground/60 font-medium'>{t('creatorInfoBlock.preferredCategories')}</span>
+          <span className='text-[10px] text-muted-foreground/60 font-medium'>{ t( 'creatorInfoBlock.preferredCategories' ) }</span>
           <CreatorCategories categories={ creator.preferred_categories } />
         </div> )
       }
@@ -90,7 +91,7 @@ const CreatorIdCopyAndAge = memo( ( { creator, hideAge, age }: CreatorIdCopyAndA
         { creator.creator_id }
         <Copy className="ml-1 size-2.5 opacity-0 group-hover:opacity-100 transition-opacity" />
       </Badge>
-      { !hideAge && age && <span className="text-xs text-muted-foreground">{ age } {t('creatorInfoBlock.yo')}</span> }
+      { !hideAge && age && <span className="text-xs text-muted-foreground">{ age } { t( 'creatorInfoBlock.yo' ) }</span> }
     </div>
   );
 } );
@@ -115,15 +116,18 @@ const CreatorHeader = memo( ( { creator, onViewDetails }: CreatorHeaderProps ) =
           <AvatarFallback>{ fullName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
         </Avatar>
         <div className="flex flex-col min-w-0">
-          { isAdmin ? (
-            <Link href={ `${ basePath }/creators/${ creator.id }` } className='dt-table__col-title'>
-              { fullName }
-            </Link>
-          ) : (
-            <button className='dt-table__col-title text-left' onClick={ () => onViewDetails( creator ) }>
-              { fullName }
-            </button>
-          ) }
+          <div className="flex items-center gap-1.5">
+            { isAdmin ? (
+              <Link href={ `${ basePath }/creators/${ creator.id }` } className='dt-table__col-title'>
+                { fullName }
+              </Link>
+            ) : (
+              <button className='dt-table__col-title text-left' onClick={ () => onViewDetails( creator ) }>
+                { fullName }
+              </button>
+            ) }
+            { creator.content_type === 'ai-generated' && <AiContentBadge className="mt-1 scale-70" /> }
+          </div>
         </div>
       </div>
     </div>

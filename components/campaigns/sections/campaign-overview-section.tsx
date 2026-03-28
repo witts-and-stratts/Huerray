@@ -163,8 +163,8 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
           onViewAllInvitations={ onViewAllInvitations }
         />
         <RoleGuard allowedRoles={ [ "brand" ] }>
-          { campaign?.number_of_gigs_validated && (
-            <InviteCreatorsCard campaignId={ campaign.id || '' } />
+          { campaign?.number_of_gigs_validated && status === 'running' && (
+            <InviteCreatorsCard campaignId={ campaign.id || '' } contentType={ campaign.content_type } />
           ) }
         </RoleGuard>
       </div>

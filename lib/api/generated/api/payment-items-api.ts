@@ -28,12 +28,48 @@ import type { ModelsPaginatedPaymentItemResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
+import type { ModelsStandardGenericResponse } from '../models';
+// @ts-ignore
 import type { ModelsStandardPaymentItemResponse } from '../models';
 /**
  * PaymentItemsApi - axios parameter creator
  */
 export const PaymentItemsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Admin deletes a payment item; recalculates the parent payment total if linked
+         * @summary Delete payment item by ID
+         * @param {string} id Payment Item ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentItemsIdDelete: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paymentItemsIdDelete', 'id', id)
+            const localVarPath = `/payment-items/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Admin creates a payment item for a gig and creator
          * @summary Create payment item
@@ -149,6 +185,19 @@ export const PaymentItemsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PaymentItemsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Admin deletes a payment item; recalculates the parent payment total if linked
+         * @summary Delete payment item by ID
+         * @param {string} id Payment Item ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paymentItemsIdDelete(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGenericResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentItemsIdDelete(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentItemsApi.paymentItemsIdDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Admin creates a payment item for a gig and creator
          * @summary Create payment item
          * @param {ModelsCreatePaymentItemRequest} request Payment item creation request
@@ -191,6 +240,16 @@ export const PaymentItemsApiFactory = function (configuration?: Configuration, b
     const localVarFp = PaymentItemsApiFp(configuration)
     return {
         /**
+         * Admin deletes a payment item; recalculates the parent payment total if linked
+         * @summary Delete payment item by ID
+         * @param {PaymentItemsApiPaymentItemsIdDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentItemsIdDelete(requestParameters: PaymentItemsApiPaymentItemsIdDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGenericResponse> {
+            return localVarFp.paymentItemsIdDelete(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Admin creates a payment item for a gig and creator
          * @summary Create payment item
          * @param {PaymentItemsApiPaymentItemsPostRequest} requestParameters Request parameters.
@@ -212,6 +271,16 @@ export const PaymentItemsApiFactory = function (configuration?: Configuration, b
         },
     };
 };
+
+/**
+ * Request parameters for paymentItemsIdDelete operation in PaymentItemsApi.
+ */
+export interface PaymentItemsApiPaymentItemsIdDeleteRequest {
+    /**
+     * Payment Item ID
+     */
+    readonly id: string
+}
 
 /**
  * Request parameters for paymentItemsPost operation in PaymentItemsApi.
@@ -248,6 +317,17 @@ export interface PaymentItemsApiPaymentItemsSearchGetRequest {
  * PaymentItemsApi - object-oriented interface
  */
 export class PaymentItemsApi extends BaseAPI {
+    /**
+     * Admin deletes a payment item; recalculates the parent payment total if linked
+     * @summary Delete payment item by ID
+     * @param {PaymentItemsApiPaymentItemsIdDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public paymentItemsIdDelete(requestParameters: PaymentItemsApiPaymentItemsIdDeleteRequest, options?: RawAxiosRequestConfig) {
+        return PaymentItemsApiFp(this.configuration).paymentItemsIdDelete(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Admin creates a payment item for a gig and creator
      * @summary Create payment item

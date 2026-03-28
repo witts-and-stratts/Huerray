@@ -255,6 +255,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                   min={ 0 }
                   value={ field.state.value }
                   onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                  onFocus={ ( e ) => e.target.select() }
                   onBlur={ field.handleBlur }
                   error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                   required
@@ -269,6 +270,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                   min={ 0 }
                   value={ field.state.value }
                   onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                  onFocus={ ( e ) => e.target.select() }
                   onBlur={ field.handleBlur }
                   error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                   required
@@ -286,6 +288,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                   min={ 1 }
                   value={ field.state.value }
                   onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                  onFocus={ ( e ) => e.target.select() }
                   onBlur={ field.handleBlur }
                   error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                   required
@@ -360,6 +363,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                   min={ 18 }
                   value={ field.state.value }
                   onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                  onFocus={ ( e ) => e.target.select() }
                   onBlur={ field.handleBlur }
                   error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                 />
@@ -373,6 +377,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                   min={ 18 }
                   value={ field.state.value }
                   onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                  onFocus={ ( e ) => e.target.select() }
                   onBlur={ field.handleBlur }
                   error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                 />
@@ -528,7 +533,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             </div>
 
             <Activity mode={ subheadTabValue === 'overview' ? 'visible' : 'hidden' }>
-              <div className="px-5 space-y-4">
+              <div className="px-2 md:px-5 space-y-2 md:space-y-4">
                 <Card>
                   <CardHeader>
                     <CardTitle>{ t( 'gigDetails' ) }</CardTitle>
@@ -557,6 +562,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                             min={ 0 }
                             value={ field.state.value }
                             onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                            onFocus={ ( e ) => e.target.select() }
                             onBlur={ field.handleBlur }
                             error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                             required
@@ -571,6 +577,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                             min={ 0 }
                             value={ field.state.value }
                             onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                            onFocus={ ( e ) => e.target.select() }
                             onBlur={ field.handleBlur }
                             error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                             required
@@ -588,6 +595,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                             min={ 1 }
                             value={ field.state.value }
                             onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                            onFocus={ ( e ) => e.target.select() }
                             onBlur={ field.handleBlur }
                             error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                             required
@@ -661,6 +669,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                             min={ 18 }
                             value={ field.state.value }
                             onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                            onFocus={ ( e ) => e.target.select() }
                             onBlur={ field.handleBlur }
                             error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                           />
@@ -674,6 +683,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
                             min={ 18 }
                             value={ field.state.value }
                             onChange={ ( e ) => field.handleChange( Number( e.target.value ) ) }
+                            onFocus={ ( e ) => e.target.select() }
                             onBlur={ field.handleBlur }
                             error={ field.state.meta.errors?.length ? field.state.meta.errors.map( e => e.message ).join( ', ' ) : undefined }
                           />
@@ -732,7 +742,7 @@ export function GigForm( { campaignId, campaignName, onSubmit, isSubmitting = fa
             </Activity>
 
             <Activity mode={ subheadTabValue === 'guidelines' ? 'visible' : 'hidden' }>
-              <div className="px-5 space-y-4">
+              <div className="px-2 md:px-5 space-y-2 md:space-y-4">
                 <Card>
                   <CardHeader>
                     <CardTitle>{ t( 'contentGuidelines' ) }</CardTitle>

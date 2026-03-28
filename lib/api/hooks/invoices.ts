@@ -88,12 +88,30 @@ export function useUpdateInvoiceStatus(
   } );
 }
 
-export function useGenerateInvoicePdf(
+export function useDownloadInvoicePdf(
+  options?: UseMutationOptions<Blob, ApiError, string>
+) {
+  return useMutation( {
+    mutationFn: async ( id: string ) => {
+      const response = await apiClient.get<Blob>( `/invoices/${ id }/pdf`, {
+        responseType: 'blob',
+        headers: {
+          Accept: 'application/pdf',
+        },
+      } );
+
+      return response.data;
+    },
+    ...options,
+  } );
+}
+
+export function useResendInvoicePdf(
   options?: UseMutationOptions<ModelsStandardInvoicePDFGeneratedResponse, ApiError, string>
 ) {
   return useMutation( {
     mutationFn: async ( id: string ) => {
-      const response = await invoiceApi.invoicesIdGeneratePdfPost( { id } );
+      const response = await invoiceApi.invoicesIdResendPdfPost( { id } );
       return response.data;
     },
     ...options,

@@ -50,9 +50,9 @@ export function CreatorDashboard() {
             Browse Gigs
           </Button>
         </Link>
-        <Link href="/creator/my-gigs">
+        <Link href="/creator/gigs">
           <Button variant="outline" className="gap-2">
-            View My Gigs
+            View Gigs
             <ArrowUpRight className="size-4" />
           </Button>
         </Link>

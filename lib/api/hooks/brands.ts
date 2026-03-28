@@ -155,6 +155,7 @@ export function useBrandCreators(
     ageMin?: number;
     ageMax?: number;
     gender?: 'male' | 'female' | 'any';
+    contentType?: 'human-generated' | 'ai-generated';
     city?: string;
     country?: string;
   },
@@ -171,6 +172,7 @@ export function useBrandCreators(
         ageMin: params?.ageMin,
         ageMax: params?.ageMax,
         gender: params?.gender as any,
+        contentType: params?.contentType as any,
         city: params?.city,
         country: params?.country,
       });

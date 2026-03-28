@@ -39,40 +39,6 @@ import type { ModelsUpdateInvoiceRequest } from '../models';
 export const InvoiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Generate PDF for an existing invoice and send via email to brand
-         * @summary Generate PDF for existing invoice
-         * @param {string} id Invoice ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        invoicesIdGeneratePdfPost: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('invoicesIdGeneratePdfPost', 'id', id)
-            const localVarPath = `/invoices/{id}/generate-pdf`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Get detailed invoice information
          * @summary Get invoice by ID
          * @param {string} id Invoice ID
@@ -92,6 +58,74 @@ export const InvoiceApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Generate and stream the invoice as a PDF file
+         * @summary Get invoice as PDF
+         * @param {string} id Invoice ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invoicesIdPdfGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('invoicesIdPdfGet', 'id', id)
+            const localVarPath = `/invoices/{id}/pdf`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/pdf';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Generate a PDF for an existing invoice and send it via email to the brand
+         * @summary Resend invoice PDF via email
+         * @param {string} id Invoice ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invoicesIdResendPdfPost: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('invoicesIdResendPdfPost', 'id', id)
+            const localVarPath = `/invoices/{id}/resend-pdf`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -260,19 +294,6 @@ export const InvoiceApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = InvoiceApiAxiosParamCreator(configuration)
     return {
         /**
-         * Generate PDF for an existing invoice and send via email to brand
-         * @summary Generate PDF for existing invoice
-         * @param {string} id Invoice ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async invoicesIdGeneratePdfPost(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardInvoicePDFGeneratedResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.invoicesIdGeneratePdfPost(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['InvoiceApi.invoicesIdGeneratePdfPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
          * Get detailed invoice information
          * @summary Get invoice by ID
          * @param {string} id Invoice ID
@@ -283,6 +304,32 @@ export const InvoiceApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.invoicesIdGet(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['InvoiceApi.invoicesIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Generate and stream the invoice as a PDF file
+         * @summary Get invoice as PDF
+         * @param {string} id Invoice ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invoicesIdPdfGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invoicesIdPdfGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['InvoiceApi.invoicesIdPdfGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Generate a PDF for an existing invoice and send it via email to the brand
+         * @summary Resend invoice PDF via email
+         * @param {string} id Invoice ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async invoicesIdResendPdfPost(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardInvoicePDFGeneratedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.invoicesIdResendPdfPost(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['InvoiceApi.invoicesIdResendPdfPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -342,16 +389,6 @@ export const InvoiceApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = InvoiceApiFp(configuration)
     return {
         /**
-         * Generate PDF for an existing invoice and send via email to brand
-         * @summary Generate PDF for existing invoice
-         * @param {InvoiceApiInvoicesIdGeneratePdfPostRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        invoicesIdGeneratePdfPost(requestParameters: InvoiceApiInvoicesIdGeneratePdfPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardInvoicePDFGeneratedResponse> {
-            return localVarFp.invoicesIdGeneratePdfPost(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Get detailed invoice information
          * @summary Get invoice by ID
          * @param {InvoiceApiInvoicesIdGetRequest} requestParameters Request parameters.
@@ -360,6 +397,26 @@ export const InvoiceApiFactory = function (configuration?: Configuration, basePa
          */
         invoicesIdGet(requestParameters: InvoiceApiInvoicesIdGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardInvoiceResponse> {
             return localVarFp.invoicesIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Generate and stream the invoice as a PDF file
+         * @summary Get invoice as PDF
+         * @param {InvoiceApiInvoicesIdPdfGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invoicesIdPdfGet(requestParameters: InvoiceApiInvoicesIdPdfGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<File> {
+            return localVarFp.invoicesIdPdfGet(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Generate a PDF for an existing invoice and send it via email to the brand
+         * @summary Resend invoice PDF via email
+         * @param {InvoiceApiInvoicesIdResendPdfPostRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        invoicesIdResendPdfPost(requestParameters: InvoiceApiInvoicesIdResendPdfPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardInvoicePDFGeneratedResponse> {
+            return localVarFp.invoicesIdResendPdfPost(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Update the status of an invoice (Admin only)
@@ -395,9 +452,9 @@ export const InvoiceApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
- * Request parameters for invoicesIdGeneratePdfPost operation in InvoiceApi.
+ * Request parameters for invoicesIdGet operation in InvoiceApi.
  */
-export interface InvoiceApiInvoicesIdGeneratePdfPostRequest {
+export interface InvoiceApiInvoicesIdGetRequest {
     /**
      * Invoice ID
      */
@@ -405,9 +462,19 @@ export interface InvoiceApiInvoicesIdGeneratePdfPostRequest {
 }
 
 /**
- * Request parameters for invoicesIdGet operation in InvoiceApi.
+ * Request parameters for invoicesIdPdfGet operation in InvoiceApi.
  */
-export interface InvoiceApiInvoicesIdGetRequest {
+export interface InvoiceApiInvoicesIdPdfGetRequest {
+    /**
+     * Invoice ID
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for invoicesIdResendPdfPost operation in InvoiceApi.
+ */
+export interface InvoiceApiInvoicesIdResendPdfPostRequest {
     /**
      * Invoice ID
      */
@@ -465,17 +532,6 @@ export interface InvoiceApiInvoicesSearchGetRequest {
  */
 export class InvoiceApi extends BaseAPI {
     /**
-     * Generate PDF for an existing invoice and send via email to brand
-     * @summary Generate PDF for existing invoice
-     * @param {InvoiceApiInvoicesIdGeneratePdfPostRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public invoicesIdGeneratePdfPost(requestParameters: InvoiceApiInvoicesIdGeneratePdfPostRequest, options?: RawAxiosRequestConfig) {
-        return InvoiceApiFp(this.configuration).invoicesIdGeneratePdfPost(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Get detailed invoice information
      * @summary Get invoice by ID
      * @param {InvoiceApiInvoicesIdGetRequest} requestParameters Request parameters.
@@ -484,6 +540,28 @@ export class InvoiceApi extends BaseAPI {
      */
     public invoicesIdGet(requestParameters: InvoiceApiInvoicesIdGetRequest, options?: RawAxiosRequestConfig) {
         return InvoiceApiFp(this.configuration).invoicesIdGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Generate and stream the invoice as a PDF file
+     * @summary Get invoice as PDF
+     * @param {InvoiceApiInvoicesIdPdfGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public invoicesIdPdfGet(requestParameters: InvoiceApiInvoicesIdPdfGetRequest, options?: RawAxiosRequestConfig) {
+        return InvoiceApiFp(this.configuration).invoicesIdPdfGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Generate a PDF for an existing invoice and send it via email to the brand
+     * @summary Resend invoice PDF via email
+     * @param {InvoiceApiInvoicesIdResendPdfPostRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public invoicesIdResendPdfPost(requestParameters: InvoiceApiInvoicesIdResendPdfPostRequest, options?: RawAxiosRequestConfig) {
+        return InvoiceApiFp(this.configuration).invoicesIdResendPdfPost(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

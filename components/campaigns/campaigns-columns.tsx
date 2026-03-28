@@ -30,8 +30,7 @@ import { cn } from '@/lib/dashboard-utils';
 import { useBasePath } from '@/lib/providers/path-provider';
 import { useLocale, useTranslations } from 'next-intl';
 import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
-import { Badge } from '@/components/dashboard-ui/badge';
-import { Brain } from 'lucide-react';
+import { AiContentBadge } from '@/components/dashboard-ui/ai-content-badge';
 
 const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignResponse>, className?: string; } ) => {
   const commonT = useTranslations( 'dashboard.common' );
@@ -219,12 +218,7 @@ const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
         <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
           <h4 className='card__title capitalize text-[18px] font-normal text-primary font-primary flex items-center gap-2'>
             <span className='font-normal'>{ campaign_name }</span>
-            { content_type === UtilsContentType.ContentTypeAIGenerated && (
-              <Badge variant="outline" className="gap-1.5 border-maroon-400 bg-maroon-50 text-maroon-500 scale-75 origin-left mt-0.5">
-                <Brain className="size-3" />
-                AI
-              </Badge>
-            ) }
+            { content_type === UtilsContentType.ContentTypeAIGenerated && <AiContentBadge /> }
           </h4>
         </Link>
         <p className='card__description line-clamp-2'>
@@ -292,6 +286,24 @@ export function useCampaignColumns(): ColumnDef<ModelsCampaignResponse>[] {
         if ( filterValue === undefined ) {
           return true;
         }
+        if ( !Array.isArray( filterValue ) ) return true;
+        if ( filterValue.length === 0 ) return false;
+        const rowValue = row.getValue( id ) as string;
+        return filterValue.includes( rowValue );
+      },
+    },
+    {
+      id: 'content_type',
+      accessorKey: 'content_type',
+      cell: () => <span data-hidden-column="true" />,
+      enableSorting: false,
+      enableHiding: false,
+      header: () => <span data-hidden-column="true" />,
+      size: 0,
+      minSize: 0,
+      maxSize: 0,
+      filterFn: ( row, id, filterValue ) => {
+        if ( filterValue === undefined ) return true;
         if ( !Array.isArray( filterValue ) ) return true;
         if ( filterValue.length === 0 ) return false;
         const rowValue = row.getValue( id ) as string;

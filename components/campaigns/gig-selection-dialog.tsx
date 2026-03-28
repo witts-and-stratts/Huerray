@@ -1,7 +1,7 @@
 "use client";
 
 import { useGigsByCampaign } from "@/lib/api/hooks/gigs";
-import { ModelsGigResponse } from "@/lib/api/generated/models";
+import { ModelsGigResponse, UtilsGigStatus } from "@/lib/api/generated/models";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/dashboard-ui/dialog";
-import { Button } from "@/components/dashboard-ui/button";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 import { Loader2 } from "lucide-react";
 import { GigSelectionItem } from "./gig-selection/gig-selection-item";
@@ -52,7 +51,9 @@ export function GigSelectionDialog( {
 }: GigSelectionDialogProps ) {
   const t = useTranslations( 'dashboard.brand.gigsPage' );
   const { data: gigsData, isLoading } = useGigsByCampaign( campaignId, "brand" );
-  const gigs = ( gigsData?.data || [] ) as ModelsGigResponse[];
+  const gigs = ( ( gigsData?.data || [] ) as ModelsGigResponse[] ).filter(
+    ( gig ) => gig.gig_status !== UtilsGigStatus.GigStatusCompleted
+  );
 
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>

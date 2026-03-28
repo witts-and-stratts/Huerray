@@ -416,7 +416,7 @@
       "brand": "Marke",
       "campaign": "Kampagne",
       "issued": "Ausgestellt",
-      "paid": "Bezahlt?",
+      "paid": "Status",
       "amount": "Betrag",
       "actions": "Aktionen"
     },
@@ -503,7 +503,7 @@
     "newBatchPayment": {
       "title": "Neue Chargenzahlung",
       "description": "Wählen Sie einen Ersteller und seine ausstehenden Zahlungsposten aus.",
-      "triggerButton": "Neue Chargenzahlung",
+      "triggerButton": "Neue Zahlung",
       "creatorLabel": "Schöpfer",
       "creatorPlaceholder": "Wählen Sie einen Ersteller...",
       "pendingItems": "Ausstehende Posten",
@@ -705,7 +705,18 @@
     "copyId": "ID kopieren",
     "thisCreator": "Dieser Schöpfer",
     "deleteCreator": "Ersteller löschen",
-    "return": "Rückkehr"
+    "return": "Rückkehr",
+    "makeAiCreator": "Make AI Creator",
+    "makeHumanCreator": "Menschenschöpfer machen",
+    "confirmMakeAiTitle": "AI Creator erstellen?",
+    "confirmMakeAiDesc": "{name} wird als KI-generierter Inhaltsersteller markiert.",
+    "confirmMakeHumanTitle": "Menschenschöpfer machen?",
+    "confirmMakeHumanDesc": "{name} werden als von Menschen erstellte Inhalte gekennzeichnet.",
+    "confirmFirstNameLabel": "Geben Sie zur Bestätigung \"{name}\" ein.",
+    "confirmFirstNamePlaceholder": "Vornamen eingeben",
+    "updatingProfileType": "Aktualisieren...",
+    "madeAiToast": "{name} ist jetzt ein KI-Ersteller",
+    "madeHumanToast": "{name} ist jetzt ein menschlicher Schöpfer"
   },
   "userDetails": {
     "description": "Detaillierte Informationen über den Benutzer",
@@ -776,6 +787,7 @@
     "size": "Größe",
     "userType": "Benutzertyp",
     "age": "Alter",
+    "contentType": "Inhalt Typ",
     "min": "Min",
     "max": "Max",
     "apply": "Bewerbung",
@@ -1061,5 +1073,75 @@
   "creatorSheetHeader": {
     "detailedInformationAboutCreator": "Detaillierte Informationen über den Ersteller",
     "yo": "Jahr/Jahr"
+  },
+  "casesPage": {
+    "title": "Support-Fälle",
+    "description": "Anzeige und Verwaltung aller Supportfälle auf der gesamten Plattform.",
+    "empty": "Keine Fälle gefunden.",
+    "tabs": {
+      "all": "Alle",
+      "open": "Öffnen Sie",
+      "inProgress": "In Arbeit",
+      "resolved": "Aufgelöst",
+      "closed": "Geschlossen"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Fälle suchen...",
+      "status": "Status",
+      "priority": "Priorität"
+    },
+    "columns": {
+      "caseNumber": "Fall #",
+      "caseNumberCopied": "Kopierte Fallnummer",
+      "title": "Titel",
+      "status": "Status",
+      "priority": "Priorität",
+      "reporter": "Reporter",
+      "entity": "Entität",
+      "created": "Erstellt",
+      "actions": "Aktionen"
+    },
+    "actionMenu": {
+      "viewDetails": "Details anzeigen",
+      "copyId": "ID kopieren",
+      "markInProgress": "Als in Bearbeitung markieren",
+      "markResolved": "Als aufgelöst markieren",
+      "reopen": "wieder öffnen.",
+      "close": "Fall schließen",
+      "toasts": {
+        "idCopied": "Fall-ID kopiert",
+        "missingId": "Fehlende Fall-ID",
+        "statusUpdated": "Fallstatus aktualisiert",
+        "statusUpdateError": "Aktualisierung des Fallstatus fehlgeschlagen"
+      }
+    },
+    "details": {
+      "tab": "Einzelheiten",
+      "description": "Detaillierte Informationen zum Fall",
+      "untitled": "Unbenannter Fall",
+      "descriptionLabel": "Beschreibung",
+      "caseInfo": "Informationen zum Fall",
+      "systemInfo": "System-Details",
+      "status": "Status",
+      "priority": "Priorität",
+      "reporter": "Reporter",
+      "assignee": "Rechtsnachfolger",
+      "relatedEntity": "Verwandte Entität",
+      "caseId": "Fall-ID",
+      "idCopied": "Fall-ID kopiert",
+      "created": "Erstellt",
+      "updated": "Zuletzt aktualisiert",
+      "resolved": "Aufgelöst am",
+      "unknown": "Unbekannt",
+      "unassigned": "Nicht zugewiesen",
+      "na": "K.A."
+    },
+    "messages": {
+      "tab": "Nachrichten",
+      "empty": "Noch keine Nachrichten. Beginnen Sie das Gespräch.",
+      "placeholder": "Geben Sie eine Nachricht ein... (Enter zum Senden)",
+      "sent": "Nachricht gesendet",
+      "sendError": "Nachricht konnte nicht gesendet werden"
+    }
   }
 }

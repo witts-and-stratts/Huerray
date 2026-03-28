@@ -84,7 +84,7 @@ const GigSubmissionsButton = memo( ( { gig, onSelectSubmission }: GigSubmissions
       </Tooltip>
 
       <DialogContent className="max-w-sm! max-h-[80vh] flex flex-col gap-0 p-0">
-        <DialogHeader className="border-b border-border/50 px-5 py-4">
+        <DialogHeader className="border-b border-border/50 px-2 md:px-5 py-2 md:py-4">
           <h5>Submissions</h5>
           <DialogTitle className={ 'dialog__title' }>{ gig.title } Gig</DialogTitle>
           <p className="text-xs text-muted-foreground">{ count } submission{ count !== 1 ? 's' : '' }</p>
@@ -112,7 +112,7 @@ GigSubmissionsButton.displayName = 'GigSubmissionsButton';
 interface GigCardHeaderProps {
   gig: ModelsGigResponse;
   coverImage: string | undefined;
-  onViewGig: () => void;
+  onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onSelectSubmission: ( sub: ModelsVideoSubmissionResponse ) => void;
 }
 
@@ -122,7 +122,7 @@ const GigCardHeader = memo( ( { gig, coverImage, onViewGig, onSelectSubmission }
     <div className="flex flex-col flex-1 min-w-0">
       <h3
         className="card__title cursor-pointer hover:underline truncate"
-        onClick={ onViewGig }
+        onClick={ () => onViewGig( gig ) }
       >
         { gig.title }
       </h3>
@@ -162,7 +162,7 @@ const GigCardHeader = memo( ( { gig, coverImage, onViewGig, onSelectSubmission }
           <GigSubmissionsButton gig={ gig } onSelectSubmission={ onSelectSubmission } />
         ) }
       </RoleGuard>
-      <GigActionMenu gig={ gig } onViewGig={ () => onViewGig() } trigger="icon" />
+      <GigActionMenu gig={ gig } onViewGig={ onViewGig } trigger="icon" />
     </div>
   </div>
 ) );
@@ -270,7 +270,7 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmiss
         <GigCardHeader
           gig={ gig }
           coverImage={ coverImage }
-          onViewGig={ handleViewGig }
+          onViewGig={ onViewGig }
           onSelectSubmission={ handleSelectSubmission }
         />
 

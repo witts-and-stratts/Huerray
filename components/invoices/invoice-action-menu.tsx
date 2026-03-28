@@ -1,18 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Ban, CheckCircle, ChevronDown, Download, FileCheck, Send, Wallet } from "lucide-react";
+import { AxiosError } from "axios";
+import { Ban, CheckCircle, ChevronDown, Download, FileCheck, Mail, Send, Wallet } from "lucide-react";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import { ReactNode } from "react";
 
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
 import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
+import { Input } from "@/components/dashboard-ui/input";
 import { ModelsInvoiceResponse, UtilsInvoiceStatus } from "@/lib/api/generated/models";
-import { useGenerateInvoicePdf, useUpdateInvoiceStatus } from "@/lib/api/hooks/invoices";
+import { useDownloadInvoicePdf, useResendInvoicePdf, useUpdateInvoiceStatus } from "@/lib/api/hooks/invoices";
 import { InvoiceDetailsSheet } from "./invoice-details-sheet";
 import { ButtonGroup } from "../dashboard-ui/button-group";
-import { BASE_URL } from "@/lib/api/client";
 import { toast } from "sonner";
 import { useTranslations } from 'next-intl';
 
@@ -30,11 +31,36 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
   const [ viewOpen, setViewOpen ] = useState( false );
   const [ openDialog, setOpenDialog ] = useState<DialogKey | null>( null );
   const [ paymentNotes, setPaymentNotes ] = useState( 'Payment made' );
+  const [ cancelConfirmation, setCancelConfirmation ] = useState( '' );
+  const invoiceTitle = invoice.invoice_number || invoice.campaign_name || t( 'details.invoiceFallback' );
 
-  const { mutate: generatePdf, isPending: isPdfPending } = useGenerateInvoicePdf( {
-    onSuccess: ( data ) => {
-      const pdfPath = data?.data?.pdf_path;
-      if ( pdfPath ) window.open( `${ BASE_URL }/${ pdfPath }`, "_blank" );
+  const { mutate: downloadPdf, isPending: isPdfPending } = useDownloadInvoicePdf( {
+    onSuccess: ( blob ) => {
+      const objectUrl = URL.createObjectURL( blob );
+      const link = document.createElement( "a" );
+      link.href = objectUrl;
+      link.download = `invoice-${ invoice.invoice_number || invoice.id || 'document' }.pdf`;
+      document.body.appendChild( link );
+      link.click();
+      link.remove();
+      URL.revokeObjectURL( objectUrl );
+    },
+    onError: () => {
+      toast.error( t( 'actions.downloadPdfError' ) );
+    },
+  } );
+
+  const { mutate: resendInvoicePdf, isPending: isResendPending } = useResendInvoicePdf( {
+    onSuccess: () => {
+      toast.success( t( 'actions.resendInvoiceSuccess' ) );
+    },
+    onError: ( error ) => {
+      const message = error instanceof AxiosError
+        ? ( error.response?.data as { message?: string; error?: string; } | undefined )?.message
+        || ( error.response?.data as { message?: string; error?: string; } | undefined )?.error
+        : undefined;
+
+      toast.error( message || t( 'actions.resendInvoiceError' ) );
     },
   } );
 
@@ -64,11 +90,19 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
 
   const actions: MenuAction<ModelsInvoiceResponse>[] = [
     {
-      label: isPdfPending ? t( 'actions.generatingPdf' ) : t( 'actions.downloadPdf' ),
+      label: isPdfPending ? t( 'actions.downloadingPdf' ) : t( 'actions.downloadPdf' ),
       icon: Download,
       disabled: isPdfPending,
       action: ( inv ) => {
-        if ( inv.id ) generatePdf( inv.id );
+        if ( inv.id ) downloadPdf( inv.id );
+      },
+    },
+    {
+      label: isResendPending ? t( 'actions.resendingInvoice' ) : t( 'actions.resendInvoice' ),
+      icon: Mail,
+      disabled: isResendPending,
+      action: ( inv ) => {
+        if ( inv.id ) resendInvoicePdf( inv.id );
       },
     },
     // {
@@ -97,6 +131,7 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
       action: () => setOpenDialog( 'cancelInvoice' ),
       className: "text-destructive focus:text-destructive",
       condition: () => invoice.invoice_status !== 'cancelled',
+      allowedRoles: [ 'admin' ]
     },
   ];
 
@@ -204,15 +239,33 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
 
       <ConfirmDialog
         open={ openDialog === 'cancelInvoice' }
-        onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
+        onOpenChange={ ( open ) => {
+          if ( !open ) {
+            setOpenDialog( null );
+            setCancelConfirmation( '' );
+          }
+        } }
         title={ t( 'dialogs.cancelInvoice.title' ) }
-        description={ t( 'dialogs.cancelInvoice.description' ) }
+        description={
+          <>
+            { t( 'dialogs.cancelInvoice.description' ) }{ " " }
+            <span className="font-semibold text-foreground">{ invoiceTitle }</span>.
+          </>
+        }
         confirmLabel={ t( 'dialogs.cancelInvoice.confirmLabel' ) }
         onConfirm={ () => handleInvoiceStatusUpdate( 'cancelled' ) }
+        confirmDisabled={ cancelConfirmation.trim() !== invoiceTitle.trim() }
         isLoading={ isStatusActionPending }
         loadingText={ t( 'dialogs.cancelInvoice.loading' ) }
         variant="destructive"
-      />
+      >
+        <Input
+          value={ cancelConfirmation }
+          onChange={ ( e ) => setCancelConfirmation( e.target.value ) }
+          placeholder={ t( 'dialogs.cancelInvoice.confirmInvoiceTitle' ) }
+          aria-label={ t( 'dialogs.cancelInvoice.confirmInvoiceTitle' ) }
+        />
+      </ConfirmDialog>
     </>
   );
 }

@@ -23,7 +23,6 @@ export function VideosTabContent( { videoItems, onPreview }: VideosTabContentPro
     <ScrollArea className="w-full" scrollbar={ { orientation: 'horizontal', style: { height: '6px' } } }>
       <div className="flex gap-2 pb-3">
         { videoItems.filter( ( item ) => item.asset ).map( ( item, index ) => {
-          console.log( "Poster", item.thumbnail );
           return <div
             key={ `${ item.asset }-${ index }` }
             onClick={ () => onPreview( index ) }

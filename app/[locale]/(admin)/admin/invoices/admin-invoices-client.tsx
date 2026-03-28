@@ -12,5 +12,9 @@ export function AdminInvoicesClient() {
     return data?.data || [];
   }, [ data ] );
 
-  return <InvoicesTable data={ invoices } isLoading={ isLoading } isAdmin />;
+  return (
+    <div className='flex flex-col flex-1 min-h-0 overflow-hidden'>
+      <InvoicesTable data={ invoices } isLoading={ isLoading } isAdmin />
+    </div>
+  );
 }

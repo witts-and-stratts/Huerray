@@ -2,7 +2,7 @@
 @reference "../dashboard-globals.css";
 
 .pagination-container {
-  @apply flex flex-col items-start justify-between gap-4 px-2 py-4 sm:flex-row sm:items-center sm:py-0 md:my-4 mt-auto;
+  @apply flex flex-col items-start justify-between gap-4 md:px-2 py-4 sm:flex-row sm:items-center sm:py-0 md:my-4 mt-auto;
 }
 
 .pagination-selection-count {
@@ -22,7 +22,7 @@
 }
 
 .pagination-rows-label {
-  @apply text-sm font-medium;
+  @apply text-sm font-medium max-md:hidden;
 }
 
 .pagination-field {

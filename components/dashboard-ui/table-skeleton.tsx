@@ -21,7 +21,7 @@ export function TableSkeleton( {
       animate={ { opacity: 1 } }
       exit={ { opacity: 0 } }
       transition={ { duration: 0.5 } }
-      className={ cn( "w-full space-y-4 px-5 pt-4", className ) }
+      className={ cn( "w-full space-y-4 px-2 md:px-5 py-2 md:py-4", className ) }
     >
       <div className="flex items-center justify-between">
         <Skeleton className="h-10 w-[250px]" />

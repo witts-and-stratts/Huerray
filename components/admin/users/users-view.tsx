@@ -8,5 +8,5 @@ interface UsersViewProps {
 }
 
 export function UsersView( { table }: UsersViewProps ) {
-  return <div className="px-5"><UsersTableView table={ table } /></div>;
+  return <div className="px-2 md:px-5"><UsersTableView table={ table } /></div>;
 }

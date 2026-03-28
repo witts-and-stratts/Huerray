@@ -65,6 +65,7 @@ const GLOBAL_STATUS_CONFIG: Record<string, StatusConfig> = {
   overdue: { label: 'Overdue', color: COLOR.red, icon: Alert02Icon },
 
   // Neutral / inactive
+  deactivated: { label: 'Deactivated', color: COLOR.slate, icon: CancelCircleIcon },
   draft: { label: 'Draft', color: COLOR.slate, icon: FileEditIcon },
   created: { label: 'Created', color: COLOR.blue, icon: CircleIcon },
   in_progress: { label: 'In Progress', color: COLOR.blue, icon: Loading01Icon },

@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email_sent** | **boolean** |  | [optional] [default to undefined]
 **invoice_id** | **string** |  | [optional] [default to undefined]
-**pdf_path** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -17,7 +16,6 @@ import { ModelsInvoicePDFGeneratedResponse } from 'huerray-api';
 const instance: ModelsInvoicePDFGeneratedResponse = {
     email_sent,
     invoice_id,
-    pdf_path,
 };
 ```
 

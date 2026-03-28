@@ -21,6 +21,7 @@ import { PaymentsTableView } from './payments-table-view';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
+import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
 
 const paymentGlobalFilter: FilterFn<ModelsPaymentResponse> = ( row, _columnId, filterValue: string ) => {
@@ -53,6 +54,7 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ searchValue, setSearchValue ] = React.useState( '' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
+  const { pagination, setPagination } = usePersistedPagination( 'payments' );
 
   const filteredData = React.useMemo( () => {
     if ( !dateRange?.from && !dateRange?.to ) return data;
@@ -90,12 +92,14 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
       globalFilter: searchValue,
+      pagination,
     },
   } );
 
@@ -108,20 +112,22 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className='flex flex-col bg-slate-50/50 grow relative overflow-auto h-full'
+          className='flex flex-col bg-slate-50/50 grow relative min-h-0'
         >
-          <PaymentsTableToolbar
-            table={ table }
-            searchValue={ searchValue }
-            setSearchValue={ setSearchValue }
-            dateRange={ dateRange }
-            setDateRange={ setDateRange }
-            statuses={ statuses }
-          />
-          <div className='px-2 md:px-5'>
-            <PaymentsTableView table={ table } />
+          <div className="flex-1 min-h-0 overflow-auto">
+            <PaymentsTableToolbar
+              table={ table }
+              searchValue={ searchValue }
+              setSearchValue={ setSearchValue }
+              dateRange={ dateRange }
+              setDateRange={ setDateRange }
+              statuses={ statuses }
+            />
+            <div className='px-2 md:px-5'>
+              <PaymentsTableView table={ table } />
+            </div>
           </div>
-          <div className='px-3 mt-auto'>
+          <div className='px-3 shrink-0 border-t bg-slate-50/50'>
             <DataTablePagination table={ table } />
           </div>
         </motion.div>

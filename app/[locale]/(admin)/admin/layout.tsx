@@ -26,7 +26,9 @@ export default function AdminLayout( {
           <SidebarInset>
             <EmailVerificationBanner />
             <DashboardHeader />
-            { children }
+            <div className="flex-1 overflow-y-auto min-h-0 flex flex-col">
+              { children }
+            </div>
           </SidebarInset>
         </SidebarProvider>
       </PathProvider>

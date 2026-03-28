@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 import { useRole } from '@/contexts/role-context';
-import { ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
+import { ModelsBrandResponse, ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency } from '@/lib/hooks/format';
@@ -79,6 +79,10 @@ export interface InvitationCardProps {
   onViewCreatorDetails?: ( creator: ModelsCreatorResponse ) => void;
 }
 
+function getInvitationBrand( invitation: ModelsGigInvitationResponse ): ModelsBrandResponse | undefined {
+  return ( invitation as ModelsGigInvitationResponse & { brand?: ModelsBrandResponse; } ).brand;
+}
+
 function getInvitationCreator( invitation: ModelsGigInvitationResponse, fallback: string ): ModelsCreatorResponse | null {
   if ( invitation.creator ) return invitation.creator as ModelsCreatorResponse;
   if ( invitation.creator_id ) {
@@ -136,11 +140,12 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
   const t = useTranslations( 'dashboard.creator' );
 
   const gig = invitation.gig;
+  const invitationBrand = getInvitationBrand( invitation );
   const gigTitle = gig?.title || t( 'common.untitledGig' );
   const requirementsTitle = t( 'requirements.title' );
   const contentGuidelinesTitle = t( 'campaign.campaignBriefTitle' );
-  const brandName = gig?.brand?.company_name || gig?.brand_name || '';
-  const brand = gig?.brand;
+  const brand = gig?.brand || invitationBrand;
+  const brandName = brand?.company_name || gig?.brand_name || '';
   const isPending = ( invitation.status || '' ).toLowerCase() === 'pending';
 
   const coverImage = ( gig?.campaign?.product_image?.asset || gig?.campaign?.campaign_images?.[ 0 ]?.asset ) || undefined;
@@ -224,19 +229,20 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
               <Button
                 variant="outline"
                 size="sm"
-                className="flex-1 font-normal border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
+                className="flex-1 min-w-0 font-normal border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
                 onClick={ () => setShowRejectDialog( true ) }
                 disabled={ isResponding }
               >
-                { t( 'invitations.actions.decline' ) }
+                <span className="truncate">{ t( 'invitations.actions.declineShort' ) }</span>
               </Button>
               <Button
                 size="sm"
-                className="flex-1"
+                className="flex-1 min-w-0"
                 onClick={ () => setShowAcceptDialog( true ) }
                 disabled={ isResponding }
               >
-                { t( 'invitations.actions.accept' ) } <ArrowRight className="size-3.5 ml-1" />
+                <span className="truncate">{ t( 'invitations.actions.acceptShort' ) }</span>
+                <ArrowRight className="size-3.5 ml-1 shrink-0" />
               </Button>
             </div>
           ) }
@@ -295,6 +301,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
 function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResponse; } ) {
   const t = useTranslations( 'dashboard.creator' );
   const gig = invitation.gig;
+  const invitationBrand = getInvitationBrand( invitation );
   const requirementsTitle = t( 'requirements.title' );
   const contentGuidelinesTitle = t( 'campaign.campaignBriefTitle' );
   const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
@@ -304,8 +311,9 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
 
   const campaign = gig?.campaign;
   const coverImage = campaign?.product_image?.asset || campaign?.campaign_images?.[ 0 ]?.asset;
-  const brandLogoUrl = gig?.brand?.profile_photo?.asset || gig?.brand_logo_url;
-  const brandName = gig?.brand_name || gig?.brand?.company_name || '';
+  const brand = gig?.brand || invitationBrand;
+  const brandLogoUrl = brand?.profile_photo?.asset || gig?.brand_logo_url;
+  const brandName = brand?.company_name || gig?.brand_name || '';
   const brandInitials = brandName.slice( 0, 2 ).toUpperCase();
 
   // Collect all product/campaign images (deduplicated)
