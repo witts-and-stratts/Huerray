@@ -24,7 +24,24 @@
   },
   "signup": {
     "title": "Anmeldung für Updates",
-    "placeholder": "E-Mail Adresse"
+    "placeholder": "E-Mail Adresse",
+    "success": "Danke für Ihre Anmeldung!",
+    "error": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
+  },
+  "newsletter": {
+    "loading": {
+      "title": "Abmeldung wird verarbeitet...",
+      "description": "Bitte warten Sie, während wir Ihre Anfrage bearbeiten."
+    },
+    "success": {
+      "title": "Sie wurden abgemeldet",
+      "description": "Sie erhalten keine Newsletter-E-Mails mehr von uns."
+    },
+    "error": {
+      "title": "Etwas ist schief gelaufen",
+      "description": "Wir konnten Ihre Abmeldeanfrage nicht verarbeiten. Der Link ist möglicherweise abgelaufen."
+    },
+    "backHome": "Zurück zur Startseite"
   },
   "copyright": "© {date} Huerray. Alle Rechte vorbehalten"
 }

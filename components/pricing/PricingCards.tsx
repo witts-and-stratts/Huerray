@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { getCalApi } from '@calcom/embed-react';
 import { PricingCard } from './PricingCard';
 import { Badge } from '../ui/badge';
 import { Check } from 'lucide-react';
@@ -10,6 +12,19 @@ import Link from 'next/link';
 export function PricingCards() {
   const tCards = useTranslations( 'pricing.cards' );
   const tExtra = useTranslations( 'pricing.extra' );
+
+  useEffect( () => {
+    ( async function () {
+      const cal = await getCalApi( { namespace: 'enterprise-booking' } );
+      cal( 'init', {
+        origin: 'https://www.cal.eu',
+      } );
+      cal( 'ui', {
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+      } );
+    } )();
+  }, [] );
 
   const cards = [
     {
@@ -104,6 +119,9 @@ export function PricingCards() {
             <Button
               variant='hero'
               className='w-full rounded-full py-6 text-lg font-medium'
+              data-cal-link='huerray/book-a-free-call'
+              data-cal-namespace='enterprise-booking'
+              data-cal-origin='https://www.cal.eu'
             >
               { tExtra( 'enterprise.buttonText' ) }
             </Button>

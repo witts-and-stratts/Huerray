@@ -41,10 +41,10 @@ export function Hero() {
           </div>
 
           {/* Hero Image Grid - Horizontal rows on mobile, vertical columns on desktop */ }
-          <div className='hero__image-grid'>
+          <div className='hero__image-grid' style={{ pointerEvents: 'none' }}>
             {/* Column/Row 1 - Horizontal on mobile, Vertical up on desktop */ }
             <div className='hero__carousel'>
-              <div className='hero__carousel-track hero__carousel-track--scroll-1'>
+              <div className='hero__carousel-track hero__carousel-track--scroll-1 pointer-events-none'>
                 { Array( 4 )
                   .fill( heroColumn1Images )
                   .flat()
@@ -62,7 +62,7 @@ export function Hero() {
 
             {/* Column/Row 2 - Horizontal reverse on mobile, Vertical down on desktop */ }
             <div className='hero__carousel'>
-              <div className='hero__carousel-track hero__carousel-track--scroll-2'>
+              <div className='hero__carousel-track hero__carousel-track--scroll-2 pointer-events-none'>
                 { Array( 4 )
                   .fill( heroColumn2Images )
                   .flat()

@@ -24,7 +24,24 @@
   },
   "signup": {
     "title": "Signup for updates",
-    "placeholder": "Email address"
+    "placeholder": "Email address",
+    "success": "Thanks for subscribing!",
+    "error": "Something went wrong. Please try again."
+  },
+  "newsletter": {
+    "loading": {
+      "title": "Unsubscribing...",
+      "description": "Please wait while we process your request."
+    },
+    "success": {
+      "title": "You've been unsubscribed",
+      "description": "You'll no longer receive newsletter emails from us."
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "We couldn't process your unsubscribe request. The link may have expired."
+    },
+    "backHome": "Back to homepage"
   },
   "copyright": "© {date} Huerray. All rights reserved"
 }

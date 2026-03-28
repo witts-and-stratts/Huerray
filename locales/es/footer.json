@@ -24,7 +24,24 @@
   },
   "signup": {
     "title": "Inscríbete para recibir actualizaciones",
-    "placeholder": "Dirección de correo electrónico"
+    "placeholder": "Dirección de correo electrónico",
+    "success": "¡Gracias por suscribirte!",
+    "error": "Algo salió mal. Por favor, inténtalo de nuevo."
+  },
+  "newsletter": {
+    "loading": {
+      "title": "Cancelando suscripción...",
+      "description": "Por favor espera mientras procesamos tu solicitud."
+    },
+    "success": {
+      "title": "Te has dado de baja",
+      "description": "Ya no recibirás correos electrónicos de nuestro boletín."
+    },
+    "error": {
+      "title": "Algo salió mal",
+      "description": "No pudimos procesar tu solicitud de baja. El enlace puede haber expirado."
+    },
+    "backHome": "Volver al inicio"
   },
   "copyright": "© {date} Huerray. Todos los derechos reservados"
 }

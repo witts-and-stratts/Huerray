@@ -24,7 +24,24 @@
   },
   "signup": {
     "title": "S'inscrire aux mises à jour",
-    "placeholder": "Adresse électronique"
+    "placeholder": "Adresse électronique",
+    "success": "Merci pour votre inscription !",
+    "error": "Une erreur s'est produite. Veuillez réessayer."
+  },
+  "newsletter": {
+    "loading": {
+      "title": "Désinscription en cours...",
+      "description": "Veuillez patienter pendant le traitement de votre demande."
+    },
+    "success": {
+      "title": "Vous avez été désinscrit",
+      "description": "Vous ne recevrez plus d'e-mails de notre newsletter."
+    },
+    "error": {
+      "title": "Une erreur s'est produite",
+      "description": "Nous n'avons pas pu traiter votre demande de désinscription. Le lien a peut-être expiré."
+    },
+    "backHome": "Retour à l'accueil"
   },
   "copyright": "© {date} Huerray. Tous droits réservés"
 }

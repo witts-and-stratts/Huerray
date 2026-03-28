@@ -44,6 +44,7 @@
 
 .hero__carousel-track {
   @apply flex md:flex-col gap-4 md:gap-8;
+  pointer-events: none;
 }
 
 .hero__carousel-track img {
