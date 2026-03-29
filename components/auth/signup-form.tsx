@@ -156,13 +156,13 @@ export function SignupForm( {
           // Route to the appropriate dashboard based on the selected role
           const dashboardPath = selectedRole === 'brand' ? "/brand" : "/creator";
 
-          toast.success( "Signup successful. Continue to Login", {
+          toast.success( t( 'toast.successTitle' ), {
             action: {
-              label: "Continue",
+              label: t( 'toast.continue' ),
               onClick: () => router.push( dashboardPath ),
             },
             cancel: {
-              label: "Cancel",
+              label: t( 'toast.cancel' ),
               onClick: () => toast.dismiss(),
             },
             dismissible: false,
@@ -172,12 +172,12 @@ export function SignupForm( {
         }
       } catch ( err: any ) {
         console.error( "Registration error:", err );
-        const errorMessage = err.response?.data?.message || err.message || "Registration failed. Please try again.";
+        const errorMessage = err.response?.data?.message || err.message || t( 'toast.errorDefault' );
         const fullError = `${ errorMessage }; ${ err.response?.data?.error?.message || '' }`;
         setError( fullError );
-        toast.error( "Registeration error", {
+        toast.error( t( 'toast.errorTitle' ), {
           description: fullError,
-          cancel: { label: "Cancel", onClick: () => toast.dismiss() },
+          cancel: { label: t( 'toast.cancel' ), onClick: () => toast.dismiss() },
           dismissible: true,
           richColors: true,
         } );

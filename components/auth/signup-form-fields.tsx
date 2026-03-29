@@ -107,7 +107,7 @@ interface FieldsProps {
 export function CommonFields( { form }: FieldsProps ) {
   const t = useTranslations( 'auth.signup.fields' );
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-2">
       <form.Field
         name="firstName"
         children={ ( field: any ) => (
