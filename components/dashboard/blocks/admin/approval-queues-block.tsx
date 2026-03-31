@@ -70,7 +70,8 @@ export function ApprovalQueuesBlock() {
           <CardTitle className="ad-card-title">{ t( 'dashboardBlocks.approvalQueues.title' ) }</CardTitle>
           <CardDescription className="ad-card-description">{ t( 'dashboardBlocks.approvalQueues.description' ) }</CardDescription>
         </div>
-        <Button variant="outline" size="xs" render={ <Link href="/admin/notifications" /> }>{ t( 'dashboardBlocks.approvalQueues.labels.viewAll' ) }</Button>
+        <Button variant="outline" size="xs" nativeButton={ false }
+          render={ <Link href="/admin/notifications" /> }>{ t( 'dashboardBlocks.approvalQueues.labels.viewAll' ) }</Button>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-[420px] pr-2" scrollbar={ { style: { width: '6px', opacity: 0.5 } } }>
@@ -103,7 +104,8 @@ export function ApprovalQueuesBlock() {
                 />
                 <div className="ad-queue-bottom">
                   <p className="ad-queue-count">{ queue.count }</p>
-                  <Button variant="ghost" size="sm" render={ <Link href={ queue.href } /> }>{ t( 'dashboardBlocks.approvalQueues.labels.reviewQueue' ) }</Button>
+                  <Button variant="ghost" size="sm" nativeButton={ false }
+          render={ <Link href={ queue.href } /> }>{ t( 'dashboardBlocks.approvalQueues.labels.reviewQueue' ) }</Button>
                 </div>
               </div>
             ) ) }

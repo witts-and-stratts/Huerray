@@ -1,11 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { ActionMenu, MenuAction } from '@/components/dashboard-ui/action-menu';
-import { ModelsCaseResponse } from '@/lib/api/generated/models';
-import { useUpdateCaseStatus } from '@/lib/api/hooks/cases';
+import { Button } from '@/components/dashboard-ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/dashboard-ui/dialog';
+import { ModelsCaseResponse, ModelsUserResponse } from '@/lib/api/generated/models';
+import { useAssignCase, useUpdateCaseStatus } from '@/lib/api/hooks/cases';
+import { useUsers } from '@/lib/api/hooks/users';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
+import { SuperField } from '@/components/dashboard-ui/super-field';
+import type { EntityMeta, SelectOption } from '@/components/dashboard-ui/superfield/types';
 
 interface CaseActionMenuProps {
   case_: ModelsCaseResponse;
@@ -16,6 +28,59 @@ interface CaseActionMenuProps {
 export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMenuProps ) {
   const t = useTranslations( 'dashboard.admin.casesPage.actionMenu' );
   const { mutate: updateStatus } = useUpdateCaseStatus();
+  const { mutate: assignCase, isPending: isAssigning } = useAssignCase();
+  const [ isAssignDialogOpen, setIsAssignDialogOpen ] = React.useState( false );
+  const [ assigneeId, setAssigneeId ] = React.useState( case_.assignee_id || '' );
+  const { data: usersResponse, isLoading: isLoadingAdmins } = useUsers(
+    {
+      userType: 'admin_user',
+      page: 1,
+      limit: 200,
+    },
+    {
+      enabled: isAssignDialogOpen,
+    }
+  );
+
+  const adminUsers = React.useMemo(
+    () => ( usersResponse?.data?.data as ModelsUserResponse[] | undefined ) ?? [],
+    [ usersResponse ]
+  );
+
+  const adminOptions = React.useMemo<SelectOption[]>(
+    () => adminUsers
+      .filter( ( admin ) => !!admin.id )
+      .map( ( admin ) => ( {
+        value: admin.id!,
+        label: `${ admin.first_name || '' } ${ admin.last_name || '' }`.trim()
+          || admin.email
+          || admin.username
+          || admin.id!,
+      } ) ),
+    [ adminUsers ]
+  );
+
+  const getAdminMeta = React.useCallback( ( value: string ): EntityMeta | undefined => {
+    const admin = adminUsers.find( ( user ) => user.id === value );
+
+    if ( !admin ) {
+      return undefined;
+    }
+
+    return {
+      name: `${ admin.first_name || '' } ${ admin.last_name || '' }`.trim()
+        || admin.email
+        || admin.username
+        || admin.id,
+      subtitle: admin.email || admin.username || undefined,
+    };
+  }, [ adminUsers ] );
+
+  React.useEffect( () => {
+    if ( isAssignDialogOpen ) {
+      setAssigneeId( case_.assignee_id || '' );
+    }
+  }, [ case_.assignee_id, isAssignDialogOpen ] );
 
   const handleStatusUpdate = ( status: string ) => {
     if ( !case_.id ) {
@@ -36,6 +101,32 @@ export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMen
     toast.success( t( 'toasts.idCopied' ) );
   };
 
+  const handleAssign = () => {
+    if ( !case_.id ) {
+      toast.error( t( 'toasts.missingId' ) );
+      return;
+    }
+
+    if ( !assigneeId ) {
+      toast.error( t( 'toasts.assigneeRequired' ) );
+      return;
+    }
+
+    assignCase(
+      {
+        id: case_.id,
+        request: { assignee_id: assigneeId },
+      },
+      {
+        onSuccess: () => {
+          toast.success( t( 'toasts.caseAssigned' ) );
+          setIsAssignDialogOpen( false );
+        },
+        onError: () => toast.error( t( 'toasts.caseAssignError' ) ),
+      }
+    );
+  };
+
   const actions: MenuAction<ModelsCaseResponse>[] = [
     ...( onViewDetails ? [ {
       label: t( 'viewDetails' ),
@@ -45,6 +136,10 @@ export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMen
       label: t( 'copyId' ),
       action: handleCopyId,
       separator: true,
+    },
+    {
+      label: t( 'assignCase' ),
+      action: () => setIsAssignDialogOpen( true ),
     },
     {
       label: t( 'markInProgress' ),
@@ -71,10 +166,50 @@ export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMen
   ];
 
   return (
-    <ActionMenu
-      actions={ actions }
-      data={ case_ }
-      trigger={ trigger }
-    />
+    <>
+      <ActionMenu
+        actions={ actions }
+        data={ case_ }
+        trigger={ trigger }
+      />
+
+      <Dialog open={ isAssignDialogOpen } onOpenChange={ setIsAssignDialogOpen }>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{ t( 'assignDialog.title' ) }</DialogTitle>
+            <DialogDescription>{ t( 'assignDialog.description' ) }</DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-2">
+            <SuperField
+              type="entity-select"
+              id={ `case-assignee-${ case_.id }` }
+              label={ t( 'assignDialog.assigneeLabel' ) }
+              value={ assigneeId }
+              onValueChange={ ( value ) => setAssigneeId( value || '' ) }
+              options={ adminOptions }
+              placeholder={ t( 'assignDialog.placeholder' ) }
+              getEntityMeta={ getAdminMeta }
+              fieldClassName="w-full"
+            />
+            { isLoadingAdmins && (
+              <p className="text-sm text-muted-foreground">{ t( 'assignDialog.loading' ) }</p>
+            ) }
+            { !isLoadingAdmins && adminUsers.length === 0 && (
+              <p className="text-sm text-muted-foreground">{ t( 'assignDialog.empty' ) }</p>
+            ) }
+          </div>
+
+          <DialogFooter>
+            <Button variant="outline" onClick={ () => setIsAssignDialogOpen( false ) }>
+              { t( 'assignDialog.cancel' ) }
+            </Button>
+            <Button onClick={ handleAssign } disabled={ isAssigning || isLoadingAdmins || adminUsers.length === 0 || !assigneeId }>
+              { isAssigning ? t( 'assignDialog.submitting' ) : t( 'assignDialog.confirm' ) }
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

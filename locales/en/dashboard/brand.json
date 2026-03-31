@@ -178,7 +178,9 @@
     "durationLabel": "{seconds}s duration",
     "task": "Task",
     "recordVideos": "{count, plural, =1 {Record # video} other {Record # videos}}",
+    "recordVideosSimple": "{count, plural, =1 {# video} other {# videos}}",
     "durationSeconds": "Duration: {count} seconds",
+    "durationSecondsSimple": "{count} seconds",
     "applied": "Applied",
     "reward": "Reward",
     "gigCost": "Gig Cost",
@@ -505,6 +507,7 @@
       "uploadProductImage": "Upload Product Image",
       "productImageInstructions": "Drag and drop a product image or paste an image URL.",
       "preview": "Preview",
+      "removeProductImage": "Remove product image",
       "uploadFailed": "Upload failed.",
       "productLink": "Product Link"
     },
@@ -629,8 +632,8 @@
     "title": "Gigs",
     "description": "Monitor and manage the status of your active gigs.",
     "noResults": "No results.",
-    "noGigsYet": "No gigs yet",
-    "noGigsYetDescription": "This campaign doesn't have any gigs yet. Create a gig first before inviting creators.",
+    "noGigsYet": "No Available Gigs",
+    "noGigsYetDescription": "There are no Gigs available for invitation at this time.",
     "creatorRequirements": "Creator Requirements",
     "gender": "Gender",
     "male": "Male",
@@ -727,7 +730,10 @@
     "failedToCreate": "Failed to create profile: {error}",
     "errorCompanyRequired": "Company name is required",
     "errorInvalidUrl": "Invalid URL",
-    "errorStateRequired": "State/Province is required"
+    "errorStateRequired": "State/Province is required",
+    "errorStreetRequired": "Street is required",
+    "errorCityRequired": "City is required",
+    "errorPostalCodeRequired": "Postal code is required"
   },
   "completeProfile": {
     "title": "Complete Your Brand Profile",

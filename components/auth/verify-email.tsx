@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,6 +11,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
 import { apiClient } from '@/lib/api/client';
+import { useAuth } from '@/lib/auth/auth-context';
 
 type State = 'loading' | 'success' | 'error';
 
@@ -23,10 +24,24 @@ async function verify( token: string ) {
 export function VerifyEmail( { token }: { token: string; } ) {
   const router = useRouter();
   const t = useTranslations( 'auth.verifyEmail' );
+  const { user, setUser } = useAuth();
+  const userRef = useRef( user );
+  useEffect( () => { userRef.current = user; }, [ user ] );
+
   const [ state, setState ] = useState<State>( 'loading' );
   const [ errorMessage, setErrorMessage ] = useState<string | null>( null );
   const [ manualCode, setManualCode ] = useState( '' );
   const [ isRetrying, setIsRetrying ] = useState( false );
+
+  const onVerified = () => {
+    const currentUser = userRef.current;
+    if ( currentUser ) {
+      setUser( { ...currentUser, emailVerified: true } );
+      setTimeout( () => router.push( `/${ currentUser.role }` ), 3000 );
+    } else {
+      setTimeout( () => router.push( '/login?verified=1' ), 3000 );
+    }
+  };
 
   useEffect( () => {
     let cancelled = false;
@@ -35,7 +50,7 @@ export function VerifyEmail( { token }: { token: string; } ) {
       .then( () => {
         if ( cancelled ) return;
         setState( 'success' );
-        setTimeout( () => router.push( '/login?verified=1' ), 3000 );
+        onVerified();
       } )
       .catch( ( err: any ) => {
         if ( cancelled ) return;
@@ -57,7 +72,7 @@ export function VerifyEmail( { token }: { token: string; } ) {
     try {
       await verify( manualCode.trim() );
       setState( 'success' );
-      setTimeout( () => router.push( '/login?verified=1' ), 3000 );
+      onVerified();
     } catch ( err: any ) {
       setErrorMessage(
         err?.response?.data?.message || err?.message || t( 'retryError' )
@@ -70,7 +85,8 @@ export function VerifyEmail( { token }: { token: string; } ) {
   const GotoSigninButton = ( { variant = 'default' }: { variant?: Parameters<typeof Button>[ 0 ][ 'variant' ]; } ) => (
     <Button className="w-full" size={ 'lg' }
       variant={ variant }
-      render={ <Link href="/login">{ t( 'goToSignIn' ) }</Link> } />
+      nativeButton={ false }
+          render={ <Link href="/login">{ t( 'goToSignIn' ) }</Link> } />
   );
 
   return (

@@ -23,7 +23,7 @@
     "searching": "Recherche...",
     "noResultsFor": "Aucun résultat pour \"{query}\"",
     "noResultsDesc": "Essayez un autre terme de recherche ou modifiez vos filtres",
-    "showingTop": "{count, plural, =1 {Afficher le premier # résultat} other {Afficher les premiers # résultats}}",
+    "showingTop": "{count, plural, =1 {Showing top # result} other {Showing top # results}}",
     "pressEnter": "Appuyez sur la touche Entrée pour effectuer une recherche",
     "navigate": "naviguer",
     "select": "sélectionner",
@@ -39,6 +39,7 @@
     "creators": "Créateurs",
     "gigs": "Gigs",
     "invoices": "Factures",
+    "newsletter": "Bulletin d'information",
     "payments": "Paiements",
     "submissions": "Soumissions"
   },
@@ -76,7 +77,7 @@
   "showLess": "Montrer moins",
   "showAll": "Afficher tout",
   "pagination": {
-    "rowsSelected": "{selected, plural, =1 {# de {total} ligne sélectionnée.} other {# de {total} lignes sélectionnées.}}",
+    "rowsSelected": "{selected, plural, =1 {# of {total} row selected.} other {# of {total} rows selected.}}",
     "rowsPerPage": "Lignes par page",
     "page": "Page {page} de {total}.",
     "goToFirst": "Aller à la première page",
@@ -256,33 +257,33 @@
     },
     "actions": {
       "view": "Voir",
-      "setStatus": "Définir le statut",
-      "setStatusDescription": "Mettez à jour le statut du paiement et les détails de versement associés.",
-      "saveStatus": "Enregistrer le statut",
+      "setStatus": "Définir l'état",
+      "setStatusDescription": "Mettre à jour le statut du paiement et tous les détails relatifs au paiement.",
+      "saveStatus": "Sauvegarder le statut",
       "statusUpdating": "Mise à jour du statut...",
       "statusSuccess": "Le statut du paiement a été mis à jour avec succès.",
-      "statusError": "Échec de la mise à jour du statut du paiement. Veuillez réessayer.",
-      "update": "Mettre à jour",
-      "updateDescription": "Modifiez les détails du versement enregistrés sur ce paiement.",
-      "paymentItems": "Postes de paiement",
-      "noEditableItems": "Aucun poste de paiement disponible pour ce paiement.",
+      "statusError": "La mise à jour de l'état du paiement a échoué. Veuillez réessayer.",
+      "update": "Mise à jour",
+      "updateDescription": "Modifier les détails du paiement enregistrés pour ce paiement.",
+      "paymentItems": "Moyens de paiement",
+      "noEditableItems": "Aucun poste de paiement n'est disponible pour ce paiement.",
       "noItemsSelected": "Aucun élément sélectionné",
       "updating": "Mise à jour...",
-      "updateSuccess": "Paiement mis à jour avec succès.",
-      "updateError": "Échec de la mise à jour du paiement. Veuillez réessayer.",
+      "updateSuccess": "Le paiement a été mis à jour avec succès.",
+      "updateError": "La mise à jour du paiement a échoué. Veuillez réessayer.",
       "confirmPayout": "Confirmer le paiement",
       "confirming": "Confirmation...",
       "confirmSuccess": "Paiement confirmé avec succès.",
       "confirmError": "Échec de la confirmation du paiement. Veuillez réessayer.",
       "missingPaymentId": "ID de paiement manquant.",
       "deleteTitle": "Supprimer le paiement",
-      "deleteDescription": "Êtes-vous sûr de vouloir supprimer ce paiement ? Cette action est irréversible.",
-      "deleteDescriptionWithReference": "Êtes-vous sûr de vouloir supprimer le paiement {reference} ? Cette action est irréversible.",
+      "deleteDescription": "Êtes-vous sûr de vouloir supprimer ce paiement ? Cette action ne peut pas être annulée.",
+      "deleteDescriptionWithReference": "Êtes-vous sûr de vouloir supprimer le paiement {reference} ? Cette action ne peut pas être annulée.",
       "deleteConfirmPlaceholder": "Tapez {reference} pour confirmer",
       "deleting": "Suppression...",
       "deleteSuccess": "Paiement supprimé avec succès.",
-      "deleteError": "Échec de la suppression du paiement. Veuillez réessayer.",
-      "methodPlaceholder": "par ex. virement bancaire, PayPal...",
+      "deleteError": "La suppression du paiement a échoué. Veuillez réessayer.",
+      "methodPlaceholder": "par exemple, virement bancaire, PayPal...",
       "notesPlaceholder": "Notes facultatives...",
       "confirmTitle": "Confirmer le paiement",
       "confirmDescription": "Êtes-vous sûr de vouloir confirmer ce paiement ?",
@@ -317,7 +318,7 @@
   },
   "batchPayment": {
     "title": "Nouveau paiement",
-    "description": "Sélectionnez un créateur et ses éléments de paiement en attente et créez également de nouveaux éléments de paiement",
+    "description": "Sélectionner un créateur et ses éléments de paiement en attente et créer de nouveaux éléments de paiement",
     "creatorLabel": "Créateur",
     "creatorPlaceholder": "Sélectionnez un créateur...",
     "pendingItems": "Postes en suspens",
@@ -326,6 +327,11 @@
     "noItems": "Aucun poste de paiement en suspens pour ce créateur.",
     "methodLabel": "Mode de paiement",
     "methodPlaceholder": "par exemple, virement bancaire, PayPal...",
+    "paymentMethods": {
+      "bankTransfer": "Virement bancaire",
+      "paypal": "PayPal",
+      "other": "Autres"
+    },
     "notesLabel": "Notes",
     "notesPlaceholder": "Notes facultatives...",
     "noItemsSelected": "Aucun élément sélectionné",
@@ -362,7 +368,7 @@
     "untitledCampaign": "Campagne sans titre",
     "draft": "Projet",
     "creatorsWanted": "Créateurs recherchés",
-    "videosPerCreator": "Nb total de vidéos",
+    "videosPerCreator": "Nombre total de vidéos",
     "videoDuration": "Durée de la vidéo",
     "brief": "Dossier de campagne",
     "briefDesc": "Détails essentiels et exigences en matière de messages",
@@ -388,6 +394,90 @@
     "backToEdit": "Retour à l'édition",
     "publishing": "L'édition...",
     "confirmPublish": "Confirmer et publier"
+  },
+  "helpSheet": {
+    "hero": {
+      "title": "Besoin d'aide?",
+      "subtitle": "Trouvez des réponses aux questions fréquentes ou contactez notre équipe de support.",
+      "searchPlaceholder": "Poser une question..."
+    },
+    "cards": {
+      "brand": [
+        { "title": "Premiers pas", "description": "Apprenez à créer des campagnes et à tirer le meilleur parti de la plateforme." },
+        { "title": "Gérer les créateurs", "description": "Invitez des créateurs, examinez les candidatures et gérez les collaborations." },
+        { "title": "Facturation & Paiements", "description": "Comprenez les factures, les méthodes de paiement et les cycles de facturation." }
+      ],
+      "creator": [
+        { "title": "Premiers pas", "description": "Apprenez à trouver des gigs et à postuler à des campagnes sur la plateforme." },
+        { "title": "Soumettre du contenu", "description": "Comprenez comment télécharger des vidéos et faire approuver votre travail." },
+        { "title": "Revenus & Paiements", "description": "Apprenez comment vos revenus sont calculés et quand vous serez payé." }
+      ],
+      "admin": [
+        { "title": "Gestion des utilisateurs", "description": "Gérez les marques, les créateurs et les utilisateurs sur la plateforme." },
+        { "title": "Cas de support", "description": "Examinez, attribuez et résolvez les tickets de support des utilisateurs." },
+        { "title": "Paramètres plateforme", "description": "Configurez les paramètres, notifications et plus à l'échelle de la plateforme." }
+      ]
+    },
+    "learnMore": "En savoir plus",
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Tout ce que vous devez savoir sur la plateforme. Vous ne trouvez pas la réponse?",
+      "contactText": "Contactez-nous à",
+      "contactEmail": "support@huerray.com"
+    },
+    "submitCta": "Soumettre un cas",
+    "myCasesLink": "Mes cas",
+    "backToHelp": "Retour à l'aide",
+    "nav": {
+      "home": "Accueil",
+      "faq": "FAQ",
+      "tickets": "Tickets"
+    },
+    "faq": {
+      "brand": [
+        { "q": "Comment créer une campagne?", "a": "Accédez à Campagnes dans la barre latérale et cliquez sur 'Nouvelle campagne'." },
+        { "q": "Comment inviter des créateurs?", "a": "Ouvrez une campagne, allez dans l'onglet Gigs et utilisez l'action d'invitation." },
+        { "q": "Comment fonctionne la facturation?", "a": "Vous êtes facturé par campagne selon votre plan. Visitez Paramètres > Facturation." },
+        { "q": "Comment examiner les soumissions?", "a": "Ouvrez un gig de votre campagne et accédez à l'onglet Soumissions." },
+        { "q": "Puis-je gérer plusieurs campagnes?", "a": "Oui, vous pouvez créer et gérer plusieurs campagnes simultanément." }
+      ],
+      "creator": [
+        { "q": "Comment rejoindre une campagne?", "a": "Parcourez les gigs disponibles et cliquez sur Postuler." },
+        { "q": "Quand serai-je payé?", "a": "Les paiements sont traités dans les 14 jours suivant l'approbation de votre contenu." },
+        { "q": "Comment soumettre du contenu?", "a": "Ouvrez votre gig actif et cliquez sur Soumettre pour télécharger votre vidéo." },
+        { "q": "Que se passe-t-il après la soumission?", "a": "La marque examinera votre soumission et l'approuvera, la renverra ou la rejettera." },
+        { "q": "Comment mettre à jour mon profil?", "a": "Allez dans Mon Profil dans la barre latérale pour mettre à jour votre bio et catégories." }
+      ],
+      "admin": [
+        { "q": "Comment gérer les utilisateurs?", "a": "Accédez à Utilisateurs dans la navigation principale." },
+        { "q": "Comment examiner les profils de marques?", "a": "Allez dans Marques et utilisez le menu d'actions." },
+        { "q": "Comment attribuer un cas?", "a": "Ouvrez un cas et utilisez le menu d'actions pour l'attribuer." },
+        { "q": "Comment approuver une campagne?", "a": "Allez dans Campagnes, ouvrez la campagne et utilisez le menu d'actions." },
+        { "q": "Comment envoyer des notifications?", "a": "Accédez à Notifications et utilisez le bouton Créer une notification." }
+      ]
+    },
+    "submitCase": {
+      "titleLabel": "Titre",
+      "titlePlaceholder": "Résumé bref de votre problème",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Décrivez votre problème en détail...",
+      "priorityLabel": "Priorité",
+      "submit": "Soumettre le cas",
+      "submitting": "Soumission...",
+      "successToast": "Votre cas a été soumis avec succès",
+      "errorToast": "Échec de la soumission. Veuillez réessayer.",
+      "titleRequired": "Le titre est requis",
+      "descriptionRequired": "La description est requise"
+    },
+    "myCases": {
+      "empty": "Aucun cas pour l'instant",
+      "emptyDesc": "Soumettez un cas si vous avez besoin d'aide",
+      "viewAll": "Voir tous les cas",
+      "replyPlaceholder": "Écrire une réponse...",
+      "send": "Envoyer",
+      "backToList": "Retour aux cas",
+      "noMessages": "Aucun message pour l'instant"
+    }
   },
   "filterValues": {
     "draft": "Projet",

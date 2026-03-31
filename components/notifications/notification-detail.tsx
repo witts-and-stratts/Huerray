@@ -35,10 +35,12 @@ interface NotificationDetailBodyProps {
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function NotificationDetailEmpty() {
+  const t = useTranslations( "dashboard.notifications" );
+
   return (
     <div className="flex flex-col items-center justify-center h-full gap-3 text-muted-foreground select-none w-full">
       <Megaphone className="size-12 opacity-20" strokeWidth={ 1 } />
-      <p className="text-sm">Select a notification to read it</p>
+      <p className="text-sm">{ t( "empty.selectPrompt" ) }</p>
     </div>
   );
 }
@@ -80,7 +82,7 @@ function NotificationDetailHeader( { notification, onMarkAsRead, onDelete, onBac
         <div className="flex items-center gap-2 mt-1.5 flex-wrap">
           { notification.event_type && (
             <Badge variant="outline" className="capitalize text-[11px] font-normal px-1.5 py-0">
-              { notification.event_type.replace( /_/g, " " ) }
+              { t( `eventTypes.${ notification.event_type }` ) }
             </Badge>
           ) }
           { notification.priority && notification.priority !== "normal" && (
@@ -88,7 +90,7 @@ function NotificationDetailHeader( { notification, onMarkAsRead, onDelete, onBac
               variant={ notification.priority === "high" ? "destructive" : "secondary" }
               className="capitalize text-[11px] font-normal px-1.5 py-0"
             >
-              { notification.priority }
+              { t( `compose.priority.${ notification.priority }.label` ) }
             </Badge>
           ) }
           <span className="text-xs text-muted-foreground">

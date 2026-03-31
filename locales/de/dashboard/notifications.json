@@ -24,20 +24,47 @@
     "next": "Weiter"
   },
   "actions": {
+    "menu": "Menü",
     "markAllAsRead": "Alle als gelesen markieren",
     "markAsRead": "Als gelesen markieren",
     "delete": "Löschen",
     "deleteAll": "Alle löschen",
-    "open": "Öffnen Sie"
+    "open": "Öffnen Sie",
+    "close": "Schließen Sie",
+    "viewInvoice": "Rechnung ansehen",
+    "viewSubmission": "Ansicht Vorlage",
+    "goToGig": "Zum Auftritt",
+    "viewCampaign": "Kampagne ansehen",
+    "reviewBrandProfile": "Markenprofil überprüfen",
+    "reviewCreatorProfile": "Erstellerprofil überprüfen",
+    "viewDetails": "Details anzeigen"
   },
   "item": {
     "showMore": "Mehr anzeigen",
     "showLess": "Weniger anzeigen",
     "eventTypeFallback": "Update"
   },
+  "eventTypes": {
+    "Creation": "Erstellung",
+    "Update": "Aktualisierung",
+    "Approval": "Genehmigung",
+    "Rejection": "Ablehnung",
+    "Deletion": "Löschung",
+    "Deactivation": "Deaktivierung",
+    "Submission": "Einreichung",
+    "Invitation": "Einladung",
+    "Application": "Bewerbung",
+    "Acceptance": "Akzeptanz",
+    "Decision": "Entscheidung",
+    "Return": "Rückgabe",
+    "Registration": "Registrierung",
+    "Generic": "Allgemein"
+  },
   "empty": {
     "title": "Es werden keine Benachrichtigungen angezeigt",
-    "description": "Das war's für den Moment."
+    "description": "Das war's für den Moment.",
+    "overlayTitle": "Keine Benachrichtigungen",
+    "selectPrompt": "Wählen Sie eine Benachrichtigung aus, um sie zu lesen"
   },
   "confirm": {
     "deleteAllTitle": "Alle Benachrichtigungen löschen",
@@ -48,5 +75,82 @@
   "toast": {
     "deleteAllSuccess": "Alle Benachrichtigungen gelöscht",
     "deleteAllError": "Alle Benachrichtigungen konnten nicht gelöscht werden"
+  },
+  "compose": {
+    "title": "Post-Benachrichtigung",
+    "description": "Erstellen und Senden einer Benachrichtigung an einen bestimmten Benutzer.",
+    "submit": "Post-Benachrichtigung",
+    "toast": {
+      "success": "Benachrichtigung veröffentlicht",
+      "error": "Meldung konnte nicht versendet werden"
+    },
+    "actions": {
+      "editActionUrl": "URL der Aktion bearbeiten",
+      "useGeneratedUrl": "Generierte URL verwenden"
+    },
+    "entityLabels": {
+      "entity": "Entität",
+      "creator": "Schöpfer",
+      "brand": "Marke",
+      "user": "Benutzer",
+      "campaign": "Kampagne",
+      "gig": "Gig",
+      "invoice": "Rechnung",
+      "case": "Fall",
+      "videoSubmission": "Video Einreichung",
+      "payment": "Zahlung"
+    },
+    "fields": {
+      "entityType": "Entitätstyp",
+      "chooseEntity": "Wählen Sie {entity}",
+      "loadingEntity": "Laden {entity}...",
+      "selectEntity": "Wählen Sie {entity}",
+      "notificationRecipient": "Benachrichtigungsempfänger",
+      "loadingUsers": "Benutzer laden...",
+      "selectRecipient": "Benachrichtigungsempfänger auswählen",
+      "recipientDescription": "Wählen Sie den Benutzer aus, der diese Benachrichtigung erhalten soll.",
+      "eventName": "Name der Veranstaltung",
+      "eventNamePlaceholder": "z.B. Auftritt Einladung angenommen",
+      "eventType": "Veranstaltungstyp",
+      "title": "Titel",
+      "titlePlaceholder": "Titel der Benachrichtigung",
+      "message": "Nachricht",
+      "messagePlaceholder": "Benachrichtigungsmeldung",
+      "priority": "Priorität",
+      "actionUrl": "Aktions-URL",
+      "actionUrlPlaceholder": "Es wird keine Aktions-URL generiert",
+      "actionUrlGenerated": "Wird automatisch aus der ausgewählten Entität generiert.",
+      "actionUrlUnavailable": "Dieser Entitätstyp erzeugt derzeit keine Aktions-URL.",
+      "metadata": "Metadaten",
+      "metadataDescription": "Optionales JSON-Objekt",
+      "metadataPlaceholder": "{\"gig_id\":\"...\"}"
+    },
+    "validation": {
+      "recipientRequired": "Empfänger der Benachrichtigung ist erforderlich",
+      "titleRequired": "Titel ist erforderlich",
+      "messageRequired": "Nachricht ist erforderlich",
+      "eventNameRequired": "Ereignisname ist erforderlich",
+      "entityTypeRequired": "Entitätstyp ist erforderlich",
+      "entityRequired": "{entity} ist erforderlich",
+      "metadataJson": "Metadaten müssen gültiges JSON sein"
+    },
+    "priority": {
+      "low": {
+        "label": "Niedrig",
+        "description": "Meldung mit niedriger Priorität"
+      },
+      "normal": {
+        "label": "Normal",
+        "description": "Standard-Prioritätsmeldung"
+      },
+      "high": {
+        "label": "Hoch",
+        "description": "Meldung mit hoher Priorität"
+      },
+      "urgent": {
+        "label": "Dringend",
+        "description": "Dringende Meldung"
+      }
+    }
   }
 }

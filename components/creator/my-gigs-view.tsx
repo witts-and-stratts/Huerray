@@ -58,7 +58,7 @@ export function MyGigsView() {
         : allGigsQuery.isLoading;
 
   return (
-    <div className="flex flex-col flex-1 h-full">
+    <div className="flex flex-col flex-1 min-h-0">
       <SubHeader
         title={ t( 'title' ) }
         description={ t( 'description' ) }
@@ -74,7 +74,7 @@ export function MyGigsView() {
           />
         }
       />
-      <div className="ad-shell bg-slate-50/50 flex-1 px-0 mt-0">
+      <div className="ad-shell bg-slate-50/50 flex-1 px-0 mt-0 min-h-0">
         <GigsTable
           data={ gigs }
           isLoading={ isLoading }

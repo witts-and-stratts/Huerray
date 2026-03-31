@@ -19,8 +19,12 @@ import type { ModelsCreatorResponse } from './models-creator-response';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ModelsGigCreatorResponse } from './models-gig-creator-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsGigInvitationBrandResponse } from './models-gig-invitation-brand-response';
 
 export interface ModelsGigInvitationResponse {
+    'brand'?: ModelsGigInvitationBrandResponse;
     'brand_id'?: string;
     'creator'?: ModelsCreatorResponse;
     'creator_id'?: string;

@@ -152,7 +152,7 @@ export function NotificationsView() {
             <SuperField
               name="search"
               type="search"
-              placeholder={ t.has( "search.placeholder" ) ? t( "search.placeholder" ) : "Search notifications" }
+              placeholder={ t( "search.placeholder" ) }
               prefix={ <Search className="size-4" /> }
               value={ searchTerm }
               onChange={ ( e ) => {
@@ -176,7 +176,7 @@ export function NotificationsView() {
               searchTerm.trim()
                 ? (
                   <div className="px-6 py-8 text-center text-sm text-muted-foreground">
-                    { t.has( "search.noResults" ) ? t( "search.noResults" ) : "No notifications match your search." }
+                    { t( "search.noResults" ) }
                   </div>
                 )
                 : <NotificationsEmptyState />

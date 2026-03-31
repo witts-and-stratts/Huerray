@@ -14,6 +14,7 @@ import {
   CreatorApi,
   GigsApi,
   InvoiceApi,
+  NewsletterApi,
   PaymentApi,
   VideoSubmissionsApi,
 } from '../generated/api';
@@ -28,6 +29,7 @@ export type EntityType =
   | 'creators'
   | 'gigs'
   | 'invoices'
+  | 'newsletter'
   | 'payments'
   | 'submissions';
 
@@ -70,12 +72,13 @@ export const ENTITY_LABELS: Record<EntityType, string> = {
   creators: 'Creators',
   gigs: 'Gigs',
   invoices: 'Invoices',
+  newsletter: 'Newsletter',
   payments: 'Payments',
   submissions: 'Submissions',
 };
 
 export const ENTITIES_BY_ROLE: Record<string, EntityType[]> = {
-  admin: ['brands', 'campaigns', 'creators', 'gigs', 'invoices', 'payments', 'submissions'],
+  admin: ['brands', 'campaigns', 'creators', 'gigs', 'invoices', 'newsletter', 'payments', 'submissions'],
   brand: ['campaigns', 'creators', 'gigs', 'submissions', 'invoices'],
   creator: ['gigs', 'submissions', 'payments'],
 };
@@ -87,6 +90,7 @@ const campaignsApi = new CampaignsApi(apiConfiguration, undefined, apiClient);
 const creatorApi = new CreatorApi(apiConfiguration, undefined, apiClient);
 const gigsApi = new GigsApi(apiConfiguration, undefined, apiClient);
 const invoiceApi = new InvoiceApi(apiConfiguration, undefined, apiClient);
+const newsletterApi = new NewsletterApi(apiConfiguration, undefined, apiClient);
 const paymentApi = new PaymentApi(apiConfiguration, undefined, apiClient);
 const videoApi = new VideoSubmissionsApi(apiConfiguration, undefined, apiClient);
 
@@ -292,6 +296,24 @@ export function useGlobalSearch({
         staleTime: 20_000,
       },
 
+      // ── Newsletter (admin only → /newsletter/search) ─────────────────────────
+      {
+        queryKey: ['gsearch', 'newsletter', query, filters],
+        queryFn: async (): Promise<SearchResult[]> => {
+          const res = await newsletterApi.newsletterSearchGet({ q: query, limit: LIMIT });
+          return (res.data?.data ?? []).map((n) => ({
+            id: n.id ?? n.email ?? '',
+            type: 'newsletter',
+            title: [n.first_name, n.last_name].filter(Boolean).join(' ') || n.email || 'Subscriber',
+            subtitle: n.email ?? undefined,
+            status: n.status ?? undefined,
+            createdAt: n.subscribed_at ?? n.created_at ?? undefined,
+          }));
+        },
+        enabled: canSearch('newsletter') && role === 'admin',
+        staleTime: 20_000,
+      },
+
       // ── Payments (admin → /payments/search, creator → /creators/payments/search) ──
       {
         queryKey: ['gsearch', 'payments', role, query, filters],
@@ -401,8 +423,9 @@ export function useGlobalSearch({
     creators: 2,
     gigs: 3,
     invoices: 4,
-    payments: 5,
-    submissions: 6,
+    newsletter: 5,
+    payments: 6,
+    submissions: 7,
   };
 
   const groups: SearchGroup[] = entityOrder

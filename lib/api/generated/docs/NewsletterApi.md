@@ -4,8 +4,89 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**newsletterSearchGet**](#newslettersearchget) | **GET** /newsletter/search | Search newsletter subscriptions|
 |[**newsletterSignupPost**](#newslettersignuppost) | **POST** /newsletter/signup | Newsletter signup|
 |[**newsletterUnsubscribeGet**](#newsletterunsubscribeget) | **GET** /newsletter/unsubscribe | Unsubscribe from newsletter|
+
+# **newsletterSearchGet**
+> ModelsPaginatedNewsletterSubscriptionResponse newsletterSearchGet()
+
+Search newsletter subscriptions using all available filters (Admin only)
+
+### Example
+
+```typescript
+import {
+    NewsletterApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new NewsletterApi(configuration);
+
+let createdAfter: string; // (optional) (default to undefined)
+let createdBefore: string; // (optional) (default to undefined)
+let limit: number; // (optional) (default to undefined)
+let page: number; // (optional) (default to undefined)
+let q: string; // (optional) (default to undefined)
+let status: 'active' | 'unsubscribed'; // (optional) (default to undefined)
+let subscribedAfter: string; // (optional) (default to undefined)
+let subscribedBefore: string; // (optional) (default to undefined)
+let unsubscribedAfter: string; // (optional) (default to undefined)
+let unsubscribedBefore: string; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.newsletterSearchGet(
+    createdAfter,
+    createdBefore,
+    limit,
+    page,
+    q,
+    status,
+    subscribedAfter,
+    subscribedBefore,
+    unsubscribedAfter,
+    unsubscribedBefore
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **createdAfter** | [**string**] |  | (optional) defaults to undefined|
+| **createdBefore** | [**string**] |  | (optional) defaults to undefined|
+| **limit** | [**number**] |  | (optional) defaults to undefined|
+| **page** | [**number**] |  | (optional) defaults to undefined|
+| **q** | [**string**] |  | (optional) defaults to undefined|
+| **status** | [**&#39;active&#39; | &#39;unsubscribed&#39;**]**Array<&#39;active&#39; &#124; &#39;unsubscribed&#39;>** |  | (optional) defaults to undefined|
+| **subscribedAfter** | [**string**] |  | (optional) defaults to undefined|
+| **subscribedBefore** | [**string**] |  | (optional) defaults to undefined|
+| **unsubscribedAfter** | [**string**] |  | (optional) defaults to undefined|
+| **unsubscribedBefore** | [**string**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**ModelsPaginatedNewsletterSubscriptionResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Newsletter subscriptions found |  -  |
+|**400** | Bad request |  -  |
+|**500** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **newsletterSignupPost**
 > ModelsStandardNewsletterSignupResponse newsletterSignupPost(request)
@@ -77,10 +158,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new NewsletterApi(configuration);
 
-let token: string; //Unsubscribe token (default to undefined)
+let email: string; //Subscriber email (default to undefined)
 
 const { status, data } = await apiInstance.newsletterUnsubscribeGet(
-    token
+    email
 );
 ```
 
@@ -88,7 +169,7 @@ const { status, data } = await apiInstance.newsletterUnsubscribeGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **token** | [**string**] | Unsubscribe token | defaults to undefined|
+| **email** | [**string**] | Subscriber email | defaults to undefined|
 
 
 ### Return type

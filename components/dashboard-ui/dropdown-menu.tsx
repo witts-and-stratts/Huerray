@@ -21,12 +21,21 @@ interface DropdownMenuTriggerProps extends MenuPrimitive.Trigger.Props {
   asChild?: boolean;
 }
 
-function DropdownMenuTrigger( { asChild = false, children, ...props }: DropdownMenuTriggerProps ) {
+function DropdownMenuTrigger( {
+  asChild = false,
+  children,
+  nativeButton,
+  ...props
+}: DropdownMenuTriggerProps ) {
   if ( asChild && React.isValidElement( children ) ) {
+    const inferredNativeButton =
+      typeof children.type === 'string' ? children.type === 'button' : true;
+
     return (
       <MenuPrimitive.Trigger
         data-slot="dropdown-menu-trigger"
         render={ children }
+        nativeButton={ nativeButton ?? inferredNativeButton }
         { ...props }
       />
     );

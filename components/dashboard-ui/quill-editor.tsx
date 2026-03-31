@@ -107,7 +107,7 @@ export function QuillEditor( { value, onChange, onBlur, placeholder, className, 
   return (
     <div className={ cn(
       "quill-editor-wrapper flex flex-col rounded-md border border-input bg-transparent shadow-xs transition-[color,box-shadow]",
-      "focus-within:ring-[3px] focus-within:ring-ring/50 focus-within:border-ring",
+      "focus-within:ring-[3px] focus-within:ring-maroon-300/40 focus-within:border-maroon-300",
       "dark:bg-input/30",
       className
     ) }>

@@ -23,7 +23,7 @@
     "searching": "Buscando...",
     "noResultsFor": "No hay resultados para \"{query}\"",
     "noResultsDesc": "Prueba con otro término de búsqueda o ajusta los filtros",
-    "showingTop": "{count, plural, =1 {Mostrando el mejor # resultado} other {Mostrando los mejores # resultados}}",
+    "showingTop": "{count, plural, =1 {Showing top # result} other {Showing top # results}}",
     "pressEnter": "Pulse Intro para buscar",
     "navigate": "navegue por",
     "select": "seleccione",
@@ -39,6 +39,7 @@
     "creators": "Creadores",
     "gigs": "Gigs",
     "invoices": "Facturas",
+    "newsletter": "Boletín",
     "payments": "Pagos",
     "submissions": "Envíos"
   },
@@ -76,7 +77,7 @@
   "showLess": "Mostrar menos",
   "showAll": "Mostrar todo",
   "pagination": {
-    "rowsSelected": "{selected, plural, =1 {# de {total} fila seleccionada.} other {# de {total} filas seleccionadas.}}",
+    "rowsSelected": "{selected, plural, =1 {# of {total} row selected.} other {# of {total} rows selected.}}",
     "rowsPerPage": "Filas por página",
     "page": "Página {page} de {total}",
     "goToFirst": "Ir a la primera página",
@@ -257,32 +258,32 @@
     "actions": {
       "view": "Ver",
       "setStatus": "Establecer estado",
-      "setStatusDescription": "Actualiza el estado del pago y los datos relacionados del desembolso.",
+      "setStatusDescription": "Actualice el estado del pago y cualquier detalle relacionado con el mismo.",
       "saveStatus": "Guardar estado",
       "statusUpdating": "Actualizando estado...",
       "statusSuccess": "Estado del pago actualizado correctamente.",
-      "statusError": "No se pudo actualizar el estado del pago. Inténtelo de nuevo.",
-      "update": "Actualizar",
-      "updateDescription": "Edita los detalles del desembolso guardados en este pago.",
+      "statusError": "No se ha podido actualizar el estado del pago. Por favor, inténtelo de nuevo.",
+      "update": "Actualización",
+      "updateDescription": "Edite los detalles de pago almacenados en este pago.",
       "paymentItems": "Elementos de pago",
       "noEditableItems": "No hay elementos de pago disponibles para este pago.",
       "noItemsSelected": "No hay artículos seleccionados",
       "updating": "Actualizando...",
       "updateSuccess": "Pago actualizado correctamente.",
-      "updateError": "No se pudo actualizar el pago. Inténtelo de nuevo.",
+      "updateError": "No se ha podido actualizar el pago. Por favor, inténtelo de nuevo.",
       "confirmPayout": "Confirmar pago",
       "confirming": "Confirmando...",
       "confirmSuccess": "Pago confirmado con éxito.",
       "confirmError": "No se ha podido confirmar el pago. Por favor, inténtelo de nuevo.",
       "missingPaymentId": "Falta ID de pago.",
-      "deleteTitle": "Eliminar pago",
-      "deleteDescription": "¿Seguro que quieres eliminar este pago? Esta acción no se puede deshacer.",
-      "deleteDescriptionWithReference": "¿Seguro que quieres eliminar el pago {reference}? Esta acción no se puede deshacer.",
-      "deleteConfirmPlaceholder": "Escribe {reference} para confirmar",
-      "deleting": "Eliminando...",
-      "deleteSuccess": "Pago eliminado correctamente.",
-      "deleteError": "No se pudo eliminar el pago. Inténtelo de nuevo.",
-      "methodPlaceholder": "p. ej. transferencia bancaria, PayPal...",
+      "deleteTitle": "Suprimir pago",
+      "deleteDescription": "¿Está seguro de que desea eliminar este pago? Esta acción no se puede deshacer.",
+      "deleteDescriptionWithReference": "¿Está seguro de que desea eliminar el pago {reference}? Esta acción no se puede deshacer.",
+      "deleteConfirmPlaceholder": "Escriba {reference} para confirmar",
+      "deleting": "Borrar...",
+      "deleteSuccess": "Pago eliminado con éxito.",
+      "deleteError": "No se ha podido eliminar el pago. Por favor, inténtelo de nuevo.",
+      "methodPlaceholder": "Por ejemplo, transferencia bancaria, PayPal...",
       "notesPlaceholder": "Notas opcionales...",
       "confirmTitle": "Confirmar pago",
       "confirmDescription": "¿Estás seguro de que quieres confirmar este pago?",
@@ -317,7 +318,7 @@
   },
   "batchPayment": {
     "title": "Nuevo pago",
-    "description": "Seleccione un creador y sus elementos de pago pendientes y también cree nuevos elementos de pago",
+    "description": "Seleccionar un creador y sus elementos de pago pendientes y también crear nuevos elementos de pago",
     "creatorLabel": "Creador",
     "creatorPlaceholder": "Seleccione un creador...",
     "pendingItems": "Asuntos pendientes",
@@ -326,6 +327,11 @@
     "noItems": "No hay partidas de pago pendientes para este creador.",
     "methodLabel": "Forma de pago",
     "methodPlaceholder": "Por ejemplo, transferencia bancaria, PayPal...",
+    "paymentMethods": {
+      "bankTransfer": "Transferencia bancaria",
+      "paypal": "PayPal",
+      "other": "Otros"
+    },
     "notesLabel": "Notas",
     "notesPlaceholder": "Notas opcionales...",
     "noItemsSelected": "No hay artículos seleccionados",
@@ -362,7 +368,7 @@
     "untitledCampaign": "Campaña sin título",
     "draft": "Borrador",
     "creatorsWanted": "Se buscan creadores",
-    "videosPerCreator": "Núm. total de vídeos",
+    "videosPerCreator": "Nº total de vídeos",
     "videoDuration": "Duración del vídeo",
     "brief": "Resumen de la campaña",
     "briefDesc": "Detalles básicos y requisitos de mensajería",
@@ -388,6 +394,90 @@
     "backToEdit": "Volver a Editar",
     "publishing": "Publicar...",
     "confirmPublish": "Confirmar y publicar"
+  },
+  "helpSheet": {
+    "hero": {
+      "title": "¿Necesitas ayuda?",
+      "subtitle": "Encuentra respuestas a preguntas frecuentes o contacta con nuestro equipo de soporte.",
+      "searchPlaceholder": "Haz una pregunta..."
+    },
+    "cards": {
+      "brand": [
+        { "title": "Primeros pasos", "description": "Aprende a crear campañas y sacar el máximo partido a la plataforma." },
+        { "title": "Gestionar creadores", "description": "Invita creadores, revisa solicitudes y gestiona colaboraciones." },
+        { "title": "Facturación y pagos", "description": "Comprende facturas, métodos de pago y ciclos de facturación." }
+      ],
+      "creator": [
+        { "title": "Primeros pasos", "description": "Aprende a encontrar gigs y postularte a campañas en la plataforma." },
+        { "title": "Enviar contenido", "description": "Aprende cómo subir videos y conseguir que aprueben tu trabajo." },
+        { "title": "Ganancias y pagos", "description": "Aprende cómo se calculan tus ganancias y cuándo te pagarán." }
+      ],
+      "admin": [
+        { "title": "Gestión de usuarios", "description": "Gestiona marcas, creadores y usuarios en la plataforma." },
+        { "title": "Casos de soporte", "description": "Revisa, asigna y resuelve tickets de soporte de usuarios." },
+        { "title": "Configuración", "description": "Configura ajustes de plataforma, notificaciones y más." }
+      ]
+    },
+    "learnMore": "Saber más",
+    "faqSection": {
+      "title": "Preguntas frecuentes",
+      "description": "Todo lo que necesitas saber sobre la plataforma. ¿No encuentras la respuesta?",
+      "contactText": "Escríbenos a",
+      "contactEmail": "support@huerray.com"
+    },
+    "submitCta": "Enviar un caso",
+    "myCasesLink": "Mis casos",
+    "backToHelp": "Volver a la ayuda",
+    "nav": {
+      "home": "Inicio",
+      "faq": "Preguntas frecuentes",
+      "tickets": "Tickets"
+    },
+    "faq": {
+      "brand": [
+        { "q": "¿Cómo creo una campaña?", "a": "Navega a Campañas en la barra lateral y haz clic en 'Nueva campaña'." },
+        { "q": "¿Cómo invito a creadores?", "a": "Abre una campaña, ve a la pestaña Gigs y usa la acción de invitación." },
+        { "q": "¿Cómo funciona la facturación?", "a": "Se te factura por campaña según tu plan. Visita Configuración > Facturación." },
+        { "q": "¿Cómo reviso las entregas?", "a": "Abre un gig de tu campaña y ve a la pestaña Entregas." },
+        { "q": "¿Puedo tener varias campañas?", "a": "Sí, puedes crear y gestionar varias campañas simultáneamente." }
+      ],
+      "creator": [
+        { "q": "¿Cómo me uno a una campaña?", "a": "Explora los gigs disponibles y haz clic en Aplicar." },
+        { "q": "¿Cuándo me pagarán?", "a": "Los pagos se procesan dentro de los 14 días después de la aprobación de tu contenido." },
+        { "q": "¿Cómo envío contenido?", "a": "Abre tu gig activo y haz clic en Enviar para subir tu video." },
+        { "q": "¿Qué pasa después de enviar?", "a": "La marca revisará tu envío y lo aprobará, devolverá o rechazará." },
+        { "q": "¿Cómo actualizo mi perfil?", "a": "Ve a Mi Perfil en la barra lateral para actualizar tu bio y categorías." }
+      ],
+      "admin": [
+        { "q": "¿Cómo gestiono usuarios?", "a": "Navega a Usuarios en la navegación principal." },
+        { "q": "¿Cómo reviso perfiles de marcas?", "a": "Ve a Marcas y usa el menú de acciones." },
+        { "q": "¿Cómo asigno un caso?", "a": "Abre un caso y usa el menú de acciones para asignarlo." },
+        { "q": "¿Cómo apruebo una campaña?", "a": "Ve a Campañas, abre la campaña y usa el menú de acciones." },
+        { "q": "¿Cómo envío notificaciones?", "a": "Navega a Notificaciones y usa el botón Crear notificación." }
+      ]
+    },
+    "submitCase": {
+      "titleLabel": "Título",
+      "titlePlaceholder": "Breve resumen de tu problema",
+      "descriptionLabel": "Descripción",
+      "descriptionPlaceholder": "Describe tu problema en detalle...",
+      "priorityLabel": "Prioridad",
+      "submit": "Enviar caso",
+      "submitting": "Enviando...",
+      "successToast": "Tu caso ha sido enviado con éxito",
+      "errorToast": "Error al enviar el caso. Por favor, inténtalo de nuevo.",
+      "titleRequired": "El título es obligatorio",
+      "descriptionRequired": "La descripción es obligatoria"
+    },
+    "myCases": {
+      "empty": "No hay casos aún",
+      "emptyDesc": "Envía un caso si necesitas ayuda",
+      "viewAll": "Ver todos los casos",
+      "replyPlaceholder": "Escribe una respuesta...",
+      "send": "Enviar",
+      "backToList": "Volver a los casos",
+      "noMessages": "No hay mensajes aún"
+    }
   },
   "filterValues": {
     "draft": "Borrador",

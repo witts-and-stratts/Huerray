@@ -245,7 +245,6 @@ export default function CreatorSettingsPage() {
     { value: 'bio', label: tTabs( 'bio' ) },
     { value: 'social-media', label: tTabs( 'socialMedia' ) },
     { value: '/creator/settings/bank', label: tTabs( 'bankDetails' ) },
-    { value: '/creator/settings/security', label: tTabs( 'security' ) },
   ];
 
   const pageDetails: Record<string, { title: string; description: string; }> = {

@@ -15,24 +15,26 @@ import { GigSelectionItem } from "./gig-selection/gig-selection-item";
 import { FolderVideoIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useTranslations } from "next-intl";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia } from "../dashboard-ui/empty";
 
 function EmptyGigsState() {
   const t = useTranslations( 'dashboard.brand.gigsPage' );
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-4">
-      <div className="size-16 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+    <Empty className="flex flex-col items-center justify-center px-4 gap-2">
+      <EmptyMedia>
         <HugeiconsIcon
           icon={ FolderVideoIcon }
-          className="w-8 h-8 text-muted-foreground/50"
+          className="w-12 h-12 text-muted-foreground/50"
+          strokeWidth={ 1 }
         />
-      </div>
-      <h3 className="text-base font-medium text-foreground mb-1">
+      </EmptyMedia>
+      <EmptyHeader className="text-base font-medium font-primary">
         { t( 'noGigsYet' ) }
-      </h3>
-      <p className="text-sm text-muted-foreground text-center max-w-[320px] mb-4">
+      </EmptyHeader>
+      <EmptyDescription className="text-sm">
         { t( 'noGigsYetDescription' ) }
-      </p>
-    </div>
+      </EmptyDescription>
+    </Empty>
   );
 }
 

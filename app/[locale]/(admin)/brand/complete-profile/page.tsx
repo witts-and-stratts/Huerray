@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import '@/app/styles/components/complete-profile.css';
-import { Tabs, TabsList, TabsTab, TabsPanel } from '@/components/animate-ui/components/base/tabs';
+import { Tabs, TabsList, TabsTab, TabsPanel, TabsPanels } from '@/components/animate-ui/components/base/tabs';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import {
@@ -24,7 +24,7 @@ import { useForm } from '@tanstack/react-form';
 import { Check, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { useTranslations } from 'next-intl';
@@ -38,32 +38,81 @@ const formatEnumLabel = ( value: string ) => {
 };
 
 export default function BrandCompleteProfilePage() {
-  const t = useTranslations('dashboard.brand');
+  const completeProfileT = useTranslations( 'dashboard.brand.completeProfile' );
+  const createProfileFormT = useTranslations( 'dashboard.brand.createProfileForm' );
   const router = useRouter();
   const params = useParams();
   const locale = params?.locale || 'en';
   const [ isSaving, setIsSaving ] = useState( false );
   const [ activeTab, setActiveTab ] = useState( 'company' );
   const dispatch = useAppDispatch();
+  const formContainerRef = useRef<HTMLDivElement>( null );
+
+  const getErrorMessage = ( error: any, fallback: string ) => {
+    const rawError =
+      error?.response?.data?.error
+      ?? error?.response?.data?.message
+      ?? error?.message;
+
+    if ( typeof rawError === 'string' && rawError.trim().length > 0 ) {
+      return rawError;
+    }
+
+    return fallback;
+  };
+
+  const scrollFirstVisibleErrorIntoView = () => {
+    window.requestAnimationFrame( () => {
+      window.requestAnimationFrame( () => {
+        const container = formContainerRef.current;
+
+        if ( !container ) {
+          return;
+        }
+
+        const candidates = Array.from(
+          container.querySelectorAll<HTMLElement>( '[data-slot="field"][data-invalid="true"], [data-slot="field-error"], [role="alert"]' )
+        );
+
+        const firstVisibleCandidate = candidates.find( ( element ) => {
+          const style = window.getComputedStyle( element );
+          return style.display !== 'none' && style.visibility !== 'hidden' && element.getClientRects().length > 0;
+        } );
+
+        if ( !firstVisibleCandidate ) {
+          return;
+        }
+
+        const target = firstVisibleCandidate.closest<HTMLElement>( '[data-slot="field"]' ) ?? firstVisibleCandidate;
+        target.scrollIntoView( { behavior: 'smooth', block: 'center' } );
+
+        const focusTarget = target.matches( 'input, textarea, select, button, [role="combobox"], [contenteditable="true"]' )
+          ? target
+          : target.querySelector<HTMLElement>( 'input, textarea, select, button, [role="combobox"], [contenteditable="true"]' );
+
+        focusTarget?.focus( { preventScroll: true } );
+      } );
+    } );
+  };
 
   const brandProfileSchema = useMemo( () => z.object( {
-    companyName: z.string().min( 1, t('createProfileForm.errorCompanyRequired') ),
-    websiteUrl: z.string().url( t('createProfileForm.errorInvalidUrl') ),
+    companyName: z.string().min( 1, createProfileFormT( 'errorCompanyRequired' ) ),
+    websiteUrl: z.string().url( createProfileFormT( 'errorInvalidUrl' ) ),
     companyDescription: z.string(),
     category: z.enum( UtilsBrandCategory ).optional(),
     companySize: z.enum( UtilsCompanySize ).optional(),
     registrationNumber: z.string(),
-    city: z.string(),
+    city: z.string().min( 1, createProfileFormT( 'errorCityRequired' ) ),
     country: z.string(),
     building_number: z.string(),
     preferredContactEmail: z.email().or( z.literal( '' ) ),
     preferredContactPhone: z.string(),
-    state: z.string().min( 1, t('createProfileForm.errorStateRequired') ),
-    street: z.string(),
+    state: z.string().min( 1, createProfileFormT( 'errorStateRequired' ) ),
+    street: z.string().min( 1, createProfileFormT( 'errorStreetRequired' ) ),
     vatId: z.string(),
-    postalCode: z.string(),
+    postalCode: z.string().min( 1, createProfileFormT( 'errorPostalCodeRequired' ) ),
     profilePhotoUrl: z.string().optional(),
-  } ), [t] );
+  } ), [ createProfileFormT ] );
 
   const form = useForm( {
     defaultValues: {
@@ -113,12 +162,12 @@ export default function BrandCompleteProfilePage() {
         // Fetch and cache the newly created profile in Redux
         await dispatch( fetchBrandProfile() );
 
-        toast.success( t('completeProfile.profileCompleted'), { richColors: true } );
+        toast.success( completeProfileT( 'profileCompleted' ), { richColors: true } );
         router.push( `/${ locale }/brand` );
       } catch ( error: any ) {
         console.error( 'Failed to complete profile', error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || 'Failed to complete profile';
-        toast.error( t('completeProfile.failedToComplete', { error: errorMessage }), { richColors: true } );
+        const errorMessage = getErrorMessage( error, 'Failed to complete profile' );
+        toast.error( completeProfileT( 'failedToComplete', { error: errorMessage } ), { richColors: true } );
       } finally {
         setIsSaving( false );
       }
@@ -155,6 +204,7 @@ export default function BrandCompleteProfilePage() {
       if ( firstErrorField ) {
         const targetTab = fieldToTab[ firstErrorField ] || 'company';
         setActiveTab( targetTab );
+        scrollFirstVisibleErrorIntoView();
 
         // Get the first error message
         const fieldMeta = errors[ firstErrorField as keyof typeof errors ];
@@ -162,14 +212,14 @@ export default function BrandCompleteProfilePage() {
         const firstError = errorMessages[ 0 ];
         const errorMessage = typeof firstError === 'string' ? firstError : ( firstError as any )?.message || 'Please fix the validation errors';
 
-        toast.error( t('completeProfile.validationError', { error: errorMessage }), { richColors: true } );
+        toast.error( completeProfileT( 'validationError', { error: errorMessage } ), { richColors: true } );
       }
     }
   } );
 
   const tabs = [
-    { value: 'company', label: t('completeProfile.companyAddress') },
-    { value: 'contact', label: t('completeProfile.branding') },
+    { value: 'company', label: completeProfileT( 'companyAddress' ) },
+    { value: 'contact', label: completeProfileT( 'branding' ) },
   ];
 
   const handleTabChange = ( value: string ) => {
@@ -196,7 +246,7 @@ export default function BrandCompleteProfilePage() {
       <div className="complete-profile__image-col">
         <Image src="/images/content/lifestyle-4.webp" alt="Huerray Lifestyle" width={ 1920 } height={ 1080 } className="complete-profile__image" />
       </div>
-      <div className="complete-profile__right-col">
+      <div className="complete-profile__right-col" ref={ formContainerRef }>
         <div className="complete-profile__lang-selector">
           <LanguageSelector showLabel={ false } />
         </div>
@@ -213,9 +263,9 @@ export default function BrandCompleteProfilePage() {
                   className="complete-profile__logo"
                 />
               </div>
-              <CardTitle className="complete-profile__title">{t('completeProfile.title')}</CardTitle>
+              <CardTitle className="complete-profile__title">{ completeProfileT( 'title' ) }</CardTitle>
               <CardDescription>
-                {t('completeProfile.description')}
+                { completeProfileT( 'description' ) }
               </CardDescription>
             </CardHeader>
 
@@ -232,247 +282,263 @@ export default function BrandCompleteProfilePage() {
                 </CardHeader>
                 <CardContent className="complete-profile__inner-card-content">
                   <form onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
-                    <TabsPanel value="company">
-                      <Card className="m-px">
-                        <CardContent>
-                          <h4 className="card__title mb-3">{t('completeProfile.companyDetails')}</h4>
-                          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <form.Field
-                              name="companyName"
-                              validators={ { onBlur: brandProfileSchema.shape.companyName } }
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.companyName')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                  onBlur={ field.handleBlur }
-                                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-                                  required
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="websiteUrl"
-                              validators={ { onBlur: brandProfileSchema.shape.websiteUrl } }
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.websiteUrl')}
-                                  type="url"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                  onBlur={ field.handleBlur }
-                                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="category"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  type="searchable-select"
-                                  label={t('createProfileForm.industryCategory')}
-                                  value={ field.state.value }
-                                  onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsBrandCategory ) }
-                                  options={ Object.values( UtilsBrandCategory ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="companySize"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  type="select"
-                                  label={t('createProfileForm.companySize')}
-                                  value={ field.state.value }
-                                  onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsCompanySize ) }
-                                  options={ Object.values( UtilsCompanySize ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="vatId"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.vatId')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="registrationNumber"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.registrationNumber')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                          </FieldGroup>
-                          <Separator className="my-6" />
-                          <h4 className="card__title mb-3">{t('completeProfile.addressInformation')}</h4>
-                          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <form.Field
-                              name="street"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.street')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="building_number"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.numberSuite')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="city"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.city')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="state"
-                              validators={ { onBlur: brandProfileSchema.shape.state } }
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.stateProvince')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                  onBlur={ field.handleBlur }
-                                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
-                                  required
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="postalCode"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.postalCode')}
-                                  type="text"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="country"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.country')}
-                                  value={ field.state.value }
-                                  type="country"
-                                  onValueChange={ ( val: string | null ) => field.handleChange( val || "" ) }
-                                />
-                              ) }
-                            />
-                          </FieldGroup>
-
-                          <Separator className="my-6" />
-
-                          <h4 className="card__title mb-3">{t('completeProfile.contactInformation')}</h4>
-                          <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <form.Field
-                              name="preferredContactEmail"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.contactEmail')}
-                                  type="email"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                            <form.Field
-                              name="preferredContactPhone"
-                              children={ ( field ) => (
-                                <SuperField
-                                  name={ field.name }
-                                  label={t('createProfileForm.contactPhone')}
-                                  type="tel"
-                                  value={ field.state.value }
-                                  onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                                />
-                              ) }
-                            />
-                          </FieldGroup>
-                        </CardContent>
-                      </Card>
-                    </TabsPanel>
-
-                    <TabsPanel value="contact">
-                      <div className="space-y-8">
-
+                    <TabsPanels>
+                      <TabsPanel value="company" keepMounted>
                         <Card className="m-px">
-                          <CardContent className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <div className="md:col-span-2">
+                          <CardContent>
+                            <h4 className="card__title mb-3">{ completeProfileT( 'companyDetails' ) }</h4>
+                            <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               <form.Field
-                                name="companyDescription"
+                                name="companyName"
+                                validators={ { onBlur: brandProfileSchema.shape.companyName } }
                                 children={ ( field ) => (
                                   <SuperField
                                     name={ field.name }
-                                    label={t('createProfileForm.description')}
-                                    type="editor"
-                                    fieldClassName='h-[300px]'
+                                    label={ createProfileFormT( 'companyName' ) }
+                                    type="text"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="websiteUrl"
+                                validators={ { onBlur: brandProfileSchema.shape.websiteUrl } }
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'websiteUrl' ) }
+                                    type="url"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="category"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    type="searchable-select"
+                                    label={ createProfileFormT( 'industryCategory' ) }
+                                    placeholder={ createProfileFormT( 'industryCategory' ) }
+                                    value={ field.state.value }
+                                    onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsBrandCategory ) }
+                                    options={ Object.values( UtilsBrandCategory ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="companySize"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    type="select"
+                                    label={ createProfileFormT( 'companySize' ) }
+                                    value={ field.state.value }
+                                    onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsCompanySize ) }
+                                    options={ Object.values( UtilsCompanySize ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="vatId"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'vatId' ) }
+                                    type="text"
                                     value={ field.state.value }
                                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                                   />
                                 ) }
                               />
-                            </div>
-                            <div className="lg:col-span-1">
-                              <div className="space-y-2 flex flex-col gap-2">
-                                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{t('createProfileForm.brandLogo')}</label>
+                              <form.Field
+                                name="registrationNumber"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'registrationNumber' ) }
+                                    type="text"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                  />
+                                ) }
+                              />
+                            </FieldGroup>
+                            <Separator className="my-6" />
+                            <h4 className="card__title mb-3">{ completeProfileT( 'addressInformation' ) }</h4>
+                            <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <form.Field
+                                name="street"
+                                validators={ { onBlur: brandProfileSchema.shape.street } }
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'street' ) }
+                                    type="text"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="building_number"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'numberSuite' ) }
+                                    type="text"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="city"
+                                validators={ { onBlur: brandProfileSchema.shape.city } }
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'city' ) }
+                                    type="text"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="state"
+                                validators={ { onBlur: brandProfileSchema.shape.state } }
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'stateProvince' ) }
+                                    type="text"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="postalCode"
+                                validators={ { onBlur: brandProfileSchema.shape.postalCode } }
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'postalCode' ) }
+                                    type="text"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="country"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'country' ) }
+                                    value={ field.state.value }
+                                    type="country"
+                                    placeholder={ createProfileFormT( 'country' ) }
+                                    onValueChange={ ( val: string | null ) => field.handleChange( val || "" ) }
+                                  />
+                                ) }
+                              />
+                            </FieldGroup>
+
+                            <Separator className="my-6" />
+
+                            <h4 className="card__title mb-3">{ completeProfileT( 'contactInformation' ) }</h4>
+                            <FieldGroup className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <form.Field
+                                name="preferredContactEmail"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'contactEmail' ) }
+                                    type="email"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                  />
+                                ) }
+                              />
+                              <form.Field
+                                name="preferredContactPhone"
+                                children={ ( field ) => (
+                                  <SuperField
+                                    name={ field.name }
+                                    label={ createProfileFormT( 'contactPhone' ) }
+                                    type="tel"
+                                    value={ field.state.value }
+                                    onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                  />
+                                ) }
+                              />
+                            </FieldGroup>
+                          </CardContent>
+                        </Card>
+                      </TabsPanel>
+
+                      <TabsPanel value="contact" keepMounted>
+                        <div className="space-y-8">
+
+                          <Card className="m-px">
+                            <CardContent className="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+                              <div className="md:col-span-2">
                                 <form.Field
-                                  name="profilePhotoUrl"
+                                  name="companyDescription"
                                   children={ ( field ) => (
-                                    <ImageUploader
+                                    <SuperField
+                                      name={ field.name }
+                                      label={ createProfileFormT( 'description' ) }
+                                      type="editor"
+                                      fieldClassName='h-[300px]'
                                       value={ field.state.value }
-                                      onChange={ ( url ) => field.handleChange( url ) }
-                                      previewTitle={ form.getFieldValue( 'companyName' ) || "Brand Logo" }
-                                      className='h-[300px]'
+                                      onChange={ ( value: string ) => field.handleChange( value ) }
                                     />
                                   ) }
                                 />
                               </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </TabsPanel>
+                              <div className="lg:col-span-1">
+                                <div className="space-y-2 flex flex-col gap-2">
+                                  <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{ createProfileFormT( 'brandLogo' ) }</label>
+                                  <form.Field
+                                    name="profilePhotoUrl"
+                                    children={ ( field ) => (
+                                      <ImageUploader
+                                        value={ field.state.value }
+                                        onChange={ ( url ) => field.handleChange( url ) }
+                                        previewTitle={ form.getFieldValue( 'companyName' ) || "Brand Logo" }
+                                        className='h-[300px]'
+                                      />
+                                    ) }
+                                  />
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </TabsPanel>
+                    </TabsPanels>
                   </form>
                 </CardContent>
                 <CardFooter className="complete-profile__inner-card-footer">
@@ -480,21 +546,21 @@ export default function BrandCompleteProfilePage() {
                     <div>
                       { activeTab !== 'company' && (
                         <Button type="button" variant="outline" onClick={ prevTab } size="lg">
-                          {t('completeProfile.back')}
+                          { completeProfileT( 'back' ) }
                         </Button>
                       ) }
                     </div>
                     <div>
                       { activeTab === 'company' ? (
                         <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                          {t('completeProfile.nextStep')} <ChevronRight className="w-4 h-4" />
+                          { completeProfileT( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
                         </Button>
                       ) : (
                         <form.Subscribe
                           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
                           children={ ( [ , isSubmitting ] ) => (
                             <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2" onClick={ () => form.handleSubmit() }>
-                              { isSubmitting || isSaving ? t('completeProfile.creatingProfile') : t('completeProfile.completeProfile') }
+                              { isSubmitting || isSaving ? completeProfileT( 'creatingProfile' ) : completeProfileT( 'completeProfile' ) }
                               { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
                             </Button>
                           ) }

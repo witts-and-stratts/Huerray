@@ -13,11 +13,16 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsPaymentMethod } from './utils-payment-method';
 
 export interface ModelsUpdatePaymentRequest {
     'add_payment_item_ids'?: Array<string>;
     'notes'?: string;
-    'payment_method'?: string;
+    'payment_method'?: UtilsPaymentMethod;
     'remove_payment_item_ids'?: Array<string>;
 }
+
+
 

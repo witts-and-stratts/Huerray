@@ -6,6 +6,7 @@ import {
   AiUserIcon,
   Task02Icon,
   FileScriptIcon,
+  Mail01Icon,
   CreditCardAcceptIcon,
   FileUploadIcon,
 } from '@hugeicons/core-free-icons';
@@ -19,6 +20,7 @@ export const ENTITY_ICONS: Record<EntityType, any> = {
   creators: AiUserIcon,
   gigs: Task02Icon,
   invoices: FileScriptIcon,
+  newsletter: Mail01Icon,
   payments: CreditCardAcceptIcon,
   submissions: FileUploadIcon,
 };
@@ -61,6 +63,10 @@ export const STATUS_OPTIONS: Record<EntityType, { value: string; label: string }
     { value: 'paid', label: 'Paid' },
     { value: 'overdue', label: 'Overdue' },
     { value: 'cancelled', label: 'Cancelled' },
+  ],
+  newsletter: [
+    { value: 'subscribed', label: 'Subscribed' },
+    { value: 'unsubscribed', label: 'Unsubscribed' },
   ],
   payments: [
     { value: 'pending', label: 'Pending' },
@@ -129,6 +135,8 @@ export function buildUrl(
         return `${ base }/admin/gigs`;
       case 'invoices':
         return `${ base }/admin/invoices`;
+      case 'newsletter':
+        return `${ base }/admin/newsletter`;
       case 'payments':
         return `${ base }/admin/payouts`;
       case 'submissions':

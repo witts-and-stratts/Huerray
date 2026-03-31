@@ -63,7 +63,7 @@ function CreatorCell( { creator_id, creator_name }: { creator_id?: string; creat
         { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ creator_name } /> }
         <AvatarFallback>{ getInitials( creator_name ) }</AvatarFallback>
       </Avatar>
-      <span className="text-sm font-medium">{ creator_name || '—' }</span>
+      <span className="text-sm font-medium max-md:whitespace-nowrap">{ creator_name || '—' }</span>
     </div>
   );
 }
@@ -119,7 +119,7 @@ export function usePaymentColumns( isAdmin = false ): ColumnDef<ModelsPaymentRes
         accessorKey: 'payment_date',
         header: ( { column } ) => <THead title={ t( 'payments.table.date' ) } column={ column } />,
         cell: ( { row } ) => (
-          <div className="text-sm pl-2">
+          <div className="text-sm pl-2 max-md:whitespace-nowrap">
             { row.original.payment_date ? useFormatDate( row.original.payment_date ) : '—' }
           </div>
         ),

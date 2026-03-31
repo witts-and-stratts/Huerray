@@ -112,7 +112,7 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className='flex flex-col bg-slate-50/50 grow relative min-h-0'
+          className='flex flex-col bg-slate-50/50 grow relative min-h-0 flex-1 h-full'
         >
           <div className="flex-1 min-h-0 overflow-auto">
             <PaymentsTableToolbar

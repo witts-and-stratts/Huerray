@@ -157,7 +157,7 @@ export function GigsTable( {
         { error && <TableErrorState key="error" entity="gigs" message={ error.message } /> }
         { !isLoading && !error && (
           <div
-            className="bg-slate-50/50 grow relative flex flex-col min-h-0"
+            className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full"
           >
             <div className='flex-1 min-h-0 overflow-auto'>
               { !hideToolbar && ( data?.length ?? 0 ) > 0 && (

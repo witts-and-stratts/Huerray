@@ -22,17 +22,18 @@ import { HeadphonesIcon } from 'lucide-react';
 type StatusFilter = 'all' | 'open' | 'in_progress' | 'resolved' | 'closed';
 
 function CasesEmptyState() {
+  const t = useTranslations( 'dashboard.admin.casesPage' );
+
   return (
     <div className="flex flex-col items-center justify-center py-16 gap-3 text-muted-foreground select-none">
       <HeadphonesIcon className="size-10 opacity-20" strokeWidth={ 1 } />
-      <p className="text-sm">No cases found</p>
+      <p className="text-sm">{ t( 'empty' ) }</p>
     </div>
   );
 }
 
 export function CasesView() {
   const t = useTranslations( 'dashboard.admin.casesPage' );
-  const getMessage = ( key: string, fallback: string ) => ( t.has( key ) ? t( key ) : fallback );
 
   const [ page, setPage ] = React.useState( 1 );
   const [ perPage, setPerPage ] = React.useState( 20 );
@@ -72,11 +73,11 @@ export function CasesView() {
   };
 
   const statusTabs: { value: StatusFilter; label: string }[] = [
-    { value: 'all', label: getMessage( 'tabs.all', 'All' ) },
-    { value: 'open', label: getMessage( 'tabs.open', 'Open' ) },
-    { value: 'in_progress', label: getMessage( 'tabs.inProgress', 'In Progress' ) },
-    { value: 'resolved', label: getMessage( 'tabs.resolved', 'Resolved' ) },
-    { value: 'closed', label: getMessage( 'tabs.closed', 'Closed' ) },
+    { value: 'all', label: t( 'tabs.all' ) },
+    { value: 'open', label: t( 'tabs.open' ) },
+    { value: 'in_progress', label: t( 'tabs.inProgress' ) },
+    { value: 'resolved', label: t( 'tabs.resolved' ) },
+    { value: 'closed', label: t( 'tabs.closed' ) },
   ];
 
   if ( isLoading ) {
@@ -131,7 +132,7 @@ export function CasesView() {
             <SuperField
               name="search"
               type="search"
-              placeholder={ getMessage( 'toolbar.searchPlaceholder', 'Search cases...' ) }
+              placeholder={ t( 'toolbar.searchPlaceholder' ) }
               prefix={ <Search className="size-4" /> }
               value={ searchTerm }
               onChange={ ( e ) => {

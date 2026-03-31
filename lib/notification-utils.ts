@@ -1,49 +1,59 @@
+import type {
+  ModelsNotificationResponse,
+  UtilsEventType,
+} from "@/lib/api/generated/models";
+
 interface NotificationActionLabelRule {
   eventName: string;
-  eventType: string;
-  label: string;
+  eventType: UtilsEventType;
+  labelKey: NotificationActionLabelKey;
 }
 
 export type NotificationsRole = "admin" | "brand" | "creator";
 export type NotificationActionKind =
   | "invoice-sheet"
+  | "gig-sheet"
   | "submission-dialog"
   | "internal-route"
   | "external-url"
   | "none";
+
+export type NotificationActionLabelKey =
+  | "viewInvoice"
+  | "viewSubmission"
+  | "goToGig"
+  | "viewCampaign"
+  | "reviewBrandProfile"
+  | "reviewCreatorProfile"
+  | "viewDetails";
 
 // Derived from current notification payload variants.
 export const NOTIFICATION_ACTION_LABEL_RULES: NotificationActionLabelRule[] = [
   {
     eventName: "Brand Campaign Decision",
     eventType: "Acceptance",
-    label: "View campaign",
+    labelKey: "viewCampaign",
   },
   {
     eventName: "Creator Profile Submission",
     eventType: "Submission",
-    label: "Review creator profile",
+    labelKey: "reviewCreatorProfile",
   },
   {
     eventName: "Brand Profile Submission",
     eventType: "Submission",
-    label: "Review brand profile",
+    labelKey: "reviewBrandProfile",
   },
 ];
 
-interface NotificationActionContext {
-  event_name?: string | null;
-  event_type?: string | null;
-  title?: string | null;
-  message?: string | null;
-  action_url?: string | null;
-  entity_id?: string | null;
-  metadata?: string | null;
-}
+type NotificationActionContext = Pick<
+  ModelsNotificationResponse,
+  "event_name" | "event_type" | "title" | "message" | "action_url" | "entity_id" | "entity_type" | "metadata"
+>;
 
 export interface NotificationActionSpec {
   kind: NotificationActionKind;
-  label: string;
+  labelKey: NotificationActionLabelKey;
   href?: string | null;
   invoiceId?: string | null;
   submissionId?: string | null;
@@ -105,7 +115,9 @@ function isInternalActionUrl( actionUrl: string | null | undefined ): boolean {
 }
 
 function isInvoiceNotification( notification: NotificationActionContext, text: string ): boolean {
-  return text.includes( "invoice" ) || notification.action_url?.includes( "/invoices/" ) === true;
+  return notification.entity_type === "Invoice"
+    || text.includes( "invoice" )
+    || notification.action_url?.includes( "/invoices/" ) === true;
 }
 
 function isVideoSubmissionNotification(
@@ -114,6 +126,7 @@ function isVideoSubmissionNotification(
   metadata: NotificationMetadata | null
 ): boolean {
   if ( text.includes( "profile submission" ) ) return false;
+  if ( notification.entity_type === "VideoSubmission" ) return true;
 
   if ( text.includes( "video submission" ) ) return true;
   if ( notification.action_url?.includes( "/videos/" ) ) return true;
@@ -126,6 +139,22 @@ function isVideoSubmissionNotification(
 function isGigInvitationAcceptedNotification(text: string): boolean {
   return text.includes( "gig invitation accepted" )
     || ( text.includes( "invitation" ) && text.includes( "accepted" ) && text.includes( "gig" ) );
+}
+
+function isCampaignNotification( notification: NotificationActionContext ): boolean {
+  return notification.entity_type === "Campaign";
+}
+
+function isBrandNotification( notification: NotificationActionContext ): boolean {
+  return notification.entity_type === "Brand";
+}
+
+function isCreatorNotification( notification: NotificationActionContext ): boolean {
+  return notification.entity_type === "Creator";
+}
+
+function isGigNotification( notification: NotificationActionContext ): boolean {
+  return notification.entity_type === "Gig";
 }
 
 function getNotificationIdentifiers( notification: NotificationActionContext ) {
@@ -149,44 +178,60 @@ function getNotificationIdentifiers( notification: NotificationActionContext ) {
   };
 }
 
-export function getNotificationActionLabel( notification: NotificationActionContext ): string {
+export function getNotificationActionLabelKey( notification: NotificationActionContext ): NotificationActionLabelKey {
   const text = buildNotificationText( notification );
 
   if ( isInvoiceNotification( notification, text ) ) {
-    return "View invoice";
+    return "viewInvoice";
   }
 
   if ( isVideoSubmissionNotification( notification, text, parseNotificationMetadata( notification.metadata ) ) ) {
-    return "View submission";
+    return "viewSubmission";
   }
 
   if ( isGigInvitationAcceptedNotification( text ) ) {
-    return "Go to gig";
+    return "goToGig";
+  }
+
+  if ( isCampaignNotification( notification ) ) {
+    return "viewCampaign";
+  }
+
+  if ( isBrandNotification( notification ) ) {
+    return "reviewBrandProfile";
+  }
+
+  if ( isCreatorNotification( notification ) ) {
+    return "reviewCreatorProfile";
+  }
+
+  if ( isGigNotification( notification ) ) {
+    return "goToGig";
   }
 
   const rule = NOTIFICATION_ACTION_LABEL_RULES.find(
     ( item ) =>
       item.eventName.toLowerCase() === ( notification.event_name || "" ).toLowerCase()
-      && item.eventType.toLowerCase() === ( notification.event_type || "" ).toLowerCase()
+      && item.eventType === notification.event_type
   );
 
   if ( rule ) {
-    return rule.label;
+    return rule.labelKey;
   }
 
   if ( notification.action_url?.includes( "/admin/campaigns/" ) ) {
-    return "View campaign";
+    return "viewCampaign";
   }
 
   if ( notification.action_url?.includes( "/admin/brands/" ) ) {
-    return "Review brand profile";
+    return "reviewBrandProfile";
   }
 
   if ( notification.action_url?.includes( "/admin/creators/" ) ) {
-    return "Review creator profile";
+    return "reviewCreatorProfile";
   }
 
-  return "View details";
+  return "viewDetails";
 }
 
 export function resolveNotificationAction(
@@ -198,12 +243,12 @@ export function resolveNotificationAction(
   const text = buildNotificationText( notification );
   const { metadata, invoiceId, submissionId, gigId } = getNotificationIdentifiers( notification );
   const href = getNotificationActionUrl( notification.action_url, role, locale, basePath );
-  const label = getNotificationActionLabel( notification );
+  const labelKey = getNotificationActionLabelKey( notification );
 
   if ( isInvoiceNotification( notification, text ) && invoiceId ) {
     return {
       kind: "invoice-sheet",
-      label,
+      labelKey,
       invoiceId,
       href,
     };
@@ -212,8 +257,17 @@ export function resolveNotificationAction(
   if ( isVideoSubmissionNotification( notification, text, metadata ) && submissionId ) {
     return {
       kind: "submission-dialog",
-      label,
+      labelKey,
       submissionId,
+      gigId,
+      href,
+    };
+  }
+
+  if ( isGigNotification( notification ) && gigId ) {
+    return {
+      kind: "gig-sheet",
+      labelKey,
       gigId,
       href,
     };
@@ -222,7 +276,7 @@ export function resolveNotificationAction(
   if ( href ) {
     return {
       kind: isInternalActionUrl( notification.action_url ) ? "internal-route" : "external-url",
-      label,
+      labelKey,
       href,
       gigId,
     };
@@ -230,7 +284,7 @@ export function resolveNotificationAction(
 
   return {
     kind: "none",
-    label,
+    labelKey,
     gigId,
   };
 }

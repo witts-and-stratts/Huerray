@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **add_payment_item_ids** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 **notes** | **string** |  | [optional] [default to undefined]
-**payment_method** | **string** |  | [optional] [default to undefined]
+**payment_method** | [**UtilsPaymentMethod**](UtilsPaymentMethod.md) |  | [optional] [default to undefined]
 **remove_payment_item_ids** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
 
 ## Example

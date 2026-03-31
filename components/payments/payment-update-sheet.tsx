@@ -23,6 +23,7 @@ import {
   ModelsPaymentResponse,
   ModelsUpdatePaymentRequest,
   UtilsCurrency,
+  UtilsPaymentMethod,
   UtilsPaymentItemStatus,
 } from '@/lib/api/generated/models';
 import { useCreator } from '@/lib/api/hooks/creators';
@@ -57,6 +58,13 @@ const EMPTY_ADD_FORM = {
 };
 
 const CURRENCY_OPTIONS: SelectOption[] = Object.values( UtilsCurrency ).map( ( currency ) => ( { value: currency, label: currency } ) );
+
+function normalizePaymentMethod( value?: string ): UtilsPaymentMethod | undefined {
+  if ( !value ) return undefined;
+  return Object.values( UtilsPaymentMethod ).includes( value as UtilsPaymentMethod )
+    ? value as UtilsPaymentMethod
+    : undefined;
+}
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -348,7 +356,7 @@ export function PaymentUpdateSheet( {
 
     onSubmit( {
       add_payment_item_ids: [ ...addPaymentItemIds, ...createdPaymentItemIds ],
-      payment_method: editMethod.trim() || undefined,
+      payment_method: normalizePaymentMethod( editMethod.trim() ),
       notes: editNotes.trim() || undefined,
       remove_payment_item_ids: removePaymentItemIds,
     } );

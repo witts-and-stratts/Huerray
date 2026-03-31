@@ -96,6 +96,11 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       url: "/brand/payments",
       icon: CreditCardAcceptIcon,
     },
+    {
+      title: withFallback( t, "brand.cases", "Cases" ),
+      url: "/brand/cases",
+      icon: CustomerSupportIcon,
+    },
   ],
   // documents: [
   //   { name: withFallback( t, "brand.savedLists", "Saved Lists" ), url: "/brand/saved-lists", icon: DatabaseIcon },
@@ -104,7 +109,7 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
   // ],
   navSecondary: [
     // { title: withFallback( t, "brand.settings", "Settings" ), url: "/brand/settings", icon: Settings01Icon },
-    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
+    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-help-sheet' ) ) },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );
@@ -156,10 +161,15 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
       url: "/creator/profile",
       icon: ImageUpload01Icon,
     },
+    {
+      title: withFallback( t, "creator.cases", "Cases" ),
+      url: "/creator/cases",
+      icon: CustomerSupportIcon,
+    },
   ],
   navSecondary: [
     // { title: withFallback( t, "creator.settings", "Settings" ), url: "/creator/settings", icon: Settings01Icon },
-    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
+    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-help-sheet' ) ) },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );
@@ -228,14 +238,19 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
     //   icon: ShieldUserIcon,
     // },
   ],
-  // documents: [
-  //   { name: withFallback( t, "admin.platformReports", "Platform Reports" ), url: "/admin/dashboard", icon: IconReport },
-  //   // { name: withFallback( t, "admin.systemLogs", "System Logs" ), url: "/admin/logs", icon: DatabaseIcon },
-  //   { name: withFallback( t, "admin.alerts", "Alerts" ), url: "/admin/notifications", icon: AlertCircleIcon },
-  // ],
+  documents: [
+    {
+      name: withFallback( t, "admin.newsletter", "Newsletter" ),
+      url: "/admin/newsletter",
+      icon: DatabaseIcon,
+    },
+    //   { name: withFallback( t, "admin.platformReports", "Platform Reports" ), url: "/admin/dashboard", icon: IconReport },
+    //   // { name: withFallback( t, "admin.systemLogs", "System Logs" ), url: "/admin/logs", icon: DatabaseIcon },
+    //   { name: withFallback( t, "admin.alerts", "Alerts" ), url: "/admin/notifications", icon: AlertCircleIcon },
+  ],
   navSecondary: [
     // { title: withFallback( t, "admin.accountSettings", "Account Settings" ), url: "/admin/settings", icon: SettingsIcon },
-    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon },
+    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-help-sheet' ) ) },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );

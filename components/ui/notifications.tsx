@@ -9,7 +9,8 @@ import { cn } from "@/lib/dashboard-utils";
 import { getNotificationsPagePath } from "@/lib/notification-utils";
 import { timeAgo } from "@/lib/utils";
 import { Bell, Check, ChevronDown, ChevronUp, EllipsisVertical, MegaphoneOff } from "lucide-react";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useNotificationAction } from "../notifications/use-notification-action";
 import { Badge } from "../dashboard-ui/badge";
@@ -20,6 +21,9 @@ import { AnimatePresence } from "motion/react";
 export function Notifications() {
   const [ isOpen, setIsOpen ] = useState( false );
   const { user } = useAuth();
+  const locale = useLocale();
+  const tCommon = useTranslations( "dashboard.common" );
+  const router = useRouter();
 
   // Fetch notifications
   const { data: response, isLoading } = useNotifications( 1, 20, false, {
@@ -36,7 +40,7 @@ export function Notifications() {
 
   const notifications = response?.data?.notifications || [];
   const unreadCount = response?.data?.unread_count || 0;
-  const notificationsPagePath = getNotificationsPagePath( user?.role );
+  const notificationsPagePath = `/${ locale }${ getNotificationsPagePath( user?.role ) }`;
 
   const handleMarkAsRead = ( id: string, e?: React.MouseEvent ) => {
     e?.stopPropagation();
@@ -67,11 +71,19 @@ export function Notifications() {
           onMarkAsRead={ handleMarkAsRead }
           onDelete={ handleDelete }
         />
-        <Link href={ notificationsPagePath } className="p-2 border-t w-full">
-          <Button variant="outline" size={ 'sm' } className="w-full justify-center text-xs">
-            View all notifications
+        <div className="p-2 border-t w-full">
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full justify-center text-xs"
+            onClick={ () => {
+              setIsOpen( false );
+              router.push( notificationsPagePath );
+            } }
+          >
+            { tCommon( "viewAllNotifications" ) }
           </Button>
-        </Link>
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -82,6 +94,8 @@ interface NotificationsTriggerProps {
 }
 
 function NotificationsTrigger( { unreadCount }: NotificationsTriggerProps ) {
+  const tCommon = useTranslations( "dashboard.common" );
+
   return (
     <DropdownMenuTrigger className={ cn( buttonVariants( { variant: "ghost", size: "icon" } ), "relative" ) }>
       <Bell className="h-5 w-5" />
@@ -93,7 +107,7 @@ function NotificationsTrigger( { unreadCount }: NotificationsTriggerProps ) {
           { unreadCount > 99 ? '99+' : unreadCount }
         </Badge>
       ) }
-      <span className="sr-only">Notifications</span>
+      <span className="sr-only">{ tCommon( "notifications" ) }</span>
     </DropdownMenuTrigger>
   );
 }
@@ -111,22 +125,24 @@ function NotificationsHeader( {
   isMarkAllPending,
   onMarkAllAsRead,
 }: NotificationsHeaderProps ) {
+  const t = useTranslations( "dashboard.notifications" );
+
   return (
     <div className="flex items-center justify-between px-2 py-1.5">
-      <span className="font-normal font-primary text-primary">Notifications</span>
+      <span className="font-normal font-primary text-primary">{ t( "title" ) }</span>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="h-6 w-6 text-muted-foreground hover:text-primary">
             <EllipsisVertical className="h-4 w-4" />
-            <span className="sr-only">Menu</span>
+            <span className="sr-only">{ t( "actions.menu" ) }</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={ onMarkAllAsRead } disabled={ unreadCount === 0 || isMarkAllPending }>
-            <span>Mark all as read</span>
+            <span>{ t( "actions.markAllAsRead" ) }</span>
           </DropdownMenuItem>
           <DropdownMenuItem className="text-destructive focus:text-destructive" disabled={ !hasNotifications }>
-            <span>Delete all</span>
+            <span>{ t( "actions.deleteAll" ) }</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -142,14 +158,17 @@ interface NotificationsListProps {
 }
 
 function NotificationsList( { isLoading, notifications, onMarkAsRead, onDelete }: NotificationsListProps ) {
+  const t = useTranslations( "dashboard.notifications" );
+  const tCommon = useTranslations( "dashboard.common" );
+
   return (
     <DropdownMenuGroup className="max-h-[300px] overflow-y-auto overflow-x-hidden">
       { isLoading ? (
-        <div className="p-4 text-center text-sm text-muted-foreground">Loading...</div>
+        <div className="p-4 text-center text-sm text-muted-foreground">{ tCommon( "loading" ) }</div>
       ) : notifications?.length === 0 ? (
         <div className="p-10 text-center text-xs text-muted-foreground/60 flex flex-col items-center gap-2">
           <MegaphoneOff className="size-6" strokeWidth={ 1 } />
-          No notifications
+          { t( "empty.overlayTitle" ) }
         </div>
       ) : (
         notifications?.map( ( notification ) => (
@@ -177,10 +196,12 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
   const [ isExpanded, setIsExpanded ] = useState( false );
   const shouldTruncate = notification.message ? notification.message.length > 140 : false;
   const { action, handleAction, overlay } = useNotificationAction( notification );
+  const t = useTranslations( "dashboard.notifications" );
+  const tCommon = useTranslations( "dashboard.common" );
 
   const actions: MenuAction<ModelsNotificationResponse>[] = [
     {
-      label: "Mark as read",
+      label: t( "actions.markAsRead" ),
       action: ( data ) => onMarkAsRead( data.id! ),
       condition: ( data ) => !data.is_read,
     },
@@ -190,7 +211,7 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
       condition: () => action.kind !== "none",
     },
     {
-      label: "Delete",
+      label: t( "actions.delete" ),
       action: ( data ) => onDelete( data.id! ),
       variant: "destructive",
       separator: true,
@@ -228,11 +249,11 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
                 >
                   { isExpanded ? (
                     <>
-                      Show less <ChevronUp className="ml-1 h-3 w-3" />
+                      { t( "item.showLess" ) } <ChevronUp className="ml-1 h-3 w-3" />
                     </>
                   ) : (
                     <>
-                      Show more <ChevronDown className="ml-1 h-3 w-3" />
+                      { t( "item.showMore" ) } <ChevronDown className="ml-1 h-3 w-3" />
                     </>
                   ) }
                 </Button>
@@ -256,10 +277,10 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
                 size="icon"
                 className="h-6 w-6 shrink-0 text-muted-foreground hover:text-primary hover:bg-muted"
                 onClick={ ( e ) => onMarkAsRead( notification.id!, e ) }
-                title="Mark as read"
+                title={ t( "actions.markAsRead" ) }
               >
                 <Check className="h-3 w-3" />
-                <span className="sr-only">Mark as read</span>
+                <span className="sr-only">{ t( "actions.markAsRead" ) }</span>
               </Button>
             ) }
             <ActionMenu
@@ -274,7 +295,7 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
                   onClick={ ( e ) => e.stopPropagation() }
                 >
                   <EllipsisVertical className="h-3 w-3" />
-                  <span className="sr-only">Actions</span>
+                  <span className="sr-only">{ tCommon( "actions" ) }</span>
                 </Button>
               }
             />

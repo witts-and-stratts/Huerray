@@ -4,7 +4,7 @@ import * as React from 'react';
 import { toast } from 'sonner';
 import { Add01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { X, Check, Loader2 } from 'lucide-react';
+import { X, Loader2 } from 'lucide-react';
 
 import { Button } from '@/components/dashboard-ui/button';
 import {
@@ -15,7 +15,6 @@ import {
   SheetTitle,
 } from '@/components/dashboard-ui/sheet';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { useCreators } from '@/lib/api/hooks/creators';
 import { usePaymentItems, useCreatePayment, useCreatePaymentItem } from '@/lib/api/hooks/payments';
@@ -29,18 +28,12 @@ import {
   UtilsPaymentMethod,
 } from '@/lib/api/generated/models';
 import { type SelectOption } from '@/components/dashboard-ui/superfield/types';
+import { type EntityMeta } from '@/components/dashboard-ui/superfield/entity-select';
 import { cn } from '@/lib/dashboard-utils';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
 import { useLocale, useTranslations } from 'next-intl';
-
-function getInitials( name?: string ) {
-  if ( !name ) return '?';
-  return name.split( ' ' ).map( w => w[ 0 ] ).join( '' ).toUpperCase().slice( 0, 2 );
-}
-
-function isSelectObject( option: SelectOption | undefined ): option is Extract<SelectOption, { value: string; }> {
-  return typeof option === 'object' && option !== null && 'value' in option;
-}
+import { getPaymentMethodOptions } from './payment-method-options';
+import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
 
 // ── Draft item type ────────────────────────────────────────────────────────────
 
@@ -62,17 +55,6 @@ const EMPTY_ADD_FORM = {
 };
 
 const CURRENCY_OPTIONS: SelectOption[] = Object.values( UtilsCurrency ).map( c => ( { value: c, label: c } ) );
-
-const PAYMENT_METHOD_LABELS: Record<string, string> = {
-  [ UtilsPaymentMethod.PaymentMethodBankTransfer ]: 'Bank Transfer',
-  [ UtilsPaymentMethod.PaymentMethodPayPal ]: 'PayPal',
-  [ UtilsPaymentMethod.PaymentMethodOther ]: 'Other',
-};
-
-const PAYMENT_METHOD_OPTIONS: SelectOption[] = Object.values( UtilsPaymentMethod ).map( v => ( {
-  value: v,
-  label: PAYMENT_METHOD_LABELS[ v ] || v,
-} ) );
 
 // ── Payment item row ──────────────────────────────────────────────────────────
 
@@ -174,20 +156,25 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
   const t = useTranslations( 'dashboard.common' );
   const locale = useLocale();
 
-  const [ selectedCreatorId, setSelectedCreatorId ] = React.useState<string>( '' );
-  const [ selectedItemIds, setSelectedItemIds ] = React.useState<Set<string>>( new Set() );
-  const [ paymentMethod, setPaymentMethod ] = React.useState( '' );
-  const [ notes, setNotes ] = React.useState( '' );
-  const [ draftItems, setDraftItems ] = React.useState<DraftPaymentItem[]>( [] );
-  const [ showAddForm, setShowAddForm ] = React.useState( false );
-  const [ addForm, setAddForm ] = React.useState( EMPTY_ADD_FORM );
-  const [ isSubmitting, setIsSubmitting ] = React.useState( false );
+  const [ selectedCreatorId, setSelectedCreatorId ] = useState<string>( '' );
+  const [ selectedItemIds, setSelectedItemIds ] = useState<Set<string>>( new Set() );
+  const [ paymentMethod, setPaymentMethod ] = useState<UtilsPaymentMethod | undefined>( undefined );
+  const [ notes, setNotes ] = useState( '' );
+  const [ draftItems, setDraftItems ] = useState<DraftPaymentItem[]>( [] );
+  const [ showAddForm, setShowAddForm ] = useState( false );
+  const [ addForm, setAddForm ] = useState( EMPTY_ADD_FORM );
+  const [ isSubmitting, setIsSubmitting ] = useState( false );
 
-  React.useEffect( () => {
+  const paymentMethodOptions: SelectOption[] = useMemo(
+    () => getPaymentMethodOptions( t ),
+    [ t ]
+  );
+
+  useEffect( () => {
     if ( !open ) {
       setSelectedCreatorId( '' );
       setSelectedItemIds( new Set() );
-      setPaymentMethod( '' );
+      setPaymentMethod( undefined );
       setNotes( '' );
       setDraftItems( [] );
       setShowAddForm( false );
@@ -203,13 +190,13 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
   );
   const creators = creatorsData?.data || [];
 
-  const creatorMap = React.useMemo( () => {
+  const creatorMap = useMemo( () => {
     const map = new Map<string, ModelsCreatorResponse>();
     creators.forEach( ( c ) => { if ( c.id ) map.set( c.id, c ); } );
     return map;
   }, [ creators ] );
 
-  const creatorOptions: SelectOption[] = React.useMemo( () =>
+  const creatorOptions: SelectOption[] = useMemo( () =>
     creators.map( ( c ) => ( {
       value: c.id || '',
       label: [ c.first_name, c.last_name ].filter( Boolean ).join( ' ' ) || c.id || '—',
@@ -228,7 +215,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
     { enabled: !!selectedCreatorId }
   );
   const gigs = gigsData?.data || [];
-  const gigMap = React.useMemo( () => {
+  const gigMap = useMemo( () => {
     const map = new Map<string, { title: string; compensationValue?: number; compensationCurrency?: string; }>();
     gigs.forEach( ( gig ) => {
       if ( gig.id ) {
@@ -241,7 +228,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
     } );
     return map;
   }, [ gigs ] );
-  const gigOptions: SelectOption[] = React.useMemo( () =>
+  const gigOptions: SelectOption[] = useMemo( () =>
     gigs.map( ( g ) => ( {
       value: g.id || '',
       label: g.title || g.id || '—',
@@ -256,7 +243,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
 
   // ── Helpers ───────────────────────────────────────────────────────────────
 
-  const formatMoney = React.useCallback( ( amount: number, currencyCode?: string ) => {
+  const formatMoney = useCallback( ( amount: number, currencyCode?: string ) => {
     return new Intl.NumberFormat( locale, {
       style: 'currency',
       currency: currencyCode || 'USD',
@@ -279,14 +266,14 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
     );
   };
 
-  const totalExisting = React.useMemo( () =>
+  const totalExisting = useMemo( () =>
     paymentItems
       .filter( ( i ) => i.id && selectedItemIds.has( i.id ) )
       .reduce( ( sum, i ) => sum + ( i.amount?.value || 0 ), 0 ),
     [ paymentItems, selectedItemIds ]
   );
 
-  const totalDraft = React.useMemo( () =>
+  const totalDraft = useMemo( () =>
     draftItems.reduce( ( sum, i ) => sum + ( i.item_count * i.cost_per_item.value ), 0 ),
     [ draftItems ]
   );
@@ -322,7 +309,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
 
   // ── Submit ────────────────────────────────────────────────────────────────
 
-  const handleSubmit = async ( e: React.FormEvent ) => {
+  const handleSubmit = async ( e: FormEvent ) => {
     e.preventDefault();
     if ( !selectedCreatorId ) return;
     if ( selectedItemIds.size === 0 && draftItems.length === 0 ) {
@@ -341,7 +328,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
           cost_per_item: { value: draft.cost_per_item.value, currency: draft.cost_per_item.currency as never },
           description: draft.description || undefined,
           item_status: UtilsPaymentItemStatus.PaymentItemStatusPending,
-        } as ModelsCreatePaymentItemRequest & { item_status: typeof UtilsPaymentItemStatus.PaymentItemStatusPending } )
+        } as ModelsCreatePaymentItemRequest & { item_status: typeof UtilsPaymentItemStatus.PaymentItemStatusPending; } )
       ) );
       const newItemIds = createdItems
         .map( ( res ) => res.data?.id )
@@ -367,54 +354,13 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
     }
   };
 
-  // ── Creator combobox renderers ────────────────────────────────────────────
-
-  const renderCreatorTrigger = ( selected: SelectOption | undefined ) => {
-    if ( !selected || typeof selected !== 'object' ) {
-      return <span className="text-muted-foreground">{ t( 'batchPayment.creatorPlaceholder' ) }</span>;
-    }
-    if ( !isSelectObject( selected ) ) {
-      return <span className="text-muted-foreground">{ t( 'batchPayment.creatorPlaceholder' ) }</span>;
-    }
-    const creator = creatorMap.get( selected.value );
-    const photoUrl = creator?.profile_image?.asset;
-    const name = typeof selected.label === 'string' ? selected.label : [ creator?.first_name, creator?.last_name ].filter( Boolean ).join( ' ' ) || selected.value;
-    return (
-      <div className="flex items-center gap-2 min-w-0 py-8">
-        <Avatar className="size-8 shrink-0">
-          { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ name } /> }
-          <AvatarFallback className="text-[9px]">{ getInitials( name ) }</AvatarFallback>
-        </Avatar>
-        <span className="truncate">{ name }</span>
-      </div>
-    );
-  };
-
-  const renderCreatorOption = ( option: SelectOption, isSelected: boolean ) => {
-    if ( !isSelectObject( option ) ) return <span className="px-2 py-1.5">{ option }</span>;
-    const creator = creatorMap.get( option.value );
-    const photoUrl = creator?.profile_image?.asset;
-    const name = typeof option.label === 'string' ? option.label : [ creator?.first_name, creator?.last_name ].filter( Boolean ).join( ' ' ) || option.value;
-    return (
-      <div className={ cn(
-        'flex items-center gap-2.5 w-full px-2 py-2 transition-colors rounded-lg group/option',
-        isSelected
-          ? 'bg-primary/10 ring-1 ring-inset ring-primary/30'
-          : 'hover:bg-primary/8 hover:ring-1 hover:ring-inset hover:ring-primary/20'
-      ) }>
-        <Avatar className="size-8 shrink-0">
-          { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ name } /> }
-          <AvatarFallback className="text-[10px]">{ getInitials( name ) }</AvatarFallback>
-        </Avatar>
-        <span className="flex-1 min-w-0">
-          <span className="block text-sm truncate">{ name }</span>
-        </span>
-        <span className={ cn( 'opacity-0 size-5 rounded-full bg-white border border-primary/30 shadow-sm shrink-0 flex items-center justify-center group-hover/option:bg-primary group-hover/option:opacity-100 transition-all duration-100', isSelected && 'opacity-100 bg-white' ) }>
-          <Check className="size-3 text-primary group-hover/option:text-white!" />
-        </span>
-      </div>
-    );
-  };
+  const getCreatorMeta = useCallback( ( id: string ): EntityMeta => {
+    const c = creatorMap.get( id );
+    return {
+      avatarUrl: c?.profile_image?.asset ? imgpresets.avatar( c.profile_image.asset ) : undefined,
+      name: [ c?.first_name, c?.last_name ].filter( Boolean ).join( ' ' ) || id,
+    };
+  }, [ creatorMap ] );
 
   const canSubmit = !!selectedCreatorId && ( selectedItemIds.size > 0 || draftItems.length > 0 ) && !isSubmitting;
   const addFormValid = !!addForm.gigId && !!addForm.itemCount && parseInt( addForm.itemCount, 10 ) > 0
@@ -433,7 +379,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
 
             { /* Creator combobox */ }
             <SuperField
-              type="searchable-select"
+              type="entity-select"
               label={ t( 'batchPayment.creatorLabel' ) }
               placeholder={ t( 'batchPayment.creatorPlaceholder' ) }
               required
@@ -447,8 +393,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
                 setAddForm( EMPTY_ADD_FORM );
               } }
               disabled={ creatorsLoading }
-              renderOption={ renderCreatorOption }
-              renderTrigger={ renderCreatorTrigger }
+              getEntityMeta={ getCreatorMeta }
               fieldClassName='h-12'
             />
 
@@ -599,9 +544,9 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
                   type="select"
                   label={ t( 'batchPayment.methodLabel' ) }
                   placeholder={ t( 'batchPayment.methodPlaceholder' ) }
-                  options={ PAYMENT_METHOD_OPTIONS }
+                  options={ paymentMethodOptions }
                   value={ paymentMethod }
-                  onValueChange={ ( v ) => setPaymentMethod( v || '' ) }
+                  onValueChange={ ( v ) => setPaymentMethod( v as UtilsPaymentMethod ) }
                 />
                 <SuperField
                   type="textarea"
@@ -642,7 +587,7 @@ export function NewPaymentSheet( { open, onOpenChange }: NewPaymentSheetProps ) 
 
 export function NewPaymentButton() {
   const t = useTranslations( 'dashboard.common' );
-  const [ open, setOpen ] = React.useState( false );
+  const [ open, setOpen ] = useState( false );
 
   return (
     <>

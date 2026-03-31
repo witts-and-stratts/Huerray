@@ -184,6 +184,7 @@ export function CreatorsStatsBlock() {
           variant="outline"
           size={ 'sm' }
           className="mt-2 w-full font-normal"
+          nativeButton={ false }
           render={ <Link href="/admin/creators" /> }
         >
           { t( 'dashboardBlocks.creators.labels.viewAll' ) }

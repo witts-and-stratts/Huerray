@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **creator_id** | **string** |  | [default to undefined]
 **notes** | **string** |  | [optional] [default to undefined]
 **payment_item_ids** | **Array&lt;string&gt;** |  | [default to undefined]
-**payment_method** | **string** |  | [optional] [default to undefined]
+**payment_method** | [**UtilsPaymentMethod**](UtilsPaymentMethod.md) |  | [optional] [default to undefined]
 
 ## Example
 

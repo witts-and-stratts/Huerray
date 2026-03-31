@@ -4,6 +4,7 @@ import { Badge } from "@/components/dashboard-ui/badge";
 import { cn } from "@/lib/dashboard-utils";
 import { timeAgo } from "@/lib/utils";
 import { ModelsNotificationResponse } from "@/lib/api/generated";
+import { useTranslations } from "next-intl";
 
 interface NotificationRowProps {
   notification: ModelsNotificationResponse;
@@ -12,6 +13,7 @@ interface NotificationRowProps {
 }
 
 export function NotificationRow( { notification, isSelected, onClick }: NotificationRowProps ) {
+  const t = useTranslations( "dashboard.notifications" );
   const isUnread = !notification.is_read;
 
   return (
@@ -54,7 +56,7 @@ export function NotificationRow( { notification, isSelected, onClick }: Notifica
 
           { notification.event_type && (
             <Badge variant="outline" className="mt-1.5 h-4 px-1.5 text-[10px] capitalize font-normal">
-              { notification.event_type.replace( /_/g, " " ) }
+              { t( `eventTypes.${ notification.event_type }` ) }
             </Badge>
           ) }
         </div>

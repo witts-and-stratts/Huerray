@@ -123,3 +123,4 @@ export type { DatePickerFieldProps } from './date-picker-input';
 export type { TagsFieldProps } from './tags-input';
 export type { SearchableSelectFieldProps } from './searchable-select';
 export type { MultiSelectFieldProps } from './multi-select-input';
+export type { EntitySelectFieldProps, EntityMeta } from './entity-select';

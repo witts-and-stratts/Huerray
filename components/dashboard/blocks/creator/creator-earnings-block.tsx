@@ -81,6 +81,7 @@ export function CreatorEarningsBlock() {
           variant="outline"
           size="sm"
           className="mt-2 w-full font-normal"
+          nativeButton={ false }
           render={ <Link href="/creator/earnings" /> }
         >
           View all earnings

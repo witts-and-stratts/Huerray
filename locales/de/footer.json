@@ -25,21 +25,21 @@
   "signup": {
     "title": "Anmeldung für Updates",
     "placeholder": "E-Mail Adresse",
-    "success": "Danke für Ihre Anmeldung!",
-    "error": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."
+    "success": "Vielen Dank für Ihr Abonnement!",
+    "error": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   },
   "newsletter": {
     "loading": {
-      "title": "Abmeldung wird verarbeitet...",
+      "title": "Abbestellen...",
       "description": "Bitte warten Sie, während wir Ihre Anfrage bearbeiten."
     },
     "success": {
       "title": "Sie wurden abgemeldet",
-      "description": "Sie erhalten keine Newsletter-E-Mails mehr von uns."
+      "description": "Sie werden keine Newsletter-E-Mails mehr von uns erhalten."
     },
     "error": {
       "title": "Etwas ist schief gelaufen",
-      "description": "Wir konnten Ihre Abmeldeanfrage nicht verarbeiten. Der Link ist möglicherweise abgelaufen."
+      "description": "Wir konnten Ihre Abmeldungsanfrage nicht bearbeiten. Der Link ist möglicherweise abgelaufen."
     },
     "backHome": "Zurück zur Startseite"
   },

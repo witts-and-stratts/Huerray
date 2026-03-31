@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { ModelsAdminUpdateCreatorProfileRequest } from '../models';
+// @ts-ignore
 import type { ModelsCreateCreatorRequest } from '../models';
 // @ts-ignore
 import type { ModelsCreatorStatusUpdateRequest } from '../models';
@@ -245,6 +247,45 @@ export const CreatorApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Admin updates creator profile fields without changing creator profile status
+         * @summary Admin update creator profile
+         * @param {string} id Creator Profile ID
+         * @param {ModelsAdminUpdateCreatorProfileRequest} request Creator profile update data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsIdProfilePut: async (id: string, request: ModelsAdminUpdateCreatorProfileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('creatorsIdProfilePut', 'id', id)
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('creatorsIdProfilePut', 'request', request)
+            const localVarPath = `/creators/{id}/profile`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1054,6 +1095,20 @@ export const CreatorApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Admin updates creator profile fields without changing creator profile status
+         * @summary Admin update creator profile
+         * @param {string} id Creator Profile ID
+         * @param {ModelsAdminUpdateCreatorProfileRequest} request Creator profile update data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async creatorsIdProfilePut(id: string, request: ModelsAdminUpdateCreatorProfileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.creatorsIdProfilePut(id, request, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CreatorApi.creatorsIdProfilePut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Admin updates creator profile status with comments
          * @summary Update creator profile status
          * @param {string} id Creator Profile ID
@@ -1342,6 +1397,16 @@ export const CreatorApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.creatorsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Admin updates creator profile fields without changing creator profile status
+         * @summary Admin update creator profile
+         * @param {CreatorApiCreatorsIdProfilePutRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        creatorsIdProfilePut(requestParameters: CreatorApiCreatorsIdProfilePutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorResponse> {
+            return localVarFp.creatorsIdProfilePut(requestParameters.id, requestParameters.request, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Admin updates creator profile status with comments
          * @summary Update creator profile status
          * @param {CreatorApiCreatorsIdProfileStatusPutRequest} requestParameters Request parameters.
@@ -1500,6 +1565,21 @@ export interface CreatorApiCreatorsIdGetRequest {
      * Creator UUID
      */
     readonly id: string
+}
+
+/**
+ * Request parameters for creatorsIdProfilePut operation in CreatorApi.
+ */
+export interface CreatorApiCreatorsIdProfilePutRequest {
+    /**
+     * Creator Profile ID
+     */
+    readonly id: string
+
+    /**
+     * Creator profile update data
+     */
+    readonly request: ModelsAdminUpdateCreatorProfileRequest
 }
 
 /**
@@ -1772,6 +1852,17 @@ export class CreatorApi extends BaseAPI {
      */
     public creatorsIdGet(requestParameters: CreatorApiCreatorsIdGetRequest, options?: RawAxiosRequestConfig) {
         return CreatorApiFp(this.configuration).creatorsIdGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Admin updates creator profile fields without changing creator profile status
+     * @summary Admin update creator profile
+     * @param {CreatorApiCreatorsIdProfilePutRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public creatorsIdProfilePut(requestParameters: CreatorApiCreatorsIdProfilePutRequest, options?: RawAxiosRequestConfig) {
+        return CreatorApiFp(this.configuration).creatorsIdProfilePut(requestParameters.id, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

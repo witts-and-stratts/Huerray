@@ -101,7 +101,6 @@ function TabsPanel( {
   ...props
 }: TabsPanelProps ) {
   const Comp = keepMounted ? Activity : Fragment;
-  console.log( "Keep Mounted: ", value, !!value );
   return (
     <Comp { ...{ ...( !!keepMounted ? { mode: !!value ? 'visible' : 'hidden' } : {} ) } }>
       <AnimatePresence mode="wait">

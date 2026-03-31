@@ -93,7 +93,6 @@ export default function CreatorBankSettingsPage() {
     { value: '/creator/settings#bio', label: tTabs( 'bio' ) },
     { value: '/creator/settings#social-media', label: tTabs( 'socialMedia' ) },
     { value: '/creator/settings/bank', label: tTabs( 'bankDetails' ) },
-    { value: '/creator/settings/security', label: tTabs( 'security' ) },
   ];
 
   const handleTabChange = useCallback( ( value: string ) => {

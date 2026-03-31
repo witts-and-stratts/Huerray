@@ -17,6 +17,7 @@ import {
   RenderCountry,
   RenderDatePicker,
   RenderEditor,
+  RenderEntitySelect,
   RenderInput,
   RenderSearchableSelect,
   RenderSelect,
@@ -31,6 +32,7 @@ import {
   CountryFieldProps,
   DatePickerFieldProps,
   EditorFieldProps,
+  EntitySelectFieldProps,
   FileFieldProps,
   InputFieldProps,
   SearchableSelectFieldProps,
@@ -52,6 +54,7 @@ type SuperFieldProps =
   | TagsFieldProps
   | EditorFieldProps
   | SearchableSelectFieldProps
+  | EntitySelectFieldProps
   | DatePickerFieldProps
   | SwitchFieldProps
   | MultiSelectFieldProps
@@ -61,6 +64,7 @@ type SuperFieldProps =
 const renderers: Record<string, React.ElementType> = {
   'select': RenderSelect,
   'searchable-select': RenderSearchableSelect,
+  'entity-select': RenderEntitySelect,
   'multi-select': RenderMultiSelect,
   'country': RenderCountry,
   'choice-card': RenderChoiceCard,
@@ -183,7 +187,7 @@ export const SuperField = forwardRef<
 
   return (
     <Field
-      className={ cn( className, ) }
+      className={ cn( className, "gap-2" ) }
       data-disabled={ disabled }
       data-invalid={ !!( error || errors?.length ) }
       orientation={ isCheckable ? 'horizontal' : 'vertical' }

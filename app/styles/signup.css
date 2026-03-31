@@ -1,0 +1,120 @@
+@reference "tailwindcss";
+@reference "./dashboard-globals.css";
+
+.signup-form {
+  @apply flex flex-col gap-6 w-full max-w-3xl md:px-4 my-10;
+}
+
+.signup-form--role-selection {
+  @apply my-0;
+}
+
+.signup-form__card {
+  @apply rounded-4xl relative overflow-hidden bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60;
+}
+
+.signup-form__header {
+  @apply text-center pb-2 relative;
+}
+
+.signup-form__back-button {
+  @apply absolute top-4 left-4 z-10;
+}
+
+.signup-form__back-icon {
+  @apply w-5 h-5;
+}
+
+.signup-form__logo-link {
+  @apply flex justify-center py-4;
+}
+
+.signup-form__logo {
+  @apply dark:invert;
+}
+
+.signup-form__title {
+  @apply text-2xl font-primary text-primary;
+}
+
+.signup-form__content {
+  @apply px-6 md:px-10 py-6;
+}
+
+.signup-form__form {
+  @apply space-y-6;
+}
+
+.signup-form__divider {
+  @apply my-6 border-t;
+}
+
+.signup-form__actions {
+  @apply mt-8;
+}
+
+.signup-form__terms {
+  @apply text-center text-xs;
+}
+
+.signup-form__terms-link {
+  @apply underline hover:text-foreground;
+}
+
+/* Role selection */
+
+.signup-form__role-logo-link {
+  @apply flex justify-center;
+}
+
+.signup-form__role-heading {
+  @apply text-center mb-4;
+}
+
+.signup-form__role-title {
+  @apply text-2xl font-medium tracking-tight mb-2 font-primary text-primary;
+}
+
+.signup-form__role-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-2;
+}
+
+.signup-form__role-card {
+  @apply cursor-pointer transition-all hover:border-primary hover:shadow-md rounded-4xl;
+}
+
+.signup-form__role-card-header {
+  @apply text-center;
+}
+
+.signup-form__role-card-title {
+  @apply text-xl font-primary;
+}
+
+.signup-form__role-button {
+  @apply w-full;
+}
+
+.signup-form__description {
+  @apply text-center;
+}
+
+.signup-form__signin-link {
+  @apply font-medium text-primary hover:underline;
+}
+
+/* Field grids */
+
+.signup-form__name-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-2;
+}
+
+.signup-form__field-row {
+  @apply grid grid-cols-2 gap-2;
+}
+
+/* Form actions */
+
+.signup-form__submit {
+  @apply w-full;
+}

@@ -28,24 +28,26 @@ export function useUsers(
     limit = 10
   }: {
     q?: string;
-    userType?: UsersSearchGetUserTypeEnum;
+    userType?: UsersSearchGetUserTypeEnum | 'admin_user';
     status?: string;
     page?: number;
     limit?: number;
-  } = {}
+  } = {},
+  options?: Omit<UseQueryOptions<any, ApiError>, 'queryKey' | 'queryFn'>
 ) {
   return useQuery<any, ApiError>({
     queryKey: usersKeys.list({ q, userType, status, page, limit }),
     queryFn: async () => {
       const response = await userApi.usersSearchGet({
         q,
-        userType,
+        userType: userType as UsersSearchGetUserTypeEnum | undefined,
         status,
         page,
         limit
       });
       return response;
     },
+    ...options,
   });
 }
 
@@ -135,7 +137,7 @@ export function useUpdateUserById() {
 }
 
 export function useUserProfile() {
-  return useQuery<any, ApiError>({
+  return useQuery<ModelsUserResponse, ApiError>({
     queryKey: [...usersKeys.all, 'profile'],
     queryFn: async () => {
       const response = await userApi.usersProfileGet();

@@ -9,7 +9,7 @@ import { ModelsUploadsImagePost200Response } from '@/lib/api/models/models-uploa
 import { getUploadProgressPercentage } from '@/lib/utils/axios-utils';
 import { CheckmarkCircle01Icon, Link01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { UploadIcon } from 'lucide-react';
+import { Trash2, UploadIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -89,12 +89,14 @@ interface ProductImageUploaderProps {
   filePreview: string;
   onUploadComplete: ( imageUrl: string ) => void;
   onPreviewChange: ( preview: string ) => void;
+  onRemove: () => void;
 }
 
 const ProductImageUploader = memo( function ProductImageUploader( {
   filePreview,
   onUploadComplete,
   onPreviewChange,
+  onRemove,
 }: ProductImageUploaderProps ) {
   const t = useTranslations( 'dashboard.brand.newCampaignPage.product' );
   const [ files, setFiles ] = useState<File[] | undefined>();
@@ -145,6 +147,14 @@ const ProductImageUploader = memo( function ProductImageUploader( {
     console.error( error );
   }, [] );
 
+  const handleRemove = useCallback( ( e: React.MouseEvent<HTMLButtonElement> ) => {
+    e.stopPropagation();
+    setFiles( undefined );
+    setUploadProgress( 0 );
+    setIsUploading( false );
+    onRemove();
+  }, [ onRemove ] );
+
   return (
     <Dropzone
       accept={ ACCEPTED_FILE_TYPES }
@@ -155,11 +165,24 @@ const ProductImageUploader = memo( function ProductImageUploader( {
       maxFiles={ 1 }
     >
       <DropzoneContent className='flex h-full w-full overflow-hidden'>
-        <ImagePreview
-          filePreview={ filePreview }
-          isUploading={ isUploading }
-          uploadProgress={ uploadProgress }
-        />
+        <div className='relative h-full w-full'>
+          <ImagePreview
+            filePreview={ filePreview }
+            isUploading={ isUploading }
+            uploadProgress={ uploadProgress }
+          />
+          { filePreview !== DEFAULT_FILE_PREVIEW && !isUploading && (
+            <button
+              type='button'
+              onClick={ handleRemove }
+              className='absolute top-2 right-2 inline-flex size-8 items-center justify-center rounded-full bg-background/90 text-muted-foreground shadow-sm transition-colors hover:bg-background hover:text-destructive'
+              aria-label={ t( 'removeProductImage' ) }
+              title={ t( 'removeProductImage' ) }
+            >
+              <Trash2 className='size-4' />
+            </button>
+          ) }
+        </div>
       </DropzoneContent>
       <DropzoneEmptyState className='p-0! h-full!'>
         <ImagePreview
@@ -204,6 +227,11 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
     setFilePreview( preview );
   }, [] );
 
+  const handleRemoveImage = useCallback( () => {
+    setFilePreview( DEFAULT_FILE_PREVIEW );
+    form.setFieldValue( 'product_image', '' );
+  }, [ form ] );
+
   return (
     <Field className='mt-4'>
       <FieldLabel>{ t( 'product' ) }</FieldLabel>
@@ -216,6 +244,7 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
                 filePreview={ filePreview }
                 onUploadComplete={ handleUploadComplete }
                 onPreviewChange={ handlePreviewChange }
+                onRemove={ handleRemoveImage }
               />
               <FieldGroup className='flex flex-row gap-2'>
                 <form.Field name="product_image">

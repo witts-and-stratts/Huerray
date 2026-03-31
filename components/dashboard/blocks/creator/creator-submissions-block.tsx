@@ -87,6 +87,7 @@ export function CreatorSubmissionsBlock() {
           variant="outline"
           size="sm"
           className="mt-2 w-full font-normal"
+          nativeButton={ false }
           render={ <Link href="/creator/my-gigs" /> }
         >
           View all submissions

@@ -24,20 +24,47 @@
     "next": "Suivant"
   },
   "actions": {
+    "menu": "Menu",
     "markAllAsRead": "Marquer tous les textes comme lus",
     "markAsRead": "Marquer comme lu",
     "delete": "Supprimer",
     "deleteAll": "Supprimer tout",
-    "open": "Ouvrir"
+    "open": "Ouvrir",
+    "close": "Fermer",
+    "viewInvoice": "Voir la facture",
+    "viewSubmission": "Voir la soumission",
+    "goToGig": "Aller au concert",
+    "viewCampaign": "Voir la campagne",
+    "reviewBrandProfile": "Réviser le profil de la marque",
+    "reviewCreatorProfile": "Consulter le profil du créateur",
+    "viewDetails": "Voir les détails"
   },
   "item": {
     "showMore": "Afficher plus",
     "showLess": "Montrer moins",
     "eventTypeFallback": "Mise à jour"
   },
+  "eventTypes": {
+    "Creation": "Création",
+    "Update": "Mise à jour",
+    "Approval": "Approbation",
+    "Rejection": "Rejet",
+    "Deletion": "Suppression",
+    "Deactivation": "Désactivation",
+    "Submission": "Soumission",
+    "Invitation": "Invitation",
+    "Application": "Candidature",
+    "Acceptance": "Acceptation",
+    "Decision": "Décision",
+    "Return": "Retour",
+    "Registration": "Inscription",
+    "Generic": "Générique"
+  },
   "empty": {
     "title": "Aucune notification à afficher",
-    "description": "Vous êtes tous rattrapés pour l'instant."
+    "description": "Vous êtes tous rattrapés pour l'instant.",
+    "overlayTitle": "Aucune notification",
+    "selectPrompt": "Sélectionnez une notification pour la lire"
   },
   "confirm": {
     "deleteAllTitle": "Supprimer toutes les notifications",
@@ -48,5 +75,82 @@
   "toast": {
     "deleteAllSuccess": "Toutes les notifications sont supprimées",
     "deleteAllError": "Échec de la suppression de toutes les notifications"
+  },
+  "compose": {
+    "title": "Notification de poste",
+    "description": "Créer et envoyer une notification à un utilisateur spécifique.",
+    "submit": "Notification de poste",
+    "toast": {
+      "success": "Notification affichée",
+      "error": "Échec de l'envoi de la notification"
+    },
+    "actions": {
+      "editActionUrl": "Modifier l'URL de l'action",
+      "useGeneratedUrl": "Utiliser l'URL générée"
+    },
+    "entityLabels": {
+      "entity": "Entité",
+      "creator": "Créateur",
+      "brand": "Marque",
+      "user": "Utilisateur",
+      "campaign": "Campagne",
+      "gig": "Gig",
+      "invoice": "Facture",
+      "case": "Cas",
+      "videoSubmission": "Soumission de vidéos",
+      "payment": "Paiement"
+    },
+    "fields": {
+      "entityType": "Type d'entité",
+      "chooseEntity": "Sélectionner {entity}",
+      "loadingEntity": "Chargement {entity}...",
+      "selectEntity": "Sélectionner {entity}",
+      "notificationRecipient": "Destinataire de la notification",
+      "loadingUsers": "Chargement des utilisateurs...",
+      "selectRecipient": "Sélectionner le destinataire de la notification",
+      "recipientDescription": "Sélectionnez l'utilisateur qui doit recevoir cette notification.",
+      "eventName": "Nom de l'événement",
+      "eventNamePlaceholder": "par exemple : Gig Invitation acceptée",
+      "eventType": "Type d'événement",
+      "title": "Titre",
+      "titlePlaceholder": "Titre de la notification",
+      "message": "Message",
+      "messagePlaceholder": "Message de notification",
+      "priority": "Priorité",
+      "actionUrl": "URL de l'action",
+      "actionUrlPlaceholder": "Aucune URL d'action ne sera générée",
+      "actionUrlGenerated": "Généré automatiquement à partir de l'entité sélectionnée.",
+      "actionUrlUnavailable": "Ce type d'entité ne génère pas actuellement d'URL d'action.",
+      "metadata": "Métadonnées",
+      "metadataDescription": "Objet JSON facultatif",
+      "metadataPlaceholder": "{\"gig_id\":\"...\"}"
+    },
+    "validation": {
+      "recipientRequired": "Le destinataire de la notification est requis",
+      "titleRequired": "Le titre est obligatoire",
+      "messageRequired": "Le message est obligatoire",
+      "eventNameRequired": "Le nom de l'événement est obligatoire",
+      "entityTypeRequired": "Le type d'entité est obligatoire",
+      "entityRequired": "{entity} est nécessaire",
+      "metadataJson": "Les métadonnées doivent être des JSON valides"
+    },
+    "priority": {
+      "low": {
+        "label": "Faible",
+        "description": "Notification de moindre priorité"
+      },
+      "normal": {
+        "label": "Normal",
+        "description": "Notification prioritaire standard"
+      },
+      "high": {
+        "label": "Haut",
+        "description": "Notification de haute priorité"
+      },
+      "urgent": {
+        "label": "Urgent",
+        "description": "Notification urgente"
+      }
+    }
   }
 }

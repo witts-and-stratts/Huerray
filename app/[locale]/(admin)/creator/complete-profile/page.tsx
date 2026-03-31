@@ -20,7 +20,7 @@ import { useForm } from '@tanstack/react-form';
 import { Check, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
@@ -32,6 +32,54 @@ export default function CompleteProfilePage() {
   const [ activeTab, setActiveTab ] = useState( 'profile' );
   const [ isSaving, setIsSaving ] = useState( false );
   const dispatch = useAppDispatch();
+  const formContainerRef = useRef<HTMLDivElement>( null );
+
+  const getErrorMessage = ( error: any, fallback: string ) => {
+    const rawError =
+      error?.response?.data?.error
+      ?? error?.response?.data?.message
+      ?? error?.message;
+
+    if ( typeof rawError === 'string' && rawError.trim().length > 0 ) {
+      return rawError;
+    }
+
+    return fallback;
+  };
+
+  const scrollFirstVisibleErrorIntoView = () => {
+    window.requestAnimationFrame( () => {
+      window.requestAnimationFrame( () => {
+        const container = formContainerRef.current;
+
+        if ( !container ) {
+          return;
+        }
+
+        const candidates = Array.from(
+          container.querySelectorAll<HTMLElement>( '[data-slot="field"][data-invalid="true"], [data-slot="field-error"], [role="alert"]' )
+        );
+
+        const firstVisibleCandidate = candidates.find( ( element ) => {
+          const style = window.getComputedStyle( element );
+          return style.display !== 'none' && style.visibility !== 'hidden' && element.getClientRects().length > 0;
+        } );
+
+        if ( !firstVisibleCandidate ) {
+          return;
+        }
+
+        const target = firstVisibleCandidate.closest<HTMLElement>( '[data-slot="field"]' ) ?? firstVisibleCandidate;
+        target.scrollIntoView( { behavior: 'smooth', block: 'center' } );
+
+        const focusTarget = target.matches( 'input, textarea, select, button, [role="combobox"], [contenteditable="true"]' )
+          ? target
+          : target.querySelector<HTMLElement>( 'input, textarea, select, button, [role="combobox"], [contenteditable="true"]' );
+
+        focusTarget?.focus( { preventScroll: true } );
+      } );
+    } );
+  };
 
   const form = useForm( {
     defaultValues: {
@@ -104,7 +152,7 @@ export default function CompleteProfilePage() {
         router.push( `/${ locale }/creator` );
       } catch ( error: any ) {
         console.error( t( 'errorCreateFailed' ), error );
-        const errorMessage = error.response?.data?.error || error.response?.data?.message || t( 'errorCreateFailed' );
+        const errorMessage = getErrorMessage( error, t( 'errorCreateFailed' ) );
         toast.error( t( 'errorCreateFailedWithError', { error: errorMessage } ), { richColors: true } );
       } finally {
         setIsSaving( false );
@@ -143,12 +191,15 @@ export default function CompleteProfilePage() {
       if ( firstErrorField ) {
         const targetTab = fieldToTab[ firstErrorField ] || 'profile';
         setActiveTab( targetTab );
+        scrollFirstVisibleErrorIntoView();
 
         // Get the first error message
         const fieldMeta = errors[ firstErrorField as keyof typeof errors ];
         const errorMessages = fieldMeta?.errors || [];
         const firstError = errorMessages[ 0 ];
-        const errorMessage = typeof firstError === 'string' ? firstError : ( firstError as any )?.message || t( 'validationFixErrors' );
+        const errorMessage = typeof firstError === 'string'
+          ? firstError
+          : getErrorMessage( firstError, t( 'validationFixErrors' ) );
         toast.error( t( 'validationErrorWithError', { error: errorMessage } ), { richColors: true } );
       }
     }
@@ -184,7 +235,7 @@ export default function CompleteProfilePage() {
       <div className="complete-profile__image-col">
         <Image src="/images/content/lifestyle-4.webp" alt={ t( 'lifestyleAlt' ) } width={ 1920 } height={ 1080 } className="complete-profile__image" />
       </div>
-      <div className="complete-profile__right-col">
+      <div className="complete-profile__right-col" ref={ formContainerRef }>
         <div className="complete-profile__lang-selector">
           <LanguageSelector showLabel={ false } />
         </div>
@@ -218,19 +269,19 @@ export default function CompleteProfilePage() {
                 </CardHeader>
                 <CardContent className="complete-profile__inner-card-content">
                   <form onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
-                    <TabsPanel value="profile">
+                    <TabsPanel value="profile" keepMounted>
                       <div className="space-y-6">
                         <CreatorProfileSection form={ form } />
                       </div>
                     </TabsPanel>
 
-                    <TabsPanel value="social">
+                    <TabsPanel value="social" keepMounted>
                       <div className="space-y-8">
                         <CreatorSocialSection form={ form } />
                       </div>
                     </TabsPanel>
 
-                    <TabsPanel value="bio">
+                    <TabsPanel value="bio" keepMounted>
                       <div className="space-y-8">
                         <CreatorBioSection form={ form } />
                       </div>

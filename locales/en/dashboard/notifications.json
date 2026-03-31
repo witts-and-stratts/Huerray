@@ -24,20 +24,47 @@
     "next": "Next"
   },
   "actions": {
+    "menu": "Menu",
     "markAllAsRead": "Mark all as read",
     "markAsRead": "Mark as read",
     "delete": "Delete",
     "deleteAll": "Delete All",
-    "open": "Open"
+    "open": "Open",
+    "close": "Close",
+    "viewInvoice": "View invoice",
+    "viewSubmission": "View submission",
+    "goToGig": "Go to gig",
+    "viewCampaign": "View campaign",
+    "reviewBrandProfile": "Review brand profile",
+    "reviewCreatorProfile": "Review creator profile",
+    "viewDetails": "View details"
   },
   "item": {
     "showMore": "Show more",
     "showLess": "Show less",
     "eventTypeFallback": "Update"
   },
+  "eventTypes": {
+    "Creation": "Creation",
+    "Update": "Update",
+    "Approval": "Approval",
+    "Rejection": "Rejection",
+    "Deletion": "Deletion",
+    "Deactivation": "Deactivation",
+    "Submission": "Submission",
+    "Invitation": "Invitation",
+    "Application": "Application",
+    "Acceptance": "Acceptance",
+    "Decision": "Decision",
+    "Return": "Return",
+    "Registration": "Registration",
+    "Generic": "Generic"
+  },
   "empty": {
     "title": "No notifications to show",
-    "description": "You're all caught up for now."
+    "description": "You're all caught up for now.",
+    "overlayTitle": "No notifications",
+    "selectPrompt": "Select a notification to read it"
   },
   "confirm": {
     "deleteAllTitle": "Delete All Notifications",
@@ -48,5 +75,82 @@
   "toast": {
     "deleteAllSuccess": "All notifications deleted",
     "deleteAllError": "Failed to delete all notifications"
+  },
+  "compose": {
+    "title": "Post Notification",
+    "description": "Create and send a notification to a specific user.",
+    "submit": "Post Notification",
+    "toast": {
+      "success": "Notification posted",
+      "error": "Failed to post notification"
+    },
+    "actions": {
+      "editActionUrl": "Edit action URL",
+      "useGeneratedUrl": "Use generated URL"
+    },
+    "entityLabels": {
+      "entity": "Entity",
+      "creator": "Creator",
+      "brand": "Brand",
+      "user": "User",
+      "campaign": "Campaign",
+      "gig": "Gig",
+      "invoice": "Invoice",
+      "case": "Case",
+      "videoSubmission": "Video Submission",
+      "payment": "Payment"
+    },
+    "fields": {
+      "entityType": "Entity Type",
+      "chooseEntity": "Select {entity}",
+      "loadingEntity": "Loading {entity}...",
+      "selectEntity": "Select {entity}",
+      "notificationRecipient": "Notification Recipient",
+      "loadingUsers": "Loading users...",
+      "selectRecipient": "Select notification recipient",
+      "recipientDescription": "Select the user who should receive this notification.",
+      "eventName": "Event Name",
+      "eventNamePlaceholder": "e.g. Gig Invitation Accepted",
+      "eventType": "Event Type",
+      "title": "Title",
+      "titlePlaceholder": "Notification title",
+      "message": "Message",
+      "messagePlaceholder": "Notification message",
+      "priority": "Priority",
+      "actionUrl": "Action URL",
+      "actionUrlPlaceholder": "No action URL will be generated",
+      "actionUrlGenerated": "Generated automatically from the selected entity.",
+      "actionUrlUnavailable": "This entity type does not currently generate an action URL.",
+      "metadata": "Metadata",
+      "metadataDescription": "Optional JSON object",
+      "metadataPlaceholder": "{\"gig_id\":\"...\"}"
+    },
+    "validation": {
+      "recipientRequired": "Notification recipient is required",
+      "titleRequired": "Title is required",
+      "messageRequired": "Message is required",
+      "eventNameRequired": "Event name is required",
+      "entityTypeRequired": "Entity Type is required",
+      "entityRequired": "{entity} is required",
+      "metadataJson": "Metadata must be valid JSON"
+    },
+    "priority": {
+      "low": {
+        "label": "Low",
+        "description": "Lower priority notification"
+      },
+      "normal": {
+        "label": "Normal",
+        "description": "Standard priority notification"
+      },
+      "high": {
+        "label": "High",
+        "description": "High priority notification"
+      },
+      "urgent": {
+        "label": "Urgent",
+        "description": "Urgent notification"
+      }
+    }
   }
 }

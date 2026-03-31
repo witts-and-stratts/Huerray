@@ -90,6 +90,7 @@ export function GigsStatsBlock() {
           variant="outline"
           size={ 'sm' }
           className="mt-2 w-full font-normal"
+          nativeButton={ false }
           render={ <Link href="/admin/gigs" /> }
         >
           { t( 'dashboardBlocks.gigs.labels.viewAll' ) }

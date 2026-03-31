@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ModelsNewsletterSignupRequest } from '../models';
 // @ts-ignore
+import type { ModelsPaginatedNewsletterSubscriptionResponse } from '../models';
+// @ts-ignore
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardNewsletterSignupResponse } from '../models';
@@ -34,6 +36,86 @@ import type { ModelsStandardNewsletterUnsubscribeResponse } from '../models';
  */
 export const NewsletterApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Search newsletter subscriptions using all available filters (Admin only)
+         * @summary Search newsletter subscriptions
+         * @param {string} [createdAfter] 
+         * @param {string} [createdBefore] 
+         * @param {number} [limit] 
+         * @param {number} [page] 
+         * @param {string} [q] 
+         * @param {NewsletterSearchGetStatusEnum} [status] 
+         * @param {string} [subscribedAfter] 
+         * @param {string} [subscribedBefore] 
+         * @param {string} [unsubscribedAfter] 
+         * @param {string} [unsubscribedBefore] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        newsletterSearchGet: async (createdAfter?: string, createdBefore?: string, limit?: number, page?: number, q?: string, status?: NewsletterSearchGetStatusEnum, subscribedAfter?: string, subscribedBefore?: string, unsubscribedAfter?: string, unsubscribedBefore?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/newsletter/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (createdAfter !== undefined) {
+                localVarQueryParameter['created_after'] = createdAfter;
+            }
+
+            if (createdBefore !== undefined) {
+                localVarQueryParameter['created_before'] = createdBefore;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (q !== undefined) {
+                localVarQueryParameter['q'] = q;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (subscribedAfter !== undefined) {
+                localVarQueryParameter['subscribed_after'] = subscribedAfter;
+            }
+
+            if (subscribedBefore !== undefined) {
+                localVarQueryParameter['subscribed_before'] = subscribedBefore;
+            }
+
+            if (unsubscribedAfter !== undefined) {
+                localVarQueryParameter['unsubscribed_after'] = unsubscribedAfter;
+            }
+
+            if (unsubscribedBefore !== undefined) {
+                localVarQueryParameter['unsubscribed_before'] = unsubscribedBefore;
+            }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Subscribe potential customers to newsletters
          * @summary Newsletter signup
@@ -72,13 +154,13 @@ export const NewsletterApiAxiosParamCreator = function (configuration?: Configur
         /**
          * Unsubscribe using token from newsletter email link
          * @summary Unsubscribe from newsletter
-         * @param {string} token Unsubscribe token
+         * @param {string} email Subscriber email
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        newsletterUnsubscribeGet: async (token: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'token' is not null or undefined
-            assertParamExists('newsletterUnsubscribeGet', 'token', token)
+        newsletterUnsubscribeGet: async (email: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('newsletterUnsubscribeGet', 'email', email)
             const localVarPath = `/newsletter/unsubscribe`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -91,8 +173,8 @@ export const NewsletterApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (token !== undefined) {
-                localVarQueryParameter['token'] = token;
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
             }
 
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -116,6 +198,28 @@ export const NewsletterApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = NewsletterApiAxiosParamCreator(configuration)
     return {
         /**
+         * Search newsletter subscriptions using all available filters (Admin only)
+         * @summary Search newsletter subscriptions
+         * @param {string} [createdAfter] 
+         * @param {string} [createdBefore] 
+         * @param {number} [limit] 
+         * @param {number} [page] 
+         * @param {string} [q] 
+         * @param {NewsletterSearchGetStatusEnum} [status] 
+         * @param {string} [subscribedAfter] 
+         * @param {string} [subscribedBefore] 
+         * @param {string} [unsubscribedAfter] 
+         * @param {string} [unsubscribedBefore] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async newsletterSearchGet(createdAfter?: string, createdBefore?: string, limit?: number, page?: number, q?: string, status?: NewsletterSearchGetStatusEnum, subscribedAfter?: string, subscribedBefore?: string, unsubscribedAfter?: string, unsubscribedBefore?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedNewsletterSubscriptionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.newsletterSearchGet(createdAfter, createdBefore, limit, page, q, status, subscribedAfter, subscribedBefore, unsubscribedAfter, unsubscribedBefore, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['NewsletterApi.newsletterSearchGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Subscribe potential customers to newsletters
          * @summary Newsletter signup
          * @param {ModelsNewsletterSignupRequest} request Newsletter signup request
@@ -131,12 +235,12 @@ export const NewsletterApiFp = function(configuration?: Configuration) {
         /**
          * Unsubscribe using token from newsletter email link
          * @summary Unsubscribe from newsletter
-         * @param {string} token Unsubscribe token
+         * @param {string} email Subscriber email
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async newsletterUnsubscribeGet(token: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardNewsletterUnsubscribeResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsletterUnsubscribeGet(token, options);
+        async newsletterUnsubscribeGet(email: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardNewsletterUnsubscribeResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.newsletterUnsubscribeGet(email, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['NewsletterApi.newsletterUnsubscribeGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -150,6 +254,16 @@ export const NewsletterApiFp = function(configuration?: Configuration) {
 export const NewsletterApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = NewsletterApiFp(configuration)
     return {
+        /**
+         * Search newsletter subscriptions using all available filters (Admin only)
+         * @summary Search newsletter subscriptions
+         * @param {NewsletterApiNewsletterSearchGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        newsletterSearchGet(requestParameters: NewsletterApiNewsletterSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedNewsletterSubscriptionResponse> {
+            return localVarFp.newsletterSearchGet(requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.status, requestParameters.subscribedAfter, requestParameters.subscribedBefore, requestParameters.unsubscribedAfter, requestParameters.unsubscribedBefore, options).then((request) => request(axios, basePath));
+        },
         /**
          * Subscribe potential customers to newsletters
          * @summary Newsletter signup
@@ -168,10 +282,35 @@ export const NewsletterApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         newsletterUnsubscribeGet(requestParameters: NewsletterApiNewsletterUnsubscribeGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardNewsletterUnsubscribeResponse> {
-            return localVarFp.newsletterUnsubscribeGet(requestParameters.token, options).then((request) => request(axios, basePath));
+            return localVarFp.newsletterUnsubscribeGet(requestParameters.email, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for newsletterSearchGet operation in NewsletterApi.
+ */
+export interface NewsletterApiNewsletterSearchGetRequest {
+    readonly createdAfter?: string
+
+    readonly createdBefore?: string
+
+    readonly limit?: number
+
+    readonly page?: number
+
+    readonly q?: string
+
+    readonly status?: NewsletterSearchGetStatusEnum
+
+    readonly subscribedAfter?: string
+
+    readonly subscribedBefore?: string
+
+    readonly unsubscribedAfter?: string
+
+    readonly unsubscribedBefore?: string
+}
 
 /**
  * Request parameters for newsletterSignupPost operation in NewsletterApi.
@@ -188,15 +327,26 @@ export interface NewsletterApiNewsletterSignupPostRequest {
  */
 export interface NewsletterApiNewsletterUnsubscribeGetRequest {
     /**
-     * Unsubscribe token
+     * Subscriber email
      */
-    readonly token: string
+    readonly email: string
 }
 
 /**
  * NewsletterApi - object-oriented interface
  */
 export class NewsletterApi extends BaseAPI {
+    /**
+     * Search newsletter subscriptions using all available filters (Admin only)
+     * @summary Search newsletter subscriptions
+     * @param {NewsletterApiNewsletterSearchGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public newsletterSearchGet(requestParameters: NewsletterApiNewsletterSearchGetRequest = {}, options?: RawAxiosRequestConfig) {
+        return NewsletterApiFp(this.configuration).newsletterSearchGet(requestParameters.createdAfter, requestParameters.createdBefore, requestParameters.limit, requestParameters.page, requestParameters.q, requestParameters.status, requestParameters.subscribedAfter, requestParameters.subscribedBefore, requestParameters.unsubscribedAfter, requestParameters.unsubscribedBefore, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Subscribe potential customers to newsletters
      * @summary Newsletter signup
@@ -216,7 +366,12 @@ export class NewsletterApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public newsletterUnsubscribeGet(requestParameters: NewsletterApiNewsletterUnsubscribeGetRequest, options?: RawAxiosRequestConfig) {
-        return NewsletterApiFp(this.configuration).newsletterUnsubscribeGet(requestParameters.token, options).then((request) => request(this.axios, this.basePath));
+        return NewsletterApiFp(this.configuration).newsletterUnsubscribeGet(requestParameters.email, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
+export const NewsletterSearchGetStatusEnum = {
+    NewsletterSubscriptionStatusActive: 'active',
+    NewsletterSubscriptionStatusUnsubscribed: 'unsubscribed'
+} as const;
+export type NewsletterSearchGetStatusEnum = typeof NewsletterSearchGetStatusEnum[keyof typeof NewsletterSearchGetStatusEnum];

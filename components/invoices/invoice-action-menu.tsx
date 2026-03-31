@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { AxiosError } from "axios";
-import { Ban, CheckCircle, ChevronDown, Download, FileCheck, Mail, Send, Wallet } from "lucide-react";
-import { SuperField } from "@/components/dashboard-ui/super-field";
+import { Ban, CheckCircle, ChevronDown, Download, Mail } from "lucide-react";
 import { ReactNode } from "react";
 
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
@@ -24,13 +23,12 @@ interface InvoiceActionMenuProps {
   bareTrigger?: boolean;
 }
 
-type DialogKey = 'generatePayment' | 'issueInvoice' | 'sendInvoice' | 'invoicePaid' | 'cancelInvoice';
+type DialogKey = 'invoicePaid' | 'cancelInvoice';
 
 export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, bareTrigger = false }: InvoiceActionMenuProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const [ viewOpen, setViewOpen ] = useState( false );
   const [ openDialog, setOpenDialog ] = useState<DialogKey | null>( null );
-  const [ paymentNotes, setPaymentNotes ] = useState( 'Payment made' );
   const [ cancelConfirmation, setCancelConfirmation ] = useState( '' );
   const invoiceTitle = invoice.invoice_number || invoice.campaign_name || t( 'details.invoiceFallback' );
 
@@ -64,16 +62,6 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
     },
   } );
 
-  const { mutate: updateInvoiceStatus, isPending: isInvoiceStatusPending } = useUpdateInvoiceStatus( {
-    onSuccess: () => {
-      toast.success( t( 'actions.paymentGeneratedSuccess' ) );
-      setOpenDialog( null );
-    },
-    onError: () => {
-      toast.error( t( 'actions.paymentGeneratedError' ) );
-    },
-  } );
-
   const { mutate: updateInvoiceStatusAction, isPending: isStatusActionPending } = useUpdateInvoiceStatus( {
     onSuccess: () => {
       toast.success( t( 'actions.invoiceUpdatedSuccess' ) );
@@ -86,6 +74,18 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
 
   const handleInvoiceStatusUpdate = ( invoiceStatus: UtilsInvoiceStatus ) => {
     if ( invoice.id ) updateInvoiceStatusAction( { id: invoice.id, request: { invoice_status: invoiceStatus } } );
+  };
+
+  const handleMarkAsPaid = () => {
+    if ( invoice.id ) {
+      updateInvoiceStatusAction( {
+        id: invoice.id,
+        request: {
+          invoice_status: 'paid',
+          paid_date: new Date().toISOString(),
+        },
+      } );
+    }
   };
 
   const actions: MenuAction<ModelsInvoiceResponse>[] = [
@@ -105,26 +105,13 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
         if ( inv.id ) resendInvoicePdf( inv.id );
       },
     },
-    // {
-    //   label: "Generate payment",
-    //   icon: Wallet,
-    //   action: () => setOpenDialog( 'generatePayment' ),
-    // },
-    // {
-    //   label: "Issue Invoice",
-    //   icon: FileCheck,
-    //   action: () => setOpenDialog( 'issueInvoice' ),
-    // },
-    // {
-    //   label: "Send Invoice",
-    //   icon: Send,
-    //   action: () => setOpenDialog( 'sendInvoice' ),
-    // },
-    // {
-    //   label: "Invoice Paid",
-    //   icon: CheckCircle,
-    //   action: () => setOpenDialog( 'invoicePaid' ),
-    // },
+    {
+      label: t( 'dialogs.invoicePaid.confirmLabel' ),
+      icon: CheckCircle,
+      action: () => setOpenDialog( 'invoicePaid' ),
+      condition: ( current ) => current.invoice_status !== 'paid' && current.invoice_status !== 'cancelled',
+      allowedRoles: [ 'admin' ],
+    },
     {
       label: t( 'actions.cancelInvoice' ),
       icon: Ban,
@@ -176,63 +163,12 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
       { showViewButton && <InvoiceDetailsSheet invoice={ invoice } open={ viewOpen } onOpenChange={ setViewOpen } /> }
 
       <ConfirmDialog
-        open={ openDialog === 'generatePayment' }
-        onOpenChange={ ( open ) => { if ( !open ) { setOpenDialog( null ); setPaymentNotes( 'Payment made' ); } } }
-        title={ t( 'dialogs.generatePayment.title' ) }
-        description={ t( 'dialogs.generatePayment.description' ) }
-        confirmLabel={ t( 'dialogs.generatePayment.confirmLabel' ) }
-        onConfirm={ () => {
-          if ( invoice.id ) updateInvoiceStatus( {
-            id: invoice.id,
-            request: {
-              invoice_status: 'paid',
-              due_date: invoice.due_date,
-              notes: paymentNotes,
-              paid_date: new Date().toISOString(),
-            },
-          } );
-        } }
-        isLoading={ isInvoiceStatusPending }
-        loadingText={ t( 'dialogs.generatePayment.loading' ) }
-      >
-        <SuperField
-          type="textarea"
-          label={ t( 'dialogs.generatePayment.notes' ) }
-          value={ paymentNotes }
-          onChange={ ( e ) => setPaymentNotes( e.target.value ) }
-          rows={ 3 }
-        />
-      </ConfirmDialog>
-
-      <ConfirmDialog
-        open={ openDialog === 'issueInvoice' }
-        onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
-        title={ t( 'dialogs.issueInvoice.title' ) }
-        description={ t( 'dialogs.issueInvoice.description' ) }
-        confirmLabel={ t( 'dialogs.issueInvoice.confirmLabel' ) }
-        onConfirm={ () => handleInvoiceStatusUpdate( 'issued' ) }
-        isLoading={ isStatusActionPending }
-        loadingText={ t( 'dialogs.issueInvoice.loading' ) }
-      />
-
-      <ConfirmDialog
-        open={ openDialog === 'sendInvoice' }
-        onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
-        title={ t( 'dialogs.sendInvoice.title' ) }
-        description={ t( 'dialogs.sendInvoice.description' ) }
-        confirmLabel={ t( 'dialogs.sendInvoice.confirmLabel' ) }
-        onConfirm={ () => handleInvoiceStatusUpdate( 'sent' ) }
-        isLoading={ isStatusActionPending }
-        loadingText={ t( 'dialogs.sendInvoice.loading' ) }
-      />
-
-      <ConfirmDialog
         open={ openDialog === 'invoicePaid' }
         onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
         title={ t( 'dialogs.invoicePaid.title' ) }
         description={ t( 'dialogs.invoicePaid.description' ) }
         confirmLabel={ t( 'dialogs.invoicePaid.confirmLabel' ) }
-        onConfirm={ () => handleInvoiceStatusUpdate( 'paid' ) }
+        onConfirm={ handleMarkAsPaid }
         isLoading={ isStatusActionPending }
         loadingText={ t( 'dialogs.invoicePaid.loading' ) }
       />

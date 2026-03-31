@@ -15,12 +15,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { UtilsPaymentMethod } from './utils-payment-method';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { UtilsPaymentStatus } from './utils-payment-status';
 
 export interface ModelsUpdatePaymentStatusRequest {
     'notes'?: string;
     'payment_date'?: string;
-    'payment_method'?: string;
+    'payment_method'?: UtilsPaymentMethod;
     'payment_status': UtilsPaymentStatus;
 }
 

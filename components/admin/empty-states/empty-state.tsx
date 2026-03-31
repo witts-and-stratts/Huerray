@@ -9,11 +9,12 @@ export interface EmptyStateProps {
   description?: string;
   fill?: boolean;
   children?: React.ReactNode;
+  className?: string;
 }
 
-export function EmptyState( { imageSrc, imageWidth = 200, imageHeight = 200, title, description, fill = false, children }: EmptyStateProps ) {
+export function EmptyState( { imageSrc, imageWidth = 200, imageHeight = 200, title, description, fill = false, children, className }: EmptyStateProps ) {
   return (
-    <Empty className={ cn( { 'border py-10 flex-1 bg-white': fill } ) }>
+    <Empty className={ cn( { 'border py-10 flex-1 bg-white': fill }, className ) }>
       <EmptyContent>
         <EmptyMedia>
           <img src={ imageSrc } width={ imageWidth } height={ imageHeight } alt={ title } />

@@ -47,16 +47,38 @@ export function CreatorInvitationsBlock() {
             { Array.from( { length: 4 } ).map( ( _, i ) => (
               <div key={ i } className="w-[200px] shrink-0">
                 <div className="relative rounded-2xl overflow-hidden aspect-[3/4]">
+                  {/* Background image */ }
                   <Skeleton className="absolute inset-0 w-full h-full" />
-                  {/* Status badge */ }
-                  <div className="absolute top-3 left-3">
+                  {/* Top row: status badge + action menu */ }
+                  <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
                     <Skeleton className="h-5 w-16 rounded-full" />
+                    <Skeleton className="h-5 w-5 rounded-md" />
                   </div>
-                  {/* Bottom content block */ }
-                  <div className="absolute bottom-2 left-2 right-2 rounded-2xl p-3 flex flex-col gap-2">
-                    <Skeleton className="h-4 w-3/4 rounded-md" />
-                    <Skeleton className="h-3 w-1/2 rounded-md" />
-                    <Skeleton className="h-3 w-2/3 rounded-md" />
+                  {/* Bottom frosted block */ }
+                  <div className="absolute bottom-0 left-0 right-0 m-2 rounded-2xl px-3 py-2 flex flex-col gap-1.5 bg-black/20">
+                    {/* Title */ }
+                    <Skeleton className="h-4 w-4/5 rounded-md" />
+                    <Skeleton className="h-4 w-3/5 rounded-md" />
+                    {/* Meta row (video count + duration) */ }
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <Skeleton className="h-3 w-10 rounded-sm" />
+                      <Skeleton className="h-3 w-8 rounded-sm" />
+                    </div>
+                    {/* Compensation */ }
+                    <div className="flex flex-col gap-1 mt-1">
+                      <Skeleton className="h-2 w-12 rounded-sm" />
+                      <Skeleton className="h-4 w-20 rounded-md" />
+                    </div>
+                    {/* Brand row */ }
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <Skeleton className="size-4 rounded-full shrink-0" />
+                      <Skeleton className="h-3 w-24 rounded-sm" />
+                    </div>
+                    {/* CTA buttons */ }
+                    <div className="flex gap-2 mt-1">
+                      <Skeleton className="h-7 flex-1 rounded-md" />
+                      <Skeleton className="h-7 flex-1 rounded-md" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -85,6 +107,7 @@ export function CreatorInvitationsBlock() {
           variant="outline"
           size="sm"
           className="mt-2 w-full font-normal"
+          nativeButton={ false }
           render={ <Link href="/creator/invitations" /> }
         >
           View all invitations

@@ -9,6 +9,7 @@ export interface ChoiceCardOption {
   value: string;
   label: string;
   description?: string;
+  icon?: React.ReactNode;
 }
 
 export interface ChoiceCardInputProps {
@@ -53,7 +54,10 @@ export function ChoiceCardInput( {
         <FieldLabel key={ option.value } htmlFor={ `${ id }-${ option.value }` }>
           <Field orientation="horizontal">
             <FieldContent>
-              <FieldTitle>{ option.label }</FieldTitle>
+              <div className="flex items-center gap-2">
+                { option.icon && <span className="text-muted-foreground">{ option.icon }</span> }
+                <FieldTitle>{ option.label }</FieldTitle>
+              </div>
               { option.description && (
                 <FieldDescription>{ option.description }</FieldDescription>
               ) }

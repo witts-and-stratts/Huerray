@@ -7,6 +7,7 @@
     "analytics": "Analítica",
     "invoices": "Facturas",
     "payments": "Pagos",
+    "cases": "Casos",
     "profileSettings": "Configuración del perfil",
     "accountSettings": "Configuración de la cuenta",
     "changePassword": "Cambiar contraseña",
@@ -25,6 +26,7 @@
     "profile": "Perfil",
     "analytics": "Analítica",
     "earnings": "Ganancias",
+    "cases": "Casos",
     "profileSettings": "Configuración del perfil",
     "account": "Configuración de la cuenta",
     "changePassword": "Cambiar contraseña",
@@ -33,6 +35,7 @@
   "admin": {
     "dashboard": "Cuadro de mandos",
     "users": "Usuarios",
+    "newsletter": "Boletín",
     "creators": "Creadores",
     "brands": "Marcas",
     "campaigns": "Campañas",

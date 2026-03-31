@@ -24,20 +24,47 @@
     "next": "Siguiente"
   },
   "actions": {
+    "menu": "Menú",
     "markAllAsRead": "Marcar todo como leído",
     "markAsRead": "Marcar como leído",
     "delete": "Borrar",
     "deleteAll": "Borrar todo",
-    "open": "Abrir"
+    "open": "Abrir",
+    "close": "Cerrar",
+    "viewInvoice": "Ver factura",
+    "viewSubmission": "Ver presentación",
+    "goToGig": "Ir al concierto",
+    "viewCampaign": "Ver campaña",
+    "reviewBrandProfile": "Revisar el perfil de la marca",
+    "reviewCreatorProfile": "Revisar el perfil del creador",
+    "viewDetails": "Ver detalles"
   },
   "item": {
     "showMore": "Ver más",
     "showLess": "Mostrar menos",
     "eventTypeFallback": "Actualización"
   },
+  "eventTypes": {
+    "Creation": "Creación",
+    "Update": "Actualización",
+    "Approval": "Aprobación",
+    "Rejection": "Rechazo",
+    "Deletion": "Eliminación",
+    "Deactivation": "Desactivación",
+    "Submission": "Envío",
+    "Invitation": "Invitación",
+    "Application": "Solicitud",
+    "Acceptance": "Aceptación",
+    "Decision": "Decisión",
+    "Return": "Devolución",
+    "Registration": "Registro",
+    "Generic": "General"
+  },
   "empty": {
     "title": "No se muestran notificaciones",
-    "description": "Ya estás al día por ahora."
+    "description": "Ya estás al día por ahora.",
+    "overlayTitle": "Sin notificaciones",
+    "selectPrompt": "Seleccione una notificación para leerla"
   },
   "confirm": {
     "deleteAllTitle": "Borrar todas las notificaciones",
@@ -48,5 +75,82 @@
   "toast": {
     "deleteAllSuccess": "Todas las notificaciones eliminadas",
     "deleteAllError": "No se han podido eliminar todas las notificaciones"
+  },
+  "compose": {
+    "title": "Notificación del puesto",
+    "description": "Crear y enviar una notificación a un usuario específico.",
+    "submit": "Notificación del puesto",
+    "toast": {
+      "success": "Notificación publicada",
+      "error": "No se ha podido enviar la notificación"
+    },
+    "actions": {
+      "editActionUrl": "Editar URL de la acción",
+      "useGeneratedUrl": "Utilizar la URL generada"
+    },
+    "entityLabels": {
+      "entity": "Entidad",
+      "creator": "Creador",
+      "brand": "Marca",
+      "user": "Usuario",
+      "campaign": "Campaña",
+      "gig": "Gig",
+      "invoice": "Factura",
+      "case": "Caso",
+      "videoSubmission": "Envío de vídeos",
+      "payment": "Pago"
+    },
+    "fields": {
+      "entityType": "Tipo de entidad",
+      "chooseEntity": "Seleccione {entity}",
+      "loadingEntity": "Cargando {entity}...",
+      "selectEntity": "Seleccione {entity}",
+      "notificationRecipient": "Destinatario de la notificación",
+      "loadingUsers": "Cargando usuarios...",
+      "selectRecipient": "Seleccionar el destinatario de la notificación",
+      "recipientDescription": "Seleccione el usuario que debe recibir esta notificación.",
+      "eventName": "Nombre del evento",
+      "eventNamePlaceholder": "p. ej. Gig Invitación aceptada",
+      "eventType": "Tipo de evento",
+      "title": "Título",
+      "titlePlaceholder": "Título de la notificación",
+      "message": "Mensaje",
+      "messagePlaceholder": "Mensaje de notificación",
+      "priority": "Prioridad",
+      "actionUrl": "URL de la acción",
+      "actionUrlPlaceholder": "No se generará ninguna URL de acción",
+      "actionUrlGenerated": "Se genera automáticamente a partir de la entidad seleccionada.",
+      "actionUrlUnavailable": "Este tipo de entidad no genera actualmente una URL de acción.",
+      "metadata": "Metadatos",
+      "metadataDescription": "Objeto JSON opcional",
+      "metadataPlaceholder": "{\"gig_id\":\"...\"}"
+    },
+    "validation": {
+      "recipientRequired": "El destinatario de la notificación es obligatorio",
+      "titleRequired": "Título obligatorio",
+      "messageRequired": "El mensaje es obligatorio",
+      "eventNameRequired": "El nombre del evento es obligatorio",
+      "entityTypeRequired": "El tipo de entidad es obligatorio",
+      "entityRequired": "{entity} es necesario",
+      "metadataJson": "Los metadatos deben ser JSON válidos"
+    },
+    "priority": {
+      "low": {
+        "label": "Bajo",
+        "description": "Notificación de prioridad inferior"
+      },
+      "normal": {
+        "label": "Normal",
+        "description": "Notificación prioritaria estándar"
+      },
+      "high": {
+        "label": "Alta",
+        "description": "Notificación de alta prioridad"
+      },
+      "urgent": {
+        "label": "Urgente",
+        "description": "Notificación urgente"
+      }
+    }
   }
 }

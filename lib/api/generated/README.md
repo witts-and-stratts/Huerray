@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *CreatorApi* | [**creatorsBankDetailsPut**](docs/CreatorApi.md#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details
 *CreatorApi* | [**creatorsIdBankDetailsGet**](docs/CreatorApi.md#creatorsidbankdetailsget) | **GET** /creators/{id}/bank-details | Get creator bank details by creator ID (Admin only)
 *CreatorApi* | [**creatorsIdGet**](docs/CreatorApi.md#creatorsidget) | **GET** /creators/{id} | Get creator by ID
+*CreatorApi* | [**creatorsIdProfilePut**](docs/CreatorApi.md#creatorsidprofileput) | **PUT** /creators/{id}/profile | Admin update creator profile
 *CreatorApi* | [**creatorsIdProfileStatusPut**](docs/CreatorApi.md#creatorsidprofilestatusput) | **PUT** /creators/{id}/profile-status | Update creator profile status
 *CreatorApi* | [**creatorsMatchingGigsGet**](docs/CreatorApi.md#creatorsmatchinggigsget) | **GET** /creators/matching-gigs | Get matching gigs
 *CreatorApi* | [**creatorsPaymentItemsSearchGet**](docs/CreatorApi.md#creatorspaymentitemssearchget) | **GET** /creators/payment-items/search | Search creator\&#39;s payment items
@@ -142,6 +143,7 @@ Class | Method | HTTP request | Description
 *InvoiceApi* | [**invoicesIdStatusPut**](docs/InvoiceApi.md#invoicesidstatusput) | **PUT** /invoices/{id}/status | Update invoice status
 *InvoiceApi* | [**invoicesPost**](docs/InvoiceApi.md#invoicespost) | **POST** /invoices | Create invoice for campaign
 *InvoiceApi* | [**invoicesSearchGet**](docs/InvoiceApi.md#invoicessearchget) | **GET** /invoices/search | Search invoices (Admin &amp; Brands)
+*NewsletterApi* | [**newsletterSearchGet**](docs/NewsletterApi.md#newslettersearchget) | **GET** /newsletter/search | Search newsletter subscriptions
 *NewsletterApi* | [**newsletterSignupPost**](docs/NewsletterApi.md#newslettersignuppost) | **POST** /newsletter/signup | Newsletter signup
 *NewsletterApi* | [**newsletterUnsubscribeGet**](docs/NewsletterApi.md#newsletterunsubscribeget) | **GET** /newsletter/unsubscribe | Unsubscribe from newsletter
 *NotificationsApi* | [**notificationsGet**](docs/NotificationsApi.md#notificationsget) | **GET** /notifications | Get user notifications
@@ -193,6 +195,7 @@ Class | Method | HTTP request | Description
 ### Documentation For Models
 
  - [ModelsAdminCampaignApprovalRequest](docs/ModelsAdminCampaignApprovalRequest.md)
+ - [ModelsAdminUpdateCreatorProfileRequest](docs/ModelsAdminUpdateCreatorProfileRequest.md)
  - [ModelsAnalyticsTimeSeriesData](docs/ModelsAnalyticsTimeSeriesData.md)
  - [ModelsAnalyticsTimeSeriesResponse](docs/ModelsAnalyticsTimeSeriesResponse.md)
  - [ModelsApplicationVideoUploadResponse](docs/ModelsApplicationVideoUploadResponse.md)
@@ -243,6 +246,7 @@ Class | Method | HTTP request | Description
  - [ModelsGigBrandResponse](docs/ModelsGigBrandResponse.md)
  - [ModelsGigCreatorListResponse](docs/ModelsGigCreatorListResponse.md)
  - [ModelsGigCreatorResponse](docs/ModelsGigCreatorResponse.md)
+ - [ModelsGigInvitationBrandResponse](docs/ModelsGigInvitationBrandResponse.md)
  - [ModelsGigInvitationRequest](docs/ModelsGigInvitationRequest.md)
  - [ModelsGigInvitationResponse](docs/ModelsGigInvitationResponse.md)
  - [ModelsGigInvitationResponseRequest](docs/ModelsGigInvitationResponseRequest.md)
@@ -257,6 +261,7 @@ Class | Method | HTTP request | Description
  - [ModelsMoney](docs/ModelsMoney.md)
  - [ModelsNewsletterSignupRequest](docs/ModelsNewsletterSignupRequest.md)
  - [ModelsNewsletterSignupResponse](docs/ModelsNewsletterSignupResponse.md)
+ - [ModelsNewsletterSubscriptionResponse](docs/ModelsNewsletterSubscriptionResponse.md)
  - [ModelsNewsletterUnsubscribeResponse](docs/ModelsNewsletterUnsubscribeResponse.md)
  - [ModelsNotificationListResponse](docs/ModelsNotificationListResponse.md)
  - [ModelsNotificationResponse](docs/ModelsNotificationResponse.md)
@@ -268,6 +273,7 @@ Class | Method | HTTP request | Description
  - [ModelsPaginatedGigCreatorResponse](docs/ModelsPaginatedGigCreatorResponse.md)
  - [ModelsPaginatedGigResponse](docs/ModelsPaginatedGigResponse.md)
  - [ModelsPaginatedInvoiceResponse](docs/ModelsPaginatedInvoiceResponse.md)
+ - [ModelsPaginatedNewsletterSubscriptionResponse](docs/ModelsPaginatedNewsletterSubscriptionResponse.md)
  - [ModelsPaginatedPaymentItemResponse](docs/ModelsPaginatedPaymentItemResponse.md)
  - [ModelsPaginatedPaymentResponse](docs/ModelsPaginatedPaymentResponse.md)
  - [ModelsPaginatedUserResponse](docs/ModelsPaginatedUserResponse.md)
@@ -359,8 +365,10 @@ Class | Method | HTTP request | Description
  - [UtilsGigInvitationStatus](docs/UtilsGigInvitationStatus.md)
  - [UtilsGigStatus](docs/UtilsGigStatus.md)
  - [UtilsInvoiceStatus](docs/UtilsInvoiceStatus.md)
+ - [UtilsNewsletterSubscriptionStatus](docs/UtilsNewsletterSubscriptionStatus.md)
  - [UtilsNotificationEntityType](docs/UtilsNotificationEntityType.md)
  - [UtilsPaymentItemStatus](docs/UtilsPaymentItemStatus.md)
+ - [UtilsPaymentMethod](docs/UtilsPaymentMethod.md)
  - [UtilsPaymentStatus](docs/UtilsPaymentStatus.md)
  - [UtilsPriority](docs/UtilsPriority.md)
  - [UtilsVideoFormat](docs/UtilsVideoFormat.md)

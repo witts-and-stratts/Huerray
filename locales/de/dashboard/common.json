@@ -23,7 +23,7 @@
     "searching": "Ich suche...",
     "noResultsFor": "Keine Ergebnisse für \"{query}\"",
     "noResultsDesc": "Versuchen Sie einen anderen Suchbegriff oder passen Sie Ihre Filter an",
-    "showingTop": "{count, plural, =1 {Zeige das beste # Ergebnis} other {Zeige die besten # Ergebnisse}}",
+    "showingTop": "{count, plural, =1 {Showing top # result} other {Showing top # results}}",
     "pressEnter": "Drücken Sie Enter zum Suchen",
     "navigate": "navigieren.",
     "select": "Wählen Sie",
@@ -39,6 +39,7 @@
     "creators": "Schöpfer",
     "gigs": "Auftritte",
     "invoices": "Rechnungen",
+    "newsletter": "Newsletter",
     "payments": "Zahlungen",
     "submissions": "Einreichungen"
   },
@@ -76,7 +77,7 @@
   "showLess": "Weniger anzeigen",
   "showAll": "Alle anzeigen",
   "pagination": {
-    "rowsSelected": "{selected, plural, =1 {# der {total} Zeile ausgewählt.} other {# der {total} Zeilen ausgewählt.}}",
+    "rowsSelected": "{selected, plural, =1 {# of {total} row selected.} other {# of {total} rows selected.}}",
     "rowsPerPage": "Zeilen pro Seite",
     "page": "Seite {page} von {total}",
     "goToFirst": "Zur ersten Seite gehen",
@@ -256,19 +257,19 @@
     },
     "actions": {
       "view": "Siehe",
-      "setStatus": "Status festlegen",
-      "setStatusDescription": "Aktualisieren Sie den Zahlungsstatus und zugehorige Auszahlungsdetails.",
+      "setStatus": "Status einstellen",
+      "setStatusDescription": "Aktualisieren Sie den Zahlungsstatus und alle damit verbundenen Auszahlungsdetails.",
       "saveStatus": "Status speichern",
-      "statusUpdating": "Status wird aktualisiert...",
-      "statusSuccess": "Zahlungsstatus erfolgreich aktualisiert.",
+      "statusUpdating": "Status aktualisieren...",
+      "statusSuccess": "Der Zahlungsstatus wurde erfolgreich aktualisiert.",
       "statusError": "Der Zahlungsstatus konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
-      "update": "Aktualisieren",
-      "updateDescription": "Bearbeiten Sie die fur diese Zahlung gespeicherten Auszahlungsdetails.",
+      "update": "Update",
+      "updateDescription": "Bearbeiten Sie die für diese Zahlung gespeicherten Auszahlungsdetails.",
       "paymentItems": "Zahlungsposten",
       "noEditableItems": "Für diese Zahlung sind keine Zahlungsposten verfügbar.",
       "noItemsSelected": "Keine Artikel ausgewählt",
-      "updating": "Wird aktualisiert...",
-      "updateSuccess": "Zahlung erfolgreich aktualisiert.",
+      "updating": "Aktualisieren...",
+      "updateSuccess": "Die Zahlung wurde erfolgreich aktualisiert.",
       "updateError": "Die Zahlung konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
       "confirmPayout": "Bestätigung der Auszahlung",
       "confirming": "Bestätigen Sie...",
@@ -279,7 +280,7 @@
       "deleteDescription": "Sind Sie sicher, dass Sie diese Zahlung löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
       "deleteDescriptionWithReference": "Sind Sie sicher, dass Sie die Zahlung {reference} löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
       "deleteConfirmPlaceholder": "Geben Sie {reference} zur Bestätigung ein",
-      "deleting": "Wird gelöscht...",
+      "deleting": "Löschen...",
       "deleteSuccess": "Zahlung erfolgreich gelöscht.",
       "deleteError": "Die Zahlung konnte nicht gelöscht werden. Bitte versuchen Sie es erneut.",
       "methodPlaceholder": "z.B. Banküberweisung, PayPal...",
@@ -317,7 +318,7 @@
   },
   "batchPayment": {
     "title": "Neue Zahlung",
-    "description": "Wählen Sie einen Ersteller und seine ausstehenden Zahlungsposten aus und erstellen Sie auch neue Zahlungsposten",
+    "description": "Wählen Sie einen Ersteller und seine ausstehenden Zahlungsposten aus und erstellen Sie auch neue Zahlungsposten.",
     "creatorLabel": "Schöpfer",
     "creatorPlaceholder": "Wählen Sie einen Ersteller...",
     "pendingItems": "Ausstehende Posten",
@@ -326,6 +327,11 @@
     "noItems": "Keine ausstehenden Zahlungsposten für diesen Ersteller.",
     "methodLabel": "Zahlungsmethode",
     "methodPlaceholder": "z.B. Banküberweisung, PayPal...",
+    "paymentMethods": {
+      "bankTransfer": "Banküberweisung",
+      "paypal": "PayPal",
+      "other": "Andere"
+    },
     "notesLabel": "Anmerkungen",
     "notesPlaceholder": "Optionale Anmerkungen...",
     "noItemsSelected": "Keine Artikel ausgewählt",
@@ -362,7 +368,7 @@
     "untitledCampaign": "Unbenannte Kampagne",
     "draft": "Entwurf",
     "creatorsWanted": "Schöpfer gesucht",
-    "videosPerCreator": "Gesamtanzahl der Videos",
+    "videosPerCreator": "Gesamtzahl der Videos",
     "videoDuration": "Video Dauer",
     "brief": "Kampagnen-Brief",
     "briefDesc": "Wesentliche Details und Anforderungen an die Nachrichtenübermittlung",
@@ -388,6 +394,90 @@
     "backToEdit": "Zurück zu Bearbeiten",
     "publishing": "Veröffentlichen...",
     "confirmPublish": "Bestätigen & Veröffentlichen"
+  },
+  "helpSheet": {
+    "hero": {
+      "title": "Brauchen Sie Hilfe?",
+      "subtitle": "Finden Sie Antworten auf häufige Fragen oder wenden Sie sich an unser Support-Team.",
+      "searchPlaceholder": "Eine Frage stellen..."
+    },
+    "cards": {
+      "brand": [
+        { "title": "Erste Schritte", "description": "Erfahren Sie, wie Sie Kampagnen erstellen und das Beste aus der Plattform herausholen." },
+        { "title": "Creator verwalten", "description": "Creators einladen, Bewerbungen prüfen und Zusammenarbeit verwalten." },
+        { "title": "Abrechnung & Zahlungen", "description": "Rechnungen, Zahlungsmethoden und Abrechnungszyklen verstehen." }
+      ],
+      "creator": [
+        { "title": "Erste Schritte", "description": "Erfahren Sie, wie Sie Gigs finden und sich für Kampagnen bewerben." },
+        { "title": "Inhalte einreichen", "description": "Verstehen Sie, wie Sie Videos hochladen und Ihre Arbeit genehmigt bekommen." },
+        { "title": "Verdienst & Auszahlungen", "description": "Erfahren Sie, wie Ihr Verdienst berechnet wird und wann Sie bezahlt werden." }
+      ],
+      "admin": [
+        { "title": "Benutzerverwaltung", "description": "Marken, Creators und Benutzer auf der Plattform verwalten." },
+        { "title": "Support-Fälle", "description": "Support-Tickets von Benutzern prüfen, zuweisen und lösen." },
+        { "title": "Plattform-Einstellungen", "description": "Plattformweite Einstellungen, Benachrichtigungen und mehr konfigurieren." }
+      ]
+    },
+    "learnMore": "Mehr erfahren",
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Alles, was Sie über die Plattform wissen müssen. Keine Antwort gefunden?",
+      "contactText": "Schreiben Sie uns unter",
+      "contactEmail": "support@huerray.com"
+    },
+    "submitCta": "Fall einreichen",
+    "myCasesLink": "Meine Fälle",
+    "backToHelp": "Zurück zur Hilfe",
+    "nav": {
+      "home": "Startseite",
+      "faq": "FAQ",
+      "tickets": "Tickets"
+    },
+    "faq": {
+      "brand": [
+        { "q": "Wie erstelle ich eine Kampagne?", "a": "Navigieren Sie zu Kampagnen und klicken Sie auf 'Neue Kampagne'." },
+        { "q": "Wie lade ich Creators ein?", "a": "Öffnen Sie eine Kampagne, gehen Sie zum Gigs-Tab und verwenden Sie die Einladungsaktion." },
+        { "q": "Wie funktioniert die Abrechnung?", "a": "Sie werden pro Kampagne basierend auf Ihrem Plan abgerechnet. Besuchen Sie Einstellungen > Abrechnung." },
+        { "q": "Wie überprüfe ich Einreichungen?", "a": "Öffnen Sie einen Gig aus Ihrer Kampagne und gehen Sie zum Tab Einreichungen." },
+        { "q": "Kann ich mehrere Kampagnen führen?", "a": "Ja, Sie können mehrere Kampagnen gleichzeitig im Bereich Kampagnen erstellen und verwalten." }
+      ],
+      "creator": [
+        { "q": "Wie nehme ich an einer Kampagne teil?", "a": "Durchsuchen Sie verfügbare Gigs und klicken Sie auf Bewerben." },
+        { "q": "Wann werde ich bezahlt?", "a": "Auszahlungen werden innerhalb von 14 Tagen nach Genehmigung Ihrer Inhalte bearbeitet." },
+        { "q": "Wie reiche ich Inhalte ein?", "a": "Öffnen Sie Ihren aktiven Gig und klicken Sie auf Einreichen." },
+        { "q": "Was passiert nach der Einreichung?", "a": "Die Marke prüft Ihre Einreichung und genehmigt, gibt sie zurück oder lehnt sie ab." },
+        { "q": "Wie aktualisiere ich mein Profil?", "a": "Gehen Sie zu Mein Profil in der Seitenleiste, um Ihre Bio und Kategorien zu aktualisieren." }
+      ],
+      "admin": [
+        { "q": "Wie verwalte ich Benutzer?", "a": "Navigieren Sie zu Benutzer in der Hauptnavigation." },
+        { "q": "Wie überprüfe ich Markenprofile?", "a": "Gehen Sie zu Marken und verwenden Sie das Aktionsmenü." },
+        { "q": "Wie weise ich einen Fall zu?", "a": "Öffnen Sie einen Fall und verwenden Sie das Aktionsmenü zum Zuweisen." },
+        { "q": "Wie genehmige ich eine Kampagne?", "a": "Gehen Sie zu Kampagnen, öffnen Sie die Kampagne und verwenden Sie das Aktionsmenü." },
+        { "q": "Wie sende ich Plattform-Benachrichtigungen?", "a": "Navigieren Sie zu Benachrichtigungen und verwenden Sie die Schaltfläche Benachrichtigung erstellen." }
+      ]
+    },
+    "submitCase": {
+      "titleLabel": "Titel",
+      "titlePlaceholder": "Kurze Zusammenfassung Ihres Problems",
+      "descriptionLabel": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie Ihr Problem im Detail...",
+      "priorityLabel": "Priorität",
+      "submit": "Fall einreichen",
+      "submitting": "Wird eingereicht...",
+      "successToast": "Ihr Fall wurde erfolgreich eingereicht",
+      "errorToast": "Fall konnte nicht eingereicht werden. Bitte erneut versuchen.",
+      "titleRequired": "Titel ist erforderlich",
+      "descriptionRequired": "Beschreibung ist erforderlich"
+    },
+    "myCases": {
+      "empty": "Noch keine Fälle",
+      "emptyDesc": "Reichen Sie einen Fall ein, wenn Sie Hilfe benötigen",
+      "viewAll": "Alle Fälle anzeigen",
+      "replyPlaceholder": "Antwort schreiben...",
+      "send": "Senden",
+      "backToList": "Zurück zu den Fällen",
+      "noMessages": "Noch keine Nachrichten"
+    }
   },
   "filterValues": {
     "draft": "Entwurf",

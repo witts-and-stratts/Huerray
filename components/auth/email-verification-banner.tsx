@@ -4,24 +4,35 @@ import { Button } from '@/components/dashboard-ui/button';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { Input } from '@/components/dashboard-ui/input';
 import { Label } from '@/components/dashboard-ui/label';
+import { useRole } from '@/contexts/role-context';
 import { apiClient } from '@/lib/api/client';
+import { ModelsUserResponse } from '@/lib/api/generated';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
+import { useBrand } from '@/lib/api/hooks';
+import { useUser, useUserProfile } from '@/lib/api/hooks/users';
 import { useAuth } from '@/lib/auth/auth-context';
 import { Loader2, Mail, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 export function EmailVerificationBanner() {
-  const { user, setUser } = useAuth();
+  const [ user, setUser ] = useState<ModelsUserResponse | null>( null );
+  const role = useRole();
   const [ dismissed, setDismissed ] = useState( false );
   const [ isResending, setIsResending ] = useState( false );
   const [ isDialogOpen, setIsDialogOpen ] = useState( false );
   const [ verificationCode, setVerificationCode ] = useState( '' );
   const [ isVerifying, setIsVerifying ] = useState( false );
+  const { data, error } = useUserProfile();
 
-  // Don't show if user is not logged in, email is verified, or banner was dismissed
-  if ( !user || user.emailVerified || dismissed ) {
+  useEffect( function getUser() {
+    console.log( "Data", data );
+    setUser( data as any );
+  }, [ data ] );
+
+  // Don't show if user is not logged in, email is already verified, or banner was dismissed
+  if ( !user || user.email_verified || dismissed ) {
     return null;
   }
 
@@ -58,7 +69,7 @@ export function EmailVerificationBanner() {
       await authApi.authVerifyEmailPost( { request: { token: verificationCode.trim() } } );
 
       // Update user state to reflect verified email
-      setUser( { ...user, emailVerified: true } );
+      setUser( { ...user, email_verified: true } );
 
       toast.success( 'Email verified successfully!', {
         description: 'Your email has been verified.',

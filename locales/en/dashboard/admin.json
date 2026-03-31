@@ -330,6 +330,46 @@
       "actions": "Actions"
     }
   },
+  "newsletterPage": {
+    "title": "Newsletter",
+    "description": "Search and export newsletter subscribers from the admin area.",
+    "notice": "The current backend only exposes newsletter search/signup/unsubscribe. Edit and delete actions will require dedicated admin endpoints before they can be enabled.",
+    "summary": "{visible} visible of {total} entries, {selected} selected",
+    "empty": "No newsletter entries found.",
+    "emptyDescription": "Newsletter subscriptions will appear here once contacts start signing up.",
+    "error": {
+      "title": "Unable to load newsletter entries",
+      "description": "There was a problem loading newsletter subscriptions. Try again.",
+      "retry": "Try again"
+    },
+    "columns": {
+      "email": "Email",
+      "name": "Name",
+      "status": "Status",
+      "source": "Source",
+      "subscribedAt": "Subscribed",
+      "updatedAt": "Updated"
+    },
+    "filters": {
+      "searchPlaceholder": "Search newsletter entries..."
+    },
+    "actions": {
+      "exportFiltered": "Bulk export",
+      "exportSelected": "Export selected",
+      "resubscribe": "Resubscribe",
+      "unsubscribe": "Unsubscribe",
+      "delete": "Delete",
+      "more": "More"
+    },
+    "messages": {
+      "endpointMissing": "This action requires a newsletter admin update/delete endpoint.",
+      "resubscribed": "Newsletter subscriber resubscribed.",
+      "resubscribeFailed": "Failed to resubscribe newsletter subscriber.",
+      "unsubscribed": "Newsletter subscriber unsubscribed.",
+      "unsubscribeFailed": "Failed to unsubscribe newsletter subscriber.",
+      "unsubscribeEmailMissing": "This newsletter entry does not include an email address."
+    }
+  },
   "gigsPage": {
     "title": "Gigs",
     "description": "View and manage all gigs across the platform."
@@ -1121,13 +1161,29 @@
     "actionMenu": {
       "viewDetails": "View details",
       "copyId": "Copy ID",
+      "assignCase": "Assign case",
       "markInProgress": "Mark as In Progress",
       "markResolved": "Mark as Resolved",
       "reopen": "Reopen",
       "close": "Close case",
+      "assignDialog": {
+        "title": "Assign case",
+        "description": "Choose an admin to assign this support case to.",
+        "assigneeLabel": "Admin assignee",
+        "placeholder": "Select an admin",
+        "unknownAdmin": "Unknown admin",
+        "loading": "Loading admins...",
+        "empty": "No admins available.",
+        "cancel": "Cancel",
+        "confirm": "Assign case",
+        "submitting": "Assigning..."
+      },
       "toasts": {
         "idCopied": "Case ID copied",
         "missingId": "Missing case ID",
+        "assigneeRequired": "Select an admin to assign this case",
+        "caseAssigned": "Case assigned",
+        "caseAssignError": "Failed to assign case",
         "statusUpdated": "Case status updated",
         "statusUpdateError": "Failed to update case status"
       }
@@ -1135,6 +1191,7 @@
     "details": {
       "tab": "Details",
       "description": "Detailed information about case",
+      "selectPrompt": "Select a case to view details",
       "untitled": "Untitled Case",
       "descriptionLabel": "Description",
       "caseInfo": "Case Information",

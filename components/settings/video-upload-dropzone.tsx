@@ -329,7 +329,7 @@ export function VideoUploadDropzone( { value, thumbnailValue, onChange, onThumbn
         ) }
       </Dropzone>
 
-      { error && <p className="text-xs text-destructive mt-2">{ error }</p> }
+      { error && <p role="alert" data-slot="field-error" className="text-xs text-destructive mt-2">{ error }</p> }
 
       <Dialog open={ isPreviewOpen } onOpenChange={ setIsPreviewOpen }>
         <DialogContent className="w-full md:w-[800px] md:max-w-none p-0 overflow-hidden flex flex-col bg-background/95 backdrop-blur-sm gap-0">

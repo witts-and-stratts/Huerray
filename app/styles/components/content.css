@@ -51,6 +51,7 @@
   padding: 8px;
   font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
 }
+
 .quill-editor-wrapper .ql-container.ql-snow {
   border: none;
   font-family: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
@@ -58,6 +59,7 @@
   flex-direction: column;
   flex: 1;
 }
+
 .quill-editor-wrapper .ql-editor {
   min-height: 150px;
   flex: 1;
@@ -67,6 +69,7 @@
   font-weight: 400;
   padding: 0.625rem 0.75rem;
 }
+
 /* .quill-editor-wrapper .ql-editor p {
   font-weight: 300;
 } */
@@ -82,6 +85,7 @@
   left: 0.75rem;
   right: 0.75rem;
 }
+
 /* .quill-editor .ql-blank p {
   font-weight: 300;
 } */
@@ -91,4 +95,14 @@
 
 .ql-editor li {
   @apply pl-3;
+}
+
+.ql-formats button:hover .ql-stroke,
+.ql-formats button.ql-active .ql-stroke {
+  @apply stroke-maroon-400!;
+}
+
+.ql-formats button:hover .ql-fill,
+.ql-formats button.ql-active .ql-fill {
+  @apply fill-maroon-400!;
 }

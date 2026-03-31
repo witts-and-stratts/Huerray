@@ -41,7 +41,7 @@ interface BrandDetailsSheetProps {
 }
 
 function BrandSheetHeader( { brand, brandId }: { brand?: Brand; brandId?: string; } ) {
-  const t = useTranslations('dashboard.admin');
+  const t = useTranslations( 'dashboard.admin' );
   const { data } = useBrand( brandId || brand?.id || '' );
   const details = data?.data;
 
@@ -85,14 +85,14 @@ function BrandSheetHeader( { brand, brandId }: { brand?: Brand; brandId?: string
       </div>
 
       <SheetDescription className="sr-only">
-        {t('brandDetailsSheet.detailedInformationAboutBrand')}{ name }.
+        { t( 'brandDetailsSheet.detailedInformationAboutBrand' ) }{ name }.
       </SheetDescription>
     </SheetHeader>
   );
 }
 
 export function BrandDetailsSheet( { brand, brandId, open, onOpenChange }: BrandDetailsSheetProps ) {
-  const t = useTranslations('dashboard.admin');
+  const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
   const [ activeTab, setActiveTab ] = React.useState( 'overview' );
 
@@ -127,8 +127,8 @@ export function BrandDetailsSheet( { brand, brandId, open, onOpenChange }: Brand
 
         <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-6">
           <TabsList className="w-full border">
-            <TabsTrigger value="overview" className="text-xs font-normal">{t('brandDetailsSheet.overview')}</TabsTrigger>
-            <TabsTrigger value="company" className="text-xs font-normal">{t('brandDetailsSheet.company')}</TabsTrigger>
+            <TabsTrigger value="overview" className="text-xs font-normal">{ t( 'brandDetailsSheet.overview' ) }</TabsTrigger>
+            <TabsTrigger value="company" className="text-xs font-normal">{ t( 'brandDetailsSheet.company' ) }</TabsTrigger>
           </TabsList>
 
           {/* Overview */ }
@@ -185,7 +185,7 @@ export function BrandDetailsSheet( { brand, brandId, open, onOpenChange }: Brand
 
               { details?.company_description && (
                 <WrappedCard title="Description">
-                  <p className="text-sm text-muted-foreground leading-relaxed">{ details.company_description }</p>
+                  <Content content={ details.company_description } />
                 </WrappedCard>
               ) }
             </div>

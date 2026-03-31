@@ -20,6 +20,7 @@ import { useTranslations } from "next-intl";
 import { PaymentDetailsSheet } from "./payment-details-sheet";
 import { PaymentStatusDialog } from "./payment-status-dialog";
 import { PaymentUpdateSheet } from "./payment-update-sheet";
+import { SentenceCase } from "../text-case";
 
 interface PaymentActionMenuProps {
   payment: ModelsPaymentResponse;
@@ -60,8 +61,11 @@ export function PaymentActionMenu( {
       toast.success( t( 'payments.actions.statusSuccess' ) );
       setOpenDialog( null );
     },
-    onError: () => {
-      toast.error( t( 'payments.actions.statusError' ) );
+    onError: ( error ) => {
+      const message = error?.response?.data?.error?.message ?? "";
+      console.log( "Error message", message );
+      toast.error( t( 'payments.actions.statusError' ),
+        { description: <SentenceCase>{ message }</SentenceCase> } );
     },
   } );
 
@@ -96,7 +100,10 @@ export function PaymentActionMenu( {
 
     updatePaymentStatus( {
       id: paymentId,
-      request: { payment_status: 'completed' },
+      request: {
+        payment_status: 'completed',
+        payment_date: payment.payment_date,
+      },
     } );
   };
 

@@ -5,6 +5,7 @@ import { SidebarTrigger } from "@/components/dashboard-ui/sidebar";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { GlobalSearch } from "./ui/global-search";
 import { Notifications } from "./ui/notifications";
+import { HelpSheet } from "./ui/help-sheet/help-sheet";
 
 export function DashboardHeader() {
   return (
@@ -17,6 +18,7 @@ export function DashboardHeader() {
           <LanguageSelector showLabel={ false } />
         </div>
       </header>
+      <HelpSheet />
     </>
   );
 }

@@ -126,7 +126,7 @@ export default async function LocaleLayout( {
           sizes='152x152'
           href='apple-touch-icon-152x152.png'
         />
-        <link rel='manifest' href='site.webmanifest' />
+        <link rel='manifest' href='/site.webmanifest' />
       </head>
       <body className={ inter.className }>
         <NextIntlClientProvider messages={ messages }>

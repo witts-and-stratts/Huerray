@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **bank_routing_number** | **string** |  | [optional] [default to undefined]
 **bio** | **string** |  | [optional] [default to undefined]
 **city** | **string** |  | [default to undefined]
+**content_type** | [**UtilsContentType**](UtilsContentType.md) |  | [optional] [default to undefined]
 **country** | [**UtilsCountryCode**](UtilsCountryCode.md) |  | [default to undefined]
 **date_of_birth** | **string** |  | [default to undefined]
 **gender** | **string** |  | [default to undefined]
@@ -44,6 +45,7 @@ const instance: ModelsUpdateCreatorRequest = {
     bank_routing_number,
     bio,
     city,
+    content_type,
     country,
     date_of_birth,
     gender,

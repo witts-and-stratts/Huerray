@@ -7,6 +7,8 @@ import { Textarea } from '@/components/dashboard-ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/dashboard-ui/select';
 import { InputGroup, InputGroupInput, InputGroupSelect, InputGroupTextarea, InputGroupAddon, InputGroupText } from '@/components/dashboard-ui/input-group';
 import { SearchableSelect } from './searchable-select';
+import { EntitySelect } from './entity-select';
+import type { EntitySelectFieldProps } from './entity-select';
 import { TagsInput } from './tags-input';
 import { DatePickerInput } from './date-picker-input';
 import {
@@ -508,6 +510,31 @@ export const RenderChoiceCard = ( {
       disabled={ base.disabled }
       className={ base.fieldClassName }
       containerClassName={ containerClassName }
+    />
+  );
+};
+
+export const RenderEntitySelect = ( {
+  props,
+  base
+}: {
+  props: EntitySelectFieldProps;
+  base: BaseRendererProps;
+} ) => {
+  const { value, onValueChange, options, placeholder, getEntityMeta, getInitials, avatarClassName } = props;
+  return (
+    <EntitySelect
+      id={ base.fieldId }
+      value={ value }
+      onValueChange={ onValueChange }
+      options={ options }
+      placeholder={ placeholder }
+      disabled={ base.disabled }
+      required={ base.required }
+      className={ base.fieldClassName }
+      getEntityMeta={ getEntityMeta }
+      getInitials={ getInitials }
+      avatarClassName={ avatarClassName }
     />
   );
 };

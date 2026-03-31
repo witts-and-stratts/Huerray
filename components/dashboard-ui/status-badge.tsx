@@ -104,6 +104,9 @@ function getConfig(
 export function StatusBadge( { status, className, configOverride }: StatusBadgeProps ) {
   const config = getConfig( status, configOverride );
   const filterLabel = useFilterLabel();
+  const defaultLabel = useMessage( config.label );
+  const label = status ? filterLabel( status ) : defaultLabel;
+
   return (
     <div className={ cn(
       'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border scale-90 origin-left whitespace-nowrap',
@@ -111,7 +114,7 @@ export function StatusBadge( { status, className, configOverride }: StatusBadgeP
       className
     ) }>
       <HugeiconsIcon icon={ config.icon } className="w-3 h-3 shrink-0" />
-      { status ? filterLabel( status ) : useMessage( config.label ) }
+      { label }
     </div>
   );
 }

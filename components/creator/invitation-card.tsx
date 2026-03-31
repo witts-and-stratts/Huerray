@@ -342,7 +342,7 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
     <HoverCard>
       <HoverCardTrigger
         render={ <button type="button" className="shrink-0" onClick={ e => e.stopPropagation() } /> }
-        nativeButton={ false }
+        nativeButton={ true }
       >
         <HugeiconsIcon icon={ InformationCircleIcon } className="size-3.5 text-white/50 hover:text-white/90 transition-colors" strokeWidth={ 1.5 } />
       </HoverCardTrigger>

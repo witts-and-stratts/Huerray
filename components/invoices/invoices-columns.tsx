@@ -51,7 +51,7 @@ function InvoiceNumberCell( { invoice }: { invoice: ModelsInvoiceResponse; } ) {
     <>
       <button
         onClick={ () => setOpen( true ) }
-        className="dt-table__col-title"
+        className="dt-table__col-title max-md:max-w-40 truncate"
       >
         { invoice_number || '—' }
       </button>
@@ -100,7 +100,7 @@ function BrandCell( { brand_id, brand_name }: { brand_id?: string; brand_name?: 
           { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ brand_name } /> }
           <AvatarFallback>{ getInitials( brand_name ) }</AvatarFallback>
         </Avatar>
-        <span className="text-sm font-medium hover:underline">{ brand_name || '—' }</span>
+        <span className="text-sm font-medium hover:underline max-md:whitespace-nowrap">{ brand_name || '—' }</span>
       </button>
       <BrandDetailsSheet
         brandId={ brand_id }
@@ -168,7 +168,7 @@ export const getColumns = (
         <THead title={ t( 'columns.issued' ) } column={ column } />
       ),
       cell: ( { row } ) => (
-        <div className="text-sm">
+        <div className="text-sm max-md:whitespace-nowrap">
           { row.original.issued_date ? useFormatDate( row.original.issued_date ) : '—' }
         </div>
       ),

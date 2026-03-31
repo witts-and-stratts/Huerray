@@ -666,9 +666,9 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
             className="px-6 flex-1 flex flex-col min-h-0 overflow-hidden"
           >
             <AnimTabsList variant="default" className="w-full">
-              <TabsTab value="details" className="text-sm font-normal">{ t( 'details' ) }</TabsTab>
-              { campaign && <TabsTab value="campaign" className="text-sm font-normal">{ campaignT( 'title' ) }</TabsTab> }
-              <TabsTab value="submissions" className="text-sm font-normal">
+              <TabsTab value="details" className="text-xs font-normal">{ t( 'details' ) }</TabsTab>
+              { campaign && <TabsTab value="campaign" className="text-xs font-normal">{ campaignT( 'title' ) }</TabsTab> }
+              <TabsTab value="submissions" className="text-xs font-normal">
                 <RoleGuard allowedRoles={ [ 'creator' ] }>{ campaignActionsT( 'submissions' ) }</RoleGuard>
                 <RoleGuard excludedRoles={ [ 'creator' ] }>{ campaignActionsT( 'submissions' ) }</RoleGuard>
               </TabsTab>

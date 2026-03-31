@@ -2,14 +2,17 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { Check, ChevronDown } from 'lucide-react';
+import { Check, ChevronDown, Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import { ActionMenu, MenuAction } from '@/components/dashboard-ui/action-menu';
 import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
+import { CreateNotificationSheet } from '@/components/notifications/create-notification-sheet';
 import type { ModelsNotificationResponse } from '@/lib/api/generated/models';
+import { useAuth } from '@/lib/auth/auth-context';
 import { useDeleteNotification, useMarkAllNotificationsAsRead, useNotifications } from '@/lib/api/hooks/notifications';
+import { RoleGuard } from '../auth/role-guard';
 
 interface NotificationActionsData {
   notifications: ModelsNotificationResponse[];
@@ -18,6 +21,8 @@ interface NotificationActionsData {
 export function NotificationsHeaderActions() {
   const t = useTranslations( 'dashboard.notifications' );
   const [ isDeleteAllOpen, setIsDeleteAllOpen ] = React.useState( false );
+  const [ isCreateOpen, setIsCreateOpen ] = React.useState( false );
+  const { user } = useAuth();
   const { data: response } = useNotifications( 1, 200, false );
   const markAllAsRead = useMarkAllNotificationsAsRead();
   const deleteNotification = useDeleteNotification();
@@ -55,13 +60,26 @@ export function NotificationsHeaderActions() {
     },
   ];
 
-  if ( unreadCount === 0 && notifications.length === 0 ) {
+  const isAdmin = user?.role === 'admin';
+
+  if ( !isAdmin && unreadCount === 0 && notifications.length === 0 ) {
     return null;
   }
 
   return (
     <>
+      <RoleGuard allowedRoles={ [ 'admin' ] }>
+        <Button
+          variant='outline'
+          size='icon'
+          onClick={ () => setIsCreateOpen( true ) }
+          className={ 'rounded-full border-dashed' }
+        >
+          <Plus className='size-4' strokeWidth={ 1 } />
+        </Button>
+      </RoleGuard>
       <ButtonGroup className='items-center'>
+
         <Button
           variant='outline'
           size='default'
@@ -98,6 +116,11 @@ export function NotificationsHeaderActions() {
         } }
         isLoading={ deleteNotification.isPending }
         loadingText={ t( 'confirm.deleting' ) }
+      />
+
+      <CreateNotificationSheet
+        open={ isCreateOpen }
+        onOpenChange={ setIsCreateOpen }
       />
     </>
   );

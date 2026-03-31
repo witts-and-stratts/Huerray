@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**brand** | [**ModelsGigInvitationBrandResponse**](ModelsGigInvitationBrandResponse.md) |  | [optional] [default to undefined]
 **brand_id** | **string** |  | [optional] [default to undefined]
 **creator** | [**ModelsCreatorResponse**](ModelsCreatorResponse.md) |  | [optional] [default to undefined]
 **creator_id** | **string** |  | [optional] [default to undefined]
@@ -23,6 +24,7 @@ Name | Type | Description | Notes
 import { ModelsGigInvitationResponse } from 'huerray-api';
 
 const instance: ModelsGigInvitationResponse = {
+    brand,
     brand_id,
     creator,
     creator_id,

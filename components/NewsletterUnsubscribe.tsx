@@ -14,7 +14,7 @@ type State = 'loading' | 'success' | 'error';
 
 const newsletterApi = new NewsletterApi(undefined, undefined, apiClient);
 
-export function NewsletterUnsubscribe({ token }: { token: string }) {
+export function NewsletterUnsubscribe({ email }: { email: string }) {
   const t = useTranslations('footer.newsletter');
   const [state, setState] = useState<State>('loading');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -22,7 +22,13 @@ export function NewsletterUnsubscribe({ token }: { token: string }) {
   useEffect(() => {
     let cancelled = false;
 
-    newsletterApi.newsletterUnsubscribeGet({ token })
+    if (!email) {
+      setErrorMessage(t('error.description'));
+      setState('error');
+      return;
+    }
+
+    newsletterApi.newsletterUnsubscribeGet({ email })
       .then(() => {
         if (cancelled) return;
         setState('success');
@@ -36,7 +42,7 @@ export function NewsletterUnsubscribe({ token }: { token: string }) {
       });
 
     return () => { cancelled = true; };
-  }, [token]);
+  }, [email, t]);
 
   return (
     <div className="flex flex-col gap-6 w-full max-w-[500px]">
@@ -88,6 +94,7 @@ export function NewsletterUnsubscribe({ token }: { token: string }) {
             <Button
               className="w-full"
               size="lg"
+              nativeButton={false}
               render={<Link href="/">{t('backHome')}</Link>}
             />
           </CardContent>

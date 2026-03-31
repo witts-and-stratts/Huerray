@@ -10,6 +10,7 @@ All URIs are relative to */api/v1*
 |[**creatorsBankDetailsPut**](#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details|
 |[**creatorsIdBankDetailsGet**](#creatorsidbankdetailsget) | **GET** /creators/{id}/bank-details | Get creator bank details by creator ID (Admin only)|
 |[**creatorsIdGet**](#creatorsidget) | **GET** /creators/{id} | Get creator by ID|
+|[**creatorsIdProfilePut**](#creatorsidprofileput) | **PUT** /creators/{id}/profile | Admin update creator profile|
 |[**creatorsIdProfileStatusPut**](#creatorsidprofilestatusput) | **PUT** /creators/{id}/profile-status | Update creator profile status|
 |[**creatorsMatchingGigsGet**](#creatorsmatchinggigsget) | **GET** /creators/matching-gigs | Get matching gigs|
 |[**creatorsPaymentItemsSearchGet**](#creatorspaymentitemssearchget) | **GET** /creators/payment-items/search | Search creator\&#39;s payment items|
@@ -321,6 +322,64 @@ No authorization required
 |**200** | Creator profile retrieved successfully |  -  |
 |**400** | Bad request |  -  |
 |**404** | Creator not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **creatorsIdProfilePut**
+> ModelsStandardCreatorResponse creatorsIdProfilePut(request)
+
+Admin updates creator profile fields without changing creator profile status
+
+### Example
+
+```typescript
+import {
+    CreatorApi,
+    Configuration,
+    ModelsAdminUpdateCreatorProfileRequest
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CreatorApi(configuration);
+
+let id: string; //Creator Profile ID (default to undefined)
+let request: ModelsAdminUpdateCreatorProfileRequest; //Creator profile update data
+
+const { status, data } = await apiInstance.creatorsIdProfilePut(
+    id,
+    request
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **request** | **ModelsAdminUpdateCreatorProfileRequest**| Creator profile update data | |
+| **id** | [**string**] | Creator Profile ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardCreatorResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Creator profile updated successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Creator profile not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

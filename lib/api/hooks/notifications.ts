@@ -15,37 +15,15 @@ import {
 } from '@tanstack/react-query';
 import { NotificationsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
-import type { ModelsNotificationResponse, ModelsStandardGenericResponse, ModelsStandardNotificationListResponse } from '../generated/models';
+import type {
+  ModelsCreateNotificationRequest,
+  ModelsStandardGenericResponse,
+  ModelsStandardNotificationListResponse,
+  ModelsStandardNotificationResponse
+} from '../generated/models';
 import type { ApiError } from './types';
 
-// Create notifications API instance
 const notificationsApi = new NotificationsApi(apiConfiguration, undefined, apiClient);
-
-export interface Notification {
-  id: string;
-  event_name: string;
-  event_type: string;
-  entity_id: string;
-  title: string;
-  message: string;
-  is_read: boolean;
-  priority: string; // 'normal' | 'high' | 'low' ?
-  action_url: string;
-  metadata: string;
-  created_at: string;
-}
-
-export interface NotificationsData {
-  notifications: Notification[];
-  total: number;
-  page: number;
-  per_page: number;
-  unread_count: number;
-}
-
-export interface NotificationsResponse {
-  data?: NotificationsData;
-}
 
 /**
  * Query key factory for notifications endpoints
@@ -133,6 +111,26 @@ export function useDeleteNotification(
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: notificationsKeys.lists() });
+    },
+    ...options,
+  });
+}
+
+/**
+ * Hook to create a notification
+ */
+export function useCreateNotification(
+  options?: UseMutationOptions<ModelsStandardNotificationResponse, ApiError, ModelsCreateNotificationRequest>
+): UseMutationResult<ModelsStandardNotificationResponse, ApiError, ModelsCreateNotificationRequest> {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (notification: ModelsCreateNotificationRequest) => {
+      const response = await notificationsApi.notificationsPost({ notification });
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: notificationsKeys.all });
     },
     ...options,
   });

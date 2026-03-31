@@ -98,13 +98,17 @@ export function LanguageSelector( { showLabel = true }: LanguageSelectorProps ) 
                     setOpen( false );
                     setTimeout( () => {
                       startTransition( () => {
-                        // Remove the current locale from pathname if it exists
                         const pathnameWithoutLocale =
-                          pathname.replace( `/${ locale }`, '' ) || '/';
+                          pathname.startsWith( `/${ locale }/` )
+                            ? pathname.slice( locale.length + 1 )
+                            : pathname === `/${ locale }`
+                              ? '/'
+                              : pathname;
                         const search = searchParams.toString();
                         const query = search ? `?${ search }` : '';
+                        const hash = window.location.hash;
                         // Navigate to the new locale
-                        router.push( `/${ currentValue }${ pathnameWithoutLocale }${ query }` );
+                        router.push( `/${ currentValue }${ pathnameWithoutLocale }${ query }${ hash }` );
                       } );
                     }, 50 );
                   } }

@@ -40,37 +40,35 @@ export function RoleSelection( { roles, onRoleSelect, className, ...props }: Rol
 
   return (
     <div className={ className } { ...props }>
-      {/* Logo */ }
-      <Link href="/" title="Huerray" className="flex justify-center">
+      <Link href="/" title="Huerray" className="signup-form__role-logo-link">
         <Image
           src="/images/huerray-symbol.svg"
           alt="Huerray"
           width={ 60 }
           height={ 60 }
-          className="dark:invert"
+          className="signup-form__logo"
         />
       </Link>
 
-      <div className="text-center mb-4">
-        <h1 className="text-2xl font-medium tracking-tight mb-2 font-primary text-primary">
+      <div className="signup-form__role-heading">
+        <h1 className="signup-form__role-title">
           { t( 'roleSelection.title' ) }
         </h1>
       </div>
 
-      {/* Role Selection Cards */ }
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div className="signup-form__role-grid">
         { roles.filter( r => r.value !== 'admin' ).map( ( role ) => (
           <Card
             key={ role.value }
-            className="cursor-pointer transition-all hover:border-primary hover:shadow-md rounded-4xl"
+            className="signup-form__role-card"
             onClick={ () => onRoleSelect( role.value ) }
           >
-            <CardHeader className="text-center">
-              <CardTitle className="text-xl font-primary">{ t( `roleSelection.${ role.value }.title` ) }</CardTitle>
+            <CardHeader className="signup-form__role-card-header">
+              <CardTitle className="signup-form__role-card-title">{ t( `roleSelection.${ role.value }.title` ) }</CardTitle>
               <CardDescription>{ t( `roleSelection.${ role.value }.description` ) }</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="signup-form__role-button">
                 { t( 'roleSelection.button', { role: t( `roleSelection.${ role.value }.title` ) } ) }
               </Button>
             </CardContent>
@@ -78,20 +76,20 @@ export function RoleSelection( { roles, onRoleSelect, className, ...props }: Rol
         ) ) }
       </div>
 
-      <FieldDescription className="text-center">
+      <FieldDescription className="signup-form__description">
         { t( 'actions.haveAccount' ) }{ " " }
-        <Link href="/login" className="font-medium text-primary hover:underline">
+        <Link href="/login" className="signup-form__signin-link">
           { t( 'actions.signIn' ) }
         </Link>
       </FieldDescription>
 
-      <FieldDescription className="text-center text-xs">
+      <FieldDescription className="signup-form__terms">
         { t( 'terms.prefix' ) }{ " " }
-        <Link href="/terms-and-conditions" className="underline hover:text-foreground">
+        <Link href="/terms-and-conditions" className="signup-form__terms-link">
           { t( 'terms.tos' ) }
         </Link>{ " " }
         { t( 'terms.and' ) }{ " " }
-        <Link href="/privacy-policy" className="underline hover:text-foreground">
+        <Link href="/privacy-policy" className="signup-form__terms-link">
           { t( 'terms.privacy' ) }
         </Link>
         { t( 'terms.suffix' ) }
@@ -107,7 +105,7 @@ interface FieldsProps {
 export function CommonFields( { form }: FieldsProps ) {
   const t = useTranslations( 'auth.signup.fields' );
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-2">
+    <div className="signup-form__name-grid">
       <form.Field
         name="firstName"
         children={ ( field: any ) => (
@@ -189,7 +187,7 @@ export function BrandFields( { form }: FieldsProps ) {
   const t = useTranslations( 'auth.signup.fields' );
   return (
     <>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="signup-form__field-row">
         <form.Field
           name="companyName"
           children={ ( field: any ) => (
@@ -226,7 +224,7 @@ export function BrandFields( { form }: FieldsProps ) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="signup-form__field-row">
         <form.Field
           name="registrationNumber"
           children={ ( field: any ) => (
@@ -262,7 +260,7 @@ export function BrandFields( { form }: FieldsProps ) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="signup-form__field-row">
         <form.Field
           name="category"
           children={ ( field: any ) => (
@@ -322,7 +320,7 @@ export function BrandFields( { form }: FieldsProps ) {
         ) }
       />
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="signup-form__field-row">
         <form.Field
           name="country"
           children={ ( field: any ) => (
@@ -357,7 +355,7 @@ export function BrandFields( { form }: FieldsProps ) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="signup-form__field-row">
         <form.Field
           name="city"
           children={ ( field: any ) => (
@@ -393,7 +391,7 @@ export function BrandFields( { form }: FieldsProps ) {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="signup-form__field-row">
         <form.Field
           name="street"
           children={ ( field: any ) => (
@@ -504,14 +502,14 @@ export function FormActions( { form, isLoading, selectedRoleInfo }: FormActionsP
       <form.Subscribe
         selector={ ( state: any ) => [ state.canSubmit, state.isSubmitting ] }
         children={ ( [ canSubmit, isSubmitting ]: [ boolean, boolean ] ) => (
-          <Button type="submit" className="w-full" disabled={ !canSubmit || isSubmitting || isLoading }>
+          <Button type="submit" className="signup-form__submit" disabled={ !canSubmit || isSubmitting || isLoading }>
             { isSubmitting || isLoading ? t( 'submitting' ) : t( 'submit' ) }
           </Button>
         ) }
       />
-      <FieldDescription className="text-center">
+      <FieldDescription className="signup-form__description">
         { t( 'haveAccount' ) }{ " " }
-        <Link href="/login" className="font-medium text-primary hover:underline">
+        <Link href="/login" className="signup-form__signin-link">
           { t( 'signIn' ) }
         </Link>
       </FieldDescription>

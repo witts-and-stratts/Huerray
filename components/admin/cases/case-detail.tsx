@@ -12,17 +12,19 @@ import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { Separator } from '@/components/dashboard-ui/separator';
 import { cn } from '@/lib/dashboard-utils';
 import { timeAgo } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { ArrowLeft, ChevronDown, HeadphonesIcon, Send } from 'lucide-react';
 import { toast } from 'sonner';
 
 // ─── Empty state ──────────────────────────────────────────────────────────────
 
 function CaseDetailEmpty() {
+  const t = useTranslations( 'dashboard.admin.casesPage' );
+
   return (
     <div className="flex flex-col items-center justify-center h-full gap-3 text-muted-foreground select-none w-full">
       <HeadphonesIcon className="size-12 opacity-20" strokeWidth={ 1 } />
-      <p className="text-sm">Select a case to view details</p>
+      <p className="text-sm">{ t( 'details.selectPrompt' ) }</p>
     </div>
   );
 }
@@ -66,7 +68,7 @@ function CaseDetailHeader( { case_, onBack }: CaseDetailHeaderProps ) {
           ) }
         </div>
         <h2 className="text-base font-medium text-foreground leading-snug truncate">
-          { case_.title || 'Untitled Case' }
+          { case_.title }
         </h2>
         <div className="flex items-center gap-2 mt-1.5 flex-wrap">
           <CaseStatusBadge status={ case_.status || 'open' } />
@@ -98,6 +100,7 @@ function CaseDetailHeader( { case_, onBack }: CaseDetailHeaderProps ) {
 
 function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
   const t = useTranslations( 'dashboard.admin.casesPage' );
+  const locale = useLocale();
   const caseId = case_.id || '';
   const { data: caseDetails } = useCase( caseId );
   const { data: messagesData } = useCaseMessages( caseId );
@@ -106,9 +109,10 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
   const messagesEndRef = React.useRef<HTMLDivElement>( null );
 
   const profile = caseDetails?.data || case_;
-  const messages = ( messagesData as any )?.data || [];
+  const messages = ( messagesData )?.data || [];
 
   React.useEffect( () => {
+    console.log( "Messages", messages );
     messagesEndRef.current?.scrollIntoView( { behavior: 'smooth' } );
   }, [ messages ] );
 
@@ -175,7 +179,7 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
               <div>
                 <p className="text-xs text-muted-foreground mb-0.5">{ t( 'details.created' ) }</p>
                 <p className="font-medium">
-                  { new Date( profile.created_at ).toLocaleDateString( 'en-US', { year: 'numeric', month: 'short', day: 'numeric' } ) }
+                  { new Date( profile.created_at ).toLocaleDateString( locale, { year: 'numeric', month: 'short', day: 'numeric' } ) }
                 </p>
               </div>
             ) }
@@ -193,17 +197,17 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
               <p className="text-sm text-muted-foreground text-center py-6">{ t( 'messages.empty' ) }</p>
             ) : (
               <div className="flex flex-col gap-4">
-                { messages.map( ( msg: any ) => {
+                { messages.map( ( msg ) => {
                   const name = msg.sender
                     ? `${ msg.sender.first_name || '' } ${ msg.sender.last_name || '' }`.trim() || msg.sender.email || t( 'details.unknown' )
                     : t( 'details.unknown' );
                   return (
                     <MessageBubble
                       key={ msg.id }
-                      content={ msg.content || '' }
+                      content={ msg.message || '' }
                       senderName={ name }
                       sentAt={ msg.created_at
-                        ? new Date( msg.created_at ).toLocaleString( 'en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' } )
+                        ? new Date( msg.created_at ).toLocaleString( locale, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' } )
                         : '' }
                     />
                   );
@@ -247,12 +251,25 @@ interface CaseDetailProps {
 }
 
 export function CaseDetail( { case_, onBack }: CaseDetailProps ) {
+  const t = useTranslations( 'dashboard.admin.casesPage' );
+
   if ( !case_ ) return <CaseDetailEmpty />;
 
   return (
     <div className="flex flex-col h-full flex-1">
-      <CaseDetailHeader case_={ case_ } onBack={ onBack } />
-      <CaseDetailBody case_={ case_ } />
+      <CaseDetailHeader
+        case_={ {
+          ...case_,
+          title: case_.title || t( 'details.untitled' ),
+        } }
+        onBack={ onBack }
+      />
+      <CaseDetailBody
+        case_={ {
+          ...case_,
+          title: case_.title || t( 'details.untitled' ),
+        } }
+      />
     </div>
   );
 }

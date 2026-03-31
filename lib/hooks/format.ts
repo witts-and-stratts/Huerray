@@ -1,16 +1,10 @@
-import { useLocale } from "next-intl";
 import { formatDate } from "../utils/format";
+import { formatCurrency } from "../utils/format";
 
 export const useFormatCurrency = ( amount: number, currency: string = 'USD' ) => {
-  const locale = useLocale();
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency,
-  }).format(amount);
+  return formatCurrency( amount, currency );
 };
 
 export const useFormatDate = ( dateString: string ) => {
-  const locale = useLocale();
-  
-  return formatDate( dateString, locale );
+  return formatDate( dateString );
 };

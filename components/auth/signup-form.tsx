@@ -1,6 +1,4 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { roles } from "@/components/auth/roles";
 import { createBrandSchema, createCreatorSchema } from "@/components/auth/schemas";
 import {
@@ -35,8 +33,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
-
 import { toast } from "sonner";
+import '@/app/styles/signup.css';
 
 interface SignupFormProps extends React.ComponentProps<"div"> {
   initialRole?: UserRole;
@@ -106,7 +104,6 @@ export function SignupForm( {
       setIsLoading( true );
 
       try {
-        // Map role to API user type
         const userType = selectedRole === 'brand'
           ? ModelsRegisterRequestUserTypeEnum.BrandUser
           : ModelsRegisterRequestUserTypeEnum.Creator;
@@ -171,7 +168,6 @@ export function SignupForm( {
           } );
         }
       } catch ( err: any ) {
-        console.error( "Registration error:", err );
         const errorMessage = err.response?.data?.message || err.message || t( 'toast.errorDefault' );
         const fullError = `${ errorMessage }; ${ err.response?.data?.error?.message || '' }`;
         setError( fullError );
@@ -192,58 +188,58 @@ export function SignupForm( {
       <RoleSelection
         roles={ roles }
         onRoleSelect={ updateRole }
-        className={ cn( "flex flex-col gap-6 w-full max-w-3xl md:px-4", className ) }
+        className={ cn( "signup-form signup-form--role-selection", className ) }
         { ...props }
       />
     );
   }
 
   return (
-    <div className={ cn( "flex flex-col gap-6 w-full max-w-3xl md:px-4 my-10", className ) } { ...props }>
-      <Card className="rounded-4xl relative overflow-hidden bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-        <CardHeader className="text-center pb-2 relative">
+    <div className={ cn( "signup-form", className ) } { ...props }>
+      <Card className="signup-form__card">
+        <CardHeader className="signup-form__header">
           { !initialRole && (
             <Button
               type="button"
               variant="outline"
               size="icon-sm"
               onClick={ handleBack }
-              className="absolute top-4 left-4 z-10"
+              className="signup-form__back-button"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="signup-form__back-icon" />
             </Button>
           ) }
 
-          <Link className="flex justify-center py-4" title="Huerray" href="/">
+          <Link className="signup-form__logo-link" title="Huerray" href="/">
             <Image
               src="/images/huerray-symbol.svg"
               alt="Huerray"
               width={ 60 }
               height={ 60 }
-              className="dark:invert"
+              className="signup-form__logo"
             />
           </Link>
-          <CardTitle className="text-2xl font-primary text-primary">{ t( `titles.${ selectedRole }` ) }</CardTitle>
+          <CardTitle className="signup-form__title">{ t( `titles.${ selectedRole }` ) }</CardTitle>
           <CardDescription>{ t( `descriptions.${ selectedRole }` ) }</CardDescription>
         </CardHeader>
-        <CardContent className="px-6 md:px-10 py-6">
+        <CardContent className="signup-form__content">
           <form onSubmit={ ( e ) => {
             e.preventDefault();
             e.stopPropagation();
             form.handleSubmit();
-          } } className="space-y-6">
+          } } className="signup-form__form">
 
             <CommonFields form={ form } />
 
             { selectedRole === 'brand' && <AdminFields form={ form } /> }
 
-            <div className="my-6 border-t" />
+            <div className="signup-form__divider" />
 
             <ContactAuthFields form={ form } />
 
             <input type="hidden" name="role" value={ selectedRole } />
 
-            <div className="mt-8">
+            <div className="signup-form__actions">
               <FormActions form={ form } isLoading={ isLoading } selectedRoleInfo={ { title: t( `titles.${ selectedRole }` ) } } />
             </div>
 
@@ -251,13 +247,13 @@ export function SignupForm( {
         </CardContent>
       </Card>
 
-      <FieldDescription className="text-center text-xs">
+      <FieldDescription className="signup-form__terms">
         { t( 'terms.prefix' ) }{ " " }
-        <Link href="/terms-and-conditions" className="underline hover:text-foreground">
+        <Link href="/terms-and-conditions" className="signup-form__terms-link">
           { t( 'terms.tos' ) }
         </Link>{ " " }
         { t( 'terms.and' ) }{ " " }
-        <Link href="/privacy-policy" className="underline hover:text-foreground">
+        <Link href="/privacy-policy" className="signup-form__terms-link">
           { t( 'terms.privacy' ) }
         </Link>
         { t( 'terms.suffix' ) }

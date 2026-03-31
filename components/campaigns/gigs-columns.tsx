@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef, Row } from '@tanstack/react-table';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, VideoIcon } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import * as React from 'react';
 
@@ -74,15 +74,6 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
             </p>
           ) }
         </div>
-        {/* <div className='mt-4 flex flex-col gap-2'>
-          { ( posting_start_date || posting_end_date ) && (
-            <span className='text-xs text-muted-foreground/60'>
-              { posting_start_date && <>{ formatDate( posting_start_date ) }</> }
-              { posting_start_date && posting_end_date && <span className='mx-1'>→</span> }
-              { posting_end_date && <>{ formatDate( posting_end_date ) }</> }
-            </span>
-          ) }
-        </div> */}
         <TaskCell row={ row } />
         <GigStatusBadge status={ gig_status } className='w-fit' />
       </div>
@@ -209,17 +200,17 @@ const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
       { number_of_videos != null && (
         <>
           <div className="flex items-center gap-1.5">
-            <HugeiconsIcon icon={ Video01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
+            <VideoIcon className="size-4 text-muted-foreground shrink-0" strokeWidth={ 1 } />
             <span className="text-sm text-foreground">
-              { t( 'recordVideos', { count: number_of_videos } ) }
+              { t( 'recordVideosSimple', { count: number_of_videos } ) }
             </span>
           </div>
           <Separator orientation="vertical" /></>
       ) }
       { video_duration_in_seconds != null && (
         <div className="flex items-center gap-1.5">
-          <HugeiconsIcon icon={ Clock01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1.5 } />
-          <span className="text-sm text-foreground">{ t( 'durationSeconds', { count: video_duration_in_seconds } ) }</span>
+          <HugeiconsIcon icon={ Clock01Icon } className="size-3.5 text-muted-foreground shrink-0" strokeWidth={ 1 } />
+          <span className="text-sm text-foreground">{ t( 'durationSecondsSimple', { count: video_duration_in_seconds } ) }</span>
         </div>
       ) }
     </div>
@@ -243,7 +234,7 @@ const DeadlineCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   if ( !posting_end_date ) return <span className="text-muted-foreground text-xs">—</span>;
   return (
     <div className="flex items-center gap-1.5 text-muted-foreground">
-      <span className="">{ useFormatDate( posting_end_date ) }</span>
+      <span className="max-md:whitespace-nowrap">{ useFormatDate( posting_end_date ) }</span>
     </div>
   );
 };
