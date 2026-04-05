@@ -1,0 +1,39 @@
+{
+  "submissions": {
+    "title": "Soumissions récentes",
+    "description": "Vos dernières vidéos livrées",
+    "noSubmissions": "Aucune soumission pour l'instant",
+    "noSubmissionsDesc": "Lorsque vous créez des soumissions pour ce concert, elles apparaissent ici.",
+    "createTitle": "Créer une soumission",
+    "createDesc": "Téléchargez votre vidéo et ajoutez des détails pour ce concert.",
+    "details": "Détails de la soumission",
+    "form": {
+      "title": "Titre",
+      "titlePlaceholder": "Donnez un titre à votre demande",
+      "notes": "Notes",
+      "notesPlaceholder": "Ajoutez des notes sur votre soumission...",
+      "submit": "Soumettre une vidéo",
+      "submitting": "Soumettre..."
+    },
+    "validation": {
+      "titleRequired": "Le titre est obligatoire",
+      "videoRequired": "Un fichier vidéo est nécessaire",
+      "maxSize": "La taille maximale des fichiers est de 500 Mo",
+      "invalidFormat": "Seuls les formats .mp4, .mov et .webm sont pris en charge."
+    },
+    "dropzoneTitle": "Glissez-déposez votre vidéo ici",
+    "dropzoneDesc": "ou cliquez sur pour naviguer à partir de votre ordinateur",
+    "dropzoneSpecs": "Prend en charge les formats MP4, MOV, WEBM (Max 500MB)",
+    "videoThumbnailError": "Échec de la génération de la vignette vidéo",
+    "uploadFailedLog": "Le téléchargement a échoué :",
+    "cancel": "Annuler",
+    "success": "Soumission créée avec succès",
+    "error": "Échec de la création de la soumission",
+    "missingGigId": "L'ID de la carte n'est pas disponible",
+    "uploading": "Veuillez attendre que la vidéo soit téléchargée",
+    "toasts": {
+      "success": "Soumission créée avec succès",
+      "error": "Échec de la création de la soumission"
+    }
+  }
+}

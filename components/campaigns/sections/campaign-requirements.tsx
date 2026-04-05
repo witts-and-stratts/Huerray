@@ -2,7 +2,7 @@
 import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { memo } from 'react';
-import { CampaignFormApi, createCampaignSchema } from '../schema';
+import { CampaignFormApi, createTranslatedCampaignSchema } from '../schema';
 import { useTranslations } from 'next-intl';
 
 interface CampaignRequirementsProps {
@@ -13,6 +13,7 @@ const videoDurationValues = [ '15', '30', '60', '90' ] as const;
 
 export const CampaignCreatorRequirements = memo( function CampaignCreatorRequirements( { form }: CampaignRequirementsProps ) {
   const t = useTranslations( 'dashboard.brand.newCampaignPage' );
+  const campaignSchema = createTranslatedCampaignSchema( t );
   const videoDurationOptions = videoDurationValues.map( ( value ) => ( {
     label: t( `videoDurationOptions.${ value }` ),
     value,
@@ -21,7 +22,7 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
   return (
     <FieldGroup className='gap-2'>
       <div className='flex gap-2'>
-        <form.Field name="number_of_creators_wanted" validators={ { onChange: createCampaignSchema.shape.number_of_creators_wanted, onBlur: createCampaignSchema.shape.number_of_creators_wanted } }>
+        <form.Field name="number_of_creators_wanted" validators={ { onChange: campaignSchema.shape.number_of_creators_wanted, onBlur: campaignSchema.shape.number_of_creators_wanted } }>
           { ( field ) => (
             <SuperField
               label={ t( 'creatorsNeeded' ) }
@@ -33,10 +34,11 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
               type="number"
               min={ 1 }
               required
+              className='justify-between'
             />
           ) }
         </form.Field>
-        <form.Field name="number_of_videos_wanted" validators={ { onChange: createCampaignSchema.shape.number_of_videos_wanted, onBlur: createCampaignSchema.shape.number_of_videos_wanted } }>
+        <form.Field name="number_of_videos_wanted" validators={ { onChange: campaignSchema.shape.number_of_videos_wanted, onBlur: campaignSchema.shape.number_of_videos_wanted } }>
           { ( field ) => (
             <SuperField
               label={ t( 'videosPerCreator' ) }
@@ -48,12 +50,13 @@ export const CampaignCreatorRequirements = memo( function CampaignCreatorRequire
               type="number"
               min={ 1 }
               required
+              className='justify-between'
             />
           ) }
         </form.Field>
       </div>
       <FieldGroup className='gap-2 mt-2'>
-        <form.Field name="video_duration_in_seconds" validators={ { onChange: createCampaignSchema.shape.video_duration_in_seconds, onBlur: createCampaignSchema.shape.video_duration_in_seconds } }>
+        <form.Field name="video_duration_in_seconds" validators={ { onChange: campaignSchema.shape.video_duration_in_seconds, onBlur: campaignSchema.shape.video_duration_in_seconds } }>
           { ( field ) => (
             <SuperField
               label={ t( 'videoDuration' ) }

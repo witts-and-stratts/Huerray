@@ -46,18 +46,18 @@
   },
   "eventTypes": {
     "Creation": "Erstellung",
-    "Update": "Aktualisierung",
-    "Approval": "Genehmigung",
+    "Update": "Update",
+    "Approval": "Zulassung",
     "Rejection": "Ablehnung",
     "Deletion": "Löschung",
     "Deactivation": "Deaktivierung",
     "Submission": "Einreichung",
     "Invitation": "Einladung",
-    "Application": "Bewerbung",
+    "Application": "Anmeldung",
     "Acceptance": "Akzeptanz",
     "Decision": "Entscheidung",
-    "Return": "Rückgabe",
-    "Registration": "Registrierung",
+    "Return": "Rückkehr",
+    "Registration": "Anmeldung",
     "Generic": "Allgemein"
   },
   "empty": {

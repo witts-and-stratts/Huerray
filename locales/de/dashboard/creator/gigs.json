@@ -1,0 +1,19 @@
+{
+  "activeGigs": {
+    "title": "Aktive Auftritte",
+    "description": "Laufende Verpflichtungen und nächste Fristen"
+  },
+  "availableGigs": {
+    "title": "Verfügbare Gigs",
+    "description": "Erkunden Sie neue Möglichkeiten, die zu Ihrem Profil passen, und bewerben Sie sich."
+  },
+  "myGigs": {
+    "title": "Auftritte",
+    "description": "Alle Auftritte, an denen Sie teilgenommen haben.",
+    "tabs": {
+      "all": "Alle Auftritte",
+      "available": "Verfügbare Gigs",
+      "active": "Aktive Auftritte"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "activeGigs": {
+    "title": "Gigs actifs",
+    "description": "Engagements actuels et prochaines échéances"
+  },
+  "availableGigs": {
+    "title": "Soirées disponibles",
+    "description": "Explorez et postulez à de nouvelles opportunités correspondant à votre profil."
+  },
+  "myGigs": {
+    "title": "Gigs",
+    "description": "Tous les concerts auxquels vous avez participé.",
+    "tabs": {
+      "all": "Tous les concerts",
+      "available": "Soirées disponibles",
+      "active": "Gigs actifs"
+    }
+  }
+}

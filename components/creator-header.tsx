@@ -40,17 +40,17 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 export function CreatorHeader() {
   const router = useRouter();
   const [ open, setOpen ] = React.useState( false );
+  const handleShortcut = React.useEffectEvent( ( e: KeyboardEvent ) => {
+    if ( e.key === "k" && ( e.metaKey || e.ctrlKey ) ) {
+      e.preventDefault();
+      setOpen( ( open ) => !open );
+    }
+  } );
 
   // Toggle command dialog with Cmd+K
   React.useEffect( () => {
-    const down = ( e: KeyboardEvent ) => {
-      if ( e.key === "k" && ( e.metaKey || e.ctrlKey ) ) {
-        e.preventDefault();
-        setOpen( ( open ) => !open );
-      }
-    };
-    document.addEventListener( "keydown", down );
-    return () => document.removeEventListener( "keydown", down );
+    document.addEventListener( "keydown", handleShortcut );
+    return () => document.removeEventListener( "keydown", handleShortcut );
   }, [] );
 
   return (

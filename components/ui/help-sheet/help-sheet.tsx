@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useEffectEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAuth } from '@/lib/auth/auth-context';
 import { HugeiconsIcon } from '@hugeicons/react';
@@ -215,11 +215,13 @@ export function HelpSheet() {
 
   const [ open, setOpen ] = useState( false );
   const [ view, setView ] = useState<View>( 'main' );
+  const openHelpSheet = useEffectEvent( () => {
+    setOpen( true );
+  } );
 
   useEffect( () => {
-    const handler = () => setOpen( true );
-    document.addEventListener( 'open-help-sheet', handler );
-    return () => document.removeEventListener( 'open-help-sheet', handler );
+    document.addEventListener( 'open-help-sheet', openHelpSheet );
+    return () => document.removeEventListener( 'open-help-sheet', openHelpSheet );
   }, [] );
 
   const handleOpenChange = ( next: boolean ) => {

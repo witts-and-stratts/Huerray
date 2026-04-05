@@ -1,0 +1,83 @@
+{
+  "welcome": "Bienvenue, {name} !",
+  "overview": "Voici un aperçu de votre concert",
+  "dashboard": {
+    "title": "Tableau de bord",
+    "description": "Suivez les invitations, les concerts, les soumissions et les revenus prévus.",
+    "browseGigs": "Parcourir les offres d'emploi",
+    "viewMyGigs": "Voir mes concerts",
+    "creatorFallback": "Créateur"
+  },
+  "common": {
+    "details": "Détails",
+    "viewAllMyGigs": "Voir tous mes concerts",
+    "viewAllEarnings": "Voir tous les revenus",
+    "viewAllInvitations": "Voir toutes les invitations",
+    "viewAllSubmissions": "Voir toutes les soumissions",
+    "untitledGig": "Concert sans titre",
+    "unknownBrand": "Marque inconnue",
+    "reward": "Récompense",
+    "gigCost": "Coût de l'abonnement",
+    "deadline": "Date limite",
+    "endsOn": "Fin {date}",
+    "noActiveGigs": "Aucun contrat actif pour l'instant.",
+    "noInvitations": "Il n'y a pas encore d'invitations.",
+    "noEarnings": "Pas encore de gains. Complétez les missions pour commencer à gagner de l'argent !",
+    "na": "N/A",
+    "invitedCreator": "Créateur invité",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Échec du chargement de {name}",
+    "somethingWentWrong": "Quelque chose n'a pas fonctionné",
+    "product": "Produit",
+    "srGigDetails": "Détails pour gig : {title}",
+    "applicationPending": "Demande en cours",
+    "applying": "Postuler...",
+    "applyForGig": "Appliquer pour Gig",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Détails",
+      "campaign": "Campagne",
+      "mySubmissions": "Mes soumissions",
+      "submissions": "Soumissions",
+      "overview": "Vue d'ensemble"
+    },
+    "toasts": {
+      "appliedSuccess": "La demande a été envoyée avec succès !",
+      "appliedError": "L'envoi de la demande a échoué. Veuillez réessayer."
+    }
+  },
+  "gigDetailsFor": "Détails pour gig : {title}",
+  "campaign": {
+    "aboutTitle": "À propos de cette campagne",
+    "dosDonts": "À faire et à ne pas faire",
+    "dos": "À faire",
+    "donts": "À ne pas faire",
+    "direction": "Direction",
+    "toneOfVoice": "Ton de la voix",
+    "keywords": "Mots clés",
+    "noKeywords": "Aucun mot-clé n'a été défini.",
+    "campaignBriefTitle": "Dossier de campagne",
+    "campaignBriefDesc": "Détails essentiels et exigences en matière de messages",
+    "description": "Description",
+    "category": "Catégorie",
+    "assets": "Actifs",
+    "images": "Images",
+    "documents": "Documents",
+    "videos": "Vidéos",
+    "task": "Tâche",
+    "recordVideos": "Enregistrement {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Durée : {count} secondes"
+  },
+  "requirements": {
+    "title": "Exigences du créateur",
+    "gender": "Genre",
+    "male": "Homme",
+    "female": "Femme",
+    "ageRange": "Tranche d'âge",
+    "any": "Tous",
+    "compensation": "Compensation",
+    "guidelines": "Lignes directrices sur le contenu",
+    "ambience": "Ambiance",
+    "requirements": "Exigences"
+  }
+}

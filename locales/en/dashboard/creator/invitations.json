@@ -1,0 +1,45 @@
+{
+  "invitations": {
+    "title": "Invitations",
+    "description": "Manage your gig invitations from brands.",
+    "latestFromBrands": "Latest invitations from brands",
+    "noInvitationsYet": "No invitations yet",
+    "noInvitationsDesc": "When brands invite you to their gigs, they will appear here.",
+    "loadFailed": "Failed to load invitations",
+    "somethingWentWrong": "Something went wrong",
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "declined": "Declined",
+      "unknown": "Unknown"
+    },
+    "actions": {
+      "view": "View Invitation",
+      "accept": "Accept Invitation",
+      "acceptShort": "Accept",
+      "decline": "Decline Invitation",
+      "declineShort": "Decline",
+      "reject": "Reject Invitation",
+      "createSubmission": "Create Submission",
+      "openMenu": "Open menu",
+      "viewSubmissions": "View Submissions"
+    },
+    "dialogs": {
+      "acceptTitle": "Accept Invitation",
+      "acceptDesc": "Are you sure you want to accept this invitation? This will notify the brand and you can start working on the gig.",
+      "acceptCommentPlaceholder": "Add a comment for this approval",
+      "accepting": "Accepting...",
+      "declineTitle": "Decline Invitation",
+      "declineDesc": "Are you sure you want to decline this invitation? This action cannot be undone.",
+      "declineCommentPlaceholder": "Explain why you're declining",
+      "declining": "Declining...",
+      "rejectTitle": "Reject Invitation",
+      "rejectDesc": "Are you sure you want to reject this invitation? This action cannot be undone."
+    },
+    "toasts": {
+      "accepted": "Invitation accepted successfully",
+      "declined": "Invitation declined successfully",
+      "error": "Failed to update invitation status"
+    }
+  }
+}

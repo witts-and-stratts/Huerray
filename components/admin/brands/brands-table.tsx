@@ -13,9 +13,9 @@ import {
 } from '@tanstack/react-table';
 import * as React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
+import { AdminNetworkErrorState } from '@/components/admin/empty-states/admin-network-error-state';
 import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
-import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 import { getColumns } from './brands-columns';
 import { Brand } from './brands-data';
 import { BrandsView } from './brands-view';
@@ -136,7 +136,7 @@ export function BrandsTable( {
   return (
     <AnimatePresence>
       { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
-      { error && <TableErrorState entity="brands" message={ error.message } /> }
+      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
       { !isLoading && !error && (
         <motion.div
           initial={ { opacity: 0 } }

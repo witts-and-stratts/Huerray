@@ -1,0 +1,22 @@
+{
+  "completeProfilePage": {
+    "title": "Complete su perfil",
+    "description": "Permítanos prepararle para empezar a trabajar con marcas.",
+    "back": "Volver",
+    "nextStep": "Siguiente paso",
+    "creatingProfile": "Crear perfil...",
+    "completeProfile": "Perfil completo",
+    "successCreated": "¡Perfil creado con éxito!",
+    "errorCreateFailed": "No se ha podido crear el perfil",
+    "errorCreateFailedWithError": "Error al crear perfil: {error}",
+    "validationFixErrors": "Por favor, corrija los errores de validación",
+    "validationErrorWithError": "Error de validación: {error}",
+    "lifestyleAlt": "Estilo de vida en Huerray",
+    "brandAlt": "Huerray",
+    "tabs": {
+      "profile": "Perfil",
+      "social": "Redes sociales",
+      "bio": "Biografía e introducción"
+    }
+  }
+}

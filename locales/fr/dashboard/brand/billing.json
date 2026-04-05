@@ -1,0 +1,96 @@
+{
+  "invoicesPage": {
+    "title": "Factures",
+    "description": "Visualisez et téléchargez vos factures.",
+    "columns": {
+      "invoice": "Facture",
+      "brand": "Marque",
+      "campaign": "Campagne",
+      "issued": "Délivré",
+      "paid": "Payé ?",
+      "amount": "Montant",
+      "actions": "Actions"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Filtrer les factures...",
+      "status": "Statut",
+      "filterByDate": "Filtrer par date",
+      "issueDate": "Date d'émission",
+      "dueDate": "Date d'échéance",
+      "dateRange": "Plage de dates",
+      "selectDateRange": "Sélectionner une plage de dates",
+      "clearDates": "Effacer les dates"
+    },
+    "actions": {
+      "view": "Voir",
+      "downloadPdf": "Télécharger le PDF",
+      "downloadingPdf": "Télécharger le PDF...",
+      "downloadPdfError": "Échec du téléchargement du PDF de la facture",
+      "resendInvoice": "Renvoyer la facture",
+      "resendingInvoice": "Renvoi de la facture...",
+      "resendInvoiceSuccess": "La facture a été renvoyée avec succès",
+      "resendInvoiceError": "Échec du renvoi de la facture",
+      "cancelInvoice": "Annuler la facture",
+      "paymentGeneratedSuccess": "Paiement généré avec succès",
+      "paymentGeneratedError": "Le paiement n'a pas été généré",
+      "invoiceUpdatedSuccess": "Facture mise à jour avec succès",
+      "invoiceUpdatedError": "Échec de la mise à jour de la facture"
+    },
+    "details": {
+      "invoiceFallback": "Facture",
+      "invoiceDetailsFor": "Détails de la facture pour",
+      "overviewTab": "Vue d'ensemble",
+      "lineItemsTab": "Postes de travail",
+      "total": "Total",
+      "amountDue": "Montant dû",
+      "downloadInvoice": "Télécharger la facture",
+      "campaign": "Campagne",
+      "dates": "Dates",
+      "issued": "Délivré",
+      "due": "Due",
+      "paid": "Statut",
+      "created": "Créée",
+      "notes": "Notes",
+      "noLineItems": "Aucun poste",
+      "lineItems": "Postes ({count})"
+    },
+    "dialogs": {
+      "generatePayment": {
+        "title": "Générer un paiement",
+        "description": "Cette action marquera la facture comme payée et générera un enregistrement de paiement. Cette action ne peut pas être annulée.",
+        "confirmLabel": "Générer un paiement",
+        "loading": "Générer...",
+        "notes": "Notes"
+      },
+      "issueInvoice": {
+        "title": "Émission de la facture",
+        "description": "Marquer cette facture comme émise. La marque en sera informée.",
+        "confirmLabel": "Émission de la facture",
+        "loading": "Délivrer..."
+      },
+      "sendInvoice": {
+        "title": "Envoyer la facture",
+        "description": "Marquer cette facture comme envoyée à la marque.",
+        "confirmLabel": "Envoyer la facture",
+        "loading": "Envoi..."
+      },
+      "invoicePaid": {
+        "title": "Facture payée",
+        "description": "Marquer cette facture comme payée par la marque.",
+        "confirmLabel": "Marquer comme payé",
+        "loading": "Mise à jour..."
+      },
+      "cancelInvoice": {
+        "title": "Annuler la facture",
+        "description": "Êtes-vous sûr de vouloir annuler cette facture ? Cette action ne peut être annulée. Tapez le titre de la facture pour confirmer :",
+        "confirmInvoiceTitle": "Tapez le titre de la facture pour confirmer",
+        "confirmLabel": "Annuler la facture",
+        "loading": "Annulation..."
+      }
+    }
+  },
+  "paymentsPage": {
+    "title": "Paiements",
+    "description": "Consulter l'historique de vos paiements."
+  }
+}

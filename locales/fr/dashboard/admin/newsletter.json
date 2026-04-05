@@ -1,0 +1,42 @@
+{
+  "newsletterPage": {
+    "title": "Bulletin d'information",
+    "description": "Recherche et exportation des abonnés à la newsletter à partir de la zone d'administration.",
+    "notice": "Le backend actuel n'expose que la recherche, l'inscription et le désabonnement à la newsletter. Les actions d'édition et de suppression nécessiteront des points de terminaison d'administration dédiés avant de pouvoir être activées.",
+    "summary": "%%0% visible de {total} entrées, {selected} sélectionnées",
+    "empty": "Aucune inscription au bulletin d'information n'a été trouvée.",
+    "emptyDescription": "Les abonnements à la lettre d'information apparaîtront ici lorsque les contacts commenceront à s'inscrire.",
+    "error": {
+      "title": "Impossible de charger les inscriptions à la newsletter",
+      "description": "Il y a eu un problème de chargement des abonnements à la newsletter. Réessayez.",
+      "retry": "Réessayer"
+    },
+    "columns": {
+      "email": "Courriel",
+      "name": "Nom",
+      "status": "Statut",
+      "source": "Source",
+      "subscribedAt": "Abonné",
+      "updatedAt": "Mise à jour"
+    },
+    "filters": {
+      "searchPlaceholder": "Recherche dans les bulletins d'information..."
+    },
+    "actions": {
+      "exportFiltered": "Exportation en vrac",
+      "exportSelected": "Exportation sélectionnée",
+      "resubscribe": "Se réinscrire",
+      "unsubscribe": "Se désabonner",
+      "delete": "Supprimer",
+      "more": "Plus d'informations"
+    },
+    "messages": {
+      "endpointMissing": "Cette action nécessite un point de terminaison de mise à jour/suppression de l'administrateur de la newsletter.",
+      "resubscribed": "L'abonné à la lettre d'information s'est réabonné.",
+      "resubscribeFailed": "Échec du réabonnement de l'abonné à la lettre d'information.",
+      "unsubscribed": "L'abonné à la lettre d'information s'est désinscrit.",
+      "unsubscribeFailed": "Échec de la désinscription de l'abonné à la lettre d'information.",
+      "unsubscribeEmailMissing": "Cette inscription au bulletin d'information ne comporte pas d'adresse électronique."
+    }
+  }
+}

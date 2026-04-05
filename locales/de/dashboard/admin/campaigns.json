@@ -1,0 +1,79 @@
+{
+  "campaignsPage": {
+    "title": "Kampagnen",
+    "description": "Ansicht und Verwaltung aller Kampagnen auf der Plattform",
+    "toolbar": {
+      "search": "Kampagne suchen...",
+      "filterByDate": "Nach Datum filtern",
+      "createdDate": "Erstellt am",
+      "updatedDate": "Aktualisiertes Datum",
+      "dateRange": "Datumsbereich",
+      "selectDateRange": "Datumsbereich auswählen",
+      "clearDates": "Daten löschen"
+    }
+  },
+  "campaignOverview": {
+    "workflow": {
+      "title": "Arbeitsablauf",
+      "description": "Anträge, Einreichungen und Einladungen",
+      "tabs": {
+        "submissions": "Einreichungen",
+        "applications": "Anwendungen",
+        "invitations": "Einladungen"
+      },
+      "states": {
+        "submissionsError": "Einreichungen können nicht geladen werden.",
+        "applicationsError": "Anwendungen können nicht geladen werden.",
+        "invitationsError": "Einladungen können nicht geladen werden.",
+        "noSubmissions": "Noch keine Einsendungen.",
+        "noApplications": "Noch keine Bewerbungen.",
+        "noInvitations": "Noch keine Einladungen."
+      },
+      "actions": {
+        "retry": "Wiederholung",
+        "viewAllInvitations": "Alle Einladungen anzeigen"
+      },
+      "labels": {
+        "unknownApplicant": "Unbekannter Antragsteller",
+        "campaignApplication": "Bewerbung für die Kampagne",
+        "creator": "Schöpfer",
+        "campaignInvitation": "Einladung zur Kampagne",
+        "na": "K.A."
+      }
+    },
+    "metadata": {
+      "title": "Kampagnen-Metadaten",
+      "description": "Zeitplan, Format und Kontext der Übermittlung",
+      "labels": {
+        "created": "Erstellt",
+        "updated": "Aktualisiert",
+        "format": "Format",
+        "multiVideo": "Mehrfaches Video",
+        "brand": "Marke",
+        "na": "K.A."
+      },
+      "values": {
+        "allowed": "Erlaubt",
+        "singleVideo": "Einzelnes Video"
+      }
+    },
+    "assets": {
+      "title": "Vermögenswerte",
+      "description": "Bilder und Dokumente der Kampagne",
+      "tabs": {
+        "images": "Bilder ({count})",
+        "documents": "Dokumente ({count})",
+        "videos": "Videos ({count})"
+      },
+      "states": {
+        "noImages": "Keine Bilder hochgeladen.",
+        "noDocuments": "Keine Dokumente beigefügt.",
+        "noVideos": "Es sind keine Beispielvideos beigefügt."
+      },
+      "labels": {
+        "previewAsset": "Vorschau Kampagnen-Asset {index}",
+        "assetAlt": "Aktivposten der Kampagne {index}"
+      }
+    }
+  }
+}

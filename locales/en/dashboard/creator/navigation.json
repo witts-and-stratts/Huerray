@@ -1,0 +1,32 @@
+{
+  "breadcrumbs": {
+    "creator": "Creator",
+    "dashboard": "Dashboard",
+    "gigs": "Gigs",
+    "active": "Active",
+    "invitations": "Invitations",
+    "notifications": "Notifications",
+    "earnings": "Earnings",
+    "portfolio": "Portfolio",
+    "settings": "Settings",
+    "completeProfile": "Complete Profile",
+    "account": "Account",
+    "editBasicInfo": "User Information",
+    "profile": "Profile",
+    "bio": "Biography",
+    "socialMedia": "Social Media",
+    "security": "Security",
+    "bankDetails": "Bank Details",
+    "loading": "Loading..."
+  },
+  "kpi": {
+    "gigsCompleted": "Gigs Completed",
+    "gigsCompletedCaption": "Total gigs you've successfully completed",
+    "totalEarned": "Total Earned",
+    "totalEarnedCaption": "Lifetime earnings across all gigs",
+    "approvalRate": "Approval Rate",
+    "approvalRateCaption": "Percentage of videos approved by brands",
+    "successRate": "Success Rate",
+    "successRateCaption": "Applications that converted to active gigs"
+  }
+}

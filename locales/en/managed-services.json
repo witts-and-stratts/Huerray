@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title": "Your UGC. Fully Managed.",
+    "subtitle": "From strategy and briefing to creator sourcing and final delivery — our Managed Service team handles every step so you can focus on growing your brand.",
+    "buttonText": "Book a Free Call"
+  },
+  "features": {
+    "title": "What we take off your plate",
+    "items": [
+      {
+        "title": "We Handle Everything",
+        "description": "From developing the concept and writing the brief to sourcing creators and editing the final cuts — we take it all off your hands. Less back-and-forth, more content that actually performs."
+      },
+      {
+        "title": "Matched With Precision",
+        "description": "We know our creator network inside out — who has delivered in your niche, who is reliable, and who will treat your product with the care it deserves. Need someone outside our network? We will recruit them."
+      },
+      {
+        "title": "Informed by Real Campaigns",
+        "description": "Hundreds of brand collaborations have given us a sharp instinct for what works in UGC — and what does not. Every campaign we manage is shaped by that experience, so you benefit from day one."
+      }
+    ]
+  },
+  "cta": {
+    "text": "Ready to hand it over? Let's build your strategy.",
+    "buttonText": "Book a Free Call"
+  },
+  "faqs": {
+    "title": "Common questions",
+    "items": [
+      {
+        "question": "Can I have input on the creator selection?",
+        "answer": "Of course. We do the heavy lifting — screening our network and shortlisting the strongest candidates for your brief. But the final choice is always yours."
+      },
+      {
+        "question": "What if I want to manage campaigns myself down the line?",
+        "answer": "That's completely fine. Huerray's platform is built for full transparency, so you can follow every step in real time. Whenever you're ready to take the wheel, the tools are there waiting for you."
+      },
+      {
+        "question": "What does Managed Service cost?",
+        "answer": "It depends on the scope — how many videos you need, how many briefings we are writing, and how many creators are involved. Pricing typically starts at €750. Book a call and we will put together a tailored quote."
+      },
+      {
+        "question": "How is this different from working with a UGC agency?",
+        "answer": "We do not do long-term retainers or rigid contracts. Every engagement is project-based, and our platform means we operate with more speed and transparency than a traditional agency. You get agency-level execution with platform-level flexibility."
+      }
+    ]
+  }
+}

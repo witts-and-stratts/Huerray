@@ -1,0 +1,185 @@
+{
+  "sheets": {
+    "overview": "Visión general",
+    "details": "Detalles",
+    "bio": "Bio",
+    "socialMedia": "Redes sociales",
+    "preferredCategories": "Categorías preferidas",
+    "noBioAvailable": "No hay biografía disponible",
+    "noSocialAccounts": "No hay cuentas sociales conectadas",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "website": "Página web",
+    "address": "Dirección",
+    "joined": "Se unió a",
+    "created": "Creado",
+    "updated": "Actualizado",
+    "type": "Tipo",
+    "yes": "Sí",
+    "no": "No",
+    "age": "Edad",
+    "ageYears": "{age} anos",
+    "updateStatus": "Estado de actualización",
+    "statusRequired": "Se requiere estatus",
+    "comments": "Comentarios",
+    "commentPlaceholder": "Añade un comentario o una razón para esta decisión...",
+    "cancel": "Cancelar",
+    "na": "N/A"
+  },
+  "helpSheet": {
+    "hero": {
+      "title": "¿Necesita ayuda?",
+      "subtitle": "Encuentre respuestas a preguntas frecuentes o póngase en contacto con nosotros y obtenga la ayuda que necesita.",
+      "searchPlaceholder": "Haz una pregunta..."
+    },
+    "cards": {
+      "brand": [
+        {
+          "title": "Primeros pasos",
+          "description": "Aprenda a crear campañas y a sacar el máximo partido de la plataforma."
+        },
+        {
+          "title": "Gestión de creadores",
+          "description": "Invite a creadores, revise solicitudes y gestione colaboraciones."
+        },
+        {
+          "title": "Facturación y pagos",
+          "description": "Comprender las facturas, los métodos de pago y los ciclos de facturación."
+        }
+      ],
+      "creator": [
+        {
+          "title": "Primeros pasos",
+          "description": "Aprende a encontrar trabajos y a participar en campañas en la plataforma."
+        },
+        {
+          "title": "Envío de contenidos",
+          "description": "Entender cómo subir vídeos y conseguir que aprueben tu trabajo."
+        },
+        {
+          "title": "Ganancias y pagos",
+          "description": "Sepa cómo se calculan sus ingresos y cuándo cobra."
+        }
+      ],
+      "admin": [
+        {
+          "title": "Gestión de usuarios",
+          "description": "Gestione marcas, creadores y usuarios en toda la plataforma."
+        },
+        {
+          "title": "Casos de apoyo",
+          "description": "Revisar, asignar y resolver los tickets de soporte de los usuarios."
+        },
+        {
+          "title": "Configuración de la plataforma",
+          "description": "Configure los ajustes de toda la plataforma, las notificaciones y mucho más."
+        }
+      ]
+    },
+    "learnMore": "Más información",
+    "faqSection": {
+      "title": "Preguntas frecuentes",
+      "description": "Todo lo que necesita saber sobre la plataforma. ¿No encuentra la respuesta que busca?",
+      "contactText": "Saluda a",
+      "contactEmail": "support@huerray.com"
+    },
+    "submitCta": "Presentar un caso",
+    "myCasesLink": "Mis casos",
+    "backToHelp": "Volver a Ayuda",
+    "nav": {
+      "home": "Inicio",
+      "faq": "FAQ",
+      "tickets": "Entradas"
+    },
+    "faq": {
+      "brand": [
+        {
+          "q": "¿Cómo se crea una campaña?",
+          "a": "Vaya a Campañas en la barra lateral y haga clic en \"Nueva campaña\" para empezar."
+        },
+        {
+          "q": "¿Cómo invito a los creadores?",
+          "a": "Abre una campaña, ve a la pestaña Gigs y utiliza la acción Invitar para enviar invitaciones a los creadores."
+        },
+        {
+          "q": "¿Cómo funciona la facturación?",
+          "a": "Se le facturará por campaña en función del plan seleccionado. Visita Configuración > Facturación para más detalles."
+        },
+        {
+          "q": "¿Cómo reviso los envíos?",
+          "a": "Abra un concierto de su campaña y navegue hasta la pestaña Presentaciones para revisar el contenido del creador."
+        },
+        {
+          "q": "¿Puedo realizar varias campañas?",
+          "a": "Sí, puede crear y gestionar varias campañas simultáneamente desde la sección Campañas."
+        }
+      ],
+      "creator": [
+        {
+          "q": "¿Cómo me uno a una campaña?",
+          "a": "Consulte los trabajos disponibles en la sección Trabajos y haga clic en Solicitar para enviar su solicitud."
+        },
+        {
+          "q": "¿Cuándo cobraré?",
+          "a": "Los pagos se procesan en un plazo de 14 días a partir de la aprobación del contenido por parte de la marca."
+        },
+        {
+          "q": "¿Cómo envío contenidos?",
+          "a": "Abre tu concierto activo en la sección de conciertos y haz clic en Enviar para subir tu vídeo."
+        },
+        {
+          "q": "¿Qué ocurre después del envío?",
+          "a": "La marca revisará su envío y lo aprobará, lo devolverá o lo rechazará con comentarios."
+        },
+        {
+          "q": "¿Cómo actualizo mi perfil?",
+          "a": "Vaya a Mi perfil en la barra lateral para actualizar su biografía, categorías y enlaces a redes sociales."
+        }
+      ],
+      "admin": [
+        {
+          "q": "¿Cómo se gestionan los usuarios?",
+          "a": "Vaya a Usuarios en la navegación principal para ver, editar o desactivar cuentas."
+        },
+        {
+          "q": "¿Cómo puedo revisar los perfiles de las marcas?",
+          "a": "Vaya a Marcas, abra el perfil de una marca y utilice el menú de acciones para actualizar su estado."
+        },
+        {
+          "q": "¿Cómo asigno un caso de asistencia?",
+          "a": "Abra un caso desde la página Casos y utilice el menú de acciones para asignarlo a un administrador."
+        },
+        {
+          "q": "¿Cómo apruebo una campaña?",
+          "a": "Vaya a Campañas, abra la campaña y utilice el menú de acciones para aceptarla o rechazarla."
+        },
+        {
+          "q": "¿Cómo envío notificaciones de la plataforma?",
+          "a": "Vaya a Notificaciones y utilice el botón Crear notificación para enviar mensajes específicos."
+        }
+      ]
+    },
+    "submitCase": {
+      "titleLabel": "Título",
+      "titlePlaceholder": "Breve resumen de su asunto",
+      "descriptionLabel": "Descripción",
+      "descriptionPlaceholder": "Describa detalladamente su problema...",
+      "priorityLabel": "Prioridad",
+      "submit": "Presentar caso",
+      "submitting": "Presentar...",
+      "successToast": "Su caso se ha enviado correctamente",
+      "errorToast": "No se ha podido enviar el caso. Por favor, inténtelo de nuevo.",
+      "titleRequired": "Título obligatorio",
+      "descriptionRequired": "Descripción obligatoria"
+    },
+    "myCases": {
+      "empty": "Aún no hay casos",
+      "emptyDesc": "Presente un caso si necesita ayuda",
+      "viewAll": "Ver todos los casos",
+      "replyPlaceholder": "Escribe una respuesta...",
+      "send": "Enviar",
+      "backToList": "Volver a los casos",
+      "noMessages": "Aún no hay mensajes"
+    }
+  }
+}

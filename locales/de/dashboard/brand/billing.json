@@ -1,0 +1,96 @@
+{
+  "invoicesPage": {
+    "title": "Rechnungen",
+    "description": "Zeigen Sie Ihre Rechnungen an und laden Sie sie herunter.",
+    "columns": {
+      "invoice": "Rechnung",
+      "brand": "Marke",
+      "campaign": "Kampagne",
+      "issued": "Ausgestellt",
+      "paid": "Bezahlt?",
+      "amount": "Betrag",
+      "actions": "Aktionen"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Rechnungen filtern...",
+      "status": "Status",
+      "filterByDate": "Nach Datum filtern",
+      "issueDate": "Datum der Ausgabe",
+      "dueDate": "Fälligkeitsdatum",
+      "dateRange": "Datumsbereich",
+      "selectDateRange": "Datumsbereich auswählen",
+      "clearDates": "Daten löschen"
+    },
+    "actions": {
+      "view": "Siehe",
+      "downloadPdf": "PDF herunterladen",
+      "downloadingPdf": "Herunterladen von PDF...",
+      "downloadPdfError": "Rechnungs-PDF kann nicht heruntergeladen werden",
+      "resendInvoice": "Rechnung erneut senden",
+      "resendingInvoice": "Rechnung erneut senden...",
+      "resendInvoiceSuccess": "Rechnung erfolgreich erneut gesendet",
+      "resendInvoiceError": "Rechnung kann nicht erneut gesendet werden",
+      "cancelInvoice": "Rechnung stornieren",
+      "paymentGeneratedSuccess": "Zahlung erfolgreich generiert",
+      "paymentGeneratedError": "Zahlung konnte nicht generiert werden",
+      "invoiceUpdatedSuccess": "Rechnung erfolgreich aktualisiert",
+      "invoiceUpdatedError": "Rechnung konnte nicht aktualisiert werden"
+    },
+    "details": {
+      "invoiceFallback": "Rechnung",
+      "invoiceDetailsFor": "Rechnungsdetails für",
+      "overviewTab": "Übersicht",
+      "lineItemsTab": "Einzelposten",
+      "total": "Insgesamt",
+      "amountDue": "Fälliger Betrag",
+      "downloadInvoice": "Rechnung herunterladen",
+      "campaign": "Kampagne",
+      "dates": "Daten",
+      "issued": "Ausgestellt",
+      "due": ".",
+      "paid": "Status",
+      "created": "Erstellt",
+      "notes": "Anmerkungen",
+      "noLineItems": "Keine Einzelposten",
+      "lineItems": "Einzelposten ({count})"
+    },
+    "dialogs": {
+      "generatePayment": {
+        "title": "Zahlung generieren",
+        "description": "Dadurch wird die Rechnung als bezahlt markiert und ein Zahlungsbeleg erstellt. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "confirmLabel": "Zahlung generieren",
+        "loading": "Erzeugen...",
+        "notes": "Anmerkungen"
+      },
+      "issueInvoice": {
+        "title": "Rechnung ausstellen",
+        "description": "Kennzeichnen Sie diese Rechnung als ausgestellt. Die Marke wird benachrichtigt.",
+        "confirmLabel": "Rechnung ausstellen",
+        "loading": "Die Ausgabe..."
+      },
+      "sendInvoice": {
+        "title": "Rechnung senden",
+        "description": "Kennzeichnen Sie diese Rechnung als an die Marke geschickt.",
+        "confirmLabel": "Rechnung senden",
+        "loading": "Ich schicke..."
+      },
+      "invoicePaid": {
+        "title": "Bezahlte Rechnung",
+        "description": "Kennzeichnen Sie diese Rechnung als von der Marke bezahlt.",
+        "confirmLabel": "Als bezahlt markieren",
+        "loading": "Aktualisieren..."
+      },
+      "cancelInvoice": {
+        "title": "Rechnung stornieren",
+        "description": "Sind Sie sicher, dass Sie diese Rechnung stornieren möchten? Diese Aktion kann nicht rückgängig gemacht werden. Geben Sie zur Bestätigung den Titel der Rechnung ein:",
+        "confirmInvoiceTitle": "Geben Sie den Rechnungstitel zur Bestätigung ein",
+        "confirmLabel": "Rechnung stornieren",
+        "loading": "Absagen..."
+      }
+    }
+  },
+  "paymentsPage": {
+    "title": "Zahlungen",
+    "description": "Ihr Zahlungsverhalten einsehen."
+  }
+}

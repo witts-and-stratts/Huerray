@@ -19,8 +19,8 @@ import { UsersView } from "./users-view";
 import { DataTablePagination } from "@/components/ui/data-table-pagination";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { AnimatePresence, motion } from "motion/react";
+import { AdminNetworkErrorState } from "@/components/admin/empty-states/admin-network-error-state";
 import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
-import { TableErrorState } from "@/components/dashboard-ui/table-error-state";
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
@@ -121,7 +121,7 @@ export function UsersTable( {
   return (
     <AnimatePresence>
       { showLoading && <DataTableSkeleton key="users-loading" /> }
-      { error && <TableErrorState key="users-error" entity="users" message={ error.message } /> }
+      { error && <AdminNetworkErrorState key="users-error" fill message={ error.message } className="flex-1 h-full" /> }
       { !isLoading && !error && (
         <motion.div
           key="users-table"

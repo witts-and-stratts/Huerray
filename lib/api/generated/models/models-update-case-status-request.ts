@@ -13,8 +13,13 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { UtilsCaseStatus } from './utils-case-status';
 
 export interface ModelsUpdateCaseStatusRequest {
-    'status': string;
+    'status': UtilsCaseStatus;
 }
+
+
 

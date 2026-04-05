@@ -37,6 +37,33 @@
     "title": "Get paid on time, everytime",
     "description": "You get automatic payments when the clients approve your creation. No question asked."
   },
+  "benefits": {
+    "heading": "Why creators choose Huerray",
+    "authentic": {
+      "title": "Authentic collaborations",
+      "description": "Work with brands that want creator-led content instead of generic ad creative."
+    },
+    "collaboration": {
+      "title": "Flexible partnerships",
+      "description": "Choose opportunities that fit your style, audience, and schedule."
+    },
+    "monetize": {
+      "title": "Reliable earnings",
+      "description": "See compensation upfront and get paid once your approved work is delivered."
+    },
+    "creative": {
+      "title": "Creative control",
+      "description": "Bring your own perspective to every brief while staying aligned with campaign goals."
+    },
+    "support": {
+      "title": "Operational support",
+      "description": "Let Huerray handle platform flow, approvals, and coordination so you can focus on making content."
+    },
+    "grow": {
+      "title": "Room to grow",
+      "description": "Build your portfolio, strengthen your creator profile, and unlock more relevant brand work over time."
+    }
+  },
   "testimonial": {
     "quote": "Huerray advocates for their creators...from making sure that we get paid fairly to constantly giving us brand opportunities that matches our lifestyle",
     "author": "Baron McHennie – @baron_mchennie"

@@ -1,0 +1,262 @@
+{
+  "dashboardBlocks": {
+    "usersRadial": {
+      "title": "Benutzer",
+      "description": "Statusverteilung über alle Nutzer der Plattform",
+      "totalUsers": "Benutzer insgesamt",
+      "stats": {
+        "total_users": "Benutzer insgesamt",
+        "total_brands": "Marken insgesamt",
+        "total_creators": "Schöpfer insgesamt",
+        "new_users_today": "Neue Benutzer heute",
+        "active_brands": "Aktive Marken",
+        "active_creators": "Aktive Schöpfer"
+      }
+    },
+    "campaigns": {
+      "title": "Kampagnen",
+      "description": "Überblick über den gesamten Kampagnenlebenszyklus",
+      "tabs": {
+        "stats": "Statistiken",
+        "recent": "Neueste Kampagnen"
+      },
+      "stats": {
+        "total": "Insgesamt",
+        "active": "Aktiv",
+        "finished": "Fertige",
+        "draft": "Entwurf"
+      },
+      "states": {
+        "loading": "Kampagnenstatistiken werden geladen...",
+        "error": "Kampagnenstatistiken können nicht geladen werden.",
+        "recentError": "Die letzten Kampagnen können nicht geladen werden.",
+        "empty": "Noch keine Kampagnen"
+      },
+      "labels": {
+        "created": "Erstellt:",
+        "viewAll": "Alle Kampagnen anzeigen",
+        "untitled": "Unbenannte Kampagne",
+        "noDescription": "Keine Beschreibung vorhanden."
+      }
+    },
+    "creators": {
+      "title": "Schöpfer",
+      "description": "Übersicht über Erstellerbasis und Genehmigungsstatus",
+      "tabs": {
+        "stats": "Statistiken",
+        "recent": "Aktuelle Schöpfer"
+      },
+      "stats": {
+        "total": "Insgesamt",
+        "approved": "Genehmigt",
+        "pending": "Anhängig",
+        "returned": "Zurückgeschickt"
+      },
+      "states": {
+        "loading": "Ersteller-Statistiken werden geladen...",
+        "error": "Ersteller-Statistiken können nicht geladen werden.",
+        "recentError": "Die letzten Ersteller können nicht geladen werden.",
+        "empty": "Noch keine Ersteller"
+      },
+      "labels": {
+        "unknown": "Unbekannter Schöpfer",
+        "viewAll": "Alle Schöpfer anzeigen"
+      }
+    },
+    "gigs": {
+      "title": "Auftritte",
+      "description": "Überblick über den Lebenszyklus eines Projekts und den Lieferfortschritt",
+      "tabs": {
+        "stats": "Statistiken",
+        "recent": "Neueste Auftritte"
+      },
+      "stats": {
+        "total": "Gigs gesamt",
+        "open": "Offene Auftritte",
+        "completed": "Abgeschlossene Gigs"
+      },
+      "states": {
+        "loading": "Gigs laden...",
+        "error": "Gigs können nicht geladen werden.",
+        "recentLoading": "Laden der letzten Auftritte...",
+        "recentError": "Die letzten Gigs können nicht geladen werden.",
+        "empty": "Keine Gigs gefunden."
+      },
+      "labels": {
+        "brand": "Marke",
+        "na": "K.A.",
+        "untitled": "Unbetitelter Auftritt",
+        "viewAll": "Alle Gigs anzeigen",
+        "submitted": "Eingereicht:",
+        "trendingUp": "Tendenz steigend um 4,6% in diesem Monat",
+        "showingTotal": "Anzeige der Gesamtzahl der Auftritte in den wichtigsten Lebenszyklusphasen"
+      }
+    },
+    "submissions": {
+      "title": "Einreichungen",
+      "description": "Status der Einreichungsprüfung und Momentaufnahme des Durchsatzes",
+      "tabs": {
+        "stats": "Statistiken",
+        "recent": "Jüngste Einreichungen"
+      },
+      "stats": {
+        "total": "Total Einreichungen",
+        "pending": "Anhängige Einreichungen",
+        "approved": "Genehmigte Einreichungen"
+      },
+      "states": {
+        "error": "Einreichungen können nicht geladen werden.",
+        "recentError": "Die letzten Einsendungen können nicht geladen werden.",
+        "empty": "Keine Einsendungen gefunden."
+      }
+    },
+    "platformAnalytics": {
+      "title": "Plattform-Analytik",
+      "description": "Live-Metriken für die gesamte Plattform über den Analyse-Endpunkt",
+      "groups": {
+        "contentPipeline": "Inhaltliche Pipeline"
+      },
+      "stats": {
+        "total_campaigns": "Kampagnen insgesamt",
+        "completed_campaigns": "Abgeschlossene Kampagnen",
+        "total_gigs": "Gigs gesamt",
+        "completed_gigs": "Abgeschlossene Gigs"
+      },
+      "states": {
+        "error": "Plattform-Analysen können nicht geladen werden."
+      }
+    },
+    "actionCenter": {
+      "title": "Aktionszentrum",
+      "description": "Springen Sie zu den Bereichen, die direkte Verwaltungsmaßnahmen erfordern",
+      "actions": {
+        "reviewBrands": {
+          "label": "Überprüfung von Markenprofilen",
+          "detail": "Ausstehende Überprüfungen und Qualitätskontrollen der Profile"
+        },
+        "reviewCreators": {
+          "label": "Überprüfung von Schöpferprofilen",
+          "detail": "Genehmigungs- und Rückgabe-Workflows für das Onboarding von Erstellern"
+        },
+        "reviewCampaigns": {
+          "label": "Überprüfung der Kampagnen-Pipeline",
+          "detail": "Überwachung von Genehmigungen, Live-Aktivitäten und Fertigstellungstempo"
+        },
+        "inspectNotifications": {
+          "label": "Benachrichtigungen inspizieren",
+          "detail": "Untersuchen Sie die jüngsten Plattform- und Moderationssignale"
+        },
+        "openUsers": {
+          "label": "Benutzerverwaltung öffnen",
+          "detail": "Benutzerstatus, Zugriffskontrolle und Kontoverwaltung"
+        },
+        "checkPayments": {
+          "label": "Scheck-Zahlungen",
+          "detail": "Auszahlungsstatus, Transaktionsanomalien und Abgleich"
+        }
+      },
+      "labels": {
+        "open": "Öffnen Sie",
+        "priorityHigh": "HIGH",
+        "priorityMedium": "MEDIUM",
+        "priorityNormal": "NORMAL"
+      }
+    },
+    "approvalQueues": {
+      "title": "Genehmigungswarteschlangen",
+      "description": "Priorisierung von Überprüfungswarteschlangen, um eine Blockierung des Marktplatzbetriebs zu vermeiden",
+      "queues": {
+        "users": "Benutzer, die zur Genehmigung anstehen",
+        "brands": "Zur Genehmigung anstehende Markenprofile",
+        "creators": "Auf Genehmigung wartende Erstellerprofile",
+        "campaigns": "Kampagnen, die von der Verwaltung geprüft werden",
+        "submissions": "Videoeinreichungen bis zur Entscheidung"
+      },
+      "labels": {
+        "viewAll": "Alle Warteschlangen anzeigen",
+        "sla": "SLA:",
+        "reviewQueue": "Review-Warteschlange",
+        "h": "h"
+      }
+    },
+    "financialSnapshot": {
+      "title": "Finanzielle Momentaufnahme",
+      "description": "Monatliche Einnahmen im Vergleich zu den Auszahlungen an die Urheber",
+      "labels": {
+        "revenue": "Einnahmen",
+        "payouts": "Auszahlungen"
+      }
+    },
+    "pipelineBreakdown": {
+      "title": "Pipeline nach Status",
+      "description": "Kampagnen, Auftritte und Einreichungen gruppiert nach aktuellem Status",
+      "labels": {
+        "campaigns": "Kampagnen",
+        "gigs": "Auftritte",
+        "submissions": "Einreichungen"
+      }
+    },
+    "platformHealth": {
+      "title": "Plattform Gesundheit Trend",
+      "description": "Nutzer, Kampagnen und Einsendungen der letzten 6 Monate",
+      "labels": {
+        "users": "Benutzer",
+        "campaigns": "Kampagnen",
+        "submissions": "Einreichungen"
+      }
+    },
+    "recentActivityBlock": {
+      "title": "Jüngste Aktivität",
+      "description": "Letzter Ereignisstrom aus der Benachrichtigungsaktivität",
+      "table": {
+        "eventName": "Name der Veranstaltung",
+        "eventType": "Veranstaltungstyp",
+        "actor": "Schauspieler",
+        "when": "Wenn",
+        "actions": "Aktionen"
+      },
+      "states": {
+        "error": "Die letzte Aktivität kann nicht geladen werden.",
+        "empty": "Noch keine aktuellen Aktivitäten."
+      },
+      "labels": {
+        "system": "System",
+        "unknownEvent": "Unbekanntes Ereignis",
+        "unknown": "Unbekannt",
+        "na": "K.A."
+      },
+      "menu": {
+        "markAsRead": "Als gelesen markieren",
+        "view": "Siehe",
+        "delete": "Löschen"
+      }
+    },
+    "revenueStats": {
+      "title": "Einnahmen",
+      "description": "Übersicht über Einnahmen, Ausschüttungen und Nettogewinne",
+      "stats": {
+        "totalRevenue": "Gesamteinnahmen",
+        "netRevenue": "Netto-Einnahmen",
+        "totalPayouts": "Auszahlungen insgesamt"
+      },
+      "labels": {
+        "revenue": "Einnahmen",
+        "payouts": "Auszahlungen"
+      },
+      "states": {
+        "error": "Es können keine Umsatzdaten geladen werden."
+      }
+    },
+    "platformUptime": {
+      "title": "Plattform-Betriebszeit",
+      "description": "Aktuelle Momentaufnahme der Serviceverfügbarkeit",
+      "labels": {
+        "uptime": "Betriebszeit"
+      }
+    },
+    "operationalAlerts": {
+      "title": "Operative Warnungen",
+      "description": "System- und Workflow-Signale, die ein Eingreifen erfordern können"
+    }
+  }
+}

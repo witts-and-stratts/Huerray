@@ -1,0 +1,101 @@
+{
+  "casesPage": {
+    "title": "Support-Fälle",
+    "description": "Anzeige und Verwaltung aller Supportfälle auf der gesamten Plattform.",
+    "empty": "Keine Fälle gefunden.",
+    "tabs": {
+      "all": "Alle",
+      "open": "Öffnen Sie",
+      "inProgress": "In Arbeit",
+      "resolved": "Aufgelöst",
+      "closed": "Geschlossen"
+    },
+    "statuses": {
+      "open": "Öffnen Sie",
+      "inProgress": "In Arbeit",
+      "resolved": "Aufgelöst",
+      "closed": "Geschlossen"
+    },
+    "priorities": {
+      "low": "Niedrig",
+      "normal": "Normal",
+      "high": "Hoch",
+      "urgent": "Dringend"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Fälle suchen...",
+      "status": "Status",
+      "priority": "Priorität"
+    },
+    "columns": {
+      "caseNumber": "Fall #",
+      "caseNumberCopied": "Kopierte Fallnummer",
+      "title": "Titel",
+      "status": "Status",
+      "priority": "Priorität",
+      "reporter": "Reporter",
+      "entity": "Entität",
+      "created": "Erstellt",
+      "actions": "Aktionen"
+    },
+    "actionMenu": {
+      "viewDetails": "Details anzeigen",
+      "copyId": "ID kopieren",
+      "assignCase": "Fall zuordnen",
+      "markInProgress": "Als in Bearbeitung markieren",
+      "markResolved": "Als aufgelöst markieren",
+      "reopen": "wieder öffnen.",
+      "close": "Fall schließen",
+      "assignDialog": {
+        "title": "Fall zuordnen",
+        "description": "Wählen Sie einen Administrator, dem Sie diesen Supportfall zuweisen möchten.",
+        "assigneeLabel": "Admin-Empfänger",
+        "placeholder": "Wählen Sie einen Administrator",
+        "unknownAdmin": "Unbekannter Admin",
+        "loading": "Admins laden...",
+        "empty": "Keine Admins verfügbar.",
+        "cancel": "Abbrechen",
+        "confirm": "Fall zuordnen",
+        "submitting": "Zuweisen..."
+      },
+      "toasts": {
+        "idCopied": "Fall-ID kopiert",
+        "missingId": "Fehlende Fall-ID",
+        "assigneeRequired": "Wählen Sie einen Administrator, um diesen Fall zuzuweisen",
+        "caseAssigned": "Zugewiesener Fall",
+        "caseAssignError": "Fall konnte nicht zugewiesen werden",
+        "statusUpdated": "Fallstatus aktualisiert",
+        "statusUpdateError": "Aktualisierung des Fallstatus fehlgeschlagen"
+      }
+    },
+    "details": {
+      "tab": "Einzelheiten",
+      "description": "Detaillierte Informationen zum Fall",
+      "selectPrompt": "Wählen Sie einen Fall aus, um Details anzuzeigen",
+      "untitled": "Unbenannter Fall",
+      "descriptionLabel": "Beschreibung",
+      "caseInfo": "Informationen zum Fall",
+      "systemInfo": "System-Details",
+      "status": "Status",
+      "priority": "Priorität",
+      "reporter": "Reporter",
+      "assignee": "Rechtsnachfolger",
+      "relatedEntity": "Verwandte Entität",
+      "caseId": "Fall-ID",
+      "idCopied": "Fall-ID kopiert",
+      "created": "Erstellt",
+      "updated": "Zuletzt aktualisiert",
+      "resolved": "Aufgelöst am",
+      "unknown": "Unbekannt",
+      "unassigned": "Nicht zugewiesen",
+      "na": "K.A."
+    },
+    "messages": {
+      "tab": "Nachrichten",
+      "empty": "Noch keine Nachrichten. Beginnen Sie das Gespräch.",
+      "placeholder": "Geben Sie eine Nachricht ein... (Enter zum Senden)",
+      "sent": "Nachricht gesendet",
+      "sendError": "Nachricht konnte nicht gesendet werden"
+    }
+  }
+}

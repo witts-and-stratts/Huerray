@@ -1,0 +1,43 @@
+{
+  "earningsPage": {
+    "title": "Les revenus",
+    "description": "Suivez l'historique de vos paiements et de vos gains pour les contrats terminés."
+  },
+  "earnings": {
+    "title": "Les revenus",
+    "description": "Suivez l'historique de vos paiements et de vos gains pour les contrats terminés.",
+    "recentTotal": "Total récent"
+  },
+  "payments": {
+    "status": {
+      "completed": "Terminé",
+      "pending": "En attente",
+      "processing": "Traitement",
+      "failed": "Échec",
+      "cancelled": "Annulé"
+    },
+    "table": {
+      "payment": "Paiement",
+      "creator": "Créateur",
+      "date": "Date",
+      "method": "Méthode",
+      "items": "Articles",
+      "paid": "Payé ?",
+      "amount": "Montant",
+      "actions": "Actions",
+      "noEarnings": "Pas encore de revenus",
+      "noEarningsFiltered": "Aucun revenu ne correspond à vos filtres actuels.",
+      "noEarningsDesc": "Vos paiements pour les contrats terminés apparaîtront ici.",
+      "searchPlaceholder": "Gains de recherche...",
+      "clearFilters": "Effacer les filtres"
+    },
+    "details": {
+      "paymentId": "ID de paiement",
+      "accessibilityDesc": "Détails de paiement pour {reference}.",
+      "created": "Créée",
+      "reference": "Référence",
+      "notes": "Notes",
+      "totalAmount": "Montant total"
+    }
+  }
+}

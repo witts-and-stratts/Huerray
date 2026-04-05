@@ -1,0 +1,55 @@
+{
+  "paymentsPage": {
+    "title": "Payouts",
+    "description": "View and manage all creator payouts across the platform.",
+    "toolbar": {
+      "filterPlaceholder": "Filter payouts...",
+      "status": "Status",
+      "dateRangeLabel": "Payment date range",
+      "dateRangePlaceholder": "Select date range",
+      "clearDates": "Clear dates"
+    },
+    "actionMenu": {
+      "view": "View",
+      "confirmPayout": "Confirm payout",
+      "confirming": "Confirming...",
+      "confirmDialog": {
+        "title": "Confirm payout",
+        "description": "Are you sure you want to confirm this payout? This will create a payment item record.",
+        "descriptionWithCreator": "Are you sure you want to confirm this payout for {name}? This will create a payment item record.",
+        "confirmLabel": "Confirm payout"
+      },
+      "toasts": {
+        "confirmSuccess": "Payout confirmed successfully.",
+        "confirmError": "Failed to confirm payout. Please try again.",
+        "missingId": "Missing payment ID."
+      }
+    },
+    "newBatchPayment": {
+      "title": "New batch payment",
+      "description": "Select a creator and their pending payment items.",
+      "triggerButton": "New Payment",
+      "creatorLabel": "Creator",
+      "creatorPlaceholder": "Select a creator...",
+      "pendingItems": "Pending items",
+      "deselectAll": "Deselect all",
+      "selectAll": "Select all",
+      "noItems": "No pending payment items for this creator.",
+      "paymentMethodLabel": "Payment method",
+      "paymentMethodPlaceholder": "e.g. bank transfer, PayPal...",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Optional notes...",
+      "noItemsSelected": "No items selected",
+      "itemUnit": "{count, plural, =1 {item} other {items}}",
+      "creating": "Creating...",
+      "createPayment": "Create payment",
+      "toasts": {
+        "createSuccess": "Batch payment created successfully.",
+        "createSuccessDesc": "The batch payment has been created successfully.",
+        "createError": "Failed to create batch payment. Please try again.",
+        "selectItem": "Select at least one payment item."
+      }
+    }
+  },
+  "emptyPayments": {}
+}

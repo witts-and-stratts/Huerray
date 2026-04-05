@@ -1,0 +1,22 @@
+{
+  "cards": {
+    "untitledSubmission": "Soumission sans titre",
+    "noDescription": "Aucune description n'est fournie",
+    "untitledGig": "Untitled Gig",
+    "applied": "Appliqué {date}",
+    "reward": "Récompense",
+    "issued": "Délivré",
+    "due": "Due",
+    "joined": "Rejoint",
+    "userFallback": "Utilisateur",
+    "creatorFallback": "Créateur",
+    "updatedDate": "Mise à jour {date}",
+    "campaignCover": "Couverture de la campagne",
+    "gigCount": "{count, plural, =1 {# gig} other {# gigs}}",
+    "application": "Application",
+    "submissions": "Soumissions",
+    "applications": "Applications",
+    "invitations": "Invitations",
+    "videoCount": "{count, plural, =1 {# video} other {# videos}}"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "invoicesPage": {
+    "title": "Facturas",
+    "description": "Visualice y gestione todas las facturas a través de la plataforma.",
+    "createInvoice": {
+      "trigger": "Nueva factura",
+      "title": "Crear factura",
+      "description": "Crear una nueva factura para una campaña finalizada.",
+      "confirm": "Crear factura",
+      "cancel": "Cancelar",
+      "creating": "Crear...",
+      "campaignLabel": "Campaña",
+      "campaignPlaceholder": "Seleccione una campaña finalizada...",
+      "campaignLoading": "Cargando campañas completadas...",
+      "dueDateLabel": "Fecha de vencimiento",
+      "notesLabel": "Notas",
+      "notesPlaceholder": "Notas opcionales para esta factura...",
+      "success": "Factura creada correctamente",
+      "error": "Error al crear factura",
+      "errorDescription": "Vuelva a intentarlo más tarde."
+    },
+    "toolbar": {
+      "search": "Buscar facturas..."
+    },
+    "columns": {
+      "invoice": "Factura",
+      "brand": "Marca",
+      "campaign": "Campaña",
+      "issued": "Publicado",
+      "paid": "Estado",
+      "amount": "Importe",
+      "actions": "Acciones"
+    },
+    "statuses": {
+      "paid": "Pagado",
+      "overdue": "Atrasado",
+      "cancelled": "Cancelado",
+      "draft": "Borrador",
+      "issued": "Publicado",
+      "sent": "Enviado"
+    },
+    "actions": {
+      "view": "Ver",
+      "downloadPdf": "Descargar PDF",
+      "generatingPdf": "Generar PDF...",
+      "cancelInvoice": "Anular factura",
+      "cancelInvoiceDesc": "¿Está seguro de que desea anular esta factura? Esta acción no se puede deshacer.",
+      "cancelling": "Cancelando...",
+      "generatePayment": "Generar pago",
+      "generatePaymentDesc": "Esto marcará la factura como pagada y generará un registro de pago. Esta acción no se puede deshacer.",
+      "generating": "Generar...",
+      "paymentNotes": "Pago efectuado",
+      "notes": "Notas",
+      "paymentSuccess": "Pago generado correctamente",
+      "paymentError": "No se ha podido generar el pago",
+      "updateSuccess": "Factura actualizada correctamente",
+      "updateError": "Error al actualizar la factura",
+      "issueInvoice": "Emitir factura",
+      "issueInvoiceDesc": "Marque esta factura como emitida. Se notificará a la marca.",
+      "issuing": "Emitiendo...",
+      "sendInvoice": "Enviar factura",
+      "sendInvoiceDesc": "Marque esta factura como enviada a la marca.",
+      "sending": "Enviando...",
+      "invoicePaid": "Factura pagada",
+      "invoicePaidDesc": "Marque esta factura como pagada por la marca.",
+      "markAsPaid": "Marcar como pagado",
+      "updating": "Actualizando..."
+    },
+    "detailsSheet": {
+      "invoiceLabel": "Factura",
+      "invoiceDetailsFor": "Detalles de la factura de {number}.",
+      "campaign": "Campaña",
+      "dates": "Fechas",
+      "issued": "Publicado",
+      "due": "Debido",
+      "paid": "Pagado",
+      "created": "Creado",
+      "notes": "Notas",
+      "lineItemsCount": "Partidas ({count})",
+      "noLineItems": "Sin partidas",
+      "overview": "Visión general",
+      "lineItems": "Partidas",
+      "total": "Total",
+      "amountDue": "Importe adeudado",
+      "downloadInvoice": "Descargar factura"
+    }
+  },
+  "emptyInvoices": {}
+}

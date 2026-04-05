@@ -6,7 +6,7 @@ import { InvoicesTable } from '@/components/invoices/invoices-table';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 
 export function AdminInvoicesClient() {
-  const { data, isLoading } = useInvoices();
+  const { data, isLoading, error, refetch } = useInvoices();
 
   const invoices = React.useMemo( (): ModelsInvoiceResponse[] => {
     return data?.data || [];
@@ -14,7 +14,7 @@ export function AdminInvoicesClient() {
 
   return (
     <div className='flex flex-col flex-1 min-h-0 overflow-hidden'>
-      <InvoicesTable data={ invoices } isLoading={ isLoading } isAdmin />
+      <InvoicesTable data={ invoices } isLoading={ isLoading } isAdmin error={ error as Error | null } refetch={ refetch } />
     </div>
   );
 }

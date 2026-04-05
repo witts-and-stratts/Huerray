@@ -1,0 +1,96 @@
+{
+  "invoicesPage": {
+    "title": "Facturas",
+    "description": "Vea y descargue sus facturas.",
+    "columns": {
+      "invoice": "Factura",
+      "brand": "Marca",
+      "campaign": "Campaña",
+      "issued": "Publicado",
+      "paid": "¿Pagado?",
+      "amount": "Importe",
+      "actions": "Acciones"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Filtrar facturas...",
+      "status": "Estado",
+      "filterByDate": "Filtrar por fecha",
+      "issueDate": "Fecha de publicación",
+      "dueDate": "Fecha de vencimiento",
+      "dateRange": "Intervalo de fechas",
+      "selectDateRange": "Seleccione el intervalo de fechas",
+      "clearDates": "Borrar fechas"
+    },
+    "actions": {
+      "view": "Ver",
+      "downloadPdf": "Descargar PDF",
+      "downloadingPdf": "Descargar PDF...",
+      "downloadPdfError": "No se ha podido descargar el PDF de la factura",
+      "resendInvoice": "Reenviar factura",
+      "resendingInvoice": "Reenviar factura...",
+      "resendInvoiceSuccess": "Factura reenviada correctamente",
+      "resendInvoiceError": "No se ha podido reenviar la factura",
+      "cancelInvoice": "Anular factura",
+      "paymentGeneratedSuccess": "Pago generado correctamente",
+      "paymentGeneratedError": "No se ha podido generar el pago",
+      "invoiceUpdatedSuccess": "Factura actualizada correctamente",
+      "invoiceUpdatedError": "Error al actualizar la factura"
+    },
+    "details": {
+      "invoiceFallback": "Factura",
+      "invoiceDetailsFor": "Detalles de la factura de",
+      "overviewTab": "Visión general",
+      "lineItemsTab": "Partidas",
+      "total": "Total",
+      "amountDue": "Importe adeudado",
+      "downloadInvoice": "Descargar factura",
+      "campaign": "Campaña",
+      "dates": "Fechas",
+      "issued": "Publicado",
+      "due": "Debido",
+      "paid": "Estado",
+      "created": "Creado",
+      "notes": "Notas",
+      "noLineItems": "Sin partidas",
+      "lineItems": "Partidas ({count})"
+    },
+    "dialogs": {
+      "generatePayment": {
+        "title": "Generar pago",
+        "description": "Esto marcará la factura como pagada y generará un registro de pago. Esta acción no se puede deshacer.",
+        "confirmLabel": "Generar pago",
+        "loading": "Generar...",
+        "notes": "Notas"
+      },
+      "issueInvoice": {
+        "title": "Emitir factura",
+        "description": "Marque esta factura como emitida. Se notificará a la marca.",
+        "confirmLabel": "Emitir factura",
+        "loading": "Emitiendo..."
+      },
+      "sendInvoice": {
+        "title": "Enviar factura",
+        "description": "Marque esta factura como enviada a la marca.",
+        "confirmLabel": "Enviar factura",
+        "loading": "Enviando..."
+      },
+      "invoicePaid": {
+        "title": "Factura pagada",
+        "description": "Marque esta factura como pagada por la marca.",
+        "confirmLabel": "Marcar como pagado",
+        "loading": "Actualizando..."
+      },
+      "cancelInvoice": {
+        "title": "Anular factura",
+        "description": "¿Está seguro de que desea anular esta factura? Esta acción no se puede deshacer. Escriba el título de la factura para confirmar:",
+        "confirmInvoiceTitle": "Escriba el título de la factura para confirmar",
+        "confirmLabel": "Anular factura",
+        "loading": "Cancelando..."
+      }
+    }
+  },
+  "paymentsPage": {
+    "title": "Pagos",
+    "description": "Consulte su historial de pagos."
+  }
+}

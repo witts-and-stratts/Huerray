@@ -1,0 +1,45 @@
+{
+  "invitations": {
+    "title": "Einladungen",
+    "description": "Verwalten Sie Ihre Auftrittseinladungen von Marken.",
+    "latestFromBrands": "Neueste Einladungen von Marken",
+    "noInvitationsYet": "Noch keine Einladungen",
+    "noInvitationsDesc": "Wenn Marken Sie zu ihren Auftritten einladen, werden sie hier erscheinen.",
+    "loadFailed": "Einladungen konnten nicht geladen werden",
+    "somethingWentWrong": "Etwas ist schief gelaufen",
+    "status": {
+      "pending": "Anhängig",
+      "accepted": "Angenommen",
+      "declined": "Abgelehnt",
+      "unknown": "Unbekannt"
+    },
+    "actions": {
+      "view": "Einladung ansehen",
+      "accept": "Einladung annehmen",
+      "acceptShort": "Akzeptieren",
+      "decline": "Einladung ablehnen",
+      "declineShort": "Rückgang",
+      "reject": "Einladung ablehnen",
+      "createSubmission": "Einreichung erstellen",
+      "openMenu": "Menü öffnen",
+      "viewSubmissions": "Einreichungen ansehen"
+    },
+    "dialogs": {
+      "acceptTitle": "Einladung annehmen",
+      "acceptDesc": "Sind Sie sicher, dass Sie diese Einladung annehmen möchten? Dadurch wird die Marke benachrichtigt und Sie können mit der Arbeit an dem Auftritt beginnen.",
+      "acceptCommentPlaceholder": "Einen Kommentar zu dieser Zulassung hinzufügen",
+      "accepting": "Annehmen...",
+      "declineTitle": "Einladung ablehnen",
+      "declineDesc": "Sind Sie sicher, dass Sie diese Einladung ablehnen wollen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "declineCommentPlaceholder": "Erklären Sie, warum Sie ablehnen",
+      "declining": "Rückläufig...",
+      "rejectTitle": "Einladung ablehnen",
+      "rejectDesc": "Sind Sie sicher, dass Sie diese Einladung ablehnen wollen? Diese Aktion kann nicht rückgängig gemacht werden."
+    },
+    "toasts": {
+      "accepted": "Einladung erfolgreich angenommen",
+      "declined": "Einladung erfolgreich abgelehnt",
+      "error": "Aktualisierung des Einladungsstatus fehlgeschlagen"
+    }
+  }
+}

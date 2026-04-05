@@ -1,0 +1,43 @@
+{
+  "earningsPage": {
+    "title": "Earnings",
+    "description": "Track your payment history and earnings from completed gigs."
+  },
+  "earnings": {
+    "title": "Earnings",
+    "description": "Track your payment history and earnings from completed gigs.",
+    "recentTotal": "Recent Total"
+  },
+  "payments": {
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "processing": "Processing",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "table": {
+      "payment": "Payment",
+      "creator": "Creator",
+      "date": "Date",
+      "method": "Method",
+      "items": "Items",
+      "paid": "Paid?",
+      "amount": "Amount",
+      "actions": "Actions",
+      "noEarnings": "No earnings yet",
+      "noEarningsFiltered": "No earnings match your current filters.",
+      "noEarningsDesc": "Your payments from completed gigs will appear here.",
+      "searchPlaceholder": "Search earnings...",
+      "clearFilters": "Clear Filters"
+    },
+    "details": {
+      "paymentId": "Payment ID",
+      "accessibilityDesc": "Payment details for {reference}.",
+      "created": "Created",
+      "reference": "Reference",
+      "notes": "Notes",
+      "totalAmount": "Total amount"
+    }
+  }
+}

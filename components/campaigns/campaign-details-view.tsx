@@ -18,7 +18,7 @@ import { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
 import { ApiError } from '@/lib/api/hooks/types';
 import { Brain, ChevronDown, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { Activity, useCallback, useEffect, useState } from 'react';
+import { Activity, useCallback, useEffect, useEffectEvent, useState } from 'react';
 import { toast } from 'sonner';
 import { SentenceCase } from '../text-case';
 import { CampaignActionMenu } from './campaign-action-menu';
@@ -88,6 +88,9 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   const newCampaignT = useTranslations( 'dashboard.brand.newCampaignPage' );
   const basePath = useBasePath();
   const [ activeTab, setActiveTab ] = useState<TabValue>( getTabFromHash );
+  const onHashChange = useEffectEvent( () => {
+    setActiveTab( getTabFromHash() );
+  } );
 
   // Sync: tab → URL hash
   const changeTab = useCallback( ( tab: string ) => {
@@ -98,7 +101,6 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
 
   // Sync: URL hash → tab (browser back/forward, external hash changes)
   useEffect( () => {
-    const onHashChange = () => setActiveTab( getTabFromHash() );
     window.addEventListener( 'hashchange', onHashChange );
     return () => window.removeEventListener( 'hashchange', onHashChange );
   }, [] );

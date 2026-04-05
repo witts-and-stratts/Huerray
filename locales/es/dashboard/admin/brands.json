@@ -1,0 +1,164 @@
+{
+  "brandsPage": {
+    "title": "Marcas",
+    "description": "Gestión y seguimiento de todas las marcas en la plataforma"
+  },
+  "brandDetails": {
+    "description": "Información detallada sobre la marca",
+    "companyDetails": "Datos de la empresa",
+    "contactInfo": "Información de contacto",
+    "systemDetails": "Detalles del sistema",
+    "brandId": "Marca ID",
+    "userId": "ID de usuario",
+    "category": "Categoría",
+    "companySize": "Tamaño de la empresa",
+    "vatId": "CIF",
+    "regNumber": "Reg. Número",
+    "descriptionLabel": "Descripción"
+  },
+  "brandStatus": {
+    "title": "Actualizar el estado de la marca",
+    "description": "Revise el perfil de la marca y actualice su estado.",
+    "statusLabel": "Estado",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "return": "Devolución",
+    "totalRejection": "Rechazo total",
+    "successToast": "Estado de la marca actualizado correctamente",
+    "errorToast": "No se ha podido actualizar el estado de la marca",
+    "missingId": "Falta el identificador de marca",
+    "confirmApproveTitle": "¿Aprobar el perfil de la marca?",
+    "confirmApproveDesc": "El perfil de {name} será aprobado y se le notificará.",
+    "confirmRejectTitle": "¿Rechazar el perfil de marca?",
+    "confirmRejectDesc": "El perfil de {name} será rechazado y se le notificará.",
+    "confirmReturnTitle": "¿Devolver el perfil de marca?",
+    "confirmReturnDesc": "El perfil de {name} será devuelto y se le notificará.",
+    "commentLabel": "Comentario",
+    "commentPlaceholder": "Añadir un comentario",
+    "approving": "Aprobando...",
+    "rejecting": "Rechazando...",
+    "returning": "Volviendo...",
+    "approvedToast": "{name} aprobado con éxito",
+    "rejectedToast": "{name} rechazado",
+    "returnedToast": "{name} devuelto",
+    "thisBrand": "Esta marca"
+  },
+  "brandActionMenu": {
+    "ThisActionCannot": "? Esta acción no se puede deshacer.",
+    "areYouSureYou": "¿Estás seguro de que quieres borrar",
+    "openMenu": "Abrir menú",
+    "brandDeletedSuccessfully": "Marca eliminada con éxito",
+    "failedToDeleteBrand": "No se ha podido eliminar la marca",
+    "brandProfileNotFound": "No se ha encontrado el perfil de la marca",
+    "copyBrandId": "Copiar ID de marca",
+    "brandIdCopiedToClipboard": "ID de marca copiado en el portapapeles",
+    "visitWebsite": "Visitar el sitio web",
+    "viewDetails": "Ver detalles",
+    "reviewProfile": "Revisar perfil",
+    "deleteBrand": "Borrar marca",
+    "confirmDelete": "Borrar"
+  },
+  "brandCard": {},
+  "brandDetailsSheet": {
+    "company": "Empresa",
+    "overview": "Visión general",
+    "detailedInformationAboutBrand": "Información detallada sobre la marca"
+  },
+  "brandStatusBadge": {},
+  "brandStatusDialog": {
+    "updateStatus": "Estado de actualización",
+    "cancel": "Cancelar",
+    "reviewTheBrandsProfile": "Revise el perfil de la marca y actualice su estado.",
+    "updateBrandStatus": "Actualizar el estado de la marca"
+  },
+  "brandsCardsView": {},
+  "brandsColumns": {},
+  "brandsTableToolbar": {
+    "selectAll": "Seleccionar todo"
+  },
+  "brandsTableView": {},
+  "brandsTable": {},
+  "brandsView": {},
+  "brandDashboard": {
+    "totalSpend": "Gasto total",
+    "avgGigSpend": "Gasto medio por Gigante",
+    "total": "Total",
+    "active": "Activo",
+    "finished": "Terminado",
+    "draft": "Borrador",
+    "failedToLoad": "No se ha podido cargar el perfil de la marca",
+    "brandNotFound": "Marca no encontrada",
+    "brandDashboard": "Cuadro de mandos de la marca",
+    "overview": "Visión general del rendimiento de la marca y detalles",
+    "brands": "Marcas"
+  },
+  "brandCampaignMetricsBlock": {
+    "campaignLifecycleOverview": "Resumen del ciclo de vida de la campaña",
+    "campaigns": "Campañas"
+  },
+  "brandCampaignsTableBlock": {
+    "created": "Creado:",
+    "noCampaignsYet": "Todavía no hay campañas",
+    "loadingRecentCampaigns": "Cargando campañas recientes...",
+    "loadingCampaignStats": "Cargando estadísticas de campaña...",
+    "recentCampaigns": "Campañas recientes",
+    "stats": "Estadísticas",
+    "brandCampaignActivityAnd": "Actividad y estado de las campañas de marca",
+    "campaigns": "Campañas",
+    "untitledCampaign": "Campaña sin título"
+  },
+  "brandContactBlock": {
+    "address": "Dirección",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "contactAddress": "Contacto y dirección"
+  },
+  "brandFinancialsBlock": {
+    "spendPerformanceForThis": "Rendimiento del gasto para esta marca",
+    "financials": "Finanzas"
+  },
+  "brandProfileBlock": {
+    "user": "Usuario",
+    "contact": "Póngase en contacto con",
+    "overview": "Visión general",
+    "failedToLoadUser": "Error al cargar los datos del usuario",
+    "identity": "Identidad",
+    "emailVerified": "Correo electrónico verificado",
+    "emailUnverified": "Correo electrónico no verificado",
+    "name": "Nombre",
+    "username": "Nombre de usuario",
+    "usernameCopied": "Nombre de usuario copiado",
+    "type": "Tipo",
+    "email": "Correo electrónico",
+    "system": "Sistema",
+    "userId": "ID de usuario",
+    "userIdCopied": "ID de usuario copiado",
+    "joined": "Se unió a",
+    "updated": "Actualizado",
+    "noContactEmail": "No hay correo electrónico de contacto",
+    "details": "Detalles",
+    "category": "Categoría",
+    "location": "Ubicación",
+    "country": "País",
+    "companySize": "Tamaño de la empresa",
+    "registered": "Registrado",
+    "vatId": "CIF",
+    "phone": "Teléfono",
+    "website": "Página web",
+    "addressTitle": "Dirección",
+    "noAddress": "No consta ninguna dirección",
+    "noLinkedUser": "Sin cuenta de usuario vinculada",
+    "na": "N/A"
+  },
+  "brandRecentCampaignsBlock": {
+    "noCampaignsYet": "Todavía no hay campañas.",
+    "unableToLoadRecent": "No se pueden cargar las campañas recientes.",
+    "latestCampaignsForThis": "Últimas campañas de esta marca",
+    "recentCampaigns": "Campañas recientes"
+  },
+  "brandRecentSubmissionsBlock": {
+    "unableToLoadRecent": "No se pueden cargar los envíos recientes.",
+    "latestVideoSubmissionsAcross": "Últimos vídeos enviados a las campañas",
+    "recentSubmissions": "Envíos recientes"
+  }
+}

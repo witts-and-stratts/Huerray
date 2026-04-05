@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** |  | [default to undefined]
+**status** | [**UtilsCaseStatus**](UtilsCaseStatus.md) |  | [default to undefined]
 
 ## Example
 

@@ -20,7 +20,7 @@ import { CreatorApi } from '@/lib/api/generated/api/creator-api';
 import { useForm } from '@tanstack/react-form';
 import { ChevronDown, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/dashboard-utils';
-import { Activity, useCallback, useEffect, useState } from 'react';
+import { Activity, useCallback, useEffect, useEffectEvent, useState } from 'react';
 import { toast } from 'sonner';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { fetchCreatorProfile } from '@/lib/redux/features/creator/creatorSlice';
@@ -37,6 +37,16 @@ export default function CreatorSettingsPage() {
   const [ isReviewConfirmOpen, setIsReviewConfirmOpen ] = useState( false );
   const [ isCommentsSheetOpen, setIsCommentsSheetOpen ] = useState( false );
   const dispatch = useAppDispatch();
+  const handleHashChange = useEffectEvent( () => {
+    if ( typeof window !== 'undefined' ) {
+      const hash = window.location.hash.replace( '#', '' );
+      if ( [ 'profile', 'bio', 'social-media' ].includes( hash ) ) {
+        setActiveTab( hash );
+      } else if ( !hash ) {
+        setActiveTab( 'profile' );
+      }
+    }
+  } );
 
   const form = useForm( {
     defaultValues: {
@@ -131,17 +141,6 @@ export default function CreatorSettingsPage() {
   } );
 
   useEffect( () => {
-    // Hash handling
-    const handleHashChange = () => {
-      if ( typeof window !== 'undefined' ) {
-        const hash = window.location.hash.replace( '#', '' );
-        if ( [ 'profile', 'bio', 'social-media' ].includes( hash ) ) {
-          setActiveTab( hash );
-        } else if ( !hash ) {
-          setActiveTab( 'profile' ); // Default
-        }
-      }
-    };
     handleHashChange();
     window.addEventListener( 'hashchange', handleHashChange );
     return () => window.removeEventListener( 'hashchange', handleHashChange );

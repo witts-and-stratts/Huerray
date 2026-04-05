@@ -1,0 +1,96 @@
+{
+  "invoicesPage": {
+    "title": "Invoices",
+    "description": "View and download your invoices.",
+    "columns": {
+      "invoice": "Invoice",
+      "brand": "Brand",
+      "campaign": "Campaign",
+      "issued": "Issued",
+      "paid": "Paid?",
+      "amount": "Amount",
+      "actions": "Actions"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Filter invoices...",
+      "status": "Status",
+      "filterByDate": "Filter by date",
+      "issueDate": "Issue Date",
+      "dueDate": "Due Date",
+      "dateRange": "Date range",
+      "selectDateRange": "Select date range",
+      "clearDates": "Clear dates"
+    },
+    "actions": {
+      "view": "View",
+      "downloadPdf": "Download PDF",
+      "downloadingPdf": "Downloading PDF...",
+      "downloadPdfError": "Failed to download invoice PDF",
+      "resendInvoice": "Resend Invoice",
+      "resendingInvoice": "Resending Invoice...",
+      "resendInvoiceSuccess": "Invoice resent successfully",
+      "resendInvoiceError": "Failed to resend invoice",
+      "cancelInvoice": "Cancel Invoice",
+      "paymentGeneratedSuccess": "Payment generated successfully",
+      "paymentGeneratedError": "Failed to generate payment",
+      "invoiceUpdatedSuccess": "Invoice updated successfully",
+      "invoiceUpdatedError": "Failed to update invoice"
+    },
+    "details": {
+      "invoiceFallback": "Invoice",
+      "invoiceDetailsFor": "Invoice details for",
+      "overviewTab": "Overview",
+      "lineItemsTab": "Line Items",
+      "total": "Total",
+      "amountDue": "Amount due",
+      "downloadInvoice": "Download Invoice",
+      "campaign": "Campaign",
+      "dates": "Dates",
+      "issued": "Issued",
+      "due": "Due",
+      "paid": "Status",
+      "created": "Created",
+      "notes": "Notes",
+      "noLineItems": "No line items",
+      "lineItems": "Line Items ({count})"
+    },
+    "dialogs": {
+      "generatePayment": {
+        "title": "Generate payment",
+        "description": "This will mark the invoice as paid and generate a payment record. This action cannot be undone.",
+        "confirmLabel": "Generate payment",
+        "loading": "Generating...",
+        "notes": "Notes"
+      },
+      "issueInvoice": {
+        "title": "Issue Invoice",
+        "description": "Mark this invoice as issued. The brand will be notified.",
+        "confirmLabel": "Issue Invoice",
+        "loading": "Issuing..."
+      },
+      "sendInvoice": {
+        "title": "Send Invoice",
+        "description": "Mark this invoice as sent to the brand.",
+        "confirmLabel": "Send Invoice",
+        "loading": "Sending..."
+      },
+      "invoicePaid": {
+        "title": "Invoice Paid",
+        "description": "Mark this invoice as paid by the brand.",
+        "confirmLabel": "Mark as Paid",
+        "loading": "Updating..."
+      },
+      "cancelInvoice": {
+        "title": "Cancel Invoice",
+        "description": "Are you sure you want to cancel this invoice? This action cannot be undone. Type the invoice title to confirm:",
+        "confirmInvoiceTitle": "Type the invoice title to confirm",
+        "confirmLabel": "Cancel Invoice",
+        "loading": "Cancelling..."
+      }
+    }
+  },
+  "paymentsPage": {
+    "title": "Payments",
+    "description": "View your payment history."
+  }
+}

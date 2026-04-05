@@ -2,22 +2,17 @@
 
 import React from 'react';
 import { ActionMenu, MenuAction } from '@/components/dashboard-ui/action-menu';
-import { Button } from '@/components/dashboard-ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/dashboard-ui/dialog';
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { ModelsCaseResponse, ModelsUserResponse } from '@/lib/api/generated/models';
+import type { UtilsCaseStatus } from '@/lib/api/generated/models/utils-case-status';
 import { useAssignCase, useUpdateCaseStatus } from '@/lib/api/hooks/cases';
 import { useUsers } from '@/lib/api/hooks/users';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import type { EntityMeta, SelectOption } from '@/components/dashboard-ui/superfield/types';
+import { Loader2 } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 
 interface CaseActionMenuProps {
   case_: ModelsCaseResponse;
@@ -82,7 +77,7 @@ export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMen
     }
   }, [ case_.assignee_id, isAssignDialogOpen ] );
 
-  const handleStatusUpdate = ( status: string ) => {
+  const handleStatusUpdate = ( status: UtilsCaseStatus ) => {
     if ( !case_.id ) {
       toast.error( t( 'toasts.missingId' ) );
       return;
@@ -173,43 +168,36 @@ export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMen
         trigger={ trigger }
       />
 
-      <Dialog open={ isAssignDialogOpen } onOpenChange={ setIsAssignDialogOpen }>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{ t( 'assignDialog.title' ) }</DialogTitle>
-            <DialogDescription>{ t( 'assignDialog.description' ) }</DialogDescription>
-          </DialogHeader>
-
-          <div className="space-y-2">
-            <SuperField
-              type="entity-select"
-              id={ `case-assignee-${ case_.id }` }
-              label={ t( 'assignDialog.assigneeLabel' ) }
-              value={ assigneeId }
-              onValueChange={ ( value ) => setAssigneeId( value || '' ) }
-              options={ adminOptions }
-              placeholder={ t( 'assignDialog.placeholder' ) }
-              getEntityMeta={ getAdminMeta }
-              fieldClassName="w-full"
-            />
-            { isLoadingAdmins && (
-              <p className="text-sm text-muted-foreground">{ t( 'assignDialog.loading' ) }</p>
-            ) }
-            { !isLoadingAdmins && adminUsers.length === 0 && (
-              <p className="text-sm text-muted-foreground">{ t( 'assignDialog.empty' ) }</p>
-            ) }
-          </div>
-
-          <DialogFooter>
-            <Button variant="outline" onClick={ () => setIsAssignDialogOpen( false ) }>
-              { t( 'assignDialog.cancel' ) }
-            </Button>
-            <Button onClick={ handleAssign } disabled={ isAssigning || isLoadingAdmins || adminUsers.length === 0 || !assigneeId }>
-              { isAssigning ? t( 'assignDialog.submitting' ) : t( 'assignDialog.confirm' ) }
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ConfirmDialog
+        open={ isAssignDialogOpen }
+        onOpenChange={ setIsAssignDialogOpen }
+        title={ t( 'assignDialog.title' ) }
+        description={ t( 'assignDialog.description' ) }
+        cancelLabel={ t( 'assignDialog.cancel' ) }
+        confirmLabel={ t( 'assignDialog.confirm' ) }
+        onConfirm={ handleAssign }
+        confirmDisabled={ isAssigning || isLoadingAdmins || adminUsers.length === 0 || !assigneeId }
+        isLoading={ isAssigning }
+        loadingText={ t( 'assignDialog.submitting' ) }
+      >
+        <div className="space-y-2">
+          <SuperField
+            type="entity-select"
+            id={ `case-assignee-${ case_.id }` }
+            label={ t( 'assignDialog.assigneeLabel' ) }
+            value={ assigneeId }
+            onValueChange={ ( value ) => setAssigneeId( value || '' ) }
+            options={ adminOptions }
+            placeholder={ t( 'assignDialog.placeholder' ) }
+            getEntityMeta={ getAdminMeta }
+            fieldClassName="w-full"
+          />
+          { isLoadingAdmins ? <Tooltip><TooltipTrigger><Loader2 className="animate-spin" color='burgundy' /></TooltipTrigger><TooltipContent>{ t( 'assignDialog.loading' ) }</TooltipContent></Tooltip> : null }
+          { !isLoadingAdmins && adminUsers.length === 0 && (
+            <p className="text-sm text-muted-foreground">{ t( 'assignDialog.empty' ) }</p>
+          ) }
+        </div>
+      </ConfirmDialog>
     </>
   );
 }

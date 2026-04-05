@@ -1,0 +1,32 @@
+{
+  "breadcrumbs": {
+    "creator": "Schöpfer",
+    "dashboard": "Dashboard",
+    "gigs": "Auftritte",
+    "active": "Aktiv",
+    "invitations": "Einladungen",
+    "notifications": "Benachrichtigungen",
+    "earnings": "Ergebnis",
+    "portfolio": "Portfolio",
+    "settings": "Einstellungen",
+    "completeProfile": "Vollständiges Profil",
+    "account": "Konto",
+    "editBasicInfo": "Benutzerinformationen",
+    "profile": "Profil",
+    "bio": "Biografie",
+    "socialMedia": "Soziale Medien",
+    "security": "Sicherheit",
+    "bankDetails": "Bankverbindung",
+    "loading": "Laden..."
+  },
+  "kpi": {
+    "gigsCompleted": "Abgeschlossene Gigs",
+    "gigsCompletedCaption": "Gesamtzahl der Gigs, die Sie erfolgreich abgeschlossen haben",
+    "totalEarned": "Verdiente Summe",
+    "totalEarnedCaption": "Lebenslanges Einkommen über alle Auftritte hinweg",
+    "approvalRate": "Bewilligungsquote",
+    "approvalRateCaption": "Prozentsatz der von den Marken genehmigten Videos",
+    "successRate": "Erfolgsquote",
+    "successRateCaption": "Anwendungen, die in aktive Auftritte umgewandelt wurden"
+  }
+}

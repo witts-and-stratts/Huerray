@@ -1,0 +1,19 @@
+{
+  "activeGigs": {
+    "title": "Active Gigs",
+    "description": "Current commitments and next deadlines"
+  },
+  "availableGigs": {
+    "title": "Available Gigs",
+    "description": "Explore and apply to new opportunities matched to your profile."
+  },
+  "myGigs": {
+    "title": "Gigs",
+    "description": "All gigs you have participated in.",
+    "tabs": {
+      "all": "All Gigs",
+      "available": "Available Gigs",
+      "active": "Active Gigs"
+    }
+  }
+}

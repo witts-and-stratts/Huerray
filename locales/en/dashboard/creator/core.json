@@ -1,0 +1,83 @@
+{
+  "welcome": "Welcome back, {name}!",
+  "overview": "Here's your gig overview",
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Track invitations, gigs, submissions, and projected earnings.",
+    "browseGigs": "Browse Gigs",
+    "viewMyGigs": "View My Gigs",
+    "creatorFallback": "Creator"
+  },
+  "common": {
+    "details": "Details",
+    "viewAllMyGigs": "View all my gigs",
+    "viewAllEarnings": "View all earnings",
+    "viewAllInvitations": "View all invitations",
+    "viewAllSubmissions": "View all submissions",
+    "untitledGig": "Untitled gig",
+    "unknownBrand": "Unknown brand",
+    "reward": "Reward",
+    "gigCost": "Gig Cost",
+    "deadline": "Deadline",
+    "endsOn": "Ends {date}",
+    "noActiveGigs": "No active gigs yet.",
+    "noInvitations": "No invitations yet.",
+    "noEarnings": "No earnings yet. Complete gigs to start earning!",
+    "na": "N/A",
+    "invitedCreator": "Invited creator",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Failed to load {name}",
+    "somethingWentWrong": "Something went wrong",
+    "product": "Product",
+    "srGigDetails": "Details for gig: {title}",
+    "applicationPending": "Application Pending",
+    "applying": "Applying...",
+    "applyForGig": "Apply for Gig",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Details",
+      "campaign": "Campaign",
+      "mySubmissions": "My Submissions",
+      "submissions": "Submissions",
+      "overview": "Overview"
+    },
+    "toasts": {
+      "appliedSuccess": "Application submitted successfully!",
+      "appliedError": "Failed to submit application. Please try again."
+    }
+  },
+  "gigDetailsFor": "Details for gig: {title}",
+  "campaign": {
+    "aboutTitle": "About this campaign",
+    "dosDonts": "Do's & Don'ts",
+    "dos": "Do's",
+    "donts": "Don'ts",
+    "direction": "Direction",
+    "toneOfVoice": "Tone of voice",
+    "keywords": "Keywords",
+    "noKeywords": "No keywords defined.",
+    "campaignBriefTitle": "Campaign Brief",
+    "campaignBriefDesc": "Core details and messaging requirements",
+    "description": "Description",
+    "category": "Category",
+    "assets": "Assets",
+    "images": "Images",
+    "documents": "Documents",
+    "videos": "Videos",
+    "task": "Task",
+    "recordVideos": "Record {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Duration: {count} seconds"
+  },
+  "requirements": {
+    "title": "Creator Requirements",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "ageRange": "Age range",
+    "any": "Any",
+    "compensation": "Compensation",
+    "guidelines": "Content Guidelines",
+    "ambience": "Ambience",
+    "requirements": "Requirements"
+  }
+}

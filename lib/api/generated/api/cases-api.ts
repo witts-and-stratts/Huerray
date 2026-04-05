@@ -47,16 +47,16 @@ export const CasesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Search cases with optional filters and pagination
          * @summary Search cases
-         * @param {string} [q] Search query
-         * @param {string} [status] Case status
-         * @param {string} [priority] Case priority
-         * @param {string} [relatedEntityType] Related entity type
-         * @param {number} [page] Page number
-         * @param {number} [limit] Items per page
+         * @param {number} [limit] 
+         * @param {number} [page] 
+         * @param {CasesGetPriorityEnum} [priority] 
+         * @param {string} [q] 
+         * @param {CasesGetRelatedEntityTypeEnum} [relatedEntityType] 
+         * @param {CasesGetStatusEnum} [status] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        casesGet: async (q?: string, status?: string, priority?: string, relatedEntityType?: string, page?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        casesGet: async (limit?: number, page?: number, priority?: CasesGetPriorityEnum, q?: string, relatedEntityType?: CasesGetRelatedEntityTypeEnum, status?: CasesGetStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/cases`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -69,28 +69,28 @@ export const CasesApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (q !== undefined) {
-                localVarQueryParameter['q'] = q;
-            }
-
-            if (status !== undefined) {
-                localVarQueryParameter['status'] = status;
-            }
-
-            if (priority !== undefined) {
-                localVarQueryParameter['priority'] = priority;
-            }
-
-            if (relatedEntityType !== undefined) {
-                localVarQueryParameter['related_entity_type'] = relatedEntityType;
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
+            if (priority !== undefined) {
+                localVarQueryParameter['priority'] = priority;
+            }
+
+            if (q !== undefined) {
+                localVarQueryParameter['q'] = q;
+            }
+
+            if (relatedEntityType !== undefined) {
+                localVarQueryParameter['related_entity_type'] = relatedEntityType;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
             }
 
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -336,17 +336,17 @@ export const CasesApiFp = function(configuration?: Configuration) {
         /**
          * Search cases with optional filters and pagination
          * @summary Search cases
-         * @param {string} [q] Search query
-         * @param {string} [status] Case status
-         * @param {string} [priority] Case priority
-         * @param {string} [relatedEntityType] Related entity type
-         * @param {number} [page] Page number
-         * @param {number} [limit] Items per page
+         * @param {number} [limit] 
+         * @param {number} [page] 
+         * @param {CasesGetPriorityEnum} [priority] 
+         * @param {string} [q] 
+         * @param {CasesGetRelatedEntityTypeEnum} [relatedEntityType] 
+         * @param {CasesGetStatusEnum} [status] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async casesGet(q?: string, status?: string, priority?: string, relatedEntityType?: string, page?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedCaseResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.casesGet(q, status, priority, relatedEntityType, page, limit, options);
+        async casesGet(limit?: number, page?: number, priority?: CasesGetPriorityEnum, q?: string, relatedEntityType?: CasesGetRelatedEntityTypeEnum, status?: CasesGetStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedCaseResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.casesGet(limit, page, priority, q, relatedEntityType, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CasesApi.casesGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -449,7 +449,7 @@ export const CasesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         casesGet(requestParameters: CasesApiCasesGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedCaseResponse> {
-            return localVarFp.casesGet(requestParameters.q, requestParameters.status, requestParameters.priority, requestParameters.relatedEntityType, requestParameters.page, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.casesGet(requestParameters.limit, requestParameters.page, requestParameters.priority, requestParameters.q, requestParameters.relatedEntityType, requestParameters.status, options).then((request) => request(axios, basePath));
         },
         /**
          * Assign a case to an admin user (admin-only endpoint)
@@ -518,35 +518,17 @@ export const CasesApiFactory = function (configuration?: Configuration, basePath
  * Request parameters for casesGet operation in CasesApi.
  */
 export interface CasesApiCasesGetRequest {
-    /**
-     * Search query
-     */
-    readonly q?: string
+    readonly limit?: number
 
-    /**
-     * Case status
-     */
-    readonly status?: string
-
-    /**
-     * Case priority
-     */
-    readonly priority?: string
-
-    /**
-     * Related entity type
-     */
-    readonly relatedEntityType?: string
-
-    /**
-     * Page number
-     */
     readonly page?: number
 
-    /**
-     * Items per page
-     */
-    readonly limit?: number
+    readonly priority?: CasesGetPriorityEnum
+
+    readonly q?: string
+
+    readonly relatedEntityType?: CasesGetRelatedEntityTypeEnum
+
+    readonly status?: CasesGetStatusEnum
 }
 
 /**
@@ -636,7 +618,7 @@ export class CasesApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public casesGet(requestParameters: CasesApiCasesGetRequest = {}, options?: RawAxiosRequestConfig) {
-        return CasesApiFp(this.configuration).casesGet(requestParameters.q, requestParameters.status, requestParameters.priority, requestParameters.relatedEntityType, requestParameters.page, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return CasesApiFp(this.configuration).casesGet(requestParameters.limit, requestParameters.page, requestParameters.priority, requestParameters.q, requestParameters.relatedEntityType, requestParameters.status, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -706,3 +688,29 @@ export class CasesApi extends BaseAPI {
     }
 }
 
+export const CasesGetPriorityEnum = {
+    PriorityLow: 'low',
+    PriorityNormal: 'normal',
+    PriorityHigh: 'high',
+    PriorityUrgent: 'urgent'
+} as const;
+export type CasesGetPriorityEnum = typeof CasesGetPriorityEnum[keyof typeof CasesGetPriorityEnum];
+export const CasesGetRelatedEntityTypeEnum = {
+    EntityUser: 'User',
+    EntityBrand: 'Brand',
+    EntityCreator: 'Creator',
+    EntityCampaign: 'Campaign',
+    EntityCase: 'Case',
+    EntityGig: 'Gig',
+    EntityVideoSubmission: 'VideoSubmission',
+    EntityPayment: 'Payment',
+    EntityInvoice: 'Invoice'
+} as const;
+export type CasesGetRelatedEntityTypeEnum = typeof CasesGetRelatedEntityTypeEnum[keyof typeof CasesGetRelatedEntityTypeEnum];
+export const CasesGetStatusEnum = {
+    CaseStatusOpen: 'open',
+    CaseStatusInProgress: 'in_progress',
+    CaseStatusResolved: 'resolved',
+    CaseStatusClosed: 'closed'
+} as const;
+export type CasesGetStatusEnum = typeof CasesGetStatusEnum[keyof typeof CasesGetStatusEnum];

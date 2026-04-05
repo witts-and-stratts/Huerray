@@ -19,6 +19,7 @@ import { getColumns } from './invoices-columns';
 import { InvoicesTableToolbar } from './invoices-table-toolbar';
 import { InvoicesView } from './invoices-view';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
+import { AdminNetworkErrorState } from '@/components/admin/empty-states/admin-network-error-state';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { usePersistedViewMode } from '@/lib/hooks/use-persisted-view-mode';
@@ -45,9 +46,11 @@ export interface InvoicesTableProps {
   data: ModelsInvoiceResponse[];
   isLoading?: boolean;
   isAdmin?: boolean;
+  error?: Error | null;
+  refetch?: () => void;
 }
 
-export function InvoicesTable( { data, isLoading = false, isAdmin = false }: InvoicesTableProps ) {
+export function InvoicesTable( { data, isLoading = false, isAdmin = false, error = null, refetch }: InvoicesTableProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const showLoading = useDelayedLoading( isLoading, 250 );
   const { view, setView } = usePersistedViewMode( 'invoices', 'table' );
@@ -111,7 +114,8 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false }: Inv
   return (
     <AnimatePresence>
       { showLoading && <DataTableSkeleton /> }
-      { !isLoading && (
+      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
+      { !isLoading && !error && (
         <motion.div
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }

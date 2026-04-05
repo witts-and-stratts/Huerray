@@ -17,6 +17,9 @@ export function GlobalSearch() {
       setOpen( ( prev ) => !prev );
     }
   } );
+  const openGlobalSearch = useEffectEvent( () => {
+    setOpen( true );
+  } );
 
   useEffect( () => {
     const handler = ( e: KeyboardEvent ) => shortCutEvent( e );
@@ -25,9 +28,8 @@ export function GlobalSearch() {
   }, [] );
 
   useEffect( () => {
-    const handler = () => setOpen( true );
-    document.addEventListener( 'open-global-search', handler );
-    return () => document.removeEventListener( 'open-global-search', handler );
+    document.addEventListener( 'open-global-search', openGlobalSearch );
+    return () => document.removeEventListener( 'open-global-search', openGlobalSearch );
   }, [] );
 
   const ShortcutBtn = (

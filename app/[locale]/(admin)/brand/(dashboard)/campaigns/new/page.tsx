@@ -54,13 +54,11 @@ export default function NewCampaignPage() {
   const [ campaignType, setCampaignType ] = React.useState<CampaignType>( getHashCampaignType );
   const router = useRouter();
   const createCampaign = useCreateCampaign();
+  const handleHashChange = React.useEffectEvent( () => {
+    setCampaignType( getHashCampaignType() );
+  } );
 
-  // Sync state with URL hash changes (browser back/forward)
   React.useEffect( () => {
-    const handleHashChange = () => {
-      setCampaignType( getHashCampaignType() );
-    };
-
     window.addEventListener( 'hashchange', handleHashChange );
     return () => window.removeEventListener( 'hashchange', handleHashChange );
   }, [] );

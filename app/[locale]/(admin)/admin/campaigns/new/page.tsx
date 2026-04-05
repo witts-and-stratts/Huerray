@@ -10,10 +10,67 @@ import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type'
 import { useCreateCampaign } from '@/lib/api/hooks/campaigns';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import * as React from 'react';
+import { useState } from 'react';
+
+function HumanOnlyUGC( { onClick }: { onClick: () => void; } ) {
+  return (
+    <Card className="flex flex-col h-full hover:border-primary/50 transition-colors cursor-pointer group pt-0" onClick={ onClick }>
+      <div className="h-48 bg-green-100/50 rounded-t-lg flex items-center justify-center p-6 pt-16 border-b">
+        {/* Placeholder for visual - using simple div structure mimicking the image */ }
+        <div className="w-3/4 bg-white rounded-md shadow-sm border border-gray-200 flex flex-col p-2">
+          <div className="h-4 w-full bg-gray-100 mb-2 rounded" />
+          <div className="flex-1 bg-green-50 rounded flex items-center justify-center">
+            <Image src='/images/human-only-ugc.jpg' alt='Human Only UGC' width={ 800 } height={ 500 } />
+          </div>
+        </div>
+      </div>
+      <CardHeader className="text-center pt-8">
+        <CardTitle className="text-xl mb-2 font-primary text-primary">Human only UGC</CardTitle>
+        <CardDescription className="text-base">
+          Leverage our network of creators to produce authentic user-generated content for your brand.
+        </CardDescription>
+      </CardHeader>
+      <CardFooter className="mt-auto justify-center pb-8 pt-4">
+        <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+          Select Human UGC
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+
+function AIEnhancedUGC( { onClick }: { onClick: () => void; } ) {
+  return (
+    <Card className="flex flex-col h-full hover:border-primary/50 transition-colors cursor-pointer group pt-0" onClick={ onClick }>
+      <div className="h-48 bg-blue-100/50 rounded-t-lg flex items-center justify-center p-6 pt-16 border-b">
+        {/* Placeholder for visual */ }
+        <div className="w-3/4 bg-white rounded-md shadow-sm border border-gray-200 flex flex-col p-2 relative">
+          <div className="absolute bottom-2 right-0 scale-75 bg-white shadow-md rounded-lg px-3 py-2 border flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            <span className="text-xs font-normal">AI Enhancing...</span>
+
+          </div>
+          <Image src='/images/ai-enhanced-ugc.jpg' alt='AI Enhanced UGC' width={ 800 } height={ 500 } />
+        </div>
+      </div>
+      <CardHeader className="text-center pt-8">
+        <CardTitle className="text-xl mb-2 font-primary text-primary">AI Enhanced UGC</CardTitle>
+        <CardDescription className="text-base">
+          Leverage AI to generate or optimize and enhance creator content for maximum engagement and conversion.
+        </CardDescription>
+      </CardHeader>
+      <CardFooter className="mt-auto justify-center pb-8 pt-4">
+        <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+          Select AI Enhanced
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
 
 export default function NewCampaignPage() {
-  const [ campaignType, setCampaignType ] = React.useState<'human' | 'ai' | null>( null );
+  const [ campaignType, setCampaignType ] = useState<'human' | 'ai' | null>( null );
   const router = useRouter();
   const createCampaign = useCreateCampaign();
 
@@ -23,7 +80,7 @@ export default function NewCampaignPage() {
       campaign_name: values.campaign_name,
       description: values.description,
       category: values.category as any,
-      content_type: values.content_type as ModelsCreateCampaignRequest['content_type'],
+      content_type: values.content_type as ModelsCreateCampaignRequest[ 'content_type' ],
       keywords: values.keywords.join( ', ' ),
       product_url: values.product_url || undefined,
       product_image: values.product_image ? { asset: values.product_image } : undefined,
@@ -63,55 +120,8 @@ export default function NewCampaignPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4">
-            {/* Human Only UGC */ }
-            <Card className="flex flex-col h-full hover:border-primary/50 transition-colors cursor-pointer group pt-0" onClick={ () => setCampaignType( 'human' ) }>
-              <div className="h-48 bg-green-100/50 rounded-t-lg flex items-center justify-center p-6 pt-16 border-b">
-                {/* Placeholder for visual - using simple div structure mimicking the image */ }
-                <div className="w-3/4 bg-white rounded-md shadow-sm border border-gray-200 flex flex-col p-2">
-                  <div className="h-4 w-full bg-gray-100 mb-2 rounded" />
-                  <div className="flex-1 bg-green-50 rounded flex items-center justify-center">
-                    <Image src='/images/human-only-ugc.jpg' alt='Human Only UGC' width={ 800 } height={ 500 } />
-                  </div>
-                </div>
-              </div>
-              <CardHeader className="text-center pt-8">
-                <CardTitle className="text-xl mb-2 font-primary text-primary">Human only UGC</CardTitle>
-                <CardDescription className="text-base">
-                  Leverage our network of creators to produce authentic user-generated content for your brand.
-                </CardDescription>
-              </CardHeader>
-              <CardFooter className="mt-auto justify-center pb-8 pt-4">
-                <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Select Human UGC
-                </Button>
-              </CardFooter>
-            </Card>
-
-            {/* AI Enhanced UGC */ }
-            <Card className="flex flex-col h-full hover:border-primary/50 transition-colors cursor-pointer group pt-0" onClick={ () => setCampaignType( 'ai' ) }>
-              <div className="h-48 bg-blue-100/50 rounded-t-lg flex items-center justify-center p-6 pt-16 border-b">
-                {/* Placeholder for visual */ }
-                <div className="w-3/4 bg-white rounded-md shadow-sm border border-gray-200 flex flex-col p-2 relative">
-                  <div className="absolute bottom-2 right-0 scale-75 bg-white shadow-md rounded-lg px-3 py-2 border flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                    <span className="text-xs font-normal">AI Enhancing...</span>
-
-                  </div>
-                  <Image src='/images/ai-enhanced-ugc.jpg' alt='AI Enhanced UGC' width={ 800 } height={ 500 } />
-                </div>
-              </div>
-              <CardHeader className="text-center pt-8">
-                <CardTitle className="text-xl mb-2 font-primary text-primary">AI Enhanced UGC</CardTitle>
-                <CardDescription className="text-base">
-                  Leverage AI to generate or optimize and enhance creator content for maximum engagement and conversion.
-                </CardDescription>
-              </CardHeader>
-              <CardFooter className="mt-auto justify-center pb-8 pt-4">
-                <Button variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Select AI Enhanced
-                </Button>
-              </CardFooter>
-            </Card>
+            <HumanOnlyUGC onClick={ () => setCampaignType( 'human' ) } />
+            <AIEnhancedUGC onClick={ () => setCampaignType( 'ai' ) } />
           </div>
         </div>
       ) : (

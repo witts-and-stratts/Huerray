@@ -19,6 +19,7 @@ import { usePaymentColumns } from './payments-columns';
 import { PaymentsTableToolbar } from './payments-table-toolbar';
 import { PaymentsTableView } from './payments-table-view';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
+import { AdminNetworkErrorState } from '@/components/admin/empty-states/admin-network-error-state';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
@@ -44,9 +45,11 @@ export interface PaymentsTableProps {
   data: ModelsPaymentResponse[];
   isLoading?: boolean;
   isAdmin?: boolean;
+  error?: Error | null;
+  refetch?: () => void;
 }
 
-export function PaymentsTable( { data, isLoading = false, isAdmin = false }: PaymentsTableProps ) {
+export function PaymentsTable( { data, isLoading = false, isAdmin = false, error = null, refetch }: PaymentsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
@@ -106,7 +109,8 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false }: Pay
   return (
     <AnimatePresence>
       { showLoading && <DataTableSkeleton /> }
-      { !isLoading && (
+      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
+      { !isLoading && !error && (
         <motion.div
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }

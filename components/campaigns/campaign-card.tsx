@@ -140,11 +140,11 @@ const CampaignAvatars = memo( ( { campaignId, onSelectMatch }: {
       { isLoadingAny ? (
         showSkeleton ? <AvatarRowSkeleton label='&nbsp;' /> : null
       ) : submissionPeople.length > 0 ? (
-        <AvatarGroup title='Submissions' people={ submissionPeople } items={ submissions } type="sub" onSelectItems={ handleSelect } />
+        <AvatarGroup title={ t( 'cards.submissions' ) } people={ submissionPeople } items={ submissions } type="sub" onSelectItems={ handleSelect } />
       ) : applicationPeople.length > 0 ? (
-        <AvatarGroup title='Applications' people={ applicationPeople } items={ applications } type="app" onSelectItems={ handleSelect } />
+        <AvatarGroup title={ t( 'cards.applications' ) } people={ applicationPeople } items={ applications } type="app" onSelectItems={ handleSelect } />
       ) : invitationPeople.length > 0 ? (
-        <AvatarGroup title='Invitations' people={ invitationPeople } items={ invitations } type="inv" onSelectItems={ handleSelect } />
+        <AvatarGroup title={ t( 'cards.invitations' ) } people={ invitationPeople } items={ invitations } type="inv" onSelectItems={ handleSelect } />
       ) : null }
     </AnimatePresence>
   );

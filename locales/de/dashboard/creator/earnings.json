@@ -1,0 +1,43 @@
+{
+  "earningsPage": {
+    "title": "Ergebnis",
+    "description": "Verfolgen Sie Ihr Zahlungsverhalten und Ihre Einnahmen aus abgeschlossenen Aufträgen."
+  },
+  "earnings": {
+    "title": "Ergebnis",
+    "description": "Verfolgen Sie Ihr Zahlungsverhalten und Ihre Einnahmen aus abgeschlossenen Aufträgen.",
+    "recentTotal": "Neueste Gesamt"
+  },
+  "payments": {
+    "status": {
+      "completed": "Abgeschlossen",
+      "pending": "Anhängig",
+      "processing": "Verarbeitung",
+      "failed": "Gescheitert",
+      "cancelled": "Abgesagt"
+    },
+    "table": {
+      "payment": "Zahlung",
+      "creator": "Schöpfer",
+      "date": "Datum",
+      "method": "Methode",
+      "items": "Artikel",
+      "paid": "Bezahlt?",
+      "amount": "Betrag",
+      "actions": "Aktionen",
+      "noEarnings": "Noch keine Einnahmen",
+      "noEarningsFiltered": "Kein Verdienst entspricht Ihren aktuellen Filtern.",
+      "noEarningsDesc": "Ihre Zahlungen aus abgeschlossenen Auftritten werden hier angezeigt.",
+      "searchPlaceholder": "Suchergebnisse...",
+      "clearFilters": "Filter löschen"
+    },
+    "details": {
+      "paymentId": "Zahlungs-ID",
+      "accessibilityDesc": "Zahlungsbedingungen für {reference}.",
+      "created": "Erstellt",
+      "reference": "Referenz",
+      "notes": "Anmerkungen",
+      "totalAmount": "Gesamtbetrag"
+    }
+  }
+}

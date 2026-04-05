@@ -1,0 +1,22 @@
+{
+  "completeProfilePage": {
+    "title": "Vervollständigen Sie Ihr Profil",
+    "description": "Wir machen Sie fit für die Zusammenarbeit mit Marken.",
+    "back": "Zurück",
+    "nextStep": "Nächster Schritt",
+    "creatingProfile": "Profil erstellen...",
+    "completeProfile": "Vollständiges Profil",
+    "successCreated": "Profil erfolgreich erstellt!",
+    "errorCreateFailed": "Profil kann nicht erstellt werden",
+    "errorCreateFailedWithError": "Profil kann nicht erstellt werden: {error}",
+    "validationFixErrors": "Bitte beheben Sie die Validierungsfehler",
+    "validationErrorWithError": "Überprüfungsfehler: {error}",
+    "lifestyleAlt": "Huerray Lebensstil",
+    "brandAlt": "Huerray",
+    "tabs": {
+      "profile": "Profil",
+      "social": "Soziale Medien",
+      "bio": "Bio & Intro"
+    }
+  }
+}

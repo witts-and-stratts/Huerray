@@ -5,7 +5,7 @@ import { GigsTable } from '@/components/campaigns/gigs-table';
 import { ModelsGigResponse } from '@/lib/api/generated';
 
 export function AdminGigsClient() {
-  const { data: gigsData, isLoading } = useGigs();
+  const { data: gigsData, isLoading, error, refetch } = useGigs();
 
   // The API returns ModelsPaginatedGigResponse which has a 'data' property containing the array of gigs
   // We need to ensure we're passing the array of gigs to the table
@@ -15,6 +15,8 @@ export function AdminGigsClient() {
     <GigsTable
       data={ gigs }
       isLoading={ isLoading }
+      error={ error as Error | null }
+      refetch={ refetch }
     />
   );
 }

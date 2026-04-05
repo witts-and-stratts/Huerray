@@ -49,16 +49,16 @@
     "Update": "Actualización",
     "Approval": "Aprobación",
     "Rejection": "Rechazo",
-    "Deletion": "Eliminación",
+    "Deletion": "Supresión",
     "Deactivation": "Desactivación",
-    "Submission": "Envío",
+    "Submission": "Presentación",
     "Invitation": "Invitación",
-    "Application": "Solicitud",
+    "Application": "Aplicación",
     "Acceptance": "Aceptación",
     "Decision": "Decisión",
     "Return": "Devolución",
-    "Registration": "Registro",
-    "Generic": "General"
+    "Registration": "Inscripción",
+    "Generic": "Genérico"
   },
   "empty": {
     "title": "No se muestran notificaciones",

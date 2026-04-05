@@ -1,0 +1,55 @@
+{
+  "paymentsPage": {
+    "title": "Auszahlungen",
+    "description": "Anzeigen und Verwalten aller Auszahlungen an Ersteller auf der gesamten Plattform.",
+    "toolbar": {
+      "filterPlaceholder": "Auszahlungen filtern...",
+      "status": "Status",
+      "dateRangeLabel": "Bereich des Zahlungsdatums",
+      "dateRangePlaceholder": "Datumsbereich auswählen",
+      "clearDates": "Daten löschen"
+    },
+    "actionMenu": {
+      "view": "Siehe",
+      "confirmPayout": "Bestätigung der Auszahlung",
+      "confirming": "Bestätigen Sie...",
+      "confirmDialog": {
+        "title": "Bestätigung der Auszahlung",
+        "description": "Sind Sie sicher, dass Sie diese Auszahlung bestätigen wollen? Dadurch wird ein Zahlungsposten-Datensatz erstellt.",
+        "descriptionWithCreator": "Sind Sie sicher, dass Sie diese Auszahlung für {name} bestätigen wollen? Dadurch wird ein Zahlungsposten-Datensatz erstellt.",
+        "confirmLabel": "Bestätigung der Auszahlung"
+      },
+      "toasts": {
+        "confirmSuccess": "Auszahlung erfolgreich bestätigt.",
+        "confirmError": "Auszahlung konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.",
+        "missingId": "Fehlende Zahlungs-ID."
+      }
+    },
+    "newBatchPayment": {
+      "title": "Neue Chargenzahlung",
+      "description": "Wählen Sie einen Ersteller und seine ausstehenden Zahlungsposten aus.",
+      "triggerButton": "Neue Zahlung",
+      "creatorLabel": "Schöpfer",
+      "creatorPlaceholder": "Wählen Sie einen Ersteller...",
+      "pendingItems": "Ausstehende Posten",
+      "deselectAll": "Alle abwählen",
+      "selectAll": "Alle auswählen",
+      "noItems": "Keine ausstehenden Zahlungsposten für diesen Ersteller.",
+      "paymentMethodLabel": "Zahlungsmethode",
+      "paymentMethodPlaceholder": "z.B. Banküberweisung, PayPal...",
+      "notesLabel": "Anmerkungen",
+      "notesPlaceholder": "Optionale Anmerkungen...",
+      "noItemsSelected": "Keine Artikel ausgewählt",
+      "itemUnit": "{count, plural, =1 {item} other {items}}",
+      "creating": "Erstellen...",
+      "createPayment": "Zahlung erstellen",
+      "toasts": {
+        "createSuccess": "Stapelzahlung erfolgreich erstellt.",
+        "createSuccessDesc": "Die Sammelzahlung wurde erfolgreich erstellt.",
+        "createError": "Stapelzahlung konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+        "selectItem": "Wählen Sie mindestens einen Zahlungsposten aus."
+      }
+    }
+  },
+  "emptyPayments": {}
+}

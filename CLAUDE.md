@@ -53,7 +53,7 @@ The app uses `next-intl` for internationalization with a custom configuration in
 
 - **Supported locales**: `en`, `de`, `fr`, `es`
 - **Default locale**: `en`
-- **Translation files**: Organized in `locales/{locale}/{namespace}.json`
+- **Translation files**: Organized in `locales/{locale}/...` as JSON namespaces, including feature folders such as `locales/{locale}/dashboard/admin/{feature}.json`
 - **Namespaces**: `common`, `header`, `footer`, `home`
 - **Route structure**: All pages are under `app/[locale]/` for locale-specific routing
 

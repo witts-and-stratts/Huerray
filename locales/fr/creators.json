@@ -37,6 +37,33 @@
     "title": "Être payé à temps, à chaque fois",
     "description": "Vous recevez des paiements automatiques lorsque les clients approuvent votre création. Aucune question n'est posée."
   },
+  "benefits": {
+    "heading": "Pourquoi les créateurs choisissent-ils Huerray ?",
+    "authentic": {
+      "title": "Collaborations authentiques",
+      "description": "Travaillez avec des marques qui recherchent des contenus créés par des créateurs plutôt que des créations publicitaires génériques."
+    },
+    "collaboration": {
+      "title": "Des partenariats flexibles",
+      "description": "Choisissez des opportunités qui correspondent à votre style, à votre public et à votre emploi du temps."
+    },
+    "monetize": {
+      "title": "Des revenus fiables",
+      "description": "Vous percevez une rémunération à l'avance et êtes payé une fois que votre travail approuvé est livré."
+    },
+    "creative": {
+      "title": "Contrôle de la création",
+      "description": "Apportez votre propre perspective à chaque dossier tout en restant en phase avec les objectifs de la campagne."
+    },
+    "support": {
+      "title": "Soutien opérationnel",
+      "description": "Laissez Huerray gérer le flux de la plateforme, les approbations et la coordination pour que vous puissiez vous concentrer sur la création de contenu."
+    },
+    "grow": {
+      "title": "Une marge de progression",
+      "description": "Constituez votre portefeuille, renforcez votre profil de créateur et débloquez des travaux de marque plus pertinents au fil du temps."
+    }
+  },
   "testimonial": {
     "quote": "Huerray défend les intérêts de ses créateurs... en veillant à ce que nous soyons rémunérés équitablement et en nous offrant constamment des opportunités de marque qui correspondent à notre style de vie.",
     "author": "Baron McHennie - @baron_mchennie"

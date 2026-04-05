@@ -1,0 +1,101 @@
+{
+  "casesPage": {
+    "title": "Cas de soutien",
+    "description": "Visualiser et gérer tous les cas d'assistance sur la plateforme.",
+    "empty": "Aucun cas n'a été trouvé.",
+    "tabs": {
+      "all": "Tous",
+      "open": "Ouvrir",
+      "inProgress": "En cours",
+      "resolved": "Résolu",
+      "closed": "Fermé"
+    },
+    "statuses": {
+      "open": "Ouvrir",
+      "inProgress": "En cours",
+      "resolved": "Résolu",
+      "closed": "Fermé"
+    },
+    "priorities": {
+      "low": "Faible",
+      "normal": "Normale",
+      "high": "Élevée",
+      "urgent": "Urgente"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Recherche de cas...",
+      "status": "Statut",
+      "priority": "Priorité"
+    },
+    "columns": {
+      "caseNumber": "Cas #",
+      "caseNumberCopied": "Numéro de dossier copié",
+      "title": "Titre",
+      "status": "Statut",
+      "priority": "Priorité",
+      "reporter": "Reporter",
+      "entity": "Entité",
+      "created": "Créée",
+      "actions": "Actions"
+    },
+    "actionMenu": {
+      "viewDetails": "Voir les détails",
+      "copyId": "Copie de l'ID",
+      "assignCase": "Attribuer un dossier",
+      "markInProgress": "Marquer comme en cours",
+      "markResolved": "Marquer comme résolu",
+      "reopen": "Réouverture",
+      "close": "Fermer le dossier",
+      "assignDialog": {
+        "title": "Attribuer un dossier",
+        "description": "Choisissez un administrateur à qui assigner ce cas d'assistance.",
+        "assigneeLabel": "Assigné administratif",
+        "placeholder": "Sélectionner un administrateur",
+        "unknownAdmin": "Administrateur inconnu",
+        "loading": "Chargement des administrateurs...",
+        "empty": "Aucun administrateur n'est disponible.",
+        "cancel": "Annuler",
+        "confirm": "Attribuer un dossier",
+        "submitting": "Attribuer..."
+      },
+      "toasts": {
+        "idCopied": "Cas d'espèce copié",
+        "missingId": "ID du cas manquant",
+        "assigneeRequired": "Sélectionnez un administrateur pour assigner ce cas",
+        "caseAssigned": "Cas attribué",
+        "caseAssignError": "Échec de l'assignation d'un cas",
+        "statusUpdated": "Mise à jour de l'état d'avancement du dossier",
+        "statusUpdateError": "Échec de la mise à jour du statut du dossier"
+      }
+    },
+    "details": {
+      "tab": "Détails",
+      "description": "Informations détaillées sur le cas",
+      "selectPrompt": "Sélectionnez un cas pour voir les détails",
+      "untitled": "Affaire sans titre",
+      "descriptionLabel": "Description",
+      "caseInfo": "Informations sur le cas",
+      "systemInfo": "Détails du système",
+      "status": "Statut",
+      "priority": "Priorité",
+      "reporter": "Reporter",
+      "assignee": "Cessionnaire",
+      "relatedEntity": "Entité apparentée",
+      "caseId": "Numéro d'identification du cas",
+      "idCopied": "Cas d'espèce copié",
+      "created": "Créée",
+      "updated": "Dernière mise à jour",
+      "resolved": "Résolu à",
+      "unknown": "Inconnu",
+      "unassigned": "Non attribué",
+      "na": "N/A"
+    },
+    "messages": {
+      "tab": "Messages",
+      "empty": "Aucun message pour l'instant. Commencer la conversation.",
+      "placeholder": "Tapez un message... (Entrez pour envoyer)",
+      "sent": "Message envoyé",
+      "sendError": "Échec de l'envoi du message"
+    }
+  }
+}

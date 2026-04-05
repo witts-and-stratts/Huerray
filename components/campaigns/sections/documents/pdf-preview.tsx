@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/dashboard-ui/button';
 import { ChevronLeft, ChevronRight, Download, Loader2 } from 'lucide-react';
-import { useState, useEffect, useCallback, useMemo, useTransition } from 'react';
+import { useState, useEffect, useEffectEvent, useCallback, useMemo, useTransition } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import useMeasure from 'react-use-measure';
 
@@ -53,41 +53,38 @@ export default function PdfPreview( { src, thumbnail }: PdfPreviewProps ) {
   const goToNextPage = useCallback( () => {
     setPageNumber( p => Math.min( numPages, p + 1 ) );
   }, [ numPages ] );
+  const handleKeyDown = useEffectEvent( ( e: KeyboardEvent ) => {
+    if (
+      document.activeElement?.tagName === 'INPUT' ||
+      document.activeElement?.tagName === 'TEXTAREA' ||
+      ( document.activeElement as HTMLElement )?.isContentEditable
+    ) {
+      return;
+    }
+
+    if ( e.altKey || e.ctrlKey || e.metaKey || e.shiftKey ) {
+      return;
+    }
+
+    if ( e.key === 'ArrowLeft' ) {
+      if ( pageNumber > 1 ) {
+        e.preventDefault();
+        e.stopPropagation();
+        goToPrevPage();
+      }
+    } else if ( e.key === 'ArrowRight' ) {
+      if ( pageNumber < numPages ) {
+        e.preventDefault();
+        e.stopPropagation();
+        goToNextPage();
+      }
+    }
+  } );
 
   useEffect( () => {
-    const handleKeyDown = ( e: KeyboardEvent ) => {
-      // Don't trigger if user is typing in an input/textarea
-      if (
-        document.activeElement?.tagName === 'INPUT' ||
-        document.activeElement?.tagName === 'TEXTAREA' ||
-        ( document.activeElement as HTMLElement )?.isContentEditable
-      ) {
-        return;
-      }
-
-      // Only handle if no modifier keys are pressed
-      if ( e.altKey || e.ctrlKey || e.metaKey || e.shiftKey ) {
-        return;
-      }
-
-      if ( e.key === 'ArrowLeft' ) {
-        if ( pageNumber > 1 ) {
-          e.preventDefault();
-          e.stopPropagation();
-          goToPrevPage();
-        }
-      } else if ( e.key === 'ArrowRight' ) {
-        if ( pageNumber < numPages ) {
-          e.preventDefault();
-          e.stopPropagation();
-          goToNextPage();
-        }
-      }
-    };
-
     window.addEventListener( 'keydown', handleKeyDown, { capture: true } );
     return () => window.removeEventListener( 'keydown', handleKeyDown, { capture: true } );
-  }, [ goToPrevPage, goToNextPage, pageNumber, numPages ] );
+  }, [] );
 
   const isLoading = numPages === 0;
   // pageReady becomes true once the first page canvas has been painted

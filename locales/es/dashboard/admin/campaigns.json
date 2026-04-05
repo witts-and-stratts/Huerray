@@ -1,0 +1,79 @@
+{
+  "campaignsPage": {
+    "title": "Campañas",
+    "description": "Ver y gestionar todas las campañas en la plataforma",
+    "toolbar": {
+      "search": "Campaña de búsqueda...",
+      "filterByDate": "Filtrar por fecha",
+      "createdDate": "Fecha de creación",
+      "updatedDate": "Fecha de actualización",
+      "dateRange": "Intervalo de fechas",
+      "selectDateRange": "Seleccione el intervalo de fechas",
+      "clearDates": "Borrar fechas"
+    }
+  },
+  "campaignOverview": {
+    "workflow": {
+      "title": "Flujo de trabajo",
+      "description": "Solicitudes, envíos e invitaciones",
+      "tabs": {
+        "submissions": "Envíos",
+        "applications": "Aplicaciones",
+        "invitations": "Invitaciones"
+      },
+      "states": {
+        "submissionsError": "No se pueden cargar los envíos.",
+        "applicationsError": "No se pueden cargar las aplicaciones.",
+        "invitationsError": "No se pueden cargar las invitaciones.",
+        "noSubmissions": "Aún no se han presentado propuestas.",
+        "noApplications": "Aún no hay solicitudes.",
+        "noInvitations": "Aún no hay invitaciones."
+      },
+      "actions": {
+        "retry": "Reintentar",
+        "viewAllInvitations": "Ver todas las invitaciones"
+      },
+      "labels": {
+        "unknownApplicant": "Solicitante desconocido",
+        "campaignApplication": "Solicitud de campaña",
+        "creator": "Creador",
+        "campaignInvitation": "Invitación a la campaña",
+        "na": "N/A"
+      }
+    },
+    "metadata": {
+      "title": "Metadatos de la campaña",
+      "description": "Calendario, formato y contexto de entrega",
+      "labels": {
+        "created": "Creado",
+        "updated": "Actualizado",
+        "format": "Formato",
+        "multiVideo": "Vídeo múltiple",
+        "brand": "Marca",
+        "na": "N/A"
+      },
+      "values": {
+        "allowed": "Permitido",
+        "singleVideo": "Vídeo individual"
+      }
+    },
+    "assets": {
+      "title": "Activos",
+      "description": "Imágenes y documentos de campaña",
+      "tabs": {
+        "images": "Imágenes ({count})",
+        "documents": "Documentos ({count})",
+        "videos": "Vídeos ({count})"
+      },
+      "states": {
+        "noImages": "No se han cargado imágenes.",
+        "noDocuments": "No se adjuntan documentos.",
+        "noVideos": "No se adjuntan vídeos de muestra."
+      },
+      "labels": {
+        "previewAsset": "Vista previa del activo de campaña {index}",
+        "assetAlt": "Activo de la campaña {index}"
+      }
+    }
+  }
+}

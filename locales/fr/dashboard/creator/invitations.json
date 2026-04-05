@@ -1,0 +1,45 @@
+{
+  "invitations": {
+    "title": "Invitations",
+    "description": "Gérez les invitations à des concerts lancées par des marques.",
+    "latestFromBrands": "Dernières invitations des marques",
+    "noInvitationsYet": "Pas encore d'invitations",
+    "noInvitationsDesc": "Lorsque des marques vous inviteront à leurs concerts, ils apparaîtront ici.",
+    "loadFailed": "Échec du chargement des invitations",
+    "somethingWentWrong": "Quelque chose n'a pas fonctionné",
+    "status": {
+      "pending": "En attente",
+      "accepted": "Accepté",
+      "declined": "Refusé",
+      "unknown": "Inconnu"
+    },
+    "actions": {
+      "view": "Voir l'invitation",
+      "accept": "Accepter l'invitation",
+      "acceptShort": "Accepter",
+      "decline": "Refuser l'invitation",
+      "declineShort": "Déclin",
+      "reject": "Rejeter l'invitation",
+      "createSubmission": "Créer une soumission",
+      "openMenu": "Ouvrir le menu",
+      "viewSubmissions": "Voir les soumissions"
+    },
+    "dialogs": {
+      "acceptTitle": "Accepter l'invitation",
+      "acceptDesc": "Êtes-vous sûr de vouloir accepter cette invitation ? La marque en sera informée et vous pourrez commencer à travailler sur le concert.",
+      "acceptCommentPlaceholder": "Ajouter un commentaire pour cette approbation",
+      "accepting": "Accepter...",
+      "declineTitle": "Refuser l'invitation",
+      "declineDesc": "Êtes-vous sûr de vouloir refuser cette invitation ? Cette action ne peut être annulée.",
+      "declineCommentPlaceholder": "Expliquez pourquoi vous déclinez",
+      "declining": "En déclin...",
+      "rejectTitle": "Rejeter l'invitation",
+      "rejectDesc": "Êtes-vous sûr de vouloir rejeter cette invitation ? Cette action ne peut être annulée."
+    },
+    "toasts": {
+      "accepted": "Invitation acceptée avec succès",
+      "declined": "Invitation refusée avec succès",
+      "error": "Échec de la mise à jour du statut de l'invitation"
+    }
+  }
+}

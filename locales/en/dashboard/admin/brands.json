@@ -1,0 +1,164 @@
+{
+  "brandsPage": {
+    "title": "Brands",
+    "description": "Manage and track all brands on the platform"
+  },
+  "brandDetails": {
+    "description": "Detailed information about brand",
+    "companyDetails": "Company Details",
+    "contactInfo": "Contact Info",
+    "systemDetails": "System Details",
+    "brandId": "Brand ID",
+    "userId": "User ID",
+    "category": "Category",
+    "companySize": "Company Size",
+    "vatId": "VAT ID",
+    "regNumber": "Reg. Number",
+    "descriptionLabel": "Description"
+  },
+  "brandStatus": {
+    "title": "Update Brand Status",
+    "description": "Review the brand's profile and update their status.",
+    "statusLabel": "Status",
+    "approve": "Approve",
+    "reject": "Reject",
+    "return": "Return",
+    "totalRejection": "Total Rejection",
+    "successToast": "Brand status updated successfully",
+    "errorToast": "Failed to update brand status",
+    "missingId": "Brand ID is missing",
+    "confirmApproveTitle": "Approve brand profile?",
+    "confirmApproveDesc": "{name}'s profile will be approved and they will be notified.",
+    "confirmRejectTitle": "Reject brand profile?",
+    "confirmRejectDesc": "{name}'s profile will be rejected and they will be notified.",
+    "confirmReturnTitle": "Return brand profile?",
+    "confirmReturnDesc": "{name}'s profile will be returned and they will be notified.",
+    "commentLabel": "Comment",
+    "commentPlaceholder": "Add a comment",
+    "approving": "Approving...",
+    "rejecting": "Rejecting...",
+    "returning": "Returning...",
+    "approvedToast": "{name} approved successfully",
+    "rejectedToast": "{name} rejected",
+    "returnedToast": "{name} returned",
+    "thisBrand": "This brand"
+  },
+  "brandActionMenu": {
+    "ThisActionCannot": "? This action cannot be undone.",
+    "areYouSureYou": "Are you sure you want to delete",
+    "openMenu": "Open menu",
+    "brandDeletedSuccessfully": "Brand deleted successfully",
+    "failedToDeleteBrand": "Failed to delete brand",
+    "brandProfileNotFound": "Brand profile not found",
+    "copyBrandId": "Copy Brand ID",
+    "brandIdCopiedToClipboard": "Brand ID copied to clipboard",
+    "visitWebsite": "Visit Website",
+    "viewDetails": "View Details",
+    "reviewProfile": "Review Profile",
+    "deleteBrand": "Delete Brand",
+    "confirmDelete": "Delete"
+  },
+  "brandCard": {},
+  "brandDetailsSheet": {
+    "company": "Company",
+    "overview": "Overview",
+    "detailedInformationAboutBrand": "Detailed information about brand"
+  },
+  "brandStatusBadge": {},
+  "brandStatusDialog": {
+    "updateStatus": "Update Status",
+    "cancel": "Cancel",
+    "reviewTheBrandsProfile": "Review the brand's profile and update their status.",
+    "updateBrandStatus": "Update Brand Status"
+  },
+  "brandsCardsView": {},
+  "brandsColumns": {},
+  "brandsTableToolbar": {
+    "selectAll": "Select All"
+  },
+  "brandsTableView": {},
+  "brandsTable": {},
+  "brandsView": {},
+  "brandDashboard": {
+    "totalSpend": "Total Spend",
+    "avgGigSpend": "Avg Gig Spend",
+    "total": "Total",
+    "active": "Active",
+    "finished": "Finished",
+    "draft": "Draft",
+    "failedToLoad": "Failed to load brand profile",
+    "brandNotFound": "Brand not found",
+    "brandDashboard": "Brand Dashboard",
+    "overview": "Overview of brand performance and details",
+    "brands": "Brands"
+  },
+  "brandCampaignMetricsBlock": {
+    "campaignLifecycleOverview": "Campaign lifecycle overview",
+    "campaigns": "Campaigns"
+  },
+  "brandCampaignsTableBlock": {
+    "created": "Created:",
+    "noCampaignsYet": "No campaigns yet",
+    "loadingRecentCampaigns": "Loading recent campaigns...",
+    "loadingCampaignStats": "Loading campaign stats...",
+    "recentCampaigns": "Recent Campaigns",
+    "stats": "Stats",
+    "brandCampaignActivityAnd": "Brand campaign activity and status",
+    "campaigns": "Campaigns",
+    "untitledCampaign": "Untitled Campaign"
+  },
+  "brandContactBlock": {
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "contactAddress": "Contact & Address"
+  },
+  "brandFinancialsBlock": {
+    "spendPerformanceForThis": "Spend performance for this brand",
+    "financials": "Financials"
+  },
+  "brandProfileBlock": {
+    "user": "User",
+    "contact": "Contact",
+    "overview": "Overview",
+    "failedToLoadUser": "Failed to load user details",
+    "identity": "Identity",
+    "emailVerified": "Email verified",
+    "emailUnverified": "Email unverified",
+    "name": "Name",
+    "username": "Username",
+    "usernameCopied": "Username copied",
+    "type": "Type",
+    "email": "Email",
+    "system": "System",
+    "userId": "User ID",
+    "userIdCopied": "User ID copied",
+    "joined": "Joined",
+    "updated": "Updated",
+    "noContactEmail": "No contact email",
+    "details": "Details",
+    "category": "Category",
+    "location": "Location",
+    "country": "Country",
+    "companySize": "Company Size",
+    "registered": "Registered",
+    "vatId": "VAT ID",
+    "phone": "Phone",
+    "website": "Website",
+    "addressTitle": "Address",
+    "noAddress": "No address on file",
+    "noLinkedUser": "No linked user account",
+    "na": "N/A"
+  },
+  "brandRecentCampaignsBlock": {
+    "noCampaignsYet": "No campaigns yet.",
+    "unableToLoadRecent": "Unable to load recent campaigns.",
+    "latestCampaignsForThis": "Latest campaigns for this brand",
+    "recentCampaigns": "Recent Campaigns"
+  },
+  "brandRecentSubmissionsBlock": {
+    "unableToLoadRecent": "Unable to load recent submissions.",
+    "latestVideoSubmissionsAcross": "Latest video submissions across campaigns",
+    "recentSubmissions": "Recent Submissions"
+  }
+}

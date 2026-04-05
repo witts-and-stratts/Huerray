@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useEffectEvent, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/dashboard-utils";
 import {
@@ -70,14 +70,14 @@ export const SearchableSelect = ( {
       setWidth( triggerRef.current.offsetWidth );
     }
   }, [ open ] );
+  const handleResize = useEffectEvent( () => {
+    if ( triggerRef.current ) {
+      setWidth( triggerRef.current.offsetWidth );
+    }
+  } );
 
   // Also handle resize to keep it responsive
   useEffect( () => {
-    const handleResize = () => {
-      if ( triggerRef.current ) {
-        setWidth( triggerRef.current.offsetWidth );
-      }
-    };
     window.addEventListener( 'resize', handleResize );
     return () => window.removeEventListener( 'resize', handleResize );
   }, [] );

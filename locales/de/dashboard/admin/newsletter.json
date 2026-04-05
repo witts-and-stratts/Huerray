@@ -1,0 +1,42 @@
+{
+  "newsletterPage": {
+    "title": "Newsletter",
+    "description": "Suchen und exportieren Sie Newsletter-Abonnenten über den Verwaltungsbereich.",
+    "notice": "Das aktuelle Backend bietet nur die Möglichkeit, Newsletter zu suchen, zu abonnieren oder abzubestellen. Bearbeitungs- und Löschvorgänge erfordern spezielle Admin-Endpunkte, bevor sie aktiviert werden können.",
+    "summary": "{visible} sichtbar von {total} Einträgen, {selected} ausgewählt",
+    "empty": "Keine Newsletter-Einträge gefunden.",
+    "emptyDescription": "Die Newsletter-Abonnements werden hier angezeigt, sobald die ersten Kontakte sich anmelden.",
+    "error": {
+      "title": "Newsletter-Einträge können nicht geladen werden",
+      "description": "Es gab ein Problem beim Laden von Newsletter-Abonnements. Versuchen Sie es erneut.",
+      "retry": "Erneut versuchen"
+    },
+    "columns": {
+      "email": "E-Mail",
+      "name": "Name",
+      "status": "Status",
+      "source": "Quelle",
+      "subscribedAt": "Abonniert",
+      "updatedAt": "Aktualisiert"
+    },
+    "filters": {
+      "searchPlaceholder": "Newsletter-Einträge suchen..."
+    },
+    "actions": {
+      "exportFiltered": "Massenhafte Ausfuhr",
+      "exportSelected": "Export ausgewählt",
+      "resubscribe": "Neu anmelden",
+      "unsubscribe": "Abbestellen",
+      "delete": "Löschen",
+      "more": "Mehr"
+    },
+    "messages": {
+      "endpointMissing": "Für diese Aktion ist ein Endpunkt für die Aktualisierung/Löschung des Newsletters erforderlich.",
+      "resubscribed": "Newsletter-Abonnent hat sich erneut angemeldet.",
+      "resubscribeFailed": "Der Newsletter-Abonnent konnte nicht erneut angemeldet werden.",
+      "unsubscribed": "Newsletter-Abonnent hat sich abgemeldet.",
+      "unsubscribeFailed": "Newsletter-Abonnent konnte nicht abbestellt werden.",
+      "unsubscribeEmailMissing": "Dieser Newsletter-Eintrag enthält keine E-Mail Adresse."
+    }
+  }
+}

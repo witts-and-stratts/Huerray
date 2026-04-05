@@ -1,0 +1,39 @@
+{
+  "submissions": {
+    "title": "Jüngste Einreichungen",
+    "description": "Ihre zuletzt gelieferten Videos",
+    "noSubmissions": "Noch keine Einreichungen",
+    "noSubmissionsDesc": "Wenn Sie Beiträge für diesen Auftritt erstellen, werden sie hier angezeigt.",
+    "createTitle": "Einreichung erstellen",
+    "createDesc": "Laden Sie Ihr Video hoch und fügen Sie Details zu diesem Auftritt hinzu.",
+    "details": "Details zur Einreichung",
+    "form": {
+      "title": "Titel",
+      "titlePlaceholder": "Geben Sie Ihrem Beitrag einen Titel",
+      "notes": "Anmerkungen",
+      "notesPlaceholder": "Fügen Sie Anmerkungen zu Ihrem Beitrag hinzu...",
+      "submit": "Video einreichen",
+      "submitting": "Einreichen..."
+    },
+    "validation": {
+      "titleRequired": "Titel ist erforderlich",
+      "videoRequired": "Videodatei ist erforderlich",
+      "maxSize": "Die maximale Dateigröße beträgt 500 MB.",
+      "invalidFormat": "Es werden nur die Formate .mp4, .mov und .webm unterstützt"
+    },
+    "dropzoneTitle": "Ziehen Sie Ihr Video per Drag & Drop hierher",
+    "dropzoneDesc": "oder klicken Sie auf , um von Ihrem Computer aus zu browsen",
+    "dropzoneSpecs": "Unterstützt MP4, MOV, WEBM (maximal 500MB)",
+    "videoThumbnailError": "Video-Miniaturansicht konnte nicht erstellt werden",
+    "uploadFailedLog": "Upload fehlgeschlagen:",
+    "cancel": "Abbrechen",
+    "success": "Einreichung erfolgreich erstellt",
+    "error": "Vorlage konnte nicht erstellt werden",
+    "missingGigId": "Gig ID fehlt",
+    "uploading": "Bitte warten Sie, bis das Video fertig hochgeladen ist",
+    "toasts": {
+      "success": "Einreichung erfolgreich erstellt",
+      "error": "Vorlage konnte nicht erstellt werden"
+    }
+  }
+}

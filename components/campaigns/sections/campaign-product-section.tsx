@@ -2,18 +2,19 @@ import { Card, CardContent } from '@/components/dashboard-ui/card';
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from '@/components/dashboard-ui/field';
 import { Progress } from '@/components/dashboard-ui/progress';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { Dropzone, DropzoneContent, DropzoneEmptyState } from '@/components/ui/shadcn-io/dropzone';
+import { Dropzone } from '@/components/ui/shadcn-io/dropzone';
 import { apiClient, apiConfiguration, BASE_URL } from '@/lib/api/client';
 import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
 import { ModelsUploadsImagePost200Response } from '@/lib/api/models/models-uploads-image-post200-response';
 import { getUploadProgressPercentage } from '@/lib/utils/axios-utils';
+import { cn } from '@/lib/utils';
 import { CheckmarkCircle01Icon, Link01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Trash2, UploadIcon } from 'lucide-react';
 import { motion } from 'motion/react';
-import { ChangeEvent, memo, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, memo, useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { CampaignFormApi } from '../schema';
+import { CampaignFormApi, createTranslatedCampaignSchema } from '../schema';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { useTranslations } from 'next-intl';
 
@@ -45,22 +46,24 @@ interface ImagePreviewProps {
   filePreview: string;
   isUploading: boolean;
   uploadProgress: number;
+  onRemove: ( e: MouseEvent<HTMLButtonElement> ) => void;
 }
 
 const ImagePreview = memo( function ImagePreview( {
   filePreview,
   isUploading,
   uploadProgress,
+  onRemove,
 }: ImagePreviewProps ) {
   const t = useTranslations( 'dashboard.brand.newCampaignPage.product' );
   const isDefaultPreview = filePreview === DEFAULT_FILE_PREVIEW;
 
   return (
-    <div className='flex p-0 gap-4 rounded-lg overflow-hidden h-full relative w-full'>
-      <div className='w-[160px] aspect-square flex shrink-0 relative'>
+    <div className='relative flex h-full min-h-32 w-[160px] shrink-0 overflow-hidden rounded-lg bg-muted'>
+      <div className='relative h-full w-full'>
         <motion.img
           alt={ t( 'preview' ) }
-          className="w-full h-full object-cover object-top"
+          className={ 'w-full h-full aspect-square object-cover object-[50%_30%]' }
           src={ filePreview.startsWith( 'http' ) ? imgpresets.card( filePreview ) : filePreview }
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
@@ -75,12 +78,18 @@ const ImagePreview = memo( function ImagePreview( {
             <HugeiconsIcon icon={ CheckmarkCircle01Icon } size={ 24 } />
           </div>
         ) }
+        { !isDefaultPreview && !isUploading && (
+          <button
+            type='button'
+            onClick={ onRemove }
+            className='absolute top-2 right-2 inline-flex size-8 items-center justify-center rounded-full bg-background/90 text-muted-foreground shadow-sm transition-colors hover:bg-background hover:text-destructive'
+            aria-label={ t( 'removeProductImage' ) }
+            title={ t( 'removeProductImage' ) }
+          >
+            <Trash2 className='size-4' />
+          </button>
+        ) }
       </div>
-      { isDefaultPreview && (
-        <div className='flex-1 flex items-center justify-center'>
-          <EmptyState />
-        </div>
-      ) }
     </div>
   );
 } );
@@ -141,13 +150,13 @@ const ProductImageUploader = memo( function ProductImageUploader( {
         setIsUploading( false );
       }
     }
-  }, [ onUploadComplete, onPreviewChange ] );
+  }, [ onUploadComplete, onPreviewChange, t ] );
 
   const handleDropError = useCallback( ( error: Error ) => {
     console.error( error );
   }, [] );
 
-  const handleRemove = useCallback( ( e: React.MouseEvent<HTMLButtonElement> ) => {
+  const handleRemove = useCallback( ( e: MouseEvent<HTMLButtonElement> ) => {
     e.stopPropagation();
     setFiles( undefined );
     setUploadProgress( 0 );
@@ -158,39 +167,30 @@ const ProductImageUploader = memo( function ProductImageUploader( {
   return (
     <Dropzone
       accept={ ACCEPTED_FILE_TYPES }
-      className='p-0 h-32 w-full transition-all duration-300 border border-dashed border-burgundy-200 hover:ring-8 hover:ring-burgundy-600/20'
+      className='group p-0 min-h-32 w-full border border-dashed border-burgundy-200 transition-all duration-300 hover:ring-8 hover:ring-burgundy-600/20'
       onDrop={ handleDrop }
       onError={ handleDropError }
       src={ files }
       maxFiles={ 1 }
     >
-      <DropzoneContent className='flex h-full w-full overflow-hidden'>
-        <div className='relative h-full w-full'>
+      { ( { isDragActive } ) => (
+        <div
+          className={ cn(
+            'flex h-full w-full items-stretch gap-4 overflow-hidden p-2 transition-all duration-300 group-hover:ring-8 group-hover:ring-burgundy-600/20',
+            isDragActive && 'ring-8 ring-burgundy-600/20'
+          ) }
+        >
           <ImagePreview
             filePreview={ filePreview }
             isUploading={ isUploading }
             uploadProgress={ uploadProgress }
+            onRemove={ handleRemove }
           />
-          { filePreview !== DEFAULT_FILE_PREVIEW && !isUploading && (
-            <button
-              type='button'
-              onClick={ handleRemove }
-              className='absolute top-2 right-2 inline-flex size-8 items-center justify-center rounded-full bg-background/90 text-muted-foreground shadow-sm transition-colors hover:bg-background hover:text-destructive'
-              aria-label={ t( 'removeProductImage' ) }
-              title={ t( 'removeProductImage' ) }
-            >
-              <Trash2 className='size-4' />
-            </button>
-          ) }
+          <div className='flex min-w-0 flex-1 items-center justify-center rounded-lg border border-dashed border-transparent px-4 py-6 text-center'>
+            <EmptyState />
+          </div>
         </div>
-      </DropzoneContent>
-      <DropzoneEmptyState className='p-0! h-full!'>
-        <ImagePreview
-          filePreview={ filePreview }
-          isUploading={ isUploading }
-          uploadProgress={ uploadProgress }
-        />
-      </DropzoneEmptyState>
+      ) }
     </Dropzone>
   );
 } );
@@ -203,6 +203,8 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
   form,
 }: { form: CampaignFormApi; } ) {
   const t = useTranslations( 'dashboard.brand.newCampaignPage.product' );
+  const campaignPageT = useTranslations( 'dashboard.brand.newCampaignPage' );
+  const campaignSchema = createTranslatedCampaignSchema( campaignPageT );
   const [ filePreview, setFilePreview ] = useState<string>(
     form.getFieldValue( 'product_image' ) || DEFAULT_FILE_PREVIEW
   );
@@ -247,7 +249,7 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
                 onRemove={ handleRemoveImage }
               />
               <FieldGroup className='flex flex-row gap-2'>
-                <form.Field name="product_image">
+                <form.Field name="product_image" validators={ { onChange: campaignSchema.shape.product_image, onBlur: campaignSchema.shape.product_image } }>
                   { ( field ) => (
                     <SuperField
                       label='Product Image URL'
@@ -264,7 +266,7 @@ export const CampaignProductSection = memo( function CampaignProductSection( {
                     />
                   ) }
                 </form.Field>
-                <form.Field name="product_url">
+                <form.Field name="product_url" validators={ { onChange: campaignSchema.shape.product_url, onBlur: campaignSchema.shape.product_url } }>
                   { ( field ) => (
                     <SuperField
                       label={ t( 'productLink' ) }

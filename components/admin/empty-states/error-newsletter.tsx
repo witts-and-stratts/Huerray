@@ -1,7 +1,5 @@
-import { useTranslations } from "next-intl";
-
-import { Button } from "@/components/dashboard-ui/button";
-import { EmptyState, EmptyStateProps } from "./empty-state";
+import { EmptyStateProps } from "./empty-state";
+import { AdminNetworkErrorState } from "./admin-network-error-state";
 
 type ErrorNewsletterProps = Omit<EmptyStateProps, "imageSrc"> & {
   message?: string;
@@ -9,32 +7,28 @@ type ErrorNewsletterProps = Omit<EmptyStateProps, "imageSrc"> & {
 };
 
 export function ErrorNewsletter( {
-  imageWidth = 240,
-  imageHeight = 240,
+  imageWidth,
+  imageHeight,
   title,
   description,
-  fill = false,
+  fill,
   children,
   message,
   onRetry,
-  className
+  className,
 }: ErrorNewsletterProps ) {
-  const t = useTranslations( "dashboard.admin" );
-
   return (
-    <EmptyState
-      imageSrc="/svg/mailbox-guy.svg"
+    <AdminNetworkErrorState
       imageWidth={ imageWidth }
       imageHeight={ imageHeight }
-      title={ title || t( "newsletterPage.error.title" ) }
-      description={ description || message || t( "newsletterPage.error.description" ) }
+      title={ title }
+      description={ description }
       fill={ fill }
       className={ className }
+      message={ message }
+      onRetry={ onRetry }
     >
       { children }
-      <Button variant="outline" onClick={ onRetry || ( () => window.location.reload() ) }>
-        { t( "newsletterPage.error.retry" ) }
-      </Button>
-    </EmptyState>
+    </AdminNetworkErrorState>
   );
 }

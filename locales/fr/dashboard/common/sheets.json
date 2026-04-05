@@ -1,0 +1,185 @@
+{
+  "sheets": {
+    "overview": "Vue d'ensemble",
+    "details": "Détails",
+    "bio": "Bio",
+    "socialMedia": "Médias sociaux",
+    "preferredCategories": "Catégories préférées",
+    "noBioAvailable": "Pas de bio disponible",
+    "noSocialAccounts": "Pas de comptes sociaux connectés",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "website": "Site web",
+    "address": "Adresse",
+    "joined": "Rejoint",
+    "created": "Créée",
+    "updated": "Mise à jour",
+    "type": "Type",
+    "yes": "Oui",
+    "no": "Non",
+    "age": "L'âge",
+    "ageYears": "{age} ans",
+    "updateStatus": "Mise à jour du statut",
+    "statusRequired": "Le statut est requis",
+    "comments": "Commentaires",
+    "commentPlaceholder": "Ajoutez un commentaire ou la raison de cette décision...",
+    "cancel": "Annuler",
+    "na": "N/A"
+  },
+  "helpSheet": {
+    "hero": {
+      "title": "Besoin d'aide ?",
+      "subtitle": "Trouvez les réponses aux questions les plus courantes ou contactez-nous pour obtenir l'aide dont vous avez besoin.",
+      "searchPlaceholder": "Poser une question..."
+    },
+    "cards": {
+      "brand": [
+        {
+          "title": "Pour commencer",
+          "description": "Apprenez à créer des campagnes et à tirer le meilleur parti de la plateforme."
+        },
+        {
+          "title": "Gestion des créateurs",
+          "description": "Invitez des créateurs, examinez les candidatures et gérez les collaborations."
+        },
+        {
+          "title": "Facturation et paiements",
+          "description": "Comprendre les factures, les méthodes de paiement et les cycles de facturation."
+        }
+      ],
+      "creator": [
+        {
+          "title": "Pour commencer",
+          "description": "Apprenez à trouver des contrats et à postuler à des campagnes sur la plateforme."
+        },
+        {
+          "title": "Soumettre du contenu",
+          "description": "Comprendre comment télécharger des vidéos et faire approuver son travail."
+        },
+        {
+          "title": "Revenus et paiements",
+          "description": "Découvrez comment vos revenus sont calculés et quand vous êtes payé."
+        }
+      ],
+      "admin": [
+        {
+          "title": "Gestion des utilisateurs",
+          "description": "Gérer les marques, les créateurs et les utilisateurs sur la plateforme."
+        },
+        {
+          "title": "Cas de soutien",
+          "description": "Examiner, attribuer et résoudre les tickets d'assistance des utilisateurs."
+        },
+        {
+          "title": "Paramètres de la plate-forme",
+          "description": "Configurez les paramètres de la plateforme, les notifications, etc."
+        }
+      ]
+    },
+    "learnMore": "En savoir plus",
+    "faqSection": {
+      "title": "FAQ",
+      "description": "Tout ce que vous devez savoir sur la plateforme. Vous ne trouvez pas la réponse que vous cherchez ?",
+      "contactText": "Passez le bonjour à",
+      "contactEmail": "support@huerray.com"
+    },
+    "submitCta": "Soumettre un cas",
+    "myCasesLink": "Mes cas",
+    "backToHelp": "Retour à l'aide",
+    "nav": {
+      "home": "Accueil",
+      "faq": "FAQ",
+      "tickets": "Billets"
+    },
+    "faq": {
+      "brand": [
+        {
+          "q": "Comment créer une campagne ?",
+          "a": "Naviguez vers Campagnes dans la barre latérale et cliquez sur \"Nouvelle campagne\" pour commencer."
+        },
+        {
+          "q": "Comment inviter des créateurs ?",
+          "a": "Ouvrez une campagne, accédez à l'onglet \"Evénements\" et utilisez l'action \"Inviter\" pour envoyer des invitations aux créateurs."
+        },
+        {
+          "q": "Comment fonctionne la facturation ?",
+          "a": "Vous êtes facturé par campagne en fonction du plan que vous avez choisi. Pour plus d'informations, consultez la rubrique Paramètres > Facturation."
+        },
+        {
+          "q": "Comment examiner les candidatures ?",
+          "a": "Ouvrez un concert de votre campagne et accédez à l'onglet Soumissions pour examiner le contenu du créateur."
+        },
+        {
+          "q": "Puis-je mener plusieurs campagnes ?",
+          "a": "Oui, vous pouvez créer et gérer plusieurs campagnes simultanément à partir de la section Campagnes."
+        }
+      ],
+      "creator": [
+        {
+          "q": "Comment participer à une campagne ?",
+          "a": "Consultez les offres d'emploi dans la section Offres d'emploi et cliquez sur Postuler pour soumettre votre candidature."
+        },
+        {
+          "q": "Quand serai-je payé ?",
+          "a": "Les paiements sont effectués dans les 14 jours suivant l'approbation de votre contenu par la marque."
+        },
+        {
+          "q": "Comment soumettre un contenu ?",
+          "a": "Ouvrez votre contrat actif dans la section Contrats et cliquez sur Soumettre pour télécharger votre vidéo."
+        },
+        {
+          "q": "Que se passe-t-il après l'envoi ?",
+          "a": "La marque examinera votre demande et l'approuvera, la renverra ou la rejettera avec des commentaires."
+        },
+        {
+          "q": "Comment mettre à jour mon profil ?",
+          "a": "Allez dans Mon profil dans la barre latérale pour mettre à jour votre biographie, vos catégories et vos liens vers les médias sociaux."
+        }
+      ],
+      "admin": [
+        {
+          "q": "Comment gérer les utilisateurs ?",
+          "a": "Naviguez vers Utilisateurs dans la navigation principale pour afficher, modifier ou désactiver des comptes."
+        },
+        {
+          "q": "Comment réviser les profils de marque ?",
+          "a": "Allez dans Marques, ouvrez le profil d'une marque et utilisez le menu d'action pour mettre à jour son statut."
+        },
+        {
+          "q": "Comment attribuer un cas d'assistance ?",
+          "a": "Ouvrez un cas à partir de la page Cas et utilisez le menu d'action pour l'attribuer à un administrateur."
+        },
+        {
+          "q": "Comment approuver une campagne ?",
+          "a": "Allez dans Campagnes, ouvrez la campagne et utilisez le menu d'action pour l'accepter ou la rejeter."
+        },
+        {
+          "q": "Comment envoyer des notifications de plate-forme ?",
+          "a": "Naviguez vers Notifications et utilisez le bouton Créer une notification pour envoyer des messages ciblés."
+        }
+      ]
+    },
+    "submitCase": {
+      "titleLabel": "Titre",
+      "titlePlaceholder": "Bref résumé de votre problème",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Décrivez votre problème en détail...",
+      "priorityLabel": "Priorité",
+      "submit": "Soumettre un dossier",
+      "submitting": "Soumettre...",
+      "successToast": "Votre dossier a été soumis avec succès",
+      "errorToast": "Échec de la soumission d'un dossier. Veuillez réessayer.",
+      "titleRequired": "Le titre est obligatoire",
+      "descriptionRequired": "La description est obligatoire"
+    },
+    "myCases": {
+      "empty": "Pas encore de cas",
+      "emptyDesc": "Soumettez un cas si vous avez besoin d'aide",
+      "viewAll": "Voir tous les cas",
+      "replyPlaceholder": "Ecrire une réponse...",
+      "send": "Envoyer",
+      "backToList": "Retour aux dossiers",
+      "noMessages": "Aucun message pour l'instant"
+    }
+  }
+}

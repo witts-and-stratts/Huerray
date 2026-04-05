@@ -1,0 +1,167 @@
+{
+  "landing": {
+    "title": "Cuadro de mandos",
+    "description": "Rendimiento de la campaña y visión operativa de su cuenta de marca",
+    "createCampaign": "Crear campaña",
+    "viewCampaigns": "Ver campañas",
+    "analytics": {
+      "title": "Análisis de marcas",
+      "description": "Métricas de rendimiento de su cuenta de marca",
+      "error": "No se puede cargar el análisis de la marca.",
+      "groups": {
+        "campaigns": "Campañas",
+        "gigs": "Gigs",
+        "outreach": "Divulgación",
+        "contentSpend": "Contenido y gasto"
+      },
+      "items": {
+        "campaignsCreated": "Campañas creadas",
+        "campaignsCompleted": "Campañas finalizadas",
+        "completionRate": "Tasa de finalización",
+        "gigsCreated": "Conciertos creados",
+        "gigsAccepted": "Trabajos aceptados",
+        "gigsCompleted": "Conciertos realizados",
+        "invitationsSent": "Invitaciones enviadas",
+        "applicationsReceived": "Solicitudes recibidas",
+        "approvalRate": "Tasa de aprobación",
+        "videosReceived": "Vídeos recibidos",
+        "videosApproved": "Vídeos aprobados",
+        "totalSpent": "Total gastado"
+      }
+    },
+    "actionCenter": {
+      "description": "Acciones comunes para las operaciones de campaña",
+      "createCampaign": {
+        "label": "Crear campaña",
+        "detail": "Lanzar una nueva campaña de información y solicitud de aprobación"
+      },
+      "findCreators": {
+        "label": "Buscar creadores",
+        "detail": "Buscar creadores que coincidan con los objetivos de su campaña"
+      },
+      "manageGigs": {
+        "label": "Gestionar Gigs",
+        "detail": "Seguimiento de la configuración, el estado y la actividad de los creadores"
+      }
+    },
+    "kpiOverview": {
+      "totalCampaigns": {
+        "title": "Total campañas",
+        "loading": "Cargando campañas...",
+        "caption": "En todos los estados de campaña"
+      },
+      "activeCampaigns": {
+        "title": "Campañas activas",
+        "caption": "Campañas en curso"
+      },
+      "totalGigs": {
+        "title": "Total de gigas",
+        "loading": "Cargando gigas...",
+        "caption": "Todos los conciertos vinculados a tus campañas"
+      },
+      "totalSpend": {
+        "title": "Gasto total",
+        "caption": "Estimación a partir de los presupuestos de conciertos e indemnizaciones"
+      }
+    },
+    "campaignsRadial": {
+      "title": "Campañas Estado",
+      "description": "Distribución del estado de sus campañas",
+      "chartCampaignsLabel": "Campañas",
+      "totalCampaigns": "Total campañas",
+      "emptyState": "Aún no hay campañas disponibles."
+    },
+    "profileSnapshot": {
+      "title": "Instantánea de la marca",
+      "description": "Perfil y datos básicos de la cuenta",
+      "brandAccount": "Cuenta de marca",
+      "brand": "Marca",
+      "preferredContact": "Contacto preferente",
+      "category": "Categoría",
+      "location": "Ubicación",
+      "na": "N/A"
+    },
+    "budgetSnapshot": {
+      "title": "Resumen presupuestario",
+      "description": "Huella de gasto actual de todos los conciertos",
+      "totalSpend": "Gasto total",
+      "thisMonth": "Este mes",
+      "averagePerGig": "Media por Gig"
+    },
+    "gigsStats": {
+      "title": "Gigs",
+      "description": "Visión general del ciclo de vida del Gig y del progreso de la entrega",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Actuaciones recientes"
+      },
+      "loadingGigs": "Cargando gigas...",
+      "errorGigs": "No se pueden cargar gigas.",
+      "loadingRecentGigs": "Cargando conciertos recientes...",
+      "errorRecentGigs": "No se pueden cargar gigas recientes.",
+      "emptyState": "No se han encontrado conciertos.",
+      "viewAll": "Ver todos los conciertos",
+      "totalGigs": "Total de gigas",
+      "openGigs": "Conciertos abiertos",
+      "completedGigs": "Conciertos finalizados",
+      "brandFallback": "Marca",
+      "untitledGig": "Actuación sin título",
+      "na": "N/A"
+    },
+    "creatorRequirements": "Requisitos del creador",
+    "gender": "Género",
+    "male": "Hombre",
+    "female": "Mujer",
+    "ageRange": "Edades",
+    "any": "Cualquier",
+    "ambience": "Ambiente",
+    "requirements": "Requisitos",
+    "contentGuidelines": "Directrices sobre contenidos",
+    "brandDetails": "Detalles de la marca",
+    "company": "Empresa",
+    "country": "País",
+    "category": "Categoría",
+    "website": "Página web",
+    "details": "Detalles",
+    "submissionsStats": {
+      "title": "Envíos",
+      "description": "Estado de la revisión de los envíos e instantánea del rendimiento",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Envíos recientes"
+      },
+      "loadingSubmissions": "Cargando envíos...",
+      "errorSubmissions": "No se pueden cargar los envíos.",
+      "loadingRecentSubmissions": "Cargando envíos recientes...",
+      "errorRecentSubmissions": "No se pueden cargar los envíos recientes.",
+      "emptyState": "No se han encontrado propuestas.",
+      "totalSubmissions": "Total de envíos",
+      "pendingSubmissions": "Envíos pendientes",
+      "approvedSubmissions": "Propuestas aprobadas"
+    },
+    "recentCampaigns": {
+      "title": "Campañas recientes",
+      "description": "Última actividad de su lista de campaña",
+      "emptyState": "Todavía no hay campañas.",
+      "untitledCampaign": "Campaña sin título",
+      "updated": "Actualizado"
+    },
+    "recentGigs": {
+      "title": "Actuaciones recientes",
+      "description": "Actuaciones y presupuestos actualizados más recientemente",
+      "emptyState": "Todavía no hay conciertos.",
+      "untitledGig": "Actuación sin título",
+      "noCampaignLinked": "Ninguna campaña vinculada",
+      "budget": "Presupuesto",
+      "updated": "Actualizado"
+    },
+    "pipelineBreakdown": {
+      "title": "Campaña",
+      "description": "Cómo se distribuyen sus campañas por estado",
+      "pendingApproval": "Pendiente de aprobación",
+      "approved": "Aprobado",
+      "running": "Ejecutar",
+      "returned": "Devuelto"
+    }
+  }
+}

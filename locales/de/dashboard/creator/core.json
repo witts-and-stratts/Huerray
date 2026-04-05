@@ -1,0 +1,83 @@
+{
+  "welcome": "Willkommen zurück, {name}!",
+  "overview": "Hier ist der Überblick über den Auftritt",
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Verfolgen Sie Einladungen, Auftritte, Einsendungen und voraussichtliche Einnahmen.",
+    "browseGigs": "Gigs durchsuchen",
+    "viewMyGigs": "Meine Gigs ansehen",
+    "creatorFallback": "Schöpfer"
+  },
+  "common": {
+    "details": "Einzelheiten",
+    "viewAllMyGigs": "Alle meine Gigs anzeigen",
+    "viewAllEarnings": "Alle Einnahmen anzeigen",
+    "viewAllInvitations": "Alle Einladungen anzeigen",
+    "viewAllSubmissions": "Alle Einsendungen anzeigen",
+    "untitledGig": "Unbetitelter Auftritt",
+    "unknownBrand": "Unbekannte Marke",
+    "reward": "Belohnung",
+    "gigCost": "Gig Kosten",
+    "deadline": "Deadline",
+    "endsOn": "Endet {date}",
+    "noActiveGigs": "Noch keine aktiven Auftritte.",
+    "noInvitations": "Noch keine Einladungen.",
+    "noEarnings": "Noch kein Verdienst. Vervollständige Gigs, um zu verdienen!",
+    "na": "K.A.",
+    "invitedCreator": "Eingeladener Ersteller",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Fehler beim Laden von {name}",
+    "somethingWentWrong": "Etwas ist schief gelaufen",
+    "product": "Produkt",
+    "srGigDetails": "Details für Auftritt: {title}",
+    "applicationPending": "Antrag anhängig",
+    "applying": "Die Bewerbung...",
+    "applyForGig": "Für Gig bewerben",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Einzelheiten",
+      "campaign": "Kampagne",
+      "mySubmissions": "Meine Einsendungen",
+      "submissions": "Einreichungen",
+      "overview": "Übersicht"
+    },
+    "toasts": {
+      "appliedSuccess": "Antrag erfolgreich eingereicht!",
+      "appliedError": "Antrag konnte nicht übermittelt werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "gigDetailsFor": "Details für Auftritt: {title}",
+  "campaign": {
+    "aboutTitle": "Über diese Kampagne",
+    "dosDonts": "Do's & Don'ts",
+    "dos": "Do's",
+    "donts": "Was man nicht tun sollte",
+    "direction": "Richtung",
+    "toneOfVoice": "Tonfall der Stimme",
+    "keywords": "Schlüsselwörter",
+    "noKeywords": "Keine Schlüsselwörter definiert.",
+    "campaignBriefTitle": "Kampagnen-Brief",
+    "campaignBriefDesc": "Wesentliche Details und Anforderungen an die Nachrichtenübermittlung",
+    "description": "Beschreibung",
+    "category": "Kategorie",
+    "assets": "Vermögenswerte",
+    "images": "Bilder",
+    "documents": "Dokumente",
+    "videos": "Videos",
+    "task": "Aufgabe",
+    "recordVideos": "Rekord {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Dauer: {count} Sekunden"
+  },
+  "requirements": {
+    "title": "Anforderungen an den Ersteller",
+    "gender": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "ageRange": "Altersspanne",
+    "any": "Jede",
+    "compensation": "Entschädigung",
+    "guidelines": "Inhaltliche Leitlinien",
+    "ambience": "Ambiente",
+    "requirements": "Anforderungen"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "breadcrumbs": {
+    "creator": "Créateur",
+    "dashboard": "Tableau de bord",
+    "gigs": "Gigs",
+    "active": "Actif",
+    "invitations": "Invitations",
+    "notifications": "Notifications",
+    "earnings": "Les revenus",
+    "portfolio": "Le portefeuille",
+    "settings": "Paramètres",
+    "completeProfile": "Profil complet",
+    "account": "Compte",
+    "editBasicInfo": "Informations sur l'utilisateur",
+    "profile": "Profil",
+    "bio": "Biographie",
+    "socialMedia": "Médias sociaux",
+    "security": "Sécurité",
+    "bankDetails": "Coordonnées bancaires",
+    "loading": "Chargement..."
+  },
+  "kpi": {
+    "gigsCompleted": "Soirées terminées",
+    "gigsCompletedCaption": "Nombre total de concerts que vous avez effectués avec succès",
+    "totalEarned": "Total gagné",
+    "totalEarnedCaption": "Revenus à vie sur l'ensemble des concerts",
+    "approvalRate": "Taux d'approbation",
+    "approvalRateCaption": "Pourcentage de vidéos approuvées par les marques",
+    "successRate": "Taux de réussite",
+    "successRateCaption": "Demandes converties en contrats actifs"
+  }
+}

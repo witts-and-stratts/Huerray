@@ -37,6 +37,33 @@
     "title": "Pünktlich bezahlt werden, jedes Mal",
     "description": "Sie erhalten automatische Zahlungen, wenn die Kunden Ihre Kreation genehmigen. Es werden keine Fragen gestellt."
   },
+  "benefits": {
+    "heading": "Warum sich Schöpfer für Huerray entscheiden",
+    "authentic": {
+      "title": "Authentische Kollaborationen",
+      "description": "Arbeiten Sie mit Marken zusammen, die kreative Inhalte anstelle von allgemeinem Werbematerial wünschen."
+    },
+    "collaboration": {
+      "title": "Flexible Partnerschaften",
+      "description": "Wählen Sie Angebote, die zu Ihrem Stil, Ihrem Publikum und Ihrem Zeitplan passen."
+    },
+    "monetize": {
+      "title": "Verlässliche Erträge",
+      "description": "Sehen Sie sich die Vergütung im Voraus an und werden Sie bezahlt, sobald Ihre genehmigte Arbeit geliefert wurde."
+    },
+    "creative": {
+      "title": "Kreative Kontrolle",
+      "description": "Bringen Sie Ihre eigene Perspektive in jedes Briefing ein und bleiben Sie dabei auf die Kampagnenziele ausgerichtet."
+    },
+    "support": {
+      "title": "Operative Unterstützung",
+      "description": "Überlassen Sie Huerray den Plattformfluss, die Genehmigungen und die Koordination, damit Sie sich auf die Erstellung von Inhalten konzentrieren können."
+    },
+    "grow": {
+      "title": "Raum für Wachstum",
+      "description": "Bauen Sie Ihr Portfolio auf, stärken Sie Ihr Kreativprofil und schalten Sie mit der Zeit mehr relevante Markenarbeit frei."
+    }
+  },
   "testimonial": {
     "quote": "Huerray setzt sich für seine Schöpfer ein... von der Sicherstellung, dass wir fair bezahlt werden, bis hin zur ständigen Bereitstellung von Markenmöglichkeiten, die zu unserem Lebensstil passen",
     "author": "Baron McHennie - @baron_mchennie"

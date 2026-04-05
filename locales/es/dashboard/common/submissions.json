@@ -1,0 +1,55 @@
+{
+  "submissionView": {
+    "comments": "Comentarios",
+    "campaign": "Campaña",
+    "gig": "Gig",
+    "status": "Estado",
+    "compensation": "Compensación",
+    "gigCost": "Coste del Gig",
+    "submitted": "Enviado",
+    "gigStatus": "Estado del Gig:",
+    "approveSubmission": "Aprobar la presentación",
+    "returnSubmission": "Devolución",
+    "acceptSubmission": "Aceptar la presentación",
+    "rejectSubmission": "Rechazar la presentación",
+    "returnToCreator": "Devolver el envío al Creador",
+    "returnConfirm": "¿Está seguro de que desea devolver este envío al creador?",
+    "rejectConfirm": "¿Está seguro de que desea rechazar este envío?",
+    "untitledSubmission": "Presentación sin título"
+  },
+  "submissionUpdate": {
+    "title": "Actualización de la presentación",
+    "description": "Actualice los datos de presentación.",
+    "submit": "Actualización",
+    "submitting": "Actualizando...",
+    "titleLabel": "Título",
+    "titlePlaceholder": "Título del envío",
+    "descriptionLabel": "Descripción",
+    "descriptionPlaceholder": "Descripción del envío",
+    "videoLabel": "Archivo de vídeo",
+    "videoRequired": "La carga es obligatoria. La presentación no se puede actualizar sin un nuevo vídeo cargado."
+  },
+  "submissionStatusUpdate": {
+    "title": "Actualizar el estado de la presentación",
+    "description": "Actualice el estado actual de este envío.",
+    "submit": "Estado de actualización",
+    "submitting": "Actualizando...",
+    "statusLabel": "Estado",
+    "commentLabel": "Comentario (opcional)",
+    "commentPlaceholder": "Añadir nota de actualización de estado"
+  },
+  "gigSelection": {
+    "title": "Seleccione un concierto",
+    "description": "Elige un concierto al que invitar a los creadores.",
+    "noGigs": "Aún no hay conciertos",
+    "noGigsDesc": "Esta campaña aún no tiene ningún concierto. Crea primero un concierto antes de invitar a creadores."
+  },
+  "gigEdit": {
+    "title": "Editar Gig",
+    "description": "Modifica los datos de tu concierto a continuación.",
+    "campaign": "Campaña",
+    "updateSuccess": "Gig actualizado correctamente",
+    "updateSuccessDesc": "Tu concierto se ha actualizado correctamente",
+    "updateError": "Error al actualizar el concierto"
+  }
+}

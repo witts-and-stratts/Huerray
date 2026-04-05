@@ -1,0 +1,55 @@
+{
+  "paymentsPage": {
+    "title": "Pagos",
+    "description": "Vea y gestione todos los pagos de los creadores en toda la plataforma.",
+    "toolbar": {
+      "filterPlaceholder": "Filtra los pagos...",
+      "status": "Estado",
+      "dateRangeLabel": "Intervalo de fechas de pago",
+      "dateRangePlaceholder": "Seleccione el intervalo de fechas",
+      "clearDates": "Borrar fechas"
+    },
+    "actionMenu": {
+      "view": "Ver",
+      "confirmPayout": "Confirmar pago",
+      "confirming": "Confirmando...",
+      "confirmDialog": {
+        "title": "Confirmar pago",
+        "description": "¿Está seguro de que desea confirmar este pago? Esto creará un registro de elemento de pago.",
+        "descriptionWithCreator": "¿Está seguro de que desea confirmar este pago para {name}? Esto creará un registro de elemento de pago.",
+        "confirmLabel": "Confirmar pago"
+      },
+      "toasts": {
+        "confirmSuccess": "Pago confirmado con éxito.",
+        "confirmError": "No se ha podido confirmar el pago. Por favor, inténtelo de nuevo.",
+        "missingId": "Falta ID de pago."
+      }
+    },
+    "newBatchPayment": {
+      "title": "Pago de un nuevo lote",
+      "description": "Seleccione un creador y sus elementos de pago pendientes.",
+      "triggerButton": "Nuevo pago",
+      "creatorLabel": "Creador",
+      "creatorPlaceholder": "Seleccione un creador...",
+      "pendingItems": "Asuntos pendientes",
+      "deselectAll": "Deseleccionar todo",
+      "selectAll": "Seleccionar todo",
+      "noItems": "No hay partidas de pago pendientes para este creador.",
+      "paymentMethodLabel": "Forma de pago",
+      "paymentMethodPlaceholder": "Por ejemplo, transferencia bancaria, PayPal...",
+      "notesLabel": "Notas",
+      "notesPlaceholder": "Notas opcionales...",
+      "noItemsSelected": "No hay artículos seleccionados",
+      "itemUnit": "{count, plural, =1 {item} other {items}}",
+      "creating": "Crear...",
+      "createPayment": "Crear pago",
+      "toasts": {
+        "createSuccess": "Pago por lotes creado con éxito.",
+        "createSuccessDesc": "El pago por lotes se ha creado correctamente.",
+        "createError": "No se ha podido crear el pago por lotes. Inténtelo de nuevo.",
+        "selectItem": "Seleccione al menos un elemento de pago."
+      }
+    }
+  },
+  "emptyPayments": {}
+}

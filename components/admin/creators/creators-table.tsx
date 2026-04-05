@@ -19,9 +19,9 @@ import { CreatorsView } from "./creators-view";
 import { DataTablePagination } from "@/components/ui/data-table-pagination";
 import { ModelsCreatorResponse } from "@/lib/api/generated/models";
 import { AnimatePresence, motion } from "motion/react";
+import { AdminNetworkErrorState } from "@/components/admin/empty-states/admin-network-error-state";
 import { TableSkeleton } from "@/components/dashboard-ui/table-skeleton";
 import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton";
-import { TableErrorState } from "@/components/dashboard-ui/table-error-state";
 import { useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { toast } from "sonner";
@@ -171,50 +171,66 @@ export function CreatorsTable( {
   } );
 
   return (
-    <AnimatePresence>
-      { showLoading && ( view === 'table' ? <DataTableSkeleton key="skeleton-table" /> : <TableSkeleton key="skeleton-cards" /> ) }
-      { error && <TableErrorState key="error" entity="creators" message={ error.message } /> }
-      { !isLoading && !error && (
-        <motion.div
-          key="content"
-          initial={ { opacity: 0 } }
-          animate={ { opacity: 1 } }
-          exit={ { opacity: 0 } }
-          transition={ { duration: 0.3 } }
-          className="flex flex-col bg-slate-50/50 grow relative min-h-0"
-        >
-          <div className="flex-1 min-h-0 overflow-auto">
-            <CreatorsTableToolbar
-              table={ table }
-              statuses={ statuses }
-              countries={ countries }
-              genders={ genders }
-              view={ view }
-              setView={ setView }
-            />
-            <CreatorsView
-              table={ table }
-              view={ view }
-              onViewDetails={ ( creator ) => {
-                setSelectedCreator( creator );
-                setIsSheetOpen( true );
-              } }
+    <>
+      <div className="grow relative flex flex-col min-h-0 bg-slate-50/50">
+        <AnimatePresence>
+          { ( showLoading || isLoading ) && (
+            <motion.div
+              key="skeleton"
+              className="absolute inset-0 z-30 bg-slate-50/50"
+              exit={ { opacity: 0 } }
+              transition={ { duration: 0.3 } }
+            >
+              { view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> }
+            </motion.div>
+          ) }
+        </AnimatePresence>
+        { error && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" /> }
+        { !isLoading && !error && (
+          <motion.div
+            key="content"
+            initial={ { opacity: 0 } }
+            animate={ { opacity: 1 } }
+            transition={ { duration: 0.3 } }
+            className="flex flex-col grow relative min-h-0"
+          >
+            <div className="flex-1 min-h-0 overflow-auto">
+              { creators.length > 0 && (
+                <CreatorsTableToolbar
+                  table={ table }
+                  statuses={ statuses }
+                  countries={ countries }
+                  genders={ genders }
+                  view={ view }
+                  setView={ setView }
+                />
+              ) }
+              <CreatorsView
+                table={ table }
+                view={ view }
+                onViewDetails={ ( creator ) => {
+                  setSelectedCreator( creator );
+                  setIsSheetOpen( true );
+                } }
+                onApproveProfile={ handleOnApproveProfile }
+                onRejectProfile={ handleOnRejectProfile }
+              />
+            </div>
+            { creators.length > 0 && (
+              <div className="px-3 shrink-0 border-t bg-slate-50/50">
+                <DataTablePagination table={ table } />
+              </div>
+            ) }
+            <CreatorDetailsSheet
+              creator={ selectedCreator }
+              open={ isSheetOpen }
+              onOpenChange={ setIsSheetOpen }
               onApproveProfile={ handleOnApproveProfile }
               onRejectProfile={ handleOnRejectProfile }
             />
-          </div>
-          <div className="px-3 shrink-0 border-t bg-slate-50/50">
-            <DataTablePagination table={ table } />
-          </div>
-          <CreatorDetailsSheet
-            creator={ selectedCreator }
-            open={ isSheetOpen }
-            onOpenChange={ setIsSheetOpen }
-            onApproveProfile={ handleOnApproveProfile }
-            onRejectProfile={ handleOnRejectProfile }
-          />
-        </motion.div>
-      ) }
+          </motion.div>
+        ) }
+      </div>
 
       <ConfirmDialog
         open={ !!pendingAction }
@@ -246,6 +262,6 @@ export function CreatorsTable( {
           fieldClassName="min-h-40"
         />
       </ConfirmDialog>
-    </AnimatePresence>
+    </>
   );
 }

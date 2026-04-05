@@ -1,0 +1,79 @@
+{
+  "campaignsPage": {
+    "title": "Campagnes",
+    "description": "Visualiser et gérer toutes les campagnes sur la plateforme",
+    "toolbar": {
+      "search": "Campagne de recherche...",
+      "filterByDate": "Filtrer par date",
+      "createdDate": "Date de création",
+      "updatedDate": "Date de mise à jour",
+      "dateRange": "Plage de dates",
+      "selectDateRange": "Sélectionner une plage de dates",
+      "clearDates": "Effacer les dates"
+    }
+  },
+  "campaignOverview": {
+    "workflow": {
+      "title": "Flux de travail",
+      "description": "Demandes, soumissions et invitations",
+      "tabs": {
+        "submissions": "Soumissions",
+        "applications": "Applications",
+        "invitations": "Invitations"
+      },
+      "states": {
+        "submissionsError": "Impossible de charger les soumissions.",
+        "applicationsError": "Impossible de charger les applications.",
+        "invitationsError": "Impossible de charger les invitations.",
+        "noSubmissions": "Aucune soumission pour l'instant.",
+        "noApplications": "Aucune candidature n'a encore été déposée.",
+        "noInvitations": "Il n'y a pas encore d'invitations."
+      },
+      "actions": {
+        "retry": "Réessayer",
+        "viewAllInvitations": "Voir toutes les invitations"
+      },
+      "labels": {
+        "unknownApplicant": "Demandeur inconnu",
+        "campaignApplication": "Application de la campagne",
+        "creator": "Créateur",
+        "campaignInvitation": "Invitation à la campagne",
+        "na": "N/A"
+      }
+    },
+    "metadata": {
+      "title": "Métadonnées de la campagne",
+      "description": "Calendrier, format et contexte de diffusion",
+      "labels": {
+        "created": "Créée",
+        "updated": "Mise à jour",
+        "format": "Format",
+        "multiVideo": "Vidéo multiple",
+        "brand": "Marque",
+        "na": "N/A"
+      },
+      "values": {
+        "allowed": "Autorisé",
+        "singleVideo": "Vidéo unique"
+      }
+    },
+    "assets": {
+      "title": "Actifs",
+      "description": "Images et documents de campagne",
+      "tabs": {
+        "images": "Images ({count})",
+        "documents": "Documents ({count})",
+        "videos": "Vidéos ({count})"
+      },
+      "states": {
+        "noImages": "Aucune image n'a été téléchargée.",
+        "noDocuments": "Aucun document n'est joint.",
+        "noVideos": "Aucun exemple de vidéo n'est joint."
+      },
+      "labels": {
+        "previewAsset": "Aperçu de l'actif de la campagne {index}",
+        "assetAlt": "Actif de la campagne {index}"
+      }
+    }
+  }
+}

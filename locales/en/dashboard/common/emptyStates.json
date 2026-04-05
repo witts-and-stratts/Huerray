@@ -1,0 +1,32 @@
+{
+  "emptyStates": {
+    "gigs": {
+      "title": "No Gigs yet",
+      "description": "There are no gigs yet for this campaign"
+    },
+    "applications": {
+      "title": "No applications found",
+      "description": "There are no applications matching your criteria"
+    },
+    "invitations": {
+      "title": "No invitations yet",
+      "description": "Your gig invitations will appear here"
+    },
+    "invoices": {
+      "title": "No invoices yet",
+      "description": "Your invoices will appear here"
+    },
+    "payments": {
+      "title": "No payments yet",
+      "description": "Your payment history will appear here"
+    },
+    "submissions": {
+      "title": "No submissions found",
+      "description": "No submissions found matching your criteria"
+    },
+    "documents": {
+      "title": "Upload documents",
+      "description": "Drag and drop files here. Support for PDF"
+    }
+  }
+}

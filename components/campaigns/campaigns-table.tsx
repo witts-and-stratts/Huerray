@@ -1,11 +1,11 @@
 
 'use client';
 
+import { AdminNetworkErrorState } from '@/components/admin/empty-states/admin-network-error-state';
 import { CampaignsView } from '@/components/campaigns/campaigns-view';
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { CampaignsTableSkeleton } from './campaigns-table-skeleton';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
-import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 import { DataTablePagination } from '@/components/ui/data-table-pagination';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
@@ -18,7 +18,9 @@ import {
   useReactTable,
   type ColumnFiltersState,
   type FilterFn,
+  type PaginationState,
   type SortingState,
+  type Updater,
   type VisibilityState
 } from '@tanstack/react-table';
 import { AnimatePresence, motion } from 'motion/react';
@@ -53,6 +55,10 @@ type CampaignsTableProps = {
   error?: Error | null;
   emptyTitle?: string;
   simpleEmptyState?: boolean;
+  // Server-side pagination — when provided, enables manual pagination mode
+  pagination?: PaginationState;
+  onPaginationChange?: (updater: Updater<PaginationState>) => void;
+  rowCount?: number;
 };
 
 export function CampaignsTable( {
@@ -61,10 +67,17 @@ export function CampaignsTable( {
   error = null,
   emptyTitle = 'Ready to launch?',
   simpleEmptyState = false,
+  pagination: externalPagination,
+  onPaginationChange: externalOnPaginationChange,
+  rowCount,
 }: CampaignsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 50 );
   const { view, setView } = usePersistedViewMode( 'campaigns', 'table' );
-  const { pagination, setPagination } = usePersistedPagination( 'campaigns' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'campaigns' );
+
+  const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
+  const pagination = isServerSide ? externalPagination : internalPagination;
+  const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
@@ -115,6 +128,10 @@ export function CampaignsTable( {
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    ...(isServerSide && {
+      manualPagination: true,
+      rowCount: rowCount ?? 0,
+    }),
     state: {
       sorting,
       columnFilters,
@@ -139,7 +156,7 @@ export function CampaignsTable( {
           </motion.div>
         ) }
       </AnimatePresence>
-      { error && <TableErrorState entity="campaigns" message={ error.message } /> }
+      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
       { !isLoading && !error && (
         <>
           <div className="flex-1 min-h-0 overflow-auto">

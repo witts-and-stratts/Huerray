@@ -1,0 +1,262 @@
+{
+  "dashboardBlocks": {
+    "usersRadial": {
+      "title": "Usuarios",
+      "description": "Distribución del estado entre todos los usuarios de la plataforma",
+      "totalUsers": "Total de usuarios",
+      "stats": {
+        "total_users": "Usuarios totales",
+        "total_brands": "Total Marcas",
+        "total_creators": "Total Creadores",
+        "new_users_today": "Nuevos usuarios hoy",
+        "active_brands": "Marcas activas",
+        "active_creators": "Creadores activos"
+      }
+    },
+    "campaigns": {
+      "title": "Campañas",
+      "description": "Visión general del ciclo de vida de la campaña",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Campañas recientes"
+      },
+      "stats": {
+        "total": "Total",
+        "active": "Activo",
+        "finished": "Terminado",
+        "draft": "Borrador"
+      },
+      "states": {
+        "loading": "Cargando estadísticas de campaña...",
+        "error": "No se pueden cargar las estadísticas de la campaña.",
+        "recentError": "No se pueden cargar las campañas recientes.",
+        "empty": "Todavía no hay campañas"
+      },
+      "labels": {
+        "created": "Creado:",
+        "viewAll": "Ver todas las campañas",
+        "untitled": "Campaña sin título",
+        "noDescription": "No se proporciona descripción."
+      }
+    },
+    "creators": {
+      "title": "Creadores",
+      "description": "Base de creadores y resumen del estado de aprobación",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Creadores recientes"
+      },
+      "stats": {
+        "total": "Total",
+        "approved": "Aprobado",
+        "pending": "Pendiente",
+        "returned": "Devuelto"
+      },
+      "states": {
+        "loading": "Cargando estadísticas del creador...",
+        "error": "No se pueden cargar las estadísticas del creador.",
+        "recentError": "No se pueden cargar los creadores recientes.",
+        "empty": "Aún no hay creadores"
+      },
+      "labels": {
+        "unknown": "Creador desconocido",
+        "viewAll": "Ver todos los creadores"
+      }
+    },
+    "gigs": {
+      "title": "Gigs",
+      "description": "Visión general del ciclo de vida del Gig y del progreso de la entrega",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Actuaciones recientes"
+      },
+      "stats": {
+        "total": "Total de gigas",
+        "open": "Conciertos abiertos",
+        "completed": "Conciertos finalizados"
+      },
+      "states": {
+        "loading": "Cargando gigas...",
+        "error": "No se pueden cargar gigas.",
+        "recentLoading": "Cargando conciertos recientes...",
+        "recentError": "No se pueden cargar gigas recientes.",
+        "empty": "No se han encontrado conciertos."
+      },
+      "labels": {
+        "brand": "Marca",
+        "na": "N/A",
+        "untitled": "Actuación sin título",
+        "viewAll": "Ver todos los conciertos",
+        "submitted": "Enviado:",
+        "trendingUp": "Tendencia al alza del 4,6% este mes",
+        "showingTotal": "Mostrar el total de conciertos en las principales fases del ciclo de vida"
+      }
+    },
+    "submissions": {
+      "title": "Envíos",
+      "description": "Estado de la revisión de los envíos e instantánea del rendimiento",
+      "tabs": {
+        "stats": "Estadísticas",
+        "recent": "Envíos recientes"
+      },
+      "stats": {
+        "total": "Total de envíos",
+        "pending": "Envíos pendientes",
+        "approved": "Propuestas aprobadas"
+      },
+      "states": {
+        "error": "No se pueden cargar los envíos.",
+        "recentError": "No se pueden cargar los envíos recientes.",
+        "empty": "No se han encontrado propuestas."
+      }
+    },
+    "platformAnalytics": {
+      "title": "Plataforma de análisis",
+      "description": "Métricas en tiempo real de toda la plataforma desde el punto final de análisis",
+      "groups": {
+        "contentPipeline": "Canalización de contenidos"
+      },
+      "stats": {
+        "total_campaigns": "Total campañas",
+        "completed_campaigns": "Campañas finalizadas",
+        "total_gigs": "Total de gigas",
+        "completed_gigs": "Conciertos finalizados"
+      },
+      "states": {
+        "error": "No se pueden cargar los análisis de la plataforma."
+      }
+    },
+    "actionCenter": {
+      "title": "Centro de Acción",
+      "description": "Ir a las áreas que requieren una acción administrativa directa",
+      "actions": {
+        "reviewBrands": {
+          "label": "Perfiles de marca",
+          "detail": "Verificaciones pendientes y controles de calidad de los perfiles"
+        },
+        "reviewCreators": {
+          "label": "Revisar los perfiles de los creadores",
+          "detail": "Flujos de trabajo de aprobación y devolución para la incorporación de creadores"
+        },
+        "reviewCampaigns": {
+          "label": "Revisar el proceso de la campaña",
+          "detail": "Supervisar las aprobaciones, la actividad en directo y el ritmo de finalización"
+        },
+        "inspectNotifications": {
+          "label": "Inspeccionar notificaciones",
+          "detail": "Investigar la plataforma reciente y las señales de moderación"
+        },
+        "openUsers": {
+          "label": "Gestión abierta de usuarios",
+          "detail": "Estado de los usuarios, controles de acceso y mantenimiento de cuentas"
+        },
+        "checkPayments": {
+          "label": "Pagos con cheque",
+          "detail": "Salud de los pagos, anomalías en las transacciones y conciliación"
+        }
+      },
+      "labels": {
+        "open": "Abrir",
+        "priorityHigh": "HIGH",
+        "priorityMedium": "MEDIUM",
+        "priorityNormal": "NORMAL"
+      }
+    },
+    "approvalQueues": {
+      "title": "Colas de aprobación",
+      "description": "Priorizar las colas de revisión para evitar el bloqueo de las operaciones del mercado",
+      "queues": {
+        "users": "Usuarios pendientes de aprobación",
+        "brands": "Perfiles de marca pendientes de aprobación",
+        "creators": "Perfiles de creador pendientes de aprobación",
+        "campaigns": "Campañas pendientes de revisión administrativa",
+        "submissions": "Presentación de vídeos pendiente de decisión"
+      },
+      "labels": {
+        "viewAll": "Ver todas las colas",
+        "sla": "SLA:",
+        "reviewQueue": "Cola de revisión",
+        "h": "h"
+      }
+    },
+    "financialSnapshot": {
+      "title": "Panorama financiero",
+      "description": "Ingresos mensuales frente a pagos a los creadores",
+      "labels": {
+        "revenue": "Ingresos",
+        "payouts": "Pagos"
+      }
+    },
+    "pipelineBreakdown": {
+      "title": "Tuberías por estado",
+      "description": "Campañas, actuaciones y envíos agrupados por estado actual",
+      "labels": {
+        "campaigns": "Campañas",
+        "gigs": "Gigs",
+        "submissions": "Envíos"
+      }
+    },
+    "platformHealth": {
+      "title": "Plataforma Tendencia Salud",
+      "description": "Usuarios, campañas y envíos en los últimos 6 meses",
+      "labels": {
+        "users": "Usuarios",
+        "campaigns": "Campañas",
+        "submissions": "Envíos"
+      }
+    },
+    "recentActivityBlock": {
+      "title": "Actividad reciente",
+      "description": "Último flujo de eventos de la actividad de notificación",
+      "table": {
+        "eventName": "Nombre del evento",
+        "eventType": "Tipo de evento",
+        "actor": "Actor",
+        "when": "En",
+        "actions": "Acciones"
+      },
+      "states": {
+        "error": "No se puede cargar la actividad reciente.",
+        "empty": "Aún no hay actividad reciente."
+      },
+      "labels": {
+        "system": "Sistema",
+        "unknownEvent": "Evento desconocido",
+        "unknown": "Desconocido",
+        "na": "N/A"
+      },
+      "menu": {
+        "markAsRead": "Marcar como leído",
+        "view": "Ver",
+        "delete": "Borrar"
+      }
+    },
+    "revenueStats": {
+      "title": "Ingresos",
+      "description": "Resumen de ingresos, pagos y beneficios netos",
+      "stats": {
+        "totalRevenue": "Ingresos totales",
+        "netRevenue": "Ingresos netos",
+        "totalPayouts": "Pagos totales"
+      },
+      "labels": {
+        "revenue": "Ingresos",
+        "payouts": "Pagos"
+      },
+      "states": {
+        "error": "No se pueden cargar los datos de ingresos."
+      }
+    },
+    "platformUptime": {
+      "title": "Tiempo de actividad de la plataforma",
+      "description": "Instantánea de la disponibilidad actual del servicio",
+      "labels": {
+        "uptime": "Tiempo de actividad"
+      }
+    },
+    "operationalAlerts": {
+      "title": "Alertas operativas",
+      "description": "Señales del sistema y del flujo de trabajo que pueden requerir intervención"
+    }
+  }
+}

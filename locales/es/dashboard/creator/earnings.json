@@ -1,0 +1,43 @@
+{
+  "earningsPage": {
+    "title": "Ganancias",
+    "description": "Haz un seguimiento de tu historial de pagos y de los ingresos de los trabajos realizados."
+  },
+  "earnings": {
+    "title": "Ganancias",
+    "description": "Haz un seguimiento de tu historial de pagos y de los ingresos de los trabajos realizados.",
+    "recentTotal": "Total reciente"
+  },
+  "payments": {
+    "status": {
+      "completed": "Completado",
+      "pending": "Pendiente",
+      "processing": "Tratamiento",
+      "failed": "Fallido",
+      "cancelled": "Cancelado"
+    },
+    "table": {
+      "payment": "Pago",
+      "creator": "Creador",
+      "date": "Fecha",
+      "method": "Método",
+      "items": "Artículos",
+      "paid": "¿Pagado?",
+      "amount": "Importe",
+      "actions": "Acciones",
+      "noEarnings": "Aún no hay ganancias",
+      "noEarningsFiltered": "Ningún ingreso coincide con tus filtros actuales.",
+      "noEarningsDesc": "Aquí aparecerán los pagos de los conciertos realizados.",
+      "searchPlaceholder": "Buscar ganancias...",
+      "clearFilters": "Limpiar filtros"
+    },
+    "details": {
+      "paymentId": "ID de pago",
+      "accessibilityDesc": "Datos de pago para {reference}.",
+      "created": "Creado",
+      "reference": "Referencia",
+      "notes": "Notas",
+      "totalAmount": "Importe total"
+    }
+  }
+}

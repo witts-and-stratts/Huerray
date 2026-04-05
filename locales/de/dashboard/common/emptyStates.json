@@ -1,0 +1,32 @@
+{
+  "emptyStates": {
+    "gigs": {
+      "title": "Noch keine Auftritte",
+      "description": "Es sind noch keine Auftritte für diese Kampagne vorhanden"
+    },
+    "applications": {
+      "title": "Keine Anwendungen gefunden",
+      "description": "Es gibt keine Bewerbungen, die Ihren Kriterien entsprechen"
+    },
+    "invitations": {
+      "title": "Noch keine Einladungen",
+      "description": "Ihre Auftrittseinladungen werden hier erscheinen"
+    },
+    "invoices": {
+      "title": "Noch keine Rechnungen",
+      "description": "Ihre Rechnungen werden hier erscheinen"
+    },
+    "payments": {
+      "title": "Noch keine Zahlungen",
+      "description": "Ihr Zahlungsverhalten wird hier angezeigt"
+    },
+    "submissions": {
+      "title": "Keine Einsendungen gefunden",
+      "description": "Keine Einträge gefunden, die Ihren Kriterien entsprechen"
+    },
+    "documents": {
+      "title": "Dokumente hochladen",
+      "description": "Ziehen Sie Dateien hierher und legen Sie sie ab. Unterstützung für PDF"
+    }
+  }
+}

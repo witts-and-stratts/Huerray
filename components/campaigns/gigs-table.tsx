@@ -43,9 +43,9 @@ import { ModelsGigResponse } from '@/lib/api/generated';
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
+import { AdminNetworkErrorState } from '@/components/admin/empty-states/admin-network-error-state';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
-import { TableErrorState } from '@/components/dashboard-ui/table-error-state';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { useTranslations } from 'next-intl';
 
@@ -53,6 +53,7 @@ export interface GigsTableProps {
   data: ModelsGigResponse[];
   isLoading?: boolean;
   error?: Error | null;
+  refetch?: () => void;
   defaultView?: 'table' | 'cards';
   hideViewToggle?: boolean;
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
@@ -67,6 +68,7 @@ export function GigsTable( {
   hideViewToggle = false,
   isLoading = false,
   error = null,
+  refetch,
   actionButtons,
   hideToolbar = false,
   hidePagination = false,
@@ -154,7 +156,7 @@ export function GigsTable( {
             ? <DataTableSkeleton key="skeleton-table" />
             : <CardGridSkeleton key="skeleton-cards" count={ 8 } cardHeight="h-[250px]" columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
         ) }
-        { error && <TableErrorState key="error" entity="gigs" message={ error.message } /> }
+        { error && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
         { !isLoading && !error && (
           <div
             className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full"

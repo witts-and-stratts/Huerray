@@ -1,0 +1,185 @@
+{
+  "sheets": {
+    "overview": "Übersicht",
+    "details": "Einzelheiten",
+    "bio": "Bio",
+    "socialMedia": "Soziale Medien",
+    "preferredCategories": "Bevorzugte Kategorien",
+    "noBioAvailable": "Keine Bio verfügbar",
+    "noSocialAccounts": "Keine sozialen Konten verbunden",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "website": "Website",
+    "address": "Adresse",
+    "joined": "Beitritt",
+    "created": "Erstellt",
+    "updated": "Aktualisiert",
+    "type": "Typ",
+    "yes": "Ja",
+    "no": "Nein",
+    "age": "Alter",
+    "ageYears": "{age} Jahr/Jahr",
+    "updateStatus": "Status aktualisieren",
+    "statusRequired": "Status ist erforderlich",
+    "comments": "Kommentare",
+    "commentPlaceholder": "Fügen Sie einen Kommentar oder eine Begründung für diese Entscheidung hinzu...",
+    "cancel": "Abbrechen",
+    "na": "K.A."
+  },
+  "helpSheet": {
+    "hero": {
+      "title": "Brauchen Sie Hilfe?",
+      "subtitle": "Hier finden Sie Antworten auf häufig gestellte Fragen oder können sich an uns wenden, um die benötigte Hilfe zu erhalten.",
+      "searchPlaceholder": "Eine Frage stellen..."
+    },
+    "cards": {
+      "brand": [
+        {
+          "title": "Erste Schritte",
+          "description": "Erfahren Sie, wie Sie Kampagnen erstellen und die Plattform optimal nutzen können."
+        },
+        {
+          "title": "Schöpfer verwalten",
+          "description": "Laden Sie Ersteller ein, prüfen Sie Bewerbungen und verwalten Sie Kooperationen."
+        },
+        {
+          "title": "Rechnungen und Zahlungen",
+          "description": "Verstehen Sie Rechnungen, Zahlungsmodalitäten und Abrechnungszyklen."
+        }
+      ],
+      "creator": [
+        {
+          "title": "Erste Schritte",
+          "description": "Erfahren Sie, wie Sie Gigs finden und sich für Kampagnen auf der Plattform bewerben können."
+        },
+        {
+          "title": "Einreichen von Inhalten",
+          "description": "Sie erfahren, wie Sie Videos hochladen und Ihre Arbeit genehmigen lassen können."
+        },
+        {
+          "title": "Einnahmen & Auszahlungen",
+          "description": "Erfahren Sie, wie Ihr Verdienst berechnet wird und wann Sie bezahlt werden."
+        }
+      ],
+      "admin": [
+        {
+          "title": "Benutzerverwaltung",
+          "description": "Verwalten Sie Marken, Urheber und Nutzer auf der gesamten Plattform."
+        },
+        {
+          "title": "Support-Fälle",
+          "description": "Überprüfung, Zuweisung und Lösung von Support-Tickets von Benutzern."
+        },
+        {
+          "title": "Plattform-Einstellungen",
+          "description": "Konfigurieren Sie plattformweite Einstellungen, Benachrichtigungen und mehr."
+        }
+      ]
+    },
+    "learnMore": "Mehr erfahren",
+    "faqSection": {
+      "title": "FAQ's",
+      "description": "Alles, was Sie über die Plattform wissen müssen. Sie können die gesuchte Antwort nicht finden?",
+      "contactText": "Begrüßung unter",
+      "contactEmail": "support@huerray.com"
+    },
+    "submitCta": "Einen Fall einreichen",
+    "myCasesLink": "Meine Fälle",
+    "backToHelp": "Zurück zu Hilfe",
+    "nav": {
+      "home": "Startseite",
+      "faq": "FAQ",
+      "tickets": "Eintrittskarten"
+    },
+    "faq": {
+      "brand": [
+        {
+          "q": "Wie kann ich eine Kampagne erstellen?",
+          "a": "Navigieren Sie in der Seitenleiste zu Kampagnen und klicken Sie auf \"Neue Kampagne\", um zu beginnen."
+        },
+        {
+          "q": "Wie lade ich Schöpfer ein?",
+          "a": "Öffnen Sie eine Kampagne, gehen Sie auf die Registerkarte \"Auftritte\" und verwenden Sie die Einladungsaktion, um Einladungen an Ersteller zu senden."
+        },
+        {
+          "q": "Wie funktioniert die Rechnungsstellung?",
+          "a": "Die Abrechnung erfolgt pro Kampagne auf der Grundlage des von Ihnen gewählten Tarifs. Besuchen Sie Einstellungen > Abrechnung für Details."
+        },
+        {
+          "q": "Wie überprüfe ich Einreichungen?",
+          "a": "Öffnen Sie einen Auftritt aus Ihrer Kampagne und navigieren Sie zur Registerkarte \"Beiträge\", um den Inhalt des Erstellers zu überprüfen."
+        },
+        {
+          "q": "Kann ich mehrere Kampagnen durchführen?",
+          "a": "Ja, Sie können im Bereich Kampagnen mehrere Kampagnen gleichzeitig erstellen und verwalten."
+        }
+      ],
+      "creator": [
+        {
+          "q": "Wie kann ich mich an einer Kampagne beteiligen?",
+          "a": "Durchstöbern Sie die verfügbaren Gigs im Bereich Gigs und klicken Sie auf Bewerben, um Ihre Bewerbung einzureichen."
+        },
+        {
+          "q": "Wann werde ich bezahlt?",
+          "a": "Die Auszahlung erfolgt innerhalb von 14 Tagen nach Genehmigung Ihrer Inhalte durch die Marke."
+        },
+        {
+          "q": "Wie kann ich Inhalte einreichen?",
+          "a": "Öffnen Sie Ihren aktiven Gig im Bereich Gigs und klicken Sie auf Submit, um Ihr Video hochzuladen."
+        },
+        {
+          "q": "Was passiert nach der Einreichung?",
+          "a": "Die Marke wird Ihren Beitrag prüfen und ihn entweder genehmigen, zurücksenden oder mit einem Feedback ablehnen."
+        },
+        {
+          "q": "Wie kann ich mein Profil aktualisieren?",
+          "a": "Gehen Sie in der Seitenleiste auf Mein Profil, um Ihren Lebenslauf, Ihre Kategorien und die Links zu sozialen Medien zu aktualisieren."
+        }
+      ],
+      "admin": [
+        {
+          "q": "Wie verwalte ich Benutzer?",
+          "a": "Navigieren Sie in der Hauptnavigation zu Benutzer, um Konten anzuzeigen, zu bearbeiten oder zu deaktivieren."
+        },
+        {
+          "q": "Wie kann ich Markenprofile überprüfen?",
+          "a": "Gehen Sie zu Marken, öffnen Sie ein Markenprofil und verwenden Sie das Aktionsmenü, um ihren Status zu aktualisieren."
+        },
+        {
+          "q": "Wie weise ich einen Supportfall zu?",
+          "a": "Öffnen Sie einen Fall auf der Seite \"Fälle\" und weisen Sie ihn über das Aktionsmenü einem Administrator zu."
+        },
+        {
+          "q": "Wie kann ich eine Kampagne genehmigen?",
+          "a": "Gehen Sie zu Kampagnen, öffnen Sie die Kampagne, und verwenden Sie das Aktionsmenü, um sie anzunehmen oder abzulehnen."
+        },
+        {
+          "q": "Wie versende ich Plattformbenachrichtigungen?",
+          "a": "Navigieren Sie zu Benachrichtigungen und verwenden Sie die Schaltfläche Benachrichtigung erstellen, um gezielte Nachrichten zu versenden."
+        }
+      ]
+    },
+    "submitCase": {
+      "titleLabel": "Titel",
+      "titlePlaceholder": "Kurze Zusammenfassung Ihres Problems",
+      "descriptionLabel": "Beschreibung",
+      "descriptionPlaceholder": "Beschreiben Sie Ihr Problem im Detail...",
+      "priorityLabel": "Priorität",
+      "submit": "Fall einreichen",
+      "submitting": "Einreichen...",
+      "successToast": "Ihr Fall wurde erfolgreich eingereicht",
+      "errorToast": "Der Fall konnte nicht übermittelt werden. Bitte versuchen Sie es erneut.",
+      "titleRequired": "Titel ist erforderlich",
+      "descriptionRequired": "Beschreibung ist erforderlich"
+    },
+    "myCases": {
+      "empty": "Noch keine Fälle",
+      "emptyDesc": "Reichen Sie einen Fall ein, wenn Sie Hilfe benötigen",
+      "viewAll": "Alle Fälle anzeigen",
+      "replyPlaceholder": "Eine Antwort schreiben...",
+      "send": "Senden Sie",
+      "backToList": "Zurück zu den Fällen",
+      "noMessages": "Noch keine Nachrichten"
+    }
+  }
+}

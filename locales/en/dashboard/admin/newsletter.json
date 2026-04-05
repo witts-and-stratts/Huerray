@@ -1,0 +1,42 @@
+{
+  "newsletterPage": {
+    "title": "Newsletter",
+    "description": "Search and export newsletter subscribers from the admin area.",
+    "notice": "The current backend only exposes newsletter search/signup/unsubscribe. Edit and delete actions will require dedicated admin endpoints before they can be enabled.",
+    "summary": "{visible} visible of {total} entries, {selected} selected",
+    "empty": "No newsletter entries found.",
+    "emptyDescription": "Newsletter subscriptions will appear here once contacts start signing up.",
+    "error": {
+      "title": "Unable to load newsletter entries",
+      "description": "There was a problem loading newsletter subscriptions. Try again.",
+      "retry": "Try again"
+    },
+    "columns": {
+      "email": "Email",
+      "name": "Name",
+      "status": "Status",
+      "source": "Source",
+      "subscribedAt": "Subscribed",
+      "updatedAt": "Updated"
+    },
+    "filters": {
+      "searchPlaceholder": "Search newsletter entries..."
+    },
+    "actions": {
+      "exportFiltered": "Bulk export",
+      "exportSelected": "Export selected",
+      "resubscribe": "Resubscribe",
+      "unsubscribe": "Unsubscribe",
+      "delete": "Delete",
+      "more": "More"
+    },
+    "messages": {
+      "endpointMissing": "This action requires a newsletter admin update/delete endpoint.",
+      "resubscribed": "Newsletter subscriber resubscribed.",
+      "resubscribeFailed": "Failed to resubscribe newsletter subscriber.",
+      "unsubscribed": "Newsletter subscriber unsubscribed.",
+      "unsubscribeFailed": "Failed to unsubscribe newsletter subscriber.",
+      "unsubscribeEmailMissing": "This newsletter entry does not include an email address."
+    }
+  }
+}

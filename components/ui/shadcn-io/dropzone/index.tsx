@@ -66,7 +66,7 @@ export const Dropzone = ( {
     disabled,
     onDrop: ( acceptedFiles, fileRejections, event ) => {
       if ( fileRejections.length > 0 ) {
-        const error = new Error( fileRejections.at( 0 )?.errors.at( 0 )?.message ) as Error & { rejectedFiles: { name: string; reason: string }[] };
+        const error = new Error( fileRejections.at( 0 )?.errors.at( 0 )?.message ) as Error & { rejectedFiles: { name: string; reason: string; }[]; };
         error.rejectedFiles = fileRejections.map( r => ( {
           name: r.file.name,
           reason: r.errors.at( 0 )?.message ?? 'Unknown error',

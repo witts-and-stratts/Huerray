@@ -157,6 +157,7 @@ export * from './utils-brand-category';
 export * from './utils-brand-status';
 export * from './utils-campaign-category';
 export * from './utils-campaign-status';
+export * from './utils-case-status';
 export * from './utils-company-size';
 export * from './utils-content-type';
 export * from './utils-country-code';

@@ -1,0 +1,89 @@
+{
+  "invoicesPage": {
+    "title": "Invoices",
+    "description": "View and manage all invoices across the platform.",
+    "createInvoice": {
+      "trigger": "New Invoice",
+      "title": "Create Invoice",
+      "description": "Create a new invoice for a completed campaign.",
+      "confirm": "Create Invoice",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "campaignLabel": "Campaign",
+      "campaignPlaceholder": "Select a completed campaign...",
+      "campaignLoading": "Loading completed campaigns...",
+      "dueDateLabel": "Due date",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Optional notes for this invoice...",
+      "success": "Invoice created successfully",
+      "error": "Failed to create invoice",
+      "errorDescription": "Please try again later."
+    },
+    "toolbar": {
+      "search": "Search invoices..."
+    },
+    "columns": {
+      "invoice": "Invoice",
+      "brand": "Brand",
+      "campaign": "Campaign",
+      "issued": "Issued",
+      "paid": "Status",
+      "amount": "Amount",
+      "actions": "Actions"
+    },
+    "statuses": {
+      "paid": "Paid",
+      "overdue": "Overdue",
+      "cancelled": "Cancelled",
+      "draft": "Draft",
+      "issued": "Issued",
+      "sent": "Sent"
+    },
+    "actions": {
+      "view": "View",
+      "downloadPdf": "Download PDF",
+      "generatingPdf": "Generating PDF...",
+      "cancelInvoice": "Cancel Invoice",
+      "cancelInvoiceDesc": "Are you sure you want to cancel this invoice? This action cannot be undone.",
+      "cancelling": "Cancelling...",
+      "generatePayment": "Generate payment",
+      "generatePaymentDesc": "This will mark the invoice as paid and generate a payment record. This action cannot be undone.",
+      "generating": "Generating...",
+      "paymentNotes": "Payment made",
+      "notes": "Notes",
+      "paymentSuccess": "Payment generated successfully",
+      "paymentError": "Failed to generate payment",
+      "updateSuccess": "Invoice updated successfully",
+      "updateError": "Failed to update invoice",
+      "issueInvoice": "Issue Invoice",
+      "issueInvoiceDesc": "Mark this invoice as issued. The brand will be notified.",
+      "issuing": "Issuing...",
+      "sendInvoice": "Send Invoice",
+      "sendInvoiceDesc": "Mark this invoice as sent to the brand.",
+      "sending": "Sending...",
+      "invoicePaid": "Invoice Paid",
+      "invoicePaidDesc": "Mark this invoice as paid by the brand.",
+      "markAsPaid": "Mark as Paid",
+      "updating": "Updating..."
+    },
+    "detailsSheet": {
+      "invoiceLabel": "Invoice",
+      "invoiceDetailsFor": "Invoice details for {number}.",
+      "campaign": "Campaign",
+      "dates": "Dates",
+      "issued": "Issued",
+      "due": "Due",
+      "paid": "Paid",
+      "created": "Created",
+      "notes": "Notes",
+      "lineItemsCount": "Line Items ({count})",
+      "noLineItems": "No line items",
+      "overview": "Overview",
+      "lineItems": "Line Items",
+      "total": "Total",
+      "amountDue": "Amount due",
+      "downloadInvoice": "Download Invoice"
+    }
+  },
+  "emptyInvoices": {}
+}

@@ -1,0 +1,167 @@
+{
+  "landing": {
+    "title": "Dashboard",
+    "description": "Kampagnenleistung und operative Ansicht für Ihr Markenkonto",
+    "createCampaign": "Kampagne erstellen",
+    "viewCampaigns": "Kampagnen ansehen",
+    "analytics": {
+      "title": "Markenanalytik",
+      "description": "Leistungsmetriken für Ihr Markenkonto",
+      "error": "Die Markenanalyse kann nicht geladen werden.",
+      "groups": {
+        "campaigns": "Kampagnen",
+        "gigs": "Auftritte",
+        "outreach": "Aufsuchen",
+        "contentSpend": "Inhalt & Ausgaben"
+      },
+      "items": {
+        "campaignsCreated": "Erstellte Kampagnen",
+        "campaignsCompleted": "Abgeschlossene Kampagnen",
+        "completionRate": "Vollzugsquote",
+        "gigsCreated": "Geschaffene Gigs",
+        "gigsAccepted": "Akzeptierte Gigs",
+        "gigsCompleted": "Abgeschlossene Gigs",
+        "invitationsSent": "Versendete Einladungen",
+        "applicationsReceived": "Eingegangene Anträge",
+        "approvalRate": "Bewilligungsquote",
+        "videosReceived": "Empfangene Videos",
+        "videosApproved": "Zugelassene Videos",
+        "totalSpent": "Insgesamt ausgegeben"
+      }
+    },
+    "actionCenter": {
+      "description": "Gemeinsame Aktionen für Kampagnenmaßnahmen",
+      "createCampaign": {
+        "label": "Kampagne erstellen",
+        "detail": "Starten Sie ein neues Kampagnenbriefing und einen Genehmigungsantrag"
+      },
+      "findCreators": {
+        "label": "Schöpfer finden",
+        "detail": "Suche nach Erstellern, die Ihren Kampagnenzielen entsprechen"
+      },
+      "manageGigs": {
+        "label": "Gigs verwalten",
+        "detail": "Verfolgen Sie die Einrichtung, den Status und die Aktivitäten des Erstellers eines Projekts"
+      }
+    },
+    "kpiOverview": {
+      "totalCampaigns": {
+        "title": "Kampagnen insgesamt",
+        "loading": "Kampagnen laden...",
+        "caption": "Über alle Kampagnenstatus hinweg"
+      },
+      "activeCampaigns": {
+        "title": "Aktive Kampagnen",
+        "caption": "Derzeit laufende Kampagnen"
+      },
+      "totalGigs": {
+        "title": "Gigs gesamt",
+        "loading": "Gigs laden...",
+        "caption": "Alle mit Ihren Kampagnen verknüpften Gigs"
+      },
+      "totalSpend": {
+        "title": "Gesamtausgaben",
+        "caption": "Geschätzt aus Auftrittsbudgets und Vergütungen"
+      }
+    },
+    "campaignsRadial": {
+      "title": "Kampagnen Staat",
+      "description": "Statusverteilung über Ihre Kampagnen",
+      "chartCampaignsLabel": "Kampagnen",
+      "totalCampaigns": "Kampagnen insgesamt",
+      "emptyState": "Noch keine Kampagnen verfügbar."
+    },
+    "profileSnapshot": {
+      "title": "Marken-Schnappschuss",
+      "description": "Profil und Kontobedingungen",
+      "brandAccount": "Markenkonto",
+      "brand": "Marke",
+      "preferredContact": "Bevorzugter Kontakt",
+      "category": "Kategorie",
+      "location": "Standort",
+      "na": "K.A."
+    },
+    "budgetSnapshot": {
+      "title": "Budget-Schnappschuss",
+      "description": "Aktueller Ausgaben-Fußabdruck von allen Auftritten",
+      "totalSpend": "Gesamtausgaben",
+      "thisMonth": "Dieser Monat",
+      "averagePerGig": "Durchschnitt pro Gig"
+    },
+    "gigsStats": {
+      "title": "Auftritte",
+      "description": "Überblick über den Lebenszyklus eines Projekts und den Lieferfortschritt",
+      "tabs": {
+        "stats": "Statistiken",
+        "recent": "Neueste Auftritte"
+      },
+      "loadingGigs": "Gigs laden...",
+      "errorGigs": "Gigs können nicht geladen werden.",
+      "loadingRecentGigs": "Laden der letzten Auftritte...",
+      "errorRecentGigs": "Die letzten Gigs können nicht geladen werden.",
+      "emptyState": "Keine Gigs gefunden.",
+      "viewAll": "Alle Gigs anzeigen",
+      "totalGigs": "Gigs gesamt",
+      "openGigs": "Offene Auftritte",
+      "completedGigs": "Abgeschlossene Gigs",
+      "brandFallback": "Marke",
+      "untitledGig": "Unbetitelter Auftritt",
+      "na": "K.A."
+    },
+    "creatorRequirements": "Anforderungen an den Ersteller",
+    "gender": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "ageRange": "Altersspanne",
+    "any": "Jede",
+    "ambience": "Ambiente",
+    "requirements": "Anforderungen",
+    "contentGuidelines": "Inhaltliche Leitlinien",
+    "brandDetails": "Details zur Marke",
+    "company": "Unternehmen",
+    "country": "Land",
+    "category": "Kategorie",
+    "website": "Website",
+    "details": "Einzelheiten",
+    "submissionsStats": {
+      "title": "Einreichungen",
+      "description": "Status der Einreichungsprüfung und Momentaufnahme des Durchsatzes",
+      "tabs": {
+        "stats": "Statistiken",
+        "recent": "Jüngste Einreichungen"
+      },
+      "loadingSubmissions": "Einreichungen laden...",
+      "errorSubmissions": "Einreichungen können nicht geladen werden.",
+      "loadingRecentSubmissions": "Laden der letzten Einsendungen...",
+      "errorRecentSubmissions": "Die letzten Einsendungen können nicht geladen werden.",
+      "emptyState": "Keine Einsendungen gefunden.",
+      "totalSubmissions": "Total Einreichungen",
+      "pendingSubmissions": "Anhängige Einreichungen",
+      "approvedSubmissions": "Genehmigte Einreichungen"
+    },
+    "recentCampaigns": {
+      "title": "Neueste Kampagnen",
+      "description": "Letzte Aktivität aus Ihrer Kampagnenliste",
+      "emptyState": "Noch keine Kampagnen.",
+      "untitledCampaign": "Unbenannte Kampagne",
+      "updated": "Aktualisiert"
+    },
+    "recentGigs": {
+      "title": "Neueste Auftritte",
+      "description": "Zuletzt aktualisierte Gigs und Budgets",
+      "emptyState": "Noch keine Auftritte.",
+      "untitledGig": "Unbetitelter Auftritt",
+      "noCampaignLinked": "Keine Kampagne verknüpft",
+      "budget": "Haushalt",
+      "updated": "Aktualisiert"
+    },
+    "pipelineBreakdown": {
+      "title": "Kampagnen-Pipeline",
+      "description": "Wie Ihre Kampagnen nach Status verteilt werden",
+      "pendingApproval": "Genehmigung ausstehend",
+      "approved": "Genehmigt",
+      "running": "Laufen",
+      "returned": "Zurückgeschickt"
+    }
+  }
+}

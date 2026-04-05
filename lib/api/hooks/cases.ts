@@ -10,7 +10,7 @@ import {
   type UseQueryOptions,
   type UseQueryResult,
 } from '@tanstack/react-query';
-import { CasesApi } from '../generated/api';
+import { CasesApi, type CasesGetPriorityEnum, type CasesGetRelatedEntityTypeEnum, type CasesGetStatusEnum } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import type {
   ModelsPaginatedCaseResponse,
@@ -36,9 +36,9 @@ export const casesKeys = {
 
 export interface UseCasesParams {
   q?: string;
-  status?: string;
-  priority?: string;
-  relatedEntityType?: string;
+  status?: CasesGetStatusEnum;
+  priority?: CasesGetPriorityEnum;
+  relatedEntityType?: CasesGetRelatedEntityTypeEnum;
   page?: number;
   limit?: number;
 }

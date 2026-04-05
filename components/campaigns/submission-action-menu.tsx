@@ -178,7 +178,7 @@ export function SubmissionActionMenu( { submission, trigger, showViewAction = tr
       label: t( 'rejectSubmission' ),
       icon: X,
       allowedRoles: [ 'brand' ],
-      condition: ( current ) => !!current.id,
+      condition: ( current ) => !!current.id && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusCreated,
       action: () => setIsRejectOpen( true ),
     },
     {
@@ -202,7 +202,7 @@ export function SubmissionActionMenu( { submission, trigger, showViewAction = tr
       label: campaignActionsT( 'reject' ),
       icon: X,
       allowedRoles: [ 'admin' ],
-      condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusRejected,
+      condition: ( current ) => !!current.id && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusCreated,
       action: () => setIsAdminRejectOpen( true ),
     },
     {

@@ -1,0 +1,167 @@
+{
+  "landing": {
+    "title": "Tableau de bord",
+    "description": "Performance de la campagne et vue opérationnelle pour le compte de votre marque",
+    "createCampaign": "Créer une campagne",
+    "viewCampaigns": "Voir les campagnes",
+    "analytics": {
+      "title": "Analyse de la marque",
+      "description": "Mesures de performance pour votre compte de marque",
+      "error": "Impossible de charger l'analyse de la marque.",
+      "groups": {
+        "campaigns": "Campagnes",
+        "gigs": "Gigs",
+        "outreach": "Sensibilisation",
+        "contentSpend": "Contenu et dépenses"
+      },
+      "items": {
+        "campaignsCreated": "Campagnes créées",
+        "campaignsCompleted": "Campagnes terminées",
+        "completionRate": "Taux d'achèvement",
+        "gigsCreated": "Soirées créées",
+        "gigsAccepted": "Projets acceptés",
+        "gigsCompleted": "Soirées terminées",
+        "invitationsSent": "Envoi des invitations",
+        "applicationsReceived": "Demandes reçues",
+        "approvalRate": "Taux d'approbation",
+        "videosReceived": "Vidéos reçues",
+        "videosApproved": "Vidéos approuvées",
+        "totalSpent": "Total des dépenses"
+      }
+    },
+    "actionCenter": {
+      "description": "Actions communes pour les opérations de campagne",
+      "createCampaign": {
+        "label": "Créer une campagne",
+        "detail": "Lancer une nouvelle campagne Briefing et demande d'approbation"
+      },
+      "findCreators": {
+        "label": "Trouver des créateurs",
+        "detail": "Rechercher des créateurs qui correspondent aux objectifs de votre campagne"
+      },
+      "manageGigs": {
+        "label": "Gérer les contrats",
+        "detail": "Suivi de la mise en place des concerts, de leur statut et de l'activité des créateurs"
+      }
+    },
+    "kpiOverview": {
+      "totalCampaigns": {
+        "title": "Total des campagnes",
+        "loading": "Chargement des campagnes...",
+        "caption": "Tous les statuts de la campagne"
+      },
+      "activeCampaigns": {
+        "title": "Campagnes actives",
+        "caption": "Campagnes en cours"
+      },
+      "totalGigs": {
+        "title": "Nombre total de gigaoctets",
+        "loading": "Chargement de gigs...",
+        "caption": "Tous les concerts liés à vos campagnes"
+      },
+      "totalSpend": {
+        "title": "Dépenses totales",
+        "caption": "Estimation à partir des budgets des concerts et des rémunérations"
+      }
+    },
+    "campaignsRadial": {
+      "title": "Campagnes État",
+      "description": "Distribution de l'état d'avancement de vos campagnes",
+      "chartCampaignsLabel": "Campagnes",
+      "totalCampaigns": "Total des campagnes",
+      "emptyState": "Aucune campagne n'est encore disponible."
+    },
+    "profileSnapshot": {
+      "title": "Aperçu de la marque",
+      "description": "Les éléments essentiels du profil et du compte",
+      "brandAccount": "Compte de marque",
+      "brand": "Marque",
+      "preferredContact": "Contact privilégié",
+      "category": "Catégorie",
+      "location": "Localisation",
+      "na": "N/A"
+    },
+    "budgetSnapshot": {
+      "title": "Aperçu du budget",
+      "description": "Empreinte des dépenses actuelles pour tous les concerts",
+      "totalSpend": "Dépenses totales",
+      "thisMonth": "Ce mois-ci",
+      "averagePerGig": "Moyenne par giga"
+    },
+    "gigsStats": {
+      "title": "Gigs",
+      "description": "Aperçu du cycle de vie du projet et de l'état d'avancement des livraisons",
+      "tabs": {
+        "stats": "Statistiques",
+        "recent": "Événements récents"
+      },
+      "loadingGigs": "Chargement de gigs...",
+      "errorGigs": "Impossible de charger les gigs.",
+      "loadingRecentGigs": "Chargement des concerts récents...",
+      "errorRecentGigs": "Impossible de charger les gigs récents.",
+      "emptyState": "Aucun concert n'a été trouvé.",
+      "viewAll": "Voir toutes les fêtes",
+      "totalGigs": "Nombre total de gigaoctets",
+      "openGigs": "Soirées ouvertes",
+      "completedGigs": "Projets terminés",
+      "brandFallback": "Marque",
+      "untitledGig": "Untitled Gig",
+      "na": "N/A"
+    },
+    "creatorRequirements": "Exigences du créateur",
+    "gender": "Genre",
+    "male": "Homme",
+    "female": "Femme",
+    "ageRange": "Tranche d'âge",
+    "any": "Tous",
+    "ambience": "Ambiance",
+    "requirements": "Exigences",
+    "contentGuidelines": "Lignes directrices sur le contenu",
+    "brandDetails": "Détails de la marque",
+    "company": "Entreprise",
+    "country": "Pays",
+    "category": "Catégorie",
+    "website": "Site web",
+    "details": "Détails",
+    "submissionsStats": {
+      "title": "Soumissions",
+      "description": "État d'avancement de l'examen des demandes et aperçu du débit",
+      "tabs": {
+        "stats": "Statistiques",
+        "recent": "Soumissions récentes"
+      },
+      "loadingSubmissions": "Chargement des soumissions...",
+      "errorSubmissions": "Impossible de charger les soumissions.",
+      "loadingRecentSubmissions": "Chargement des soumissions récentes...",
+      "errorRecentSubmissions": "Impossible de charger les soumissions récentes.",
+      "emptyState": "Aucune soumission n'a été trouvée.",
+      "totalSubmissions": "Total des soumissions",
+      "pendingSubmissions": "Soumissions en attente",
+      "approvedSubmissions": "Soumissions approuvées"
+    },
+    "recentCampaigns": {
+      "title": "Campagnes récentes",
+      "description": "Dernières activités de votre liste de campagne",
+      "emptyState": "Il n'y a pas encore de campagnes.",
+      "untitledCampaign": "Campagne sans titre",
+      "updated": "Mise à jour"
+    },
+    "recentGigs": {
+      "title": "Événements récents",
+      "description": "Dernières mises à jour des contrats et des budgets",
+      "emptyState": "Pas encore de concerts.",
+      "untitledGig": "Untitled Gig",
+      "noCampaignLinked": "Pas de campagne liée",
+      "budget": "Budget",
+      "updated": "Mise à jour"
+    },
+    "pipelineBreakdown": {
+      "title": "Pipeline de campagne",
+      "description": "Comment vos campagnes sont-elles réparties par statut ?",
+      "pendingApproval": "En attente d'approbation",
+      "approved": "Approuvé",
+      "running": "La course à pied",
+      "returned": "Renvoyé"
+    }
+  }
+}

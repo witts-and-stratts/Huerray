@@ -1,0 +1,55 @@
+{
+  "submissionView": {
+    "comments": "Comments",
+    "campaign": "Campaign",
+    "gig": "Gig",
+    "status": "Status",
+    "compensation": "Compensation",
+    "gigCost": "Gig Cost",
+    "submitted": "Submitted",
+    "gigStatus": "Gig status:",
+    "approveSubmission": "Approve Submission",
+    "returnSubmission": "Return Submission",
+    "acceptSubmission": "Accept Submission",
+    "rejectSubmission": "Reject Submission",
+    "returnToCreator": "Return Submission to Creator",
+    "returnConfirm": "Are you sure you want to return this submission to the creator?",
+    "rejectConfirm": "Are you sure you want to reject this submission?",
+    "untitledSubmission": "Untitled Submission"
+  },
+  "submissionUpdate": {
+    "title": "Update Submission",
+    "description": "Update the submission details.",
+    "submit": "Update",
+    "submitting": "Updating...",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Submission title",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Submission description",
+    "videoLabel": "Video File",
+    "videoRequired": "Upload is required. Submission cannot be updated without a newly uploaded video."
+  },
+  "submissionStatusUpdate": {
+    "title": "Update Submission Status",
+    "description": "Update the current status for this submission.",
+    "submit": "Update Status",
+    "submitting": "Updating...",
+    "statusLabel": "Status",
+    "commentLabel": "Comment (Optional)",
+    "commentPlaceholder": "Add status update note"
+  },
+  "gigSelection": {
+    "title": "Select a Gig",
+    "description": "Choose a gig to invite creators to.",
+    "noGigs": "No gigs yet",
+    "noGigsDesc": "This campaign doesn't have any gigs yet. Create a gig first before inviting creators."
+  },
+  "gigEdit": {
+    "title": "Edit Gig",
+    "description": "Make changes to your gig details below.",
+    "campaign": "Campaign",
+    "updateSuccess": "Gig updated successfully",
+    "updateSuccessDesc": "Your gig has been updated successfully",
+    "updateError": "Failed to update gig"
+  }
+}

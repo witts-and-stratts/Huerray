@@ -1,0 +1,39 @@
+{
+  "submissions": {
+    "title": "Recent Submissions",
+    "description": "Your latest delivered videos",
+    "noSubmissions": "No submissions yet",
+    "noSubmissionsDesc": "When you create submissions for this gig, they will appear here.",
+    "createTitle": "Create Submission",
+    "createDesc": "Upload your video and add details for this gig.",
+    "details": "Submission Details",
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "Give your submission a title",
+      "notes": "Notes",
+      "notesPlaceholder": "Add any notes about your submission...",
+      "submit": "Submit Video",
+      "submitting": "Submitting..."
+    },
+    "validation": {
+      "titleRequired": "Title is required",
+      "videoRequired": "Video file is required",
+      "maxSize": "Max file size is 500MB",
+      "invalidFormat": "Only .mp4, .mov, and .webm formats are supported"
+    },
+    "dropzoneTitle": "Drag & drop your video here",
+    "dropzoneDesc": "or click to browse from your computer",
+    "dropzoneSpecs": "Supports MP4, MOV, WEBM (Max 500MB)",
+    "videoThumbnailError": "Failed to generate video thumbnail",
+    "uploadFailedLog": "Upload failed:",
+    "cancel": "Cancel",
+    "success": "Submission created successfully",
+    "error": "Failed to create submission",
+    "missingGigId": "Gig ID is missing",
+    "uploading": "Please wait for the video to finish uploading",
+    "toasts": {
+      "success": "Submission created successfully",
+      "error": "Failed to create submission"
+    }
+  }
+}

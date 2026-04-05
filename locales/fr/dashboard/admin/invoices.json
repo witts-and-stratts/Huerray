@@ -1,0 +1,89 @@
+{
+  "invoicesPage": {
+    "title": "Factures",
+    "description": "Visualiser et gérer toutes les factures sur la plateforme.",
+    "createInvoice": {
+      "trigger": "Nouvelle facture",
+      "title": "Créer une facture",
+      "description": "Créer une nouvelle facture pour une campagne terminée.",
+      "confirm": "Créer une facture",
+      "cancel": "Annuler",
+      "creating": "Créer...",
+      "campaignLabel": "Campagne",
+      "campaignPlaceholder": "Sélectionnez une campagne terminée...",
+      "campaignLoading": "Chargement des campagnes terminées...",
+      "dueDateLabel": "Date d'échéance",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Notes facultatives pour cette facture...",
+      "success": "Facture créée avec succès",
+      "error": "Échec de la création de la facture",
+      "errorDescription": "Veuillez réessayer plus tard."
+    },
+    "toolbar": {
+      "search": "Recherche de factures..."
+    },
+    "columns": {
+      "invoice": "Facture",
+      "brand": "Marque",
+      "campaign": "Campagne",
+      "issued": "Délivré",
+      "paid": "Statut",
+      "amount": "Montant",
+      "actions": "Actions"
+    },
+    "statuses": {
+      "paid": "Payé",
+      "overdue": "En retard",
+      "cancelled": "Annulé",
+      "draft": "Projet",
+      "issued": "Délivré",
+      "sent": "Envoyé"
+    },
+    "actions": {
+      "view": "Voir",
+      "downloadPdf": "Télécharger le PDF",
+      "generatingPdf": "Générer des PDF...",
+      "cancelInvoice": "Annuler la facture",
+      "cancelInvoiceDesc": "Êtes-vous sûr de vouloir annuler cette facture ? Cette action ne peut être annulée.",
+      "cancelling": "Annulation...",
+      "generatePayment": "Générer un paiement",
+      "generatePaymentDesc": "Cette action marquera la facture comme payée et générera un enregistrement de paiement. Cette action ne peut pas être annulée.",
+      "generating": "Générer...",
+      "paymentNotes": "Paiement effectué",
+      "notes": "Notes",
+      "paymentSuccess": "Paiement généré avec succès",
+      "paymentError": "Le paiement n'a pas été généré",
+      "updateSuccess": "Facture mise à jour avec succès",
+      "updateError": "Échec de la mise à jour de la facture",
+      "issueInvoice": "Émission de la facture",
+      "issueInvoiceDesc": "Marquer cette facture comme émise. La marque en sera informée.",
+      "issuing": "Délivrer...",
+      "sendInvoice": "Envoyer la facture",
+      "sendInvoiceDesc": "Marquer cette facture comme envoyée à la marque.",
+      "sending": "Envoi...",
+      "invoicePaid": "Facture payée",
+      "invoicePaidDesc": "Marquer cette facture comme payée par la marque.",
+      "markAsPaid": "Marquer comme payé",
+      "updating": "Mise à jour..."
+    },
+    "detailsSheet": {
+      "invoiceLabel": "Facture",
+      "invoiceDetailsFor": "Détails de la facture pour {number}.",
+      "campaign": "Campagne",
+      "dates": "Dates",
+      "issued": "Délivré",
+      "due": "Due",
+      "paid": "Payé",
+      "created": "Créée",
+      "notes": "Notes",
+      "lineItemsCount": "Postes ({count})",
+      "noLineItems": "Aucun poste",
+      "overview": "Vue d'ensemble",
+      "lineItems": "Postes de travail",
+      "total": "Total",
+      "amountDue": "Montant dû",
+      "downloadInvoice": "Télécharger la facture"
+    }
+  },
+  "emptyInvoices": {}
+}

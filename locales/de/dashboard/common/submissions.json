@@ -1,0 +1,55 @@
+{
+  "submissionView": {
+    "comments": "Kommentare",
+    "campaign": "Kampagne",
+    "gig": "Gig",
+    "status": "Status",
+    "compensation": "Entschädigung",
+    "gigCost": "Gig Kosten",
+    "submitted": "Eingereicht",
+    "gigStatus": "Gig-Status:",
+    "approveSubmission": "Einreichung genehmigen",
+    "returnSubmission": "Rücksendung Einreichung",
+    "acceptSubmission": "Einreichung akzeptieren",
+    "rejectSubmission": "Einreichung ablehnen",
+    "returnToCreator": "Rücksendung an den Schöpfer",
+    "returnConfirm": "Sind Sie sicher, dass Sie diesen Beitrag an den Ersteller zurückschicken wollen?",
+    "rejectConfirm": "Sind Sie sicher, dass Sie diesen Antrag ablehnen wollen?",
+    "untitledSubmission": "Untitled Submission"
+  },
+  "submissionUpdate": {
+    "title": "Update Einreichung",
+    "description": "Aktualisieren Sie die Details der Einreichung.",
+    "submit": "Update",
+    "submitting": "Aktualisieren...",
+    "titleLabel": "Titel",
+    "titlePlaceholder": "Titel der Einreichung",
+    "descriptionLabel": "Beschreibung",
+    "descriptionPlaceholder": "Beschreibung der Einreichung",
+    "videoLabel": "Video-Datei",
+    "videoRequired": "Ein Upload ist erforderlich. Die Einreichung kann ohne ein neu hochgeladenes Video nicht aktualisiert werden."
+  },
+  "submissionStatusUpdate": {
+    "title": "Einreichungsstatus aktualisieren",
+    "description": "Aktualisieren Sie den aktuellen Status für diesen Antrag.",
+    "submit": "Status aktualisieren",
+    "submitting": "Aktualisieren...",
+    "statusLabel": "Status",
+    "commentLabel": "Kommentar (fakultativ)",
+    "commentPlaceholder": "Notiz zur Statusaktualisierung hinzufügen"
+  },
+  "gigSelection": {
+    "title": "Wählen Sie einen Gig",
+    "description": "Wählen Sie einen Auftritt, zu dem Sie Schöpfer einladen.",
+    "noGigs": "Noch keine Auftritte",
+    "noGigsDesc": "Diese Kampagne hat noch keine Gigs. Erstelle erst einen Gig, bevor du Ersteller einlädst."
+  },
+  "gigEdit": {
+    "title": "Gig bearbeiten",
+    "description": "Nehmen Sie unten Änderungen an Ihren Auftrittsdaten vor.",
+    "campaign": "Kampagne",
+    "updateSuccess": "Gig erfolgreich aktualisiert",
+    "updateSuccessDesc": "Ihr Auftritt wurde erfolgreich aktualisiert",
+    "updateError": "Aktualisierung des Gig fehlgeschlagen"
+  }
+}

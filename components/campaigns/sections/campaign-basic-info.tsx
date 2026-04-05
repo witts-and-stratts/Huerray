@@ -4,7 +4,7 @@ import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { UtilsCampaignCategory } from '@/lib/api/generated/models/utils-campaign-category';
 import { useFilterLabel } from '@/lib/hooks/use-filter-label';
-import { CampaignFormApi, createCampaignSchema } from '../schema';
+import { CampaignFormApi, createTranslatedCampaignSchema } from '../schema';
 import { useTranslations } from 'next-intl';
 
 interface CampaignBasicInfoProps {
@@ -14,10 +14,11 @@ interface CampaignBasicInfoProps {
 export const CampaignBasicInfo = memo( function CampaignBasicInfo( { form }: CampaignBasicInfoProps ) {
   const t = useTranslations( 'dashboard.brand.newCampaignPage' );
   const getFilterLabel = useFilterLabel();
+  const campaignSchema = createTranslatedCampaignSchema( t );
 
   return (
     <FieldGroup>
-      <form.Field name="campaign_name" validators={ { onChange: createCampaignSchema.shape.campaign_name, onBlur: createCampaignSchema.shape.campaign_name } }>
+      <form.Field name="campaign_name" validators={ { onChange: campaignSchema.shape.campaign_name, onBlur: campaignSchema.shape.campaign_name } }>
         { ( field ) => (
           <SuperField
             label={ t( 'campaignName' ) }
@@ -31,7 +32,7 @@ export const CampaignBasicInfo = memo( function CampaignBasicInfo( { form }: Cam
           />
         ) }
       </form.Field>
-      <form.Field name="description" validators={ { onChange: createCampaignSchema.shape.description, onBlur: createCampaignSchema.shape.description } }>
+      <form.Field name="description" validators={ { onChange: campaignSchema.shape.description, onBlur: campaignSchema.shape.description } }>
         { ( field ) => (
           <SuperField
             label={ t( 'description' ) }
@@ -46,7 +47,7 @@ export const CampaignBasicInfo = memo( function CampaignBasicInfo( { form }: Cam
         ) }
       </form.Field>
       <div className='flex gap-4'>
-        <form.Field name="category" validators={ { onChange: createCampaignSchema.shape.category, onBlur: createCampaignSchema.shape.category } }>
+        <form.Field name="category" validators={ { onChange: campaignSchema.shape.category, onBlur: campaignSchema.shape.category } }>
           { ( field ) => (
             <SuperField
               label={ t( 'category' ) }
@@ -64,7 +65,7 @@ export const CampaignBasicInfo = memo( function CampaignBasicInfo( { form }: Cam
           ) }
         </form.Field>
       </div>
-      <form.Field name="keywords" validators={ { onChange: createCampaignSchema.shape.keywords as any, onBlur: createCampaignSchema.shape.keywords as any } }>
+      <form.Field name="keywords" validators={ { onChange: campaignSchema.shape.keywords as any, onBlur: campaignSchema.shape.keywords as any } }>
         { ( field ) => (
           <SuperField
             label={ t( 'keywords' ) }

@@ -28,20 +28,20 @@ import {
 const configuration = new Configuration();
 const apiInstance = new CasesApi(configuration);
 
-let q: string; //Search query (optional) (default to undefined)
-let status: string; //Case status (optional) (default to undefined)
-let priority: string; //Case priority (optional) (default to undefined)
-let relatedEntityType: string; //Related entity type (optional) (default to undefined)
-let page: number; //Page number (optional) (default to 1)
-let limit: number; //Items per page (optional) (default to 10)
+let limit: number; // (optional) (default to undefined)
+let page: number; // (optional) (default to undefined)
+let priority: 'low' | 'normal' | 'high' | 'urgent'; // (optional) (default to undefined)
+let q: string; // (optional) (default to undefined)
+let relatedEntityType: 'User' | 'Brand' | 'Creator' | 'Campaign' | 'Case' | 'Gig' | 'VideoSubmission' | 'Payment' | 'Invoice'; // (optional) (default to undefined)
+let status: 'open' | 'in_progress' | 'resolved' | 'closed'; // (optional) (default to undefined)
 
 const { status, data } = await apiInstance.casesGet(
-    q,
-    status,
-    priority,
-    relatedEntityType,
+    limit,
     page,
-    limit
+    priority,
+    q,
+    relatedEntityType,
+    status
 );
 ```
 
@@ -49,12 +49,12 @@ const { status, data } = await apiInstance.casesGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **q** | [**string**] | Search query | (optional) defaults to undefined|
-| **status** | [**string**] | Case status | (optional) defaults to undefined|
-| **priority** | [**string**] | Case priority | (optional) defaults to undefined|
-| **relatedEntityType** | [**string**] | Related entity type | (optional) defaults to undefined|
-| **page** | [**number**] | Page number | (optional) defaults to 1|
-| **limit** | [**number**] | Items per page | (optional) defaults to 10|
+| **limit** | [**number**] |  | (optional) defaults to undefined|
+| **page** | [**number**] |  | (optional) defaults to undefined|
+| **priority** | [**&#39;low&#39; | &#39;normal&#39; | &#39;high&#39; | &#39;urgent&#39;**]**Array<&#39;low&#39; &#124; &#39;normal&#39; &#124; &#39;high&#39; &#124; &#39;urgent&#39;>** |  | (optional) defaults to undefined|
+| **q** | [**string**] |  | (optional) defaults to undefined|
+| **relatedEntityType** | [**&#39;User&#39; | &#39;Brand&#39; | &#39;Creator&#39; | &#39;Campaign&#39; | &#39;Case&#39; | &#39;Gig&#39; | &#39;VideoSubmission&#39; | &#39;Payment&#39; | &#39;Invoice&#39;**]**Array<&#39;User&#39; &#124; &#39;Brand&#39; &#124; &#39;Creator&#39; &#124; &#39;Campaign&#39; &#124; &#39;Case&#39; &#124; &#39;Gig&#39; &#124; &#39;VideoSubmission&#39; &#124; &#39;Payment&#39; &#124; &#39;Invoice&#39;>** |  | (optional) defaults to undefined|
+| **status** | [**&#39;open&#39; | &#39;in_progress&#39; | &#39;resolved&#39; | &#39;closed&#39;**]**Array<&#39;open&#39; &#124; &#39;in_progress&#39; &#124; &#39;resolved&#39; &#124; &#39;closed&#39;>** |  | (optional) defaults to undefined|
 
 
 ### Return type

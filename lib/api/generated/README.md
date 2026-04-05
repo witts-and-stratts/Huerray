@@ -353,6 +353,7 @@ Class | Method | HTTP request | Description
  - [UtilsBrandStatus](docs/UtilsBrandStatus.md)
  - [UtilsCampaignCategory](docs/UtilsCampaignCategory.md)
  - [UtilsCampaignStatus](docs/UtilsCampaignStatus.md)
+ - [UtilsCaseStatus](docs/UtilsCaseStatus.md)
  - [UtilsCompanySize](docs/UtilsCompanySize.md)
  - [UtilsContentType](docs/UtilsContentType.md)
  - [UtilsCountryCode](docs/UtilsCountryCode.md)

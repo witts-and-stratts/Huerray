@@ -1,0 +1,32 @@
+{
+  "breadcrumbs": {
+    "creator": "Creador",
+    "dashboard": "Cuadro de mandos",
+    "gigs": "Gigs",
+    "active": "Activo",
+    "invitations": "Invitaciones",
+    "notifications": "Notificaciones",
+    "earnings": "Ganancias",
+    "portfolio": "Cartera",
+    "settings": "Ajustes",
+    "completeProfile": "Perfil completo",
+    "account": "Cuenta",
+    "editBasicInfo": "Información para el usuario",
+    "profile": "Perfil",
+    "bio": "Biografía",
+    "socialMedia": "Redes sociales",
+    "security": "Seguridad",
+    "bankDetails": "Datos bancarios",
+    "loading": "Cargando..."
+  },
+  "kpi": {
+    "gigsCompleted": "Conciertos realizados",
+    "gigsCompletedCaption": "Total de actuaciones que ha completado con éxito",
+    "totalEarned": "Total ganado",
+    "totalEarnedCaption": "Ingresos de por vida en todos los conciertos",
+    "approvalRate": "Tasa de aprobación",
+    "approvalRateCaption": "Porcentaje de vídeos aprobados por las marcas",
+    "successRate": "Tasa de éxito",
+    "successRateCaption": "Solicitudes que se convirtieron en actuaciones activas"
+  }
+}

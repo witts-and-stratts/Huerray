@@ -1,0 +1,164 @@
+{
+  "brandsPage": {
+    "title": "Marques",
+    "description": "Gérer et suivre toutes les marques sur la plateforme"
+  },
+  "brandDetails": {
+    "description": "Informations détaillées sur la marque",
+    "companyDetails": "Détails de l'entreprise",
+    "contactInfo": "Contact",
+    "systemDetails": "Détails du système",
+    "brandId": "ID de marque",
+    "userId": "ID de l'utilisateur",
+    "category": "Catégorie",
+    "companySize": "Taille de l'entreprise",
+    "vatId": "NUMÉRO D'IDENTIFICATION TVA",
+    "regNumber": "Reg. Numéro d'immatriculation",
+    "descriptionLabel": "Description"
+  },
+  "brandStatus": {
+    "title": "Mise à jour du statut de la marque",
+    "description": "Consultez le profil de la marque et mettez à jour son statut.",
+    "statusLabel": "Statut",
+    "approve": "Approuver",
+    "reject": "Rejeter",
+    "return": "Retour",
+    "totalRejection": "Rejet total",
+    "successToast": "Le statut de la marque a été mis à jour avec succès",
+    "errorToast": "Échec de la mise à jour du statut de la marque",
+    "missingId": "L'identifiant de la marque est manquant",
+    "confirmApproveTitle": "Approuver le profil de la marque ?",
+    "confirmApproveDesc": "Le profil de {name} sera approuvé et il en sera informé.",
+    "confirmRejectTitle": "Rejeter le profil de la marque ?",
+    "confirmRejectDesc": "Le profil de {name} sera rejeté et il en sera informé.",
+    "confirmReturnTitle": "Retourner le profil de la marque ?",
+    "confirmReturnDesc": "Le profil de {name} sera renvoyé et il en sera informé.",
+    "commentLabel": "Commentaire",
+    "commentPlaceholder": "Ajouter un commentaire",
+    "approving": "Approuver...",
+    "rejecting": "Rejeter...",
+    "returning": "Retour...",
+    "approvedToast": "{name} approuvé avec succès",
+    "rejectedToast": "{name} rejeté",
+    "returnedToast": "{name} retourné",
+    "thisBrand": "Cette marque"
+  },
+  "brandActionMenu": {
+    "ThisActionCannot": "? Cette action ne peut être annulée.",
+    "areYouSureYou": "Êtes-vous sûr de vouloir supprimer",
+    "openMenu": "Ouvrir le menu",
+    "brandDeletedSuccessfully": "Marque supprimée avec succès",
+    "failedToDeleteBrand": "Échec de la suppression de la marque",
+    "brandProfileNotFound": "Profil de marque introuvable",
+    "copyBrandId": "Copier l'identifiant de la marque",
+    "brandIdCopiedToClipboard": "ID de marque copié dans le presse-papiers",
+    "visitWebsite": "Visiter le site web",
+    "viewDetails": "Voir les détails",
+    "reviewProfile": "Profil d'examen",
+    "deleteBrand": "Supprimer la marque",
+    "confirmDelete": "Supprimer"
+  },
+  "brandCard": {},
+  "brandDetailsSheet": {
+    "company": "Entreprise",
+    "overview": "Vue d'ensemble",
+    "detailedInformationAboutBrand": "Informations détaillées sur la marque"
+  },
+  "brandStatusBadge": {},
+  "brandStatusDialog": {
+    "updateStatus": "Mise à jour du statut",
+    "cancel": "Annuler",
+    "reviewTheBrandsProfile": "Consultez le profil de la marque et mettez à jour son statut.",
+    "updateBrandStatus": "Mise à jour du statut de la marque"
+  },
+  "brandsCardsView": {},
+  "brandsColumns": {},
+  "brandsTableToolbar": {
+    "selectAll": "Sélectionner tout"
+  },
+  "brandsTableView": {},
+  "brandsTable": {},
+  "brandsView": {},
+  "brandDashboard": {
+    "totalSpend": "Dépenses totales",
+    "avgGigSpend": "Dépenses moyennes par personne",
+    "total": "Total",
+    "active": "Actif",
+    "finished": "Fini",
+    "draft": "Projet",
+    "failedToLoad": "Échec du chargement du profil de marque",
+    "brandNotFound": "Marque non trouvée",
+    "brandDashboard": "Tableau de bord de la marque",
+    "overview": "Vue d'ensemble des performances et des détails de la marque",
+    "brands": "Marques"
+  },
+  "brandCampaignMetricsBlock": {
+    "campaignLifecycleOverview": "Aperçu du cycle de vie de la campagne",
+    "campaigns": "Campagnes"
+  },
+  "brandCampaignsTableBlock": {
+    "created": "Créé :",
+    "noCampaignsYet": "Pas encore de campagne",
+    "loadingRecentCampaigns": "Chargement des campagnes récentes...",
+    "loadingCampaignStats": "Chargement des statistiques de la campagne...",
+    "recentCampaigns": "Campagnes récentes",
+    "stats": "Statistiques",
+    "brandCampaignActivityAnd": "Activité et statut de la campagne de marque",
+    "campaigns": "Campagnes",
+    "untitledCampaign": "Campagne sans titre"
+  },
+  "brandContactBlock": {
+    "address": "Adresse",
+    "phone": "Téléphone",
+    "email": "Courriel",
+    "contactAddress": "Contact et adresse"
+  },
+  "brandFinancialsBlock": {
+    "spendPerformanceForThis": "Performance des dépenses pour cette marque",
+    "financials": "Finances"
+  },
+  "brandProfileBlock": {
+    "user": "Utilisateur",
+    "contact": "Contact",
+    "overview": "Vue d'ensemble",
+    "failedToLoadUser": "Échec du chargement des détails de l'utilisateur",
+    "identity": "Identité",
+    "emailVerified": "Courriel vérifié",
+    "emailUnverified": "Email non vérifié",
+    "name": "Nom",
+    "username": "Nom d'utilisateur",
+    "usernameCopied": "Nom d'utilisateur copié",
+    "type": "Type",
+    "email": "Courriel",
+    "system": "Système",
+    "userId": "ID de l'utilisateur",
+    "userIdCopied": "ID utilisateur copié",
+    "joined": "Rejoint",
+    "updated": "Mise à jour",
+    "noContactEmail": "Pas d'email de contact",
+    "details": "Détails",
+    "category": "Catégorie",
+    "location": "Localisation",
+    "country": "Pays",
+    "companySize": "Taille de l'entreprise",
+    "registered": "Enregistré",
+    "vatId": "NUMÉRO D'IDENTIFICATION TVA",
+    "phone": "Téléphone",
+    "website": "Site web",
+    "addressTitle": "Adresse",
+    "noAddress": "Pas d'adresse dans le dossier",
+    "noLinkedUser": "Pas de compte utilisateur lié",
+    "na": "N/A"
+  },
+  "brandRecentCampaignsBlock": {
+    "noCampaignsYet": "Il n'y a pas encore de campagnes.",
+    "unableToLoadRecent": "Impossible de charger les campagnes récentes.",
+    "latestCampaignsForThis": "Dernières campagnes pour cette marque",
+    "recentCampaigns": "Campagnes récentes"
+  },
+  "brandRecentSubmissionsBlock": {
+    "unableToLoadRecent": "Impossible de charger les soumissions récentes.",
+    "latestVideoSubmissionsAcross": "Dernières vidéos soumises dans le cadre des campagnes",
+    "recentSubmissions": "Soumissions récentes"
+  }
+}

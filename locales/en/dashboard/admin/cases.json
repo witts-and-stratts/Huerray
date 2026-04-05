@@ -1,0 +1,101 @@
+{
+  "casesPage": {
+    "title": "Support Cases",
+    "description": "View and manage all support cases across the platform.",
+    "empty": "No cases found.",
+    "tabs": {
+      "all": "All",
+      "open": "Open",
+      "inProgress": "In Progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "statuses": {
+      "open": "Open",
+      "inProgress": "In Progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "priorities": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search cases...",
+      "status": "Status",
+      "priority": "Priority"
+    },
+    "columns": {
+      "caseNumber": "Case #",
+      "caseNumberCopied": "Case number copied",
+      "title": "Title",
+      "status": "Status",
+      "priority": "Priority",
+      "reporter": "Reporter",
+      "entity": "Entity",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "actionMenu": {
+      "viewDetails": "View details",
+      "copyId": "Copy ID",
+      "assignCase": "Assign case",
+      "markInProgress": "Mark as In Progress",
+      "markResolved": "Mark as Resolved",
+      "reopen": "Reopen",
+      "close": "Close case",
+      "assignDialog": {
+        "title": "Assign case",
+        "description": "Choose an admin to assign this support case to.",
+        "assigneeLabel": "Admin assignee",
+        "placeholder": "Select an admin",
+        "unknownAdmin": "Unknown admin",
+        "loading": "Loading admins...",
+        "empty": "No admins available.",
+        "cancel": "Cancel",
+        "confirm": "Assign case",
+        "submitting": "Assigning..."
+      },
+      "toasts": {
+        "idCopied": "Case ID copied",
+        "missingId": "Missing case ID",
+        "assigneeRequired": "Select an admin to assign this case",
+        "caseAssigned": "Case assigned",
+        "caseAssignError": "Failed to assign case",
+        "statusUpdated": "Case status updated",
+        "statusUpdateError": "Failed to update case status"
+      }
+    },
+    "details": {
+      "tab": "Details",
+      "description": "Detailed information about case",
+      "selectPrompt": "Select a case to view details",
+      "untitled": "Untitled Case",
+      "descriptionLabel": "Description",
+      "caseInfo": "Case Information",
+      "systemInfo": "System Details",
+      "status": "Status",
+      "priority": "Priority",
+      "reporter": "Reporter",
+      "assignee": "Assignee",
+      "relatedEntity": "Related Entity",
+      "caseId": "Case ID",
+      "idCopied": "Case ID copied",
+      "created": "Created",
+      "updated": "Last Updated",
+      "resolved": "Resolved At",
+      "unknown": "Unknown",
+      "unassigned": "Unassigned",
+      "na": "N/A"
+    },
+    "messages": {
+      "tab": "Messages",
+      "empty": "No messages yet. Start the conversation.",
+      "placeholder": "Type a message... (Enter to send)",
+      "sent": "Message sent",
+      "sendError": "Failed to send message"
+    }
+  }
+}

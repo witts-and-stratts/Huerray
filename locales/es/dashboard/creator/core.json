@@ -1,0 +1,83 @@
+{
+  "welcome": "¡Bienvenido de nuevo, {name}!",
+  "overview": "Aquí tienes un resumen del concierto",
+  "dashboard": {
+    "title": "Cuadro de mandos",
+    "description": "Realice un seguimiento de las invitaciones, las actuaciones, los envíos y los ingresos previstos.",
+    "browseGigs": "Buscar conciertos",
+    "viewMyGigs": "Ver mis conciertos",
+    "creatorFallback": "Creador"
+  },
+  "common": {
+    "details": "Detalles",
+    "viewAllMyGigs": "Ver todos mis conciertos",
+    "viewAllEarnings": "Ver todos los ingresos",
+    "viewAllInvitations": "Ver todas las invitaciones",
+    "viewAllSubmissions": "Ver todos los envíos",
+    "untitledGig": "Actuación sin título",
+    "unknownBrand": "Marca desconocida",
+    "reward": "Recompensa",
+    "gigCost": "Coste del Gig",
+    "deadline": "Plazo",
+    "endsOn": "Fin {date}",
+    "noActiveGigs": "Aún no hay actuaciones activas.",
+    "noInvitations": "Aún no hay invitaciones.",
+    "noEarnings": "Aún no has ganado nada. ¡Completa los gigs para empezar a ganar!",
+    "na": "N/A",
+    "invitedCreator": "Creador invitado",
+    "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
+    "failedToLoad": "Error al cargar {name}",
+    "somethingWentWrong": "Algo salió mal",
+    "product": "Producto",
+    "srGigDetails": "Detalles del concierto: {title}",
+    "applicationPending": "Solicitud pendiente",
+    "applying": "Aplicando...",
+    "applyForGig": "Solicitar Gig",
+    "submissionCount": "{count, plural, =0 {No submissions} =1 {1 submission} other {# submissions}}",
+    "tabs": {
+      "details": "Detalles",
+      "campaign": "Campaña",
+      "mySubmissions": "Mis propuestas",
+      "submissions": "Envíos",
+      "overview": "Visión general"
+    },
+    "toasts": {
+      "appliedSuccess": "Solicitud enviada correctamente",
+      "appliedError": "No se ha podido enviar la solicitud. Por favor, inténtelo de nuevo."
+    }
+  },
+  "gigDetailsFor": "Detalles del concierto: {title}",
+  "campaign": {
+    "aboutTitle": "Acerca de esta campaña",
+    "dosDonts": "Qué hacer y qué no hacer",
+    "dos": "Qué hacer",
+    "donts": "No hacer",
+    "direction": "Dirección",
+    "toneOfVoice": "Tono de voz",
+    "keywords": "Palabras clave",
+    "noKeywords": "No se han definido palabras clave.",
+    "campaignBriefTitle": "Resumen de la campaña",
+    "campaignBriefDesc": "Detalles básicos y requisitos de mensajería",
+    "description": "Descripción",
+    "category": "Categoría",
+    "assets": "Activos",
+    "images": "Imágenes",
+    "documents": "Documentos",
+    "videos": "Vídeos",
+    "task": "Tarea",
+    "recordVideos": "Record {count, plural, =0 {no videos} =1 {1 video} other {# videos}}",
+    "durationSeconds": "Duración: {count} segundos"
+  },
+  "requirements": {
+    "title": "Requisitos del creador",
+    "gender": "Género",
+    "male": "Hombre",
+    "female": "Mujer",
+    "ageRange": "Edades",
+    "any": "Cualquier",
+    "compensation": "Compensación",
+    "guidelines": "Directrices sobre contenidos",
+    "ambience": "Ambiente",
+    "requirements": "Requisitos"
+  }
+}

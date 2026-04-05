@@ -1,0 +1,262 @@
+{
+  "dashboardBlocks": {
+    "usersRadial": {
+      "title": "Users",
+      "description": "Status distribution across all platform users",
+      "totalUsers": "Total users",
+      "stats": {
+        "total_users": "Total Users",
+        "total_brands": "Total Brands",
+        "total_creators": "Total Creators",
+        "new_users_today": "New Users Today",
+        "active_brands": "Active Brands",
+        "active_creators": "Active Creators"
+      }
+    },
+    "campaigns": {
+      "title": "Campaigns",
+      "description": "Overall campaign lifecycle overview",
+      "tabs": {
+        "stats": "Stats",
+        "recent": "Recent Campaigns"
+      },
+      "stats": {
+        "total": "Total",
+        "active": "Active",
+        "finished": "Finished",
+        "draft": "Draft"
+      },
+      "states": {
+        "loading": "Loading campaign stats...",
+        "error": "Unable to load campaign stats.",
+        "recentError": "Unable to load recent campaigns.",
+        "empty": "No campaigns yet"
+      },
+      "labels": {
+        "created": "Created:",
+        "viewAll": "View all Campaigns",
+        "untitled": "Untitled Campaign",
+        "noDescription": "No description provided."
+      }
+    },
+    "creators": {
+      "title": "Creators",
+      "description": "Creator base and approval status overview",
+      "tabs": {
+        "stats": "Stats",
+        "recent": "Recent Creators"
+      },
+      "stats": {
+        "total": "Total",
+        "approved": "Approved",
+        "pending": "Pending",
+        "returned": "Returned"
+      },
+      "states": {
+        "loading": "Loading creator stats...",
+        "error": "Unable to load creator stats.",
+        "recentError": "Unable to load recent creators.",
+        "empty": "No creators yet"
+      },
+      "labels": {
+        "unknown": "Unknown Creator",
+        "viewAll": "View all Creators"
+      }
+    },
+    "gigs": {
+      "title": "Gigs",
+      "description": "Gig lifecycle and delivery progress overview",
+      "tabs": {
+        "stats": "Stats",
+        "recent": "Recent Gigs"
+      },
+      "stats": {
+        "total": "Total Gigs",
+        "open": "Open Gigs",
+        "completed": "Completed Gigs"
+      },
+      "states": {
+        "loading": "Loading gigs...",
+        "error": "Unable to load gigs.",
+        "recentLoading": "Loading recent gigs...",
+        "recentError": "Unable to load recent gigs.",
+        "empty": "No gigs found."
+      },
+      "labels": {
+        "brand": "Brand",
+        "na": "N/A",
+        "untitled": "Untitled Gig",
+        "viewAll": "View all Gigs",
+        "submitted": "Submitted:",
+        "trendingUp": "Trending up by 4.6% this month",
+        "showingTotal": "Showing total gigs across key lifecycle stages"
+      }
+    },
+    "submissions": {
+      "title": "Submissions",
+      "description": "Submission review status and throughput snapshot",
+      "tabs": {
+        "stats": "Stats",
+        "recent": "Recent Submissions"
+      },
+      "stats": {
+        "total": "Total Submissions",
+        "pending": "Pending Submissions",
+        "approved": "Approved Submissions"
+      },
+      "states": {
+        "error": "Unable to load submissions.",
+        "recentError": "Unable to load recent submissions.",
+        "empty": "No submissions found."
+      }
+    },
+    "platformAnalytics": {
+      "title": "Platform Analytics",
+      "description": "Live platform-wide metrics from the analytics endpoint",
+      "groups": {
+        "contentPipeline": "Content Pipeline"
+      },
+      "stats": {
+        "total_campaigns": "Total Campaigns",
+        "completed_campaigns": "Completed Campaigns",
+        "total_gigs": "Total Gigs",
+        "completed_gigs": "Completed Gigs"
+      },
+      "states": {
+        "error": "Unable to load platform analytics."
+      }
+    },
+    "actionCenter": {
+      "title": "Action Center",
+      "description": "Jump to the areas that require direct admin action",
+      "actions": {
+        "reviewBrands": {
+          "label": "Review Brand Profiles",
+          "detail": "Pending verifications and profile quality checks"
+        },
+        "reviewCreators": {
+          "label": "Review Creator Profiles",
+          "detail": "Approval and return workflows for creator onboarding"
+        },
+        "reviewCampaigns": {
+          "label": "Review Campaign Pipeline",
+          "detail": "Monitor approvals, live activity, and completion pacing"
+        },
+        "inspectNotifications": {
+          "label": "Inspect Notifications",
+          "detail": "Investigate recent platform and moderation signals"
+        },
+        "openUsers": {
+          "label": "Open User Management",
+          "detail": "User status, access controls, and account maintenance"
+        },
+        "checkPayments": {
+          "label": "Check Payments",
+          "detail": "Payout health, transaction anomalies, and reconciliation"
+        }
+      },
+      "labels": {
+        "open": "Open",
+        "priorityHigh": "HIGH",
+        "priorityMedium": "MEDIUM",
+        "priorityNormal": "NORMAL"
+      }
+    },
+    "approvalQueues": {
+      "title": "Approval Queues",
+      "description": "Prioritize review queues to avoid blocking marketplace operations",
+      "queues": {
+        "users": "Users Awaiting Approval",
+        "brands": "Brand Profiles Awaiting Approval",
+        "creators": "Creator Profiles Awaiting Approval",
+        "campaigns": "Campaigns Pending Admin Review",
+        "submissions": "Video Submissions Pending Decision"
+      },
+      "labels": {
+        "viewAll": "View All Queues",
+        "sla": "SLA:",
+        "reviewQueue": "Review Queue",
+        "h": "h"
+      }
+    },
+    "financialSnapshot": {
+      "title": "Financial Snapshot",
+      "description": "Monthly revenue versus creator payouts",
+      "labels": {
+        "revenue": "Revenue",
+        "payouts": "Payouts"
+      }
+    },
+    "pipelineBreakdown": {
+      "title": "Pipeline By Status",
+      "description": "Campaigns, gigs, and submissions grouped by current status",
+      "labels": {
+        "campaigns": "Campaigns",
+        "gigs": "Gigs",
+        "submissions": "Submissions"
+      }
+    },
+    "platformHealth": {
+      "title": "Platform Health Trend",
+      "description": "Users, campaigns, and submissions over the last 6 months",
+      "labels": {
+        "users": "Users",
+        "campaigns": "Campaigns",
+        "submissions": "Submissions"
+      }
+    },
+    "recentActivityBlock": {
+      "title": "Recent Activity",
+      "description": "Latest event stream from notification activity",
+      "table": {
+        "eventName": "Event Name",
+        "eventType": "Event Type",
+        "actor": "Actor",
+        "when": "When",
+        "actions": "Actions"
+      },
+      "states": {
+        "error": "Unable to load recent activity.",
+        "empty": "No recent activity yet."
+      },
+      "labels": {
+        "system": "System",
+        "unknownEvent": "Unknown Event",
+        "unknown": "Unknown",
+        "na": "N/A"
+      },
+      "menu": {
+        "markAsRead": "Mark as read",
+        "view": "View",
+        "delete": "Delete"
+      }
+    },
+    "revenueStats": {
+      "title": "Revenue",
+      "description": "Revenue, payouts, and net earnings overview",
+      "stats": {
+        "totalRevenue": "Total Revenue",
+        "netRevenue": "Net Revenue",
+        "totalPayouts": "Total Payouts"
+      },
+      "labels": {
+        "revenue": "Revenue",
+        "payouts": "Payouts"
+      },
+      "states": {
+        "error": "Unable to load revenue data."
+      }
+    },
+    "platformUptime": {
+      "title": "Platform Uptime",
+      "description": "Current service availability snapshot",
+      "labels": {
+        "uptime": "Uptime"
+      }
+    },
+    "operationalAlerts": {
+      "title": "Operational Alerts",
+      "description": "System and workflow signals that may require intervention"
+    }
+  }
+}

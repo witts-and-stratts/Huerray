@@ -1,0 +1,42 @@
+{
+  "newsletterPage": {
+    "title": "Boletín",
+    "description": "Busque y exporte suscriptores de boletines desde el área de administración.",
+    "notice": "El backend actual sólo permite buscar, suscribirse y darse de baja en boletines. Las acciones de edición y eliminación requerirán puntos finales de administración dedicados antes de que puedan habilitarse.",
+    "summary": "{visible} visible de {total} entradas, {selected} seleccionadas",
+    "empty": "No se han encontrado entradas de boletines.",
+    "emptyDescription": "Las suscripciones al boletín aparecerán aquí una vez que los contactos empiecen a registrarse.",
+    "error": {
+      "title": "No se pueden cargar las entradas del boletín",
+      "description": "Se ha producido un problema al cargar las suscripciones al boletín. Vuelve a intentarlo.",
+      "retry": "Inténtalo de nuevo"
+    },
+    "columns": {
+      "email": "Correo electrónico",
+      "name": "Nombre",
+      "status": "Estado",
+      "source": "Fuente",
+      "subscribedAt": "Suscrito",
+      "updatedAt": "Actualizado"
+    },
+    "filters": {
+      "searchPlaceholder": "Buscar entradas de boletines..."
+    },
+    "actions": {
+      "exportFiltered": "Exportación a granel",
+      "exportSelected": "Exportación seleccionada",
+      "resubscribe": "Volver a suscribirse",
+      "unsubscribe": "Cancelar suscripción",
+      "delete": "Borrar",
+      "more": "Más"
+    },
+    "messages": {
+      "endpointMissing": "Esta acción requiere un punto final de actualización/eliminación del administrador del boletín.",
+      "resubscribed": "El suscriptor del boletín se ha vuelto a suscribir.",
+      "resubscribeFailed": "No se ha podido volver a suscribir al suscriptor del boletín.",
+      "unsubscribed": "El suscriptor del boletín se ha dado de baja.",
+      "unsubscribeFailed": "No se ha podido dar de baja al suscriptor del boletín.",
+      "unsubscribeEmailMissing": "Esta entrada del boletín no incluye una dirección de correo electrónico."
+    }
+  }
+}

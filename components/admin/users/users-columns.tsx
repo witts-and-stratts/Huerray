@@ -152,7 +152,7 @@ export const getColumns = ( { onViewDetails, t, tc }: GetColumnsProps & { t: any
           >
             <CopyText
               text={ username }
-              copyMessage={ t( 'creatorStatus.idCopied' ) }
+              copyMessage={ t( 'userActionMenu.usernameCopied' ) }
               iconSide="left"
               iconClassName={ '-left-8' }
             >

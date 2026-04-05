@@ -6,13 +6,17 @@ import { Button } from '@/components/dashboard-ui/button';
 import { SubHeader } from '@/components/subheader';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
+import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import Link from 'next/link';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 
 export default function CampaignsPage() {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  const { pagination, setPagination } = usePersistedPagination( 'campaigns' );
   const { data: response, isLoading, error } = useBrandCampaigns( {
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
   } );
 
   const campaigns = React.useMemo( () => {
@@ -45,6 +49,9 @@ export default function CampaignsPage() {
         campaigns={ campaigns }
         isLoading={ isLoading }
         error={ error }
+        pagination={ pagination }
+        onPaginationChange={ setPagination }
+        rowCount={ response?.pagination?.total }
       />
     </>
   );

@@ -1,0 +1,55 @@
+{
+  "paymentsPage": {
+    "title": "Paiements",
+    "description": "Visualisez et gérez tous les paiements des créateurs sur la plateforme.",
+    "toolbar": {
+      "filterPlaceholder": "Filtrer les paiements...",
+      "status": "Statut",
+      "dateRangeLabel": "Fourchette de dates de paiement",
+      "dateRangePlaceholder": "Sélectionner une plage de dates",
+      "clearDates": "Effacer les dates"
+    },
+    "actionMenu": {
+      "view": "Voir",
+      "confirmPayout": "Confirmer le paiement",
+      "confirming": "Confirmation...",
+      "confirmDialog": {
+        "title": "Confirmer le paiement",
+        "description": "Êtes-vous sûr de vouloir confirmer ce paiement ? Cela créera un enregistrement d'élément de paiement.",
+        "descriptionWithCreator": "Êtes-vous sûr de vouloir confirmer ce paiement pour {name} ? Cela créera un enregistrement d'élément de paiement.",
+        "confirmLabel": "Confirmer le paiement"
+      },
+      "toasts": {
+        "confirmSuccess": "Paiement confirmé avec succès.",
+        "confirmError": "Échec de la confirmation du paiement. Veuillez réessayer.",
+        "missingId": "ID de paiement manquant."
+      }
+    },
+    "newBatchPayment": {
+      "title": "Paiement d'un nouveau lot",
+      "description": "Sélectionnez un créateur et ses éléments de paiement en attente.",
+      "triggerButton": "Nouveau paiement",
+      "creatorLabel": "Créateur",
+      "creatorPlaceholder": "Sélectionnez un créateur...",
+      "pendingItems": "Postes en suspens",
+      "deselectAll": "Désélectionner tout",
+      "selectAll": "Sélectionner tout",
+      "noItems": "Aucun poste de paiement en suspens pour ce créateur.",
+      "paymentMethodLabel": "Mode de paiement",
+      "paymentMethodPlaceholder": "par exemple, virement bancaire, PayPal...",
+      "notesLabel": "Notes",
+      "notesPlaceholder": "Notes facultatives...",
+      "noItemsSelected": "Aucun élément sélectionné",
+      "itemUnit": "{count, plural, =1 {item} other {items}}",
+      "creating": "Créer...",
+      "createPayment": "Créer un paiement",
+      "toasts": {
+        "createSuccess": "Le paiement par lot a été créé avec succès.",
+        "createSuccessDesc": "Le paiement par lot a été créé avec succès.",
+        "createError": "Échec de la création d'un paiement par lot. Veuillez réessayer.",
+        "selectItem": "Sélectionnez au moins un poste de paiement."
+      }
+    }
+  },
+  "emptyPayments": {}
+}

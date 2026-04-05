@@ -22,7 +22,7 @@ export function Footer( { className }: { className?: string; } ) {
     services: [
       { label: t( 'links.prices' ), href: '/pricing' },
       // { label: t( 'links.creditPacks' ), href: '#' },
-      { label: t( 'links.managedService' ), href: '#' },
+      { label: t( 'links.managedService' ), href: '/managed-services' },
     ],
     faq: [
       { label: t( 'links.faqBrands' ), href: '/brands-faq' },

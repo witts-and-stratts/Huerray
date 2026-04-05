@@ -1,0 +1,32 @@
+{
+  "emptyStates": {
+    "gigs": {
+      "title": "Aún no hay conciertos",
+      "description": "Aún no hay actuaciones para esta campaña"
+    },
+    "applications": {
+      "title": "No se han encontrado aplicaciones",
+      "description": "No hay solicitudes que coincidan con sus criterios"
+    },
+    "invitations": {
+      "title": "Aún no hay invitaciones",
+      "description": "Tus invitaciones a conciertos aparecerán aquí"
+    },
+    "invoices": {
+      "title": "Aún no hay facturas",
+      "description": "Sus facturas aparecerán aquí"
+    },
+    "payments": {
+      "title": "Aún no hay pagos",
+      "description": "Su historial de pagos aparecerá aquí"
+    },
+    "submissions": {
+      "title": "No se han encontrado propuestas",
+      "description": "No se han encontrado propuestas que coincidan con sus criterios"
+    },
+    "documents": {
+      "title": "Cargar documentos",
+      "description": "Arrastre y suelte archivos aquí. Soporte para PDF"
+    }
+  }
+}

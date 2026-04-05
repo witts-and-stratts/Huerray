@@ -1,0 +1,262 @@
+{
+  "dashboardBlocks": {
+    "usersRadial": {
+      "title": "Utilisateurs",
+      "description": "Répartition des statuts entre tous les utilisateurs de la plateforme",
+      "totalUsers": "Total des utilisateurs",
+      "stats": {
+        "total_users": "Total des utilisateurs",
+        "total_brands": "Total des marques",
+        "total_creators": "Total des créateurs",
+        "new_users_today": "Nouveaux utilisateurs aujourd'hui",
+        "active_brands": "Marques actives",
+        "active_creators": "Créateurs actifs"
+      }
+    },
+    "campaigns": {
+      "title": "Campagnes",
+      "description": "Vue d'ensemble du cycle de vie de la campagne",
+      "tabs": {
+        "stats": "Statistiques",
+        "recent": "Campagnes récentes"
+      },
+      "stats": {
+        "total": "Total",
+        "active": "Actif",
+        "finished": "Fini",
+        "draft": "Projet"
+      },
+      "states": {
+        "loading": "Chargement des statistiques de la campagne...",
+        "error": "Impossible de charger les statistiques de la campagne.",
+        "recentError": "Impossible de charger les campagnes récentes.",
+        "empty": "Pas encore de campagne"
+      },
+      "labels": {
+        "created": "Créé :",
+        "viewAll": "Voir toutes les campagnes",
+        "untitled": "Campagne sans titre",
+        "noDescription": "Aucune description n'est fournie."
+      }
+    },
+    "creators": {
+      "title": "Créateurs",
+      "description": "Base des créateurs et vue d'ensemble du statut d'approbation",
+      "tabs": {
+        "stats": "Statistiques",
+        "recent": "Créateurs récents"
+      },
+      "stats": {
+        "total": "Total",
+        "approved": "Approuvé",
+        "pending": "En attente",
+        "returned": "Renvoyé"
+      },
+      "states": {
+        "loading": "Chargement des statistiques sur les créateurs...",
+        "error": "Impossible de charger les statistiques du créateur.",
+        "recentError": "Impossible de charger les créateurs récents.",
+        "empty": "Pas encore de créateurs"
+      },
+      "labels": {
+        "unknown": "Créateur inconnu",
+        "viewAll": "Voir tous les créateurs"
+      }
+    },
+    "gigs": {
+      "title": "Gigs",
+      "description": "Aperçu du cycle de vie du projet et de l'état d'avancement des livraisons",
+      "tabs": {
+        "stats": "Statistiques",
+        "recent": "Événements récents"
+      },
+      "stats": {
+        "total": "Nombre total de gigaoctets",
+        "open": "Soirées ouvertes",
+        "completed": "Projets terminés"
+      },
+      "states": {
+        "loading": "Chargement de gigs...",
+        "error": "Impossible de charger les gigs.",
+        "recentLoading": "Chargement des concerts récents...",
+        "recentError": "Impossible de charger les gigs récents.",
+        "empty": "Aucun concert n'a été trouvé."
+      },
+      "labels": {
+        "brand": "Marque",
+        "na": "N/A",
+        "untitled": "Untitled Gig",
+        "viewAll": "Voir toutes les fêtes",
+        "submitted": "Soumis :",
+        "trendingUp": "La tendance est à la hausse de 4,6 % ce mois-ci",
+        "showingTotal": "Montrer le nombre total de concerts à travers les étapes clés du cycle de vie"
+      }
+    },
+    "submissions": {
+      "title": "Soumissions",
+      "description": "État d'avancement de l'examen des demandes et aperçu du débit",
+      "tabs": {
+        "stats": "Statistiques",
+        "recent": "Soumissions récentes"
+      },
+      "stats": {
+        "total": "Total des soumissions",
+        "pending": "Soumissions en attente",
+        "approved": "Soumissions approuvées"
+      },
+      "states": {
+        "error": "Impossible de charger les soumissions.",
+        "recentError": "Impossible de charger les soumissions récentes.",
+        "empty": "Aucune soumission n'a été trouvée."
+      }
+    },
+    "platformAnalytics": {
+      "title": "Analyse de la plate-forme",
+      "description": "Mesures en direct à l'échelle de la plate-forme à partir du point final d'analyse",
+      "groups": {
+        "contentPipeline": "Pipeline de contenu"
+      },
+      "stats": {
+        "total_campaigns": "Total des campagnes",
+        "completed_campaigns": "Campagnes terminées",
+        "total_gigs": "Nombre total de gigaoctets",
+        "completed_gigs": "Projets terminés"
+      },
+      "states": {
+        "error": "Impossible de charger les analyses de la plate-forme."
+      }
+    },
+    "actionCenter": {
+      "title": "Centre d'action",
+      "description": "Passer aux domaines qui nécessitent une action directe de l'administration",
+      "actions": {
+        "reviewBrands": {
+          "label": "Examiner les profils de marque",
+          "detail": "Vérifications en cours et contrôles de qualité des profils"
+        },
+        "reviewCreators": {
+          "label": "Examiner les profils des créateurs",
+          "detail": "Flux de travail d'approbation et de retour pour l'intégration des créateurs"
+        },
+        "reviewCampaigns": {
+          "label": "Examiner le pipeline de la campagne",
+          "detail": "Contrôler les approbations, l'activité en direct et le rythme d'achèvement des travaux"
+        },
+        "inspectNotifications": {
+          "label": "Inspecter les notifications",
+          "detail": "Examiner les signaux récents de la plate-forme et de la modération"
+        },
+        "openUsers": {
+          "label": "Gestion des utilisateurs ouverts",
+          "detail": "Statut de l'utilisateur, contrôles d'accès et gestion des comptes"
+        },
+        "checkPayments": {
+          "label": "Paiements par chèque",
+          "detail": "Santé des paiements, anomalies des transactions et réconciliation"
+        }
+      },
+      "labels": {
+        "open": "Ouvrir",
+        "priorityHigh": "HIGH",
+        "priorityMedium": "MEDIUM",
+        "priorityNormal": "NORMAL"
+      }
+    },
+    "approvalQueues": {
+      "title": "Files d'attente d'approbation",
+      "description": "Prioriser les files d'attente de révision pour éviter de bloquer les opérations de la place de marché",
+      "queues": {
+        "users": "Utilisateurs en attente d'approbation",
+        "brands": "Profils de marque en attente d'approbation",
+        "creators": "Profils de créateurs en attente d'approbation",
+        "campaigns": "Campagnes en attente de révision par l'administration",
+        "submissions": "Soumissions vidéo en attente de décision"
+      },
+      "labels": {
+        "viewAll": "Voir toutes les files d'attente",
+        "sla": "ALS :",
+        "reviewQueue": "File d'attente d'examen",
+        "h": "h"
+      }
+    },
+    "financialSnapshot": {
+      "title": "Aperçu financier",
+      "description": "Revenus mensuels par rapport aux rémunérations des créateurs",
+      "labels": {
+        "revenue": "Recettes",
+        "payouts": "Paiements"
+      }
+    },
+    "pipelineBreakdown": {
+      "title": "Pipeline par statut",
+      "description": "Campagnes, contrats et soumissions regroupés par statut actuel",
+      "labels": {
+        "campaigns": "Campagnes",
+        "gigs": "Gigs",
+        "submissions": "Soumissions"
+      }
+    },
+    "platformHealth": {
+      "title": "Plateforme Santé Tendance",
+      "description": "Utilisateurs, campagnes et soumissions au cours des 6 derniers mois",
+      "labels": {
+        "users": "Utilisateurs",
+        "campaigns": "Campagnes",
+        "submissions": "Soumissions"
+      }
+    },
+    "recentActivityBlock": {
+      "title": "Activité récente",
+      "description": "Dernier flux d'événements de l'activité de notification",
+      "table": {
+        "eventName": "Nom de l'événement",
+        "eventType": "Type d'événement",
+        "actor": "Acteur",
+        "when": "Quand",
+        "actions": "Actions"
+      },
+      "states": {
+        "error": "Impossible de charger l'activité récente.",
+        "empty": "Aucune activité récente."
+      },
+      "labels": {
+        "system": "Système",
+        "unknownEvent": "Événement inconnu",
+        "unknown": "Inconnu",
+        "na": "N/A"
+      },
+      "menu": {
+        "markAsRead": "Marquer comme lu",
+        "view": "Voir",
+        "delete": "Supprimer"
+      }
+    },
+    "revenueStats": {
+      "title": "Recettes",
+      "description": "Vue d'ensemble des revenus, des paiements et des bénéfices nets",
+      "stats": {
+        "totalRevenue": "Recettes totales",
+        "netRevenue": "Recettes nettes",
+        "totalPayouts": "Total des paiements"
+      },
+      "labels": {
+        "revenue": "Recettes",
+        "payouts": "Paiements"
+      },
+      "states": {
+        "error": "Impossible de charger les données sur les revenus."
+      }
+    },
+    "platformUptime": {
+      "title": "Temps de disponibilité de la plate-forme",
+      "description": "Aperçu de la disponibilité des services actuels",
+      "labels": {
+        "uptime": "Temps de fonctionnement"
+      }
+    },
+    "operationalAlerts": {
+      "title": "Alertes opérationnelles",
+      "description": "Signaux du système et du flux de travail pouvant nécessiter une intervention"
+    }
+  }
+}

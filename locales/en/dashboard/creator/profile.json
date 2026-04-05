@@ -1,0 +1,22 @@
+{
+  "completeProfilePage": {
+    "title": "Complete Your Profile",
+    "description": "Let us get you set up to start working with brands.",
+    "back": "Back",
+    "nextStep": "Next Step",
+    "creatingProfile": "Creating Profile...",
+    "completeProfile": "Complete Profile",
+    "successCreated": "Profile created successfully!",
+    "errorCreateFailed": "Failed to create profile",
+    "errorCreateFailedWithError": "Failed to create profile: {error}",
+    "validationFixErrors": "Please fix the validation errors",
+    "validationErrorWithError": "Validation error: {error}",
+    "lifestyleAlt": "Huerray Lifestyle",
+    "brandAlt": "Huerray",
+    "tabs": {
+      "profile": "Profile",
+      "social": "Social Media",
+      "bio": "Bio & Intro"
+    }
+  }
+}

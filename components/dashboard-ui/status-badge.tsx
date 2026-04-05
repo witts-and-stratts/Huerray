@@ -105,7 +105,12 @@ export function StatusBadge( { status, className, configOverride }: StatusBadgeP
   const config = getConfig( status, configOverride );
   const filterLabel = useFilterLabel();
   const defaultLabel = useMessage( config.label );
-  const label = status ? filterLabel( status ) : defaultLabel;
+  const hasOverrideLabel = !!status && !!configOverride?.[ status.toLowerCase() ];
+  const label = hasOverrideLabel
+    ? config.label
+    : status
+      ? filterLabel( status )
+      : defaultLabel;
 
   return (
     <div className={ cn(

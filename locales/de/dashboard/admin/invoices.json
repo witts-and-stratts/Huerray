@@ -1,0 +1,89 @@
+{
+  "invoicesPage": {
+    "title": "Rechnungen",
+    "description": "Anzeigen und Verwalten aller Rechnungen auf der gesamten Plattform.",
+    "createInvoice": {
+      "trigger": "Neue Rechnung",
+      "title": "Rechnung erstellen",
+      "description": "Erstellen Sie eine neue Rechnung für eine abgeschlossene Kampagne.",
+      "confirm": "Rechnung erstellen",
+      "cancel": "Abbrechen",
+      "creating": "Erstellen...",
+      "campaignLabel": "Kampagne",
+      "campaignPlaceholder": "Wählen Sie eine abgeschlossene Kampagne aus...",
+      "campaignLoading": "Laden abgeschlossener Kampagnen...",
+      "dueDateLabel": "Fälligkeitsdatum",
+      "notesLabel": "Anmerkungen",
+      "notesPlaceholder": "Optionale Anmerkungen zu dieser Rechnung...",
+      "success": "Rechnung erfolgreich erstellt",
+      "error": "Rechnung konnte nicht erstellt werden",
+      "errorDescription": "Bitte versuchen Sie es später noch einmal."
+    },
+    "toolbar": {
+      "search": "Rechnungen suchen..."
+    },
+    "columns": {
+      "invoice": "Rechnung",
+      "brand": "Marke",
+      "campaign": "Kampagne",
+      "issued": "Ausgestellt",
+      "paid": "Status",
+      "amount": "Betrag",
+      "actions": "Aktionen"
+    },
+    "statuses": {
+      "paid": "Bezahlt",
+      "overdue": "Überfällig",
+      "cancelled": "Abgesagt",
+      "draft": "Entwurf",
+      "issued": "Ausgestellt",
+      "sent": "Gesendet"
+    },
+    "actions": {
+      "view": "Siehe",
+      "downloadPdf": "PDF herunterladen",
+      "generatingPdf": "PDF generieren...",
+      "cancelInvoice": "Rechnung stornieren",
+      "cancelInvoiceDesc": "Sind Sie sicher, dass Sie diese Rechnung stornieren möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "cancelling": "Absagen...",
+      "generatePayment": "Zahlung generieren",
+      "generatePaymentDesc": "Dadurch wird die Rechnung als bezahlt markiert und ein Zahlungsbeleg erstellt. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "generating": "Erzeugen...",
+      "paymentNotes": "Geleistete Zahlung",
+      "notes": "Anmerkungen",
+      "paymentSuccess": "Zahlung erfolgreich generiert",
+      "paymentError": "Zahlung konnte nicht generiert werden",
+      "updateSuccess": "Rechnung erfolgreich aktualisiert",
+      "updateError": "Rechnung konnte nicht aktualisiert werden",
+      "issueInvoice": "Rechnung ausstellen",
+      "issueInvoiceDesc": "Kennzeichnen Sie diese Rechnung als ausgestellt. Die Marke wird benachrichtigt.",
+      "issuing": "Die Ausgabe...",
+      "sendInvoice": "Rechnung senden",
+      "sendInvoiceDesc": "Kennzeichnen Sie diese Rechnung als an die Marke geschickt.",
+      "sending": "Ich schicke...",
+      "invoicePaid": "Bezahlte Rechnung",
+      "invoicePaidDesc": "Kennzeichnen Sie diese Rechnung als von der Marke bezahlt.",
+      "markAsPaid": "Als bezahlt markieren",
+      "updating": "Aktualisieren..."
+    },
+    "detailsSheet": {
+      "invoiceLabel": "Rechnung",
+      "invoiceDetailsFor": "Rechnungsdetails für {number}.",
+      "campaign": "Kampagne",
+      "dates": "Daten",
+      "issued": "Ausgestellt",
+      "due": ".",
+      "paid": "Bezahlt",
+      "created": "Erstellt",
+      "notes": "Anmerkungen",
+      "lineItemsCount": "Einzelposten ({count})",
+      "noLineItems": "Keine Einzelposten",
+      "overview": "Übersicht",
+      "lineItems": "Einzelposten",
+      "total": "Insgesamt",
+      "amountDue": "Fälliger Betrag",
+      "downloadInvoice": "Rechnung herunterladen"
+    }
+  },
+  "emptyInvoices": {}
+}

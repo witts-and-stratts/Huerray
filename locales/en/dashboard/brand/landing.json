@@ -1,0 +1,167 @@
+{
+  "landing": {
+    "title": "Dashboard",
+    "description": "Campaign performance and operational view for your brand account",
+    "createCampaign": "Create Campaign",
+    "viewCampaigns": "View Campaigns",
+    "analytics": {
+      "title": "Brand Analytics",
+      "description": "Performance metrics for your brand account",
+      "error": "Unable to load brand analytics.",
+      "groups": {
+        "campaigns": "Campaigns",
+        "gigs": "Gigs",
+        "outreach": "Outreach",
+        "contentSpend": "Content & Spend"
+      },
+      "items": {
+        "campaignsCreated": "Campaigns Created",
+        "campaignsCompleted": "Campaigns Completed",
+        "completionRate": "Completion Rate",
+        "gigsCreated": "Gigs Created",
+        "gigsAccepted": "Gigs Accepted",
+        "gigsCompleted": "Gigs Completed",
+        "invitationsSent": "Invitations Sent",
+        "applicationsReceived": "Applications Received",
+        "approvalRate": "Approval Rate",
+        "videosReceived": "Videos Received",
+        "videosApproved": "Videos Approved",
+        "totalSpent": "Total Spent"
+      }
+    },
+    "actionCenter": {
+      "description": "Common actions for campaign operations",
+      "createCampaign": {
+        "label": "Create Campaign",
+        "detail": "Launch a new campaign briefing and approval request"
+      },
+      "findCreators": {
+        "label": "Find Creators",
+        "detail": "Search creators that match your campaign goals"
+      },
+      "manageGigs": {
+        "label": "Manage Gigs",
+        "detail": "Track gig setup, status, and creator activity"
+      }
+    },
+    "kpiOverview": {
+      "totalCampaigns": {
+        "title": "Total Campaigns",
+        "loading": "Loading campaigns...",
+        "caption": "Across all campaign statuses"
+      },
+      "activeCampaigns": {
+        "title": "Active Campaigns",
+        "caption": "Campaigns currently in running state"
+      },
+      "totalGigs": {
+        "title": "Total Gigs",
+        "loading": "Loading gigs...",
+        "caption": "All gigs linked to your campaigns"
+      },
+      "totalSpend": {
+        "title": "Total Spend",
+        "caption": "Estimated from gig budgets and compensation"
+      }
+    },
+    "campaignsRadial": {
+      "title": "Campaigns State",
+      "description": "Status distribution across your campaigns",
+      "chartCampaignsLabel": "Campaigns",
+      "totalCampaigns": "Total campaigns",
+      "emptyState": "No campaigns available yet."
+    },
+    "profileSnapshot": {
+      "title": "Brand Snapshot",
+      "description": "Profile and account essentials",
+      "brandAccount": "Brand account",
+      "brand": "Brand",
+      "preferredContact": "Preferred Contact",
+      "category": "Category",
+      "location": "Location",
+      "na": "N/A"
+    },
+    "budgetSnapshot": {
+      "title": "Budget Snapshot",
+      "description": "Current spend footprint from all gigs",
+      "totalSpend": "Total Spend",
+      "thisMonth": "This Month",
+      "averagePerGig": "Average Per Gig"
+    },
+    "gigsStats": {
+      "title": "Gigs",
+      "description": "Gig lifecycle and delivery progress overview",
+      "tabs": {
+        "stats": "Stats",
+        "recent": "Recent Gigs"
+      },
+      "loadingGigs": "Loading gigs...",
+      "errorGigs": "Unable to load gigs.",
+      "loadingRecentGigs": "Loading recent gigs...",
+      "errorRecentGigs": "Unable to load recent gigs.",
+      "emptyState": "No gigs found.",
+      "viewAll": "View all Gigs",
+      "totalGigs": "Total Gigs",
+      "openGigs": "Open Gigs",
+      "completedGigs": "Completed Gigs",
+      "brandFallback": "Brand",
+      "untitledGig": "Untitled Gig",
+      "na": "N/A"
+    },
+    "creatorRequirements": "Creator Requirements",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "ageRange": "Age range",
+    "any": "Any",
+    "ambience": "Ambience",
+    "requirements": "Requirements",
+    "contentGuidelines": "Content Guidelines",
+    "brandDetails": "Brand Details",
+    "company": "Company",
+    "country": "Country",
+    "category": "Category",
+    "website": "Website",
+    "details": "Details",
+    "submissionsStats": {
+      "title": "Submissions",
+      "description": "Submission review status and throughput snapshot",
+      "tabs": {
+        "stats": "Stats",
+        "recent": "Recent Submissions"
+      },
+      "loadingSubmissions": "Loading submissions...",
+      "errorSubmissions": "Unable to load submissions.",
+      "loadingRecentSubmissions": "Loading recent submissions...",
+      "errorRecentSubmissions": "Unable to load recent submissions.",
+      "emptyState": "No submissions found.",
+      "totalSubmissions": "Total Submissions",
+      "pendingSubmissions": "Pending Submissions",
+      "approvedSubmissions": "Approved Submissions"
+    },
+    "recentCampaigns": {
+      "title": "Recent Campaigns",
+      "description": "Latest activity from your campaign list",
+      "emptyState": "No campaigns yet.",
+      "untitledCampaign": "Untitled Campaign",
+      "updated": "Updated"
+    },
+    "recentGigs": {
+      "title": "Recent Gigs",
+      "description": "Most recently updated gigs and budgets",
+      "emptyState": "No gigs yet.",
+      "untitledGig": "Untitled Gig",
+      "noCampaignLinked": "No campaign linked",
+      "budget": "Budget",
+      "updated": "Updated"
+    },
+    "pipelineBreakdown": {
+      "title": "Campaign Pipeline",
+      "description": "How your campaigns are distributed by status",
+      "pendingApproval": "Pending Approval",
+      "approved": "Approved",
+      "running": "Running",
+      "returned": "Returned"
+    }
+  }
+}

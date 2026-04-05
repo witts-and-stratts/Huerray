@@ -92,11 +92,6 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       icon: FileScriptIcon,
     },
     {
-      title: withFallback( t, "brand.payments", "Payments" ),
-      url: "/brand/payments",
-      icon: CreditCardAcceptIcon,
-    },
-    {
       title: withFallback( t, "brand.cases", "Cases" ),
       url: "/brand/cases",
       icon: CustomerSupportIcon,

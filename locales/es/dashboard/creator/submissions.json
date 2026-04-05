@@ -1,0 +1,39 @@
+{
+  "submissions": {
+    "title": "Envíos recientes",
+    "description": "Los últimos vídeos entregados",
+    "noSubmissions": "Aún no se han presentado propuestas",
+    "noSubmissionsDesc": "Cuando crees envíos para este concierto, aparecerán aquí.",
+    "createTitle": "Crear envío",
+    "createDesc": "Sube tu vídeo y añade detalles para este concierto.",
+    "details": "Detalles del envío",
+    "form": {
+      "title": "Título",
+      "titlePlaceholder": "Ponle un título a tu propuesta",
+      "notes": "Notas",
+      "notesPlaceholder": "Añada cualquier nota sobre su envío...",
+      "submit": "Enviar vídeo",
+      "submitting": "Presentar..."
+    },
+    "validation": {
+      "titleRequired": "Título obligatorio",
+      "videoRequired": "Se requiere archivo de vídeo",
+      "maxSize": "El tamaño máximo de los archivos es de 500 MB",
+      "invalidFormat": "Sólo se admiten los formatos .mp4, .mov y .webm"
+    },
+    "dropzoneTitle": "Arrastre y suelte su vídeo aquí",
+    "dropzoneDesc": "o haga clic para navegar desde su ordenador",
+    "dropzoneSpecs": "Admite MP4, MOV, WEBM (máx. 500 MB)",
+    "videoThumbnailError": "Error al generar la miniatura del vídeo",
+    "uploadFailedLog": "Carga fallida:",
+    "cancel": "Cancelar",
+    "success": "Presentación creada con éxito",
+    "error": "Error al crear el envío",
+    "missingGigId": "Falta el Gig ID",
+    "uploading": "Espere a que termine de cargarse el vídeo",
+    "toasts": {
+      "success": "Presentación creada con éxito",
+      "error": "Error al crear el envío"
+    }
+  }
+}
