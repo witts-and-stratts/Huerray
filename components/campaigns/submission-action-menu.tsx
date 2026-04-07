@@ -171,14 +171,14 @@ export function SubmissionActionMenu( { submission, trigger, showViewAction = tr
       label: t( 'acceptSubmission' ),
       icon: Check,
       allowedRoles: [ 'brand' ],
-      condition: ( current ) => !!current.id,
+      condition: ( current ) => !!current.id && current.status === UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
       action: () => setIsAcceptOpen( true ),
     },
     {
       label: t( 'rejectSubmission' ),
       icon: X,
       allowedRoles: [ 'brand' ],
-      condition: ( current ) => !!current.id && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusCreated,
+      condition: ( current ) => !!current.id && current.status === UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved,
       action: () => setIsRejectOpen( true ),
     },
     {
@@ -195,21 +195,21 @@ export function SubmissionActionMenu( { submission, trigger, showViewAction = tr
       label: campaignActionsT( 'approve' ),
       icon: Check,
       allowedRoles: [ 'admin' ],
-      condition: ( current ) => !!current.id && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusCreated,
+      condition: ( current ) => !!current.id && current.status === UtilsVideoSubmissionStatus.VideoStatusPendingApproval,
       action: () => setIsAdminApproveOpen( true ),
     },
-    {
-      label: campaignActionsT( 'reject' ),
-      icon: X,
-      allowedRoles: [ 'admin' ],
-      condition: ( current ) => !!current.id && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusCreated,
-      action: () => setIsAdminRejectOpen( true ),
-    },
+    // {
+    //   label: campaignActionsT( 'reject' ),
+    //   icon: X,
+    //   allowedRoles: [ 'admin' ],
+    //   condition: ( current ) => !!current.id && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusApproved && current.status !== UtilsVideoSubmissionStatus.VideoSubmissionStatusCreated,
+    //   action: () => setIsAdminRejectOpen( true ),
+    // },
     {
       label: t( 'return' ),
       icon: Undo2,
       allowedRoles: [ 'admin' ],
-      condition: ( current ) => !!current.id && ( current.status || '' ).toLowerCase() !== UtilsVideoSubmissionStatus.VideoSubmissionStatusReturned,
+      condition: ( current ) => !!current.id && current.status == UtilsVideoSubmissionStatus.VideoStatusPendingApproval,
       action: () => setIsAdminReturnOpen( true ),
     },
     {
@@ -338,6 +338,7 @@ export function SubmissionActionMenu( { submission, trigger, showViewAction = tr
           const updated = await handleUpdateSubmission();
           if ( updated ) {
             setIsUpdateSubmissionOpen( false );
+            setIsConfirmOpen( true );
           }
         } }
         isLoading={ updateSubmission.isPending }

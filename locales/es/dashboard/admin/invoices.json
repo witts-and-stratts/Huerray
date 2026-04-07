@@ -27,6 +27,7 @@
       "brand": "Marca",
       "campaign": "Campaña",
       "issued": "Publicado",
+      "status": "Estado",
       "paid": "Estado",
       "amount": "Importe",
       "actions": "Acciones"

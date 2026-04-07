@@ -24,7 +24,8 @@
       "items": "Items",
       "paid": "Paid",
       "amount": "Amount",
-      "actions": "Actions"
+      "actions": "Actions",
+      "status": "Status"
     },
     "filters": {
       "searchPlaceholder": "Filter payouts...",

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { PaginationState, Updater } from '@tanstack/react-table';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { setPageSize } from '@/lib/redux/features/ui/uiSlice';
@@ -7,7 +7,9 @@ const DEFAULT_PAGE_SIZE = 10;
 
 export function usePersistedPagination( pageKey: string, defaultPageSize: number = DEFAULT_PAGE_SIZE ) {
   const dispatch = useAppDispatch();
-  const persistedPageSize = useAppSelector( ( state ) => state.ui.pageSizes?.[ pageKey ] ) ?? defaultPageSize;
+  const rawPersistedPageSize = useAppSelector( ( state ) => state.ui.pageSizes?.[ pageKey ] );
+  const persistedPageSize = rawPersistedPageSize ?? defaultPageSize;
+  const syncingFromStoreRef = useRef( false );
 
   const [ pagination, setInternalPagination ] = useState<PaginationState>( {
     pageIndex: 0,
@@ -15,17 +17,27 @@ export function usePersistedPagination( pageKey: string, defaultPageSize: number
   } );
 
   useEffect( () => {
-    if ( persistedPageSize && persistedPageSize !== pagination.pageSize ) {
-      setInternalPagination( ( prev ) => ( { ...prev, pageSize: persistedPageSize } ) );
+    // Only sync from Redux when a persisted value exists for this key.
+    if ( typeof rawPersistedPageSize === 'number' && rawPersistedPageSize !== pagination.pageSize ) {
+      syncingFromStoreRef.current = true;
+      setInternalPagination( ( prev ) => ( { ...prev, pageSize: rawPersistedPageSize } ) );
     }
-  }, [ persistedPageSize ] );
+  }, [ rawPersistedPageSize, pagination.pageSize ] );
+
+  useEffect( () => {
+    if ( syncingFromStoreRef.current ) {
+      syncingFromStoreRef.current = false;
+      return;
+    }
+
+    if ( pagination.pageSize !== persistedPageSize ) {
+      dispatch( setPageSize( { pageKey, pageSize: pagination.pageSize } ) );
+    }
+  }, [ dispatch, pageKey, pagination.pageSize, persistedPageSize ] );
 
   const setPagination = ( updater: Updater<PaginationState> ) => {
     setInternalPagination( ( prev ) => {
       const next = typeof updater === 'function' ? updater( prev ) : updater;
-      if ( next.pageSize !== prev.pageSize ) {
-        dispatch( setPageSize( { pageKey, pageSize: next.pageSize } ) );
-      }
       return next;
     } );
   };

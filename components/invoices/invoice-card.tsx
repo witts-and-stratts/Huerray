@@ -14,6 +14,7 @@ import { InvoiceActionMenu } from './invoice-action-menu';
 import { InvoiceDetailsSheet } from './invoice-details-sheet';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
+import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
 
 interface InvoiceCardProps {
   invoice: ModelsInvoiceResponse;
@@ -38,9 +39,11 @@ export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
       <Card className='py-3 justify-between gap-1 h-full'>
         <CardHeader className='flex items-start justify-between gap-4 mb-2 pr-1'>
           <div className='flex flex-col flex-1 min-w-0'>
-            <button onClick={ () => setOpen( true ) } className='text-left hover:underline'>
-              <CardTitle>{ invoice_number || '—' }</CardTitle>
-            </button>
+            <div className='line-clamp-1'>
+              <button onClick={ () => setOpen( true ) } className='text-left hover:underline whitespace-nowrap line-clamp-1'>
+                <CardTitle>{ invoice_number || '—' }</CardTitle>
+              </button>
+            </div>
             { isAdmin && brand_name && (
               <CardDescription className='text-muted-foreground/70 text-sm truncate'>
                 { brand_name }
@@ -59,7 +62,7 @@ export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
           <div className='flex items-center justify-between gap-2'>
             <InvoiceStatusBadge status={ invoice_status } />
             { total?.value != null && (
-              <span className='text-sm font-medium'>{ formatCurrency( total.value ) }</span>
+              <span className='font-medium dt-table__money'>{ useFormatCurrency( total.value, total.currency ) }</span>
             ) }
           </div>
 
@@ -67,13 +70,13 @@ export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
             { issued_date && (
               <div className='flex justify-between'>
                 <span>{ t( 'columns.issued' ) }</span>
-                <span>{ formatDate( issued_date ) }</span>
+                <span>{ useFormatDate( issued_date ) }</span>
               </div>
             ) }
             { due_date && (
               <div className='flex justify-between'>
                 <span>{ t( 'details.due' ) }</span>
-                <span>{ formatDate( due_date ) }</span>
+                <span>{ useFormatDate( due_date ) }</span>
               </div>
             ) }
           </div>

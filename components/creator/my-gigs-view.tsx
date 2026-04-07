@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useActiveGigs, useCreatorGigs, useMatchingGigs } from '@/lib/api/hooks/creators';
+import { useEffect, useMemo, useState } from 'react';
+import { useCreatorApplications, useCreatorGigs, useMatchingGigs } from '@/lib/api/hooks/creators';
+import { useCreatorInvitations } from '@/lib/api/hooks/gigs';
 import { GigsTable } from '@/components/campaigns/gigs-table';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
-import { ModelsGigResponse } from '@/lib/api/generated/models';
+import { ModelsGigCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
 import { CreateSubmissionSheet } from '@/components/creator/create-submission-sheet';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -23,7 +24,8 @@ export function MyGigsView() {
   const [ submissionGigId, setSubmissionGigId ] = useState<string | null>( null );
 
   const matchingQuery = useMatchingGigs();
-  const activeQuery = useActiveGigs();
+  const applicationsQuery = useCreatorApplications();
+  const invitationsQuery = useCreatorInvitations();
   const allGigsQuery = useCreatorGigs();
 
   useEffect( () => {
@@ -46,15 +48,26 @@ export function MyGigsView() {
     router.replace( nextQuery ? `${ pathname }?${ nextQuery }` : pathname, { scroll: false } );
   };
 
+  const activeGigs = useMemo( (): ModelsGigCreatorResponse[] => {
+    const gigMap = new Map<string, ModelsGigCreatorResponse>();
+    ( applicationsQuery.data?.data || [] )
+      .filter( ( a ) => a.status === 'accepted' )
+      .forEach( ( a ) => { if ( a.gig?.id ) gigMap.set( a.gig.id, a.gig ); } );
+    ( ( invitationsQuery.data?.data || [] ) as ModelsGigInvitationResponse[] )
+      .filter( ( i ) => i.status === 'accepted' )
+      .forEach( ( i ) => { if ( i.gig?.id ) gigMap.set( i.gig.id, i.gig ); } );
+    return Array.from( gigMap.values() );
+  }, [ applicationsQuery.data, invitationsQuery.data ] );
+
   const gigs = (
     tab === 'available' ? matchingQuery.data?.data || []
-      : tab === 'active' ? activeQuery.data?.data?.gigs || []
+      : tab === 'active' ? activeGigs
         : allGigsQuery.data?.data || []
   ) as unknown as ModelsGigResponse[];
 
   const isLoading =
     tab === 'available' ? matchingQuery.isLoading
-      : tab === 'active' ? activeQuery.isLoading
+      : tab === 'active' ? ( applicationsQuery.isLoading || invitationsQuery.isLoading )
         : allGigsQuery.isLoading;
 
   return (

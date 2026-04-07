@@ -24,7 +24,8 @@
       "items": "Articles",
       "paid": "Payé",
       "amount": "Montant",
-      "actions": "Actions"
+      "actions": "Actions",
+      "status": "Statut"
     },
     "filters": {
       "searchPlaceholder": "Filtrer les paiements...",

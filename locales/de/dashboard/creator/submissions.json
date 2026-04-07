@@ -29,6 +29,12 @@
     "cancel": "Abbrechen",
     "success": "Einreichung erfolgreich erstellt",
     "error": "Vorlage konnte nicht erstellt werden",
+    "submittingForApproval": "Einreichung zur Genehmigung...",
+    "submissionSentForApproval": "Zur Genehmigung übermittelte Vorlage",
+    "submitForApprovalFailed": "Nicht zur Genehmigung vorgelegt",
+    "confirmSubmissionTitle": "Einreichung bestätigen",
+    "confirmSubmissionDescription": "Diese Vorlage jetzt zur Genehmigung senden?",
+    "submitForApproval": "Zur Genehmigung vorlegen",
     "missingGigId": "Gig ID fehlt",
     "uploading": "Bitte warten Sie, bis das Video fertig hochgeladen ist",
     "toasts": {

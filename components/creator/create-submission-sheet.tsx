@@ -1,9 +1,10 @@
 "use client";
 
-import { useCreateVideoSubmission } from '@/lib/api/hooks/video-submissions';
+import { useCreateVideoSubmission, useSubmitVideoSubmission } from '@/lib/api/hooks/video-submissions';
 import { useGig } from '@/lib/api/hooks/gigs';
 import { VideoDropzone } from '@/components/creator/video-dropzone';
 import { Button } from '@/components/dashboard-ui/button';
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { FieldGroup } from '@/components/dashboard-ui/field';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import {
@@ -150,9 +151,12 @@ export function CreateSubmissionSheet( {
   const t = useTranslations( 'dashboard.creator.submissions' );
   const submissionSchema = getSubmissionSchema( t );
   const { mutate: createSubmission, isPending: isCreating } = useCreateVideoSubmission();
+  const submitVideoSubmission = useSubmitVideoSubmission();
   const { data: gigResponse } = useGig( gigId, { enabled: open && !!gigId } );
   const gig = gigResponse?.data;
   const [ videoData, setVideoData ] = useState<{ url: string; filename: string; thumbnail?: string; } | null>( null );
+  const [ isSubmitConfirmOpen, setIsSubmitConfirmOpen ] = useState( false );
+  const [ createdSubmissionId, setCreatedSubmissionId ] = useState<string | null>( null );
 
   const form = useForm( {
     defaultValues: {
@@ -182,11 +186,14 @@ export function CreateSubmissionSheet( {
           video_filename: videoData.filename,
         },
         {
-          onSuccess: () => {
+          onSuccess: ( response ) => {
+            const newSubmissionId = response.data?.id;
             toast.success( t( 'success' ) );
             onOpenChange( false );
             form.reset();
             setVideoData( null );
+            setCreatedSubmissionId( newSubmissionId || null );
+            setIsSubmitConfirmOpen( Boolean( newSubmissionId ) );
             onSuccess?.();
           },
           onError: ( error ) => {
@@ -207,9 +214,26 @@ export function CreateSubmissionSheet( {
     form.handleSubmit();
   };
 
+  const handleSubmitForApproval = async () => {
+    if ( !createdSubmissionId ) return;
+
+    await toast.promise(
+      submitVideoSubmission.mutateAsync( { id: createdSubmissionId } ),
+      {
+        loading: t( 'submittingForApproval' ),
+        success: t( 'submissionSentForApproval' ),
+        error: t( 'submitForApprovalFailed' ),
+      }
+    );
+
+    setIsSubmitConfirmOpen( false );
+    setCreatedSubmissionId( null );
+  };
+
   return (
-    <Sheet open={ open } onOpenChange={ onOpenChange }>
-      <SheetContent className="w-[97%]! max-w-[550px]! overflow-hidden bg-background/80 flex flex-col p-0!">
+    <>
+      <Sheet open={ open } onOpenChange={ onOpenChange }>
+        <SheetContent className="w-[97%]! max-w-[550px]! overflow-hidden bg-background/80 flex flex-col p-0!">
 
         { /* ── Header ── */ }
         <SheetHeader className="relative flex flex-col gap-2 mx-3 rounded-lg pb-0">
@@ -327,7 +351,23 @@ export function CreateSubmissionSheet( {
           </SheetFooter>
         </form>
 
-      </SheetContent>
-    </Sheet>
+        </SheetContent>
+      </Sheet>
+      <ConfirmDialog
+        open={ isSubmitConfirmOpen }
+        onOpenChange={ ( nextOpen ) => {
+          setIsSubmitConfirmOpen( nextOpen );
+          if ( !nextOpen ) {
+            setCreatedSubmissionId( null );
+          }
+        } }
+        title={ t( 'confirmSubmissionTitle' ) }
+        description={ t( 'confirmSubmissionDescription' ) }
+        confirmLabel={ t( 'submitForApproval' ) }
+        onConfirm={ handleSubmitForApproval }
+        isLoading={ submitVideoSubmission.isPending }
+        loadingText={ t( 'form.submitting' ) }
+      />
+    </>
   );
 }

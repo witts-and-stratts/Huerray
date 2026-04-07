@@ -3,8 +3,7 @@
 import { ActionMenu, MenuAction } from '@/components/dashboard-ui/action-menu';
 import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
 import { Button } from '@/components/dashboard-ui/button';
-import { CreateSubmissionSheet } from './create-submission-sheet';
-import { Eye, MoreVertical, UploadCloud } from 'lucide-react';
+import { Eye, MoreVertical } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
@@ -23,7 +22,6 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
   const tToasts = useTranslations( 'dashboard.creator.invitations.toasts' );
   const [ showAcceptDialog, setShowAcceptDialog ] = useState( false );
   const [ showRejectDialog, setShowRejectDialog ] = useState( false );
-  const [ showSubmissionSheet, setShowSubmissionSheet ] = useState( false );
 
   const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
 
@@ -48,31 +46,24 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
 
   const isPending = invitation.status === 'pending';
   const actions: MenuAction<ModelsGigInvitationResponse>[] = [
-    {
-      label: t( 'createSubmission' ),
-      icon: UploadCloud,
-      condition: () => invitation.status === 'accepted',
-      action: () => setShowSubmissionSheet( true ),
-      allowedRoles: [ 'creator' ]
-    },
     ...( onViewDetails ? [ {
       label: t( 'view' ),
       icon: Eye,
       action: () => onViewDetails( invitation ),
     } ] : [] ),
     {
-      label: t( 'accept' ),
-      condition: () => isPending,
-      separator: true,
-      action: () => setShowAcceptDialog( true ),
-      allowedRoles: [ 'creator' ]
-    },
-    {
       label: t( 'reject' ),
       condition: () => isPending,
+      separator: true,
       variant: "destructive",
       className: "text-destructive focus:text-destructive",
       action: () => setShowRejectDialog( true ),
+      allowedRoles: [ 'creator' ]
+    },
+    {
+      label: t( 'accept' ),
+      condition: () => isPending,
+      action: () => setShowAcceptDialog( true ),
       allowedRoles: [ 'creator' ]
     },
   ];
@@ -112,12 +103,6 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
         isLoading={ isResponding }
         loadingText={ tDialogs( 'declining' ) }
         variant="destructive"
-      />
-
-      <CreateSubmissionSheet
-        open={ showSubmissionSheet }
-        onOpenChange={ setShowSubmissionSheet }
-        gigId={ invitation.gig_id || '' }
       />
     </>
   );

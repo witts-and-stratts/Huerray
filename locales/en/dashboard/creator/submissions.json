@@ -29,6 +29,12 @@
     "cancel": "Cancel",
     "success": "Submission created successfully",
     "error": "Failed to create submission",
+    "submittingForApproval": "Submitting for approval...",
+    "submissionSentForApproval": "Submission sent for approval",
+    "submitForApprovalFailed": "Failed to submit for approval",
+    "confirmSubmissionTitle": "Confirm Submission",
+    "confirmSubmissionDescription": "Send this submission for approval now?",
+    "submitForApproval": "Submit for Approval",
     "missingGigId": "Gig ID is missing",
     "uploading": "Please wait for the video to finish uploading",
     "toasts": {

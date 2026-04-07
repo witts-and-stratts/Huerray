@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 import { ModelsBrandResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
-import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
+import { useMyVideoSubmissions, useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
 import { cn } from '@/lib/dashboard-utils';
 import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { useFormatCurrency } from '@/lib/hooks/format';
@@ -42,6 +42,8 @@ interface GigSubmissionsButtonProps {
 }
 
 const GigSubmissionsButton = memo( ( { gig, onSelectSubmission }: GigSubmissionsButtonProps ) => {
+  const tInv = useTranslations( 'dashboard.creator.invitations.actions' );
+  const tCampaigns = useTranslations( 'dashboard.brand.campaignsPage' );
   const { data: submissionsData, isLoading } = useVideoSubmissionsByGig( gig.id! );
   const showLoading = useDelayedLoading( isLoading );
   const submissions = useMemo( () => submissionsData?.data ?? [], [ submissionsData ] );
@@ -80,14 +82,14 @@ const GigSubmissionsButton = memo( ( { gig, onSelectSubmission }: GigSubmissions
             }
           />
         </TooltipTrigger>
-        <TooltipContent side="top">View submissions</TooltipContent>
+        <TooltipContent side="top">{ tInv( 'viewSubmissions' ) }</TooltipContent>
       </Tooltip>
 
       <DialogContent className="max-w-sm! max-h-[80vh] flex flex-col gap-0 p-0">
         <DialogHeader className="border-b border-border/50 px-2 md:px-5 py-2 md:py-4">
-          <h5>Submissions</h5>
+          <h5>{ tCampaigns( 'actions.submissions' ) }</h5>
           <DialogTitle className={ 'dialog__title' }>{ gig.title } Gig</DialogTitle>
-          <p className="text-xs text-muted-foreground">{ count } submission{ count !== 1 ? 's' : '' }</p>
+          <p className="text-xs text-muted-foreground">{ tCampaigns( 'submissionCount', { count } ) }</p>
         </DialogHeader>
         <div className="flex-1 overflow-y-auto p-4">
           <div className="grid grid-cols-1 gap-3">
@@ -228,19 +230,58 @@ interface GigDeadlineRowProps {
   gigStatus: string | undefined;
 }
 
-const GigDeadlineRow = memo( ( { postingEndDate, gigStatus }: GigDeadlineRowProps ) => (
+const GigDeadlineRow = memo( function GigDeadlineRow( { postingEndDate, gigStatus }: GigDeadlineRowProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  return (
   <div className="flex items-center justify-between border-t border-border/50 mt-auto pt-2">
     <div className="flex items-center gap-1.5 text-muted-foreground">
       <HugeiconsIcon icon={ InformationCircleIcon } className="size-3.5" strokeWidth={ 1.5 } />
-      <span className="uppercase tracking-widest text-[10px] font-medium">Deadline</span>
+      <span className="uppercase tracking-widest text-[10px] font-medium">{ t( 'deadline' ) }</span>
       { postingEndDate && (
         <span className="text-xs text-muted-foreground/60">{ formatDate( postingEndDate ) }</span>
       ) }
     </div>
     <GigStatusBadge status={ gigStatus } className="origin-right" />
   </div>
-) );
+  );
+} );
 GigDeadlineRow.displayName = 'GigDeadlineRow';
+
+// ─── Creator submission button ────────────────────────────────────────────────
+
+interface CreatorSubmissionButtonProps {
+  gig: ModelsGigResponse;
+  onCreateSubmission: ( gig: ModelsGigResponse ) => void;
+  onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
+}
+
+const CreatorSubmissionButton = memo( function CreatorSubmissionButton( { gig, onCreateSubmission, onViewGig }: CreatorSubmissionButtonProps ) {
+  const tInv = useTranslations( 'dashboard.creator.invitations.actions' );
+  const { data, isLoading } = useMyVideoSubmissions( { gigId: gig.id! }, { enabled: !!gig.id } );
+  const showLoading = useDelayedLoading( isLoading );
+
+  if ( showLoading ) {
+    return <Skeleton className="h-8 w-full rounded-md" />;
+  }
+
+  const count = data?.data?.length ?? 0;
+
+  if ( count > 0 ) {
+    const label = count === 1 ? tInv( 'viewSubmission' ) : tInv( 'viewSubmissions' );
+    return (
+      <Button variant="outline" size="sm" className="flex-1 font-normal" onClick={ () => onViewGig( gig, 'submissions' ) }>
+        { label }
+      </Button>
+    );
+  }
+
+  return (
+    <Button variant="outline" size="sm" className="flex-1 font-normal" onClick={ () => onCreateSubmission( gig ) }>
+      { tInv( 'createSubmission' ) }
+    </Button>
+  );
+} );
+CreatorSubmissionButton.displayName = 'CreatorSubmissionButton';
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
@@ -258,8 +299,6 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmiss
   const rewardAmount = gig.compensation?.value ?? gig.gig_cost?.value;
   const formattedReward = gig.compensation?.value ? formattedCompensation : formattedGigCost;
 
-  const handleViewGig = useCallback( () => onViewGig( gig ), [ gig, onViewGig ] );
-  const handleCreateSubmission = useCallback( () => onCreateSubmission?.( gig ), [ gig, onCreateSubmission ] );
   const handleSelectSubmission = useCallback( ( sub: ModelsVideoSubmissionResponse ) => setSelectedSubmission( sub ), [] );
   const handleCloseSubmission = useCallback( ( open: boolean ) => { if ( !open ) setSelectedSubmission( null ); }, [] );
 
@@ -293,12 +332,7 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmiss
 
           { onCreateSubmission && (
             <div className='flex w-full gap-2 mt-auto pt-4'>
-              <Button variant="outline" size="sm" className="flex-1 font-normal" onClick={ handleViewGig }>
-                View Gig
-              </Button>
-              <Button variant="outline" size="sm" className="flex-1 font-normal" onClick={ handleCreateSubmission }>
-                Create Submission
-              </Button>
+              <CreatorSubmissionButton gig={ gig } onCreateSubmission={ onCreateSubmission } onViewGig={ onViewGig } />
             </div>
           ) }
         </CardContent>

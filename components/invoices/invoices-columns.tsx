@@ -1,16 +1,6 @@
 "use client";
 
 import { imgpresets } from '@/lib/utils/imgproxy';
-import {
-  Cancel01Icon,
-  CheckmarkCircle02Icon,
-  Clock01Icon,
-  File01Icon,
-  FileEditIcon,
-  Sent02Icon,
-  SentIcon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon, IconSvgElement } from '@hugeicons/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { useLocale } from 'next-intl';
 import Link from 'next/link';
@@ -25,16 +15,8 @@ import { BrandDetailsSheet } from '../admin/brands/brand-details-sheet';
 import { TCheckboxCell, TCheckboxHead, THead } from '../admin/data-table';
 import { InvoiceActionMenu } from './invoice-action-menu';
 import { InvoiceDetailsSheet } from './invoice-details-sheet';
+import { InvoiceStatusBadge } from './invoice-status-badge';
 import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
-
-const statusIconMap: Record<UtilsInvoiceStatus, { icon: IconSvgElement; className: string; label: string; }> = {
-  paid: { icon: CheckmarkCircle02Icon, className: 'text-green-500', label: 'Paid' },
-  overdue: { icon: Clock01Icon, className: 'text-red-500', label: 'Overdue' },
-  cancelled: { icon: Cancel01Icon, className: 'text-red-400', label: 'Cancelled' },
-  draft: { icon: FileEditIcon, className: 'text-gray-400', label: 'Draft' },
-  issued: { icon: File01Icon, className: 'text-blue-400', label: 'Issued' },
-  sent: { icon: Sent02Icon, className: 'text-maroon-500', label: 'Sent' },
-};
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -175,16 +157,15 @@ export const getColumns = (
       enableSorting: true,
     },
     {
-      id: 'paid',
+      id: 'status',
       accessorKey: 'invoice_status',
-      header: () => <THead title={ t( 'columns.paid' ) } />,
+      header: () => <THead title={ t( 'columns.status' ) } />,
       cell: ( { row } ) => {
         const status = row.original.invoice_status as UtilsInvoiceStatus | undefined;
         if ( !status ) return <div className="pl-2 text-muted-foreground">—</div>;
-        const { icon, className, label } = statusIconMap[ status ] ?? statusIconMap.draft;
         return (
-          <div className="pl-2" title={ label }>
-            <HugeiconsIcon icon={ icon } className={ `size-5 ${ className }` } />
+          <div className="pl-2">
+            <InvoiceStatusBadge status={ status } />
           </div>
         );
       },

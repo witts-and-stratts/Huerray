@@ -29,6 +29,12 @@
     "cancel": "Cancelar",
     "success": "Presentación creada con éxito",
     "error": "Error al crear el envío",
+    "submittingForApproval": "Someter a aprobación...",
+    "submissionSentForApproval": "Presentación enviada para su aprobación",
+    "submitForApprovalFailed": "No presentado para aprobación",
+    "confirmSubmissionTitle": "Confirmar envío",
+    "confirmSubmissionDescription": "¿Enviar ahora este envío para su aprobación?",
+    "submitForApproval": "Presentar para aprobación",
     "missingGigId": "Falta el Gig ID",
     "uploading": "Espere a que termine de cargarse el vídeo",
     "toasts": {

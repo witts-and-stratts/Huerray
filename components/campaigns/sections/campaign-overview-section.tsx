@@ -9,11 +9,11 @@ import {
   CampaignWorkflowCard,
   KpiMetricCard,
 } from '@/components/dashboard-ui/campaigns/campaign-overview-cards';
-import { useCampaignApplications, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
+import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/dashboard-ui/card';
 import { RoleGuard } from '@/components/auth/role-guard';
-import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { ModelsCampaignResponse, ModelsGigInvitationResponse } from '@/lib/api/generated';
 
 interface CampaignOverviewSectionProps {
   campaign: ModelsCampaignResponse;
@@ -104,9 +104,18 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
   const videoItems = campaign.sample_videos ?? [];
 
   const { data: applicationsData } = useCampaignApplications( campaign.id || '' );
+  const { data: invitationsData } = useCampaignInvitations( campaign.id || '' );
   const { data: submissionsData } = useCampaignSubmissions( campaign.id || '' );
 
-  const applicationCount = applicationsData?.data?.length ?? 0;
+  const invitations: ModelsGigInvitationResponse[] = Array.isArray( invitationsData?.data )
+    ? invitationsData.data
+    : invitationsData?.data
+      ? [ invitationsData.data ]
+      : [];
+
+  const acceptedApplicationsCount = applicationsData?.data?.filter( ( application ) => application.status === 'accepted' ).length ?? 0;
+  const acceptedInvitationsCount = invitations.filter( ( invitation ) => invitation.status === 'accepted' ).length;
+  const receivedCreatorsCount = acceptedApplicationsCount + acceptedInvitationsCount;
   const submissionCount = submissionsData?.data?.length ?? 0;
   const creatorsWanted = campaign.number_of_creators_wanted || 0;
   const videosWanted = campaign.number_of_videos_wanted || 0;
@@ -132,9 +141,9 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
           <KpiMetricCard
             label="Creators Wanted"
-            value={ `${ applicationCount }/${ creatorsWanted }` }
+            value={ `${ receivedCreatorsCount }/${ creatorsWanted }` }
             icon={ Users }
-            progress={ creatorsWanted > 0 ? ( applicationCount / creatorsWanted ) * 100 : 0 }
+            progress={ creatorsWanted > 0 ? ( receivedCreatorsCount / creatorsWanted ) * 100 : 0 }
           />
           <KpiMetricCard
             label="Videos Wanted"

@@ -3,6 +3,7 @@
 
 import { AdminNetworkErrorState } from '@/components/admin/empty-states/admin-network-error-state';
 import { CampaignsView } from '@/components/campaigns/campaigns-view';
+import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { CampaignsTableSkeleton } from './campaigns-table-skeleton';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
@@ -28,6 +29,7 @@ import * as React from 'react';
 import { useCampaignColumns } from './campaigns-columns';
 import { CampaignsTableToolbar } from './campaigns-table-toolbar';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { ModelsCreatorResponse } from '@/lib/api/generated/models';
 import { DEFAULT_PAGE } from '@/lib/constants';
 
 const campaignGlobalFilter: FilterFn<ModelsCampaignResponse> = ( row, _columnId, filterValue: string ) => {
@@ -73,7 +75,7 @@ export function CampaignsTable( {
 }: CampaignsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 50 );
   const { view, setView } = usePersistedViewMode( 'campaigns', 'table' );
-  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'campaigns' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'campaigns-table' );
 
   const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
   const pagination = isServerSide ? externalPagination : internalPagination;
@@ -85,6 +87,7 @@ export function CampaignsTable( {
   const [ globalFilter, setGlobalFilter ] = React.useState( '' );
   const [ dateFilterType, setDateFilterType ] = React.useState<'created_at' | 'updated_at'>( 'created_at' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
+  const [ selectedCreator, setSelectedCreator ] = React.useState<ModelsCreatorResponse | null>( null );
 
   const filteredData = React.useMemo( () => {
     if ( !dateRange?.from && !dateRange?.to ) return campaigns;
@@ -112,7 +115,7 @@ export function CampaignsTable( {
     return Array.from( statusSet );
   }, [ filteredData ] );
 
-  const columns = useCampaignColumns();
+  const columns = useCampaignColumns( { onViewCreator: setSelectedCreator } );
 
   const table = useReactTable( {
     data: filteredData,
@@ -143,7 +146,7 @@ export function CampaignsTable( {
   } );
 
   return (
-    <div className="grow relative flex flex-col min-h-0 bg-slate-50/50">
+    <div className="grow relative flex flex-col min-h-[420px] bg-slate-50/50">
       <AnimatePresence>
         { ( showLoading || isLoading ) && (
           <motion.div
@@ -173,7 +176,7 @@ export function CampaignsTable( {
                   setDateRange={ setDateRange }
                 />
               ) }
-              <CampaignsView table={ table } view={ view } />
+              <CampaignsView table={ table } view={ view } onViewCreator={ setSelectedCreator } />
             </div>
           </div>
           { campaigns.length > 0 && (
@@ -186,6 +189,11 @@ export function CampaignsTable( {
           ) }
         </>
       ) }
+      <CreatorDetailsSheet
+        creator={ selectedCreator }
+        open={ !!selectedCreator }
+        onOpenChange={ ( open ) => !open && setSelectedCreator( null ) }
+      />
     </div>
   );
 }

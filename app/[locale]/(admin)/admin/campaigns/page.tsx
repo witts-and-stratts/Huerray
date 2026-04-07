@@ -4,13 +4,17 @@
 import { CampaignsTable } from '@/components/campaigns/campaigns-table';
 import { SubHeader } from '@/components/subheader';
 import { useCampaigns } from '@/lib/api/hooks/campaigns';
+import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
 
 export default function CampaignsPage() {
   const t = useTranslations( 'dashboard.admin' );
-  const { data: response, isLoading, error } = useCampaigns( {
+  const { pagination, setPagination } = usePersistedPagination( 'admin-campaigns' );
+  const { data: response, isLoading, isFetching, error } = useCampaigns( {
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
   } );
 
   const campaigns = React.useMemo( () => {
@@ -38,8 +42,11 @@ export default function CampaignsPage() {
       />
       <CampaignsTable
         campaigns={ campaigns }
-        isLoading={ isLoading }
+        isLoading={ isLoading || isFetching }
         error={ error }
+        pagination={ pagination }
+        onPaginationChange={ setPagination }
+        rowCount={ response?.pagination?.total }
       />
     </>
   );

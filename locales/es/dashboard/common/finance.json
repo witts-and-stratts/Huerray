@@ -24,7 +24,8 @@
       "items": "Artículos",
       "paid": "Pagado",
       "amount": "Importe",
-      "actions": "Acciones"
+      "actions": "Acciones",
+      "status": "Estado"
     },
     "filters": {
       "searchPlaceholder": "Filtra los pagos...",

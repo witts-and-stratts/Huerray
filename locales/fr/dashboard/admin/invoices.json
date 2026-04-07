@@ -27,6 +27,7 @@
       "brand": "Marque",
       "campaign": "Campagne",
       "issued": "Délivré",
+      "status": "Statut",
       "paid": "Statut",
       "amount": "Montant",
       "actions": "Actions"

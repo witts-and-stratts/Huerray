@@ -16,6 +16,7 @@ import {
 import { GigsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import { campaignsKeys } from './campaigns';
+import { creatorsKeys } from './creators';
 import type {
   ModelsStandardGenericResponse,
   ModelsPaginatedGigResponse,
@@ -113,9 +114,11 @@ export function useCreateGig(
       return response.data;
     },
     onSuccess: ( _, variables ) => {
-      // Invalidate gigs lists and campaign-specific gigs
+      // Invalidate gigs lists and campaign data impacted by this new gig
       queryClient.invalidateQueries( { queryKey: gigsKeys.lists() } );
-      queryClient.invalidateQueries( { queryKey: gigsKeys.byCampaign( variables.campaign_id ) } );
+      queryClient.invalidateQueries( { queryKey: [ ...gigsKeys.all, 'campaign', variables.campaign_id ] } );
+      queryClient.invalidateQueries( { queryKey: campaignsKeys.detail( variables.campaign_id ) } );
+      queryClient.invalidateQueries( { queryKey: campaignsKeys.lists() } );
     },
     ...options,
   } );
@@ -296,6 +299,7 @@ export function useRespondToInvitation(
     },
     onSuccess: () => {
       queryClient.invalidateQueries( { queryKey: gigsKeys.all } );
+      queryClient.invalidateQueries( { queryKey: creatorsKeys.all } );
     },
     ...options,
   } );

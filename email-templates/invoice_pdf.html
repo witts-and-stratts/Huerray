@@ -6,6 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice {{.InvoiceNumber}}</title>
     <style>
+        @font-face {
+            font-family: 'Aeonik';
+            src: url('https://dev.huerray.de/fonts/Aeonik-Regular.woff2') format('woff2'),
+                url('https://dev.huerray.de/fonts/Aeonik-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Aeonik';
+            src: url('https://dev.huerray.de/fonts/Aeonik-Bold.woff2') format('woff2'),
+                url('https://dev.huerray.de/fonts/Aeonik-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'ABC Diatype';
+            src: url('https://dev.huerray.de/fonts/ABCDiatype-Regular.woff2') format('woff2'),
+                url('https://dev.huerray.de/fonts/ABCDiatype-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
             margin: 0;
             padding: 32px;
@@ -231,6 +258,12 @@
             line-height: 1.7;
             color: #67798b;
         }
+
+        .bank-details {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #67798b;
+        }
     </style>
 </head>
 
@@ -265,9 +298,9 @@
                 <div class="meta-column">
                     <p class="section-title">From</p>
                     <div class="block">
-                        <strong>Huerray Platform</strong><br>
-                        Creator-brand services<br>
-                        billing@huerray.de
+                        <strong>Thrypes GmbH</strong><br>
+                        Gontardstraße 11<br>
+                        10178, Berlin, Germany<br>
                     </div>
                 </div>
                 <div class="meta-column meta-column--right">
@@ -375,6 +408,13 @@
             <div class="block">{{.Notes}}</div>
         </div>
         {{end}}
+
+        <div class="notes notes--ruled">
+            <p class="bank-details">IBAN: <strong>DE58 1001 0123 4453 3793 04</strong> <br>
+                BIC: <strong>QNTODEB2XXX</strong> <br>
+                IBAN: <strong>BE37 9050 8679 7728</strong> <br>
+                BIC: <strong>TRWIBEBIXXX</strong></p>
+        </div>
 
         <div class="footer">
             Thank you for using Huerray. This invoice was generated automatically on {{.CreatedAt}}.

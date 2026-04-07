@@ -7,6 +7,7 @@
       "brand": "Brand",
       "campaign": "Campaign",
       "issued": "Issued",
+      "status": "Status",
       "paid": "Paid?",
       "amount": "Amount",
       "actions": "Actions"
@@ -34,7 +35,8 @@
       "paymentGeneratedSuccess": "Payment generated successfully",
       "paymentGeneratedError": "Failed to generate payment",
       "invoiceUpdatedSuccess": "Invoice updated successfully",
-      "invoiceUpdatedError": "Failed to update invoice"
+      "invoiceUpdatedError": "Failed to update invoice",
+      "setStatus": "Set Status"
     },
     "details": {
       "invoiceFallback": "Invoice",
@@ -78,7 +80,12 @@
         "title": "Invoice Paid",
         "description": "Mark this invoice as paid by the brand.",
         "confirmLabel": "Mark as Paid",
-        "loading": "Updating..."
+        "loading": "Updating...",
+        "cancel": "Cancel",
+        "paidDateLabel": "Paid Date",
+        "dueDateLabel": "Due Date",
+        "notesLabel": "Notes",
+        "notesPlaceholder": "Add any notes..."
       },
       "cancelInvoice": {
         "title": "Cancel Invoice",
@@ -86,6 +93,27 @@
         "confirmInvoiceTitle": "Type the invoice title to confirm",
         "confirmLabel": "Cancel Invoice",
         "loading": "Cancelling..."
+      },
+      "setStatus": {
+        "title": "Set Invoice Status",
+        "description": "Update the status of this invoice.",
+        "statusLabel": "Status",
+        "statusRequired": "Status is required",
+        "statusChanged": "Select a different status",
+        "paidDateLabel": "Paid Date",
+        "notesLabel": "Notes",
+        "notesPlaceholder": "Add any notes...",
+        "saveLabel": "Save Status",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "statuses": {
+          "draft": "Draft",
+          "issued": "Issued",
+          "sent": "Sent",
+          "paid": "Paid",
+          "overdue": "Overdue",
+          "cancelled": "Cancelled"
+        }
       }
     }
   },

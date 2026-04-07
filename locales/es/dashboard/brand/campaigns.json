@@ -169,6 +169,7 @@
     "durationLabel": "%%0%s duración",
     "task": "Tarea",
     "recordVideos": "{count, plural, =1 {Record # video} other {Record # videos}}",
+    "submissionCount": "{count, plural, =1 {# submission} other {# submissions}}",
     "recordVideosSimple": "{count, plural, =1 {# video} other {# videos}}",
     "durationSeconds": "Duración: {count} segundos",
     "durationSecondsSimple": "{count} segundos",

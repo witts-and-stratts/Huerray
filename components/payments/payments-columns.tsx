@@ -1,33 +1,18 @@
 "use client";
 
 import { imgpresets } from '@/lib/utils/imgproxy';
-import {
-  Alert01Icon,
-  ArrowReloadHorizontalIcon,
-  Cancel01Icon,
-  CheckmarkCircle02Icon,
-  Clock01Icon,
-} from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { ColumnDef } from '@tanstack/react-table';
 import * as React from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { ModelsPaymentResponse, UtilsPaymentStatus } from '@/lib/api/generated/models';
 import { useCreator } from '@/lib/api/hooks/creators';
-import { TCheckboxCell, TCheckboxHead, THead } from '../admin/data-table';
+import { TCheckboxCell, TCheckboxHead, THead } from '@/components/admin/data-table';
 import { PaymentActionMenu } from './payment-action-menu';
 import { PaymentDetailsSheet } from './payment-details-sheet';
+import { PaymentStatusBadge } from './payment-status-badge';
 import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
 import { useTranslations } from 'next-intl';
-
-const getStatusConfig = ( t: ReturnType<typeof useTranslations> ) => ( {
-  completed: { icon: CheckmarkCircle02Icon, className: 'text-green-500', label: t( 'payments.status.completed' ) },
-  pending: { icon: Clock01Icon, className: 'text-amber-500', label: t( 'payments.status.pending' ) },
-  processing: { icon: ArrowReloadHorizontalIcon, className: 'text-blue-500', label: t( 'payments.status.processing' ) },
-  failed: { icon: Alert01Icon, className: 'text-red-500', label: t( 'payments.status.failed' ) },
-  cancelled: { icon: Cancel01Icon, className: 'text-gray-400', label: t( 'payments.status.cancelled' ) },
-} );
 
 function getInitials( name?: string ) {
   if ( !name ) return '?';
@@ -63,7 +48,7 @@ function CreatorCell( { creator_id, creator_name }: { creator_id?: string; creat
         { photoUrl && <AvatarImage src={ imgpresets.avatar( photoUrl ) } alt={ creator_name } /> }
         <AvatarFallback>{ getInitials( creator_name ) }</AvatarFallback>
       </Avatar>
-      <span className="text-sm font-medium max-md:whitespace-nowrap">{ creator_name || '—' }</span>
+      <span className="text-sm font-medium whitespace-nowrap">{ creator_name || '—' }</span>
     </div>
   );
 }
@@ -74,8 +59,6 @@ export function usePaymentColumns( isAdmin = false ): ColumnDef<ModelsPaymentRes
   const t = useTranslations( 'dashboard.common' );
 
   return React.useMemo( () => {
-    const statusConfig = getStatusConfig( t );
-
     return [
       {
         id: 'select',
@@ -140,16 +123,15 @@ export function usePaymentColumns( isAdmin = false ): ColumnDef<ModelsPaymentRes
         ),
       },
       {
-        id: 'paid',
+        id: 'status',
         accessorKey: 'payment_status',
-        header: () => <THead title={ t( 'payments.table.paid' ) } shouldSort={ false } />,
+        header: () => <THead title={ t( 'payments.table.status' ) } shouldSort={ false } />,
         cell: ( { row } ) => {
           const status = row.original.payment_status as UtilsPaymentStatus | undefined;
           if ( !status ) return <div className="pl-2 text-muted-foreground">—</div>;
-          const entry = statusConfig[ status ] ?? statusConfig.pending;
           return (
-            <div className="pl-2" title={ entry.label }>
-              <HugeiconsIcon icon={ entry.icon } className={ `size-5 ${ entry.className }` } />
+            <div className="pl-2">
+              <PaymentStatusBadge status={ status } />
             </div>
           );
         },

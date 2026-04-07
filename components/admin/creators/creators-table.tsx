@@ -3,7 +3,9 @@
 import * as React from "react";
 import {
   ColumnFiltersState,
+  PaginationState,
   SortingState,
+  Updater,
   VisibilityState,
   getCoreRowModel,
   getFilteredRowModel,
@@ -60,20 +62,37 @@ interface CreatorsTableProps {
   creators?: ModelsCreatorResponse[];
   isLoading?: boolean;
   error?: Error | null;
+  pagination?: PaginationState;
+  onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
+  rowCount?: number;
+  defaultContentTypeFilter?: string[];
+  onContentTypeFilterChange?: ( value?: string[] ) => void;
 }
 
 export function CreatorsTable( {
   creators = [],
   isLoading = false,
   error = null,
+  pagination: externalPagination,
+  onPaginationChange: externalOnPaginationChange,
+  rowCount,
+  defaultContentTypeFilter,
+  onContentTypeFilterChange,
 }: CreatorsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
   const { view, setView } = usePersistedViewMode( 'creators', 'cards' );
-  const { pagination, setPagination } = usePersistedPagination( 'creators' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'creators' );
+  const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
+  const pagination = isServerSide ? externalPagination : internalPagination;
+  const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
-  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
+  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
+    defaultContentTypeFilter?.length
+      ? [ { id: 'content_type', value: defaultContentTypeFilter } ]
+      : []
+  );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ globalFilter, setGlobalFilter ] = React.useState( '' );
@@ -160,6 +179,10 @@ export function CreatorsTable( {
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    ...(isServerSide && {
+      manualPagination: true,
+      rowCount: rowCount ?? 0,
+    }),
     state: {
       sorting,
       columnFilters,
@@ -169,6 +192,16 @@ export function CreatorsTable( {
       pagination,
     },
   } );
+
+  React.useEffect( () => {
+    if ( !onContentTypeFilterChange ) return;
+    const contentTypeFilter = columnFilters.find( ( filter ) => filter.id === 'content_type' );
+    if ( Array.isArray( contentTypeFilter?.value ) ) {
+      onContentTypeFilterChange( contentTypeFilter.value as string[] );
+      return;
+    }
+    onContentTypeFilterChange( undefined );
+  }, [ columnFilters, onContentTypeFilterChange ] );
 
   return (
     <>

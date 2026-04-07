@@ -87,6 +87,7 @@ interface StatusBadgeProps {
   status?: string;
   className?: string;
   configOverride?: Record<string, StatusConfig>;
+  showIcon?: boolean;
 }
 
 function getConfig(
@@ -101,7 +102,7 @@ function getConfig(
   };
 }
 
-export function StatusBadge( { status, className, configOverride }: StatusBadgeProps ) {
+export function StatusBadge( { status, className, configOverride, showIcon = true }: StatusBadgeProps ) {
   const config = getConfig( status, configOverride );
   const filterLabel = useFilterLabel();
   const defaultLabel = useMessage( config.label );
@@ -118,7 +119,7 @@ export function StatusBadge( { status, className, configOverride }: StatusBadgeP
       config.color,
       className
     ) }>
-      <HugeiconsIcon icon={ config.icon } className="w-3 h-3 shrink-0" />
+      { showIcon ? <HugeiconsIcon icon={ config.icon } className="w-3 h-3 shrink-0" /> : null }
       { label }
     </div>
   );
@@ -147,11 +148,11 @@ export function UserStatusBadge( { status, className, configOverride }: StatusBa
 }
 
 export function InvoiceStatusBadge( { status, className, configOverride }: StatusBadgeProps ) {
-  return <StatusBadge status={ status } className={ className } configOverride={ configOverride } />;
+  return <StatusBadge status={ status } className={ className } configOverride={ configOverride } showIcon={ false } />;
 }
 
 export function PaymentStatusBadge( { status, className, configOverride }: StatusBadgeProps ) {
-  return <StatusBadge status={ status } className={ className } configOverride={ configOverride } />;
+  return <StatusBadge status={ status } className={ className } configOverride={ configOverride } showIcon={ false } />;
 }
 
 export function SubmissionStatusBadge( { status, className, configOverride }: StatusBadgeProps ) {

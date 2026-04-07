@@ -16,6 +16,7 @@ import { CamapignsTableView } from './campaigns-table-view';
 
 import { useBasePath } from '@/lib/providers/path-provider';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
+import { ModelsCreatorResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
 
 function CampaignEmptyState() {
@@ -47,9 +48,11 @@ function CampaignEmptyState() {
 export function CampaignsView( {
   table,
   view,
+  onViewCreator,
 }: {
   table: TanstackTable<ModelsCampaignResponse>;
   view: 'table' | 'cards';
+  onViewCreator?: ( creator: ModelsCreatorResponse ) => void;
 } ) {
   return (
     <div className='px-2 md:px-5 mt-1 grow flex-1'>
@@ -58,7 +61,7 @@ export function CampaignsView( {
       ) : view === 'table' ? (
         <CamapignsTableView table={ table } />
       ) : (
-        <CampaignsCardsView table={ table } />
+        <CampaignsCardsView table={ table } onViewCreator={ onViewCreator } />
       ) }
     </div>
   );

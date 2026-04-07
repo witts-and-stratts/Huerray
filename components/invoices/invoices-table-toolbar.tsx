@@ -26,6 +26,7 @@ interface InvoicesTableToolbarProps {
   statuses: string[];
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
+  isAdmin?: boolean;
 }
 
 export function InvoicesTableToolbar( {
@@ -39,6 +40,7 @@ export function InvoicesTableToolbar( {
   statuses,
   view,
   setView,
+  isAdmin,
 }: InvoicesTableToolbarProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
   return (
@@ -56,7 +58,7 @@ export function InvoicesTableToolbar( {
         />
       </div>
       <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
-        <DataTableViewToggle view={ view } setView={ setView } />
+        { !isAdmin && <DataTableViewToggle view={ view } setView={ setView } /> }
         <DataTableFilterDropdown
           table={ table }
           columnId='invoice_status'

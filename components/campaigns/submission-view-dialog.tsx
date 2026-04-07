@@ -14,7 +14,7 @@ import { memo, ReactNode, useState, useEffect, useCallback, useMemo, useRef } fr
 import { TextCapitalize } from '../text-case';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { Button } from '@/components/dashboard-ui/button';
-import { useUpdateVideoSubmissionStatus, useVideoSubmissionDecision } from '@/lib/api/hooks/video-submissions';
+import { useUpdateVideoSubmissionStatus, useVideoSubmissionDecision, useVideoSubmission } from '@/lib/api/hooks/video-submissions';
 import { UtilsVideoSubmissionStatus, ModelsBrandVideoDecisionRequestStatusEnum } from '@/lib/api/generated/models';
 import { toast } from 'sonner';
 import { ChevronDown, Loader2 } from 'lucide-react';
@@ -449,20 +449,31 @@ SubmissionCommentsPanel.displayName = 'SubmissionCommentsPanel';
 export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, initialCommentsOpen = false }: SubmissionViewDialogProps ) => {
   const locale = useLocale();
   const [ isCommentsOpen, setIsCommentsOpen ] = useState( initialCommentsOpen );
+  const {
+    data: submissionResponse,
+    isFetching: isSubmissionFetching,
+    refetch: refetchSubmission,
+  } = useVideoSubmission( submission.id || '', {
+    enabled: false,
+  } );
+  const latestSubmission = submissionResponse?.data || submission;
 
   useEffect( () => {
     if ( open ) {
       setIsCommentsOpen( initialCommentsOpen );
+      if ( submission.id ) {
+        refetchSubmission();
+      }
     }
-  }, [ open, initialCommentsOpen ] );
+  }, [ open, initialCommentsOpen, submission.id, refetchSubmission ] );
 
-  const commentsResults = useSubmissionComments( open ? submission.id : undefined );
+  const commentsResults = useSubmissionComments( open ? latestSubmission.id : undefined );
   const commentCount = commentsResults.reduce( ( sum, r ) => sum + ( r.data?.data?.length ?? 0 ), 0 );
 
-  const commentEntities = useMemo( () => open && submission.id ? [
-    { entityType: UtilsEntityType.EntityTypeVideoSubmissionStatusUpdate, entityId: submission.id },
-    { entityType: UtilsEntityType.EntityTypeBrandVideoDecision, entityId: submission.id },
-  ] : [], [ open, submission.id ] );
+  const commentEntities = useMemo( () => open && latestSubmission.id ? [
+    { entityType: UtilsEntityType.EntityTypeVideoSubmissionStatusUpdate, entityId: latestSubmission.id },
+    { entityType: UtilsEntityType.EntityTypeBrandVideoDecision, entityId: latestSubmission.id },
+  ] : [], [ open, latestSubmission.id ] );
 
   const handleToggleComments = useCallback( () => {
     setIsCommentsOpen( prev => !prev );
@@ -473,28 +484,34 @@ export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, in
       <DialogContent className="p-0 gap-0 overflow-hidden max-w-6xl! min-w-[300px] w-[95vw] bg-burgundy-50/80 max-h-[90vh] flex flex-row">
         <div className={ cn( "flex flex-col transition-all duration-300 ease-in-out w-full min-h-0", isCommentsOpen && "md:pr-[416px]" ) }>
           <div className="flex-1 overflow-y-auto">
-            <SubmissionVideo videoUrl={ submission.video?.asset || '' } poster={ submission.video?.thumbnail || '' } />
+            <SubmissionVideo videoUrl={ latestSubmission.video?.asset || '' } poster={ latestSubmission.video?.thumbnail || '' } />
 
             <div className="p-4 border-t bg-muted/20 space-y-4 flex-1">
+              { isSubmissionFetching && (
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <Loader2 className="size-3.5 animate-spin" />
+                  Refreshing latest submission details...
+                </div>
+              ) }
               <SubmissionHeader
-                title={ submission.title || submission.video_filename || "Untitled Submission" }
-                description={ submission.description }
+                title={ latestSubmission.title || latestSubmission.video_filename || "Untitled Submission" }
+                description={ latestSubmission.description }
                 commentCount={ commentCount }
                 isCommentsOpen={ isCommentsOpen }
                 onToggleComments={ handleToggleComments }
               />
 
-              <CreatorTrigger creatorProfile={ submission.creator } />
+              <CreatorTrigger creatorProfile={ latestSubmission.creator } />
 
-              <SubmissionDetailsSection submission={ submission } locale={ locale } open={ open } />
+              <SubmissionDetailsSection submission={ latestSubmission } locale={ locale } open={ open } />
 
-              <SubmissionActions submission={ submission } onOpenChange={ onOpenChange } />
+              <SubmissionActions submission={ latestSubmission } onOpenChange={ onOpenChange } />
             </div>
           </div>
 
           <DialogFooter className="px-4 py-4 shrink-0 border-t bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur sm:justify-start">
             <SubmissionActionMenu
-              submission={ submission }
+              submission={ latestSubmission }
               showViewAction={ false }
               trigger={
                 <ButtonGroup className="self-start">

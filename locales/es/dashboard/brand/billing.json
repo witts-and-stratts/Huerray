@@ -7,6 +7,7 @@
       "brand": "Marca",
       "campaign": "Campaña",
       "issued": "Publicado",
+      "status": "Estado",
       "paid": "¿Pagado?",
       "amount": "Importe",
       "actions": "Acciones"
@@ -34,7 +35,8 @@
       "paymentGeneratedSuccess": "Pago generado correctamente",
       "paymentGeneratedError": "No se ha podido generar el pago",
       "invoiceUpdatedSuccess": "Factura actualizada correctamente",
-      "invoiceUpdatedError": "Error al actualizar la factura"
+      "invoiceUpdatedError": "Error al actualizar la factura",
+      "setStatus": "Establecer estado"
     },
     "details": {
       "invoiceFallback": "Factura",
@@ -78,7 +80,12 @@
         "title": "Factura pagada",
         "description": "Marque esta factura como pagada por la marca.",
         "confirmLabel": "Marcar como pagado",
-        "loading": "Actualizando..."
+        "loading": "Actualizando...",
+        "cancel": "Cancelar",
+        "paidDateLabel": "Fecha de pago",
+        "dueDateLabel": "Fecha de vencimiento",
+        "notesLabel": "Notas",
+        "notesPlaceholder": "Añade cualquier nota..."
       },
       "cancelInvoice": {
         "title": "Anular factura",
@@ -86,6 +93,27 @@
         "confirmInvoiceTitle": "Escriba el título de la factura para confirmar",
         "confirmLabel": "Anular factura",
         "loading": "Cancelando..."
+      },
+      "setStatus": {
+        "title": "Establecer el estado de la factura",
+        "description": "Actualizar el estado de esta factura.",
+        "statusLabel": "Estado",
+        "statusRequired": "Se requiere estatus",
+        "statusChanged": "Seleccionar otro estado",
+        "paidDateLabel": "Fecha de pago",
+        "notesLabel": "Notas",
+        "notesPlaceholder": "Añade cualquier nota...",
+        "saveLabel": "Guardar estado",
+        "saving": "Ahorrar...",
+        "cancel": "Cancelar",
+        "statuses": {
+          "draft": "Borrador",
+          "issued": "Publicado",
+          "sent": "Enviado",
+          "paid": "Pagado",
+          "overdue": "Atrasado",
+          "cancelled": "Cancelado"
+        }
       }
     }
   },

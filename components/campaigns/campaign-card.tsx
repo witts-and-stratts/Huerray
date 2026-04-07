@@ -20,7 +20,7 @@ import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 import { useRole } from '@/contexts/role-context';
-import { ModelsBrandResponse, ModelsCampaignResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { ModelsBrandResponse, ModelsCampaignResponse, ModelsCreatorResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
@@ -41,6 +41,7 @@ import { useTranslations } from 'next-intl';
 
 interface CampaignCardProps {
   campaign: ModelsCampaignResponse;
+  onViewCreator?: ( creator: ModelsCreatorResponse ) => void;
 }
 
 type SelectedItem =
@@ -86,9 +87,10 @@ const AvatarGroup = memo( ( { title, people, onSelectItems, items, type }: {
 } );
 AvatarGroup.displayName = 'AvatarGroup';
 
-const CampaignAvatars = memo( ( { campaignId, onSelectMatch }: {
+const CampaignAvatars = memo( ( { campaignId, onSelectMatch, onViewCreator }: {
   campaignId: string;
   onSelectMatch: ( type: 'app' | 'inv' | 'sub', item: any ) => void;
+  onViewCreator?: ( creator: ModelsCreatorResponse ) => void;
 } ) => {
   const t = useTranslations( 'dashboard.common' );
   const { data: applicationsData, isLoading: loadingApps } = useCampaignApplications( campaignId );
@@ -132,8 +134,16 @@ const CampaignAvatars = memo( ( { campaignId, onSelectMatch }: {
   } ) ), [ submissions ] );
 
   const handleSelect = useCallback( ( item: any, type: any ) => {
+    if ( type === 'sub' ) {
+      onSelectMatch( type, item );
+      return;
+    }
+    if ( item?.creator && onViewCreator ) {
+      onViewCreator( item.creator );
+      return;
+    }
     onSelectMatch( type, item );
-  }, [ onSelectMatch ] );
+  }, [ onSelectMatch, onViewCreator ] );
 
   return (
     <AnimatePresence>
@@ -220,7 +230,7 @@ export const CampaignGigsButton = memo( ( { campaignId, basePath }: { campaignId
 } );
 CampaignGigsButton.displayName = 'CampaignGigsButton';
 
-export function CampaignCard( { campaign }: CampaignCardProps ) {
+export function CampaignCard( { campaign, onViewCreator }: CampaignCardProps ) {
   const basePath = useBasePath();
   const tCard = useTranslations( 'dashboard.common' );
   const { id, campaign_name, description, campaign_status, updated_at, brand_id } = campaign;
@@ -289,6 +299,7 @@ export function CampaignCard( { campaign }: CampaignCardProps ) {
             <CampaignAvatars
               campaignId={ id! }
               onSelectMatch={ handleSelectMatch }
+              onViewCreator={ onViewCreator }
             />
           </div>
 

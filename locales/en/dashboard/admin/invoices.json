@@ -27,6 +27,7 @@
       "brand": "Brand",
       "campaign": "Campaign",
       "issued": "Issued",
+      "status": "Status",
       "paid": "Status",
       "amount": "Amount",
       "actions": "Actions"

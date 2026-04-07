@@ -7,6 +7,7 @@
       "brand": "Marke",
       "campaign": "Kampagne",
       "issued": "Ausgestellt",
+      "status": "Status",
       "paid": "Bezahlt?",
       "amount": "Betrag",
       "actions": "Aktionen"
@@ -34,7 +35,8 @@
       "paymentGeneratedSuccess": "Zahlung erfolgreich generiert",
       "paymentGeneratedError": "Zahlung konnte nicht generiert werden",
       "invoiceUpdatedSuccess": "Rechnung erfolgreich aktualisiert",
-      "invoiceUpdatedError": "Rechnung konnte nicht aktualisiert werden"
+      "invoiceUpdatedError": "Rechnung konnte nicht aktualisiert werden",
+      "setStatus": "Status setzen"
     },
     "details": {
       "invoiceFallback": "Rechnung",
@@ -78,7 +80,12 @@
         "title": "Bezahlte Rechnung",
         "description": "Kennzeichnen Sie diese Rechnung als von der Marke bezahlt.",
         "confirmLabel": "Als bezahlt markieren",
-        "loading": "Aktualisieren..."
+        "loading": "Aktualisieren...",
+        "cancel": "Abbrechen",
+        "paidDateLabel": "Bezahltes Datum",
+        "dueDateLabel": "Fälligkeitsdatum",
+        "notesLabel": "Anmerkungen",
+        "notesPlaceholder": "Notizen hinzufügen..."
       },
       "cancelInvoice": {
         "title": "Rechnung stornieren",
@@ -86,6 +93,27 @@
         "confirmInvoiceTitle": "Geben Sie den Rechnungstitel zur Bestätigung ein",
         "confirmLabel": "Rechnung stornieren",
         "loading": "Absagen..."
+      },
+      "setStatus": {
+        "title": "Rechnungsstatus festlegen",
+        "description": "Aktualisieren Sie den Status dieser Rechnung.",
+        "statusLabel": "Status",
+        "statusRequired": "Status ist erforderlich",
+        "statusChanged": "Wählen Sie einen anderen Status",
+        "paidDateLabel": "Bezahltes Datum",
+        "notesLabel": "Anmerkungen",
+        "notesPlaceholder": "Notizen hinzufügen...",
+        "saveLabel": "Status speichern",
+        "saving": "Sparen...",
+        "cancel": "Abbrechen",
+        "statuses": {
+          "draft": "Entwurf",
+          "issued": "Ausgestellt",
+          "sent": "Gesendet",
+          "paid": "Bezahlt",
+          "overdue": "Überfällig",
+          "cancelled": "Abgesagt"
+        }
       }
     }
   },

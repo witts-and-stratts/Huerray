@@ -31,12 +31,12 @@ export function CampaignsTableSkeleton( {
       initial={ { opacity: 0 } }
       animate={ { opacity: 1 } }
       transition={ { duration: 0.2 } }
-      className={ cn( "w-full space-y-2 md:space-y-4 px-2 md:px-5 py-2 md:py-4", className ) }
+      className={ cn( "w-full space-y-2 md:space-y-4", className ) }
     >
       { /* Toolbar */ }
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between gap-3 bg-background py-2 px-2 md:px-4">
         <div className="flex items-center gap-2 flex-1">
-          <Skeleton className="h-9 w-[220px]" />
+          <Skeleton className="h-9 w-[220px] max-w-full md:w-[500px]" />
           <Skeleton className="h-9 w-[110px]" />
           <Skeleton className="h-9 w-[110px]" />
         </div>
@@ -47,9 +47,9 @@ export function CampaignsTableSkeleton( {
       </div>
 
       { /* Table */ }
-      <div className="rounded-md border">
+      <div className="rounded-md border mx-2 md:mx-4">
         { /* Header */ }
-        <div className="border-b bg-muted/50 px-4 py-3 flex items-center gap-4">
+        <div className="border-b bg-muted/50 px-4 py-1 flex items-center gap-4 py-2">
           <Skeleton className="size-4 shrink-0 rounded-sm" />
           <Skeleton className="h-4 w-[180px]" />
           <div className="ml-auto flex items-center gap-8 pr-2">

@@ -24,7 +24,8 @@
       "items": "Artikel",
       "paid": "Bezahlt",
       "amount": "Betrag",
-      "actions": "Aktionen"
+      "actions": "Aktionen",
+      "status": "Status"
     },
     "filters": {
       "searchPlaceholder": "Auszahlungen filtern...",

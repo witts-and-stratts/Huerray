@@ -20,6 +20,7 @@ import { useFormatCurrency } from '@/lib/hooks/format';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { TextCapitalize } from '../text-case';
 import { useTranslations } from 'next-intl';
+import { RoleGuard } from '../auth/role-guard';
 
 type StatusIcon = ComponentProps<typeof HugeiconsIcon>[ 'icon' ];
 
@@ -93,9 +94,10 @@ function CardShell( {
 
 interface ApplicationCardProps {
   application: ModelsGigApplicationResponse;
+  onClick?: () => void;
 }
 
-export function ApplicationCard( { application }: ApplicationCardProps ) {
+export function ApplicationCard( { application, onClick }: ApplicationCardProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const creator = application.creator;
   const gig = application.gig;
@@ -117,6 +119,7 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
     <CardShell
       backgroundImage={ profileImage ? imgpresets.card( profileImage ) : undefined }
       fallbackGradient="from-slate-700/80 via-slate-600/50 to-slate-500/30"
+      onClick={ onClick }
     >
       { /* Top row */ }
       <div className="absolute top-3 left-3 right-3 flex items-start justify-between" onClick={ e => e.stopPropagation() }>
@@ -139,16 +142,28 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
       <div className="absolute bottom-0 left-0 right-0 px-4 py-2 flex flex-col gap-1 bg-black/5 backdrop-blur m-2 rounded-2xl border border-white/10">
 
         { /* Gig title */ }
-        <h3 className="text-white text-base font-primary font-normal leading-tight line-clamp-2">
+        <h3 className="text-base font-primary font-normal leading-tight line-clamp-2 text-burgundy-100">
+          { creatorName }
+        </h3>
+
+        { /* Optional message */ }
+        { application.message && (
+          <p className="text-white/50 text-xs line-clamp-2 italic mt-0.5">&quot;{ application.message }&quot;</p>
+        ) }
+
+        <Separator className='bg-white/10' />
+
+        <h3 className="text-white text-sm font-primary font-normal leading-tight line-clamp-2">
           { gigTitle }
         </h3>
 
+
         { /* Meta row — videos + duration */ }
         { ( numberOfVideos || durationSeconds ) && (
-          <div className="flex items-center gap-2 text-white/60 text-sm">
+          <div className="flex items-center gap-2 text-white/60 text-xs">
             { numberOfVideos && (
               <span className="flex items-center gap-1">
-                <VideoIcon className="size-5" strokeWidth={ 1 } />
+                <VideoIcon className="size-4" strokeWidth={ 1 } />
                 { t( 'videoCountLabel', { count: numberOfVideos } ) }
               </span>
             ) }
@@ -158,30 +173,27 @@ export function ApplicationCard( { application }: ApplicationCardProps ) {
         ) }
 
         { /* Compensation */ }
-        { compensation && (
-          <p className="flex flex-col mt-1">
-            <span className="text-white/60 text-[10px] uppercase tracking-widest -mb-1.5">{ t( 'reward' ) }</span>
-            <span className="text-burgundy-100">{ formattedCompensation }</span>
-          </p>
-        ) }
+        {/* <RoleGuard allowedRoles={ [ 'admin' ] }>
+          { compensation && (
+            <p className="flex flex-col mt-1">
+              <span className="text-white/60 text-[10px] uppercase tracking-widest -mb-1.5">{ t( 'reward' ) }</span>
+              <span className="text-burgundy-100">{ formattedCompensation }</span>
+            </p>
+          ) }
+        </RoleGuard> */}
 
         { /* Creator */ }
-        <div className="flex items-center gap-1.5 mt-0.5">
-          <Avatar className="size-4 rounded-full border border-white/20 shrink-0">
+        {/* <div className="flex items-center gap-1.5 mt-0.5">
+          <Avatar className="size-8 rounded-full border border-white/20 shrink-0">
             { profileImage && <AvatarImage src={ imgpresets.avatar( profileImage ) } alt={ creatorName } /> }
             <AvatarFallback className="text-[8px] bg-white/20 text-white">{ creatorInitials }</AvatarFallback>
           </Avatar>
-          <p className="text-white/60 text-xs line-clamp-1">{ creatorName }</p>
-        </div>
+          <p className="text-white/60 text-sm line-clamp-1">{ creatorName }</p>
+        </div> */}
 
         { /* Applied date */ }
         { appliedDate && (
-          <p className="text-white/40 text-[10px]">{ t( 'applied' ) } { appliedDate }</p>
-        ) }
-
-        { /* Optional message */ }
-        { application.message && (
-          <p className="text-white/50 text-xs line-clamp-2 italic mt-0.5">&quot;{ application.message }&quot;</p>
+          <p className="text-white/40 text-xs">{ t( 'applied' ) } { appliedDate }</p>
         ) }
       </div>
     </CardShell>

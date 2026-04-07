@@ -7,6 +7,7 @@
       "brand": "Marque",
       "campaign": "Campagne",
       "issued": "Délivré",
+      "status": "Statut",
       "paid": "Payé ?",
       "amount": "Montant",
       "actions": "Actions"
@@ -34,7 +35,8 @@
       "paymentGeneratedSuccess": "Paiement généré avec succès",
       "paymentGeneratedError": "Le paiement n'a pas été généré",
       "invoiceUpdatedSuccess": "Facture mise à jour avec succès",
-      "invoiceUpdatedError": "Échec de la mise à jour de la facture"
+      "invoiceUpdatedError": "Échec de la mise à jour de la facture",
+      "setStatus": "Définir l'état"
     },
     "details": {
       "invoiceFallback": "Facture",
@@ -78,7 +80,12 @@
         "title": "Facture payée",
         "description": "Marquer cette facture comme payée par la marque.",
         "confirmLabel": "Marquer comme payé",
-        "loading": "Mise à jour..."
+        "loading": "Mise à jour...",
+        "cancel": "Annuler",
+        "paidDateLabel": "Date de paiement",
+        "dueDateLabel": "Date d'échéance",
+        "notesLabel": "Notes",
+        "notesPlaceholder": "Ajouter des notes..."
       },
       "cancelInvoice": {
         "title": "Annuler la facture",
@@ -86,6 +93,27 @@
         "confirmInvoiceTitle": "Tapez le titre de la facture pour confirmer",
         "confirmLabel": "Annuler la facture",
         "loading": "Annulation..."
+      },
+      "setStatus": {
+        "title": "Définir le statut de la facture",
+        "description": "Mettre à jour le statut de cette facture.",
+        "statusLabel": "Statut",
+        "statusRequired": "Le statut est requis",
+        "statusChanged": "Sélectionner un autre statut",
+        "paidDateLabel": "Date de paiement",
+        "notesLabel": "Notes",
+        "notesPlaceholder": "Ajouter des notes...",
+        "saveLabel": "Sauvegarder l'état",
+        "saving": "Économiser...",
+        "cancel": "Annuler",
+        "statuses": {
+          "draft": "Projet",
+          "issued": "Délivré",
+          "sent": "Envoyé",
+          "paid": "Payé",
+          "overdue": "En retard",
+          "cancelled": "Annulé"
+        }
       }
     }
   },

@@ -2,13 +2,12 @@
 
 import Link from 'next/link';
 
-import { ModelsCampaignResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
+import { ModelsCampaignResponse, ModelsCreatorResponse, ModelsGigApplicationResponse, ModelsGigInvitationResponse, ModelsGigResponse, ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useCampaignApplications, useCampaignInvitations, useCampaignSubmissions } from '@/lib/api/hooks/campaigns';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import * as React from 'react';
-import { ApplicationDetailsSheet } from './application-details-sheet';
 import { GigDetailsSheet } from './gig-details-sheet';
 import { SubmissionViewDialog } from './submission-view-dialog';
 
@@ -43,7 +42,7 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignRespo
       </RoleGuard>
       <ButtonGroup className='flex justify-end'>
         <RoleGuard allowedRoles={ [ 'admin' ] }>
-          <Button variant='outline' size='sm' className='font-regular' render={
+          <Button variant='outline' size='sm' className='font-regular' nativeButton={ false } render={
             <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
               { commonT( 'view' ) }
             </Link>
@@ -53,14 +52,14 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignRespo
         <RoleGuard allowedRoles={ [ 'brand' ] }>
           {
             ( row.original.campaign_status === 'draft' || row.original.campaign_status === 'returned' ) ? (
-              <Button variant='outline' size='sm' className='font-regular' render={
+              <Button variant='outline' size='sm' className='font-regular' nativeButton={ false } render={
                 <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
                   { actionsT( 'edit' ) }
                 </Link>
               }>
               </Button>
             ) : (
-              <Button variant='outline' size='sm' className='font-regular' render={
+              <Button variant='outline' size='sm' className='font-regular' nativeButton={ false } render={
                 <Link href={ `${ basePath }/campaigns/${ row.original.id }` }>
                   { commonT( 'view' ) }
                 </Link>
@@ -82,12 +81,17 @@ const CampaignActionsCell = ( { row, className }: { row: Row<ModelsCampaignRespo
   );
 };
 
-const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
+const ApplicationsCell = ( {
+  row,
+  onViewCreator,
+}: {
+  row: Row<ModelsCampaignResponse>;
+  onViewCreator?: ( creator: ModelsCreatorResponse ) => void;
+} ) => {
   const t = useTranslations( 'dashboard.common.cards' );
   const { id } = row.original;
   const { data: applicationsData } = useCampaignApplications( id || '' );
   const applications = ( applicationsData?.data || [] ) as ModelsGigApplicationResponse[];
-  const [ selected, setSelected ] = React.useState<ModelsGigApplicationResponse | null>( null );
 
   const people = applications.map( app => ( {
     first_name: app.creator?.first_name || '',
@@ -101,16 +105,14 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
         <AnimatePresence>
           <AvatarCollage
             people={ people }
-            onPersonClick={ ( i ) => setSelected( applications[ i ] ) }
+            onPersonClick={ ( i ) => {
+              const creator = applications[ i ]?.creator;
+              if ( creator ) onViewCreator?.( creator );
+            } }
             title={ t( 'applications' ) }
           />
         </AnimatePresence>
       </div>
-      <ApplicationDetailsSheet
-        application={ selected }
-        open={ !!selected }
-        onOpenChange={ ( open ) => !open && setSelected( null ) }
-      />
     </>
   );
 };
@@ -235,9 +237,10 @@ const DetailsCell = ( { row }: { row: Row<ModelsCampaignResponse>; } ) => {
   );
 };
 
-export function useCampaignColumns(): ColumnDef<ModelsCampaignResponse>[] {
+export function useCampaignColumns( options?: { onViewCreator?: ( creator: ModelsCreatorResponse ) => void; } ): ColumnDef<ModelsCampaignResponse>[] {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const actionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const onViewCreator = options?.onViewCreator;
 
   return React.useMemo( () => [
     {
@@ -351,7 +354,7 @@ export function useCampaignColumns(): ColumnDef<ModelsCampaignResponse>[] {
           </Button>
         );
       },
-      cell: ( { row } ) => <ApplicationsCell row={ row } />,
+      cell: ( { row } ) => <ApplicationsCell row={ row } onViewCreator={ onViewCreator } />,
     },
     {
       accessorKey: 'invitations',
@@ -373,5 +376,5 @@ export function useCampaignColumns(): ColumnDef<ModelsCampaignResponse>[] {
       enableHiding: false,
       cell: ( { row } ) => <CampaignActionsCell row={ row } className='pr-2' />,
     },
-  ], [ t, actionsT ] );
+  ], [ t, actionsT, onViewCreator ] );
 }

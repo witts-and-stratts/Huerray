@@ -29,6 +29,12 @@
     "cancel": "Annuler",
     "success": "Soumission créée avec succès",
     "error": "Échec de la création de la soumission",
+    "submittingForApproval": "Soumettre pour approbation...",
+    "submissionSentForApproval": "Envoi de la soumission pour approbation",
+    "submitForApprovalFailed": "N'a pas été soumis à l'approbation",
+    "confirmSubmissionTitle": "Confirmer la soumission",
+    "confirmSubmissionDescription": "Envoyer cette demande pour approbation maintenant ?",
+    "submitForApproval": "Soumettre pour approbation",
     "missingGigId": "L'ID de la carte n'est pas disponible",
     "uploading": "Veuillez attendre que la vidéo soit téléchargée",
     "toasts": {

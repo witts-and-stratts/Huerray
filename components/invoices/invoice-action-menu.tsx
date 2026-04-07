@@ -9,9 +9,10 @@ import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-me
 import { Button } from "@/components/dashboard-ui/button";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { Input } from "@/components/dashboard-ui/input";
-import { ModelsInvoiceResponse, UtilsInvoiceStatus } from "@/lib/api/generated/models";
+import { ModelsInvoiceResponse, ModelsUpdateInvoiceRequest, UtilsInvoiceStatus } from "@/lib/api/generated/models";
 import { useDownloadInvoicePdf, useResendInvoicePdf, useUpdateInvoiceStatus } from "@/lib/api/hooks/invoices";
 import { InvoiceDetailsSheet } from "./invoice-details-sheet";
+import { InvoiceMarkAsPaidDialog } from "./invoice-mark-as-paid-dialog";
 import { ButtonGroup } from "../dashboard-ui/button-group";
 import { toast } from "sonner";
 import { useTranslations } from 'next-intl';
@@ -76,16 +77,8 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
     if ( invoice.id ) updateInvoiceStatusAction( { id: invoice.id, request: { invoice_status: invoiceStatus } } );
   };
 
-  const handleMarkAsPaid = () => {
-    if ( invoice.id ) {
-      updateInvoiceStatusAction( {
-        id: invoice.id,
-        request: {
-          invoice_status: 'paid',
-          paid_date: new Date().toISOString(),
-        },
-      } );
-    }
+  const handleMarkAsPaid = ( request: ModelsUpdateInvoiceRequest ) => {
+    if ( invoice.id ) updateInvoiceStatusAction( { id: invoice.id, request } );
   };
 
   const actions: MenuAction<ModelsInvoiceResponse>[] = [
@@ -162,15 +155,12 @@ export function InvoiceActionMenu( { invoice, trigger, showViewButton = true, ba
 
       { showViewButton && <InvoiceDetailsSheet invoice={ invoice } open={ viewOpen } onOpenChange={ setViewOpen } /> }
 
-      <ConfirmDialog
+      <InvoiceMarkAsPaidDialog
         open={ openDialog === 'invoicePaid' }
         onOpenChange={ ( open ) => !open && setOpenDialog( null ) }
-        title={ t( 'dialogs.invoicePaid.title' ) }
-        description={ t( 'dialogs.invoicePaid.description' ) }
-        confirmLabel={ t( 'dialogs.invoicePaid.confirmLabel' ) }
-        onConfirm={ handleMarkAsPaid }
-        isLoading={ isStatusActionPending }
-        loadingText={ t( 'dialogs.invoicePaid.loading' ) }
+        invoice={ invoice }
+        isSubmitting={ isStatusActionPending }
+        onSubmit={ handleMarkAsPaid }
       />
 
       <ConfirmDialog

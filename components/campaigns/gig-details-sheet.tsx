@@ -1,54 +1,54 @@
 "use client";
 
-import * as React from 'react';
-import { useTranslations } from 'next-intl';
-import { imgpresets } from '@/lib/utils/imgproxy';
-import { ModelsGigResponse } from '@/lib/api/generated';
-import type { ModelsBrandResponse } from '@/lib/api/generated';
-import type { ModelsContentMedia } from '@/lib/api/generated/models/models-content-media';
-import type { ModelsCampaignResponse } from '@/lib/api/generated/models/models-campaign-response';
+import { Tabs as AnimTabs, TabsList as AnimTabsList, TabsPanel, TabsPanels, TabsTab } from '@/components/animate-ui/components/base/tabs';
+import { MediaPreview, type LegacyMediaItem } from '@/components/campaigns/media-preview';
+import { CreateSubmissionSheet } from '@/components/creator/create-submission-sheet';
+import { InvitationActionMenu } from '@/components/creator/invitation-action-menu';
+import { Badge } from '@/components/dashboard-ui/badge';
+import { Button } from '@/components/dashboard-ui/button';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { DocumentsTabContent } from '@/components/dashboard-ui/campaigns/assets-block/documents-tab-content';
+import { ImagesTabContent } from '@/components/dashboard-ui/campaigns/assets-block/images-tab-content';
+import { VideosTabContent } from '@/components/dashboard-ui/campaigns/assets-block/videos-tab-content';
+import { Separator } from '@/components/dashboard-ui/separator';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetFooter,
 } from '@/components/dashboard-ui/sheet';
-import { Tabs as AnimTabs, TabsList as AnimTabsList, TabsPanel, TabsPanels, TabsTab } from '@/components/animate-ui/components/base/tabs';
-import { GigStatusBadge } from './gig-status-badge';
-import { formatDate } from '@/lib/utils';
-import { useFormatCurrency } from '@/lib/hooks/format';
-import { Button } from '@/components/dashboard-ui/button';
-import { useApplyToGig, useGigInvitations, useRespondToInvitation } from '@/lib/api/hooks/gigs';
-import { useCreatorApplications, useCreatorGigs } from '@/lib/api/hooks/creators';
 import { useRole } from '@/contexts/role-context';
+import type { ModelsBrandResponse } from '@/lib/api/generated';
+import { ModelsGigResponse } from '@/lib/api/generated';
+import type { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import type { ModelsCampaignResponse } from '@/lib/api/generated/models/models-campaign-response';
+import type { ModelsContentMedia } from '@/lib/api/generated/models/models-content-media';
+import type { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models/models-video-submission-response';
+import { useCreatorApplications } from '@/lib/api/hooks/creators';
+import { useApplyToGig, useCreatorInvitations, useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
-import { SubmissionCard } from './submission-card';
+import { useFormatCurrency } from '@/lib/hooks/format';
+import { formatDate } from '@/lib/utils';
+import { imgpresets } from '@/lib/utils/imgproxy';
+import { ArrowRight, ChevronDown, Globe, Loader2, Plus, VideoIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import * as React from 'react';
 import { toast } from 'sonner';
-import { ArrowRight, ChevronDown, Globe, Loader2, VideoIcon } from 'lucide-react';
+import { Row } from '../admin/creators/creator-details-sheet';
+import { EmptySubmission } from '../admin/empty-states/empty-submissions';
 import { RoleGuard } from '../auth/role-guard';
-import { Badge } from '@/components/dashboard-ui/badge';
-import { Separator } from '@/components/dashboard-ui/separator';
+import { Card, CardContent } from '../dashboard-ui/card';
+import { Content } from '../dashboard-ui/content';
+import { ExpandableContent } from '../dashboard-ui/expandable-content';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
+import { SentenceCase } from '../text-case';
 import { BrandAvatar } from './brand-avatar';
 import { BrandHoverCard } from './brand-hover-card';
-import { Row } from '../admin/creators/creator-details-sheet';
-import { Content } from '../dashboard-ui/content';
-import { ImagesTabContent } from '@/components/dashboard-ui/campaigns/assets-block/images-tab-content';
-import { DocumentsTabContent } from '@/components/dashboard-ui/campaigns/assets-block/documents-tab-content';
-import { VideosTabContent } from '@/components/dashboard-ui/campaigns/assets-block/videos-tab-content';
-import { MediaPreview, type LegacyMediaItem } from '@/components/campaigns/media-preview';
-import { ExpandableContent } from '../dashboard-ui/expandable-content';
-import type { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models/models-video-submission-response';
-import { Card, CardContent } from '../dashboard-ui/card';
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from '../dashboard-ui/empty';
-import { SentenceCase } from '../text-case';
-import { CreateSubmissionSheet } from '@/components/creator/create-submission-sheet';
-import { EmptySubmission } from '../admin/empty-states/empty-submissions';
 import { GigActionMenu } from './gig-action-menu';
-import { InvitationActionMenu } from '@/components/creator/invitation-action-menu';
-import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { GigStatusBadge } from './gig-status-badge';
+import { SubmissionCard } from './submission-card';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -337,11 +337,14 @@ interface GigSubmissionsTabProps {
   isLoading: boolean;
   error: Error | null;
   canSubmit: boolean;
+  showAddSubmissionButton: boolean;
   onOpenSubmission: () => void;
 }
 
-function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSubmission }: GigSubmissionsTabProps ) {
+function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, showAddSubmissionButton, onOpenSubmission }: GigSubmissionsTabProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  const creatorInvitationActionsT = useTranslations( 'dashboard.creator.invitations.actions' );
+  const shouldShowAddSubmissionButton = canSubmit && showAddSubmissionButton;
   if ( isLoading ) {
     return (
       <TabsPanel value="submissions" className="pt-0 flex-1 h-full">
@@ -365,11 +368,26 @@ function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSu
   if ( submissions.length === 0 ) {
     return (
       <TabsPanel value="submissions" className="pt-0 flex-1 h-full">
-        <EmptySubmission
-          title={ t( 'noSubmissionsYet' ) }
-          imageWidth={ 140 }
-          description={ t( 'noSubmissionsYetDescription' ) }
-        />
+        { shouldShowAddSubmissionButton ? (
+          <div className="grid grid-cols-1 gap-4">
+            <Button
+              variant="outline"
+              className="h-52 w-full border-dashed border-2 border-muted-foreground/40 bg-transparent hover:bg-muted/40"
+              onClick={ onOpenSubmission }
+            >
+              <span className="flex items-center justify-center gap-2 text-muted-foreground">
+                <Plus className="size-5" />
+                { creatorInvitationActionsT( 'createSubmission' ) }
+              </span>
+            </Button>
+          </div>
+        ) : (
+          <EmptySubmission
+            title={ t( 'noSubmissionsYet' ) }
+            imageWidth={ 140 }
+            description={ t( 'noSubmissionsYetDescription' ) }
+          />
+        ) }
       </TabsPanel>
     );
   }
@@ -385,6 +403,19 @@ function GigSubmissionsTab( { submissions, isLoading, error, canSubmit, onOpenSu
             layout="media-overlay"
           />
         ) ) }
+        { shouldShowAddSubmissionButton && (
+          <Button
+            variant="outline"
+            size="icon-lg"
+            className="border-dashed border-px border-muted-foreground/20 bg-transparent hover:bg-muted/40 rounded-full mx-auto hover:shadow-lg cursor-pointer"
+            onClick={ onOpenSubmission }
+          >
+            <Plus className="size-5 text-muted-foreground" strokeWidth={ 1 } />
+            <span className="sr-only">
+              { creatorInvitationActionsT( 'createSubmission' ) }
+            </span>
+          </Button>
+        ) }
       </div>
     </TabsPanel>
   );
@@ -469,13 +500,13 @@ function GigFooter( {
               { isResponding ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />{ invitationDialogsT( 'accepting' ) }</> : invitationActionsT( 'accept' ) }
             </Button>
           </div>
-        ) : ( invitationId && invitationStatus === 'accepted' ) || isParticipating ? (
+        ) : isParticipating ? (
           submissionsCount === 0 && (
             <Button className="w-full" onClick={ onOpenSubmission }>
               { invitationActionsT( 'createSubmission' ) }
             </Button>
           )
-        ) : invitationId && invitationStatus === 'declined' ? null : hasAppliedPending ? (
+        ) : hasAppliedPending ? (
           <Button className="w-full" disabled>
             { commonT( 'applicationPending' ) }
           </Button>
@@ -508,7 +539,7 @@ function GigFooter( {
       </RoleGuard>
 
       <RoleGuard allowedRoles={ [ 'creator' ] }>
-        { invitationId ? (
+        { invitationId && invitationStatus !== 'pending' ? (
           <InvitationActionMenu
             invitation={ {
               id: invitationId,
@@ -556,31 +587,31 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
 
   // Fetch invitation and participation data for creator role when not provided via props
   const needsFetch = isCreator && !invitationId;
-  const { data: gigInvitationData, isLoading: isInvitationLoading } = useGigInvitations(
-    gig?.id || '',
-    { enabled: needsFetch && open && !!gig?.id }
-  );
-  const { data: creatorGigsData, isLoading: isCreatorGigsLoading } = useCreatorGigs(
-    { campaignId: gig?.campaign?.id },
-    { enabled: needsFetch && open && !!gig?.campaign?.id }
+  const { data: creatorInvitationsData, isLoading: isInvitationLoading } = useCreatorInvitations(
+    { enabled: needsFetch && open }
   );
   const { data: creatorApplicationsData, isLoading: isApplicationsLoading } = useCreatorApplications(
     { enabled: needsFetch && open }
   );
 
-  // Derive effective invitation state — props take priority (invitations view already has the data)
-  const effectiveInvitationId = invitationId ?? gigInvitationData?.data?.id;
-  const effectiveInvitationStatus = invitationStatus ?? gigInvitationData?.data?.status;
+  // Find the creator's invitation for this specific gig
+  const creatorInvitations = ( creatorInvitationsData?.data || [] ) as ModelsGigInvitationResponse[];
+  const gigInvitation = creatorInvitations.find( ( inv ) => inv.gig_id === gig?.id );
 
-  // Check if creator has a pending application for this gig (applied but not yet accepted)
+  // Derive effective invitation state — props take priority (invitations view already has the data)
+  const effectiveInvitationId = invitationId ?? gigInvitation?.id;
+  const effectiveInvitationStatus = invitationStatus ?? gigInvitation?.status;
+
+  // Application state for this gig
   const gigApplication = creatorApplicationsData?.data?.find( ( a ) => a.gig_id === gig?.id );
+  const hasAcceptedApplication = gigApplication?.status === 'accepted';
   const hasAppliedPending = !effectiveInvitationId && gigApplication?.status === 'pending';
 
-  // Only considered "participating" if gig is in creator's list AND application is accepted (not pending)
-  const isParticipating = !effectiveInvitationId && !hasAppliedPending && ( creatorGigsData?.data?.some( ( g ) => g.id === gig?.id ) ?? false );
+  // Creator is participating after accepted invitation or accepted application
+  const isParticipating = hasAcceptedApplication || effectiveInvitationStatus === 'accepted';
 
   // Wait for all creator-specific queries before showing action buttons to avoid flashing
-  const isFooterLoading = isCreator && ( isSubmissionsLoading || ( needsFetch && ( isInvitationLoading || isCreatorGigsLoading || isApplicationsLoading ) ) );
+  const isFooterLoading = isCreator && ( isSubmissionsLoading || ( needsFetch && ( isInvitationLoading || isApplicationsLoading ) ) );
 
   const formattedCompensation = useFormatCurrency( gig?.compensation?.value ?? 0, gig?.compensation?.currency || 'EUR' );
   const formattedGigCost = useFormatCurrency( gig?.gig_cost?.value ?? 0, gig?.gig_cost?.currency || 'EUR' );
@@ -597,6 +628,15 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
   const videoItems = React.useMemo<ModelsContentMedia[]>( () => campaign?.sample_videos ?? [], [ campaign ] );
   const hasAssets = React.useMemo( () => imageItems.length > 0 || documentItems.length > 0 || videoItems.length > 0, [ imageItems, documentItems, videoItems ] );
   const submissions = React.useMemo( () => submissionsResponse?.data ?? [], [ submissionsResponse ] );
+  const shouldShowAddSubmissionButton = React.useMemo(
+    () => (
+      isCreator
+      && gig?.enforce_single_creator_submission === true
+      && typeof gig?.number_of_videos === 'number'
+      && submissions.length !== gig.number_of_videos
+    ),
+    [ isCreator, gig?.enforce_single_creator_submission, gig?.number_of_videos, submissions.length ]
+  );
   const coverImage = React.useMemo( () =>
     campaign?.product_image?.asset !== '' ? campaign?.product_image?.asset : campaign?.campaign_images?.[ 0 ]?.asset,
     [ campaign ]
@@ -669,7 +709,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
               <TabsTab value="details" className="text-xs font-normal">{ t( 'details' ) }</TabsTab>
               { campaign && <TabsTab value="campaign" className="text-xs font-normal">{ campaignT( 'title' ) }</TabsTab> }
               <TabsTab value="submissions" className="text-xs font-normal">
-                <RoleGuard allowedRoles={ [ 'creator' ] }>{ campaignActionsT( 'submissions' ) }</RoleGuard>
+                <RoleGuard allowedRoles={ [ 'creator' ] }>My Submissions</RoleGuard>
                 <RoleGuard excludedRoles={ [ 'creator' ] }>{ campaignActionsT( 'submissions' ) }</RoleGuard>
               </TabsTab>
             </AnimTabsList>
@@ -700,6 +740,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
                 isLoading={ isSubmissionsLoading }
                 error={ submissionsError }
                 canSubmit={ ( !!effectiveInvitationId && effectiveInvitationStatus === 'accepted' ) || isParticipating }
+                showAddSubmissionButton={ shouldShowAddSubmissionButton }
                 onOpenSubmission={ () => setSubmissionSheetOpen( true ) }
               />
             </div>

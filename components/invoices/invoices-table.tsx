@@ -53,7 +53,8 @@ export interface InvoicesTableProps {
 export function InvoicesTable( { data, isLoading = false, isAdmin = false, error = null, refetch }: InvoicesTableProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const showLoading = useDelayedLoading( isLoading, 250 );
-  const { view, setView } = usePersistedViewMode( 'invoices', 'table' );
+  const { view: persistedView, setView } = usePersistedViewMode( 'invoices', 'table' );
+  const view = isAdmin ? 'table' : persistedView;
   const { pagination, setPagination } = usePersistedPagination( 'invoices' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
@@ -113,10 +114,11 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false, error
 
   return (
     <AnimatePresence>
-      { showLoading && <DataTableSkeleton /> }
-      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
+      { showLoading && <DataTableSkeleton key="invoices-loading" /> }
+      { error && <AdminNetworkErrorState key="invoices-error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
       { !isLoading && !error && (
         <motion.div
+          key="invoices-content"
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
@@ -135,6 +137,7 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false, error
               statuses={ statuses }
               view={ view }
               setView={ setView }
+              isAdmin={ isAdmin }
             />
             <InvoicesView table={ table } view={ view } isAdmin={ isAdmin } />
           </div>
