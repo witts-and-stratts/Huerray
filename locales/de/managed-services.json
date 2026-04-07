@@ -1,48 +1,48 @@
 {
   "hero": {
-    "title": "Dein UGC. Komplett verwaltet.",
-    "subtitle": "Von der Strategie und dem Briefing bis hin zur Creator-Auswahl und Endlieferung — das Huerray Managed Service Team übernimmt jeden Schritt, damit du dich auf deine Marke konzentrieren kannst.",
-    "buttonText": "Kostenlosen Anruf buchen"
+    "title": "Ihr UGC. Vollständig verwaltet.",
+    "subtitle": "Von der Strategie und dem Briefing über die Suche nach Kreativen bis hin zur endgültigen Lieferung - unser Managed-Service-Team kümmert sich um jeden Schritt, damit Sie sich auf das Wachstum Ihrer Marke konzentrieren können.",
+    "buttonText": "Kostenloses Gespräch buchen"
   },
   "features": {
-    "title": "Was wir dir abnehmen",
+    "title": "Was wir Ihnen abnehmen",
     "items": [
       {
         "title": "Wir kümmern uns um alles",
-        "description": "Von der Konzeptentwicklung und dem Briefing über die Creator-Auswahl bis zur finalen Videoproduktion — wir übernehmen alles. Weniger Abstimmungsaufwand, mehr Content, der wirklich performt."
+        "description": "Von der Entwicklung des Konzepts und der Erstellung des Briefings über die Suche nach Kreativen bis hin zur Bearbeitung der endgültigen Beiträge - wir nehmen Ihnen alles ab. Weniger Hin und Her, mehr Inhalte, die tatsächlich funktionieren."
       },
       {
-        "title": "Präzises Matching",
-        "description": "Wir kennen unser Creator-Netzwerk in- und auswendig — wer in deiner Nische geliefert hat, wer zuverlässig ist und wer dein Produkt mit der nötigen Sorgfalt behandelt. Falls der ideale Creator noch nicht dabei ist, finden wir ihn."
+        "title": "Abgestimmt mit Präzision",
+        "description": "Wir kennen unser Kreativnetzwerk in- und auswendig - wer hat in Ihrer Nische geliefert, wer ist zuverlässig, und wer wird Ihr Produkt mit der Sorgfalt behandeln, die es verdient. Sie brauchen jemanden außerhalb unseres Netzwerks? Wir werden sie rekrutieren."
       },
       {
-        "title": "Basierend auf echten Kampagnen",
-        "description": "Hunderte von Marken-Kooperationen haben uns ein scharfes Gespür dafür gegeben, was bei UGC funktioniert — und was nicht. Jede Kampagne, die wir verwalten, profitiert von diesem Erfahrungsschatz ab dem ersten Tag."
+        "title": "Informiert durch echte Kampagnen",
+        "description": "Hunderte von Markenkooperationen haben uns ein feines Gespür dafür gegeben, was bei UGC funktioniert - und was nicht. Jede von uns betreute Kampagne ist von dieser Erfahrung geprägt, sodass Sie vom ersten Tag an davon profitieren."
       }
     ]
   },
   "cta": {
-    "text": "Bereit, es abzugeben? Lass uns deine Strategie aufbauen.",
-    "buttonText": "Kostenlosen Anruf buchen"
+    "text": "Bereit zur Übergabe? Lassen Sie uns Ihre Strategie entwickeln.",
+    "buttonText": "Kostenloses Gespräch buchen"
   },
   "faqs": {
-    "title": "Häufige Fragen",
+    "title": "Allgemeine Fragen",
     "items": [
       {
-        "question": "Kann ich bei der Creator-Auswahl mitentscheiden?",
-        "answer": "Natürlich. Wir übernehmen die Vorauswahl und erstellen eine Shortlist der besten Kandidaten für dein Briefing. Die endgültige Entscheidung liegt immer bei dir."
+        "question": "Kann ich bei der Auswahl des Erstellers mitreden?",
+        "answer": "Ja, natürlich. Wir nehmen Ihnen die Arbeit ab, indem wir unser Netzwerk prüfen und die besten Kandidaten für Ihren Auftrag in die engere Auswahl nehmen. Aber die endgültige Entscheidung liegt immer bei Ihnen."
       },
       {
-        "question": "Was, wenn ich Kampagnen später selbst verwalten möchte?",
-        "answer": "Kein Problem. Huerray's Plattform ist auf volle Transparenz ausgelegt, sodass du jeden Schritt in Echtzeit verfolgen kannst. Wann immer du bereit bist, selbst das Steuer zu übernehmen, stehen dir die Tools zur Verfügung."
+        "question": "Was ist, wenn ich die Kampagnen später selbst verwalten möchte?",
+        "answer": "Das ist völlig in Ordnung. Die Plattform von Huerray ist auf vollständige Transparenz ausgelegt, sodass Sie jeden Schritt in Echtzeit verfolgen können. Wann immer Sie bereit sind, das Steuer in die Hand zu nehmen, stehen die Werkzeuge für Sie bereit."
       },
       {
         "question": "Was kostet der Managed Service?",
-        "answer": "Das hängt vom Umfang ab — wie viele Videos du benötigst, wie viele Briefings wir erstellen und wie viele Creator beteiligt sind. Der Preis beginnt typischerweise bei 750 €. Buche einen Anruf und wir erstellen ein individuelles Angebot."
+        "answer": "Das hängt vom Umfang ab - wie viele Videos Sie benötigen, wie viele Briefings wir schreiben und wie viele Kreative beteiligt sind. Die Preise beginnen in der Regel bei 750 €. Vereinbaren Sie einen Termin und wir erstellen ein maßgeschneidertes Angebot."
       },
       {
-        "question": "Wie unterscheidet sich das von einer UGC-Agentur?",
-        "answer": "Wir haben keine langfristigen Retainer oder starre Verträge. Jedes Engagement ist projektbasiert, und unsere Plattform ermöglicht es uns, schneller und transparenter zu arbeiten als eine traditionelle Agentur. Du bekommst Agentur-Qualität mit Plattform-Flexibilität."
+        "question": "Wie unterscheidet sich dies von der Zusammenarbeit mit einer UGC-Agentur?",
+        "answer": "Wir arbeiten nicht mit langfristigen Festanstellungen oder starren Verträgen. Jeder Auftrag ist projektbezogen, und unsere Plattform bedeutet, dass wir schneller und transparenter arbeiten als eine traditionelle Agentur. Sie erhalten eine Ausführung auf Agenturniveau mit Flexibilität auf Plattformniveau."
       }
     ]
   }

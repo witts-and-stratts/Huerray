@@ -104,7 +104,7 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
   // ],
   navSecondary: [
     // { title: withFallback( t, "brand.settings", "Settings" ), url: "/brand/settings", icon: Settings01Icon },
-    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-help-sheet' ) ) },
+    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "/brand/help", icon: HelpCircleIcon },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );
@@ -164,7 +164,7 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
   ],
   navSecondary: [
     // { title: withFallback( t, "creator.settings", "Settings" ), url: "/creator/settings", icon: Settings01Icon },
-    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-help-sheet' ) ) },
+    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "/creator/help", icon: HelpCircleIcon },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );
@@ -245,7 +245,7 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
   ],
   navSecondary: [
     // { title: withFallback( t, "admin.accountSettings", "Account Settings" ), url: "/admin/settings", icon: SettingsIcon },
-    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "#", icon: HelpCircleIcon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-help-sheet' ) ) },
+    { title: withFallback( t, "common.getHelp", "Get Help" ), url: "/admin/help", icon: HelpCircleIcon },
     { title: withFallback( t, "common.search", "Search" ), url: "#", icon: Search01Icon, onClick: () => document.dispatchEvent( new CustomEvent( 'open-global-search' ) ) },
   ],
 } );

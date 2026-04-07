@@ -240,3 +240,7 @@
 .about-cta__title {
   @apply text-h2 font-heading leading-tight;
 }
+
+.about-cta__subtitle {
+  @apply text-h4 font-bold text-bright-fuchsia px-10 tracking-tight;
+}

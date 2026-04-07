@@ -18,9 +18,9 @@
     },
     "priorities": {
       "low": "Faible",
-      "normal": "Normale",
-      "high": "Élevée",
-      "urgent": "Urgente"
+      "normal": "Normal",
+      "high": "Haut",
+      "urgent": "Urgent"
     },
     "toolbar": {
       "searchPlaceholder": "Recherche de cas...",

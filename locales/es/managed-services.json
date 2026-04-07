@@ -1,48 +1,48 @@
 {
   "hero": {
-    "title": "Tu UGC. Totalmente gestionado.",
-    "subtitle": "Desde la estrategia y el briefing hasta la selección de creadores y la entrega final — el equipo de Managed Service de Huerray se encarga de cada paso para que puedas centrarte en tu marca.",
-    "buttonText": "Reservar una llamada gratuita"
+    "title": "Su UGC. Totalmente gestionado.",
+    "subtitle": "Desde la estrategia y el briefing hasta la contratación de creadores y la entrega final, nuestro equipo de servicios gestionados se encarga de cada paso para que usted pueda centrarse en hacer crecer su marca.",
+    "buttonText": "Concierte una llamada gratuita"
   },
   "features": {
-    "title": "Lo que quitamos de tu plato",
+    "title": "Lo que le quitamos del plato",
     "items": [
       {
         "title": "Nos encargamos de todo",
-        "description": "Desde el concepto y el briefing hasta la selección de creadores y la edición final — lo asumimos todo. Menos idas y venidas, más contenido que realmente funciona."
+        "description": "Desde el desarrollo del concepto y la redacción del briefing hasta la búsqueda de creadores y la edición de los cortes finales, nosotros nos encargamos de todo. Menos idas y venidas y más contenidos que realmente funcionan."
       },
       {
-        "title": "El match perfecto, siempre",
-        "description": "Conocemos nuestra red de creadores a fondo — quién ha trabajado en tu sector, quién entrega con consistencia y quién va a tratar tu producto con el cuidado que merece. ¿Necesitas a alguien fuera de nuestra red? Lo encontramos."
+        "title": "Emparejados con precisión",
+        "description": "Conocemos a la perfección nuestra red de creadores: quién ha trabajado en su sector, quién es de confianza y quién tratará su producto con el cuidado que se merece. ¿Necesita a alguien fuera de nuestra red? Nosotros lo contratamos."
       },
       {
-        "title": "Respaldado por campañas reales",
-        "description": "Cientos de colaboraciones con marcas nos han dado un instinto afinado sobre lo que funciona en UGC — y lo que no. Cada campaña que gestionamos se beneficia de esa experiencia desde el primer día."
+        "title": "Basado en campañas reales",
+        "description": "Cientos de colaboraciones con marcas nos han dado un agudo instinto para saber lo que funciona en UGC, y lo que no. Todas las campañas que gestionamos se basan en esa experiencia, para que te beneficies desde el primer día."
       }
     ]
   },
   "cta": {
-    "text": "¿Listo para delegarlo? Construyamos tu estrategia.",
-    "buttonText": "Reservar una llamada gratuita"
+    "text": "¿Listo para entregarlo? Construyamos su estrategia.",
+    "buttonText": "Concierte una llamada gratuita"
   },
   "faqs": {
     "title": "Preguntas frecuentes",
     "items": [
       {
-        "question": "¿Puedo participar en la selección de creadores?",
-        "answer": "Por supuesto. Nosotros hacemos el trabajo pesado — filtrando nuestra red y elaborando una lista de los mejores candidatos para tu brief. Pero la decisión final siempre es tuya."
+        "question": "¿Puedo opinar sobre la selección del creador?",
+        "answer": "Por supuesto. Nosotros nos encargamos del trabajo pesado: examinamos nuestra red y preseleccionamos a los mejores candidatos para su proyecto. Pero la decisión final es siempre suya."
       },
       {
-        "question": "¿Y si quiero gestionar las campañas yo mismo más adelante?",
-        "answer": "Sin problema. La plataforma de Huerray está diseñada para la transparencia total, por lo que puedes seguir cada paso en tiempo real. Cuando estés listo para tomar las riendas, las herramientas te esperan."
+        "question": "¿Y si más adelante quiero gestionar yo mismo las campañas?",
+        "answer": "No pasa nada. La plataforma de Huerray está diseñada para ofrecer una transparencia total, de modo que puedas seguir cada paso en tiempo real. Siempre que estés listo para tomar el timón, las herramientas están ahí esperándote."
       },
       {
-        "question": "¿Cuánto cuesta el Managed Service?",
-        "answer": "Depende del alcance — cuántos vídeos necesitas, cuántos briefings redactamos y cuántos creadores están involucrados. El precio típicamente comienza en 750 €. Reserva una llamada y prepararemos un presupuesto a medida."
+        "question": "¿Cuánto cuesta el Servicio Gestionado?",
+        "answer": "Depende del alcance: cuántos vídeos necesita, cuántos informes redactamos y cuántos creadores participan. Los precios suelen empezar en 750 euros. Llámenos y le prepararemos un presupuesto a medida."
       },
       {
-        "question": "¿En qué se diferencia de trabajar con una agencia de UGC?",
-        "answer": "No hacemos retainers a largo plazo ni contratos rígidos. Cada proyecto se define individualmente y nuestra plataforma nos permite operar con más rapidez y transparencia que una agencia tradicional."
+        "question": "¿En qué se diferencia esto de trabajar con una agencia de CGU?",
+        "answer": "No hacemos retenciones a largo plazo ni contratos rígidos. Cada encargo se basa en un proyecto, y nuestra plataforma nos permite operar con más rapidez y transparencia que una agencia tradicional. Obtendrá una ejecución propia de una agencia con la flexibilidad propia de una plataforma."
       }
     ]
   }

@@ -12,14 +12,12 @@ export function AboutTeam() {
     {
       name: t( 'members.0.name' ),
       bio: t( 'members.0.bio' ),
+      image: '/images/team/adedapo.jpg'
     },
     {
       name: t( 'members.1.name' ),
       bio: t( 'members.1.bio' ),
-    },
-    {
-      name: t( 'members.2.name' ),
-      bio: t( 'members.2.bio' ),
+      image: '/images/team/norina.jpg'
     },
   ];
 
@@ -39,7 +37,7 @@ export function AboutTeam() {
         { teamMembers.map( ( member, index ) => (
           <div key={ index } className={ cn( 'about-team__member-card' ) }>
             <Image
-              src={ `/images/about/team/${ index + 1 }.png` }
+              src={ member.image }
               alt={ member.name }
               width={ 300 }
               height={ 300 }

@@ -9,7 +9,7 @@
 }
 
 .creators-cta__subtitle {
-  @apply text-h4 font-bold text-bright-fuchsia;
+  @apply text-h4 font-bold text-bright-fuchsia tracking-tight;
 }
 
 .creators-cta__title {

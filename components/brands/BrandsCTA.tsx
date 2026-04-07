@@ -8,7 +8,7 @@ export function BrandsCTA() {
   const t = useTranslations( 'brands.cta' );
 
   return (
-    <section className='creators-cta bg-orange text-white rounded-[40px]'>
+    <section className='creators-cta bg-orange text-white rounded-[40px] px-10'>
       <div className='creators-cta__container'>
         <h2 className='text-white! creators-cta__subtitle'>
           { t( 'subtitle' ) }
