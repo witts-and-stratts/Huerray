@@ -9,7 +9,7 @@
     "submitted": "Soumis",
     "gigStatus": "Statut de Gig :",
     "approveSubmission": "Approuver la soumission",
-    "returnSubmission": "Renvoi de la demande",
+    "returnSubmission": "Demande de retour",
     "acceptSubmission": "Accepter la soumission",
     "rejectSubmission": "Rejeter la demande",
     "returnToCreator": "Retourner la soumission au créateur",
@@ -39,7 +39,7 @@
     "commentPlaceholder": "Ajouter une note de mise à jour de l'état"
   },
   "gigSelection": {
-    "title": "Sélectionner un événement",
+    "title": "Sélectionner un concert",
     "description": "Choisissez un concert auquel inviter les créateurs.",
     "noGigs": "Pas encore de concerts",
     "noGigsDesc": "Cette campagne n'a pas encore de concerts. Créez d'abord un concert avant d'inviter des créateurs."
@@ -48,7 +48,7 @@
     "title": "Edit Gig",
     "description": "Modifiez les détails de votre concert ci-dessous.",
     "campaign": "Campagne",
-    "updateSuccess": "Gig mis à jour avec succès",
+    "updateSuccess": "Mise à jour réussie",
     "updateSuccessDesc": "Votre concert a été mis à jour avec succès",
     "updateError": "Échec de la mise à jour de gig"
   }

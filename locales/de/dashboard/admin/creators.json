@@ -1,7 +1,7 @@
 {
   "creatorsPage": {
-    "title": "Schöpfer",
-    "description": "Verwalten von Plattform-Erstellern"
+    "title": "Creators",
+    "description": "Verwalten der Creators der Plattform"
   },
   "creatorDetails": {
     "tabOverview": "Übersicht",
@@ -10,7 +10,7 @@
     "tabUser": "Benutzer",
     "contactPersonal": "Kontakt und persönliche Informationen",
     "systemDetails": "System-Details",
-    "creatorId": "Schöpfer-ID",
+    "creatorId": "Creators ID",
     "userId": "Benutzer-ID",
     "applicationVideo": "Bewerbungsvideo",
     "bankAccount": "Bankkonto",
@@ -30,20 +30,20 @@
     "updatedLabel": "Aktualisiert"
   },
   "creatorStatus": {
-    "title": "Erstellerstatus aktualisieren",
-    "description": "Überprüfen Sie das Profil des Erstellers und aktualisieren Sie seinen Status.",
+    "title": "Creator-Status aktualisieren",
+    "description": "Überprüfen Sie das Profil des Creators und aktualisieren Sie seinen Status.",
     "statusLabel": "Status",
     "approve": "Genehmigen Sie",
     "reject": "Ablehnen",
     "totalRejection": "Ablehnung insgesamt",
-    "successToast": "Erstellerstatus erfolgreich aktualisiert",
-    "errorToast": "Aktualisierung des Erstellerstatus fehlgeschlagen",
-    "missingId": "Die Ersteller-ID fehlt",
-    "confirmApproveTitle": "Erstellerprofil genehmigen?",
+    "successToast": "Creators Status erfolgreich aktualisiert",
+    "errorToast": "Aktualisierung des Creator-Status fehlgeschlagen",
+    "missingId": "Creator ID fehlt",
+    "confirmApproveTitle": "Creator-Profil genehmigen?",
     "confirmApproveDesc": "Das Profil von {name} wird genehmigt und die Person wird benachrichtigt.",
-    "confirmRejectTitle": "Erstellerprofil ablehnen?",
+    "confirmRejectTitle": "Creator-Profil ablehnen?",
     "confirmRejectDesc": "Das Profil von {name} wird abgelehnt und die Person wird benachrichtigt.",
-    "confirmReturnTitle": "Erstellerprofil zurückgeben?",
+    "confirmReturnTitle": "Creator-Profil zurückgeben?",
     "confirmReturnDesc": "Das Profil von {name} wird zurückgegeben und die Person wird benachrichtigt.",
     "commentLabel": "Kommentar",
     "commentPlaceholder": "Einen Kommentar hinzufügen",
@@ -55,26 +55,26 @@
     "returnedToast": "{name} zurückgegeben",
     "idCopied": "ID in die Zwischenablage kopiert",
     "copyId": "ID kopieren",
-    "thisCreator": "Dieser Schöpfer",
-    "deleteCreator": "Ersteller löschen",
+    "thisCreator": "Dieser Creator",
+    "deleteCreator": "Creator löschen",
     "return": "Rückkehr",
     "makeAiCreator": "Make AI Creator",
-    "makeHumanCreator": "Menschenschöpfer machen",
+    "makeHumanCreator": "Human Creator machen",
     "confirmMakeAiTitle": "AI Creator erstellen?",
-    "confirmMakeAiDesc": "{name} wird als KI-generierter Inhaltsersteller markiert.",
-    "confirmMakeHumanTitle": "Menschenschöpfer machen?",
-    "confirmMakeHumanDesc": "{name} werden als von Menschen erstellte Inhalte gekennzeichnet.",
+    "confirmMakeAiDesc": "{name} werden als AI-generierte Creators gekennzeichnet.",
+    "confirmMakeHumanTitle": "Menschen zu Creators machen?",
+    "confirmMakeHumanDesc": "{name} werden als von Menschen erstellte Creators gekennzeichnet.",
     "confirmFirstNameLabel": "Geben Sie zur Bestätigung \"{name}\" ein.",
     "confirmFirstNamePlaceholder": "Vornamen eingeben",
     "updatingProfileType": "Aktualisieren...",
-    "madeAiToast": "{name} ist jetzt ein KI-Ersteller",
-    "madeHumanToast": "{name} ist jetzt ein menschlicher Schöpfer"
+    "madeAiToast": "{name} ist jetzt ein AI Creator",
+    "madeHumanToast": "{name} ist jetzt ein menschlicher Creator"
   },
   "creatorDashboard": {
-    "title": "Schöpfer Dashboard",
-    "description": "Überblick über die Leistung des Erstellers und Details",
-    "failedLoad": "Erstellerprofil konnte nicht geladen werden",
-    "creatorNotFound": "Ersteller nicht gefunden",
+    "title": "Creators Dashboard",
+    "description": "Übersicht über die Leistung der Creators und Details",
+    "failedLoad": "Creator-Profil konnte nicht geladen werden",
+    "creatorNotFound": "Creator nicht gefunden",
     "metrics": {
       "totalEarned": "Verdiente Summe",
       "avgPerGig": "Durchschnittswert pro Gig",
@@ -107,7 +107,7 @@
   "creatorsColumns": {},
   "creatorsTableToolbar": {},
   "creatorsTableView": {
-    "noCreatorsFound": "Keine Schöpfer gefunden."
+    "noCreatorsFound": "Keine Creators gefunden."
   },
   "creatorsTable": {},
   "creatorsView": {},
@@ -123,7 +123,7 @@
   "brandCreatorDetailsSheet": {},
   "creatorDetailsShared": {},
   "creatorSheetHeader": {
-    "detailedInformationAboutCreator": "Detaillierte Informationen über den Ersteller",
+    "detailedInformationAboutCreator": "Detaillierte Informationen über Creator",
     "yo": "Jahr/Jahr"
   }
 }

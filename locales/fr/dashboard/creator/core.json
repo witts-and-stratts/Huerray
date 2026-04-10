@@ -22,7 +22,7 @@
     "endsOn": "Fin {date}",
     "noActiveGigs": "Aucun contrat actif pour l'instant.",
     "noInvitations": "Il n'y a pas encore d'invitations.",
-    "noEarnings": "Pas encore de gains. Complétez les missions pour commencer à gagner de l'argent !",
+    "noEarnings": "Pas encore de gains. Complétez les contrats pour commencer à gagner de l'argent !",
     "na": "N/A",
     "invitedCreator": "Créateur invité",
     "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",

@@ -1,5 +1,5 @@
 {
-  "title": "Schöpfer-FAQ",
+  "title": "Creators' FAQ",
   "subtitle": "Hier finden Sie einige der am häufigsten gestellten Fragen.",
   "sections": [
     {
@@ -7,7 +7,7 @@
       "faqs": [
         {
           "question": "Was ist Huerray?",
-          "answer": "Huerray ist eine UGC-Plattform, die Marken mit verschiedenen Kreativen verbindet und sich auf authentisches Storytelling, kulturelle Relevanz und sinnvolle Darstellung konzentriert, insbesondere für People of Color und unterrepräsentierte Stimmen in der DACH-Region."
+          "answer": "Huerray ist eine UGC-Plattform, die Marken mit diversen Creators verbindet und sich auf authentisches Storytelling, kulturelle Relevanz und sinnvolle Darstellung konzentriert, insbesondere für People of Color und unterrepräsentierte Stimmen in der DACH-Region."
         },
         {
           "question": "Muss ich die Inhalte auf meinen eigenen Social-Media-Kanälen veröffentlichen?",
@@ -20,11 +20,11 @@
       "faqs": [
         {
           "question": "Wie kann ich mich für Kampagnen bewerben?",
-          "answer": "Füllen Sie Ihr Erstellerprofil aus und durchsuchen Sie die verfügbaren Kampagnen, die Ihrem Stil entsprechen. Bewerben Sie sich direkt, wenn Sie interessiert sind. Die Marke prüft die Bewerbungen und wählt die Kreativen aus. Sobald Sie den Auftrag angenommen haben, beginnt die Produktion."
+          "answer": "Füllen Sie Ihr Creator-Profil aus und durchsuchen Sie die verfügbaren Kampagnen, die Ihrem Stil entsprechen. Bewerben Sie sich direkt, wenn Sie interessiert sind. Die Marke prüft die Bewerbungen und wählt die Creators aus. Sobald Sie den Auftrag angenommen haben, beginnt die Produktion."
         },
         {
           "question": "Was passiert, nachdem ich ausgewählt wurde?",
-          "answer": "Sie erhalten ein ausführliches Briefing. Bei Bedarf schickt der Kunde Produktionsmaterial. Anschließend erstellen Sie den Inhalt und laden ihn über die Huerray-Plattform hoch."
+          "answer": "Sie erhalten ein ausführliches Briefing. Bei Bedarf schickt der Kunde Produktionsmaterial. Sie erstellen dann die Inhalte und laden sie über die Huerray-Plattform hoch."
         }
       ]
     },
@@ -45,7 +45,7 @@
         },
         {
           "question": "Kann ich das in Teilzeit machen?",
-          "answer": "Ja. Viele Kreative arbeiten mit Huerray neben ihren Jobs oder Studien. Ihr Arbeitspensum hängt von Ihrer Verfügbarkeit und der Effizienz Ihrer Arbeitsabläufe ab."
+          "answer": "Ja. Viele Creators arbeiten mit Huerray neben ihrem Job oder Studium. Ihr Arbeitspensum hängt von Ihrer Verfügbarkeit und der Effizienz Ihrer Arbeitsabläufe ab."
         },
         {
           "question": "Brauche ich eine professionelle Ausrüstung?",
@@ -109,7 +109,7 @@
           "answer": "Nein. Direkte Zusammenarbeit außerhalb von Huerray ist für 3 Monate nach Abschluss der Kampagne verboten. Zuwiderhandlungen können zur Sperrung des Kontos oder zu Strafen führen."
         },
         {
-          "question": "Was sind meine Pflichten als Schöpfer?",
+          "question": "Was sind meine Pflichten als Creator?",
           "answer": "Sie müssen sicherstellen, dass alle Inhalte originell sind, keine Rechte Dritter verletzen, mit deren Zustimmung sichtbar sind, kein schädliches oder illegales Material enthalten und vollständig mit den Richtlinien der Kampagne übereinstimmen."
         }
       ]
@@ -134,7 +134,7 @@
     }
   ],
   "seo": {
-    "title": "Schöpfer-FAQ",
-    "description": "Hier finden Sie Antworten auf häufig gestellte Fragen zu den Themen Schöpfer werden, Zahlungen und Kampagnen auf Huerray."
+    "title": "Creators' FAQ",
+    "description": "Hier finden Sie Antworten auf häufig gestellte Fragen zu den Themen Creator werden, Zahlungen und Kampagnen auf Huerray."
   }
 }

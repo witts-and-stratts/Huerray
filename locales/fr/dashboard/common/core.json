@@ -25,7 +25,7 @@
     "pressEnter": "Appuyez sur la touche Entrée pour effectuer une recherche",
     "navigate": "naviguer",
     "select": "sélectionner",
-    "select_all": "Sélectionner tout",
+    "select_all": "Tout sélectionner",
     "close": "fermer",
     "after": "Après",
     "before": "Avant",
@@ -81,7 +81,7 @@
   "support": "Soutien",
   "uploadToPortfolio": "Télécharger vers le portefeuille",
   "browseGigs": "Parcourir les offres d'emploi",
-  "portfolio": "Le portefeuille",
+  "portfolio": "Portefeuille",
   "analytics": "Analyse",
   "earnings": "Les revenus"
 }

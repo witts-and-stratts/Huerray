@@ -39,8 +39,8 @@
           "description": "Erfahren Sie, wie Sie Kampagnen erstellen und die Plattform optimal nutzen können."
         },
         {
-          "title": "Schöpfer verwalten",
-          "description": "Laden Sie Ersteller ein, prüfen Sie Bewerbungen und verwalten Sie Kooperationen."
+          "title": "Creators verwalten",
+          "description": "Laden Sie Creators ein, prüfen Sie Bewerbungen und verwalten Sie Kooperationen."
         },
         {
           "title": "Rechnungen und Zahlungen",
@@ -64,7 +64,7 @@
       "admin": [
         {
           "title": "Benutzerverwaltung",
-          "description": "Verwalten Sie Marken, Urheber und Nutzer auf der gesamten Plattform."
+          "description": "Verwalten Sie Marken, Creators und Nutzer auf der gesamten Plattform."
         },
         {
           "title": "Support-Fälle",
@@ -98,8 +98,8 @@
           "a": "Navigieren Sie in der Seitenleiste zu Kampagnen und klicken Sie auf \"Neue Kampagne\", um zu beginnen."
         },
         {
-          "q": "Wie lade ich Schöpfer ein?",
-          "a": "Öffnen Sie eine Kampagne, gehen Sie auf die Registerkarte \"Auftritte\" und verwenden Sie die Einladungsaktion, um Einladungen an Ersteller zu senden."
+          "q": "Wie kann ich Creators einladen?",
+          "a": "Öffnen Sie eine Kampagne, gehen Sie auf die Registerkarte Gigs und verwenden Sie die Einladungsaktion, um Einladungen an Creators zu senden."
         },
         {
           "q": "Wie funktioniert die Rechnungsstellung?",
@@ -107,7 +107,7 @@
         },
         {
           "q": "Wie überprüfe ich Einreichungen?",
-          "a": "Öffnen Sie einen Auftritt aus Ihrer Kampagne und navigieren Sie zur Registerkarte \"Beiträge\", um den Inhalt des Erstellers zu überprüfen."
+          "a": "Öffnen Sie einen Auftritt aus Ihrer Kampagne und navigieren Sie zur Registerkarte \"Beiträge\", um den Inhalt des Creators zu überprüfen."
         },
         {
           "q": "Kann ich mehrere Kampagnen durchführen?",
@@ -121,7 +121,7 @@
         },
         {
           "q": "Wann werde ich bezahlt?",
-          "a": "Die Auszahlung erfolgt innerhalb von 14 Tagen nach Genehmigung Ihrer Inhalte durch die Marke."
+          "a": "Die Auszahlungen erfolgen innerhalb von 14 Tagen nach Genehmigung Ihrer Inhalte durch die Marke."
         },
         {
           "q": "Wie kann ich Inhalte einreichen?",

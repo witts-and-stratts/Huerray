@@ -68,7 +68,7 @@
     }
   },
   "filters": {
-    "searchCreators": "Filter-Ersteller...",
+    "searchCreators": "Creators der Filter...",
     "searchBrands": "Marken filtern...",
     "searchUsers": "Benutzer filtern...",
     "searchGigs": "Gigs filtern...",
@@ -85,7 +85,7 @@
     "clear": "Klar",
     "selectAll": "Alle auswählen",
     "joined": "Beitritt",
-    "noCreators": "Keine Schöpfer gefunden.",
+    "noCreators": "Keine Creators gefunden.",
     "noBrands": "Keine Marken gefunden.",
     "name": "Name",
     "location": "Stadt/Land",
@@ -115,7 +115,7 @@
     "issue_date": "Datum der Ausgabe",
     "issued_date": "Ausgabedatum",
     "due_date": "Fälligkeitsdatum",
-    "creator_name": "Ersteller Name",
+    "creator_name": "Creators Name",
     "total": "Insgesamt"
   },
   "dataTable": {},

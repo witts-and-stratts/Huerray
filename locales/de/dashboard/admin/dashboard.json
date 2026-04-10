@@ -7,10 +7,10 @@
       "stats": {
         "total_users": "Benutzer insgesamt",
         "total_brands": "Marken insgesamt",
-        "total_creators": "Schöpfer insgesamt",
+        "total_creators": "Total Creators",
         "new_users_today": "Neue Benutzer heute",
         "active_brands": "Aktive Marken",
-        "active_creators": "Aktive Schöpfer"
+        "active_creators": "Aktive Creators"
       }
     },
     "campaigns": {
@@ -40,11 +40,11 @@
       }
     },
     "creators": {
-      "title": "Schöpfer",
-      "description": "Übersicht über Erstellerbasis und Genehmigungsstatus",
+      "title": "Creators",
+      "description": "Creator-Basis und Übersicht über den Genehmigungsstatus",
       "tabs": {
         "stats": "Statistiken",
-        "recent": "Aktuelle Schöpfer"
+        "recent": "Neueste Creators"
       },
       "stats": {
         "total": "Insgesamt",
@@ -53,14 +53,14 @@
         "returned": "Zurückgeschickt"
       },
       "states": {
-        "loading": "Ersteller-Statistiken werden geladen...",
-        "error": "Ersteller-Statistiken können nicht geladen werden.",
-        "recentError": "Die letzten Ersteller können nicht geladen werden.",
-        "empty": "Noch keine Ersteller"
+        "loading": "Laden der Creator-Statistiken...",
+        "error": "Creator-Statistiken können nicht geladen werden.",
+        "recentError": "Die letzten Creators können nicht geladen werden.",
+        "empty": "Noch keine Creators"
       },
       "labels": {
-        "unknown": "Unbekannter Schöpfer",
-        "viewAll": "Alle Schöpfer anzeigen"
+        "unknown": "Unbekannter Creator",
+        "viewAll": "Alle Creators anzeigen"
       }
     },
     "gigs": {
@@ -78,7 +78,7 @@
       "states": {
         "loading": "Gigs laden...",
         "error": "Gigs können nicht geladen werden.",
-        "recentLoading": "Laden der letzten Auftritte...",
+        "recentLoading": "Aktuelle Auftritte laden...",
         "recentError": "Die letzten Gigs können nicht geladen werden.",
         "empty": "Keine Gigs gefunden."
       },
@@ -135,8 +135,8 @@
           "detail": "Ausstehende Überprüfungen und Qualitätskontrollen der Profile"
         },
         "reviewCreators": {
-          "label": "Überprüfung von Schöpferprofilen",
-          "detail": "Genehmigungs- und Rückgabe-Workflows für das Onboarding von Erstellern"
+          "label": "Überprüfung Creators-Profile",
+          "detail": "Genehmigungs- und Rückgabe-Workflows für das Onboarding von Creators"
         },
         "reviewCampaigns": {
           "label": "Überprüfung der Kampagnen-Pipeline",
@@ -168,7 +168,7 @@
       "queues": {
         "users": "Benutzer, die zur Genehmigung anstehen",
         "brands": "Zur Genehmigung anstehende Markenprofile",
-        "creators": "Auf Genehmigung wartende Erstellerprofile",
+        "creators": "Creators-Profile in der Genehmigungsphase",
         "campaigns": "Kampagnen, die von der Verwaltung geprüft werden",
         "submissions": "Videoeinreichungen bis zur Entscheidung"
       },
@@ -180,8 +180,8 @@
       }
     },
     "financialSnapshot": {
-      "title": "Finanzielle Momentaufnahme",
-      "description": "Monatliche Einnahmen im Vergleich zu den Auszahlungen an die Urheber",
+      "title": "Finanzieller Schnappschuss",
+      "description": "Monatliche Einnahmen versus Creator-Auszahlungen",
       "labels": {
         "revenue": "Einnahmen",
         "payouts": "Auszahlungen"
@@ -217,7 +217,7 @@
       },
       "states": {
         "error": "Die letzte Aktivität kann nicht geladen werden.",
-        "empty": "Noch keine aktuellen Aktivitäten."
+        "empty": "Keine neuen Aktivitäten."
       },
       "labels": {
         "system": "System",

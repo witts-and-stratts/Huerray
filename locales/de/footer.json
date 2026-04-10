@@ -13,13 +13,13 @@
     "creditPacks": "Kredit-Pakete",
     "managedService": "Verwalteter Dienst",
     "faqBrands": "FAQ Marken",
-    "faqCreators": "FAQ-Ersteller",
+    "faqCreators": "FAQ Creators",
     "caseStudies": "Fallstudien",
     "helpCenter": "Hilfe-Center",
     "aboutHuerray": "Über Huerray",
     "siteNotice": "Hinweis zur Website",
     "privacyPolicy": "Datenschutzbestimmungen",
-    "tcCreators": "T&C - Schöpfer",
+    "tcCreators": "T&C - Creators",
     "tcBrands": "T&C - Marken"
   },
   "signup": {
@@ -34,7 +34,7 @@
       "description": "Bitte warten Sie, während wir Ihre Anfrage bearbeiten."
     },
     "success": {
-      "title": "Sie wurden abgemeldet",
+      "title": "Sie sind abgemeldet worden",
       "description": "Sie werden keine Newsletter-E-Mails mehr von uns erhalten."
     },
     "error": {

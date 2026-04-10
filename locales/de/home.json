@@ -1,22 +1,22 @@
 {
-  "tagline": "Huerray bringt Kreative und Marken zusammen, um die perfekten Inhalte für soziale Medien, E-Commerce, Werbung und mehr zu erstellen",
+  "tagline": "Huerray bringt Creators und Marken zusammen, um die perfekten Inhalte für soziale Medien, E-Commerce, Werbung und mehr zu erstellen",
   "hero": {
     "title": "Authentische UGC-Videoinhalte, die konvertieren",
-    "subtitle": "Arbeiten Sie mit echten, geprüften Kreativen zusammen, die Videos für TikTok, Reels und Anzeigen erstellen, die das Scrollen anhalten.",
+    "subtitle": "Arbeiten Sie mit echten, geprüften Creators zusammen, die Videos für TikTok, Reels und Anzeigen erstellen, die den Bildlauf anhalten.",
     "description": "Keine Abonnements. Keine Plattformkosten.\nNur UGC, das den Umsatz steigert"
   },
   "howItWorks": {
     "step1": {
-      "title": "Finden und verbinden Sie sich mit Künstlern, die zu Ihrer Marke passen",
+      "title": "Finden und verbinden Sie sich mit Creators, die zu Ihrer Marke passen",
       "description": "Passen Sie Ihr Briefing an und stellen Sie es ein, indem Sie Details wie Länge, Format und Videobearbeitung während der Bearbeitung anpassen."
     },
     "step2": {
       "title": "Attraktive, originelle Fotos und Videos in Auftrag geben",
-      "description": "Erhalten Sie Bewerbungen von Top-Kreativen. Wählen Sie Ihre bevorzugten Kreativen nach Kriterien aus, die den Anforderungen Ihrer Markeninhalte oder Kampagnen entsprechen."
+      "description": "Erhalten Sie Bewerbungen von Top Creators. Wählen Sie Ihre bevorzugten Creators nach Kriterien aus, die den Anforderungen Ihrer Markeninhalte oder Kampagnen entsprechen."
     },
     "step3": {
       "title": "Feedback senden und empfangen",
-      "description": "Nutzen Sie die integrierte Kommunikationsfunktion, um Feedback mit Ihren Erstellern auszutauschen, ihnen Fragen zu ihren Leistungen zu stellen, bei Bedarf Anpassungen vorzunehmen oder Ihre Anforderungen zu präzisieren."
+      "description": "Nutzen Sie die integrierte Kommunikationsfunktion, um Feedback mit Ihren Creators auszutauschen, ihnen Fragen zu ihren Leistungen zu stellen, bei Bedarf Anpassungen vorzunehmen oder Ihre Anforderungen zu präzisieren."
     },
     "step4": {
       "title": "100%ige Lizenzrechte an allen erstellten Inhalten",
@@ -25,7 +25,7 @@
   },
   "contentObjectives": {
     "title": "Inhalte für jedes Ziel",
-    "subtitle": "Kreative produzieren ständig hochwertige Inhalte - von Lo-Fi bis Hi-Fi. Kreative haben ein breites Spektrum und passen ihre Produktion an Ihre Ziele an",
+    "subtitle": "Creators produzieren ständig hochwertige Inhalte - von Lo-Fi bis Hi-Fi. Creators haben eine große Bandbreite und passen ihre Produktion an Ihre Ziele an.",
     "categories": {
       "product_shots": "Produktaufnahmen",
       "testimonial_videos": "Testimonial-Videos",
@@ -36,7 +36,7 @@
     }
   },
   "creatorVideos": {
-    "title": "Abgleich mit erfahrenen Schöpfern"
+    "title": "Match mit erfahrenen Creators"
   },
   "testimonial": {
     "company": "Intelligenz Medien",
@@ -44,7 +44,7 @@
     "author": "Jorens, CEO"
   },
   "creatorsSection": {
-    "label": "Schöpfer",
+    "label": "Creators",
     "title": "Werden Sie für das bezahlt, was Sie lieben",
     "description": "Finden Sie Kollaborationen, die Sie begeistern. Arbeiten Sie mit Marken zusammen, die zu Ihrem Content-Stil passen, mit besonderer Autonomie bei jeder von Ihnen produzierten Kampagne"
   },

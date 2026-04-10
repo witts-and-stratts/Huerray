@@ -36,7 +36,7 @@
     "goToGig": "Zum Auftritt",
     "viewCampaign": "Kampagne ansehen",
     "reviewBrandProfile": "Markenprofil überprüfen",
-    "reviewCreatorProfile": "Erstellerprofil überprüfen",
+    "reviewCreatorProfile": "Überprüfung des Creators-Profils",
     "viewDetails": "Details anzeigen"
   },
   "item": {
@@ -78,7 +78,7 @@
   },
   "compose": {
     "title": "Post-Benachrichtigung",
-    "description": "Erstellen und Senden einer Benachrichtigung an einen bestimmten Benutzer.",
+    "description": "Erstellen und senden Sie eine Benachrichtigung an einen bestimmten Benutzer.",
     "submit": "Post-Benachrichtigung",
     "toast": {
       "success": "Benachrichtigung veröffentlicht",
@@ -90,7 +90,7 @@
     },
     "entityLabels": {
       "entity": "Entität",
-      "creator": "Schöpfer",
+      "creator": "Creator",
       "brand": "Marke",
       "user": "Benutzer",
       "campaign": "Kampagne",

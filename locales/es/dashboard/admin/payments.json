@@ -31,7 +31,7 @@
       "triggerButton": "Nuevo pago",
       "creatorLabel": "Creador",
       "creatorPlaceholder": "Seleccione un creador...",
-      "pendingItems": "Asuntos pendientes",
+      "pendingItems": "Pendientes",
       "deselectAll": "Deseleccionar todo",
       "selectAll": "Seleccionar todo",
       "noItems": "No hay partidas de pago pendientes para este creador.",

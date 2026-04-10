@@ -40,7 +40,7 @@
     "contactInformation": "Informations sur le contact",
     "addressInformation": "Informations sur l'adresse",
     "tellUsAboutYour": "Parlez-nous de votre entreprise pour démarrer avec Huerray.",
-    "completeYourBrandProfile": "Complétez votre profil de marque",
+    "completeYourBrandProfile": "Complétez le profil de votre marque",
     "companyName": "Nom de l'entreprise",
     "websiteUrl": "URL du site web",
     "industryCategory": "Catégorie d'industrie",
@@ -69,7 +69,7 @@
     "errorPostalCodeRequired": "Le code postal est requis"
   },
   "completeProfile": {
-    "title": "Complétez votre profil de marque",
+    "title": "Complétez le profil de votre marque",
     "description": "Configurons les détails de votre marque pour commencer à lancer des campagnes.",
     "companyAddress": "Société et adresse",
     "branding": "L'image de marque",

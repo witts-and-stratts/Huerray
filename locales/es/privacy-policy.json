@@ -163,7 +163,7 @@
         {
           "id": "email-storage",
           "title": "d) Periodo de almacenamiento",
-          "content": "Almacenamos sus datos de correo electrónico hasta que retire su consentimiento/se dé de baja de la lista de correo correspondiente y, en caso necesario, a efectos de prueba (registros de consentimiento) durante un máximo de 3 años después del último envío/retirada (art. 5, apdo. 2 del RGPD - responsabilidad; art. 7 de la UWG). Los registros de correos electrónicos transaccionales se conservan de acuerdo con los períodos de retención legales y/o los requisitos de seguridad de TI y, a continuación, se eliminan o anonimizan. Mailchimp elimina o anonimiza los datos de acuerdo con los requisitos contractuales y siguiendo nuestras instrucciones."
+          "content": "Almacenamos sus datos de correo electrónico hasta que retire su consentimiento/se dé de baja de la lista de correo correspondiente y, en caso necesario, a efectos de prueba (registros de consentimiento) durante un máximo de 3 años después del último envío/retirada (art. 5, apdo. 2 del RGPD - responsabilidad; art. 7 de la UWG). Los registros de correos electrónicos transaccionales se conservan de acuerdo con los períodos de retención legales y/o los requisitos de seguridad de TI y luego se eliminan o anonimizan. Mailchimp elimina o anonimiza los datos de acuerdo con los requisitos contractuales y siguiendo nuestras instrucciones."
         },
         {
           "id": "email-objection",
@@ -224,7 +224,7 @@
     },
     {
       "id": "publicidad sin consentimiento",
-      "title": "9. Publicidad sin consentimiento (Publicidad de clientes existentes según el § 7(3) UWG)",
+      "title": "9. Publicidad sin consentimiento (publicidad de clientes existentes en virtud del artículo 7(3) de la UWG)",
       "subsections": [
         {
           "id": "publicidad-descripción",
@@ -244,7 +244,7 @@
         {
           "id": "publicidad-almacenamiento",
           "title": "d) Duración del almacenamiento",
-          "content": "Procesamos los datos de contacto y de uso necesarios para este fin mientras exista la relación con el cliente, hasta que usted se oponga, o -en su caso- de conformidad con los principios y periodos legales de conservación descritos en la sección 14 (Periodo de conservación y criterios)."
+          "content": "Procesamos los datos de contacto y de uso necesarios para este fin mientras exista la relación con el cliente, hasta que usted se oponga, o -en su caso- de conformidad con los principios y plazos legales de conservación descritos en la sección 14 (Plazo y criterios de conservación)."
         },
         {
           "id": "publicidad-objeción",
@@ -262,7 +262,7 @@
     {
       "id": "destinatarios-tercer-país",
       "title": "11. Destinatarios, transferencias a terceros países y garantías",
-      "content": "<strong>Destinatarios:</strong><br/>Departamentos internos (Operaciones, Éxito de Creadores, Ventas, Finanzas), procesadores contratados (alojamiento/TI, correo electrónico/boletines, servicios de pago, transferencia de archivos, sistemas CRM/tickets) y -en contextos de proyectos- clientes/socios comerciales.<br/><br/><strong>Terceros países:</strong><br/>Si los datos se transfieren a terceros países (fuera del EEE), por ejemplo, a Mailchimp (EE.UU.), dichas transferencias se basan en garantías adecuadas, en particular Cláusulas Contractuales Tipo (CCT), y medidas de protección técnicas y organizativas adicionales, limitadas a lo necesario. <br /><br />Se pueden proporcionar detalles previa solicitud.",
+      "content": "<strong>Destinatarios:</strong><br/>Departamentos internos (Operaciones, Éxito de Creadores, Ventas, Finanzas), procesadores contratados (alojamiento/TI, correo electrónico/boletines, servicios de pago, transferencia de archivos, sistemas CRM/tickets) y -en contextos de proyectos- clientes/socios comerciales.<br/><br/><strong>Terceros países:</strong><br/>Si los datos se transfieren a terceros países (fuera del EEE), por ejemplo, a Mailchimp (EE.UU.), dichas transferencias se basan en garantías adecuadas, en particular Cláusulas Contractuales Tipo (CCT), y medidas técnicas y organizativas de protección adicionales, limitadas a lo necesario. <br /><br />Se pueden proporcionar detalles previa solicitud.",
       "subsections": []
     },
     {
@@ -279,7 +279,7 @@
     },
     {
       "id": "período de almacenamiento",
-      "title": "14. Período de almacenamiento y criterios",
+      "title": "14. Periodo de almacenamiento y criterios",
       "content": "Almacenamos los datos personales sólo durante el tiempo necesario para cumplir los fines respectivos o según lo exijan las obligaciones legales/contractuales (normalmente de 6 a 10 años para la documentación fiscal y comercial). Después, eliminamos o anonimizamos los datos. Los registros de consentimiento pueden conservarse hasta 3 años después de su retirada (obligación de rendir cuentas).",
       "subsections": []
     },
@@ -381,10 +381,10 @@
           "content": "Usted tiene derecho a no ser objeto de una decisión basada únicamente en un tratamiento automatizado -incluida la elaboración de perfiles- que produzca efectos jurídicos en su persona o le afecte de forma similar y significativa, excepto cuando:",
           "orderedList": [
             "es necesario para celebrar o ejecutar un contrato entre usted y nosotros;",
-            "esté autorizada por la legislación de la Unión o de los Estados miembros que establezca garantías adecuadas; o",
+            "esté autorizada por la legislación de la Unión o de los Estados miembros que prevea garantías adecuadas; o",
             "se basa en su consentimiento explícito."
           ],
-          "additionalContent": "Dichas decisiones no podrán basarse en categorías especiales de datos personales a menos que se aplique el art. 9(2)(a) o (g) GDPR se aplique y se tomen las medidas adecuadas para salvaguardar sus derechos e intereses.<br/><br/>En los casos mencionados en (1) y (3), aplicaremos las medidas adecuadas para proteger sus derechos y libertades, incluido el derecho a la intervención humana, a expresar su punto de vista y a impugnar la decisión."
+          "additionalContent": "Dichas decisiones no podrán basarse en categorías especiales de datos personales a menos que sea de aplicación el art. 9(2)(a) o (g) GDPR se aplique y se tomen las medidas adecuadas para salvaguardar sus derechos e intereses.<br/><br/>En los casos mencionados en (1) y (3), aplicaremos las medidas adecuadas para proteger sus derechos y libertades, incluido el derecho a la intervención humana, a expresar su punto de vista y a impugnar la decisión."
         },
         {
           "id": "derecho de alojamiento-denuncia",

@@ -30,7 +30,7 @@
         "loading": "Cargando estadísticas de campaña...",
         "error": "No se pueden cargar las estadísticas de la campaña.",
         "recentError": "No se pueden cargar las campañas recientes.",
-        "empty": "Todavía no hay campañas"
+        "empty": "Aún no hay campañas"
       },
       "labels": {
         "created": "Creado:",

@@ -88,7 +88,7 @@
       "gigMetrics": "Métriques Gig",
       "recentGigs": "Événements récents",
       "bio": "Biographie",
-      "portfolio": "Le portefeuille",
+      "portfolio": "Portefeuille",
       "social": "Médias sociaux",
       "video": "Vidéo d'application"
     }
@@ -98,7 +98,7 @@
   "creatorCategories": {},
   "creatorDetailsSheet": {},
   "creatorInfoBlock": {
-    "yo": "an/o",
+    "yo": "a/o",
     "preferredCategories": "Catégories préférées"
   },
   "creatorSocialLinks": {},
@@ -124,6 +124,6 @@
   "creatorDetailsShared": {},
   "creatorSheetHeader": {
     "detailedInformationAboutCreator": "Informations détaillées sur le créateur",
-    "yo": "an/o"
+    "yo": "a/o"
   }
 }

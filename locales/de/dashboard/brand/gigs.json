@@ -5,7 +5,7 @@
     "noResults": "Keine Ergebnisse.",
     "noGigsYet": "Keine verfügbaren Gigs",
     "noGigsYetDescription": "Zur Zeit sind keine Gigs für Einladungen verfügbar.",
-    "creatorRequirements": "Anforderungen an den Ersteller",
+    "creatorRequirements": "Creators Anforderungen",
     "gender": "Geschlecht",
     "male": "Männlich",
     "female": "Weiblich",
@@ -16,7 +16,7 @@
     "contentGuidelines": "Inhaltliche Leitlinien",
     "na": "K.A.",
     "selectGigTitle": "Wählen Sie einen Gig",
-    "selectGigDescription": "Wählen Sie einen Auftritt, zu dem Sie Schöpfer einladen.",
+    "selectGigDescription": "Wählen Sie einen Auftritt, zu dem Creators eingeladen werden sollen.",
     "videoCount": "{count, plural, =1 {# video} other {# videos}}",
     "duration": "Dauer: {seconds}s",
     "brandDetails": "Details zur Marke",
@@ -28,9 +28,9 @@
       "viewGig": "Ansicht Gig",
       "editGig": "Gig bearbeiten",
       "validateGig": "Gig validieren",
-      "inviteCreators": "Schöpfer einladen",
+      "inviteCreators": "Creators einladen",
       "submissions": "Einreichungen",
-      "mySubmissions": "Meine Einsendungen",
+      "mySubmissions": "Meine Einreichungen",
       "deleteGig": "Gig löschen",
       "deleteGigTitle": "Auftritt löschen?",
       "deleteGigDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Löschen",
@@ -48,6 +48,6 @@
       "validateFailed": "Gig konnte nicht validiert werden"
     },
     "details": "Einzelheiten",
-    "mySubmissions": "Meine Einsendungen"
+    "mySubmissions": "Meine Einreichungen"
   }
 }

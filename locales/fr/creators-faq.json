@@ -24,7 +24,7 @@
         },
         {
           "question": "Que se passe-t-il une fois que j'ai été sélectionné ?",
-          "answer": "Vous recevrez un briefing complet. Si nécessaire, le client envoie du matériel de production. Vous créez et téléchargez ensuite le contenu via la plateforme Huerray."
+          "answer": "Vous recevrez un briefing complet. Si nécessaire, le client envoie du matériel de production. Vous créez et téléchargez ensuite le contenu sur la plateforme Huerray."
         }
       ]
     },
@@ -106,7 +106,7 @@
       "faqs": [
         {
           "question": "Puis-je travailler avec la marque en dehors de Huerray ?",
-          "answer": "Non. La collaboration directe en dehors de Huerray est interdite pendant 3 mois après la fin de la campagne. Les infractions peuvent entraîner la suspension du compte ou des pénalités."
+          "answer": "Non. La collaboration directe en dehors de Huerray est interdite pendant 3 mois après la fin de la campagne. Toute infraction peut entraîner la suspension du compte ou des sanctions."
         },
         {
           "question": "Quelles sont mes responsabilités en tant que créateur ?",

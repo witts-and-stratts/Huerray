@@ -7,19 +7,19 @@
       "faqs": [
         {
           "question": "Was ist Huerray?",
-          "answer": "Huerray ist eine UGC-Plattform, die Marken mit verschiedenen Kreativen und KI-gestützten Storytelling-Tools verbindet. Die Plattform konzentriert sich auf authentische Inhalte, kulturelle Relevanz und sinnvolle Darstellung, insbesondere für People of Color und unterrepräsentierte Zielgruppen in der DACH-Region."
+          "answer": "Huerray ist eine UGC-Plattform, die Marken mit diversen Creators und KI-gesteuerten Storytelling-Tools verbindet. Die Plattform konzentriert sich auf authentische Inhalte, kulturelle Relevanz und sinnvolle Darstellung, insbesondere für People of Color und unterrepräsentierte Zielgruppen in der DACH-Region."
         },
         {
           "question": "Was ist UGC und warum funktioniert es so gut?",
-          "answer": "Bei nutzergenerierten Inhalten (UGC) handelt es sich um Inhalte, die von echten Menschen, z. B. Kunden oder Urhebern, erstellt wurden. Sie fühlen sich natürlich an und schaffen Vertrauen, was oft zu einem höheren Engagement und einer besseren Kampagnenleistung als bei herkömmlichen Anzeigen führt."
+          "answer": "Bei nutzergenerierten Inhalten (UGC) handelt es sich um Inhalte, die von echten Menschen, wie Kunden oder Creators, erstellt werden. Sie fühlen sich natürlich an und schaffen Vertrauen, was oft zu einem höheren Engagement und einer besseren Kampagnenleistung als bei herkömmlichen Anzeigen führt."
         },
         {
-          "question": "Veröffentlichen die Urheber die Inhalte auf ihren eigenen Social-Media-Kanälen?",
-          "answer": "Nein. Creators produzieren Inhalte für Ihre Marke, posten diese aber nicht automatisch auf ihren eigenen Konten. Die Reichweite von Creators kann als optionales Add-on hinzugefügt werden."
+          "question": "Posten die Creators die Inhalte auf ihren eigenen Social-Media-Kanälen?",
+          "answer": "Nein. Creators produzieren Inhalte für Ihre Marke, posten diese aber nicht automatisch auf ihren eigenen Konten. Die Creators-Reichweite kann als optionales Add-on hinzugefügt werden."
         },
         {
           "question": "Wodurch unterscheidet sich Huerray von anderen UGC-Plattformen?",
-          "answer": "Huerray kombiniert Vielfalt, kulturelle Intelligenz und KI-Innovation, um emotional ansprechende Inhalte zu liefern. Im Gegensatz zu herkömmlichen Plattformen, die nur Schöpfer und Marken zusammenbringen, verbessert Huerray das Storytelling durch menschliche und KI-Fähigkeiten."
+          "answer": "Huerray kombiniert Vielfalt, kulturelle Intelligenz und KI-Innovation, um emotional ansprechende Inhalte zu liefern. Im Gegensatz zu herkömmlichen Plattformen, die nur Creators und Marken zusammenbringen, verbessert Huerray das Storytelling durch menschliche und KI-Fähigkeiten."
         }
       ]
     },
@@ -28,11 +28,11 @@
       "faqs": [
         {
           "question": "Wie funktioniert eine Kampagne mit Huerray?",
-          "answer": "Nachdem Sie ein Konto erstellt haben, können Sie Ihr Kampagnen-Briefing starten, indem Sie Produktziele, Botschaften, Zielgruppe, Tonalität, Formate und Erzählstil angeben. Sie erhalten kuratierte Erstellerempfehlungen, und die Ersteller können sich auch bewerben. Nach der Genehmigung produziert der Ersteller die Inhalte, Sie erhalten eine Vorschau und können eine Überarbeitung anfordern, bevor Sie die endgültigen Inhalte mit allen Nutzungsrechten erhalten."
+          "answer": "Nachdem Sie ein Konto erstellt haben, können Sie Ihr Kampagnen-Briefing starten, indem Sie Produktziele, Botschaften, Zielgruppe, Tonalität, Formate und Erzählstil angeben. Sie erhalten kuratierte Creator-Empfehlungen, und Creators können sich ebenfalls bewerben. Nach der Genehmigung produziert der Creator die Inhalte, Sie erhalten eine Vorschau und können eine Überarbeitung anfordern, bevor Sie die endgültigen Inhalte mit allen Nutzungsrechten erhalten."
         },
         {
-          "question": "Verwendet Huerray eine künstliche Intelligenz anstelle von echten Schöpfern?",
-          "answer": "Marken können zwischen von Menschen erstellten Inhalten und von KI erstellten Inhalten wählen."
+          "question": "Verwendet Huerray KI anstelle von echten Creators?",
+          "answer": "Marken haben die Wahl zwischen von Menschen erstellten Inhalten und AI Creators-Inhalten."
         },
         {
           "question": "Gibt es ein Mindestbudget oder eine Mindestverpflichtung?",
@@ -48,7 +48,7 @@
         },
         {
           "question": "Wie viel kostet es, mit Huerray zu arbeiten?",
-          "answer": "Der Preis hängt vom Umfang der Kampagne ab. UGC-Pakete beginnen bei 149 €, KI-Kampagnen bei 89 €."
+          "answer": "Der Preis hängt vom Umfang der Kampagne ab. UGC-Pakete gibt es ab 149 €, KI-Creator-Kampagnen ab 89 €."
         },
         {
           "question": "Welche Nutzungsrechte erhalte ich?",
@@ -63,16 +63,16 @@
           "answer": "Genehmigen Sie die Inhalte in Ihrem Kampagnen-Gig, dann stehen die Dateien sofort zum Download bereit."
         },
         {
-          "question": "Was ist, wenn ich ein zusätzliches UGC-Video von einem Creator bestellen möchte, mit dem ich bereits gearbeitet habe?",
-          "answer": "Sie können entweder ein neues Briefing erstellen und den Ersteller einladen oder ein Upgrade innerhalb der bestehenden Kampagne beantragen, indem Sie Huerray eine E-Mail mit den Daten der Kampagne und des Erstellers schicken."
+          "question": "Was ist, wenn ich ein zusätzliches UGC-Video bei einem Creator bestellen möchte, mit dem ich bereits zusammengearbeitet habe?",
+          "answer": "Sie können entweder ein neues Briefing erstellen und den Creator einladen oder ein Upgrade innerhalb einer bestehenden Kampagne anfordern, indem Sie Huerray eine E-Mail mit den Angaben zur Kampagne und zum Creator schicken."
         },
         {
-          "question": "Was ist, wenn ich einer Kampagne mehr Ersteller zuweisen möchte als ursprünglich gebucht?",
-          "answer": "Sie können weitere Schöpfer aus der Anmeldeliste einladen. Wenn dies über Ihre ursprüngliche Buchung hinausgeht, senden Sie eine E-Mail an Huerray, um die Bestellung und die Rechnung zu aktualisieren."
+          "question": "Was ist, wenn ich einer Kampagne mehr Creators zuweisen möchte als ursprünglich gebucht?",
+          "answer": "Sie können weitere Creators aus der Anmeldeliste einladen. Wenn dies über Ihre ursprüngliche Buchung hinausgeht, senden Sie eine E-Mail an Huerray, um die Bestellung und die Rechnung zu aktualisieren."
         },
         {
           "question": "Kann ich die Spezifikationen der Kampagne nach der Übermittlung des Briefings ändern?",
-          "answer": "Erweiterungen und Ergänzungen sind nach der Auftragserstellung möglich, Reduzierungen jedoch nicht, da die Bezahlung an die Vergütung des Erstellers gebunden ist. Um den Umfang zu erhöhen, senden Sie Huerray eine E-Mail mit Details."
+          "answer": "Upgrades und Ergänzungen sind nach der Auftragserstellung möglich, Reduzierungen jedoch nicht, da die Bezahlung an die Vergütung des Creators gebunden ist. Um den Umfang zu erhöhen, senden Sie Huerray eine E-Mail mit Details."
         },
         {
           "question": "Wie kann ich meine Bestellung stornieren?",
@@ -81,19 +81,19 @@
       ]
     },
     {
-      "section": "Brief & Creator Anwendungen",
+      "section": "Brief & Creator-Anwendungen",
       "faqs": [
         {
-          "question": "Was muss ich tun, um Bewerbungen von Kreativen zu erhalten?",
-          "answer": "Vervollständigen Sie Ihr Briefing und reichen Sie es zur Prüfung ein. Sobald das Briefing genehmigt ist, wird es auf der Plattform veröffentlicht und Ersteller können sich bewerben. Alle Bewerbungen werden auf Ihrer Kampagnenseite zur Überprüfung angezeigt."
+          "question": "Was muss ich tun, um Bewerbungen von Creators zu erhalten?",
+          "answer": "Vervollständigen Sie Ihr Briefing und reichen Sie es zur Prüfung ein. Sobald das Briefing genehmigt ist, wird es auf der Plattform veröffentlicht und Creators können sich bewerben. Alle Bewerbungen werden auf Ihrer Kampagnenseite zur Überprüfung angezeigt."
         },
         {
           "question": "Mein Briefing wird überprüft - was bedeutet das?",
-          "answer": "Huerray prüft, ob Ihr Briefing genügend Details enthält, damit die Ersteller angepasste Inhalte produzieren können. Sie können Vorschläge erhalten, wenn Anpassungen erforderlich sind."
+          "answer": "Huerray prüft, ob Ihr Briefing genügend Details enthält, damit die Creators angepasste Inhalte produzieren können. Sie können Vorschläge erhalten, wenn Anpassungen erforderlich sind."
         },
         {
           "question": "Was geschieht, nachdem mein Briefing genehmigt wurde?",
-          "answer": "Ihr Briefing wird an die zuständigen Ersteller weitergeleitet. In der Regel gehen die ersten Bewerbungen innerhalb von 3 Tagen ein."
+          "answer": "Ihr Briefing wird an die entsprechenden Creators weitergeleitet. In der Regel gehen die ersten Bewerbungen innerhalb von 3 Tagen ein."
         }
       ]
     },
@@ -102,7 +102,7 @@
       "faqs": [
         {
           "question": "Wie lange dauert es, bis ich meine endgültige UGC erhalte?",
-          "answer": "Sobald der Ersteller das Produkt und die Klarstellungen erhält, beträgt die Standardlieferzeit 7 Tage. Eine kostenlose Überarbeitung ist inbegriffen."
+          "answer": "Sobald der Creator das Produkt und die Klarstellungen erhalten hat, beträgt die Standardlieferzeit 7 Tage. Eine kostenlose Überarbeitung ist inbegriffen."
         },
         {
           "question": "Wie lange habe ich Zeit, eine Revision zu beantragen?",

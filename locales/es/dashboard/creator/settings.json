@@ -140,7 +140,7 @@
     "middleName": "Segundo nombre",
     "middleNamePlaceholder": "Introduzca el segundo nombre (opcional)",
     "username": "Nombre de usuario",
-    "usernamePlaceholder": "Introducir nombre de usuario",
+    "usernamePlaceholder": "Nombre de usuario",
     "contactInformationTitle": "Información de contacto",
     "contactInformationDescription": "Su correo electrónico y número de teléfono."
   },
@@ -155,6 +155,6 @@
     "bankNameRequired": "Se requiere el nombre del banco",
     "bankAccountNameRequired": "Se requiere el nombre del titular de la cuenta",
     "bankAccountNumberRequired": "Número de cuenta obligatorio",
-    "bankRoutingNumberRequired": "Se requiere el número de ruta o el código SWIFT"
+    "bankRoutingNumberRequired": "Se requiere número de ruta o código SWIFT"
   }
 }

@@ -6,7 +6,7 @@
     "description": "Verfolgen Sie Einladungen, Auftritte, Einsendungen und voraussichtliche Einnahmen.",
     "browseGigs": "Gigs durchsuchen",
     "viewMyGigs": "Meine Gigs ansehen",
-    "creatorFallback": "Schöpfer"
+    "creatorFallback": "Creator"
   },
   "common": {
     "details": "Einzelheiten",
@@ -24,9 +24,9 @@
     "noInvitations": "Noch keine Einladungen.",
     "noEarnings": "Noch kein Verdienst. Vervollständige Gigs, um zu verdienen!",
     "na": "K.A.",
-    "invitedCreator": "Eingeladener Ersteller",
+    "invitedCreator": "Eingeladener Creator",
     "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
-    "failedToLoad": "Fehler beim Laden von {name}",
+    "failedToLoad": "Konnte nicht geladen werden {name}",
     "somethingWentWrong": "Etwas ist schief gelaufen",
     "product": "Produkt",
     "srGigDetails": "Details für Auftritt: {title}",
@@ -37,7 +37,7 @@
     "tabs": {
       "details": "Einzelheiten",
       "campaign": "Kampagne",
-      "mySubmissions": "Meine Einsendungen",
+      "mySubmissions": "Meine Einreichungen",
       "submissions": "Einreichungen",
       "overview": "Übersicht"
     },
@@ -69,7 +69,7 @@
     "durationSeconds": "Dauer: {count} Sekunden"
   },
   "requirements": {
-    "title": "Anforderungen an den Ersteller",
+    "title": "Creators Anforderungen",
     "gender": "Geschlecht",
     "male": "Männlich",
     "female": "Weiblich",

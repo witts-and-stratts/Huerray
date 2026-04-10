@@ -25,7 +25,7 @@
         "applicationsReceived": "Eingegangene Anträge",
         "approvalRate": "Bewilligungsquote",
         "videosReceived": "Empfangene Videos",
-        "videosApproved": "Zugelassene Videos",
+        "videosApproved": "Videos Genehmigt",
         "totalSpent": "Insgesamt ausgegeben"
       }
     },
@@ -36,12 +36,12 @@
         "detail": "Starten Sie ein neues Kampagnenbriefing und einen Genehmigungsantrag"
       },
       "findCreators": {
-        "label": "Schöpfer finden",
-        "detail": "Suche nach Erstellern, die Ihren Kampagnenzielen entsprechen"
+        "label": "Creators finden",
+        "detail": "Suche nach Creators, die Ihren Kampagnenzielen entsprechen"
       },
       "manageGigs": {
         "label": "Gigs verwalten",
-        "detail": "Verfolgen Sie die Einrichtung, den Status und die Aktivitäten des Erstellers eines Projekts"
+        "detail": "Verfolgen Sie Gig-Einrichtung, Status und Creator-Aktivitäten"
       }
     },
     "kpiOverview": {
@@ -97,7 +97,7 @@
       },
       "loadingGigs": "Gigs laden...",
       "errorGigs": "Gigs können nicht geladen werden.",
-      "loadingRecentGigs": "Laden der letzten Auftritte...",
+      "loadingRecentGigs": "Aktuelle Auftritte laden...",
       "errorRecentGigs": "Die letzten Gigs können nicht geladen werden.",
       "emptyState": "Keine Gigs gefunden.",
       "viewAll": "Alle Gigs anzeigen",
@@ -108,7 +108,7 @@
       "untitledGig": "Unbetitelter Auftritt",
       "na": "K.A."
     },
-    "creatorRequirements": "Anforderungen an den Ersteller",
+    "creatorRequirements": "Creators Anforderungen",
     "gender": "Geschlecht",
     "male": "Männlich",
     "female": "Weiblich",

@@ -6,7 +6,7 @@
     "viewCampaigns": "Voir les campagnes",
     "analytics": {
       "title": "Analyse de la marque",
-      "description": "Mesures de performance pour votre compte de marque",
+      "description": "Mesures de performance pour le compte de votre marque",
       "error": "Impossible de charger l'analyse de la marque.",
       "groups": {
         "campaigns": "Campagnes",

@@ -1,48 +1,48 @@
 {
   "hero": {
-    "title": "Zusammenarbeit mit Spitzenkreativen",
+    "title": "Arbeiten Sie mit Top Creators zusammen",
     "subtitle": "Arbeiten Sie mit Marken und echten Unternehmen. Verdienen Sie Geld für das, was Sie lieben.",
     "buttonText": "Los geht's"
   },
   "scroller": {
-    "title": "Abgleich mit erfahrenen Schöpfern"
+    "title": "Match mit erfahrenen Creators"
   },
   "match": {
     "pill": "Passend dazu",
-    "title": "Finden Sie die richtigen Schöpfer für Ihre Marke",
-    "description": "Unser Matching-Verfahren bedeutet, dass 92 % der Ersteller-Treffer in der ersten Runde genehmigt werden.",
+    "title": "Finden Sie die richtigen Creators für Ihre Marke",
+    "description": "Unser Matching-Prozess bedeutet, dass 92 % der Creators in der ersten Runde zugelassen werden.",
     "listItems": {
-      "item1": "Vollständig angemeldetes und verifiziertes Netzwerk von Urhebern",
-      "item2": "Ein großes Netzwerk von Künstlern aus unterrepräsentierten Gemeinschaften und Nischenkategorien"
+      "item1": "Vollständig angemeldetes und verifiziertes Netzwerk von Creators",
+      "item2": "Ein großes Netzwerk von diversen Creators aus unterrepräsentierten Gemeinschaften und Nischenkategorien"
     },
     "paymentMade": "Geleistete Zahlung"
   },
   "contentObjective": {
     "pill": "Qualität des Inhalts",
     "title": "Inhalte für jedes Ziel",
-    "description": "Die Autoren produzieren qualitativ hochwertige Inhalte, die auf Ihre Ziele und Anforderungen abgestimmt sind.",
+    "description": "Creators produzieren qualitativ hochwertige Inhalte mit einer Reihe von Outputs, die an Ihre Ziele und Anforderungen angepasst sind.",
     "listItems": {
-      "item1": "Egal, ob es sich um einen Werbespot für Schönheitsprodukte, einen Testbericht für die Automobilindustrie oder eine Präsentation von Babyprodukten handelt, Sie werden die spezialisierten Inhalte der Autoren finden",
+      "item1": "Egal, ob es sich um einen Werbespot für Schönheitsprodukte, einen Testbericht für Automobile oder eine Präsentation von Babyprodukten handelt, Sie werden die speziellen Creators-Inhalte finden",
       "item2": "Von UGC bis zu spezialisierten Inhalten können Sie je nach Ihren Zielen wählen",
-      "item3": "Von zusätzlichen Inhalten über Unterhaltungsinhalte bis hin zu Produktbesprechungen und Live-Events - die Inhalte der Autoren sind vielseitig"
+      "item3": "Von zusätzlichen Inhalten über Unterhaltungsinhalte bis hin zu Produktbesprechungen und Live-Events - Creators-Inhalte sind vielseitig."
     }
   },
   "expertSupport": {
     "pill": "Engagierte Unterstützung",
     "title": "Unterstützung auf Expertenebene",
-    "description": "Unser Team sorgt dafür, dass Sie mit den richtigen Kreativen zusammenarbeiten, dass die Ergebnisse pünktlich geliefert werden und dass Ihre Kampagne und kreative Strategie ein Erfolg wird.",
+    "description": "Unser Team sorgt dafür, dass Sie mit den richtigen Creators zusammengebracht werden, dass die Ergebnisse pünktlich geliefert werden und dass Ihre Kampagne und kreative Strategie ein Erfolg wird.",
     "listItems": {
-      "item1": "Zu viel zu tun? Überlassen Sie uns das Hin und Her mit den Erstellern",
-      "item2": "Kampagnenüberprüfungen vor der Genehmigung, so dass Sie nicht durch nicht abgestimmte Anträge gehen müssen",
+      "item1": "Zu viel zu tun? Lassen Sie uns das Hin und Her mit Creators regeln",
+      "item2": "Kampagnenüberprüfungen vor der Genehmigung, damit Sie sich nicht mit Anfragen herumschlagen müssen, die nicht aufeinander abgestimmt sind",
       "item3": "Wir verwalten Live-Kampagnen und Ergebnisse für Sie, damit Sie Ihren Starttermin nicht verpassen"
     }
   },
   "beyondFeed": {
     "pill": "Omni-Channel",
     "title": "Über Ihren Content Feed hinaus",
-    "description": "Von Creators erstellte Inhalte werden an Sie lizenziert, damit Sie sie in all Ihren Marketingkanälen nutzen können. Ob auf Ihrer Website, Ihrer E-Commerce-Plattform, auf Youtube oder im Inflight-Entertainment - schaffen Sie ein wahrhaft kanalübergreifendes Marketing-Erlebnis für Creators.",
+    "description": "Die von Creators erstellten Inhalte werden an Sie lizenziert, damit Sie sie in all Ihren Marketingkanälen nutzen können. Ob Website, E-Commerce-Plattform, Youtube oder Inflight-Entertainment - schaffen Sie ein wahrhaft kanalübergreifendes Creators-Marketing-Erlebnis.",
     "listItems": {
-      "item1": "Wiederverwendung von Autoreninhalten über alle Ihre Marketingkanäle",
+      "item1": "Wiederverwendung von Creators-Inhalten in all Ihren Marketingkanälen",
       "item2": "Kein Rätselraten und keine ungeplanten Ausgaben. Keine zusätzlichen Kosten für die Nutzung mehrerer Plattformen"
     },
     "contentUsageTitle": "Inhalt Verwendung",
@@ -85,11 +85,11 @@
     "heading": "Häufig gestellte Fragen",
     "q1": {
       "question": "Was ist Huerray?",
-      "answer": "Huerray ist eine Plattform, die Marken und Kreative zusammenbringt, um hochwertige Inhalte zu produzieren."
+      "answer": "Huerray ist eine Plattform, die Marken mit Creators zusammenbringt, um hochwertige Inhalte zu produzieren."
     },
     "q2": {
       "question": "Wie fange ich an?",
-      "answer": "Melden Sie sich für ein Konto an und erstellen Sie eine Kampagne, um mit dem Matching mit Schöpfern zu beginnen."
+      "answer": "Melden Sie sich für ein Konto an und erstellen Sie eine Kampagne, um mit Creators in Kontakt zu treten."
     },
     "q3": {
       "question": "Welche Art von Inhalten kann ich bekommen?",
@@ -97,14 +97,14 @@
     },
     "q4": {
       "question": "Wie hoch sind die Kosten?",
-      "answer": "Die Kosten hängen vom Umfang Ihrer Kampagne und den Schöpfern ab, mit denen Sie zusammenarbeiten."
+      "answer": "Die Kosten richten sich nach dem Umfang Ihrer Kampagne und den Creators, mit denen Sie zusammenarbeiten."
     },
     "q5": {
       "question": "Wie lange dauert es?",
-      "answer": "Der Zeitrahmen hängt vom jeweiligen Projekt ab, aber in der Regel erhalten Sie die Inhalte innerhalb weniger Wochen."
+      "answer": "Der Zeitrahmen hängt vom jeweiligen Projekt ab, aber in der Regel erhalten Sie die Inhalte innerhalb von ein paar Wochen."
     },
     "q6": {
-      "question": "Wie bezahle ich Schöpfer?",
+      "question": "Wie kann ich Creators bezahlen?",
       "answer": "Die Zahlungen werden sicher über unsere Plattform abgewickelt. Sie können mit einer Kreditkarte oder per Banküberweisung bezahlen."
     },
     "q7": {
@@ -116,12 +116,12 @@
       "answer": "Wir haben ein Revisionsverfahren, um sicherzustellen, dass Sie mit dem Endprodukt zufrieden sind. Sollten Sie dennoch nicht zufrieden sein, bieten wir eine Geld-zurück-Garantie."
     },
     "q9": {
-      "question": "Wie überprüfen Sie die Schöpfer?",
-      "answer": "Wir haben ein strenges Prüfverfahren, um sicherzustellen, dass alle Schöpfer auf unserer Plattform professionell sind und qualitativ hochwertige Arbeiten produzieren."
+      "question": "Wie überprüfen Sie Creators?",
+      "answer": "Wir haben ein strenges Prüfverfahren, um sicherzustellen, dass alle Creators auf unserer Plattform professionell sind und qualitativ hochwertige Arbeiten produzieren."
     },
     "q10": {
       "question": "Bieten Sie verwaltete Dienste an?",
-      "answer": "Ja, wir bieten Managed Services für Marken an, die sich nicht so viel Mühe geben wollen. Unser Team kann sich um alles kümmern, von der Kampagnenstrategie bis zum Ersteller-Management."
+      "answer": "Ja, wir bieten Managed Services für Marken an, die sich nicht so viel Mühe geben wollen. Unser Team kann sich um alles kümmern, von der Kampagnenstrategie bis zum Creator-Management."
     },
     "q11": {
       "question": "Ich habe eine weitere Frage",

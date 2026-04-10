@@ -12,14 +12,14 @@
     "returnSubmission": "Rücksendung Einreichung",
     "acceptSubmission": "Einreichung akzeptieren",
     "rejectSubmission": "Einreichung ablehnen",
-    "returnToCreator": "Rücksendung an den Schöpfer",
-    "returnConfirm": "Sind Sie sicher, dass Sie diesen Beitrag an den Ersteller zurückschicken wollen?",
+    "returnToCreator": "Rücksendung an den Creator",
+    "returnConfirm": "Sind Sie sicher, dass Sie diesen Beitrag an den Creator zurückschicken wollen?",
     "rejectConfirm": "Sind Sie sicher, dass Sie diesen Antrag ablehnen wollen?",
     "untitledSubmission": "Untitled Submission"
   },
   "submissionUpdate": {
     "title": "Update Einreichung",
-    "description": "Aktualisieren Sie die Details der Einreichung.",
+    "description": "Aktualisieren Sie die Angaben zur Einreichung.",
     "submit": "Update",
     "submitting": "Aktualisieren...",
     "titleLabel": "Titel",
@@ -40,9 +40,9 @@
   },
   "gigSelection": {
     "title": "Wählen Sie einen Gig",
-    "description": "Wählen Sie einen Auftritt, zu dem Sie Schöpfer einladen.",
+    "description": "Wählen Sie einen Auftritt, zu dem Creators eingeladen werden sollen.",
     "noGigs": "Noch keine Auftritte",
-    "noGigsDesc": "Diese Kampagne hat noch keine Gigs. Erstelle erst einen Gig, bevor du Ersteller einlädst."
+    "noGigsDesc": "Diese Kampagne hat noch keine Gigs. Erstelle erst einen Gig, bevor du Creators einlädst."
   },
   "gigEdit": {
     "title": "Gig bearbeiten",

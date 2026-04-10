@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Huerray\nJeder Farbton. Jede Geschichte",
-    "subtitle": "Wir bringen Marken mit Kreativen aus unterrepräsentierten Gemeinschaften zusammen, um authentischen UGC zu erstellen, der die Menschen anspricht - kulturell reichhaltig, emotional echt und für die sozialen Feeds von heute konzipiert."
+    "subtitle": "Wir bringen Marken mit Creators aus unterrepräsentierten Gemeinschaften zusammen, um authentischen UGC zu erstellen, der sich durchsetzt - kulturell reichhaltig, emotional echt und für die sozialen Feeds von heute konzipiert."
   },
   "why": {
     "pill": "Unser Warum",
@@ -10,10 +10,10 @@
   },
   "whatWeDo": {
     "pill": "Was wir tun",
-    "title": "Wir bringen Marken mit Künstlern zusammen, denen ihre Produkte wirklich am Herzen liegen",
-    "description": "Huerray ist eine Plattform, die Marken mit den perfekten Kreativen für authentische Inhalte zusammenbringt. Wir kümmern uns um alles von der Entdeckung bis zur Bezahlung, damit Sie sich auf das Wesentliche konzentrieren können: die Erstellung großartiger Inhalte.",
+    "title": "Wir bringen Marken mit Creators zusammen, denen ihre Produkte wirklich am Herzen liegen",
+    "description": "Huerray ist eine Plattform, die Marken mit den perfekten Creators für authentische Inhalte zusammenbringt. Wir kümmern uns um alles von der Entdeckung bis zur Bezahlung, damit Sie sich auf das Wesentliche konzentrieren können: die Erstellung großartiger Inhalte.",
     "features": [
-      "Intelligenter Erstellerabgleich",
+      "Intelligenter Creator-Abgleich",
       "Transparente Preisgestaltung",
       "Sichere Zahlungen",
       "Verwaltung von Inhaltsrechten"
@@ -24,11 +24,11 @@
     "items": [
       {
         "title": "Authentizität geht vor",
-        "description": "Wir glauben an echte Verbindungen zwischen Marken und Künstlern"
+        "description": "Wir glauben an echte Verbindungen zwischen Marken und Creators"
       },
       {
         "title": "Gerechte Entschädigung",
-        "description": "Schöpfer verdienen es, für ihre Arbeit und ihren Einfluss fair bezahlt zu werden"
+        "description": "Creators verdienen es, für ihre Arbeit und ihren Einfluss fair bezahlt zu werden"
       },
       {
         "title": "Transparenz",
@@ -44,16 +44,16 @@
     "pill": "Unsere Geschichte",
     "title": "Huerray schreibt die 2-3 Empfehlungen neu, die Marken anziehen und an diesem Ende verbinden",
     "subtitle": "Eine Reise von der Frustration zur Innovation",
-    "content": "Huerray wurde von Kreativen und Vermarktern gegründet, die die Probleme des Influencer-Marketings aus erster Hand erfahren haben, und wurde entwickelt, um echte Probleme zu lösen. Wir haben eine Plattform geschaffen, die sowohl Marken als auch Kreative respektiert und die Zusammenarbeit reibungsloser, fairer und effektiver macht."
+    "content": "Huerray wurde von Creators und Vermarktern gegründet, die die Probleme des Influencer-Marketings aus erster Hand erfahren haben, um echte Probleme zu lösen. Wir haben eine Plattform geschaffen, die sowohl Marken als auch Creators respektiert und die Zusammenarbeit reibungsloser, fairer und effektiver macht."
   },
   "team": {
     "subtitle": "Unsere Gründungsgeschichte",
     "title": "Geboren in Berlin; gegründet von 3 Freunden aus verschiedenen Ecken der Welt",
-    "description": "Huerray entstand aus einer einfachen Beobachtung: Großartige Kreative wurden übersehen, weil sie nicht in eine enge Schablone passten. Also bauten wir eine Plattform, die Sichtbarkeit skalierbar macht - auf der Kreativen vertraut wird, um Geschichten zu erzählen, und auf der Marken Inhalte erhalten, die wirklich ankommen.",
+    "description": "Huerray entstand aus einer einfachen Beobachtung: Großartige Creators wurden übersehen, weil sie nicht in eine enge Schablone passten. Also bauten wir eine Plattform, die Sichtbarkeit skalierbar macht - auf der Creators das Vertrauen haben, Geschichten zu erzählen, und Marken Inhalte erhalten, die wirklich ankommen.",
     "members": [
       {
         "name": "Adedapo",
-        "bio": "Ein Unternehmensstratege aus Nigeria hatte jahrelang beobachtet, wie brillante Schöpfer übersehen wurden - nicht weil es ihnen an Fähigkeiten mangelte, sondern weil sie nicht in das Schema passten."
+        "bio": "Ein Unternehmensstratege aus Nigeria hatte jahrelang beobachtet, wie brillante Creators übersehen wurden - nicht, weil es ihnen an Fähigkeiten mangelte, sondern weil sie nicht in die Form passten."
       },
       {
         "name": "Norina",
@@ -66,7 +66,7 @@
     ]
   },
   "cta": {
-    "subtitle": "Schließen Sie sich Tausenden von Kreativen und Unternehmen an, die zusammenarbeiten, um wirkungsvolle Inhalte für alle zu erstellen.",
+    "subtitle": "Schließen Sie sich Tausenden von Creators und Unternehmen an, die zusammenarbeiten, um wirkungsvolle Inhalte für alle zu erstellen.",
     "buttonText": "Beginnen Sie hier"
   }
 }

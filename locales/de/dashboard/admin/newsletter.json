@@ -33,7 +33,7 @@
     "messages": {
       "endpointMissing": "Für diese Aktion ist ein Endpunkt für die Aktualisierung/Löschung des Newsletters erforderlich.",
       "resubscribed": "Newsletter-Abonnent hat sich erneut angemeldet.",
-      "resubscribeFailed": "Der Newsletter-Abonnent konnte nicht erneut angemeldet werden.",
+      "resubscribeFailed": "Newsletter-Abonnent konnte nicht erneut angemeldet werden.",
       "unsubscribed": "Newsletter-Abonnent hat sich abgemeldet.",
       "unsubscribeFailed": "Newsletter-Abonnent konnte nicht abbestellt werden.",
       "unsubscribeEmailMissing": "Dieser Newsletter-Eintrag enthält keine E-Mail Adresse."

@@ -4,9 +4,9 @@
     "subtitle": "Wir bringen Kultur, Kreativität und Technologie zusammen, um Kreativen und unterrepräsentierten Stimmen in der DACH-Region die Sichtbarkeit zu geben, die sie verdienen. Und hinter den Kulissen leben wir, wofür wir stehen: Vielfalt, Offenheit, Mut und echte Zusammenarbeit.",
     "buttonText": "Offene Stellen anzeigen",
     "videoAlt": "Junge Frau, die Mode vorführt",
-    "imageAlt1": "Hauptverfasser",
-    "imageAlt2": "Inhalt des Erstellers",
-    "imageAlt3": "Schöpfer-Porträt"
+    "imageAlt1": "Haupt-Creator",
+    "imageAlt2": "Creators Inhalt",
+    "imageAlt3": "Creators Porträt"
   },
   "opportunities": {
     "title": "Offene Gelegenheiten",
@@ -56,15 +56,15 @@
     "teams": [
       {
         "title": "Produkt, Design und Daten",
-        "text": "Wir bauen eine Plattform auf, die die Erstellung und Verbreitung von Inhalten für Marken auf der ganzen Welt ermöglicht. Unsere Mission ist es, der Kreativwirtschaft zu dienen und ihnen den besten Platz auf der Welt zu bieten, um das zu tun, was sie lieben - zu kreieren."
+        "text": "Wir bauen eine Plattform auf, die die Erstellung und Verbreitung von Inhalten für Marken auf der ganzen Welt ermöglicht. Unsere Mission ist es, der Creator Economy zu dienen und ihnen den besten Platz auf der Welt zu bieten, um das zu tun, was sie lieben - zu kreieren."
       },
       {
         "title": "Kundenerfahrung",
-        "text": "Wir sind die geheime Soße von #paid - wir kreieren und ermöglichen Kunden- und Kreativitätserlebnisse, die Ergebnisse, Wirkung und vor allem Freude bringen."
+        "text": "Wir sind die geheime Soße der #paid-creation und ermöglichen Kunden und Creators Erfahrungen, die Ergebnisse, Auswirkungen und vor allem Freude liefern."
       },
       {
         "title": "Vertrieb",
-        "text": "Unser Ziel ist es, Marken und Agenturen beizubringen, wie sie über Kreativitätsmarketing denken sollen. Wir gehen auf Entdeckungsreise und passen unser Angebot so an, dass unsere Kunden ihre Ziele erreichen können."
+        "text": "Unser Ziel ist es, Marken und Agenturen beizubringen, wie sie über Creators Marketing denken sollen. Wir gehen auf Entdeckungsreise und passen unser Angebot so an, dass unsere Kunden ihre Ziele erreichen können."
       },
       {
         "title": "Menschen",
@@ -80,17 +80,17 @@
       },
       {
         "title": "Marketing",
-        "text": "Unser Ziel ist es, eine Marke aufzubauen, die den Menschen nicht mehr aus dem Kopf geht. Gemeinsam streben wir danach, unvergessliche Momente mit Marken und Kreativen zu schaffen."
+        "text": "Unser Ziel ist es, eine Marke aufzubauen, die den Menschen nicht mehr aus dem Kopf geht. Gemeinsam streben wir danach, mit Marken und Creators unvergessliche Momente zu schaffen."
       },
       {
         "title": "Technik",
-        "text": "Wir entwickeln Tools und Funktionen, die die Grundlage für die Zusammenarbeit zwischen Marken und Kreativen schaffen. Wir definieren die Zukunft von #paid und suchen nach Wegen, wie wir die Zukunft der Creator Economy skalieren und teilen können."
+        "text": "Wir entwickeln Tools und Funktionen, die die Grundlage für die Zusammenarbeit zwischen Marken und Creators schaffen. Wir definieren die Zukunft von #paid und suchen nach Wegen, wie wir die Zukunft der Creator Economy skalieren und teilen können."
       }
     ]
   },
   "careerWhy": {
-    "mainTitle": "Wir stellen uns eine Welt vor, in der Schöpfer mit Leidenschaft etwas aufbauen, das von Bedeutung ist.",
-    "subtitle": "Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn glauben und die einen echten Wandel herbeiführen wollen.",
+    "mainTitle": "Wir stellen uns eine Welt vor, in der Creators mit Leidenschaft etwas aufbauen, das von Bedeutung ist.",
+    "subtitle": "Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn und Zweck glauben und die einen echten Wandel herbeiführen wollen.",
     "description1": "Egal, ob Sie aus dem Marketing, der Technik, dem Design, der Geschäftsentwicklung oder der Gemeinschaft kommen. Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn glauben und die echte Veränderungen herbeiführen wollen, ganz gleich, ob Ihr Hintergrund im Marketing, in der Technik, im Design, in der Geschäftsentwicklung oder im Gemeinwesen liegt. Uns geht es weniger um Titel als vielmehr darum, wer du bist, wofür du stehst und welche Energie du mitbringst. Wir wachsen, organisch, absichtlich und mit Absicht.",
     "description2": "Wir sind immer offen für Menschen, die unsere Vision teilen und sie mitgestalten wollen.",
     "imageAlt": "Warum Huerray"

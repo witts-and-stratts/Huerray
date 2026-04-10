@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generated - Huerray</title>
+    <style>
+        @font-face {
+            font-family: 'Aeonik';
+            src: url('https://dev.huerray.de/fonts/Aeonik-Regular.woff2') format('woff2'),
+                url('https://dev.huerray.de/fonts/Aeonik-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Aeonik';
+            src: url('https://dev.huerray.de/fonts/Aeonik-Bold.woff2') format('woff2'),
+                url('https://dev.huerray.de/fonts/Aeonik-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'ABC Diatype';
+            src: url('https://dev.huerray.de/fonts/ABCDiatype-Regular.woff2') format('woff2'),
+                url('https://dev.huerray.de/fonts/ABCDiatype-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            margin: 0;
+            padding: 32px 16px;
+            background: #fcf7f3;
+            color: #28313a;
+            font-family: 'ABC Diatype', 'Aeonik', 'Segoe UI', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .shell {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            margin-bottom: 18px;
+            margin-top: 32px;
+            display: block;
+        }
+
+        .logo {
+            width: 180px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #ecdcd3;
+            border-radius: 16px;
+            box-shadow: 0 24px 60px rgba(40, 49, 58, 0.08);
+            padding: 32px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #fdf0f4;
+            color: #9c1e5a;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0 0 14px;
+            font-family: 'Aeonik', 'ABC Diatype', 'Segoe UI', Arial, sans-serif;
+            font-size: 32px;
+            line-height: 1.05;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #9c1e5a;
+            background: linear-gradient(90deg, #9c1e5a 0%, #fa6b0c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            margin: 0 0 16px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #51606f;
+        }
+
+        .lede {
+            color: #28313a;
+            font-size: 17px;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #f0dacc;
+            border-top: 4px solid #9c1e5a;
+            box-shadow: 0 24px 60px rgba(142, 11, 11, 0.08);
+        }
+
+        .summary-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .summary-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+            color: #28313a;
+            font-family: 'Aeonik', 'ABC Diatype', 'Segoe UI', Arial, sans-serif;
+        }
+
+        .invoice-number {
+            margin: 0;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid #eadfd8;
+            color: #67798b;
+            font-size: 14x;
+            font-weight: 600;
+            background: #fcf7f3;
+            white-space: nowrap;
+        }
+
+        .summary-grid {
+            margin: 12px 0 0;
+            border-top: 1px solid #eadfd8;
+        }
+
+        .row {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-bottom: 1px solid #eadfd8;
+        }
+
+        .row:last-of-type {
+            border-bottom: none;
+            margin-bottom: -8px;
+        }
+
+        .label,
+        .value {
+            display: table-cell;
+            padding: 10px 0;
+            font-size: 14px;
+            line-height: 1.5;
+            vertical-align: top;
+        }
+
+        .label {
+            color: #67798b;
+            width: 46%;
+            padding-right: 12px;
+        }
+
+        .value {
+            color: #28313a;
+            font-weight: 600;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .total-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: #9c1e5a;
+        }
+
+        .attachment,
+        .details {
+            padding: 16px 0;
+            border-bottom: 1px solid #eadfd8;
+        }
+
+        .box-title {
+            margin: 0 0 8px;
+            color: #28313a;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .notice {
+            margin-top: 20px;
+            padding: 16px 0;
+            color: #5f6976;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            padding-top: 22px;
+        }
+
+        .footer p {
+            margin-bottom: 4px;
+            font-size: 13px;
+            color: #67798b;
+        }
+
+        .footer a {
+            color: #9c1e5a;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .card {
+                padding: 24px;
+                border-radius: 24px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .summary-head {
+                display: block;
+            }
+
+            .invoice-number {
+                display: inline-block;
+                margin-top: 10px;
+            }
+
+            .label,
+            .value {
+                display: block;
+                width: 100%;
+                padding: 8px 0;
+                text-align: left;
+            }
+
+            .row {
+                display: block;
+                padding: 2px 0;
+            }
+        }
+
+        .more-info {
+            margin-top: 16px !important;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .button {
+            display: inline-block !important;
+            width: auto !important;
+            max-width: none !important;
+            height: auto !important;
+            margin-top: 6px !important;
+            padding: 16px 32px !important;
+            border: none !important;
+            border-radius: 8px !important;
+            background: #9c1e5a !important;
+            color: #fdf0f4 !important;
+            text-decoration: none !important;
+            font-size: 20px !important;
+            font-weight: 500 !important;
+            line-height: 16px !important;
+            box-shadow: none !important;
+            text-align: center !important;
+            vertical-align: middle !important;
+            white-space: nowrap !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="shell">
+        <a class="brand" href="{{.WebsiteURL}}" title="Huerray">
+            <img src="https://dev.huerray.de/images/huerray-logo.png" alt="Huerray Logo" class="logo">
+        </a>
+
+        <div class="card">
+            <div class="eyebrow">Invoice Generated</div>
+            <h1>Your latest invoice is ready for review.</h1>
+            <p class="lede">Hello <strong>{{.FirstName}}</strong>, </p>
+            <p class="lede">We generated a new invoice for approved work completed on your Huerray campaign. All
+                deliverables have been reviewed and approved</p>
+        </div>
+
+        <div class="shell">
+            <div class="summary">
+                <div class="summary-head">
+                    <h3 class="summary-title">Invoice summary</h3>
+                    <p class="invoice-number">{{.InvoiceNumber}}</p>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="row">
+                        <span class="label">Campaign</span>
+                        <span class="value">{{.CampaignName}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Issue date</span>
+                        <span class="value">{{.IssuedDate}}</span>
+                    </div>
+                    {{if .DueDate}}
+                    <div class="row">
+                        <span class="label">Due date</span>
+                        <span class="value">{{.DueDate}}</span>
+                    </div>
+                    {{end}}
+                    <div class="row">
+                        <span class="label">Status</span>
+                        <span class="value">{{.InvoiceStatus}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Completed gigs</span>
+                        <span class="value">{{.ItemCount}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Currency</span>
+                        <span class="value">{{.Currency}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Total amount</span>
+                        <span class="value total-amount">{{printf "%.2f" .TotalAmount}} {{.Currency}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card more-info">
+            <div class="attachment">
+                <p class="box-title">Invoice PDF Attached</p>
+                <p>A detailed invoice PDF is attached to this email for your records, internal review, and payment
+                    processing.</p>
+            </div>
+
+            <div class="details">
+                <p class="box-title">What Happens Next</p>
+                <p>This invoice includes all successfully completed and approved gigs from your campaign. Each content
+                    piece has met your specified requirements and quality standards.</p>
+                <p>You can also access and download this invoice anytime from your dashboard in the invoices section.
+                </p>
+
+                <a href="{{.DashboardLink}}" class="button">Go to Dashboard</a>
+            </div>
+
+            <div class="notice">
+                This email was generated automatically by Huerray. Please do not reply to this email.
+            </div>
+        </div>
+        <div class="footer">
+            <p>This email was sent to {{.Email}}.</p>
+            <p>Questions about billing? Contact <a href="mailto:{{.SupportEmail}}">{{.SupportEmail}}</a>.</p>
+        </div>
+    </div>
+</body>
+
+</html>

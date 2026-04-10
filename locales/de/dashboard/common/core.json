@@ -14,7 +14,7 @@
   "search": {
     "title": "Globale Suche",
     "description": "Suche über Ihr Dashboard",
-    "placeholder": "Suchkampagnen, Schöpfer, Gigs...",
+    "placeholder": "Suche nach Kampagnen, Creators, Gigs...",
     "all": "Alle",
     "filters": "Filter",
     "typeToSearch": "Geben Sie mindestens 2 Zeichen für die Suche ein",
@@ -34,7 +34,7 @@
   "searchEntities": {
     "brands": "Marken",
     "campaigns": "Kampagnen",
-    "creators": "Schöpfer",
+    "creators": "Creators",
     "gigs": "Auftritte",
     "invoices": "Rechnungen",
     "newsletter": "Newsletter",

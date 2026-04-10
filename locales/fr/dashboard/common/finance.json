@@ -94,7 +94,7 @@
     "creatorPlaceholder": "Sélectionnez un créateur...",
     "pendingItems": "Postes en suspens",
     "deselectAll": "Désélectionner tout",
-    "selectAll": "Sélectionner tout",
+    "selectAll": "Tout sélectionner",
     "noItems": "Aucun poste de paiement en suspens pour ce créateur.",
     "methodLabel": "Mode de paiement",
     "methodPlaceholder": "par exemple, virement bancaire, PayPal...",

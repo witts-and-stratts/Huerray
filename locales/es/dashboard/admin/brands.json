@@ -27,7 +27,7 @@
     "successToast": "Estado de la marca actualizado correctamente",
     "errorToast": "No se ha podido actualizar el estado de la marca",
     "missingId": "Falta el identificador de marca",
-    "confirmApproveTitle": "¿Aprobar el perfil de la marca?",
+    "confirmApproveTitle": "¿Aprobar perfil de marca?",
     "confirmApproveDesc": "El perfil de {name} será aprobado y se le notificará.",
     "confirmRejectTitle": "¿Rechazar el perfil de marca?",
     "confirmRejectDesc": "El perfil de {name} será rechazado y se le notificará.",
@@ -98,7 +98,7 @@
   },
   "brandCampaignsTableBlock": {
     "created": "Creado:",
-    "noCampaignsYet": "Todavía no hay campañas",
+    "noCampaignsYet": "Aún no hay campañas",
     "loadingRecentCampaigns": "Cargando campañas recientes...",
     "loadingCampaignStats": "Cargando estadísticas de campaña...",
     "recentCampaigns": "Campañas recientes",

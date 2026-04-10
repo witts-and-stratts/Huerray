@@ -9,7 +9,7 @@
     "due": ".",
     "joined": "Beitritt",
     "userFallback": "Benutzer",
-    "creatorFallback": "Schöpfer",
+    "creatorFallback": "Creator",
     "updatedDate": "Aktualisiert {date}",
     "campaignCover": "Abdeckung der Kampagne",
     "gigCount": "{count, plural, =1 {# gig} other {# gigs}}",

@@ -1,6 +1,6 @@
 {
   "breadcrumbs": {
-    "creator": "Schöpfer",
+    "creator": "Creator",
     "dashboard": "Dashboard",
     "gigs": "Auftritte",
     "active": "Aktiv",
@@ -27,6 +27,6 @@
     "approvalRate": "Bewilligungsquote",
     "approvalRateCaption": "Prozentsatz der von den Marken genehmigten Videos",
     "successRate": "Erfolgsquote",
-    "successRateCaption": "Anwendungen, die in aktive Auftritte umgewandelt wurden"
+    "successRateCaption": "Anträge, die in aktive Auftritte umgewandelt wurden"
   }
 }

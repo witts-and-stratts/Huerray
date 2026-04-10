@@ -1,11 +1,11 @@
 {
   "earningsPage": {
     "title": "Ganancias",
-    "description": "Haz un seguimiento de tu historial de pagos y de los ingresos de los trabajos realizados."
+    "description": "Haz un seguimiento de tu historial de pagos y de las ganancias de los trabajos realizados."
   },
   "earnings": {
     "title": "Ganancias",
-    "description": "Haz un seguimiento de tu historial de pagos y de los ingresos de los trabajos realizados.",
+    "description": "Haz un seguimiento de tu historial de pagos y de las ganancias de los trabajos realizados.",
     "recentTotal": "Total reciente"
   },
   "payments": {

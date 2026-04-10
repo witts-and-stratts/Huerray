@@ -39,7 +39,7 @@
       "confirmGigName": "Escribe el nombre del concierto para confirmar",
       "deleteGigFailed": "Error al borrar el concierto",
       "deleteFailed": "Error al borrar el concierto",
-      "viewGigFailed": "No se ha podido abrir el concierto",
+      "viewGigFailed": "Error al abrir el concierto",
       "missingId": "Falta el Gig ID",
       "approvedGig": "Gig aprobado",
       "approveFailed": "No se aprueba el concierto",

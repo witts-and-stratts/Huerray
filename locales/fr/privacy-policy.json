@@ -15,7 +15,7 @@
     {
       "id": "introduction",
       "title": "Introduction",
-      "content": "<Ces règles de confidentialité ont été traduites de l'allemand. Jusqu'à la création de la British Ltd, HUERRAY relève encore de l'entité allemande. Jusqu'à cette date, les conditions générales de HUERRAY telles que stipulées par l'entité allemande s'appliquent.</strong><br /><br />La présente politique de confidentialité explique comment THRYPES GmbH, 4th Floor,<br /> Gontardstr. 11, 10178 Berlin, Allemagne (ci-après dénommée \" THRYPES \", \" nous \"), traite les données à caractère personnel lorsque vous utilisez nos sites Web, plateformes, pages de médias sociaux, canaux de communication et services liés au contenu généré par l'utilisateur (CGU) ; lorsque vous vous inscrivez en tant que créateur/influenceur ou en tant qu'entreprise cliente ; lorsque vous coopérez avec nous, concluez des contrats ou interagissez d'une autre manière avec nous. <br /><br/>Nous traitons les données dans la région DACH conformément au règlement général sur la protection des données (UE) 2016/679 (\"GDPR\"), à la loi fédérale allemande sur la protection des données (BDSG), à la loi sur la protection des données des télécommunications et des télémédias (TTDSG) et à d'autres lois applicables en matière de protection des données."
+      "content": "<strong>Ces règles de confidentialité ont été traduites de l'allemand. Jusqu'à la création de la British Ltd, HUERRAY relève encore de l'entité allemande. Jusqu'à cette date, les conditions générales de HUERRAY telles que stipulées par l'entité allemande s'appliquent.</strong><br /><br />La présente politique de confidentialité explique comment THRYPES GmbH, 4th Floor,<br /> Gontardstr. 11, 10178 Berlin, Allemagne (ci-après dénommée \" THRYPES \", \" nous \"), traite les données personnelles lorsque vous utilisez nos sites Web, plateformes, pages de médias sociaux, canaux de communication et services liés au contenu généré par l'utilisateur (CGU) ; lorsque vous vous inscrivez en tant que créateur/influenceur ou en tant qu'entreprise cliente ; lorsque vous coopérez avec nous, concluez des contrats ou interagissez d'une autre manière avec nous. <br /><br/>Nous traitons les données dans la région DACH conformément au règlement général sur la protection des données (UE) 2016/679 (\"GDPR\"), à la loi fédérale allemande sur la protection des données (BDSG), à la loi sur la protection des données des télécommunications et des télémédias (TTDSG) et à d'autres lois applicables en matière de protection des données."
     },
     {
       "id": "contrôleur et contact",
@@ -41,14 +41,14 @@
       "subsections": [
         {
           "id": "champ d'application du traitement",
-          "title": "a) Portée du traitement des données à caractère personnel",
+          "title": "a) Champ d'application du traitement des données à caractère personnel",
           "content": "Nous traitons les données à caractère personnel de nos utilisateurs uniquement dans la mesure où cela est nécessaire pour fournir un site web/une plateforme fonctionnel(le) et pour fournir notre contenu et nos services liés à l'entreprise. Le traitement se fait généralement sur la base de votre consentement (par exemple, via notre gestionnaire de consentement pour les technologies d'analyse/de marketing, les abonnements aux lettres d'information ou le contenu UGC publié). Une exception s'applique dans les cas où l'obtention d'un consentement préalable n'est pas possible pour des raisons pratiques et où le traitement est autorisé par des dispositions légales ou est nécessaire à l'exécution du contrat. <br /><br />Nous adhérons aux principes de transparence, de limitation des finalités, de minimisation des données, d'exactitude, de limitation du stockage et d'intégrité/confidentialité conformément à l'art. 5 GDPR."
         },
         {
           "id": "base juridique",
           "title": "b) Base juridique du traitement des données à caractère personnel",
           "list": [
-            "Nous traitons les données sur la base des fondements juridiques suivants:<br/><br/><strong>Consentement (Art. 6(1)(a) GDPR):</strong> lorsque vous avez explicitement donné votre consentement via le gestionnaire de consentement ou autrement (par exemple, pour Google Analytics/GA4, les e-mails de marketing dans le cadre de la procédure de double opt-in, ou la publication de matériel image/vidéo en dehors des obligations contractuelles). Le consentement est volontaire et peut être retiré à tout moment avec effet futur",
+            "Nous traitons les données sur la base des fondements juridiques suivants:<br/><br/><strong>Consentement (Art. 6(1)(a) GDPR):</strong> lorsque vous avez explicitement donné votre consentement via le gestionnaire de consentement ou autrement (par exemple, pour Google Analytics/GA4, les courriels de marketing dans le cadre de la procédure de double opt-in, ou la publication de matériel image/vidéo en dehors des obligations contractuelles). Le consentement est volontaire et peut être retiré à tout moment avec effet futur",
             "<strong>Contrat / Mesures précontractuelles (article 6, paragraphe 1, point b), du RGPD):</strong> lorsque le traitement est nécessaire à l'exécution d'un contrat avec vous ou à l'exécution de mesures précontractuelles (par exemple, l'accueil des créateurs, le briefing, la production, l'approbation, le paiement, le service à la clientèle).",
             "<strong>Obligation légale (Art. 6(1)(c) GDPR):</strong> lorsque le traitement est requis pour se conformer à des obligations légales (par exemple, conservation commerciale/fiscale, conformité, ou divulgation aux autorités).",
             "<strong>Intérêts vitaux (Art. 6(1)(d) GDPR):</strong> dans de rares cas, lorsque le traitement est nécessaire pour protéger les intérêts vitaux de la personne concernée ou d'une autre personne physique.",
@@ -59,7 +59,7 @@
         {
           "id": "suppression des données",
           "title": "c) Suppression des données et période de conservation",
-          "content": "Les données personnelles sont effacées ou bloquées dès que l'objectif du stockage cesse d'être d'actualité. Les données peuvent être conservées au-delà de ce point si les législateurs européens ou nationaux l'exigent dans les règlements de l'UE, les lois ou d'autres dispositions auxquelles nous sommes soumis (par exemple, les obligations de conservation commerciale/fiscale en vertu du code de commerce allemand (HGB) ou du code fiscal (AO), généralement pour une durée de 6 à 10 ans). <br /><br />Le blocage ou la suppression intervient également à l'expiration d'une période de conservation prescrite par la loi, à moins que le maintien de la conservation ne soit nécessaire à l'exécution du contrat ou à l'exercice ou à la défense de droits légaux. Après expiration, les données seront supprimées ou, si possible, rendues anonymes."
+          "content": "Les données personnelles sont supprimées ou bloquées dès que l'objectif de la conservation cesse d'être d'actualité. Les données peuvent être conservées au-delà de ce point si les législateurs européens ou nationaux l'exigent dans les règlements de l'UE, les lois ou d'autres dispositions auxquelles nous sommes soumis (par exemple, les obligations de conservation commerciale/fiscale en vertu du code de commerce allemand (HGB) ou du code fiscal (AO), généralement pour une durée de 6 à 10 ans). <br /><br />Le blocage ou la suppression intervient également à l'expiration d'une période de conservation prescrite par la loi, à moins que le maintien de la conservation ne soit nécessaire à l'exécution du contrat ou à l'exercice ou à la défense de droits légaux. Après expiration, les données seront supprimées ou, si possible, rendues anonymes."
         }
       ]
     },
@@ -195,7 +195,7 @@
           "title": "b) Base juridique du traitement des données",
           "list": [
             "<strong>Art. 6(1)(b) GDPR (contrat/mesures précontractuelles)</strong> pour les informations obligatoires et tous les traitements nécessaires pour fournir le compte, permettre les fonctions et exécuter les contrats.",
-            "<strong>Art. 6(1)(a) GDPR (consentement)</strong> pour les informations volontaires, les bulletins d'information/communications marketing et la publication de contenu si elle n'est pas déjà due contractuellement.",
+            "<strong>Art. 6(1)(a) GDPR (consentement)</strong> pour les informations volontaires, les bulletins d'information/communications marketing et la publication de contenu lorsqu'elle n'est pas déjà due contractuellement.",
             "<strong>Art. 6(1)(c) GDPR (obligation légale)</strong>, par exemple, pour des obligations de conservation fiscale/commerciale.",
             "<strong>Art. 6(1)(f) GDPR (intérêts légitimes)</strong> par exemple, pour la sécurité informatique et des comptes, la prévention des abus/fraudes, l'administration interne et l'application de la loi ; vos intérêts sont soigneusement mis en balance."
           ]
@@ -218,7 +218,7 @@
         {
           "id": "enregistrement-objection",
           "title": "e) Droit d'opposition et options de suppression",
-          "content": "Lorsque nous traitons des données sur la base de votre consentement ou d'informations volontaires, vous pouvez retirer votre consentement à tout moment avec effet futur et/ou supprimer/ajuster vous-même les informations volontaires dans votre compte. Il n'y a pas de possibilité de retrait pour les données contractuelles/systémiques obligatoires lorsqu'elles sont nécessaires à la fourniture des services ou au respect des obligations légales. Votre droit d'opposition en vertu de l'art. 21 GDPR n'est pas affecté (par exemple, contre le traitement basé sur des intérêts légitimes). Veuillez adresser les retraits/objections à datenschutz@huerray.de."
+          "content": "Lorsque nous traitons des données sur la base de votre consentement ou d'informations volontaires, vous pouvez retirer votre consentement à tout moment avec effet futur et/ou supprimer/ajuster vous-même les informations volontaires dans votre compte. Il n'y a pas de possibilité de retrait pour les données contractuelles/systémiques obligatoires lorsqu'elles sont nécessaires pour fournir les services ou remplir les obligations légales. Votre droit d'opposition en vertu de l'art. 21 GDPR n'est pas affecté (par exemple, contre le traitement basé sur des intérêts légitimes). Veuillez adresser les retraits/objections à datenschutz@huerray.de."
         }
       ]
     },
@@ -255,7 +255,7 @@
     },
     {
       "id": "ugc-uploads",
-      "title": "10. Téléchargement, révision, publication et mise à disposition de CGU aux entreprises clientes",
+      "title": "10. Téléchargement, révision, publication et mise à disposition de CGU pour les entreprises clientes",
       "content": "Les créateurs téléchargent du contenu (par exemple, des vidéos, des images, du texte, des métadonnées d'accompagnement) par l'intermédiaire de la plateforme. Le contenu est vérifié pour s'assurer qu'il est complet et conforme aux instructions et aux normes juridiques, et - selon le statut de la campagne - il est mis à la disposition des entreprises clientes pour visualisation, sélection, approbation et utilisation. Après approbation, le contenu est fourni aux entreprises conformément aux droits d'utilisation convenus (par exemple, pour le téléchargement, les placements publicitaires, les messages organiques, les pages d'atterrissage ou les boutiques en ligne).<br/><br/><strong>Bases juridiques:</strong><br/>- Art. 6(1)(b) GDPR (contrat / mesures précontractuelles)<br/>- Art. 6(1)(f) GDPR (assurance qualité / modération)<br/>- Art. 6(1)(a) GDPR (consentement) pour le traitement/publication au-delà de ce qui est contractuellement requis.<br/><br/><strong>Transparence/Visibilité:</strong><br/>Dans le contexte du projet ou de la campagne, il est visible quelles données/UGC sont mises à la disposition de quelle entreprise. Les données de profil nécessaires aux applications/appariements (par exemple, le nom/le nom du créateur, les liens sociaux, les balises thématiques, les échantillons de CGU) peuvent être affichées pour les entreprises clientes.<br/><br/><strong>Deletion/Retention:</strong><br/>Les téléchargements bruts, les versions révisées, les approbations et les acceptations sont stockés sur la base d'un projet. Une fois le projet terminé, nous supprimons ou anonymisons les données, sauf si des obligations légales ou contractuelles exigent qu'elles soient conservées. Les droits d'utilisation déjà accordés ne sont pas affectés (utilisations existantes).",
       "subsections": []
     },
@@ -341,7 +341,7 @@
             {
               "id": "notification aux tiers",
               "title": "b) Notification aux tiers",
-              "content": "Lorsque nous avons rendu publiques des données à caractère personnel et que nous sommes obligés de les effacer, nous prenons des mesures raisonnables, y compris des mesures techniques, pour informer les responsables du traitement des données que vous avez demandé l'effacement de tous les liens vers ces données, de toutes les copies ou de toutes les réplications de ces données."
+              "content": "Lorsque nous avons rendu publiques des données à caractère personnel et que nous sommes tenus de les effacer, nous prenons des mesures raisonnables, y compris des mesures techniques, pour informer les responsables du traitement des données que vous avez demandé l'effacement de tous les liens vers ces données, de toutes les copies ou de toutes les réplications de ces données."
             },
             {
               "id": "exceptions",
@@ -358,7 +358,7 @@
         {
           "id": "droit à la portabilité des données",
           "title": "Droit à la portabilité des données",
-          "content": "Vous avez le droit de recevoir les données à caractère personnel que vous nous avez fournies dans un format structuré, couramment utilisé et lisible par machine, ainsi que le droit de transmettre ces données à un autre responsable du traitement sans entrave, si :",
+          "content": "Vous avez le droit de recevoir les données à caractère personnel que vous nous avez fournies dans un format structuré, couramment utilisé et lisible par machine, et le droit de transmettre ces données à un autre responsable du traitement sans entrave, lorsque :",
           "orderedList": [
             "le traitement est fondé sur le consentement (art. 6, paragraphe 1, point a), ou art. 9(2)(a) GDPR) ou sur un contrat (Art. 6(1)(b) GDPR) ; et",
             "le traitement est effectué par des moyens automatisés."
@@ -368,7 +368,7 @@
         {
           "id": "droit à l'objet",
           "title": "Droit d'opposition",
-          "content": "Vous avez le droit de vous opposer à tout moment, pour des raisons tenant à votre situation particulière, au traitement de vos données à caractère personnel fondé sur l'art. 6(1)(e) ou (f) GDPR, y compris le profilage basé sur ces dispositions.<br/><br/>Nous ne traiterons plus vos données personnelles à moins que nous puissions démontrer des motifs légitimes impérieux qui l'emportent sur vos intérêts ou que le traitement serve à la constatation, à l'exercice ou à la défense de droits en justice.<br/><br/>Si vos données personnelles sont traitées à des fins de marketing direct, vous pouvez vous opposer à tout moment à un tel traitement, y compris au profilage lié au marketing direct. Si vous vous y opposez, vos données à caractère personnel ne seront plus traitées à ces fins.<br/><br/>Vous pouvez exercer votre droit d'opposition en utilisant des procédures automatisées (par exemple, des liens de désinscription) qui utilisent des spécifications techniques, indépendamment de la directive 2002/58/CE."
+          "content": "Vous avez le droit de vous opposer à tout moment, pour des raisons tenant à votre situation particulière, au traitement de vos données à caractère personnel fondé sur l'art. 6(1)(e) ou (f) GDPR, y compris le profilage basé sur ces dispositions.<br/><br/>Nous ne traiterons plus vos données personnelles à moins que nous puissions démontrer des motifs légitimes impérieux qui l'emportent sur vos intérêts ou que le traitement serve à la constatation, à l'exercice ou à la défense de droits en justice.<br/><br/>Si vos données personnelles sont traitées à des fins de marketing direct, vous pouvez vous opposer à tout moment à ce traitement, y compris au profilage lié au marketing direct. Si vous vous y opposez, vos données à caractère personnel ne seront plus traitées à ces fins.<br/><br/>Vous pouvez exercer votre droit d'opposition en utilisant des procédures automatisées (par exemple, des liens de désinscription) qui utilisent des spécifications techniques, indépendamment de la directive 2002/58/CE."
         },
         {
           "id": "droit de retirer son consentement",
@@ -389,7 +389,7 @@
         {
           "id": "droit à l'hébergement-plainte",
           "title": "Droit de déposer une plainte auprès d'une autorité de surveillance",
-          "content": "Sans préjudice de tout autre recours administratif ou judiciaire, vous avez le droit d'introduire une réclamation auprès d'une autorité de contrôle - en particulier dans l'État membre de votre résidence, de votre lieu de travail ou de l'infraction présumée - si vous considérez que le traitement de vos données à caractère personnel viole le GDPR.<br/><br/>L'autorité de contrôle auprès de laquelle la réclamation a été introduite vous informera de l'avancement et de l'issue de la réclamation, y compris de la possibilité d'un recours judiciaire en vertu de l'Art. 78 DU GDPR."
+          "content": "Sans préjudice de tout autre recours administratif ou judiciaire, vous avez le droit d'introduire une réclamation auprès d'une autorité de contrôle - en particulier dans l'État membre de votre résidence, de votre lieu de travail ou de l'infraction présumée - si vous considérez que le traitement de vos données à caractère personnel viole le GDPR.<br/><br/>L'autorité de contrôle auprès de laquelle la réclamation a été introduite vous informera de la progression et de l'issue de la réclamation, y compris de la possibilité d'un recours juridictionnel en vertu de l'Art. 78 DU GDPR."
         }
       ]
     }

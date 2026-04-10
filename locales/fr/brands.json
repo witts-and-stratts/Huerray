@@ -56,7 +56,7 @@
   "stopAssuming": {
     "pill": "Mesures",
     "title": "Cesser de présumer de ce qui fonctionne",
-    "description": "Gardez le pouls de ce qui se passe au cours du processus de création, grâce à un retour d'information et à des mises à jour constantes.",
+    "description": "Gardez le pouls de ce qui se passe au cours du processus de création, grâce à un retour d'information et à des mises à jour constants.",
     "listItems": {
       "item1": "Suivez votre campagne et voyez comment elle fonctionne",
       "item2": "Des analyses de campagne et des informations sur tous vos projets/briefs"

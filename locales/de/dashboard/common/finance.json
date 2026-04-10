@@ -18,7 +18,7 @@
   "payments": {
     "table": {
       "payment": "Zahlung",
-      "creator": "Schöpfer",
+      "creator": "Creator",
       "date": "Datum",
       "method": "Methode",
       "items": "Artikel",
@@ -89,13 +89,13 @@
   },
   "batchPayment": {
     "title": "Neue Zahlung",
-    "description": "Wählen Sie einen Ersteller und seine ausstehenden Zahlungsposten aus und erstellen Sie auch neue Zahlungsposten.",
-    "creatorLabel": "Schöpfer",
-    "creatorPlaceholder": "Wählen Sie einen Ersteller...",
+    "description": "Wählen Sie einen Creator und seine ausstehenden Zahlungsposten aus und erstellen Sie auch neue Zahlungsposten.",
+    "creatorLabel": "Creator",
+    "creatorPlaceholder": "Wählen Sie einen Creator...",
     "pendingItems": "Ausstehende Posten",
     "deselectAll": "Alle abwählen",
     "selectAll": "Alle auswählen",
-    "noItems": "Keine ausstehenden Zahlungsposten für diesen Ersteller.",
+    "noItems": "Keine ausstehenden Zahlungen für diesen Creator.",
     "methodLabel": "Zahlungsmethode",
     "methodPlaceholder": "z.B. Banküberweisung, PayPal...",
     "paymentMethods": {

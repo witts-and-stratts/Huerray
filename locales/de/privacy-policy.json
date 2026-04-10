@@ -15,7 +15,7 @@
     {
       "id": "Einführung",
       "title": "Einführung",
-      "content": "<strong>Diese Datenschutzrichtlinien wurden aus dem Deutschen übersetzt. Bis zur Gründung der britischen Ltd. fällt HUERRAY noch unter die deutsche Entität. Bis dahin gelten die von der deutschen Gesellschaft festgelegten Geschäftsbedingungen von HUERRAY.</strong><br /><br />Diese Datenschutzerklärung erläutert, wie die THRYPES GmbH, 4th Floor,<br /> Gontardstr. 11, 10178 Berlin, Deutschland (im Folgenden \"THRYPES\", \"wir\" oder \"uns\" genannt), personenbezogene Daten verarbeitet, wenn Sie unsere Websites, Plattformen, Social-Media-Seiten, Kommunikationskanäle und Dienste im Zusammenhang mit nutzergenerierten Inhalten (UGC) nutzen; wenn Sie sich als Creator/Influencer oder als Firmenkunde registrieren; wenn Sie mit uns kooperieren, Verträge abschließen oder anderweitig mit uns interagieren. <br /><br/>Wir verarbeiten Daten innerhalb der DACH-Region in Übereinstimmung mit der Allgemeinen Datenschutzverordnung (EU) 2016/679 (\"GDPR\"), dem deutschen Bundesdatenschutzgesetz (BDSG), dem Telekommunikations-Telemediendatenschutzgesetz (TTDSG) und anderen anwendbaren Datenschutzgesetzen."
+      "content": "<strong>Diese Datenschutzrichtlinien wurden aus dem Deutschen übersetzt. Bis zur Gründung der britischen Ltd. fällt HUERRAY noch unter die deutsche Entität. Bis dahin gelten also die von der deutschen Gesellschaft festgelegten Bedingungen von HUERRAY.</strong><br /><br />Diese Datenschutzbestimmungen erläutern, wie die THRYPES GmbH, 4th Floor,<br /> Gontardstr. 11, 10178 Berlin, Deutschland (im Folgenden \"THRYPES\", \"wir\" oder \"uns\" genannt), personenbezogene Daten verarbeitet, wenn Sie unsere Websites, Plattformen, Social-Media-Seiten, Kommunikationskanäle und Dienste im Zusammenhang mit nutzergenerierten Inhalten (UGC) nutzen; wenn Sie sich als Creator/Influencer oder als Firmenkunde registrieren; wenn Sie mit uns zusammenarbeiten, Verträge abschließen oder anderweitig mit uns interagieren. <br /><br/>Wir verarbeiten Daten innerhalb der DACH-Region in Übereinstimmung mit der Allgemeinen Datenschutzverordnung (EU) 2016/679 (\"GDPR\"), dem deutschen Bundesdatenschutzgesetz (BDSG), dem Telekommunikations-Telemediendatenschutzgesetz (TTDSG) und anderen anwendbaren Datenschutzgesetzen."
     },
     {
       "id": "Controller und Kontakt",
@@ -52,7 +52,7 @@
             "<strong>Vertrag / Vorvertragliche Maßnahmen (Art. 6(1)(b) GDPR):</strong> wenn die Verarbeitung erforderlich ist, um einen Vertrag mit Ihnen zu erfüllen oder vorvertragliche Maßnahmen durchzuführen (z.B. Creator Onboarding, Briefing, Produktion, Genehmigung, Bezahlung, Kundenservice)",
             "<strong>Gesetzliche Verpflichtung (Art. 6(1)(c) GDPR):</strong> wenn die Verarbeitung erforderlich ist, um gesetzlichen Verpflichtungen nachzukommen (z.B. Aufbewahrung von Handels-/Steuerdaten, Einhaltung von Vorschriften oder Offenlegung gegenüber Behörden)",
             "<strong>Wichtige Interessen (Art. 6(1)(d) GDPR):</strong> in seltenen Fällen, wenn die Verarbeitung zum Schutz lebenswichtiger Interessen der betroffenen Person oder einer anderen natürlichen Person erforderlich ist",
-            "<strong>Legitime Interessen (Art. 6(1)(f) GDPR):</strong> wenn die Verarbeitung zur Wahrung unserer berechtigten Interessen oder der Interessen Dritter erforderlich ist, sofern Ihre Interessen oder Grundrechte nicht überwiegen (z. B. IT-Sicherheit, Betrugsprävention, Messung der Mindestreichweite, Qualitätsmanagement, Rechtsdurchsetzung/-verteidigung oder die Auswahl geeigneter Ersteller auf der Grundlage objektiver, nicht automatisierter Kriterien)",
+            "<strong>Legitime Interessen (Art. 6(1)(f) GDPR):</strong> wenn die Verarbeitung zur Wahrung unserer berechtigten Interessen oder der Interessen Dritter erforderlich ist, sofern Ihre Interessen oder Grundrechte nicht überwiegen (z.B. IT-Sicherheit, Betrugsprävention, Messung der Mindestreichweite, Qualitätsmanagement, Rechtsdurchsetzung/-verteidigung oder die Auswahl geeigneter Creators auf der Grundlage objektiver, nicht automatisierter Kriterien)",
             "<strong>TTDSG:</strong> Die Speicherung von Informationen oder der Zugriff auf Informationen auf Ihrem Gerät (z.B. Cookies, Geräte-IDs) erfordert Ihre Einwilligung nach § 25(1) TTDSG, es sei denn, dies ist technisch notwendig. Die anschließende Verarbeitung beruht dann auf einer der oben genannten GDPR-Rechtsgrundlagen. Für Bestandskundenwerbung kann § 7(3) UWG Anwendung finden."
           ]
         },
@@ -158,7 +158,7 @@
         {
           "id": "E-Mail-Zweck",
           "title": "c) Zweck der Datenverarbeitung",
-          "content": "Die Verarbeitung dient dem E-Mail-Versand, der Abonnementverwaltung, der Dokumentation Ihrer Einwilligung (Nachweis), der Optimierung unserer Kommunikation (z.B. Themen-/Häufigkeitssteuerung) und der Messung der Reichweite/des Erfolgs unserer E-Mails (aggregierte Statistiken, Fehlermeldungen, Zustellbarkeit)."
+          "content": "Die Verarbeitung dient dem E-Mail-Versand, der Abonnementverwaltung, der Dokumentation Ihrer Einwilligung (Nachweis), der Optimierung unserer Kommunikation (z.B. Themen-/Häufigkeitssteuerung) und der Messung der Reichweite/Erfolg unserer E-Mails (aggregierte Statistiken, Fehlermeldungen, Zustellbarkeit)."
         },
         {
           "id": "email-storage",
@@ -179,16 +179,16 @@
         {
           "id": "registration-description",
           "title": "a) Beschreibung und Umfang der Datenverarbeitung",
-          "content": "Bei der erstmaligen Registrierung und Erstellung eines Accounts sowie bei der Nutzung unserer Online-Dienste (z.B. Kunden-/Ersteller-Dashboard, Briefing-/Upload-Funktionen, Bestell-/Buchungsvorgänge) bitten wir Sie um die Angabe personenbezogener Daten. Wir weisen transparent darauf hin, welche Angaben obligatorisch (Pflichtfelder) und welche freiwillig sind.<br/><br/>Zu den Daten, die erhoben werden können, gehören insbesondere:",
+          "content": "Bei der erstmaligen Registrierung und Erstellung eines Kontos sowie bei der Nutzung unserer Online-Dienste (z.B. Kunden-/Creator-Dashboard, Briefing-/Upload-Funktionen, Bestell-/Buchungsprozesse) bitten wir Sie um die Angabe personenbezogener Daten. Wir weisen transparent darauf hin, welche Angaben obligatorisch (Pflichtfelder) und welche freiwillig sind.<br/><br/>Zu den Daten, die erhoben werden können, gehören insbesondere:",
           "list": [
-            "<strong>Identitäts- und Kontaktdaten:</strong> Vor- und Nachname, ggf. Name des Künstlers/Schöpfers, Adresse(n), E-Mail-Adresse, Telefonnummer(n), Firmenname/Funktion (für Geschäftskunden), bevorzugte Sprache.",
+            "<strong>Identitäts- und Kontaktdaten:</strong> Vor- und Nachname, ggf. Name des Künstlers/Creators, Adresse(n), E-Mail-Adresse, Telefonnummer(n), Firmenname/Funktion (bei Geschäftskunden), bevorzugte Sprache.",
             "<strong>Zugangsdaten:</strong> Benutzername, Passwort (ausschließlich in verschlüsselter Form gespeichert), ggf. Sicherheits-/Verifizierungsattribute.",
-            "<strong>Vertrags-/Geschäftsdaten:</strong> Informationen zum Rechtsgeschäft (Angebot, Auftrag, Vertragstexte, Konditionen, Stornierungen), Projekt-/Auftrags-IDs, Briefings/Genehmigungen, Abnahmen, Projektkommunikation, Rechnungs-/Zahlungsstatus.",
+            "<strong>Vertrags-/Geschäftsdaten:</strong> Informationen zum Rechtsgeschäft (Angebot, Auftrag, Vertragstexte, Konditionen, Stornierungen), Projekt-/Auftragskennungen, Briefings/Genehmigungen, Abnahmen, Projektkommunikation, Rechnungs-/Zahlungsstatus.",
             "<strong>Rechnungs-/Zahlungsdaten:</strong> Rechnungs- und Lieferadresse, Umsatzsteuer-ID (falls zutreffend), Bankverbindung/IBAN/BIC oder ID des Zahlungsdienstleisters.",
             "<strong>Zustimmungs- und Nachweisdaten:</strong> Zustimmungserklärungen (z. B. Newsletter/Tracking, Veröffentlichungen), Double-Opt-In-Zeitstempel, Zustimmungs-/Widerrufsprotokolle.",
             "<strong>Profil-/Benutzerinformationen (freiwillig):</strong> Profilfoto/Avatar, Social-Media-Handles, Themenpräferenzen, Portfolio-Links, Einstellungen."
           ],
-          "additionalContent": "Im Rahmen der Vertragserfüllung können Ihre personenbezogenen Daten an Dritte weitergegeben werden, soweit dies für die jeweilige Vertragsabwicklung oder Projektdurchführung erforderlich ist (z.B. an Hosting-/IT-Provider, E-Mail-/Newsletter-Anbieter Mailchimp, Zahlungs-/Bankdienstleister, Logistik/Dateitransfer und im Rahmen der Erstellung an Kunden/Partner, soweit dies für Briefing, Freigaben, Abnahmen oder Verwendungsnachweise erforderlich ist). Wir haben Datenverarbeitungsverträge mit Auftragsverarbeitern gemäß Art. 28 GDPR."
+          "additionalContent": "Im Rahmen der Vertragserfüllung können Ihre personenbezogenen Daten an Dritte weitergegeben werden, soweit dies für die jeweilige Vertragsabwicklung oder Projektdurchführung erforderlich ist (z.B. Hosting-/IT-Provider, E-Mail-/Newsletter-Anbieter Mailchimp, Zahlungs-/Bankdienstleister, Logistik/Dateitransfer und im Creators-Kontext Kunden/Partner, soweit dies für Briefing, Freigaben, Abnahmen oder Nutzungsnachweise erforderlich ist). Wir haben Datenverarbeitungsverträge mit Auftragsverarbeitern gemäß Art. 28 GDPR."
         },
         {
           "id": "melderechtliche Grundlage",
@@ -229,7 +229,7 @@
         {
           "id": "Werbebeschreibung",
           "title": "a) Beschreibung und Umfang der Datenverarbeitung",
-          "content": "Wenn Sie ein Konto bei uns angelegt oder eine unserer Dienstleistungen in Anspruch genommen haben, betrachten wir Sie als bestehenden Kunden. In diesem Rahmen dürfen wir Ihre postalischen Kontaktdaten (Name, Adresse) - auch ohne gesonderte Einwilligung - verarbeiten, um Ihnen Informationen über unsere eigenen, ähnlichen Produkte oder Dienstleistungen zuzusenden. Auch Ihre E-Mail-Adresse dürfen wir nutzen, um Ihnen eigene, ähnliche Angebote zukommen zu lassen, sofern wir sie im Zusammenhang mit dem Verkauf eines Produkts oder einer Dienstleistung erhalten haben. Freiwillige Angaben (z.B. Interessen) können verwendet werden, um Inhalte auf Ihre Präferenzen abzustimmen. Es werden keine Daten an Dritte für deren eigene Werbezwecke weitergegeben; Auftragsverarbeiter werden gemäß Art. 28 GDPR."
+          "content": "Wenn Sie ein Konto bei uns angelegt oder eine unserer Dienstleistungen in Anspruch genommen haben, betrachten wir Sie als bestehenden Kunden. In diesem Rahmen dürfen wir Ihre postalischen Kontaktdaten (Name, Adresse) - auch ohne gesonderte Einwilligung - verarbeiten, um Ihnen Informationen über unsere eigenen, ähnlichen Produkte oder Dienstleistungen zuzusenden. Auch Ihre E-Mail-Adresse dürfen wir nutzen, um Ihnen eigene, ähnliche Angebote zukommen zu lassen, sofern wir sie im Zusammenhang mit dem Verkauf eines Produktes oder einer Dienstleistung erhalten haben. Freiwillige Angaben (z.B. Interessen) können verwendet werden, um Inhalte auf Ihre Präferenzen abzustimmen. Es werden keine Daten an Dritte für deren eigene Werbezwecke weitergegeben; Auftragsverarbeiter werden gemäß Art. 28 GDPR."
         },
         {
           "id": "werberechtliche Grundlage",
@@ -249,20 +249,20 @@
         {
           "id": "Werbeeinwand",
           "title": "e) Widerspruchsrecht und Löschungsmöglichkeiten",
-          "content": "Sie können der Nutzung Ihrer Daten zu Werbezwecken jederzeit widersprechen. Bei E-Mails nutzen Sie bitte den dafür vorgesehenen Abmeldelink oder wenden sich an datenschutz@huerray.de; bei postalischer Werbung können Sie ebenfalls jederzeit widersprechen."
+          "content": "Sie können der Nutzung Ihrer Daten für Werbezwecke jederzeit widersprechen. Bei E-Mails nutzen Sie bitte den dafür vorgesehenen Abmeldelink oder wenden sich an datenschutz@huerray.de; bei postalischer Werbung können Sie ebenfalls jederzeit widersprechen."
         }
       ]
     },
     {
       "id": "ugc-uploads",
       "title": "10. UGC-Uploads, Überprüfung, Veröffentlichung und Bereitstellung für Geschäftskunden",
-      "content": "Ersteller laden Inhalte (z. B. Videos, Bilder, Texte, begleitende Metadaten) über die Plattform hoch. Die Inhalte werden auf Vollständigkeit, Einhaltung von Briefings und rechtlichen Standards geprüft und - je nach Status der Kampagne - den Geschäftskunden zur Sichtung, Auswahl, Freigabe und Nutzung zur Verfügung gestellt. Nach der Freigabe werden die Inhalte den Unternehmen entsprechend der vereinbarten Nutzungsrechte zur Verfügung gestellt (z.B. zum Download, für Werbeplatzierungen, organische Posts, Landing Pages oder E-Shops).<br/><br/><strong>Rechtsgrundlagen:</strong><br/>- Art. 6(1)(b) GDPR (Vertrag / vorvertragliche Maßnahmen)<br/>- Art. 6(1)(f) GDPR (Qualitätssicherung / Moderation)<br/>- Art. 6(1)(a) GDPR (Einwilligung) zur Verarbeitung/Veröffentlichung über das vertraglich Erforderliche hinaus.<br/><br/><strong>Transparenz/Sichtbarkeit:</strong><br/>Im Projekt- oder Kampagnenkontext ist ersichtlich, welche Daten/UGC welchem Unternehmen zur Verfügung gestellt werden. Für Bewerbungen/Matching notwendige Profildaten (z.B. Name/Ersteller, Social Links, thematische Tags, Beispiel-UGC) können Geschäftskunden angezeigt werden.<br/><br/><strong>Löschung/Aufbewahrung:</strong><br/>Roh-Uploads, Review-Versionen, Freigaben und Akzeptanzen werden projektbezogen gespeichert. Nach Abschluss des Projekts werden die Daten gelöscht oder anonymisiert, es sei denn, gesetzliche oder vertragliche Verpflichtungen erfordern eine Aufbewahrung. Bereits erteilte Nutzungsrechte bleiben davon unberührt (bestehende Nutzungen).",
+      "content": "Creators laden Inhalte (z. B. Videos, Bilder, Texte, begleitende Metadaten) über die Plattform hoch. Die Inhalte werden auf Vollständigkeit, Einhaltung von Briefings und rechtlichen Standards geprüft und - je nach Status der Kampagne - den Geschäftskunden zur Sichtung, Auswahl, Freigabe und Nutzung zur Verfügung gestellt. Nach der Freigabe werden die Inhalte den Unternehmen entsprechend der vereinbarten Nutzungsrechte zur Verfügung gestellt (z.B. zum Download, für Werbeplatzierungen, organische Posts, Landing Pages oder E-Shops).<br/><br/><strong>Rechtsgrundlagen:</strong><br/>- Art. 6(1)(b) GDPR (Vertrag / vorvertragliche Maßnahmen)<br/>- Art. 6(1)(f) GDPR (Qualitätssicherung / Moderation)<br/>- Art. 6(1)(a) GDPR (Einwilligung) zur Verarbeitung/Veröffentlichung über das vertraglich Erforderliche hinaus.<br/><br/><strong>Transparenz/Sichtbarkeit:</strong><br/>Im Projekt- oder Kampagnenkontext ist ersichtlich, welche Daten/UGC welchem Unternehmen zur Verfügung gestellt werden. Für Bewerbungen/Matching notwendige Profildaten (z.B. Name/Creator-Name, soziale Links, thematische Tags, Beispiel-UGC) können Geschäftskunden angezeigt werden.<br/><br/><strong>Löschung/Aufbewahrung:</strong><br/>Roh-Uploads, Überprüfungsversionen, Genehmigungen und Akzeptanzen werden projektbezogen gespeichert. Nach Abschluss des Projekts werden die Daten gelöscht oder anonymisiert, es sei denn, gesetzliche oder vertragliche Verpflichtungen erfordern eine Aufbewahrung. Bereits erteilte Nutzungsrechte bleiben davon unberührt (bestehende Nutzungen).",
       "subsections": []
     },
     {
       "id": "empfänger-drittland",
       "title": "11. Empfänger, Übermittlung in Drittländer und Schutzmaßnahmen",
-      "content": "<strong>Empfänger:</strong><br/>Interne Abteilungen (Operations, Creator Success, Sales, Finance), Auftragsverarbeiter (Hosting/IT, E-Mail/Newsletter, Zahlungsdienste, Filetransfer, CRM/Ticket-Systeme) und - im Rahmen von Projekten - Geschäftskunden/Partner.<br/><br/><strong>Drittländer:</strong><br/>Wenn Daten in Drittländer (außerhalb des EWR) übermittelt werden, z.B., an Mailchimp (USA), erfolgen solche Übermittlungen auf der Grundlage angemessener Garantien, insbesondere Standardvertragsklauseln (SCCs), und zusätzlicher technischer und organisatorischer Schutzmaßnahmen, die auf das notwendige Maß beschränkt sind. <br /><br />Details können auf Anfrage zur Verfügung gestellt werden.",
+      "content": "<strong>Empfänger:</strong><br/>Interne Abteilungen (Operations, Creator Success, Sales, Finance), Auftragsverarbeiter (Hosting/IT, E-Mail/Newsletter, Zahlungsdienste, Dateitransfer, CRM/Ticket-Systeme) und - im Rahmen von Projekten - Geschäftskunden/Partner.<br/><br/><strong>Drittländer:</strong><br/>Wenn Daten in Drittländer (außerhalb des EWR) übermittelt werden, z.B., an Mailchimp (USA), erfolgen solche Übermittlungen auf der Grundlage angemessener Garantien, insbesondere Standardvertragsklauseln (SCCs), und zusätzlicher technischer und organisatorischer Schutzmaßnahmen, die auf das notwendige Maß beschränkt sind. <br /><br />Details können auf Anfrage zur Verfügung gestellt werden.",
       "subsections": []
     },
     {
@@ -279,7 +279,7 @@
     },
     {
       "id": "Speicherzeitraum",
-      "title": "14. Lagerdauer und Kriterien",
+      "title": "14. Lagerungsdauer und Kriterien",
       "content": "Wir speichern personenbezogene Daten nur so lange, wie es zur Erfüllung der jeweiligen Zwecke erforderlich ist oder wie es die gesetzlichen/vertraglichen Verpflichtungen verlangen (in der Regel 6-10 Jahre für steuerliche und handelsrechtliche Unterlagen). Danach löschen oder anonymisieren wir die Daten. Einverständniserklärungen können bis zu 3 Jahre nach Widerruf aufbewahrt werden (Rechenschaftspflicht).",
       "subsections": []
     },
@@ -315,11 +315,11 @@
           "content": "Sie können die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten unter den folgenden Bedingungen verlangen:",
           "orderedList": [
             "Sie die Richtigkeit Ihrer personenbezogenen Daten während eines Zeitraums bestreiten, der es uns ermöglicht, die Richtigkeit der Daten zu überprüfen;",
-            "die Verarbeitung rechtswidrig ist, Sie aber die Löschung ablehnen und stattdessen die Einschränkung der Verarbeitung verlangen;",
+            "die Verarbeitung rechtswidrig ist, Sie aber der Löschung widersprechen und stattdessen die Einschränkung der Verarbeitung verlangen;",
             "wir die Daten für die Verarbeitung nicht mehr benötigen, Sie sie aber zur Begründung, Ausübung oder Verteidigung von Rechtsansprüchen benötigen; oder",
             "Sie haben Widerspruch gegen die Verarbeitung gemäß Art. 21(1) DSGVO widersprochen haben, bis wir geprüft haben, ob unsere berechtigten Gründe die Ihren überwiegen."
           ],
-          "additionalContent": "Wenn die Verarbeitung eingeschränkt ist, dürfen die Daten - abgesehen von der Speicherung - nur mit Ihrer Einwilligung, für rechtliche Ansprüche, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden. Sie werden informiert, bevor eine Einschränkung aufgehoben wird."
+          "additionalContent": "Wenn die Verarbeitung eingeschränkt ist, dürfen die Daten - abgesehen von der Speicherung - nur mit Ihrer Zustimmung, für rechtliche Ansprüche, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden. Sie werden informiert, bevor eine Einschränkung aufgehoben wird."
         },
         {
           "id": "Recht auf Erlass",
@@ -346,7 +346,7 @@
             {
               "id": "Ausnahmen",
               "title": "c) Ausnahmen",
-              "content": "Das Recht auf Löschung gilt nicht, wenn die Verarbeitung erforderlich ist:<br/><br/>1. zur Ausübung des Rechts auf freie Meinungsäußerung und Information;<br/>2. zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe im öffentlichen Interesse;<br/>3. aus Gründen des öffentlichen Interesses im Bereich der öffentlichen Gesundheit (Art. 9(2)(h, i) und (3) GDPR);<br/>4. für archivarische, wissenschaftliche, historische oder statistische Zwecke (Art. 89(1) GDPR), wenn eine Löschung diese Zwecke ernsthaft beeinträchtigen würde; oder<br/>5. für die Begründung, Ausübung oder Verteidigung von Rechtsansprüchen."
+              "content": "Das Recht auf Löschung gilt nicht, wenn die Verarbeitung erforderlich ist:<br/><br/>1. zur Ausübung des Rechts auf freie Meinungsäußerung und Information;<br/>2. zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe von öffentlichem Interesse;<br/>3. aus Gründen des öffentlichen Interesses im Bereich der öffentlichen Gesundheit (Art. 9(2)(h, i) und (3) GDPR);<br/>4. für archivarische, wissenschaftliche, historische oder statistische Zwecke (Art. 89(1) GDPR), wenn eine Löschung diese Zwecke ernsthaft beeinträchtigen würde; oder<br/>5. für die Begründung, Ausübung oder Verteidigung von Rechtsansprüchen."
             }
           ]
         },

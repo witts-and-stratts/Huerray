@@ -1,7 +1,7 @@
 {
   "paymentsPage": {
     "title": "Auszahlungen",
-    "description": "Anzeigen und Verwalten aller Auszahlungen an Ersteller auf der gesamten Plattform.",
+    "description": "Anzeigen und Verwalten aller Creators-Auszahlungen auf der gesamten Plattform.",
     "toolbar": {
       "filterPlaceholder": "Auszahlungen filtern...",
       "status": "Status",
@@ -27,14 +27,14 @@
     },
     "newBatchPayment": {
       "title": "Neue Chargenzahlung",
-      "description": "Wählen Sie einen Ersteller und seine ausstehenden Zahlungsposten aus.",
+      "description": "Wählen Sie einen Creator und seine ausstehenden Zahlungsposten aus.",
       "triggerButton": "Neue Zahlung",
-      "creatorLabel": "Schöpfer",
-      "creatorPlaceholder": "Wählen Sie einen Ersteller...",
+      "creatorLabel": "Creator",
+      "creatorPlaceholder": "Wählen Sie einen Creator...",
       "pendingItems": "Ausstehende Posten",
       "deselectAll": "Alle abwählen",
       "selectAll": "Alle auswählen",
-      "noItems": "Keine ausstehenden Zahlungsposten für diesen Ersteller.",
+      "noItems": "Keine ausstehenden Zahlungen für diesen Creator.",
       "paymentMethodLabel": "Zahlungsmethode",
       "paymentMethodPlaceholder": "z.B. Banküberweisung, PayPal...",
       "notesLabel": "Anmerkungen",
