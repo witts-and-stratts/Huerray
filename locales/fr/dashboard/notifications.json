@@ -68,7 +68,7 @@
   },
   "confirm": {
     "deleteAllTitle": "Supprimer toutes les notifications",
-    "deleteAllDescription": "Êtes-vous sûr de vouloir supprimer toutes les notifications ? Cette action ne peut être annulée.",
+    "deleteAllDescription": "Êtes-vous sûr de vouloir supprimer toutes les notifications ? Cette action ne peut pas être annulée.",
     "deleteAllConfirm": "Supprimer tout",
     "deleting": "Suppression..."
   },
@@ -110,7 +110,7 @@
       "selectRecipient": "Sélectionner le destinataire de la notification",
       "recipientDescription": "Sélectionnez l'utilisateur qui doit recevoir cette notification.",
       "eventName": "Nom de l'événement",
-      "eventNamePlaceholder": "par exemple, Invitation à la fête acceptée",
+      "eventNamePlaceholder": "par exemple : Gig Invitation acceptée",
       "eventType": "Type d'événement",
       "title": "Titre",
       "titlePlaceholder": "Titre de la notification",

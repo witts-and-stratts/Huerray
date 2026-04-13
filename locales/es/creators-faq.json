@@ -11,7 +11,7 @@
         },
         {
           "question": "¿Tengo que publicar el contenido en mis propios canales de redes sociales?",
-          "answer": "No. Usted crea el contenido para la marca; no es necesario publicar en sus propios canales a menos que forme parte explícitamente de la oferta de la campaña."
+          "answer": "No. Usted crea el contenido para la marca; publicar en sus propios canales no es necesario a menos que forme parte explícitamente de la oferta de la campaña."
         }
       ]
     },
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "section": "Legal y conducta",
+      "section": "Legal & Conducta",
       "faqs": [
         {
           "question": "¿Puedo trabajar con la marca fuera de Huerray?",

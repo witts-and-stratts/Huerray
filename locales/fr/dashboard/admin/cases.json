@@ -63,7 +63,7 @@
         "missingId": "ID du cas manquant",
         "assigneeRequired": "Sélectionnez un administrateur pour assigner ce cas",
         "caseAssigned": "Cas attribué",
-        "caseAssignError": "Échec de l'assignation d'un cas",
+        "caseAssignError": "Échec de l'attribution d'un dossier",
         "statusUpdated": "Mise à jour de l'état d'avancement du dossier",
         "statusUpdateError": "Échec de la mise à jour du statut du dossier"
       }

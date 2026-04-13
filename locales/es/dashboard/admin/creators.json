@@ -60,7 +60,7 @@
     "return": "Devolución",
     "makeAiCreator": "Creador de IA",
     "makeHumanCreator": "Hacer Creador Humano",
-    "confirmMakeAiTitle": "¿Creador de IA?",
+    "confirmMakeAiTitle": "¿Hacer creador de IA?",
     "confirmMakeAiDesc": "{name} será marcado como creador de contenidos generados por IA.",
     "confirmMakeHumanTitle": "¿Hacer Creador Humano?",
     "confirmMakeHumanDesc": "{name} será marcado como creador de contenidos generados por humanos.",

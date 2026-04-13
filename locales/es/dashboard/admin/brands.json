@@ -45,7 +45,7 @@
   },
   "brandActionMenu": {
     "ThisActionCannot": "? Esta acción no se puede deshacer.",
-    "areYouSureYou": "¿Estás seguro de que quieres borrar",
+    "areYouSureYou": "¿Está seguro de que desea eliminar",
     "openMenu": "Abrir menú",
     "brandDeletedSuccessfully": "Marca eliminada con éxito",
     "failedToDeleteBrand": "No se ha podido eliminar la marca",
@@ -98,7 +98,7 @@
   },
   "brandCampaignsTableBlock": {
     "created": "Creado:",
-    "noCampaignsYet": "Aún no hay campañas",
+    "noCampaignsYet": "Todavía no hay campañas",
     "loadingRecentCampaigns": "Cargando campañas recientes...",
     "loadingCampaignStats": "Cargando estadísticas de campaña...",
     "recentCampaigns": "Campañas recientes",
@@ -151,7 +151,7 @@
     "na": "N/A"
   },
   "brandRecentCampaignsBlock": {
-    "noCampaignsYet": "Todavía no hay campañas.",
+    "noCampaignsYet": "Aún no hay campañas.",
     "unableToLoadRecent": "No se pueden cargar las campañas recientes.",
     "latestCampaignsForThis": "Últimas campañas de esta marca",
     "recentCampaigns": "Campañas recientes"

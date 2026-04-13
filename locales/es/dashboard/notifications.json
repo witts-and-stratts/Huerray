@@ -137,7 +137,7 @@
     "priority": {
       "low": {
         "label": "Bajo",
-        "description": "Notificación de prioridad inferior"
+        "description": "Notificación de menor prioridad"
       },
       "normal": {
         "label": "Normal",

@@ -67,7 +67,7 @@
     "saveChanges": "Änderungen speichern",
     "discardChanges": "Änderungen verwerfen",
     "confirmTitle": "Bestätigung der Profilaktualisierung",
-    "confirmDescription": "Das Speichern Ihres Profils erfordert eine Überprüfung und Genehmigung, bevor Sie bestimmte Aufgaben ausführen können.",
+    "confirmDescription": "Die Speicherung Ihres Profils erfordert eine Überprüfung und Genehmigung, bevor Sie bestimmte Aufgaben ausführen können.",
     "continueAndSave": "Fortfahren und speichern",
     "passwordUpdated": "Passwort erfolgreich aktualisiert",
     "errorPasswordUpdate": "Passwortänderung fehlgeschlagen",

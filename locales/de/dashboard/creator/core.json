@@ -26,7 +26,7 @@
     "na": "K.A.",
     "invitedCreator": "Eingeladener Creator",
     "videoCount": "{count, plural, =0 {No videos} =1 {1 video} other {# videos}}",
-    "failedToLoad": "Konnte nicht geladen werden {name}",
+    "failedToLoad": "Fehler beim Laden von {name}",
     "somethingWentWrong": "Etwas ist schief gelaufen",
     "product": "Produkt",
     "srGigDetails": "Details für Auftritt: {title}",

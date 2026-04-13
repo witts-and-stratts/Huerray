@@ -12,7 +12,7 @@
     "actionMenu": {
       "view": "Siehe",
       "confirmPayout": "Bestätigung der Auszahlung",
-      "confirming": "Bestätigen Sie...",
+      "confirming": "Bestätigen...",
       "confirmDialog": {
         "title": "Bestätigung der Auszahlung",
         "description": "Sind Sie sicher, dass Sie diese Auszahlung bestätigen wollen? Dadurch wird ein Zahlungsposten-Datensatz erstellt.",

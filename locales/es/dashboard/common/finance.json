@@ -61,7 +61,7 @@
       "confirmSuccess": "Pago confirmado con éxito.",
       "confirmError": "No se ha podido confirmar el pago. Por favor, inténtelo de nuevo.",
       "missingPaymentId": "Falta ID de pago.",
-      "deleteTitle": "Borrar pago",
+      "deleteTitle": "Suprimir pago",
       "deleteDescription": "¿Está seguro de que desea eliminar este pago? Esta acción no se puede deshacer.",
       "deleteDescriptionWithReference": "¿Está seguro de que desea eliminar el pago {reference}? Esta acción no se puede deshacer.",
       "deleteConfirmPlaceholder": "Escriba {reference} para confirmar",

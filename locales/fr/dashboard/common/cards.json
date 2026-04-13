@@ -11,7 +11,7 @@
     "userFallback": "Utilisateur",
     "creatorFallback": "Créateur",
     "updatedDate": "Mise à jour {date}",
-    "campaignCover": "Couverture de la campagne",
+    "campaignCover": "Couverture de campagne",
     "gigCount": "{count, plural, =1 {# gig} other {# gigs}}",
     "application": "Application",
     "submissions": "Soumissions",

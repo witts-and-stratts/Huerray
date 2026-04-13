@@ -168,7 +168,7 @@
         {
           "id": "E-Mail-Beschwerde",
           "title": "e) Widerspruchsrecht und Löschungsmöglichkeiten",
-          "content": "Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen (z.B. über den Abmeldelink in jeder E-Mail oder per E-Mail an info@huerray.de). Sie können der Werbung für Bestandskunden jederzeit widersprechen. Die Verarbeitung von Transaktions-E-Mails ist für die Vertragserfüllung erforderlich; es besteht keine Möglichkeit, diese abzubestellen, wenn dies gesetzlich/vertraglich vorgeschrieben ist."
+          "content": "Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen (z.B. über den Abmeldelink in jeder E-Mail oder per E-Mail an info@huerray.de). Sie können der Werbung für Bestandskunden jederzeit widersprechen. Die Verarbeitung von Transaktions-E-Mails ist für die Vertragserfüllung erforderlich; es besteht keine Möglichkeit, diese abzubestellen, sofern dies gesetzlich/vertraglich vorgeschrieben ist."
         }
       ]
     },
@@ -183,12 +183,12 @@
           "list": [
             "<strong>Identitäts- und Kontaktdaten:</strong> Vor- und Nachname, ggf. Name des Künstlers/Creators, Adresse(n), E-Mail-Adresse, Telefonnummer(n), Firmenname/Funktion (bei Geschäftskunden), bevorzugte Sprache.",
             "<strong>Zugangsdaten:</strong> Benutzername, Passwort (ausschließlich in verschlüsselter Form gespeichert), ggf. Sicherheits-/Verifizierungsattribute.",
-            "<strong>Vertrags-/Geschäftsdaten:</strong> Informationen zum Rechtsgeschäft (Angebot, Auftrag, Vertragstexte, Konditionen, Stornierungen), Projekt-/Auftragskennungen, Briefings/Genehmigungen, Abnahmen, Projektkommunikation, Rechnungs-/Zahlungsstatus.",
+            "<strong>Vertrags-/Geschäftsdaten:</strong> Informationen zum Rechtsgeschäft (Angebot, Auftrag, Vertragstexte, Konditionen, Stornierungen), Projekt-/Auftrags-IDs, Briefings/Genehmigungen, Abnahmen, Projektkommunikation, Rechnungs-/Zahlungsstatus.",
             "<strong>Rechnungs-/Zahlungsdaten:</strong> Rechnungs- und Lieferadresse, Umsatzsteuer-ID (falls zutreffend), Bankverbindung/IBAN/BIC oder ID des Zahlungsdienstleisters.",
             "<strong>Zustimmungs- und Nachweisdaten:</strong> Zustimmungserklärungen (z. B. Newsletter/Tracking, Veröffentlichungen), Double-Opt-In-Zeitstempel, Zustimmungs-/Widerrufsprotokolle.",
             "<strong>Profil-/Benutzerinformationen (freiwillig):</strong> Profilfoto/Avatar, Social-Media-Handles, Themenpräferenzen, Portfolio-Links, Einstellungen."
           ],
-          "additionalContent": "Im Rahmen der Vertragserfüllung können Ihre personenbezogenen Daten an Dritte weitergegeben werden, soweit dies für die jeweilige Vertragsabwicklung oder Projektdurchführung erforderlich ist (z.B. Hosting-/IT-Provider, E-Mail-/Newsletter-Anbieter Mailchimp, Zahlungs-/Bankdienstleister, Logistik/Dateitransfer und im Creators-Kontext Kunden/Partner, soweit dies für Briefing, Freigaben, Abnahmen oder Nutzungsnachweise erforderlich ist). Wir haben Datenverarbeitungsverträge mit Auftragsverarbeitern gemäß Art. 28 GDPR."
+          "additionalContent": "Im Rahmen der Vertragserfüllung können Ihre personenbezogenen Daten an Dritte weitergegeben werden, soweit dies für die jeweilige Vertragsabwicklung oder Projektdurchführung erforderlich ist (z.B. an Hosting-/IT-Provider, E-Mail-/Newsletter-Anbieter Mailchimp, Zahlungs-/Bankdienstleister, Logistik/Dateitransfer und im Creators-Kontext an Kunden/Partner, soweit dies für Briefing, Freigaben, Abnahmen oder Nutzungsnachweise erforderlich ist). Wir haben Datenverarbeitungsverträge mit Auftragsverarbeitern gemäß Art. 28 GDPR."
         },
         {
           "id": "melderechtliche Grundlage",
@@ -249,7 +249,7 @@
         {
           "id": "Werbeeinwand",
           "title": "e) Widerspruchsrecht und Löschungsmöglichkeiten",
-          "content": "Sie können der Nutzung Ihrer Daten für Werbezwecke jederzeit widersprechen. Bei E-Mails nutzen Sie bitte den dafür vorgesehenen Abmeldelink oder wenden sich an datenschutz@huerray.de; bei postalischer Werbung können Sie ebenfalls jederzeit widersprechen."
+          "content": "Sie können der Nutzung Ihrer Daten zu Werbezwecken jederzeit widersprechen. Bei E-Mails nutzen Sie bitte den dafür vorgesehenen Abmeldelink oder wenden sich an datenschutz@huerray.de; bei postalischer Werbung können Sie ebenfalls jederzeit widersprechen."
         }
       ]
     },
@@ -279,8 +279,8 @@
     },
     {
       "id": "Speicherzeitraum",
-      "title": "14. Lagerungsdauer und Kriterien",
-      "content": "Wir speichern personenbezogene Daten nur so lange, wie es zur Erfüllung der jeweiligen Zwecke erforderlich ist oder wie es die gesetzlichen/vertraglichen Verpflichtungen verlangen (in der Regel 6-10 Jahre für steuerliche und handelsrechtliche Unterlagen). Danach löschen oder anonymisieren wir die Daten. Einverständniserklärungen können bis zu 3 Jahre nach Widerruf aufbewahrt werden (Rechenschaftspflicht).",
+      "title": "14. Lagerdauer und Kriterien",
+      "content": "Wir speichern personenbezogene Daten nur so lange, wie es zur Erfüllung der jeweiligen Zwecke erforderlich ist oder wie es die gesetzlichen/vertraglichen Verpflichtungen erfordern (in der Regel 6-10 Jahre für steuer- und handelsrechtliche Unterlagen). Danach löschen oder anonymisieren wir die Daten. Einverständniserklärungen können bis zu 3 Jahre nach Widerruf aufbewahrt werden (Rechenschaftspflicht).",
       "subsections": []
     },
     {
@@ -319,7 +319,7 @@
             "wir die Daten für die Verarbeitung nicht mehr benötigen, Sie sie aber zur Begründung, Ausübung oder Verteidigung von Rechtsansprüchen benötigen; oder",
             "Sie haben Widerspruch gegen die Verarbeitung gemäß Art. 21(1) DSGVO widersprochen haben, bis wir geprüft haben, ob unsere berechtigten Gründe die Ihren überwiegen."
           ],
-          "additionalContent": "Wenn die Verarbeitung eingeschränkt ist, dürfen die Daten - abgesehen von der Speicherung - nur mit Ihrer Zustimmung, für rechtliche Ansprüche, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden. Sie werden informiert, bevor eine Einschränkung aufgehoben wird."
+          "additionalContent": "Wenn die Verarbeitung eingeschränkt ist, dürfen die Daten - abgesehen von der Speicherung - nur mit Ihrer Einwilligung, für rechtliche Ansprüche, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden. Sie werden informiert, bevor eine Einschränkung aufgehoben wird."
         },
         {
           "id": "Recht auf Erlass",
@@ -346,7 +346,7 @@
             {
               "id": "Ausnahmen",
               "title": "c) Ausnahmen",
-              "content": "Das Recht auf Löschung gilt nicht, wenn die Verarbeitung erforderlich ist:<br/><br/>1. zur Ausübung des Rechts auf freie Meinungsäußerung und Information;<br/>2. zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe von öffentlichem Interesse;<br/>3. aus Gründen des öffentlichen Interesses im Bereich der öffentlichen Gesundheit (Art. 9(2)(h, i) und (3) GDPR);<br/>4. für archivarische, wissenschaftliche, historische oder statistische Zwecke (Art. 89(1) GDPR), wenn eine Löschung diese Zwecke ernsthaft beeinträchtigen würde; oder<br/>5. für die Begründung, Ausübung oder Verteidigung von Rechtsansprüchen."
+              "content": "Das Recht auf Löschung gilt nicht, wenn die Verarbeitung erforderlich ist:<br/><br/>1. zur Ausübung des Rechts auf freie Meinungsäußerung und Information;<br/>2. zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe im öffentlichen Interesse;<br/>3. aus Gründen des öffentlichen Interesses im Bereich der öffentlichen Gesundheit (Art. 9(2)(h, i) und (3) GDPR);<br/>4. für archivarische, wissenschaftliche, historische oder statistische Zwecke (Art. 89(1) GDPR), wenn eine Löschung diese Zwecke ernsthaft beeinträchtigen würde; oder<br/>5. für die Begründung, Ausübung oder Verteidigung von Rechtsansprüchen."
             }
           ]
         },
@@ -381,7 +381,7 @@
           "content": "Sie haben das Recht, keiner ausschließlich auf einer automatisierten Verarbeitung - einschließlich Profiling - beruhenden Entscheidung unterworfen zu werden, die Ihnen gegenüber rechtliche Wirkung entfaltet oder Sie in ähnlicher Weise erheblich beeinträchtigt, es sei denn, dies ist der Fall:",
           "orderedList": [
             "es für den Abschluss oder die Erfüllung eines Vertrags zwischen Ihnen und uns erforderlich ist;",
-            "sie nach dem Unionsrecht oder dem Recht der Mitgliedstaaten, das angemessene Garantien vorsieht, zulässig ist; oder",
+            "sie nach dem Unionsrecht oder dem Recht der Mitgliedstaaten, das geeignete Garantien vorsieht, zulässig ist; oder",
             "sie beruht auf Ihrer ausdrücklichen Zustimmung."
           ],
           "additionalContent": "Solche Entscheidungen dürfen nicht auf besonderen Kategorien personenbezogener Daten beruhen, es sei denn, Art. 9 Absatz 2 Buchstabe a oder g DSGVO Anwendung findet und angemessene Maßnahmen zur Wahrung Ihrer Rechte und Interessen ergriffen werden.<br/><br/>In den unter (1) und (3) genannten Fällen ergreifen wir geeignete Maßnahmen zum Schutz Ihrer Rechte und Freiheiten, einschließlich des Rechts auf ein Eingreifen des Menschen, auf Darlegung des eigenen Standpunkts und auf Anfechtung der Entscheidung."

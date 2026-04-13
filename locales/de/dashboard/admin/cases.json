@@ -51,7 +51,7 @@
         "description": "Wählen Sie einen Administrator, dem Sie diesen Supportfall zuweisen möchten.",
         "assigneeLabel": "Admin-Empfänger",
         "placeholder": "Wählen Sie einen Administrator",
-        "unknownAdmin": "Unbekannter Administrator",
+        "unknownAdmin": "Unbekannter Admin",
         "loading": "Admins laden...",
         "empty": "Keine Admins verfügbar.",
         "cancel": "Abbrechen",

@@ -7,7 +7,7 @@
     "description": "Mettez à jour vos données personnelles et vos coordonnées.",
     "saving": "Économiser...",
     "saveChanges": "Enregistrer les modifications",
-    "discardChanges": "Modifications de la mise au rebut",
+    "discardChanges": "Changements dans les rejets",
     "changesDiscarded": "Modifications rejetées",
     "successUpdated": "Mise à jour réussie des paramètres du compte",
     "errorUpdateFailed": "Échec de la mise à jour des paramètres du compte",

@@ -59,7 +59,7 @@
     "dialogs": {
       "generatePayment": {
         "title": "Générer un paiement",
-        "description": "Cette action marquera la facture comme payée et générera un enregistrement de paiement. Cette action ne peut pas être annulée.",
+        "description": "Cette action marque la facture comme payée et génère un enregistrement de paiement. Cette action ne peut pas être annulée.",
         "confirmLabel": "Générer un paiement",
         "loading": "Générer...",
         "notes": "Notes"
@@ -119,6 +119,6 @@
   },
   "paymentsPage": {
     "title": "Paiements",
-    "description": "Consulter l'historique de vos paiements."
+    "description": "Consultez l'historique de vos paiements."
   }
 }

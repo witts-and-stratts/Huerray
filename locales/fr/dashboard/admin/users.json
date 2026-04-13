@@ -45,7 +45,7 @@
   },
   "createUser": {
     "title": "Ajouter un utilisateur",
-    "description": "Créez un nouveau compte utilisateur. Remplissez les informations ci-dessous.",
+    "description": "Créez un nouveau compte utilisateur. Complétez les informations ci-dessous.",
     "firstNameLabel": "Prénom",
     "firstNamePlaceholder": "Jean",
     "lastNameLabel": "Nom de famille",

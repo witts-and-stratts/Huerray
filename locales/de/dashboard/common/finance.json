@@ -57,7 +57,7 @@
       "updateSuccess": "Die Zahlung wurde erfolgreich aktualisiert.",
       "updateError": "Die Zahlung konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
       "confirmPayout": "Bestätigung der Auszahlung",
-      "confirming": "Bestätigen Sie...",
+      "confirming": "Bestätigen...",
       "confirmSuccess": "Auszahlung erfolgreich bestätigt.",
       "confirmError": "Auszahlung konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.",
       "missingPaymentId": "Fehlende Zahlungs-ID.",
