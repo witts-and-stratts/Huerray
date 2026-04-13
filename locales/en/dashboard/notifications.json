@@ -123,7 +123,7 @@
       "actionUrlUnavailable": "This entity type does not currently generate an action URL.",
       "metadata": "Metadata",
       "metadataDescription": "Optional JSON object",
-      "metadataPlaceholder": "{\"gig_id\":\"...\"}"
+      "metadataPlaceholder": "'{\"gig_id\":\"...\"}'"
     },
     "validation": {
       "recipientRequired": "Notification recipient is required",

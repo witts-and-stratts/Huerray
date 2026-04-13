@@ -123,7 +123,7 @@
       "actionUrlUnavailable": "Ce type d'entité ne génère pas actuellement d'URL d'action.",
       "metadata": "Métadonnées",
       "metadataDescription": "Objet JSON facultatif",
-      "metadataPlaceholder": "{\"gig_id\":\"...\"}"
+      "metadataPlaceholder": "'{\"gig_id\":\"...\"}'"
     },
     "validation": {
       "recipientRequired": "Le destinataire de la notification est requis",

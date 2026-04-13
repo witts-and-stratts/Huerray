@@ -23,8 +23,9 @@ interface SubHeaderProps {
   breadcrumbs?: { label: string; href?: string; }[];
   status?: React.ReactNode;
   className?: string;
+  childrenClassName?: string;
 }
-export function SubHeader( { title, description, children, pre, tabs, breadcrumbs, status, className }: SubHeaderProps ) {
+export function SubHeader( { title, description, children, pre, tabs, breadcrumbs, status, className, childrenClassName }: SubHeaderProps ) {
   return (
     <div className={ cn( 'pt-4 sticky top-0 bg-background z-50' ) }>
       { breadcrumbs && breadcrumbs.length > 0 && (
@@ -53,7 +54,7 @@ export function SubHeader( { title, description, children, pre, tabs, breadcrumb
         <SubpageHeading title={ title } description={ description || '' }>
           { status }
         </SubpageHeading>
-        <div className='flex gap-2'>
+        <div className={ cn( 'flex gap-2', childrenClassName ) }>
           { children }
         </div>
       </div>

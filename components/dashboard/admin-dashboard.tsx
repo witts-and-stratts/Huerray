@@ -21,7 +21,7 @@ export function AdminDashboard() {
         title={ t( 'overview' ) }
         description={ t( 'description' ) }
       >
-        <AdminDateRangePicker />
+        {/* <AdminDateRangePicker /> */ }
       </SubHeader>
 
       <div className="ad-shell py-4 bg-burgundy-50/50 mt-0">

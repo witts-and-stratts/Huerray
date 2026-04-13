@@ -67,7 +67,7 @@ export function NotificationsHeaderActions() {
   }
 
   return (
-    <>
+    <div className='flex gap-2 max-md:self-end'>
       <RoleGuard allowedRoles={ [ 'admin' ] }>
         <Button
           variant='outline'
@@ -78,12 +78,11 @@ export function NotificationsHeaderActions() {
           <Plus className='size-4' strokeWidth={ 1 } />
         </Button>
       </RoleGuard>
-      <ButtonGroup className='items-center'>
-
+      <ButtonGroup className='items-center items-start'>
         <Button
           variant='outline'
           size='default'
-          className='hidden sm:flex'
+          className='hidden md:flex'
           onClick={ () => markAllAsRead.mutate() }
           disabled={ markAllAsRead.isPending || unreadCount === 0 }
         >
@@ -96,7 +95,7 @@ export function NotificationsHeaderActions() {
           data={ { notifications } }
           label=''
           trigger={
-            <Button variant='outline' size='default' className='font-regular max-md:border-l max-md:rounded-l-md'>
+            <Button variant='outline' size='default' className='font-regular max-md:border-l-1! max-md:rounded-l-md!'>
               <ChevronDown className='size-4' />
             </Button>
           }
@@ -122,6 +121,6 @@ export function NotificationsHeaderActions() {
         open={ isCreateOpen }
         onOpenChange={ setIsCreateOpen }
       />
-    </>
+    </div>
   );
 }

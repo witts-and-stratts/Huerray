@@ -107,7 +107,7 @@ export function NotificationsView() {
 
         {/* Mobile sheet — detail */ }
         <Sheet open={ mobileDetailOpen } onOpenChange={ setMobileDetailOpen }>
-          <SheetContent side="right" className="w-full sm:max-w-full p-0 gap-0" showCloseButton={ false }>
+          <SheetContent side="right" className="w-[90%]! sm:max-w-full p-0 gap-0" showCloseButton={ false }>
             <NotificationDetail
               notification={ selectedNotification }
               onMarkAsRead={ handleMarkAsRead }
@@ -169,38 +169,38 @@ export function NotificationsView() {
                 <Loader2 className="size-5 animate-spin text-muted-foreground" />
               </div>
             ) }
-          <ScrollArea className="h-full" scrollbar={ {
-            className: "w-3 p-1",
-          } }>
-            { filtered.length === 0 ? (
-              searchTerm.trim()
-                ? (
-                  <div className="px-6 py-8 text-center text-sm text-muted-foreground">
-                    { t( "search.noResults" ) }
-                  </div>
-                )
-                : <NotificationsEmptyState />
-            ) : (
-              <AnimatePresence initial={ false } mode="popLayout">
-                { filtered.map( ( notification, index ) => (
-                  <motion.div
-                    key={ notification.id }
-                    layout
-                    initial={ { opacity: 0, x: -8 } }
-                    animate={ { opacity: 1, x: 0 } }
-                    exit={ { opacity: 0, x: -8 } }
-                    transition={ { duration: 0.15, ease: "easeOut", delay: Math.min( index * 0.02, 0.1 ) } }
-                  >
-                    <NotificationRow
-                      notification={ notification }
-                      isSelected={ selectedId === notification.id }
-                      onClick={ () => handleSelect( notification.id! ) }
-                    />
-                  </motion.div>
-                ) ) }
-              </AnimatePresence>
-            ) }
-          </ScrollArea>
+            <ScrollArea className="h-full" scrollbar={ {
+              className: "w-3 p-1",
+            } }>
+              { filtered.length === 0 ? (
+                searchTerm.trim()
+                  ? (
+                    <div className="px-6 py-8 text-center text-sm text-muted-foreground">
+                      { t( "search.noResults" ) }
+                    </div>
+                  )
+                  : <NotificationsEmptyState />
+              ) : (
+                <AnimatePresence initial={ false } mode="popLayout">
+                  { filtered.map( ( notification, index ) => (
+                    <motion.div
+                      key={ notification.id }
+                      layout
+                      initial={ { opacity: 0, x: -8 } }
+                      animate={ { opacity: 1, x: 0 } }
+                      exit={ { opacity: 0, x: -8 } }
+                      transition={ { duration: 0.15, ease: "easeOut", delay: Math.min( index * 0.02, 0.1 ) } }
+                    >
+                      <NotificationRow
+                        notification={ notification }
+                        isSelected={ selectedId === notification.id }
+                        onClick={ () => handleSelect( notification.id! ) }
+                      />
+                    </motion.div>
+                  ) ) }
+                </AnimatePresence>
+              ) }
+            </ScrollArea>
           </div>
 
           {/* Pagination */ }
