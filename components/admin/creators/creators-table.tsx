@@ -67,6 +67,7 @@ interface CreatorsTableProps {
   rowCount?: number;
   defaultContentTypeFilter?: string[];
   onContentTypeFilterChange?: ( value?: string[] ) => void;
+  showContentTypeFilter?: boolean;
 }
 
 export function CreatorsTable( {
@@ -78,6 +79,7 @@ export function CreatorsTable( {
   rowCount,
   defaultContentTypeFilter,
   onContentTypeFilterChange,
+  showContentTypeFilter = true,
 }: CreatorsTableProps ) {
   const showLoading = useDelayedLoading( isLoading, 250 );
   const t = useTranslations( 'dashboard.admin' );
@@ -236,6 +238,7 @@ export function CreatorsTable( {
                   genders={ genders }
                   view={ view }
                   setView={ setView }
+                  showContentTypeFilter={ showContentTypeFilter }
                 />
               ) }
               <CreatorsView

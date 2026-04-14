@@ -194,6 +194,7 @@ interface CreatorsTableToolbarProps<TData> {
   genders: string[];
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
+  showContentTypeFilter?: boolean;
 }
 
 export function CreatorsTableToolbar<TData>( {
@@ -203,6 +204,7 @@ export function CreatorsTableToolbar<TData>( {
   genders,
   view,
   setView,
+  showContentTypeFilter = true,
 }: CreatorsTableToolbarProps<TData> ) {
   const t = useTranslations( 'dashboard.admin' );
   const getFilterLabel = useFilterLabel();
@@ -232,7 +234,7 @@ export function CreatorsTableToolbar<TData>( {
           title={ t( 'filters.sex' ) }
           labelFn={ getFilterLabel }
         />
-        <ContentTypeFilter table={ table } />
+        { showContentTypeFilter && <ContentTypeFilter table={ table } /> }
         <AgeRangeFilter table={ table } />
         <DataTableViewOptions
           table={ table }

@@ -14,17 +14,20 @@ import { InviteCreatorsDialog } from '@/components/campaigns/invite-creators-dia
 import { InvitationCard } from '@/components/creator/invitation-card';
 import { Button } from '@/components/dashboard-ui/button';
 import { useRole } from '@/contexts/role-context';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { useTranslations } from 'next-intl';
 
 interface CampaignInvitationsSectionProps {
   campaignId: string;
   campaignStatus?: string;
+  campaignContentType?: string;
 }
 
 
-export function CampaignInvitationsSection( { campaignId, campaignStatus }: CampaignInvitationsSectionProps ) {
+export function CampaignInvitationsSection( { campaignId, campaignStatus, campaignContentType }: CampaignInvitationsSectionProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const role = useRole();
+  const isAiCampaign = campaignContentType === UtilsContentType.ContentTypeAIGenerated;
   const { data: invitationsData, isLoading, error } = useCampaignInvitations( campaignId );
   const [ selectedInvitation, setSelectedInvitation ] = useState<ModelsGigInvitationResponse | null>( null );
   const [ sheetOpen, setSheetOpen ] = useState( false );
@@ -74,7 +77,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus }: Camp
         <EmptyInvitations
           fill={ true }
         >
-          { role === 'brand' && campaignStatus === 'running' && (
+          { role === 'brand' && campaignStatus === 'running' && !isAiCampaign && (
             <Button size='lg' className='min-w-[200px]' onClick={ () => setSelectionOpen( true ) }>{ t( 'inviteCreators' ) }</Button>
           ) }
         </EmptyInvitations>

@@ -156,6 +156,7 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   const status = campaign.campaign_status ?? '';
   const campaignId = campaign.id ?? '';
   const gigsValidated = campaign.number_of_gigs_validated ?? false;
+  const isAiCampaign = campaign.content_type === UtilsContentType.ContentTypeAIGenerated;
 
   const openAdminDialog = ( decision: AdminDecision ) => {
     setAdminDecision( decision );
@@ -163,7 +164,10 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   };
 
   const openBrandAccept = () => setAcceptDialogOpen( true );
-  const openInviteCreators = () => setGigSelectionOpen( true );
+  const openInviteCreators = () => {
+    if ( isAiCampaign ) return;
+    setGigSelectionOpen( true );
+  };
 
   const handleAdminAction = () => {
     if ( !campaignId ) return;
@@ -208,7 +212,7 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   // Build the action list and take the top 2 for the subheader
   const allActions = role === 'admin'
     ? buildAdminActions( t, status, basePath, campaignId, gigsValidated, pendingSubmissionCount, approvedSubmissionCount, openGigCount, openAdminDialog, changeTab )
-    : buildBrandActions( t, status, basePath, campaignId, submissionCount, pendingSubmissionCount, approvedSubmissionCount, acceptedSubmissionCount, openGigCount, inProgressGigCount, openBrandAccept, openInviteCreators, changeTab );
+    : buildBrandActions( t, status, basePath, campaignId, submissionCount, pendingSubmissionCount, approvedSubmissionCount, acceptedSubmissionCount, openGigCount, inProgressGigCount, !isAiCampaign, openBrandAccept, openInviteCreators, changeTab );
 
   const subheaderActions = allActions.slice( 0, 1 );
   const dropdownVariant = subheaderActions[ 0 ]?.disabled ? 'outline' : 'default';
@@ -330,7 +334,11 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
         </Activity>
 
         <Activity mode={ activeTab === 'invitations' ? 'visible' : 'hidden' }>
-          <CampaignInvitationsSection campaignId={ campaign.id || '' } campaignStatus={ campaign.campaign_status } />
+          <CampaignInvitationsSection
+            campaignId={ campaign.id || '' }
+            campaignStatus={ campaign.campaign_status }
+            campaignContentType={ campaign.content_type }
+          />
         </Activity>
 
         <Activity mode={ activeTab === 'gigs' ? 'visible' : 'hidden' }>

@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { Card } from '@/components/dashboard-ui/card';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { ModelsCampaignResponse, ModelsGigInvitationResponse } from '@/lib/api/generated';
+import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 
 interface CampaignOverviewSectionProps {
   campaign: ModelsCampaignResponse;
@@ -119,6 +120,7 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
   const submissionCount = submissionsData?.data?.length ?? 0;
   const creatorsWanted = campaign.number_of_creators_wanted || 0;
   const videosWanted = campaign.number_of_videos_wanted || 0;
+  const isAiCampaign = campaign.content_type === UtilsContentType.ContentTypeAIGenerated;
 
   // Stage reached logic based on campaign status lifecycle
   const status = campaign.campaign_status ?? '';
@@ -172,7 +174,7 @@ export function CampaignOverviewSection( { campaign, basePath, onViewAllInvitati
           onViewAllInvitations={ onViewAllInvitations }
         />
         <RoleGuard allowedRoles={ [ "brand" ] }>
-          { campaign?.number_of_gigs_validated && status === 'running' && (
+          { campaign?.number_of_gigs_validated && status === 'running' && !isAiCampaign && (
             <InviteCreatorsCard campaignId={ campaign.id || '' } contentType={ campaign.content_type } />
           ) }
         </RoleGuard>

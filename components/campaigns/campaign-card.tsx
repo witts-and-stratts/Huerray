@@ -263,7 +263,9 @@ export function CampaignCard( { campaign, onViewCreator }: CampaignCardProps ) {
             <Link href={ `${ basePath }/campaigns/${ id }` } className='hover:underline'>
               <CardTitle className='truncate flex items-center gap-2'>
                 <span className='truncate font-normal'>{ campaign_name }</span>
-                { campaign.content_type === UtilsContentType.ContentTypeAIGenerated && <AiContentBadge /> }
+                <RoleGuard>
+                  { campaign.content_type === UtilsContentType.ContentTypeAIGenerated && <AiContentBadge /> }
+                </RoleGuard>
               </CardTitle>
             </Link>
             <CardDescription

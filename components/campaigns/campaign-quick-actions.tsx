@@ -187,6 +187,7 @@ export function buildBrandActions(
   acceptedSubmissionCount: number,
   openGigCount: number,
   inProgressGigCount: number,
+  allowInviteCreators: boolean,
   openAccept: () => void,
   openInviteCreators: () => void,
   onNavigateToTab: ( tab: string ) => void,
@@ -194,15 +195,22 @@ export function buildBrandActions(
   const phase = resolveBrandPhase( status, pendingSubmissionCount, approvedSubmissionCount, submissionCount, acceptedSubmissionCount, openGigCount, inProgressGigCount );
   const editHref = `${ basePath }/campaigns/${ campaignId }/edit`;
 
+  const inviteMoreAction = allowInviteCreators
+    ? { key: 'invite-more', label: 'Invite More Creators', icon: Users, variant: 'primary', onClick: openInviteCreators }
+    : null;
+  const inviteAction = allowInviteCreators
+    ? { key: 'invite-creators', label: t( 'inviteCreators' ), icon: Users, variant: 'primary', onClick: openInviteCreators }
+    : null;
+
   const phaseActions: Record<BrandPhase, ActionItem | null> = {
     'created': { key: 'edit', label: 'Edit', icon: FilePen, variant: 'primary', href: editHref },
     'returned': { key: 'edit', label: 'Edit', icon: FilePen, variant: 'primary', href: editHref },
     'pending_approval': { key: '', label: 'Awaiting approval', variant: 'outline', disabled: true },
     'gigs_approved': { key: 'accept', label: t( 'acceptCampaign' ), icon: ThumbsUp, variant: 'primary', onClick: openAccept },
     'running:review': { key: 'review-submissions', label: 'Review Submissions', icon: FileSearch, variant: 'primary', onClick: () => onNavigateToTab( 'submissions' ) },
-    'running:invite_more': { key: 'invite-more', label: 'Invite More Creators', icon: Users, variant: 'primary', onClick: openInviteCreators },
+    'running:invite_more': inviteMoreAction,
     'running:awaiting_submissions': { key: 'awaiting-submissions', label: 'Awaiting Submissions', icon: Clock, variant: 'outline', disabled: true },
-    'running:invite': { key: 'invite-creators', label: t( 'inviteCreators' ), icon: Users, variant: 'primary', onClick: openInviteCreators },
+    'running:invite': inviteAction,
     'completed': null,
   };
 
