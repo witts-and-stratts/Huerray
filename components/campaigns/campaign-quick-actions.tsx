@@ -195,10 +195,10 @@ export function buildBrandActions(
   const phase = resolveBrandPhase( status, pendingSubmissionCount, approvedSubmissionCount, submissionCount, acceptedSubmissionCount, openGigCount, inProgressGigCount );
   const editHref = `${ basePath }/campaigns/${ campaignId }/edit`;
 
-  const inviteMoreAction = allowInviteCreators
+  const inviteMoreAction: ActionItem | null = allowInviteCreators
     ? { key: 'invite-more', label: 'Invite More Creators', icon: Users, variant: 'primary', onClick: openInviteCreators }
     : null;
-  const inviteAction = allowInviteCreators
+  const inviteAction: ActionItem | null = allowInviteCreators
     ? { key: 'invite-creators', label: t( 'inviteCreators' ), icon: Users, variant: 'primary', onClick: openInviteCreators }
     : null;
 
