@@ -8,11 +8,39 @@
       "title": "Brand Analytics",
       "description": "Performance metrics for your brand account",
       "error": "Unable to load brand analytics.",
+      "page": {
+        "title": "Analytics",
+        "description": "Track campaign, gig, creator outreach, content approval, and spend performance.",
+        "periodLabel": "Select analytics period",
+        "refresh": "Refresh",
+        "periods": {
+          "allTime": "All time",
+          "lastWeek": "Last week",
+          "lastMonth": "Last month",
+          "lastThreeMonths": "Last 3 months",
+          "lastYear": "Last year"
+        },
+        "groups": {
+          "support": "Support"
+        },
+        "groupDescriptions": {
+          "campaigns": "Campaign creation and completion across the selected period.",
+          "gigs": "Gig creation, acceptance, and delivery momentum.",
+          "outreach": "Creator invitations, applications, and approval quality.",
+          "contentSpend": "Video submission volume and approval throughput for your brand.",
+          "support": "Case volume and resolution performance for your account."
+        },
+        "items": {
+          "casesReported": "Cases Reported",
+          "casesResolved": "Cases Resolved",
+          "caseResolutionRate": "Case Resolution Rate"
+        }
+      },
       "groups": {
         "campaigns": "Campaigns",
         "gigs": "Gigs",
         "outreach": "Outreach",
-        "contentSpend": "Content & Spend"
+        "contentSpend": "Video Submissions"
       },
       "items": {
         "campaignsCreated": "Campaigns Created",

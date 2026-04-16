@@ -1,0 +1,276 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link [ref=e5] [cursor=pointer]:
+          - /url: /en
+          - img [ref=e6]
+        - navigation [ref=e60]:
+          - link "For Creators" [ref=e61] [cursor=pointer]:
+            - /url: /en/creators
+          - link "For Brands" [ref=e62] [cursor=pointer]:
+            - /url: /en/brands
+          - link "Pricing" [ref=e63] [cursor=pointer]:
+            - /url: /en/pricing
+        - generic [ref=e64]:
+          - button "User menu" [ref=e65] [cursor=pointer]:
+            - generic [ref=e66]: 
+            - generic [ref=e67]: 
+          - button "Select language" [active] [ref=e69] [cursor=pointer]:
+            - generic [ref=e71]: 
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - heading "Authentic UGC Video Content that Converts" [level=1] [ref=e75]
+          - heading "Collaborate with real vetted creators who make scroll-stopping videos for TikTok, Reels, and Ads" [level=2] [ref=e76]
+          - paragraph [ref=e77]: No Subscriptions. No Platform costs. Just UGC that drives sales
+          - button "Get started" [ref=e78]:
+            - link "Get started" [ref=e79] [cursor=pointer]:
+              - /url: /signup
+        - generic:
+          - generic:
+            - generic:
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+          - generic:
+            - generic:
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+              - img "Creator"
+    - heading "Huerray brings creators and brands together to create the perfect content for social media, ecommerce, ads and more" [level=2] [ref=e81]
+    - generic [ref=e82]:
+      - heading "Available to be used on" [level=5] [ref=e83]
+      - generic [ref=e85]:
+        - img "Shopify" [ref=e87]
+        - img "Instagram" [ref=e89]
+        - img "TikTok" [ref=e91]
+        - img "YouTube" [ref=e93]
+        - img "Snapchat" [ref=e95]
+        - img "WhatsApp" [ref=e97]
+        - img "LinkedIn" [ref=e99]
+        - img "Telegram" [ref=e101]
+        - img "Shopify" [ref=e103]
+        - img "Instagram" [ref=e105]
+        - img "TikTok" [ref=e107]
+        - img "YouTube" [ref=e109]
+        - img "Snapchat" [ref=e111]
+        - img "WhatsApp" [ref=e113]
+        - img "LinkedIn" [ref=e115]
+        - img "Telegram" [ref=e117]
+        - img "Shopify" [ref=e119]
+        - img "Instagram" [ref=e121]
+        - img "TikTok" [ref=e123]
+        - img "YouTube" [ref=e125]
+        - img "Snapchat" [ref=e127]
+        - img "WhatsApp" [ref=e129]
+        - img "LinkedIn" [ref=e131]
+        - img "Telegram" [ref=e133]
+    - generic [ref=e134]:
+      - heading "Match with experienced creators" [level=2] [ref=e135]
+      - region [ref=e137]:
+        - generic [ref=e138]:
+          - group [ref=e139]
+          - group [ref=e142]
+          - group [ref=e145]
+          - group [ref=e148]
+          - group [ref=e151]
+          - group [ref=e154]
+          - group [ref=e157]
+          - group [ref=e160]
+          - group "5 of 5" [ref=e163]
+          - group "1 of 5" [ref=e166]
+          - group "2 of 5" [ref=e169]
+          - group "3 of 5" [ref=e172]
+          - group [ref=e175]
+          - group [ref=e178]
+          - group [ref=e181]
+          - group [ref=e184]
+          - group [ref=e187]
+          - group [ref=e190]
+          - group [ref=e193]
+          - group [ref=e196]
+          - group [ref=e199]
+          - group [ref=e202]
+          - group [ref=e205]
+    - generic [ref=e208]:
+      - heading "Content for every objective" [level=2] [ref=e209]
+      - heading "Creators produce high-quality content all the time—from lo-fi to hi-fi. Creators have range, and adapt their production to match your goals" [level=4] [ref=e210]
+      - generic [ref=e211]:
+        - generic [ref=e212] [cursor=pointer]: Product Shots
+        - generic [ref=e213] [cursor=pointer]: Testimonial Videos
+        - generic [ref=e214] [cursor=pointer]: Unboxing Videos
+        - generic [ref=e215] [cursor=pointer]: Lifestyle Shots
+        - generic [ref=e216] [cursor=pointer]: Food & Beverage
+        - generic [ref=e217] [cursor=pointer]: Travel & Hospitality
+      - generic [ref=e218]:
+        - generic [ref=e220]:
+          - img "Content 1" [ref=e222]
+          - img "Content 1" [ref=e225]
+        - generic [ref=e227]:
+          - img "Content 2" [ref=e229]
+          - img "Content 2" [ref=e232]
+        - generic [ref=e234]:
+          - img "Content 3" [ref=e236]
+          - img "Content 3" [ref=e239]
+        - generic [ref=e241]:
+          - img "Content 4" [ref=e243]
+          - img "Content 4" [ref=e246]
+        - generic [ref=e248]:
+          - img "Content 5" [ref=e250]
+          - img "Content 5" [ref=e253]
+        - generic [ref=e255]:
+          - img "Content 6" [ref=e257]
+          - img "Content 6" [ref=e260]
+        - generic [ref=e262]:
+          - img "Content 7" [ref=e264]
+          - img "Content 7" [ref=e267]
+        - generic [ref=e269]:
+          - img "Content 8" [ref=e271]
+          - img "Content 8" [ref=e274]
+        - generic [ref=e276]:
+          - img "Content 9" [ref=e278]
+          - img "Content 9" [ref=e281]
+        - generic [ref=e283]:
+          - img "Content 10" [ref=e285]
+          - img "Content 10" [ref=e288]
+    - generic [ref=e290]:
+      - generic [ref=e291]:
+        - generic [ref=e292]:
+          - heading "Find & connect with creators who fit your brand" [level=3] [ref=e293]
+          - paragraph [ref=e294]: Customise and post your brief, tailoring the details such as length, format and video editing along the way
+        - generic [ref=e295]:
+          - heading "Commission attractive, original photos & videos" [level=3] [ref=e296]
+          - paragraph [ref=e297]: Receive applications from top creators. Select your preferred creators according to criteria that fits your brand content or campaign requirements
+        - generic [ref=e298]:
+          - heading "Send & receive feedback" [level=3] [ref=e299]
+          - paragraph [ref=e300]: Use the in-built communication feature to exchange feedback with your creators, ask them questions about their deliverables, make adjustments where needed or refine your requirements
+        - generic [ref=e301]:
+          - heading "100% licensing rights to all content created" [level=3] [ref=e302]
+          - paragraph [ref=e303]: Use your generated content. Your UGC will be delivered within 7 days. You can then start implementing it into your campaign
+      - img "How It Works" [ref=e305]
+    - generic [ref=e307]:
+      - paragraph [ref=e308]: Intelligencia Media
+      - paragraph [ref=e309]: “We immediately published the first ad variations with Billo's recommended structure, we didn't edit anything, and it already worked better than our previous ads. Our ROAS was better and acquisition costs went down. We were able to scale larger because of that.”
+      - generic [ref=e310]:
+        - img "Jorens, CEO" [ref=e312]
+        - paragraph [ref=e314]: Jorens, CEO
+  - generic [ref=e316]:
+    - generic [ref=e317]:
+      - heading "Creators" [level=2] [ref=e318]
+      - heading "Get paid to do what you love" [level=3] [ref=e319]
+      - paragraph [ref=e320]: Find collaborations that gets you excited. Work with brands that fit your content style, with special autonomy over every campaign your produce
+      - button "Join for Free" [ref=e321]:
+        - link "Join for Free" [ref=e322] [cursor=pointer]:
+          - /url: /signup?role=creator
+    - generic [ref=e323]:
+      - img "Creator" [ref=e325]
+      - img "Creator" [ref=e327]
+      - generic [ref=e328]:
+        - img "Avatar" [ref=e330]
+        - paragraph [ref=e332]: Payment made
+      - img "Teaser" [ref=e336]
+  - contentinfo [ref=e337]:
+    - generic [ref=e338]:
+      - heading "Ready for your first UGC video?" [level=2] [ref=e339]
+      - button "Register now" [ref=e340]:
+        - link "Register now" [ref=e341] [cursor=pointer]:
+          - /url: /signup
+    - generic [ref=e342]:
+      - generic [ref=e343]:
+        - generic [ref=e344]:
+          - heading "Services" [level=4] [ref=e345]
+          - list [ref=e346]:
+            - listitem [ref=e347]:
+              - link "Prices" [ref=e348] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e349]:
+              - link "Managed Service" [ref=e350] [cursor=pointer]:
+                - /url: /managed-services
+        - generic [ref=e351]:
+          - heading "FAQ" [level=4] [ref=e352]
+          - list [ref=e353]:
+            - listitem [ref=e354]:
+              - link "FAQ Brands" [ref=e355] [cursor=pointer]:
+                - /url: /brands-faq
+            - listitem [ref=e356]:
+              - link "FAQ Creators" [ref=e357] [cursor=pointer]:
+                - /url: /creators-faq
+        - generic [ref=e358]:
+          - heading "Platform" [level=4] [ref=e359]
+          - list [ref=e360]:
+            - listitem [ref=e361]:
+              - link "About Huerray" [ref=e362] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e363]:
+              - link "Careers" [ref=e364] [cursor=pointer]:
+                - /url: /careers
+            - listitem [ref=e365]:
+              - link "Site Notice" [ref=e366] [cursor=pointer]:
+                - /url: site-notice
+            - listitem [ref=e367]:
+              - link "Privacy Policy" [ref=e368] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e369]:
+              - link "T&C – Creators" [ref=e370] [cursor=pointer]:
+                - /url: /creator-terms
+            - listitem [ref=e371]:
+              - link "T&C – Brands" [ref=e372] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e373]:
+        - heading "Signup for updates" [level=3] [ref=e374]
+        - generic [ref=e375]:
+          - textbox "Email address" [ref=e376]
+          - button "Submit" [ref=e377]:
+            - generic [ref=e378]: 
+    - generic [ref=e380]:
+      - generic [ref=e381]:
+        - img "Huerray" [ref=e382]
+        - paragraph [ref=e383]: © 2026 Huerray. All rights reserved
+      - generic [ref=e384]:
+        - button "Select language" [ref=e385] [cursor=pointer]:
+          - generic [ref=e387]: English
+          - generic [ref=e388]: 
+        - generic [ref=e389]:
+          - link "Facebook" [ref=e390] [cursor=pointer]:
+            - /url: https://www.facebook.com/profile.php?id=61577485322627&mibextid=wwXIfr&rdid=16XIHv5v2uXCkiGV#
+            - generic [ref=e391]: 
+          - link "X" [ref=e392] [cursor=pointer]:
+            - /url: https://x.com/huerray_de
+            - generic [ref=e393]: 
+          - link "Instagram" [ref=e394] [cursor=pointer]:
+            - /url: https://www.instagram.com/huerray_de/
+            - generic [ref=e395]: 
+          - link "TikTok" [ref=e396] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@huerray
+            - generic [ref=e397]: 
+  - img
+  - button "Open Next.js Dev Tools" [ref=e403] [cursor=pointer]:
+    - generic [ref=e406]:
+      - text: Rendering
+      - generic [ref=e407]:
+        - generic [ref=e408]: .
+        - generic [ref=e409]: .
+        - generic [ref=e410]: .
+  - alert [ref=e411]
+```

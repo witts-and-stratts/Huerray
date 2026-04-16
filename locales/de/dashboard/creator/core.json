@@ -8,6 +8,60 @@
     "viewMyGigs": "Meine Gigs ansehen",
     "creatorFallback": "Creator"
   },
+  "analyticsPage": {
+    "title": "Analytik",
+    "description": "Verfolgen Sie Bewerbungen, Einladungen, Gigs, Einnahmen, Video-Einreichungen und Support.",
+    "periodLabel": "Analysezeitraum auswählen",
+    "refresh": "Aktualisieren",
+    "error": "Creator-Analysen können nicht geladen werden.",
+    "periods": {
+      "allTime": "Gesamter Zeitraum",
+      "lastWeek": "Letzte Woche",
+      "lastMonth": "Letzter Monat",
+      "lastThreeMonths": "Letzte 3 Monate",
+      "lastYear": "Letztes Jahr"
+    },
+    "groups": {
+      "applications": "Bewerbungen",
+      "invitations": "Einladungen",
+      "gigs": "Gigs & Einnahmen",
+      "videoSubmissions": "Video-Einreichungen",
+      "support": "Support"
+    },
+    "groupDescriptions": {
+      "applications": "Bewerbungsaktivität und Annahmequalität.",
+      "invitations": "Erhaltene und akzeptierte Creator-Einladungen.",
+      "gigs": "Abgeschlossene Gigs, Gesamteinnahmen und Erfolgsrate.",
+      "videoSubmissions": "Eingereichte Videos und freigegebene Deliverables.",
+      "support": "Fallvolumen und Lösungsleistung."
+    },
+    "items": {
+      "gigsCompleted": "Abgeschlossene Gigs",
+      "successRate": "Erfolgsrate",
+      "totalEarned": "Gesamteinnahmen",
+      "videosApproved": "Freigegebene Videos",
+      "applicationsSent": "Gesendete Bewerbungen",
+      "applicationsAccepted": "Akzeptierte Bewerbungen",
+      "approvalRate": "Freigaberate",
+      "invitationsReceived": "Erhaltene Einladungen",
+      "invitationsAccepted": "Akzeptierte Einladungen",
+      "videosSubmitted": "Eingereichte Videos",
+      "casesReported": "Gemeldete Fälle",
+      "casesResolved": "Gelöste Fälle",
+      "caseResolutionRate": "Falllösungsrate"
+    },
+    "shortLabels": {
+      "sent": "Gesendet",
+      "accepted": "Akzeptiert",
+      "received": "Erhalten",
+      "completed": "Abgeschlossen",
+      "earned": "Verdient",
+      "submitted": "Eingereicht",
+      "approved": "Freigegeben",
+      "reported": "Gemeldet",
+      "resolved": "Gelöst"
+    }
+  },
   "common": {
     "details": "Einzelheiten",
     "viewAllMyGigs": "Alle meine Gigs anzeigen",

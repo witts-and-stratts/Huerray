@@ -1,0 +1,111 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "2"
+          - generic [ref=e15]: "3"
+        - generic [ref=e16]:
+          - text: Issue
+          - generic [ref=e17]: s
+      - button "Collapse issues badge" [ref=e18]:
+        - img [ref=e19]
+  - alert [ref=e21]
+  - generic [ref=e23]:
+    - img "Huerray Lifestyle" [ref=e25]
+    - generic [ref=e26]:
+      - button "Select language" [ref=e28] [cursor=pointer]:
+        - generic [ref=e30]: 
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - img "Huerray" [ref=e35]
+          - generic [ref=e36]: Complete Your Brand Profile
+          - generic [ref=e37]: Let's set up your brand details to start launching campaigns.
+        - generic [ref=e39]:
+          - tablist [ref=e42]:
+            - tab "Company & Address" [selected] [ref=e45]
+            - tab "Branding" [ref=e47]
+          - generic [ref=e51]:
+            - tabpanel "Company & Address" [ref=e52]:
+              - generic [ref=e54]:
+                - heading "Company Details" [level=4] [ref=e55]
+                - generic [ref=e56]:
+                  - group [ref=e57]:
+                    - generic [ref=e59]:
+                      - text: Company Name
+                      - generic [ref=e60]: "*"
+                    - textbox "Company Name *" [ref=e61]
+                  - group [ref=e62]:
+                    - generic [ref=e64]: Website URL
+                    - textbox "Website URL" [ref=e65]
+                  - group [ref=e66]:
+                    - generic [ref=e68]: Industry Category
+                    - button "Industry Category" [ref=e70]:
+                      - generic [ref=e71]: Industry Category
+                      - img
+                  - group [ref=e72]:
+                    - generic [ref=e74]: Company Size
+                    - combobox "Company Size" [ref=e75]:
+                      - img
+                    - textbox [ref=e76]
+                  - group [ref=e77]:
+                    - generic [ref=e79]: VAT ID
+                    - textbox "VAT ID" [ref=e80]
+                  - group [ref=e81]:
+                    - generic [ref=e83]: Registration Number
+                    - textbox "Registration Number" [ref=e84]
+                - separator [ref=e85]
+                - heading "Address Information" [level=4] [ref=e86]
+                - generic [ref=e87]:
+                  - group [ref=e88]:
+                    - generic [ref=e90]:
+                      - text: Street
+                      - generic [ref=e91]: "*"
+                    - textbox "Street *" [ref=e92]
+                  - group [ref=e93]:
+                    - generic [ref=e95]: Number/Suite
+                    - textbox "Number/Suite" [ref=e96]
+                  - group [ref=e97]:
+                    - generic [ref=e99]:
+                      - text: City
+                      - generic [ref=e100]: "*"
+                    - textbox "City *" [ref=e101]
+                  - group [ref=e102]:
+                    - generic [ref=e104]:
+                      - text: State/Province
+                      - generic [ref=e105]: "*"
+                    - textbox "State/Province *" [ref=e106]
+                  - group [ref=e107]:
+                    - generic [ref=e109]:
+                      - text: Postal Code
+                      - generic [ref=e110]: "*"
+                    - textbox "Postal Code *" [ref=e111]
+                  - group [ref=e112]:
+                    - generic [ref=e114]: Country
+                    - button "Country" [ref=e116]:
+                      - generic [ref=e117]: Country
+                      - img
+                - separator [ref=e118]
+                - heading "Contact Information" [level=4] [ref=e119]
+                - generic [ref=e120]:
+                  - group [ref=e121]:
+                    - generic [ref=e123]: Contact Email
+                    - textbox "Contact Email" [ref=e124]
+                  - group [ref=e125]:
+                    - generic [ref=e127]: Contact Phone
+                    - textbox "Contact Phone" [ref=e128]
+            - text: "Visit URL: EditRemove"
+          - button "Next Step" [ref=e132]:
+            - text: Next Step
+            - img
+  - region "Notifications alt+T"
+  - generic [ref=e133]:
+    - img [ref=e135]
+    - button "Open Tanstack query devtools" [ref=e183] [cursor=pointer]:
+      - img [ref=e184]
+```

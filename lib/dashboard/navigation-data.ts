@@ -157,6 +157,11 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
       icon: ImageUpload01Icon,
     },
     {
+      title: withFallback( t, "creator.analytics", "Analytics" ),
+      url: "/creator/analytics",
+      icon: ChartLineData01Icon,
+    },
+    {
       title: withFallback( t, "creator.cases", "Cases" ),
       url: "/creator/cases",
       icon: CustomerSupportIcon,
@@ -222,11 +227,11 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       url: "/admin/cases",
       icon: CustomerSupportIcon,
     },
-    // {
-    //   title: withFallback( t, "admin.analytics", "Analytics" ),
-    //   url: "/admin/analytics",
-    //   icon: ChartLineData01Icon,
-    // },
+    {
+      title: withFallback( t, "admin.analytics", "Analytics" ),
+      url: "/admin/analytics",
+      icon: ChartLineData01Icon,
+    },
     // {
     //   title: withFallback( t, "admin.moderation", "Moderation" ),
     //   url: "/admin/moderation",

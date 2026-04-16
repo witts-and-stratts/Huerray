@@ -1,0 +1,36 @@
+@reference "tailwindcss";
+@reference "../dashboard-globals.css";
+
+@layer components {
+  .analytics-chart-layout {
+    @apply grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1fr)_170px];
+  }
+
+  .analytics-chart-layout-single {
+    @apply grid grid-cols-1 gap-3;
+  }
+
+  .analytics-chart-box {
+    @apply rounded-md border border-border/60 bg-white p-2.5;
+  }
+
+  .analytics-rate-card {
+    @apply flex min-h-[180px] flex-col justify-center rounded-md border border-border/60 bg-white p-4;
+  }
+
+  .analytics-chart-row {
+    @apply grid grid-cols-1 gap-4;
+  }
+
+  .analytics-chart-row-two {
+    @apply grid grid-cols-1 gap-4 @[800px]:grid-cols-2;
+  }
+
+  .analytics-kpi-grid {
+    @apply grid grid-cols-2 gap-4 lg:grid-cols-4;
+  }
+
+  .analytics-chart-container {
+    @apply h-[180px] w-full;
+  }
+}

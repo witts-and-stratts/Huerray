@@ -2,6 +2,68 @@
   "welcome": "Bienvenue, Admin !",
   "overview": "Vue d'ensemble du système",
   "description": "Vue d'ensemble de la plateforme et suivi opérationnel",
+  "analyticsPage": {
+    "title": "Analyse de la plateforme",
+    "description": "Suivez les utilisateurs, le pipeline de contenu, les revenus, les soumissions vidéo et le support.",
+    "periodLabel": "Sélectionner la période d'analyse",
+    "refresh": "Actualiser",
+    "error": "Impossible de charger l'analyse de la plateforme.",
+    "periods": {
+      "allTime": "Toute la période",
+      "lastWeek": "Semaine dernière",
+      "lastMonth": "Mois dernier",
+      "lastThreeMonths": "3 derniers mois",
+      "lastYear": "Année dernière"
+    },
+    "groups": {
+      "users": "Utilisateurs",
+      "contentPipeline": "Pipeline de contenu",
+      "videoSubmissions": "Soumissions vidéo",
+      "revenue": "Revenus",
+      "support": "Support"
+    },
+    "groupDescriptions": {
+      "users": "Croissance des utilisateurs, marques et créateurs sur la plateforme.",
+      "contentPipeline": "Débit des campagnes et des gigs sur la marketplace.",
+      "videoSubmissions": "Volume des soumissions vidéo et validations.",
+      "revenue": "Revenus bruts, revenus nets et paiements aux créateurs.",
+      "support": "Volume de cas et performance de résolution."
+    },
+    "items": {
+      "totalUsers": "Utilisateurs totaux",
+      "totalRevenue": "Revenus totaux",
+      "completedCampaigns": "Campagnes terminées",
+      "approvedVideoSubmissions": "Soumissions vidéo approuvées",
+      "totalBrands": "Marques totales",
+      "totalCreators": "Créateurs totaux",
+      "newUsersToday": "Nouveaux utilisateurs aujourd'hui",
+      "totalCampaigns": "Campagnes totales",
+      "totalGigs": "Gigs totaux",
+      "completedGigs": "Gigs terminés",
+      "totalVideoSubmissions": "Soumissions vidéo totales",
+      "netRevenue": "Revenus nets",
+      "totalPayouts": "Paiements totaux",
+      "totalCases": "Cas totaux",
+      "resolvedCases": "Cas résolus",
+      "caseResolutionRate": "Taux de résolution des cas"
+    },
+    "shortLabels": {
+      "users": "Utilisateurs",
+      "brands": "Marques",
+      "creators": "Créateurs",
+      "new": "Nouveaux",
+      "campaigns": "Campagnes",
+      "completed": "Terminées",
+      "gigs": "Gigs",
+      "done": "Faits",
+      "total": "Total",
+      "approved": "Approuvées",
+      "net": "Net",
+      "payouts": "Paiements",
+      "cases": "Cas",
+      "resolved": "Résolus"
+    }
+  },
   "accountEditPage": {
     "title": "Paramètres du compte",
     "description": "Mettez à jour vos données personnelles et vos coordonnées.",

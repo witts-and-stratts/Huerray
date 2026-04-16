@@ -8,6 +8,60 @@
     "viewMyGigs": "View My Gigs",
     "creatorFallback": "Creator"
   },
+  "analyticsPage": {
+    "title": "Analytics",
+    "description": "Track applications, invitations, gigs, earnings, video submissions, and support.",
+    "periodLabel": "Select analytics period",
+    "refresh": "Refresh",
+    "error": "Unable to load creator analytics.",
+    "periods": {
+      "allTime": "All time",
+      "lastWeek": "Last week",
+      "lastMonth": "Last month",
+      "lastThreeMonths": "Last 3 months",
+      "lastYear": "Last year"
+    },
+    "groups": {
+      "applications": "Applications",
+      "invitations": "Invitations",
+      "gigs": "Gigs & Earnings",
+      "videoSubmissions": "Video Submissions",
+      "support": "Support"
+    },
+    "groupDescriptions": {
+      "applications": "Application activity and acceptance quality.",
+      "invitations": "Creator invitations received and accepted.",
+      "gigs": "Completed gigs, total earnings, and success rate.",
+      "videoSubmissions": "Submitted videos and approved deliverables.",
+      "support": "Case volume and resolution performance."
+    },
+    "items": {
+      "gigsCompleted": "Gigs Completed",
+      "successRate": "Success Rate",
+      "totalEarned": "Total Earned",
+      "videosApproved": "Videos Approved",
+      "applicationsSent": "Applications Sent",
+      "applicationsAccepted": "Applications Accepted",
+      "approvalRate": "Approval Rate",
+      "invitationsReceived": "Invitations Received",
+      "invitationsAccepted": "Invitations Accepted",
+      "videosSubmitted": "Videos Submitted",
+      "casesReported": "Cases Reported",
+      "casesResolved": "Cases Resolved",
+      "caseResolutionRate": "Case Resolution Rate"
+    },
+    "shortLabels": {
+      "sent": "Sent",
+      "accepted": "Accepted",
+      "received": "Received",
+      "completed": "Completed",
+      "earned": "Earned",
+      "submitted": "Submitted",
+      "approved": "Approved",
+      "reported": "Reported",
+      "resolved": "Resolved"
+    }
+  },
   "common": {
     "details": "Details",
     "viewAllMyGigs": "View all my gigs",

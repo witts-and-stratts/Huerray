@@ -74,7 +74,7 @@ export function GigsStatsPanel( { chartData }: GigsStatsPanelProps ) {
         <div className="flex gap-2 leading-none font-medium text-xs">
           { t( 'dashboardBlocks.gigs.labels.trendingUp' ) } <TrendingUp className="h-4 w-4" />
         </div>
-        <div className="text-muted-foreground leading-none text-xs">
+        <div className="text-muted-foreground text-xs">
           { t( 'dashboardBlocks.gigs.labels.showingTotal' ) }
         </div>
       </div>

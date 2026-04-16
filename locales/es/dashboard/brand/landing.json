@@ -8,11 +8,39 @@
       "title": "Análisis de marcas",
       "description": "Métricas de rendimiento de su cuenta de marca",
       "error": "No se puede cargar el análisis de la marca.",
+      "page": {
+        "title": "Analítica",
+        "description": "Sigue el rendimiento de campañas, gigs, outreach a creadores, aprobaciones de contenido y gasto.",
+        "periodLabel": "Seleccionar periodo de analítica",
+        "refresh": "Actualizar",
+        "periods": {
+          "allTime": "Todo el tiempo",
+          "lastWeek": "Última semana",
+          "lastMonth": "Último mes",
+          "lastThreeMonths": "Últimos 3 meses",
+          "lastYear": "Último año"
+        },
+        "groups": {
+          "support": "Soporte"
+        },
+        "groupDescriptions": {
+          "campaigns": "Creación y finalización de campañas en el periodo seleccionado.",
+          "gigs": "Creación, aceptación y entrega de gigs.",
+          "outreach": "Invitaciones a creadores, solicitudes y calidad de aprobación.",
+          "contentSpend": "Volumen de envíos de video y aprobaciones de tu marca.",
+          "support": "Volumen de casos y rendimiento de resolución de tu cuenta."
+        },
+        "items": {
+          "casesReported": "Casos reportados",
+          "casesResolved": "Casos resueltos",
+          "caseResolutionRate": "Tasa de resolución de casos"
+        }
+      },
       "groups": {
         "campaigns": "Campañas",
         "gigs": "Gigs",
         "outreach": "Divulgación",
-        "contentSpend": "Contenido y gasto"
+        "contentSpend": "Envíos de video"
       },
       "items": {
         "campaignsCreated": "Campañas creadas",

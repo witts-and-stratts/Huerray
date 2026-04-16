@@ -1,0 +1,267 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - alert [ref=e20]
+  - generic [ref=e21]:
+    - generic [ref=e24]:
+      - list [ref=e26]:
+        - listitem [ref=e27]:
+          - link "Huerray" [ref=e28] [cursor=pointer]:
+            - /url: "#"
+            - img "Huerray" [ref=e30]
+      - generic [ref=e31]:
+        - list [ref=e34]:
+          - listitem [ref=e35]:
+            - link "Dashboard" [ref=e36] [cursor=pointer]:
+              - /url: /en/brand
+              - button "Dashboard" [ref=e37]:
+                - img [ref=e38]
+                - generic [ref=e43]: Dashboard
+          - listitem [ref=e44]:
+            - link "Campaigns" [ref=e45] [cursor=pointer]:
+              - /url: /en/brand/campaigns
+              - button "Campaigns" [ref=e46]:
+                - img [ref=e47]
+                - generic [ref=e50]: Campaigns
+          - listitem [ref=e51]:
+            - link "Creators" [ref=e52] [cursor=pointer]:
+              - /url: /en/brand/creators
+              - button "Creators" [ref=e53]:
+                - img [ref=e54]
+                - generic [ref=e61]: Creators
+          - listitem [ref=e62]:
+            - link "Analytics" [ref=e63] [cursor=pointer]:
+              - /url: /en/brand/analytics
+              - button "Analytics" [ref=e64]:
+                - img [ref=e65]
+                - generic [ref=e68]: Analytics
+          - listitem [ref=e69]:
+            - link "Invoices" [ref=e70] [cursor=pointer]:
+              - /url: /en/brand/invoices
+              - button "Invoices" [ref=e71]:
+                - img [ref=e72]
+                - generic [ref=e75]: Invoices
+          - listitem [ref=e76]:
+            - link "Cases" [ref=e77] [cursor=pointer]:
+              - /url: /en/brand/cases
+              - button "Cases" [ref=e78]:
+                - img [ref=e79]
+                - generic [ref=e84]: Cases
+        - list [ref=e87]:
+          - listitem [ref=e88]:
+            - link "Get Help" [ref=e89] [cursor=pointer]:
+              - /url: /brand/help
+              - img [ref=e90]
+              - generic [ref=e93]: Get Help
+          - listitem [ref=e94]:
+            - button "Search" [ref=e95]:
+              - img [ref=e96]
+              - generic [ref=e99]: Search
+      - generic [ref=e100]:
+        - text: 
+        - list [ref=e101]:
+          - listitem [ref=e102]:
+            - button "CN Test Brand brand-e2e@test.huerray.de" [ref=e103]:
+              - generic [ref=e105]: CN
+              - generic [ref=e106]:
+                - generic [ref=e107]: Test Brand
+                - generic [ref=e108]: brand-e2e@test.huerray.de
+              - img [ref=e109]
+    - main [ref=e113]:
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - img [ref=e118]
+          - paragraph [ref=e121]:
+            - text: Verify your email address. Please check your inbox for a verification link.
+            - button "Enter code manually" [ref=e122]
+        - generic [ref=e123]:
+          - button "Resend email" [ref=e124]
+          - button "Dismiss" [ref=e125]:
+            - img
+      - generic [ref=e126]:
+        - button "Toggle Sidebar" [ref=e127]:
+          - img
+          - generic [ref=e128]: Toggle Sidebar
+        - group [ref=e129]:
+          - group [ref=e130] [cursor=pointer]:
+            - group [ref=e131]:
+              - img [ref=e132]
+            - searchbox "Search..." [ref=e135]
+            - group [ref=e136]:
+              - group [ref=e137]:
+                - generic [ref=e138]:
+                  - generic: ⌘
+                  - generic: K
+        - generic [ref=e139]:
+          - heading "Global Search" [level=2] [ref=e140]
+          - generic [ref=e141]: Search across your dashboard
+        - generic [ref=e142]:
+          - button "1 Notifications" [ref=e143]:
+            - img
+            - generic: "1"
+            - generic [ref=e144]: Notifications
+          - button "Select language" [ref=e145] [cursor=pointer]:
+            - generic [ref=e147]: 
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - navigation "breadcrumb" [ref=e152]:
+            - list [ref=e153]:
+              - listitem [ref=e154]:
+                - link "Campaigns" [ref=e155] [cursor=pointer]:
+                  - /url: /brand/campaigns
+              - listitem [ref=e156]:
+                - img [ref=e157]
+              - listitem [ref=e159]: New Campaign
+          - generic [ref=e160]:
+            - generic [ref=e161]:
+              - heading "New Campaign" [level=1] [ref=e162]:
+                - generic [ref=e164]: New Campaign
+              - paragraph
+            - group [ref=e167]:
+              - button "Publish" [ref=e168]
+              - button "Save draft" [ref=e169]
+              - button [ref=e170]:
+                - img
+          - tablist [ref=e174]:
+            - tab "Overview" [selected] [ref=e175]
+            - tab "Instructions" [ref=e176]
+            - tab "Documents" [ref=e177]
+            - tab "Images" [ref=e178]
+            - tab "Videos" [ref=e179]
+          - separator [ref=e180]
+        - generic [ref=e181]:
+          - generic [ref=e183]:
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - group [ref=e187]:
+                  - generic [ref=e189]:
+                    - text: Campaign Name
+                    - generic [ref=e190]: "*"
+                  - textbox "Campaign Name *" [ref=e191]:
+                    - /placeholder: Enter campaign name
+                - group [ref=e192]:
+                  - generic [ref=e194]:
+                    - text: Description
+                    - generic [ref=e195]: "*"
+                  - generic [ref=e196]:
+                    - toolbar [ref=e197]:
+                      - generic [ref=e198]:
+                        - button "bold" [ref=e199] [cursor=pointer]:
+                          - img [ref=e200]
+                        - button "italic" [ref=e203] [cursor=pointer]:
+                          - img [ref=e204]
+                        - button "underline" [ref=e206] [cursor=pointer]:
+                          - img [ref=e207]
+                        - button "strike" [ref=e210] [cursor=pointer]:
+                          - img [ref=e211]
+                      - generic [ref=e215]:
+                        - 'button "list: ordered" [ref=e216] [cursor=pointer]':
+                          - img [ref=e217]
+                        - 'button "list: bullet" [ref=e221] [cursor=pointer]':
+                          - img [ref=e222]
+                      - button "clean" [ref=e224] [cursor=pointer]:
+                        - img [ref=e225]
+                    - generic [ref=e230]:
+                      - generic [ref=e231]:
+                        - text: Describe your campaign, goals, and expectations...
+                        - paragraph [ref=e232]
+                      - text: "Visit URL: EditRemove"
+                - group [ref=e234]:
+                  - generic [ref=e236]:
+                    - text: Category
+                    - generic [ref=e237]: "*"
+                  - combobox "Category *" [ref=e238]:
+                    - generic [ref=e239]: Select category
+                    - img
+                  - textbox [ref=e240]
+                - group [ref=e241]:
+                  - generic [ref=e243]: Keywords
+                  - textbox "Keywords" [ref=e245]:
+                    - /placeholder: Add keywords
+              - group [ref=e246]:
+                - generic [ref=e247]: Product
+                - paragraph [ref=e248]: Add the product image and destination link for this campaign.
+                - generic [ref=e252]:
+                  - generic [ref=e253]:
+                    - button "Choose File" [ref=e254]
+                    - generic [ref=e255]:
+                      - img "Preview" [ref=e258]
+                      - generic [ref=e260]:
+                        - generic [ref=e261]:
+                          - img
+                        - generic [ref=e262]:
+                          - paragraph [ref=e263]: Upload Product Image
+                          - paragraph [ref=e264]: Drag and drop a product image or paste an image URL.
+                  - generic [ref=e265]:
+                    - group [ref=e266]:
+                      - generic [ref=e268]: Product Image URL
+                      - group [ref=e269]:
+                        - group [ref=e270]:
+                          - img [ref=e271]
+                        - textbox "Product Image URL" [ref=e274]:
+                          - /placeholder: https://yourstore.com/product-image
+                    - group [ref=e275]:
+                      - generic [ref=e277]: Product Link
+                      - group [ref=e278]:
+                        - group [ref=e279]:
+                          - img [ref=e280]
+                        - textbox "Product Link" [ref=e283]:
+                          - /placeholder: https://yourstore.com/product
+            - generic [ref=e284]:
+              - generic [ref=e285]:
+                - generic [ref=e286]: Creator Requirements
+                - generic [ref=e287]: Specify the creator requirements for your campaign
+              - generic [ref=e289]:
+                - generic [ref=e290]:
+                  - group [ref=e291]:
+                    - generic [ref=e293]:
+                      - text: Creators Needed
+                      - generic [ref=e294]: "*"
+                    - spinbutton "Creators Needed *" [ref=e295]: "1"
+                  - group [ref=e296]:
+                    - generic [ref=e298]:
+                      - text: Total No. of Videos
+                      - generic [ref=e299]: "*"
+                    - spinbutton "Total No. of Videos *" [ref=e300]: "1"
+                - generic [ref=e301]:
+                  - group [ref=e302]:
+                    - generic [ref=e304]: Video Duration
+                    - combobox "Video Duration" [ref=e305]:
+                      - generic [ref=e306]: 15 seconds
+                      - img
+                    - textbox [ref=e307]: "15"
+                  - group [ref=e308]:
+                    - generic [ref=e310]: Allow Multiple Videos
+                    - radiogroup [ref=e311]:
+                      - group [ref=e313]:
+                        - generic [ref=e314]:
+                          - generic [ref=e316]: "Yes"
+                          - paragraph [ref=e317]: Creators can submit more than one video.
+                        - radio [ref=e318]
+                        - radio [ref=e319]
+                      - group [ref=e321]:
+                        - generic [ref=e322]:
+                          - generic [ref=e324]: "No"
+                          - paragraph [ref=e325]: Only one video per creator.
+                        - radio [checked] [ref=e326]
+                        - radio [checked] [ref=e329]
+                    - textbox [ref=e330]: "no"
+          - text: "What creators should do... Visit URL: EditRemove What creators should avoid... Visit URL: EditRemove e.g. Energetic, professional, casual... Visit URL: EditRemove"
+  - region "Notifications alt+T"
+  - generic [ref=e331]:
+    - img [ref=e333]
+    - button "Open Tanstack query devtools" [ref=e381] [cursor=pointer]:
+      - img [ref=e382]
+```

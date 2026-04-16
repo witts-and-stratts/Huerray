@@ -2,6 +2,68 @@
   "welcome": "Willkommen zurück, Admin!",
   "overview": "System-Übersicht",
   "description": "Plattformübersicht und Betriebsüberwachung",
+  "analyticsPage": {
+    "title": "Plattform-Analytik",
+    "description": "Verfolgen Sie Nutzer, Content-Pipeline, Umsatz, Video-Einreichungen und Support-Leistung.",
+    "periodLabel": "Analysezeitraum auswählen",
+    "refresh": "Aktualisieren",
+    "error": "Plattformanalysen können nicht geladen werden.",
+    "periods": {
+      "allTime": "Gesamter Zeitraum",
+      "lastWeek": "Letzte Woche",
+      "lastMonth": "Letzter Monat",
+      "lastThreeMonths": "Letzte 3 Monate",
+      "lastYear": "Letztes Jahr"
+    },
+    "groups": {
+      "users": "Nutzer",
+      "contentPipeline": "Content-Pipeline",
+      "videoSubmissions": "Video-Einreichungen",
+      "revenue": "Umsatz",
+      "support": "Support"
+    },
+    "groupDescriptions": {
+      "users": "Wachstum von Nutzern, Marken und Creators auf der Plattform.",
+      "contentPipeline": "Kampagnen- und Gig-Durchsatz im Marketplace.",
+      "videoSubmissions": "Volumen und Freigaben von Video-Einreichungen.",
+      "revenue": "Bruttoumsatz, Nettoumsatz und Creator-Auszahlungen.",
+      "support": "Fallvolumen und Lösungsleistung."
+    },
+    "items": {
+      "totalUsers": "Nutzer gesamt",
+      "totalRevenue": "Gesamtumsatz",
+      "completedCampaigns": "Abgeschlossene Kampagnen",
+      "approvedVideoSubmissions": "Freigegebene Video-Einreichungen",
+      "totalBrands": "Marken gesamt",
+      "totalCreators": "Creators gesamt",
+      "newUsersToday": "Neue Nutzer heute",
+      "totalCampaigns": "Kampagnen gesamt",
+      "totalGigs": "Gigs gesamt",
+      "completedGigs": "Abgeschlossene Gigs",
+      "totalVideoSubmissions": "Video-Einreichungen gesamt",
+      "netRevenue": "Nettoumsatz",
+      "totalPayouts": "Auszahlungen gesamt",
+      "totalCases": "Fälle gesamt",
+      "resolvedCases": "Gelöste Fälle",
+      "caseResolutionRate": "Falllösungsrate"
+    },
+    "shortLabels": {
+      "users": "Nutzer",
+      "brands": "Marken",
+      "creators": "Creators",
+      "new": "Neu",
+      "campaigns": "Kampagnen",
+      "completed": "Abgeschlossen",
+      "gigs": "Gigs",
+      "done": "Erledigt",
+      "total": "Gesamt",
+      "approved": "Freigegeben",
+      "net": "Netto",
+      "payouts": "Auszahlungen",
+      "cases": "Fälle",
+      "resolved": "Gelöst"
+    }
+  },
   "accountEditPage": {
     "title": "Kontoeinstellungen",
     "description": "Aktualisieren Sie Ihre persönlichen Daten und Kontaktinformationen.",

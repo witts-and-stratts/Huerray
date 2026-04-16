@@ -1,0 +1,55 @@
+{"version":8,"type":"context-options","origin":"testRunner","browserName":"","playwrightVersion":"1.57.0","options":{},"platform":"darwin","wallTime":1776160462901,"monotonicTime":292372.569,"sdkLanguage":"javascript"}
+{"type":"before","callId":"hook@1","stepId":"hook@1","startTime":292377.234,"class":"Test","method":"hook","title":"Before Hooks","params":{},"stack":[]}
+{"type":"before","callId":"hook@2","stepId":"hook@2","parentId":"hook@1","startTime":292377.595,"class":"Test","method":"hook","title":"beforeEach hook","params":{},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":72,"column":8}]}
+{"type":"before","callId":"fixture@27","stepId":"fixture@27","parentId":"hook@2","startTime":292385.122,"class":"Test","method":"fixture","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@28","stepId":"pw:api@28","parentId":"fixture@27","startTime":292387.012,"class":"Test","method":"pw:api","title":"Launch browser","params":{"handleSIGINT":"false","tracesDir":"/Users/ws-one/Documents/www/huerray/test-results/.playwright-artifacts-14/traces","headless":"true","ignoreDefaultArgs":"undefined","ignoreAllDefaultArgs":"false","env":"undefined","timeout":"180000"},"stack":[]}
+{"type":"after","callId":"pw:api@28","endTime":292886.694,"annotations":[]}
+{"type":"after","callId":"fixture@27","endTime":292886.833,"annotations":[]}
+{"type":"before","callId":"fixture@31","stepId":"fixture@31","parentId":"hook@2","startTime":292888.145,"class":"Test","method":"fixture","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@32","stepId":"pw:api@32","parentId":"fixture@31","startTime":292893.08,"class":"Test","method":"pw:api","title":"Create context","params":{"acceptDownloads":"accept","bypassCSP":"false","colorScheme":"light","deviceScaleFactor":"1","hasTouch":"false","ignoreHTTPSErrors":"false","isMobile":"false","javaScriptEnabled":"true","locale":"en-US","offline":"false","storageState":"Object","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.7499.4 Safari/537.36","viewport":"Object","baseURL":"http://localhost:3000","serviceWorkers":"allow","selectorEngines":"[]","testIdAttributeName":"data-testid","noDefaultViewport":"false","extraHTTPHeaders":"undefined","reducedMotion":"undefined","forcedColors":"undefined","contrast":"undefined","clientCertificates":"undefined"},"stack":[]}
+{"type":"after","callId":"pw:api@32","endTime":293553.987,"annotations":[]}
+{"type":"after","callId":"fixture@31","endTime":293555.392,"annotations":[]}
+{"type":"before","callId":"fixture@33","stepId":"fixture@33","parentId":"hook@2","startTime":293555.593,"class":"Test","method":"fixture","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@34","stepId":"pw:api@34","parentId":"fixture@33","startTime":293556.256,"class":"Test","method":"pw:api","title":"Create page","params":{},"stack":[]}
+{"type":"after","callId":"pw:api@34","endTime":294456.643,"annotations":[]}
+{"type":"after","callId":"fixture@33","endTime":294456.727,"annotations":[]}
+{"type":"before","callId":"pw:api@35","stepId":"pw:api@35","parentId":"hook@2","startTime":294458.125,"class":"Test","method":"pw:api","title":"Navigate to \"/brand/campaigns\"","params":{"url":"/brand/campaigns","waitUntil":"load","timeout":"0"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":43,"column":14,"function":"gotoBrandCampaigns"}]}
+{"type":"after","callId":"pw:api@35","endTime":302304.423,"annotations":[]}
+{"type":"before","callId":"expect@36","stepId":"expect@36","parentId":"hook@2","startTime":302449.35,"class":"Test","method":"expect","title":"Expect \"toHaveURL\"","params":{"expected":"Object"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":45,"column":22,"function":"gotoBrandCampaigns"}]}
+{"type":"after","callId":"expect@36","endTime":302839.912,"annotations":[]}
+{"type":"after","callId":"hook@2","endTime":302840.02,"annotations":[]}
+{"type":"after","callId":"hook@1","endTime":302840.248,"annotations":[]}
+{"type":"before","callId":"pw:api@37","stepId":"pw:api@37","startTime":302841.23,"class":"Test","method":"pw:api","title":"Navigate to \"/brand/campaigns/new#human\"","params":{"url":"/brand/campaigns/new#human","waitUntil":"load","timeout":"0"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":49,"column":14,"function":"openCampaignCreateForm"}]}
+{"type":"after","callId":"pw:api@37","endTime":315047.729,"annotations":[]}
+{"type":"before","callId":"expect@38","stepId":"expect@38","startTime":315072.195,"class":"Test","method":"expect","title":"Expect \"toBeVisible\"","params":{"expected":"Object"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":51,"column":41,"function":"openCampaignCreateForm"}]}
+{"type":"after","callId":"expect@38","endTime":315139.82,"annotations":[]}
+{"type":"before","callId":"pw:api@39","stepId":"pw:api@39","startTime":315156.719,"class":"Test","method":"pw:api","title":"Click getByRole('button', { name: /Publish/i })","params":{"selector":"internal:role=button[name=/Publish/i]","strict":"true","timeout":"0"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":102,"column":58}]}
+{"type":"after","callId":"pw:api@39","endTime":315481.568,"annotations":[]}
+{"type":"before","callId":"expect@40","stepId":"expect@40","startTime":315483.479,"class":"Test","method":"expect","title":"Expect \"toBeVisible\"","params":{"expected":"Object"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":104,"column":66}]}
+{"type":"after","callId":"expect@40","endTime":315567.303,"annotations":[]}
+{"type":"before","callId":"expect@41","stepId":"expect@41","startTime":315572.079,"class":"Test","method":"expect","title":"Expect \"toBeVisible\"","params":{"expected":"Object"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-creation.spec.ts","line":105,"column":74}]}
+{"type":"after","callId":"expect@41","endTime":315599.907,"annotations":[]}
+{"type":"before","callId":"hook@42","stepId":"hook@42","startTime":315600.392,"class":"Test","method":"hook","title":"After Hooks","params":{},"stack":[]}
+{"type":"before","callId":"fixture@43","stepId":"fixture@43","parentId":"hook@42","startTime":315604.114,"class":"Test","method":"fixture","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"after","callId":"fixture@43","endTime":315605.509,"annotations":[]}
+{"type":"before","callId":"fixture@44","stepId":"fixture@44","parentId":"hook@42","startTime":315605.886,"class":"Test","method":"fixture","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@45","stepId":"pw:api@45","parentId":"fixture@44","startTime":317153.891,"class":"Test","method":"pw:api","title":"Close context","params":{"reason":"Test ended."},"stack":[]}
+{"type":"after","callId":"pw:api@45","endTime":317162.181,"annotations":[]}
+{"type":"after","callId":"fixture@44","endTime":317162.304,"annotations":[]}
+{"type":"before","callId":"fixture@54","stepId":"fixture@54","parentId":"hook@42","startTime":317165.282,"class":"Test","method":"fixture","title":"Fixture \"baseURL\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@54","endTime":317165.308,"annotations":[]}
+{"type":"before","callId":"fixture@55","stepId":"fixture@55","parentId":"hook@42","startTime":317165.384,"class":"Test","method":"fixture","title":"Fixture \"userAgent\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@55","endTime":317165.393,"annotations":[]}
+{"type":"before","callId":"fixture@57","stepId":"fixture@57","parentId":"hook@42","startTime":317165.715,"class":"Test","method":"fixture","title":"Fixture \"viewport\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@57","endTime":317165.737,"annotations":[]}
+{"type":"before","callId":"fixture@58","stepId":"fixture@58","parentId":"hook@42","startTime":317165.851,"class":"Test","method":"fixture","title":"Fixture \"storageState\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@58","endTime":317165.864,"annotations":[]}
+{"type":"before","callId":"fixture@64","stepId":"fixture@64","parentId":"hook@42","startTime":317166.346,"class":"Test","method":"fixture","title":"Fixture \"isMobile\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@64","endTime":317166.355,"annotations":[]}
+{"type":"before","callId":"fixture@68","stepId":"fixture@68","parentId":"hook@42","startTime":317167.053,"class":"Test","method":"fixture","title":"Fixture \"hasTouch\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@68","endTime":317167.062,"annotations":[]}
+{"type":"before","callId":"fixture@70","stepId":"fixture@70","parentId":"hook@42","startTime":317167.197,"class":"Test","method":"fixture","title":"Fixture \"deviceScaleFactor\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@70","endTime":317167.205,"annotations":[]}
+{"type":"after","callId":"hook@42","endTime":317167.785,"annotations":[]}
+{"type":"before","callId":"attach@3294d6cdaca0e97a0d5d1c65a01e6f8b","stepId":"attach@3294d6cdaca0e97a0d5d1c65a01e6f8b","startTime":319180.163,"class":"Test","method":"test.attach","title":"Attach \"trace\"","params":{},"stack":[]}
+{"type":"after","callId":"attach@3294d6cdaca0e97a0d5d1c65a01e6f8b","endTime":319180.225,"attachments":[]}

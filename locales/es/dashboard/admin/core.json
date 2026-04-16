@@ -2,6 +2,68 @@
   "welcome": "Bienvenido de nuevo, Admin.",
   "overview": "Visión general del sistema",
   "description": "Visión general de la plataforma y supervisión de su funcionamiento",
+  "analyticsPage": {
+    "title": "Analítica de plataforma",
+    "description": "Haz seguimiento de usuarios, pipeline de contenido, ingresos, envíos de video y soporte.",
+    "periodLabel": "Seleccionar periodo de analítica",
+    "refresh": "Actualizar",
+    "error": "No se puede cargar la analítica de la plataforma.",
+    "periods": {
+      "allTime": "Todo el tiempo",
+      "lastWeek": "Última semana",
+      "lastMonth": "Último mes",
+      "lastThreeMonths": "Últimos 3 meses",
+      "lastYear": "Último año"
+    },
+    "groups": {
+      "users": "Usuarios",
+      "contentPipeline": "Pipeline de contenido",
+      "videoSubmissions": "Envíos de video",
+      "revenue": "Ingresos",
+      "support": "Soporte"
+    },
+    "groupDescriptions": {
+      "users": "Crecimiento de usuarios, marcas y creadores en la plataforma.",
+      "contentPipeline": "Rendimiento de campañas y gigs en el marketplace.",
+      "videoSubmissions": "Volumen de envíos y aprobaciones de video.",
+      "revenue": "Ingresos brutos, ingresos netos y pagos a creadores.",
+      "support": "Volumen de casos y rendimiento de resolución."
+    },
+    "items": {
+      "totalUsers": "Usuarios totales",
+      "totalRevenue": "Ingresos totales",
+      "completedCampaigns": "Campañas completadas",
+      "approvedVideoSubmissions": "Envíos de video aprobados",
+      "totalBrands": "Marcas totales",
+      "totalCreators": "Creadores totales",
+      "newUsersToday": "Nuevos usuarios hoy",
+      "totalCampaigns": "Campañas totales",
+      "totalGigs": "Gigs totales",
+      "completedGigs": "Gigs completados",
+      "totalVideoSubmissions": "Envíos de video totales",
+      "netRevenue": "Ingresos netos",
+      "totalPayouts": "Pagos totales",
+      "totalCases": "Casos totales",
+      "resolvedCases": "Casos resueltos",
+      "caseResolutionRate": "Tasa de resolución de casos"
+    },
+    "shortLabels": {
+      "users": "Usuarios",
+      "brands": "Marcas",
+      "creators": "Creadores",
+      "new": "Nuevos",
+      "campaigns": "Campañas",
+      "completed": "Completadas",
+      "gigs": "Gigs",
+      "done": "Hechos",
+      "total": "Total",
+      "approved": "Aprobados",
+      "net": "Neto",
+      "payouts": "Pagos",
+      "cases": "Casos",
+      "resolved": "Resueltos"
+    }
+  },
   "accountEditPage": {
     "title": "Configuración de la cuenta",
     "description": "Actualice sus datos personales y de contacto.",

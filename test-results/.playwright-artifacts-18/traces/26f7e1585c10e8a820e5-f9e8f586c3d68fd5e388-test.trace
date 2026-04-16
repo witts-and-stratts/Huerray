@@ -1,0 +1,48 @@
+{"version":8,"type":"context-options","origin":"testRunner","browserName":"","playwrightVersion":"1.57.0","options":{},"platform":"darwin","wallTime":1776160505877,"monotonicTime":335349.375,"sdkLanguage":"javascript"}
+{"type":"before","callId":"hook@1","stepId":"hook@1","startTime":335362.487,"class":"Test","method":"hook","title":"Before Hooks","params":{},"stack":[]}
+{"type":"before","callId":"fixture@26","stepId":"fixture@26","parentId":"hook@1","startTime":335380.785,"class":"Test","method":"fixture","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@27","stepId":"pw:api@27","parentId":"fixture@26","startTime":335397.122,"class":"Test","method":"pw:api","title":"Launch browser","params":{"handleSIGINT":"false","tracesDir":"/Users/ws-one/Documents/www/huerray/test-results/.playwright-artifacts-18/traces","headless":"true","ignoreDefaultArgs":"undefined","ignoreAllDefaultArgs":"false","env":"undefined","timeout":"180000"},"stack":[]}
+{"type":"after","callId":"pw:api@27","endTime":335690.236,"annotations":[]}
+{"type":"after","callId":"fixture@26","endTime":335690.404,"annotations":[]}
+{"type":"before","callId":"fixture@30","stepId":"fixture@30","parentId":"hook@1","startTime":335691.723,"class":"Test","method":"fixture","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@31","stepId":"pw:api@31","parentId":"fixture@30","startTime":335693.553,"class":"Test","method":"pw:api","title":"Create context","params":{"acceptDownloads":"accept","bypassCSP":"false","colorScheme":"light","deviceScaleFactor":"1","hasTouch":"false","ignoreHTTPSErrors":"false","isMobile":"false","javaScriptEnabled":"true","locale":"en-US","offline":"false","storageState":"Object","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.7499.4 Safari/537.36","viewport":"Object","baseURL":"http://localhost:3000","serviceWorkers":"allow","selectorEngines":"[]","testIdAttributeName":"data-testid","noDefaultViewport":"false","extraHTTPHeaders":"undefined","reducedMotion":"undefined","forcedColors":"undefined","contrast":"undefined","clientCertificates":"undefined"},"stack":[]}
+{"type":"after","callId":"pw:api@31","endTime":336157.688,"annotations":[]}
+{"type":"after","callId":"fixture@30","endTime":336205.272,"annotations":[]}
+{"type":"before","callId":"fixture@32","stepId":"fixture@32","parentId":"hook@1","startTime":336211.45,"class":"Test","method":"fixture","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"before","callId":"pw:api@33","stepId":"pw:api@33","parentId":"fixture@32","startTime":336214.706,"class":"Test","method":"pw:api","title":"Create page","params":{},"stack":[]}
+{"type":"after","callId":"pw:api@33","endTime":336599.395,"annotations":[]}
+{"type":"after","callId":"fixture@32","endTime":336599.611,"annotations":[]}
+{"type":"after","callId":"hook@1","endTime":336599.64,"annotations":[]}
+{"type":"before","callId":"pw:api@34","stepId":"pw:api@34","startTime":336602.053,"class":"Test","method":"pw:api","title":"Navigate to \"/brand/campaigns\"","params":{"url":"/brand/campaigns","waitUntil":"load","timeout":"0"},"stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-edit.spec.ts","line":18,"column":14,"function":"getFirstEditUrl"}]}
+{"type":"after","callId":"pw:api@34","endTime":336826.95,"annotations":[],"error":{"name":"","message":"Error: page.goto: net::ERR_ABORTED at http://localhost:3000/brand/campaigns\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/brand/campaigns\", waiting until \"load\"\u001b[22m\n","stack":"Error: page.goto: net::ERR_ABORTED at http://localhost:3000/brand/campaigns\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/brand/campaigns\", waiting until \"load\"\u001b[22m\n\n    at getFirstEditUrl (/Users/ws-one/Documents/www/huerray/tests/brand/campaign-edit.spec.ts:18:14)\n    at /Users/ws-one/Documents/www/huerray/tests/brand/campaign-edit.spec.ts:63:27"}}
+{"type":"error","message":"Error: page.goto: net::ERR_ABORTED at http://localhost:3000/brand/campaigns\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3000/brand/campaigns\", waiting until \"load\"\u001b[22m\n","stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-edit.spec.ts","line":18,"column":14,"function":"getFirstEditUrl"},{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-edit.spec.ts","line":63,"column":27}]}
+{"type":"before","callId":"hook@35","stepId":"hook@35","startTime":336827.507,"class":"Test","method":"hook","title":"After Hooks","params":{},"stack":[]}
+{"type":"error","message":"Error: write EPIPE","stack":[{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-edit.spec.ts","line":18,"column":3,"function":"getFirstEditUrl"},{"file":"/Users/ws-one/Documents/www/huerray/tests/brand/campaign-edit.spec.ts","line":63,"column":21}]}
+{"type":"before","callId":"fixture@36","stepId":"fixture@36","parentId":"hook@35","startTime":336845.966,"class":"Test","method":"fixture","title":"Fixture \"page\"","params":{},"stack":[]}
+{"type":"after","callId":"fixture@36","endTime":336846.125,"annotations":[]}
+{"type":"before","callId":"fixture@37","stepId":"fixture@37","parentId":"hook@35","startTime":336846.539,"class":"Test","method":"fixture","title":"Fixture \"context\"","params":{},"stack":[]}
+{"type":"error","message":"Error: apiRequestContext._wrapApiCall: Target page, context or browser has been closed","stack":[]}
+{"type":"after","callId":"fixture@37","endTime":336858.52,"annotations":[],"error":{"name":"","message":"Error: apiRequestContext._wrapApiCall: Target page, context or browser has been closed","stack":"Error: apiRequestContext._wrapApiCall: Target page, context or browser has been closed"}}
+{"type":"before","callId":"fixture@46","stepId":"fixture@46","parentId":"hook@35","startTime":336863.344,"class":"Test","method":"fixture","title":"Fixture \"baseURL\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@46","endTime":336863.375,"annotations":[]}
+{"type":"before","callId":"fixture@47","stepId":"fixture@47","parentId":"hook@35","startTime":336863.532,"class":"Test","method":"fixture","title":"Fixture \"userAgent\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@47","endTime":336863.626,"annotations":[]}
+{"type":"before","callId":"fixture@49","stepId":"fixture@49","parentId":"hook@35","startTime":336864.137,"class":"Test","method":"fixture","title":"Fixture \"viewport\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@49","endTime":336864.208,"annotations":[]}
+{"type":"before","callId":"fixture@50","stepId":"fixture@50","parentId":"hook@35","startTime":336864.675,"class":"Test","method":"fixture","title":"Fixture \"storageState\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@50","endTime":336864.702,"annotations":[]}
+{"type":"before","callId":"fixture@56","stepId":"fixture@56","parentId":"hook@35","startTime":336865.387,"class":"Test","method":"fixture","title":"Fixture \"isMobile\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@56","endTime":336865.4,"annotations":[]}
+{"type":"before","callId":"fixture@60","stepId":"fixture@60","parentId":"hook@35","startTime":336865.733,"class":"Test","method":"fixture","title":"Fixture \"hasTouch\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@60","endTime":336865.743,"annotations":[]}
+{"type":"before","callId":"fixture@62","stepId":"fixture@62","parentId":"hook@35","startTime":336865.911,"class":"Test","method":"fixture","title":"Fixture \"deviceScaleFactor\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@62","endTime":336865.919,"annotations":[]}
+{"type":"after","callId":"hook@35","endTime":336866.835,"annotations":[],"error":{"name":"","message":"\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m","stack":"\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"}}
+{"type":"before","callId":"hook@68","stepId":"hook@68","startTime":336867.112,"class":"Test","method":"hook","title":"Worker Cleanup","params":{},"stack":[]}
+{"type":"before","callId":"fixture@72","stepId":"fixture@72","parentId":"hook@68","startTime":336868.616,"class":"Test","method":"fixture","title":"Fixture \"browser\"","params":{},"stack":[]}
+{"type":"after","callId":"fixture@72","endTime":336870.997,"annotations":[]}
+{"type":"before","callId":"fixture@76","stepId":"fixture@76","parentId":"hook@68","startTime":336871.566,"class":"Test","method":"fixture","title":"Fixture \"defaultBrowserType\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@76","endTime":336871.705,"annotations":[]}
+{"type":"before","callId":"fixture@77","stepId":"fixture@77","parentId":"hook@68","startTime":336871.965,"class":"Test","method":"fixture","title":"Fixture \"screenshot\"","params":{},"stack":[{"file":"project#brand","line":1,"column":1}],"group":"configuration"}
+{"type":"after","callId":"fixture@77","endTime":336872.004,"annotations":[]}
+{"type":"after","callId":"hook@68","endTime":336873.554,"annotations":[]}

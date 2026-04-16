@@ -1,0 +1,60 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - img "Product Image" [ref=e4]
+    - generic [ref=e5]:
+      - button "Select language" [ref=e7] [cursor=pointer]:
+        - generic [ref=e9]: 
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e12]:
+            - link "Huerray" [ref=e13] [cursor=pointer]:
+              - /url: /
+              - img "Huerray" [ref=e14]
+            - generic [ref=e15]: Login to Huerray
+            - generic [ref=e16]: Welcome back. Sign in to your Huerray account to continue
+          - generic [ref=e19]:
+            - group [ref=e20]:
+              - generic [ref=e22]:
+                - text: Email or Username
+                - generic [ref=e23]: "*"
+              - textbox "Email or Username *" [ref=e24]:
+                - /placeholder: you@example.com or username
+            - group [ref=e25]:
+              - generic [ref=e26]:
+                - generic [ref=e27]:
+                  - text: Password
+                  - generic [ref=e28]: "*"
+                - link "Forgot password?" [ref=e29] [cursor=pointer]:
+                  - /url: /forgot-password
+              - group [ref=e30]:
+                - textbox "Password *" [ref=e31]
+                - group [ref=e32]:
+                  - button "Show" [ref=e33]:
+                    - img
+                    - generic [ref=e34]: Show
+            - group [ref=e35]:
+              - checkbox [ref=e36]
+              - checkbox [ref=e37]
+              - generic [ref=e39] [cursor=pointer]: Keep me logged in
+            - group [ref=e40]:
+              - button "Sign in" [ref=e41]
+              - paragraph [ref=e42]:
+                - text: Don't have an account?
+                - link "Sign up" [ref=e43] [cursor=pointer]:
+                  - /url: /signup
+        - paragraph [ref=e44]:
+          - text: By continuing, you agree to our
+          - link "Terms of Service" [ref=e45] [cursor=pointer]:
+            - /url: /terms-and-conditions
+          - text: and
+          - link "Privacy Policy" [ref=e46] [cursor=pointer]:
+            - /url: /privacy-policy
+          - text: .
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e52] [cursor=pointer]:
+    - img [ref=e53]
+  - alert [ref=e56]
+```

@@ -8,6 +8,60 @@
     "viewMyGigs": "Voir mes concerts",
     "creatorFallback": "Créateur"
   },
+  "analyticsPage": {
+    "title": "Analyse",
+    "description": "Suivez les candidatures, invitations, gigs, revenus, soumissions vidéo et le support.",
+    "periodLabel": "Sélectionner la période d'analyse",
+    "refresh": "Actualiser",
+    "error": "Impossible de charger l'analyse du créateur.",
+    "periods": {
+      "allTime": "Toute la période",
+      "lastWeek": "Semaine dernière",
+      "lastMonth": "Mois dernier",
+      "lastThreeMonths": "3 derniers mois",
+      "lastYear": "Année dernière"
+    },
+    "groups": {
+      "applications": "Candidatures",
+      "invitations": "Invitations",
+      "gigs": "Gigs et revenus",
+      "videoSubmissions": "Soumissions vidéo",
+      "support": "Support"
+    },
+    "groupDescriptions": {
+      "applications": "Activité des candidatures et qualité d'acceptation.",
+      "invitations": "Invitations reçues et acceptées.",
+      "gigs": "Gigs terminés, revenus totaux et taux de réussite.",
+      "videoSubmissions": "Vidéos soumises et livrables approuvés.",
+      "support": "Volume de cas et performance de résolution."
+    },
+    "items": {
+      "gigsCompleted": "Gigs terminés",
+      "successRate": "Taux de réussite",
+      "totalEarned": "Total gagné",
+      "videosApproved": "Vidéos approuvées",
+      "applicationsSent": "Candidatures envoyées",
+      "applicationsAccepted": "Candidatures acceptées",
+      "approvalRate": "Taux d'approbation",
+      "invitationsReceived": "Invitations reçues",
+      "invitationsAccepted": "Invitations acceptées",
+      "videosSubmitted": "Vidéos soumises",
+      "casesReported": "Cas signalés",
+      "casesResolved": "Cas résolus",
+      "caseResolutionRate": "Taux de résolution des cas"
+    },
+    "shortLabels": {
+      "sent": "Envoyées",
+      "accepted": "Acceptées",
+      "received": "Reçues",
+      "completed": "Terminés",
+      "earned": "Gagné",
+      "submitted": "Soumises",
+      "approved": "Approuvées",
+      "reported": "Signalés",
+      "resolved": "Résolus"
+    }
+  },
   "common": {
     "details": "Détails",
     "viewAllMyGigs": "Voir tous mes concerts",
