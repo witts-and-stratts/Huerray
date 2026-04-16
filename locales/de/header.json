@@ -2,10 +2,10 @@
   "nav": {
     "forCreators": "Für Creators",
     "forBrands": "Für Marken",
-    "pricing": "Preisgestaltung"
+    "pricing": "Preise"
   },
   "userMenu": {
     "login": "Anmeldung",
-    "signup": "Anmeldung"
+    "signup": "Registrieren"
   }
 }

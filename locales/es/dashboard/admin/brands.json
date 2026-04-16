@@ -151,7 +151,7 @@
     "na": "N/A"
   },
   "brandRecentCampaignsBlock": {
-    "noCampaignsYet": "Aún no hay campañas.",
+    "noCampaignsYet": "Todavía no hay campañas.",
     "unableToLoadRecent": "No se pueden cargar las campañas recientes.",
     "latestCampaignsForThis": "Últimas campañas de esta marca",
     "recentCampaigns": "Campañas recientes"

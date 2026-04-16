@@ -35,8 +35,28 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    // Auth setup — runs first, saves brand session to disk
+    {
+      name: 'brand-setup',
+      testMatch: /setup\/brand-auth\.setup\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+
+    // Authenticated brand tests — depend on saved session
+    {
+      name: 'brand',
+      testMatch: /tests\/brand\/.+\.spec\.ts/,
+      dependencies: ['brand-setup'],
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'tests/.auth/brand.json',
+      },
+    },
+
+    // Everything else (unauthenticated / auth suite)
     {
       name: 'chromium',
+      testIgnore: /tests\/brand\/.+\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
   ],

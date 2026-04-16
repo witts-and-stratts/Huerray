@@ -1,10 +1,10 @@
 {
   "hero": {
     "title": "Bezahlen Sie für UGC, nicht für versteckte Gebühren",
-    "subtitle": "Jeder Dollar fließt in einen skalierbaren, markengerechten UGC, der zu Ergebnissen führt, nicht in Plattformgebühren."
+    "subtitle": "Ihr Budget fließt direkt in hochwertigen UGC, nicht in versteckte Plattformkosten"
   },
   "cards": {
-    "disclaimer": "Alle Preise gelten für ein Video, ohne Mehrwertsteuer.",
+    "disclaimer": "Alle Preise verstehen sich für ein Video, ohne Mehrwertsteuer.",
     "buttonText": "Einen Auftrag erstellen",
     "short": {
       "tag": "Kurz",
@@ -57,8 +57,8 @@
         "text": "Die Creators von Huerray arbeiten mit einem festen Budget für alle Ihre Projekte."
       },
       {
-        "title": "Volle Lizenz- und Vertriebsrechte für Ihre Inhalte",
-        "text": "100% Lizenz- und Vertriebsrechte für die Verwendung in sozialen Netzwerken, auf Websites, in Anzeigen und mehr."
+        "title": "Volle Nutzungsrechte und Vertriebsrechte für Ihre Inhalte",
+        "text": "100% Nutzungsrechte für die Verwendung in sozialen Netzwerken, auf Websites, in Anzeigen und mehr."
       },
       {
         "title": "Feedback in Echtzeit",
@@ -76,30 +76,30 @@
     },
     "enterprise": {
       "badge": "Extra + Verwaltet",
-      "title": "Unternehmensplan",
+      "title": "Enterprise Plan",
       "description": "Benötigen Sie mehr generierte Inhalte? Sprechen Sie mit unserem Team",
       "features": [
-        "Dienst anfordern",
-        "Anforderungen besprechen",
-        "Erhalten Sie ein individuelles Angebot",
-        "Bereit zum Abflug"
+        "Persönliche Beratung & Strategie",
+        "Auswahl passender Creator",
+        "Individuelles Angebot nach Ihren Zielen",
+        "End-to-End Betreuung Ihrer Kampagne"
       ],
-      "buttonText": "Einen Anruf buchen"
+      "buttonText": "Einen Call buchen"
     }
   },
   "faqs": {
-    "title": "Stellen Sie uns Fragen",
+    "title": "Stellen Sie uns Fragen.",
     "items": [
       {
         "question": "Wie lange dauert es, bis mein Creator-Antrag geprüft wird?",
-        "answer": "Aufgrund der großen Anzahl von Bewerbungen, die bei uns eingehen, kann die Bearbeitung einige Zeit in Anspruch nehmen. Wir bemühen uns, Bewerbungen so schnell wie möglich zu bearbeiten, aber bitte beachten Sie, dass dies je nach Nachfrage und aktueller Kapazität variieren kann. Seien Sie versichert, dass wir Sie benachrichtigen werden, sobald es ein Update zum Status Ihrer Bewerbung gibt. Wir danken Ihnen für Ihre Geduld!"
+        "answer": "Aufgrund der großen Anzahl von Bewerbungen, die bei uns eingehen, kann die Bearbeitung einige Zeit in Anspruch nehmen. Wir bemühen uns, Bewerbungen so schnell wie möglich zu bearbeiten, aber bitte beachten Sie, dass dies basierend auf der Nachfrage und unserer aktuellen Kapazität variieren kann. Seien Sie versichert, dass wir Sie benachrichtigen werden, sobald es ein Update zum Status Ihrer Bewerbung gibt. Wir danken Ihnen für Ihre Geduld!"
       },
       {
         "question": "Brauche ich eine bestimmte Anzahl von Followern, um Huerray beizutreten?",
         "answer": "Nein. Vielleicht haben Sie nicht einmal soziale Medien und das ist völlig in Ordnung. Alles, was Sie tun müssen, ist Inhalte zu erstellen, um bezahlt zu werden."
       },
       {
-        "question": "Muss ich auf sozialen Kanälen posten?",
+        "question": "Muss ich auf sozialen Kanälen veröffentlichen?",
         "answer": "Nein. Alles, was Sie tun müssen, ist, den Inhalt auf die Huerray-Plattform hochzuladen."
       },
       {

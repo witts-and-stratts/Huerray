@@ -101,15 +101,15 @@
         {
           "id": "Cookies-Beschreibung",
           "title": "a) Beschreibung und Umfang der Datenverarbeitung",
-          "content": "Wenn Sie unsere Dienste nutzen, können wir und ausgewählte Dritte Cookies und ähnliche Technologien (z. B. lokale Speicherung, Pixel, Tags und SDKs) verwenden, um Ihnen ein besseres, schnelleres und sichereres Nutzererlebnis zu bieten oder um Zielgruppenmessungen und personalisierte Inhalte/Werbung zu ermöglichen. Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen. Über unsere Consent Management Platform (CMP) können Sie verwalten, welchen Technologien und Anbietern Sie für bestimmte Zwecke zustimmen."
+          "content": "Wenn Sie unsere Dienste nutzen, können wir und ausgewählte Dritte Cookies und ähnliche Technologien (z. B. lokale Speicherung, Pixel, Tags und SDKs) verwenden, um Ihnen ein besseres, schnelleres und sichereres Nutzererlebnis zu bieten oder um Publikumsmessungen und personalisierte Inhalte/Werbung zu ermöglichen. Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert werden, wenn Sie unsere Website besuchen. Über unsere Consent Management Platform (CMP) können Sie verwalten, welchen Technologien und Anbietern Sie basierend auf bestimmten Zwecken zustimmen."
         },
         {
           "id": "cookies-legal-basis",
           "title": "b) Rechtsgrundlage für die Datenverarbeitung",
-          "content": "Je nach Art und Zweck der Technologie erfolgt die Verarbeitung auf der Grundlage:",
+          "content": "Je nach Art und Zweck der Technologie basiert die Verarbeitung auf:",
           "list": [
             "<strong>Art. 6(1)(a) GDPR in Verbindung mit § 25(1) TTDSG (Einwilligung)</strong> - z.B. für Analytik/Marketing und personalisierte Inhalte oder Werbung",
-            "<strong>Art. 6(1)(b) GDPR (Vertrag/Vorvertragliche Maßnahmen)</strong> - wenn die Verwendung von Technologien technisch notwendig ist, um angeforderte Dienstleistungen zu erbringen (z. B. Warenkorb/Session-Cookies, Login, Speicherung von Einwilligungen);",
+            "<strong>Art. 6(1)(b) GDPR (Vertrag/Vorvertragliche Maßnahmen)</strong> - wenn der Einsatz von Technologien technisch notwendig ist, um angeforderte Dienstleistungen zu erbringen (z.B. Warenkorb/Session-Cookies, Login, Speicherung von Einwilligungen);",
             "<strong>Art. 6(1)(f) GDPR in Verbindung mit § 25(2) TTDSG (Berechtigte Interessen / Technisch notwendige Speicherung)</strong> - z.B. zur Gewährleistung der IT-Sicherheit und der wesentlichen Funktionalität der Website."
           ]
         },
@@ -122,7 +122,7 @@
             "<strong>Technische Optimierung:</strong> Überwachung von Fehlermeldungen, Ladezeiten und Systemstabilität;",
             "<strong>Analysen/Statistiken:</strong> Auswertung des Nutzerverhaltens (aggregiert/pseudonymisiert) zur kontinuierlichen Verbesserung unserer Produkte und Inhalte;",
             "<strong>Benutzerfreundlichkeit/Personalisierung:</strong> Verbesserung der Benutzerfreundlichkeit (z. B. Vorlieben wie Schriftgröße, Sprache oder letzte Formulareingaben);",
-            "<strong>Marketing/Personalisierte Inhalte (nur mit Zustimmung):</strong> Anzeige und Messung von Werbekampagnen, möglicherweise über mehrere Plattformen hinweg."
+            "<strong>Marketing/Personalisierte Inhalte (nur mit Zustimmung):</strong> Anzeige und Messbarkeit von Werbekampagnen, möglicherweise über mehrere Plattformen hinweg."
           ]
         },
         {
@@ -133,7 +133,7 @@
         {
           "id": "cookies-einwand",
           "title": "e) Widerspruchsrecht und Beseitigungsmöglichkeiten",
-          "content": "Soweit Cookies oder Technologien technisch erforderlich sind, besteht keine Widerspruchsmöglichkeit, da sie für den Betrieb der Website unerlässlich sind. <br /><br />Werden Cookies/Technologien aufgrund Ihrer Einwilligung eingesetzt, können Sie Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen - entweder über den Einwilligungsmanager oder über Ihre Browsereinstellungen (z. B. Löschen/Blockieren von Cookies). <br /><br />Bitte beachten Sie, dass der Widerruf der Einwilligung die Funktionalität der Website einschränken kann."
+          "content": "Soweit Cookies oder Technologien technisch erforderlich sind, besteht keine Widerspruchsmöglichkeit, da sie für den Betrieb der Website unerlässlich sind. <br /><br />Werden Cookies/Technologien basierend auf Ihrer Einwilligung eingesetzt, können Sie Ihre Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen - entweder über den Einwilligungsmanager oder über Ihre Browsereinstellungen (z.B. Löschen/Blockieren von Cookies). <br /><br />Bitte beachten Sie, dass der Widerruf der Einwilligung die Funktionalität der Website einschränken kann."
         }
       ]
     },
@@ -144,7 +144,7 @@
         {
           "id": "E-Mail-Beschreibung",
           "title": "a) Beschreibung und Umfang der Datenverarbeitung",
-          "content": "Auf unserer Website können Sie sich für Benachrichtigungen, Newsletter oder andere E-Mail-Nachrichten (z. B. Projektaktualisierungen, UGC-Nachrichten) anmelden. Für den Versand und die Analyse unserer E-Mails nutzen wir den Dienst Mailchimp von The Rocket Science Group LLC d/b/a Mailchimp, 675 Ponce de Leon Ave NE, Suite 5000, Atlanta, GA 30308, USA. <br /><br />Mailchimp ermöglicht die Organisation und den Versand von E-Mails (Transaktions- und Marketing-E-Mails) sowie die Analyse (z.B. Zustellbarkeit, Öffnungen, Klicks, Abmeldungen). Zu diesem Zweck werden u.a. folgende Daten verarbeitet und auf den Servern von Mailchimp gespeichert: E-Mail-Adresse, ggf. Name, Firma, Sprache/Region, Zeitpunkt der Anmeldung (Double-Opt-In), Nachweis der Einwilligung, IP-Adresse/Zeitzone bei Anmeldung, Interaktionen mit unseren E-Mails (z.B. Öffnungen, Klicks), technische Metadaten (z.B. Geräte-/Browserinformationen). Mailchimp kann Zustellungsberichte erstellen, um die Zustellbarkeit zu optimieren, und kann ein Tracking-Pixel in E-Mails verwenden. Bei einer Übermittlung in die USA stützen wir uns auf die SCCs und die mit Mailchimp vereinbarten Datenschutz-/Verarbeitungsbedingungen."
+          "content": "Auf unserer Website können Sie sich für Benachrichtigungen, Newsletter oder andere E-Mail-Nachrichten (z. B. Projekt-Updates, UGC-News) anmelden. Für den Versand und die Analyse unserer E-Mails nutzen wir den Dienst Mailchimp von The Rocket Science Group LLC d/b/a Mailchimp, 675 Ponce de Leon Ave NE, Suite 5000, Atlanta, GA 30308, USA. <br /><br />Mailchimp ermöglicht die Organisation und den Versand von E-Mails (Transaktions- und Marketing-E-Mails) sowie die Analyse (z.B. Zustellbarkeit, Öffnungen, Klicks, Abmeldungen). Zu diesem Zweck werden u.a. folgende Daten verarbeitet und auf den Servern von Mailchimp gespeichert: E-Mail-Adresse, ggf. Name, Firma, Sprache/Region, Zeitpunkt der Anmeldung (Double-Opt-In), Nachweis der Einwilligung, IP-Adresse/Zeitzone bei Anmeldung, Interaktionen mit unseren E-Mails (z.B. Öffnungen, Klicks), technische Metadaten (z.B. Geräte-/Browserinformationen). Mailchimp kann Zustellungsberichte erstellen, um die Zustellbarkeit zu optimieren, und kann ein Tracking-Pixel in E-Mails verwenden. Bei einer Übermittlung in die USA stützen wir uns auf die SCCs und die mit Mailchimp vereinbarten Datenschutz-/Verarbeitungsbedingungen."
         },
         {
           "id": "E-Mail-Rechtsgrundlage",
@@ -183,7 +183,7 @@
           "list": [
             "<strong>Identitäts- und Kontaktdaten:</strong> Vor- und Nachname, ggf. Name des Künstlers/Creators, Adresse(n), E-Mail-Adresse, Telefonnummer(n), Firmenname/Funktion (bei Geschäftskunden), bevorzugte Sprache.",
             "<strong>Zugangsdaten:</strong> Benutzername, Passwort (ausschließlich in verschlüsselter Form gespeichert), ggf. Sicherheits-/Verifizierungsattribute.",
-            "<strong>Vertrags-/Geschäftsdaten:</strong> Informationen zum Rechtsgeschäft (Angebot, Auftrag, Vertragstexte, Konditionen, Stornierungen), Projekt-/Auftrags-IDs, Briefings/Genehmigungen, Abnahmen, Projektkommunikation, Rechnungs-/Zahlungsstatus.",
+            "<strong>Vertrags-/Geschäftsdaten:</strong> Informationen zum Rechtsgeschäft (Angebot, Auftrag, Vertragstexte, Konditionen, Stornierungen), Projekt-/Auftragskennungen, Briefings/Genehmigungen, Abnahmen, Projektkommunikation, Rechnungs-/Zahlungsstatus.",
             "<strong>Rechnungs-/Zahlungsdaten:</strong> Rechnungs- und Lieferadresse, Umsatzsteuer-ID (falls zutreffend), Bankverbindung/IBAN/BIC oder ID des Zahlungsdienstleisters.",
             "<strong>Zustimmungs- und Nachweisdaten:</strong> Zustimmungserklärungen (z. B. Newsletter/Tracking, Veröffentlichungen), Double-Opt-In-Zeitstempel, Zustimmungs-/Widerrufsprotokolle.",
             "<strong>Profil-/Benutzerinformationen (freiwillig):</strong> Profilfoto/Avatar, Social-Media-Handles, Themenpräferenzen, Portfolio-Links, Einstellungen."
@@ -300,7 +300,7 @@
             "das Bestehen des Rechts auf Berichtigung, Löschung oder Einschränkung der Verarbeitung oder das Recht auf Widerspruch gegen eine solche Verarbeitung;",
             "das Bestehen eines Beschwerderechts bei einer Aufsichtsbehörde;",
             "wenn die personenbezogenen Daten nicht bei Ihnen erhoben werden, alle verfügbaren Informationen über ihre Herkunft;",
-            "das Vorliegen einer automatisierten Entscheidungsfindung, einschließlich Profiling gemäß Art. 22(1) und (4) DSGVO und - zumindest in diesen Fällen - aussagekräftige Informationen über die involvierte Logik sowie die Bedeutung und die voraussichtlichen Folgen einer solchen Verarbeitung."
+            "das Vorliegen einer automatisierten Entscheidungsfindung, einschließlich Profiling gemäß Art. 22 Abs. 1 und 4 DS-GVO und - zumindest in diesen Fällen - aussagekräftige Informationen über die involvierte Logik sowie die Bedeutung und die voraussichtlichen Folgen einer solchen Verarbeitung."
           ],
           "additionalContent": "Sie haben außerdem das Recht, darüber informiert zu werden, ob Ihre Daten in ein Drittland oder an eine internationale Organisation übermittelt werden, und über die geeigneten Garantien gemäß Art. 46 DSGVO in Bezug auf solche Übermittlungen."
         },
@@ -315,11 +315,11 @@
           "content": "Sie können die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten unter den folgenden Bedingungen verlangen:",
           "orderedList": [
             "Sie die Richtigkeit Ihrer personenbezogenen Daten während eines Zeitraums bestreiten, der es uns ermöglicht, die Richtigkeit der Daten zu überprüfen;",
-            "die Verarbeitung rechtswidrig ist, Sie aber der Löschung widersprechen und stattdessen die Einschränkung der Verarbeitung verlangen;",
+            "die Verarbeitung rechtswidrig ist, Sie sich aber der Löschung widersetzen und stattdessen eine Einschränkung beantragen;",
             "wir die Daten für die Verarbeitung nicht mehr benötigen, Sie sie aber zur Begründung, Ausübung oder Verteidigung von Rechtsansprüchen benötigen; oder",
             "Sie haben Widerspruch gegen die Verarbeitung gemäß Art. 21(1) DSGVO widersprochen haben, bis wir geprüft haben, ob unsere berechtigten Gründe die Ihren überwiegen."
           ],
-          "additionalContent": "Wenn die Verarbeitung eingeschränkt ist, dürfen die Daten - abgesehen von der Speicherung - nur mit Ihrer Einwilligung, für rechtliche Ansprüche, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden. Sie werden informiert, bevor eine Einschränkung aufgehoben wird."
+          "additionalContent": "Wenn die Verarbeitung eingeschränkt ist, dürfen die Daten - abgesehen von der Speicherung - nur mit Ihrer Zustimmung, für rechtliche Ansprüche, zum Schutz der Rechte einer anderen Person oder aus wichtigen Gründen des öffentlichen Interesses verarbeitet werden. Sie werden informiert, bevor eine Einschränkung aufgehoben wird."
         },
         {
           "id": "Recht auf Erlass",
@@ -341,7 +341,7 @@
             {
               "id": "Mitteilung an Dritte",
               "title": "b) Benachrichtigung von Drittparteien",
-              "content": "Wenn wir personenbezogene Daten veröffentlicht haben und verpflichtet sind, sie zu löschen, werden wir angemessene Schritte unternehmen, einschließlich technischer Maßnahmen, um die für die Verarbeitung der Daten Verantwortlichen darüber zu informieren, dass Sie die Löschung aller Links zu diesen Daten sowie aller Kopien oder Replikationen dieser Daten beantragt haben."
+              "content": "Wenn wir personenbezogene Daten veröffentlicht haben und zu deren Löschung verpflichtet sind, werden wir angemessene Schritte, einschließlich technischer Maßnahmen, ergreifen, um die für die Verarbeitung der Daten Verantwortlichen darüber zu informieren, dass Sie die Löschung aller Links zu diesen Daten sowie aller Kopien oder Replikationen dieser Daten beantragt haben."
             },
             {
               "id": "Ausnahmen",
@@ -360,15 +360,15 @@
           "title": "Recht auf Datenübertragbarkeit",
           "content": "Sie haben das Recht, die personenbezogenen Daten, die Sie uns zur Verfügung gestellt haben, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten, und das Recht, diese Daten einem anderen für die Verarbeitung Verantwortlichen ungehindert zu übermitteln, sofern dies möglich ist:",
           "orderedList": [
-            "die Verarbeitung beruht auf einer Einwilligung (Art. 6(1)(a) oder Art. 9(2)(a) GDPR) oder auf einen Vertrag (Art. 6(1)(b) GDPR); und",
+            "die Verarbeitung basiert auf einer Einwilligung (Art. 6(1)(a) oder Art. 9(2)(a) GDPR) oder auf einen Vertrag (Art. 6(1)(b) GDPR); und",
             "die Verarbeitung erfolgt mit Hilfe automatisierter Verfahren."
           ],
-          "additionalContent": "Sie haben außerdem das Recht, dass Ihre Daten direkt von einem für die Verarbeitung Verantwortlichen an einen anderen übermittelt werden, sofern dies technisch machbar ist und die Rechte anderer nicht beeinträchtigt werden. Dieses Recht gilt nicht für Verarbeitungen, die für die Wahrnehmung einer Aufgabe erforderlich sind, die im öffentlichen Interesse liegt oder in Ausübung öffentlicher Gewalt erfolgt."
+          "additionalContent": "Sie haben außerdem das Recht, dass Ihre Daten direkt von einem für die Verarbeitung Verantwortlichen an einen anderen übermittelt werden, sofern dies technisch machbar ist und die Rechte anderer nicht beeinträchtigt werden. Dieses Recht gilt nicht für Verarbeitungen, die für die Wahrnehmung einer Aufgabe erforderlich sind, die im öffentlichen Interesse oder in Ausübung öffentlicher Gewalt erfolgt."
         },
         {
           "id": "Recht-auf-Gegenstand",
           "title": "Recht auf Widerspruch",
-          "content": "Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Ihrer personenbezogenen Daten, die aufgrund von Art. 6 Abs. 1 Buchstabe e oder f DSGVO, einschließlich eines auf diese Bestimmungen gestützten Profilings, zu widersprechen.<br/><br/>Wir verarbeiten Ihre personenbezogenen Daten nicht mehr, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.<br/><br/>Werden Ihre personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, so können Sie jederzeit Widerspruch gegen diese Verarbeitung einlegen; dies gilt auch für das Profiling, soweit es mit solcher Direktwerbung in Verbindung steht. Wenn Sie widersprechen, werden Ihre personenbezogenen Daten nicht mehr für diese Zwecke verarbeitet.<br/><br/>Sie können Ihr Widerspruchsrecht mit Hilfe automatisierter Verfahren (z. B. Abmeldelinks) ausüben, die technische Spezifikationen verwenden, unabhängig von der Richtlinie 2002/58/EG."
+          "content": "Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten, die aufgrund von Art. 6 Abs. 1 Buchstabe e oder f DSGVO, einschließlich eines auf diese Bestimmungen gestützten Profilings, zu widersprechen.<br/><br/>Wir verarbeiten Ihre personenbezogenen Daten nicht mehr, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.<br/><br/>Werden Ihre personenbezogenen Daten verarbeitet, um Direktwerbung zu betreiben, können Sie jederzeit Widerspruch gegen diese Verarbeitung einlegen, einschließlich eines auf Direktwerbung gestützten Profilings. Wenn Sie widersprechen, werden Ihre personenbezogenen Daten nicht mehr für diese Zwecke verarbeitet.<br/><br/>Sie können Ihr Widerspruchsrecht mit Hilfe automatisierter Verfahren (z. B. Abmeldelinks) ausüben, die technische Spezifikationen verwenden, unabhängig von der Richtlinie 2002/58/EG."
         },
         {
           "id": "Recht-auf-Widerruf-Zustimmung",

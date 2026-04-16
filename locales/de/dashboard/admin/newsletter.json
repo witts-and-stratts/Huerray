@@ -2,7 +2,7 @@
   "newsletterPage": {
     "title": "Newsletter",
     "description": "Suchen und exportieren Sie Newsletter-Abonnenten über den Verwaltungsbereich.",
-    "notice": "Das aktuelle Backend bietet nur die Möglichkeit, Newsletter zu suchen, zu abonnieren oder abzubestellen. Bearbeitungs- und Löschvorgänge erfordern spezielle Admin-Endpunkte, bevor sie aktiviert werden können.",
+    "notice": "Das aktuelle Backend bietet nur die Möglichkeit, Newsletter zu suchen, zu registrieren oder abzubestellen. Bearbeitungs- und Löschvorgänge erfordern spezielle Admin-Endpunkte, bevor sie aktiviert werden können.",
     "summary": "{visible} sichtbar von {total} Einträgen, {selected} ausgewählt",
     "empty": "Keine Newsletter-Einträge gefunden.",
     "emptyDescription": "Die Newsletter-Abonnements werden hier angezeigt, sobald die ersten Kontakte sich anmelden.",

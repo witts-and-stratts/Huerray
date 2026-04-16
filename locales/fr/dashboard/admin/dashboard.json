@@ -169,7 +169,7 @@
         "users": "Utilisateurs en attente d'approbation",
         "brands": "Profils de marque en attente d'approbation",
         "creators": "Profils de créateurs en attente d'approbation",
-        "campaigns": "Campagnes en attente de révision par l'administration",
+        "campaigns": "Campagnes en attente de révision administrative",
         "submissions": "Soumissions vidéo en attente de décision"
       },
       "labels": {

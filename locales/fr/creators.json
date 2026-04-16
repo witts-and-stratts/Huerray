@@ -20,7 +20,7 @@
   "collaborations": {
     "pill": "Correspondance",
     "title": "Des collaborations qui correspondent à votre style",
-    "description": "Correspondance entre les marques en fonction de votre style et de vos préférences en matière de contenu."
+    "description": "Des marques qui correspondent à vos préférences en matière de style et de contenu."
   },
   "director": {
     "pill": "Contrôle de la création",
@@ -41,7 +41,7 @@
     "heading": "Pourquoi les créateurs choisissent-ils Huerray ?",
     "authentic": {
       "title": "Collaborations authentiques",
-      "description": "Travaillez avec des marques qui souhaitent un contenu créé par des créateurs plutôt qu'une création publicitaire générique."
+      "description": "Travaillez avec des marques qui recherchent des contenus créés par des créateurs plutôt que des créations publicitaires génériques."
     },
     "collaboration": {
       "title": "Des partenariats flexibles",
@@ -65,7 +65,7 @@
     }
   },
   "testimonial": {
-    "quote": "Huerray défend les intérêts de ses créateurs... en veillant à ce que nous soyons rémunérés équitablement et en nous offrant constamment des opportunités de marque correspondant à notre style de vie.",
+    "quote": "Huerray défend les intérêts de ses créateurs... en veillant à ce que nous soyons payés équitablement et en nous offrant constamment des opportunités de marque qui correspondent à notre style de vie.",
     "author": "Baron McHennie - @baron_mchennie"
   },
   "cta": {
@@ -81,7 +81,7 @@
     },
     "q2": {
       "question": "Quelles sont les conditions d'adhésion ?",
-      "answer": "Nous accueillons des créateurs de toutes tailles. Vous devez avoir une présence active sur les médias sociaux et être capable de créer un contenu de qualité qui interpelle votre public."
+      "answer": "Nous accueillons des créateurs de toutes tailles. Vous devez avoir une présence active sur les médias sociaux et la capacité de créer un contenu de qualité qui engage votre public."
     },
     "q3": {
       "question": "Combien puis-je gagner ?",

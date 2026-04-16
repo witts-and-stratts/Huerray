@@ -1,52 +1,52 @@
 {
-  "tagline": "Huerray bringt Creators und Marken zusammen, um die perfekten Inhalte für soziale Medien, E-Commerce, Werbung und mehr zu erstellen",
+  "tagline": "Huerray bringt Creators und Marken zusammen, um die richtigen Inhalte für soziale Medien, E-Commerce, Werbung und mehr zu erstellen",
   "hero": {
-    "title": "Authentische UGC-Videoinhalte, die konvertieren",
-    "subtitle": "Arbeiten Sie mit echten, geprüften Creators zusammen, die Videos für TikTok, Reels und Anzeigen erstellen, die den Bildlauf anhalten.",
+    "title": "Authentische UGC-Videos, die konvertieren",
+    "subtitle": "Arbeiten Sie mit echten, geprüften Creators zusammen, die Videos für TikTok, Reels und Anzeigen erstellen, die die Aufmerksamkeit auf sich ziehen.",
     "description": "Keine Abonnements. Keine Plattformkosten.\nNur UGC, das den Umsatz steigert"
   },
   "howItWorks": {
     "step1": {
-      "title": "Finden und verbinden Sie sich mit Creators, die zu Ihrer Marke passen",
-      "description": "Passen Sie Ihr Briefing an und stellen Sie es ein, indem Sie Details wie Länge, Format und Videobearbeitung während der Bearbeitung anpassen."
+      "title": "Finden und vernetzen Sie sich mit Creators, die zu Ihrer Marke passen",
+      "description": "Passen Sie Ihr Briefing an und veröffentlichen Sie es, wobei Sie Details wie Länge, Format und Videobearbeitung selbst bestimmen können."
     },
     "step2": {
-      "title": "Attraktive, originelle Fotos und Videos in Auftrag geben",
+      "title": "Beauftragen Sie ansprechende, originelle Fotos & Videos",
       "description": "Erhalten Sie Bewerbungen von Top Creators. Wählen Sie Ihre bevorzugten Creators nach Kriterien aus, die den Anforderungen Ihrer Markeninhalte oder Kampagnen entsprechen."
     },
     "step3": {
-      "title": "Feedback senden und empfangen",
-      "description": "Nutzen Sie die integrierte Kommunikationsfunktion, um Feedback mit Ihren Creators auszutauschen, ihnen Fragen zu ihren Leistungen zu stellen, bei Bedarf Anpassungen vorzunehmen oder Ihre Anforderungen zu präzisieren."
+      "title": "Feedback austauschen",
+      "description": "Nutzen Sie die integrierte Kommunikationsfunktion, um sich mit Ihren Creators auszutauschen, ihnen Fragen zu ihren Leistungen zu stellen, bei Bedarf Anpassungen vorzunehmen oder Ihre Anforderungen zu präzisieren."
     },
     "step4": {
-      "title": "100%ige Lizenzrechte an allen erstellten Inhalten",
+      "title": "100% Nutzungsrechte an allen erstellten Inhalten",
       "description": "Verwenden Sie die von Ihnen erstellten Inhalte. Ihr UGC wird innerhalb von 7 Tagen geliefert. Sie können dann damit beginnen, ihn in Ihre Kampagne zu integrieren"
     }
   },
   "contentObjectives": {
-    "title": "Inhalte für jedes Ziel",
-    "subtitle": "Creators produzieren ständig hochwertige Inhalte - von Lo-Fi bis Hi-Fi. Creators haben eine große Bandbreite und passen ihre Produktion an Ihre Ziele an.",
+    "title": "Content für jedes Ziel",
+    "subtitle": "Unsere Creators liefern stets hochwertigen Content - von Lo-Fi bis Hi-Fi. Creators haben eine große Bandbreite und passen ihre Produktion an Ihre Ziele an",
     "categories": {
-      "product_shots": "Produktaufnahmen",
-      "testimonial_videos": "Testimonial-Videos",
+      "product_shots": "Produktvideos",
+      "testimonial_videos": "Testimonials",
       "unboxing_videos": "Unboxing-Videos",
-      "lifestyle_shots": "Lifestyle-Aufnahmen",
-      "food_and_beverage": "Essen & Trinken",
-      "travel_and_hospitality": "Reisen und Gastgewerbe"
+      "lifestyle_shots": "Lifestyle Content",
+      "food_and_beverage": "Food Content",
+      "travel_and_hospitality": "Travel Content"
     }
   },
   "creatorVideos": {
-    "title": "Match mit erfahrenen Creators"
+    "title": "Die richtigen Creators für Ihre Marke"
   },
   "testimonial": {
-    "company": "Intelligenz Medien",
-    "quote": "Wir haben sofort die ersten Anzeigenvariationen mit der von Billo empfohlenen Struktur veröffentlicht, wir haben nichts geändert, und es funktionierte bereits besser als unsere vorherigen Anzeigen. Unser ROAS war besser und die Akquisitionskosten gingen zurück. Dadurch konnten wir größer skalieren.",
+    "company": "Intelligencia Media",
+    "quote": "Wir haben sofort die ersten Anzeigenvariationen mit der von Billo empfohlenen Struktur veröffentlicht, wir haben nichts bearbeitet, und es funktionierte bereits besser als unsere vorherigen Anzeigen. Unser ROAS war besser und die Akquisitionskosten gingen zurück. Dadurch konnten wir größer skalieren.",
     "author": "Jorens, CEO"
   },
   "creatorsSection": {
     "label": "Creators",
     "title": "Werden Sie für das bezahlt, was Sie lieben",
-    "description": "Finden Sie Kollaborationen, die Sie begeistern. Arbeiten Sie mit Marken zusammen, die zu Ihrem Content-Stil passen, mit besonderer Autonomie bei jeder von Ihnen produzierten Kampagne"
+    "description": "Finden Sie Kollaborationen, die Sie begeistern. Arbeiten Sie mit Marken zusammen, die zu Ihrem Content-Stil passen, mit voller kreativer Freiheit bei jeder Kampagne, die Sie produzieren"
   },
   "platformLogos": {
     "title": "Verfügbar zur Verwendung auf"

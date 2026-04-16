@@ -10,14 +10,48 @@
   },
   "whatWeDo": {
     "pill": "Qué hacemos",
-    "title": "Conectamos marcas con creadores que realmente se preocupan por sus productos",
-    "description": "Huerray es una plataforma que pone en contacto a las marcas con los creadores perfectos para un contenido auténtico. Nos encargamos de todo, desde el descubrimiento hasta el pago, para que tú puedas centrarte en lo que importa: crear grandes contenidos.",
-    "features": [
-      "Adaptación inteligente de creadores",
-      "Precios transparentes",
-      "Pagos seguros",
-      "Gestión de derechos de contenido"
-    ]
+    "title": "Conectamos a las marcas con creadores que reflejan el mundo al que quieren llegar. En Alemania, Austria y Suiza",
+    "description": "Conectamos a las marcas con creadores reales que producen videos que detienen el scroll, unboxings, testimonios y contenido de estilo de vida para TikTok, Reels y anuncios. Ya necesites autenticidad lo-fi o demostraciones de producto pulidas, Huerray selecciona creadores, gestiona el proceso y entrega activos con licencia listos para todos los canales.",
+    "imageAlt": "Qué hacemos",
+    "items": [
+      {
+        "title": "UGC liderado por creadores",
+        "text": "Testimonios, reseñas y contenido lifestyle auténticos"
+      },
+      {
+        "title": "Campañas para anuncios y e-commerce",
+        "text": "Anuncios de formato corto y fotos de producto"
+      },
+      {
+        "title": "Servicio gestionado y dirección creativa",
+        "text": "Para marcas que quieren una experiencia integral sin complicaciones"
+      },
+      {
+        "title": "Herramientas de storytelling asistidas por IA",
+        "text": "Amplificar, nunca reemplazar, la creatividad humana"
+      }
+    ],
+    "promise": {
+      "title": "Nuestra promesa",
+      "items": [
+        {
+          "title": "Creadores diversos y verificados",
+          "text": "Una red opt-in que refleja comunidades reales"
+        },
+        {
+          "title": "Precios claros",
+          "text": "Paga por contenido, no por comisiones ocultas de plataforma"
+        },
+        {
+          "title": "Derechos completos y uso multicanal",
+          "text": "Usa el contenido en redes sociales, web, anuncios y más."
+        },
+        {
+          "title": "Entrega rápida",
+          "text": "Activos creativos listos para publicar en días, no semanas"
+        }
+      ]
+    }
   },
   "values": {
     "title": "Nuestros valores",

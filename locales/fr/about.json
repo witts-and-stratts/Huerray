@@ -10,14 +10,48 @@
   },
   "whatWeDo": {
     "pill": "Ce que nous faisons",
-    "title": "Nous mettons en relation les marques avec des créateurs qui s'intéressent réellement à leurs produits.",
-    "description": "Huerray est une plateforme qui met en relation les marques et les créateurs parfaits pour un contenu authentique. Nous nous occupons de tout, de la découverte au paiement, afin que vous puissiez vous concentrer sur l'essentiel : créer du contenu de qualité.",
-    "features": [
-      "Correspondance intelligente des créateurs",
-      "Une tarification transparente",
-      "Paiements sécurisés",
-      "Gestion des droits sur le contenu"
-    ]
+    "title": "Nous connectons les marques avec des créateurs qui reflètent le monde qu'elles veulent atteindre. En Allemagne, en Autriche et en Suisse",
+    "description": "Nous mettons les marques en relation avec de vrais créateurs qui produisent des vidéos qui arrêtent le scroll, des unboxings, des témoignages et du contenu lifestyle pour TikTok, Reels et les publicités. Que vous ayez besoin d'une authenticité lo-fi ou de présentations produit soignées, Huerray sélectionne les créateurs, gère le processus et livre des assets sous licence prêts pour tous les canaux.",
+    "imageAlt": "Ce que nous faisons",
+    "items": [
+      {
+        "title": "UGC mené par les créateurs",
+        "text": "Témoignages, avis et contenu lifestyle authentiques"
+      },
+      {
+        "title": "Campagnes pour publicités et e-commerce",
+        "text": "Publicités courtes et visuels produit"
+      },
+      {
+        "title": "Service géré et direction créative",
+        "text": "Pour les marques qui veulent une expérience complète sans gestion quotidienne"
+      },
+      {
+        "title": "Outils de storytelling assistés par IA",
+        "text": "Amplifier, jamais remplacer, la créativité humaine"
+      }
+    ],
+    "promise": {
+      "title": "Notre promesse",
+      "items": [
+        {
+          "title": "Créateurs diversifiés et vérifiés",
+          "text": "Un réseau opt-in qui reflète de vraies communautés"
+        },
+        {
+          "title": "Prix clairs",
+          "text": "Payez pour du contenu, pas pour des frais de plateforme cachés"
+        },
+        {
+          "title": "Droits complets et usage multicanal",
+          "text": "Utilisez le contenu sur les réseaux sociaux, le web, les publicités et au-delà."
+        },
+        {
+          "title": "Livraison rapide",
+          "text": "Des assets créatifs prêts à déployer en quelques jours, pas en plusieurs semaines"
+        }
+      ]
+    }
   },
   "values": {
     "title": "Nos valeurs",

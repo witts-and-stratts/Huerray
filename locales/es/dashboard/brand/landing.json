@@ -142,7 +142,7 @@
     "recentCampaigns": {
       "title": "Campañas recientes",
       "description": "Última actividad de su lista de campaña",
-      "emptyState": "Aún no hay campañas.",
+      "emptyState": "Todavía no hay campañas.",
       "untitledCampaign": "Campaña sin título",
       "updated": "Actualizado"
     },

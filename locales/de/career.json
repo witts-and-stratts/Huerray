@@ -1,9 +1,9 @@
 {
   "hero": {
     "title": "Schließen Sie sich einer Bewegung an, die die kreative Kultur voranbringt",
-    "subtitle": "Wir bringen Kultur, Kreativität und Technologie zusammen, um Kreativen und unterrepräsentierten Stimmen in der DACH-Region die Sichtbarkeit zu geben, die sie verdienen. Und hinter den Kulissen leben wir das, wofür wir stehen: Vielfalt, Offenheit, Mut und echte Zusammenarbeit.",
+    "subtitle": "Wir bringen Kultur, Kreativität und Technologie zusammen, um Kreativen und unterrepräsentierten Stimmen in der DACH-Region die Sichtbarkeit zu geben, die sie verdienen. Und hinter den Kulissen leben wir, wofür wir stehen: Vielfalt, Offenheit, Mut und echte Zusammenarbeit.",
     "buttonText": "Offene Stellen anzeigen",
-    "videoAlt": "Junge Frau bei der Präsentation von Mode",
+    "videoAlt": "Junge Frau, die Mode vorführt",
     "imageAlt1": "Haupt-Creator",
     "imageAlt2": "Creators Inhalt",
     "imageAlt3": "Creators Porträt"
@@ -34,7 +34,7 @@
     "title": "Unsere Werte",
     "values": [
       {
-        "title": "Vielfalt",
+        "title": "Diversität",
         "text": "Vielfalt ist kein Schlagwort. Sie ist das, was wir sind, in unserem Team, unseren Partnern und unseren Ideen."
       },
       {
@@ -90,7 +90,7 @@
   },
   "careerWhy": {
     "mainTitle": "Wir stellen uns eine Welt vor, in der Creators mit Leidenschaft etwas aufbauen, das von Bedeutung ist.",
-    "subtitle": "Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn und Zweck glauben und die einen echten Wandel herbeiführen wollen.",
+    "subtitle": "Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn glauben und die einen echten Wandel herbeiführen wollen.",
     "description1": "Egal, ob Sie aus dem Marketing, der Technik, dem Design, der Geschäftsentwicklung oder der Gemeinschaft kommen. Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn glauben und die echte Veränderungen herbeiführen wollen, ganz gleich, ob Ihr Hintergrund im Marketing, in der Technik, im Design, in der Geschäftsentwicklung oder im Gemeinwesen liegt. Uns geht es weniger um Titel als vielmehr darum, wer du bist, wofür du stehst und welche Energie du mitbringst. Wir wachsen, organisch, absichtlich und mit Absicht.",
     "description2": "Wir sind immer offen für Menschen, die unsere Vision teilen und sie mitgestalten wollen.",
     "imageAlt": "Warum Huerray"

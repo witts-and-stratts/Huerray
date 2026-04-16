@@ -145,16 +145,16 @@ test.describe('Language Selector', () => {
     // Wait for dropdown
     await page.waitForTimeout(300);
 
-    // Switch to French
+    // Switch to Deutsch
     const dropdown = page.locator('.language-selector__dropdown');
-    const frenchOption = dropdown.getByText('Français', { exact: true });
-    await frenchOption.click();
+    const germanOption = dropdown.getByText('Deutsch', { exact: true });
+    await germanOption.click();
 
     // Wait for navigation
     await page.waitForLoadState('networkidle');
 
-    // Should be on French version of the same page
-    expect(page.url()).toContain('/fr');
+    // Should be on German version of the same page
+    expect(page.url()).toContain('/de');
 
     // Page should still be loaded with content
     const bodyContent = page.locator('.body-content, section');

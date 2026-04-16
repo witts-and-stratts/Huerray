@@ -157,7 +157,7 @@
     },
     "pipelineBreakdown": {
       "title": "Pipeline de campagne",
-      "description": "Comment vos campagnes sont-elles réparties par statut ?",
+      "description": "Comment vos campagnes sont réparties par statut",
       "pendingApproval": "En attente d'approbation",
       "approved": "Approuvé",
       "running": "La course à pied",

@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@reference 'tailwindcss';
 
 .about-hero {
   @apply relative -mt-[6.8rem] rounded-bl-[4rem] rounded-br-[4rem] pb-10;
@@ -151,7 +151,7 @@
 }
 
 .about-story__description {
-  @apply text-lg text-white/80 font-light max-w-3xl leading-relaxed;
+  @apply text-lg text-white/80 font-light md:max-w-3xl leading-relaxed;
 }
 
 .about-story__placeholders {
@@ -193,7 +193,7 @@
 }
 
 .about-team__description {
-  @apply text-h5 max-w-2/3 text-white mt-8;
+  @apply text-h5 max-w-full md:max-w-2/3 text-white mt-8;
 }
 
 .about-team__grid {

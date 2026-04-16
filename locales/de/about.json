@@ -10,14 +10,48 @@
   },
   "whatWeDo": {
     "pill": "Was wir tun",
-    "title": "Wir bringen Marken mit Creators zusammen, denen ihre Produkte wirklich am Herzen liegen",
-    "description": "Huerray ist eine Plattform, die Marken mit den perfekten Creators für authentische Inhalte zusammenbringt. Wir kümmern uns um alles von der Entdeckung bis zur Bezahlung, damit Sie sich auf das Wesentliche konzentrieren können: die Erstellung großartiger Inhalte.",
-    "features": [
-      "Intelligenter Creator-Abgleich",
-      "Transparente Preisgestaltung",
-      "Sichere Zahlungen",
-      "Verwaltung von Inhaltsrechten"
-    ]
+    "title": "Wir verbinden Marken mit Creators, die die Welt widerspiegeln, die sie erreichen wollen. In Deutschland, Österreich und der Schweiz",
+    "description": "Wir bringen Marken mit echten Creators zusammen, die aufmerksamkeitsstarke Videos, Unboxings, Testimonials und Lifestyle-Content für TikTok, Reels und Ads erstellen. Ob Sie authentischen Lo-Fi-Content oder hochwertige Produktinszenierungen brauchen: Huerray kuratiert Creators, steuert den Prozess und liefert lizenzierte Assets, die für alle Kanäle bereit sind.",
+    "imageAlt": "Was wir tun",
+    "items": [
+      {
+        "title": "Creator-geführter UGC",
+        "text": "Authentische Testimonials, Reviews und Lifestyle-Content"
+      },
+      {
+        "title": "Kampagnen für Ads & E-Commerce",
+        "text": "Kurzformat-Anzeigen und Produktaufnahmen"
+      },
+      {
+        "title": "Managed Service & Creative Direction",
+        "text": "Für Marken, die eine vollständig betreute End-to-End-Erfahrung wünschen"
+      },
+      {
+        "title": "KI-gestützte Storytelling-Tools",
+        "text": "Verstärken, niemals ersetzen, menschliche Kreativität"
+      }
+    ],
+    "promise": {
+      "title": "Unser Versprechen",
+      "items": [
+        {
+          "title": "Vielfältige, geprüfte Creators",
+          "text": "Ein Opt-in-Netzwerk, das echte Communities widerspiegelt"
+        },
+        {
+          "title": "Klare Preise",
+          "text": "Sie zahlen für Content, nicht für versteckte Plattformgebühren"
+        },
+        {
+          "title": "Volle Rechte & Nutzung auf mehreren Kanälen",
+          "text": "Nutzen Sie Content auf Social Media, Websites, in Ads und darüber hinaus."
+        },
+        {
+          "title": "Schnelle Lieferung",
+          "text": "Kreative Assets sind in Tagen einsatzbereit, nicht erst in Wochen"
+        }
+      ]
+    }
   },
   "values": {
     "title": "Unsere Werte",

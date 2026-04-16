@@ -7,7 +7,7 @@
     "creatingProfile": "Création d'un profil...",
     "completeProfile": "Profil complet",
     "successCreated": "Profil créé avec succès !",
-    "errorCreateFailed": "Échec de la création du profil",
+    "errorCreateFailed": "Échec de la création d'un profil",
     "errorCreateFailedWithError": "Échec de la création du profil : {error}",
     "validationFixErrors": "Veuillez corriger les erreurs de validation",
     "validationErrorWithError": "Erreur de validation : {error}",

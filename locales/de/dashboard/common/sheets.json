@@ -30,12 +30,12 @@
     "hero": {
       "title": "Brauchen Sie Hilfe?",
       "subtitle": "Hier finden Sie Antworten auf häufig gestellte Fragen oder können sich an uns wenden, um die benötigte Hilfe zu erhalten.",
-      "searchPlaceholder": "Eine Frage stellen..."
+      "searchPlaceholder": "Stellen Sie eine Frage..."
     },
     "cards": {
       "brand": [
         {
-          "title": "Erste Schritte",
+          "title": "Jetzt Creator finden",
           "description": "Erfahren Sie, wie Sie Kampagnen erstellen und die Plattform optimal nutzen können."
         },
         {
@@ -49,7 +49,7 @@
       ],
       "creator": [
         {
-          "title": "Erste Schritte",
+          "title": "Jetzt Creator finden",
           "description": "Erfahren Sie, wie Sie Gigs finden und sich für Kampagnen auf der Plattform bewerben können."
         },
         {
@@ -103,7 +103,7 @@
         },
         {
           "q": "Wie funktioniert die Rechnungsstellung?",
-          "a": "Die Abrechnung erfolgt pro Kampagne auf der Grundlage des von Ihnen gewählten Tarifs. Besuchen Sie Einstellungen > Abrechnung für Details."
+          "a": "Die Abrechnung erfolgt pro Kampagne basierend auf dem von Ihnen gewählten Tarif. Besuchen Sie Einstellungen > Abrechnung für Details."
         },
         {
           "q": "Wie überprüfe ich Einreichungen?",

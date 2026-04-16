@@ -10,14 +10,48 @@
   },
   "whatWeDo": {
     "pill": "What We Do",
-    "title": "We connect brands with creators who actually care about their products",
-    "description": "Huerray is a platform that matches brands with the perfect creators for authentic content. We handle everything from discovery to payment, so you can focus on what matters: creating great content.",
-    "features": [
-      "Smart creator matching",
-      "Transparent pricing",
-      "Secure payments",
-      "Content rights management"
-    ]
+    "title": "We connect brands with creators who reflect the world they want to reach. Across Germany, Austria and Switzerland",
+    "description": "We match brands with real creators who make scroll-stopping videos, unboxings, testimonials and lifestyle content for TikTok, Reels and ads. Whether you need lo-fi authenticity or polished product showcases, Huerray curates creators, manages the process, and delivers licenced assets ready for all channels.",
+    "imageAlt": "What We Do",
+    "items": [
+      {
+        "title": "Creator-led UGC",
+        "text": "Authentic testimonials, reviews, lifestyle"
+      },
+      {
+        "title": "Campaigns for ads & e-commerce",
+        "text": "Short-form ads, product shots"
+      },
+      {
+        "title": "Managed service & creative direction",
+        "text": "For brands who want a hands-off end-to-end experience"
+      },
+      {
+        "title": "AI-assisted storytelling tools",
+        "text": "Amplify, never replace, human creativity"
+      }
+    ],
+    "promise": {
+      "title": "Our Promise",
+      "items": [
+        {
+          "title": "Diverse, vetted creators",
+          "text": "Opt-in network that reflects real communities"
+        },
+        {
+          "title": "Clear pricing",
+          "text": "Pay for content, not hidden platform fees"
+        },
+        {
+          "title": "Full rights & multi-channel use",
+          "text": "Use content on social, web, ads, and beyond."
+        },
+        {
+          "title": "Fast delivery",
+          "text": "Creative assets ready to deploy in days, not weeks"
+        }
+      ]
+    }
   },
   "values": {
     "title": "Our Values",

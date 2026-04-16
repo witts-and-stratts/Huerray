@@ -1,12 +1,12 @@
 {
   "submissions": {
     "title": "Envíos recientes",
-    "description": "Los últimos vídeos entregados",
+    "description": "Tus últimos vídeos entregados",
     "noSubmissions": "Aún no se han presentado propuestas",
     "noSubmissionsDesc": "Cuando crees envíos para este concierto, aparecerán aquí.",
     "createTitle": "Crear envío",
     "createDesc": "Sube tu vídeo y añade detalles para este concierto.",
-    "details": "Detalles de la presentación",
+    "details": "Detalles del envío",
     "form": {
       "title": "Título",
       "titlePlaceholder": "Ponle un título a tu propuesta",

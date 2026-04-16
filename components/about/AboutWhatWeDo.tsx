@@ -7,62 +7,26 @@ import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
-const whatWeDo = [
-  {
-    title: 'Creator-led UGC',
-    text: 'Authentic testimonials, reviews, lifestyle',
-  },
-  {
-    title: 'Campaigns for ads & e-commerce',
-    text: 'Short-form ads, product shots',
-  },
-  {
-    title: 'Managed service & creative direction',
-    text: 'for brands who want a hands-off end-to-end experience',
-  },
-  {
-    title: 'AI-assisted storytelling tools',
-    text: 'Amplify, never replace, human creativity',
-  },
-];
-
-const ourPromise = [
-  {
-    title: 'Diverse, vetted creators',
-    text: 'Opt-in network that reflects real communities',
-  },
-  {
-    title: 'Clear pricing',
-    text: 'Pay for content, not hidden platform fees',
-  },
-  {
-    title: 'Full rights & multi-channel use',
-    text: 'Use content on social, web, ads, and beyond.',
-  },
-  {
-    title: 'Fast delivery',
-    text: 'Creative assets ready to deploy in days, not weeks',
-  },
-];
+type TextCard = {
+  title: string;
+  text: string;
+};
 
 export function AboutWhatWeDo() {
   const t = useTranslations( 'about.whatWeDo' );
+  const whatWeDo = t.raw( 'items' ) as TextCard[];
+  const ourPromise = t.raw( 'promise.items' ) as TextCard[];
 
   return (
     <section className='section-card section-card--spaced section-card--pink overflow-visible! mb-20'>
-      <h2 className='h3 gradient-text'>What We Do</h2>
+      <h2 className='h3 gradient-text'>{ t( 'pill' ) }</h2>
 
       <h3 className='text-h3 font-secondary mt-20 gradient-text'>
-        We connect brands with creators who reflect the world they want to
-        reach. Across Germany, Austria and Switzerland
+        { t( 'title' ) }
       </h3>
 
-      <p className='text-h5 text-dark-burgundy max-w-7/10 mt-4'>
-        We match brands with real creators who make scroll-stopping videos,
-        unboxings, testimonials and lifestyle content for TikTok, Reels and ads.
-        Whether you need lo-fi authenticity or polished product showcases,
-        Huerray curates creators, manages the process, and delivers licenced
-        assets ready for all channels.
+      <p className='text-h5 text-dark-burgundy md:max-w-7/10 mt-4'>
+        { t( 'description' ) }
       </p>
 
       <div className='grid md:grid-cols-12 mt-8'>
@@ -83,7 +47,7 @@ export function AboutWhatWeDo() {
         <div className='col-span-7'>
           <Image
             src='/images/what-wedo-collage.webp'
-            alt='What We Do'
+            alt={ t( 'imageAlt' ) }
             width={ 800 }
             height={ 800 }
             className='max-md:scale-120 md:w-[40000px]! mx:max-w-auto! translate-x-[20%]'
@@ -93,7 +57,7 @@ export function AboutWhatWeDo() {
 
       <div className='w-full p-6 border border-dark-burgundy rounded-3xl mt-20 relative'>
         <h3 className='absolute -top-8 -left-4 px-4 py-2 bg-fuchsia-100'>
-          <span className='gradient-text text-h5'>Our Promise</span>
+          <span className='gradient-text text-h5'>{ t( 'promise.title' ) }</span>
         </h3>
         <Splide options={
           {

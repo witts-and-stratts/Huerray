@@ -138,6 +138,7 @@ body {
 .animate-scroll-platforms {
   animation: scroll-horizontal 15s linear infinite;
 }
+
 /* Fix: hero carousel overflows footer hit area */
 .hero__image-grid,
 .hero__carousel,

@@ -7,10 +7,10 @@
   },
   "categories": {
     "fashion": "Mode",
-    "lifestyle": "Lebensstil",
-    "beauty": "Schönheit",
+    "lifestyle": "Lifestyle",
+    "beauty": "Beauty",
     "fitness": "Fitness",
-    "food": "Lebensmittel",
+    "food": "Food",
     "travel": "Reisen",
     "tech": "Tech",
     "healthWellness": "Gesundheit & Wellness",
@@ -18,7 +18,7 @@
     "skincare": "Hautpflege"
   },
   "collaborations": {
-    "pill": "Passend dazu",
+    "pill": "Matching",
     "title": "Kollaborationen, die zu Ihrem Stil passen",
     "description": "Passende Marken auf der Grundlage Ihrer Präferenzen für Stil und Inhalt."
   },

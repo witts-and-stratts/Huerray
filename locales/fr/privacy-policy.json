@@ -15,7 +15,7 @@
     {
       "id": "introduction",
       "title": "Introduction",
-      "content": "<Ces règles de confidentialité ont été traduites de l'allemand. Jusqu'à la création de la British Ltd, HUERRAY relève encore de l'entité allemande. Jusqu'à cette date, les conditions d'utilisation de HUERRAY telles que stipulées par l'entité allemande s'appliquent.</strong><br /><br />La présente politique de confidentialité explique comment THRYPES GmbH, 4th Floor,<br /> Gontardstr. 11, 10178 Berlin, Allemagne (ci-après dénommée \" THRYPES \", \" nous \"), traite les données à caractère personnel lorsque vous utilisez nos sites Web, plateformes, pages de médias sociaux, canaux de communication et services liés au contenu généré par l'utilisateur (CGU) ; lorsque vous vous inscrivez en tant que créateur/influenceur ou en tant qu'entreprise cliente ; lorsque vous coopérez avec nous, concluez des contrats ou interagissez d'une autre manière avec nous. <br /><br/>Nous traitons les données dans la région DACH conformément au règlement général sur la protection des données (UE) 2016/679 (\"GDPR\"), à la loi fédérale allemande sur la protection des données (BDSG), à la loi sur la protection des données des télécommunications et des télémédias (TTDSG) et à d'autres lois applicables en matière de protection des données."
+      "content": "<Ces règles de confidentialité ont été traduites de l'allemand. Jusqu'à la création de la British Ltd, HUERRAY relève encore de l'entité allemande. Jusqu'à cette date, les conditions générales de HUERRAY telles que stipulées par l'entité allemande s'appliquent.</strong><br /><br />La présente politique de confidentialité explique comment THRYPES GmbH, 4th Floor,<br /> Gontardstr. 11, 10178 Berlin, Allemagne (ci-après dénommée \" THRYPES \", \" nous \"), traite les données à caractère personnel lorsque vous utilisez nos sites Web, plateformes, pages de médias sociaux, canaux de communication et services liés au contenu généré par l'utilisateur (CGU) ; lorsque vous vous inscrivez en tant que créateur/influenceur ou en tant qu'entreprise cliente ; lorsque vous coopérez avec nous, concluez des contrats ou interagissez d'une autre manière avec nous. <br /><br/>Nous traitons les données dans la région DACH conformément au règlement général sur la protection des données (UE) 2016/679 (\"GDPR\"), à la loi fédérale allemande sur la protection des données (BDSG), à la loi sur la protection des données des télécommunications et des télémédias (TTDSG) et à d'autres lois applicables en matière de protection des données."
     },
     {
       "id": "contrôleur et contact",
@@ -41,7 +41,7 @@
       "subsections": [
         {
           "id": "champ d'application du traitement",
-          "title": "a) Champ d'application du traitement des données à caractère personnel",
+          "title": "a) Portée du traitement des données à caractère personnel",
           "content": "Nous traitons les données à caractère personnel de nos utilisateurs uniquement dans la mesure où cela est nécessaire pour fournir un site web/une plateforme fonctionnel(le) et pour fournir notre contenu et nos services liés à l'entreprise. Le traitement se fait généralement sur la base de votre consentement (par exemple, via notre gestionnaire de consentement pour les technologies d'analyse/de marketing, les abonnements aux lettres d'information ou le contenu UGC publié). Une exception s'applique dans les cas où l'obtention d'un consentement préalable n'est pas possible pour des raisons pratiques et où le traitement est autorisé par des dispositions légales ou est nécessaire à l'exécution du contrat. <br /><br />Nous adhérons aux principes de transparence, de limitation des finalités, de minimisation des données, d'exactitude, de limitation du stockage et d'intégrité/confidentialité conformément à l'art. 5 GDPR."
         },
         {
@@ -59,7 +59,7 @@
         {
           "id": "suppression des données",
           "title": "c) Suppression des données et période de conservation",
-          "content": "Les données personnelles sont effacées ou bloquées dès que l'objectif du stockage cesse d'être d'actualité. Les données peuvent être conservées au-delà de ce point si les législateurs européens ou nationaux l'exigent dans les règlements de l'UE, les lois ou d'autres dispositions auxquelles nous sommes soumis (par exemple, les obligations de conservation commerciale/fiscale en vertu du code de commerce allemand (HGB) ou du code fiscal (AO), généralement pour une durée de 6 à 10 ans). <br /><br />Le blocage ou la suppression intervient également à l'expiration d'une période de conservation prescrite par la loi, à moins que la poursuite de la conservation ne soit nécessaire à l'exécution du contrat ou à l'exercice ou à la défense de droits légaux. Après expiration, les données seront supprimées ou, si possible, rendues anonymes."
+          "content": "Les données personnelles sont effacées ou bloquées dès que l'objectif du stockage cesse d'être d'actualité. Les données peuvent être conservées au-delà de ce point si les législateurs européens ou nationaux l'exigent dans les règlements de l'UE, les lois ou d'autres dispositions auxquelles nous sommes soumis (par exemple, les obligations de conservation commerciale/fiscale en vertu du code de commerce allemand (HGB) ou du code fiscal (AO), généralement pour une durée de 6 à 10 ans). <br /><br />Le blocage ou la suppression intervient également à l'expiration d'une période de conservation prescrite par la loi, à moins que le maintien de la conservation ne soit nécessaire à l'exécution du contrat ou à l'exercice ou à la défense de droits légaux. Après expiration, les données seront supprimées ou, si possible, rendues anonymes."
         }
       ]
     },
@@ -78,7 +78,7 @@
           "content": "La base juridique du stockage temporaire des données et de l'enregistrement dans des fichiers journaux est l'article 6, paragraphe 1, point f), du RGPD. 6(1)(f) GDPR. Notre intérêt légitime est d'assurer la fonctionnalité technique, la stabilité et la sécurité du site web (par exemple, en détectant les abus ou les attaques), ainsi que le contrôle des performances et le dépannage."
         },
         {
-          "id": "site web de l'objectif",
+          "id": "objectif-site web",
           "title": "c) Finalité du traitement",
           "content": "Le stockage temporaire de l'adresse IP par le système est nécessaire pour fournir le site web à l'appareil de l'utilisateur. À cette fin, l'adresse IP de l'utilisateur doit rester stockée pendant la durée de la session. Ces objectifs constituent également notre intérêt légitime dans le traitement des données conformément à l'article 6, paragraphe 1, point f), du RGPD. 6(1)(f) GDPR."
         },

@@ -71,7 +71,7 @@
     "gigCreatedSuccessfully": "Gig créé avec succès",
     "failedToCreateGig": "Échec de la création d'un concert",
     "gigNotFound": "Gig introuvable",
-    "gigUpdatedSuccessfully": "Mise à jour réussie",
+    "gigUpdatedSuccessfully": "Gig mis à jour avec succès",
     "failedToUpdateGig": "Échec de la mise à jour de gig"
   },
   "activeGigsView": {},

@@ -110,7 +110,7 @@
       "selectRecipient": "Sélectionner le destinataire de la notification",
       "recipientDescription": "Sélectionnez l'utilisateur qui doit recevoir cette notification.",
       "eventName": "Nom de l'événement",
-      "eventNamePlaceholder": "par exemple : Gig Invitation acceptée",
+      "eventNamePlaceholder": "par exemple, Invitation à la fête acceptée",
       "eventType": "Type d'événement",
       "title": "Titre",
       "titlePlaceholder": "Titre de la notification",

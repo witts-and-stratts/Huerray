@@ -28,7 +28,7 @@
     }
   },
   "expertSupport": {
-    "pill": "Apoyo específico",
+    "pill": "Asistencia dedicada",
     "title": "Asistencia de nivel experto",
     "description": "Nuestro equipo está aquí para garantizar que se le asigne a los creadores adecuados, que las entregas se realicen a tiempo y para asegurarse de que su campaña y su estrategia creativa sean un éxito.",
     "listItems": {
@@ -55,7 +55,7 @@
   },
   "stopAssuming": {
     "pill": "Medición",
-    "title": "Dejar de suponer lo que funciona",
+    "title": "Dejar de asumir lo que funciona",
     "description": "Mantén el pulso de lo que ocurre durante el proceso creativo, con información y actualizaciones constantes.",
     "listItems": {
       "item1": "Haga un seguimiento de su campaña y compruebe sus resultados",
@@ -65,7 +65,7 @@
   },
   "cta": {
     "subtitle": "Únete a miles de marcas que obtienen contenidos increíbles",
-    "title": "Únase al mercado. Encuentra a tus próximos embajadores de marca",
+    "title": "Únase a la red. Encuentre a sus próximos embajadores de marca",
     "buttonText": "Empezar"
   },
   "industry": {
@@ -117,7 +117,7 @@
     },
     "q9": {
       "question": "¿Cómo se investiga a los creadores?",
-      "answer": "Contamos con un riguroso proceso de selección para garantizar que todos los creadores de nuestra plataforma sean profesionales y produzcan trabajos de alta calidad."
+      "answer": "Llevamos a cabo un riguroso proceso de selección para garantizar que todos los creadores de nuestra plataforma sean profesionales y produzcan trabajos de alta calidad."
     },
     "q10": {
       "question": "¿Ofrecen servicios gestionados?",
