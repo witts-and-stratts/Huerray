@@ -54,6 +54,9 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
   const [ activeTab, setActiveTab ] = React.useState( 'overview' );
 
   const { data: bankDetails } = useCreatorBankDetails( id! );
+  const joinedLabel = useFormatDate( created_at || '' );
+  const userCreatedLabel = useFormatDate( userDetails?.created_at || '' );
+  const userUpdatedLabel = useFormatDate( userDetails?.updated_at || '' );
 
   const handles: Record<string, string> = { instagram_handle, tiktok_handle, youtube_handle };
   const activeSocials = SOCIAL_PLATFORMS.filter( p => handles[ p.handleKey ] );
@@ -116,7 +119,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
               ) }
 
               <WrappedCard title={ t( 'creatorDetails.systemDetails' ) }>
-                <Row label={ tc( 'sheets.joined' ) } value={ created_at ? useFormatDate( created_at as string ) : tc( 'sheets.na' ) } />
+                <Row label={ tc( 'sheets.joined' ) } value={ created_at ? joinedLabel : tc( 'sheets.na' ) } />
                 <Separator />
                 <Row label={ t( 'creatorDetails.creatorId' ) } value={ <CopyText text={ id } iconSide='left' className='font-mono text-[13px]'>{ id }</CopyText> } />
                 <Separator />
@@ -189,9 +192,9 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
               <WrappedCard title={ t( 'creatorDetails.systemSection' ) }>
                 <Row label={ t( 'creatorDetails.userId' ) } value={ <CopyText text={ userDetails?.id || user_id } iconSide='left' className='font-mono text-[13px]'>{ userDetails?.id || user_id }</CopyText> } />
                 <Separator />
-                <Row label={ t( 'creatorDetails.createdLabel' ) } value={ userDetails?.created_at ? useFormatDate( userDetails.created_at ) : tc( 'sheets.na' ) } />
+                <Row label={ t( 'creatorDetails.createdLabel' ) } value={ userDetails?.created_at ? userCreatedLabel : tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label={ t( 'creatorDetails.updatedLabel' ) } value={ userDetails?.updated_at ? useFormatDate( userDetails.updated_at ) : tc( 'sheets.na' ) } />
+                <Row label={ t( 'creatorDetails.updatedLabel' ) } value={ userDetails?.updated_at ? userUpdatedLabel : tc( 'sheets.na' ) } />
               </WrappedCard>
             </div>
           </Activity>
@@ -199,42 +202,38 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
 
         <RoleGuard allowedRoles={ [ 'admin' ] }>
           <SheetFooter className="sticky bottom-0 px-6 pb-6 pt-3 shrink-0 border-t border-border/50 bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur">
-            <CreatorActionMenu
-              creator={ creator! }
-              onApproveProfile={ onApproveProfile }
-              onRejectProfile={ onRejectProfile }
-              trigger={
-                <ButtonGroup className={ cn( "self-start min-w-[240px]", { "w-full": isPendingApproval } ) }>
-                  { isPendingApproval && onApproveProfile ? (
-                    <Button
-                      size="sm"
-                      className="font-regular flex-1"
-                      onClick={ () => onApproveProfile( creator! ) }
-                    >
-                      { t( 'creatorStatus.approve' ) }
-                    </Button>
-                  ) : null }
-                  { isPendingApproval && onRejectProfile ? (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="font-regular text-destructive flex-1"
-                      onClick={ () => onRejectProfile( creator! ) }
-                    >
-                      { t( 'creatorStatus.return' ) }
-                    </Button>
-                  ) : null }
-                  { !isPendingApproval ? (
-                    <Button variant="outline" size="sm" className="font-regular flex-1">
-                      { tc( 'actions' ) }
-                    </Button>
-                  ) : null }
-                  <Button variant="outline" size="sm" className="font-regular">
+            <ButtonGroup className={ cn( "self-start min-w-[240px]", { "w-full": isPendingApproval } ) }>
+              { isPendingApproval && onApproveProfile ? (
+                <Button
+                  size="sm"
+                  className="font-regular flex-1"
+                  onClick={ () => onApproveProfile( creator! ) }
+                >
+                  { t( 'creatorStatus.approve' ) }
+                </Button>
+              ) : null }
+              { isPendingApproval && onRejectProfile ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="font-regular text-destructive flex-1"
+                  onClick={ () => onRejectProfile( creator! ) }
+                >
+                  { t( 'creatorStatus.return' ) }
+                </Button>
+              ) : null }
+              <CreatorActionMenu
+                creator={ creator! }
+                onApproveProfile={ onApproveProfile }
+                onRejectProfile={ onRejectProfile }
+                trigger={
+                  <Button variant="outline" size="sm" className="font-regular flex-1">
+                    { !isPendingApproval ? tc( 'actions' ) : null }
                     <ChevronDown className="size-4" />
                   </Button>
-                </ButtonGroup>
-              }
-            />
+                }
+              />
+            </ButtonGroup>
           </SheetFooter>
         </RoleGuard>
 

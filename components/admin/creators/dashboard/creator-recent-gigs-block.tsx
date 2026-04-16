@@ -72,7 +72,7 @@ export function CreatorRecentGigsBlock( { creatorId }: CreatorRecentGigsBlockPro
         { !isLoading && !isError && recentItems.length === 0 && <EmptySubmission /> }
 
         { !isLoading && !isError && recentItems.length > 0 && (
-          <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             { recentItems.map( ( item ) => (
               <SubmissionCard key={ item.id } submission={ item } layout="mini" />
             ) ) }
