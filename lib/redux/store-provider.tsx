@@ -32,7 +32,7 @@ export default function StoreProvider( {
   return (
     <Provider store={ storeRef.current }>
       <PersistorContext.Provider value={ persistorRef.current ?? null }>
-        <PersistGate loading={ null } persistor={ persistorRef.current }>
+        <PersistGate loading={ null } persistor={ persistorRef.current! }>
           { children }
         </PersistGate>
       </PersistorContext.Provider>
