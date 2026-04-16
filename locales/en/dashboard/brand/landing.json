@@ -12,6 +12,8 @@
         "title": "Analytics",
         "description": "Track campaign, gig, creator outreach, content approval, and spend performance.",
         "periodLabel": "Select analytics period",
+        "dateRangeLabel": "Select date range",
+        "dateRangePlaceholder": "Select date range",
         "refresh": "Refresh",
         "periods": {
           "allTime": "All time",

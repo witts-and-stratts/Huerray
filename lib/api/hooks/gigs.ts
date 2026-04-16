@@ -8,6 +8,7 @@ import {
   useQuery, 
   useMutation, 
   useQueryClient,
+  keepPreviousData,
   type UseQueryResult, 
   type UseMutationResult,
   type UseQueryOptions,
@@ -67,6 +68,7 @@ export function useGigs(
       const response = await gigsApi.gigsSearchGet( params as any );
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   } );
 }

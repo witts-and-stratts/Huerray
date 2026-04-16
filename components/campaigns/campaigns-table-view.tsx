@@ -12,7 +12,6 @@ import {
   flexRender,
   type Table as TanstackTable
 } from '@tanstack/react-table';
-import { cn } from '@/lib/dashboard-utils';
 import { AnimatePresence } from 'motion/react';
 import { MotionTableRow } from '../dashboard-ui/motion-table';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
@@ -45,30 +44,19 @@ export function CamapignsTableView( {
         ) ) }
       </TableHeader>
       <TableBody>
-        <AnimatePresence mode='popLayout'>
+        <AnimatePresence initial={ false }>
           { table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map( ( row ) => (
               <MotionTableRow
                 key={ row.id }
                 data-state={ row.getIsSelected() && 'selected' }
-                layout
-                initial={ {
-                  opacity: 0,
-                  y: 20,
-                  borderColor: 'transparent',
-                } }
+                initial={ { opacity: 0 } }
                 animate={ {
                   opacity: row.original.campaign_status === 'deactivated' ? 0.45 : 1,
                   filter: row.original.campaign_status === 'deactivated' ? 'grayscale(1)' : 'grayscale(0)',
-                  y: 0,
-                  borderColor: 'inherit',
                 } }
-                exit={ { opacity: 0, y: 20, transition: { duration: 0.1 } } }
-                transition={ {
-                  duration: 0.4,
-                  delay: row.index * 0.05,
-                  layout: { duration: 0.3 },
-                } }
+                exit={ { opacity: 0 } }
+                transition={ { duration: 0.2, ease: 'easeOut' } }
                 className='bg-background'
               >
                 { row.getVisibleCells().map( ( cell ) => (

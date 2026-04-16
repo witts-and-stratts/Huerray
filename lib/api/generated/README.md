@@ -52,11 +52,9 @@ All URIs are relative to */api/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AnalyticsApi* | [**analyticsBrandGet**](docs/AnalyticsApi.md#analyticsbrandget) | **GET** /analytics/brand | Get brand analytics
-*AnalyticsApi* | [**analyticsBrandPeriodGet**](docs/AnalyticsApi.md#analyticsbrandperiodget) | **GET** /analytics/brand/period | Get brand analytics by period
 *AnalyticsApi* | [**analyticsCreatorGet**](docs/AnalyticsApi.md#analyticscreatorget) | **GET** /analytics/creator | Get creator analytics
-*AnalyticsApi* | [**analyticsCreatorPeriodGet**](docs/AnalyticsApi.md#analyticscreatorperiodget) | **GET** /analytics/creator/period | Get creator analytics by period
+*AnalyticsApi* | [**analyticsDelete**](docs/AnalyticsApi.md#analyticsdelete) | **DELETE** /analytics | Delete all analytics data
 *AnalyticsApi* | [**analyticsPlatformGet**](docs/AnalyticsApi.md#analyticsplatformget) | **GET** /analytics/platform | Get platform analytics
-*AnalyticsApi* | [**analyticsPlatformPeriodGet**](docs/AnalyticsApi.md#analyticsplatformperiodget) | **GET** /analytics/platform/period | Get platform analytics by period
 *AnalyticsApi* | [**analyticsTimeSeriesGet**](docs/AnalyticsApi.md#analyticstimeseriesget) | **GET** /analytics/time-series | Get analytics time series
 *AuthenticationApi* | [**authChangePasswordPost**](docs/AuthenticationApi.md#authchangepasswordpost) | **POST** /auth/change-password | Change user password
 *AuthenticationApi* | [**authLoginPost**](docs/AuthenticationApi.md#authloginpost) | **POST** /auth/login | User login

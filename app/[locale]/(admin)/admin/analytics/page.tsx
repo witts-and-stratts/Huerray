@@ -5,10 +5,9 @@ import {
   type AnalyticsMetric,
   type AnalyticsMetricGroup,
   type AnalyticsPeriod,
-  type PeriodEndpoint,
 } from '@/components/dashboard/analytics/dashboard-analytics-page';
 import type { ModelsPlatformAnalyticsResponse } from '@/lib/api/generated/models';
-import { usePlatformAnalytics, usePlatformAnalyticsByPeriod } from '@/lib/api/hooks/analytics';
+import { usePlatformAnalytics } from '@/lib/api/hooks/analytics';
 import { useTranslations } from 'next-intl';
 
 type PlatformAnalytics = ModelsPlatformAnalyticsResponse;
@@ -85,6 +84,9 @@ export default function AdminPlatformAnalyticsPage() {
       title={ t( 'title' ) }
       description={ t( 'description' ) }
       periodLabel={ t( 'periodLabel' ) }
+      dateRangeLabel={ t( 'dateRangeLabel' ) }
+      dateRangePlaceholder={ t( 'dateRangePlaceholder' ) }
+      storageKey="admin-analytics"
       refreshLabel={ t( 'refresh' ) }
       errorLabel={ t( 'error' ) }
       periodOptions={ periodOptions }
@@ -94,8 +96,7 @@ export default function AdminPlatformAnalyticsPage() {
         [ metricGroups[ 3 ], metricGroups[ 2 ] ],
         [ metricGroups[ 4 ] ],
       ] }
-      useAllAnalytics={ usePlatformAnalytics }
-      usePeriodAnalytics={ ( period: PeriodEndpoint, options ) => usePlatformAnalyticsByPeriod( period, options ) }
+      useAnalytics={ usePlatformAnalytics }
     />
   );
 }

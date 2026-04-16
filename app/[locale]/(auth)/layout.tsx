@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { QueryProvider } from "@/lib/api/query-provider";
 import { AuthProvider } from "@/lib/auth/auth-context";
+import StoreProvider from "@/lib/redux/store-provider";
 import "@/app/styles/dashboard-globals.css";
 
 export const metadata: Metadata = {
@@ -26,8 +28,12 @@ export default async function AuthLayout( {
       <body>
         <NextIntlClientProvider messages={ messages }>
           <AuthProvider>
-            { children }
-            <Toaster />
+            <StoreProvider>
+              <QueryProvider>
+                { children }
+                <Toaster />
+              </QueryProvider>
+            </StoreProvider>
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

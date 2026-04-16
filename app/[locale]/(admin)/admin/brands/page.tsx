@@ -6,10 +6,15 @@ import { useBrands } from "@/lib/api/hooks/brands";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { BrandsTable } from "@/components/admin/brands/brands-table";
+import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 
 export default function BrandsPage() {
   const t = useTranslations( 'dashboard.admin' );
-  const { data, isLoading, error } = useBrands();
+  const { pagination, setPagination } = usePersistedPagination( 'admin-brands' );
+  const { data, isLoading, isFetching, error } = useBrands( {
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  } );
 
   // Transform API response to Brand[] format expected by BrandsTable
   const brandsData = useMemo<Brand[]>( () => {
@@ -56,7 +61,11 @@ export default function BrandsPage() {
       <BrandsTable
         brandsData={ brandsData }
         isLoading={ isLoading }
+        isFetching={ isFetching }
         error={ error as Error | null }
+        pagination={ pagination }
+        onPaginationChange={ setPagination }
+        rowCount={ data?.pagination?.total }
       />
     </>
   );

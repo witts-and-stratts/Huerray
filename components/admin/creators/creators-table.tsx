@@ -32,6 +32,7 @@ import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
+import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 
 const creatorGlobalFilter: FilterFn<ModelsCreatorResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -181,10 +182,10 @@ export function CreatorsTable( {
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
-    ...(isServerSide && {
+    ...( isServerSide && {
       manualPagination: true,
       rowCount: rowCount ?? 0,
-    }),
+    } ),
     state: {
       sorting,
       columnFilters,
@@ -229,7 +230,7 @@ export function CreatorsTable( {
             transition={ { duration: 0.3 } }
             className="flex flex-col grow relative min-h-0"
           >
-            <div className="flex-1 min-h-0 overflow-auto">
+            <ScrollArea className="flex-1 min-h-0 overflow-auto">
               { creators.length > 0 && (
                 <CreatorsTableToolbar
                   table={ table }
@@ -251,7 +252,7 @@ export function CreatorsTable( {
                 onApproveProfile={ handleOnApproveProfile }
                 onRejectProfile={ handleOnRejectProfile }
               />
-            </div>
+            </ScrollArea>
             { creators.length > 0 && (
               <div className="px-3 shrink-0 border-t bg-slate-50/50">
                 <DataTablePagination table={ table } />

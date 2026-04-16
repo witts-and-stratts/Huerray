@@ -8,7 +8,9 @@ import {
   useReactTable,
   type ColumnFiltersState,
   type FilterFn,
+  type PaginationState,
   type SortingState,
+  type Updater,
   type VisibilityState,
 } from '@tanstack/react-table';
 import * as React from 'react';
@@ -26,6 +28,7 @@ import { usePersistedViewMode } from '@/lib/hooks/use-persisted-view-mode';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
+import { ScrollArea } from '../dashboard-ui/scroll-area';
 
 const invoiceGlobalFilter: FilterFn<ModelsInvoiceResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -45,17 +48,37 @@ const invoiceGlobalFilter: FilterFn<ModelsInvoiceResponse> = ( row, _columnId, f
 export interface InvoicesTableProps {
   data: ModelsInvoiceResponse[];
   isLoading?: boolean;
+  isFetching?: boolean;
   isAdmin?: boolean;
   error?: Error | null;
   refetch?: () => void;
+  pagination?: PaginationState;
+  onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
+  rowCount?: number;
 }
 
-export function InvoicesTable( { data, isLoading = false, isAdmin = false, error = null, refetch }: InvoicesTableProps ) {
+export function InvoicesTable( {
+  data,
+  isLoading = false,
+  isFetching = false,
+  isAdmin = false,
+  error = null,
+  refetch,
+  pagination: externalPagination,
+  onPaginationChange: externalOnPaginationChange,
+  rowCount,
+}: InvoicesTableProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
-  const showLoading = useDelayedLoading( isLoading, 250 );
+  const isInitialLoading = isLoading && data.length === 0;
+  const isContentLoading = !isInitialLoading && isFetching;
+  const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 250 );
   const { view: persistedView, setView } = usePersistedViewMode( 'invoices', 'table' );
   const view = isAdmin ? 'table' : persistedView;
-  const { pagination, setPagination } = usePersistedPagination( 'invoices' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'invoices' );
+  const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
+  const pagination = isServerSide ? externalPagination : internalPagination;
+  const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
@@ -102,6 +125,10 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false, error
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    ...( isServerSide && {
+      manualPagination: true,
+      rowCount: rowCount ?? 0,
+    } ),
     state: {
       sorting,
       columnFilters,
@@ -114,9 +141,9 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false, error
 
   return (
     <AnimatePresence>
-      { showLoading && <DataTableSkeleton key="invoices-loading" /> }
+      { showInitialLoading && <DataTableSkeleton key="invoices-loading" /> }
       { error && <AdminNetworkErrorState key="invoices-error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
-      { !isLoading && !error && (
+      { !isInitialLoading && !error && (
         <motion.div
           key="invoices-content"
           initial={ { opacity: 0 } }
@@ -125,7 +152,7 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false, error
           transition={ { duration: 0.3 } }
           className='flex flex-col flex-1 bg-slate-50/50 grow relative min-h-0 overflow-hidden'
         >
-          <div className="flex-1 min-h-0 overflow-auto">
+          <ScrollArea className="flex-1 min-h-0 overflow-auto">
             <InvoicesTableToolbar
               table={ table }
               searchValue={ searchValue }
@@ -139,8 +166,13 @@ export function InvoicesTable( { data, isLoading = false, isAdmin = false, error
               setView={ setView }
               isAdmin={ isAdmin }
             />
-            <InvoicesView table={ table } view={ view } isAdmin={ isAdmin } />
-          </div>
+            <InvoicesView
+              table={ table }
+              view={ view }
+              isAdmin={ isAdmin }
+              isLoading={ showContentLoading }
+            />
+          </ScrollArea>
           <div className='px-3 shrink-0 border-t bg-slate-50/50'>
             <DataTablePagination table={ table } />
           </div>

@@ -12,6 +12,8 @@
     "title": "Analyse",
     "description": "Suivez les candidatures, invitations, gigs, revenus, soumissions vidéo et le support.",
     "periodLabel": "Sélectionner la période d'analyse",
+    "dateRangeLabel": "Sélectionner la plage de dates",
+    "dateRangePlaceholder": "Sélectionner la plage de dates",
     "refresh": "Actualiser",
     "error": "Impossible de charger l'analyse du créateur.",
     "periods": {

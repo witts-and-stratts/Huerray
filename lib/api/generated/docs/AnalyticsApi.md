@@ -5,17 +5,15 @@ All URIs are relative to */api/v1*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**analyticsBrandGet**](#analyticsbrandget) | **GET** /analytics/brand | Get brand analytics|
-|[**analyticsBrandPeriodGet**](#analyticsbrandperiodget) | **GET** /analytics/brand/period | Get brand analytics by period|
 |[**analyticsCreatorGet**](#analyticscreatorget) | **GET** /analytics/creator | Get creator analytics|
-|[**analyticsCreatorPeriodGet**](#analyticscreatorperiodget) | **GET** /analytics/creator/period | Get creator analytics by period|
+|[**analyticsDelete**](#analyticsdelete) | **DELETE** /analytics | Delete all analytics data|
 |[**analyticsPlatformGet**](#analyticsplatformget) | **GET** /analytics/platform | Get platform analytics|
-|[**analyticsPlatformPeriodGet**](#analyticsplatformperiodget) | **GET** /analytics/platform/period | Get platform analytics by period|
 |[**analyticsTimeSeriesGet**](#analyticstimeseriesget) | **GET** /analytics/time-series | Get analytics time series|
 
 # **analyticsBrandGet**
 > ModelsStandardBrandAnalyticsResponse analyticsBrandGet()
 
-Get analytics for brand\'s performance
+Get analytics for brand\'s performance. Admin can pass brand_id query param. Optionally filter by period or date range (mutually exclusive).
 
 ### Example
 
@@ -28,56 +26,16 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AnalyticsApi(configuration);
 
-const { status, data } = await apiInstance.analyticsBrandGet();
-```
+let brandId: string; //Brand ID (admin only) (optional) (default to undefined)
+let period: string; //Period (last_week, last_month, last_three_months, last_year) (optional) (default to undefined)
+let startDate: string; //Start date for date range filter (YYYY-MM-DD) (optional) (default to undefined)
+let endDate: string; //End date for date range filter (YYYY-MM-DD) (optional) (default to undefined)
 
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ModelsStandardBrandAnalyticsResponse**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | OK |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **analyticsBrandPeriodGet**
-> ModelsStandardBrandAnalyticsResponse analyticsBrandPeriodGet()
-
-Get brand analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-
-### Example
-
-```typescript
-import {
-    AnalyticsApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new AnalyticsApi(configuration);
-
-let period: string; //Period (last_week, last_month, last_three_months, last_year) (default to undefined)
-
-const { status, data } = await apiInstance.analyticsBrandPeriodGet(
-    period
+const { status, data } = await apiInstance.analyticsBrandGet(
+    brandId,
+    period,
+    startDate,
+    endDate
 );
 ```
 
@@ -85,7 +43,10 @@ const { status, data } = await apiInstance.analyticsBrandPeriodGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **period** | [**string**] | Period (last_week, last_month, last_three_months, last_year) | defaults to undefined|
+| **brandId** | [**string**] | Brand ID (admin only) | (optional) defaults to undefined|
+| **period** | [**string**] | Period (last_week, last_month, last_three_months, last_year) | (optional) defaults to undefined|
+| **startDate** | [**string**] | Start date for date range filter (YYYY-MM-DD) | (optional) defaults to undefined|
+| **endDate** | [**string**] | End date for date range filter (YYYY-MM-DD) | (optional) defaults to undefined|
 
 
 ### Return type
@@ -115,7 +76,7 @@ No authorization required
 # **analyticsCreatorGet**
 > ModelsStandardCreatorAnalyticsResponse analyticsCreatorGet()
 
-Get analytics for creator\'s performance
+Get analytics for creator\'s performance. Admin can pass creator_id query param. Optionally filter by period or date range (mutually exclusive).
 
 ### Example
 
@@ -128,56 +89,16 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AnalyticsApi(configuration);
 
-const { status, data } = await apiInstance.analyticsCreatorGet();
-```
+let creatorId: string; //Creator ID (admin only) (optional) (default to undefined)
+let period: string; //Period (last_week, last_month, last_three_months, last_year) (optional) (default to undefined)
+let startDate: string; //Start date for date range filter (YYYY-MM-DD) (optional) (default to undefined)
+let endDate: string; //End date for date range filter (YYYY-MM-DD) (optional) (default to undefined)
 
-### Parameters
-This endpoint does not have any parameters.
-
-
-### Return type
-
-**ModelsStandardCreatorAnalyticsResponse**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | OK |  -  |
-|**401** | Unauthorized |  -  |
-|**403** | Forbidden |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **analyticsCreatorPeriodGet**
-> ModelsStandardCreatorAnalyticsResponse analyticsCreatorPeriodGet()
-
-Get creator analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-
-### Example
-
-```typescript
-import {
-    AnalyticsApi,
-    Configuration
-} from 'huerray-api';
-
-const configuration = new Configuration();
-const apiInstance = new AnalyticsApi(configuration);
-
-let period: string; //Period (last_week, last_month, last_three_months, last_year) (default to undefined)
-
-const { status, data } = await apiInstance.analyticsCreatorPeriodGet(
-    period
+const { status, data } = await apiInstance.analyticsCreatorGet(
+    creatorId,
+    period,
+    startDate,
+    endDate
 );
 ```
 
@@ -185,7 +106,10 @@ const { status, data } = await apiInstance.analyticsCreatorPeriodGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **period** | [**string**] | Period (last_week, last_month, last_three_months, last_year) | defaults to undefined|
+| **creatorId** | [**string**] | Creator ID (admin only) | (optional) defaults to undefined|
+| **period** | [**string**] | Period (last_week, last_month, last_three_months, last_year) | (optional) defaults to undefined|
+| **startDate** | [**string**] | Start date for date range filter (YYYY-MM-DD) | (optional) defaults to undefined|
+| **endDate** | [**string**] | End date for date range filter (YYYY-MM-DD) | (optional) defaults to undefined|
 
 
 ### Return type
@@ -212,10 +136,10 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **analyticsPlatformGet**
-> ModelsStandardPlatformAnalyticsResponse analyticsPlatformGet()
+# **analyticsDelete**
+> ModelsStandardResponseAny analyticsDelete()
 
-Get platform-wide analytics for admin users
+Delete all platform, brand, and creator analytics metrics
 
 ### Example
 
@@ -228,7 +152,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AnalyticsApi(configuration);
 
-const { status, data } = await apiInstance.analyticsPlatformGet();
+const { status, data } = await apiInstance.analyticsDelete();
 ```
 
 ### Parameters
@@ -237,7 +161,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**ModelsStandardPlatformAnalyticsResponse**
+**ModelsStandardResponseAny**
 
 ### Authorization
 
@@ -255,13 +179,14 @@ No authorization required
 |**200** | OK |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
+|**500** | Internal Server Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **analyticsPlatformPeriodGet**
-> ModelsStandardPlatformAnalyticsResponse analyticsPlatformPeriodGet()
+# **analyticsPlatformGet**
+> ModelsStandardPlatformAnalyticsResponse analyticsPlatformGet()
 
-Get platform analytics for specific time periods (last_week, last_month, last_three_months, last_year)
+Get platform-wide analytics for admin users. Optionally filter by period or date range (mutually exclusive).
 
 ### Example
 
@@ -274,10 +199,14 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AnalyticsApi(configuration);
 
-let period: string; //Period (last_week, last_month, last_three_months, last_year) (default to undefined)
+let period: string; //Period (last_week, last_month, last_three_months, last_year) (optional) (default to undefined)
+let startDate: string; //Start date for date range filter (YYYY-MM-DD) (optional) (default to undefined)
+let endDate: string; //End date for date range filter (YYYY-MM-DD) (optional) (default to undefined)
 
-const { status, data } = await apiInstance.analyticsPlatformPeriodGet(
-    period
+const { status, data } = await apiInstance.analyticsPlatformGet(
+    period,
+    startDate,
+    endDate
 );
 ```
 
@@ -285,7 +214,9 @@ const { status, data } = await apiInstance.analyticsPlatformPeriodGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **period** | [**string**] | Period (last_week, last_month, last_three_months, last_year) | defaults to undefined|
+| **period** | [**string**] | Period (last_week, last_month, last_three_months, last_year) | (optional) defaults to undefined|
+| **startDate** | [**string**] | Start date for date range filter (YYYY-MM-DD) | (optional) defaults to undefined|
+| **endDate** | [**string**] | End date for date range filter (YYYY-MM-DD) | (optional) defaults to undefined|
 
 
 ### Return type

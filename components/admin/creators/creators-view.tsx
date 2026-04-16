@@ -28,7 +28,7 @@ export function CreatorsView( { table, view, onViewDetails, onApproveProfile, on
     }
 
     return (
-      <div className="@container px-2 md:px-5">
+      <div className="@container p-2 md:p-5">
         <AnimatePresence mode='popLayout'>
           <motion.div
             className="grid grid-cols-2 gap-4 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-5 @xl:grid-cols-6 @2xl:grid-cols-7"
@@ -64,5 +64,5 @@ export function CreatorsView( { table, view, onViewDetails, onApproveProfile, on
     );
   }
 
-  return <div className="px-2 md:px-5"><CreatorsTableView table={ table } /></div>;
+  return <div className="p-2 md:p-4"><CreatorsTableView table={ table } /></div>;
 }

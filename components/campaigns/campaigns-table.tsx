@@ -30,7 +30,8 @@ import { useCampaignColumns } from './campaigns-columns';
 import { CampaignsTableToolbar } from './campaigns-table-toolbar';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { ModelsCreatorResponse } from '@/lib/api/generated/models';
-import { DEFAULT_PAGE } from '@/lib/constants';
+import { DEFAULT_PAGE_SIZE } from '@/lib/constants';
+import { ScrollArea } from '../dashboard-ui/scroll-area';
 
 const campaignGlobalFilter: FilterFn<ModelsCampaignResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -54,18 +55,20 @@ const campaignGlobalFilter: FilterFn<ModelsCampaignResponse> = ( row, _columnId,
 type CampaignsTableProps = {
   campaigns?: ModelsCampaignResponse[];
   isLoading?: boolean;
+  isFetching?: boolean;
   error?: Error | null;
   emptyTitle?: string;
   simpleEmptyState?: boolean;
   // Server-side pagination — when provided, enables manual pagination mode
   pagination?: PaginationState;
-  onPaginationChange?: (updater: Updater<PaginationState>) => void;
+  onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
 };
 
 export function CampaignsTable( {
   campaigns = [],
   isLoading = false,
+  isFetching = false,
   error = null,
   emptyTitle = 'Ready to launch?',
   simpleEmptyState = false,
@@ -73,7 +76,10 @@ export function CampaignsTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
 }: CampaignsTableProps ) {
-  const showLoading = useDelayedLoading( isLoading, 50 );
+  const isInitialLoading = isLoading && campaigns.length === 0;
+  const isContentLoading = !isInitialLoading && isFetching;
+  const showInitialLoading = useDelayedLoading( isInitialLoading, 50 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 50 );
   const { view, setView } = usePersistedViewMode( 'campaigns', 'table' );
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'campaigns-table' );
 
@@ -131,10 +137,10 @@ export function CampaignsTable( {
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
-    ...(isServerSide && {
+    ...( isServerSide && {
       manualPagination: true,
       rowCount: rowCount ?? 0,
-    }),
+    } ),
     state: {
       sorting,
       columnFilters,
@@ -146,9 +152,9 @@ export function CampaignsTable( {
   } );
 
   return (
-    <div className="grow relative flex flex-col min-h-[420px] bg-slate-50/50">
+    <div className="grow relative flex flex-col min-h-[420px] bg-slate-50/50 overflow-hidden">
       <AnimatePresence>
-        { ( showLoading || isLoading ) && (
+        { showInitialLoading && (
           <motion.div
             key="skeleton"
             className="absolute inset-0 z-30 bg-slate-50/50"
@@ -160,30 +166,33 @@ export function CampaignsTable( {
         ) }
       </AnimatePresence>
       { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
-      { !isLoading && !error && (
+      { !isInitialLoading && !error && (
         <>
-          <div className="flex-1 min-h-0 overflow-auto">
-            <div className="space-y-4">
-              { campaigns.length > 0 && (
-                <CampaignsTableToolbar
-                  table={ table }
-                  statuses={ statuses }
-                  view={ view }
-                  setView={ setView }
-                  dateFilterType={ dateFilterType }
-                  setDateFilterType={ setDateFilterType }
-                  dateRange={ dateRange }
-                  setDateRange={ setDateRange }
-                />
-              ) }
-              <CampaignsView table={ table } view={ view } onViewCreator={ setSelectedCreator } />
-            </div>
-          </div>
+          <ScrollArea className="flex-1">
+            { campaigns.length > 0 && (
+              <CampaignsTableToolbar
+                table={ table }
+                statuses={ statuses }
+                view={ view }
+                setView={ setView }
+                dateFilterType={ dateFilterType }
+                setDateFilterType={ setDateFilterType }
+                dateRange={ dateRange }
+                setDateRange={ setDateRange }
+              />
+            ) }
+            <CampaignsView
+              table={ table }
+              view={ view }
+              onViewCreator={ setSelectedCreator }
+              isLoading={ showContentLoading }
+            />
+          </ScrollArea>
           { campaigns.length > 0 && (
             <div className="px-2 md:px-4 shrink-0 border-t bg-slate-50/50">
               <DataTablePagination
                 table={ table }
-                pageSizeOptions={ DEFAULT_PAGE }
+                pageSizeOptions={ DEFAULT_PAGE_SIZE }
               />
             </div>
           ) }

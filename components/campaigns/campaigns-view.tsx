@@ -12,6 +12,8 @@ import Link from 'next/link';
 import { RoleGuard } from '../auth/role-guard';
 import { Avatar, AvatarFallback, AvatarImage } from '../dashboard-ui/avatar';
 import { CampaignsCardsView } from './campaigns-cards-view';
+import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
+import { CampaignsTableSkeleton } from './campaigns-table-skeleton';
 import { CamapignsTableView } from './campaigns-table-view';
 
 import { useBasePath } from '@/lib/providers/path-provider';
@@ -49,14 +51,28 @@ export function CampaignsView( {
   table,
   view,
   onViewCreator,
+  isLoading = false,
 }: {
   table: TanstackTable<ModelsCampaignResponse>;
   view: 'table' | 'cards';
   onViewCreator?: ( creator: ModelsCreatorResponse ) => void;
+  isLoading?: boolean;
 } ) {
+  const pageSize = table.getState().pagination.pageSize;
+
   return (
-    <div className='px-2 md:px-5 mt-1 grow flex-1'>
-      { table.getRowModel().rows.length === 0 ? (
+    <div className='p-2 md:p-4 grow flex-1'>
+      { isLoading ? (
+        view === 'table' ? (
+          <CampaignsTableSkeleton
+            showToolbar={ false }
+            rowCount={ Math.min( pageSize, 10 ) }
+            className="md:space-y-0"
+          />
+        ) : (
+          <CardGridSkeleton count={ Math.min( pageSize, 6 ) } cardHeight="h-[300px]" />
+        )
+      ) : table.getRowModel().rows.length === 0 ? (
         <CampaignEmptyState />
       ) : view === 'table' ? (
         <CamapignsTableView table={ table } />

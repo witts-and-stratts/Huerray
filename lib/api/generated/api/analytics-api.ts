@@ -31,18 +31,24 @@ import type { ModelsStandardCreatorAnalyticsResponse } from '../models';
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardPlatformAnalyticsResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardResponseAny } from '../models';
 /**
  * AnalyticsApi - axios parameter creator
  */
 export const AnalyticsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Get analytics for brand\'s performance
+         * Get analytics for brand\'s performance. Admin can pass brand_id query param. Optionally filter by period or date range (mutually exclusive).
          * @summary Get brand analytics
+         * @param {string} [brandId] Brand ID (admin only)
+         * @param {string} [period] Period (last_week, last_month, last_three_months, last_year)
+         * @param {string} [startDate] Start date for date range filter (YYYY-MM-DD)
+         * @param {string} [endDate] End date for date range filter (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsBrandGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        analyticsBrandGet: async (brandId?: string, period?: string, startDate?: string, endDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/analytics/brand`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -55,43 +61,22 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get brand analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get brand analytics by period
-         * @param {string} period Period (last_week, last_month, last_three_months, last_year)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        analyticsBrandPeriodGet: async (period: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'period' is not null or undefined
-            assertParamExists('analyticsBrandPeriodGet', 'period', period)
-            const localVarPath = `/analytics/brand/period`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
+            if (brandId !== undefined) {
+                localVarQueryParameter['brand_id'] = brandId;
             }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
 
             if (period !== undefined) {
                 localVarQueryParameter['period'] = period;
             }
 
+            if (startDate !== undefined) {
+                localVarQueryParameter['start_date'] = startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['end_date'] = endDate;
+            }
+
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -104,12 +89,16 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Get analytics for creator\'s performance
+         * Get analytics for creator\'s performance. Admin can pass creator_id query param. Optionally filter by period or date range (mutually exclusive).
          * @summary Get creator analytics
+         * @param {string} [creatorId] Creator ID (admin only)
+         * @param {string} [period] Period (last_week, last_month, last_three_months, last_year)
+         * @param {string} [startDate] Start date for date range filter (YYYY-MM-DD)
+         * @param {string} [endDate] End date for date range filter (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsCreatorGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        analyticsCreatorGet: async (creatorId?: string, period?: string, startDate?: string, endDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/analytics/creator`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -122,6 +111,22 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (creatorId !== undefined) {
+                localVarQueryParameter['creator_id'] = creatorId;
+            }
+
+            if (period !== undefined) {
+                localVarQueryParameter['period'] = period;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['start_date'] = startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['end_date'] = endDate;
+            }
+
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -134,16 +139,13 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Get creator analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get creator analytics by period
-         * @param {string} period Period (last_week, last_month, last_three_months, last_year)
+         * Delete all platform, brand, and creator analytics metrics
+         * @summary Delete all analytics data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsCreatorPeriodGet: async (period: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'period' is not null or undefined
-            assertParamExists('analyticsCreatorPeriodGet', 'period', period)
-            const localVarPath = `/analytics/creator/period`;
+        analyticsDelete: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/analytics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -151,13 +153,9 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            if (period !== undefined) {
-                localVarQueryParameter['period'] = period;
-            }
 
             localVarHeaderParameter['Accept'] = 'application/json';
 
@@ -171,12 +169,15 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Get platform-wide analytics for admin users
+         * Get platform-wide analytics for admin users. Optionally filter by period or date range (mutually exclusive).
          * @summary Get platform analytics
+         * @param {string} [period] Period (last_week, last_month, last_three_months, last_year)
+         * @param {string} [startDate] Start date for date range filter (YYYY-MM-DD)
+         * @param {string} [endDate] End date for date range filter (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsPlatformGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        analyticsPlatformGet: async (period?: string, startDate?: string, endDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/analytics/platform`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -189,41 +190,16 @@ export const AnalyticsApiAxiosParamCreator = function (configuration?: Configura
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Get platform analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get platform analytics by period
-         * @param {string} period Period (last_week, last_month, last_three_months, last_year)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        analyticsPlatformPeriodGet: async (period: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'period' is not null or undefined
-            assertParamExists('analyticsPlatformPeriodGet', 'period', period)
-            const localVarPath = `/analytics/platform/period`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
             if (period !== undefined) {
                 localVarQueryParameter['period'] = period;
+            }
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['start_date'] = startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['end_date'] = endDate;
             }
 
             localVarHeaderParameter['Accept'] = 'application/json';
@@ -298,78 +274,62 @@ export const AnalyticsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AnalyticsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Get analytics for brand\'s performance
+         * Get analytics for brand\'s performance. Admin can pass brand_id query param. Optionally filter by period or date range (mutually exclusive).
          * @summary Get brand analytics
+         * @param {string} [brandId] Brand ID (admin only)
+         * @param {string} [period] Period (last_week, last_month, last_three_months, last_year)
+         * @param {string} [startDate] Start date for date range filter (YYYY-MM-DD)
+         * @param {string} [endDate] End date for date range filter (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsBrandGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandAnalyticsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsBrandGet(options);
+        async analyticsBrandGet(brandId?: string, period?: string, startDate?: string, endDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandAnalyticsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsBrandGet(brandId, period, startDate, endDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsBrandGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get brand analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get brand analytics by period
-         * @param {string} period Period (last_week, last_month, last_three_months, last_year)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async analyticsBrandPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardBrandAnalyticsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsBrandPeriodGet(period, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsBrandPeriodGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Get analytics for creator\'s performance
+         * Get analytics for creator\'s performance. Admin can pass creator_id query param. Optionally filter by period or date range (mutually exclusive).
          * @summary Get creator analytics
+         * @param {string} [creatorId] Creator ID (admin only)
+         * @param {string} [period] Period (last_week, last_month, last_three_months, last_year)
+         * @param {string} [startDate] Start date for date range filter (YYYY-MM-DD)
+         * @param {string} [endDate] End date for date range filter (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsCreatorGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorAnalyticsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsCreatorGet(options);
+        async analyticsCreatorGet(creatorId?: string, period?: string, startDate?: string, endDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorAnalyticsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsCreatorGet(creatorId, period, startDate, endDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsCreatorGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get creator analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get creator analytics by period
-         * @param {string} period Period (last_week, last_month, last_three_months, last_year)
+         * Delete all platform, brand, and creator analytics metrics
+         * @summary Delete all analytics data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsCreatorPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardCreatorAnalyticsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsCreatorPeriodGet(period, options);
+        async analyticsDelete(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponseAny>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsDelete(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsCreatorPeriodGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get platform-wide analytics for admin users
+         * Get platform-wide analytics for admin users. Optionally filter by period or date range (mutually exclusive).
          * @summary Get platform analytics
+         * @param {string} [period] Period (last_week, last_month, last_three_months, last_year)
+         * @param {string} [startDate] Start date for date range filter (YYYY-MM-DD)
+         * @param {string} [endDate] End date for date range filter (YYYY-MM-DD)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async analyticsPlatformGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPlatformAnalyticsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsPlatformGet(options);
+        async analyticsPlatformGet(period?: string, startDate?: string, endDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPlatformAnalyticsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsPlatformGet(period, startDate, endDate, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsPlatformGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Get platform analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get platform analytics by period
-         * @param {string} period Period (last_week, last_month, last_three_months, last_year)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async analyticsPlatformPeriodGet(period: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardPlatformAnalyticsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.analyticsPlatformPeriodGet(period, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AnalyticsApi.analyticsPlatformPeriodGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -397,61 +357,43 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
     const localVarFp = AnalyticsApiFp(configuration)
     return {
         /**
-         * Get analytics for brand\'s performance
+         * Get analytics for brand\'s performance. Admin can pass brand_id query param. Optionally filter by period or date range (mutually exclusive).
          * @summary Get brand analytics
+         * @param {AnalyticsApiAnalyticsBrandGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsBrandGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandAnalyticsResponse> {
-            return localVarFp.analyticsBrandGet(options).then((request) => request(axios, basePath));
+        analyticsBrandGet(requestParameters: AnalyticsApiAnalyticsBrandGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandAnalyticsResponse> {
+            return localVarFp.analyticsBrandGet(requestParameters.brandId, requestParameters.period, requestParameters.startDate, requestParameters.endDate, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get brand analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get brand analytics by period
-         * @param {AnalyticsApiAnalyticsBrandPeriodGetRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        analyticsBrandPeriodGet(requestParameters: AnalyticsApiAnalyticsBrandPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardBrandAnalyticsResponse> {
-            return localVarFp.analyticsBrandPeriodGet(requestParameters.period, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get analytics for creator\'s performance
+         * Get analytics for creator\'s performance. Admin can pass creator_id query param. Optionally filter by period or date range (mutually exclusive).
          * @summary Get creator analytics
+         * @param {AnalyticsApiAnalyticsCreatorGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsCreatorGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorAnalyticsResponse> {
-            return localVarFp.analyticsCreatorGet(options).then((request) => request(axios, basePath));
+        analyticsCreatorGet(requestParameters: AnalyticsApiAnalyticsCreatorGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorAnalyticsResponse> {
+            return localVarFp.analyticsCreatorGet(requestParameters.creatorId, requestParameters.period, requestParameters.startDate, requestParameters.endDate, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get creator analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get creator analytics by period
-         * @param {AnalyticsApiAnalyticsCreatorPeriodGetRequest} requestParameters Request parameters.
+         * Delete all platform, brand, and creator analytics metrics
+         * @summary Delete all analytics data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsCreatorPeriodGet(requestParameters: AnalyticsApiAnalyticsCreatorPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardCreatorAnalyticsResponse> {
-            return localVarFp.analyticsCreatorPeriodGet(requestParameters.period, options).then((request) => request(axios, basePath));
+        analyticsDelete(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponseAny> {
+            return localVarFp.analyticsDelete(options).then((request) => request(axios, basePath));
         },
         /**
-         * Get platform-wide analytics for admin users
+         * Get platform-wide analytics for admin users. Optionally filter by period or date range (mutually exclusive).
          * @summary Get platform analytics
+         * @param {AnalyticsApiAnalyticsPlatformGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        analyticsPlatformGet(options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPlatformAnalyticsResponse> {
-            return localVarFp.analyticsPlatformGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Get platform analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-         * @summary Get platform analytics by period
-         * @param {AnalyticsApiAnalyticsPlatformPeriodGetRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        analyticsPlatformPeriodGet(requestParameters: AnalyticsApiAnalyticsPlatformPeriodGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPlatformAnalyticsResponse> {
-            return localVarFp.analyticsPlatformPeriodGet(requestParameters.period, options).then((request) => request(axios, basePath));
+        analyticsPlatformGet(requestParameters: AnalyticsApiAnalyticsPlatformGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardPlatformAnalyticsResponse> {
+            return localVarFp.analyticsPlatformGet(requestParameters.period, requestParameters.startDate, requestParameters.endDate, options).then((request) => request(axios, basePath));
         },
         /**
          * Get time-series analytics data
@@ -467,33 +409,73 @@ export const AnalyticsApiFactory = function (configuration?: Configuration, base
 };
 
 /**
- * Request parameters for analyticsBrandPeriodGet operation in AnalyticsApi.
+ * Request parameters for analyticsBrandGet operation in AnalyticsApi.
  */
-export interface AnalyticsApiAnalyticsBrandPeriodGetRequest {
+export interface AnalyticsApiAnalyticsBrandGetRequest {
+    /**
+     * Brand ID (admin only)
+     */
+    readonly brandId?: string
+
     /**
      * Period (last_week, last_month, last_three_months, last_year)
      */
-    readonly period: string
+    readonly period?: string
+
+    /**
+     * Start date for date range filter (YYYY-MM-DD)
+     */
+    readonly startDate?: string
+
+    /**
+     * End date for date range filter (YYYY-MM-DD)
+     */
+    readonly endDate?: string
 }
 
 /**
- * Request parameters for analyticsCreatorPeriodGet operation in AnalyticsApi.
+ * Request parameters for analyticsCreatorGet operation in AnalyticsApi.
  */
-export interface AnalyticsApiAnalyticsCreatorPeriodGetRequest {
+export interface AnalyticsApiAnalyticsCreatorGetRequest {
+    /**
+     * Creator ID (admin only)
+     */
+    readonly creatorId?: string
+
     /**
      * Period (last_week, last_month, last_three_months, last_year)
      */
-    readonly period: string
+    readonly period?: string
+
+    /**
+     * Start date for date range filter (YYYY-MM-DD)
+     */
+    readonly startDate?: string
+
+    /**
+     * End date for date range filter (YYYY-MM-DD)
+     */
+    readonly endDate?: string
 }
 
 /**
- * Request parameters for analyticsPlatformPeriodGet operation in AnalyticsApi.
+ * Request parameters for analyticsPlatformGet operation in AnalyticsApi.
  */
-export interface AnalyticsApiAnalyticsPlatformPeriodGetRequest {
+export interface AnalyticsApiAnalyticsPlatformGetRequest {
     /**
      * Period (last_week, last_month, last_three_months, last_year)
      */
-    readonly period: string
+    readonly period?: string
+
+    /**
+     * Start date for date range filter (YYYY-MM-DD)
+     */
+    readonly startDate?: string
+
+    /**
+     * End date for date range filter (YYYY-MM-DD)
+     */
+    readonly endDate?: string
 }
 
 /**
@@ -521,66 +503,46 @@ export interface AnalyticsApiAnalyticsTimeSeriesGetRequest {
  */
 export class AnalyticsApi extends BaseAPI {
     /**
-     * Get analytics for brand\'s performance
+     * Get analytics for brand\'s performance. Admin can pass brand_id query param. Optionally filter by period or date range (mutually exclusive).
      * @summary Get brand analytics
+     * @param {AnalyticsApiAnalyticsBrandGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public analyticsBrandGet(options?: RawAxiosRequestConfig) {
-        return AnalyticsApiFp(this.configuration).analyticsBrandGet(options).then((request) => request(this.axios, this.basePath));
+    public analyticsBrandGet(requestParameters: AnalyticsApiAnalyticsBrandGetRequest = {}, options?: RawAxiosRequestConfig) {
+        return AnalyticsApiFp(this.configuration).analyticsBrandGet(requestParameters.brandId, requestParameters.period, requestParameters.startDate, requestParameters.endDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Get brand analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-     * @summary Get brand analytics by period
-     * @param {AnalyticsApiAnalyticsBrandPeriodGetRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public analyticsBrandPeriodGet(requestParameters: AnalyticsApiAnalyticsBrandPeriodGetRequest, options?: RawAxiosRequestConfig) {
-        return AnalyticsApiFp(this.configuration).analyticsBrandPeriodGet(requestParameters.period, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get analytics for creator\'s performance
+     * Get analytics for creator\'s performance. Admin can pass creator_id query param. Optionally filter by period or date range (mutually exclusive).
      * @summary Get creator analytics
+     * @param {AnalyticsApiAnalyticsCreatorGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public analyticsCreatorGet(options?: RawAxiosRequestConfig) {
-        return AnalyticsApiFp(this.configuration).analyticsCreatorGet(options).then((request) => request(this.axios, this.basePath));
+    public analyticsCreatorGet(requestParameters: AnalyticsApiAnalyticsCreatorGetRequest = {}, options?: RawAxiosRequestConfig) {
+        return AnalyticsApiFp(this.configuration).analyticsCreatorGet(requestParameters.creatorId, requestParameters.period, requestParameters.startDate, requestParameters.endDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Get creator analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-     * @summary Get creator analytics by period
-     * @param {AnalyticsApiAnalyticsCreatorPeriodGetRequest} requestParameters Request parameters.
+     * Delete all platform, brand, and creator analytics metrics
+     * @summary Delete all analytics data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public analyticsCreatorPeriodGet(requestParameters: AnalyticsApiAnalyticsCreatorPeriodGetRequest, options?: RawAxiosRequestConfig) {
-        return AnalyticsApiFp(this.configuration).analyticsCreatorPeriodGet(requestParameters.period, options).then((request) => request(this.axios, this.basePath));
+    public analyticsDelete(options?: RawAxiosRequestConfig) {
+        return AnalyticsApiFp(this.configuration).analyticsDelete(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Get platform-wide analytics for admin users
+     * Get platform-wide analytics for admin users. Optionally filter by period or date range (mutually exclusive).
      * @summary Get platform analytics
+     * @param {AnalyticsApiAnalyticsPlatformGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public analyticsPlatformGet(options?: RawAxiosRequestConfig) {
-        return AnalyticsApiFp(this.configuration).analyticsPlatformGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Get platform analytics for specific time periods (last_week, last_month, last_three_months, last_year)
-     * @summary Get platform analytics by period
-     * @param {AnalyticsApiAnalyticsPlatformPeriodGetRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public analyticsPlatformPeriodGet(requestParameters: AnalyticsApiAnalyticsPlatformPeriodGetRequest, options?: RawAxiosRequestConfig) {
-        return AnalyticsApiFp(this.configuration).analyticsPlatformPeriodGet(requestParameters.period, options).then((request) => request(this.axios, this.basePath));
+    public analyticsPlatformGet(requestParameters: AnalyticsApiAnalyticsPlatformGetRequest = {}, options?: RawAxiosRequestConfig) {
+        return AnalyticsApiFp(this.configuration).analyticsPlatformGet(requestParameters.period, requestParameters.startDate, requestParameters.endDate, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

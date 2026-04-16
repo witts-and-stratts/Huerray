@@ -10,6 +10,7 @@ export function usePersistedPagination( pageKey: string, defaultPageSize: number
   const rawPersistedPageSize = useAppSelector( ( state ) => state.ui.pageSizes?.[ pageKey ] );
   const persistedPageSize = rawPersistedPageSize ?? defaultPageSize;
   const syncingFromStoreRef = useRef( false );
+  const lastSyncedPageSizeRef = useRef( rawPersistedPageSize );
 
   const [ pagination, setInternalPagination ] = useState<PaginationState>( {
     pageIndex: 0,
@@ -18,11 +19,21 @@ export function usePersistedPagination( pageKey: string, defaultPageSize: number
 
   useEffect( () => {
     // Only sync from Redux when a persisted value exists for this key.
-    if ( typeof rawPersistedPageSize === 'number' && rawPersistedPageSize !== pagination.pageSize ) {
+    if (
+      typeof rawPersistedPageSize === 'number'
+      && rawPersistedPageSize !== lastSyncedPageSizeRef.current
+    ) {
+      lastSyncedPageSizeRef.current = rawPersistedPageSize;
       syncingFromStoreRef.current = true;
-      setInternalPagination( ( prev ) => ( { ...prev, pageSize: rawPersistedPageSize } ) );
+      setInternalPagination( ( prev ) => {
+        if ( prev.pageSize === rawPersistedPageSize ) {
+          return prev;
+        }
+
+        return { ...prev, pageSize: rawPersistedPageSize };
+      } );
     }
-  }, [ rawPersistedPageSize, pagination.pageSize ] );
+  }, [ rawPersistedPageSize ] );
 
   useEffect( () => {
     if ( syncingFromStoreRef.current ) {

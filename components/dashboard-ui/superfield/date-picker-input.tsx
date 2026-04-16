@@ -273,6 +273,7 @@ export const DatePickerInput = ( {
                   captionLayout="dropdown"
                   numberOfMonths={ 2 }
                   disabled={ calendarDisabled }
+                  appLocale={ locale }
                 />
               ) : (
                 <Calendar
@@ -283,6 +284,7 @@ export const DatePickerInput = ( {
                   onMonthChange={ setMonth }
                   captionLayout="dropdown"
                   disabled={ calendarDisabled }
+                  appLocale={ locale }
                 />
               ) }
             </div>

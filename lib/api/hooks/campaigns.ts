@@ -9,6 +9,7 @@ import {
   useQuery, 
   useMutation, 
   useQueryClient,
+  keepPreviousData,
   type UseQueryResult, 
   type UseMutationResult,
   type UseQueryOptions,
@@ -177,6 +178,7 @@ export function useCampaigns(
       const response = await campaignsApi.campaignsSearchGet(params);
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   });
 }
@@ -212,6 +214,7 @@ export function useBrandCampaigns(
       const response = await brandApi.brandsSearchCampaignsGet(params);
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   });
 }

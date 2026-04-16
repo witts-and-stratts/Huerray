@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { RefreshCw } from 'lucide-react';
 import '@/app/styles/components/dashboard-stats.css';
 import '@/app/styles/components/dashboard-analytics.css';
@@ -14,15 +13,19 @@ import {
 } from '@/components/dashboard-ui/card';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { SuperField } from '@/components/dashboard-ui/super-field';
+import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { KpiCard } from '@/components/dashboard/blocks/shared/kpi-card';
 import { SubHeader } from '@/components/subheader';
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { cn } from '@/lib/dashboard-utils';
+import { type AnalyticsFilters } from '@/lib/api/hooks/analytics';
+import { usePersistedAnalyticsTimeframe } from '@/lib/hooks/use-persisted-analytics-timeframe';
+import type { AnalyticsTimeframe } from '@/lib/redux/features/ui/uiSlice';
 import { useLocale } from 'next-intl';
 import { Bar, BarChart, CartesianGrid, Cell, LabelList, XAxis, YAxis } from 'recharts';
 
-export type AnalyticsPeriod = 'all_time' | 'last_week' | 'last_month' | 'last_three_months' | 'last_year';
-export type PeriodEndpoint = Exclude<AnalyticsPeriod, 'all_time'>;
+export type AnalyticsPeriod = 'all_time' | 'last_week' | 'last_month' | 'last_three_months' | 'last_year' | 'date_range';
+export type PeriodEndpoint = Exclude<AnalyticsPeriod, 'all_time' | 'date_range'>;
 
 type AnalyticsQuery<TData extends object> = {
   data?: {
@@ -56,16 +59,17 @@ type DashboardAnalyticsPageProps<TData extends object> = {
   title: string;
   description: string;
   periodLabel: string;
+  dateRangeLabel: string;
+  dateRangePlaceholder: string;
+  storageKey: string;
   refreshLabel: string;
   errorLabel: string;
   periodOptions: AnalyticsPeriodOption[];
   summaryMetrics: AnalyticsMetric<TData>[];
   rows: AnalyticsMetricGroup<TData>[][];
-  useAllAnalytics: ( options: { enabled: boolean } ) => AnalyticsQuery<TData>;
-  usePeriodAnalytics: ( period: PeriodEndpoint, options: { enabled: boolean } ) => AnalyticsQuery<TData>;
+  useAnalytics: ( filters: AnalyticsFilters | undefined, options: { enabled: boolean; } ) => AnalyticsQuery<TData>;
 };
 
-const PERIOD_FALLBACK: PeriodEndpoint = 'last_month';
 const BAR_COLORS = [ 'var(--chart-1)', 'var(--chart-2)', 'var(--chart-3)' ];
 
 const groupChartConfig = {
@@ -107,6 +111,62 @@ function getAxisLabel( label: string ) {
   const words = label.split( ' ' ).filter( Boolean );
   if ( words.length <= 1 ) return label;
   return words[ words.length - 1 ];
+}
+
+function formatDateParam( date: Date ) {
+  const year = date.getFullYear();
+  const month = `${ date.getMonth() + 1 }`.padStart( 2, '0' );
+  const day = `${ date.getDate() }`.padStart( 2, '0' );
+  return `${ year }-${ month }-${ day }`;
+}
+
+function getDateRangeFilters( dateRange: DateRange | undefined ): AnalyticsFilters | undefined {
+  if ( !dateRange?.from || !dateRange?.to ) return undefined;
+  return {
+    startDate: formatDateParam( dateRange.from ),
+    endDate: formatDateParam( dateRange.to ),
+  };
+}
+
+function isAnalyticsPeriod( value: string | undefined ): value is AnalyticsPeriod {
+  return value === 'all_time'
+    || value === 'last_week'
+    || value === 'last_month'
+    || value === 'last_three_months'
+    || value === 'last_year'
+    || value === 'date_range';
+}
+
+function parseStoredDate( value: string | undefined ): Date | undefined {
+  if ( !value ) return undefined;
+  const date = new Date( `${ value }T00:00:00` );
+  return isNaN( date.getTime() ) ? undefined : date;
+}
+
+function parseStoredDateRange( dateRange: AnalyticsTimeframe[ 'dateRange' ] ): DateRange | undefined {
+  if ( !dateRange?.from && !dateRange?.to ) return undefined;
+  return {
+    from: parseStoredDate( dateRange.from ),
+    to: parseStoredDate( dateRange.to ),
+  };
+}
+
+function serializeDateRange( dateRange: DateRange | undefined ): AnalyticsTimeframe[ 'dateRange' ] {
+  if ( !dateRange?.from && !dateRange?.to ) return undefined;
+  return {
+    from: dateRange.from ? formatDateParam( dateRange.from ) : undefined,
+    to: dateRange.to ? formatDateParam( dateRange.to ) : undefined,
+  };
+}
+
+function formatDateRangeCaption( dateRange: DateRange, locale: string ) {
+  if ( !dateRange.from || !dateRange.to ) return '';
+  const formatter = new Intl.DateTimeFormat( locale, {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  } );
+  return `${ formatter.format( dateRange.from ) } - ${ formatter.format( dateRange.to ) }`;
 }
 
 function MetricGroupChart<TData extends object>( {
@@ -219,42 +279,63 @@ export function DashboardAnalyticsPage<TData extends object>( {
   title,
   description,
   periodLabel,
+  dateRangeLabel,
+  dateRangePlaceholder,
+  storageKey,
   refreshLabel,
   errorLabel,
   periodOptions,
   summaryMetrics,
   rows,
-  useAllAnalytics,
-  usePeriodAnalytics,
+  useAnalytics,
 }: DashboardAnalyticsPageProps<TData> ) {
   const locale = useLocale();
-  const [ period, setPeriod ] = useState<AnalyticsPeriod>( 'all_time' );
+  const { timeframe, setTimeframe } = usePersistedAnalyticsTimeframe( storageKey );
+  const period = isAnalyticsPeriod( timeframe.period ) ? timeframe.period : 'all_time';
+  const dateRange = parseStoredDateRange( timeframe.dateRange );
 
-  const baseQuery = useAllAnalytics( {
-    enabled: period === 'all_time',
-  } );
-  const periodQuery = usePeriodAnalytics(
-    period === 'all_time' ? PERIOD_FALLBACK : period,
-    {
-      enabled: period !== 'all_time',
-    }
-  );
-
-  const activeQuery = period === 'all_time' ? baseQuery : periodQuery;
-  const analytics = activeQuery.data?.data;
-  const selectedPeriodLabel = periodOptions.find( ( option ) => option.value === period )?.label || periodOptions[ 0 ]?.label || '';
+  const isDateRangeSelected = period === 'date_range';
+  const dateRangeFilters = isDateRangeSelected ? getDateRangeFilters( dateRange ) : undefined;
+  const activeFilters = dateRangeFilters ?? ( period === 'all_time' || isDateRangeSelected ? undefined : { period } );
+  const activeQuery = useAnalytics( activeFilters, { enabled: !isDateRangeSelected || !!dateRangeFilters } );
+  const analytics = isDateRangeSelected && !dateRangeFilters ? undefined : activeQuery.data?.data;
+  const selectedPeriodLabel = isDateRangeSelected
+    ? dateRangeFilters && dateRange
+      ? formatDateRangeCaption( dateRange, locale )
+      : dateRangeLabel
+    : periodOptions.find( ( option ) => option.value === period )?.label || periodOptions[ 0 ]?.label || '';
 
   return (
     <>
       <SubHeader title={ title } description={ description } childrenClassName='items-end'>
         <SuperField
-          type="select"
+          type="date-range-with-options"
           label={ periodLabel }
           labelClassName="sr-only"
+          className='w-full md:w-[240px]'
+          dropdownClassName='w-[240px]'
           value={ period }
           options={ periodOptions }
-          onValueChange={ ( value ) => value && setPeriod( value as AnalyticsPeriod ) }
-          fieldClassName="w-52 bg-white"
+          dateRange={ dateRange }
+          onDateRangeChange={ ( value ) => {
+            setTimeframe( {
+              period: 'date_range',
+              dateRange: serializeDateRange( value ),
+            } );
+          } }
+          dateRangeValue="date_range"
+          dateRangeLabel={ dateRangeLabel }
+          dateRangePlaceholder={ dateRangePlaceholder }
+          placeholder={ periodOptions[ 0 ]?.label }
+          locale={ locale }
+          onValueChange={ ( value ) => {
+            if ( !value ) return;
+            const nextPeriod = isAnalyticsPeriod( value ) ? value : 'all_time';
+            setTimeframe( {
+              period: nextPeriod,
+              dateRange: nextPeriod === 'date_range' ? timeframe.dateRange : undefined,
+            } );
+          } }
         />
         <Button variant="outline" className="gap-2" onClick={ () => activeQuery.refetch() }>
           <RefreshCw className={ cn( 'size-4', activeQuery.isFetching && 'animate-spin' ) } />

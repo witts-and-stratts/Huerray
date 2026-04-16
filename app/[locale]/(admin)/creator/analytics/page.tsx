@@ -5,10 +5,9 @@ import {
   type AnalyticsMetric,
   type AnalyticsMetricGroup,
   type AnalyticsPeriod,
-  type PeriodEndpoint,
 } from '@/components/dashboard/analytics/dashboard-analytics-page';
 import type { ModelsCreatorAnalyticsResponse } from '@/lib/api/generated/models';
-import { useCreatorAnalytics, useCreatorAnalyticsByPeriod } from '@/lib/api/hooks/analytics';
+import { useCreatorAnalytics } from '@/lib/api/hooks/analytics';
 import { useTranslations } from 'next-intl';
 
 type CreatorAnalytics = ModelsCreatorAnalyticsResponse;
@@ -82,6 +81,9 @@ export default function CreatorAnalyticsPage() {
       title={ t( 'title' ) }
       description={ t( 'description' ) }
       periodLabel={ t( 'periodLabel' ) }
+      dateRangeLabel={ t( 'dateRangeLabel' ) }
+      dateRangePlaceholder={ t( 'dateRangePlaceholder' ) }
+      storageKey="creator-analytics"
       refreshLabel={ t( 'refresh' ) }
       errorLabel={ t( 'error' ) }
       periodOptions={ periodOptions }
@@ -91,8 +93,7 @@ export default function CreatorAnalyticsPage() {
         [ metricGroups[ 2 ], metricGroups[ 3 ] ],
         [ metricGroups[ 4 ] ],
       ] }
-      useAllAnalytics={ useCreatorAnalytics }
-      usePeriodAnalytics={ ( period: PeriodEndpoint, options ) => useCreatorAnalyticsByPeriod( period, options ) }
+      useAnalytics={ useCreatorAnalytics }
     />
   );
 }

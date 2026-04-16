@@ -3,6 +3,7 @@
  */
 
 import {
+  keepPreviousData,
   useMutation,
   useQuery,
   useQueryClient,
@@ -43,6 +44,7 @@ export function useInvoices(
       const response = await invoiceApi.invoicesSearchGet( params || {} );
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   } );
 }

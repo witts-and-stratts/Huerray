@@ -12,6 +12,8 @@
     "title": "Analytics",
     "description": "Track applications, invitations, gigs, earnings, video submissions, and support.",
     "periodLabel": "Select analytics period",
+    "dateRangeLabel": "Select date range",
+    "dateRangePlaceholder": "Select date range",
     "refresh": "Refresh",
     "error": "Unable to load creator analytics.",
     "periods": {

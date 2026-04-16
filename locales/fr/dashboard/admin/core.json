@@ -6,6 +6,8 @@
     "title": "Analyse de la plateforme",
     "description": "Suivez les utilisateurs, le pipeline de contenu, les revenus, les soumissions vidéo et le support.",
     "periodLabel": "Sélectionner la période d'analyse",
+    "dateRangeLabel": "Sélectionner la plage de dates",
+    "dateRangePlaceholder": "Sélectionner la plage de dates",
     "refresh": "Actualiser",
     "error": "Impossible de charger l'analyse de la plateforme.",
     "periods": {

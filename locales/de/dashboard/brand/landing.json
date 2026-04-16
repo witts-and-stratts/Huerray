@@ -12,6 +12,8 @@
         "title": "Analytik",
         "description": "Verfolgen Sie Kampagnen, Gigs, Creator-Outreach, Content-Freigaben und Ausgaben.",
         "periodLabel": "Analysezeitraum auswählen",
+        "dateRangeLabel": "Datumsbereich auswählen",
+        "dateRangePlaceholder": "Datumsbereich auswählen",
         "refresh": "Aktualisieren",
         "periods": {
           "allTime": "Gesamter Zeitraum",

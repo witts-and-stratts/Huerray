@@ -12,6 +12,8 @@
     "title": "Analytik",
     "description": "Verfolgen Sie Bewerbungen, Einladungen, Gigs, Einnahmen, Video-Einreichungen und Support.",
     "periodLabel": "Analysezeitraum auswählen",
+    "dateRangeLabel": "Datumsbereich auswählen",
+    "dateRangePlaceholder": "Datumsbereich auswählen",
     "refresh": "Aktualisieren",
     "error": "Creator-Analysen können nicht geladen werden.",
     "periods": {

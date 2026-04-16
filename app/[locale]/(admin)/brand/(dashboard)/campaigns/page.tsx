@@ -14,7 +14,7 @@ import { useTranslations } from 'next-intl';
 export default function CampaignsPage() {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const { pagination, setPagination } = usePersistedPagination( 'campaigns' );
-  const { data: response, isLoading, error } = useBrandCampaigns( {
+  const { data: response, isLoading, isFetching, error } = useBrandCampaigns( {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
   } );
@@ -48,6 +48,7 @@ export default function CampaignsPage() {
       <CampaignsTable
         campaigns={ campaigns }
         isLoading={ isLoading }
+        isFetching={ isFetching }
         error={ error }
         pagination={ pagination }
         onPaginationChange={ setPagination }

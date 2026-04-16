@@ -3,6 +3,7 @@
  */
 
 import {
+  keepPreviousData,
   useMutation,
   useQuery,
   useQueryClient,
@@ -65,6 +66,7 @@ export function usePayments(
       } );
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   } );
 }
@@ -278,6 +280,7 @@ export function useCreatorEarnings(
       } );
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   } );
 }

@@ -17,7 +17,7 @@ export default function CreatorsPage() {
   }, [ response ] );
 
   return (
-    <>
+    <div className="flex flex-col h-full overflow-hidden">
       <SubHeader
         title={ t( 'creatorsPage.title' ) }
         description={ t( 'creatorsPage.description' ) }
@@ -29,6 +29,6 @@ export default function CreatorsPage() {
         isLoading={ isLoading }
         error={ error }
       />
-    </>
+    </div>
   );
 }

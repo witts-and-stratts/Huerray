@@ -6,6 +6,8 @@
     "title": "Plattform-Analytik",
     "description": "Verfolgen Sie Nutzer, Content-Pipeline, Umsatz, Video-Einreichungen und Support-Leistung.",
     "periodLabel": "Analysezeitraum auswählen",
+    "dateRangeLabel": "Datumsbereich auswählen",
+    "dateRangePlaceholder": "Datumsbereich auswählen",
     "refresh": "Aktualisieren",
     "error": "Plattformanalysen können nicht geladen werden.",
     "periods": {

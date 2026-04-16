@@ -4,6 +4,8 @@ import * as React from 'react';
 import { Table as TanstackTable, flexRender } from '@tanstack/react-table';
 import { AnimatePresence } from 'motion/react';
 import { MotionTableRow } from '../dashboard-ui/motion-table';
+import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
+import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { GigsCardsView } from './gigs-cards-view';
 import {
   Table,
@@ -96,13 +98,37 @@ interface GigsViewProps {
   onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void;
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
   actionButtons?: React.ReactNode;
+  isLoading?: boolean;
 }
 
 
-export function GigsView( { table, view, onViewGig, onCreateSubmission, actionButtons }: GigsViewProps ) {
+export function GigsView( {
+  table,
+  view,
+  onViewGig,
+  onCreateSubmission,
+  actionButtons,
+  isLoading = false,
+}: GigsViewProps ) {
+  const pageSize = table.getState().pagination.pageSize;
+
   return (
-    <div className='px-2 md:px-5 flex flex-col flex-1 h-full'>
-      { table.getRowModel().rows.length === 0 ? (
+    <div className='p-2 md:p-4 flex flex-col flex-1 h-full'>
+      { isLoading ? (
+        view === 'table' ? (
+          <DataTableSkeleton
+            showToolbar={ false }
+            rowCount={ Math.min( pageSize, 10 ) }
+            className="px-0 pt-0"
+          />
+        ) : (
+          <CardGridSkeleton
+            count={ Math.min( pageSize, 8 ) }
+            cardHeight="h-[250px]"
+            columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          />
+        )
+      ) : table.getRowModel().rows.length === 0 ? (
         <EmptyGigs>
           { actionButtons }
         </EmptyGigs>

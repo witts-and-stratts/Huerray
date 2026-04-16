@@ -6,6 +6,8 @@
     "title": "Platform Analytics",
     "description": "Track users, content pipeline, revenue, video submissions, and support performance.",
     "periodLabel": "Select analytics period",
+    "dateRangeLabel": "Select date range",
+    "dateRangePlaceholder": "Select date range",
     "refresh": "Refresh",
     "error": "Unable to load platform analytics.",
     "periods": {

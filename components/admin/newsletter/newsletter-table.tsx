@@ -21,6 +21,7 @@ import { getNewsletterColumns } from "./newsletter-columns";
 import { NewsletterTableToolbar } from "./newsletter-table-toolbar";
 import { NewsletterTableView } from "./newsletter-table-view";
 import { ModelsNewsletterSubscriptionResponse } from "@/lib/api/generated";
+import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 
 interface NewsletterTableProps {
   entries?: ModelsNewsletterSubscriptionResponse[];
@@ -80,7 +81,7 @@ export function NewsletterTable( {
       { error && <ErrorNewsletter fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
 
       { !isLoading && !error && (
-        <div className="grow relative flex flex-col min-h-0 bg-slate-50/50">
+        <ScrollArea className="grow relative flex flex-col min-h-0 bg-slate-50/50">
           <NewsletterTableToolbar
             entries={ entries }
             selectedEntries={ selectedEntries }
@@ -91,7 +92,7 @@ export function NewsletterTable( {
           />
 
           <div className="flex-1 min-h-0 overflow-auto">
-            <div className="px-2 md:px-5">
+            <div className="p-2 md:p-4">
               <NewsletterTableView table={ table } />
             </div>
           </div>
@@ -101,7 +102,7 @@ export function NewsletterTable( {
               <DataTablePagination table={ table } />
             </div>
           ) }
-        </div>
+        </ScrollArea>
       ) }
     </>
   );

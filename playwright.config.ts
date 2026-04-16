@@ -1,4 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+
+dotenv.config({ path: path.resolve(__dirname, '.env.local') });
+
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -19,12 +25,15 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: process.env.CI ? 'html' : 'list',
+
+  /* Keep local test artifacts out of tracked Playwright report/result folders. */
+  outputDir: '.playwright-results',
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:3000',
+    baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -38,14 +47,14 @@ export default defineConfig({
     // Auth setup — runs first, saves brand session to disk
     {
       name: 'brand-setup',
-      testMatch: /setup\/brand-auth\.setup\.ts/,
+      testMatch: /dashboards\/brand\/setup\/brand-auth\.setup\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
 
     // Authenticated brand tests — depend on saved session
     {
       name: 'brand',
-      testMatch: /tests\/brand\/.+\.spec\.ts/,
+      testMatch: /tests\/dashboards\/brand\/authenticated\/.+\.spec\.ts/,
       dependencies: ['brand-setup'],
       use: {
         ...devices['Desktop Chrome'],
@@ -56,15 +65,16 @@ export default defineConfig({
     // Everything else (unauthenticated / auth suite)
     {
       name: 'chromium',
-      testIgnore: /tests\/brand\/.+\.spec\.ts/,
+      testIgnore: /tests\/dashboards\/brand\/authenticated\/.+\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
     },
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run dev',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: {
+    command: 'npm run dev',
+    url: baseURL,
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
+  },
 });

@@ -42,7 +42,8 @@ export default function CampaignsPage() {
       />
       <CampaignsTable
         campaigns={ campaigns }
-        isLoading={ isLoading || isFetching }
+        isLoading={ isLoading }
+        isFetching={ isFetching }
         error={ error }
         pagination={ pagination }
         onPaginationChange={ setPagination }

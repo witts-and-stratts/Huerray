@@ -10,6 +10,8 @@ import {
   getSortedRowModel,
   useReactTable,
   type FilterFn,
+  type PaginationState,
+  type Updater,
 } from '@tanstack/react-table';
 import * as React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
@@ -26,6 +28,7 @@ import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { BrandDetailsSheet } from './brand-details-sheet';
 import { useTranslations } from 'next-intl';
+import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 
 const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -47,17 +50,31 @@ const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string
 type BrandsTableProps = {
   brandsData?: Brand[];
   isLoading?: boolean;
+  isFetching?: boolean;
   error?: Error | null;
+  pagination?: PaginationState;
+  onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
+  rowCount?: number;
 };
 
 export function BrandsTable( {
   brandsData,
   isLoading = false,
+  isFetching = false,
   error = null,
+  pagination: externalPagination,
+  onPaginationChange: externalOnPaginationChange,
+  rowCount,
 }: BrandsTableProps ) {
-  const showLoading = useDelayedLoading( isLoading, 250 );
+  const isInitialLoading = isLoading && ( brandsData?.length ?? 0 ) === 0;
+  const isContentLoading = !isInitialLoading && isFetching;
+  const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 250 );
   const { view, setView } = usePersistedViewMode( 'brands', 'cards' );
-  const { pagination, setPagination } = usePersistedPagination( 'brands' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'brands' );
+  const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
+  const pagination = isServerSide ? externalPagination : internalPagination;
+  const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
@@ -123,6 +140,10 @@ export function BrandsTable( {
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    ...( isServerSide && {
+      manualPagination: true,
+      rowCount: rowCount ?? 0,
+    } ),
     state: {
       sorting,
       columnFilters,
@@ -135,20 +156,25 @@ export function BrandsTable( {
 
   return (
     <AnimatePresence>
-      { showLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
+      { showInitialLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
       { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
-      { !isLoading && !error && (
+      { !isInitialLoading && !error && (
         <motion.div
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="flex flex-col bg-slate-50/50 grow relative min-h-0"
+          className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
         >
-          <div className="flex-1 min-h-0 overflow-auto">
+          <ScrollArea className="flex-1 min-h-0">
             <BrandsTableToolbar table={ table } view={ view } setView={ setView } statuses={ statuses } countries={ countries } sizes={ sizes } />
-            <BrandsView table={ table } view={ view } onViewDetails={ ( brand ) => { setSelectedBrand( brand ); setIsSheetOpen( true ); } } />
-          </div>
+            <BrandsView
+              table={ table }
+              view={ view }
+              onViewDetails={ ( brand ) => { setSelectedBrand( brand ); setIsSheetOpen( true ); } }
+              isLoading={ showContentLoading }
+            />
+          </ScrollArea>
           <div className="px-3 shrink-0 border-t bg-slate-50/50">
             <DataTablePagination table={ table } />
           </div>

@@ -12,6 +12,7 @@ import { Button } from "@/components/dashboard-ui/button";
 import { cn } from "@/lib/utils";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import '@/app/styles/components/data-table-pagination.css';
+import { DEFAULT_PAGE_SIZE } from "@/lib/constants";
 
 
 interface DataTablePaginationProps<TData> {
@@ -78,7 +79,9 @@ function PaginationRowsPerPage<TData>( {
         value={ `${ table.getState().pagination.pageSize }` }
         options={ pageSizeOptions }
         onValueChange={ ( value ) => {
-          table.setPageSize( Number( value ) );
+          if ( value ) {
+            table.setPageSize( Number( value ) );
+          }
         } }
         className="pagination-field"
       />
@@ -139,7 +142,7 @@ function PaginationNavigation<TData>( { table }: { table: Table<TData>; } ) {
  */
 export function DataTablePagination<TData>( {
   table,
-  pageSizeOptions = [ 10, 20, 30, 40, 50, 100, 200 ],
+  pageSizeOptions = DEFAULT_PAGE_SIZE,
   showSelectionCount = true,
   className,
 }: DataTablePaginationProps<TData> ) {

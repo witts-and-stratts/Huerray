@@ -5,10 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**brand_city** | **string** |  | [optional] [default to undefined]
+**brand_country** | **string** |  | [optional] [default to undefined]
 **brand_id** | **string** |  | [optional] [default to undefined]
 **brand_name** | **string** |  | [optional] [default to undefined]
+**brand_number** | **string** |  | [optional] [default to undefined]
+**brand_postal_code** | **string** |  | [optional] [default to undefined]
+**brand_street** | **string** |  | [optional] [default to undefined]
 **campaign_id** | **string** |  | [optional] [default to undefined]
 **campaign_name** | **string** |  | [optional] [default to undefined]
+**campaign_number** | **string** |  | [optional] [default to undefined]
 **created_at** | **string** |  | [optional] [default to undefined]
 **due_date** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
@@ -21,6 +27,9 @@ Name | Type | Description | Notes
 **notes** | **string** |  | [optional] [default to undefined]
 **paid_date** | **string** |  | [optional] [default to undefined]
 **pdf_path** | **string** |  | [optional] [default to undefined]
+**subtotal** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
+**tax_amount** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
+**tax_rate** | **number** |  | [optional] [default to undefined]
 **total** | [**ModelsMoney**](ModelsMoney.md) |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
 
@@ -30,10 +39,16 @@ Name | Type | Description | Notes
 import { ModelsInvoiceResponse } from 'huerray-api';
 
 const instance: ModelsInvoiceResponse = {
+    brand_city,
+    brand_country,
     brand_id,
     brand_name,
+    brand_number,
+    brand_postal_code,
+    brand_street,
     campaign_id,
     campaign_name,
+    campaign_number,
     created_at,
     due_date,
     id,
@@ -46,6 +61,9 @@ const instance: ModelsInvoiceResponse = {
     notes,
     paid_date,
     pdf_path,
+    subtotal,
+    tax_amount,
+    tax_rate,
     total,
     updated_at,
 };

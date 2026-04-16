@@ -11,6 +11,7 @@ import { EntitySelect } from './entity-select';
 import type { EntitySelectFieldProps } from './entity-select';
 import { TagsInput } from './tags-input';
 import { DatePickerInput } from './date-picker-input';
+import { DateRangeWithOptionsInput } from './date-range-with-options-input';
 import {
   SelectFieldProps,
   SearchableSelectFieldProps,
@@ -23,7 +24,8 @@ import {
   FileFieldProps,
   SwitchFieldProps,
   MultiSelectFieldProps,
-  CountryFieldProps
+  CountryFieldProps,
+  DateRangeWithOptionsFieldProps
 } from './types';
 import { UtilsCountryCode } from '@/lib/api/generated/models/utils-country-code';
 import { getCountryName } from '@/lib/country-flags';
@@ -461,6 +463,59 @@ export const RenderDatePicker = ( {
       minDate={ minDate }
       maxDate={ maxDate }
       mode={ mode }
+    />
+  );
+};
+
+export const RenderDateRangeWithOptions = ( {
+  props,
+  base
+}: {
+  props: DateRangeWithOptionsFieldProps;
+  base: BaseRendererProps;
+} ) => {
+  const {
+    value,
+    onValueChange,
+    dateRange,
+    onDateRangeChange,
+    options,
+    placeholder,
+    dateRangeValue,
+    dateRangeLabel,
+    dateRangePlaceholder,
+    dropdownClassName,
+    dateFormat,
+    locale,
+    minDate,
+    maxDate,
+    onBlur,
+    name,
+  } = props;
+
+  return (
+    <DateRangeWithOptionsInput
+      id={ base.fieldId }
+      name={ name }
+      value={ value }
+      onValueChange={ onValueChange }
+      dateRange={ dateRange }
+      onDateRangeChange={ onDateRangeChange }
+      options={ options }
+      placeholder={ placeholder }
+      disabled={ base.disabled }
+      required={ base.required }
+      className={ base.fieldClassName }
+      ariaConfig={ base.ariaConfig }
+      dateRangeValue={ dateRangeValue }
+      dateRangeLabel={ dateRangeLabel }
+      dateRangePlaceholder={ dateRangePlaceholder }
+      dropdownClassName={ dropdownClassName }
+      dateFormat={ dateFormat }
+      locale={ locale }
+      minDate={ minDate }
+      maxDate={ maxDate }
+      onBlur={ onBlur }
     />
   );
 };

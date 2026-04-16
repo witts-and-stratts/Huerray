@@ -8,7 +8,9 @@ import {
   useReactTable,
   type ColumnFiltersState,
   type FilterFn,
+  type PaginationState,
   type SortingState,
+  type Updater,
   type VisibilityState
 } from '@tanstack/react-table';
 const gigGlobalFilter: FilterFn<ModelsGigResponse> = ( row, _columnId, filterValue: string ) => {
@@ -48,10 +50,12 @@ import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { useTranslations } from 'next-intl';
+import { ScrollArea } from '../dashboard-ui/scroll-area';
 
 export interface GigsTableProps {
   data: ModelsGigResponse[];
   isLoading?: boolean;
+  isFetching?: boolean;
   error?: Error | null;
   refetch?: () => void;
   defaultView?: 'table' | 'cards';
@@ -60,6 +64,9 @@ export interface GigsTableProps {
   actionButtons?: React.ReactNode;
   hideToolbar?: boolean;
   hidePagination?: boolean;
+  pagination?: PaginationState;
+  onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
+  rowCount?: number;
 }
 
 export function GigsTable( {
@@ -67,17 +74,27 @@ export function GigsTable( {
   defaultView = 'table',
   hideViewToggle = false,
   isLoading = false,
+  isFetching = false,
   error = null,
   refetch,
   actionButtons,
   hideToolbar = false,
   hidePagination = false,
   onCreateSubmission,
+  pagination: externalPagination,
+  onPaginationChange: externalOnPaginationChange,
+  rowCount,
 }: GigsTableProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
-  const showLoading = useDelayedLoading( isLoading, 50 );
+  const isInitialLoading = isLoading && data.length === 0;
+  const isContentLoading = !isInitialLoading && isFetching;
+  const showInitialLoading = useDelayedLoading( isInitialLoading, 50 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 50 );
   const { view, setView } = usePersistedViewMode( 'gigs', defaultView );
-  const { pagination, setPagination } = usePersistedPagination( 'gigs' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'gigs' );
+  const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
+  const pagination = isServerSide ? externalPagination : internalPagination;
+  const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
@@ -138,6 +155,10 @@ export function GigsTable( {
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    ...( isServerSide && {
+      manualPagination: true,
+      rowCount: rowCount ?? 0,
+    } ),
     state: {
       sorting,
       columnFilters,
@@ -151,17 +172,17 @@ export function GigsTable( {
   return (
     <>
       <AnimatePresence>
-        { showLoading && (
+        { showInitialLoading && (
           view === 'table'
             ? <DataTableSkeleton key="skeleton-table" />
             : <CardGridSkeleton key="skeleton-cards" count={ 8 } cardHeight="h-[250px]" columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
         ) }
         { error && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
-        { !isLoading && !error && (
+        { !isInitialLoading && !error && (
           <div
-            className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full"
+            className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full overflow-hidden"
           >
-            <div className='flex-1 min-h-0 overflow-auto'>
+            <ScrollArea className='flex-1 min-h-0 overflow-auto'>
               { !hideToolbar && ( data?.length ?? 0 ) > 0 && (
                 <GigsTableToolbar
                   table={ table }
@@ -181,13 +202,13 @@ export function GigsTable( {
                 onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
                 onCreateSubmission={ onCreateSubmission }
                 actionButtons={ actionButtons }
+                isLoading={ showContentLoading }
               />
-            </div>
+            </ScrollArea>
             { !hidePagination && ( data?.length ?? 0 ) > 0 && (
               <div className='px-2 md:px-5 shrink-0 border-t bg-slate-50/50'>
                 <DataTablePagination
                   table={ table }
-                  pageSizeOptions={ [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ] }
                 />
               </div>
             ) }

@@ -7,6 +7,7 @@ import { cn } from "@/lib/dashboard-utils";
 interface CampaignsTableSkeletonProps {
   className?: string;
   rowCount?: number;
+  showToolbar?: boolean;
 }
 
 function AvatarCollageSkeleton() {
@@ -25,6 +26,7 @@ function AvatarCollageSkeleton() {
 export function CampaignsTableSkeleton( {
   className,
   rowCount = 10,
+  showToolbar = true,
 }: CampaignsTableSkeletonProps ) {
   return (
     <motion.div
@@ -33,18 +35,19 @@ export function CampaignsTableSkeleton( {
       transition={ { duration: 0.2 } }
       className={ cn( "w-full space-y-2 md:space-y-4", className ) }
     >
-      { /* Toolbar */ }
-      <div className="flex items-center justify-between gap-3 bg-background py-2 px-2 md:px-4">
-        <div className="flex items-center gap-2 flex-1">
-          <Skeleton className="h-9 w-[220px] max-w-full md:w-[500px]" />
-          <Skeleton className="h-9 w-[110px]" />
-          <Skeleton className="h-9 w-[110px]" />
+      { showToolbar && (
+        <div className="flex items-center justify-between gap-3 bg-background py-2 px-2 md:px-4">
+          <div className="flex items-center gap-2 flex-1">
+            <Skeleton className="h-9 w-[220px] max-w-full md:w-[500px]" />
+            <Skeleton className="h-9 w-[110px]" />
+            <Skeleton className="h-9 w-[110px]" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-9 w-[90px]" />
+            <Skeleton className="h-9 w-[72px]" />
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Skeleton className="h-9 w-[90px]" />
-          <Skeleton className="h-9 w-[72px]" />
-        </div>
-      </div>
+      ) }
 
       { /* Table */ }
       <div className="rounded-md border mx-2 md:mx-4">

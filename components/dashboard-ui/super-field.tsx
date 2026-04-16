@@ -16,6 +16,7 @@ import {
   RenderChoiceCard,
   RenderCountry,
   RenderDatePicker,
+  RenderDateRangeWithOptions,
   RenderEditor,
   RenderEntitySelect,
   RenderInput,
@@ -31,6 +32,7 @@ import {
   ChoiceCardFieldProps,
   CountryFieldProps,
   DatePickerFieldProps,
+  DateRangeWithOptionsFieldProps,
   EditorFieldProps,
   EntitySelectFieldProps,
   FileFieldProps,
@@ -56,6 +58,7 @@ type SuperFieldProps =
   | SearchableSelectFieldProps
   | EntitySelectFieldProps
   | DatePickerFieldProps
+  | DateRangeWithOptionsFieldProps
   | SwitchFieldProps
   | MultiSelectFieldProps
   | CountryFieldProps
@@ -74,6 +77,7 @@ const renderers: Record<string, React.ElementType> = {
   'tags': RenderTags,
   'editor': RenderEditor,
   'datepicker': RenderDatePicker,
+  'date-range-with-options': RenderDateRangeWithOptions,
   'file': RenderInput,
   'default': RenderInput
 };

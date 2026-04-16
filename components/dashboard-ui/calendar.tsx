@@ -6,11 +6,26 @@ import {
   getDefaultClassNames,
   type DayButton,
 } from "react-day-picker";
+import { de, enUS, es, fr } from "react-day-picker/locale";
 
 import { cn } from "@/lib/dashboard-utils";
 import { Button, buttonVariants } from "@/components/dashboard-ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowLeftIcon, ArrowRightIcon, ArrowDownIcon } from "@hugeicons/core-free-icons";
+
+const CALENDAR_LOCALES = {
+  de,
+  en: enUS,
+  es,
+  fr,
+};
+
+type CalendarLocaleKey = keyof typeof CALENDAR_LOCALES;
+
+function getCalendarLocaleKey( appLocale: string | undefined ): CalendarLocaleKey {
+  const language = appLocale?.split( '-' )[ 0 ] as CalendarLocaleKey | undefined;
+  return language && language in CALENDAR_LOCALES ? language : 'en';
+}
 
 function Calendar( {
   className,
@@ -20,14 +35,20 @@ function Calendar( {
   buttonVariant = "ghost",
   formatters,
   components,
+  appLocale,
+  locale,
   ...props
 }: React.ComponentProps<typeof DayPicker> & {
+  appLocale?: string;
   buttonVariant?: React.ComponentProps<typeof Button>[ "variant" ];
 } ) {
   const defaultClassNames = getDefaultClassNames();
+  const localeKey = getCalendarLocaleKey( appLocale );
+  const intlLocale = appLocale || localeKey;
 
   return (
     <DayPicker
+      locale={ locale ?? CALENDAR_LOCALES[ localeKey ] }
       showOutsideDays={ showOutsideDays }
       className={ cn(
         "p-3 [--cell-radius:var(--radius-md)] [--cell-size:--spacing(8)] bg-background group/calendar [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
@@ -38,7 +59,7 @@ function Calendar( {
       captionLayout={ captionLayout }
       formatters={ {
         formatMonthDropdown: ( date ) =>
-          date.toLocaleString( "default", { month: "short" } ),
+          date.toLocaleString( intlLocale, { month: "short" } ),
         ...formatters,
       } }
       classNames={ {

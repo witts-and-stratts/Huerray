@@ -19,6 +19,7 @@ import { SuperField } from '@/components/dashboard-ui/super-field';
 import { apiClient } from '@/lib/api/client';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
 import { useAuth } from '@/lib/auth/auth-context';
+import { usePersistor } from '@/lib/redux/store-provider';
 import { DASHBOARD_PATHS, getUserRole } from '@/lib/constants';
 import { cn } from '@/lib/dashboard-utils';
 import { ViewIcon, ViewOffIcon } from '@hugeicons/core-free-icons';
@@ -155,6 +156,7 @@ export function LoginForm( {
   const tValidation = useTranslations( 'auth.validation' );
   const searchParams = useSearchParams();
   const { setUser } = useAuth();
+  const persistor = usePersistor();
   const [ isLoading, setIsLoading ] = useState( false );
   const [ formError, setFormError ] = useState<string | null>( null );
 
@@ -199,6 +201,10 @@ export function LoginForm( {
         if ( !user ) return;
 
         const userRole = getUserRole( user );
+
+        // Clear persisted Redux state from any previous session before setting the new user
+        // (Tanstack Query in-memory cache is cleared automatically by the full page reload below)
+        await persistor?.purge();
 
         setUser( {
           id: user.id!,

@@ -24,6 +24,7 @@ import { DataTableSkeleton } from "@/components/dashboard-ui/data-table-skeleton
 import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
+import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 
 const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -129,9 +130,9 @@ export function UsersTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="flex flex-col bg-slate-50/50 grow relative min-h-0"
+          className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
         >
-          <div className="flex-1 min-h-0 overflow-auto">
+          <ScrollArea className="flex-1 min-h-0">
             <UsersTableToolbar
               table={ table }
               statuses={ statuses }
@@ -143,7 +144,7 @@ export function UsersTable( {
                 setIsSheetOpen( true );
               } }
             />
-          </div>
+          </ScrollArea>
           <div className="px-3 shrink-0 border-t bg-slate-50/50">
             <DataTablePagination table={ table } />
           </div>

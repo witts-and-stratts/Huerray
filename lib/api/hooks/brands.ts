@@ -3,6 +3,7 @@ import {
   useSuspenseQuery,
   useMutation,
   useQueryClient,
+  keepPreviousData,
   type UseQueryResult, 
   type UseSuspenseQueryResult,
   type UseQueryOptions,
@@ -85,6 +86,7 @@ export function useBrands(
       const response = await brandApi.brandsSearchGet( params );
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   });
 }

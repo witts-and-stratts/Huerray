@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/playwright-report/
+/.playwright-results/
 /test-results/
 /tests/.auth/
 

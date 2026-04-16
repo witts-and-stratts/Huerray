@@ -5,10 +5,9 @@ import {
   type AnalyticsMetric,
   type AnalyticsMetricGroup,
   type AnalyticsPeriod,
-  type PeriodEndpoint,
 } from '@/components/dashboard/analytics/dashboard-analytics-page';
 import type { ModelsBrandAnalyticsResponse } from '@/lib/api/generated/models';
-import { useBrandAnalytics, useBrandAnalyticsByPeriod } from '@/lib/api/hooks/analytics';
+import { useBrandAnalytics } from '@/lib/api/hooks/analytics';
 import { useTranslations } from 'next-intl';
 
 type BrandAnalytics = ModelsBrandAnalyticsResponse;
@@ -83,6 +82,9 @@ export default function BrandAnalyticsPage() {
       title={ t( 'page.title' ) }
       description={ t( 'page.description' ) }
       periodLabel={ t( 'page.periodLabel' ) }
+      dateRangeLabel={ t( 'page.dateRangeLabel' ) }
+      dateRangePlaceholder={ t( 'page.dateRangePlaceholder' ) }
+      storageKey="brand-analytics"
       refreshLabel={ t( 'page.refresh' ) }
       errorLabel={ t( 'error' ) }
       periodOptions={ periodOptions }
@@ -92,8 +94,7 @@ export default function BrandAnalyticsPage() {
         [ metricGroups[ 1 ], metricGroups[ 3 ] ],
         [ metricGroups[ 4 ] ],
       ] }
-      useAllAnalytics={ useBrandAnalytics }
-      usePeriodAnalytics={ ( period: PeriodEndpoint, options ) => useBrandAnalyticsByPeriod( period, options ) }
+      useAnalytics={ useBrandAnalytics }
     />
   );
 }

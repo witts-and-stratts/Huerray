@@ -6,6 +6,8 @@
     "title": "Analítica de plataforma",
     "description": "Haz seguimiento de usuarios, pipeline de contenido, ingresos, envíos de video y soporte.",
     "periodLabel": "Seleccionar periodo de analítica",
+    "dateRangeLabel": "Seleccionar rango de fechas",
+    "dateRangePlaceholder": "Seleccionar rango de fechas",
     "refresh": "Actualizar",
     "error": "No se puede cargar la analítica de la plataforma.",
     "periods": {

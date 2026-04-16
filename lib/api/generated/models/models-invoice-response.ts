@@ -21,10 +21,16 @@ import type { ModelsInvoiceItemResponse } from './models-invoice-item-response';
 import type { ModelsMoney } from './models-money';
 
 export interface ModelsInvoiceResponse {
+    'brand_city'?: string;
+    'brand_country'?: string;
     'brand_id'?: string;
     'brand_name'?: string;
+    'brand_number'?: string;
+    'brand_postal_code'?: string;
+    'brand_street'?: string;
     'campaign_id'?: string;
     'campaign_name'?: string;
+    'campaign_number'?: string;
     'created_at'?: string;
     'due_date'?: string;
     'id'?: string;
@@ -37,6 +43,9 @@ export interface ModelsInvoiceResponse {
     'notes'?: string;
     'paid_date'?: string;
     'pdf_path'?: string;
+    'subtotal'?: ModelsMoney;
+    'tax_amount'?: ModelsMoney;
+    'tax_rate'?: number;
     'total'?: ModelsMoney;
     'updated_at'?: string;
 }

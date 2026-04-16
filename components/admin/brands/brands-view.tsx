@@ -2,6 +2,8 @@
 
 import { Table as TanstackTable } from '@tanstack/react-table';
 import { AnimatePresence, motion } from 'motion/react';
+import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
+import { TableSkeleton } from '@/components/dashboard-ui/table-skeleton';
 import { BrandCard } from './brand-card';
 import { Brand } from './brands-data';
 import { BrandsTableView } from './brands-table-view';
@@ -11,10 +13,36 @@ interface BrandsViewProps {
   table: TanstackTable<Brand>;
   view: 'table' | 'cards';
   onViewDetails?: ( brand: Brand ) => void;
+  isLoading?: boolean;
 }
 
-export function BrandsView( { table, view, onViewDetails }: BrandsViewProps ) {
+export function BrandsView( {
+  table,
+  view,
+  onViewDetails,
+  isLoading = false,
+}: BrandsViewProps ) {
   const t = useTranslations( 'dashboard.admin' );
+  const pageSize = table.getState().pagination.pageSize;
+
+  if ( isLoading ) {
+    return view === 'table' ? (
+      <div className="p-2 md:p-4">
+        <DataTableSkeleton
+          showToolbar={ false }
+          rowCount={ Math.min( pageSize, 10 ) }
+          className="px-0 pt-0"
+        />
+      </div>
+    ) : (
+      <TableSkeleton
+        showToolbar={ false }
+        cardCount={ Math.min( pageSize, 8 ) }
+        className="py-0"
+      />
+    );
+  }
+
   if ( view === 'cards' ) {
     if ( table.getRowModel().rows.length === 0 ) {
       return (
@@ -25,7 +53,7 @@ export function BrandsView( { table, view, onViewDetails }: BrandsViewProps ) {
     }
 
     return (
-      <div className="@container px-2 md:px-5">
+      <div className="@container p-2 md:p-5">
         <AnimatePresence mode='popLayout'>
           <motion.div
             className="grid grid-cols-1 gap-4 @sm:grid-cols-2 @md:grid-cols-3 @xl:grid-cols-4 @2xl:grid-cols-6"
@@ -57,5 +85,5 @@ export function BrandsView( { table, view, onViewDetails }: BrandsViewProps ) {
     );
   }
 
-  return <div className="px-2 md:px-5"><BrandsTableView table={ table } /></div>;
+  return <div className="p-2 md:p-4"><BrandsTableView table={ table } /></div>;
 }

@@ -233,16 +233,16 @@ interface GigDeadlineRowProps {
 const GigDeadlineRow = memo( function GigDeadlineRow( { postingEndDate, gigStatus }: GigDeadlineRowProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
   return (
-  <div className="flex items-center justify-between border-t border-border/50 mt-auto pt-2">
-    <div className="flex items-center gap-1.5 text-muted-foreground">
-      <HugeiconsIcon icon={ InformationCircleIcon } className="size-3.5" strokeWidth={ 1.5 } />
-      <span className="uppercase tracking-widest text-[10px] font-medium">{ t( 'deadline' ) }</span>
-      { postingEndDate && (
-        <span className="text-xs text-muted-foreground/60">{ formatDate( postingEndDate ) }</span>
-      ) }
+    <div className="flex items-center justify-between border-t border-border/50 mt-auto pt-2">
+      <div className="flex items-center gap-1.5 text-muted-foreground">
+        <HugeiconsIcon icon={ InformationCircleIcon } className="size-3.5" strokeWidth={ 1.5 } />
+        <span className="uppercase tracking-widest text-[10px] font-medium">{ t( 'deadline' ) }</span>
+        { postingEndDate && (
+          <span className="text-xs text-muted-foreground/60">{ formatDate( postingEndDate ) }</span>
+        ) }
+      </div>
+      <GigStatusBadge status={ gigStatus } className="origin-right" />
     </div>
-    <GigStatusBadge status={ gigStatus } className="origin-right" />
-  </div>
   );
 } );
 GigDeadlineRow.displayName = 'GigDeadlineRow';

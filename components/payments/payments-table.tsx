@@ -8,7 +8,9 @@ import {
   useReactTable,
   type ColumnFiltersState,
   type FilterFn,
+  type PaginationState,
   type SortingState,
+  type Updater,
   type VisibilityState,
 } from '@tanstack/react-table';
 import * as React from 'react';
@@ -24,6 +26,7 @@ import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton
 import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
+import { ScrollArea } from '../dashboard-ui/scroll-area';
 
 const paymentGlobalFilter: FilterFn<ModelsPaymentResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -44,20 +47,40 @@ const paymentGlobalFilter: FilterFn<ModelsPaymentResponse> = ( row, _columnId, f
 export interface PaymentsTableProps {
   data: ModelsPaymentResponse[];
   isLoading?: boolean;
+  isFetching?: boolean;
   isAdmin?: boolean;
   error?: Error | null;
   refetch?: () => void;
+  pagination?: PaginationState;
+  onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
+  rowCount?: number;
 }
 
-export function PaymentsTable( { data, isLoading = false, isAdmin = false, error = null, refetch }: PaymentsTableProps ) {
-  const showLoading = useDelayedLoading( isLoading, 250 );
+export function PaymentsTable( {
+  data,
+  isLoading = false,
+  isFetching = false,
+  isAdmin = false,
+  error = null,
+  refetch,
+  pagination: externalPagination,
+  onPaginationChange: externalOnPaginationChange,
+  rowCount,
+}: PaymentsTableProps ) {
+  const isInitialLoading = isLoading && data.length === 0;
+  const isContentLoading = !isInitialLoading && isFetching;
+  const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 250 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ searchValue, setSearchValue ] = React.useState( '' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
-  const { pagination, setPagination } = usePersistedPagination( 'payments' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'payments' );
+  const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
+  const pagination = isServerSide ? externalPagination : internalPagination;
+  const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
 
   const filteredData = React.useMemo( () => {
     if ( !dateRange?.from && !dateRange?.to ) return data;
@@ -96,6 +119,10 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false, error
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    ...( isServerSide && {
+      manualPagination: true,
+      rowCount: rowCount ?? 0,
+    } ),
     state: {
       sorting,
       columnFilters,
@@ -108,9 +135,9 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false, error
 
   return (
     <AnimatePresence>
-      { showLoading && <DataTableSkeleton /> }
+      { showInitialLoading && <DataTableSkeleton /> }
       { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
-      { !isLoading && !error && (
+      { !isInitialLoading && !error && (
         <motion.div
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }
@@ -118,7 +145,7 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false, error
           transition={ { duration: 0.3 } }
           className='flex flex-col bg-slate-50/50 grow relative min-h-0 flex-1 h-full'
         >
-          <div className="flex-1 min-h-0 overflow-auto">
+          <ScrollArea className="flex-1 min-h-0 overflow-auto">
             <PaymentsTableToolbar
               table={ table }
               searchValue={ searchValue }
@@ -127,10 +154,18 @@ export function PaymentsTable( { data, isLoading = false, isAdmin = false, error
               setDateRange={ setDateRange }
               statuses={ statuses }
             />
-            <div className='px-2 md:px-5'>
-              <PaymentsTableView table={ table } />
+            <div className='p-2 md:p-4'>
+              { showContentLoading ? (
+                <DataTableSkeleton
+                  showToolbar={ false }
+                  rowCount={ Math.min( pagination.pageSize, 10 ) }
+                  className="px-0 pt-0"
+                />
+              ) : (
+                <PaymentsTableView table={ table } />
+              ) }
             </div>
-          </div>
+          </ScrollArea>
           <div className='px-3 shrink-0 border-t bg-slate-50/50'>
             <DataTablePagination table={ table } />
           </div>

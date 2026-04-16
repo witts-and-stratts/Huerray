@@ -120,6 +120,7 @@ export interface CountryFieldProps extends BaseFieldProps {
 // Re-export types from other files
 export type { ChoiceCardFieldProps } from './choice-card-input';
 export type { DatePickerFieldProps } from './date-picker-input';
+export type { DateRangeWithOptionsFieldProps } from './date-range-with-options-input';
 export type { TagsFieldProps } from './tags-input';
 export type { SearchableSelectFieldProps } from './searchable-select';
 export type { MultiSelectFieldProps } from './multi-select-input';

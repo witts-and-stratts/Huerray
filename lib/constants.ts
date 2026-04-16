@@ -1,6 +1,6 @@
 export type UserRole = 'admin' | 'creator' | 'brand';
 
-export const DEFAULT_PAGE = [ 10, 20, 30, 40, 50, 100, 200, 300, 500, 1000 ];
+export const DEFAULT_PAGE_SIZE = [ 10, 20, 30, 40, 50, 100 ];
 
 export const DASHBOARD_PATHS: Record<UserRole, string> = {
   admin: '/admin',
