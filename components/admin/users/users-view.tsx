@@ -1,6 +1,7 @@
 import { Table } from "@tanstack/react-table";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { UsersTableView } from "./users-table-view";
+import { TableviewWrapper } from "@/components/table-view-wrapper";
 
 interface UsersViewProps {
   table: Table<ModelsUserResponse>;
@@ -8,5 +9,7 @@ interface UsersViewProps {
 }
 
 export function UsersView( { table }: UsersViewProps ) {
-  return <div className="p-2 md:p-4"><UsersTableView table={ table } /></div>;
+  return <TableviewWrapper>
+    <UsersTableView table={ table } />
+  </TableviewWrapper>;
 }

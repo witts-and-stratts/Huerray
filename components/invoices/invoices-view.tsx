@@ -14,9 +14,10 @@ interface InvoicesViewProps {
   view: 'table' | 'cards';
   isAdmin?: boolean;
   isLoading?: boolean;
+  showInvoiceEmptyState?: boolean;
 }
 
-export function InvoicesView( { table, view, isAdmin, isLoading = false }: InvoicesViewProps ) {
+export function InvoicesView( { table, view, isAdmin, isLoading = false, showInvoiceEmptyState = true }: InvoicesViewProps ) {
   const pageSize = table.getState().pagination.pageSize;
 
   if ( isLoading ) {
@@ -41,6 +42,10 @@ export function InvoicesView( { table, view, isAdmin, isLoading = false }: Invoi
     const rows = table.getRowModel().rows;
 
     if ( rows.length === 0 ) {
+      if ( !showInvoiceEmptyState ) {
+        return <div className='p-2 md:p-4'><InvoicesTableView table={ table } /></div>;
+      }
+
       return <EmptyInvoices imageWidth={ 300 } imageHeight={ 240 } fill />;
     }
 
@@ -77,5 +82,5 @@ export function InvoicesView( { table, view, isAdmin, isLoading = false }: Invoi
     );
   }
 
-  return <div className='p-2 md:p-4'><InvoicesTableView table={ table } /></div>;
+  return <div className='p-2 md:p-4'><InvoicesTableView table={ table } showInvoiceEmptyState={ showInvoiceEmptyState } /></div>;
 }

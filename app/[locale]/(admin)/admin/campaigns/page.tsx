@@ -14,6 +14,7 @@ export default function CampaignsPage() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-campaigns' );
   const [ searchValue, setSearchValue ] = React.useState( '' );
   const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
+  const isSearchPending = searchValue.trim() !== deferredSearchValue;
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {
@@ -62,6 +63,7 @@ export default function CampaignsPage() {
         onPaginationChange={ setPagination }
         rowCount={ response?.pagination?.total }
         onSearchChange={ setSearchValue }
+        isSearchPending={ isSearchPending }
       />
     </>
   );

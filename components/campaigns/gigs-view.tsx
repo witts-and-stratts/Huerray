@@ -1,95 +1,18 @@
 "use client";
 
 import * as React from 'react';
-import { Table as TanstackTable, flexRender } from '@tanstack/react-table';
-import { AnimatePresence } from 'motion/react';
-import { MotionTableRow } from '../dashboard-ui/motion-table';
+import { Table as TanstackTable } from '@tanstack/react-table';
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { GigsCardsView } from './gigs-cards-view';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/dashboard-ui/table';
+import { DataTableView } from '@/components/dashboard-ui/data-table/data-table-view';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
 import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
 
-// Inline Table View Component (extracted from previous gigs-table.tsx)
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
   const t = useTranslations( 'dashboard.brand.gigsPage' );
-  return (
-    <div className='border border-border rounded-lg'>
-      <Table className='rounded-lg overflow-hidden'>
-        <TableHeader sticky>
-          { table.getHeaderGroups().map( ( headerGroup ) => (
-            <TableRow key={ headerGroup.id }>
-              { headerGroup.headers.map( ( header ) => {
-                return (
-                  <TableHead key={ header.id } className='bg-slate-50/80'>
-                    { header.isPlaceholder
-                      ? null
-                      : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      ) }
-                  </TableHead>
-                );
-              } ) }
-            </TableRow>
-          ) ) }
-        </TableHeader>
-        <TableBody>
-          <AnimatePresence mode='popLayout'>
-            { table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map( ( row ) => (
-                <MotionTableRow
-                  key={ row.id }
-                  data-state={ row.getIsSelected() && 'selected' }
-                  layout
-                  initial={ {
-                    opacity: 0,
-                    y: 20,
-                    borderColor: 'transparent',
-                  } }
-                  animate={ { opacity: 1, y: 0, borderColor: 'inherit' } }
-                  exit={ { opacity: 0, y: 20, transition: { duration: 0.1 } } }
-                  transition={ {
-                    duration: 0.4,
-                    delay: row.index * 0.05,
-                    layout: { duration: 0.3 },
-                  } }
-                  className='bg-background'
-                >
-                  { row.getVisibleCells().map( ( cell ) => (
-                    <TableCell key={ cell.id } className='align-top py-4'>
-                      { flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      ) }
-                    </TableCell>
-                  ) ) }
-                </MotionTableRow>
-              ) )
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={ table.getVisibleLeafColumns().length }
-                  className='h-24 text-center'
-                >
-                  { t( 'noResults' ) }
-                </TableCell>
-              </TableRow>
-            ) }
-          </AnimatePresence>
-        </TableBody>
-      </Table>
-    </div>
-  );
+  return <DataTableView table={ table } emptyState={ t( 'noResults' ) } />;
 }
 
 interface GigsViewProps {
@@ -99,6 +22,7 @@ interface GigsViewProps {
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
   actionButtons?: React.ReactNode;
   isLoading?: boolean;
+  showGigsEmptyState?: boolean;
 }
 
 
@@ -109,6 +33,7 @@ export function GigsView( {
   onCreateSubmission,
   actionButtons,
   isLoading = false,
+  showGigsEmptyState = true,
 }: GigsViewProps ) {
   const pageSize = table.getState().pagination.pageSize;
 
@@ -128,7 +53,7 @@ export function GigsView( {
             columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           />
         )
-      ) : table.getRowModel().rows.length === 0 ? (
+      ) : table.getRowModel().rows.length === 0 && showGigsEmptyState ? (
         <EmptyGigs>
           { actionButtons }
         </EmptyGigs>

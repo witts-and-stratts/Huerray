@@ -29,6 +29,7 @@ interface NewsletterTableProps {
   currentSearch: string;
   onSearchCommit: ( value: string ) => void;
   isLoading?: boolean;
+  isSearchPending?: boolean;
   error?: Error | null;
   refetch: () => void;
 }
@@ -39,9 +40,17 @@ export function NewsletterTable( {
   currentSearch,
   onSearchCommit,
   isLoading = false,
+  isSearchPending = false,
   error = null,
   refetch,
 }: NewsletterTableProps ) {
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
+  const sourceEntries = React.useMemo(
+    () => isNotFoundError ? [] : entries,
+    [ entries, isNotFoundError ]
+  );
   const t = useTranslations( "dashboard.admin" );
   const tc = useTranslations( "dashboard.common" );
   const showLoading = useDelayedLoading( isLoading, 250 );
@@ -56,7 +65,7 @@ export function NewsletterTable( {
   );
 
   const table = useReactTable( {
-    data: entries,
+    data: sourceEntries,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -74,17 +83,19 @@ export function NewsletterTable( {
   } );
 
   const selectedEntries = table.getSelectedRowModel().rows.map( ( row ) => row.original );
-  const showTableControls = entries.length > 0 || currentSearch.trim().length > 0;
+  const hasActiveSearch = currentSearch.trim().length > 0;
+  const showTableControls = sourceEntries.length > 0 || hasActiveSearch || isSearchPending;
+  const showNewsletterEmptyState = sourceEntries.length === 0 && !hasActiveSearch && !isLoading && !isSearchPending;
 
   return (
     <>
-      { showLoading && entries.length === 0 && <DataTableSkeleton /> }
-      { error && <ErrorNewsletter fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
+      { showLoading && sourceEntries.length === 0 && <DataTableSkeleton /> }
+      { error && !isNotFoundError && <ErrorNewsletter fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
 
-      { !isLoading && !error && (
+      { !isLoading && ( !error || isNotFoundError ) && (
         <div className="flex flex-col h-full overflow-hidden bg-slate-50/50">
           <NewsletterTableToolbar
-            entries={ entries }
+            entries={ sourceEntries }
             selectedEntries={ selectedEntries }
             currentSearch={ currentSearch }
             onSearchCommit={ onSearchCommit }
@@ -94,7 +105,7 @@ export function NewsletterTable( {
 
           <ScrollArea className="h-full">
             <div className="p-2 md:p-4">
-              <NewsletterTableView table={ table } />
+              <NewsletterTableView table={ table } showNewsletterEmptyState={ showNewsletterEmptyState } />
             </div>
           </ScrollArea>
 

@@ -55,6 +55,7 @@ export interface PaymentsTableProps {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
+  isSearchPending?: boolean;
 }
 
 export function PaymentsTable( {
@@ -68,8 +69,16 @@ export function PaymentsTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   onSearchChange,
+  isSearchPending = false,
 }: PaymentsTableProps ) {
-  const isInitialLoading = isLoading && data.length === 0;
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
+  const sourceData = React.useMemo(
+    () => isNotFoundError ? [] : data,
+    [ data, isNotFoundError ]
+  );
+  const isInitialLoading = isLoading && sourceData.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
   const showContentLoading = useDelayedLoading( isContentLoading, 400 );
@@ -78,12 +87,16 @@ export function PaymentsTable( {
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ internalSearchValue, setInternalSearchValue ] = React.useState( '' );
+  const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'payments' );
   const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
   const pagination = isServerSide ? externalPagination : internalPagination;
   const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
+  const hasActiveSearch = internalSearchValue.trim().length > 0;
+  const hasCommittedSearch = committedSearchValue.trim().length > 0;
   const setSearchValue = React.useCallback( ( nextValue: string ) => {
+    setCommittedSearchValue( nextValue );
     if ( onSearchChange ) {
       onSearchChange( nextValue );
     } else {
@@ -92,8 +105,8 @@ export function PaymentsTable( {
   }, [ onSearchChange ] );
 
   const filteredData = React.useMemo( () => {
-    if ( !dateRange?.from && !dateRange?.to ) return data;
-    return ( data || [] ).filter( ( p ) => {
+    if ( !dateRange?.from && !dateRange?.to ) return sourceData;
+    return ( sourceData || [] ).filter( ( p ) => {
       if ( !p.payment_date ) return false;
       const date = new Date( p.payment_date );
       if ( dateRange.from && date < dateRange.from ) return false;
@@ -104,7 +117,7 @@ export function PaymentsTable( {
       }
       return true;
     } );
-  }, [ data, dateRange ] );
+  }, [ sourceData, dateRange ] );
 
   const statuses = React.useMemo( () => {
     const set = new Set<string>();
@@ -146,8 +159,8 @@ export function PaymentsTable( {
   return (
     <AnimatePresence>
       { showInitialLoading && <DataTableSkeleton /> }
-      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
-      { !isInitialLoading && !error && (
+      { error && !isNotFoundError && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
+      { !isInitialLoading && ( !error || isNotFoundError ) && (
         <motion.div
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }
@@ -165,14 +178,17 @@ export function PaymentsTable( {
           />
           <ScrollArea className="flex-1 min-h-0">
             <div className='p-2 md:p-4'>
-              { showContentLoading && table.getRowModel().rows.length === 0 ? (
+              { showContentLoading && table.getRowModel().rows.length === 0 && !isSearchPending ? (
                 <DataTableSkeleton
                   showToolbar={ false }
                   rowCount={ Math.min( pagination.pageSize, 10 ) }
                   className="px-0 pt-0"
                 />
               ) : (
-                <PaymentsTableView table={ table } />
+                <PaymentsTableView
+                  table={ table }
+                  showPaymentEmptyState={ sourceData.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
+                />
               ) }
             </div>
           </ScrollArea>

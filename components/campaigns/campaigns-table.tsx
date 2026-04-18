@@ -64,6 +64,7 @@ type CampaignsTableProps = {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
+  isSearchPending?: boolean;
 };
 
 export function CampaignsTable( {
@@ -77,7 +78,11 @@ export function CampaignsTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   onSearchChange,
+  isSearchPending = false,
 }: CampaignsTableProps ) {
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
   const isInitialLoading = isLoading && campaigns.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 50 );
@@ -97,19 +102,29 @@ export function CampaignsTable( {
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
   const [ selectedCreator, setSelectedCreator ] = React.useState<ModelsCreatorResponse | null>( null );
   const [ hasSearched, setHasSearched ] = React.useState( false );
+  const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;
   const hasActiveSearch = globalFilter.trim().length > 0;
-  const showTableControls = campaigns.length > 0 || hasActiveSearch || hasSearched;
+  const hasCommittedSearch = committedSearchValue.trim().length > 0;
+  const sourceCampaigns = React.useMemo(
+    () => isNotFoundError ? [] : campaigns,
+    [ campaigns, isNotFoundError ]
+  );
+  const showTableControls = sourceCampaigns.length > 0 || hasActiveSearch || hasSearched;
   const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
     setHasSearched( true );
     setInternalGlobalFilter( ( currentValue ) =>
       typeof updater === 'function' ? updater( currentValue ) : updater
     );
   }, [] );
+  const handleSearchChange = React.useCallback( ( value: string ) => {
+    setCommittedSearchValue( value );
+    onSearchChange?.( value );
+  }, [ onSearchChange ] );
 
   const filteredData = React.useMemo( () => {
-    if ( !dateRange?.from && !dateRange?.to ) return campaigns;
-    return ( campaigns || [] ).filter( ( campaign ) => {
+    if ( !dateRange?.from && !dateRange?.to ) return sourceCampaigns;
+    return ( sourceCampaigns || [] ).filter( ( campaign ) => {
       const dateStr = dateFilterType === 'created_at' ? campaign.created_at : campaign.updated_at;
       if ( !dateStr ) return false;
       const date = new Date( dateStr );
@@ -121,7 +136,7 @@ export function CampaignsTable( {
       }
       return true;
     } );
-  }, [ campaigns, dateFilterType, dateRange ] );
+  }, [ sourceCampaigns, dateFilterType, dateRange ] );
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
@@ -178,8 +193,8 @@ export function CampaignsTable( {
           </motion.div>
         ) }
       </AnimatePresence>
-      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
-      { !isInitialLoading && !error && (
+      { error && !isNotFoundError && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
+      { !isInitialLoading && ( !error || isNotFoundError ) && (
         <>
           { showTableControls && (
             <CampaignsTableToolbar
@@ -192,7 +207,7 @@ export function CampaignsTable( {
               dateRange={ dateRange }
               setDateRange={ setDateRange }
               onSearchInputChange={ setGlobalFilter }
-              onSearchChange={ onSearchChange }
+              onSearchChange={ handleSearchChange }
             />
           ) }
           <ScrollArea className="flex-1">
@@ -201,6 +216,7 @@ export function CampaignsTable( {
               view={ view }
               onViewCreator={ setSelectedCreator }
               isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
+              showCampaignEmptyState={ sourceCampaigns.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
             />
           </ScrollArea>
           { showTableControls && (

@@ -10,6 +10,7 @@ export function AdminInvoicesClient() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-invoices' );
   const [ searchValue, setSearchValue ] = React.useState( '' );
   const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
+  const isSearchPending = searchValue.trim() !== deferredSearchValue;
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {
@@ -43,6 +44,7 @@ export function AdminInvoicesClient() {
         onPaginationChange={ setPagination }
         rowCount={ data?.pagination?.total }
         onSearchChange={ setSearchValue }
+        isSearchPending={ isSearchPending }
       />
     </div>
   );

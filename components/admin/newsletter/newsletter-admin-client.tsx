@@ -11,6 +11,7 @@ export function NewsletterAdminClient() {
   const t = useTranslations( "dashboard.admin" );
   const [ search, setSearch ] = React.useState( "" );
   const deferredSearch = React.useDeferredValue( search );
+  const isSearchPending = search.trim() !== deferredSearch.trim();
   const { data, isLoading, error, refetch } = useNewsletterEntries( deferredSearch );
 
   return (
@@ -25,6 +26,7 @@ export function NewsletterAdminClient() {
         currentSearch={ search }
         onSearchCommit={ setSearch }
         isLoading={ isLoading }
+        isSearchPending={ isSearchPending }
         error={ error }
         refetch={ refetch }
       />

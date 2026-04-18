@@ -1,5 +1,6 @@
 "use client";
 
+import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/dashboard-ui/button";
@@ -7,7 +8,7 @@ import { EmptyState, EmptyStateProps } from "./empty-state";
 
 type AdminNetworkErrorStateProps = Omit<EmptyStateProps, "imageSrc"> & {
   message?: string;
-  onRetry?: () => void;
+  onRetry?: () => void | Promise<unknown>;
   imageSrc?: string;
 };
 
@@ -24,6 +25,8 @@ export function AdminNetworkErrorState( {
   className,
 }: AdminNetworkErrorStateProps ) {
   const t = useTranslations( "dashboard.admin" );
+  const queryClient = useQueryClient();
+  const handleRetry = onRetry ?? ( () => queryClient.refetchQueries( { type: "active" } ) );
 
   return (
     <EmptyState
@@ -36,7 +39,7 @@ export function AdminNetworkErrorState( {
       className={ className }
     >
       { children }
-      <Button variant="outline" onClick={ onRetry || ( () => window.location.reload() ) }>
+      <Button variant="outline" onClick={ () => { void handleRetry(); } }>
         { t( "general.error.network.retry" ) }
       </Button>
     </EmptyState>

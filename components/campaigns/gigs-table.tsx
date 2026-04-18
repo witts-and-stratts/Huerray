@@ -68,6 +68,7 @@ export interface GigsTableProps {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
+  isSearchPending?: boolean;
 }
 
 export function GigsTable( {
@@ -86,9 +87,17 @@ export function GigsTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   onSearchChange,
+  isSearchPending = false,
 }: GigsTableProps ) {
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
+  const sourceData = React.useMemo(
+    () => isNotFoundError ? [] : data,
+    [ data, isNotFoundError ]
+  );
   const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
-  const isInitialLoading = isLoading && data.length === 0;
+  const isInitialLoading = isLoading && sourceData.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 50 );
   const showContentLoading = useDelayedLoading( isContentLoading, 400 );
@@ -109,19 +118,25 @@ export function GigsTable( {
   const [ selectedTab, setSelectedTab ] = React.useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = React.useState<ModelsGigResponse | null>( null );
   const [ hasSearched, setHasSearched ] = React.useState( false );
+  const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;
   const hasActiveSearch = globalFilter.trim().length > 0;
-  const showTableControls = ( data?.length ?? 0 ) > 0 || hasActiveSearch || hasSearched;
+  const hasCommittedSearch = committedSearchValue.trim().length > 0;
+  const showTableControls = sourceData.length > 0 || hasActiveSearch || hasSearched || hasCommittedSearch || isSearchPending;
   const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
     setHasSearched( true );
     setInternalGlobalFilter( ( currentValue ) =>
       typeof updater === 'function' ? updater( currentValue ) : updater
     );
   }, [] );
+  const handleSearchChange = React.useCallback( ( value: string ) => {
+    setCommittedSearchValue( value );
+    onSearchChange?.( value );
+  }, [ onSearchChange ] );
 
   const filteredData = React.useMemo( () => {
-    if ( !dateRange?.from && !dateRange?.to ) return data;
-    return ( data || [] ).filter( ( gig ) => {
+    if ( !dateRange?.from && !dateRange?.to ) return sourceData;
+    return ( sourceData || [] ).filter( ( gig ) => {
       let dateStr: string | undefined;
       if ( dateFilterType === 'created_at' ) dateStr = gig.created_at;
       else if ( dateFilterType === 'updated_at' ) dateStr = gig.updated_at;
@@ -138,7 +153,7 @@ export function GigsTable( {
       }
       return true;
     } );
-  }, [ data, dateFilterType, dateRange ] );
+  }, [ sourceData, dateFilterType, dateRange ] );
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
@@ -190,8 +205,8 @@ export function GigsTable( {
             ? <DataTableSkeleton key="skeleton-table" />
             : <CardGridSkeleton key="skeleton-cards" count={ 8 } cardHeight="h-[250px]" columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" />
         ) }
-        { error && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
-        { !isInitialLoading && !error && (
+        { error && !isNotFoundError && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
+        { !isInitialLoading && ( !error || isNotFoundError ) && (
           <div
             className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full"
           >
@@ -207,7 +222,7 @@ export function GigsTable( {
                 dateRange={ dateRange }
                 setDateRange={ setDateRange }
                 onSearchInputChange={ setGlobalFilter }
-                onSearchChange={ onSearchChange }
+                onSearchChange={ handleSearchChange }
               />
             ) }
             <ScrollArea>
@@ -218,6 +233,7 @@ export function GigsTable( {
                 onCreateSubmission={ onCreateSubmission }
                 actionButtons={ actionButtons }
                 isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
+                showGigsEmptyState={ sourceData.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
               />
             </ScrollArea>
             { !hidePagination && showTableControls && (

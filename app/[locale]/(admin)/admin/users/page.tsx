@@ -16,6 +16,7 @@ export default function UsersPage() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-users' );
   const [ searchValue, setSearchValue ] = React.useState( '' );
   const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
+  const isSearchPending = searchValue.trim() !== deferredSearchValue;
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {
@@ -56,6 +57,7 @@ export default function UsersPage() {
         onPaginationChange={ setPagination }
         rowCount={ response?.data?.pagination?.total }
         onSearchChange={ setSearchValue }
+        isSearchPending={ isSearchPending }
       />
     </>
   );

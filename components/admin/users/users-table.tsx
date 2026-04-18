@@ -27,6 +27,7 @@ import { useDelayedLoading } from "@/lib/hooks/use-delayed-loading";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
+import { TableviewWrapper } from "@/components/table-view-wrapper";
 
 const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -56,6 +57,7 @@ interface UsersTableProps {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
+  isSearchPending?: boolean;
 }
 
 export function UsersTable( {
@@ -67,8 +69,16 @@ export function UsersTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   onSearchChange,
+  isSearchPending = false,
 }: UsersTableProps ) {
-  const isInitialLoading = isLoading && users.length === 0;
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
+  const sourceUsers = React.useMemo(
+    () => isNotFoundError ? [] : users,
+    [ users, isNotFoundError ]
+  );
+  const isInitialLoading = isLoading && sourceUsers.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showLoading = useDelayedLoading( isInitialLoading, 250 );
   const showContentLoading = useDelayedLoading( isContentLoading, 400 );
@@ -79,26 +89,36 @@ export function UsersTable( {
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { user_type_filter: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
+  const [ hasSearched, setHasSearched ] = React.useState( false );
+  const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'admin-users' );
   const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
   const pagination = isServerSide ? externalPagination : internalPagination;
   const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
   const globalFilter = internalGlobalFilter;
+  const hasActiveSearch = globalFilter.trim().length > 0;
+  const hasCommittedSearch = committedSearchValue.trim().length > 0;
+  const showTableControls = sourceUsers.length > 0 || hasActiveSearch || hasSearched || hasCommittedSearch || isSearchPending;
   const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
+    setHasSearched( true );
     setInternalGlobalFilter( ( currentValue ) =>
       typeof updater === 'function' ? updater( currentValue ) : updater
     );
   }, [] );
+  const handleSearchChange = React.useCallback( ( value: string ) => {
+    setCommittedSearchValue( value );
+    onSearchChange?.( value );
+  }, [ onSearchChange ] );
   const [ selectedUser, setSelectedUser ] =
     React.useState<ModelsUserResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
 
   const statuses = React.useMemo( () => {
     const uniqueStatuses = Array.from(
-      new Set( users.map( ( user ) => user.user_status || "active" ) )
+      new Set( sourceUsers.map( ( user ) => user.user_status || "active" ) )
     );
     return uniqueStatuses as string[];
-  }, [ users ] );
+  }, [ sourceUsers ] );
 
   const columns = React.useMemo(
     () =>
@@ -114,7 +134,7 @@ export function UsersTable( {
   );
 
   const table = useReactTable( {
-    data: users,
+    data: sourceUsers,
     columns,
     getRowId: ( row, index ) => row.id || row.username || row.email || `user-${ index }`,
     initialState: {
@@ -151,8 +171,11 @@ export function UsersTable( {
   return (
     <AnimatePresence>
       { showLoading && <DataTableSkeleton key="users-loading" /> }
-      { error && <AdminNetworkErrorState key="users-error" fill message={ error.message } className="flex-1 h-full" /> }
-      { !isInitialLoading && !error && (
+      { error && !isNotFoundError &&
+        <TableviewWrapper>
+          <AdminNetworkErrorState key="users-error" fill message={ error.message } className="flex-1 h-full" />
+        </TableviewWrapper> }
+      { !isInitialLoading && ( !error || isNotFoundError ) && (
         <motion.div
           key="users-table"
           initial={ { opacity: 0 } }
@@ -161,12 +184,14 @@ export function UsersTable( {
           transition={ { duration: 0.3 } }
           className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
         >
-          <UsersTableToolbar
-            table={ table }
-            statuses={ statuses }
-            onSearchInputChange={ setGlobalFilter }
-            onSearchChange={ onSearchChange }
-          />
+          { showTableControls && (
+            <UsersTableToolbar
+              table={ table }
+              statuses={ statuses }
+              onSearchInputChange={ setGlobalFilter }
+              onSearchChange={ handleSearchChange }
+            />
+          ) }
           <ScrollArea className="flex-1 min-h-0">
             <UsersView
               table={ table }
@@ -179,9 +204,11 @@ export function UsersTable( {
               <DataTableSkeleton showToolbar={ false } className="absolute inset-x-0 top-12 z-20 bg-slate-50/50" />
             ) }
           </ScrollArea>
-          <div className="px-3 shrink-0 border-t bg-slate-50/50">
-            <DataTablePagination table={ table } />
-          </div>
+          { showTableControls && (
+            <div className="px-3 shrink-0 border-t bg-slate-50/50">
+              <DataTablePagination table={ table } />
+            </div>
+          ) }
           <UserDetailsSheet
             user={ selectedUser }
             open={ isSheetOpen }

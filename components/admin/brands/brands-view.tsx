@@ -14,6 +14,7 @@ interface BrandsViewProps {
   view: 'table' | 'cards';
   onViewDetails?: ( brand: Brand ) => void;
   isLoading?: boolean;
+  showBrandEmptyState?: boolean;
 }
 
 export function BrandsView( {
@@ -21,6 +22,7 @@ export function BrandsView( {
   view,
   onViewDetails,
   isLoading = false,
+  showBrandEmptyState = true,
 }: BrandsViewProps ) {
   const t = useTranslations( 'dashboard.admin' );
   const pageSize = table.getState().pagination.pageSize;
@@ -45,6 +47,10 @@ export function BrandsView( {
 
   if ( view === 'cards' ) {
     if ( table.getRowModel().rows.length === 0 ) {
+      if ( !showBrandEmptyState ) {
+        return <div className="p-2 md:p-4"><BrandsTableView table={ table } /></div>;
+      }
+
       return (
         <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
           <p className="text-muted-foreground">{ t( 'filters.noBrands' ) }</p>

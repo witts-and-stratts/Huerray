@@ -3,15 +3,16 @@
 import { CreatorsTable } from "@/components/admin/creators/creators-table";
 import { SubHeader } from "@/components/subheader";
 import { useCreators } from "@/lib/api/hooks/creators";
-import * as React from "react";
-import { useTranslations } from "next-intl";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
+import { useTranslations } from "next-intl";
+import * as React from "react";
 
 export default function CreatorsPage() {
   const t = useTranslations( 'dashboard.admin' );
   const { pagination, setPagination } = usePersistedPagination( 'admin-creators' );
   const [ searchValue, setSearchValue ] = React.useState( '' );
   const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
+  const isSearchPending = searchValue.trim() !== deferredSearchValue;
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {
@@ -38,7 +39,6 @@ export default function CreatorsPage() {
         title={ t( 'creatorsPage.title' ) }
         description={ t( 'creatorsPage.description' ) }
       >
-        {/* <Button className="gap-2 rounded-md">Add Creator</Button> */ }
       </SubHeader>
       <CreatorsTable
         creators={ creators }
@@ -49,6 +49,7 @@ export default function CreatorsPage() {
         onPaginationChange={ setPagination }
         rowCount={ response?.pagination?.total }
         onSearchChange={ setSearchValue }
+        isSearchPending={ isSearchPending }
       />
     </div>
   );

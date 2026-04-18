@@ -52,11 +52,13 @@ export function CampaignsView( {
   view,
   onViewCreator,
   isLoading = false,
+  showCampaignEmptyState,
 }: {
   table: TanstackTable<ModelsCampaignResponse>;
   view: 'table' | 'cards';
   onViewCreator?: ( creator: ModelsCreatorResponse ) => void;
   isLoading?: boolean;
+  showCampaignEmptyState: boolean;
 } ) {
   const pageSize = table.getState().pagination.pageSize;
 
@@ -72,7 +74,7 @@ export function CampaignsView( {
         ) : (
           <CardGridSkeleton count={ Math.min( pageSize, 6 ) } cardHeight="h-[300px]" />
         )
-      ) : table.getRowModel().rows.length === 0 ? (
+      ) : showCampaignEmptyState ? (
         <CampaignEmptyState />
       ) : view === 'table' ? (
         <CamapignsTableView table={ table } />

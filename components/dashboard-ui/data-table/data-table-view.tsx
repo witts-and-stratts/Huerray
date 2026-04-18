@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { flexRender, type Table as TanstackTable } from '@tanstack/react-table';
-import { AnimatePresence } from 'motion/react';
+import { flexRender, type Row, type Table as TanstackTable } from '@tanstack/react-table';
+import { AnimatePresence, type HTMLMotionProps } from 'motion/react';
 import {
   Table,
   TableBody,
@@ -19,9 +19,16 @@ import { useTranslations } from 'next-intl';
 interface DataTableViewProps<T> {
   table: TanstackTable<T>;
   emptyState?: React.ReactNode;
+  getRowMotionProps?: ( row: Row<T> ) => Partial<HTMLMotionProps<'tr'>>;
+  animatePresenceInitial?: boolean;
 }
 
-export function DataTableView<T>( { table, emptyState }: DataTableViewProps<T> ) {
+export function DataTableView<T>( {
+  table,
+  emptyState,
+  getRowMotionProps,
+  animatePresenceInitial,
+}: DataTableViewProps<T> ) {
   const t = useTranslations( 'dashboard.common' );
   const { scrollRef, isScrolled, lastPinnedId } = useTableScrollBorder( table );
 
@@ -52,42 +59,47 @@ export function DataTableView<T>( { table, emptyState }: DataTableViewProps<T> )
           ) ) }
         </TableHeader>
         <TableBody>
-          <AnimatePresence mode='popLayout'>
+          <AnimatePresence mode='popLayout' initial={ animatePresenceInitial }>
             { table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map( ( row ) => (
-                <MotionTableRow
-                  key={ row.id }
-                  data-state={ row.getIsSelected() && 'selected' }
-                  layout
-                  initial={ { opacity: 0, y: 20, borderColor: 'transparent' } }
-                  animate={ { opacity: 1, y: 0, borderColor: 'inherit' } }
-                  exit={ { opacity: 0, y: 20, transition: { duration: 0.1 } } }
-                  transition={ { duration: 0.4, delay: row.index * 0.05, layout: { duration: 0.3 } } }
-                  className='bg-background group'
-                >
-                  { row.getVisibleCells().map( ( cell ) => {
-                    const isPinned = cell.column.getIsPinned();
-                    const isLastPinned = isPinned === 'left' && cell.column.id === lastPinnedId;
-                    return (
-                      <TableCell
-                        key={ cell.id }
-                        className={ cn(
-                          'align-top py-4 group-hover:bg-muted',
-                          isPinned && 'bg-background',
-                          isLastPinned && isScrolled && 'dt-pinned-border'
-                        ) }
-                        style={ isPinned ? {
-                          position: 'sticky',
-                          left: cell.column.getStart( 'left' ),
-                          zIndex: 1,
-                        } : undefined }
-                      >
-                        { flexRender( cell.column.columnDef.cell, cell.getContext() ) }
-                      </TableCell>
-                    );
-                  } ) }
-                </MotionTableRow>
-              ) )
+              table.getRowModel().rows.map( ( row ) => {
+                const { className, ...rowMotionProps } = getRowMotionProps?.( row ) ?? {};
+
+                return (
+                  <MotionTableRow
+                    key={ row.id }
+                    data-state={ row.getIsSelected() && 'selected' }
+                    layout
+                    initial={ { opacity: 0, y: 20, borderColor: 'transparent' } }
+                    animate={ { opacity: 1, y: 0, borderColor: 'inherit' } }
+                    exit={ { opacity: 0, y: 20, transition: { duration: 0.1 } } }
+                    transition={ { duration: 0.4, delay: row.index * 0.05, layout: { duration: 0.3 } } }
+                    className={ cn( 'bg-background group', className ) }
+                    { ...rowMotionProps }
+                  >
+                    { row.getVisibleCells().map( ( cell ) => {
+                      const isPinned = cell.column.getIsPinned();
+                      const isLastPinned = isPinned === 'left' && cell.column.id === lastPinnedId;
+                      return (
+                        <TableCell
+                          key={ cell.id }
+                          className={ cn(
+                            'align-top py-4 group-hover:bg-muted',
+                            isPinned && 'bg-background',
+                            isLastPinned && isScrolled && 'dt-pinned-border'
+                          ) }
+                          style={ isPinned ? {
+                            position: 'sticky',
+                            left: cell.column.getStart( 'left' ),
+                            zIndex: 1,
+                          } : undefined }
+                        >
+                          { flexRender( cell.column.columnDef.cell, cell.getContext() ) }
+                        </TableCell>
+                      );
+                    } ) }
+                  </MotionTableRow>
+                );
+              } )
             ) : (
               <TableRow>
                 <TableCell colSpan={ table.getVisibleLeafColumns().length } className='h-24 text-center py-10'>

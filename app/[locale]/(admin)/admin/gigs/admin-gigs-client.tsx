@@ -10,6 +10,7 @@ export function AdminGigsClient() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-gigs' );
   const [ searchValue, setSearchValue ] = React.useState( '' );
   const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
+  const isSearchPending = searchValue.trim() !== deferredSearchValue;
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {
@@ -41,6 +42,7 @@ export function AdminGigsClient() {
       onPaginationChange={ setPagination }
       rowCount={ gigsData?.pagination?.total }
       onSearchChange={ setSearchValue }
+      isSearchPending={ isSearchPending }
     />
   );
 }

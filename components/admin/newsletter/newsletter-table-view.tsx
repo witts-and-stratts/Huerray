@@ -8,8 +8,9 @@ import { type NewsletterEntry } from "@/lib/api/hooks/newsletter";
 
 interface NewsletterTableViewProps {
   table: TanstackTable<NewsletterEntry>;
+  showNewsletterEmptyState?: boolean;
 }
 
-export function NewsletterTableView( { table }: NewsletterTableViewProps ) {
-  return <DataTableView table={ table } emptyState={ <EmptyNewsletter fill /> } />;
+export function NewsletterTableView( { table, showNewsletterEmptyState = true }: NewsletterTableViewProps ) {
+  return <DataTableView table={ table } emptyState={ showNewsletterEmptyState ? <EmptyNewsletter fill /> : undefined } />;
 }

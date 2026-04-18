@@ -13,6 +13,7 @@ export default function BrandsPage() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-brands' );
   const [ searchValue, setSearchValue ] = useState( '' );
   const deferredSearchValue = useDeferredValue( searchValue.trim() );
+  const isSearchPending = searchValue.trim() !== deferredSearchValue;
   const hasMountedRef = useRef( false );
 
   useEffect( () => {
@@ -80,6 +81,7 @@ export default function BrandsPage() {
         onPaginationChange={ setPagination }
         rowCount={ data?.pagination?.total }
         onSearchChange={ setSearchValue }
+        isSearchPending={ isSearchPending }
       />
     </>
   );

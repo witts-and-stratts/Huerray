@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { CreatorCard } from "./creator-card";
 import { CreatorsTableView } from "./creators-table-view";
 import { useTranslations } from "next-intl";
+import { TableviewWrapper } from "@/components/table-view-wrapper";
 
 interface CreatorsViewProps {
   table: Table<ModelsCreatorResponse>;
@@ -13,13 +14,18 @@ interface CreatorsViewProps {
   onViewDetails: ( creator: ModelsCreatorResponse ) => void;
   onApproveProfile: ( creator: ModelsCreatorResponse ) => void;
   onRejectProfile: ( creator: ModelsCreatorResponse ) => void;
+  showCreatorEmptyState?: boolean;
 }
 
-export function CreatorsView( { table, view, onViewDetails, onApproveProfile, onRejectProfile }: CreatorsViewProps ) {
+export function CreatorsView( { table, view, onViewDetails, onApproveProfile, onRejectProfile, showCreatorEmptyState = true }: CreatorsViewProps ) {
   const t = useTranslations( 'dashboard.admin' );
   if ( view === "cards" ) {
     // Check if there are rows to display in card view
     if ( table.getRowModel().rows.length === 0 ) {
+      if ( !showCreatorEmptyState ) {
+        return <TableviewWrapper><CreatorsTableView table={ table } /></TableviewWrapper>;
+      }
+
       return (
         <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
           <p className="text-muted-foreground">{ t( 'filters.noCreators' ) }</p>

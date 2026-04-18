@@ -71,6 +71,7 @@ interface CreatorsTableProps {
   onContentTypeFilterChange?: ( value?: string[] ) => void;
   showContentTypeFilter?: boolean;
   onSearchChange?: ( value: string ) => void;
+  isSearchPending?: boolean;
 }
 
 export function CreatorsTable( {
@@ -85,7 +86,11 @@ export function CreatorsTable( {
   onContentTypeFilterChange,
   showContentTypeFilter = true,
   onSearchChange,
+  isSearchPending = false,
 }: CreatorsTableProps ) {
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
   const isInitialLoading = isLoading && creators.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showLoading = useDelayedLoading( isInitialLoading, 250 );
@@ -115,9 +120,15 @@ export function CreatorsTable( {
     comments: string;
   } | null>( null );
   const [ hasSearched, setHasSearched ] = React.useState( false );
+  const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;
   const hasActiveSearch = globalFilter.trim().length > 0;
-  const showTableControls = creators.length > 0 || hasActiveSearch || hasSearched;
+  const hasCommittedSearch = committedSearchValue.trim().length > 0;
+  const sourceCreators = React.useMemo(
+    () => isNotFoundError ? [] : creators,
+    [ creators, isNotFoundError ]
+  );
+  const showTableControls = sourceCreators.length > 0 || hasActiveSearch || hasSearched;
   const globalFilterRef = React.useRef( globalFilter );
 
   React.useEffect( () => {
@@ -134,6 +145,10 @@ export function CreatorsTable( {
     const nextValue = typeof updater === 'function' ? updater( currentValue ) : updater;
     commitGlobalFilter( nextValue );
   }, [ commitGlobalFilter ] );
+  const handleSearchChange = React.useCallback( ( value: string ) => {
+    setCommittedSearchValue( value );
+    onSearchChange?.( value );
+  }, [ onSearchChange ] );
 
   const updateStatus = useUpdateCreatorProfileStatus();
 
@@ -178,7 +193,7 @@ export function CreatorsTable( {
   );
 
   const table = useReactTable( {
-    data: creators,
+    data: sourceCreators,
     columns,
     getRowId: ( row, index ) => row.id || row.creator_id || row.user_id || `creator-${ index }`,
     globalFilterFn: creatorGlobalFilter,
@@ -231,8 +246,8 @@ export function CreatorsTable( {
             </motion.div>
           ) }
         </AnimatePresence>
-        { error && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" /> }
-        { !isInitialLoading && !error && (
+        { error && !isNotFoundError && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" /> }
+        { !isInitialLoading && ( !error || isNotFoundError ) && (
           <motion.div
             key="content"
             initial={ { opacity: 0 } }
@@ -247,7 +262,7 @@ export function CreatorsTable( {
                 setView={ setView }
                 showContentTypeFilter={ showContentTypeFilter }
                 onSearchInputChange={ setGlobalFilter }
-                onSearchChange={ onSearchChange }
+                onSearchChange={ handleSearchChange }
               />
             ) }
             <ScrollArea className="flex-1 min-h-0">
@@ -260,6 +275,7 @@ export function CreatorsTable( {
                 } }
                 onApproveProfile={ handleOnApproveProfile }
                 onRejectProfile={ handleOnRejectProfile }
+                showCreatorEmptyState={ sourceCreators.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
               />
               { showContentLoading && table.getRowModel().rows.length === 0 && (
                 <DataTableSkeleton showToolbar={ false } className="absolute inset-x-0 top-12 z-20 bg-slate-50/50" />

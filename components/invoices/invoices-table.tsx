@@ -56,6 +56,7 @@ export interface InvoicesTableProps {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
+  isSearchPending?: boolean;
 }
 
 export function InvoicesTable( {
@@ -69,9 +70,17 @@ export function InvoicesTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   onSearchChange,
+  isSearchPending = false,
 }: InvoicesTableProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
-  const isInitialLoading = isLoading && data.length === 0;
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
+  const sourceData = React.useMemo(
+    () => isNotFoundError ? [] : data,
+    [ data, isNotFoundError ]
+  );
+  const isInitialLoading = isLoading && sourceData.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
   const showContentLoading = useDelayedLoading( isContentLoading, 400 );
@@ -86,9 +95,13 @@ export function InvoicesTable( {
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ internalSearchValue, setInternalSearchValue ] = React.useState( '' );
+  const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const [ dateFilterType, setDateFilterType ] = React.useState<'issued_date' | 'due_date'>( 'issued_date' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
+  const hasActiveSearch = internalSearchValue.trim().length > 0;
+  const hasCommittedSearch = committedSearchValue.trim().length > 0;
   const setSearchValue = React.useCallback( ( nextValue: string ) => {
+    setCommittedSearchValue( nextValue );
     if ( onSearchChange ) {
       onSearchChange( nextValue );
     } else {
@@ -97,8 +110,8 @@ export function InvoicesTable( {
   }, [ onSearchChange ] );
 
   const filteredData = React.useMemo( () => {
-    if ( !dateRange?.from && !dateRange?.to ) return data;
-    return ( data || [] ).filter( ( inv ) => {
+    if ( !dateRange?.from && !dateRange?.to ) return sourceData;
+    return ( sourceData || [] ).filter( ( inv ) => {
       const dateStr = dateFilterType === 'issued_date' ? inv.issued_date : inv.due_date;
       if ( !dateStr ) return false;
       const date = new Date( dateStr );
@@ -110,7 +123,7 @@ export function InvoicesTable( {
       }
       return true;
     } );
-  }, [ data, dateFilterType, dateRange ] );
+  }, [ sourceData, dateFilterType, dateRange ] );
 
   const statuses = React.useMemo( () => {
     const set = new Set<string>();
@@ -152,8 +165,8 @@ export function InvoicesTable( {
   return (
     <AnimatePresence>
       { showInitialLoading && <DataTableSkeleton key="invoices-loading" /> }
-      { error && <AdminNetworkErrorState key="invoices-error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
-      { !isInitialLoading && !error && (
+      { error && !isNotFoundError && <AdminNetworkErrorState key="invoices-error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
+      { !isInitialLoading && ( !error || isNotFoundError ) && (
         <motion.div
           key="invoices-content"
           initial={ { opacity: 0 } }
@@ -181,6 +194,7 @@ export function InvoicesTable( {
               view={ view }
               isAdmin={ isAdmin }
               isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
+              showInvoiceEmptyState={ sourceData.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
             />
           </ScrollArea>
           <div className='px-3 shrink-0 border-t bg-slate-50/50'>

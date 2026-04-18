@@ -29,6 +29,7 @@ import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { BrandDetailsSheet } from './brand-details-sheet';
 import { useTranslations } from 'next-intl';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
+import { TableviewWrapper } from '@/components/table-view-wrapper';
 
 const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -56,6 +57,7 @@ type BrandsTableProps = {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
+  isSearchPending?: boolean;
 };
 
 export function BrandsTable( {
@@ -67,8 +69,16 @@ export function BrandsTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   onSearchChange,
+  isSearchPending = false,
 }: BrandsTableProps ) {
-  const isInitialLoading = isLoading && ( brandsData?.length ?? 0 ) === 0;
+  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
+    ?? ( error as { status?: number; } | null )?.status;
+  const isNotFoundError = errorStatus === 404;
+  const sourceBrands = React.useMemo(
+    () => isNotFoundError ? [] : brandsData || [],
+    [ brandsData, isNotFoundError ]
+  );
+  const isInitialLoading = isLoading && sourceBrands.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
   const showContentLoading = useDelayedLoading( isContentLoading, 400 );
@@ -84,36 +94,46 @@ export function BrandsTable( {
   const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
   const [ selectedBrand, setSelectedBrand ] = React.useState<Brand | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
+  const [ hasSearched, setHasSearched ] = React.useState( false );
+  const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;
+  const hasActiveSearch = globalFilter.trim().length > 0;
+  const hasCommittedSearch = committedSearchValue.trim().length > 0;
+  const showTableControls = sourceBrands.length > 0 || hasActiveSearch || hasSearched;
   const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
+    setHasSearched( true );
     setInternalGlobalFilter( ( currentValue ) =>
       typeof updater === 'function' ? updater( currentValue ) : updater
     );
   }, [] );
+  const handleSearchChange = React.useCallback( ( value: string ) => {
+    setCommittedSearchValue( value );
+    onSearchChange?.( value );
+  }, [ onSearchChange ] );
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
-    brandsData?.forEach( ( brand ) => {
+    sourceBrands.forEach( ( brand ) => {
       if ( brand.brand_status ) statusSet.add( brand.brand_status );
     } );
     return Array.from( statusSet );
-  }, [ brandsData ] );
+  }, [ sourceBrands ] );
 
   const countries = React.useMemo( () => {
     const set = new Set<string>();
-    brandsData?.forEach( ( brand ) => {
+    sourceBrands.forEach( ( brand ) => {
       if ( brand.country ) set.add( brand.country );
     } );
     return Array.from( set ).sort();
-  }, [ brandsData ] );
+  }, [ sourceBrands ] );
 
   const sizes = React.useMemo( () => {
     const set = new Set<string>();
-    brandsData?.forEach( ( brand ) => {
+    sourceBrands.forEach( ( brand ) => {
       if ( brand.company_size ) set.add( brand.company_size );
     } );
     return Array.from( set );
-  }, [ brandsData ] );
+  }, [ sourceBrands ] );
 
   const tAdmin = useTranslations( 'dashboard.admin' );
   const tCommon = useTranslations( 'dashboard.common' );
@@ -132,7 +152,7 @@ export function BrandsTable( {
   );
 
   const table = useReactTable( {
-    data: brandsData || [],
+    data: sourceBrands,
     columns,
     getRowId: ( row, index ) => row.id || `brand-${ index }`,
     initialState: {
@@ -166,8 +186,8 @@ export function BrandsTable( {
   return (
     <AnimatePresence>
       { showInitialLoading && ( view === 'table' ? <DataTableSkeleton /> : <TableSkeleton /> ) }
-      { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
-      { !isInitialLoading && !error && (
+      { error && !isNotFoundError && <TableviewWrapper><AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /></TableviewWrapper> }
+      { !isInitialLoading && ( !error || isNotFoundError ) && (
         <motion.div
           initial={ { opacity: 0 } }
           animate={ { opacity: 1 } }
@@ -175,27 +195,32 @@ export function BrandsTable( {
           transition={ { duration: 0.3 } }
           className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
         >
-          <BrandsTableToolbar
-            table={ table }
-            view={ view }
-            setView={ setView }
-            statuses={ statuses }
-            countries={ countries }
-            sizes={ sizes }
-            onSearchInputChange={ setGlobalFilter }
-            onSearchChange={ onSearchChange }
-          />
+          { showTableControls && (
+            <BrandsTableToolbar
+              table={ table }
+              view={ view }
+              setView={ setView }
+              statuses={ statuses }
+              countries={ countries }
+              sizes={ sizes }
+              onSearchInputChange={ setGlobalFilter }
+              onSearchChange={ handleSearchChange }
+            />
+          ) }
           <ScrollArea className="flex-1 min-h-0">
             <BrandsView
               table={ table }
               view={ view }
               onViewDetails={ ( brand ) => { setSelectedBrand( brand ); setIsSheetOpen( true ); } }
               isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
+              showBrandEmptyState={ sourceBrands.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
             />
           </ScrollArea>
-          <div className="px-3 shrink-0 border-t bg-slate-50/50">
-            <DataTablePagination table={ table } />
-          </div>
+          { showTableControls && (
+            <div className="px-3 shrink-0 border-t bg-slate-50/50">
+              <DataTablePagination table={ table } />
+            </div>
+          ) }
           <BrandDetailsSheet
             brand={ selectedBrand! }
             open={ isSheetOpen }
