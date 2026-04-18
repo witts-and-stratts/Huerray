@@ -14,11 +14,15 @@ import { useFilterLabel } from '@/lib/hooks/use-filter-label';
 interface UsersTableToolbarProps<TData> {
   table: Table<TData>;
   statuses: string[];
+  onSearchInputChange?: ( value: string ) => void;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function UsersTableToolbar<TData>( {
   table,
   statuses,
+  onSearchInputChange,
+  onSearchChange,
 }: UsersTableToolbarProps<TData> ) {
   const t = useTranslations( 'dashboard.admin' );
   const getFilterLabel = useFilterLabel();
@@ -26,9 +30,12 @@ export function UsersTableToolbar<TData>( {
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
-          table={ table }
           columnId='username'
           placeholder={ t( 'filters.searchUsers' ) }
+          onInputChange={ onSearchInputChange }
+          onValueChange={ onSearchChange }
+          filterMode='none'
+          debounceMs={ 250 }
         />
       </div>
       <div className='flex items-center gap-2 overflow-x-auto'>

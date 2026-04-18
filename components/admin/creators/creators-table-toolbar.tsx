@@ -26,6 +26,11 @@ import * as React from 'react';
 import '@/app/styles/components/data-table.css';
 import { useTranslations } from 'next-intl';
 import { useFilterLabel } from '@/lib/hooks/use-filter-label';
+import { UtilsCountryCode, UtilsCreatorStatus, UtilsGender } from '@/lib/api/generated/models';
+
+const CREATOR_STATUS_OPTIONS = Object.values( UtilsCreatorStatus );
+const CREATOR_GENDER_OPTIONS = [ UtilsGender.GenderMale, UtilsGender.GenderFemale ];
+const CREATOR_COUNTRY_OPTIONS = Object.values( UtilsCountryCode ).sort();
 
 interface AgeRangeFilterProps<TData> {
   table: Table<TData>;
@@ -187,63 +192,132 @@ function ContentTypeFilter<TData>( { table }: { table: Table<TData>; } ) {
   );
 }
 
-interface CreatorsTableToolbarProps<TData> {
+interface CreatorSearchFieldProps {
+  placeholder: string;
+  onSearchInputChange?: ( value: string ) => void;
+  onSearchChange?: ( value: string ) => void;
+}
+
+const CreatorSearchField = React.memo( function CreatorSearchField( {
+  placeholder,
+  onSearchInputChange,
+  onSearchChange,
+}: CreatorSearchFieldProps ) {
+  return (
+    <div className='flex flex-1 items-center space-x-2'>
+      <DataTableSearch
+        columnId='name'
+        placeholder={ placeholder }
+        onInputChange={ onSearchInputChange }
+        onValueChange={ onSearchChange }
+        filterMode='none'
+        debounceMs={ 250 }
+      />
+    </div>
+  );
+} );
+
+interface CreatorFilterControlsProps<TData> {
   table: Table<TData>;
   statuses: string[];
   countries: string[];
   genders: string[];
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
-  showContentTypeFilter?: boolean;
+  showContentTypeFilter: boolean;
+  labels: {
+    status: string;
+    sex: string;
+    joined: string;
+  };
+  labelFn: ( value: string ) => string;
 }
 
-export function CreatorsTableToolbar<TData>( {
+const CreatorFilterControls = React.memo( function CreatorFilterControls<TData>( {
   table,
   statuses,
   countries,
   genders,
   view,
   setView,
+  showContentTypeFilter,
+  labels,
+  labelFn,
+}: CreatorFilterControlsProps<TData> ) {
+  return (
+    <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
+      <DataTableViewToggle view={ view } setView={ setView } />
+      <DataTableFilterDropdown
+        table={ table }
+        columnId='creator_status'
+        options={ statuses }
+        title={ labels.status }
+        labelFn={ labelFn }
+      />
+      <CountryFilter table={ table } countries={ countries } />
+      <DataTableFilterDropdown
+        table={ table }
+        columnId='gender'
+        options={ genders }
+        title={ labels.sex }
+        labelFn={ labelFn }
+      />
+      { showContentTypeFilter && <ContentTypeFilter table={ table } /> }
+      <AgeRangeFilter table={ table } />
+      <DataTableViewOptions
+        table={ table }
+        labels={ {
+          creator_status: labels.status,
+          created_at: labels.joined
+        } }
+      />
+    </div>
+  );
+} ) as <TData>( props: CreatorFilterControlsProps<TData> ) => React.ReactElement;
+
+interface CreatorsTableToolbarProps<TData> {
+  table: Table<TData>;
+  view: 'table' | 'cards';
+  setView: ( view: 'table' | 'cards' ) => void;
+  showContentTypeFilter?: boolean;
+  onSearchInputChange?: ( value: string ) => void;
+  onSearchChange?: ( value: string ) => void;
+}
+
+export function CreatorsTableToolbar<TData>( {
+  table,
+  view,
+  setView,
   showContentTypeFilter = true,
+  onSearchInputChange,
+  onSearchChange,
 }: CreatorsTableToolbarProps<TData> ) {
   const t = useTranslations( 'dashboard.admin' );
   const getFilterLabel = useFilterLabel();
+  const labels = React.useMemo( () => ( {
+    status: t( 'filters.status' ),
+    sex: t( 'filters.sex' ),
+    joined: t( 'filters.joined' ),
+  } ), [ t ] );
+
   return (
     <div className='dt-toolbar'>
-      <div className='flex flex-1 items-center space-x-2'>
-        <DataTableSearch
-          table={ table }
-          columnId='name'
-          placeholder={ t( 'filters.searchCreators' ) }
-        />
-      </div>
-      <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
-        <DataTableViewToggle view={ view } setView={ setView } />
-        <DataTableFilterDropdown
-          table={ table }
-          columnId='creator_status'
-          options={ statuses }
-          title={ t( 'filters.status' ) }
-          labelFn={ getFilterLabel }
-        />
-        <CountryFilter table={ table } countries={ countries } />
-        <DataTableFilterDropdown
-          table={ table }
-          columnId='gender'
-          options={ genders }
-          title={ t( 'filters.sex' ) }
-          labelFn={ getFilterLabel }
-        />
-        { showContentTypeFilter && <ContentTypeFilter table={ table } /> }
-        <AgeRangeFilter table={ table } />
-        <DataTableViewOptions
-          table={ table }
-          labels={ {
-            creator_status: t( 'filters.status' ),
-            created_at: t( 'filters.joined' )
-          } }
-        />
-      </div>
+      <CreatorSearchField
+        placeholder={ t( 'filters.searchCreators' ) }
+        onSearchInputChange={ onSearchInputChange }
+        onSearchChange={ onSearchChange }
+      />
+      <CreatorFilterControls
+        table={ table }
+        statuses={ CREATOR_STATUS_OPTIONS }
+        countries={ CREATOR_COUNTRY_OPTIONS }
+        genders={ CREATOR_GENDER_OPTIONS }
+        view={ view }
+        setView={ setView }
+        showContentTypeFilter={ showContentTypeFilter }
+        labels={ labels }
+        labelFn={ getFilterLabel }
+      />
     </div>
   );
 }

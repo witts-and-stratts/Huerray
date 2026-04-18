@@ -26,7 +26,7 @@ import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { useTranslations } from 'next-intl';
 
 

@@ -62,6 +62,7 @@ const creatorGlobalFilter: FilterFn<ModelsCreatorResponse> = ( row, _columnId, f
 interface CreatorsTableProps {
   creators?: ModelsCreatorResponse[];
   isLoading?: boolean;
+  isFetching?: boolean;
   error?: Error | null;
   pagination?: PaginationState;
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
@@ -69,11 +70,13 @@ interface CreatorsTableProps {
   defaultContentTypeFilter?: string[];
   onContentTypeFilterChange?: ( value?: string[] ) => void;
   showContentTypeFilter?: boolean;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function CreatorsTable( {
   creators = [],
   isLoading = false,
+  isFetching = false,
   error = null,
   pagination: externalPagination,
   onPaginationChange: externalOnPaginationChange,
@@ -81,8 +84,12 @@ export function CreatorsTable( {
   defaultContentTypeFilter,
   onContentTypeFilterChange,
   showContentTypeFilter = true,
+  onSearchChange,
 }: CreatorsTableProps ) {
-  const showLoading = useDelayedLoading( isLoading, 250 );
+  const isInitialLoading = isLoading && creators.length === 0;
+  const isContentLoading = !isInitialLoading && isFetching;
+  const showLoading = useDelayedLoading( isInitialLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 400 );
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
   const { view, setView } = usePersistedViewMode( 'creators', 'cards' );
@@ -98,7 +105,7 @@ export function CreatorsTable( {
   );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
+  const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
   const [ selectedCreator, setSelectedCreator ] =
     React.useState<ModelsCreatorResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -107,6 +114,26 @@ export function CreatorsTable( {
     type: "approve" | "reject";
     comments: string;
   } | null>( null );
+  const [ hasSearched, setHasSearched ] = React.useState( false );
+  const globalFilter = internalGlobalFilter;
+  const hasActiveSearch = globalFilter.trim().length > 0;
+  const showTableControls = creators.length > 0 || hasActiveSearch || hasSearched;
+  const globalFilterRef = React.useRef( globalFilter );
+
+  React.useEffect( () => {
+    globalFilterRef.current = globalFilter;
+  }, [ globalFilter ] );
+
+  const commitGlobalFilter = React.useCallback( ( nextValue: string ) => {
+    setHasSearched( true );
+    setInternalGlobalFilter( nextValue );
+  }, [] );
+
+  const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
+    const currentValue = globalFilterRef.current;
+    const nextValue = typeof updater === 'function' ? updater( currentValue ) : updater;
+    commitGlobalFilter( nextValue );
+  }, [ commitGlobalFilter ] );
 
   const updateStatus = useUpdateCreatorProfileStatus();
 
@@ -138,24 +165,6 @@ export function CreatorsTable( {
     );
   };
 
-  const statuses = React.useMemo( () => {
-    const uniqueStatuses = Array.from(
-      new Set( creators.map( ( creator ) => creator.creator_status || "active" ) )
-    );
-    return uniqueStatuses as string[];
-  }, [ creators ] );
-
-  const countries = React.useMemo( () =>
-    Array.from( new Set( creators.map( c => c.country ).filter( Boolean ) ) ).sort() as string[],
-    [ creators ]
-  );
-
-  const genders = React.useMemo( () =>
-    Array.from( new Set( creators.map( c => c.gender ).filter( Boolean ) ) ).sort() as string[],
-    [ creators ]
-  );
-
-
   const columns = React.useMemo(
     () =>
       getColumns( {
@@ -171,6 +180,7 @@ export function CreatorsTable( {
   const table = useReactTable( {
     data: creators,
     columns,
+    getRowId: ( row, index ) => row.id || row.creator_id || row.user_id || `creator-${ index }`,
     globalFilterFn: creatorGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -210,7 +220,7 @@ export function CreatorsTable( {
     <>
       <div className="grow relative flex flex-col min-h-0 bg-slate-50/50">
         <AnimatePresence>
-          { ( showLoading || isLoading ) && (
+          { showLoading && (
             <motion.div
               key="skeleton"
               className="absolute inset-0 z-30 bg-slate-50/50"
@@ -222,7 +232,7 @@ export function CreatorsTable( {
           ) }
         </AnimatePresence>
         { error && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" /> }
-        { !isLoading && !error && (
+        { !isInitialLoading && !error && (
           <motion.div
             key="content"
             initial={ { opacity: 0 } }
@@ -230,18 +240,17 @@ export function CreatorsTable( {
             transition={ { duration: 0.3 } }
             className="flex flex-col grow relative min-h-0"
           >
-            <ScrollArea className="flex-1 min-h-0 overflow-auto">
-              { creators.length > 0 && (
-                <CreatorsTableToolbar
-                  table={ table }
-                  statuses={ statuses }
-                  countries={ countries }
-                  genders={ genders }
-                  view={ view }
-                  setView={ setView }
-                  showContentTypeFilter={ showContentTypeFilter }
-                />
-              ) }
+            { showTableControls && (
+              <CreatorsTableToolbar
+                table={ table }
+                view={ view }
+                setView={ setView }
+                showContentTypeFilter={ showContentTypeFilter }
+                onSearchInputChange={ setGlobalFilter }
+                onSearchChange={ onSearchChange }
+              />
+            ) }
+            <ScrollArea className="flex-1 min-h-0">
               <CreatorsView
                 table={ table }
                 view={ view }
@@ -252,8 +261,11 @@ export function CreatorsTable( {
                 onApproveProfile={ handleOnApproveProfile }
                 onRejectProfile={ handleOnRejectProfile }
               />
+              { showContentLoading && table.getRowModel().rows.length === 0 && (
+                <DataTableSkeleton showToolbar={ false } className="absolute inset-x-0 top-12 z-20 bg-slate-50/50" />
+              ) }
             </ScrollArea>
-            { creators.length > 0 && (
+            { showTableControls && (
               <div className="px-3 shrink-0 border-t bg-slate-50/50">
                 <DataTablePagination table={ table } />
               </div>

@@ -11,6 +11,8 @@ import {
   getSortedRowModel,
   useReactTable,
   type FilterFn,
+  type PaginationState,
+  type Updater,
 } from "@tanstack/react-table";
 import { getColumns } from "./users-columns";
 import { UserDetailsSheet } from "./user-details-sheet";
@@ -48,23 +50,45 @@ const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterV
 interface UsersTableProps {
   users?: ModelsUserResponse[];
   isLoading?: boolean;
+  isFetching?: boolean;
   error?: Error | null;
+  pagination?: PaginationState;
+  onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
+  rowCount?: number;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function UsersTable( {
   users = [],
   isLoading = false,
+  isFetching = false,
   error = null,
+  pagination: externalPagination,
+  onPaginationChange: externalOnPaginationChange,
+  rowCount,
+  onSearchChange,
 }: UsersTableProps ) {
-  const showLoading = useDelayedLoading( isLoading, 250 );
+  const isInitialLoading = isLoading && users.length === 0;
+  const isContentLoading = !isInitialLoading && isFetching;
+  const showLoading = useDelayedLoading( isInitialLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 400 );
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { user_type_filter: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
-  const { pagination, setPagination } = usePersistedPagination( 'admin-users' );
+  const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
+  const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'admin-users' );
+  const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
+  const pagination = isServerSide ? externalPagination : internalPagination;
+  const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
+  const globalFilter = internalGlobalFilter;
+  const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
+    setInternalGlobalFilter( ( currentValue ) =>
+      typeof updater === 'function' ? updater( currentValue ) : updater
+    );
+  }, [] );
   const [ selectedUser, setSelectedUser ] =
     React.useState<ModelsUserResponse | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
@@ -92,6 +116,7 @@ export function UsersTable( {
   const table = useReactTable( {
     data: users,
     columns,
+    getRowId: ( row, index ) => row.id || row.username || row.email || `user-${ index }`,
     initialState: {
       columnPinning: {
         left: [ 'select', 'user_type', 'name' ],
@@ -109,6 +134,10 @@ export function UsersTable( {
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    ...( isServerSide && {
+      manualPagination: true,
+      rowCount: rowCount ?? 0,
+    } ),
     state: {
       sorting,
       columnFilters,
@@ -123,7 +152,7 @@ export function UsersTable( {
     <AnimatePresence>
       { showLoading && <DataTableSkeleton key="users-loading" /> }
       { error && <AdminNetworkErrorState key="users-error" fill message={ error.message } className="flex-1 h-full" /> }
-      { !isLoading && !error && (
+      { !isInitialLoading && !error && (
         <motion.div
           key="users-table"
           initial={ { opacity: 0 } }
@@ -132,11 +161,13 @@ export function UsersTable( {
           transition={ { duration: 0.3 } }
           className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
         >
+          <UsersTableToolbar
+            table={ table }
+            statuses={ statuses }
+            onSearchInputChange={ setGlobalFilter }
+            onSearchChange={ onSearchChange }
+          />
           <ScrollArea className="flex-1 min-h-0">
-            <UsersTableToolbar
-              table={ table }
-              statuses={ statuses }
-            />
             <UsersView
               table={ table }
               onViewDetails={ ( user ) => {
@@ -144,6 +175,9 @@ export function UsersTable( {
                 setIsSheetOpen( true );
               } }
             />
+            { showContentLoading && table.getRowModel().rows.length === 0 && (
+              <DataTableSkeleton showToolbar={ false } className="absolute inset-x-0 top-12 z-20 bg-slate-50/50" />
+            ) }
           </ScrollArea>
           <div className="px-3 shrink-0 border-t bg-slate-50/50">
             <DataTablePagination table={ table } />

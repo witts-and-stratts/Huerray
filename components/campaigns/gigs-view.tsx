@@ -23,8 +23,8 @@ import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
   const t = useTranslations( 'dashboard.brand.gigsPage' );
   return (
-    <div className='border border-border rounded-lg overflow-hidden'>
-      <Table className='overflow-auto'>
+    <div className='border border-border rounded-lg'>
+      <Table className='rounded-lg overflow-hidden'>
         <TableHeader sticky>
           { table.getHeaderGroups().map( ( headerGroup ) => (
             <TableRow key={ headerGroup.id }>
@@ -113,7 +113,7 @@ export function GigsView( {
   const pageSize = table.getState().pagination.pageSize;
 
   return (
-    <div className='p-2 md:p-4 flex flex-col flex-1 h-full'>
+    <div className='p-2 md:p-4'>
       { isLoading ? (
         view === 'table' ? (
           <DataTableSkeleton

@@ -22,7 +22,7 @@ import { cn } from '@/lib/utils';
 import { useForm } from '@tanstack/react-form';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { Separator } from '../dashboard-ui/separator';
 import { ImageUploader } from './image-uploader';
 import { useAppDispatch } from '@/lib/redux/hooks';
@@ -486,7 +486,7 @@ export function GeneralSettingsForm() {
                     children={ ( field ) => (
                       <SuperField
                         name={ field.name }
-                    label={ t( 'descriptionField' ) }
+                        label={ t( 'descriptionField' ) }
                         type="editor"
                         fieldClassName='h-[350px]'
                         value={ field.state.value }
@@ -499,14 +499,14 @@ export function GeneralSettingsForm() {
                 </div>
                 <div className="lg:col-span-1">
                   <div className="space-y-2 flex flex-col gap-2">
-                  <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{ t( 'brandLogo' ) }</label>
+                    <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">{ t( 'brandLogo' ) }</label>
                     <form.Field
                       name="profilePhotoUrl"
                       children={ ( field ) => (
                         <ImageUploader
                           value={ field.state.value }
                           onChange={ ( url ) => field.handleChange( url ) }
-                        previewTitle={ form.getFieldValue( 'companyName' ) || t( 'brandLogo' ) }
+                          previewTitle={ form.getFieldValue( 'companyName' ) || t( 'brandLogo' ) }
                           className='h-[350px]'
                         />
                       ) }

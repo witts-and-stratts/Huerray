@@ -54,6 +54,7 @@ export interface PaymentsTableProps {
   pagination?: PaginationState;
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function PaymentsTable( {
@@ -66,21 +67,29 @@ export function PaymentsTable( {
   pagination: externalPagination,
   onPaginationChange: externalOnPaginationChange,
   rowCount,
+  onSearchChange,
 }: PaymentsTableProps ) {
   const isInitialLoading = isLoading && data.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
-  const showContentLoading = useDelayedLoading( isContentLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 400 );
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
+  const [ internalSearchValue, setInternalSearchValue ] = React.useState( '' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'payments' );
   const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
   const pagination = isServerSide ? externalPagination : internalPagination;
   const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
+  const setSearchValue = React.useCallback( ( nextValue: string ) => {
+    if ( onSearchChange ) {
+      onSearchChange( nextValue );
+    } else {
+      setInternalSearchValue( nextValue );
+    }
+  }, [ onSearchChange ] );
 
   const filteredData = React.useMemo( () => {
     if ( !dateRange?.from && !dateRange?.to ) return data;
@@ -108,10 +117,11 @@ export function PaymentsTable( {
   const table = useReactTable( {
     data: filteredData,
     columns,
+    getRowId: ( row, index ) => row.id || row.payment_id || row.reference || `payment-${ index }`,
     globalFilterFn: paymentGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setSearchValue,
+    onGlobalFilterChange: setInternalSearchValue,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -128,7 +138,7 @@ export function PaymentsTable( {
       columnFilters,
       columnVisibility,
       rowSelection,
-      globalFilter: searchValue,
+      globalFilter: internalSearchValue,
       pagination,
     },
   } );
@@ -145,17 +155,17 @@ export function PaymentsTable( {
           transition={ { duration: 0.3 } }
           className='flex flex-col bg-slate-50/50 grow relative min-h-0 flex-1 h-full'
         >
-          <ScrollArea className="flex-1 min-h-0 overflow-auto">
-            <PaymentsTableToolbar
-              table={ table }
-              searchValue={ searchValue }
-              setSearchValue={ setSearchValue }
-              dateRange={ dateRange }
-              setDateRange={ setDateRange }
-              statuses={ statuses }
-            />
+          <PaymentsTableToolbar
+            table={ table }
+            setSearchValue={ setSearchValue }
+            setLocalSearchValue={ setInternalSearchValue }
+            dateRange={ dateRange }
+            setDateRange={ setDateRange }
+            statuses={ statuses }
+          />
+          <ScrollArea className="flex-1 min-h-0">
             <div className='p-2 md:p-4'>
-              { showContentLoading ? (
+              { showContentLoading && table.getRowModel().rows.length === 0 ? (
                 <DataTableSkeleton
                   showToolbar={ false }
                   rowCount={ Math.min( pagination.pageSize, 10 ) }

@@ -2,12 +2,11 @@
 
 import { type Table } from '@tanstack/react-table';
 import { CalendarDays, ChevronDown } from 'lucide-react';
-import { SearchIcon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/dashboard-ui/popover';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { Button } from '@/components/dashboard-ui/button';
+import { DataTableSearch } from '@/components/dashboard-ui/data-table/data-table-search';
 import { DataTableFilterDropdown } from '@/components/dashboard-ui/data-table/data-table-filter-dropdown';
 import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
@@ -16,8 +15,8 @@ import '@/app/styles/components/data-table.css';
 
 interface PaymentsTableToolbarProps {
   table: Table<ModelsPaymentResponse>;
-  searchValue: string;
   setSearchValue: ( value: string ) => void;
+  setLocalSearchValue?: ( value: string ) => void;
   dateRange: DateRange | undefined;
   setDateRange: ( value: DateRange | undefined ) => void;
   statuses: string[];
@@ -25,8 +24,8 @@ interface PaymentsTableToolbarProps {
 
 export function PaymentsTableToolbar( {
   table,
-  searchValue,
   setSearchValue,
+  setLocalSearchValue,
   dateRange,
   setDateRange,
   statuses,
@@ -36,15 +35,14 @@ export function PaymentsTableToolbar( {
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
-        <SuperField
-          type='search'
+        <DataTableSearch
+          columnId='payment_id'
           placeholder={ t( 'payments.filters.searchPlaceholder' ) }
-          prefix={ <HugeiconsIcon icon={ SearchIcon } /> }
-          fieldClassName='placeholder:text-gray-400 font-regular'
-          value={ searchValue }
-          onChange={ ( e ) => setSearchValue( e.target.value ) }
           className='w-full md:max-w-md bg-background h-8'
-          autoComplete='off'
+          onInputChange={ setLocalSearchValue }
+          onValueChange={ setSearchValue }
+          filterMode='none'
+          debounceMs={ 250 }
         />
       </div>
       <div className='flex items-center gap-2 max-w-full overflow-x-auto'>

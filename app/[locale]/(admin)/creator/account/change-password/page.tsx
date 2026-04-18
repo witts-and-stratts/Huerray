@@ -69,7 +69,7 @@ export default function CreatorChangePasswordPage() {
   ];
 
   return (
-    <form onSubmit={ handleFormSubmit } className="contents">
+    <form onSubmit={ handleFormSubmit } className="contents" noValidate>
       <CreatorAccountHeader
         breadcrumbs={ breadcrumbs }
         title={ t( 'settings.password.title' ) }

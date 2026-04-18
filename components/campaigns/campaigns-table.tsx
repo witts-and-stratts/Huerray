@@ -63,6 +63,7 @@ type CampaignsTableProps = {
   pagination?: PaginationState;
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
+  onSearchChange?: ( value: string ) => void;
 };
 
 export function CampaignsTable( {
@@ -75,11 +76,12 @@ export function CampaignsTable( {
   pagination: externalPagination,
   onPaginationChange: externalOnPaginationChange,
   rowCount,
+  onSearchChange,
 }: CampaignsTableProps ) {
   const isInitialLoading = isLoading && campaigns.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 50 );
-  const showContentLoading = useDelayedLoading( isContentLoading, 50 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 400 );
   const { view, setView } = usePersistedViewMode( 'campaigns', 'table' );
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'campaigns-table' );
 
@@ -90,10 +92,20 @@ export function CampaignsTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
+  const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
   const [ dateFilterType, setDateFilterType ] = React.useState<'created_at' | 'updated_at'>( 'created_at' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
   const [ selectedCreator, setSelectedCreator ] = React.useState<ModelsCreatorResponse | null>( null );
+  const [ hasSearched, setHasSearched ] = React.useState( false );
+  const globalFilter = internalGlobalFilter;
+  const hasActiveSearch = globalFilter.trim().length > 0;
+  const showTableControls = campaigns.length > 0 || hasActiveSearch || hasSearched;
+  const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
+    setHasSearched( true );
+    setInternalGlobalFilter( ( currentValue ) =>
+      typeof updater === 'function' ? updater( currentValue ) : updater
+    );
+  }, [] );
 
   const filteredData = React.useMemo( () => {
     if ( !dateRange?.from && !dateRange?.to ) return campaigns;
@@ -126,6 +138,7 @@ export function CampaignsTable( {
   const table = useReactTable( {
     data: filteredData,
     columns,
+    getRowId: ( row, index ) => row.id || row.campaign_id || `campaign-${ index }`,
     globalFilterFn: campaignGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -168,27 +181,29 @@ export function CampaignsTable( {
       { error && <AdminNetworkErrorState fill message={ error.message } className="flex-1 h-full" /> }
       { !isInitialLoading && !error && (
         <>
+          { showTableControls && (
+            <CampaignsTableToolbar
+              table={ table }
+              statuses={ statuses }
+              view={ view }
+              setView={ setView }
+              dateFilterType={ dateFilterType }
+              setDateFilterType={ setDateFilterType }
+              dateRange={ dateRange }
+              setDateRange={ setDateRange }
+              onSearchInputChange={ setGlobalFilter }
+              onSearchChange={ onSearchChange }
+            />
+          ) }
           <ScrollArea className="flex-1">
-            { campaigns.length > 0 && (
-              <CampaignsTableToolbar
-                table={ table }
-                statuses={ statuses }
-                view={ view }
-                setView={ setView }
-                dateFilterType={ dateFilterType }
-                setDateFilterType={ setDateFilterType }
-                dateRange={ dateRange }
-                setDateRange={ setDateRange }
-              />
-            ) }
             <CampaignsView
               table={ table }
               view={ view }
               onViewCreator={ setSelectedCreator }
-              isLoading={ showContentLoading }
+              isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
             />
           </ScrollArea>
-          { campaigns.length > 0 && (
+          { showTableControls && (
             <div className="px-2 md:px-4 shrink-0 border-t bg-slate-50/50">
               <DataTablePagination
                 table={ table }

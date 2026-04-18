@@ -11,7 +11,7 @@ export default async function AdminGigsPage() {
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       />
-      <div className='h-full overflow-hidden'><AdminGigsClient /></div>
+      <AdminGigsClient />
     </>
   );
 }

@@ -55,6 +55,7 @@ type BrandsTableProps = {
   pagination?: PaginationState;
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
+  onSearchChange?: ( value: string ) => void;
 };
 
 export function BrandsTable( {
@@ -65,11 +66,12 @@ export function BrandsTable( {
   pagination: externalPagination,
   onPaginationChange: externalOnPaginationChange,
   rowCount,
+  onSearchChange,
 }: BrandsTableProps ) {
   const isInitialLoading = isLoading && ( brandsData?.length ?? 0 ) === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
-  const showContentLoading = useDelayedLoading( isContentLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 400 );
   const { view, setView } = usePersistedViewMode( 'brands', 'cards' );
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'brands' );
   const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
@@ -79,9 +81,15 @@ export function BrandsTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( { country: false } );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
+  const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
   const [ selectedBrand, setSelectedBrand ] = React.useState<Brand | null>( null );
   const [ isSheetOpen, setIsSheetOpen ] = React.useState( false );
+  const globalFilter = internalGlobalFilter;
+  const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
+    setInternalGlobalFilter( ( currentValue ) =>
+      typeof updater === 'function' ? updater( currentValue ) : updater
+    );
+  }, [] );
 
   const statuses = React.useMemo( () => {
     const statusSet = new Set<string>();
@@ -126,6 +134,7 @@ export function BrandsTable( {
   const table = useReactTable( {
     data: brandsData || [],
     columns,
+    getRowId: ( row, index ) => row.id || `brand-${ index }`,
     initialState: {
       columnPinning: { left: [ 'select', 'name' ] },
     },
@@ -166,13 +175,22 @@ export function BrandsTable( {
           transition={ { duration: 0.3 } }
           className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
         >
+          <BrandsTableToolbar
+            table={ table }
+            view={ view }
+            setView={ setView }
+            statuses={ statuses }
+            countries={ countries }
+            sizes={ sizes }
+            onSearchInputChange={ setGlobalFilter }
+            onSearchChange={ onSearchChange }
+          />
           <ScrollArea className="flex-1 min-h-0">
-            <BrandsTableToolbar table={ table } view={ view } setView={ setView } statuses={ statuses } countries={ countries } sizes={ sizes } />
             <BrandsView
               table={ table }
               view={ view }
               onViewDetails={ ( brand ) => { setSelectedBrand( brand ); setIsSheetOpen( true ); } }
-              isLoading={ showContentLoading }
+              isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
             />
           </ScrollArea>
           <div className="px-3 shrink-0 border-t bg-slate-50/50">

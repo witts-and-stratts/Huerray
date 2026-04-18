@@ -21,8 +21,8 @@ import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
 import { toast } from 'sonner';
 import { useForm } from '@tanstack/react-form';
 import { useCallback, useMemo, useState } from 'react';
-import { z } from 'zod';
 import { useTranslations } from 'next-intl';
+import { getChangePasswordSchema } from './change-password-schema';
 
 export function ChangePasswordForm() {
   const t = useTranslations( 'dashboard.creator.settings.password' );
@@ -31,13 +31,11 @@ export function ChangePasswordForm() {
   const [ showNewPassword, setShowNewPassword ] = useState( false );
   const [ showConfirmPassword, setShowConfirmPassword ] = useState( false );
 
-  const schema = useMemo( () => z.object( {
-    currentPassword: z.string().min( 1, t( 'currentPasswordRequired' ) ),
-    newPassword: z.string().min( 8, t( 'newPasswordMin' ) ),
-    confirmPassword: z.string().min( 1, t( 'confirmPasswordRequired' ) ),
-  } ).refine( ( data ) => data.newPassword === data.confirmPassword, {
-    message: t( 'passwordsDontMatch' ),
-    path: [ "confirmPassword" ],
+  const schema = useMemo( () => getChangePasswordSchema( {
+    currentPasswordRequired: t( 'currentPasswordRequired' ),
+    newPasswordMin: t( 'newPasswordMin' ),
+    confirmPasswordRequired: t( 'confirmPasswordRequired' ),
+    passwordsDontMatch: t( 'passwordsDontMatch' ),
   } ), [ t ] );
 
   const form = useForm( {
@@ -110,7 +108,7 @@ export function ChangePasswordForm() {
         <CardDescription>{ t( 'description' ) }</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={ handleFormSubmit }>
+        <form onSubmit={ handleFormSubmit } noValidate>
           <FieldGroup>
             <form.Field
               name="currentPassword"

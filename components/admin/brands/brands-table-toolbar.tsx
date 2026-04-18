@@ -83,6 +83,8 @@ interface BrandsTableToolbarProps {
   sizes: string[];
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
+  onSearchInputChange?: ( value: string ) => void;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function BrandsTableToolbar( {
@@ -92,6 +94,8 @@ export function BrandsTableToolbar( {
   sizes,
   view,
   setView,
+  onSearchInputChange,
+  onSearchChange,
 }: BrandsTableToolbarProps ) {
   const t = useTranslations('dashboard.admin');
   const getFilterLabel = useFilterLabel();
@@ -99,9 +103,12 @@ export function BrandsTableToolbar( {
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
-          table={ table }
           columnId='name'
           placeholder={ t( 'filters.searchBrands' ) }
+          onInputChange={ onSearchInputChange }
+          onValueChange={ onSearchChange }
+          filterMode='none'
+          debounceMs={ 250 }
         />
       </div>
       <div className='flex items-center gap-2 max-w-full overflow-x-auto'>

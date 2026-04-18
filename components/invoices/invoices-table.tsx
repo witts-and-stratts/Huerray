@@ -55,6 +55,7 @@ export interface InvoicesTableProps {
   pagination?: PaginationState;
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function InvoicesTable( {
@@ -67,12 +68,13 @@ export function InvoicesTable( {
   pagination: externalPagination,
   onPaginationChange: externalOnPaginationChange,
   rowCount,
+  onSearchChange,
 }: InvoicesTableProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
   const isInitialLoading = isLoading && data.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 250 );
-  const showContentLoading = useDelayedLoading( isContentLoading, 250 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 400 );
   const { view: persistedView, setView } = usePersistedViewMode( 'invoices', 'table' );
   const view = isAdmin ? 'table' : persistedView;
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'invoices' );
@@ -83,9 +85,16 @@ export function InvoicesTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
+  const [ internalSearchValue, setInternalSearchValue ] = React.useState( '' );
   const [ dateFilterType, setDateFilterType ] = React.useState<'issued_date' | 'due_date'>( 'issued_date' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
+  const setSearchValue = React.useCallback( ( nextValue: string ) => {
+    if ( onSearchChange ) {
+      onSearchChange( nextValue );
+    } else {
+      setInternalSearchValue( nextValue );
+    }
+  }, [ onSearchChange ] );
 
   const filteredData = React.useMemo( () => {
     if ( !dateRange?.from && !dateRange?.to ) return data;
@@ -114,10 +123,11 @@ export function InvoicesTable( {
   const table = useReactTable( {
     data: filteredData,
     columns,
+    getRowId: ( row, index ) => row.id || row.invoice_id || row.invoice_number || `invoice-${ index }`,
     globalFilterFn: invoiceGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    onGlobalFilterChange: setSearchValue,
+    onGlobalFilterChange: setInternalSearchValue,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -134,7 +144,7 @@ export function InvoicesTable( {
       columnFilters,
       columnVisibility,
       rowSelection,
-      globalFilter: searchValue,
+      globalFilter: internalSearchValue,
       pagination,
     },
   } );
@@ -152,25 +162,25 @@ export function InvoicesTable( {
           transition={ { duration: 0.3 } }
           className='flex flex-col flex-1 bg-slate-50/50 grow relative min-h-0 overflow-hidden'
         >
-          <ScrollArea className="flex-1 min-h-0 overflow-auto">
-            <InvoicesTableToolbar
-              table={ table }
-              searchValue={ searchValue }
-              setSearchValue={ setSearchValue }
-              dateFilterType={ dateFilterType }
-              setDateFilterType={ setDateFilterType }
-              dateRange={ dateRange }
-              setDateRange={ setDateRange }
-              statuses={ statuses }
-              view={ view }
-              setView={ setView }
-              isAdmin={ isAdmin }
-            />
+          <InvoicesTableToolbar
+            table={ table }
+            setSearchValue={ setSearchValue }
+            setLocalSearchValue={ setInternalSearchValue }
+            dateFilterType={ dateFilterType }
+            setDateFilterType={ setDateFilterType }
+            dateRange={ dateRange }
+            setDateRange={ setDateRange }
+            statuses={ statuses }
+            view={ view }
+            setView={ setView }
+            isAdmin={ isAdmin }
+          />
+          <ScrollArea className="flex-1 min-h-0">
             <InvoicesView
               table={ table }
               view={ view }
               isAdmin={ isAdmin }
-              isLoading={ showContentLoading }
+              isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
             />
           </ScrollArea>
           <div className='px-3 shrink-0 border-t bg-slate-50/50'>

@@ -3,7 +3,7 @@
 import { SubHeader } from "@/components/subheader";
 import { Brand } from "@/components/admin/brands/brands-data";
 import { useBrands } from "@/lib/api/hooks/brands";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState, useDeferredValue, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { BrandsTable } from "@/components/admin/brands/brands-table";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
@@ -11,9 +11,22 @@ import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 export default function BrandsPage() {
   const t = useTranslations( 'dashboard.admin' );
   const { pagination, setPagination } = usePersistedPagination( 'admin-brands' );
+  const [ searchValue, setSearchValue ] = useState( '' );
+  const deferredSearchValue = useDeferredValue( searchValue.trim() );
+  const hasMountedRef = useRef( false );
+
+  useEffect( () => {
+    if ( !hasMountedRef.current ) {
+      hasMountedRef.current = true;
+      return;
+    }
+    setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
+  }, [ deferredSearchValue, setPagination ] );
+
   const { data, isLoading, isFetching, error } = useBrands( {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
+    q: deferredSearchValue || undefined,
   } );
 
   // Transform API response to Brand[] format expected by BrandsTable
@@ -66,6 +79,7 @@ export default function BrandsPage() {
         pagination={ pagination }
         onPaginationChange={ setPagination }
         rowCount={ data?.pagination?.total }
+        onSearchChange={ setSearchValue }
       />
     </>
   );

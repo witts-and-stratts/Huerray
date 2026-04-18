@@ -12,9 +12,22 @@ import { ModelsCampaignResponse } from '@/lib/api/generated';
 export default function CampaignsPage() {
   const t = useTranslations( 'dashboard.admin' );
   const { pagination, setPagination } = usePersistedPagination( 'admin-campaigns' );
+  const [ searchValue, setSearchValue ] = React.useState( '' );
+  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
+  const hasMountedRef = React.useRef( false );
+
+  React.useEffect( () => {
+    if ( !hasMountedRef.current ) {
+      hasMountedRef.current = true;
+      return;
+    }
+    setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
+  }, [ deferredSearchValue, setPagination ] );
+
   const { data: response, isLoading, isFetching, error } = useCampaigns( {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
+    q: deferredSearchValue || undefined,
   } );
 
   const campaigns = React.useMemo( () => {
@@ -48,6 +61,7 @@ export default function CampaignsPage() {
         pagination={ pagination }
         onPaginationChange={ setPagination }
         rowCount={ response?.pagination?.total }
+        onSearchChange={ setSearchValue }
       />
     </>
   );

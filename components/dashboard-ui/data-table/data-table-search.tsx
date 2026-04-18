@@ -9,30 +9,76 @@ import { SuperField } from '@/components/dashboard-ui/super-field';
 import { cn } from '@/lib/dashboard-utils';
 
 interface DataTableSearchProps<TData> {
-  table: Table<TData>;
+  table?: Table<TData>;
   columnId: string;
   placeholder?: string;
   className?: string;
+  value?: string;
+  onInputChange?: ( value: string ) => void;
+  onValueChange?: ( value: string ) => void;
+  filterMode?: 'column' | 'global' | 'none';
+  debounceMs?: number;
 }
 
-export function DataTableSearch<TData>( {
+function DataTableSearchComponent<TData>( {
   table,
   columnId,
   placeholder = 'Search...',
   className = 'max-w-sm bg-background',
+  value,
+  onInputChange,
+  onValueChange,
+  filterMode = 'column',
+  debounceMs = 100,
 }: DataTableSearchProps<TData> ) {
+  const isControlled = value !== undefined;
   const [ searchValue, setSearchValue ] = React.useState(
-    ( table.getColumn( columnId )?.getFilterValue() as string ) ?? ''
+    value ?? ( table?.getColumn( columnId )?.getFilterValue() as string ) ?? ''
   );
+  const tableRef = React.useRef<Table<TData> | undefined>( table );
+  const onInputChangeRef = React.useRef( onInputChange );
+  const onValueChangeRef = React.useRef( onValueChange );
+  const lastCommittedValueRef = React.useRef( searchValue );
+
+  React.useEffect( () => {
+    tableRef.current = table;
+  }, [ table ] );
+
+  React.useEffect( () => {
+    onInputChangeRef.current = onInputChange;
+  }, [ onInputChange ] );
+
+  React.useEffect( () => {
+    onValueChangeRef.current = onValueChange;
+  }, [ onValueChange ] );
+
+  React.useEffect( () => {
+    if ( isControlled ) setSearchValue( value ?? '' );
+  }, [ isControlled, value ] );
 
   // Debounce search input
   React.useEffect( () => {
     const timer = setTimeout( () => {
-      table.getColumn( columnId )?.setFilterValue( searchValue );
-    }, 100 );
+      if ( lastCommittedValueRef.current === searchValue ) return;
+
+      lastCommittedValueRef.current = searchValue;
+      onValueChangeRef.current?.( searchValue );
+
+      if ( filterMode === 'global' ) {
+        tableRef.current?.setGlobalFilter( searchValue );
+      } else if ( filterMode === 'column' ) {
+        tableRef.current?.getColumn( columnId )?.setFilterValue( searchValue );
+      }
+    }, debounceMs );
 
     return () => clearTimeout( timer );
-  }, [ searchValue, table, columnId ] );
+  }, [ searchValue, columnId, filterMode, debounceMs ] );
+
+  const handleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
+    const nextValue = event.target.value;
+    setSearchValue( nextValue );
+    onInputChangeRef.current?.( nextValue );
+  };
 
   return (
     <SuperField
@@ -41,9 +87,11 @@ export function DataTableSearch<TData>( {
       prefix={ <HugeiconsIcon icon={ SearchIcon } /> }
       fieldClassName='placeholder:text-gray-400 font-regular'
       value={ searchValue }
-      onChange={ ( event ) => setSearchValue( event.target.value ) }
+      onChange={ handleChange }
       className={ cn( className, 'h-8' ) }
       autoComplete='off'
     />
   );
 }
+
+export const DataTableSearch = React.memo( DataTableSearchComponent ) as typeof DataTableSearchComponent;

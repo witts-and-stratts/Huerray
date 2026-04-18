@@ -67,6 +67,7 @@ export interface GigsTableProps {
   pagination?: PaginationState;
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function GigsTable( {
@@ -84,12 +85,13 @@ export function GigsTable( {
   pagination: externalPagination,
   onPaginationChange: externalOnPaginationChange,
   rowCount,
+  onSearchChange,
 }: GigsTableProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const isInitialLoading = isLoading && data.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 50 );
-  const showContentLoading = useDelayedLoading( isContentLoading, 50 );
+  const showContentLoading = useDelayedLoading( isContentLoading, 400 );
   const { view, setView } = usePersistedViewMode( 'gigs', defaultView );
   const { pagination: internalPagination, setPagination: setInternalPagination } = usePersistedPagination( 'gigs' );
   const isServerSide = externalPagination !== undefined && externalOnPaginationChange !== undefined;
@@ -99,13 +101,23 @@ export function GigsTable( {
   const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
-  const [ globalFilter, setGlobalFilter ] = React.useState( '' );
+  const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
   const [ dateFilterType, setDateFilterType ] = React.useState<'created_at' | 'updated_at' | 'posting_start_date' | 'posting_end_date'>( 'created_at' );
   const [ dateRange, setDateRange ] = React.useState<DateRange | undefined>( undefined );
 
   const [ selectedGig, setSelectedGig ] = React.useState<ModelsGigResponse | null>( null );
   const [ selectedTab, setSelectedTab ] = React.useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = React.useState<ModelsGigResponse | null>( null );
+  const [ hasSearched, setHasSearched ] = React.useState( false );
+  const globalFilter = internalGlobalFilter;
+  const hasActiveSearch = globalFilter.trim().length > 0;
+  const showTableControls = ( data?.length ?? 0 ) > 0 || hasActiveSearch || hasSearched;
+  const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
+    setHasSearched( true );
+    setInternalGlobalFilter( ( currentValue ) =>
+      typeof updater === 'function' ? updater( currentValue ) : updater
+    );
+  }, [] );
 
   const filteredData = React.useMemo( () => {
     if ( !dateRange?.from && !dateRange?.to ) return data;
@@ -144,6 +156,7 @@ export function GigsTable( {
   const table = useReactTable( {
     data: filteredData || [],
     columns,
+    getRowId: ( row, index ) => row.id || `gig-${ index }`,
     globalFilterFn: gigGlobalFilter,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -180,32 +193,34 @@ export function GigsTable( {
         { error && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
         { !isInitialLoading && !error && (
           <div
-            className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full overflow-hidden"
+            className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full"
           >
-            <ScrollArea className='flex-1 min-h-0 overflow-auto'>
-              { !hideToolbar && ( data?.length ?? 0 ) > 0 && (
-                <GigsTableToolbar
-                  table={ table }
-                  statuses={ statuses }
-                  view={ view }
-                  setView={ setView }
-                  hideViewToggle={ hideViewToggle }
-                  dateFilterType={ dateFilterType }
-                  setDateFilterType={ setDateFilterType }
-                  dateRange={ dateRange }
-                  setDateRange={ setDateRange }
-                />
-              ) }
+            { !hideToolbar && showTableControls && (
+              <GigsTableToolbar
+                table={ table }
+                statuses={ statuses }
+                view={ view }
+                setView={ setView }
+                hideViewToggle={ hideViewToggle }
+                dateFilterType={ dateFilterType }
+                setDateFilterType={ setDateFilterType }
+                dateRange={ dateRange }
+                setDateRange={ setDateRange }
+                onSearchInputChange={ setGlobalFilter }
+                onSearchChange={ onSearchChange }
+              />
+            ) }
+            <ScrollArea>
               <GigsView
                 table={ table }
                 view={ view }
                 onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
                 onCreateSubmission={ onCreateSubmission }
                 actionButtons={ actionButtons }
-                isLoading={ showContentLoading }
+                isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }
               />
             </ScrollArea>
-            { !hidePagination && ( data?.length ?? 0 ) > 0 && (
+            { !hidePagination && showTableControls && (
               <div className='px-2 md:px-5 shrink-0 border-t bg-slate-50/50'>
                 <DataTablePagination
                   table={ table }

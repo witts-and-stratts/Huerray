@@ -8,9 +8,22 @@ import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 
 export function AdminPaymentsClient() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-payments' );
+  const [ searchValue, setSearchValue ] = React.useState( '' );
+  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
+  const hasMountedRef = React.useRef( false );
+
+  React.useEffect( () => {
+    if ( !hasMountedRef.current ) {
+      hasMountedRef.current = true;
+      return;
+    }
+    setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
+  }, [ deferredSearchValue, setPagination ] );
+
   const { data, isLoading, isFetching, error, refetch } = usePayments( {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
+    search: deferredSearchValue || undefined,
   } );
 
   const payments = React.useMemo( (): ModelsPaymentResponse[] => {
@@ -29,6 +42,7 @@ export function AdminPaymentsClient() {
         pagination={ pagination }
         onPaginationChange={ setPagination }
         rowCount={ data?.pagination?.total }
+        onSearchChange={ setSearchValue }
       />
     </div>
   );

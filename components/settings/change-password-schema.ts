@@ -1,5 +1,5 @@
 
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { FormApi } from '@tanstack/react-form';
 
 export type ReactFormApi<TData> = FormApi<TData, any, any, any, any, any, any, any, any, any, any, any> & {
@@ -27,7 +27,7 @@ export const changePasswordSchema = getChangePasswordSchema( {
   currentPasswordRequired: 'Current password is required',
   newPasswordMin: 'Password must be at least 8 characters',
   confirmPasswordRequired: 'Please confirm your new password',
-  passwordsDontMatch: "Passwords don't match",
+  passwordsDontMatch: "Passwords do not match",
 } );
 
 export type ChangePasswordSettings = z.infer<typeof changePasswordSchema>;

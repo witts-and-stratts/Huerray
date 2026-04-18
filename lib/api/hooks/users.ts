@@ -1,5 +1,5 @@
 
-import { useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
+import { keepPreviousData, useQuery, useMutation, useQueryClient, type UseQueryOptions } from '@tanstack/react-query';
 import { UserApi, UsersSearchGetUserTypeEnum } from '../generated/api/user-api';
 import { AuthenticationApi } from '../generated/api/authentication-api';
 import { apiClient, apiConfiguration } from '../client';
@@ -47,6 +47,7 @@ export function useUsers(
       });
       return response;
     },
+    placeholderData: keepPreviousData,
     ...options,
   });
 }

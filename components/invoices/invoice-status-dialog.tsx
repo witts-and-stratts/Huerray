@@ -3,7 +3,7 @@
 import { useEffect, useMemo } from 'react';
 import { useForm } from '@tanstack/react-form';
 import { useTranslations } from 'next-intl';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 import { Button } from '@/components/dashboard-ui/button';
 import {

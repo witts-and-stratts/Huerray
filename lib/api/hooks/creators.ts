@@ -8,6 +8,7 @@ import {
   useQuery, 
   useMutation, 
   useQueryClient,
+  keepPreviousData,
   type UseQueryResult, 
   type UseMutationResult,
   type UseQueryOptions,
@@ -289,6 +290,7 @@ export function useCreators(
       });
       return response.data;
     },
+    placeholderData: keepPreviousData,
     ...options,
   });
 }

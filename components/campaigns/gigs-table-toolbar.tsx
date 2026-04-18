@@ -23,6 +23,8 @@ interface GigsTableToolbarProps {
   setDateFilterType?: ( value: 'created_at' | 'updated_at' | 'posting_start_date' | 'posting_end_date' ) => void;
   dateRange?: DateRange | undefined;
   setDateRange?: ( value: DateRange | undefined ) => void;
+  onSearchInputChange?: ( value: string ) => void;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function GigsTableToolbar( {
@@ -36,25 +38,20 @@ export function GigsTableToolbar( {
   setDateFilterType,
   dateRange,
   setDateRange,
+  onSearchInputChange,
+  onSearchChange,
 }: GigsTableToolbarProps ) {
-  const [ searchValue, setSearchValue ] = React.useState( '' );
   const t = useTranslations( 'dashboard.admin' );
-
-  // Debounce search input
-  React.useEffect( () => {
-    const timer = setTimeout( () => {
-      table.setGlobalFilter( searchValue );
-    }, 100 );
-
-    return () => clearTimeout( timer );
-  }, [ searchValue, table ] );
 
   return (
     <div className='dt-toolbar'>
       <DataTableSearch
-        table={ table }
         columnId='details'
         placeholder={ t( 'filters.searchGigs' ) }
+        onInputChange={ onSearchInputChange }
+        onValueChange={ onSearchChange }
+        filterMode='none'
+        debounceMs={ 250 }
       />
 
       <div className='flex items-center gap-2 w-full md:w-auto'>

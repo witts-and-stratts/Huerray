@@ -2,12 +2,11 @@
 
 import { type Table } from '@tanstack/react-table';
 import { CalendarDays, ChevronDown } from 'lucide-react';
-import { SearchIcon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/dashboard-ui/popover';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { SuperField } from '@/components/dashboard-ui/super-field';
 import { Button } from '@/components/dashboard-ui/button';
+import { DataTableSearch } from '@/components/dashboard-ui/data-table/data-table-search';
 import { DataTableFilterDropdown } from '@/components/dashboard-ui/data-table/data-table-filter-dropdown';
 import { DataTableViewOptions } from '@/components/dashboard-ui/data-table/data-table-view-options';
 import { DataTableViewToggle } from '@/components/dashboard-ui/data-table/data-table-view-toggle';
@@ -17,8 +16,8 @@ import { useTranslations } from 'next-intl';
 
 interface InvoicesTableToolbarProps {
   table: Table<ModelsInvoiceResponse>;
-  searchValue: string;
   setSearchValue: ( value: string ) => void;
+  setLocalSearchValue?: ( value: string ) => void;
   dateFilterType: 'issued_date' | 'due_date';
   setDateFilterType: ( value: 'issued_date' | 'due_date' ) => void;
   dateRange: DateRange | undefined;
@@ -31,8 +30,8 @@ interface InvoicesTableToolbarProps {
 
 export function InvoicesTableToolbar( {
   table,
-  searchValue,
   setSearchValue,
+  setLocalSearchValue,
   dateFilterType,
   setDateFilterType,
   dateRange,
@@ -46,15 +45,14 @@ export function InvoicesTableToolbar( {
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
-        <SuperField
-          type='search'
+        <DataTableSearch
+          columnId='invoice_number'
           placeholder={ t( 'toolbar.searchPlaceholder' ) }
-          prefix={ <HugeiconsIcon icon={ SearchIcon } /> }
-          fieldClassName='placeholder:text-gray-400 font-regular'
-          value={ searchValue }
-          onChange={ ( e ) => setSearchValue( e.target.value ) }
           className='w-full md:max-w-md bg-background h-8'
-          autoComplete='off'
+          onInputChange={ setLocalSearchValue }
+          onValueChange={ setSearchValue }
+          filterMode='none'
+          debounceMs={ 250 }
         />
       </div>
       <div className='flex items-center gap-2 max-w-full overflow-x-auto'>

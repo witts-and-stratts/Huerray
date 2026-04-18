@@ -5,13 +5,22 @@
  * They cover the /brand/analytics page:
  *   1. Page loads with analytics heading
  *   2. Metric cards are visible (campaigns, gigs, videos, cases)
- *   3. Period selector dropdown opens and lists options
- *   4. Selecting a different period triggers a data refresh
+ *   3. Period selector trigger is present and shows the default "All time" label
+ *   4. Opening the period selector shows all five period options
+ *   5. Selecting a different period updates the trigger label and keeps the page stable
  */
 import { test, expect, type Page } from '@playwright/test';
 
 const BRAND_USER = process.env.BRAND_E2E_USER ?? 'brand-e2e@test.huerray.de';
 const BRAND_PASSWORD = process.env.BRAND_E2E_PASSWORD ?? 'TestPwd123!@#';
+
+const PERIOD_OPTIONS = [
+  'All time',
+  'Last week',
+  'Last month',
+  'Last 3 months',
+  'Last year',
+];
 
 async function loginIfNeeded(page: Page) {
   if (!/\/login(?:$|\?)/.test(page.url())) return;
@@ -23,6 +32,11 @@ async function loginIfNeeded(page: Page) {
   await page.getByLabel(/Password/i).first().fill(BRAND_PASSWORD);
   await page.locator('button[type="submit"]').click();
   await expect(page).toHaveURL(/.*(brand|dashboard).*/, { timeout: 20000 });
+}
+
+/** Returns the period selector trigger button (shows the currently selected period label). */
+function periodTrigger(page: Page) {
+  return page.locator('button[type="button"]').filter({ hasText: /all time|last week|last month|last 3 months|last year/i }).first();
 }
 
 test.describe('Dashboards - Brand Analytics', () => {
@@ -42,10 +56,6 @@ test.describe('Dashboards - Brand Analytics', () => {
   });
 
   test('metric cards are visible on the analytics page', async ({ page }) => {
-    // Wait for data to load (may have loading skeletons first)
-    await page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => {});
-
-    // Look for metric/stat cards — the analytics page renders multiple
     const metricCards = page
       .locator('[class*="card"]')
       .or(page.locator('[class*="metric"]'))
@@ -53,93 +63,50 @@ test.describe('Dashboards - Brand Analytics', () => {
 
     await expect(metricCards.first()).toBeVisible({ timeout: 15000 });
 
-    // At least one key metric label should appear
     const metricLabel = page.getByText(/campaigns|gigs|videos|cases/i).first();
     await expect(metricLabel).toBeVisible({ timeout: 10000 });
   });
 
-  test('period selector dropdown is present', async ({ page }) => {
-    const periodSelector = page
-      .getByRole('combobox', { name: /period|time range|filter/i })
-      .or(page.locator('select').filter({ hasText: /period|all time|last/i }))
-      .or(page.locator('button').filter({ hasText: /all time|last week|last month/i }));
-
-    if (await periodSelector.count() === 0) {
-      test.skip(true, 'No period selector found on analytics page; skipping.');
-      return;
-    }
-
-    await expect(periodSelector.first()).toBeVisible({ timeout: 10000 });
+  test('period selector trigger shows the default "All time" label', async ({ page }) => {
+    const trigger = periodTrigger(page);
+    await expect(trigger).toBeVisible({ timeout: 10000 });
+    await expect(trigger).toContainText('All time');
   });
 
-  test('period selector opens and shows period options', async ({ page }) => {
-    const periodSelector = page
-      .getByRole('combobox', { name: /period|time range/i })
-      .or(page.locator('button').filter({ hasText: /all time|last week|last month/i }))
-      .first();
+  test('period selector opens and lists all period options', async ({ page }) => {
+    const trigger = periodTrigger(page);
+    await expect(trigger).toBeVisible({ timeout: 10000 });
+    await trigger.click();
 
-    if (await periodSelector.count() === 0) {
-      test.skip(true, 'No period selector found; skipping options test.');
-      return;
-    }
-
-    await periodSelector.click();
-
-    // Options should appear after opening
-    const options = page
-      .getByRole('option')
-      .or(page.getByRole('menuitem'))
-      .or(page.locator('[class*="option"]'));
-
-    await expect(options.first()).toBeVisible({ timeout: 5000 });
-
-    // Verify common period options are present
-    const expectedOptions = [/all time/i, /last week|last month/i];
-    for (const opt of expectedOptions) {
-      const option = page.getByText(opt).first();
-      if (await option.count() > 0) {
-        await expect(option).toBeVisible({ timeout: 3000 });
-      }
+    // Each period is rendered as a ghost button inside the popover
+    for (const label of PERIOD_OPTIONS) {
+      await expect(
+        page.locator('[data-slot="popover-content"]').getByRole('button', { name: label })
+      ).toBeVisible({ timeout: 5000 });
     }
   });
 
-  test('selecting a different period refreshes analytics data', async ({ page }) => {
-    const periodSelector = page
-      .getByRole('combobox', { name: /period|time range/i })
-      .or(page.locator('button').filter({ hasText: /all time|last week|last month/i }))
-      .first();
+  test('selecting "Last month" updates the trigger label', async ({ page }) => {
+    const trigger = periodTrigger(page);
+    await expect(trigger).toBeVisible({ timeout: 10000 });
+    await trigger.click();
 
-    if (await periodSelector.count() === 0) {
-      test.skip(true, 'No period selector found; skipping period change test.');
-      return;
-    }
+    // Click the "Last month" option inside the popover
+    await page
+      .locator('[data-slot="popover-content"]')
+      .getByRole('button', { name: 'Last month' })
+      .click();
 
-    await periodSelector.click();
+    // Popover closes and trigger reflects the new selection
+    await expect(trigger).toContainText('Last month', { timeout: 5000 });
 
-    // Select "Last Month" or any second option
-    const secondOption = page.getByRole('option').nth(1)
-      .or(page.getByRole('menuitem').nth(1));
+    // Page remains stable — heading and metric cards still visible
+    await expect(
+      page.getByRole('heading', { name: /analytics/i }).or(page.locator('h1, h2').filter({ hasText: /analytics/i })).first()
+    ).toBeVisible({ timeout: 10000 });
 
-    if (await secondOption.count() === 0) {
-      test.skip(true, 'No second period option found; skipping.');
-      return;
-    }
-
-    await secondOption.click();
-
-    // After selection, the page should still render without error
-    const heading = page
-      .getByRole('heading', { name: /analytics/i })
-      .or(page.locator('h1, h2').filter({ hasText: /analytics/i }));
-
-    await expect(heading.first()).toBeVisible({ timeout: 15000 });
-
-    // Metric cards should still be visible (data may update)
-    const metricCards = page
-      .locator('[class*="card"]')
-      .or(page.locator('[class*="metric"]'))
-      .or(page.locator('[class*="stat"]'));
-
-    await expect(metricCards.first()).toBeVisible({ timeout: 15000 });
+    await expect(
+      page.locator('[class*="card"]').or(page.locator('[class*="metric"]')).or(page.locator('[class*="stat"]')).first()
+    ).toBeVisible({ timeout: 15000 });
   });
 });

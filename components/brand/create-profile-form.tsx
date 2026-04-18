@@ -25,7 +25,7 @@ import { useForm } from '@tanstack/react-form';
 import { useRouter } from 'next/navigation';
 import { useCallback, useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { Separator } from '@/components/dashboard-ui/separator';
 
 

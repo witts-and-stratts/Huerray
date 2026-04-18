@@ -90,7 +90,7 @@ export function DataTableView<T>( { table, emptyState }: DataTableViewProps<T> )
               ) )
             ) : (
               <TableRow>
-                <TableCell colSpan={ table.getVisibleLeafColumns().length } className='h-24 text-center'>
+                <TableCell colSpan={ table.getVisibleLeafColumns().length } className='h-24 text-center py-10'>
                   { emptyState ?? t( 'noResultsFound' ) }
                 </TableCell>
               </TableRow>

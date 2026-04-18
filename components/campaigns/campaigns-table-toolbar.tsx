@@ -70,6 +70,8 @@ interface CampaignsTableToolbarProps {
   setDateFilterType: ( value: 'created_at' | 'updated_at' ) => void;
   dateRange: DateRange | undefined;
   setDateRange: ( value: DateRange | undefined ) => void;
+  onSearchInputChange?: ( value: string ) => void;
+  onSearchChange?: ( value: string ) => void;
 }
 
 export function CampaignsTableToolbar( {
@@ -81,15 +83,20 @@ export function CampaignsTableToolbar( {
   setDateFilterType,
   dateRange,
   setDateRange,
+  onSearchInputChange,
+  onSearchChange,
 }: CampaignsTableToolbarProps ) {
   const t = useTranslations( 'dashboard.admin' );
   const getFilterLabel = useFilterLabel();
   return (
     <div className='dt-toolbar'>
       <DataTableSearch
-        table={ table }
         columnId='campaign_name'
         placeholder={ t( 'campaignsPage.toolbar.search' ) }
+        onInputChange={ onSearchInputChange }
+        onValueChange={ onSearchChange }
+        filterMode='none'
+        debounceMs={ 250 }
       />
       <div className='flex items-center gap-2'>
         <Popover>

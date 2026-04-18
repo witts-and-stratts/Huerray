@@ -63,8 +63,8 @@ test.describe('Dashboards - Brand Settings Security', () => {
 
     // At least one validation error should appear
     const validationError = page
-      .locator('[class*="error"]')
-      .or(page.getByText(/required|must be|please enter/i))
+      .getByRole('alert')
+      .filter({ hasText: /required|must be|please enter/i })
       .first();
 
     await expect(validationError).toBeVisible({ timeout: 5000 });

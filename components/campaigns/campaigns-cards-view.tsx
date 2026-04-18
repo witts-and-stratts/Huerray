@@ -16,18 +16,18 @@ export function CampaignsCardsView( { table, onViewCreator }: CampaignsCardsProp
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4 overflow-hidden'>
-      <AnimatePresence initial={ false }>
+      <AnimatePresence mode='popLayout' initial={ false }>
         { rows.map( ( row, index ) => {
           const campaign = row.original;
-          const cardKey = campaign.id || campaign.campaign_id || campaign.campaign_name || `campaign-${ index }`;
           return (
             <motion.div
-              key={ cardKey }
-              initial={ { opacity: 0 } }
-              animate={ { opacity: 1 } }
-              exit={ { opacity: 0 } }
-              transition={ { duration: 0.2, delay: index * 0.02, ease: 'easeOut' } }
-              className='flex-1'
+              key={ row.id }
+              layout
+              initial={ { opacity: 0, y: 16 } }
+              animate={ { opacity: 1, y: 0 } }
+              exit={ { opacity: 0, y: 16, transition: { duration: 0.1 } } }
+              transition={ { duration: 0.3, delay: index * 0.04 } }
+              className='flex-1 h-full'
             >
               <CampaignCard campaign={ campaign } onViewCreator={ onViewCreator } />
             </motion.div>

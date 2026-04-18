@@ -31,7 +31,7 @@ export default function SecuritySettingsPage() {
       confirmPassword: '',
     } as ChangePasswordSettings,
     validators: {
-      onBlur: changePasswordSchema,
+      onChange: changePasswordSchema,
       onSubmit: changePasswordSchema,
     },
     onSubmit: async ( { value } ) => {
@@ -64,12 +64,12 @@ export default function SecuritySettingsPage() {
   }, [ form ] );
 
   return (
-    <form onSubmit={ handleFormSubmit } className="contents">
+    <form onSubmit={ handleFormSubmit } className="contents" noValidate>
       <BrandSettingsHeader>
         <form.Subscribe
           selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
           children={ ( [ canSubmit, isSubmitting ] ) => (
-            <Button type='submit' disabled={ !canSubmit || isSubmitting || isLoading }>
+            <Button type='submit' disabled={ isSubmitting || isLoading }>
               { isSubmitting || isLoading ? t('updating') : t('updatePassword') }
             </Button>
           ) }

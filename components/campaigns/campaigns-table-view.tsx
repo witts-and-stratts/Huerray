@@ -44,19 +44,33 @@ export function CamapignsTableView( {
         ) ) }
       </TableHeader>
       <TableBody>
-        <AnimatePresence initial={ false }>
+        <AnimatePresence mode='popLayout' initial={ false }>
           { table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map( ( row ) => (
               <MotionTableRow
                 key={ row.id }
                 data-state={ row.getIsSelected() && 'selected' }
-                initial={ { opacity: 0 } }
+                layout
+                initial={ {
+                  opacity: 0,
+                  y: 20,
+                  borderColor: 'transparent',
+                } }
                 animate={ {
                   opacity: row.original.campaign_status === 'deactivated' ? 0.45 : 1,
+                  y: 0,
+                  borderColor: 'inherit',
                   filter: row.original.campaign_status === 'deactivated' ? 'grayscale(1)' : 'grayscale(0)',
+                  transition: {
+                    duration: 0.3,
+                  }
                 } }
-                exit={ { opacity: 0 } }
-                transition={ { duration: 0.2, ease: 'easeOut' } }
+                exit={ { opacity: 0, y: 20, transition: { duration: 0.3 } } }
+                transition={ {
+                  duration: 0.4,
+                  delay: row.index * 0.05,
+                  layout: { duration: 0.3 },
+                } }
                 className='bg-background'
               >
                 { row.getVisibleCells().map( ( cell ) => (

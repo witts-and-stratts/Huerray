@@ -84,7 +84,7 @@ export default function CreatorSecuritySettingsPage() {
   ];
 
   return (
-    <form onSubmit={ handleFormSubmit } className="contents">
+    <form onSubmit={ handleFormSubmit } className="contents" noValidate>
       <SubHeader
         breadcrumbs={ breadcrumbs }
         title={ t( 'securityTitle' ) }

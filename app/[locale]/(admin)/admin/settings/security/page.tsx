@@ -69,7 +69,7 @@ export default function AdminSecuritySettingsPage() {
   ];
 
   return (
-    <form onSubmit={ handleFormSubmit } className="contents">
+    <form onSubmit={ handleFormSubmit } className="contents" noValidate>
       <AdminSettingsHeader
         breadcrumbs={ breadcrumbs }
         title={ t( 'settings.password.title' ) }

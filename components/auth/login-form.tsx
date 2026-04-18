@@ -32,7 +32,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useMemo, useState } from 'react';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 type LoginFormValues = {
   identifier: string;

@@ -1,6 +1,6 @@
 
 import { UtilsBrandCategory, UtilsCompanySize } from '@/lib/api/generated';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { FormApi } from '@tanstack/react-form';
 
 export type ReactFormApi<TData> = FormApi<TData, any, any, any, any, any, any, any, any, any, any, any> & {

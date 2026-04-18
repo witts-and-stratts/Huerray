@@ -74,6 +74,7 @@ export function NewsletterTable( {
   } );
 
   const selectedEntries = table.getSelectedRowModel().rows.map( ( row ) => row.original );
+  const showTableControls = entries.length > 0 || currentSearch.trim().length > 0;
 
   return (
     <>
@@ -81,7 +82,7 @@ export function NewsletterTable( {
       { error && <ErrorNewsletter fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
 
       { !isLoading && !error && (
-        <ScrollArea className="grow relative flex flex-col min-h-0 bg-slate-50/50">
+        <div className="flex flex-col h-full overflow-hidden bg-slate-50/50">
           <NewsletterTableToolbar
             entries={ entries }
             selectedEntries={ selectedEntries }
@@ -91,18 +92,18 @@ export function NewsletterTable( {
             table={ table }
           />
 
-          <div className="flex-1 min-h-0 overflow-auto">
+          <ScrollArea className="h-full">
             <div className="p-2 md:p-4">
               <NewsletterTableView table={ table } />
             </div>
-          </div>
+          </ScrollArea>
 
-          { entries.length > 0 && (
+          { showTableControls && (
             <div className="px-2 md:px-4 shrink-0 border-t bg-slate-50/50">
               <DataTablePagination table={ table } />
             </div>
           ) }
-        </ScrollArea>
+        </div>
       ) }
     </>
   );
