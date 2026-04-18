@@ -36,7 +36,7 @@ export function SearchResultRow( { result, onSelect }: SearchResultRowProps ) {
       } }
     >
       { hasAvatar ? (
-        <Avatar className="size-8 shrink-0 rounded-md">
+        <Avatar className="size-8 shrink-0 rounded-md" data-avatar-src={ result.avatarUrl }>
           <AvatarImage
             src={ result.avatarUrl }
             alt={ result.title }

@@ -39,6 +39,74 @@
     @apply flex flex-col md:flex-row md:items-center justify-between py-4 sticky top-0 bg-background z-20 border-b gap-4 px-5 transition-all duration-500;
   }
 
+  .dt-page-shell {
+    @apply flex flex-col flex-1 min-h-0 overflow-hidden bg-slate-50/50;
+  }
+
+  .dt-table-shell {
+    @apply flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden;
+  }
+
+  .dt-table-shell-full {
+    @apply flex flex-col bg-slate-50/50 grow relative min-h-0 flex-1 h-full;
+  }
+
+  .dt-table-shell-campaigns {
+    @apply grow relative flex flex-col min-h-[420px] bg-slate-50/50 overflow-hidden;
+  }
+
+  .dt-view-wrapper {
+    @apply flex-1 min-h-0 bg-slate-50/50 p-2 md:p-4;
+  }
+
+  .dt-view-wrapper-flush {
+    @apply flex-1 min-h-0 bg-slate-50/50;
+  }
+
+  .dt-view-padding {
+    @apply p-2 md:p-4;
+  }
+
+  .dt-card-empty {
+    @apply flex h-full min-h-[420px] flex-col items-center justify-center text-center space-y-6;
+  }
+
+  .dt-card-empty-icon {
+    @apply text-muted-foreground/70 bg-background rounded-full p-2;
+  }
+
+  .dt-card-empty-text {
+    @apply text-muted-foreground;
+  }
+
+  .dt-table-empty {
+    @apply flex flex-col items-center justify-center text-center text-muted-foreground;
+  }
+
+  .dt-table-empty-icon {
+    @apply mx-auto mb-3 text-muted-foreground/70 bg-background rounded-full p-2;
+  }
+
+  .dt-scroll-area {
+    @apply flex-1 min-h-0;
+  }
+
+  .dt-pagination-shell {
+    @apply px-3 shrink-0 border-t bg-slate-50/50;
+  }
+
+  .dt-pagination-shell-wide {
+    @apply px-2 md:px-4 shrink-0 border-t bg-slate-50/50;
+  }
+
+  .dt-loading-overlay {
+    @apply absolute inset-0 z-30 bg-slate-50/50;
+  }
+
+  .dt-content-loading-overlay {
+    @apply absolute inset-x-0 top-12 z-20 bg-slate-50/50;
+  }
+
   /* Hide columns that are used for filtering but shouldn't render visually */
   th:has([data-hidden-column='true']),
   td:has([data-hidden-column='true']) {

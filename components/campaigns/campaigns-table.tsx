@@ -1,6 +1,7 @@
 
 'use client';
 
+import '@/app/styles/components/data-table.css';
 import { AdminNetworkErrorState } from '@/components/admin/empty-states/admin-network-error-state';
 import { CampaignsView } from '@/components/campaigns/campaigns-view';
 import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
@@ -32,6 +33,7 @@ import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { ModelsCreatorResponse } from '@/lib/api/generated/models';
 import { DEFAULT_PAGE_SIZE } from '@/lib/constants';
 import { ScrollArea } from '../dashboard-ui/scroll-area';
+import { isApiNotFoundError } from '@/lib/api/error-utils';
 
 const campaignGlobalFilter: FilterFn<ModelsCampaignResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -80,9 +82,7 @@ export function CampaignsTable( {
   onSearchChange,
   isSearchPending = false,
 }: CampaignsTableProps ) {
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const isInitialLoading = isLoading && campaigns.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showInitialLoading = useDelayedLoading( isInitialLoading, 50 );
@@ -180,12 +180,12 @@ export function CampaignsTable( {
   } );
 
   return (
-    <div className="grow relative flex flex-col min-h-[420px] bg-slate-50/50 overflow-hidden">
+    <div className="dt-table-shell-campaigns">
       <AnimatePresence>
         { showInitialLoading && (
           <motion.div
             key="skeleton"
-            className="absolute inset-0 z-30 bg-slate-50/50"
+            className="dt-loading-overlay"
             exit={ { opacity: 0 } }
             transition={ { duration: 0.3 } }
           >
@@ -210,7 +210,7 @@ export function CampaignsTable( {
               onSearchChange={ handleSearchChange }
             />
           ) }
-          <ScrollArea className="flex-1">
+          <ScrollArea className="dt-scroll-area">
             <CampaignsView
               table={ table }
               view={ view }
@@ -220,7 +220,7 @@ export function CampaignsTable( {
             />
           </ScrollArea>
           { showTableControls && (
-            <div className="px-2 md:px-4 shrink-0 border-t bg-slate-50/50">
+            <div className="dt-pagination-shell-wide">
               <DataTablePagination
                 table={ table }
                 pageSizeOptions={ DEFAULT_PAGE_SIZE }

@@ -1,5 +1,6 @@
 "use client";
 
+import "@/app/styles/components/data-table.css";
 import * as React from "react";
 import {
   getCoreRowModel,
@@ -22,6 +23,8 @@ import { NewsletterTableToolbar } from "./newsletter-table-toolbar";
 import { NewsletterTableView } from "./newsletter-table-view";
 import { ModelsNewsletterSubscriptionResponse } from "@/lib/api/generated";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
+import { isApiNotFoundError } from "@/lib/api/error-utils";
+import { TableviewWrapper } from "@/components/table-view-wrapper";
 
 interface NewsletterTableProps {
   entries?: ModelsNewsletterSubscriptionResponse[];
@@ -44,9 +47,7 @@ export function NewsletterTable( {
   error = null,
   refetch,
 }: NewsletterTableProps ) {
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const sourceEntries = React.useMemo(
     () => isNotFoundError ? [] : entries,
     [ entries, isNotFoundError ]
@@ -93,7 +94,7 @@ export function NewsletterTable( {
       { error && !isNotFoundError && <ErrorNewsletter fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
 
       { !isLoading && ( !error || isNotFoundError ) && (
-        <div className="flex flex-col h-full overflow-hidden bg-slate-50/50">
+        <div className="dt-table-shell-full">
           <NewsletterTableToolbar
             entries={ sourceEntries }
             selectedEntries={ selectedEntries }
@@ -103,14 +104,14 @@ export function NewsletterTable( {
             table={ table }
           />
 
-          <ScrollArea className="h-full">
-            <div className="p-2 md:p-4">
+          <ScrollArea className="dt-scroll-area">
+            <TableviewWrapper>
               <NewsletterTableView table={ table } showNewsletterEmptyState={ showNewsletterEmptyState } />
-            </div>
+            </TableviewWrapper>
           </ScrollArea>
 
           { showTableControls && (
-            <div className="px-2 md:px-4 shrink-0 border-t bg-slate-50/50">
+            <div className="dt-pagination-shell-wide">
               <DataTablePagination table={ table } />
             </div>
           ) }

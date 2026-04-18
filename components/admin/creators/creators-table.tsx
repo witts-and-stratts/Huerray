@@ -1,5 +1,6 @@
 "use client";
 
+import "@/app/styles/components/data-table.css";
 import * as React from "react";
 import {
   ColumnFiltersState,
@@ -33,6 +34,7 @@ import { usePersistedViewMode } from "@/lib/hooks/use-persisted-view-mode";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
+import { isApiNotFoundError } from "@/lib/api/error-utils";
 
 const creatorGlobalFilter: FilterFn<ModelsCreatorResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -88,9 +90,7 @@ export function CreatorsTable( {
   onSearchChange,
   isSearchPending = false,
 }: CreatorsTableProps ) {
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const isInitialLoading = isLoading && creators.length === 0;
   const isContentLoading = !isInitialLoading && isFetching;
   const showLoading = useDelayedLoading( isInitialLoading, 250 );
@@ -233,12 +233,12 @@ export function CreatorsTable( {
 
   return (
     <>
-      <div className="grow relative flex flex-col min-h-0 bg-slate-50/50">
+      <div className="dt-table-shell">
         <AnimatePresence>
           { showLoading && (
             <motion.div
               key="skeleton"
-              className="absolute inset-0 z-30 bg-slate-50/50"
+              className="dt-loading-overlay"
               exit={ { opacity: 0 } }
               transition={ { duration: 0.3 } }
             >
@@ -265,7 +265,7 @@ export function CreatorsTable( {
                 onSearchChange={ handleSearchChange }
               />
             ) }
-            <ScrollArea className="flex-1 min-h-0">
+            <ScrollArea className="dt-scroll-area">
               <CreatorsView
                 table={ table }
                 view={ view }
@@ -278,11 +278,11 @@ export function CreatorsTable( {
                 showCreatorEmptyState={ sourceCreators.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
               />
               { showContentLoading && table.getRowModel().rows.length === 0 && (
-                <DataTableSkeleton showToolbar={ false } className="absolute inset-x-0 top-12 z-20 bg-slate-50/50" />
+                <DataTableSkeleton showToolbar={ false } className="dt-content-loading-overlay" />
               ) }
             </ScrollArea>
             { showTableControls && (
-              <div className="px-3 shrink-0 border-t bg-slate-50/50">
+              <div className="dt-pagination-shell">
                 <DataTablePagination table={ table } />
               </div>
             ) }

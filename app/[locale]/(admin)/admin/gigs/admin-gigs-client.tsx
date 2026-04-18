@@ -4,13 +4,12 @@ import * as React from 'react';
 import { useGigs } from '@/lib/api/hooks/gigs';
 import { GigsTable } from '@/components/campaigns/gigs-table';
 import { ModelsGigResponse } from '@/lib/api/generated';
+import { useDeferredTableSearch } from '@/lib/hooks/use-deferred-table-search';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 
 export function AdminGigsClient() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-gigs' );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
-  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
-  const isSearchPending = searchValue.trim() !== deferredSearchValue;
+  const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {

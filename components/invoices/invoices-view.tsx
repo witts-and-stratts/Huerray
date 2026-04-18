@@ -8,6 +8,9 @@ import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 import { InvoicesTableView } from './invoices-table-view';
 import { InvoiceCard } from './invoice-card';
 import { EmptyInvoices } from '../admin/empty-states/empty-invoices';
+import { TableviewWrapper } from '@/components/table-view-wrapper';
+import { useTranslations } from 'next-intl';
+import { DataTableCardEmpty } from '@/components/dashboard-ui/data-table/data-table-card-empty';
 
 interface InvoicesViewProps {
   table: TanstackTable<ModelsInvoiceResponse>;
@@ -18,17 +21,18 @@ interface InvoicesViewProps {
 }
 
 export function InvoicesView( { table, view, isAdmin, isLoading = false, showInvoiceEmptyState = true }: InvoicesViewProps ) {
+  const tCommon = useTranslations( 'dashboard.common' );
   const pageSize = table.getState().pagination.pageSize;
 
   if ( isLoading ) {
     return view === 'table' ? (
-      <div className='p-2 md:p-4'>
+      <TableviewWrapper>
         <DataTableSkeleton
           showToolbar={ false }
           rowCount={ Math.min( pageSize, 10 ) }
           className="px-0 pt-0"
         />
-      </div>
+      </TableviewWrapper>
     ) : (
       <TableSkeleton
         showToolbar={ false }
@@ -43,7 +47,7 @@ export function InvoicesView( { table, view, isAdmin, isLoading = false, showInv
 
     if ( rows.length === 0 ) {
       if ( !showInvoiceEmptyState ) {
-        return <div className='p-2 md:p-4'><InvoicesTableView table={ table } /></div>;
+        return <DataTableCardEmpty>{ tCommon( 'noResultsFound' ) }</DataTableCardEmpty>;
       }
 
       return <EmptyInvoices imageWidth={ 300 } imageHeight={ 240 } fill />;
@@ -82,5 +86,5 @@ export function InvoicesView( { table, view, isAdmin, isLoading = false, showInv
     );
   }
 
-  return <div className='p-2 md:p-4'><InvoicesTableView table={ table } showInvoiceEmptyState={ showInvoiceEmptyState } /></div>;
+  return <TableviewWrapper><InvoicesTableView table={ table } showInvoiceEmptyState={ showInvoiceEmptyState } /></TableviewWrapper>;
 }

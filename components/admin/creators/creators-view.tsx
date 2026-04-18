@@ -7,6 +7,7 @@ import { CreatorCard } from "./creator-card";
 import { CreatorsTableView } from "./creators-table-view";
 import { useTranslations } from "next-intl";
 import { TableviewWrapper } from "@/components/table-view-wrapper";
+import { DataTableCardEmpty } from "@/components/dashboard-ui/data-table/data-table-card-empty";
 
 interface CreatorsViewProps {
   table: Table<ModelsCreatorResponse>;
@@ -22,14 +23,10 @@ export function CreatorsView( { table, view, onViewDetails, onApproveProfile, on
   if ( view === "cards" ) {
     // Check if there are rows to display in card view
     if ( table.getRowModel().rows.length === 0 ) {
-      if ( !showCreatorEmptyState ) {
-        return <TableviewWrapper><CreatorsTableView table={ table } /></TableviewWrapper>;
-      }
-
       return (
-        <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
-          <p className="text-muted-foreground">{ t( 'filters.noCreators' ) }</p>
-        </div>
+        <DataTableCardEmpty>
+          { showCreatorEmptyState ? t( 'filters.noCreators' ) : t( 'creatorsTableView.noCreatorsFound' ) }
+        </DataTableCardEmpty>
       );
     }
 
@@ -70,5 +67,5 @@ export function CreatorsView( { table, view, onViewDetails, onApproveProfile, on
     );
   }
 
-  return <div className="p-2 md:p-4"><CreatorsTableView table={ table } /></div>;
+  return <TableviewWrapper><CreatorsTableView table={ table } /></TableviewWrapper>;
 }

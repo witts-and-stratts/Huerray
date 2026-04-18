@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/styles/components/data-table.css';
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -27,6 +28,8 @@ import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
 import { ScrollArea } from '../dashboard-ui/scroll-area';
+import { isApiNotFoundError } from '@/lib/api/error-utils';
+import { TableviewWrapper } from '@/components/table-view-wrapper';
 
 const paymentGlobalFilter: FilterFn<ModelsPaymentResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -71,9 +74,7 @@ export function PaymentsTable( {
   onSearchChange,
   isSearchPending = false,
 }: PaymentsTableProps ) {
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const sourceData = React.useMemo(
     () => isNotFoundError ? [] : data,
     [ data, isNotFoundError ]
@@ -166,7 +167,7 @@ export function PaymentsTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className='flex flex-col bg-slate-50/50 grow relative min-h-0 flex-1 h-full'
+          className='dt-table-shell-full'
         >
           <PaymentsTableToolbar
             table={ table }
@@ -176,8 +177,8 @@ export function PaymentsTable( {
             setDateRange={ setDateRange }
             statuses={ statuses }
           />
-          <ScrollArea className="flex-1 min-h-0">
-            <div className='p-2 md:p-4'>
+          <ScrollArea className="dt-scroll-area">
+            <TableviewWrapper>
               { showContentLoading && table.getRowModel().rows.length === 0 && !isSearchPending ? (
                 <DataTableSkeleton
                   showToolbar={ false }
@@ -190,9 +191,9 @@ export function PaymentsTable( {
                   showPaymentEmptyState={ sourceData.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
                 />
               ) }
-            </div>
+            </TableviewWrapper>
           </ScrollArea>
-          <div className='px-3 shrink-0 border-t bg-slate-50/50'>
+          <div className='dt-pagination-shell'>
             <DataTablePagination table={ table } />
           </div>
         </motion.div>

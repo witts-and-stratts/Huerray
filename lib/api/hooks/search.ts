@@ -11,6 +11,7 @@ import { useQueries } from '@tanstack/react-query';
 import {
   BrandApi,
   CampaignsApi,
+  CasesApi,
   CreatorApi,
   GigsApi,
   InvoiceApi,
@@ -20,12 +21,14 @@ import {
 } from '../generated/api';
 import { ModelsVideoSubmissionResponse } from '../generated/models';
 import { apiClient, apiConfiguration } from '../client';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export type EntityType =
   | 'brands'
   | 'campaigns'
+  | 'cases'
   | 'creators'
   | 'gigs'
   | 'invoices'
@@ -69,6 +72,7 @@ export interface SearchGroup {
 export const ENTITY_LABELS: Record<EntityType, string> = {
   brands: 'Brands',
   campaigns: 'Campaigns',
+  cases: 'Cases',
   creators: 'Creators',
   gigs: 'Gigs',
   invoices: 'Invoices',
@@ -78,7 +82,7 @@ export const ENTITY_LABELS: Record<EntityType, string> = {
 };
 
 export const ENTITIES_BY_ROLE: Record<string, EntityType[]> = {
-  admin: ['brands', 'campaigns', 'creators', 'gigs', 'invoices', 'newsletter', 'payments', 'submissions'],
+  admin: ['brands', 'campaigns', 'cases', 'creators', 'gigs', 'invoices', 'newsletter', 'payments', 'submissions'],
   brand: ['campaigns', 'creators', 'gigs', 'submissions', 'invoices'],
   creator: ['gigs', 'submissions', 'payments'],
 };
@@ -87,6 +91,7 @@ export const ENTITIES_BY_ROLE: Record<string, EntityType[]> = {
 
 const brandApi = new BrandApi(apiConfiguration, undefined, apiClient);
 const campaignsApi = new CampaignsApi(apiConfiguration, undefined, apiClient);
+const casesApi = new CasesApi(apiConfiguration, undefined, apiClient);
 const creatorApi = new CreatorApi(apiConfiguration, undefined, apiClient);
 const gigsApi = new GigsApi(apiConfiguration, undefined, apiClient);
 const invoiceApi = new InvoiceApi(apiConfiguration, undefined, apiClient);
@@ -135,7 +140,7 @@ export function useGlobalSearch({
             title: b.company_name ?? 'Unknown Brand',
             subtitle: b.category ?? undefined,
             status: undefined,
-            avatarUrl: b.profile_photo?.asset ?? undefined,
+            avatarUrl: b.profile_photo?.asset ? imgpresets.avatar(b.profile_photo.asset) : undefined,
             country: b.country ?? undefined,
             tags: [],
           }));
@@ -176,11 +181,37 @@ export function useGlobalSearch({
             subtitle: c.brand_name ?? undefined,
             status: c.campaign_status ?? undefined,
             createdAt: c.created_at ?? undefined,
-            avatarUrl: c.product_image?.asset ?? undefined,
+            avatarUrl: c.product_image?.asset ? imgpresets.avatar(c.product_image.asset) : undefined,
             tags: c.category ? [{ label: 'Category', value: String(c.category) }] : [],
           }));
         },
         enabled: canSearch('campaigns') && (role === 'admin' || role === 'brand'),
+        staleTime: 20_000,
+      },
+
+      // ── Cases (admin only) ────────────────────────────────────────────────
+      {
+        queryKey: ['gsearch', 'cases', query, filters],
+        queryFn: async (): Promise<SearchResult[]> => {
+          const res = await casesApi.casesGet({
+            q: query,
+            limit: LIMIT,
+            status: status as never,
+          });
+          return (res.data?.data ?? []).map((caseItem) => ({
+            id: caseItem.id ?? '',
+            type: 'cases',
+            title: caseItem.case_number ?? caseItem.title ?? `Case ${(caseItem.id ?? '').slice(0, 8)}`,
+            subtitle: caseItem.title ?? caseItem.description ?? undefined,
+            status: caseItem.status ?? undefined,
+            createdAt: caseItem.created_at ?? undefined,
+            tags: [
+              ...(caseItem.priority ? [{ label: 'Priority', value: caseItem.priority }] : []),
+              ...(caseItem.related_entity_type ? [{ label: 'Related', value: caseItem.related_entity_type }] : []),
+            ],
+          }));
+        },
+        enabled: canSearch('cases') && role === 'admin',
         staleTime: 20_000,
       },
 
@@ -210,7 +241,7 @@ export function useGlobalSearch({
             subtitle: c.email ?? undefined,
             status: undefined,
             createdAt: (c as any).created_at ?? undefined,
-            avatarUrl: c.profile_image?.asset ?? undefined,
+            avatarUrl: c.profile_image?.asset ? imgpresets.avatar(c.profile_image.asset) : undefined,
             country: c.country ?? undefined,
             tags: [],
           }));
@@ -420,12 +451,13 @@ export function useGlobalSearch({
   const queryIndexMap: Record<EntityType, number> = {
     brands: 0,
     campaigns: 1,
-    creators: 2,
-    gigs: 3,
-    invoices: 4,
-    newsletter: 5,
-    payments: 6,
-    submissions: 7,
+    cases: 2,
+    creators: 3,
+    gigs: 4,
+    invoices: 5,
+    newsletter: 6,
+    payments: 7,
+    submissions: 8,
   };
 
   const groups: SearchGroup[] = entityOrder

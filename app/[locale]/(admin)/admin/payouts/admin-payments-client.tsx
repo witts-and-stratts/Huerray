@@ -4,13 +4,12 @@ import * as React from 'react';
 import { usePayments } from '@/lib/api/hooks/payments';
 import { PaymentsTable } from '@/components/payments/payments-table';
 import { ModelsPaymentResponse } from '@/lib/api/generated/models';
+import { useDeferredTableSearch } from '@/lib/hooks/use-deferred-table-search';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 
 export function AdminPaymentsClient() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-payments' );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
-  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
-  const isSearchPending = searchValue.trim() !== deferredSearchValue;
+  const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {

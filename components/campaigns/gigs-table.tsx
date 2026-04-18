@@ -1,5 +1,6 @@
 "use client";
 
+import '@/app/styles/components/data-table.css';
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -51,6 +52,7 @@ import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker-input';
 import { useTranslations } from 'next-intl';
 import { ScrollArea } from '../dashboard-ui/scroll-area';
+import { isApiNotFoundError } from '@/lib/api/error-utils';
 
 export interface GigsTableProps {
   data: ModelsGigResponse[];
@@ -89,9 +91,7 @@ export function GigsTable( {
   onSearchChange,
   isSearchPending = false,
 }: GigsTableProps ) {
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const sourceData = React.useMemo(
     () => isNotFoundError ? [] : data,
     [ data, isNotFoundError ]
@@ -208,7 +208,7 @@ export function GigsTable( {
         { error && !isNotFoundError && <AdminNetworkErrorState key="error" fill message={ error.message } className="flex-1 h-full" onRetry={ refetch } /> }
         { !isInitialLoading && ( !error || isNotFoundError ) && (
           <div
-            className="bg-slate-50/50 grow relative flex flex-1 flex-col min-h-0 h-full"
+            className="dt-table-shell-full"
           >
             { !hideToolbar && showTableControls && (
               <GigsTableToolbar
@@ -237,7 +237,7 @@ export function GigsTable( {
               />
             </ScrollArea>
             { !hidePagination && showTableControls && (
-              <div className='px-2 md:px-5 shrink-0 border-t bg-slate-50/50'>
+              <div className='dt-pagination-shell-wide'>
                 <DataTablePagination
                   table={ table }
                 />

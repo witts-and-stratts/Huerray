@@ -3,6 +3,7 @@
 import { CreatorsTable } from "@/components/admin/creators/creators-table";
 import { SubHeader } from "@/components/subheader";
 import { useCreators } from "@/lib/api/hooks/creators";
+import { useDeferredTableSearch } from "@/lib/hooks/use-deferred-table-search";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
 import * as React from "react";
@@ -10,9 +11,7 @@ import * as React from "react";
 export default function CreatorsPage() {
   const t = useTranslations( 'dashboard.admin' );
   const { pagination, setPagination } = usePersistedPagination( 'admin-creators' );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
-  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
-  const isSearchPending = searchValue.trim() !== deferredSearchValue;
+  const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {

@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/styles/components/data-table.css';
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -29,6 +30,7 @@ import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
 import { ScrollArea } from '../dashboard-ui/scroll-area';
+import { isApiNotFoundError } from '@/lib/api/error-utils';
 
 const invoiceGlobalFilter: FilterFn<ModelsInvoiceResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -73,9 +75,7 @@ export function InvoicesTable( {
   isSearchPending = false,
 }: InvoicesTableProps ) {
   const t = useTranslations( 'dashboard.brand.invoicesPage' );
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const sourceData = React.useMemo(
     () => isNotFoundError ? [] : data,
     [ data, isNotFoundError ]
@@ -173,7 +173,7 @@ export function InvoicesTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className='flex flex-col flex-1 bg-slate-50/50 grow relative min-h-0 overflow-hidden'
+          className='dt-table-shell-full'
         >
           <InvoicesTableToolbar
             table={ table }
@@ -188,7 +188,7 @@ export function InvoicesTable( {
             setView={ setView }
             isAdmin={ isAdmin }
           />
-          <ScrollArea className="flex-1 min-h-0">
+          <ScrollArea className="dt-scroll-area">
             <InvoicesView
               table={ table }
               view={ view }
@@ -197,7 +197,7 @@ export function InvoicesTable( {
               showInvoiceEmptyState={ sourceData.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
             />
           </ScrollArea>
-          <div className='px-3 shrink-0 border-t bg-slate-50/50'>
+          <div className='dt-pagination-shell'>
             <DataTablePagination table={ table } />
           </div>
         </motion.div>

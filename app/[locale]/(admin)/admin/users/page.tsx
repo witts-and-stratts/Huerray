@@ -8,15 +8,14 @@ import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { CreateUserSheet } from "@/components/admin/users/create-user-sheet";
 import * as React from "react";
 import { useTranslations } from "next-intl";
+import { useDeferredTableSearch } from "@/lib/hooks/use-deferred-table-search";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 
 export default function UsersPage() {
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
   const { pagination, setPagination } = usePersistedPagination( 'admin-users' );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
-  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
-  const isSearchPending = searchValue.trim() !== deferredSearchValue;
+  const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {

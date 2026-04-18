@@ -10,13 +10,12 @@ import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 import Link from 'next/link';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
+import { useDeferredTableSearch } from '@/lib/hooks/use-deferred-table-search';
 
 export default function CampaignsPage() {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const { pagination, setPagination } = usePersistedPagination( 'campaigns' );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
-  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
-  const isSearchPending = searchValue.trim() !== deferredSearchValue;
+  const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {

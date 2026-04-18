@@ -15,6 +15,7 @@ import { MotionTableRow } from '@/components/dashboard-ui/motion-table';
 import { cn } from '@/lib/dashboard-utils';
 import { useTableScrollBorder } from '@/lib/hooks/use-table-scroll-border';
 import { useTranslations } from 'next-intl';
+import { DataTableEmpty } from '@/components/dashboard-ui/data-table/data-table-empty';
 
 interface DataTableViewProps<T> {
   table: TanstackTable<T>;
@@ -103,7 +104,7 @@ export function DataTableView<T>( {
             ) : (
               <TableRow>
                 <TableCell colSpan={ table.getVisibleLeafColumns().length } className='h-24 text-center py-10'>
-                  { emptyState ?? t( 'noResultsFound' ) }
+                  { emptyState ?? <DataTableEmpty>{ t( 'noResultsFound' ) }</DataTableEmpty> }
                 </TableCell>
               </TableRow>
             ) }

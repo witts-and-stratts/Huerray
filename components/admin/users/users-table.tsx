@@ -1,5 +1,6 @@
 "use client";
 
+import "@/app/styles/components/data-table.css";
 import * as React from "react";
 import {
   ColumnFiltersState,
@@ -28,6 +29,7 @@ import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 import { TableviewWrapper } from "@/components/table-view-wrapper";
+import { isApiNotFoundError } from "@/lib/api/error-utils";
 
 const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -71,9 +73,7 @@ export function UsersTable( {
   onSearchChange,
   isSearchPending = false,
 }: UsersTableProps ) {
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const sourceUsers = React.useMemo(
     () => isNotFoundError ? [] : users,
     [ users, isNotFoundError ]
@@ -182,7 +182,7 @@ export function UsersTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
+          className="dt-table-shell"
         >
           { showTableControls && (
             <UsersTableToolbar
@@ -192,7 +192,7 @@ export function UsersTable( {
               onSearchChange={ handleSearchChange }
             />
           ) }
-          <ScrollArea className="flex-1 min-h-0">
+          <ScrollArea className="dt-scroll-area">
             <UsersView
               table={ table }
               onViewDetails={ ( user ) => {
@@ -201,11 +201,11 @@ export function UsersTable( {
               } }
             />
             { showContentLoading && table.getRowModel().rows.length === 0 && (
-              <DataTableSkeleton showToolbar={ false } className="absolute inset-x-0 top-12 z-20 bg-slate-50/50" />
+              <DataTableSkeleton showToolbar={ false } className="dt-content-loading-overlay" />
             ) }
           </ScrollArea>
           { showTableControls && (
-            <div className="px-3 shrink-0 border-t bg-slate-50/50">
+            <div className="dt-pagination-shell">
               <DataTablePagination table={ table } />
             </div>
           ) }

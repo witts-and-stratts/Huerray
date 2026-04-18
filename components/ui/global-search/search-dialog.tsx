@@ -37,17 +37,27 @@ import { ResultGroup } from './result-group';
 
 // ─── Empty / Hint state ───────────────────────────────────────────────────────
 
-function SearchPlaceholderState( { children }: { children: React.ReactNode; } ) {
+function SearchPlaceholderState( {
+  children,
+  isLoading = false,
+}: {
+  children: React.ReactNode;
+  isLoading?: boolean;
+} ) {
   return (
     <motion.div
-      className="flex flex-col items-center justify-center py-10 text-center w-full"
-      initial={ { opacity: 0, scale: 0.98 } }
-      animate={ { opacity: 1, scale: 1 } }
-      exit={ { opacity: 0, scale: 0.98, position: 'absolute', top: 0, left: 0, right: 0 } }
-      transition={ { duration: 0.2, ease: 'easeInOut' } }
+      className="flex min-h-[300px] w-full flex-col items-center justify-center px-6 py-10 text-center"
+      initial={ { opacity: 0, y: 4 } }
+      animate={ { opacity: 1, y: 0 } }
+      exit={ { opacity: 0, y: -4 } }
+      transition={ { duration: 0.16, ease: 'easeOut' } }
     >
       <div className="mb-3 flex size-12 items-center justify-center rounded-full bg-muted">
-        <HugeiconsIcon icon={ SearchIcon } className="size-5 text-muted-foreground" strokeWidth={ 1.5 } />
+        { isLoading ? (
+          <div className="size-5 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
+        ) : (
+          <HugeiconsIcon icon={ SearchIcon } className="size-5 text-muted-foreground" strokeWidth={ 1.5 } />
+        ) }
       </div>
       { children }
     </motion.div>
@@ -188,6 +198,13 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
   const showResults = debouncedQuery.length >= 2 && visibleResultCount > 0;
   const showEmpty = debouncedQuery.length >= 2 && !isAnyLoading && !hasResults;
   const showLoading = debouncedQuery.length >= 2 && isAnyLoading && !settledHasResults;
+  const placeholderState = showHint
+    ? 'hint'
+    : showLoading
+      ? 'loading'
+      : showEmpty
+        ? 'empty'
+        : null;
 
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>
@@ -287,52 +304,73 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
         </AnimatePresence>
 
         {/* ── Results ── */ }
-        <ScrollArea className="max-h-[460px]" scrollbar={ {
+        <ScrollArea className="h-[460px]" scrollbar={ {
           style: {
             width: '12px',
             padding: '4px'
           }
         } }>
           <motion.div
-            layout="position"
-            className="py-2 relative min-h-[100px]"
-            transition={ { duration: 0.2, ease: 'easeInOut' } }
+            className="relative min-h-full py-2"
+            transition={ { duration: 0.18, ease: 'easeOut' } }
           >
-            <AnimatePresence mode="popLayout">
-              { showHint && (
-                <SearchPlaceholderState key="hint">
-                  <p className="text-sm font-medium text-foreground">{ t( 'search.description' ) }</p>
-                  <p className="mt-1 text-xs text-muted-foreground uppercase tracking-wider text-[10px]">
-                    { t( 'search.typeToSearch' ) }
-                  </p>
-                </SearchPlaceholderState>
-              ) }
-              { showLoading && (
-                <SearchPlaceholderState key="loading">
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="size-6 animate-spin rounded-full border-2 border-primary/20 border-t-primary" />
-                    <p className="text-sm text-muted-foreground">{ t( 'search.searching' ) }</p>
-                  </div>
-                </SearchPlaceholderState>
-              ) }
-              { showEmpty && (
-                <SearchPlaceholderState key="empty">
-                  <p className="text-sm font-medium text-foreground">
-                    { t( 'search.noResultsFor', { query: debouncedQuery } ) }
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    { t( 'search.noResultsDesc' ) }
-                  </p>
+            <AnimatePresence mode="wait" initial={ false }>
+              { placeholderState && (
+                <SearchPlaceholderState key="placeholder" isLoading={ placeholderState === 'loading' }>
+                  <AnimatePresence mode="wait" initial={ false }>
+                    { placeholderState === 'hint' && (
+                      <motion.div
+                        key="hint-copy"
+                        initial={ { opacity: 0, y: 3 } }
+                        animate={ { opacity: 1, y: 0 } }
+                        exit={ { opacity: 0, y: -3 } }
+                        transition={ { duration: 0.14, ease: 'easeOut' } }
+                      >
+                        <p className="text-sm font-medium text-foreground">{ t( 'search.description' ) }</p>
+                        <p className="mt-1 text-xs text-muted-foreground uppercase tracking-wider text-[10px]">
+                          { t( 'search.typeToSearch' ) }
+                        </p>
+                      </motion.div>
+                    ) }
+                    { placeholderState === 'loading' && (
+                      <motion.p
+                        key="loading-copy"
+                        className="text-sm text-muted-foreground"
+                        initial={ { opacity: 0, y: 3 } }
+                        animate={ { opacity: 1, y: 0 } }
+                        exit={ { opacity: 0, y: -3 } }
+                        transition={ { duration: 0.14, ease: 'easeOut' } }
+                      >
+                        { t( 'search.searching' ) }
+                      </motion.p>
+                    ) }
+                    { placeholderState === 'empty' && (
+                      <motion.div
+                        key="empty-copy"
+                        initial={ { opacity: 0, y: 3 } }
+                        animate={ { opacity: 1, y: 0 } }
+                        exit={ { opacity: 0, y: -3 } }
+                        transition={ { duration: 0.14, ease: 'easeOut' } }
+                      >
+                        <p className="text-sm font-medium text-foreground">
+                          { t( 'search.noResultsFor', { query: debouncedQuery } ) }
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          { t( 'search.noResultsDesc' ) }
+                        </p>
+                      </motion.div>
+                    ) }
+                  </AnimatePresence>
                 </SearchPlaceholderState>
               ) }
               { showResults && (
                 <motion.div
                   key="results"
                   className={ cn( "space-y-3 transition-opacity duration-200", isAnyLoading && "opacity-50 pointer-events-none" ) }
-                  initial={ { opacity: 0, y: 4 } }
+                  initial={ { opacity: 0, y: 6 } }
                   animate={ { opacity: 1, y: 0 } }
-                  exit={ { opacity: 0, y: -4, position: 'absolute', top: 0, left: 0, right: 0 } }
-                  transition={ { duration: 0.22, ease: 'easeOut' } }
+                  exit={ { opacity: 0, y: -6 } }
+                  transition={ { duration: 0.18, ease: 'easeOut' } }
                 >
                   { visibleGroups.map( ( group, i ) => (
                     <ResultGroup key={ group.type } group={ group } groupIndex={ i } onSelect={ handleSelect } />

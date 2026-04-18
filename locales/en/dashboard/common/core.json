@@ -34,6 +34,7 @@
   "searchEntities": {
     "brands": "Brands",
     "campaigns": "Campaigns",
+    "cases": "Cases",
     "creators": "Creators",
     "gigs": "Gigs",
     "invoices": "Invoices",

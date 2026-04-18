@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/styles/components/data-table.css';
 import {
   ColumnFiltersState,
   SortingState,
@@ -30,6 +31,7 @@ import { BrandDetailsSheet } from './brand-details-sheet';
 import { useTranslations } from 'next-intl';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { TableviewWrapper } from '@/components/table-view-wrapper';
+import { isApiNotFoundError } from '@/lib/api/error-utils';
 
 const brandGlobalFilter: FilterFn<Brand> = ( row, _columnId, filterValue: string ) => {
   const q = filterValue.toLowerCase().trim();
@@ -71,9 +73,7 @@ export function BrandsTable( {
   onSearchChange,
   isSearchPending = false,
 }: BrandsTableProps ) {
-  const errorStatus = ( error as { response?: { status?: number; }; status?: number; } | null )?.response?.status
-    ?? ( error as { status?: number; } | null )?.status;
-  const isNotFoundError = errorStatus === 404;
+  const isNotFoundError = isApiNotFoundError( error );
   const sourceBrands = React.useMemo(
     () => isNotFoundError ? [] : brandsData || [],
     [ brandsData, isNotFoundError ]
@@ -193,7 +193,7 @@ export function BrandsTable( {
           animate={ { opacity: 1 } }
           exit={ { opacity: 0 } }
           transition={ { duration: 0.3 } }
-          className="flex flex-col bg-slate-50/50 grow relative min-h-0 overflow-hidden"
+          className="dt-table-shell"
         >
           { showTableControls && (
             <BrandsTableToolbar
@@ -207,7 +207,7 @@ export function BrandsTable( {
               onSearchChange={ handleSearchChange }
             />
           ) }
-          <ScrollArea className="flex-1 min-h-0">
+          <ScrollArea className="dt-scroll-area">
             <BrandsView
               table={ table }
               view={ view }
@@ -217,7 +217,7 @@ export function BrandsTable( {
             />
           </ScrollArea>
           { showTableControls && (
-            <div className="px-3 shrink-0 border-t bg-slate-50/50">
+            <div className="dt-pagination-shell">
               <DataTablePagination table={ table } />
             </div>
           ) }

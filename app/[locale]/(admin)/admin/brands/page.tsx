@@ -3,17 +3,16 @@
 import { SubHeader } from "@/components/subheader";
 import { Brand } from "@/components/admin/brands/brands-data";
 import { useBrands } from "@/lib/api/hooks/brands";
-import { useEffect, useMemo, useState, useDeferredValue, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { BrandsTable } from "@/components/admin/brands/brands-table";
+import { useDeferredTableSearch } from "@/lib/hooks/use-deferred-table-search";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 
 export default function BrandsPage() {
   const t = useTranslations( 'dashboard.admin' );
   const { pagination, setPagination } = usePersistedPagination( 'admin-brands' );
-  const [ searchValue, setSearchValue ] = useState( '' );
-  const deferredSearchValue = useDeferredValue( searchValue.trim() );
-  const isSearchPending = searchValue.trim() !== deferredSearchValue;
+  const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const hasMountedRef = useRef( false );
 
   useEffect( () => {

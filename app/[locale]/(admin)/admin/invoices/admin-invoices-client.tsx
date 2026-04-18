@@ -4,13 +4,12 @@ import * as React from 'react';
 import { useInvoices } from '@/lib/api/hooks/invoices';
 import { InvoicesTable } from '@/components/invoices/invoices-table';
 import { ModelsInvoiceResponse } from '@/lib/api/generated/models';
+import { useDeferredTableSearch } from '@/lib/hooks/use-deferred-table-search';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
 
 export function AdminInvoicesClient() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-invoices' );
-  const [ searchValue, setSearchValue ] = React.useState( '' );
-  const deferredSearchValue = React.useDeferredValue( searchValue.trim() );
-  const isSearchPending = searchValue.trim() !== deferredSearchValue;
+  const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {

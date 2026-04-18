@@ -4,13 +4,11 @@ import {
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
-  EmptyMedia,
   EmptyTitle,
 } from '@/components/dashboard-ui/empty';
 import { Table as TanstackTable } from '@tanstack/react-table';
 import Link from 'next/link';
 import { RoleGuard } from '../auth/role-guard';
-import { Avatar, AvatarFallback, AvatarImage } from '../dashboard-ui/avatar';
 import { CampaignsCardsView } from './campaigns-cards-view';
 import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { CampaignsTableSkeleton } from './campaigns-table-skeleton';
@@ -20,6 +18,8 @@ import { useBasePath } from '@/lib/providers/path-provider';
 import { ModelsCampaignResponse } from '@/lib/api/generated';
 import { ModelsCreatorResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
+import { TableviewWrapper } from '@/components/table-view-wrapper';
+import { DataTableCardEmpty } from '@/components/dashboard-ui/data-table/data-table-card-empty';
 
 function CampaignEmptyState() {
   const basePath = useBasePath();
@@ -61,9 +61,11 @@ export function CampaignsView( {
   showCampaignEmptyState: boolean;
 } ) {
   const pageSize = table.getState().pagination.pageSize;
+  const hasRows = table.getRowModel().rows.length > 0;
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
 
   return (
-    <div className='p-2 md:p-4 grow flex-1'>
+    <TableviewWrapper>
       { isLoading ? (
         view === 'table' ? (
           <CampaignsTableSkeleton
@@ -76,11 +78,13 @@ export function CampaignsView( {
         )
       ) : showCampaignEmptyState ? (
         <CampaignEmptyState />
+      ) : !hasRows && view === 'cards' ? (
+        <DataTableCardEmpty>{ t( 'noResults' ) }</DataTableCardEmpty>
       ) : view === 'table' ? (
         <CamapignsTableView table={ table } />
       ) : (
         <CampaignsCardsView table={ table } onViewCreator={ onViewCreator } />
       ) }
-    </div>
+    </TableviewWrapper>
   );
 }

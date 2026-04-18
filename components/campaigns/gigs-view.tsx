@@ -6,13 +6,16 @@ import { CardGridSkeleton } from '@/components/dashboard-ui/card-grid-skeleton';
 import { DataTableSkeleton } from '@/components/dashboard-ui/data-table-skeleton';
 import { GigsCardsView } from './gigs-cards-view';
 import { DataTableView } from '@/components/dashboard-ui/data-table/data-table-view';
+import { DataTableEmpty } from '@/components/dashboard-ui/data-table/data-table-empty';
 import { ModelsGigResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
 import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
+import { TableviewWrapper } from '@/components/table-view-wrapper';
+import { DataTableCardEmpty } from '@/components/dashboard-ui/data-table/data-table-card-empty';
 
 function GigsTableView( { table }: { table: TanstackTable<ModelsGigResponse>; } ) {
   const t = useTranslations( 'dashboard.brand.gigsPage' );
-  return <DataTableView table={ table } emptyState={ t( 'noResults' ) } />;
+  return <DataTableView table={ table } emptyState={ <DataTableEmpty>{ t( 'noResults' ) }</DataTableEmpty> } />;
 }
 
 interface GigsViewProps {
@@ -35,10 +38,12 @@ export function GigsView( {
   isLoading = false,
   showGigsEmptyState = true,
 }: GigsViewProps ) {
+  const t = useTranslations( 'dashboard.brand.gigsPage' );
   const pageSize = table.getState().pagination.pageSize;
+  const hasRows = table.getRowModel().rows.length > 0;
 
   return (
-    <div className='p-2 md:p-4'>
+    <TableviewWrapper>
       { isLoading ? (
         view === 'table' ? (
           <DataTableSkeleton
@@ -53,15 +58,21 @@ export function GigsView( {
             columns="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           />
         )
-      ) : table.getRowModel().rows.length === 0 && showGigsEmptyState ? (
-        <EmptyGigs>
-          { actionButtons }
-        </EmptyGigs>
+      ) : !hasRows ? (
+        view === 'table' ? (
+          <GigsTableView table={ table } />
+        ) : showGigsEmptyState ? (
+          <EmptyGigs>
+            { actionButtons }
+          </EmptyGigs>
+        ) : (
+          <DataTableCardEmpty>{ t( 'noResults' ) }</DataTableCardEmpty>
+        )
       ) : view === 'table' ? (
         <GigsTableView table={ table } />
       ) : (
         <GigsCardsView table={ table } onViewGig={ onViewGig } onCreateSubmission={ onCreateSubmission } />
       ) }
-    </div>
+    </TableviewWrapper>
   );
 }

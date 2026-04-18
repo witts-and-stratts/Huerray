@@ -1,18 +1,21 @@
 "use client";
 
-import * as React from "react";
 import { useTranslations } from "next-intl";
 
 import { NewsletterTable } from "@/components/admin/newsletter/newsletter-table";
 import { SubHeader } from "@/components/subheader";
 import { useNewsletterEntries } from "@/lib/api/hooks/newsletter";
+import { useDeferredTableSearch } from "@/lib/hooks/use-deferred-table-search";
 
 export function NewsletterAdminClient() {
   const t = useTranslations( "dashboard.admin" );
-  const [ search, setSearch ] = React.useState( "" );
-  const deferredSearch = React.useDeferredValue( search );
-  const isSearchPending = search.trim() !== deferredSearch.trim();
-  const { data, isLoading, error, refetch } = useNewsletterEntries( deferredSearch );
+  const {
+    searchValue,
+    setSearchValue,
+    deferredSearchValue,
+    isSearchPending,
+  } = useDeferredTableSearch();
+  const { data, isLoading, error, refetch } = useNewsletterEntries( deferredSearchValue );
 
   return (
     <>
@@ -23,8 +26,8 @@ export function NewsletterAdminClient() {
       <NewsletterTable
         entries={ data?.items ?? [] }
         total={ data?.total ?? 0 }
-        currentSearch={ search }
-        onSearchCommit={ setSearch }
+        currentSearch={ searchValue }
+        onSearchCommit={ setSearchValue }
         isLoading={ isLoading }
         isSearchPending={ isSearchPending }
         error={ error }

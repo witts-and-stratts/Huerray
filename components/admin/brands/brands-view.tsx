@@ -8,6 +8,8 @@ import { BrandCard } from './brand-card';
 import { Brand } from './brands-data';
 import { BrandsTableView } from './brands-table-view';
 import { useTranslations } from 'next-intl';
+import { TableviewWrapper } from '@/components/table-view-wrapper';
+import { DataTableCardEmpty } from '@/components/dashboard-ui/data-table/data-table-card-empty';
 
 interface BrandsViewProps {
   table: TanstackTable<Brand>;
@@ -29,13 +31,13 @@ export function BrandsView( {
 
   if ( isLoading ) {
     return view === 'table' ? (
-      <div className="p-2 md:p-4">
+      <TableviewWrapper>
         <DataTableSkeleton
           showToolbar={ false }
           rowCount={ Math.min( pageSize, 10 ) }
           className="px-0 pt-0"
         />
-      </div>
+      </TableviewWrapper>
     ) : (
       <TableSkeleton
         showToolbar={ false }
@@ -47,15 +49,7 @@ export function BrandsView( {
 
   if ( view === 'cards' ) {
     if ( table.getRowModel().rows.length === 0 ) {
-      if ( !showBrandEmptyState ) {
-        return <div className="p-2 md:p-4"><BrandsTableView table={ table } /></div>;
-      }
-
-      return (
-        <div className="flex flex-col items-center justify-center py-20 text-center space-y-6">
-          <p className="text-muted-foreground">{ t( 'filters.noBrands' ) }</p>
-        </div>
-      );
+      return <DataTableCardEmpty>{ t( 'filters.noBrands' ) }</DataTableCardEmpty>;
     }
 
     return (
@@ -91,5 +85,5 @@ export function BrandsView( {
     );
   }
 
-  return <div className="p-2 md:p-4"><BrandsTableView table={ table } /></div>;
+  return <TableviewWrapper><BrandsTableView table={ table } /></TableviewWrapper>;
 }
