@@ -47,17 +47,17 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
       <SheetContent className="w-[95%]! max-w-[500px]! overflow-y-auto bg-background/90">
         <CreatorSheetHeader creator={ creator! } />
         {/* ── Brand View (Merged & Streamlined) ── */ }
-        <div className="px-6 flex flex-col gap-4 pb-6">
-          <WrappedCard title={ t('creatorDashboard.blocks.bio') }>
+        <div className="px-6 flex flex-col gap-4 p-3 md:pb-6">
+          <WrappedCard title={ t( 'creatorDashboard.blocks.bio' ) }>
             { displayVideo && (
               <video src={ displayVideo } poster={ optimizedVideoPoster } controls className="w-full aspect-video rounded-md mb-4" />
             ) }
             <ExpandableContent maxHeightClass="max-h-24">
-              <Content content={ displayBio || tc('sheets.noBioAvailable') } />
+              <Content content={ displayBio || tc( 'sheets.noBioAvailable' ) } />
             </ExpandableContent>
           </WrappedCard>
 
-          <WrappedCard title={ tc('sheets.socialMedia') }>
+          <WrappedCard title={ tc( 'sheets.socialMedia' ) }>
             { activeSocials.length > 0 ? (
               <div className="flex items-center gap-6">
                 { activeSocials.map( p => (
@@ -70,12 +70,12 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange }: Creat
                 ) ) }
               </div>
             ) : (
-              <p className="py-2 text-center text-sm text-muted-foreground italic">{ tc('sheets.noSocialAccounts') }</p>
+              <p className="py-2 text-center text-sm text-muted-foreground italic">{ tc( 'sheets.noSocialAccounts' ) }</p>
             ) }
           </WrappedCard>
 
           { c?.preferred_categories?.length > 0 && (
-            <WrappedCard title={ tc('sheets.preferredCategories') }>
+            <WrappedCard title={ tc( 'sheets.preferredCategories' ) }>
               <ExpandableCategories categories={ c.preferred_categories } />
             </WrappedCard>
           ) }

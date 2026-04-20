@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.tab-trigger {
+  @apply text-xs md:text-sm font-normal;
+}

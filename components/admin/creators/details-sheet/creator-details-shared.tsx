@@ -17,13 +17,13 @@ export interface CreatorDetailsSheetProps {
 
 export const Row = ( { label, value }: { label: string; value: ReactNode; } ) => (
   <div className="flex justify-between items-center gap-3">
-    <span className="text-sm text-muted-foreground">{ label }</span>
+    <span className="text-sm text-muted-foreground whitespace-nowrap">{ label }</span>
     <span className="text-sm font-normal text-muted-foreground">{ value }</span>
   </div>
 );
 
 export const MetaBadge = ( { children }: { children: ReactNode; } ) => (
-  <Badge className="bg-background/80 inline-flex items-center gap-2 py-3" variant="outline">
+  <Badge className="bg-background/80 inline-flex items-center gap-2 py-1 md:py-3 text-[11px] md:text-xs" variant="outline">
     { children }
   </Badge>
 );

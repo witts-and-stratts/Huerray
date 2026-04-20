@@ -67,7 +67,7 @@ export function CopyText( {
       ) }
       { ...props }
     >
-      <span className={ cn( clamp && "truncate min-w-0 flex-1" ) }>{ children }</span>
+      <span className={ cn( clamp && "line-clamp-1" ) }>{ children }</span>
       <AnimatePresence mode="wait">
         { isCopied ? (
           <motion.span

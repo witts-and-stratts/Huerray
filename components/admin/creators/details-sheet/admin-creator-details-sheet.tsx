@@ -66,18 +66,16 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
 
   return (
     <Sheet open={ open } onOpenChange={ onOpenChange } modal>
-      <SheetContent className="w-[95%]! max-w-[500px]! overflow-y-auto bg-background/90">
-
-        {/* ── Header ── */ }
+      <SheetContent className="w-[95%]! max-w-[500px]! overflow-y-auto bg-background/90 overflow-x-hidden">
         <CreatorSheetHeader creator={ creator! } />
 
         {/* ── Admin View (Tabbed) ── */ }
-        <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-6">
+        <Tabs value={ activeTab } onValueChange={ setActiveTab } className="px-3 md:px-6">
           <TabsList className="w-full border">
-            <TabsTrigger value="overview" className="text-sm font-normal">{ t( 'creatorDetails.tabOverview' ) }</TabsTrigger>
-            <TabsTrigger value="bio" className="text-sm font-normal">{ t( 'creatorDetails.tabBio' ) }</TabsTrigger>
-            <TabsTrigger value="bank" className="text-sm font-normal">{ t( 'creatorDetails.tabBank' ) }</TabsTrigger>
-            <TabsTrigger value="user" className="text-sm font-normal">{ t( 'creatorDetails.tabUser' ) }</TabsTrigger>
+            <TabsTrigger value="overview" className="tab-trigger">{ t( 'creatorDetails.tabOverview' ) }</TabsTrigger>
+            <TabsTrigger value="bio" className="tab-trigger">{ t( 'creatorDetails.tabBio' ) }</TabsTrigger>
+            <TabsTrigger value="bank" className="tab-trigger">{ t( 'creatorDetails.tabBank' ) }</TabsTrigger>
+            <TabsTrigger value="user" className="tab-trigger">{ t( 'creatorDetails.tabUser' ) }</TabsTrigger>
           </TabsList>
 
           {/* Overview */ }
@@ -85,7 +83,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
             <div className="space-y-3 rounded-lg">
               <WrappedCard title={ t( 'creatorDetails.contactPersonal' ) }>
                 <Row label={ tc( 'sheets.email' ) } value={
-                  <CopyText text={ email } iconSide='left'>
+                  <CopyText text={ email } iconSide='left' clamp className='text-right'>
                     <span className='font-normal'>{ email || tc( 'sheets.na' ) }</span>
                   </CopyText> } />
                 <Separator />
@@ -121,9 +119,9 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
               <WrappedCard title={ t( 'creatorDetails.systemDetails' ) }>
                 <Row label={ tc( 'sheets.joined' ) } value={ created_at ? joinedLabel : tc( 'sheets.na' ) } />
                 <Separator />
-                <Row label={ t( 'creatorDetails.creatorId' ) } value={ <CopyText text={ id } iconSide='left' className='font-mono text-[13px]'>{ id }</CopyText> } />
+                <Row label={ t( 'creatorDetails.creatorId' ) } value={ <CopyText text={ id } iconSide='left' className='font-mono text-[13px] text-right' clamp>{ id }</CopyText> } />
                 <Separator />
-                <Row label={ t( 'creatorDetails.userId' ) } value={ <CopyText text={ user_id } iconSide='left' className='font-mono text-[13px]'>{ user_id }</CopyText> } />
+                <Row label={ t( 'creatorDetails.userId' ) } value={ <CopyText text={ user_id } iconSide='left' className='font-mono text-[13px] text-right' clamp>{ user_id }</CopyText> } />
               </WrappedCard>
             </div>
           </Activity>
@@ -227,7 +225,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
                 onApproveProfile={ onApproveProfile }
                 onRejectProfile={ onRejectProfile }
                 trigger={
-                  <Button variant="outline" size="sm" className="font-regular flex-1">
+                  <Button variant="outline" size="sm" className="font-regular flex-1 w-full">
                     { !isPendingApproval ? tc( 'actions' ) : null }
                     <ChevronDown className="size-4" />
                   </Button>

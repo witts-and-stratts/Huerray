@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { useAuth } from '@/lib/auth/auth-context';
 import { useRouter, useParams, usePathname } from 'next/navigation';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useEffectEvent, useRef } from 'react';
 import {
   ENTITIES_BY_ROLE,
   useGlobalSearch,
@@ -126,16 +126,14 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
     return () => clearTimeout( timer );
   }, [ inputValue ] );
 
-  // Focus / reset on open
+  // Focus on open. Intentionally do NOT reset query/filters/groups on close
+  // so reopening the dialog after a navigation shows the previous results.
+  const focusSearchInput = useEffectEvent( () => {
+    setTimeout( () => inputRef.current?.focus(), 50 );
+  } );
+
   useEffect( () => {
-    if ( open ) {
-      setTimeout( () => inputRef.current?.focus(), 50 );
-    } else {
-      setInputValue( '' );
-      setDebouncedQuery( '' );
-      setFilters( {} );
-      setShowAdvanced( false );
-    }
+    if ( open ) focusSearchInput();
   }, [ open ] );
 
   useEffect( () => {
