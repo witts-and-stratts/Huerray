@@ -475,11 +475,11 @@ export function HelpCenterPage( {
         <SidebarProvider
           defaultOpen={ true }
           style={ { '--sidebar-width': '180px' } as CSSProperties }
-          className="flex flex-row h-full min-h-0 overflow-hidden rounded-xl"
+          className="flex flex-col md:flex-row h-full min-h-0 overflow-hidden rounded-xl"
         >
           <Sidebar
             collapsible="none"
-            className="border-r border-border bg-muted/30 shrink-0 flex flex-col"
+            className="hidden md:flex border-r border-border bg-muted/30 shrink-0 flex-col"
           >
             <SidebarContent className="pt-6 md:pt-10 px-2">
               <SidebarMenu>
@@ -498,6 +498,21 @@ export function HelpCenterPage( {
               </SidebarMenu>
             </SidebarContent>
           </Sidebar>
+
+          <div className="md:hidden flex items-center p-3 border-b border-border bg-muted/30 overflow-x-auto gap-2 shrink-0 scrollbar-hide">
+            { navItems.map( ( item ) => (
+              <Button
+                key={ item.section }
+                variant={ activeSection === item.section ? "secondary" : "ghost" }
+                size="sm"
+                onClick={ () => router.push( item.section === 'home' ? baseHelpPath : `${ baseHelpPath }/${ item.section }` ) }
+                className={ cn( "gap-2 rounded-full whitespace-nowrap", activeSection === item.section ? "bg-muted hover:bg-muted" : "" ) }
+              >
+                <HugeiconsIcon icon={ item.icon } className="size-4 shrink-0" />
+                <span>{ t( item.labelKey as Parameters<typeof t>[ 0 ] ) }</span>
+              </Button>
+            ) ) }
+          </div>
 
           <SidebarInset className="flex-1 overflow-y-auto p-5 md:p-6 min-h-0">
             { section === 'topic' && topic && <TopicDetailView role={ role } topic={ topic } baseHelpPath={ baseHelpPath } /> }

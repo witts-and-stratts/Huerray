@@ -151,7 +151,7 @@ export function UsersStatusRadialCard() {
                     }
                   }>
                     <LabelList
-                      position="insideStart"
+                      position="insideEnd"
                       dataKey="status"
                       className="fill-white capitalize mix-blend-luminosity"
                       fontSize={ 11 }
