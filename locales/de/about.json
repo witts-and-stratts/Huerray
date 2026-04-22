@@ -10,45 +10,45 @@
   },
   "whatWeDo": {
     "pill": "Was wir tun",
-    "title": "Wir verbinden Marken mit Creators, die die Welt widerspiegeln, die sie erreichen wollen. In Deutschland, Österreich und der Schweiz",
-    "description": "Wir bringen Marken mit echten Creators zusammen, die aufmerksamkeitsstarke Videos, Unboxings, Testimonials und Lifestyle-Content für TikTok, Reels und Ads erstellen. Ob Sie authentischen Lo-Fi-Content oder hochwertige Produktinszenierungen brauchen: Huerray kuratiert Creators, steuert den Prozess und liefert lizenzierte Assets, die für alle Kanäle bereit sind.",
+    "title": "Wir vernetzen sich mit Creators, die die Welt widerspiegeln, die sie erreichen wollen. In ganz Deutschland, Österreich und der Schweiz",
+    "description": "Wir bringen Marken mit echten Creators zusammen, die Videos, Unboxings, Testimonials und Lifestyle-Inhalte für TikTok, Reels und Anzeigen erstellen, die Aufmerksamkeit erregen. Egal, ob Sie Lo-Fi-Authentizität oder ausgefeilte Produktpräsentationen benötigen, Huerray kuratiert Creators, verwaltet den Prozess und liefert lizenzierte Assets, die für alle Kanäle geeignet sind.",
     "imageAlt": "Was wir tun",
     "items": [
       {
         "title": "Creator-geführter UGC",
-        "text": "Authentische Testimonials, Reviews und Lifestyle-Content"
+        "text": "Authentische Zeugnisse, Bewertungen, Lifestyle"
       },
       {
-        "title": "Kampagnen für Ads & E-Commerce",
-        "text": "Kurzformat-Anzeigen und Produktaufnahmen"
+        "title": "Kampagnen für Anzeigen & E-Commerce",
+        "text": "Kurzform-Anzeigen, Produktvideos"
       },
       {
-        "title": "Managed Service & Creative Direction",
-        "text": "Für Marken, die eine vollständig betreute End-to-End-Erfahrung wünschen"
+        "title": "Managed Service & kreative Leitung",
+        "text": "Für Marken, die ein End-to-End-Erlebnis ohne Aufwand wünschen"
       },
       {
         "title": "KI-gestützte Storytelling-Tools",
-        "text": "Verstärken, niemals ersetzen, menschliche Kreativität"
+        "text": "Die menschliche Kreativität verstärken, nicht ersetzen"
       }
     ],
     "promise": {
       "title": "Unser Versprechen",
       "items": [
         {
-          "title": "Vielfältige, geprüfte Creators",
-          "text": "Ein Opt-in-Netzwerk, das echte Communities widerspiegelt"
+          "title": "Vielfältige, überprüfte Creators",
+          "text": "Opt-in-Netzwerk, das reale Gemeinschaften widerspiegelt"
         },
         {
           "title": "Klare Preise",
-          "text": "Sie zahlen für Content, nicht für versteckte Plattformgebühren"
+          "text": "Für Inhalte bezahlen, nicht für versteckte Plattformgebühren"
         },
         {
-          "title": "Volle Rechte & Nutzung auf mehreren Kanälen",
-          "text": "Nutzen Sie Content auf Social Media, Websites, in Ads und darüber hinaus."
+          "title": "Vollständige Rechte und mehrkanalige Nutzung",
+          "text": "Nutzen Sie Inhalte in sozialen Netzwerken, im Web, in Anzeigen und darüber hinaus."
         },
         {
           "title": "Schnelle Lieferung",
-          "text": "Kreative Assets sind in Tagen einsatzbereit, nicht erst in Wochen"
+          "text": "Kreative Assets, die innerhalb von Tagen, nicht Wochen, bereitgestellt werden können"
         }
       ]
     }

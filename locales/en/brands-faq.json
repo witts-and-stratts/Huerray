@@ -44,7 +44,7 @@
         },
         {
           "question": "What if I'm not satisfied with the delivered content?",
-          "answer": "Each campaign includes one revision. If the content does not align with your briefing, you can request a revision via the 'Request revision' button."
+          "answer": "Each campaign includes one revision. If the content does not align with your briefing, you can request a revision."
         },
         {
           "question": "How much does it cost to work with Huerray?",
@@ -137,7 +137,7 @@
       "faqs": [
         {
           "question": "Still have questions?",
-          "answer": "Email support@huerray.com for help."
+          "answer": "Email support@huerray.de for help."
         }
       ]
     }

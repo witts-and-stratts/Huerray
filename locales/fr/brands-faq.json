@@ -44,7 +44,7 @@
         },
         {
           "question": "Que se passe-t-il si je ne suis pas satisfait du contenu fourni ?",
-          "answer": "Chaque campagne comprend une révision. Si le contenu ne correspond pas à votre briefing, vous pouvez demander une révision via le bouton \"Demander une révision\"."
+          "answer": "Chaque campagne comprend une révision. Si le contenu ne correspond pas à votre briefing, vous pouvez demander une révision."
         },
         {
           "question": "Quel est le coût d'une collaboration avec Huerray ?",
@@ -137,7 +137,7 @@
       "faqs": [
         {
           "question": "Vous avez encore des questions ?",
-          "answer": "Envoyez un courriel à support@huerray.com pour obtenir de l'aide."
+          "answer": "Envoyez un courriel à support@huerray.de pour obtenir de l'aide."
         }
       ]
     }

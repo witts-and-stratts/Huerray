@@ -10,43 +10,43 @@
   },
   "analyticsPage": {
     "title": "Analytik",
-    "description": "Verfolgen Sie Bewerbungen, Einladungen, Gigs, Einnahmen, Video-Einreichungen und Support.",
+    "description": "Verfolgen Sie Bewerbungen, Einladungen, Auftritte, Einnahmen, Videoeinsendungen und Support.",
     "periodLabel": "Analysezeitraum auswählen",
     "dateRangeLabel": "Datumsbereich auswählen",
     "dateRangePlaceholder": "Datumsbereich auswählen",
-    "refresh": "Aktualisieren",
-    "error": "Creator-Analysen können nicht geladen werden.",
+    "refresh": "Auffrischen",
+    "error": "Die Creator-Analysen können nicht geladen werden.",
     "periods": {
-      "allTime": "Gesamter Zeitraum",
+      "allTime": "Alle Zeiten",
       "lastWeek": "Letzte Woche",
       "lastMonth": "Letzter Monat",
       "lastThreeMonths": "Letzte 3 Monate",
       "lastYear": "Letztes Jahr"
     },
     "groups": {
-      "applications": "Bewerbungen",
+      "applications": "Anwendungen",
       "invitations": "Einladungen",
-      "gigs": "Gigs & Einnahmen",
+      "gigs": "Auftritte & Einnahmen",
       "videoSubmissions": "Video-Einreichungen",
-      "support": "Support"
+      "support": "Unterstützung"
     },
     "groupDescriptions": {
       "applications": "Bewerbungsaktivität und Annahmequalität.",
-      "invitations": "Erhaltene und akzeptierte Creator-Einladungen.",
-      "gigs": "Abgeschlossene Gigs, Gesamteinnahmen und Erfolgsrate.",
-      "videoSubmissions": "Eingereichte Videos und freigegebene Deliverables.",
-      "support": "Fallvolumen und Lösungsleistung."
+      "invitations": "Creators Einladungen erhalten und angenommen.",
+      "gigs": "Abgeschlossene Gigs, Gesamteinnahmen und Erfolgsquote.",
+      "videoSubmissions": "Eingereichte Videos und genehmigte Ergebnisse.",
+      "support": "Fallvolumen und Auflösungsleistung."
     },
     "items": {
       "gigsCompleted": "Abgeschlossene Gigs",
-      "successRate": "Erfolgsrate",
-      "totalEarned": "Gesamteinnahmen",
-      "videosApproved": "Freigegebene Videos",
-      "applicationsSent": "Gesendete Bewerbungen",
-      "applicationsAccepted": "Akzeptierte Bewerbungen",
-      "approvalRate": "Freigaberate",
+      "successRate": "Erfolgsquote",
+      "totalEarned": "Verdiente Summe",
+      "videosApproved": "Zugelassene Videos",
+      "applicationsSent": "Versendete Anträge",
+      "applicationsAccepted": "Angenommene Bewerbungen",
+      "approvalRate": "Bewilligungsquote",
       "invitationsReceived": "Erhaltene Einladungen",
-      "invitationsAccepted": "Akzeptierte Einladungen",
+      "invitationsAccepted": "Angenommene Einladungen",
       "videosSubmitted": "Eingereichte Videos",
       "casesReported": "Gemeldete Fälle",
       "casesResolved": "Gelöste Fälle",
@@ -54,14 +54,14 @@
     },
     "shortLabels": {
       "sent": "Gesendet",
-      "accepted": "Akzeptiert",
-      "received": "Erhalten",
+      "accepted": "Angenommen",
+      "received": "Empfangen",
       "completed": "Abgeschlossen",
       "earned": "Verdient",
       "submitted": "Eingereicht",
-      "approved": "Freigegeben",
-      "reported": "Gemeldet",
-      "resolved": "Gelöst"
+      "approved": "Genehmigt",
+      "reported": "Berichtet",
+      "resolved": "Aufgelöst"
     }
   },
   "common": {

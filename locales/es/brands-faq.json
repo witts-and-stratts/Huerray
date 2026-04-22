@@ -44,7 +44,7 @@
         },
         {
           "question": "¿Y si no estoy satisfecho con el contenido entregado?",
-          "answer": "Cada campaña incluye una revisión. Si el contenido no se ajusta a su briefing, puede solicitar una revisión a través del botón \"Solicitar revisión\"."
+          "answer": "Cada campaña incluye una revisión. Si el contenido no se ajusta a su briefing, puede solicitar una revisión."
         },
         {
           "question": "¿Cuánto cuesta trabajar con Huerray?",
@@ -137,7 +137,7 @@
       "faqs": [
         {
           "question": "¿Aún tiene preguntas?",
-          "answer": "Envíe un correo electrónico a support@huerray.com para obtener ayuda."
+          "answer": "Envíe un correo electrónico a support@huerray.de para obtener ayuda."
         }
       ]
     }

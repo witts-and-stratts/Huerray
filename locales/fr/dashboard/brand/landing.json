@@ -10,26 +10,26 @@
       "error": "Impossible de charger l'analyse de la marque.",
       "page": {
         "title": "Analyse",
-        "description": "Suivez les performances des campagnes, des gigs, de l'outreach créateur, des validations de contenu et des dépenses.",
+        "description": "Suivi des campagnes, des concerts, des contacts avec les créateurs, de l'approbation du contenu et des performances en matière de dépenses.",
         "periodLabel": "Sélectionner la période d'analyse",
-        "dateRangeLabel": "Sélectionner la plage de dates",
-        "dateRangePlaceholder": "Sélectionner la plage de dates",
-        "refresh": "Actualiser",
+        "dateRangeLabel": "Sélectionner une plage de dates",
+        "dateRangePlaceholder": "Sélectionner une plage de dates",
+        "refresh": "Rafraîchir",
         "periods": {
-          "allTime": "Toute la période",
-          "lastWeek": "Semaine dernière",
-          "lastMonth": "Mois dernier",
-          "lastThreeMonths": "3 derniers mois",
-          "lastYear": "Année dernière"
+          "allTime": "Tout le temps",
+          "lastWeek": "La semaine dernière",
+          "lastMonth": "Le mois dernier",
+          "lastThreeMonths": "Les 3 derniers mois",
+          "lastYear": "L'année dernière"
         },
         "groups": {
-          "support": "Support"
+          "support": "Soutien"
         },
         "groupDescriptions": {
-          "campaigns": "Création et finalisation des campagnes sur la période sélectionnée.",
-          "gigs": "Création, acceptation et livraison des gigs.",
-          "outreach": "Invitations créateurs, candidatures et qualité d'approbation.",
-          "contentSpend": "Volume de soumissions vidéo et validations pour votre marque.",
+          "campaigns": "Création et achèvement d'une campagne sur la période sélectionnée.",
+          "gigs": "Dynamique de création, d'acceptation et de livraison des gigaoctets.",
+          "outreach": "Invitations de créateurs, demandes et qualité de l'approbation.",
+          "contentSpend": "Volume de soumissions vidéo et débit d'approbation pour votre marque.",
           "support": "Volume de cas et performance de résolution pour votre compte."
         },
         "items": {
@@ -42,7 +42,7 @@
         "campaigns": "Campagnes",
         "gigs": "Gigs",
         "outreach": "Sensibilisation",
-        "contentSpend": "Soumissions vidéo"
+        "contentSpend": "Soumissions de vidéos"
       },
       "items": {
         "campaignsCreated": "Campagnes créées",

@@ -10,30 +10,30 @@
       "error": "No se puede cargar el análisis de la marca.",
       "page": {
         "title": "Analítica",
-        "description": "Sigue el rendimiento de campañas, gigs, outreach a creadores, aprobaciones de contenido y gasto.",
-        "periodLabel": "Seleccionar periodo de analítica",
-        "dateRangeLabel": "Seleccionar rango de fechas",
-        "dateRangePlaceholder": "Seleccionar rango de fechas",
+        "description": "Realice un seguimiento del rendimiento de la campaña, el concierto, la difusión de creadores, la aprobación de contenidos y el gasto.",
+        "periodLabel": "Seleccione el periodo de análisis",
+        "dateRangeLabel": "Seleccione el intervalo de fechas",
+        "dateRangePlaceholder": "Seleccione el intervalo de fechas",
         "refresh": "Actualizar",
         "periods": {
-          "allTime": "Todo el tiempo",
-          "lastWeek": "Última semana",
-          "lastMonth": "Último mes",
+          "allTime": "Todos los tiempos",
+          "lastWeek": "La semana pasada",
+          "lastMonth": "El mes pasado",
           "lastThreeMonths": "Últimos 3 meses",
-          "lastYear": "Último año"
+          "lastYear": "El año pasado"
         },
         "groups": {
-          "support": "Soporte"
+          "support": "Ayuda"
         },
         "groupDescriptions": {
-          "campaigns": "Creación y finalización de campañas en el periodo seleccionado.",
-          "gigs": "Creación, aceptación y entrega de gigs.",
-          "outreach": "Invitaciones a creadores, solicitudes y calidad de aprobación.",
-          "contentSpend": "Volumen de envíos de video y aprobaciones de tu marca.",
-          "support": "Volumen de casos y rendimiento de resolución de tu cuenta."
+          "campaigns": "Creación y finalización de campañas durante el periodo seleccionado.",
+          "gigs": "Impulso a la creación, aceptación y entrega de Gig.",
+          "outreach": "Invitaciones de creadores, solicitudes y calidad de aprobación.",
+          "contentSpend": "Volumen de envíos de vídeo y de aprobaciones para su marca.",
+          "support": "Volumen de casos y rendimiento de resolución de su cuenta."
         },
         "items": {
-          "casesReported": "Casos reportados",
+          "casesReported": "Casos notificados",
           "casesResolved": "Casos resueltos",
           "caseResolutionRate": "Tasa de resolución de casos"
         }
@@ -42,7 +42,7 @@
         "campaigns": "Campañas",
         "gigs": "Gigs",
         "outreach": "Divulgación",
-        "contentSpend": "Envíos de video"
+        "contentSpend": "Envío de vídeos"
       },
       "items": {
         "campaignsCreated": "Campañas creadas",

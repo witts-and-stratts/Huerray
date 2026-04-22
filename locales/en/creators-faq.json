@@ -33,15 +33,11 @@
       "faqs": [
         {
           "question": "Where do I upload my final content?",
-          "answer": "Upload your content in the designated delivery slot within the 'Delivery' section of your campaign. For extra footage, use the 'Additional delivery' button."
+          "answer": "Upload your content in the designated submission slot within the 'Submission' section of your campaign."
         },
         {
           "question": "What if a brand requests an additional video during an active campaign?",
           "answer": "Contact Huerray via email. They will set up a campaign upgrade so the additional video can be processed and compensated."
-        },
-        {
-          "question": "What if I’m unavailable or on holiday?",
-          "answer": "Activate Vacation Mode and set your unavailable period, or email Huerray to pause your account. You may also mention availability in applications. Key: communicate early."
         },
         {
           "question": "Can I do this part-time?",
@@ -128,7 +124,7 @@
       "faqs": [
         {
           "question": "Still have questions?",
-          "answer": "Email support@huerray.com for immediate assistance."
+          "answer": "Email support@huerray.de for immediate assistance."
         }
       ]
     }

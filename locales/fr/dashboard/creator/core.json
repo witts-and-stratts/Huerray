@@ -10,40 +10,40 @@
   },
   "analyticsPage": {
     "title": "Analyse",
-    "description": "Suivez les candidatures, invitations, gigs, revenus, soumissions vidéo et le support.",
+    "description": "Suivez les candidatures, les invitations, les contrats, les revenus, les vidéos envoyées et l'assistance.",
     "periodLabel": "Sélectionner la période d'analyse",
-    "dateRangeLabel": "Sélectionner la plage de dates",
-    "dateRangePlaceholder": "Sélectionner la plage de dates",
-    "refresh": "Actualiser",
-    "error": "Impossible de charger l'analyse du créateur.",
+    "dateRangeLabel": "Sélectionner une plage de dates",
+    "dateRangePlaceholder": "Sélectionner une plage de dates",
+    "refresh": "Rafraîchir",
+    "error": "Impossible de charger les analyses du créateur.",
     "periods": {
-      "allTime": "Toute la période",
-      "lastWeek": "Semaine dernière",
-      "lastMonth": "Mois dernier",
-      "lastThreeMonths": "3 derniers mois",
-      "lastYear": "Année dernière"
+      "allTime": "Tout le temps",
+      "lastWeek": "La semaine dernière",
+      "lastMonth": "Le mois dernier",
+      "lastThreeMonths": "Les 3 derniers mois",
+      "lastYear": "L'année dernière"
     },
     "groups": {
-      "applications": "Candidatures",
+      "applications": "Applications",
       "invitations": "Invitations",
-      "gigs": "Gigs et revenus",
-      "videoSubmissions": "Soumissions vidéo",
-      "support": "Support"
+      "gigs": "Soirées et rémunérations",
+      "videoSubmissions": "Soumissions de vidéos",
+      "support": "Soutien"
     },
     "groupDescriptions": {
-      "applications": "Activité des candidatures et qualité d'acceptation.",
-      "invitations": "Invitations reçues et acceptées.",
-      "gigs": "Gigs terminés, revenus totaux et taux de réussite.",
-      "videoSubmissions": "Vidéos soumises et livrables approuvés.",
-      "support": "Volume de cas et performance de résolution."
+      "applications": "Activité de la demande et qualité de l'acceptation.",
+      "invitations": "Invitations de créateurs reçues et acceptées.",
+      "gigs": "Missions terminées, revenus totaux et taux de réussite.",
+      "videoSubmissions": "Soumission de vidéos et approbation des produits livrables.",
+      "support": "Volume de l'affaire et performance de la résolution."
     },
     "items": {
-      "gigsCompleted": "Gigs terminés",
+      "gigsCompleted": "Soirées terminées",
       "successRate": "Taux de réussite",
       "totalEarned": "Total gagné",
       "videosApproved": "Vidéos approuvées",
-      "applicationsSent": "Candidatures envoyées",
-      "applicationsAccepted": "Candidatures acceptées",
+      "applicationsSent": "Envoi des candidatures",
+      "applicationsAccepted": "Demandes acceptées",
       "approvalRate": "Taux d'approbation",
       "invitationsReceived": "Invitations reçues",
       "invitationsAccepted": "Invitations acceptées",
@@ -53,15 +53,15 @@
       "caseResolutionRate": "Taux de résolution des cas"
     },
     "shortLabels": {
-      "sent": "Envoyées",
-      "accepted": "Acceptées",
-      "received": "Reçues",
-      "completed": "Terminés",
+      "sent": "Envoyé",
+      "accepted": "Accepté",
+      "received": "Reçu",
+      "completed": "Terminé",
       "earned": "Gagné",
-      "submitted": "Soumises",
-      "approved": "Approuvées",
-      "reported": "Signalés",
-      "resolved": "Résolus"
+      "submitted": "Soumis",
+      "approved": "Approuvé",
+      "reported": "Signalé",
+      "resolved": "Résolu"
     }
   },
   "common": {

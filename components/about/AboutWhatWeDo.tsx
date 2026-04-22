@@ -74,7 +74,7 @@ export function AboutWhatWeDo() {
             },
             breakpoints: {
               768: {
-                perPage: 1,
+                perPage: 1.5,
                 gap: '1.5rem',
               },
               1024: {

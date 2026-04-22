@@ -33,15 +33,11 @@
       "faqs": [
         {
           "question": "¿Dónde subo mi contenido final?",
-          "answer": "Cargue su contenido en el espacio de entrega designado dentro de la sección \"Entrega\" de su campaña. Para metraje adicional, utilice el botón \"Entrega adicional\"."
+          "answer": "Cargue su contenido en el espacio de envío designado dentro de la sección \"Envío\" de su campaña."
         },
         {
           "question": "¿Qué ocurre si una marca solicita un vídeo adicional durante una campaña activa?",
           "answer": "Ponte en contacto con Huerray por correo electrónico. Ellos establecerán una actualización de la campaña para que el vídeo adicional pueda ser procesado y compensado."
-        },
-        {
-          "question": "¿Y si no estoy disponible o estoy de vacaciones?",
-          "answer": "Active el Modo Vacaciones y establezca su periodo de no disponibilidad, o envíe un correo electrónico a Huerray para poner en pausa su cuenta. También puedes mencionar la disponibilidad en las solicitudes. Clave: comunícalo con tiempo."
         },
         {
           "question": "¿Puedo hacerlo a tiempo parcial?",
@@ -128,7 +124,7 @@
       "faqs": [
         {
           "question": "¿Aún tiene preguntas?",
-          "answer": "Envíe un correo electrónico a support@huerray.com para obtener ayuda inmediata."
+          "answer": "Envíe un correo electrónico a support@huerray.de para obtener ayuda inmediata."
         }
       ]
     }

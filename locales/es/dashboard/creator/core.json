@@ -10,58 +10,58 @@
   },
   "analyticsPage": {
     "title": "Analítica",
-    "description": "Sigue solicitudes, invitaciones, gigs, ganancias, envíos de video y soporte.",
-    "periodLabel": "Seleccionar periodo de analítica",
-    "dateRangeLabel": "Seleccionar rango de fechas",
-    "dateRangePlaceholder": "Seleccionar rango de fechas",
+    "description": "Seguimiento de solicitudes, invitaciones, actuaciones, ganancias, envíos de vídeos y asistencia.",
+    "periodLabel": "Seleccione el periodo de análisis",
+    "dateRangeLabel": "Seleccione el intervalo de fechas",
+    "dateRangePlaceholder": "Seleccione el intervalo de fechas",
     "refresh": "Actualizar",
-    "error": "No se puede cargar la analítica del creador.",
+    "error": "No se puede cargar el análisis del creador.",
     "periods": {
-      "allTime": "Todo el tiempo",
-      "lastWeek": "Última semana",
-      "lastMonth": "Último mes",
+      "allTime": "Todos los tiempos",
+      "lastWeek": "La semana pasada",
+      "lastMonth": "El mes pasado",
       "lastThreeMonths": "Últimos 3 meses",
-      "lastYear": "Último año"
+      "lastYear": "El año pasado"
     },
     "groups": {
-      "applications": "Solicitudes",
+      "applications": "Aplicaciones",
       "invitations": "Invitaciones",
-      "gigs": "Gigs y ganancias",
-      "videoSubmissions": "Envíos de video",
-      "support": "Soporte"
+      "gigs": "Trabajos y ganancias",
+      "videoSubmissions": "Envío de vídeos",
+      "support": "Ayuda"
     },
     "groupDescriptions": {
-      "applications": "Actividad de solicitudes y calidad de aceptación.",
-      "invitations": "Invitaciones recibidas y aceptadas.",
-      "gigs": "Gigs completados, ganancias totales y tasa de éxito.",
-      "videoSubmissions": "Videos enviados y entregables aprobados.",
+      "applications": "Actividad de aplicación y calidad de aceptación.",
+      "invitations": "Invitaciones de creadores recibidas y aceptadas.",
+      "gigs": "Actuaciones realizadas, ingresos totales y tasa de éxito.",
+      "videoSubmissions": "Envío de vídeos y aprobación de entregas.",
       "support": "Volumen de casos y rendimiento de resolución."
     },
     "items": {
-      "gigsCompleted": "Gigs completados",
+      "gigsCompleted": "Conciertos realizados",
       "successRate": "Tasa de éxito",
       "totalEarned": "Total ganado",
-      "videosApproved": "Videos aprobados",
+      "videosApproved": "Vídeos aprobados",
       "applicationsSent": "Solicitudes enviadas",
       "applicationsAccepted": "Solicitudes aceptadas",
       "approvalRate": "Tasa de aprobación",
       "invitationsReceived": "Invitaciones recibidas",
       "invitationsAccepted": "Invitaciones aceptadas",
-      "videosSubmitted": "Videos enviados",
-      "casesReported": "Casos reportados",
+      "videosSubmitted": "Vídeos enviados",
+      "casesReported": "Casos notificados",
       "casesResolved": "Casos resueltos",
       "caseResolutionRate": "Tasa de resolución de casos"
     },
     "shortLabels": {
-      "sent": "Enviadas",
-      "accepted": "Aceptadas",
-      "received": "Recibidas",
-      "completed": "Completados",
+      "sent": "Enviado",
+      "accepted": "Aceptado",
+      "received": "Recibido",
+      "completed": "Completado",
       "earned": "Ganado",
-      "submitted": "Enviados",
-      "approved": "Aprobados",
-      "reported": "Reportados",
-      "resolved": "Resueltos"
+      "submitted": "Enviado",
+      "approved": "Aprobado",
+      "reported": "Reportado",
+      "resolved": "Resuelto"
     }
   },
   "common": {

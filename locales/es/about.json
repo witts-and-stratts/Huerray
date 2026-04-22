@@ -10,45 +10,45 @@
   },
   "whatWeDo": {
     "pill": "Qué hacemos",
-    "title": "Conectamos a las marcas con creadores que reflejan el mundo al que quieren llegar. En Alemania, Austria y Suiza",
-    "description": "Conectamos a las marcas con creadores reales que producen videos que detienen el scroll, unboxings, testimonios y contenido de estilo de vida para TikTok, Reels y anuncios. Ya necesites autenticidad lo-fi o demostraciones de producto pulidas, Huerray selecciona creadores, gestiona el proceso y entrega activos con licencia listos para todos los canales.",
+    "title": "Conectamos marcas con creadores que reflejan el mundo al que quieren llegar. En Alemania, Austria y Suiza",
+    "description": "Ponemos en contacto a marcas con creadores reales que hacen vídeos que hacen scroll, unboxings, testimonios y contenido de estilo de vida para TikTok, Reels y anuncios. Huerray selecciona a los creadores, gestiona el proceso y entrega activos con licencia listos para todos los canales, tanto si necesitas autenticidad lo-fi como si quieres mostrar un producto pulido.",
     "imageAlt": "Qué hacemos",
     "items": [
       {
-        "title": "UGC liderado por creadores",
-        "text": "Testimonios, reseñas y contenido lifestyle auténticos"
+        "title": "CGU dirigido por el creador",
+        "text": "Testimonios auténticos, reseñas, estilo de vida"
       },
       {
-        "title": "Campañas para anuncios y e-commerce",
-        "text": "Anuncios de formato corto y fotos de producto"
+        "title": "Campañas de publicidad y comercio electrónico",
+        "text": "Anuncios cortos, fotos de productos"
       },
       {
         "title": "Servicio gestionado y dirección creativa",
-        "text": "Para marcas que quieren una experiencia integral sin complicaciones"
+        "text": "Para marcas que quieren una experiencia integral sin intervención humana"
       },
       {
-        "title": "Herramientas de storytelling asistidas por IA",
-        "text": "Amplificar, nunca reemplazar, la creatividad humana"
+        "title": "Herramientas de narración asistida por IA",
+        "text": "Amplificar, nunca sustituir, la creatividad humana"
       }
     ],
     "promise": {
       "title": "Nuestra promesa",
       "items": [
         {
-          "title": "Creadores diversos y verificados",
-          "text": "Una red opt-in que refleja comunidades reales"
+          "title": "Creadores diversos e investigados",
+          "text": "Red de adhesión que refleja comunidades reales"
         },
         {
           "title": "Precios claros",
-          "text": "Paga por contenido, no por comisiones ocultas de plataforma"
+          "text": "Pague por los contenidos, no por las comisiones ocultas de la plataforma"
         },
         {
-          "title": "Derechos completos y uso multicanal",
-          "text": "Usa el contenido en redes sociales, web, anuncios y más."
+          "title": "Plenos derechos y uso multicanal",
+          "text": "Utilice los contenidos en las redes sociales, la web, los anuncios y otros medios."
         },
         {
           "title": "Entrega rápida",
-          "text": "Activos creativos listos para publicar en días, no semanas"
+          "text": "Activos creativos listos para desplegar en días, no semanas"
         }
       ]
     }

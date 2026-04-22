@@ -33,15 +33,11 @@
       "faqs": [
         {
           "question": "Wo lade ich meine endgültigen Inhalte hoch?",
-          "answer": "Laden Sie Ihre Inhalte in das dafür vorgesehene Feld im Abschnitt \"Lieferung\" Ihrer Kampagne hoch. Für zusätzliches Filmmaterial verwenden Sie die Schaltfläche \"Zusätzliche Lieferung\"."
+          "answer": "Laden Sie Ihre Inhalte in das dafür vorgesehene Feld im Abschnitt \"Einreichung\" Ihrer Kampagne hoch."
         },
         {
           "question": "Was ist, wenn eine Marke während einer aktiven Kampagne ein zusätzliches Video anfordert?",
           "answer": "Kontaktieren Sie Huerray per E-Mail. Sie werden ein Kampagnen-Upgrade einrichten, damit das zusätzliche Video verarbeitet und vergütet werden kann."
-        },
-        {
-          "question": "Was ist, wenn ich nicht verfügbar oder im Urlaub bin?",
-          "answer": "Aktivieren Sie den Urlaubsmodus und legen Sie Ihren Abwesenheitszeitraum fest, oder senden Sie eine E-Mail an Huerray, um Ihr Konto zu pausieren. Sie können Ihre Verfügbarkeit auch in Ihrer Bewerbung angeben. Wichtig: Frühzeitig kommunizieren."
         },
         {
           "question": "Kann ich das in Teilzeit machen?",
@@ -128,7 +124,7 @@
       "faqs": [
         {
           "question": "Haben Sie noch Fragen?",
-          "answer": "Senden Sie eine E-Mail an support@huerray.com, um sofortige Unterstützung zu erhalten."
+          "answer": "Senden Sie eine E-Mail an support@huerray.de, um sofortige Unterstützung zu erhalten."
         }
       ]
     }

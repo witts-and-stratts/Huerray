@@ -18,7 +18,7 @@ export function CreatorsSection() {
           <p className='creators-section__description text-white!'>
             { t( 'description' ) }
           </p>
-          <Button variant='hero' size='lg' className='min-w-80'>
+          <Button variant='hero' size='lg' className='min-w-80 mt-8'>
             <Link href="/signup?role=creator" title={ tCommon( 'button.joinForFree' ) }>{ tCommon( 'button.joinForFree' ) }</Link>
           </Button>
         </div>

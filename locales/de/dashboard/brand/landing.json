@@ -10,26 +10,26 @@
       "error": "Die Markenanalyse kann nicht geladen werden.",
       "page": {
         "title": "Analytik",
-        "description": "Verfolgen Sie Kampagnen, Gigs, Creator-Outreach, Content-Freigaben und Ausgaben.",
+        "description": "Verfolgen Sie die Leistung von Kampagnen, Auftritten, Creators, die Genehmigung von Inhalten und die Ausgaben.",
         "periodLabel": "Analysezeitraum auswählen",
         "dateRangeLabel": "Datumsbereich auswählen",
         "dateRangePlaceholder": "Datumsbereich auswählen",
-        "refresh": "Aktualisieren",
+        "refresh": "Auffrischen",
         "periods": {
-          "allTime": "Gesamter Zeitraum",
+          "allTime": "Alle Zeiten",
           "lastWeek": "Letzte Woche",
           "lastMonth": "Letzter Monat",
           "lastThreeMonths": "Letzte 3 Monate",
           "lastYear": "Letztes Jahr"
         },
         "groups": {
-          "support": "Support"
+          "support": "Unterstützung"
         },
         "groupDescriptions": {
-          "campaigns": "Kampagnenerstellung und Abschlüsse im ausgewählten Zeitraum.",
-          "gigs": "Erstellung, Annahme und Lieferung von Gigs.",
-          "outreach": "Creator-Einladungen, Bewerbungen und Freigabequalität.",
-          "contentSpend": "Volumen und Freigaben von Video-Einreichungen für Ihre Marke.",
+          "campaigns": "Erstellung und Abschluss von Kampagnen im ausgewählten Zeitraum.",
+          "gigs": "Dynamik bei der Erstellung, Annahme und Auslieferung von Aufträgen.",
+          "outreach": "Creators Einladungen, Anträge und Genehmigungsqualität.",
+          "contentSpend": "Videoeinreichungsvolumen und Genehmigungsdurchsatz für Ihre Marke.",
           "support": "Fallvolumen und Lösungsleistung für Ihr Konto."
         },
         "items": {

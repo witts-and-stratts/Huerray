@@ -33,15 +33,11 @@
       "faqs": [
         {
           "question": "Où dois-je télécharger mon contenu final ?",
-          "answer": "Téléchargez votre contenu dans le créneau de livraison désigné dans la section \"Livraison\" de votre campagne. Pour des séquences supplémentaires, utilisez le bouton \"Livraison supplémentaire\"."
+          "answer": "Téléchargez votre contenu dans l'emplacement prévu à cet effet dans la section \"Soumission\" de votre campagne."
         },
         {
           "question": "Que se passe-t-il si une marque demande une vidéo supplémentaire au cours d'une campagne active ?",
           "answer": "Contactez Huerray par courrier électronique. Ils mettront en place une mise à niveau de la campagne afin que la vidéo supplémentaire puisse être traitée et rémunérée."
-        },
-        {
-          "question": "Que se passe-t-il si je ne suis pas disponible ou si je suis en vacances ?",
-          "answer": "Activez le mode vacances et définissez votre période d'indisponibilité, ou envoyez un courriel à Huerray pour mettre votre compte en pause. Vous pouvez également mentionner votre disponibilité dans les candidatures. La clé : communiquer à l'avance."
         },
         {
           "question": "Puis-je travailler à temps partiel ?",
@@ -128,7 +124,7 @@
       "faqs": [
         {
           "question": "Vous avez encore des questions ?",
-          "answer": "Envoyez un courriel à support@huerray.com pour obtenir une assistance immédiate."
+          "answer": "Envoyez un courriel à support@huerray.de pour obtenir une assistance immédiate."
         }
       ]
     }

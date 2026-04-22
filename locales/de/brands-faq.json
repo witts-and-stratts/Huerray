@@ -44,7 +44,7 @@
         },
         {
           "question": "Was ist, wenn ich mit dem gelieferten Inhalt nicht zufrieden bin?",
-          "answer": "Jede Kampagne beinhaltet eine Überarbeitung. Wenn der Inhalt nicht mit Ihrem Briefing übereinstimmt, können Sie über die Schaltfläche \"Überarbeitung anfordern\" eine Überarbeitung anfordern."
+          "answer": "Jede Kampagne beinhaltet eine Überarbeitung. Wenn der Inhalt nicht mit Ihrem Briefing übereinstimmt, können Sie eine Überarbeitung anfordern."
         },
         {
           "question": "Wie viel kostet es, mit Huerray zu arbeiten?",
@@ -137,7 +137,7 @@
       "faqs": [
         {
           "question": "Haben Sie noch Fragen?",
-          "answer": "Senden Sie eine E-Mail an support@huerray.com, um Hilfe zu erhalten."
+          "answer": "Senden Sie eine E-Mail an support@huerray.de, um Hilfe zu erhalten."
         }
       ]
     }
