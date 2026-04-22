@@ -20,7 +20,12 @@ export function toDateLabel(value?: string) {
 export function toCurrency(value: number) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'EUR',
     maximumFractionDigits: 0,
   }).format(value);
+}
+
+export function toPercent(value: number) {
+  const normalized = value > 1 ? value : value * 100;
+  return `${normalized.toFixed(1)}%`;
 }

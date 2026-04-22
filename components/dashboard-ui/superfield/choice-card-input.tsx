@@ -10,6 +10,7 @@ export interface ChoiceCardOption {
   label: string;
   description?: string;
   icon?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export interface ChoiceCardInputProps {
@@ -51,7 +52,11 @@ export function ChoiceCardInput( {
       className={ cn( "gap-2", containerClassName ) }
     >
       { options.map( ( option ) => (
-        <FieldLabel key={ option.value } htmlFor={ `${ id }-${ option.value }` }>
+        <FieldLabel 
+          key={ option.value } 
+          htmlFor={ `${ id }-${ option.value }` }
+          className={ cn( option.disabled && "opacity-50 cursor-not-allowed" ) }
+        >
           <Field orientation="horizontal">
             <FieldContent>
               <div className="flex items-center gap-2">
@@ -62,7 +67,11 @@ export function ChoiceCardInput( {
                 <FieldDescription>{ option.description }</FieldDescription>
               ) }
             </FieldContent>
-            <RadioGroupItem value={ option.value } id={ `${ id }-${ option.value }` } />
+            <RadioGroupItem 
+              value={ option.value } 
+              id={ `${ id }-${ option.value }` } 
+              disabled={ option.disabled } 
+            />
           </Field>
         </FieldLabel>
       ) ) }

@@ -23,6 +23,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { apiClient } from "@/lib/api/client";
+import { useTranslations } from "next-intl";
 
 interface ResetPasswordFormProps extends React.ComponentProps<"div"> {
   token: string;
@@ -33,6 +34,8 @@ export function ResetPasswordForm( {
   className,
   ...props
 }: ResetPasswordFormProps ) {
+  const t = useTranslations( 'auth.resetPassword' );
+  const tValidation = useTranslations( 'auth.validation' );
   const router = useRouter();
   const [ isLoading, setIsLoading ] = useState( false );
   const [ error, setError ] = useState<string | null>( null );
@@ -50,13 +53,13 @@ export function ResetPasswordForm( {
 
     // Validation
     if ( formData.password !== formData.confirmPassword ) {
-      setError( "Passwords do not match" );
+      setError( tValidation( 'passwordsDoNotMatch' ) );
       setIsLoading( false );
       return;
     }
 
     if ( formData.password.length < 8 ) {
-      setError( "Password must be at least 8 characters" );
+      setError( tValidation( 'passwordMin' ) );
       setIsLoading( false );
       return;
     }
@@ -73,7 +76,7 @@ export function ResetPasswordForm( {
       router.push( "/login?reset=success" );
     } catch ( err: any ) {
       console.error( "Password reset error:", err );
-      const errorMessage = err.response?.data?.message || err.message || "Failed to reset password. The link may be expired.";
+      const errorMessage = err.response?.data?.message || err.message || t( 'errors.default' );
       setError( errorMessage );
     } finally {
       setIsLoading( false );
@@ -102,9 +105,9 @@ export function ResetPasswordForm( {
 
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-primary">Reset your password</CardTitle>
+          <CardTitle className="text-2xl font-primary">{ t( 'title' ) }</CardTitle>
           <CardDescription>
-            Enter your new password below
+            { t( 'description' ) }
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -116,28 +119,28 @@ export function ResetPasswordForm( {
           <form onSubmit={ handleSubmit }>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="password">New Password</FieldLabel>
+                <FieldLabel htmlFor="password">{ t( 'newPasswordLabel' ) }</FieldLabel>
                 <Input
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="Enter new password"
+                  placeholder={ t( 'newPasswordPlaceholder' ) }
                   value={ formData.password }
                   onChange={ handleInputChange }
                   required
                 />
                 <FieldDescription>
-                  Must be at least 8 characters
+                  { t( 'passwordHelp' ) }
                 </FieldDescription>
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="confirmPassword">Confirm Password</FieldLabel>
+                <FieldLabel htmlFor="confirmPassword">{ t( 'confirmPasswordLabel' ) }</FieldLabel>
                 <Input
                   id="confirmPassword"
                   name="confirmPassword"
                   type="password"
-                  placeholder="Confirm new password"
+                  placeholder={ t( 'confirmPasswordPlaceholder' ) }
                   value={ formData.confirmPassword }
                   onChange={ handleInputChange }
                   required
@@ -146,12 +149,12 @@ export function ResetPasswordForm( {
 
               <Field>
                 <Button type="submit" className="w-full" disabled={ isLoading }>
-                  { isLoading ? "Resetting..." : "Reset password" }
+                  { isLoading ? t( 'submittingButton' ) : t( 'submitButton' ) }
                 </Button>
                 <FieldDescription className="text-center">
-                  Remember your password?{ " " }
+                  { t( 'rememberPassword' ) }{ " " }
                   <Link href="/login" className="font-medium text-primary hover:underline">
-                    Sign in
+                    { t( 'signIn' ) }
                   </Link>
                 </FieldDescription>
               </Field>

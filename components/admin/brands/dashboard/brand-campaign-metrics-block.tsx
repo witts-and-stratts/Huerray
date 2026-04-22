@@ -1,12 +1,14 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import type { BrandStatRow } from './brand-dashboard-utils';
 import { useTranslations } from "next-intl";
 
 interface BrandCampaignMetricsBlockProps {
   rows: BrandStatRow[];
+  isLoading?: boolean;
 }
 
-export function BrandCampaignMetricsBlock( { rows }: BrandCampaignMetricsBlockProps ) {
+export function BrandCampaignMetricsBlock( { rows, isLoading = false }: BrandCampaignMetricsBlockProps ) {
   const t = useTranslations('dashboard.admin');
   const maxValue = Math.max( ...rows.map( ( row ) => row.numeric ), 1 );
 
@@ -17,7 +19,13 @@ export function BrandCampaignMetricsBlock( { rows }: BrandCampaignMetricsBlockPr
         <CardDescription className="ad-card-description">{t('brandCampaignMetricsBlock.campaignLifecycleOverview')}</CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-2 space-y-0">
-        { rows.map( ( item ) => {
+        { isLoading ? Array.from( { length: 4 } ).map( ( _, index ) => (
+          <div key={ `brand-campaign-metrics-skeleton-${ index }` } className="rounded-lg border border-border/60 bg-white p-2.5">
+            <Skeleton className="mb-2 h-3 w-24" />
+            <Skeleton className="mb-2 h-7 w-16" />
+            <Skeleton className="h-2 w-full rounded-full" />
+          </div>
+        ) ) : rows.map( ( item ) => {
           const widthPct = Math.max( 10, Math.round( ( item.numeric / maxValue ) * 100 ) );
 
           return (

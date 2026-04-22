@@ -11,7 +11,10 @@ import { SubHeader } from '@/components/subheader';
 import { useCreator } from '@/lib/api/hooks/creators';
 import { usePaymentItems, usePayments } from '@/lib/api/hooks/payments';
 import { formatCurrency } from '@/lib/utils';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ChevronDown } from 'lucide-react';
+import { CreatorActionMenu } from '@/components/admin/creators/creator-action-menu';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { Button } from '@/components/dashboard-ui/button';
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
@@ -101,7 +104,12 @@ export default function CreatorDashboardPage() {
       <div className="ad-shell bg-slate-50/50 mt-0 flex-1 p-2 md:p-5">
         <section className="grid gap-4 md:grid-cols-12 lg:h-full">
           <aside className="space-y-4 md:col-span-5 md:sticky md:top-24 md:self-start h-full">
-            <CreatorProfileBlock creator={ creator! } creatorName={ creatorName } creatorAvatar={ creatorAvatar } />
+            <CreatorProfileBlock creator={ creator! } creatorName={ creatorName } creatorAvatar={ creatorAvatar }>
+              <CreatorActionMenu creator={ creator! } trigger={ <ButtonGroup className='mt-auto min-w-[200px]'>
+                <Button variant='outline' size={ 'sm' } className='flex-1 font-regular'>{ t( 'actions' ) }</Button>
+                <Button variant='outline' size={ 'sm' }><ChevronDown strokeWidth={ 1 } /></Button>
+              </ButtonGroup> } />
+            </CreatorProfileBlock>
           </aside>
 
           <section className="space-y-4 md:col-span-7">

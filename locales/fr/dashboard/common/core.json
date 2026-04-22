@@ -56,6 +56,7 @@
   "create": "Créer",
   "createValue": "Créer {value}",
   "view": "Voir",
+  "viewCampaign": "Voir la campagne",
   "actions": "Actions",
   "status": "Statut",
   "selectedCount": "{count} sélectionné",

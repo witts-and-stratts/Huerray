@@ -264,6 +264,14 @@ export function resolveNotificationAction(
     };
   }
 
+  if ( isCreatorNotification( notification ) && role === "creator" ) {
+    return {
+      kind: "internal-route",
+      labelKey,
+      href: locale ? `/${ locale }/creator/profile` : "/creator/profile",
+    };
+  }
+
   if ( isGigNotification( notification ) && gigId ) {
     return {
       kind: "gig-sheet",

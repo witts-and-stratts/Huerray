@@ -64,7 +64,8 @@ function getFieldError( field: { state: { meta: { isTouched: boolean; errors: Va
 // ─── Gig context card ────────────────────────────────────────────────────────
 
 function GigContextCard( { gig }: { gig: ModelsGigResponse; } ) {
-  const formattedCompensation = useFormatCurrency(
+  const formatCurrency = useFormatCurrency();
+  const formattedCompensation = formatCurrency(
     gig.compensation?.value ?? 0,
     gig.compensation?.currency || 'EUR'
   );

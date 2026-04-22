@@ -1,6 +1,6 @@
 import { KpiCard } from '@/components/dashboard/blocks/shared/kpi-card';
 import type { BrandDashboardSummary } from './types';
-import { toMoney } from './types';
+import { useFormatCurrency } from '@/lib/hooks/format';
 import { useTranslations } from 'next-intl';
 
 interface BrandKpiOverviewBlockProps {
@@ -19,6 +19,8 @@ export function BrandKpiOverviewBlock( {
   isGigsLoading,
 }: BrandKpiOverviewBlockProps ) {
   const t = useTranslations( 'dashboard.brand.landing.kpiOverview' );
+  const formatCurrency = useFormatCurrency();
+
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <KpiCard
@@ -40,7 +42,7 @@ export function BrandKpiOverviewBlock( {
       />
       <KpiCard
         title={ t( 'totalSpend.title' ) }
-        value={ toMoney( summary.totalSpend ) }
+        value={ formatCurrency( summary.totalSpend ) }
         caption={ t( 'totalSpend.caption' ) }
       />
     </section>

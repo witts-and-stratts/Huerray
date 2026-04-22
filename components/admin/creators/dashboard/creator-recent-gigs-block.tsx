@@ -74,7 +74,7 @@ export function CreatorRecentGigsBlock( { creatorId }: CreatorRecentGigsBlockPro
         { !isLoading && !isError && recentItems.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             { recentItems.map( ( item ) => (
-              <SubmissionCard key={ item.id } submission={ item } layout="mini" />
+              <SubmissionCard key={ item.id } submission={ item } layout="media-overlay" />
             ) ) }
           </div>
         ) }

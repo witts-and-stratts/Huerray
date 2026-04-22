@@ -82,6 +82,12 @@
   "brandDashboard": {
     "totalSpend": "Gesamtausgaben",
     "avgGigSpend": "Avg Gig Spend",
+    "totalSpent": "Insgesamt ausgegeben",
+    "approvalRate": "Bewilligungsquote",
+    "campaignsCreated": "Erstellte Kampagnen",
+    "campaignsCompleted": "Abgeschlossene Kampagnen",
+    "gigsCreated": "Geschaffene Gigs",
+    "gigsCompleted": "Abgeschlossene Gigs",
     "total": "Insgesamt",
     "active": "Aktiv",
     "finished": "Fertige",
@@ -90,7 +96,8 @@
     "brandNotFound": "Marke nicht gefunden",
     "brandDashboard": "Marken-Dashboard",
     "overview": "Überblick über die Markenleistung und Details",
-    "brands": "Marken"
+    "brands": "Marken",
+    "actions": "Aktionen"
   },
   "brandCampaignMetricsBlock": {
     "campaignLifecycleOverview": "Überblick über den Kampagnenlebenszyklus",

@@ -2,9 +2,9 @@ import { useLocale } from "next-intl";
 import { formatDate } from "../utils/format";
 import { formatCurrency } from "../utils/format";
 
-export const useFormatCurrency = ( amount: number, currency: string = 'EUR' ) => {
+export const useFormatCurrency = () => {
   const locale = useLocale();
-  return formatCurrency( amount, currency, locale );
+  return ( amount: number, currency: string = 'EUR' ) => formatCurrency( amount, currency, locale );
 };
 
 export const useFormatDate = ( dateString: string ) => {

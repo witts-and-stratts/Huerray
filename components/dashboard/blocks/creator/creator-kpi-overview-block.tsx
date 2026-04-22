@@ -1,12 +1,13 @@
 'use client';
 
 import { useCreatorAnalytics } from '@/lib/api/hooks/analytics';
-import { toMoney } from '@/lib/utils';
+import { useFormatCurrency } from '@/lib/hooks/format';
 import { KpiCard } from '@/components/dashboard/blocks/shared/kpi-card';
 
 export function CreatorKpiOverviewBlock() {
   const { data: analyticsResponse, isLoading } = useCreatorAnalytics();
   const analytics = analyticsResponse?.data;
+  const formatCurrency = useFormatCurrency();
 
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -18,7 +19,7 @@ export function CreatorKpiOverviewBlock() {
       />
       <KpiCard
         title="Total Earned"
-        value={ toMoney( analytics?.total_earned ?? 0 ) }
+        value={ formatCurrency( analytics?.total_earned ?? 0 ) }
         caption="Lifetime earnings across all gigs"
         isLoading={ isLoading }
       />

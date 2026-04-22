@@ -2,12 +2,10 @@
 
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
-import { Loader2 } from 'lucide-react';
+import { ChevronDown, Loader2 } from 'lucide-react';
 import { SubHeader } from '@/components/subheader';
 import { useBrand } from '@/lib/api/hooks/brands';
-import { useCampaigns } from '@/lib/api/hooks/campaigns';
-import { useGigs } from '@/lib/api/hooks/gigs';
-import type { ModelsCampaignResponse, ModelsGigResponse } from '@/lib/api/generated/models';
+import { useBrandAnalytics } from '@/lib/api/hooks/analytics';
 import {
   BrandCampaignMetricsBlock,
   BrandFinancialsBlock,
@@ -15,83 +13,63 @@ import {
   BrandRecentSubmissionsBlock,
   BrandProfileBlock,
   toCurrency,
+  toPercent,
   type BrandStatRow,
 } from '@/components/admin/brands/dashboard';
 import { useTranslations } from "next-intl";
+import { BrandActionMenu } from '@/components/admin/brands/brand-action-menu';
+import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { Button } from '@/components/dashboard-ui/button';
+import { useFormatCurrency } from '@/lib/hooks/format';
+
+function metric( value?: number ) {
+  return typeof value === 'number' ? value : 0;
+}
 
 export default function BrandDashboardPage() {
   const t = useTranslations( 'dashboard.admin.brandDashboard' );
   const params = useParams<{ id: string; }>();
   const brandId = params.id;
+  const formatCurrency = useFormatCurrency();
 
   const { data: brandData, isLoading: isBrandLoading, error: brandError } = useBrand( brandId );
-  const { data: campaignsData } = useCampaigns( { brandId, limit: 100, page: 1 } );
-  const { data: gigsData } = useGigs( { brandId, page: 1, limit: 500 } );
+  const { data: analyticsData, isLoading: isAnalyticsLoading } = useBrandAnalytics(
+    { brandId },
+    { enabled: !!brandId }
+  );
 
   const brand = useMemo( () => {
     if ( !brandData?.data ) return null;
     return Array.isArray( brandData.data ) ? brandData.data[ 0 ] : brandData.data;
   }, [ brandData ] );
 
-  const campaigns = useMemo<ModelsCampaignResponse[]>( () => {
-    if ( !campaignsData?.data || !Array.isArray( campaignsData.data ) ) return [];
-    return campaignsData.data as ModelsCampaignResponse[];
-  }, [ campaignsData ] );
-
-  const gigs = useMemo<ModelsGigResponse[]>( () => {
-    if ( !gigsData?.data || !Array.isArray( gigsData.data ) ) return [];
-    return gigsData.data;
-  }, [ gigsData ] );
-
-  const campaignMetrics = useMemo( () => {
-    const total = campaigns.length;
-
-    const active = campaigns.filter( ( campaign ) => {
-      const status = String( ( campaign as { status?: string; campaign_status?: string; } ).campaign_status || ( campaign as { status?: string; } ).status || '' ).toLowerCase();
-      return [ 'active', 'in_progress', 'ongoing', 'open' ].includes( status );
-    } ).length;
-
-    const finished = campaigns.filter( ( campaign ) => {
-      const status = String( ( campaign as { status?: string; campaign_status?: string; } ).campaign_status || ( campaign as { status?: string; } ).status || '' ).toLowerCase();
-      return [ 'completed', 'finished', 'closed' ].includes( status );
-    } ).length;
-
-    const draft = campaigns.filter( ( campaign ) => {
-      const status = String( ( campaign as { status?: string; campaign_status?: string; } ).campaign_status || ( campaign as { status?: string; } ).status || '' ).toLowerCase();
-      return [ 'draft', 'pending', 'pending_approval' ].includes( status );
-    } ).length;
-
-    return { total, active, finished, draft };
-  }, [ campaigns ] );
-
-  const spendMetrics = useMemo( () => {
-    const totalGigs = gigs.length;
-
-    const totalSpend = gigs.reduce( ( sum, gig ) => {
-      if ( gig.gig_cost?.value != null ) return sum + ( gig.gig_cost?.value ?? 0 );
-      if ( gig.compensation?.value != null && typeof gig.number_of_videos === 'number' ) {
-        return sum + ( ( gig.compensation?.value ?? 0 ) * gig.number_of_videos );
-      }
-      if ( gig.compensation?.value != null ) return sum + ( gig.compensation?.value ?? 0 );
-      return sum;
-    }, 0 );
-
-    const avgGigSpend = totalGigs > 0 ? totalSpend / totalGigs : 0;
-
-    return { totalSpend, avgGigSpend };
-  }, [ gigs ] );
+  const analytics = analyticsData?.data;
 
   const financialRows = useMemo<BrandStatRow[]>( () => ( [
-    { label: t( 'totalSpend' ), value: toCurrency( spendMetrics.totalSpend ), numeric: spendMetrics.totalSpend || 0 },
-    { label: t( 'avgGigSpend' ), value: toCurrency( spendMetrics.avgGigSpend ), numeric: spendMetrics.avgGigSpend || 0 },
-  ] ), [ spendMetrics.avgGigSpend, spendMetrics.totalSpend, t ] );
+    {
+      label: t( 'totalSpent' ),
+      value: formatCurrency( metric( analytics?.total_spent ) ),
+      numeric: metric( analytics?.total_spent ),
+    },
+    {
+      label: t( 'approvalRate' ),
+      value: toPercent( metric( analytics?.approval_rate ) ),
+      numeric: metric( analytics?.approval_rate ),
+    },
+  ] ), [ analytics?.approval_rate, analytics?.total_spent, formatCurrency, t ] );
 
   const campaignRows = useMemo<BrandStatRow[]>( () => ( [
-    { label: t( 'total' ), value: `${ campaignMetrics.total }`, numeric: campaignMetrics.total },
-    { label: t( 'active' ), value: `${ campaignMetrics.active }`, numeric: campaignMetrics.active },
-    { label: t( 'finished' ), value: `${ campaignMetrics.finished }`, numeric: campaignMetrics.finished },
-    { label: t( 'draft' ), value: `${ campaignMetrics.draft }`, numeric: campaignMetrics.draft },
-  ] ), [ campaignMetrics.active, campaignMetrics.draft, campaignMetrics.finished, campaignMetrics.total ] );
+    { label: t( 'campaignsCreated' ), value: `${ metric( analytics?.campaigns_created ) }`, numeric: metric( analytics?.campaigns_created ) },
+    { label: t( 'campaignsCompleted' ), value: `${ metric( analytics?.campaigns_completed ) }`, numeric: metric( analytics?.campaigns_completed ) },
+    { label: t( 'gigsCreated' ), value: `${ metric( analytics?.gigs_created ) }`, numeric: metric( analytics?.gigs_created ) },
+    { label: t( 'gigsCompleted' ), value: `${ metric( analytics?.gigs_completed ) }`, numeric: metric( analytics?.gigs_completed ) },
+  ] ), [
+    analytics?.campaigns_completed,
+    analytics?.campaigns_created,
+    analytics?.gigs_completed,
+    analytics?.gigs_created,
+    t,
+  ] );
 
 
   if ( isBrandLoading ) {
@@ -128,14 +106,19 @@ export default function BrandDashboardPage() {
       <div className="ad-shell bg-slate-50/50 mt-0 flex-1 p-2 md:p-5">
         <section className="grid gap-4 md:grid-cols-12 lg:h-full">
           <aside className="space-y-4 md:col-span-5 md:sticky md:top-24 md:self-start h-full">
-            <BrandProfileBlock brand={ brand } brandName={ brandName } brandLogo={ brandLogo } />
+            <BrandProfileBlock brand={ brand } brandName={ brandName } brandLogo={ brandLogo }>
+              <BrandActionMenu brand={ brand } trigger={ <ButtonGroup className='mt-auto min-w-[200px]'>
+                <Button variant='outline' size={ 'sm' } className='flex-1 font-regular'>{ t( 'actions' ) }</Button>
+                <Button variant='outline' size={ 'sm' }><ChevronDown strokeWidth={ 1 } /></Button>
+              </ButtonGroup> } />
+            </BrandProfileBlock>
           </aside>
 
           <section className="space-y-4 md:col-span-7">
             <div className="flex flex-col gap-4 h-full">
               <div className='flex flex-col md:flex-row gap-4 w-full flex-1'>
-                <BrandFinancialsBlock rows={ financialRows } />
-                <BrandCampaignMetricsBlock rows={ campaignRows } />
+                <BrandFinancialsBlock rows={ financialRows } isLoading={ isAnalyticsLoading } />
+                <BrandCampaignMetricsBlock rows={ campaignRows } isLoading={ isAnalyticsLoading } />
               </div>
               <BrandRecentCampaignsBlock brandId={ brandId } />
               <BrandRecentSubmissionsBlock brandId={ brandId } />

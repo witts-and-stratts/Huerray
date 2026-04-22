@@ -7,14 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
 import { BrandStatusBadge } from '@/components/admin/brands/brand-status-badge';
 import { getCountryFlag } from '@/lib/country-flags';
-import type { ModelsBrandResponse } from '@/lib/api/generated/models';
+import type { ModelsBrandResponse, ModelsUserResponse } from '@/lib/api/generated/models';
 import { CopyText } from '@/components/dashboard-ui/copy-text';
 import { UserStatusBadge } from '@/components/admin/users/user-status-badge';
 import { EmailStatusBadge } from '@/components/dashboard-ui/status-badge';
 import { useFormatDate } from '@/lib/hooks/format';
-import { useUser } from '@/lib/api/hooks/users';
 import { cn } from '@/lib/dashboard-utils';
-import { Loader2 } from 'lucide-react';
 import { useTranslations } from "next-intl";
 import { imgpresets } from '@/lib/utils/imgproxy';
 
@@ -42,28 +40,15 @@ function EmptyState( { label }: { label: string; } ) {
   );
 }
 
-function UserTab( { userId }: { userId: string; } ) {
+function UserTab( { user }: { user: ModelsUserResponse; } ) {
   const t = useTranslations( 'dashboard.admin' );
-  const { data: userDetails, isLoading } = useUser( userId );
-  const joinedLabel = useFormatDate( userDetails?.created_at || '' );
-  const updatedLabel = useFormatDate( userDetails?.updated_at || '' );
-
-  if ( isLoading ) {
-    return (
-      <div className="flex items-center justify-center py-8">
-        <Loader2 className="size-5 animate-spin text-muted-foreground" />
-      </div>
-    );
-  }
-
-  if ( !userDetails ) {
-    return <EmptyState label={ t( 'brandProfileBlock.failedToLoadUser' ) } />;
-  }
+  const joinedLabel = useFormatDate( user.created_at || '' );
+  const updatedLabel = useFormatDate( user.updated_at || '' );
 
   const {
     first_name, last_name, username, email,
     user_type, user_status, email_verified, id,
-  } = userDetails;
+  } = user;
 
   const toLabel = ( value?: string ) =>
     value ? value.replace( /_/g, ' ' ).replace( /\b\w/g, c => c.toUpperCase() ) : t( 'brandProfileBlock.na' );
@@ -196,10 +181,10 @@ export function BrandProfileBlock( { brand, brandName, brandLogo, children }: Br
             </WrappedCard>
           </TabsContent>
 
-          {/* User Tab */ }
+          {/* User Tab */}
           <TabsContent value="user">
-            { brand?.user_id ? (
-              <UserTab userId={ brand.user_id } />
+            { brand?.user ? (
+              <UserTab user={ brand.user } />
             ) : (
               <EmptyState label={ t( 'brandProfileBlock.noLinkedUser' ) } />
             ) }

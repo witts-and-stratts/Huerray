@@ -82,6 +82,12 @@
   "brandDashboard": {
     "totalSpend": "Total Spend",
     "avgGigSpend": "Avg Gig Spend",
+    "totalSpent": "Total Spent",
+    "approvalRate": "Approval Rate",
+    "campaignsCreated": "Campaigns Created",
+    "campaignsCompleted": "Campaigns Completed",
+    "gigsCreated": "Gigs Created",
+    "gigsCompleted": "Gigs Completed",
     "total": "Total",
     "active": "Active",
     "finished": "Finished",
@@ -90,7 +96,8 @@
     "brandNotFound": "Brand not found",
     "brandDashboard": "Brand Dashboard",
     "overview": "Overview of brand performance and details",
-    "brands": "Brands"
+    "brands": "Brands",
+    "actions": "Actions"
   },
   "brandCampaignMetricsBlock": {
     "campaignLifecycleOverview": "Campaign lifecycle overview",

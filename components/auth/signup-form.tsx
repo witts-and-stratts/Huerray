@@ -2,7 +2,6 @@
 import { roles } from "@/components/auth/roles";
 import { createBrandSchema, createCreatorSchema } from "@/components/auth/schemas";
 import {
-  AdminFields,
   CommonFields,
   ContactAuthFields,
   FormActions,
@@ -231,7 +230,7 @@ export function SignupForm( {
 
             <CommonFields form={ form } />
 
-            { selectedRole === 'brand' && <AdminFields form={ form } /> }
+
 
             <div className="signup-form__divider" />
 

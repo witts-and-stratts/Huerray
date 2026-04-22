@@ -179,7 +179,8 @@ export function PaymentDetailsSheet( { payment, open, onOpenChange, isAdmin = fa
 
   const formattedDate = useFormatDate( resolvedPayment?.payment_date || '' );
   const formattedCreated = useFormatDate( resolvedPayment?.created_at || '' );
-  const formattedTotal = useFormatCurrency( resolvedPayment?.total?.value ?? 0, resolvedPayment?.total?.currency || 'EUR' );
+  const formatCurrency = useFormatCurrency();
+  const formattedTotal = formatCurrency( resolvedPayment?.total?.value ?? 0, resolvedPayment?.total?.currency || 'EUR' );
 
   if ( !resolvedPayment ) return null;
 

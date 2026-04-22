@@ -93,6 +93,23 @@ function BrandCell( { brand_id, brand_name }: { brand_id?: string; brand_name?: 
   );
 }
 
+function IssuedDateCell( { invoice }: { invoice: ModelsInvoiceResponse; } ) {
+  const formattedDate = useFormatDate( invoice.issued_date || '' );
+  return (
+    <div className="text-sm max-md:whitespace-nowrap">
+      { invoice.issued_date ? formattedDate : '—' }
+    </div>
+  );
+}
+
+function TotalCell( { invoice }: { invoice: ModelsInvoiceResponse; } ) {
+  const formatCurrency = useFormatCurrency();
+  const amount = invoice.total?.value;
+  const currency = invoice.total?.currency;
+  if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
+  return <div className="pl-4 dt-table__money">{ formatCurrency( amount, currency ) }</div>;
+}
+
 // ── Column definitions ────────────────────────────────────────────────────────
 
 export const getColumns = (
@@ -149,11 +166,7 @@ export const getColumns = (
       header: ( { column } ) => (
         <THead title={ t( 'columns.issued' ) } column={ column } />
       ),
-      cell: ( { row } ) => (
-        <div className="text-sm max-md:whitespace-nowrap">
-          { row.original.issued_date ? useFormatDate( row.original.issued_date ) : '—' }
-        </div>
-      ),
+      cell: ( { row } ) => <IssuedDateCell invoice={ row.original } />,
       enableSorting: true,
     },
     {
@@ -176,12 +189,7 @@ export const getColumns = (
       header: ( { column } ) => (
         <THead title={ t( 'columns.amount' ) } column={ column } />
       ),
-      cell: ( { row } ) => {
-        const amount = row.original.total?.value;
-        const currency = row.original.total?.currency;
-        if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
-        return <div className="pl-4 dt-table__money">{ useFormatCurrency( amount, currency ) }</div>;
-      },
+      cell: ( { row } ) => <TotalCell invoice={ row.original } />,
       enableSorting: true,
     },
     {

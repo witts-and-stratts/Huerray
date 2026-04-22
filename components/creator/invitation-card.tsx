@@ -150,7 +150,8 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
 
   const coverImage = ( gig?.campaign?.product_image?.asset || gig?.campaign?.campaign_images?.[ 0 ]?.asset ) || undefined;
   const compensation = gig?.compensation?.value;
-  const formattedCompensation = useFormatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
+  const formatCurrency = useFormatCurrency();
+  const formattedCompensation = formatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
   const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
 
@@ -307,7 +308,8 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
   const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
   const compensation = gig?.compensation?.value;
-  const formattedCompensation = useFormatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
+  const formatCurrency = useFormatCurrency();
+  const formattedCompensation = formatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
 
   const campaign = gig?.campaign;
   const coverImage = campaign?.product_image?.asset || campaign?.campaign_images?.[ 0 ]?.asset;

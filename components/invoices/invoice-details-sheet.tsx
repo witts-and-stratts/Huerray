@@ -201,7 +201,8 @@ export function InvoiceDetailsSheet( { invoice, open, onOpenChange }: InvoiceDet
   const formattedDue = useFormatDate( resolvedInvoice?.due_date || '' );
   const formattedPaid = useFormatDate( resolvedInvoice?.paid_date || '' );
   const formattedCreated = useFormatDate( resolvedInvoice?.created_at || '' );
-  const formattedTotal = useFormatCurrency( resolvedInvoice?.total?.value ?? 0, resolvedInvoice?.total?.currency || 'EUR' );
+  const formatCurrency = useFormatCurrency();
+  const formattedTotal = formatCurrency( resolvedInvoice?.total?.value ?? 0, resolvedInvoice?.total?.currency || 'EUR' );
 
   if ( !resolvedInvoice ) return null;
 

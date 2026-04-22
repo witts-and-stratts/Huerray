@@ -288,8 +288,9 @@ CreatorSubmissionButton.displayName = 'CreatorSubmissionButton';
 export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) {
   const [ selectedSubmission, setSelectedSubmission ] = useState<ModelsVideoSubmissionResponse | null>( null );
 
-  const formattedCompensation = useFormatCurrency( gig.compensation?.value ?? 0, gig.compensation?.currency || 'EUR' );
-  const formattedGigCost = useFormatCurrency( gig.gig_cost?.value ?? 0, gig.gig_cost?.currency || 'EUR' );
+  const formatCurrency = useFormatCurrency();
+  const formattedCompensation = formatCurrency( gig.compensation?.value ?? 0, gig.compensation?.currency || 'EUR' );
+  const formattedGigCost = formatCurrency( gig.gig_cost?.value ?? 0, gig.gig_cost?.currency || 'EUR' );
 
   const coverImage = useMemo(
     () => gig.campaign?.product_image?.asset ?? gig.campaign?.campaign_images?.[ 0 ]?.asset,

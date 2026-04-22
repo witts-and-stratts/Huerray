@@ -318,6 +318,7 @@
       "productImageInvalid": "Enter a valid product image URL.",
       "creatorsNeededRequired": "Enter the number of creators needed.",
       "videosPerCreatorRequired": "Enter the total number of videos.",
+      "videosMustBeGreater": "Total videos must be equal or greater than creators needed.",
       "videoDurationRequired": "Select a video duration.",
       "videoFormatRequired": "Video format is required.",
       "submissionFailed": "Submission failed",

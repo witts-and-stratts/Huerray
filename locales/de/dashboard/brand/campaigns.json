@@ -318,6 +318,7 @@
       "productImageInvalid": "Geben Sie eine gültige URL für das Produktbild ein.",
       "creatorsNeededRequired": "Geben Sie die Anzahl der benötigten Creators ein.",
       "videosPerCreatorRequired": "Geben Sie die Gesamtzahl der Videos ein.",
+      "videosMustBeGreater": "Die Gesamtzahl der Videos muss mindestens so groß sein wie die Zahl der benötigten Creators.",
       "videoDurationRequired": "Wählen Sie eine Videodauer.",
       "videoFormatRequired": "Das Videoformat ist erforderlich.",
       "submissionFailed": "Einreichung fehlgeschlagen",

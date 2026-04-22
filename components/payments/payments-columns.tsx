@@ -53,6 +53,23 @@ function CreatorCell( { creator_id, creator_name }: { creator_id?: string; creat
   );
 }
 
+function PaymentDateCell( { payment }: { payment: ModelsPaymentResponse; } ) {
+  const formatDate = useFormatDate( payment.payment_date || '' );
+  return (
+    <div className="text-sm pl-2 max-md:whitespace-nowrap">
+      { payment.payment_date ? formatDate : '—' }
+    </div>
+  );
+}
+
+function PaymentTotalCell( { payment }: { payment: ModelsPaymentResponse; } ) {
+  const formatCurrency = useFormatCurrency();
+  const amount = payment.total?.value;
+  const currency = payment.total?.currency;
+  if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
+  return <div className="pl-4 dt-table__col-title">{ formatCurrency( amount, currency ) }</div>;
+}
+
 // ── Column definitions ────────────────────────────────────────────────────────
 
 export function usePaymentColumns( isAdmin = false ): ColumnDef<ModelsPaymentResponse>[] {
@@ -101,11 +118,7 @@ export function usePaymentColumns( isAdmin = false ): ColumnDef<ModelsPaymentRes
       {
         accessorKey: 'payment_date',
         header: ( { column } ) => <THead title={ t( 'payments.table.date' ) } column={ column } />,
-        cell: ( { row } ) => (
-          <div className="text-sm pl-2 max-md:whitespace-nowrap">
-            { row.original.payment_date ? useFormatDate( row.original.payment_date ) : '—' }
-          </div>
-        ),
+        cell: ( { row } ) => <PaymentDateCell payment={ row.original } />,
         enableSorting: true,
       },
       {
@@ -140,12 +153,7 @@ export function usePaymentColumns( isAdmin = false ): ColumnDef<ModelsPaymentRes
       {
         accessorKey: 'total',
         header: ( { column } ) => <THead title={ t( 'payments.table.amount' ) } column={ column } />,
-        cell: ( { row } ) => {
-          const amount = row.original.total?.value;
-          const currency = row.original.total?.currency;
-          if ( amount == null ) return <div className="pl-4 text-muted-foreground">—</div>;
-          return <div className="pl-4 dt-table__col-title">{ useFormatCurrency( amount, currency ) }</div>;
-        },
+        cell: ( { row } ) => <PaymentTotalCell payment={ row.original } />,
         enableSorting: true,
       },
       {

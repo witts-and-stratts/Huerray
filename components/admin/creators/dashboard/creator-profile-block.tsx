@@ -1,28 +1,26 @@
 'use client';
 
-import Image from 'next/image';
+import { CreatorStatusBadge } from '@/components/admin/creators/creator-status-badge';
+import { UserStatusBadge } from '@/components/admin/users/user-status-badge';
+import { RoleGuard } from '@/components/auth/role-guard';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Badge } from '@/components/dashboard-ui/badge';
 import { Card, CardContent, CardHeader } from '@/components/dashboard-ui/card';
+import { Content } from '@/components/dashboard-ui/content';
+import { CopyText } from '@/components/dashboard-ui/copy-text';
+import { Skeleton } from '@/components/dashboard-ui/skeleton';
+import { EmailStatusBadge } from '@/components/dashboard-ui/status-badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
-import { CreatorStatusBadge } from '@/components/admin/creators/creator-status-badge';
-import { getCountryFlag } from '@/lib/country-flags';
 import type { ModelsCreatorResponse } from '@/lib/api/generated/models';
-import { imgpresets } from '@/lib/utils/imgproxy';
-import { Content } from '@/components/dashboard-ui/content';
-import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
-import { Skeleton } from '@/components/dashboard-ui/skeleton';
-import { useFormatDate } from '@/lib/hooks/format';
+import { useCreatorBankDetails, useOwnBankDetails } from '@/lib/api/hooks/creators';
 import { useUser, useUserProfile } from '@/lib/api/hooks/users';
-import { useCreatorBankDetails } from '@/lib/api/hooks/creators';
-import { CopyText } from '@/components/dashboard-ui/copy-text';
-import { Separator } from '@/components/dashboard-ui/separator';
-import { UserStatusBadge } from '@/components/admin/users/user-status-badge';
-import { EmailStatusBadge } from '@/components/dashboard-ui/status-badge';
+import { getCountryFlag } from '@/lib/country-flags';
 import { cn } from '@/lib/dashboard-utils';
+import { useFormatDate } from '@/lib/hooks/format';
+import { imgpresets } from '@/lib/utils/imgproxy';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 interface CreatorProfileBlockProps {
   creator: ModelsCreatorResponse;
@@ -130,15 +128,20 @@ function UserTab( { userId, useProfileEndpoint }: { userId: string; useProfileEn
               </CopyText>
             ) : tc( 'sheets.na' )
           } />
-        <Row label="Joined" value={ joinedLabel } />
-        <Row label="Updated" value={ updatedLabel } />
+        <Row label={ t( 'creatorProfileBlock.joined' ) } value={ joinedLabel } />
+        <Row label={ t( 'creatorProfileBlock.updated' ) } value={ updatedLabel } />
       </WrappedCard>
     </div>
   );
 }
 
-function BankTab( { creatorId }: { creatorId: string; } ) {
-  const { data: bankDetails, isLoading } = useCreatorBankDetails( creatorId );
+function BankTab( { creatorId, useProfileEndpoint }: { creatorId: string; useProfileEndpoint?: boolean; } ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
+  const adminBankQuery = useCreatorBankDetails( creatorId, { enabled: !useProfileEndpoint && !!creatorId } );
+  const ownBankQuery = useOwnBankDetails( { enabled: !!useProfileEndpoint } );
+
+  const { data: bankDetails, isLoading } = useProfileEndpoint ? ownBankQuery : adminBankQuery;
 
   if ( isLoading ) {
     return (
@@ -155,32 +158,31 @@ function BankTab( { creatorId }: { creatorId: string; } ) {
   }
 
   if ( !bankDetails || !bankDetails.has_bank_details ) {
-    return <EmptyState label="No bank details on file" />;
+    return <EmptyState label={ t( 'creatorProfileBlock.noBankDetails' ) } />;
   }
 
   return (
     <div className="space-y-3">
-      <WrappedCard title="Bank Details">
-        { bankDetails.bank_name && <Row label="Bank Name" value={ bankDetails.bank_name } /> }
-        { bankDetails.bank_account_name && <Row label="Account Name" value={ bankDetails.bank_account_name } /> }
-        { bankDetails.bank_account_number && (
-          <Row label="Account No." value={ bankDetails.bank_account_number.replace( /(.{4})/g, '$1 ' ).trim() } />
-        ) }
-        { bankDetails.bank_routing_number && (
-          <Row label="Routing No." value={ bankDetails.bank_routing_number } />
-        ) }
-        { bankDetails.bank_address && <Row label="Bank Address" value={ bankDetails.bank_address } /> }
-        { bankDetails.has_tax_details && bankDetails.tax_id && <Row label="Tax ID" value={ bankDetails.tax_id } /> }
-        { bankDetails.tax_residence_country && <Row label="Tax Country" value={ bankDetails.tax_residence_country } /> }
+      <WrappedCard title={ t( 'creatorProfileBlock.bankDetails' ) }>
+        <Row label={ t( 'creatorProfileBlock.bankName' ) } value={ bankDetails.bank_name || tc( 'sheets.na' ) } />
+        <Row label={ t( 'creatorProfileBlock.accountName' ) } value={ bankDetails.bank_account_name || tc( 'sheets.na' ) } />
+        <Row label={ t( 'creatorProfileBlock.accountNumber' ) } value={ bankDetails.bank_account_number ? bankDetails.bank_account_number.replace( /(.{4})/g, '$1 ' ).trim() : tc( 'sheets.na' ) } />
+        <Row label={ t( 'creatorProfileBlock.routingNumber' ) } value={ bankDetails.bank_routing_number || tc( 'sheets.na' ) } />
+        <Row label={ t( 'creatorProfileBlock.bankAddress' ) } value={ bankDetails.bank_address || tc( 'sheets.na' ) } />
+        <Row label={ t( 'creatorProfileBlock.taxId' ) } value={ bankDetails.tax_id || tc( 'sheets.na' ) } />
+        <Row label={ t( 'creatorProfileBlock.taxCountry' ) } value={ bankDetails.tax_residence_country || tc( 'sheets.na' ) } />
       </WrappedCard>
     </div>
   );
 }
 
 export function CreatorProfileBlock( { creator, creatorName, creatorAvatar, children, useProfileEndpoint }: CreatorProfileBlockProps ) {
+  const t = useTranslations( 'dashboard.admin' );
+  const tc = useTranslations( 'dashboard.common' );
   const status = creator?.creator_status || 'inactive';
   const flagName = getCountryFlag( creator?.country );
   const location = [ creator?.city, creator?.country ].filter( Boolean ).join( ', ' );
+  const birthdayLabel = useFormatDate( creator?.date_of_birth || '' );
 
   return (
     <Card className="ad-summary-card border-primary/20 bg-burgundy-50 grow-0 h-full">
@@ -192,7 +194,7 @@ export function CreatorProfileBlock( { creator, creatorName, creatorAvatar, chil
           </Avatar>
           <div className="flex flex-col items-center">
             <span className="ad-card-title card__title font-medium text-foreground">{ creatorName }</span>
-            <span className="ad-card-description text-muted-foreground text-sm">{ creator?.email || 'No contact email' }</span>
+            <span className="ad-card-description text-muted-foreground text-sm">{ creator?.email || t( 'creatorProfileBlock.noContactEmail' ) }</span>
             <div className="mt-2 text-[10px] sm:text-xs">
               <CreatorStatusBadge status={ status as string } />
             </div>
@@ -203,76 +205,79 @@ export function CreatorProfileBlock( { creator, creatorName, creatorAvatar, chil
       <CardContent className="px-3 pb-4">
         <Tabs defaultValue="overview">
           <TabsList className="w-full mb-3">
-            <TabsTrigger value="overview" className="flex-1 text-xs">Overview</TabsTrigger>
-            <TabsTrigger value="bio" className="flex-1 text-xs">Bio</TabsTrigger>
-            <TabsTrigger value="bank" className="flex-1 text-xs">Bank</TabsTrigger>
-            <TabsTrigger value="user" className="flex-1 text-xs">User</TabsTrigger>
+            <TabsTrigger value="overview" className="flex-1 text-xs">{ t( 'creatorProfileBlock.tabs.overview' ) }</TabsTrigger>
+            <RoleGuard excludedRoles={ [ 'creator' ] }>
+              <TabsTrigger value="bio" className="flex-1 text-xs">{ t( 'creatorProfileBlock.tabs.bio' ) }</TabsTrigger>
+            </RoleGuard>
+            <TabsTrigger value="bank" className="flex-1 text-xs">{ t( 'creatorProfileBlock.tabs.bank' ) }</TabsTrigger>
+            <TabsTrigger value="user" className="flex-1 text-xs">{ t( 'creatorProfileBlock.tabs.user' ) }</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */ }
           <TabsContent value="overview">
-            <WrappedCard title="Details">
-              <Row label="Location" value={
+            <WrappedCard title={ t( 'creatorProfileBlock.details' ) }>
+              <Row label={ t( 'creatorProfileBlock.location' ) } value={
                 <span className="flex items-center gap-1.5 justify-end">
                   { flagName && (
                     <Image
                       src={ `/images/flags/${ flagName }.svg` }
-                      alt={ creator?.country || 'Country' }
+                      alt={ creator?.country || t( 'creatorProfileBlock.country' ) }
                       width={ 14 }
                       height={ 10 }
                       className="h-3 w-auto"
                     />
                   ) }
-                  <span>{ location || 'N/A' }</span>
+                  <span>{ location || tc( 'sheets.na' ) }</span>
                 </span>
               } />
-              <Row label="Birthday" value={ creator?.date_of_birth ? useFormatDate( creator.date_of_birth ) : 'N/A' } />
-              <Row label="Gender" value={ ( creator?.gender || 'N/A' ).toLowerCase() } />
-              <Row label="Phone" value={ creator?.phone_number || 'N/A' } />
-              {/* <Row label="Joined" value={ useFormatDate( creator?.created_at! ) } /> */ }
+              <Row label={ t( 'creatorProfileBlock.birthday' ) } value={ creator?.date_of_birth ? birthdayLabel : tc( 'sheets.na' ) } />
+              <Row label={ t( 'creatorProfileBlock.gender' ) } value={ creator?.gender ? String( creator.gender ).toLowerCase() : tc( 'sheets.na' ) } />
+              <Row label={ t( 'creatorProfileBlock.phone' ) } value={ creator?.phone_number || tc( 'sheets.na' ) } />
             </WrappedCard>
           </TabsContent>
 
           {/* Bio Tab */ }
-          <TabsContent value="bio" className="space-y-3">
-            { creator?.application_video?.asset && (
-              <WrappedCard title="Application Video">
-                <video
-                  src={ creator.application_video.asset }
-                  poster={ creator.application_video.thumbnail }
-                  controls
-                  className="w-full rounded-md"
-                />
-              </WrappedCard>
-            ) }
-
-            <WrappedCard title="Biography">
-              { creator?.bio ? (
-                <Content content={ creator.bio } className="text-sm" />
-              ) : (
-                <EmptyState label="No biography provided" />
+          <RoleGuard excludedRoles={ [ 'creator' ] }>
+            <TabsContent value="bio" className="space-y-3">
+              { creator?.application_video?.asset && (
+                <WrappedCard title={ t( 'creatorProfileBlock.applicationVideo' ) }>
+                  <video
+                    src={ creator.application_video.asset }
+                    poster={ creator.application_video.thumbnail }
+                    controls
+                    className="w-full rounded-md"
+                  />
+                </WrappedCard>
               ) }
-            </WrappedCard>
 
-            { creator?.preferred_categories && creator.preferred_categories.length > 0 && (
-              <WrappedCard title="Preferred Categories">
-                <div className="flex flex-wrap gap-1.5">
-                  { creator.preferred_categories.map( ( cat ) => (
-                    <Badge key={ String( cat ) } variant="secondary" className="font-normal capitalize text-xs">
-                      { String( cat ).replace( /_/g, ' ' ) }
-                    </Badge>
-                  ) ) }
-                </div>
+              <WrappedCard title={ t( 'creatorProfileBlock.biography' ) }>
+                { creator?.bio ? (
+                  <Content content={ creator.bio } className="text-sm" />
+                ) : (
+                  <EmptyState label={ t( 'creatorProfileBlock.noBiography' ) } />
+                ) }
               </WrappedCard>
-            ) }
-          </TabsContent>
+
+              { creator?.preferred_categories && creator.preferred_categories.length > 0 && (
+                <WrappedCard title={ t( 'creatorProfileBlock.preferredCategories' ) }>
+                  <div className="flex flex-wrap gap-1.5">
+                    { creator.preferred_categories.map( ( cat ) => (
+                      <Badge key={ String( cat ) } variant="secondary" className="font-normal capitalize text-xs">
+                        { String( cat ).replace( /_/g, ' ' ) }
+                      </Badge>
+                    ) ) }
+                  </div>
+                </WrappedCard>
+              ) }
+            </TabsContent>
+          </RoleGuard>
 
           {/* Bank Details Tab */ }
           <TabsContent value="bank">
-            { creator?.id ? (
-              <BankTab creatorId={ creator.id } />
+            { creator?.id || useProfileEndpoint ? (
+              <BankTab creatorId={ creator?.id || '' } useProfileEndpoint={ useProfileEndpoint } />
             ) : (
-              <EmptyState label="No bank details on file" />
+              <EmptyState label={ t( 'creatorProfileBlock.noBankDetails' ) } />
             ) }
           </TabsContent>
 
@@ -281,7 +286,7 @@ export function CreatorProfileBlock( { creator, creatorName, creatorAvatar, chil
             { creator?.user_id ? (
               <UserTab userId={ creator.user_id } useProfileEndpoint={ useProfileEndpoint } />
             ) : (
-              <EmptyState label="No linked user account" />
+              <EmptyState label={ t( 'creatorProfileBlock.noLinkedUser' ) } />
             ) }
           </TabsContent>
         </Tabs>

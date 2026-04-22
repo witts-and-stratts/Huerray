@@ -7,8 +7,10 @@ import { AlertTriangle, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { Button } from '@/components/dashboard-ui/button';
+import { useTranslations } from 'next-intl';
 
 type ProfileRole = 'brand' | 'creator';
+type ProfileStatusBannerTranslation = ReturnType<typeof useTranslations>;
 
 interface ProfileStatusBannerProps {
   role: ProfileRole;
@@ -20,26 +22,27 @@ function toReadableStatus( status: string ) {
   return status.replace( /_/g, ' ' );
 }
 
-function getStatusMessage( role: ProfileRole, status: string ) {
+function getStatusMessage( role: ProfileRole, status: string, t: ProfileStatusBannerTranslation ) {
   const normalized = status.toLowerCase();
-  const noun = role === 'brand' ? 'brand' : 'creator';
+  const noun = role === 'brand' ? t( 'roleBrand' ) : t( 'roleCreator' );
 
   if ( normalized === 'pending_approval' ) {
-    return `Your ${ noun } profile is awaiting approval. Some actions are unavailable until approval.`;
+    return t( 'messages.pendingApproval', { role: noun } );
   }
 
   if ( normalized === 'returned' || normalized === 'rejected' ) {
-    return `Your ${ noun } profile was returned for updates. Some actions are unavailable until approval.`;
+    return t( 'messages.returned', { role: noun } );
   }
 
   if ( normalized === 'created' || normalized === 'draft' ) {
-    return `Your ${ noun } profile is not approved yet. Some actions are unavailable until approval.`;
+    return t( 'messages.notApproved', { role: noun } );
   }
 
-  return `Your ${ noun } profile status is "${ toReadableStatus( normalized ) }". Some actions are unavailable until approval.`;
+  return t( 'messages.status', { role: noun, status: toReadableStatus( normalized ) } );
 }
 
 export function ProfileStatusBanner( { role }: ProfileStatusBannerProps ) {
+  const t = useTranslations( 'auth.profileStatusBanner' );
   const [ dismissed, setDismissed ] = useState( false );
   const creatorProfile = useAppSelector( selectCreatorProfile );
   const brandProfile = useAppSelector( selectBrandProfile );
@@ -54,7 +57,7 @@ export function ProfileStatusBanner( { role }: ProfileStatusBannerProps ) {
     return null;
   }
 
-  const message = getStatusMessage( role, normalizedStatus );
+  const message = getStatusMessage( role, normalizedStatus, t );
   const creatorStatusComment = role === 'creator' ? creatorProfile?.status_comments?.trim() : '';
 
   return (
@@ -72,13 +75,13 @@ export function ProfileStatusBanner( { role }: ProfileStatusBannerProps ) {
             </div>
             <div>
               <p className="text-sm text-amber-800">
-                <span className="font-medium">Profile approval required.</span>
+                <span className="font-medium">{ t( 'title' ) }</span>
                 { ' ' }
                 { message }
               </p>
               { creatorStatusComment && (
                 <p className="mt-1 text-sm text-amber-800">
-                  <span className="font-medium">Admin note:</span>
+                  <span className="font-medium">{ t( 'adminNote' ) }</span>
                   { ' ' }
                   { creatorStatusComment }
                 </p>
@@ -91,7 +94,7 @@ export function ProfileStatusBanner( { role }: ProfileStatusBannerProps ) {
               size="icon-sm"
               onClick={ () => setDismissed( true ) }
               className="text-amber-600 hover:text-amber-800 hover:bg-amber-100"
-              aria-label="Dismiss"
+              aria-label={ t( 'dismiss' ) }
             >
               <X className="h-4 w-4" />
             </Button>

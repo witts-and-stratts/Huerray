@@ -96,6 +96,11 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       url: "/brand/cases",
       icon: CustomerSupportIcon,
     },
+    {
+      title: withFallback( t, "brand.profile", "Profile" ),
+      url: "/brand/profile",
+      icon: Store01Icon,
+    },
   ],
   // documents: [
   //   { name: withFallback( t, "brand.savedLists", "Saved Lists" ), url: "/brand/saved-lists", icon: DatabaseIcon },

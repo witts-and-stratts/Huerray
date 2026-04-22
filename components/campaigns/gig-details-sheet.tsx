@@ -33,7 +33,8 @@ import { useFormatCurrency } from '@/lib/hooks/format';
 import { formatDate } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { ArrowRight, ChevronDown, Globe, Loader2, Plus, VideoIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
 import * as React from 'react';
 import { toast } from 'sonner';
 import { Row } from '../admin/creators/creator-details-sheet';
@@ -468,6 +469,19 @@ function GigFooter( {
   const invitationActionsT = useTranslations( 'dashboard.creator.invitations.actions' );
   const invitationDialogsT = useTranslations( 'dashboard.creator.invitations.dialogs' );
   const tc = useTranslations( 'dashboard.common' );
+  const locale = useLocale();
+  const role = useRole();
+
+  const ViewCampaignButton = () => campaignHref && (
+    <Button variant="outline" className="self-start px-10">
+      <Link href={ campaignHref }>{ tc( 'viewCampaign' ) }</Link>
+    </Button>
+  );
+
+  const campaignId = gig.campaign_id ?? gig.campaign?.id;
+  const campaignHref = campaignId
+    ? `/${ locale }/${ role === 'admin' ? 'admin' : 'brand' }/campaigns/${ campaignId }`
+    : null;
   return (
     <SheetFooter className="px-6 pb-6 pt-3 shrink-0 flex flex-col gap-3 border-t border-border/50">
       { ( compensationValue || gigCostValue ) && (
@@ -522,20 +536,27 @@ function GigFooter( {
       </RoleGuard>
 
       <RoleGuard allowedRoles={ [ 'admin' ] }>
-        <GigActionMenu
-          gig={ gig }
-          onViewGig={ ( _, tab ) => onSelectTab( tab ?? 'details' ) }
-          trigger={
-            <ButtonGroup className="self-start min-w-[240px]">
-              <Button variant="outline" size="sm" className="font-regular flex-1">
-                { tc( 'actions' ) }
-              </Button>
-              <Button variant="outline" size="sm" className="font-regular shrink-0">
-                <ChevronDown className="size-4" />
-              </Button>
-            </ButtonGroup>
-          }
-        />
+        <div className="flex items-center gap-2">
+          <GigActionMenu
+            gig={ gig }
+            onViewGig={ ( _, tab ) => onSelectTab( tab ?? 'details' ) }
+            trigger={
+              <ButtonGroup className="self-start min-w-[240px]">
+                <Button variant="outline" size="sm" className="font-regular flex-1">
+                  { tc( 'actions' ) }
+                </Button>
+                <Button variant="outline" size="sm" className="font-regular shrink-0">
+                  <ChevronDown className="size-4" />
+                </Button>
+              </ButtonGroup>
+            }
+          />
+          <ViewCampaignButton />
+        </div>
+      </RoleGuard>
+
+      <RoleGuard allowedRoles={ [ 'brand' ] }>
+        <ViewCampaignButton />
       </RoleGuard>
 
       <RoleGuard allowedRoles={ [ 'creator' ] }>
@@ -613,8 +634,9 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
   // Wait for all creator-specific queries before showing action buttons to avoid flashing
   const isFooterLoading = isCreator && ( isSubmissionsLoading || ( needsFetch && ( isInvitationLoading || isApplicationsLoading ) ) );
 
-  const formattedCompensation = useFormatCurrency( gig?.compensation?.value ?? 0, gig?.compensation?.currency || 'EUR' );
-  const formattedGigCost = useFormatCurrency( gig?.gig_cost?.value ?? 0, gig?.gig_cost?.currency || 'EUR' );
+  const formatCurrency = useFormatCurrency();
+  const formattedCompensation = formatCurrency( gig?.compensation?.value ?? 0, gig?.compensation?.currency || 'EUR' );
+  const formattedGigCost = formatCurrency( gig?.gig_cost?.value ?? 0, gig?.gig_cost?.currency || 'EUR' );
 
   React.useEffect( () => {
     if ( !open ) return;

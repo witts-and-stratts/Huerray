@@ -31,6 +31,7 @@ import { useGigs } from '@/lib/api/hooks/gigs';
 import { useCreatePaymentItem, usePayment, usePaymentItems } from '@/lib/api/hooks/payments';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { type SelectOption } from '@/components/dashboard-ui/superfield/types';
+import { getPaymentMethodOptions } from './payment-method-options';
 
 interface PaymentUpdateSheetProps {
   open: boolean;
@@ -178,6 +179,11 @@ export function PaymentUpdateSheet( {
   const [ draftItems, setDraftItems ] = useState<DraftPaymentItem[]>( [] );
   const [ showAddForm, setShowAddForm ] = useState( false );
   const [ addForm, setAddForm ] = useState( EMPTY_ADD_FORM );
+
+  const paymentMethodOptions: SelectOption[] = useMemo(
+    () => getPaymentMethodOptions( t ),
+    [ t ]
+  );
 
   const paymentId = payment.id || '';
   const { data: paymentDetailResponse, isLoading: isLoadingPayment } = usePayment( paymentId, {
@@ -544,10 +550,11 @@ export function PaymentUpdateSheet( {
             </WrappedCard>
 
             <SuperField
-              type="text"
+              type="select"
               label={ t( 'payments.table.method' ) }
+              options={ paymentMethodOptions }
               value={ editMethod }
-              onChange={ ( e ) => setEditMethod( e.target.value ) }
+              onValueChange={ ( v ) => setEditMethod( v || '' ) }
               placeholder={ t( 'payments.actions.methodPlaceholder' ) }
             />
             <SuperField

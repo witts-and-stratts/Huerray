@@ -228,10 +228,10 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
       >
         <div className="flex justify-between items-start gap-3">
           <div className="space-y-1 flex-1 min-w-0">
-            <p className={ cn( "text-sm flex items-center gap-2", !notification.is_read ? "font-semibold text-primary" : "font-medium text-muted-foreground" ) }>
-              { !notification.is_read && (
+            <p className={ cn( "text-sm flex items-start gap-2", !notification.is_read ? "font-semibold text-primary" : "font-medium text-muted-foreground" ) }>
+              {/* { !notification.is_read && (
                 <span className="h-2 w-2 shrink-0 rounded-full bg-primary" aria-hidden="true" />
-              ) }
+              ) } */}
               { notification.title }
             </p>
             <div className="relative">

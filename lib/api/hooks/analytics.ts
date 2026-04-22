@@ -24,13 +24,14 @@ export type AnalyticsFilters = {
   period?: AnalyticsPeriodFilter;
   startDate?: string;
   endDate?: string;
+  brandId?: string;
 };
 
 type AnalyticsQueryOptions<TResponse> = Omit<UseQueryOptions<TResponse, ApiError>, 'queryKey' | 'queryFn'>;
 
 function isAnalyticsFilters( value: unknown ): value is AnalyticsFilters {
   if ( !value || typeof value !== 'object' ) return false;
-  return 'period' in value || 'startDate' in value || 'endDate' in value;
+  return 'period' in value || 'startDate' in value || 'endDate' in value || 'brandId' in value;
 }
 
 function resolveAnalyticsArgs<TResponse>(

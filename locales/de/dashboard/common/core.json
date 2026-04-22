@@ -56,6 +56,7 @@
   "create": "erstellen.",
   "createValue": "Erstellen {value}",
   "view": "Siehe",
+  "viewCampaign": "Kampagne ansehen",
   "actions": "Aktionen",
   "status": "Status",
   "selectedCount": "{count} ausgewählt",

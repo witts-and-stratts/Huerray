@@ -84,7 +84,7 @@ export function CampaignActionMenu( {
         onSuccess: () => {
           toast.success( t( 'deletedCampaign' ) );
           setDeleteDialogOpen( false );
-          if ( !hideViewDetails ) {
+          if ( hideViewDetails ) {
             router.push( basePath + "/campaigns" );
           } else {
             router.refresh();
@@ -338,8 +338,8 @@ export function CampaignActionMenu( {
       label: t( 'delete' ),
       action: () => setDeleteDialogOpen( true ),
       className: "text-destructive focus:text-destructive",
-      allowedRoles: [ "admin" ],
-      condition: () => !isCompleted,
+      allowedRoles: [ "admin", "brand" ],
+      condition: () => !isCompleted && ( campaignStatus === UtilsCampaignStatus.CampaignStatusDraft || campaignStatus === UtilsCampaignStatus.CampaignStatusReturned ),
     },
   ];
 

@@ -318,6 +318,7 @@
       "productImageInvalid": "Saisissez une URL valide pour l'image du produit.",
       "creatorsNeededRequired": "Indiquez le nombre de créateurs nécessaires.",
       "videosPerCreatorRequired": "Entrez le nombre total de vidéos.",
+      "videosMustBeGreater": "Le nombre total de vidéos doit être égal ou supérieur au nombre de créateurs nécessaires.",
       "videoDurationRequired": "Sélectionnez une durée de vidéo.",
       "videoFormatRequired": "Le format vidéo est requis.",
       "submissionFailed": "Échec de la soumission",

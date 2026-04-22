@@ -109,7 +109,8 @@ export function ApplicationCard( { application, onClick }: ApplicationCardProps 
   const numberOfVideos = gig?.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
   const compensation = gig?.compensation?.value;
-  const formattedCompensation = useFormatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
+  const formatCurrency = useFormatCurrency();
+  const formattedCompensation = formatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
 
   const appliedDate = application.applied_at
     ? Intl.DateTimeFormat( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } ).format( new Date( application.applied_at ) )

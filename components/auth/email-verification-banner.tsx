@@ -13,10 +13,12 @@ import { useUser, useUserProfile } from '@/lib/api/hooks/users';
 import { useAuth } from '@/lib/auth/auth-context';
 import { Loader2, Mail, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 export function EmailVerificationBanner() {
+  const t = useTranslations( 'auth.emailVerificationBanner' );
   const [ user, setUser ] = useState<ModelsUserResponse | null>( null );
   const role = useRole();
   const [ dismissed, setDismissed ] = useState( false );
@@ -43,13 +45,13 @@ export function EmailVerificationBanner() {
     try {
       const authApi = new AuthenticationApi( undefined, undefined, apiClient );
       await authApi.authResendVerificationPost( { request: { email: user.email } } );
-      toast.success( 'Verification email sent', {
-        description: 'Please check your inbox and spam folder.',
+      toast.success( t( 'toast.sentTitle' ), {
+        description: t( 'toast.sentDescription' ),
         richColors: true
       } );
     } catch ( error ) {
-      toast.error( 'Failed to send verification email', {
-        description: 'Please try again later.',
+      toast.error( t( 'toast.sendFailedTitle' ), {
+        description: t( 'toast.tryAgainLater' ),
         richColors: true
       } );
     } finally {
@@ -59,7 +61,7 @@ export function EmailVerificationBanner() {
 
   const handleVerifyCode = async () => {
     if ( !verificationCode.trim() ) {
-      toast.error( 'Please enter the verification code' );
+      toast.error( t( 'toast.codeRequired' ) );
       return;
     }
 
@@ -71,16 +73,16 @@ export function EmailVerificationBanner() {
       // Update user state to reflect verified email
       setUser( { ...user, email_verified: true } );
 
-      toast.success( 'Email verified successfully!', {
-        description: 'Your email has been verified.',
+      toast.success( t( 'toast.verifiedTitle' ), {
+        description: t( 'toast.verifiedDescription' ),
         richColors: true
       } );
 
       setIsDialogOpen( false );
       setVerificationCode( '' );
     } catch ( error ) {
-      toast.error( 'Verification failed', {
-        description: 'Invalid or expired verification code. Please try again.',
+      toast.error( t( 'toast.verifyFailedTitle' ), {
+        description: t( 'toast.verifyFailedDescription' ),
         richColors: true
       } );
     } finally {
@@ -102,15 +104,15 @@ export function EmailVerificationBanner() {
               <Mail className="h-4 w-4 text-amber-600" />
             </div>
             <p className="text-sm text-amber-800">
-              <span className="font-medium">Verify your email address.</span>
+              <span className="font-medium">{ t( 'title' ) }</span>
               { ' ' }
-              Please check your inbox for a verification link.
+              { t( 'description' ) }
               { ' ' }
               <button
                 onClick={ () => setIsDialogOpen( true ) }
                 className="font-medium underline underline-offset-2 hover:text-amber-900 transition-colors"
               >
-                Enter code manually
+                { t( 'enterCodeManually' ) }
               </button>
             </p>
           </div>
@@ -123,14 +125,14 @@ export function EmailVerificationBanner() {
               className="bg-white hover:bg-amber-50 border-amber-300 text-amber-700 hover:text-amber-800"
             >
               { isResending && <Loader2 className="mr-2 h-3 w-3 animate-spin" /> }
-              Resend email
+              { t( 'resendEmail' ) }
             </Button>
             <Button
               variant="ghost"
               size="icon-sm"
               onClick={ () => setDismissed( true ) }
               className="text-amber-600 hover:text-amber-800 hover:bg-amber-100"
-              aria-label="Dismiss"
+              aria-label={ t( 'dismiss' ) }
             >
               <X className="h-4 w-4" />
             </Button>
@@ -141,20 +143,20 @@ export function EmailVerificationBanner() {
       <ConfirmDialog
         open={ isDialogOpen }
         onOpenChange={ setIsDialogOpen }
-        title="Enter verification code"
-        description={ `Enter the verification code from the email we sent to ${ user.email }` }
-        confirmLabel="Verify email"
+        title={ t( 'dialog.title' ) }
+        description={ t( 'dialog.description', { email: user.email || '' } ) }
+        confirmLabel={ t( 'dialog.confirmLabel' ) }
         onConfirm={ handleVerifyCode }
         confirmDisabled={ !verificationCode.trim() }
         isLoading={ isVerifying }
-        loadingText="Verifying..."
+        loadingText={ t( 'dialog.loadingText' ) }
         className="sm:max-w-md"
       >
         <div className="space-y-2 pt-4">
-          <Label htmlFor="verification-code">Verification code</Label>
+          <Label htmlFor="verification-code">{ t( 'dialog.codeLabel' ) }</Label>
           <Input
             id="verification-code"
-            placeholder="Enter your verification code"
+            placeholder={ t( 'dialog.codePlaceholder' ) }
             value={ verificationCode }
             onChange={ ( e ) => setVerificationCode( e.target.value ) }
             onKeyDown={ ( e ) => e.key === 'Enter' && !isVerifying && verificationCode.trim() && handleVerifyCode() }

@@ -507,7 +507,7 @@ export function HelpCenterPage( {
               <div className="max-w-md">
                 <h2 className="text-lg font-semibold mb-1">{ t( 'helpSheet.submitCta' ) }</h2>
                 <p className="text-sm text-muted-foreground mb-5">{ t( 'helpSheet.hero.subtitle' ) }</p>
-                <SubmitCaseTab onSuccess={ () => {} } />
+                <SubmitCaseTab role={ role } onSuccess={ () => {} } />
               </div>
             ) }
             { section === 'tickets' && (

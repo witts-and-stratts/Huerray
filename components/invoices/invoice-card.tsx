@@ -34,6 +34,11 @@ export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
     total,
   } = invoice;
 
+  const formatCurrency = useFormatCurrency();
+  const formattedTotal = total?.value != null ? formatCurrency( total.value, total.currency ) : null;
+  const formattedIssued = useFormatDate( issued_date || '' );
+  const formattedDue = useFormatDate( due_date || '' );
+
   return (
     <>
       <Card className='py-3 justify-between gap-1 h-full'>
@@ -62,7 +67,7 @@ export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
           <div className='flex items-center justify-between gap-2'>
             <InvoiceStatusBadge status={ invoice_status } />
             { total?.value != null && (
-              <span className='font-medium dt-table__money'>{ useFormatCurrency( total.value, total.currency ) }</span>
+              <span className='font-medium dt-table__money'>{ formattedTotal }</span>
             ) }
           </div>
 
@@ -70,13 +75,13 @@ export function InvoiceCard( { invoice, isAdmin }: InvoiceCardProps ) {
             { issued_date && (
               <div className='flex justify-between'>
                 <span>{ t( 'columns.issued' ) }</span>
-                <span>{ useFormatDate( issued_date ) }</span>
+                <span>{ formattedIssued }</span>
               </div>
             ) }
             { due_date && (
               <div className='flex justify-between'>
                 <span>{ t( 'details.due' ) }</span>
-                <span>{ useFormatDate( due_date ) }</span>
+                <span>{ formattedDue }</span>
               </div>
             ) }
           </div>

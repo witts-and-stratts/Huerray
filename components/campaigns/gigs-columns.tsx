@@ -220,10 +220,11 @@ const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 // ─── Reward Cell ──────────────────────────────────────────────────────────────
 
 const RewardCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
+  const formatCurrency = useFormatCurrency();
   const amount = row.original.compensation?.value ?? row.original.gig_cost?.value;
   if ( amount == null ) return <span className="text-muted-foreground">—</span>;
   return (
-    <span className="dt-table__money">{ useFormatCurrency( amount, "EUR" ) }</span>
+    <span className="dt-table__money">{ formatCurrency( amount, "EUR" ) }</span>
   );
 };
 
@@ -273,6 +274,15 @@ const GigActionsCell = ( { row, onViewGig, onEditGig, className }: {
       </ButtonGroup>
     </div>
   );
+};
+
+// ─── Gig cost cell ────────────────────────────────────────────────────────────
+
+const GigCostCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
+  const formatCurrency = useFormatCurrency();
+  const amount = row.original.gig_cost?.value;
+  if ( amount == null ) return <span className="text-muted-foreground text-base">—</span>;
+  return <span className="dt-table__money">{ formatCurrency( amount, "EUR" ) }</span>;
 };
 
 // ─── Column definitions ───────────────────────────────────────────────────────
@@ -380,11 +390,7 @@ export const getColumns = (
     {
       accessorKey: 'gig_cost',
       header: () => <span className='font-regular'>{ t( 'gigCost' ) }</span>,
-      cell: ( { row } ) => {
-        const amount = row.original.gig_cost?.value;
-        if ( amount == null ) return <span className="text-muted-foreground text-base">—</span>;
-        return <span className="dt-table__money">{ useFormatCurrency( amount, "EUR" ) }</span>;
-      },
+      cell: ( { row } ) => <GigCostCell row={ row } />,
     },
     {
       accessorKey: 'deadline',

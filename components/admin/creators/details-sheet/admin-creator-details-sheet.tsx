@@ -153,6 +153,8 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
                 <Row label={ t( 'creatorDetails.bankName' ) } value={ bankDetails?.bank_name || tc( 'sheets.na' ) } />
                 <Separator />
                 <Row label={ t( 'creatorDetails.routingNumber' ) } value={ bankDetails?.bank_routing_number || tc( 'sheets.na' ) } />
+                <Separator />
+                <Row label="Bank Address" value={ bankDetails?.bank_address || tc( 'sheets.na' ) } />
               </WrappedCard>
               <WrappedCard title={ t( 'creatorDetails.taxDetails' ) }>
                 <Row label={ t( 'creatorDetails.taxCountry' ) } value={ bankDetails?.tax_residence_country || tc( 'sheets.na' ) } />
@@ -225,7 +227,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
                 onApproveProfile={ onApproveProfile }
                 onRejectProfile={ onRejectProfile }
                 trigger={
-                  <Button variant="outline" size="sm" className="font-regular flex-1 w-full">
+                  <Button variant="outline" size="sm" className="font-regular flex-1 grow-0 w-full">
                     { !isPendingApproval ? tc( 'actions' ) : null }
                     <ChevronDown className="size-4" />
                   </Button>

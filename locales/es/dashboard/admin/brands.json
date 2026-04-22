@@ -82,6 +82,12 @@
   "brandDashboard": {
     "totalSpend": "Gasto total",
     "avgGigSpend": "Gasto medio por Gigante",
+    "totalSpent": "Total gastado",
+    "approvalRate": "Tasa de aprobación",
+    "campaignsCreated": "Campañas creadas",
+    "campaignsCompleted": "Campañas finalizadas",
+    "gigsCreated": "Conciertos creados",
+    "gigsCompleted": "Conciertos realizados",
     "total": "Total",
     "active": "Activo",
     "finished": "Terminado",
@@ -90,7 +96,8 @@
     "brandNotFound": "Marca no encontrada",
     "brandDashboard": "Cuadro de mandos de la marca",
     "overview": "Visión general del rendimiento de la marca y detalles",
-    "brands": "Marcas"
+    "brands": "Marcas",
+    "actions": "Acciones"
   },
   "brandCampaignMetricsBlock": {
     "campaignLifecycleOverview": "Resumen del ciclo de vida de la campaña",
