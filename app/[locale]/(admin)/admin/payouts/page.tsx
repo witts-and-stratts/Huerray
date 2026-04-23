@@ -1,7 +1,12 @@
+import type { Metadata } from 'next';
 import { SubHeader } from '@/components/subheader';
 import { NewPaymentButton } from '@/components/payments/new-payment-sheet';
 import { getTranslations } from 'next-intl/server';
 import { AdminPaymentsClient } from './admin-payments-client';
+
+export const metadata: Metadata = {
+  title: 'Payouts',
+};
 
 export default async function AdminPaymentsPage() {
   const t = await getTranslations( 'dashboard.admin.paymentsPage' );

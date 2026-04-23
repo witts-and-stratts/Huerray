@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { HelpCenterPage } from '@/components/ui/help-sheet/help-center-page';
 import { resolveHelpRoute } from '@/components/ui/help-sheet/help-routing';
@@ -5,6 +6,10 @@ import { resolveHelpRoute } from '@/components/ui/help-sheet/help-routing';
 interface AdminHelpPageProps {
   params: Promise<{ slug?: string[] }>;
 }
+
+export const metadata: Metadata = {
+  title: 'Help Center',
+};
 
 export default async function AdminHelpPage( { params }: AdminHelpPageProps ) {
   const { slug } = await params;

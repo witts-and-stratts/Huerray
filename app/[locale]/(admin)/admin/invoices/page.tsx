@@ -1,7 +1,12 @@
+import type { Metadata } from 'next';
 import { SubHeader } from '@/components/subheader';
 import { getTranslations } from 'next-intl/server';
 import { AdminInvoicesClient } from './admin-invoices-client';
 import { NewInvoiceDialog } from '@/components/invoices/new-invoice-dialog';
+
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
 
 export default async function AdminInvoicesPage() {
   const t = await getTranslations( 'dashboard.admin.invoicesPage' );

@@ -4,11 +4,20 @@ import { QueryProvider } from '@/lib/api/query-provider';
 import { AuthProvider } from '@/lib/auth/auth-context';
 import { cn } from '@/lib/dashboard-utils';
 import StoreProvider from '@/lib/redux/store-provider';
+import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Dashboard - Huerray',
+    template: '%s - Huerray',
+  },
+  robots: { index: false, follow: false },
+};
 
 export default async function AdminLayout( {
   children,
@@ -22,10 +31,6 @@ export default async function AdminLayout( {
 
   return (
     <html lang={ locale } suppressHydrationWarning>
-      <head>
-        <title>Dashboard - Huerray</title>
-        <meta name='robots' content='noindex, nofollow' />
-      </head>
       <body className={ cn( 'h-screen! overflow-y-hidden!', inter.className ) } suppressHydrationWarning>
         <NextIntlClientProvider messages={ messages }>
           <AuthProvider>
