@@ -11,10 +11,10 @@ export default function SubpageHeading( {
 } ) {
   return (
     <div>
-      <h1 className="text-h4 font-primary font-normal tracking-tight text-primary">
+      <h1 className="page-title">
         { title }
       </h1>
-      <p className="text-muted-foreground/70 mt-1 font-regular max-w-[600px]" dangerouslySetInnerHTML={ { __html: stripTags( description ) || '' } } />
+      <p className="page-description" dangerouslySetInnerHTML={ { __html: stripTags( description ) || '' } } />
       { children && (
         <div className="mt-2">
           { children }

@@ -25,6 +25,7 @@ export type NotificationActionLabelKey =
   | "viewCampaign"
   | "reviewBrandProfile"
   | "reviewCreatorProfile"
+  | "reviewProfile"
   | "viewDetails";
 
 // Derived from current notification payload variants.
@@ -269,6 +270,14 @@ export function resolveNotificationAction(
       kind: "internal-route",
       labelKey,
       href: locale ? `/${ locale }/creator/profile` : "/creator/profile",
+    };
+  }
+
+  if ( isBrandNotification( notification ) && role === "brand" ) {
+    return {
+      kind: "internal-route",
+      labelKey: "reviewProfile",
+      href: locale ? `/${ locale }/brand/profile` : "/brand/profile",
     };
   }
 

@@ -1,0 +1,214 @@
+@reference 'tailwindcss';
+@reference '../dashboard-globals.css';
+
+@layer components {
+  /* Shell */
+  .help-center {
+    @apply p-4 md:p-6 pt-0 md:pt-0 h-full min-h-0;
+  }
+
+  .help-center__frame {
+    @apply bg-background ring-foreground/10 ring-1 rounded-md shadow-sm h-full min-h-[560px] overflow-hidden;
+  }
+
+  .help-center__layout {
+    @apply flex flex-col h-full min-h-0 overflow-hidden rounded-md;
+  }
+
+  .help-center__nav {
+    @apply flex items-center p-3 border-b border-border bg-muted/30 overflow-x-auto gap-2 shrink-0;
+  }
+
+  .help-center__nav-button {
+    @apply gap-2 rounded-full whitespace-nowrap;
+  }
+
+  .help-center__nav-button--active {
+    @apply bg-muted hover:bg-muted;
+  }
+
+  .help-center__nav-icon {
+    @apply size-4 shrink-0;
+  }
+
+  .help-center__inset {
+    @apply flex-1 overflow-y-auto p-4! md:p-6! min-h-0;
+  }
+
+  /* Section panels (submit / tickets) */
+  .help-center__panel {
+    @apply max-w-md;
+  }
+
+  .help-center__panel-subtitle {
+    @apply text-sm text-muted-foreground mb-5;
+  }
+
+  /* Submit case form */
+  .help-submit {
+    @apply space-y-6;
+  }
+
+  .help-submit__fields {
+    @apply space-y-4;
+  }
+
+  .help-submit__footer {
+    @apply sticky -bottom-4 md:-bottom-6 -mx-4 md:-mx-6 -mb-4 md:-mb-6 mt-6 border-t bg-background p-4;
+  }
+
+  .help-submit__button {
+    @apply w-full h-12 text-base font-semibold;
+  }
+
+  /* Main view */
+  .help-main {
+    @apply flex flex-col gap-8;
+  }
+
+  .help-main__hero {
+    @apply text-center pt-2;
+  }
+
+  .help-main__hero-subtitle {
+    @apply text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed mb-5;
+  }
+
+  .help-main__search {
+    @apply flex gap-2 max-w-sm mx-auto;
+  }
+
+  .help-main__search-field {
+    @apply flex-1 text-left;
+  }
+
+  .help-main__search-button {
+    @apply shrink-0 gap-1.5 px-4;
+  }
+
+  .help-main__search-button-icon {
+    @apply size-4;
+  }
+
+  .help-main__cards {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-3;
+  }
+
+  .help-main__card {
+    @apply border border-border rounded-xl p-4 flex flex-col gap-3 hover:border-primary/40 hover:bg-primary/2 transition-colors;
+  }
+
+  .help-main__card-icon-wrap {
+    @apply w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0;
+  }
+
+  .help-main__card-icon {
+    @apply size-5 text-primary;
+  }
+
+  .help-main__card-body {
+    @apply flex-1;
+  }
+
+  .help-main__card-title {
+    @apply text-base font-medium font-primary leading-relaxed mb-1;
+  }
+
+  .help-main__card-description {
+    @apply text-xs text-muted-foreground leading-relaxed;
+  }
+
+  .help-main__card-link {
+    @apply text-xs font-medium underline underline-offset-2 text-left text-foreground hover:text-primary transition-colors w-fit;
+  }
+
+  .help-main__cta-row {
+    @apply flex gap-3 border-t border-border pt-6;
+  }
+
+  .help-main__cta-button {
+    @apply gap-2;
+  }
+
+  .help-main__cta-button--ghost {
+    @apply gap-2 text-muted-foreground;
+  }
+
+  .help-main__faq {
+    @apply border-t border-border pt-6;
+  }
+
+  .help-main__faq-header {
+    @apply mb-4;
+  }
+
+  .help-main__faq-description {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* FAQ list (shared) */
+  .help-faq {
+    @apply flex flex-col gap-5;
+  }
+
+  .help-faq__description {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .help-faq__search {
+    @apply relative;
+  }
+
+  .help-faq__search-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none;
+  }
+
+  .help-faq__search-input {
+    @apply w-full rounded-lg border border-border bg-background pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30;
+  }
+
+  .help-faq__empty {
+    @apply text-sm text-muted-foreground text-center py-8;
+  }
+
+  .help-faq__answer {
+    @apply text-sm text-muted-foreground leading-relaxed pb-4;
+  }
+
+  .help-faq__contact {
+    @apply text-xs text-muted-foreground border-t border-border pt-4;
+  }
+
+  .help-faq__contact-link {
+    @apply text-primary underline underline-offset-2;
+  }
+
+  /* Topic detail */
+  .help-topic {
+    @apply flex flex-col gap-6;
+  }
+
+  .help-topic__back {
+    @apply text-sm text-muted-foreground hover:text-foreground underline underline-offset-2 mb-2 inline-block;
+  }
+
+  .help-topic__description {
+    @apply text-sm text-muted-foreground mt-2 max-w-2xl;
+  }
+
+  .help-topic__section {
+    @apply rounded-lg border border-border p-4;
+  }
+
+  .help-topic__list {
+    @apply list-disc pl-5 space-y-2 text-sm text-muted-foreground;
+  }
+
+  .help-topic__links {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .help-topic__link {
+    @apply text-xs px-3 py-1.5 rounded-full border border-border hover:border-primary/40 hover:bg-primary/4 transition-colors;
+  }
+}

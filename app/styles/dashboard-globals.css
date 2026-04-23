@@ -163,3 +163,21 @@
     scrollbar-width: none;
   }
 }
+
+@layer components {
+  .page-title {
+    @apply text-h4 font-primary font-normal tracking-tight text-primary mb-1;
+  }
+
+  .page-description {
+    @apply text-muted-foreground/70 mt-1 font-regular max-w-[600px];
+  }
+
+  .header-2 {
+    @apply leading-normal font-normal group-data-[size=sm]/card:text-sm capitalize text-lg text-primary font-primary flex items-center gap-2 leading-tight mb-2;
+  }
+
+  .question-header {
+    @apply leading-normal group-data-[size=sm]/card:text-sm capitalize text-base! font-primary font-normal flex items-center gap-2 leading-tight;
+  }
+}
