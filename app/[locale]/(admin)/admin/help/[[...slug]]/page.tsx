@@ -7,7 +7,7 @@ import { getFaqs } from '@/sanity/lib/faq';
 import { getHelpCenterData } from '@/sanity/lib/help';
 
 interface AdminHelpPageProps {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ slug?: string[]; }>;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,14 +25,14 @@ export default async function AdminHelpPage( { params }: AdminHelpPageProps ) {
     notFound();
   }
 
-  const [faqs, helpData] = await Promise.all([
+  const [ faqs, helpData ] = await Promise.all( [
     getFaqs( 'admin' ),
     getHelpCenterData( 'admin' )
-  ]);
+  ] );
 
   if ( route.section === 'topic' ) {
-    return <HelpCenterPage role="admin" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } />;
+    return <div className='py-5'><HelpCenterPage role="admin" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } /></div>;
   }
 
-  return <HelpCenterPage role="admin" section={ route.section } faqs={ faqs } helpData={ helpData } />;
+  return <div className='py-5'><HelpCenterPage role="admin" section={ route.section } faqs={ faqs } helpData={ helpData } /></div>;
 }
