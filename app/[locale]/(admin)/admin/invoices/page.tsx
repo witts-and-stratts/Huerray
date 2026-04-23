@@ -4,9 +4,12 @@ import { getTranslations } from 'next-intl/server';
 import { AdminInvoicesClient } from './admin-invoices-client';
 import { NewInvoiceDialog } from '@/components/invoices/new-invoice-dialog';
 
-export const metadata: Metadata = {
-  title: 'Invoices',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( 'metadata' );
+  return {
+    title: t( 'admin.invoices' ),
+  };
+}
 
 export default async function AdminInvoicesPage() {
   const t = await getTranslations( 'dashboard.admin.invoicesPage' );

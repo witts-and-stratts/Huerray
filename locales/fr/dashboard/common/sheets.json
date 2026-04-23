@@ -91,89 +91,27 @@
       "faq": "FAQ",
       "tickets": "Billets"
     },
-    "faq": {
-      "brand": [
-        {
-          "q": "Comment créer une campagne ?",
-          "a": "Naviguez vers Campagnes dans la barre latérale et cliquez sur \"Nouvelle campagne\" pour commencer."
-        },
-        {
-          "q": "Comment inviter des créateurs ?",
-          "a": "Ouvrez une campagne, accédez à l'onglet \"Evénements\" et utilisez l'action \"Inviter\" pour envoyer des invitations aux créateurs."
-        },
-        {
-          "q": "Comment fonctionne la facturation ?",
-          "a": "Vous êtes facturé par campagne en fonction du plan que vous avez choisi. Pour plus d'informations, consultez la rubrique Paramètres > Facturation."
-        },
-        {
-          "q": "Comment puis-je examiner les candidatures ?",
-          "a": "Ouvrez un concert de votre campagne et accédez à l'onglet Soumissions pour examiner le contenu du créateur."
-        },
-        {
-          "q": "Puis-je mener plusieurs campagnes ?",
-          "a": "Oui, vous pouvez créer et gérer plusieurs campagnes simultanément à partir de la section Campagnes."
-        }
-      ],
-      "creator": [
-        {
-          "q": "Comment participer à une campagne ?",
-          "a": "Consultez les offres d'emploi dans la section Offres d'emploi et cliquez sur Postuler pour soumettre votre candidature."
-        },
-        {
-          "q": "Quand serai-je payé ?",
-          "a": "Les paiements sont effectués dans les 14 jours suivant l'approbation de votre contenu par la marque."
-        },
-        {
-          "q": "Comment soumettre un contenu ?",
-          "a": "Ouvrez votre contrat actif dans la section Contrats et cliquez sur Soumettre pour télécharger votre vidéo."
-        },
-        {
-          "q": "Que se passe-t-il après l'envoi ?",
-          "a": "La marque examinera votre demande et l'approuvera, la renverra ou la rejettera avec des commentaires."
-        },
-        {
-          "q": "Comment mettre à jour mon profil ?",
-          "a": "Allez dans Mon profil dans la barre latérale pour mettre à jour votre biographie, vos catégories et vos liens vers les médias sociaux."
-        }
-      ],
-      "admin": [
-        {
-          "q": "Comment gérer les utilisateurs ?",
-          "a": "Naviguez vers Utilisateurs dans la navigation principale pour afficher, modifier ou désactiver des comptes."
-        },
-        {
-          "q": "Comment réviser les profils de marque ?",
-          "a": "Allez dans Marques, ouvrez le profil d'une marque et utilisez le menu d'action pour mettre à jour son statut."
-        },
-        {
-          "q": "Comment attribuer un cas d'assistance ?",
-          "a": "Ouvrez un cas à partir de la page Cas et utilisez le menu d'action pour l'attribuer à un administrateur."
-        },
-        {
-          "q": "Comment approuver une campagne ?",
-          "a": "Allez dans Campagnes, ouvrez la campagne et utilisez le menu d'action pour l'accepter ou la rejeter."
-        },
-        {
-          "q": "Comment envoyer des notifications de plate-forme ?",
-          "a": "Naviguez vers Notifications et utilisez le bouton Créer une notification pour envoyer des messages ciblés."
-        }
-      ]
-    },
     "submitCase": {
       "titleLabel": "Titre",
       "titlePlaceholder": "Bref résumé de votre problème",
       "descriptionLabel": "Description",
       "descriptionPlaceholder": "Décrivez votre problème en détail...",
       "priorityLabel": "Priorité",
-      "relatedEntityTypeLabel": "Type d'entité liée",
+      "relatedToLabel": "En rapport avec",
       "noRelatedEntityType": "Aucun",
-      "relatedEntityIdLabel": "ID de l'entité liée",
-      "relatedEntityIdPlaceholder": "Sélectionnez {entity} liée",
-      "relatedEntityOptionsLoading": "Chargement de {entity} liée...",
-      "relatedEntityDetailsTitle": "Détails de l'entité liée",
+      "relatedEntityIdLabel": "Article spécifique",
+      "relatedEntityIdDynamicLabel": "Sélectionner {entity}",
+      "relatedEntityIdPlaceholder": "Sélectionner les {entity} connexes",
+      "relatedEntityOptionsLoading": "Chargement d'éléments connexes {entity}...",
+      "relatedEntityDetailsTitle": "Détails de l'entité apparentée",
+      "relatedEntityDetailsDynamicTitle": "{entity} Détails",
+      "paymentItemsLabel": "Postes de travail",
       "relatedEntityLoading": "Chargement des détails de l'entité liée...",
-      "relatedEntityError": "Impossible de charger les détails de cette entité liée.",
-      "relatedEntityEmpty": "Aucun détail trouvé pour cette entité liée.",
+      "relatedEntityLoadingDynamic": "Chargement des détails {entity}...",
+      "relatedEntityError": "Impossible de charger les détails de cette entité apparentée.",
+      "relatedEntityErrorDynamic": "Impossible de charger les détails pour ce {entity}.",
+      "relatedEntityEmpty": "Aucun détail n'a été trouvé pour cette entité apparentée.",
+      "relatedEntityEmptyDynamic": "Aucun détail n'a été trouvé pour ce {entity}.",
       "submit": "Soumettre un dossier",
       "submitting": "Soumettre...",
       "successToast": "Votre dossier a été soumis avec succès",

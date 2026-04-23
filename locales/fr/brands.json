@@ -56,7 +56,7 @@
   "stopAssuming": {
     "pill": "Mesures",
     "title": "Cesser de présumer de ce qui fonctionne",
-    "description": "Gardez le pouls de ce qui se passe au cours du processus de création, grâce à un retour d'information et à des mises à jour constants.",
+    "description": "Gardez le pouls de ce qui se passe au cours du processus de création, grâce à un retour d'information et à des mises à jour constantes.",
     "listItems": {
       "item1": "Suivez votre campagne et voyez comment elle fonctionne",
       "item2": "Des analyses de campagne et des informations sur tous vos projets/briefs"
@@ -113,7 +113,7 @@
     },
     "q8": {
       "question": "Que se passe-t-il si je ne suis pas satisfait du contenu ?",
-      "answer": "Nous disposons d'une procédure de révision pour nous assurer que vous êtes satisfait du produit final. Si vous n'êtes toujours pas satisfait, nous vous offrons une garantie de remboursement."
+      "answer": "Nous avons mis en place un processus de révision pour nous assurer que vous êtes satisfait du produit final. Si vous n'êtes toujours pas satisfait, nous vous offrons une garantie de remboursement."
     },
     "q9": {
       "question": "Comment contrôlez-vous les créateurs ?",

@@ -78,7 +78,7 @@
       "states": {
         "loading": "Gigs laden...",
         "error": "Gigs können nicht geladen werden.",
-        "recentLoading": "Aktuelle Auftritte laden...",
+        "recentLoading": "Laden der letzten Auftritte...",
         "recentError": "Die letzten Gigs können nicht geladen werden.",
         "empty": "Keine Gigs gefunden."
       },
@@ -198,7 +198,7 @@
     },
     "platformHealth": {
       "title": "Plattform Gesundheit Trend",
-      "description": "Nutzer, Kampagnen und Einsendungen der letzten 6 Monate",
+      "description": "Nutzer, Kampagnen und Einreichungen der letzten 6 Monate",
       "labels": {
         "users": "Benutzer",
         "campaigns": "Kampagnen",

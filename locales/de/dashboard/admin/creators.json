@@ -63,7 +63,7 @@
     "confirmMakeAiTitle": "AI Creator erstellen?",
     "confirmMakeAiDesc": "{name} werden als AI-generierte Creators gekennzeichnet.",
     "confirmMakeHumanTitle": "Menschen zu Creators machen?",
-    "confirmMakeHumanDesc": "{name} werden als Creator von Inhalten gekennzeichnet, die von Menschen erstellt wurden.",
+    "confirmMakeHumanDesc": "{name} werden als von Menschen erstellte Creators gekennzeichnet.",
     "confirmFirstNameLabel": "Geben Sie zur Bestätigung \"{name}\" ein.",
     "confirmFirstNamePlaceholder": "Vornamen eingeben",
     "updatingProfileType": "Aktualisieren...",
@@ -153,7 +153,7 @@
   "brandCreatorDetailsSheet": {},
   "creatorDetailsShared": {},
   "creatorSheetHeader": {
-    "detailedInformationAboutCreator": "Detaillierte Informationen über Creator",
+    "detailedInformationAboutCreator": "Ausführliche Informationen über Creator",
     "yo": "Jahr/Jahr"
   }
 }

@@ -4,7 +4,7 @@
   "description": "Vue d'ensemble de la plateforme et suivi opérationnel",
   "analyticsPage": {
     "title": "Analyse de la plate-forme",
-    "description": "Suivez les utilisateurs, le pipeline de contenu, le chiffre d'affaires, les vidéos soumises et les performances du support.",
+    "description": "Suivez les utilisateurs, le pipeline de contenu, les revenus, les soumissions de vidéos et les performances du support.",
     "periodLabel": "Sélectionner la période d'analyse",
     "dateRangeLabel": "Sélectionner une plage de dates",
     "dateRangePlaceholder": "Sélectionner une plage de dates",
@@ -71,7 +71,7 @@
     "description": "Mettez à jour vos données personnelles et vos coordonnées.",
     "saving": "Économiser...",
     "saveChanges": "Enregistrer les modifications",
-    "discardChanges": "Changements dans les rejets",
+    "discardChanges": "Modifications des rejets",
     "changesDiscarded": "Modifications rejetées",
     "successUpdated": "Mise à jour réussie des paramètres du compte",
     "errorUpdateFailed": "Échec de la mise à jour des paramètres du compte",

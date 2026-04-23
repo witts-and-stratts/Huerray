@@ -11,6 +11,19 @@ import {
   Home01Icon,
   QuestionIcon,
 } from '@hugeicons/core-free-icons';
+
+export const iconMap: Record<string, HugeIcon> = {
+  ChartLineData01Icon,
+  UserGroupIcon,
+  WalletDone01Icon,
+  Task02Icon,
+  ImageUpload01Icon,
+  UserMultiple02Icon,
+  CustomerSupportIcon,
+  Settings01Icon,
+  Home01Icon,
+  QuestionIcon,
+};
 import { TOPIC_IDS_BY_ROLE, TOPIC_SLUG_BY_ID } from './help-routing';
 import type { HelpRole, HelpTopicId } from './help-routing';
 

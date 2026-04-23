@@ -18,7 +18,7 @@
       "description": "Verwalten Sie Ihre Markendaten und öffentlichen Profilinformationen.",
       "companyName": "Name des Unternehmens",
       "websiteUrl": "Website-URL",
-      "industryCategory": "Industrie-Kategorie",
+      "industryCategory": "Industrie Kategorie",
       "companySize": "Größe des Unternehmens",
       "vatId": "UMSATZSTEUERIDENTIFIKATIONSNUMMER",
       "registrationNumber": "Zulassungsnummer",
@@ -38,7 +38,7 @@
       "invalidUrl": "Ungültige URL",
       "stateRequired": "Staat/Provinz ist erforderlich",
       "successUpdated": "Einstellungen erfolgreich aktualisiert",
-      "errorUpdateFailed": "Aktualisierung der Einstellungen fehlgeschlagen",
+      "errorUpdateFailed": "Einstellungen konnten nicht aktualisiert werden",
       "errorLoadFailed": "Markeneinstellungen konnten nicht geladen werden",
       "saving": "Sparen...",
       "saveChanges": "Änderungen speichern"
@@ -48,8 +48,8 @@
       "description": "Verwalten Sie Ihr Abonnement und Ihre Zahlungsmodalitäten."
     },
     "successUpdated": "Einstellungen erfolgreich aktualisiert",
-    "errorUpdateFailed": "Aktualisierung der Einstellungen fehlgeschlagen",
-    "errorUpdateFailedDesc": "Aktualisierung der Einstellungen fehlgeschlagen",
+    "errorUpdateFailed": "Einstellungen konnten nicht aktualisiert werden",
+    "errorUpdateFailedDesc": "Einstellungen konnten nicht aktualisiert werden",
     "errorLoadFailed": "Markeneinstellungen konnten nicht geladen werden",
     "changesDiscarded": "Verworfene Änderungen",
     "security": {

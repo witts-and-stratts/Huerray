@@ -13,7 +13,9 @@ import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
 
-export default defineConfig({
+export const config = {
+  name: 'default',
+  title: 'Huerray',
   basePath: '/admin/studio',
   projectId,
   dataset,
@@ -25,4 +27,6 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
   ],
-})
+}
+
+export default defineConfig(config)

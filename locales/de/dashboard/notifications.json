@@ -1,6 +1,6 @@
 {
   "title": "Benachrichtigungen",
-  "description": "Alle Benachrichtigungen anzeigen und verwalten",
+  "description": "Anzeigen und Verwalten aller Benachrichtigungen",
   "descriptionBrand": "Anzeigen und Verwalten aller Ihrer Benachrichtigungen",
   "stats": {
     "total": "Total Notifikationen",
@@ -37,6 +37,7 @@
     "viewCampaign": "Kampagne ansehen",
     "reviewBrandProfile": "Markenprofil überprüfen",
     "reviewCreatorProfile": "Profil überprüfen",
+    "reviewProfile": "Profil überprüfen",
     "viewDetails": "Details anzeigen"
   },
   "item": {
@@ -77,12 +78,12 @@
     "deleteAllError": "Alle Benachrichtigungen konnten nicht gelöscht werden"
   },
   "compose": {
-    "title": "Post-Benachrichtigung",
+    "title": "Benachrichtigung veröffentlichen",
     "description": "Erstellen und senden Sie eine Benachrichtigung an einen bestimmten Benutzer.",
-    "submit": "Post-Benachrichtigung",
+    "submit": "Benachrichtigung veröffentlichen",
     "toast": {
-      "success": "Benachrichtigung veröffentlicht",
-      "error": "Meldung konnte nicht versendet werden"
+      "success": "Bekanntmachung veröffentlicht",
+      "error": "Benachrichtigung konnte nicht veröffentlicht werden"
     },
     "actions": {
       "editActionUrl": "URL der Aktion bearbeiten",

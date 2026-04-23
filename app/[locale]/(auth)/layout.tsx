@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { QueryProvider } from "@/lib/api/query-provider";
 import { AuthProvider } from "@/lib/auth/auth-context";
 import StoreProvider from "@/lib/redux/store-provider";
 import "@/app/styles/dashboard-globals.css";
 
-export const metadata: Metadata = {
-  title: "Sign In - Huerray",
-  description: "Sign in to your Huerray account",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( "metadata" );
+  return {
+    title: {
+      default: `${ t( "auth.signIn" ) } - Huerray`,
+      template: "%s - Huerray",
+    },
+    description: "Sign in to your Huerray account",
+  };
+}
 
 import { Toaster } from "@/components/ui/sonner";
 

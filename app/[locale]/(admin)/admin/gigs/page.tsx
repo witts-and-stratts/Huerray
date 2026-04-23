@@ -3,9 +3,12 @@ import { SubHeader } from '@/components/subheader';
 import { getTranslations } from 'next-intl/server';
 import { AdminGigsClient } from './admin-gigs-client';
 
-export const metadata: Metadata = {
-  title: 'Gigs',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( 'metadata' );
+  return {
+    title: t( 'admin.gigs' ),
+  };
+}
 
 export default async function AdminGigsPage() {
   const t = await getTranslations( 'dashboard.admin.gigsPage' );

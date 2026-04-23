@@ -80,7 +80,7 @@ export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' 
           <Dialog modal open={ open } onOpenChange={ setOpen }>
             <Tooltip>
               <TooltipTrigger asChild>
-                <DialogTrigger>
+                <DialogTrigger asChild>
                   <button className='hover:opacity-80 transition-opacity focus:outline-none'>
                     <AvatarGroupCount className='cursor-pointer text-xs'>
                       +{ remainingCount }

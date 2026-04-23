@@ -27,14 +27,7 @@ export const authorType = defineType({
     }),
     defineField({
       name: 'bio',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
-          lists: [],
-        }),
-      ],
+      type: 'localizedBlockContent',
     }),
   ],
   preview: {

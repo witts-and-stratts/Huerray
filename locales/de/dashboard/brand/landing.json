@@ -14,7 +14,7 @@
         "periodLabel": "Analysezeitraum auswählen",
         "dateRangeLabel": "Datumsbereich auswählen",
         "dateRangePlaceholder": "Datumsbereich auswählen",
-        "refresh": "Auffrischen",
+        "refresh": "Aktualisieren",
         "periods": {
           "allTime": "Alle Zeiten",
           "lastWeek": "Letzte Woche",
@@ -27,7 +27,7 @@
         },
         "groupDescriptions": {
           "campaigns": "Erstellung und Abschluss von Kampagnen im ausgewählten Zeitraum.",
-          "gigs": "Dynamik bei der Erstellung, Annahme und Auslieferung von Aufträgen.",
+          "gigs": "Dynamik bei der Erstellung, Akzeptanz und Lieferung von Aufträgen.",
           "outreach": "Creators Einladungen, Anträge und Genehmigungsqualität.",
           "contentSpend": "Videoeinreichungsvolumen und Genehmigungsdurchsatz für Ihre Marke.",
           "support": "Fallvolumen und Lösungsleistung für Ihr Konto."
@@ -127,7 +127,7 @@
       },
       "loadingGigs": "Gigs laden...",
       "errorGigs": "Gigs können nicht geladen werden.",
-      "loadingRecentGigs": "Aktuelle Auftritte laden...",
+      "loadingRecentGigs": "Laden der letzten Auftritte...",
       "errorRecentGigs": "Die letzten Gigs können nicht geladen werden.",
       "emptyState": "Keine Gigs gefunden.",
       "viewAll": "Alle Gigs anzeigen",

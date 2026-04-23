@@ -56,7 +56,7 @@
   "stopAssuming": {
     "pill": "Messbarkeit",
     "title": "Klar sehen, was funktioniert",
-    "description": "Behalten Sie während des kreativen Prozesses durch ständiges Feedback und Aktualisierungen den Überblick über das Geschehen.",
+    "description": "Behalten Sie während des kreativen Prozesses durch ständiges Feedback und Aktualisierungen den Überblick.",
     "listItems": {
       "item1": "Verfolgen Sie Ihre Kampagnen in Echtzeit und sehen Sie die Performance",
       "item2": "Zentrale Kampagnenübersicht mit allen Projekten, Briefings und Ergebnissen auf einen Blick"
@@ -101,7 +101,7 @@
     },
     "q5": {
       "question": "Wie lange dauert es?",
-      "answer": "Der Zeitrahmen hängt vom jeweiligen Projekt ab, aber in der Regel erhalten Sie die Inhalte innerhalb weniger Wochen."
+      "answer": "Der Zeitplan ist je nach Projekt unterschiedlich, aber in der Regel erhalten Sie die Inhalte innerhalb von ein paar Wochen."
     },
     "q6": {
       "question": "Wie kann ich Creators bezahlen?",

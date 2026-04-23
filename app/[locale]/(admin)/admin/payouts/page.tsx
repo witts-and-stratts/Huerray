@@ -4,9 +4,12 @@ import { NewPaymentButton } from '@/components/payments/new-payment-sheet';
 import { getTranslations } from 'next-intl/server';
 import { AdminPaymentsClient } from './admin-payments-client';
 
-export const metadata: Metadata = {
-  title: 'Payouts',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( 'metadata' );
+  return {
+    title: t( 'admin.payouts' ),
+  };
+}
 
 export default async function AdminPaymentsPage() {
   const t = await getTranslations( 'dashboard.admin.paymentsPage' );

@@ -4,7 +4,7 @@
     "description": "Compromisos actuales y próximos plazos"
   },
   "availableGigs": {
-    "title": "Actuaciones disponibles",
+    "title": "Conciertos disponibles",
     "description": "Explore y solicite nuevas oportunidades que se ajusten a su perfil."
   },
   "myGigs": {
@@ -12,7 +12,7 @@
     "description": "Todos los conciertos en los que has participado.",
     "tabs": {
       "all": "Todos los conciertos",
-      "available": "Actuaciones disponibles",
+      "available": "Conciertos disponibles",
       "active": "Activos"
     }
   }

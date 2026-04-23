@@ -1,22 +1,37 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Search01Icon } from '@hugeicons/core-free-icons';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import type { HelpRole } from './help-routing';
+import { PortableText } from '@portabletext/react';
+import type { HelpRole, SanityFaq } from './help-routing';
 
-export function HelpFaqView( { role }: { role: HelpRole; } ) {
+export function HelpFaqView( { 
+  role,
+  sanityFaqs
+}: { 
+  role: HelpRole;
+  sanityFaqs?: SanityFaq[];
+} ) {
   const t = useTranslations( 'dashboard.common' );
+  const locale = useLocale();
   const [ search, setSearch ] = useState( '' );
-  const faqs = t.raw( `helpSheet.faq.${ role }` ) as Array<{ q: string; a: string; }>;
+
+  const faqs = ( sanityFaqs || [] ).map( ( f: any ) => ( {
+    q: f.question[ locale ] || f.question[ 'en' ] || '',
+    a: f.answer[ locale ] || f.answer[ 'en' ] || [],
+    isSanity: true
+  } ) );
 
   const filtered = search.trim()
     ? faqs.filter(
       ( f ) =>
         f.q.toLowerCase().includes( search.toLowerCase() ) ||
-        f.a.toLowerCase().includes( search.toLowerCase() )
+        (typeof f.a === 'string' 
+          ? f.a.toLowerCase().includes( search.toLowerCase() )
+          : JSON.stringify(f.a).toLowerCase().includes( search.toLowerCase() ))
     )
     : faqs;
 
@@ -49,7 +64,9 @@ export function HelpFaqView( { role }: { role: HelpRole; } ) {
                 { item.q }
               </AccordionTrigger>
               <AccordionContent className="help-faq__answer">
-                { item.a }
+                <div className="portable-text">
+                  <PortableText value={ item.a as any } />
+                </div>
               </AccordionContent>
             </AccordionItem>
           ) ) }

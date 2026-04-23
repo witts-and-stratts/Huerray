@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { ResetPasswordForm } from "@/components/auth/reset-password-form";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Reset Password",
+};
 
 export default async function ResetPasswordPage( {
   searchParams,

@@ -41,7 +41,7 @@
       "subsections": [
         {
           "id": "champ d'application du traitement",
-          "title": "a) Portée du traitement des données à caractère personnel",
+          "title": "a) Champ d'application du traitement des données à caractère personnel",
           "content": "Nous traitons les données à caractère personnel de nos utilisateurs uniquement dans la mesure où cela est nécessaire pour fournir un site web/une plateforme fonctionnel(le) et pour fournir notre contenu et nos services liés à l'entreprise. Le traitement se fait généralement sur la base de votre consentement (par exemple, via notre gestionnaire de consentement pour les technologies d'analyse/de marketing, les abonnements aux lettres d'information ou le contenu UGC publié). Une exception s'applique dans les cas où l'obtention d'un consentement préalable n'est pas possible pour des raisons pratiques et où le traitement est autorisé par des dispositions légales ou est nécessaire à l'exécution du contrat. <br /><br />Nous adhérons aux principes de transparence, de limitation des finalités, de minimisation des données, d'exactitude, de limitation du stockage et d'intégrité/confidentialité conformément à l'art. 5 GDPR."
         },
         {
@@ -78,7 +78,7 @@
           "content": "La base juridique du stockage temporaire des données et de l'enregistrement dans des fichiers journaux est l'article 6, paragraphe 1, point f), du RGPD. 6(1)(f) GDPR. Notre intérêt légitime est d'assurer la fonctionnalité technique, la stabilité et la sécurité du site web (par exemple, en détectant les abus ou les attaques), ainsi que le contrôle des performances et le dépannage."
         },
         {
-          "id": "objectif-site web",
+          "id": "site web de l'objectif",
           "title": "c) Finalité du traitement",
           "content": "Le stockage temporaire de l'adresse IP par le système est nécessaire pour fournir le site web à l'appareil de l'utilisateur. À cette fin, l'adresse IP de l'utilisateur doit rester stockée pendant la durée de la session. Ces objectifs constituent également notre intérêt légitime dans le traitement des données conformément à l'article 6, paragraphe 1, point f), du RGPD. 6(1)(f) GDPR."
         },
@@ -121,7 +121,7 @@
             "<strong>Techniquement nécessaire:</strong> Fourniture de nos services (par exemple, contrôle des sessions, sécurité, stockage des consentements) ;",
             "<strong>Optimisation technique:</strong> Surveillance des messages d'erreur, des temps de chargement et de la stabilité du système ;",
             "<strong>Analytiques/Statistiques:</strong> Évaluation du comportement des utilisateurs (agrégé/pseudonymisé) pour l'amélioration continue de nos produits et de notre contenu ;",
-            "<strong>Convivialité/personnalisation:</strong> Amélioration de l'expérience de l'utilisateur (par exemple, préférences telles que la taille de la police, la langue ou les dernières entrées du formulaire) ;",
+            "<strong>Convivialité/Personnalisation:</strong> Amélioration de l'expérience de l'utilisateur (par exemple, préférences telles que la taille de la police, la langue ou les dernières entrées du formulaire) ;",
             "<strong>Marketing/Contenu personnalisé (uniquement avec consentement):</strong> Affichage et mesure des campagnes publicitaires, potentiellement sur plusieurs plateformes."
           ]
         },
@@ -168,7 +168,7 @@
         {
           "id": "email-objection",
           "title": "e) Droit d'opposition et options de suppression",
-          "content": "Vous pouvez retirer votre consentement à tout moment avec effet pour l'avenir (par exemple, via le lien de désinscription figurant dans chaque courriel ou par courriel à l'adresse info@huerray.de). Vous pouvez vous opposer à tout moment à la publicité destinée aux clients existants. Le traitement des courriels transactionnels est nécessaire à l'exécution du contrat ; il n'est pas possible de se désinscrire de ces courriels lorsqu'ils sont légalement/contractuellement requis."
+          "content": "Vous pouvez retirer votre consentement à tout moment avec effet pour l'avenir (par exemple, via le lien de désinscription figurant dans chaque courriel ou par courriel à l'adresse info@huerray.de). Vous pouvez vous opposer à tout moment à la publicité destinée aux clients existants. Le traitement des courriels transactionnels est nécessaire à l'exécution du contrat ; il n'est pas possible de se désabonner de ces courriels lorsqu'ils sont légalement/contractuellement requis."
         }
       ]
     },
@@ -218,7 +218,7 @@
         {
           "id": "enregistrement-objection",
           "title": "e) Droit d'opposition et options de suppression",
-          "content": "Lorsque nous traitons des données sur la base de votre consentement ou d'informations volontaires, vous pouvez retirer votre consentement à tout moment avec effet futur et/ou supprimer/ajuster vous-même les informations volontaires dans votre compte. Il n'y a pas de possibilité de retrait pour les données contractuelles/systémiques obligatoires lorsqu'elles sont nécessaires à la fourniture des services ou au respect des obligations légales. Votre droit d'opposition en vertu de l'art. 21 GDPR n'est pas affecté (par exemple, contre le traitement basé sur des intérêts légitimes). Veuillez adresser les retraits/objections à datenschutz@huerray.de."
+          "content": "Lorsque nous traitons des données sur la base de votre consentement ou d'informations volontaires, vous pouvez retirer votre consentement à tout moment avec effet futur et/ou supprimer/ajuster vous-même les informations volontaires dans votre compte. Il n'y a pas de possibilité de retrait pour les données contractuelles/systémiques obligatoires lorsqu'elles sont nécessaires pour fournir les services ou remplir les obligations légales. Votre droit d'opposition en vertu de l'art. 21 GDPR n'est pas affecté (par exemple, contre le traitement basé sur des intérêts légitimes). Veuillez adresser vos retraits/objections à datenschutz@huerray.de."
         }
       ]
     },
@@ -255,7 +255,7 @@
     },
     {
       "id": "ugc-uploads",
-      "title": "10. Téléchargement, révision, publication et mise à disposition de CGU pour les entreprises clientes",
+      "title": "10. Téléchargement, révision, publication et mise à disposition de CGU aux entreprises clientes",
       "content": "Les créateurs téléchargent du contenu (par exemple, des vidéos, des images, du texte, des métadonnées d'accompagnement) par l'intermédiaire de la plateforme. Le contenu est vérifié pour s'assurer qu'il est complet et conforme aux instructions et aux normes juridiques, et - selon le statut de la campagne - il est mis à la disposition des entreprises clientes pour visualisation, sélection, approbation et utilisation. Après approbation, le contenu est fourni aux entreprises conformément aux droits d'utilisation convenus (par exemple, pour le téléchargement, les placements publicitaires, les messages organiques, les pages d'atterrissage ou les boutiques en ligne).<br/><br/><strong>Bases juridiques:</strong><br/>- Art. 6(1)(b) GDPR (contrat / mesures précontractuelles)<br/>- Art. 6(1)(f) GDPR (assurance qualité / modération)<br/>- Art. 6(1)(a) GDPR (consentement) pour le traitement/publication au-delà de ce qui est contractuellement requis.<br/><br/><strong>Transparence/Visibilité:</strong><br/>Dans le contexte du projet ou de la campagne, il est visible quelles données/UGC sont mises à la disposition de quelle entreprise. Les données de profil nécessaires aux applications/appariements (par exemple, le nom/le nom du créateur, les liens sociaux, les balises thématiques, les échantillons de CGU) peuvent être affichées pour les entreprises clientes.<br/><br/><strong>Deletion/Retention:</strong><br/>Les téléchargements bruts, les versions révisées, les approbations et les acceptations sont stockés sur la base d'un projet. Une fois le projet terminé, nous supprimons ou anonymisons les données, sauf si des obligations légales ou contractuelles exigent qu'elles soient conservées. Les droits d'utilisation déjà accordés ne sont pas affectés (utilisations existantes).",
       "subsections": []
     },
@@ -299,7 +299,7 @@
             "la durée de conservation envisagée ou, si une information spécifique n'est pas possible, les critères utilisés pour déterminer cette durée ;",
             "l'existence d'un droit de rectification, d'effacement ou de limitation du traitement, ou d'un droit d'opposition à ce traitement ;",
             "l'existence d'un droit d'introduire une réclamation auprès d'une autorité de contrôle ;",
-            "lorsque les données à caractère personnel ne sont pas collectées auprès de vous, toute information disponible quant à leur source ;",
+            "lorsque les données à caractère personnel ne sont pas collectées auprès de vous, toute information disponible sur leur source ;",
             "l'existence d'une prise de décision automatisée, y compris le profilage en vertu de l'art. 22(1) et (4) GDPR, et - au moins dans ces cas - des informations significatives sur la logique impliquée ainsi que sur la signification et les conséquences envisagées d'un tel traitement."
           ],
           "additionalContent": "Vous avez également le droit d'être informé si vos données sont transférées vers un pays tiers ou une organisation internationale et d'être informé des garanties appropriées en vertu de l'art. 46 GDPR relatives à ces transferts."
@@ -368,7 +368,7 @@
         {
           "id": "droit à l'objet",
           "title": "Droit d'opposition",
-          "content": "Vous avez le droit de vous opposer à tout moment, pour des raisons tenant à votre situation particulière, au traitement de vos données à caractère personnel fondé sur l'art. 6(1)(e) ou (f) GDPR, y compris le profilage basé sur ces dispositions.<br/><br/>Nous ne traiterons plus vos données personnelles à moins que nous puissions démontrer des motifs légitimes impérieux qui l'emportent sur vos intérêts ou que le traitement serve à la constatation, à l'exercice ou à la défense de droits en justice.<br/><br/>Si vos données personnelles sont traitées à des fins de marketing direct, vous pouvez vous opposer à tout moment à un tel traitement, y compris au profilage lié au marketing direct. Si vous vous y opposez, vos données à caractère personnel ne seront plus traitées à ces fins.<br/><br/>Vous pouvez exercer votre droit d'opposition en utilisant des procédures automatisées (par exemple, des liens de désinscription) qui utilisent des spécifications techniques, indépendamment de la directive 2002/58/CE."
+          "content": "Vous avez le droit de vous opposer à tout moment, pour des raisons tenant à votre situation particulière, au traitement de vos données à caractère personnel fondé sur l'art. 6(1)(e) ou (f) GDPR, y compris le profilage basé sur ces dispositions.<br/><br/>Nous ne traiterons plus vos données personnelles à moins que nous puissions démontrer des motifs légitimes impérieux qui l'emportent sur vos intérêts ou que le traitement serve à la constatation, à l'exercice ou à la défense de droits en justice.<br/><br/>Si vos données personnelles sont traitées à des fins de marketing direct, vous pouvez vous opposer à tout moment à ce traitement, y compris au profilage lié au marketing direct. Si vous vous y opposez, vos données à caractère personnel ne seront plus traitées à ces fins.<br/><br/>Vous pouvez exercer votre droit d'opposition en utilisant des procédures automatisées (par exemple, des liens de désinscription) qui utilisent des spécifications techniques, indépendamment de la directive 2002/58/CE."
         },
         {
           "id": "droit de retirer son consentement",
@@ -389,7 +389,7 @@
         {
           "id": "droit à l'hébergement-plainte",
           "title": "Droit de déposer une plainte auprès d'une autorité de surveillance",
-          "content": "Sans préjudice de tout autre recours administratif ou judiciaire, vous avez le droit d'introduire une réclamation auprès d'une autorité de contrôle - en particulier dans l'État membre de votre résidence, de votre lieu de travail ou de l'infraction présumée - si vous considérez que le traitement de vos données à caractère personnel viole le GDPR.<br/><br/>L'autorité de contrôle auprès de laquelle la réclamation a été introduite vous informera de la progression et de l'issue de la réclamation, y compris de la possibilité d'un recours juridictionnel en vertu de l'Art. 78 DU GDPR."
+          "content": "Sans préjudice de tout autre recours administratif ou judiciaire, vous avez le droit d'introduire une réclamation auprès d'une autorité de contrôle - en particulier dans l'État membre de votre résidence, de votre lieu de travail ou de l'infraction présumée - si vous considérez que le traitement de vos données à caractère personnel viole le GDPR.<br/><br/>L'autorité de contrôle auprès de laquelle la réclamation a été introduite vous informera de l'avancement et de l'issue de la réclamation, y compris de la possibilité d'un recours judiciaire en vertu de l'Art. 78 DU GDPR."
         }
       ]
     }

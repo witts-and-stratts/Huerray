@@ -91,89 +91,27 @@
       "faq": "FAQ",
       "tickets": "Entradas"
     },
-    "faq": {
-      "brand": [
-        {
-          "q": "¿Cómo se crea una campaña?",
-          "a": "Vaya a Campañas en la barra lateral y haga clic en \"Nueva campaña\" para empezar."
-        },
-        {
-          "q": "¿Cómo invito a los creadores?",
-          "a": "Abre una campaña, ve a la pestaña Gigs y utiliza la acción Invitar para enviar invitaciones a los creadores."
-        },
-        {
-          "q": "¿Cómo funciona la facturación?",
-          "a": "Se le facturará por campaña en función del plan seleccionado. Visita Configuración > Facturación para más detalles."
-        },
-        {
-          "q": "¿Cómo reviso los envíos?",
-          "a": "Abra un concierto de su campaña y navegue hasta la pestaña Presentaciones para revisar el contenido del creador."
-        },
-        {
-          "q": "¿Puedo realizar varias campañas?",
-          "a": "Sí, puede crear y gestionar varias campañas simultáneamente desde la sección Campañas."
-        }
-      ],
-      "creator": [
-        {
-          "q": "¿Cómo me uno a una campaña?",
-          "a": "Consulte los trabajos disponibles en la sección Trabajos y haga clic en Solicitar para enviar su solicitud."
-        },
-        {
-          "q": "¿Cuándo cobraré?",
-          "a": "Los pagos se procesan en un plazo de 14 días a partir de la aprobación del contenido por parte de la marca."
-        },
-        {
-          "q": "¿Cómo envío contenidos?",
-          "a": "Abre tu concierto activo en la sección de conciertos y haz clic en Enviar para subir tu vídeo."
-        },
-        {
-          "q": "¿Qué ocurre después del envío?",
-          "a": "La marca revisará su envío y lo aprobará, lo devolverá o lo rechazará con comentarios."
-        },
-        {
-          "q": "¿Cómo actualizo mi perfil?",
-          "a": "Vaya a Mi perfil en la barra lateral para actualizar su biografía, categorías y enlaces a redes sociales."
-        }
-      ],
-      "admin": [
-        {
-          "q": "¿Cómo se gestionan los usuarios?",
-          "a": "Vaya a Usuarios en la navegación principal para ver, editar o desactivar cuentas."
-        },
-        {
-          "q": "¿Cómo puedo revisar los perfiles de las marcas?",
-          "a": "Vaya a Marcas, abra el perfil de una marca y utilice el menú de acciones para actualizar su estado."
-        },
-        {
-          "q": "¿Cómo asigno un caso de asistencia?",
-          "a": "Abra un caso desde la página Casos y utilice el menú de acciones para asignarlo a un administrador."
-        },
-        {
-          "q": "¿Cómo apruebo una campaña?",
-          "a": "Vaya a Campañas, abra la campaña y utilice el menú de acciones para aceptarla o rechazarla."
-        },
-        {
-          "q": "¿Cómo envío notificaciones de la plataforma?",
-          "a": "Vaya a Notificaciones y utilice el botón Crear notificación para enviar mensajes específicos."
-        }
-      ]
-    },
     "submitCase": {
       "titleLabel": "Título",
       "titlePlaceholder": "Breve resumen de su asunto",
       "descriptionLabel": "Descripción",
       "descriptionPlaceholder": "Describa detalladamente su problema...",
       "priorityLabel": "Prioridad",
-      "relatedEntityTypeLabel": "Tipo de entidad relacionada",
+      "relatedToLabel": "Relacionado",
       "noRelatedEntityType": "Ninguno",
-      "relatedEntityIdLabel": "ID de entidad relacionada",
-      "relatedEntityIdPlaceholder": "Seleccione {entity} relacionada",
-      "relatedEntityOptionsLoading": "Cargando {entity} relacionada...",
+      "relatedEntityIdLabel": "Artículo específico",
+      "relatedEntityIdDynamicLabel": "Seleccione {entity}",
+      "relatedEntityIdPlaceholder": "Seleccione {entity} relacionado",
+      "relatedEntityOptionsLoading": "Cargando relacionados {entity}...",
       "relatedEntityDetailsTitle": "Detalles de la entidad relacionada",
+      "relatedEntityDetailsDynamicTitle": "{entity} Detalles",
+      "paymentItemsLabel": "Partidas",
       "relatedEntityLoading": "Cargando detalles de la entidad relacionada...",
-      "relatedEntityError": "No se pudieron cargar los detalles de esta entidad relacionada.",
-      "relatedEntityEmpty": "No se encontraron detalles para esta entidad relacionada.",
+      "relatedEntityLoadingDynamic": "Cargando {entity} detalles...",
+      "relatedEntityError": "No se han podido cargar los detalles de esta entidad relacionada.",
+      "relatedEntityErrorDynamic": "No se han podido cargar los detalles de este {entity}.",
+      "relatedEntityEmpty": "No se han encontrado detalles para esta entidad relacionada.",
+      "relatedEntityEmptyDynamic": "No se han encontrado detalles para este {entity}.",
       "submit": "Presentar caso",
       "submitting": "Presentar...",
       "successToast": "Su caso se ha enviado correctamente",

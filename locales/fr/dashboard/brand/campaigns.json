@@ -215,7 +215,7 @@
     "heroTitle": "Créer quelque chose qui se fait remarquer",
     "heroDescription": "Créez des campagnes UGC avec notre réseau de créateurs pour produire un contenu authentique généré par les utilisateurs pour votre marque.",
     "human": {
-      "title": "Humain uniquement UGC",
+      "title": "Humain seulement UGC",
       "description": "Tirez parti de notre réseau de créateurs pour produire un contenu authentique généré par les utilisateurs pour votre marque.",
       "select": "Sélectionner l'UGC humaine",
       "imageAlt": "Humain seulement CGU"
@@ -225,7 +225,7 @@
       "description": "Tirez parti de l'IA pour générer ou optimiser et améliorer le contenu des créateurs afin de maximiser l'engagement et la conversion.",
       "select": "Sélectionner AI Enhanced",
       "imageAlt": "CGU amélioré par l'IA",
-      "enhancing": "Amélioration de l'IA..."
+      "enhancing": "L'IA améliore..."
     },
     "editCampaign": "Modifier la campagne",
     "newCampaign": "Nouvelle campagne",
@@ -315,7 +315,7 @@
       "categoryRequired": "La catégorie est obligatoire.",
       "contentTypeRequired": "Le type de contenu est obligatoire.",
       "productUrlInvalid": "Saisissez une URL de produit valide.",
-      "productImageInvalid": "Saisissez une URL valide pour l'image du produit.",
+      "productImageInvalid": "Entrez une URL valide pour l'image du produit.",
       "creatorsNeededRequired": "Indiquez le nombre de créateurs nécessaires.",
       "videosPerCreatorRequired": "Entrez le nombre total de vidéos.",
       "videosMustBeGreater": "Le nombre total de vidéos doit être égal ou supérieur au nombre de créateurs nécessaires.",

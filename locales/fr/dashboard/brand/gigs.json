@@ -15,7 +15,7 @@
     "requirements": "Exigences",
     "contentGuidelines": "Lignes directrices sur le contenu",
     "na": "N/A",
-    "selectGigTitle": "Sélectionner un concert",
+    "selectGigTitle": "Sélectionner un événement",
     "selectGigDescription": "Choisissez un concert auquel inviter les créateurs.",
     "videoCount": "{count, plural, =1 {# video} other {# videos}}",
     "duration": "Durée : {seconds}s",

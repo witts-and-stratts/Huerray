@@ -233,6 +233,11 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       icon: CustomerSupportIcon,
     },
     {
+      title: withFallback( t, "admin.studio", "Sanity Studio" ),
+      url: "/admin/studio",
+      icon: DatabaseIcon,
+    },
+    {
       title: withFallback( t, "admin.analytics", "Analytics" ),
       url: "/admin/analytics",
       icon: ChartLineData01Icon,

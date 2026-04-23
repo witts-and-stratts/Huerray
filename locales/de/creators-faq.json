@@ -7,7 +7,7 @@
       "faqs": [
         {
           "question": "Was ist Huerray?",
-          "answer": "Huerray ist eine UGC-Plattform, die Marken mit diversen Creators verbindet und sich auf authentisches Storytelling, kulturelle Relevanz und sinnvolle Darstellung konzentriert, insbesondere für People of Color und unterrepräsentierte Stimmen in der DACH-Region."
+          "answer": "Huerray ist eine UGC-Plattform, die Marken mit diversen Creators vernetzt und sich auf authentisches Storytelling, kulturelle Relevanz und sinnvolle Darstellung konzentriert, insbesondere für People of Color und unterrepräsentierte Stimmen in der DACH-Region."
         },
         {
           "question": "Muss ich die Inhalte auf meinen eigenen Social-Media-Kanälen veröffentlichen?",
@@ -115,7 +115,7 @@
       "faqs": [
         {
           "question": "Ich kann nicht auf mein Konto zugreifen - was soll ich tun?",
-          "answer": "Klicken Sie auf \"Passwort zurücksetzen\" auf der Anmeldeseite. Sollten die Probleme weiterhin bestehen, wenden Sie sich bitte per E-Mail an den Huerray-Support, um Hilfe zu erhalten."
+          "answer": "Klicken Sie auf \"Passwort zurücksetzen\" auf der Anmeldeseite. Wenn die Probleme weiterhin bestehen, wenden Sie sich bitte per E-Mail an den Huerray-Support, um Hilfe zu erhalten."
         }
       ]
     },
@@ -131,6 +131,6 @@
   ],
   "seo": {
     "title": "Creators' FAQ",
-    "description": "Hier finden Sie Antworten auf häufig gestellte Fragen über das Werden eines Creators, Zahlungen und Kampagnen auf Huerray."
+    "description": "Hier finden Sie Antworten auf häufig gestellte Fragen zum Thema Creator werden, Zahlungen und Kampagnen auf Huerray."
   }
 }

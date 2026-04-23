@@ -1,5 +1,12 @@
 export type HelpRole = 'admin' | 'brand' | 'creator';
 export type HelpSection = 'home' | 'faq' | 'tickets' | 'submit' | 'topic';
+
+export interface SanityFaq {
+  _id: string;
+  question: Record<string, string>;
+  answer: Record<string, any>;
+  category?: { title: string };
+}
 export type HelpTopicId =
   | 'admin-users'
   | 'admin-cases'

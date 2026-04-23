@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Huerray\nJeder Farbton. Jede Geschichte",
-    "subtitle": "Wir bringen Marken mit Creators aus unterrepräsentierten Gemeinschaften zusammen, um authentischen UGC zu erstellen, der die Menschen anspricht - kulturell reichhaltig, emotional echt und für die sozialen Feeds von heute konzipiert."
+    "subtitle": "Wir vernetzen Marken mit Creators aus unterrepräsentierten Gemeinschaften, um authentischen UGC zu erstellen, der sich durchsetzt - kulturell reichhaltig, emotional echt und für die sozialen Feeds von heute konzipiert."
   },
   "why": {
     "pill": "Unser Warum",
@@ -11,7 +11,7 @@
   "whatWeDo": {
     "pill": "Was wir tun",
     "title": "Wir vernetzen sich mit Creators, die die Welt widerspiegeln, die sie erreichen wollen. In ganz Deutschland, Österreich und der Schweiz",
-    "description": "Wir bringen Marken mit echten Creators zusammen, die Videos, Unboxings, Testimonials und Lifestyle-Inhalte für TikTok, Reels und Anzeigen erstellen, die Aufmerksamkeit erregen. Egal, ob Sie Lo-Fi-Authentizität oder ausgefeilte Produktpräsentationen benötigen, Huerray kuratiert Creators, verwaltet den Prozess und liefert lizenzierte Assets, die für alle Kanäle geeignet sind.",
+    "description": "Wir bringen Marken mit echten Creators zusammen, die Aufmerksamkeit erregende Videos, Unboxings, Testimonials und Lifestyle-Inhalte für TikTok, Reels und Anzeigen erstellen. Egal, ob Sie Lo-Fi-Authentizität oder ausgefeilte Produktpräsentationen benötigen, Huerray kuratiert Creators, verwaltet den Prozess und liefert lizenzierte Assets, die für alle Kanäle geeignet sind.",
     "imageAlt": "Was wir tun",
     "items": [
       {
@@ -48,7 +48,7 @@
         },
         {
           "title": "Schnelle Lieferung",
-          "text": "Kreative Assets, die innerhalb von Tagen, nicht Wochen, bereitgestellt werden können"
+          "text": "Kreative Assets sind innerhalb von Tagen, nicht Wochen, einsatzbereit"
         }
       ]
     }

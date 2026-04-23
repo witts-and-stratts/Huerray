@@ -19,11 +19,15 @@ export function HelpCenterPage( {
   section = 'home',
   topicId,
   className,
+  faqs,
+  helpData,
 }: {
   role: HelpRole;
   section?: HelpSection;
   topicId?: HelpTopicId;
   className?: string;
+  faqs?: any[];
+  helpData?: any;
 } ) {
   const t = useTranslations( 'dashboard.common' );
   const router = useRouter();
@@ -63,8 +67,8 @@ export function HelpCenterPage( {
 
           <div className="help-center__inset">
             { section === 'topic' && topic && <TopicDetailView role={ role } topic={ topic } baseHelpPath={ baseHelpPath } /> }
-            { section === 'home' && <HelpMainView role={ role } baseHelpPath={ baseHelpPath } /> }
-            { section === 'faq' && <HelpFaqView role={ role } /> }
+            { section === 'home' && <HelpMainView role={ role } baseHelpPath={ baseHelpPath } sanityFaqs={ faqs } helpData={ helpData } /> }
+            { section === 'faq' && <HelpFaqView role={ role } sanityFaqs={ faqs } /> }
             { section === 'submit' && (
               <div className="help-center__panel">
                 <h2 className="page-title">{ t( 'helpSheet.submitCta' ) }</h2>

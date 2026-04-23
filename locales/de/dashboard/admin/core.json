@@ -8,7 +8,7 @@
     "periodLabel": "Analysezeitraum auswählen",
     "dateRangeLabel": "Datumsbereich auswählen",
     "dateRangePlaceholder": "Datumsbereich auswählen",
-    "refresh": "Auffrischen",
+    "refresh": "Aktualisieren",
     "error": "Plattform-Analysen können nicht geladen werden.",
     "periods": {
       "allTime": "Alle Zeiten",

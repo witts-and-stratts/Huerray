@@ -20,7 +20,7 @@
       "errorDescription": "Veuillez réessayer plus tard."
     },
     "toolbar": {
-      "search": "Rechercher des factures..."
+      "search": "Recherche de factures..."
     },
     "columns": {
       "invoice": "Facture",
@@ -48,7 +48,7 @@
       "cancelInvoiceDesc": "Êtes-vous sûr de vouloir annuler cette facture ? Cette action ne peut être annulée.",
       "cancelling": "Annulation...",
       "generatePayment": "Générer un paiement",
-      "generatePaymentDesc": "Cette action marque la facture comme payée et génère un enregistrement de paiement. Cette action ne peut pas être annulée.",
+      "generatePaymentDesc": "Cette action marquera la facture comme payée et générera un enregistrement de paiement. Cette action ne peut pas être annulée.",
       "generating": "Générer...",
       "paymentNotes": "Paiement effectué",
       "notes": "Notes",

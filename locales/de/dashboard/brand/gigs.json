@@ -30,7 +30,7 @@
       "validateGig": "Gig validieren",
       "inviteCreators": "Creators einladen",
       "submissions": "Einreichungen",
-      "mySubmissions": "Meine Einreichungen",
+      "mySubmissions": "Meine Einsendungen",
       "deleteGig": "Gig löschen",
       "deleteGigTitle": "Auftritt löschen?",
       "deleteGigDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Löschen",
@@ -48,6 +48,6 @@
       "validateFailed": "Gig konnte nicht validiert werden"
     },
     "details": "Einzelheiten",
-    "mySubmissions": "Meine Einreichungen"
+    "mySubmissions": "Meine Einsendungen"
   }
 }

@@ -10,7 +10,7 @@
       "error": "Impossible de charger l'analyse de la marque.",
       "page": {
         "title": "Analyse",
-        "description": "Suivi des campagnes, des concerts, des contacts avec les créateurs, de l'approbation du contenu et des performances en matière de dépenses.",
+        "description": "Suivi des campagnes, des concerts, des contacts avec les créateurs, de l'approbation des contenus et des performances en matière de dépenses.",
         "periodLabel": "Sélectionner la période d'analyse",
         "dateRangeLabel": "Sélectionner une plage de dates",
         "dateRangePlaceholder": "Sélectionner une plage de dates",
@@ -187,7 +187,7 @@
     },
     "pipelineBreakdown": {
       "title": "Pipeline de campagne",
-      "description": "Comment vos campagnes sont réparties par statut",
+      "description": "Comment vos campagnes sont-elles réparties par statut ?",
       "pendingApproval": "En attente d'approbation",
       "approved": "Approuvé",
       "running": "La course à pied",

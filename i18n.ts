@@ -158,6 +158,7 @@ export default getRequestConfig(async ({ locale, requestLocale }) => {
     'creators-faq': (await import(`./locales/en/creators-faq.json`)).default,
     'managed-services': (await import(`./locales/en/managed-services.json`)).default,
     auth: (await import(`./locales/en/auth.json`)).default,
+    metadata: (await import(`./locales/en/metadata.json`)).default,
     dashboard: {
       common: await loadDashboardCommonMessages( 'en' ),
       navigation: (await import(`./locales/en/dashboard/navigation.json`)).default,
@@ -186,6 +187,7 @@ export default getRequestConfig(async ({ locale, requestLocale }) => {
     'creators-faq': (await import(`./locales/${validLocale}/creators-faq.json`)).default,
     'managed-services': (await import(`./locales/${validLocale}/managed-services.json`)).default,
     auth: (await import(`./locales/${validLocale}/auth.json`)).default,
+    metadata: (await import(`./locales/${validLocale}/metadata.json`)).default,
     dashboard: {
       common: await loadDashboardCommonMessages( validLocale as Locale ),
       navigation: (await import(`./locales/${validLocale}/dashboard/navigation.json`)).default,

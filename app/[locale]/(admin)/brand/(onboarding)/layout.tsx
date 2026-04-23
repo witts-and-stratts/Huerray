@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Complete Profile - Huerray",
-  description: "Complete your brand profile",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( "metadata" );
+  return {
+    title: t( "brand.completeProfile" ),
+    description: "Complete your brand profile",
+  };
+}
 
 export default async function OnboardingLayout( {
   children,
-  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string; }>;

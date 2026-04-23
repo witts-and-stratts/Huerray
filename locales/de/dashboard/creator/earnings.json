@@ -26,7 +26,7 @@
       "amount": "Betrag",
       "actions": "Aktionen",
       "noEarnings": "Noch keine Einnahmen",
-      "noEarningsFiltered": "Kein Verdienst entspricht Ihren aktuellen Filtern.",
+      "noEarningsFiltered": "Keine Einnahmen entsprechen Ihren aktuellen Filtern.",
       "noEarningsDesc": "Ihre Zahlungen aus abgeschlossenen Auftritten werden hier angezeigt.",
       "searchPlaceholder": "Suchergebnisse...",
       "clearFilters": "Filter löschen"

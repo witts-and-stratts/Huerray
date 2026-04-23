@@ -1,5 +1,10 @@
+import type { Metadata } from 'next';
 import { NewsletterUnsubscribe } from '@/components/NewsletterUnsubscribe';
 import { LanguageSelector } from '@/components/LanguageSelector';
+
+export const metadata: Metadata = {
+  title: 'Newsletter Unsubscribe',
+};
 
 export default async function NewsletterUnsubscribePage({
   searchParams,

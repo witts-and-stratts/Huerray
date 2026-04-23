@@ -3,7 +3,7 @@
   "overview": "Aquí tienes un resumen del concierto",
   "dashboard": {
     "title": "Cuadro de mandos",
-    "description": "Realice un seguimiento de las invitaciones, las actuaciones, los envíos y los ingresos previstos.",
+    "description": "Realice un seguimiento de las invitaciones, las actuaciones, las presentaciones y los ingresos previstos.",
     "browseGigs": "Buscar conciertos",
     "viewMyGigs": "Ver mis conciertos",
     "creatorFallback": "Creador"
@@ -34,7 +34,7 @@
       "applications": "Actividad de aplicación y calidad de aceptación.",
       "invitations": "Invitaciones de creadores recibidas y aceptadas.",
       "gigs": "Actuaciones realizadas, ingresos totales y tasa de éxito.",
-      "videoSubmissions": "Envío de vídeos y aprobación de entregas.",
+      "videoSubmissions": "Presentación de vídeos y aprobación de entregas.",
       "support": "Volumen de casos y rendimiento de resolución."
     },
     "items": {

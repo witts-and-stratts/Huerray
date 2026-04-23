@@ -299,7 +299,7 @@
     "toneTitle": "Tono de voz",
     "toneDescription": "Describa el tono deseado para el contenido",
     "toneLabel": "Tono de voz",
-    "tonePlaceholder": "Por ejemplo, enérgico, profesional, informal...",
+    "tonePlaceholder": "p. ej. Enérgico, profesional, informal...",
     "deleteConfirmTitle": "¿Borrar campaña?",
     "deleteConfirmDescription": "Esta acción no se puede deshacer. La campaña y todos sus datos se eliminarán de forma permanente.",
     "deleteCampaign": "Eliminar campaña",

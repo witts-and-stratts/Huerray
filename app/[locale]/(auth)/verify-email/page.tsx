@@ -1,6 +1,11 @@
+import type { Metadata } from 'next';
 import { VerifyEmail } from '@/components/auth/verify-email';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { redirect } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: 'Verify Email',
+};
 
 export default async function VerifyEmailPage( {
   searchParams,

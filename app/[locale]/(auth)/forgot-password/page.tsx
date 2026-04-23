@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
 import { LanguageSelector } from "@/components/LanguageSelector";
+
+export const metadata: Metadata = {
+  title: "Forgot Password",
+};
 
 export default function ForgotPasswordPage() {
   return (

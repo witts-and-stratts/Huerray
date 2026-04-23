@@ -87,7 +87,7 @@
   },
   "settingsPage": {
     "successUpdated": "Einstellungen erfolgreich aktualisiert",
-    "errorUpdateFailed": "Aktualisierung der Einstellungen fehlgeschlagen",
+    "errorUpdateFailed": "Einstellungen konnten nicht aktualisiert werden",
     "errorResponseData": "Antwortdaten:",
     "errorFetchFailed": "Fehler beim Abrufen von Einstellungen",
     "errorLoadFailed": "Einige Einstellungen konnten nicht geladen werden",
@@ -150,7 +150,7 @@
     "saving": "Sparen...",
     "saveChanges": "Änderungen speichern",
     "successUpdated": "Bankverbindung erfolgreich aktualisiert",
-    "errorUpdateFailed": "Aktualisierung der Einstellungen fehlgeschlagen",
+    "errorUpdateFailed": "Einstellungen konnten nicht aktualisiert werden",
     "errorUpdateFailedWithError": "Aktualisierung fehlgeschlagen: {error}",
     "bankNameRequired": "Bankname ist erforderlich",
     "bankAccountNameRequired": "Name des Kontoinhabers ist erforderlich",

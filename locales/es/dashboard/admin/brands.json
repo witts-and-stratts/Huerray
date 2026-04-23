@@ -27,7 +27,7 @@
     "successToast": "Estado de la marca actualizado correctamente",
     "errorToast": "No se ha podido actualizar el estado de la marca",
     "missingId": "Falta el identificador de marca",
-    "confirmApproveTitle": "¿Aprobar perfil de marca?",
+    "confirmApproveTitle": "¿Aprobar el perfil de la marca?",
     "confirmApproveDesc": "El perfil de {name} será aprobado y se le notificará.",
     "confirmRejectTitle": "¿Rechazar el perfil de marca?",
     "confirmRejectDesc": "El perfil de {name} será rechazado y se le notificará.",
@@ -45,10 +45,10 @@
   },
   "brandActionMenu": {
     "ThisActionCannot": "? Esta acción no se puede deshacer.",
-    "areYouSureYou": "¿Está seguro de que desea eliminar",
+    "areYouSureYou": "¿Estás seguro de que quieres borrar",
     "openMenu": "Abrir menú",
     "brandDeletedSuccessfully": "Marca eliminada con éxito",
-    "failedToDeleteBrand": "No se ha podido eliminar la marca",
+    "failedToDeleteBrand": "No se ha podido borrar la marca",
     "brandProfileNotFound": "No se ha encontrado el perfil de la marca",
     "copyBrandId": "Copiar ID de marca",
     "brandIdCopiedToClipboard": "ID de marca copiado en el portapapeles",
@@ -158,7 +158,7 @@
     "na": "N/A"
   },
   "brandRecentCampaignsBlock": {
-    "noCampaignsYet": "Todavía no hay campañas.",
+    "noCampaignsYet": "Aún no hay campañas.",
     "unableToLoadRecent": "No se pueden cargar las campañas recientes.",
     "latestCampaignsForThis": "Últimas campañas de esta marca",
     "recentCampaigns": "Campañas recientes"

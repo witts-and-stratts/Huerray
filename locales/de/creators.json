@@ -1,6 +1,6 @@
 {
   "hero": {
-    "title": "Werden Sie für das bezahlt, was Sie lieben",
+    "title": "Monetarisieren Sie Ihr Talent für das, was Sie lieben",
     "subtitle": "Arbeiten Sie mit Marken und echten Unternehmen. Verdienen Sie Geld für das, was Sie lieben.",
     "buttonText": "Werden Sie ein Creator",
     "paymentMade": "Geleistete Zahlung"
@@ -20,22 +20,22 @@
   "collaborations": {
     "pill": "Matching",
     "title": "Kollaborationen, die zu Ihrem Stil passen",
-    "description": "Passende Marken auf der Grundlage Ihrer Präferenzen für Stil und Inhalt."
+    "description": "Matching Brands basierend auf Ihren stilistischen und inhaltlichen Vorlieben."
   },
   "director": {
-    "pill": "Kreative Kontrolle",
-    "title": "Seien Sie der kreative Direktor",
-    "description": "Gewinnen Sie kreative Autonomie über Ihre Kreationen. Seien Sie der Mittelpunkt der Show."
+    "pill": "Kreative Freiheit",
+    "title": "Ihre Vision. Ihre kreative Führung",
+    "description": "Sie entscheiden, wie Ihr Content aussieht. Ihr Stil steht im Fokus."
   },
   "manage": {
     "pill": "Automatisierung",
     "title": "Sie schaffen. Wir verwalten alles andere",
-    "description": "Unser Team und unsere Technologie unterstützen Sie bei der Zusammenarbeit mit Marken, sodass Sie sich auf die Erstellung der besten Inhalte konzentrieren können."
+    "description": "Unser Team und unsere Technologie unterstützen Sie bei der Zusammenarbeit mit Marken, so dass Sie sich auf die Erstellung von Content konzentrieren können."
   },
   "paid": {
     "pill": "Zahlungen",
     "title": "Pünktlich bezahlt werden, jedes Mal",
-    "description": "Sie erhalten automatische Zahlungen, wenn die Kunden Ihre Kreation genehmigen. Es wird keine Frage gestellt."
+    "description": "Sie erhalten automatische Zahlungen, wenn die Kunden Ihren Content freigeben. Ohne Aufwand für Sie."
   },
   "benefits": {
     "heading": "Warum Creators sich für Huerray entscheiden",
@@ -52,7 +52,7 @@
       "description": "Sehen Sie sich die Vergütung im Voraus an und werden Sie bezahlt, sobald Ihre genehmigte Arbeit geliefert wurde."
     },
     "creative": {
-      "title": "Kreative Kontrolle",
+      "title": "Kreative Freiheit",
       "description": "Bringen Sie Ihre eigene Perspektive in jedes Briefing ein und bleiben Sie dabei auf die Kampagnenziele ausgerichtet."
     },
     "support": {
@@ -65,13 +65,13 @@
     }
   },
   "testimonial": {
-    "quote": "Huerray setzt sich für seine Creators ein... von der Sicherstellung einer fairen Bezahlung bis hin zur ständigen Bereitstellung von Markenangeboten, die unserem Lebensstil entsprechen",
+    "quote": "Huerray setzt sich für seine Creators ein ... sorgt für faire Bezahlung und bietet uns ständig Zugang zu Markenkooperationen, die zu unserem Lifestyle passen.",
     "author": "Baron McHennie - @baron_mchennie"
   },
   "cta": {
     "buttonText": "Werden Sie ein Creator",
     "subtitle": "Schließen Sie sich Tausenden von Creators an",
-    "title": "Werden Sie für das bezahlt, was Sie lieben"
+    "title": "Monetarisieren Sie Ihr Talent"
   },
   "faq": {
     "heading": "FAQs",
@@ -85,14 +85,14 @@
     },
     "q3": {
       "question": "Wie viel kann ich verdienen?",
-      "answer": "Der Verdienst hängt von der Größe Ihrer Zielgruppe, den Engagement-Raten und dem Umfang der jeweiligen Zusammenarbeit ab. Die Details der Vergütung werden Ihnen für jede Gelegenheit im Voraus angezeigt."
+      "answer": "Der Verdienst variiert basierend auf der Größe Ihrer Zielgruppe, den Engagement-Raten und dem Umfang der jeweiligen Zusammenarbeit. Die Details der Vergütung werden Ihnen für jede Gelegenheit im Voraus angezeigt."
     },
     "q4": {
       "question": "Wie funktionieren die Zahlungen?",
       "answer": "Sie erhalten die Zahlung, sobald Ihr Inhalt von der Marke genehmigt wurde und die Anforderungen der Kampagne erfüllt. Die Zahlungen werden sicher über unsere Plattform abgewickelt."
     },
     "q5": {
-      "question": "Kann ich wählen, mit welchen Marken ich zusammenarbeite?",
+      "question": "Kann ich wählen, mit welchen Marken ich arbeiten möchte?",
       "answer": "Ganz genau! Sie haben die volle Kontrolle darüber, welche Kooperationen Sie annehmen. Arbeiten Sie nur mit Marken zusammen, die zu Ihren Werten und Ihrer Zielgruppe passen."
     },
     "q6": {
