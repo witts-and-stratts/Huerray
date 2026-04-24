@@ -10,7 +10,7 @@ import { Button } from "@/components/dashboard-ui/button";
 import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 import { Card, CardContent } from "@/components/dashboard-ui/card";
 import { cn } from "@/lib/dashboard-utils";
-import { timeAgo } from "@/lib/utils";
+import { useTimeAgo } from "@/lib/hooks/format";
 
 interface NotificationItemProps {
   notification: ModelsNotificationResponse;
@@ -20,6 +20,7 @@ interface NotificationItemProps {
 
 export function NotificationItem( { notification, onMarkAsRead, onDelete }: NotificationItemProps ) {
   const t = useTranslations( "dashboard.notifications" );
+  const formatTimeAgo = useTimeAgo();
   const [ isExpanded, setIsExpanded ] = useState( false );
   const shouldTruncate = notification.message ? notification.message.length > 140 : false;
   const eventType = notification.event_type || t( "item.eventTypeFallback" );
@@ -88,7 +89,7 @@ export function NotificationItem( { notification, onMarkAsRead, onDelete }: Noti
                     { eventType.replace( /_/g, " " ) }
                   </Badge>
                   <p className="text-xs text-muted-foreground">
-                    { timeAgo( notification.created_at! ) }
+                    { formatTimeAgo( notification.created_at! ) }
                   </p>
                 </div>
               </div>

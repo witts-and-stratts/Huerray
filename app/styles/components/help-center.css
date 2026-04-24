@@ -8,7 +8,7 @@
   }
 
   .help-center__frame {
-    @apply bg-background ring-foreground/10 ring-1 rounded-md shadow-sm h-full min-h-[560px] overflow-hidden;
+    @apply bg-background ring-foreground/10 ring-1 rounded-md h-full min-h-[560px] overflow-hidden;
   }
 
   .help-center__layout {
@@ -41,7 +41,7 @@
   }
 
   .help-center__panel-subtitle {
-    @apply text-sm text-muted-foreground mb-5;
+    @apply text-base font-light text-muted-foreground mb-5;
   }
 
   /* Submit case form */
@@ -67,15 +67,15 @@
   }
 
   .help-main__hero {
-    @apply text-center pt-2;
+    @apply text-center pt-8;
   }
 
   .help-main__hero-subtitle {
-    @apply text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed mb-5;
+    @apply text-sm font-light text-muted-foreground max-w-sm mx-auto leading-relaxed mb-5;
   }
 
   .help-main__search {
-    @apply flex gap-2 max-w-sm mx-auto;
+    @apply flex gap-2 max-w-sm mx-auto py-4;
   }
 
   .help-main__search-field {
@@ -115,7 +115,7 @@
   }
 
   .help-main__card-description {
-    @apply text-xs text-muted-foreground leading-relaxed;
+    @apply text-sm text-muted-foreground leading-relaxed font-light mb-2;
   }
 
   .help-main__card-link {
@@ -139,7 +139,7 @@
   }
 
   .help-main__results {
-    @apply mt-5 border-t border-border pt-5 text-left max-w-2xl mx-auto;
+    @apply mt-5 border-t border-border text-left max-w-2xl mx-auto bg-slate-50/50 p-3 md:p-5;
   }
 
   .help-main__faq-header {
@@ -155,7 +155,7 @@
   }
 
   .help-main__result {
-    @apply rounded-lg border border-border p-3 flex flex-col gap-1 hover:border-primary/40 hover:bg-primary/2 transition-colors;
+    @apply rounded-lg border border-border p-3 flex flex-col gap-1 bg-background hover:border-primary/40 hover:bg-primary/2 transition-colors;
   }
 
   .help-main__result-type {
@@ -176,7 +176,7 @@
   }
 
   .help-faq__description {
-    @apply text-sm text-muted-foreground;
+    @apply text-base font-light text-muted-foreground;
   }
 
   .help-faq__search {
@@ -213,7 +213,7 @@
   }
 
   .help-topic__back {
-    @apply text-sm text-muted-foreground hover:text-foreground underline underline-offset-2 mb-2 inline-block;
+    @apply text-sm text-muted-foreground hover:text-foreground underline underline-offset-2 mb-10 inline-block;
   }
 
   .help-topic__description {

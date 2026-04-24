@@ -8,11 +8,12 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/dashboard-ui/table';
 import type { ModelsNotificationResponse } from '@/lib/api/generated/models';
 import { useDeleteNotification, useMarkNotificationAsRead, useNotifications } from '@/lib/api/hooks/notifications';
-import { timeAgo } from '@/lib/utils';
+import { useTimeAgo } from '@/lib/hooks/format';
 import { useTranslations } from 'next-intl';
 
 export function RecentActivityBlock() {
   const t = useTranslations( 'dashboard.admin' );
+  const formatTimeAgo = useTimeAgo();
   const { data: response, isLoading, isError } = useNotifications( 1, 10, false );
   const markAsRead = useMarkNotificationAsRead();
   const deleteNotification = useDeleteNotification();
@@ -26,7 +27,7 @@ export function RecentActivityBlock() {
       eventName: notification.event_name || t( 'dashboardBlocks.recentActivityBlock.labels.unknownEvent' ),
       eventType: notification.event_type || t( 'dashboardBlocks.recentActivityBlock.labels.unknown' ),
       actor: actorFromMessage || notification.title || t( 'dashboardBlocks.recentActivityBlock.labels.system' ),
-      when: notification.created_at ? timeAgo( notification.created_at ) : t( 'dashboardBlocks.recentActivityBlock.labels.na' ),
+      when: notification.created_at ? formatTimeAgo( notification.created_at ) : t( 'dashboardBlocks.recentActivityBlock.labels.na' ),
       notification,
     };
   } );

@@ -7,7 +7,7 @@ import { config } from "@/lib/config";
 import { useAuth } from "@/lib/auth/auth-context";
 import { cn } from "@/lib/dashboard-utils";
 import { getNotificationsPagePath } from "@/lib/notification-utils";
-import { timeAgo } from "@/lib/utils";
+import { useTimeAgo } from "@/lib/hooks/format";
 import { Bell, Check, ChevronDown, ChevronUp, EllipsisVertical, MegaphoneOff } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -177,7 +177,6 @@ function NotificationsList( { isLoading, notifications, onMarkAsRead, onDelete }
             notification={ notification }
             onMarkAsRead={ onMarkAsRead }
             onDelete={ onDelete }
-            timeAgo={ timeAgo }
           />
         ) )
       ) }
@@ -189,10 +188,10 @@ interface DropdownNotificationItemProps {
   notification: ModelsNotificationResponse;
   onMarkAsRead: ( id: string, e?: React.MouseEvent ) => void;
   onDelete: ( id: string, e?: React.MouseEvent ) => void;
-  timeAgo: ( dateStr: string ) => string;
 }
 
-function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeAgo }: DropdownNotificationItemProps ) {
+function DropdownNotificationItem( { notification, onMarkAsRead, onDelete }: DropdownNotificationItemProps ) {
+  const formatTimeAgo = useTimeAgo();
   const [ isExpanded, setIsExpanded ] = useState( false );
   const shouldTruncate = notification.message ? notification.message.length > 140 : false;
   const { action, handleAction, overlay } = useNotificationAction( notification );
@@ -263,7 +262,7 @@ function DropdownNotificationItem( { notification, onMarkAsRead, onDelete, timeA
               ) }
             </div>
             <p className="text-xs text-muted-foreground pt-1">
-              { timeAgo( notification.created_at! ) }
+              { formatTimeAgo( notification.created_at! ) }
             </p>
             <AnimatePresence>
               { action.kind !== "none" && (

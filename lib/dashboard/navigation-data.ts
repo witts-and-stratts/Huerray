@@ -92,14 +92,14 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       icon: FileScriptIcon,
     },
     {
-      title: withFallback( t, "brand.cases", "Cases" ),
-      url: "/brand/cases",
-      icon: CustomerSupportIcon,
-    },
-    {
       title: withFallback( t, "brand.profile", "Profile" ),
       url: "/brand/profile",
       icon: Store01Icon,
+    },
+    {
+      title: withFallback( t, "brand.cases", "Support Tickets" ),
+      url: "/brand/support-tickets",
+      icon: CustomerSupportIcon,
     },
   ],
   // documents: [
@@ -167,8 +167,8 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
       icon: ChartLineData01Icon,
     },
     {
-      title: withFallback( t, "creator.cases", "Cases" ),
-      url: "/creator/cases",
+      title: withFallback( t, "creator.cases", "Support Tickets" ),
+      url: "/creator/support-tickets",
       icon: CustomerSupportIcon,
     },
   ],
@@ -228,11 +228,6 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       icon: CreditCardAcceptIcon,
     },
     {
-      title: withFallback( t, "admin.cases", "Cases" ),
-      url: "/admin/cases",
-      icon: CustomerSupportIcon,
-    },
-    {
       title: withFallback( t, "admin.studio", "Sanity Studio" ),
       url: "/admin/studio",
       icon: DatabaseIcon,
@@ -241,6 +236,11 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       title: withFallback( t, "admin.analytics", "Analytics" ),
       url: "/admin/analytics",
       icon: ChartLineData01Icon,
+    },
+    {
+      title: withFallback( t, "admin.cases", "Support Tickets" ),
+      url: "/admin/support-tickets",
+      icon: CustomerSupportIcon,
     },
     // {
     //   title: withFallback( t, "admin.moderation", "Moderation" ),

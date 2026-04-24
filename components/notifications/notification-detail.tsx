@@ -6,7 +6,7 @@ import { Button } from "@/components/dashboard-ui/button";
 import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 import { ScrollArea } from "@/components/dashboard-ui/scroll-area";
 import { cn } from "@/lib/dashboard-utils";
-import { timeAgo } from "@/lib/utils";
+import { useTimeAgo } from "@/lib/hooks/format";
 import { ModelsNotificationResponse } from "@/lib/api/generated";
 import { useNotificationAction } from "./use-notification-action";
 import { useTranslations } from "next-intl";
@@ -47,6 +47,7 @@ function NotificationDetailEmpty() {
 
 function NotificationDetailHeader( { notification, onMarkAsRead, onDelete, onBack }: NotificationDetailHeaderProps ) {
   const t = useTranslations( "dashboard.notifications" );
+  const formatTimeAgo = useTimeAgo();
   const isUnread = !notification.is_read;
 
   const actions: MenuAction<ModelsNotificationResponse>[] = [
@@ -94,7 +95,7 @@ function NotificationDetailHeader( { notification, onMarkAsRead, onDelete, onBac
             </Badge>
           ) }
           <span className="text-xs text-muted-foreground">
-            { timeAgo( notification.created_at! ) }
+            { formatTimeAgo( notification.created_at! ) }
           </span>
         </div>
       </div>

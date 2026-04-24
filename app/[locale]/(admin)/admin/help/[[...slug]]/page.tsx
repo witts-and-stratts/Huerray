@@ -32,5 +32,5 @@ export default async function AdminHelpPage( { params }: AdminHelpPageProps ) {
     return <div className='py-5'><HelpCenterPage role="admin" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } /></div>;
   }
 
-  return <div className='py-5'><HelpCenterPage role="admin" section={ route.section } faqs={ faqs } helpData={ helpData } /></div>;
+  return <div className='py-5'><HelpCenterPage role="admin" section={ route.section } ticketId={ route.section === 'tickets' ? route.ticketId : undefined } faqs={ faqs } helpData={ helpData } /></div>;
 }

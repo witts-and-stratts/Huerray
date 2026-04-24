@@ -9,8 +9,10 @@ import { CustomerSupportIcon, Search01Icon } from '@hugeicons/core-free-icons';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PortableText } from '@portabletext/react';
 import { AnimatePresence, motion } from 'motion/react';
+import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
 import { SuperField } from '@/components/dashboard-ui/super-field';
+import { useCases } from '@/lib/api/hooks';
 import type { HelpRole, SanityFaq, SanityHelpCenterData, SanityHelpTopic } from './help-routing';
 import { cardIcons, getLocalizedValue, iconMap } from './help-content';
 
@@ -41,7 +43,7 @@ function portableTextToText( value: unknown ): string {
   if ( typeof value === 'string' ) return value;
   if ( Array.isArray( value ) ) return value.map( portableTextToText ).filter( Boolean ).join( ' ' );
   if ( typeof value === 'object' ) {
-    const item = value as { text?: unknown; children?: unknown; [key: string]: unknown };
+    const item = value as { text?: unknown; children?: unknown;[ key: string ]: unknown; };
     if ( typeof item.text === 'string' ) return item.text;
     if ( item.children ) return portableTextToText( item.children );
   }
@@ -86,6 +88,8 @@ export function HelpMainView( {
   const router = useRouter();
   const [ search, setSearch ] = useState( '' );
   const [ debouncedSearch, setDebouncedSearch ] = useState( '' );
+  const { data: openCasesData } = useCases( { status: 'open', limit: 1 } );
+  const openTicketsCount = openCasesData?.pagination?.total ?? 0;
 
   useEffect( () => {
     const timeout = window.setTimeout( () => {
@@ -96,15 +100,15 @@ export function HelpMainView( {
   }, [ search ] );
 
   const topics = helpData?.topics ?? [];
-  const cards: HelpCard[] = topics.map((topic) => ({
+  const cards: HelpCard[] = topics.map( ( topic ) => ( {
     title: getLocalizedValue( topic.title, locale ),
     description: getLocalizedValue( topic.description, locale ),
     iconName: topic.icon,
-  }));
-  
+  } ) );
+
   const heroTitle = getLocalizedValue( helpData?.heroTitle, locale, t( 'helpSheet.hero.title' ) );
   const heroSubtitle = getLocalizedValue( helpData?.heroSubtitle, locale, t( 'helpSheet.hero.subtitle' ) );
-  
+
   const faqs = ( sanityFaqs || [] ).map( ( f: SanityFaq ) => ( {
     id: f._id,
     q: getLocalizedValue( f.question, locale ),
@@ -255,9 +259,9 @@ export function HelpMainView( {
           return (
             <div key={ i } className="help-main__card">
               <div className="help-main__card-icon-wrap">
-                <HugeiconsIcon 
-                  icon={ card.iconName && iconMap[card.iconName] ? iconMap[card.iconName] : icons[ i ] } 
-                  className="help-main__card-icon" 
+                <HugeiconsIcon
+                  icon={ card.iconName && iconMap[ card.iconName ] ? iconMap[ card.iconName ] : icons[ i ] }
+                  className="help-main__card-icon"
                 />
               </div>
               <div className="help-main__card-body">
@@ -277,21 +281,22 @@ export function HelpMainView( {
 
       <div className="help-main__cta-row">
         <Button
-          variant="outline"
-          size="sm"
-          className="help-main__cta-button"
+          variant="default"
+          // className="help-main__cta-button"
           onClick={ () => router.push( `${ baseHelpPath }/submit` ) }
         >
           <HugeiconsIcon icon={ CustomerSupportIcon } className="help-main__search-button-icon" />
           { t( 'helpSheet.submitCta' ) }
         </Button>
         <Button
-          variant="ghost"
-          size="sm"
-          className="help-main__cta-button--ghost"
+          variant="outline"
+          // className="help-main__cta-button--ghost"
           onClick={ () => router.push( `${ baseHelpPath }/tickets` ) }
         >
-          { t( 'helpSheet.myCasesLink' ) }
+          { t( 'helpSheet.supportTickets' ) }
+          { openTicketsCount > 0 && (
+            <Badge variant="destructive" className="ml-2">{ openTicketsCount }</Badge>
+          ) }
         </Button>
       </div>
 

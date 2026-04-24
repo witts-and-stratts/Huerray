@@ -25,6 +25,7 @@ type StatusFilter = 'all' | 'open' | 'in_progress' | 'resolved' | 'closed';
 
 interface CasesShellProps {
   listHref: string;
+  selectedId?: string | null;
   children?: React.ReactNode;
 }
 
@@ -39,12 +40,12 @@ function CasesEmptyState() {
   );
 }
 
-export function CasesShell( { listHref, children }: CasesShellProps ) {
+export function CasesShell( { listHref, selectedId: selectedIdOverride, children }: CasesShellProps ) {
   const t = useTranslations( 'dashboard.admin.casesPage' );
   const router = useRouter();
   const params = useParams<{ id?: string; }>();
-  const selectedId = params.id ?? null;
-  const hasDetailRoute = React.Children.count( children ) > 0;
+  const selectedId = selectedIdOverride ?? params.id ?? null;
+  const hasDetailRoute = React.Children.count( children ) > 0 || !!selectedId;
   const [ isMobile, setIsMobile ] = React.useState( false );
 
   const [ page, setPage ] = React.useState( 1 );
@@ -74,6 +75,10 @@ export function CasesShell( { listHref, children }: CasesShellProps ) {
   );
 
   const cases: ModelsCaseResponse[] = React.useMemo( () => response?.data || [], [ response ] );
+  const selectedCase = React.useMemo(
+    () => cases.find( c => c.id === selectedId ) || null,
+    [ cases, selectedId ]
+  );
   const totalCount = ( response as any )?.pagination?.total || cases.length;
   const totalPages = Math.max( Math.ceil( totalCount / perPage ), 1 );
   const startItem = totalCount === 0 ? 0 : ( page - 1 ) * perPage + 1;
@@ -97,7 +102,7 @@ export function CasesShell( { listHref, children }: CasesShellProps ) {
   }
 
   return (
-    <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
+    <div className="flex flex-col flex-1 min-h-0 h-full overflow-hidden">
       <div className="flex flex-1 overflow-hidden min-h-0">
         { isMobile && (
           <Sheet open={ hasDetailRoute } onOpenChange={ ( open ) => {
@@ -105,8 +110,8 @@ export function CasesShell( { listHref, children }: CasesShellProps ) {
               router.push( listHref );
             }
           } }>
-            <SheetContent side="right" className="w-full sm:max-w-full p-0 gap-0" showCloseButton={ false }>
-              { hasDetailRoute ? children : <CaseDetail case_={ null } /> }
+            <SheetContent side="right" className="w-full max-md:w-9/10! sm:max-w-full p-0 gap-0" showCloseButton={ false }>
+              { children || <CaseDetail case_={ selectedCase } /> }
             </SheetContent>
           </Sheet>
         ) }
@@ -222,7 +227,7 @@ export function CasesShell( { listHref, children }: CasesShellProps ) {
         </div>
 
         <div className="hidden md:flex flex-1 overflow-hidden bg-background w-full">
-          { hasDetailRoute ? children : <CaseDetail case_={ null } /> }
+          { children || <CaseDetail case_={ selectedCase } /> }
         </div>
       </div>
     </div>

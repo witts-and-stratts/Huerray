@@ -8164,5 +8164,14 @@
   "fr::Topic": "Sujet",
   "fr::How to use this area": "Comment utiliser cette zone",
   "fr::Quick Links": "Liens rapides",
-  "fr::Related FAQ": "FAQ apparentée"
+  "fr::Related FAQ": "FAQ apparentée",
+  "de::Submit a Ticket": "Ticket einreichen",
+  "de::My Tickets": "Meine Tickets",
+  "de::Support Tickets": "Tickets unterstützen",
+  "es::Submit a Ticket": "Enviar un billete",
+  "es::My Tickets": "Mis entradas",
+  "es::Support Tickets": "Tickets de asistencia",
+  "fr::Submit a Ticket": "Soumettre un ticket",
+  "fr::My Tickets": "Mes billets",
+  "fr::Support Tickets": "Tickets de soutien"
 }

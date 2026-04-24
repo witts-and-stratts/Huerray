@@ -68,7 +68,7 @@
           "description": "Gestione marcas, creadores y usuarios en toda la plataforma."
         },
         {
-          "title": "Casos de apoyo",
+          "title": "Tickets de soporte",
           "description": "Revisar, asignar y resolver los tickets de soporte de los usuarios."
         },
         {
@@ -96,8 +96,9 @@
       "quickLinksTitle": "Enlaces rápidos",
       "relatedFaqTitle": "Preguntas frecuentes relacionadas"
     },
-    "submitCta": "Presentar un caso",
-    "myCasesLink": "Mis casos",
+    "submitCta": "Enviar un billete",
+    "myCasesLink": "Mis entradas",
+    "supportTickets": "Tickets de asistencia",
     "backToHelp": "Volver a Ayuda",
     "nav": {
       "home": "Inicio",

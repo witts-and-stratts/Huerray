@@ -12,7 +12,7 @@ import { Loader2, RefreshCw, Send, ShieldCheck } from 'lucide-react';
 import { KeyboardEvent, memo, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { SuperField } from './super-field';
-import { timeAgo } from '@/lib/utils';
+import { useTimeAgo } from '@/lib/hooks/format';
 import { AnimatePresence, motion } from 'motion/react';
 
 export interface EntityRef {
@@ -67,6 +67,7 @@ const MessageGroupItem = memo( ( {
   user: any,
   size: 'default' | 'sm';
 } ) => {
+  const formatTimeAgo = useTimeAgo();
   const isOwn = group.senderId === user?.id;
   const firstName = group.commenter?.first_name ?? '';
   const lastName = group.commenter?.last_name ?? '';
@@ -146,7 +147,7 @@ const MessageGroupItem = memo( ( {
             transition={ { duration: 0.3, ease: 'easeOut', delay: group.messages.length * 0.01 } }
             exit={ { opacity: 0, y: 10 } }
           >
-            { timeAgo( group.messages[ group.messages.length - 1 ].created_at! ) }
+            { formatTimeAgo( group.messages[ group.messages.length - 1 ].created_at! ) }
           </motion.span>
         </motion.div>
       </motion.div>

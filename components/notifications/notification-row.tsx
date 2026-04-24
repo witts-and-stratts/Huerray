@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/dashboard-ui/badge";
 import { cn } from "@/lib/dashboard-utils";
-import { timeAgo } from "@/lib/utils";
+import { useTimeAgo } from "@/lib/hooks/format";
 import { ModelsNotificationResponse } from "@/lib/api/generated";
 import { useTranslations } from "next-intl";
 
@@ -14,6 +14,7 @@ interface NotificationRowProps {
 
 export function NotificationRow( { notification, isSelected, onClick }: NotificationRowProps ) {
   const t = useTranslations( "dashboard.notifications" );
+  const formatTimeAgo = useTimeAgo();
   const isUnread = !notification.is_read;
 
   return (
@@ -46,7 +47,7 @@ export function NotificationRow( { notification, isSelected, onClick }: Notifica
               { notification.title }
             </p>
             <span className="text-[11px] text-muted-foreground shrink-0">
-              { timeAgo( notification.created_at! ) }
+              { formatTimeAgo( notification.created_at! ) }
             </span>
           </div>
 

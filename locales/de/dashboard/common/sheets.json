@@ -68,7 +68,7 @@
           "description": "Verwalten Sie Marken, Creators und Nutzer auf der gesamten Plattform."
         },
         {
-          "title": "Support-Fälle",
+          "title": "Support-Tickets",
           "description": "Überprüfung, Zuweisung und Lösung von Support-Tickets von Benutzern."
         },
         {
@@ -96,8 +96,9 @@
       "quickLinksTitle": "Schnelle Links",
       "relatedFaqTitle": "Verwandte FAQ"
     },
-    "submitCta": "Einen Fall einreichen",
-    "myCasesLink": "Meine Fälle",
+    "submitCta": "Ticket einreichen",
+    "myCasesLink": "Meine Tickets",
+    "supportTickets": "Tickets unterstützen",
     "backToHelp": "Zurück zu Hilfe",
     "nav": {
       "home": "Startseite",

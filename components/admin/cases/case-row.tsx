@@ -1,11 +1,10 @@
 'use client';
 
 import { ModelsCaseResponse } from '@/lib/api/generated/models';
-import { CaseStatusBadge } from './case-status-badge';
-import { CasePriorityBadge } from './case-priority-badge';
 import { cn } from '@/lib/dashboard-utils';
-import { timeAgo } from '@/lib/utils';
+import { useTimeAgo } from '@/lib/hooks/format';
 import { Link } from '@/lib/navigation';
+import { useTranslations } from 'next-intl';
 
 interface CaseRowProps {
   case_: ModelsCaseResponse;
@@ -14,11 +13,46 @@ interface CaseRowProps {
   href?: string;
 }
 
+const statusDotColor: Record<string, string> = {
+  open: 'bg-blue-500',
+  in_progress: 'bg-amber-500',
+  resolved: 'bg-emerald-500',
+  closed: 'bg-slate-400',
+};
+
+const priorityDotColor: Record<string, string> = {
+  low: 'bg-slate-400',
+  normal: 'bg-blue-500',
+  medium: 'bg-blue-500',
+  high: 'bg-amber-500',
+  urgent: 'bg-red-500',
+};
+
+const statusKeyMap = {
+  open: 'open',
+  in_progress: 'inProgress',
+  resolved: 'resolved',
+  closed: 'closed',
+} as const;
+
+const priorityKeyMap = {
+  low: 'low',
+  normal: 'normal',
+  medium: 'normal',
+  high: 'high',
+  urgent: 'urgent',
+} as const;
+
 export function CaseRow( { case_, isSelected, onClick, href }: CaseRowProps ) {
-  const isOpen = case_.status === 'open' || case_.status === 'in_progress';
-  const reporterName = case_.reporter
-    ? `${ case_.reporter.first_name || '' } ${ case_.reporter.last_name || '' }`.trim() || case_.reporter.email || 'Unknown'
-    : 'Unknown';
+  const formatTimeAgo = useTimeAgo();
+  const tStatus = useTranslations( 'dashboard.admin.casesPage.statuses' );
+  const tPriority = useTranslations( 'dashboard.admin.casesPage.priorities' );
+  const status = case_.status || 'open';
+  const priority = case_.priority || 'normal';
+  const isOpen = status === 'open' || status === 'in_progress';
+  const statusKey = ( statusKeyMap[ status as keyof typeof statusKeyMap ] ?? 'open' ) as Parameters<typeof tStatus>[ 0 ];
+  const priorityKey = ( priorityKeyMap[ priority as keyof typeof priorityKeyMap ] ?? 'normal' ) as Parameters<typeof tPriority>[ 0 ];
+
   const className = cn(
     'w-full text-left px-4 py-3 border-b border-border/50 transition-colors cursor-pointer block',
     'hover:bg-primary/5',
@@ -29,25 +63,13 @@ export function CaseRow( { case_, isSelected, onClick, href }: CaseRowProps ) {
 
   const content = (
     <div className="flex items-start gap-3">
-      <div className="mt-1.5 shrink-0">
-        { isOpen
-          ? <span className="block w-2 h-2 rounded-full bg-primary" />
-          : <span className="block w-2 h-2 rounded-full bg-transparent" />
-        }
-      </div>
-
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between gap-2 mb-0.5">
-          <p className={ cn(
-            'text-sm truncate',
-            isOpen ? 'font-medium text-foreground' : 'font-normal text-muted-foreground'
-          ) }>
-            { case_.title || 'Untitled Case' }
-          </p>
-          <span className="text-[11px] text-muted-foreground shrink-0">
-            { case_.created_at ? timeAgo( case_.created_at ) : '' }
-          </span>
-        </div>
+        <p className={ cn(
+          'text-base truncate font-primary -mt-1',
+          isOpen ? 'font-medium text-foreground' : 'font-normal text-muted-foreground'
+        ) }>
+          { case_.title || 'Untitled Case' }
+        </p>
 
         { case_.description && (
           <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed mb-1.5">
@@ -55,11 +77,22 @@ export function CaseRow( { case_, isSelected, onClick, href }: CaseRowProps ) {
           </p>
         ) }
 
-        <div className="flex items-center gap-1.5 flex-wrap mt-1">
-          <CaseStatusBadge status={ case_.status || 'open' } />
-          <CasePriorityBadge priority={ case_.priority || 'medium' } />
-          <span className="text-[10px] text-muted-foreground ml-auto">{ reporterName }</span>
-        </div>
+        <span className="block text-[11px] text-muted-foreground mt-3">
+          { case_.created_at ? formatTimeAgo( case_.created_at ) : '' }
+        </span>
+      </div>
+
+      <div className="flex shrink-0 items-center gap-0.5 mt-1.5">
+        <span
+          className={ cn( 'block size-1.5 rounded-full', statusDotColor[ status ] ?? 'bg-slate-400' ) }
+          title={ tStatus( statusKey ) }
+          aria-label={ tStatus( statusKey ) }
+        />
+        <span
+          className={ cn( 'block size-1.5 rounded-full', priorityDotColor[ priority ] ?? 'bg-slate-400' ) }
+          title={ tPriority( priorityKey ) }
+          aria-label={ tPriority( priorityKey ) }
+        />
       </div>
     </div>
   );

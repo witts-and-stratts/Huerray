@@ -7,7 +7,7 @@ import { getFaqs } from '@/sanity/lib/faq';
 import { getHelpCenterData } from '@/sanity/lib/help';
 
 interface BrandHelpPageProps {
-  params: Promise<{ slug?: string[] }>;
+  params: Promise<{ slug?: string[]; }>;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -29,8 +29,8 @@ export default async function BrandHelpPage( { params }: BrandHelpPageProps ) {
   const faqs = await getFaqs( 'brand' );
 
   if ( route.section === 'topic' ) {
-    return <HelpCenterPage role="brand" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } />;
+    return <div className='py-5 h-full'><HelpCenterPage role="brand" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } /></div>;
   }
 
-  return <HelpCenterPage role="brand" section={ route.section } faqs={ faqs } helpData={ helpData } />;
+  return <div className='py-5 h-full'><HelpCenterPage role="brand" section={ route.section } ticketId={ route.section === 'tickets' ? route.ticketId : undefined } faqs={ faqs } helpData={ helpData } /></div>;
 }

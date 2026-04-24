@@ -3,11 +3,13 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useRouter } from 'next/navigation';
+import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
 import { SubmitCaseTab } from './submit-case-tab';
 import { MyCasesTab } from './my-cases-tab';
 import type { HelpRole, HelpSection, HelpTopicId, SanityHelpCenterData } from './help-routing';
 import { cn } from '@/lib/dashboard-utils';
+import { useCases } from '@/lib/api/hooks';
 import { HelpMainView } from './help-main-view';
 import { TopicDetailView } from './topic-detail-view';
 import { HelpFaqView } from './help-faq-view';
@@ -18,6 +20,7 @@ export function HelpCenterPage( {
   role,
   section = 'home',
   topicId,
+  ticketId,
   className,
   faqs,
   helpData,
@@ -25,6 +28,7 @@ export function HelpCenterPage( {
   role: HelpRole;
   section?: HelpSection;
   topicId?: HelpTopicId;
+  ticketId?: string;
   className?: string;
   faqs?: any[];
   helpData?: SanityHelpCenterData | null;
@@ -35,6 +39,8 @@ export function HelpCenterPage( {
   const baseHelpPath = baseHelpPathByRole[ role ];
   const activeSection: HelpNavSection =
     section === 'faq' || section === 'tickets' ? section : 'home';
+  const { data: openCasesData } = useCases( { status: 'open', limit: 1 } );
+  const openTicketsCount = openCasesData?.pagination?.total ?? 0;
 
   const sanityTopic = section === 'topic' && topicId
     ? helpData?.topics?.find( ( item ) => item.topicId === topicId )
@@ -68,6 +74,9 @@ export function HelpCenterPage( {
               >
                 <HugeiconsIcon icon={ item.icon } className="help-center__nav-icon" />
                 <span>{ t( item.labelKey as Parameters<typeof t>[ 0 ] ) }</span>
+                { item.section === 'tickets' && openTicketsCount > 0 && (
+                  <Badge variant="destructive" className="ml-auto">{ openTicketsCount }</Badge>
+                ) }
               </Button>
             ) ) }
           </div>
@@ -84,10 +93,10 @@ export function HelpCenterPage( {
               </div>
             ) }
             { section === 'tickets' && (
-              <div>
-                <h2 className="page-title">{ t( 'helpSheet.myCasesLink' ) }</h2>
+              <div className="flex h-full min-h-0 flex-col">
+                <h2 className="page-title">{ t( 'helpSheet.supportTickets' ) }</h2>
                 <p className="help-center__panel-subtitle">{ t( 'helpSheet.faqSection.description' ) }</p>
-                <MyCasesTab role={ role } />
+                <MyCasesTab selectedCaseId={ ticketId } listHref={ `${ baseHelpPath }/tickets` } />
               </div>
             ) }
           </div>

@@ -68,7 +68,7 @@
           "description": "Manage brands, creators, and users across the platform."
         },
         {
-          "title": "Support Cases",
+          "title": "Support Tickets",
           "description": "Review, assign, and resolve support tickets from users."
         },
         {
@@ -96,8 +96,9 @@
       "quickLinksTitle": "Quick Links",
       "relatedFaqTitle": "Related FAQ"
     },
-    "submitCta": "Submit a Case",
-    "myCasesLink": "My Cases",
+    "submitCta": "Submit a Ticket",
+    "myCasesLink": "My Tickets",
+    "supportTickets": "Support Tickets",
     "backToHelp": "Back to Help",
     "nav": {
       "home": "Home",

@@ -32,5 +32,5 @@ export default async function CreatorHelpPage( { params }: CreatorHelpPageProps 
     return <HelpCenterPage role="creator" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } />;
   }
 
-  return <HelpCenterPage role="creator" section={ route.section } faqs={ faqs } helpData={ helpData } />;
+  return <HelpCenterPage role="creator" section={ route.section } ticketId={ route.section === 'tickets' ? route.ticketId : undefined } faqs={ faqs } helpData={ helpData } />;
 }

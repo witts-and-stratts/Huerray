@@ -11,7 +11,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { Separator } from '@/components/dashboard-ui/separator';
 import { cn } from '@/lib/dashboard-utils';
-import { timeAgo } from '@/lib/utils';
+import { useTimeAgo } from '@/lib/hooks/format';
 import { useLocale, useTranslations } from 'next-intl';
 import { ArrowLeft, ChevronDown, HeadphonesIcon, Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -33,12 +33,14 @@ function CaseDetailEmpty() {
 
 function MessageBubble( { content, senderName, sentAt }: { content: string; senderName: string; sentAt: string; } ) {
   return (
-    <div className="flex flex-col gap-1 max-w-[85%]">
-      <span className="text-xs text-muted-foreground px-1">{ senderName }</span>
-      <div className="bg-muted rounded-2xl rounded-bl-sm px-3.5 py-2.5 text-sm leading-relaxed">
+    <div className="flex flex-col gap-1 border-b border-b-border pb-4">
+      <div className="flex items-center justify-between">
+        <span className="text-xs text-muted-foreground px-1">{ senderName }</span>
+        <span className="text-[11px] text-muted-foreground px-1 mt-1">{ sentAt }</span>
+      </div>
+      <div className="bg-muted rounded-sm px-3.5 py-2.5 text-base leading-relaxed">
         { content }
       </div>
-      <span className="text-[10px] text-muted-foreground px-1">{ sentAt }</span>
     </div>
   );
 }
@@ -52,9 +54,10 @@ interface CaseDetailHeaderProps {
 
 function CaseDetailHeader( { case_, onBack }: CaseDetailHeaderProps ) {
   const tc = useTranslations( 'dashboard.common' );
+  const formatTimeAgo = useTimeAgo();
 
   return (
-    <div className="flex items-start justify-between gap-4 px-6 py-4 border-b border-border/60 shrink-0">
+    <div className="flex items-start justify-between gap-4 px-6 py-4 border-b border-border/60 shrink-0 bg-slate-50/50">
       { onBack && (
         <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 -ml-2" onClick={ onBack }>
           <ArrowLeft className="size-4" />
@@ -67,14 +70,14 @@ function CaseDetailHeader( { case_, onBack }: CaseDetailHeaderProps ) {
             <span className="text-xs text-muted-foreground font-mono">{ case_.case_number }</span>
           ) }
         </div>
-        <h2 className="text-base font-medium text-foreground leading-snug truncate">
+        <h2 className="text-lg font-primary font-medium text-foreground leading-snug truncate">
           { case_.title }
         </h2>
         <div className="flex items-center gap-2 mt-1.5 flex-wrap">
           <CaseStatusBadge status={ case_.status || 'open' } />
           <CasePriorityBadge priority={ case_.priority || 'medium' } />
           { case_.created_at && (
-            <span className="text-xs text-muted-foreground">{ timeAgo( case_.created_at ) }</span>
+            <span className="text-xs text-muted-foreground">{ formatTimeAgo( case_.created_at ) }</span>
           ) }
         </div>
       </div>
@@ -152,15 +155,18 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
 
           { /* Case meta */ }
           { profile?.description && (
-            <div>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
-                { t( 'details.descriptionLabel' ) }
-              </p>
-              <p className="text-sm text-foreground/80 leading-relaxed">{ profile.description }</p>
-            </div>
+            <>
+              <div>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
+                  { t( 'details.descriptionLabel' ) }
+                </p>
+                <p className="text-foreground/80 leading-relaxed">{ profile.description }</p>
+              </div>
+              <Separator />
+            </>
           ) }
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm bg-slate-50/30 rounded-md px-4 py-4 border border-slate-50/80">
             <div>
               <p className="text-xs text-muted-foreground mb-0.5">{ t( 'details.reporter' ) }</p>
               <p className="font-medium truncate">{ reporterName }</p>

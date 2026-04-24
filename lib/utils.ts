@@ -68,16 +68,17 @@ export function stripTags( html: string | null | undefined, tags?: string[] ): s
   return html.replace( new RegExp( `</?(${ pattern })(?:\\s[^>]*)?>`, 'gi' ), '' );
 }
 
-export const timeAgo = ( dateStr: string ) => {
+export const timeAgo = ( dateStr: string, locale?: string ) => {
   try {
     const date = new Date( dateStr );
     const now = new Date();
     const diffInSeconds = Math.max( 0, Math.floor( ( now.getTime() - date.getTime() ) / 1000 ) );
+    const formatter = new Intl.RelativeTimeFormat( locale, { numeric: 'auto', style: 'narrow' } );
 
-    if ( diffInSeconds < 60 ) return "Just now";
-    if ( diffInSeconds < 3600 ) return `${ Math.floor( diffInSeconds / 60 ) }m ago`;
-    if ( diffInSeconds < 86400 ) return `${ Math.floor( diffInSeconds / 3600 ) }h ago`;
-    return `${ Math.floor( diffInSeconds / 86400 ) }d ago`;
+    if ( diffInSeconds < 60 ) return formatter.format( 0, 'second' );
+    if ( diffInSeconds < 3600 ) return formatter.format( -Math.floor( diffInSeconds / 60 ), 'minute' );
+    if ( diffInSeconds < 86400 ) return formatter.format( -Math.floor( diffInSeconds / 3600 ), 'hour' );
+    return formatter.format( -Math.floor( diffInSeconds / 86400 ), 'day' );
   } catch {
     return "";
   }

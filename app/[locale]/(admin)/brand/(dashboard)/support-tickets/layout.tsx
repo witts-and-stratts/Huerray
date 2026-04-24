@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { SubHeader } from '@/components/subheader';
 import { CasesShell } from '@/components/admin/cases/cases-shell';
 
-export default function CreatorCasesLayout( { children }: { children: ReactNode; } ) {
+export default function BrandCasesLayout( { children }: { children: ReactNode; } ) {
   const t = useTranslations( 'dashboard.admin.casesPage' );
 
   return (
@@ -14,7 +14,7 @@ export default function CreatorCasesLayout( { children }: { children: ReactNode;
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       />
-      <CasesShell listHref="/creator/cases">
+      <CasesShell listHref="/brand/support-tickets">
         { children }
       </CasesShell>
     </>

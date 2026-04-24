@@ -49,7 +49,8 @@ export type HelpTopicId =
   | 'creator-earnings';
 
 export type HelpRoute =
-  | { section: 'home' | 'faq' | 'tickets' | 'submit' }
+  | { section: 'home' | 'faq' | 'submit' }
+  | { section: 'tickets'; ticketId?: string }
   | { section: 'topic'; topicId: HelpTopicId };
 
 export function resolveHelpRoute( role: HelpRole, slugSegments?: string[], helpData?: SanityHelpCenterData | null ): HelpRoute | null {
@@ -57,15 +58,25 @@ export function resolveHelpRoute( role: HelpRole, slugSegments?: string[], helpD
     return { section: 'home' };
   }
 
-  if ( slugSegments.length > 1 ) {
+  const slug = decodeURIComponent( slugSegments[ 0 ] ).toLowerCase();
+
+  if ( slug === 'faq' ) {
+    return slugSegments.length === 1 ? { section: 'faq' } : null;
+  }
+
+  if ( slug === 'tickets' ) {
+    if ( slugSegments.length === 1 ) return { section: 'tickets' };
+    if ( slugSegments.length === 2 ) {
+      return { section: 'tickets', ticketId: decodeURIComponent( slugSegments[ 1 ] ) };
+    }
     return null;
   }
 
-  const slug = decodeURIComponent( slugSegments[ 0 ] ).toLowerCase();
+  if ( slug === 'submit' ) return slugSegments.length === 1 ? { section: 'submit' } : null;
 
-  if ( slug === 'faq' ) return { section: 'faq' };
-  if ( slug === 'tickets' ) return { section: 'tickets' };
-  if ( slug === 'submit' ) return { section: 'submit' };
+  if ( slugSegments.length > 1 ) {
+    return null;
+  }
 
   const topic = helpData?.topics?.find(
     ( item ) => item.slug === slug && (!item.audience || item.audience === role)

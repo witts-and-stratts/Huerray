@@ -14,7 +14,7 @@ export default function AdminCasesLayout( { children }: { children: ReactNode; }
         title={ t( 'title' ) }
         description={ t( 'description' ) }
       />
-      <CasesShell listHref="/admin/cases">
+      <CasesShell listHref="/admin/support-tickets">
         { children }
       </CasesShell>
     </>

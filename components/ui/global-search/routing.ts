@@ -15,7 +15,7 @@ export function buildUrl(
       case 'campaigns':
         return `${ base }/admin/campaigns/${ id }`;
       case 'cases':
-        return `${ base }/admin/cases/${ id }`;
+        return `${ base }/admin/support-tickets/${ id }`;
       case 'creators':
         return `${ base }/admin/creators/${ id }`;
       case 'gigs':
