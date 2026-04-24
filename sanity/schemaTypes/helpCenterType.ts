@@ -31,41 +31,6 @@ export const helpCenterType = defineType({
       title: 'Hero Subtitle',
       type: 'localizedString',
     }),
-    defineField({
-      name: 'cards',
-      title: 'Support Cards',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'title',
-              title: 'Title',
-              type: 'localizedString',
-            }),
-            defineField({
-              name: 'description',
-              title: 'Description',
-              type: 'localizedString',
-            }),
-            defineField({
-              name: 'icon',
-              title: 'Icon Name',
-              type: 'string',
-              description: 'Name of the Hugeicon to use (e.g., UserMultiple02Icon)',
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'title.en',
-              subtitle: 'description.en',
-            },
-          },
-        },
-      ],
-      validation: (Rule) => Rule.max(3),
-    }),
   ],
   preview: {
     select: {

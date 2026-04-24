@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { LoginForm } from "@/components/auth/login-form";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import Image from "next/image";
 
-export const metadata: Metadata = {
-  title: "Sign In",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( "metadata" );
+  return {
+    title: t( "auth.signIn" ),
+  };
+}
 
 export default async function LoginPage( {
   searchParams,

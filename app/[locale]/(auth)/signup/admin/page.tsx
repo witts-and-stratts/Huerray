@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { SignupForm } from "@/components/auth/signup-form";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import Image from "next/image";
 
-export const metadata: Metadata = {
-  title: "Admin Sign Up",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( "metadata" );
+  return {
+    title: t( "auth.adminSignUp" ),
+  };
+}
 
 export default function AdminSignupPage() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { HelpCenterPage } from '@/components/ui/help-sheet/help-center-page';
 import { resolveHelpRoute } from '@/components/ui/help-sheet/help-routing';
@@ -9,22 +10,23 @@ interface CreatorHelpPageProps {
   params: Promise<{ slug?: string[] }>;
 }
 
-export const metadata: Metadata = {
-  title: 'Help Center',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( 'metadata' );
+  return {
+    title: t( 'creator.help' ),
+  };
+}
 
 export default async function CreatorHelpPage( { params }: CreatorHelpPageProps ) {
   const { slug } = await params;
-  const route = resolveHelpRoute( 'creator', slug );
+  const helpData = await getHelpCenterData( 'creator' );
+  const route = resolveHelpRoute( 'creator', slug, helpData );
 
   if ( !route ) {
     notFound();
   }
 
-  const [faqs, helpData] = await Promise.all([
-    getFaqs( 'creator' ),
-    getHelpCenterData( 'creator' )
-  ]);
+  const faqs = await getFaqs( 'creator' );
 
   if ( route.section === 'topic' ) {
     return <HelpCenterPage role="creator" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } />;

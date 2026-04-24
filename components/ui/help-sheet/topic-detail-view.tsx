@@ -1,28 +1,41 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import type { HelpRole } from './help-routing';
-import { topicActionCopy, topicFaqIndexes, topicLinks } from './help-content';
+import { PortableText } from '@portabletext/react';
+import type { SanityHelpTopic } from './help-routing';
+import { getLocalizedValue } from './help-content';
 import type { HelpTopic } from './help-content';
 
 export function TopicDetailView( {
-  role,
   topic,
+  sanityTopic,
   baseHelpPath,
 }: {
-  role: HelpRole;
   topic: HelpTopic;
+  sanityTopic?: SanityHelpTopic | null;
   baseHelpPath: string;
 } ) {
   const t = useTranslations( 'dashboard.common' );
-  const faqs = t.raw( `helpSheet.faq.${ role }` ) as Array<{ q: string; a: string; }>;
-  const relatedFaqs = ( topicFaqIndexes[ topic.id ] ?? [] )
-    .map( ( index ) => faqs[ index ] )
-    .filter( Boolean );
-  const links = topicLinks[ topic.id ] ?? [];
-  const actions = topicActionCopy[ topic.id ] ?? [];
+  const locale = useLocale();
+  const relatedFaqs = sanityTopic?.relatedFaqs?.length
+    ? sanityTopic.relatedFaqs.map( ( faq ) => ({
+      q: getLocalizedValue( faq.question, locale ),
+      a: faq.answer?.[ locale ] || faq.answer?.en || [],
+    }))
+    : [];
+  const links = sanityTopic?.quickLinks?.length
+    ? sanityTopic.quickLinks
+      .map( ( link ) => ( {
+        label: getLocalizedValue( link.label, locale ),
+        href: link.href || '#',
+      } ) )
+      .filter( ( link ) => link.label && link.href )
+    : [];
+  const actions = sanityTopic?.actionItems?.length
+    ? sanityTopic.actionItems.map( ( item ) => getLocalizedValue( item.text, locale ) ).filter( Boolean )
+    : [];
 
   return (
     <div className="help-topic">
@@ -38,7 +51,7 @@ export function TopicDetailView( {
       </div>
 
       <div className="help-topic__section">
-        <h3 className="header-2">How to use this area</h3>
+        <h3 className="header-2">{ t( 'helpSheet.topicDetail.howToUseTitle' ) }</h3>
         <ul className="help-topic__list">
           { actions.map( ( action ) => (
             <li key={ action }>{ action }</li>
@@ -47,7 +60,7 @@ export function TopicDetailView( {
       </div>
 
       <div className="help-topic__section">
-        <h3 className="header-2">Quick Links</h3>
+        <h3 className="header-2">{ t( 'helpSheet.topicDetail.quickLinksTitle' ) }</h3>
         <div className="help-topic__links">
           { links.map( ( link ) => (
             <Link
@@ -62,7 +75,7 @@ export function TopicDetailView( {
       </div>
 
       <div className="help-topic__section">
-        <h3 className="header-2">Related FAQ</h3>
+        <h3 className="header-2">{ t( 'helpSheet.topicDetail.relatedFaqTitle' ) }</h3>
         <Accordion type="single" collapsible className="w-full">
           { relatedFaqs.map( ( item, index ) => (
             <AccordionItem key={ `${ topic.id }-${ index }` } value={ `topic-faq-${ index }` }>
@@ -70,7 +83,9 @@ export function TopicDetailView( {
                 { item.q }
               </AccordionTrigger>
               <AccordionContent className="help-faq__answer">
-                { item.a }
+                <div className="portable-text">
+                  <PortableText value={ item.a as any } />
+                </div>
               </AccordionContent>
             </AccordionItem>
           ) ) }

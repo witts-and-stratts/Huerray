@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { ResetPasswordForm } from "@/components/auth/reset-password-form";
 import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Reset Password",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( "metadata" );
+  return {
+    title: t( "auth.resetPassword" ),
+  };
+}
 
 export default async function ResetPasswordPage( {
   searchParams,

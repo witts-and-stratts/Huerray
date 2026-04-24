@@ -19,16 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function AdminHelpPage( { params }: AdminHelpPageProps ) {
   const { slug } = await params;
-  const route = resolveHelpRoute( 'admin', slug );
+  const helpData = await getHelpCenterData( 'admin' );
+  const route = resolveHelpRoute( 'admin', slug, helpData );
 
   if ( !route ) {
     notFound();
   }
 
-  const [ faqs, helpData ] = await Promise.all( [
-    getFaqs( 'admin' ),
-    getHelpCenterData( 'admin' )
-  ] );
+  const faqs = await getFaqs( 'admin' );
 
   if ( route.section === 'topic' ) {
     return <div className='py-5'><HelpCenterPage role="admin" section="topic" topicId={ route.topicId } faqs={ faqs } helpData={ helpData } /></div>;

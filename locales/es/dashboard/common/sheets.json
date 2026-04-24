@@ -30,7 +30,8 @@
     "hero": {
       "title": "¿Necesita ayuda?",
       "subtitle": "Encuentre respuestas a preguntas frecuentes o póngase en contacto con nosotros y obtenga la ayuda que necesita.",
-      "searchPlaceholder": "Haz una pregunta..."
+      "searchPlaceholder": "Haz una pregunta...",
+      "searchButton": "Buscar en"
     },
     "cards": {
       "brand": [
@@ -82,6 +83,18 @@
       "description": "Todo lo que necesita saber sobre la plataforma. ¿No encuentra la respuesta que busca?",
       "contactText": "Saluda a",
       "contactEmail": "support@huerray.de"
+    },
+    "searchResults": {
+      "title": "Resultados de la búsqueda",
+      "description": "Mostrar temas de ayuda y preguntas frecuentes para su función.",
+      "empty": "No se han encontrado resultados.",
+      "topicType": "Tema",
+      "faqType": "FAQ"
+    },
+    "topicDetail": {
+      "howToUseTitle": "Cómo utilizar esta zona",
+      "quickLinksTitle": "Enlaces rápidos",
+      "relatedFaqTitle": "Preguntas frecuentes relacionadas"
     },
     "submitCta": "Presentar un caso",
     "myCasesLink": "Mis casos",

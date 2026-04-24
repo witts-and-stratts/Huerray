@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { VerifyEmail } from '@/components/auth/verify-email';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'Verify Email',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( 'metadata' );
+  return {
+    title: t( 'auth.verifyEmail' ),
+  };
+}
 
 export default async function VerifyEmailPage( {
   searchParams,

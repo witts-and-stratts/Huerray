@@ -16,6 +16,7 @@ import {structure} from './sanity/structure'
 export const config = {
   name: 'default',
   title: 'Huerray',
+  subtitle: 'Content Management System',
   basePath: '/admin/studio',
   projectId,
   dataset,
@@ -25,8 +26,9 @@ export const config = {
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({defaultApiVersion: apiVersion}),
+    // visionTool({defaultApiVersion: apiVersion}),
+    
   ],
 }
 
-export default defineConfig(config)
+export default defineConfig( config );

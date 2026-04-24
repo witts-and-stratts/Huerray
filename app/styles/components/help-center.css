@@ -138,12 +138,36 @@
     @apply border-t border-border pt-6;
   }
 
+  .help-main__results {
+    @apply mt-5 border-t border-border pt-5 text-left max-w-2xl mx-auto;
+  }
+
   .help-main__faq-header {
     @apply mb-4;
   }
 
   .help-main__faq-description {
     @apply text-sm text-muted-foreground;
+  }
+
+  .help-main__result-list {
+    @apply flex flex-col gap-2;
+  }
+
+  .help-main__result {
+    @apply rounded-lg border border-border p-3 flex flex-col gap-1 hover:border-primary/40 hover:bg-primary/2 transition-colors;
+  }
+
+  .help-main__result-type {
+    @apply text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground font-medium;
+  }
+
+  .help-main__result-title {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  .help-main__result-description {
+    @apply text-xs text-muted-foreground leading-relaxed line-clamp-2;
   }
 
   /* FAQ list (shared) */

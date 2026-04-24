@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { NewsletterUnsubscribe } from '@/components/NewsletterUnsubscribe';
 import { LanguageSelector } from '@/components/LanguageSelector';
 
-export const metadata: Metadata = {
-  title: 'Newsletter Unsubscribe',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations( 'metadata' );
+  return {
+    title: t( 'auth.newsletterUnsubscribe' ),
+  };
+}
 
 export default async function NewsletterUnsubscribePage({
   searchParams,

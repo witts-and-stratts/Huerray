@@ -30,7 +30,8 @@
     "hero": {
       "title": "Need Assistance?",
       "subtitle": "Find answers to common questions or reach out and get the help you need.",
-      "searchPlaceholder": "Ask a question..."
+      "searchPlaceholder": "Ask a question...",
+      "searchButton": "Search"
     },
     "cards": {
       "brand": [
@@ -82,6 +83,18 @@
       "description": "Everything you need to know about the platform. Can't find the answer you're looking for?",
       "contactText": "Say hi at",
       "contactEmail": "support@huerray.de"
+    },
+    "searchResults": {
+      "title": "Search results",
+      "description": "Showing help topics and FAQs for your role.",
+      "empty": "No results found.",
+      "topicType": "Topic",
+      "faqType": "FAQ"
+    },
+    "topicDetail": {
+      "howToUseTitle": "How to use this area",
+      "quickLinksTitle": "Quick Links",
+      "relatedFaqTitle": "Related FAQ"
     },
     "submitCta": "Submit a Case",
     "myCasesLink": "My Cases",

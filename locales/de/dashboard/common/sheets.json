@@ -30,7 +30,8 @@
     "hero": {
       "title": "Brauchen Sie Hilfe?",
       "subtitle": "Hier finden Sie Antworten auf häufig gestellte Fragen oder können sich an uns wenden, um die benötigte Hilfe zu erhalten.",
-      "searchPlaceholder": "Stellen Sie eine Frage..."
+      "searchPlaceholder": "Stellen Sie eine Frage...",
+      "searchButton": "Suche"
     },
     "cards": {
       "brand": [
@@ -82,6 +83,18 @@
       "description": "Alles, was Sie über die Plattform wissen müssen. Sie können die gesuchte Antwort nicht finden?",
       "contactText": "Begrüßung unter",
       "contactEmail": "support@huerray.de"
+    },
+    "searchResults": {
+      "title": "Suchergebnisse",
+      "description": "Anzeige von Hilfethemen und FAQs für Ihre Rolle.",
+      "empty": "Keine Ergebnisse gefunden.",
+      "topicType": "Thema",
+      "faqType": "FAQ"
+    },
+    "topicDetail": {
+      "howToUseTitle": "Wie man diesen Bereich nutzt",
+      "quickLinksTitle": "Schnelle Links",
+      "relatedFaqTitle": "Verwandte FAQ"
     },
     "submitCta": "Einen Fall einreichen",
     "myCasesLink": "Meine Fälle",

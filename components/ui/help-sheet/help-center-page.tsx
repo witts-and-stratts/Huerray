@@ -1,17 +1,17 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/dashboard-ui/button';
 import { SubmitCaseTab } from './submit-case-tab';
 import { MyCasesTab } from './my-cases-tab';
-import type { HelpRole, HelpSection, HelpTopicId } from './help-routing';
+import type { HelpRole, HelpSection, HelpTopicId, SanityHelpCenterData } from './help-routing';
 import { cn } from '@/lib/dashboard-utils';
 import { HelpMainView } from './help-main-view';
 import { TopicDetailView } from './topic-detail-view';
 import { HelpFaqView } from './help-faq-view';
-import { baseHelpPathByRole, getTopicForRole, navItems, type HelpNavSection } from './help-content';
+import { baseHelpPathByRole, getLocalizedValue, navItems, type HelpNavSection } from './help-content';
 import '@/app/styles/components/help-center.css';
 
 export function HelpCenterPage( {
@@ -27,17 +27,24 @@ export function HelpCenterPage( {
   topicId?: HelpTopicId;
   className?: string;
   faqs?: any[];
-  helpData?: any;
+  helpData?: SanityHelpCenterData | null;
 } ) {
   const t = useTranslations( 'dashboard.common' );
+  const locale = useLocale();
   const router = useRouter();
-  const cards = t.raw( `helpSheet.cards.${ role }` ) as Array<{ title: string; description: string; }>;
   const baseHelpPath = baseHelpPathByRole[ role ];
   const activeSection: HelpNavSection =
     section === 'faq' || section === 'tickets' ? section : 'home';
 
+  const sanityTopic = section === 'topic' && topicId
+    ? helpData?.topics?.find( ( item ) => item.topicId === topicId )
+    : null;
   const topic = section === 'topic' && topicId
-    ? getTopicForRole( role, topicId, cards )
+    ? sanityTopic && {
+      id: topicId,
+      title: getLocalizedValue( sanityTopic.title, locale ),
+      description: getLocalizedValue( sanityTopic.description, locale ),
+    }
     : null;
 
   const navigateToSection = ( target: HelpNavSection ) =>
@@ -66,7 +73,7 @@ export function HelpCenterPage( {
           </div>
 
           <div className="help-center__inset">
-            { section === 'topic' && topic && <TopicDetailView role={ role } topic={ topic } baseHelpPath={ baseHelpPath } /> }
+            { section === 'topic' && topic && <TopicDetailView topic={ topic } sanityTopic={ sanityTopic } baseHelpPath={ baseHelpPath } /> }
             { section === 'home' && <HelpMainView role={ role } baseHelpPath={ baseHelpPath } sanityFaqs={ faqs } helpData={ helpData } /> }
             { section === 'faq' && <HelpFaqView role={ role } sanityFaqs={ faqs } /> }
             { section === 'submit' && (

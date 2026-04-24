@@ -7,6 +7,36 @@ export interface SanityFaq {
   answer: Record<string, any>;
   category?: { title: string };
 }
+
+export interface LocalizedValue {
+  en?: string;
+  de?: string;
+  es?: string;
+  fr?: string;
+  [key: string]: string | undefined;
+}
+
+export interface SanityHelpTopic {
+  _id?: string;
+  audience?: HelpRole;
+  topicId: HelpTopicId;
+  order?: number;
+  slug?: string;
+  title?: LocalizedValue;
+  description?: LocalizedValue;
+  icon?: string;
+  actionItems?: Array<{ text?: LocalizedValue }>;
+  quickLinks?: Array<{ label?: LocalizedValue; href?: string }>;
+  relatedFaqs?: SanityFaq[];
+}
+
+export interface SanityHelpCenterData {
+  _id: string;
+  audience: HelpRole;
+  heroTitle?: LocalizedValue;
+  heroSubtitle?: LocalizedValue;
+  topics?: SanityHelpTopic[];
+}
 export type HelpTopicId =
   | 'admin-users'
   | 'admin-cases'
@@ -22,29 +52,7 @@ export type HelpRoute =
   | { section: 'home' | 'faq' | 'tickets' | 'submit' }
   | { section: 'topic'; topicId: HelpTopicId };
 
-export const TOPIC_IDS_BY_ROLE: Record<HelpRole, HelpTopicId[]> = {
-  admin: [ 'admin-users', 'admin-cases', 'admin-platform' ],
-  brand: [ 'brand-start', 'brand-creators', 'brand-billing' ],
-  creator: [ 'creator-start', 'creator-submit', 'creator-earnings' ],
-};
-
-export const TOPIC_SLUG_BY_ID: Record<HelpTopicId, string> = {
-  'admin-users': 'user-management',
-  'admin-cases': 'support-cases',
-  'admin-platform': 'platform-settings',
-  'brand-start': 'getting-started',
-  'brand-creators': 'managing-creators',
-  'brand-billing': 'billing-payments',
-  'creator-start': 'getting-started',
-  'creator-submit': 'submitting-content',
-  'creator-earnings': 'earnings-payouts',
-};
-
-const topicIdBySlug = Object.fromEntries(
-  Object.entries( TOPIC_SLUG_BY_ID ).map( ( [ id, slug ] ) => [ slug, id ] )
-) as Record<string, HelpTopicId>;
-
-export function resolveHelpRoute( role: HelpRole, slugSegments?: string[] ): HelpRoute | null {
+export function resolveHelpRoute( role: HelpRole, slugSegments?: string[], helpData?: SanityHelpCenterData | null ): HelpRoute | null {
   if ( !slugSegments || slugSegments.length === 0 ) {
     return { section: 'home' };
   }
@@ -59,9 +67,12 @@ export function resolveHelpRoute( role: HelpRole, slugSegments?: string[] ): Hel
   if ( slug === 'tickets' ) return { section: 'tickets' };
   if ( slug === 'submit' ) return { section: 'submit' };
 
-  const topicId = topicIdBySlug[ slug ];
-  if ( topicId && TOPIC_IDS_BY_ROLE[ role ].includes( topicId ) ) {
-    return { section: 'topic', topicId };
+  const topic = helpData?.topics?.find(
+    ( item ) => item.slug === slug && (!item.audience || item.audience === role)
+  );
+
+  if ( topic ) {
+    return { section: 'topic', topicId: topic.topicId };
   }
 
   return null;
