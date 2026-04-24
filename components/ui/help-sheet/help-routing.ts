@@ -20,7 +20,7 @@ export interface SanityHelpTopic {
   _id?: string;
   audience?: HelpRole;
   topicId: HelpTopicId;
-  order?: number;
+  orderRank?: string;
   slug?: string;
   title?: LocalizedValue;
   description?: LocalizedValue;

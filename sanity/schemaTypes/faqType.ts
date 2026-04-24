@@ -1,4 +1,5 @@
 import {HelpCircleIcon} from '@sanity/icons'
+import {orderRankField, orderRankOrdering} from '@sanity/orderable-document-list'
 import {defineField, defineType} from 'sanity'
 
 export const faqType = defineType({
@@ -6,7 +7,9 @@ export const faqType = defineType({
   title: 'FAQ',
   type: 'document',
   icon: HelpCircleIcon,
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({type: 'faq'}),
     defineField({
       name: 'audience',
       title: 'Audience',
@@ -46,12 +49,6 @@ export const faqType = defineType({
       name: 'answer',
       title: 'Answer',
       type: 'localizedBlockContent',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Used to sort FAQs (lower numbers appear first)',
     }),
   ],
   preview: {

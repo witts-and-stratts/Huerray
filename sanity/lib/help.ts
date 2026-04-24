@@ -7,11 +7,11 @@ export const HELP_CENTER_QUERY = defineQuery(`
     audience,
     heroTitle,
     heroSubtitle,
-    "topics": *[_type == "helpTopic" && audience == $audience] | order(order asc, _createdAt asc) {
+    "topics": *[_type == "helpTopic" && audience == $audience] | order(orderRank asc, _createdAt asc) {
       _id,
       audience,
       topicId,
-      order,
+      orderRank,
       "slug": slug.current,
       title,
       description,

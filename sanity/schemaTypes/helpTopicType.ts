@@ -1,4 +1,5 @@
 import {HelpCircleIcon} from '@sanity/icons'
+import {orderRankField, orderRankOrdering} from '@sanity/orderable-document-list'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
 const audienceOptions = [
@@ -24,7 +25,9 @@ export const helpTopicType = defineType({
   title: 'Help Topic',
   type: 'document',
   icon: HelpCircleIcon,
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({type: 'helpTopic'}),
     defineField({
       name: 'audience',
       title: 'Audience',
@@ -43,13 +46,6 @@ export const helpTopicType = defineType({
         list: topicOptions,
       },
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Controls the topic order and home-card order for this audience.',
-      validation: (Rule) => Rule.required().integer().min(0),
     }),
     defineField({
       name: 'slug',
@@ -138,14 +134,13 @@ export const helpTopicType = defineType({
     select: {
       title: 'title.en',
       audience: 'audience',
-      order: 'order',
     },
-    prepare({title, audience, order}) {
+    prepare({title, audience}) {
       const audienceLabel = audience ? audience.charAt(0).toUpperCase() + audience.slice(1) : 'No audience'
 
       return {
         title,
-        subtitle: `${audienceLabel}${typeof order === 'number' ? ` | Order: ${order}` : ''}`,
+        subtitle: audienceLabel,
       }
     },
   },

@@ -72,7 +72,7 @@ export function CaseRow( { case_, isSelected, onClick, href }: CaseRowProps ) {
         </p>
 
         { case_.description && (
-          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed mb-1.5">
+          <p className="text-[14px] font-light text-muted-foreground/70 line-clamp-2 leading-relaxed mb-1.5">
             { case_.description }
           </p>
         ) }
@@ -84,12 +84,12 @@ export function CaseRow( { case_, isSelected, onClick, href }: CaseRowProps ) {
 
       <div className="flex shrink-0 items-center gap-0.5 mt-1.5">
         <span
-          className={ cn( 'block size-1.5 rounded-full', statusDotColor[ status ] ?? 'bg-slate-400' ) }
+          className={ cn( 'block size-[5px] rounded-full', statusDotColor[ status ] ?? 'bg-slate-400' ) }
           title={ tStatus( statusKey ) }
           aria-label={ tStatus( statusKey ) }
         />
         <span
-          className={ cn( 'block size-1.5 rounded-full', priorityDotColor[ priority ] ?? 'bg-slate-400' ) }
+          className={ cn( 'block size-[5px] rounded-full', priorityDotColor[ priority ] ?? 'bg-slate-400' ) }
           title={ tPriority( priorityKey ) }
           aria-label={ tPriority( priorityKey ) }
         />

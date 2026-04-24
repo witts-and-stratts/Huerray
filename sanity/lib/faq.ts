@@ -2,7 +2,7 @@ import { defineQuery } from "next-sanity";
 import { sanityFetch } from "./live";
 
 export const FAQS_QUERY = defineQuery(`
-  *[_type == "faq" && audience == $audience] | order(order asc, _createdAt desc) {
+  *[_type == "faq" && audience == $audience] | order(orderRank asc, _createdAt desc) {
     _id,
     question,
     answer,

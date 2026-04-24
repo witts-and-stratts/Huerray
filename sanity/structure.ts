@@ -1,9 +1,10 @@
 import {HelpCircleIcon, LockIcon, UsersIcon, TagIcon} from '@sanity/icons'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 import type {StructureResolver} from 'sanity/structure'
 import {apiVersion} from './env'
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
-export const structure: StructureResolver = (S) =>
+export const structure: StructureResolver = (S, context) =>
   S.list()
     .title('Content')
     .items([
@@ -27,33 +28,33 @@ export const structure: StructureResolver = (S) =>
                   S.list()
                     .title('Topics')
                     .items([
-                      S.listItem()
-                        .title('Admin Topics')
-                        .icon(LockIcon)
-                        .child(
-                          S.documentList()
-                            .title('Admin Topics')
-                            .apiVersion(apiVersion)
-                            .filter('_type == "helpTopic" && audience == "admin"')
-                        ),
-                      S.listItem()
-                        .title('Creator Topics')
-                        .icon(UsersIcon)
-                        .child(
-                          S.documentList()
-                            .title('Creator Topics')
-                            .apiVersion(apiVersion)
-                            .filter('_type == "helpTopic" && audience == "creator"')
-                        ),
-                      S.listItem()
-                        .title('Brand Topics')
-                        .icon(TagIcon)
-                        .child(
-                          S.documentList()
-                            .title('Brand Topics')
-                            .apiVersion(apiVersion)
-                            .filter('_type == "helpTopic" && audience == "brand"')
-                        ),
+                      orderableDocumentListDeskItem({
+                        type: 'helpTopic',
+                        title: 'Admin Topics',
+                        id: 'helpTopic-admin',
+                        icon: LockIcon,
+                        filter: 'audience == "admin"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'helpTopic',
+                        title: 'Creator Topics',
+                        id: 'helpTopic-creator',
+                        icon: UsersIcon,
+                        filter: 'audience == "creator"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'helpTopic',
+                        title: 'Brand Topics',
+                        id: 'helpTopic-brand',
+                        icon: TagIcon,
+                        filter: 'audience == "brand"',
+                        S,
+                        context,
+                      }),
                     ])
                 ),
               S.listItem()
@@ -64,33 +65,33 @@ export const structure: StructureResolver = (S) =>
                   S.list()
                     .title('FAQs')
                     .items([
-                      S.listItem()
-                        .title('Admin FAQs')
-                        .icon(LockIcon)
-                        .child(
-                          S.documentList()
-                            .title('Admin FAQs')
-                            .apiVersion(apiVersion)
-                            .filter('_type == "faq" && audience == "admin"')
-                        ),
-                      S.listItem()
-                        .title('Creator FAQs')
-                        .icon(UsersIcon)
-                        .child(
-                          S.documentList()
-                            .title('Creator FAQs')
-                            .apiVersion(apiVersion)
-                            .filter('_type == "faq" && audience == "creator"')
-                        ),
-                      S.listItem()
-                        .title('Brand FAQs')
-                        .icon(TagIcon)
-                        .child(
-                          S.documentList()
-                            .title('Brand FAQs')
-                            .apiVersion(apiVersion)
-                            .filter('_type == "faq" && audience == "brand"')
-                        ),
+                      orderableDocumentListDeskItem({
+                        type: 'faq',
+                        title: 'Admin FAQs',
+                        id: 'faq-admin',
+                        icon: LockIcon,
+                        filter: 'audience == "admin"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'faq',
+                        title: 'Creator FAQs',
+                        id: 'faq-creator',
+                        icon: UsersIcon,
+                        filter: 'audience == "creator"',
+                        S,
+                        context,
+                      }),
+                      orderableDocumentListDeskItem({
+                        type: 'faq',
+                        title: 'Brand FAQs',
+                        id: 'faq-brand',
+                        icon: TagIcon,
+                        filter: 'audience == "brand"',
+                        S,
+                        context,
+                      }),
                     ])
                 ),
               S.listItem()
