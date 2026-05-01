@@ -97,7 +97,9 @@ jobs:
 
   deploy-live:
     if: github.ref_name == 'main'
-    needs: build-live
+    needs:
+    - build-live
+    - deploy-dev
     runs-on: ubuntu-latest
     steps:
     - name: Get AWS Credentials
