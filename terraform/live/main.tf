@@ -1,7 +1,7 @@
 locals {
   name      = "huerray-web"
   tier      = "live"
-  hostnames = ["huerray.de"]
+  hostnames = ["huerray.de", "huerray.com"]
 }
 
 module "huerray_web" {

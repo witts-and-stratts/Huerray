@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['dev.huerray.de'],
   turbopack: {
     root: process.cwd(),
-  }
+  },
 };
 
 export default withNextIntl(nextConfig);
