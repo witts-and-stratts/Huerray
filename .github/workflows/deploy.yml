@@ -20,6 +20,7 @@ env:
 
 jobs:
   build-dev:
+    if: github.ref_name == 'develop'
     runs-on: ubuntu-latest
     steps:
     - name: Get AWS Credentials
@@ -72,6 +73,7 @@ jobs:
         terraform apply -no-color -auto-approve -var 'service_version=dev-${{ github.sha }}'
 
   build-live:
+    if: github.ref_name == 'main'
     runs-on: ubuntu-latest
     steps:
     - name: Get AWS Credentials
@@ -92,14 +94,14 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
+        build-args: |
+          ENVIRONMENT=live
         push: true
         tags: ${{ steps.login-ecr.outputs.registry }}/${{ steps.repo-name.outputs.repo-name }}:live-${{ github.sha }}
 
   deploy-live:
     if: github.ref_name == 'main'
-    needs:
-    - build-live
-    - deploy-dev
+    needs: build-live
     runs-on: ubuntu-latest
     steps:
     - name: Get AWS Credentials
