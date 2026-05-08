@@ -314,21 +314,24 @@ export function getNotificationActionUrl(
 ): string | null {
   if ( !actionUrl ) return null;
   if ( /^https?:\/\//i.test( actionUrl ) ) return actionUrl;
+  // Strip /api/v1 prefix and map generic /users/profile to role-specific /profile.
+  const normalizedUrl = actionUrl
+    .replace( /^\/api\/v1(?=\/|$)/, "" )
+    .replace( /^\/users\/profile(?=\/|$|\?|#)/, "/profile" );
   if ( basePath ) {
     const normalizedBasePath = basePath.replace( /\/$/, "" );
-    const normalizedActionPath = actionUrl.replace( /^\/api\/v1(?=\/|$)/, "" );
 
-    if ( /^\/(admin|brand|creator)(\/|$)/.test( normalizedActionPath ) ) {
-      return normalizedActionPath;
+    if ( /^\/(admin|brand|creator)(\/|$)/.test( normalizedUrl ) ) {
+      return normalizedUrl;
     }
 
-    return `${ normalizedBasePath }${ normalizedActionPath.startsWith( "/" ) ? normalizedActionPath : `/${ normalizedActionPath }` }`;
+    return `${ normalizedBasePath }${ normalizedUrl.startsWith( "/" ) ? normalizedUrl : `/${ normalizedUrl }` }`;
   }
   const roleBase = role === "admin" ? "/admin" : role === "brand" ? "/brand" : role === "creator" ? "/creator" : "";
-  const hasRolePrefix = /^\/(admin|brand|creator)(\/|$)/.test( actionUrl );
+  const hasRolePrefix = /^\/(admin|brand|creator)(\/|$)/.test( normalizedUrl );
   const rolePath = hasRolePrefix
-    ? actionUrl.replace( /^\/(admin|brand|creator)/, roleBase )
-    : `${ roleBase }${ actionUrl }`;
+    ? normalizedUrl.replace( /^\/(admin|brand|creator)/, roleBase )
+    : `${ roleBase }${ normalizedUrl }`;
   return locale ? `/${ locale }${ rolePath }` : rolePath;
 }
 

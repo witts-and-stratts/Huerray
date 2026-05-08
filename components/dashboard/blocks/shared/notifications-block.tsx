@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { useNotifications } from '@/lib/api/hooks/notifications';
@@ -16,6 +17,7 @@ function getUnreadCount( notifications: ModelsNotificationResponse[], unreadCoun
 
 export function NotificationsBlock() {
   const { user } = useAuth();
+  const t = useTranslations( 'dashboard.notifications.summaryCard' );
   const { data: response, isLoading, isError } = useNotifications( 1, 20, true );
   const unreadNotifications = response?.data?.notifications || [];
   const notificationsPagePath = getNotificationsPagePath( user?.role );
@@ -37,18 +39,18 @@ export function NotificationsBlock() {
   return (
     <Card className="ad-summary-card">
       <CardHeader className="pb-2">
-        <CardTitle className="ad-card-title">Unread Notifications</CardTitle>
-        <CardDescription className="ad-card-description">Unread inbox count and latest pending items</CardDescription>
+        <CardTitle className="ad-card-title">{ t( 'title' ) }</CardTitle>
+        <CardDescription className="ad-card-description">{ t( 'description' ) }</CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         <div className="ad-list-item-sm">
-          <p className="ad-stat-label mb-1.5">Unread Total</p>
+          <p className="ad-stat-label mb-1.5">{ t( 'unreadTotal' ) }</p>
           <p className="ad-stat-number">{ unreadCount }</p>
-          <span className="ad-delta-neutral">{ newToday > 0 ? `+${ newToday } today` : 'No new notifications today' }</span>
+          <span className="ad-delta-neutral">{ t( 'newToday', { count: newToday } ) }</span>
         </div>
 
-        { isLoading && <p className="text-xs text-muted-foreground">Loading unread notifications...</p> }
-        { isError && <p className="text-xs text-destructive">Unable to load unread notifications.</p> }
+        { isLoading && <p className="text-xs text-muted-foreground">{ t( 'loading' ) }</p> }
+        { isError && <p className="text-xs text-destructive">{ t( 'error' ) }</p> }
       </CardContent>
       <CardFooter className="flex-col justify-end gap-2 text-sm grow">
         <Button
@@ -58,7 +60,7 @@ export function NotificationsBlock() {
           nativeButton={ false }
           render={ <Link href={ notificationsPagePath } /> }
         >
-          View all notifications
+          { t( 'viewAll' ) }
         </Button>
       </CardFooter>
     </Card>

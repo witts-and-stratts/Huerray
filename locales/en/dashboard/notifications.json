@@ -77,6 +77,15 @@
     "deleteAllSuccess": "All notifications deleted",
     "deleteAllError": "Failed to delete all notifications"
   },
+  "summaryCard": {
+    "title": "Unread Notifications",
+    "description": "Unread inbox count and latest pending items",
+    "unreadTotal": "Unread Total",
+    "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
+    "loading": "Loading unread notifications...",
+    "error": "Unable to load unread notifications.",
+    "viewAll": "View all notifications"
+  },
   "compose": {
     "title": "Post Notification",
     "description": "Create and send a notification to a specific user.",

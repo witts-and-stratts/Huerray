@@ -61,6 +61,13 @@
     },
     "actionCenter": {
       "description": "Common actions for campaign operations",
+      "title": "Unread Notifications",
+      "summaryDescription": "Unread inbox count and latest pending items",
+      "unreadTotal": "Unread Total",
+      "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
+      "loading": "Loading unread notifications...",
+      "error": "Unable to load unread notifications.",
+      "viewAll": "View all notifications",
       "createCampaign": {
         "label": "Create Campaign",
         "detail": "Launch a new campaign briefing and approval request"
@@ -73,6 +80,12 @@
         "label": "Manage Gigs",
         "detail": "Track gig setup, status, and creator activity"
       }
+    },
+    "campaignStatsLabels": {
+      "total": "Total",
+      "active": "Active",
+      "totalGigs": "Total Gigs",
+      "totalSpend": "Total Spend"
     },
     "kpiOverview": {
       "totalCampaigns": {
@@ -130,7 +143,7 @@
       "loadingRecentGigs": "Loading recent gigs...",
       "errorRecentGigs": "Unable to load recent gigs.",
       "emptyState": "No gigs found.",
-      "viewAll": "View all Gigs",
+      "viewAll": "View all Campaigns",
       "totalGigs": "Total Gigs",
       "openGigs": "Open Gigs",
       "completedGigs": "Completed Gigs",
@@ -170,11 +183,45 @@
       "approvedSubmissions": "Approved Submissions"
     },
     "recentCampaigns": {
-      "title": "Recent Campaigns",
+      "title": "Campaigns",
       "description": "Latest activity from your campaign list",
       "emptyState": "No campaigns yet.",
       "untitledCampaign": "Untitled Campaign",
-      "updated": "Updated"
+      "updated": "Updated",
+      "tabs": {
+        "recent": "Recent",
+        "stats": "Stats"
+      },
+      "stats": {
+        "total": "Total",
+        "active": "Active",
+        "finished": "Finished",
+        "draft": "Draft"
+      }
+    },
+    "recentSubmissions": {
+      "title": "Submissions",
+      "description": "Latest creator submissions across your campaigns",
+      "emptyState": "No submissions yet.",
+      "loading": "Loading submissions...",
+      "error": "Failed to load submissions",
+      "tabs": {
+        "recent": "Recent",
+        "stats": "Stats"
+      },
+      "stats": {
+        "total": "Total",
+        "pending": "Pending",
+        "approved": "Approved"
+      }
+    },
+    "recentApplications": {
+      "title": "Recent Applications",
+      "description": "Creators who recently applied to your campaigns",
+      "emptyState": "No applications yet.",
+      "loading": "Loading applications...",
+      "dialogTitle": "Applicants",
+      "summary": "{creators} creators · {applications} applications"
     },
     "recentGigs": {
       "title": "Recent Gigs",

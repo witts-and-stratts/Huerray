@@ -61,6 +61,13 @@
     },
     "actionCenter": {
       "description": "Acciones comunes para las operaciones de campaña",
+      "title": "Notificaciones sin leer",
+      "summaryDescription": "Recuento de la bandeja de entrada sin leer y últimos elementos pendientes",
+      "unreadTotal": "Total sin leer",
+      "newToday": "{count, plural, =0 {No hay nuevas notificaciones hoy} other {+# hoy}}",
+      "loading": "Cargando notificaciones sin leer...",
+      "error": "No se pueden cargar las notificaciones sin leer.",
+      "viewAll": "Ver todas las notificaciones",
       "createCampaign": {
         "label": "Crear campaña",
         "detail": "Lanzar una nueva campaña de información y solicitud de aprobación"
@@ -73,6 +80,12 @@
         "label": "Gestionar Gigs",
         "detail": "Seguimiento de la configuración, el estado y la actividad de los creadores"
       }
+    },
+    "campaignStatsLabels": {
+      "total": "Total",
+      "active": "Activas",
+      "totalGigs": "Total de gigs",
+      "totalSpend": "Gasto total"
     },
     "kpiOverview": {
       "totalCampaigns": {
@@ -130,7 +143,7 @@
       "loadingRecentGigs": "Cargando conciertos recientes...",
       "errorRecentGigs": "No se pueden cargar gigas recientes.",
       "emptyState": "No se han encontrado conciertos.",
-      "viewAll": "Ver todos los conciertos",
+      "viewAll": "Ver todas las campañas",
       "totalGigs": "Total de gigas",
       "openGigs": "Conciertos abiertos",
       "completedGigs": "Conciertos finalizados",
@@ -170,11 +183,45 @@
       "approvedSubmissions": "Propuestas aprobadas"
     },
     "recentCampaigns": {
-      "title": "Campañas recientes",
+      "title": "Campañas",
       "description": "Última actividad de su lista de campaña",
       "emptyState": "Aún no hay campañas.",
       "untitledCampaign": "Campaña sin título",
-      "updated": "Actualizado"
+      "updated": "Actualizado",
+      "tabs": {
+        "recent": "Recientes",
+        "stats": "Estadísticas"
+      },
+      "stats": {
+        "total": "Total",
+        "active": "Activas",
+        "finished": "Finalizadas",
+        "draft": "Borrador"
+      }
+    },
+    "recentSubmissions": {
+      "title": "Envíos",
+      "description": "Últimos envíos de creadores en tus campañas",
+      "emptyState": "Aún no hay envíos.",
+      "loading": "Cargando envíos...",
+      "error": "Error al cargar los envíos",
+      "tabs": {
+        "recent": "Recientes",
+        "stats": "Estadísticas"
+      },
+      "stats": {
+        "total": "Total",
+        "pending": "Pendientes",
+        "approved": "Aprobados"
+      }
+    },
+    "recentApplications": {
+      "title": "Postulaciones recientes",
+      "description": "Creadores que postularon recientemente a tus campañas",
+      "emptyState": "Aún no hay postulaciones.",
+      "loading": "Cargando postulaciones...",
+      "dialogTitle": "Postulantes",
+      "summary": "{creators} creadores · {applications} postulaciones"
     },
     "recentGigs": {
       "title": "Actuaciones recientes",

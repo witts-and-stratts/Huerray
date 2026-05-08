@@ -38,6 +38,7 @@ import { apiClient } from "@/lib/api/client";
 import { useAppDispatch } from "@/lib/redux/hooks";
 import { clearBrandProfile } from "@/lib/redux/features/brand/brandSlice";
 import { clearCreatorProfile } from "@/lib/redux/features/creator/creatorSlice";
+import { useClearPersistedData } from "@/lib/hooks/use-clear-persisted-data";
 import { Bell, KeyIcon } from "lucide-react";
 
 export function NavUser( {
@@ -56,23 +57,21 @@ export function NavUser( {
   const router = useRouter();
   const locale = useLocale();
   const dispatch = useAppDispatch();
+  const clearPersistedData = useClearPersistedData();
 
   const handleLogout = async () => {
     try {
-      // Call logout API
       const authApi = new AuthenticationApi( undefined, undefined, apiClient );
       await authApi.authLogoutPost();
     } catch ( error ) {
       console.error( "Logout error:", error );
-      // Continue with logout even if API call fails
     } finally {
-      // Clear user state
       setUser( null );
-      // Clear brand and creator profiles from Redux
       dispatch( clearBrandProfile() );
       dispatch( clearCreatorProfile() );
-      // Redirect to login
-      router.push( "/login" );
+      await clearPersistedData();
+      // Full reload to wipe in-memory React/Redux state too
+      window.location.href = "/login";
     }
   };
 

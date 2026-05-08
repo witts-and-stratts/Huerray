@@ -63,6 +63,7 @@ export function CampaignActionMenu( {
   const [ deactivateConfirmation, setDeactivateConfirmation ] = React.useState( '' );
   const [ reactivateDialogOpen, setReactivateDialogOpen ] = React.useState( false );
   const [ publishDialogOpen, setPublishDialogOpen ] = React.useState( false );
+  const [ replicateDialogOpen, setReplicateDialogOpen ] = React.useState( false );
 
   const [ deleteConfirmation, setDeleteConfirmation ] = React.useState( '' );
 
@@ -224,6 +225,24 @@ export function CampaignActionMenu( {
     }
   };
 
+  const handleReplicate = () => {
+    if ( !campaign.id ) return;
+    replicateCampaign.mutate( campaign.id, {
+      onSuccess: ( response ) => {
+        toast.success( t( 'replicatedCampaign' ) );
+        setReplicateDialogOpen( false );
+        const newId = response?.data?.id;
+        if ( newId ) {
+          router.push( `${ basePath }/campaigns/${ newId }` );
+          router.refresh();
+        } else {
+          router.refresh();
+        }
+      },
+      onError: () => toast.error( t( 'replicateFailed' ) ),
+    } );
+  };
+
   const handlePublishCampaign = async () => {
     if ( !campaign.id ) return;
 
@@ -272,15 +291,7 @@ export function CampaignActionMenu( {
     {
       label: t( 'replicate' ),
       allowedRoles: [ "brand" ],
-      condition: () => isCompleted,
-      action: () => {
-        if ( campaign.id ) {
-          replicateCampaign.mutate( campaign.id, {
-            onSuccess: () => toast.success( t( 'replicatedCampaign' ) ),
-            onError: () => toast.error( t( 'replicateFailed' ) ),
-          } );
-        }
-      },
+      action: () => setReplicateDialogOpen( true ),
     },
     {
       label: t( 'approveCampaign' ),
@@ -373,6 +384,18 @@ export function CampaignActionMenu( {
           onSuccess={ () => router.refresh() }
         />
       ) }
+      <ConfirmDialog
+        open={ replicateDialogOpen }
+        onOpenChange={ setReplicateDialogOpen }
+        title={ t( 'replicate' ) }
+        description={ <> { t( 'replicateCampaignDescription' ) } <span className="font-semibold text-foreground">{ campaign.campaign_name }</span>?</> }
+        confirmLabel={ t( 'replicate' ) }
+        onConfirm={ handleReplicate }
+        isLoading={ replicateCampaign.isPending }
+        loadingText={ t( 'replicating' ) }
+        variant="default"
+      />
+
       <ConfirmDialog
         open={ publishDialogOpen }
         onOpenChange={ setPublishDialogOpen }

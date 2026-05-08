@@ -25,6 +25,7 @@ export interface SidebarNavMainItem {
   title: string;
   url: string;
   icon?: Icon | HugeIconData;
+  badge?: number;
   items?: {
     title: string;
     url: string;

@@ -18,6 +18,7 @@ import {
   AiUserIcon,
   CreditCardAcceptIcon,
   CustomerSupportIcon,
+  MailIcon,
 } from "@hugeicons/core-free-icons";
 import { IconReport } from "@tabler/icons-react";
 import type { SidebarNavigationData } from "@/components/app-sidebar";
@@ -38,7 +39,8 @@ const withFallback = ( t: NavigationTranslator | undefined, key: string, fallbac
 export function getNavigationData(
   role: 'brand' | 'creator' | 'admin',
   user?: { name: string; email: string; avatar?: string },
-  t?: NavigationTranslator
+  t?: NavigationTranslator,
+  inboxCount?: number
 ): SidebarNavigationData {
   const defaultUser = {
     name: user?.name || "",
@@ -47,7 +49,7 @@ export function getNavigationData(
   };
 
   const navigationMap = {
-    brand: brandNavigationData( t ),
+    brand: brandNavigationData( t, inboxCount ),
     creator: creatorNavigationData( t ),
     admin: adminNavigationData( t ),
   };
@@ -59,7 +61,10 @@ export function getNavigationData(
 }
 
 // Brand Dashboard Navigation
-export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNavigationData, 'user'> & { user: { name: string; email: string; avatar: string } } => ( {
+export const brandNavigationData = (
+  t?: NavigationTranslator,
+  inboxCount?: number
+): Omit<SidebarNavigationData, 'user'> & { user: { name: string; email: string; avatar: string } } => ( {
   user: {
     name: "",
     email: "",
@@ -70,6 +75,12 @@ export const brandNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       title: withFallback( t, "brand.dashboard", "Dashboard" ),
       url: "/brand",
       icon: DashboardSquareAddIcon,
+    },
+    {
+      title: withFallback( t, "brand.inbox", "Inbox" ),
+      url: "/brand/notifications",
+      icon: MailIcon,
+      badge: inboxCount,
     },
     {
       title: withFallback( t, "brand.campaigns", "Campaigns" ),

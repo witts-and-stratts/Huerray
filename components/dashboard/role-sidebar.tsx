@@ -6,6 +6,7 @@ import { useAuth, getUserDisplayName } from "@/lib/auth/auth-context";
 import { useTranslations } from "next-intl";
 import { useBrandProfile } from "@/lib/api/hooks/brands";
 import { useCreatorProfile } from "@/lib/api/hooks/creators";
+import { useNotifications } from "@/lib/api/hooks/notifications";
 import { imgpresets } from "@/lib/utils/imgproxy";
 
 interface RoleSidebarProps {
@@ -18,6 +19,9 @@ export function RoleSidebar( { role }: RoleSidebarProps ) {
 
   const { data: brandProfile } = useBrandProfile( { enabled: role === 'brand' } );
   const { data: creatorProfile } = useCreatorProfile( { enabled: role === 'creator' } );
+  const { data: brandNotifications } = useNotifications( 1, 1, true, {
+    enabled: role === 'brand',
+  } );
 
   const rawAvatar =
     role === 'brand' ? brandProfile?.data?.profile_photo?.asset :
@@ -30,7 +34,7 @@ export function RoleSidebar( { role }: RoleSidebarProps ) {
     name: getUserDisplayName( user ),
     email: user.email,
     avatar: profileAvatar,
-  } : undefined, tNavigation );
+  } : undefined, tNavigation, brandNotifications?.data?.unread_count ?? brandNotifications?.data?.total ?? 0 );
 
   return <AppSidebar navigationData={ navigationData } />;
 }

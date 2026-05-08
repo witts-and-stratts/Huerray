@@ -24,6 +24,7 @@ interface SubmissionCardProps {
   layout?: 'media-overlay' | 'mini';
   overlayDetailsMode?: 'hover' | 'always';
   onExpand?: () => void;
+  fullHeight?: boolean;
 }
 
 export function SubmissionCard( {
@@ -32,6 +33,7 @@ export function SubmissionCard( {
   layout = 'media-overlay',
   overlayDetailsMode = 'hover',
   onExpand,
+  fullHeight = false,
 }: SubmissionCardProps ) {
   const t = useTranslations( 'dashboard.common' );
   const status = submission.status?.toLowerCase() || 'unknown';
@@ -71,7 +73,8 @@ export function SubmissionCard( {
       <Card
         className={ cn(
           "submission-card",
-          isMiniLayout && 'submission-card--mini'
+          isMiniLayout && 'submission-card--mini',
+          fullHeight && 'submission-card--full-height'
         ) }
         onMouseEnter={ () => setIsHovering( true ) }
         onMouseLeave={ () => setIsHovering( false ) }
@@ -86,6 +89,7 @@ export function SubmissionCard( {
           commentCount={ commentCount }
           onCommentClick={ handleCommentClick }
           poster={ videoPoster }
+          fullHeight={ fullHeight }
         />
 
         <div className="submission-card__overlay" />

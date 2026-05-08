@@ -77,6 +77,15 @@
     "deleteAllSuccess": "Todas las notificaciones eliminadas",
     "deleteAllError": "No se han podido eliminar todas las notificaciones"
   },
+  "summaryCard": {
+    "title": "Notificaciones no leídas",
+    "description": "Recuento de la bandeja de entrada no leída y últimos pendientes",
+    "unreadTotal": "Total no leídas",
+    "newToday": "{count, plural, =0 {Sin nuevas notificaciones hoy} other {+# hoy}}",
+    "loading": "Cargando notificaciones no leídas...",
+    "error": "No se pueden cargar las notificaciones no leídas.",
+    "viewAll": "Ver todas las notificaciones"
+  },
   "compose": {
     "title": "Notificación del puesto",
     "description": "Crear y enviar una notificación a un usuario específico.",

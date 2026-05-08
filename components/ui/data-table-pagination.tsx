@@ -77,6 +77,7 @@ function PaginationRowsPerPage<TData>( {
       <SuperField
         type="select"
         value={ `${ table.getState().pagination.pageSize }` }
+        defaultValue="50"
         options={ pageSizeOptions }
         onValueChange={ ( value ) => {
           if ( value ) {

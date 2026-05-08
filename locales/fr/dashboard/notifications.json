@@ -77,6 +77,15 @@
     "deleteAllSuccess": "Toutes les notifications sont supprimées",
     "deleteAllError": "Échec de la suppression de toutes les notifications"
   },
+  "summaryCard": {
+    "title": "Notifications non lues",
+    "description": "Nombre de messages non lus et derniers éléments en attente",
+    "unreadTotal": "Total non lues",
+    "newToday": "{count, plural, =0 {Aucune nouvelle notification aujourd''hui} other {+# aujourd''hui}}",
+    "loading": "Chargement des notifications non lues...",
+    "error": "Impossible de charger les notifications non lues.",
+    "viewAll": "Voir toutes les notifications"
+  },
   "compose": {
     "title": "Notification de poste",
     "description": "Créer et envoyer une notification à un utilisateur spécifique.",

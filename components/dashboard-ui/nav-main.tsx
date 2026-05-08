@@ -19,6 +19,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/dashboard-ui/sidebar";
+import { Badge } from "@/components/dashboard-ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import Link from 'next/link';
 import type { SidebarNavMainItem } from '@/components/app-sidebar';
@@ -126,27 +127,35 @@ export function NavMain( {
                   className="group/collapsible"
                 >
                   <SidebarMenuItem className="font-regular">
-                    <Link href={ localisedUrl( item.url ) } onClick={ () => openItem( item.title ) }>
-                      <SidebarMenuButton
-                        tooltip={ item.title }
-                        isActive={ isParentActive || isAnyChildActive }
-                      >
+                <Link href={ localisedUrl( item.url ) } onClick={ () => openItem( item.title ) }>
+                  <SidebarMenuButton
+                    tooltip={ item.title }
+                    isActive={ isParentActive || isAnyChildActive }
+                  >
                         { item.icon && (
                           Array.isArray( item.icon )
                             ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
-                            : ( () => {
+                        : ( () => {
                               const IconComponent = item.icon as Icon;
                               return <IconComponent />;
                             } )()
-                        ) }
-                        <span>{ item.title }</span>
-                      </SidebarMenuButton>
-                    </Link>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuAction
-                        className="transition-transform group-data-[state=open]/collapsible:rotate-90"
-                        onClick={ ( e ) => { e.preventDefault(); toggleItem( item.title ); } }
+                    ) }
+                    <span>{ item.title }</span>
+                    { typeof item.badge === "number" && item.badge > 0 && (
+                      <Badge
+                        variant="destructive"
+                        className="ml-1 h-5 min-w-5 rounded-full px-1 text-[10px] leading-none pointer-events-none"
                       >
+                        { item.badge > 99 ? "99+" : item.badge }
+                      </Badge>
+                    ) }
+                  </SidebarMenuButton>
+                </Link>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuAction
+                    className="transition-transform group-data-[state=open]/collapsible:rotate-90"
+                    onClick={ ( e ) => { e.preventDefault(); toggleItem( item.title ); } }
+                  >
                         <ChevronRight />
                         <span className="sr-only">Toggle submenu</span>
                       </SidebarMenuAction>
@@ -181,11 +190,19 @@ export function NavMain( {
                       Array.isArray( item.icon )
                         ? <HugeiconsIcon icon={ item.icon } strokeWidth={ 1.5 } />
                         : ( () => {
-                          const IconComponent = item.icon as Icon;
-                          return <IconComponent />;
-                        } )()
+                              const IconComponent = item.icon as Icon;
+                              return <IconComponent />;
+                            } )()
                     ) }
                     <span>{ item.title }</span>
+                    { typeof item.badge === "number" && item.badge > 0 && (
+                      <Badge
+                        variant="destructive"
+                        className="ml-1 h-5 min-w-5 rounded-full px-1 text-[10px] leading-none pointer-events-none"
+                      >
+                        { item.badge > 99 ? "99+" : item.badge }
+                      </Badge>
+                    ) }
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>

@@ -16,6 +16,7 @@ interface OverlayVideoPlayerProps {
   commentCount?: number;
   onCommentClick?: () => void;
   poster?: string;
+  fullHeight?: boolean;
 }
 
 export function OverlayVideoPlayer( {
@@ -26,6 +27,7 @@ export function OverlayVideoPlayer( {
   commentCount,
   onCommentClick,
   poster,
+  fullHeight = false,
 }: OverlayVideoPlayerProps ) {
   const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   const videoRef = useRef<HTMLVideoElement>( null );
@@ -44,20 +46,20 @@ export function OverlayVideoPlayer( {
 
   if ( !videoUrl ) {
     return (
-      <div className="submission-video-player__fallback">
+      <div className={ cn( "submission-video-player__fallback", fullHeight && "h-full" ) }>
         { t( 'noVideoAvailable' ) }
       </div>
     );
   }
 
   return (
-    <div className="submission-video-player">
+    <div className={ cn( "submission-video-player", fullHeight && "submission-video-player--full-height" ) }>
       <video
         ref={ videoRef }
         src={ videoUrl }
         preload="metadata"
         playsInline
-        className="submission-video-player__media"
+        className={ cn( "submission-video-player__media", fullHeight && "submission-video-player__media--full-height" ) }
         onPlay={ () => setIsPlaying( true ) }
         onPause={ () => setIsPlaying( false ) }
         onClick={ togglePlayback }

@@ -49,6 +49,7 @@ export function useCampaignDecision(
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: campaignsKeys.detail(variables.id) });
       queryClient.invalidateQueries({ queryKey: campaignsKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: brandCampaignsKeys.lists() });
     },
     ...options,
   });

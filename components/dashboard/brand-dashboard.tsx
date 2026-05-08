@@ -11,27 +11,29 @@ import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
 import type { ModelsCampaignResponse, ModelsGigBrandResponse } from '@/lib/api/generated/models';
 import {
   BrandActionCenterBlock,
-  BrandAnalyticsBlock,
   BrandCampaignsRadialBlock,
   BrandGigsStatsBlock,
-  BrandKpiOverviewBlock,
   BrandNotificationsBlock,
   BrandProfileSnapshotBlock,
-  BrandSubmissionsStatsBlock,
+  BrandRecentApplicationsBlock,
+  BrandRecentCampaignsBlock,
+  BrandRecentSubmissionsBlock,
   buildSummary,
 } from '@/components/dashboard/blocks/brand';
-import { CampaignStatsBlock } from '@/components/dashboard/blocks/admin/campaign-stats-block';
 import { RecentActivityBlock } from '@/components/dashboard/blocks/admin/recent-activity-block';
+import { useFormatCurrency } from '@/lib/hooks/format';
 import { useTranslations } from 'next-intl';
 
 export function BrandDashboard() {
   const t = useTranslations( 'dashboard.brand.landing' );
+  const tStats = useTranslations( 'dashboard.brand.landing.campaignStatsLabels' );
+  const formatCurrency = useFormatCurrency();
   const { user } = useAuth();
   const brandId = user?.id || '';
 
   const { data: brandData } = useBrandProfile();
   const { data: campaignsResponse, isLoading: isCampaignsLoading } = useBrandCampaigns( { limit: 100, page: 1 } );
-  const { data: gigsResponse, isLoading: isGigsLoading } = useBrandGigs( { brandId, limit: 100, page: 1 }, { enabled: !!brandId } );
+  const { data: gigsResponse } = useBrandGigs( { brandId, limit: 100, page: 1 }, { enabled: !!brandId } );
 
   const brand = useMemo( () => {
     if ( !brandData?.data ) return null;
@@ -49,6 +51,13 @@ export function BrandDashboard() {
   }, [ gigsResponse ] );
 
   const summary = useMemo( () => buildSummary( campaigns, gigs ), [ campaigns, gigs ] );
+
+  const campaignStats = useMemo( () => [
+    { label: tStats( 'total' ), value: `${ campaigns.length }`, numeric: campaigns.length },
+    { label: tStats( 'active' ), value: `${ summary.running }`, numeric: summary.running },
+    { label: tStats( 'totalGigs' ), value: `${ gigs.length }`, numeric: gigs.length },
+    { label: tStats( 'totalSpend' ), value: formatCurrency( summary.totalSpend ), numeric: summary.totalSpend },
+  ], [ campaigns.length, gigs.length, summary.running, summary.totalSpend, formatCurrency, tStats ] );
 
   return (
     <>
@@ -73,14 +82,7 @@ export function BrandDashboard() {
       <div className="ad-shell py-4 bg-burgundy-50/50 mt-0">
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-12">
           <div className="order-2 lg:order-1 lg:col-span-8 space-y-4">
-            <BrandCampaignsRadialBlock campaigns={ campaigns } isLoading={ isCampaignsLoading } />
-            <BrandKpiOverviewBlock
-              campaignsCount={ campaigns.length }
-              gigsCount={ gigs.length }
-              summary={ summary }
-              isCampaignsLoading={ isCampaignsLoading }
-              isGigsLoading={ isGigsLoading }
-            />
+            <BrandCampaignsRadialBlock campaigns={ campaigns } isLoading={ isCampaignsLoading } kpiStats={ campaignStats } />
           </div>
           <div className="order-1 lg:order-2 lg:col-span-4">
             <BrandProfileSnapshotBlock
@@ -91,21 +93,23 @@ export function BrandDashboard() {
           </div>
         </section>
 
-        <BrandAnalyticsBlock />
+        <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <BrandRecentCampaignsBlock campaigns={ campaigns } />
+          <BrandRecentSubmissionsBlock />
+        </section>
 
-        <section className="ad-kpi-grid grid-cols-1 lg:grid-cols-3">
-          <CampaignStatsBlock />
+        <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <BrandRecentApplicationsBlock campaigns={ campaigns } />
           <BrandGigsStatsBlock />
-          <BrandSubmissionsStatsBlock />
         </section>
 
         <section>
           <BrandActionCenterBlock />
         </section>
 
-        <section>
+        {/* <section>
           <BrandNotificationsBlock />
-        </section>
+        </section> */}
 
         <section>
           <RecentActivityBlock />

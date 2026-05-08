@@ -67,10 +67,14 @@ export function CreatorAuthGuard( { children }: { children: React.ReactNode; } )
     };
   }, [ dispatch ] );
 
+  const isOnCompleteProfile = pathname?.includes( '/complete-profile' );
+  // Keep the loader visible while a redirect to complete-profile is pending,
+  // so the dashboard doesn't briefly render between fetch resolution and router.replace.
+  const redirectPending = hasFetchedThisSession && hasProfile === false && !isOnCompleteProfile;
+
   // Show loading until we've verified profile status this session
-  if ( !hasFetchedThisSession || isLoading ) {
-    // Don't show loading on complete-profile page
-    if ( pathname?.includes( '/complete-profile' ) ) {
+  if ( !hasFetchedThisSession || isLoading || redirectPending ) {
+    if ( isOnCompleteProfile ) {
       return <>{ children }</>;
     }
 

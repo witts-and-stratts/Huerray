@@ -3,6 +3,8 @@ export { BrandKpiOverviewBlock } from './brand-kpi-overview-block';
 export { BrandPipelineBreakdownBlock } from './brand-pipeline-breakdown-block';
 export { BrandActionCenterBlock } from './brand-action-center-block';
 export { BrandRecentCampaignsBlock } from './brand-recent-campaigns-block';
+export { BrandRecentSubmissionsBlock } from './brand-recent-submissions-block';
+export { BrandRecentApplicationsBlock } from './brand-recent-applications-block';
 export { BrandRecentGigsBlock } from './brand-recent-gigs-block';
 export { BrandBudgetSnapshotBlock } from './brand-budget-snapshot-block';
 export { BrandProfileSnapshotBlock } from './brand-profile-snapshot-block';

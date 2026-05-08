@@ -23,6 +23,7 @@ import {
 } from '@/components/dashboard-ui/tooltip';
 import { motion } from 'motion/react';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { cn } from '@/lib/dashboard-utils';
 
 export type Person = {
   first_name: string;
@@ -31,7 +32,14 @@ export type Person = {
   email?: string;
 };
 
-export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' }: { people: Person[]; onPersonClick?: ( index: number ) => void; title: string; size?: 'sm' | 'default' | 'lg'; } ) => {
+interface AvatarCollageProps {
+  people: Person[];
+  onPersonClick?: ( index: number ) => void;
+  title: string;
+  size?: 'sm' | 'default' | 'lg' | 'xl';
+}
+
+export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' }: AvatarCollageProps ) => {
   const limit = 4;
   const shownPeople = people?.slice( 0, limit ) || [];
   const remainingCount = people?.length > limit ? people.length - limit : 0;
@@ -59,7 +67,7 @@ export const AvatarCollage = ( { people, onPersonClick, title, size = 'default' 
           >
             <Tooltip>
               <TooltipTrigger asChild>
-                <Avatar size={ size } className='border-2 border-white'>
+                <Avatar size={ size } className={ cn( 'border-2 border-white hover:scale-[1.2] transition-transform duration-300 ease-out', { "border-4": size === 'xl' || size === 'lg' } ) }>
                   <AvatarImage src={ imgpresets.avatar( person.avatar! ) } />
                   <AvatarFallback className='text-xs'>
                     { person.first_name?.[ 0 ] }

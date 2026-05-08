@@ -16,12 +16,19 @@ const STATUS_COLORS = [
   'var(--chart-5)',
 ];
 
+interface RadialKpiStat {
+  label: string;
+  value: string;
+  numeric: number;
+}
+
 interface BrandCampaignsRadialBlockProps {
   campaigns: ModelsCampaignResponse[];
   isLoading: boolean;
+  kpiStats?: RadialKpiStat[];
 }
 
-export function BrandCampaignsRadialBlock( { campaigns, isLoading }: BrandCampaignsRadialBlockProps ) {
+export function BrandCampaignsRadialBlock( { campaigns, isLoading, kpiStats }: BrandCampaignsRadialBlockProps ) {
   const t = useTranslations( 'dashboard.brand.landing.campaignsRadial' );
   const { chartConfig, campaignsStatusBreakdown, chartData } = useMemo( () => {
     const counts = new Map<string, number>();
@@ -159,6 +166,16 @@ export function BrandCampaignsRadialBlock( { campaigns, isLoading }: BrandCampai
               </div>
             </div>
           </>
+        ) }
+        { !isLoading && kpiStats && kpiStats.length > 0 && (
+          <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4 col-span-full">
+            { kpiStats.map( ( item ) => (
+              <div key={ item.label } className="rounded-lg border border-border/60 bg-white p-2.5">
+                <p className="ad-stat-label">{ item.label }</p>
+                <p className="mt-1 text-2xl leading-none font-primary font-medium">{ item.value }</p>
+              </div>
+            ) ) }
+          </div>
         ) }
       </CardContent>
     </Card>

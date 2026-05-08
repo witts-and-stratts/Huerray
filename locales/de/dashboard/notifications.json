@@ -77,6 +77,15 @@
     "deleteAllSuccess": "Alle Benachrichtigungen gelöscht",
     "deleteAllError": "Alle Benachrichtigungen konnten nicht gelöscht werden"
   },
+  "summaryCard": {
+    "title": "Ungelesene Benachrichtigungen",
+    "description": "Anzahl ungelesener Nachrichten und aktuelle ausstehende Einträge",
+    "unreadTotal": "Ungelesen gesamt",
+    "newToday": "{count, plural, =0 {Keine neuen Benachrichtigungen heute} other {+# heute}}",
+    "loading": "Ungelesene Benachrichtigungen werden geladen...",
+    "error": "Ungelesene Benachrichtigungen konnten nicht geladen werden.",
+    "viewAll": "Alle Benachrichtigungen anzeigen"
+  },
   "compose": {
     "title": "Benachrichtigung veröffentlichen",
     "description": "Erstellen und senden Sie eine Benachrichtigung an einen bestimmten Benutzer.",

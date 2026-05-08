@@ -17,6 +17,8 @@
       "edit": "Editar",
       "rename": "Cambie el nombre de",
       "replicate": "Replicar",
+      "replicating": "Replicando...",
+      "replicateCampaignDescription": "¿Está seguro de que desea replicar",
       "replicatedCampaign": "Campaña replicada",
       "replicateFailed": "Error al replicar la campaña",
       "approveCampaign": "Aprobar campaña",

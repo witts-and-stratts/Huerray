@@ -486,7 +486,7 @@ function SidebarMenuItem( { className, ...props }: React.ComponentProps<"li"> ) 
 }
 
 const sidebarMenuButtonVariants = cva(
-  "ring-sidebar-ring hover:bg-primary/10 hover:text-primary active:bg-primary/10 active:text-primary data-active:text-primary data-open:hover:bg-primary/10 data-open:hover:text-primary gap-2 rounded-md p-2 text-left text-sm transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 data-active:font-medium peer/menu-button flex w-full items-center overflow-hidden outline-hidden group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&_svg]:size-4 group-data-[collapsible=icon]:[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:transition-[width,height] [&_svg]:duration-200",
+  "ring-sidebar-ring hover:bg-primary/10 hover:text-primary active:bg-primary/10 active:text-primary data-active:text-primary data-open:hover:bg-primary/10 data-open:hover:text-primary gap-2 rounded-md p-2 text-left text-sm transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 data-active:font-medium peer/menu-button flex w-full items-center overflow-hidden outline-hidden group/menu-button disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&_svg]:size-4 group-data-[collapsible=icon]:[&_svg]:size-5 [&_svg]:shrink-0 [&_svg]:transition-[width,height] [&_svg]:duration-200",
   {
     variants: {
       variant: {

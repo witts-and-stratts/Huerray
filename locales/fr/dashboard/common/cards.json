@@ -17,6 +17,7 @@
     "submissions": "Soumissions",
     "applications": "Applications",
     "invitations": "Invitations",
-    "videoCount": "{count, plural, =1 {# video} other {# videos}}"
+    "videoCount": "{count, plural, =1 {# video} other {# videos}}",
+    "actionCenterTitle": "Centre d'actions"
   }
 }
