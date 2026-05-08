@@ -54,7 +54,7 @@ export function BrandCard( { brand, onViewDetails }: BrandCardProps ) {
             <AvatarImage src={ imgpresets.avatar( logo ) } alt={ name } />
             <AvatarFallback>{ name.substring( 0, 2 ).toUpperCase() }</AvatarFallback>
           </Avatar>
-          <BrandActionMenu brand={ brand } onViewDetails={ onViewDetails } />
+          <BrandActionMenu brand={ brand } />
         </div>
       </CardHeader>
 

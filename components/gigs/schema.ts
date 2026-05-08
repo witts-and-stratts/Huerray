@@ -9,9 +9,9 @@ function getEnumValues<T extends Record<string, any>>(obj: T) {
 
 export const createGigBaseSchema = z.object({
   title: z.string().min(1, 'Title is required'),
-  compensation: z.number({ error: 'Compensation must be a number' }).min(0, 'Compensation must be positive'),
-  gig_cost: z.number({ error: 'Gig cost must be a number' }).min(0, 'Gig cost must be positive'),
-  number_of_videos: z.number({ error: 'Must be a number' }).min(1, 'At least 1 video is required'),
+  compensation: z.number({ error: 'Compensation must be a number' }).gt(0, 'Compensation must be greater than 0'),
+  gig_cost: z.number({ error: 'Gig cost must be a number' }).gt(0, 'Total Gig cost must be greater than 0'),
+  number_of_videos: z.number({ error: 'Must be a number' }).gt(0, 'Number of videos must be greater than 0'),
   video_duration_in_seconds: z.number({ error: 'Must be a number' }).min(1, 'Duration must be at least 1 second'),
   posting_start_date: z.date({ error: 'Start date is required' }),
   posting_end_date: z.date({ error: 'End date is required' }),

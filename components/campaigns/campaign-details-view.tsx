@@ -101,6 +101,7 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
 
   // Sync: URL hash → tab (browser back/forward, external hash changes)
   useEffect( () => {
+    setActiveTab( getTabFromHash() );
     window.addEventListener( 'hashchange', onHashChange );
     return () => window.removeEventListener( 'hashchange', onHashChange );
   }, [] );

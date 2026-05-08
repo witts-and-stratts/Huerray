@@ -39,6 +39,7 @@
       "confirmGigName": "Geben Sie den Gig-Namen zur Bestätigung ein",
       "deleteGigFailed": "Gig konnte nicht gelöscht werden",
       "deleteFailed": "Gig konnte nicht gelöscht werden",
+      "deletedGig": "Gig gelöscht",
       "viewGigFailed": "Gig konnte nicht geöffnet werden",
       "missingId": "Gig ID fehlt",
       "approvedGig": "Gig genehmigt",

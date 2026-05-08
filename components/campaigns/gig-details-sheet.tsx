@@ -100,6 +100,8 @@ interface GigSheetHeaderProps {
   gigCostValue?: number;
   formattedCompensation: string;
   formattedGigCost: string;
+  enforceSingleCreatorSubmission?: boolean;
+  enforceUniqueCreatorSubmission?: boolean;
 }
 
 function GigSheetHeader( {
@@ -114,8 +116,16 @@ function GigSheetHeader( {
   gigCostValue,
   formattedCompensation,
   formattedGigCost,
+  enforceSingleCreatorSubmission,
+  enforceUniqueCreatorSubmission,
 }: GigSheetHeaderProps ) {
   const t = useTranslations( 'dashboard.creator' );
+  const adminGigsT = useTranslations( 'dashboard.admin.gigForm' );
+  const enforcementLabel = enforceUniqueCreatorSubmission
+    ? adminGigsT( 'uniqueCreatorSubmission' )
+    : enforceSingleCreatorSubmission
+      ? adminGigsT( 'singleSubmission' )
+      : null;
   return (
     <SheetHeader className={ `relative flex flex-row items-start gap-4 bg-burgundy-50/70 mx-6 rounded-lg border border-primary/20 mb-0 ${ hasCoverImage ? '-mt-32 z-10 backdrop-blur-lg' : 'mt-16' }` }>
       <div className="flex flex-col gap-2 flex-1 min-w-0">
@@ -140,7 +150,14 @@ function GigSheetHeader( {
           ) }
         </div>
 
-        <GigStatusBadge status={ gigStatus } className="self-start" />
+        <div className="flex flex-wrap items-center gap-2">
+          <GigStatusBadge status={ gigStatus } />
+          <RoleGuard allowedRoles={ [ 'admin' ] }>
+            { enforcementLabel && (
+              <Badge variant="secondary" className="text-xs font-normal">{ enforcementLabel }</Badge>
+            ) }
+          </RoleGuard>
+        </div>
       </div>
 
       { brand && (
@@ -650,14 +667,16 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
   const videoItems = React.useMemo<ModelsContentMedia[]>( () => campaign?.sample_videos ?? [], [ campaign ] );
   const hasAssets = React.useMemo( () => imageItems.length > 0 || documentItems.length > 0 || videoItems.length > 0, [ imageItems, documentItems, videoItems ] );
   const submissions = React.useMemo( () => submissionsResponse?.data ?? [], [ submissionsResponse ] );
+  const creatorSubmissionCap = React.useMemo( () => {
+    if ( gig?.enforce_unique_creator_submission === true ) return 1;
+    if ( gig?.enforce_single_creator_submission === true && typeof gig?.number_of_videos === 'number' ) {
+      return gig.number_of_videos;
+    }
+    return undefined;
+  }, [ gig?.enforce_unique_creator_submission, gig?.enforce_single_creator_submission, gig?.number_of_videos ] );
   const shouldShowAddSubmissionButton = React.useMemo(
-    () => (
-      isCreator
-      && gig?.enforce_single_creator_submission === true
-      && typeof gig?.number_of_videos === 'number'
-      && submissions.length !== gig.number_of_videos
-    ),
-    [ isCreator, gig?.enforce_single_creator_submission, gig?.number_of_videos, submissions.length ]
+    () => isCreator && typeof creatorSubmissionCap === 'number' && submissions.length < creatorSubmissionCap,
+    [ isCreator, creatorSubmissionCap, submissions.length ]
   );
   const coverImage = React.useMemo( () =>
     campaign?.product_image?.asset !== '' ? campaign?.product_image?.asset : campaign?.campaign_images?.[ 0 ]?.asset,
@@ -668,7 +687,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
     if ( !gig?.id ) return;
     applyToGig( {
       id: gig.id,
-      application: { message: "I am interested in this gig!", number_of_videos: gig.number_of_videos || 1 },
+      application: { message: "I am interested in this gig!", number_of_videos: gig.enforce_unique_creator_submission ? 1 : ( gig.number_of_videos || 1 ) },
     }, {
       onSuccess: () => { toast.success( creatorCommonT( 'toasts.appliedSuccess' ) ); onOpenChange( false ); },
       onError: ( error ) => {
@@ -700,6 +719,8 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
 
   const { title, gig_status, posting_end_date, compensation: compensationMoney, number_of_videos, video_duration_in_seconds, requirements, content_guidelines, ambience, gender_requirement, age_min, age_max } = gig;
 
+  const displayedNumberOfVideos = isCreator && gig.enforce_unique_creator_submission === true ? 1 : number_of_videos;
+
   return (
     <>
       <Sheet open={ open } onOpenChange={ onOpenChange }>
@@ -711,7 +732,7 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
           <GigSheetHeader
             title={ title }
             gigStatus={ gig_status }
-            numberOfVideos={ number_of_videos }
+            numberOfVideos={ displayedNumberOfVideos }
             videoDuration={ video_duration_in_seconds }
             postingEndDate={ posting_end_date }
             hasCoverImage={ !!coverImage }
@@ -720,6 +741,8 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
             gigCostValue={ gig.gig_cost?.value }
             formattedCompensation={ formattedCompensation }
             formattedGigCost={ formattedGigCost }
+            enforceSingleCreatorSubmission={ gig.enforce_single_creator_submission }
+            enforceUniqueCreatorSubmission={ gig.enforce_unique_creator_submission }
           />
 
           <AnimTabs

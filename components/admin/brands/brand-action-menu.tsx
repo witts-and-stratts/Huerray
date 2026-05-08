@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { useDeleteBrand, useUpdateBrandStatus } from "@/lib/api/hooks/brands";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 type BrandActionStatus = "approved" | "rejected" | "returned";
 
@@ -18,15 +19,14 @@ interface BrandActionMenuProps {
   className?: string;
   trigger?: ReactNode;
   align?: "center" | "start" | "end";
-  onViewDetails?: ( brand: Brand ) => void;
 }
 
 export function BrandActionMenu( {
   brand,
   trigger,
   align = "end",
-  onViewDetails,
 }: BrandActionMenuProps ) {
+  const { locale } = useParams<{ locale: string }>();
   const menuT = useTranslations( 'dashboard.admin.brandActionMenu' );
   const t = useTranslations( 'dashboard.admin' );
   const updateStatus = useUpdateBrandStatus( brand.id );
@@ -117,11 +117,11 @@ export function BrandActionMenu( {
       separator: true,
       condition: ( data ) => !!data.website,
     },
-    ...( onViewDetails ? [ {
+    {
       label: menuT( 'viewDetails' ),
-      action: () => onViewDetails?.( brand ),
+      href: `/${ locale }/admin/brands/${ brand.id }`,
       separator: true,
-    } ] : [] ),
+    },
     {
       label: t( 'brandStatus.approve' ),
       action: () => handleStatusAction( "approved" ),

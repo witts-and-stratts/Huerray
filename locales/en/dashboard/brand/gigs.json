@@ -39,6 +39,7 @@
       "confirmGigName": "Type the gig name to confirm",
       "deleteGigFailed": "Failed to delete gig",
       "deleteFailed": "Failed to delete gig",
+      "deletedGig": "Gig deleted",
       "viewGigFailed": "Failed to open gig",
       "missingId": "Gig ID is missing",
       "approvedGig": "Gig approved",

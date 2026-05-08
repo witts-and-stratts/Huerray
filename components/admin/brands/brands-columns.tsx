@@ -61,7 +61,6 @@ const BrandActionsCell = ( {
         </Button>
         <BrandActionMenu
           brand={ brand }
-          onViewDetails={ onViewDetails }
           trigger={
             <Button variant="outline" size="sm" className="font-regular">
               <ChevronDown />
