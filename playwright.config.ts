@@ -51,6 +51,13 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
+    // Auth setup — runs first, saves admin session to disk
+    {
+      name: 'admin-setup',
+      testMatch: /dashboards\/admin\/setup\/admin-auth\.setup\.ts/,
+      use: { ...devices['Desktop Chrome'] },
+    },
+
     // Authenticated brand tests — depend on saved session
     {
       name: 'brand',
@@ -62,10 +69,24 @@ export default defineConfig({
       },
     },
 
+    // Authenticated admin tests — depend on saved admin session
+    {
+      name: 'admin',
+      testMatch: /tests\/dashboards\/admin\/(?!setup).+\.spec\.ts/,
+      dependencies: ['admin-setup'],
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'tests/.auth/admin.json',
+      },
+    },
+
     // Everything else (unauthenticated / auth suite)
     {
       name: 'chromium',
-      testIgnore: /tests\/dashboards\/brand\/authenticated\/.+\.spec\.ts/,
+      testIgnore: [
+        /tests\/dashboards\/brand\/authenticated\/.+\.spec\.ts/,
+        /tests\/dashboards\/admin\/(?!setup).+\.spec\.ts/,
+      ],
       use: { ...devices['Desktop Chrome'] },
     },
   ],

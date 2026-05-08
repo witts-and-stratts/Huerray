@@ -13,7 +13,7 @@ import { useCases } from '@/lib/api/hooks';
 import { HelpMainView } from './help-main-view';
 import { TopicDetailView } from './topic-detail-view';
 import { HelpFaqView } from './help-faq-view';
-import { baseHelpPathByRole, getLocalizedValue, navItems, type HelpNavSection } from './help-content';
+import { baseHelpPathByRole, getLocalizedValue, navItems, supportTicketsPathByRole, type HelpNavSection } from './help-content';
 import '@/app/styles/components/help-center.css';
 
 export function HelpCenterPage( {
@@ -53,8 +53,17 @@ export function HelpCenterPage( {
     }
     : null;
 
-  const navigateToSection = ( target: HelpNavSection ) =>
-    router.push( target === 'home' ? baseHelpPath : `${ baseHelpPath }/${ target }` );
+  const navigateToSection = ( target: HelpNavSection ) => {
+    if ( target === 'home' ) {
+      router.push( baseHelpPath );
+      return;
+    }
+    if ( target === 'tickets' ) {
+      router.push( supportTicketsPathByRole[ role ] );
+      return;
+    }
+    router.push( `${ baseHelpPath }/${ target }` );
+  };
 
   return (
     <div className={ cn( 'help-center', className ) }>

@@ -42,6 +42,12 @@ export const baseHelpPathByRole: Record<HelpRole, string> = {
   creator: '/creator/help',
 };
 
+export const supportTicketsPathByRole: Record<HelpRole, string> = {
+  admin: '/admin/support-tickets',
+  brand: '/brand/support-tickets',
+  creator: '/creator/support-tickets',
+};
+
 export const cardIcons: Record<HelpRole, HugeIcon[]> = {
   brand: [ ChartLineData01Icon, UserGroupIcon, WalletDone01Icon ],
   creator: [ Task02Icon, ImageUpload01Icon, WalletDone01Icon ],

@@ -1,20 +1,68 @@
 'use client';
 
-import * as React from 'react';
-import { ModelsCaseResponse } from '@/lib/api/generated/models';
-import { useCase, useCaseMessages, useAddCaseMessage } from '@/lib/api/hooks/cases';
-import { CaseStatusBadge } from './case-status-badge';
-import { CasePriorityBadge } from './case-priority-badge';
-import { CaseActionMenu } from './case-action-menu';
-import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
+import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { CopyText } from '@/components/dashboard-ui/copy-text';
+import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { Separator } from '@/components/dashboard-ui/separator';
-import { cn } from '@/lib/dashboard-utils';
+import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
+import { PaymentDetailsSheet } from '@/components/payments/payment-details-sheet';
+import { ModelsCaseResponse, ModelsCaseUserSummary, ModelsPaymentResponse, UtilsNotificationEntityType } from '@/lib/api/generated/models';
+import { useAddCaseMessage, useCase, useCaseMessages } from '@/lib/api/hooks/cases';
+import { useGig } from '@/lib/api/hooks/gigs';
+import { useAuth } from '@/lib/auth/auth-context';
 import { useTimeAgo } from '@/lib/hooks/format';
-import { useLocale, useTranslations } from 'next-intl';
 import { ArrowLeft, ChevronDown, HeadphonesIcon, Send } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import Link from 'next/link';
+import * as React from 'react';
 import { toast } from 'sonner';
+import { CaseActionMenu } from './case-action-menu';
+import { CasePriorityBadge } from './case-priority-badge';
+import { CaseStatusBadge } from './case-status-badge';
+import { UserRole } from '@/lib/constants';
+
+function getEntityHref(
+  entityType: string | undefined,
+  entityId: string | undefined,
+  role: UserRole | undefined,
+): string | null {
+  if ( !entityType || !entityId || !role ) return null;
+  if ( role === 'admin' ) {
+    switch ( entityType ) {
+      case UtilsNotificationEntityType.EntityBrand: return `/admin/brands/${ entityId }`;
+      case UtilsNotificationEntityType.EntityCreator: return `/admin/creators/${ entityId }`;
+      case UtilsNotificationEntityType.EntityCampaign: return `/admin/campaigns/${ entityId }`;
+      case UtilsNotificationEntityType.EntityCase: return `/admin/support-tickets/${ entityId }`;
+      case UtilsNotificationEntityType.EntityInvoice: return `/admin/invoice/${ entityId }`;
+      default: return null;
+    }
+  }
+  if ( role === 'brand' ) {
+    switch ( entityType ) {
+      case UtilsNotificationEntityType.EntityCampaign: return `/brand/campaigns/${ entityId }`;
+      case UtilsNotificationEntityType.EntityCase: return `/brand/support-tickets/${ entityId }`;
+      case UtilsNotificationEntityType.EntityInvoice: return '/brand/invoices';
+      default: return null;
+    }
+  }
+  if ( role === 'creator' ) {
+    switch ( entityType ) {
+      case UtilsNotificationEntityType.EntityCase: return `/creator/support-tickets/${ entityId }`;
+      default: return null;
+    }
+  }
+  return null;
+}
+
+function getReporterHref( reporter: ModelsCaseUserSummary | undefined, role: UserRole | undefined ): string | null {
+  if ( role !== 'admin' || !reporter?.id ) return null;
+  const userType = reporter.user_type?.toLowerCase();
+  if ( userType === 'brand' || userType === 'brand_user' ) return `/admin/brands/${ reporter.id }`;
+  if ( userType === 'creator' ) return `/admin/creators/${ reporter.id }`;
+  return null;
+}
 
 // ─── Empty state ──────────────────────────────────────────────────────────────
 
@@ -67,13 +115,18 @@ function CaseDetailHeader( { case_, onBack }: CaseDetailHeaderProps ) {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
           { case_.case_number && (
-            <span className="text-xs text-muted-foreground font-mono">{ case_.case_number }</span>
+            <CopyText text={ case_.case_number }>
+              <Badge variant='outline'>
+                <span className="text-xs text-muted-foreground/70 font-mono py-1">
+                  { case_.case_number }</span>
+              </Badge>
+            </CopyText>
           ) }
         </div>
         <h2 className="text-lg font-primary font-medium text-foreground leading-snug truncate">
           { case_.title }
         </h2>
-        <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+        <div className="flex items-center gap-0.25 mt-1.5 flex-wrap">
           <CaseStatusBadge status={ case_.status || 'open' } />
           <CasePriorityBadge priority={ case_.priority || 'medium' } />
           { case_.created_at && (
@@ -104,6 +157,8 @@ function CaseDetailHeader( { case_, onBack }: CaseDetailHeaderProps ) {
 function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
   const t = useTranslations( 'dashboard.admin.casesPage' );
   const locale = useLocale();
+  const { user } = useAuth();
+  const role = user?.role as UserRole | undefined;
   const caseId = case_.id || '';
   const { data: caseDetails } = useCase( caseId );
   const { data: messagesData } = useCaseMessages( caseId );
@@ -113,6 +168,24 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
 
   const profile = caseDetails?.data || case_;
   const messages = ( messagesData )?.data || [];
+
+  const reporterHref = getReporterHref( profile?.reporter, role );
+  const relatedEntityHref = getEntityHref(
+    profile?.related_entity_type,
+    profile?.related_entity_id,
+    role,
+  );
+  const isPaymentEntity = profile?.related_entity_type === UtilsNotificationEntityType.EntityPayment
+    && !!profile?.related_entity_id;
+  const isGigEntity = profile?.related_entity_type === UtilsNotificationEntityType.EntityGig
+    && !!profile?.related_entity_id;
+  const [ paymentSheetOpen, setPaymentSheetOpen ] = React.useState( false );
+  const [ gigSheetOpen, setGigSheetOpen ] = React.useState( false );
+  const { data: gigResponse } = useGig(
+    profile?.related_entity_id || '',
+    { enabled: isGigEntity && gigSheetOpen },
+  );
+  const gigData = gigResponse?.data;
 
   React.useEffect( () => {
     console.log( "Messages", messages );
@@ -169,7 +242,13 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
           <div className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm bg-slate-50/30 rounded-md px-4 py-4 border border-slate-50/80">
             <div>
               <p className="text-xs text-muted-foreground mb-0.5">{ t( 'details.reporter' ) }</p>
-              <p className="font-medium truncate">{ reporterName }</p>
+              { reporterHref ? (
+                <Link href={ reporterHref } className="font-medium truncate block hover:underline text-primary">
+                  { reporterName }
+                </Link>
+              ) : (
+                <p className="font-medium truncate">{ reporterName }</p>
+              ) }
             </div>
             <div>
               <p className="text-xs text-muted-foreground mb-0.5">{ t( 'details.assignee' ) }</p>
@@ -178,7 +257,29 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
             { profile?.related_entity_type && (
               <div>
                 <p className="text-xs text-muted-foreground mb-0.5">{ t( 'details.relatedEntity' ) }</p>
-                <p className="font-medium capitalize">{ profile.related_entity_type.replace( /_/g, ' ' ) }</p>
+                { isPaymentEntity ? (
+                  <button
+                    type="button"
+                    onClick={ () => setPaymentSheetOpen( true ) }
+                    className="font-medium capitalize block hover:underline text-primary text-left"
+                  >
+                    { profile.related_entity_type.replace( /_/g, ' ' ) }
+                  </button>
+                ) : isGigEntity ? (
+                  <button
+                    type="button"
+                    onClick={ () => setGigSheetOpen( true ) }
+                    className="font-medium capitalize block hover:underline text-primary text-left"
+                  >
+                    { profile.related_entity_type.replace( /_/g, ' ' ) }
+                  </button>
+                ) : relatedEntityHref ? (
+                  <Link href={ relatedEntityHref } className="font-medium capitalize block hover:underline text-primary">
+                    { profile.related_entity_type.replace( /_/g, ' ' ) }
+                  </Link>
+                ) : (
+                  <p className="font-medium capitalize">{ profile.related_entity_type.replace( /_/g, ' ' ) }</p>
+                ) }
               </div>
             ) }
             { profile?.created_at && (
@@ -245,6 +346,22 @@ function CaseDetailBody( { case_ }: { case_: ModelsCaseResponse; } ) {
           <Send className="size-4" />
         </Button>
       </div>
+
+      { isPaymentEntity && (
+        <PaymentDetailsSheet
+          payment={ { id: profile.related_entity_id } as ModelsPaymentResponse }
+          open={ paymentSheetOpen }
+          onOpenChange={ setPaymentSheetOpen }
+          isAdmin={ role === 'admin' }
+        />
+      ) }
+      { isGigEntity && gigSheetOpen && gigData && (
+        <GigDetailsSheet
+          gig={ gigData }
+          open={ gigSheetOpen }
+          onOpenChange={ setGigSheetOpen }
+        />
+      ) }
     </div>
   );
 }

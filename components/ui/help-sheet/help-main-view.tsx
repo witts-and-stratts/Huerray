@@ -9,10 +9,8 @@ import { CustomerSupportIcon, Search01Icon } from '@hugeicons/core-free-icons';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PortableText } from '@portabletext/react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Badge } from '@/components/dashboard-ui/badge';
 import { Button } from '@/components/dashboard-ui/button';
 import { SuperField } from '@/components/dashboard-ui/super-field';
-import { useCases } from '@/lib/api/hooks';
 import type { HelpRole, SanityFaq, SanityHelpCenterData, SanityHelpTopic } from './help-routing';
 import { cardIcons, getLocalizedValue, iconMap } from './help-content';
 
@@ -88,8 +86,6 @@ export function HelpMainView( {
   const router = useRouter();
   const [ search, setSearch ] = useState( '' );
   const [ debouncedSearch, setDebouncedSearch ] = useState( '' );
-  const { data: openCasesData } = useCases( { status: 'open', limit: 1 } );
-  const openTicketsCount = openCasesData?.pagination?.total ?? 0;
 
   useEffect( () => {
     const timeout = window.setTimeout( () => {
@@ -287,16 +283,6 @@ export function HelpMainView( {
         >
           <HugeiconsIcon icon={ CustomerSupportIcon } className="help-main__search-button-icon" />
           { t( 'helpSheet.submitCta' ) }
-        </Button>
-        <Button
-          variant="outline"
-          // className="help-main__cta-button--ghost"
-          onClick={ () => router.push( `${ baseHelpPath }/tickets` ) }
-        >
-          { t( 'helpSheet.supportTickets' ) }
-          { openTicketsCount > 0 && (
-            <Badge variant="destructive" className="ml-2">{ openTicketsCount }</Badge>
-          ) }
         </Button>
       </div>
 
