@@ -20,7 +20,7 @@ export default function CreatorsPage() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, setPagination ] );
+  }, [ deferredSearchValue ] );
 
   const { data: response, isLoading, isFetching, error } = useCreators( {
     page: pagination.pageIndex + 1,

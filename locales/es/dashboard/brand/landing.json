@@ -4,6 +4,11 @@
     "description": "Rendimiento de la campaña y visión operativa de su cuenta de marca",
     "createCampaign": "Crear campaña",
     "viewCampaigns": "Ver campañas",
+    "emptyBanner": {
+      "title": "Empieza a crear UGC con los mejores creadores que se adaptan a tu marca.",
+      "subtitle": "Lanza tu primera campaña y conecta con creadores auténticos listos para dar vida a tu marca.",
+      "cta": "Crear tu primera campaña"
+    },
     "analytics": {
       "title": "Análisis de marcas",
       "description": "Métricas de rendimiento de su cuenta de marca",

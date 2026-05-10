@@ -119,5 +119,9 @@
       "question": "¿Cómo se determinan los partidos de marca?",
       "answer": "Nuestro algoritmo de concordancia tiene en cuenta el estilo de tus contenidos, los datos demográficos de tu audiencia, los índices de participación y las preferencias de marca para sugerirte las mejores colaboraciones."
     }
+  },
+  "seo": {
+    "title": "Cobra por hacer lo que te gusta",
+    "description": "Trabaja con marcas y empresas reales. Empieza a ganar dinero por lo que te gusta."
   }
 }

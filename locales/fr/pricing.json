@@ -119,5 +119,9 @@
   "cta": {
     "title": "Prêt pour votre première vidéo UGC ?",
     "buttonText": "S'inscrire"
+  },
+  "seo": {
+    "title": "Payer pour l'UGC, pas pour des frais cachés",
+    "description": "Chaque dollar est consacré à un CGU évolutif et de marque qui génère des résultats, et non à des frais de plateforme."
   }
 }

@@ -1,4 +1,4 @@
-import {HelpCircleIcon, LockIcon, UsersIcon, TagIcon} from '@sanity/icons'
+import {HelpCircleIcon, LockIcon, UsersIcon, TagIcon, DocumentTextIcon} from '@sanity/icons'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 import type {StructureResolver} from 'sanity/structure'
 import {apiVersion} from './env'
@@ -11,6 +11,14 @@ export const structure: StructureResolver = (S, context) =>
       S.documentTypeListItem('blog').title('Blog'),
       S.documentTypeListItem('category').title('Categories'),
       S.documentTypeListItem('author').title('Authors'),
+      orderableDocumentListDeskItem({
+        type: 'openPosition',
+        title: 'Open Positions',
+        id: 'openPosition',
+        icon: DocumentTextIcon,
+        S,
+        context,
+      }),
       S.divider(),
       S.listItem()
         .id('help-center-section')
@@ -108,6 +116,8 @@ export const structure: StructureResolver = (S, context) =>
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (item) => item.getId() && !['blog', 'category', 'author', 'faq', 'helpCenter', 'helpTopic'].includes(item.getId()!),
+        (item) =>
+          item.getId() &&
+          !['blog', 'category', 'author', 'openPosition', 'faq', 'helpCenter', 'helpTopic'].includes(item.getId()!),
       ),
     ])

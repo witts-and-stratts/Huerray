@@ -11,8 +11,9 @@ import { config } from "@/lib/config";
 import { keepPreviousData } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight, Loader2, Search } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import type { ModelsNotificationResponse } from "@/lib/api/generated/models";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SuperField } from "../dashboard-ui/super-field";
 import { NotificationDetail } from "./notification-detail";
 import { NotificationRow } from "./notification-row";
@@ -29,44 +30,116 @@ export function NotificationsView() {
   const [ selectedId, setSelectedId ] = useState<string | null>( null );
   const [ mobileDetailOpen, setMobileDetailOpen ] = useState( false );
 
-  const { data: response, isLoading, isPlaceholderData } = useNotifications( page, perPage, false, {
+  const queryOptions = {
     placeholderData: keepPreviousData,
     refetchInterval: config.polling.notificationsInterval,
     refetchIntervalInBackground: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
+  };
+
+  // Stats query: unfiltered, drives tab badges so they reflect global counts
+  // regardless of which tab is active.
+  const { data: statsResponse } = useNotifications( 1, 1, false, queryOptions );
+  const globalTotal = statsResponse?.data?.total ?? 0;
+  const globalUnread = statsResponse?.data?.unread_count ?? 0;
+  const globalRead = Math.max( globalTotal - globalUnread, 0 );
+
+  // List query. For "all"/"unread" the server filters and paginates. The API
+  // has no `read_only` param, so for "read" we fetch every notification in one
+  // shot (per_page = global total) and filter + paginate client-side.
+  const isReadFilter = filter === "read";
+  const apiPage = isReadFilter ? 1 : page;
+  const apiPerPage = isReadFilter ? Math.max( globalTotal, 1 ) : perPage;
+  const apiUnreadOnly = filter === "unread";
+
+  const { data: response, isLoading, isPlaceholderData } = useNotifications( apiPage, apiPerPage, apiUnreadOnly, {
+    ...queryOptions,
+    enabled: !isReadFilter || globalTotal > 0,
   } );
 
   const markAsRead = useMarkNotificationAsRead();
   const deleteNotification = useDeleteNotification();
 
-  const notifications = useMemo( () => response?.data?.notifications || [], [ response?.data?.notifications ] );
-  const unreadCount = response?.data?.unread_count || 0;
-  const totalCount = response?.data?.total || notifications.length;
-  const currentPage = response?.data?.page || page;
-  const currentPerPage = response?.data?.per_page || perPage;
+  const fetchedNotifications = useMemo( () => response?.data?.notifications || [], [ response?.data?.notifications ] );
+
+  const readNotifications = useMemo(
+    () => isReadFilter ? fetchedNotifications.filter( n => n.is_read ) : fetchedNotifications,
+    [ isReadFilter, fetchedNotifications ]
+  );
+
+  // Unread tab uses server-side filtering, so once a notification is marked
+  // read it disappears from the next refetch — meaning a click would make it
+  // vanish before the user could read it. Snapshot the page locally and apply
+  // mark-as-read to the snapshot so items stay put until the user leaves the
+  // tab. Refreshed when page or per-page changes; cleared on tab change.
+  const isUnreadFilter = filter === "unread";
+  const [ unreadCache, setUnreadCache ] = useState<{
+    key: string;
+    notifications: ModelsNotificationResponse[];
+    total: number;
+    page: number;
+    perPage: number;
+  } | null>( null );
+  const unreadCacheKey = `${ page }:${ perPage }`;
+
+  useEffect( () => {
+    if ( !isUnreadFilter ) {
+      if ( unreadCache !== null ) setUnreadCache( null );
+      return;
+    }
+    if ( !response?.data?.notifications ) return;
+    if ( unreadCache?.key === unreadCacheKey ) return;
+    setUnreadCache( {
+      key: unreadCacheKey,
+      notifications: response.data.notifications,
+      total: response.data.total ?? response.data.notifications.length,
+      page: response.data.page ?? page,
+      perPage: response.data.per_page ?? perPage,
+    } );
+  }, [ isUnreadFilter, unreadCacheKey, unreadCache, response, page, perPage ] );
+
+  const activeUnreadCache = isUnreadFilter && unreadCache?.key === unreadCacheKey ? unreadCache : null;
+
+  const totalCount = isReadFilter
+    ? readNotifications.length
+    : activeUnreadCache
+      ? activeUnreadCache.total
+      : ( response?.data?.total ?? 0 );
+  const currentPage = isReadFilter
+    ? page
+    : activeUnreadCache
+      ? activeUnreadCache.page
+      : ( response?.data?.page ?? page );
+  const currentPerPage = isReadFilter
+    ? perPage
+    : activeUnreadCache
+      ? activeUnreadCache.perPage
+      : ( response?.data?.per_page ?? perPage );
   const totalPages = Math.max( Math.ceil( totalCount / currentPerPage ), 1 );
   const startItem = totalCount === 0 ? 0 : ( currentPage - 1 ) * currentPerPage + 1;
   const endItem = totalCount === 0 ? 0 : Math.min( currentPage * currentPerPage, totalCount );
-  const readCount = Math.max( totalCount - unreadCount, 0 );
 
-  const filteredByStatus = useMemo( () => {
-    if ( filter === "unread" ) return notifications.filter( n => !n.is_read );
-    if ( filter === "read" ) return notifications.filter( n => n.is_read );
-    return notifications;
-  }, [ filter, notifications ] );
+  const pagedNotifications = useMemo( () => {
+    if ( isReadFilter ) {
+      const start = ( page - 1 ) * perPage;
+      return readNotifications.slice( start, start + perPage );
+    }
+    if ( activeUnreadCache ) return activeUnreadCache.notifications;
+    return readNotifications;
+  }, [ isReadFilter, activeUnreadCache, readNotifications, page, perPage ] );
 
   const filtered = useMemo( () => {
     const query = searchTerm.trim().toLowerCase();
-    if ( !query ) return filteredByStatus;
-    return filteredByStatus.filter( n => {
+    if ( !query ) return pagedNotifications;
+    return pagedNotifications.filter( n => {
       const title = n.title?.toLowerCase() ?? "";
       const message = n.message?.toLowerCase() ?? "";
       const eventType = n.event_type?.replace( /_/g, " " ).toLowerCase() ?? "";
       return title.includes( query ) || message.includes( query ) || eventType.includes( query );
     } );
-  }, [ filteredByStatus, searchTerm ] );
+  }, [ pagedNotifications, searchTerm ] );
 
   const selectedNotification = useMemo(
     () => filtered.find( n => n.id === selectedId ) ?? null,
@@ -90,8 +163,15 @@ export function NotificationsView() {
       setMobileDetailOpen( true );
     }
     if ( id === selectedId ) return;
-    const notification = notifications.find( n => n.id === id );
+    const notification = activeUnreadCache?.notifications.find( n => n.id === id )
+      ?? fetchedNotifications.find( n => n.id === id );
     if ( notification && !notification.is_read ) {
+      if ( isUnreadFilter ) {
+        setUnreadCache( prev => prev
+          ? { ...prev, notifications: prev.notifications.map( n => n.id === id ? { ...n, is_read: true } : n ) }
+          : prev
+        );
+      }
       markAsRead.mutate( id );
     }
   };
@@ -133,15 +213,15 @@ export function NotificationsView() {
               <TabsList variant="default" className="border w-full">
                 <TabsTrigger value="all" className="font-normal gap-1.5 flex-1">
                   { t( "tabs.all" ) }
-                  <Badge variant="outline" className="h-4 px-1 text-[10px]">{ totalCount }</Badge>
+                  <Badge variant="outline" className="h-4 px-1 text-[10px]">{ globalTotal }</Badge>
                 </TabsTrigger>
                 <TabsTrigger value="unread" className="font-normal gap-1.5 flex-1">
                   { t( "tabs.unread" ) }
-                  <Badge variant="outline" className="h-4 px-1 text-[10px]">{ unreadCount }</Badge>
+                  <Badge variant="outline" className="h-4 px-1 text-[10px]">{ globalUnread }</Badge>
                 </TabsTrigger>
                 <TabsTrigger value="read" className="font-normal gap-1.5 flex-1">
                   { t( "tabs.read" ) }
-                  <Badge variant="outline" className="h-4 px-1 text-[10px]">{ readCount }</Badge>
+                  <Badge variant="outline" className="h-4 px-1 text-[10px]">{ globalRead }</Badge>
                 </TabsTrigger>
               </TabsList>
             </Tabs>

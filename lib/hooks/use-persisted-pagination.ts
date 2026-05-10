@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import type { PaginationState, Updater } from '@tanstack/react-table';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { setPageSize } from '@/lib/redux/features/ui/uiSlice';
@@ -46,12 +46,12 @@ export function usePersistedPagination( pageKey: string, defaultPageSize: number
     }
   }, [ dispatch, pageKey, pagination.pageSize, persistedPageSize ] );
 
-  const setPagination = ( updater: Updater<PaginationState> ) => {
+  const setPagination = useCallback( ( updater: Updater<PaginationState> ) => {
     setInternalPagination( ( prev ) => {
       const next = typeof updater === 'function' ? updater( prev ) : updater;
       return next;
     } );
-  };
+  }, [] );
 
   return { pagination, setPagination };
 }

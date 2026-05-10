@@ -11,7 +11,7 @@ type Props = {
 
 export async function generateMetadata( { params }: Props ) {
   const { locale } = await params;
-  return generateSEO( locale, 'brands-faq' );
+  return generateSEO( locale, 'brands-faq', { pathname: '/brands-faq' } );
 }
 
 // Type for FAQ section data from translations

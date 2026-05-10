@@ -7,8 +7,13 @@ import { CareerOpportunities } from '@/components/career/CareerOpportunities';
 import { CareerWhy } from '@/components/career/CareerWhy';
 import { OurTeams } from '@/components/career/OurTeams';
 import { OurValues } from '@/components/career/OurValues';
+import type { OpenPosition } from '@/sanity/lib/careers';
 
-export function CareerPageClient() {
+type CareerPageClientProps = {
+  openPositions?: OpenPosition[];
+};
+
+export function CareerPageClient({ openPositions }: CareerPageClientProps) {
   return (
     <>
       <Header />
@@ -18,7 +23,7 @@ export function CareerPageClient() {
         <div className="career-page__spacer" />
         <OurTeams />
         <OurValues />
-        <CareerOpportunities />
+        <CareerOpportunities openPositions={ openPositions } />
         <div className="career-page__bottom-spacer">&nbsp;</div>
       </main>
       <Footer />

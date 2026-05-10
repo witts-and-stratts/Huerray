@@ -1,28 +1,28 @@
 "use client";
 
-import Link from 'next/link';
-import { useMemo } from 'react';
-import { ArrowUpRight, CirclePlus } from 'lucide-react';
 import { Button } from '@/components/dashboard-ui/button';
-import { SubHeader } from '@/components/subheader';
-import { useAuth } from '@/lib/auth/auth-context';
-import { useBrandGigs, useBrandProfile } from '@/lib/api/hooks/brands';
-import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
-import type { ModelsCampaignResponse, ModelsGigBrandResponse } from '@/lib/api/generated/models';
+import { RecentActivityBlock } from '@/components/dashboard/blocks/admin/recent-activity-block';
 import {
   BrandActionCenterBlock,
   BrandCampaignsRadialBlock,
   BrandGigsStatsBlock,
-  BrandNotificationsBlock,
   BrandProfileSnapshotBlock,
   BrandRecentApplicationsBlock,
   BrandRecentCampaignsBlock,
   BrandRecentSubmissionsBlock,
-  buildSummary,
+  buildSummary
 } from '@/components/dashboard/blocks/brand';
-import { RecentActivityBlock } from '@/components/dashboard/blocks/admin/recent-activity-block';
+import { SubHeader } from '@/components/subheader';
+import type { ModelsCampaignResponse, ModelsGigBrandResponse } from '@/lib/api/generated/models';
+import { useBrandGigs, useBrandProfile } from '@/lib/api/hooks/brands';
+import { useBrandCampaigns } from '@/lib/api/hooks/campaigns';
+import { useAuth } from '@/lib/auth/auth-context';
 import { useFormatCurrency } from '@/lib/hooks/format';
+import { ArrowUpRight, CirclePlus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useMemo } from 'react';
+import { StartCreatingUGCBanner } from './blocks/start-creating-ugc-banner';
 
 export function BrandDashboard() {
   const t = useTranslations( 'dashboard.brand.landing' );
@@ -51,6 +51,8 @@ export function BrandDashboard() {
   }, [ gigsResponse ] );
 
   const summary = useMemo( () => buildSummary( campaigns, gigs ), [ campaigns, gigs ] );
+
+  const showEmptyBanner = !isCampaignsLoading && campaigns.length === 0;
 
   const campaignStats = useMemo( () => [
     { label: tStats( 'total' ), value: `${ campaigns.length }`, numeric: campaigns.length },
@@ -93,15 +95,21 @@ export function BrandDashboard() {
           </div>
         </section>
 
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <BrandRecentCampaignsBlock campaigns={ campaigns } />
-          <BrandRecentSubmissionsBlock />
-        </section>
+        { showEmptyBanner ? (
+          <StartCreatingUGCBanner />
+        ) : (
+          <>
+            <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <BrandRecentCampaignsBlock campaigns={ campaigns } />
+              <BrandRecentSubmissionsBlock />
+            </section>
 
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <BrandRecentApplicationsBlock campaigns={ campaigns } />
-          <BrandGigsStatsBlock />
-        </section>
+            <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              <BrandRecentApplicationsBlock campaigns={ campaigns } />
+              <BrandGigsStatsBlock />
+            </section>
+          </>
+        ) }
 
         <section>
           <BrandActionCenterBlock />

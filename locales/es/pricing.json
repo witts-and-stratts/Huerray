@@ -119,5 +119,9 @@
   "cta": {
     "title": "¿Listo para tu primer vídeo UGC?",
     "buttonText": "Regístrese ahora"
+  },
+  "seo": {
+    "title": "Pague por el CGU, no por comisiones ocultas",
+    "description": "Cada dólar se destina a un CGU escalable y adaptado a la marca que genera resultados, no a tarifas de plataforma."
   }
 }

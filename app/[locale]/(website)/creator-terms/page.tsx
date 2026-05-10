@@ -13,7 +13,7 @@ type Props = {
 
 export async function generateMetadata( { params }: Props ) {
   const { locale } = await params;
-  return generateSEO( locale, 'creator-terms' );
+  return generateSEO( locale, 'creator-terms', { pathname: '/creator-terms' } );
 }
 
 export default async function CreatorTerms( { params }: Props ) {

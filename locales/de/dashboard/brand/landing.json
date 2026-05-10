@@ -4,6 +4,11 @@
     "description": "Kampagnenleistung und operative Ansicht für Ihr Markenkonto",
     "createCampaign": "Kampagne erstellen",
     "viewCampaigns": "Kampagnen ansehen",
+    "emptyBanner": {
+      "title": "Starte UGC mit den besten Creator:innen, die zu deiner Marke passen.",
+      "subtitle": "Starte deine erste Kampagne und verbinde dich mit authentischen Creator:innen, die deine Marke zum Leben erwecken.",
+      "cta": "Erste Kampagne erstellen"
+    },
     "analytics": {
       "title": "Markenanalytik",
       "description": "Leistungsmetriken für Ihr Markenkonto",

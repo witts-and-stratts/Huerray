@@ -21,7 +21,7 @@ export default function BrandsPage() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, setPagination ] );
+  }, [ deferredSearchValue ] );
 
   const { data, isLoading, isFetching, error } = useBrands( {
     page: pagination.pageIndex + 1,

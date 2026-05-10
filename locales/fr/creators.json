@@ -119,5 +119,9 @@
       "question": "Comment sont déterminées les correspondances entre les marques ?",
       "answer": "Notre algorithme de correspondance prend en compte le style de votre contenu, les données démographiques de votre public, les taux d'engagement et les préférences de votre marque pour vous suggérer les meilleures collaborations."
     }
+  },
+  "seo": {
+    "title": "Être payé pour faire ce que l'on aime",
+    "description": "Travaillez avec des marques et des entreprises réelles. Commencez à gagner de l'argent pour ce que vous aimez."
   }
 }

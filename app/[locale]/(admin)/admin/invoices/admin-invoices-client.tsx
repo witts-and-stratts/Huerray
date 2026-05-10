@@ -18,7 +18,7 @@ export function AdminInvoicesClient() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, setPagination ] );
+  }, [ deferredSearchValue ] );
 
   const { data, isLoading, isFetching, error, refetch } = useInvoices( {
     page: pagination.pageIndex + 1,

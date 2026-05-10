@@ -175,6 +175,7 @@ export const blogType = defineType({
     defineField({
       name: 'body',
       title: 'Body',
+      description: 'Compose the article with text, images, videos, social embeds, callouts, and CTAs.',
       type: 'localizedBlockContent',
       group: 'content',
       fieldset: 'content',

@@ -119,5 +119,9 @@
   "cta": {
     "title": "Sind Sie bereit für Ihr erstes UGC-Video?",
     "buttonText": "Jetzt anmelden"
+  },
+  "seo": {
+    "title": "Bezahlen Sie für UGC, nicht für versteckte Gebühren",
+    "description": "Ihr Budget fließt direkt in hochwertigen UGC, nicht in versteckte Plattformkosten"
   }
 }

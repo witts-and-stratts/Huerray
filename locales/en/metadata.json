@@ -79,6 +79,18 @@
     "forCreators": "For Creators",
     "careers": "Careers",
     "pricing": "Pricing",
-    "managedServices": "Managed Services"
+    "managedServices": "Managed Services",
+    "blog": "Blog",
+    "blogDescription": "Ideas, creator marketing insights, and platform updates from Huerray.",
+    "blogFeatured": "Featured article",
+    "blogLatest": "Latest articles",
+    "blogReadMore": "Read more",
+    "blogNoPosts": "No blog posts are live yet. Check back soon.",
+    "blogRelated": "Related articles",
+    "blogBack": "Back to blog",
+    "blogPublished": "Published",
+    "blogBy": "By",
+    "blogReadTime": "min read",
+    "blogUpdated": "Updated"
   }
 }

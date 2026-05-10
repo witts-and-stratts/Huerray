@@ -12,6 +12,7 @@
     "title": "Opportunités ouvertes",
     "subtitle": "Si vous avez un cerveau actif, des idées intéressantes et une bonne âme, nous aimerions vous entendre.",
     "button": "En savoir plus",
+    "applyButton": "Postuler maintenant",
     "jobs": [
       {
         "category": "Produit, conception et données",
@@ -94,5 +95,9 @@
     "description1": "Que vous soyez dans le marketing, la technologie, le design, le développement d'entreprise ou la communauté. Huerray est un espace pour les personnes qui aiment les idées, qui croient en la créativité dans un but précis et qui veulent apporter un réel changement. Que vous ayez une formation en marketing, en technologie, en design, en développement d'entreprise ou en communauté. Nous nous soucions moins des titres que de qui vous êtes, de ce que vous représentez et de l'énergie que vous apportez. Nous sommes en pleine croissance, de manière organique, intentionnelle et ciblée.",
     "description2": "Nous sommes toujours prêts à rencontrer des personnes qui partagent notre vision et veulent contribuer à la façonner.",
     "imageAlt": "Pourquoi Huerray"
+  },
+  "seo": {
+    "title": "Rejoignez un mouvement qui fait avancer la culture créative",
+    "description": "Nous réunissons la culture, la créativité et la technologie pour donner aux créateurs et aux voix sous-représentées de la région DACH la visibilité qu'ils méritent. Et en coulisses, nous vivons ce que nous défendons : la diversité, l'ouverture, le courage et une véritable collaboration."
   }
 }

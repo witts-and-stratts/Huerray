@@ -18,7 +18,7 @@ export function AdminPaymentsClient() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, setPagination ] );
+  }, [ deferredSearchValue ] );
 
   const { data, isLoading, isFetching, error, refetch } = usePayments( {
     page: pagination.pageIndex + 1,

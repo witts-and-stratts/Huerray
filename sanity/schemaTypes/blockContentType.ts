@@ -1,4 +1,4 @@
-import {defineType, defineArrayMember} from 'sanity'
+import {defineType, defineArrayMember, defineField} from 'sanity'
 import {ImageIcon} from '@sanity/icons'
 
 /**
@@ -29,9 +29,13 @@ export const blockContentType = defineType({
         {title: 'H2', value: 'h2'},
         {title: 'H3', value: 'h3'},
         {title: 'H4', value: 'h4'},
+        {title: 'H5', value: 'h5'},
         {title: 'Quote', value: 'blockquote'},
       ],
-      lists: [{title: 'Bullet', value: 'bullet'}],
+      lists: [
+        {title: 'Bullet', value: 'bullet'},
+        {title: 'Numbered', value: 'number'},
+      ],
       // Marks let you mark up inline text in the Portable Text Editor
       marks: {
         // Decorators usually describe a single property – e.g. a typographic
@@ -47,11 +51,21 @@ export const blockContentType = defineType({
             name: 'link',
             type: 'object',
             fields: [
-              {
+              defineField({
                 title: 'URL',
                 name: 'href',
                 type: 'url',
-              },
+                validation: (rule) =>
+                  rule.uri({
+                    scheme: ['http', 'https'],
+                  }),
+              }),
+              defineField({
+                title: 'Open in new tab',
+                name: 'blank',
+                type: 'boolean',
+                initialValue: true,
+              }),
             ],
           },
         ],
@@ -65,12 +79,41 @@ export const blockContentType = defineType({
       icon: ImageIcon,
       options: {hotspot: true},
       fields: [
-        {
+        defineField({
           name: 'alt',
           type: 'string',
           title: 'Alternative Text',
-        }
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        }),
+        defineField({
+          name: 'credit',
+          type: 'string',
+          title: 'Credit',
+        }),
       ]
+    }),
+    defineArrayMember({
+      type: 'blogVideoEmbed',
+    }),
+    defineArrayMember({
+      type: 'blogSocialEmbed',
+    }),
+    defineArrayMember({
+      type: 'blogCallout',
+    }),
+    defineArrayMember({
+      type: 'blogCta',
+    }),
+    defineArrayMember({
+      type: 'blogCodeBlock',
+    }),
+    defineArrayMember({
+      type: 'blogSeparator',
     }),
   ],
 })

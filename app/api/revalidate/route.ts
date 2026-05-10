@@ -58,6 +58,8 @@ function getTagsForPayload(body: WebhookPayloadWithType): string[] {
       return ['helpCenter', `helpCenter:${body.audience ?? 'admin'}`]
     case 'helpTopic':
       return ['helpCenter', `helpCenter:${body.audience ?? 'admin'}`]
+    case 'openPosition':
+      return ['openPosition']
     case 'category':
       return ['category', 'faq', ...ALL_AUDIENCES.map((audience) => `faq:${audience}`)]
     default:

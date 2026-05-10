@@ -79,6 +79,18 @@
     "forCreators": "Für Creators",
     "careers": "Karriere",
     "pricing": "Preise",
-    "managedServices": "Verwaltete Dienste"
+    "managedServices": "Verwaltete Dienste",
+    "blog": "Blog",
+    "blogDescription": "Ideen, Einblicke in Creator-Marketing und Plattform-Updates von Huerray.",
+    "blogFeatured": "Ausgewählter Artikel",
+    "blogLatest": "Neueste Artikel",
+    "blogReadMore": "Weiterlesen",
+    "blogNoPosts": "Noch sind keine Blogbeiträge online. Schau bald wieder vorbei.",
+    "blogRelated": "Ähnliche Artikel",
+    "blogBack": "Zurück zum Blog",
+    "blogPublished": "Veröffentlicht",
+    "blogBy": "Von",
+    "blogReadTime": "Min. Lesezeit",
+    "blogUpdated": "Aktualisiert"
   }
 }

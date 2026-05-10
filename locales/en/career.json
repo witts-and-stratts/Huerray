@@ -12,6 +12,7 @@
     "title": "Open Opportunities",
     "subtitle": "If you're the owner of an active brain, interesting thoughts, and a good soul, we would like to hear from you.",
     "button": "Learn More",
+    "applyButton": "Apply Now",
     "jobs": [
       {
         "category": "Product, Design & Data",
@@ -94,5 +95,9 @@
     "description1": "Whether your background is in marketing, tech, design, business development, or community. Huerray is a space for people who love ideas, who believe in creativity with purpose, and who want to make real change happen. whether your background is in marketing, tech, design, business development, or community. We care less about titles and more about who you are, what you stand for, and the energy you bring. We're growing, organically, intentionally, and with purpose.",
     "description2": "We're always open to meeting people who share our vision and want to help shape it.",
     "imageAlt": "Why Huerray"
+  },
+  "seo": {
+    "title": "Join a movement moving creative culture forward",
+    "description": "We bring together culture, creativity, and technology to give creatives and underrepresented voices across the DACH region the visibility they deserve. And behind the scenes, we live what we stand for: diversity, openness, courage, and true collaboration."
   }
 }

@@ -4,6 +4,11 @@
     "description": "Campaign performance and operational view for your brand account",
     "createCampaign": "Create Campaign",
     "viewCampaigns": "View Campaigns",
+    "emptyBanner": {
+      "title": "Start Creating UGC with the best creators that match your brand.",
+      "subtitle": "Launch your first campaign and connect with authentic creators ready to bring your brand to life.",
+      "cta": "Create your first campaign"
+    },
     "analytics": {
       "title": "Brand Analytics",
       "description": "Performance metrics for your brand account",

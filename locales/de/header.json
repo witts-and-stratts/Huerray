@@ -2,7 +2,8 @@
   "nav": {
     "forCreators": "Für Creators",
     "forBrands": "Für Marken",
-    "pricing": "Preise"
+    "pricing": "Preise",
+    "blog": "Blog"
   },
   "userMenu": {
     "login": "Anmeldung",

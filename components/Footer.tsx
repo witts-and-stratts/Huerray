@@ -32,6 +32,7 @@ export function Footer( { className }: { className?: string; } ) {
     ],
     platform: [
       { label: t( 'links.aboutHuerray' ), href: '/about' },
+      { label: t( 'links.blog' ), href: '/blog' },
       { label: 'Careers', href: '/careers' },
       { label: t( 'links.siteNotice' ), href: 'site-notice' },
       { label: t( 'links.privacyPolicy' ), href: '/privacy-policy' },

@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
 import { PricingPageClient } from '@/components/PricingPageClient';
+import generateSEO from '@/components/seo/SEO';
+import type { Locale } from '@/i18n';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations( 'metadata' );
-  return {
-    title: `${ t( 'website.pricing' ) } - Huerray`,
-  };
+type Props = {
+  params: Promise<{ locale: Locale }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return generateSEO(locale, 'pricing', { pathname: '/pricing' });
 }
 
 export default function PricingPage() {

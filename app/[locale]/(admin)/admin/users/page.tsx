@@ -24,7 +24,7 @@ export default function UsersPage() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, setPagination ] );
+  }, [ deferredSearchValue ] );
 
   const { data: response, isLoading, isFetching, error } = useUsers( {
     page: pagination.pageIndex + 1,

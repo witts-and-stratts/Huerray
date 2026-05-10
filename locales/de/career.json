@@ -12,6 +12,7 @@
     "title": "Offene Gelegenheiten",
     "subtitle": "Wenn Sie ein aktives Gehirn, interessante Gedanken und eine gute Seele haben, würden wir gerne von Ihnen hören.",
     "button": "Mehr erfahren",
+    "applyButton": "Jetzt bewerben",
     "jobs": [
       {
         "category": "Produkt, Design & Daten",
@@ -94,5 +95,9 @@
     "description1": "Egal, ob Sie aus dem Marketing, der Technik, dem Design, der Geschäftsentwicklung oder der Gemeinschaft kommen. Huerray ist ein Ort für Menschen, die Ideen lieben, die an Kreativität mit Sinn glauben und die echte Veränderungen herbeiführen wollen, ganz gleich, ob Ihr Hintergrund im Marketing, in der Technik, im Design, in der Geschäftsentwicklung oder im Gemeinwesen liegt. Uns geht es weniger um Titel als vielmehr darum, wer du bist, wofür du stehst und welche Energie du mitbringst. Wir wachsen, organisch, absichtlich und mit Absicht.",
     "description2": "Wir sind immer offen für Menschen, die unsere Vision teilen und sie mitgestalten wollen.",
     "imageAlt": "Warum Huerray"
+  },
+  "seo": {
+    "title": "Schließen Sie sich einer Bewegung an, die die kreative Kultur voranbringt",
+    "description": "Wir bringen Kultur, Kreativität und Technologie zusammen, um Kreativen und unterrepräsentierten Stimmen in der DACH-Region die Sichtbarkeit zu geben, die sie verdienen. Und hinter den Kulissen leben wir das, wofür wir stehen: Vielfalt, Offenheit, Mut und echte Zusammenarbeit."
   }
 }

@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 
+import { dataset, projectId } from './sanity/env';
+
 const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://backend.huerray.de/api/v1';
@@ -13,6 +15,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: apiHostname,
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: `/images/${projectId}/${dataset}/**`,
       },
     ],
   },

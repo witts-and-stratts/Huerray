@@ -41,8 +41,72 @@
   @apply font-secondary text-slate-600 font-light;
 }
 
+.career-opportunity-card__description {
+  @apply mt-4 font-secondary text-sm leading-[1.6] text-slate-700 whitespace-normal;
+}
+
 .career-opportunity-card__button {
   @apply shrink-0 rounded-full px-8! py-2! text-base font-medium min-w-50 scale-75 max-md:-translate-x-[15%] md:translate-x-[15%];
+}
+
+.career-opportunity-dialog__content {
+  @apply overflow-hidden p-0 gap-0;
+}
+
+.career-opportunity-dialog__header {
+  @apply px-6 pt-6 pb-4 border-b border-slate-200 bg-white/90;
+}
+
+.career-opportunity-dialog__title {
+  @apply text-h3 text-left;
+}
+
+.career-opportunity-dialog__meta {
+  @apply text-sm text-slate-600 flex items-center gap-2;
+}
+
+.career-opportunity-dialog__meta-divider {
+  @apply text-slate-400;
+}
+
+.career-opportunity-dialog__body {
+  @apply px-6 py-5 overflow-y-auto;
+}
+
+.career-opportunity-dialog__paragraph {
+  @apply mb-4 last:mb-0 text-base leading-7 text-slate-700;
+}
+
+.career-opportunity-dialog__heading {
+  @apply text-h5 font-secondary font-bold text-black mt-6 mb-3 first:mt-0;
+}
+
+.career-opportunity-dialog__subheading {
+  @apply text-h6 font-secondary font-bold text-black mt-5 mb-2 first:mt-0;
+}
+
+.career-opportunity-dialog__quote {
+  @apply border-l-4 border-burgundy-300 pl-4 italic text-slate-700 my-4;
+}
+
+.career-opportunity-dialog__list {
+  @apply my-4 pl-6 space-y-2;
+}
+
+.career-opportunity-dialog__list--bullet {
+  @apply list-disc;
+}
+
+.career-opportunity-dialog__list--number {
+  @apply list-decimal;
+}
+
+.career-opportunity-dialog__list-item {
+  @apply text-base leading-7 text-slate-700;
+}
+
+.career-opportunity-dialog__footer {
+  @apply px-6 pb-6 pt-4 border-t border-slate-200 bg-white/90;
 }
 
 /* Career page layout */

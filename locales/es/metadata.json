@@ -79,6 +79,18 @@
     "forCreators": "Para creadores",
     "careers": "Carreras profesionales",
     "pricing": "Precios",
-    "managedServices": "Servicios gestionados"
+    "managedServices": "Servicios gestionados",
+    "blog": "Blog",
+    "blogDescription": "Ideas, información sobre marketing de creadores y novedades de la plataforma de Huerray.",
+    "blogFeatured": "Artículo destacado",
+    "blogLatest": "Últimos artículos",
+    "blogReadMore": "Leer más",
+    "blogNoPosts": "Aún no hay entradas publicadas. Vuelve pronto.",
+    "blogRelated": "Artículos relacionados",
+    "blogBack": "Volver al blog",
+    "blogPublished": "Publicado",
+    "blogBy": "Por",
+    "blogReadTime": "min de lectura",
+    "blogUpdated": "Actualizado"
   }
 }

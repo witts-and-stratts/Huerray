@@ -4,6 +4,11 @@
     "description": "Performance de la campagne et vue opérationnelle pour le compte de votre marque",
     "createCampaign": "Créer une campagne",
     "viewCampaigns": "Voir les campagnes",
+    "emptyBanner": {
+      "title": "Lancez-vous dans l'UGC avec les meilleurs créateurs qui correspondent à votre marque.",
+      "subtitle": "Lancez votre première campagne et connectez-vous avec des créateurs authentiques prêts à donner vie à votre marque.",
+      "cta": "Créer votre première campagne"
+    },
     "analytics": {
       "title": "Analyse de la marque",
       "description": "Mesures de performance pour votre compte de marque",

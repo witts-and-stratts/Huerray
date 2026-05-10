@@ -119,5 +119,9 @@
   "cta": {
     "title": "Ready for your first UGC video?",
     "buttonText": "Register now"
+  },
+  "seo": {
+    "title": "Pay for UGC, not hidden fees",
+    "description": "Every dollar goes toward a scalable, on-brand UGC that drives results, not platform fees"
   }
 }

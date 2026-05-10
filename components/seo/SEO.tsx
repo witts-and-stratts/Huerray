@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
+import { locales } from '@/i18n';
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.com';
 const DEV_URL = 'http://localhost:3000';
 const SITE_NAME = 'Huerray';
@@ -16,11 +18,28 @@ interface SeoProps {
   imageHeight?: number;
   url?: string;
   lang?: string;
+  pathname?: string;
+  canonical?: string;
+  noIndex?: boolean;
 }
 
 const baseUrl =
   process.env.NODE_ENV === 'development' ? DEV_URL : SITE_URL;
 const defaultImageUrl = `${ baseUrl }/images/og-image.png`;
+
+function normalizeText(value?: string): string | undefined {
+  if (!value) return undefined;
+  const normalized = value.replace( /\s+/g, ' ' ).trim();
+  return normalized || undefined;
+}
+
+function toLocalizedPath(locale: string, pathname?: string): string {
+  if (!pathname || pathname === '/' ) {
+    return `/${ locale }`;
+  }
+
+  return `/${ locale }${ pathname.startsWith( '/' ) ? pathname : `/${ pathname }` }`;
+}
 
 /**
  * Generate SEO metadata for a page using translations
@@ -35,17 +54,45 @@ export default async function generateSEO(
 ): Promise<Metadata> {
   const t = await getTranslations( { locale: lang, namespace } );
 
-  // Try to get SEO data from translations, fallback to defaults
-  const title = overrides?.title || ( t.has( 'seo.title' ) ? t( 'seo.title' ) : SITE_NAME );
-  const description = overrides?.description || ( t.has( 'seo.description' ) ? t( 'seo.description' ) : '' );
-  const keywords = overrides?.keywords || ( t.has( 'seo.keywords' ) ? t( 'seo.keywords' ).split( ',' ).map( k => k.trim() ) : [] );
+  const seo = t.has( 'seo' ) ? t.raw( 'seo' ) as { title?: string; description?: string; keywords?: string; } : undefined;
+  const pageTitle =
+    overrides?.title ||
+    normalizeText( seo?.title ) ||
+    normalizeText( t.has( 'page.title' ) ? t( 'page.title' ) : undefined ) ||
+    normalizeText( t.has( 'hero.title' ) ? t( 'hero.title' ) : undefined ) ||
+    normalizeText( t.has( 'title' ) ? t( 'title' ) : undefined ) ||
+    SITE_NAME;
+  const description =
+    overrides?.description ||
+    normalizeText( seo?.description ) ||
+    normalizeText( t.has( 'page.subtitle' ) ? t( 'page.subtitle' ) : undefined ) ||
+    normalizeText( t.has( 'hero.subtitle' ) ? t( 'hero.subtitle' ) : undefined ) ||
+    normalizeText( t.has( 'subtitle' ) ? t( 'subtitle' ) : undefined ) ||
+    normalizeText( t.has( 'hero.description' ) ? t( 'hero.description' ) : undefined ) ||
+    '';
+  const keywords =
+    overrides?.keywords ||
+    ( seo?.keywords ? seo.keywords.split( ',' ).map( ( keyword ) => keyword.trim() ).filter( Boolean ) : [] );
 
   const imageUrl = overrides?.imageUrl || defaultImageUrl;
   const imageWidth = overrides?.imageWidth || 1200;
   const imageHeight = overrides?.imageHeight || 630;
-  const url = overrides?.url || baseUrl;
+  const pathname = overrides?.pathname;
+  const url = overrides?.canonical || overrides?.url || ( pathname ? `${ baseUrl }${ toLocalizedPath( lang, pathname ) }` : baseUrl );
 
-  const fullTitle = title === SITE_NAME ? title : `${ title } | ${ SITE_NAME }`;
+  const fullTitle = pageTitle === SITE_NAME ? pageTitle : `${ pageTitle } | ${ SITE_NAME }`;
+  const locale = locales.includes( lang as (typeof locales)[number] ) ? lang : 'en';
+  const alternates = pathname
+    ? {
+        canonical: overrides?.canonical || `${ baseUrl }${ toLocalizedPath( locale, pathname ) }`,
+        languages: Object.fromEntries(
+          locales.map( ( localeKey ) => [
+            localeKey,
+            `${ baseUrl }${ toLocalizedPath( localeKey, pathname ) }`,
+          ] ),
+        ),
+      }
+    : undefined;
 
   const jsonLdScript = {
     __html: JSON.stringify( {
@@ -67,6 +114,7 @@ export default async function generateSEO(
     metadataBase: new URL( SITE_URL ),
     title: fullTitle,
     description: description,
+    alternates,
     applicationName: SITE_NAME,
     icons: {
       icon: `${ baseUrl }/favicon.ico`,
@@ -100,7 +148,7 @@ export default async function generateSEO(
         },
       ],
       siteName: SITE_NAME,
-      locale: lang === 'en' ? 'en_US' : `${ lang }_${ lang.toUpperCase() }`,
+      locale: locale === 'en' ? 'en_US' : `${ locale }_${ locale.toUpperCase() }`,
     },
     other: {
       jsonld: jsonLdScript.__html,
@@ -126,6 +174,6 @@ export default async function generateSEO(
       { name: SITE_NAME, url: SITE_URL },
     ],
     keywords: keywords,
-    robots: 'index, follow',
+    robots: overrides?.noIndex ? { index: false, follow: false } : 'index, follow',
   };
 }

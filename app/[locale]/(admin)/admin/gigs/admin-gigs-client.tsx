@@ -18,7 +18,7 @@ export function AdminGigsClient() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, setPagination ] );
+  }, [ deferredSearchValue ] );
 
   const { data: gigsData, isLoading, isFetching, error, refetch } = useGigs( {
     page: pagination.pageIndex + 1,

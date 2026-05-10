@@ -22,7 +22,7 @@ export default function CampaignsPage() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, setPagination ] );
+  }, [ deferredSearchValue ] );
 
   const { data: response, isLoading, isFetching, error } = useCampaigns( {
     page: pagination.pageIndex + 1,

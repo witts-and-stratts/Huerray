@@ -2,7 +2,8 @@
   "nav": {
     "forCreators": "For Creators",
     "forBrands": "For Brands",
-    "pricing": "Pricing"
+    "pricing": "Pricing",
+    "blog": "Blog"
   },
   "userMenu": {
     "login": "Login",
