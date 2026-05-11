@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack --port 3000",
-    "build": "next build",
+    "build": "dotenvx run -f .env.${ENVIRONMENT} -- next build",
     "start": "next start --port 3000",
     "lint": "eslint",
     "test": "playwright test",
@@ -99,6 +99,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/redux-persist": "^4.3.1",
+    "@dotenvx/dotenvx": "^1.48.2",
     "baseline-browser-mapping": "^2.9.19",
     "eslint": "^9",
     "eslint-config-next": "16.2.1",

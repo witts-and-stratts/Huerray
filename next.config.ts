@@ -9,6 +9,7 @@ const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://backend.huer
 const apiHostname = new URL(apiBaseUrl).hostname;
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   /* config options here */
   images: {
     remotePatterns: [
@@ -26,10 +27,10 @@ const nextConfig: NextConfig = {
   experimental: {
     // turbopackFileSystemCacheForDev: true,
   },
-  allowedDevOrigins: [ 'dev.huerray.de' ],
+  allowedDevOrigins: ['dev.huerray.de'],
   turbopack: {
     root: process.cwd(),
-  }
+  },
 };
 
 export default withNextIntl(nextConfig);
