@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .career-opportunities {
   @apply py-20 px-4 relative overflow-hidden;
 }
@@ -50,11 +52,11 @@
 }
 
 .career-opportunity-dialog__content {
-  @apply overflow-hidden p-0 gap-0;
+  @apply overflow-hidden p-0 gap-0 h-[calc(100vh-4rem)] md:h-[calc(100vh-8rem)] flex flex-col;
 }
 
 .career-opportunity-dialog__header {
-  @apply px-6 pt-6 pb-4 border-b border-slate-200 bg-white/90;
+  @apply px-6 pt-6 pb-4 border-b border-slate-200 bg-white/90 font-primary leading-none;
 }
 
 .career-opportunity-dialog__title {
@@ -70,7 +72,7 @@
 }
 
 .career-opportunity-dialog__body {
-  @apply px-6 py-5 overflow-y-auto;
+  @apply px-6 py-5 overflow-y-auto flex-1 min-h-0;
 }
 
 .career-opportunity-dialog__paragraph {

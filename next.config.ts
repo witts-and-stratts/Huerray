@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
   experimental: {
     // turbopackFileSystemCacheForDev: true,
   },
-  allowedDevOrigins: ['dev.huerray.de'],
+  allowedDevOrigins: ['dev.huerray.de', 'stellar.huerray.de', 'huerray.de'],
   turbopack: {
     root: process.cwd(),
   },

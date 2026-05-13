@@ -8,15 +8,20 @@ import Link from 'next/link';
 
 // Creator images for Hero section
 const heroColumn1Images = [
-  '/images/creators/creator-1.webp',
-  '/images/creators/creator-2.webp',
-  '/images/creators/creator-3.webp',
+  '/images/creators/hero-creator-7.webp',
+  '/images/creators/hero-creator-12.webp',
+  '/images/creators/hero-creator-15.webp',
+  '/images/creators/hero-creator-19.webp',
+  '/images/creators/hero-creator-9.webp',
 ];
 
 const heroColumn2Images = [
-  '/images/creators/creator-4.webp',
-  '/images/creators/creator-5.webp',
-  '/images/creators/creator-6.webp',
+  '/images/creators/hero-creator-13.webp',
+  '/images/creators/hero-creator-2.webp',
+  '/images/creators/hero-creator-3.webp',
+  '/images/creators/hero-creator-4.webp',
+  '/images/creators/hero-creator-17.webp',
+  '/images/creators/hero-creator-8.webp',
 ];
 
 export function Hero() {
@@ -41,7 +46,7 @@ export function Hero() {
           </div>
 
           {/* Hero Image Grid - Horizontal rows on mobile, vertical columns on desktop */ }
-          <div className='hero__image-grid' style={{ pointerEvents: 'none' }}>
+          <div className='hero__image-grid' style={ { pointerEvents: 'none' } }>
             {/* Column/Row 1 - Horizontal on mobile, Vertical up on desktop */ }
             <div className='hero__carousel'>
               <div className='hero__carousel-track hero__carousel-track--scroll-1 pointer-events-none'>

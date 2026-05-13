@@ -323,6 +323,7 @@ export function SearchDialog( { open, onOpenChange }: SearchDialogProps ) {
                         animate={ { opacity: 1, y: 0 } }
                         exit={ { opacity: 0, y: -3 } }
                         transition={ { duration: 0.14, ease: 'easeOut' } }
+                        layout
                       >
                         <p className="text-sm font-medium text-foreground">{ t( 'search.description' ) }</p>
                         <p className="mt-1 text-xs text-muted-foreground uppercase tracking-wider text-[10px]">
