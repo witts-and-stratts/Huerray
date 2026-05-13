@@ -62,8 +62,8 @@ export function CareerOpportunityDialog( { open, onOpenChange, opportunity }: Ca
   if ( !opportunity ) return null;
 
   const title = getLocalizedValue( opportunity.title, locale, t( 'title' ) );
-  const category = getLocalizedValue( opportunity.department, locale, '' );
-  const location = getLocalizedValue( opportunity.location, locale, '' );
+  const category = getLocalizedValue<string>( opportunity.department, locale, '' );
+  const location = getLocalizedValue<string>( opportunity.location, locale, '' );
   const body = getPortableTextValue( opportunity.body, locale );
   const applyButton = t( 'applyButton' );
 
