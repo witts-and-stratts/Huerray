@@ -100,8 +100,10 @@ export const getColumns = ( { onViewDetails, t, tc }: GetColumnsProps & { t: any
       cell: () => null,
       filterFn: ( row, _id, filterValue ) => {
         if ( !Array.isArray( filterValue ) || filterValue.length === 0 ) return true;
-        const rowValue = ( row.original.user_type ?? '' ).toLowerCase();
-        return filterValue.some( ( v: string ) => v.toLowerCase() === rowValue );
+        const normalizeUserType = ( value: string ) =>
+          value.toLowerCase() === 'admin_user' ? 'admin' : value.toLowerCase();
+        const rowValue = normalizeUserType( row.original.user_type ?? '' );
+        return filterValue.some( ( v: string ) => normalizeUserType( v ) === rowValue );
       },
     },
     {

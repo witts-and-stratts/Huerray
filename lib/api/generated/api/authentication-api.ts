@@ -43,6 +43,8 @@ import type { ModelsStandardAuthResponse } from '../models';
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardGenericResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardResponseMapStringString } from '../models';
 /**
  * AuthenticationApi - axios parameter creator
  */
@@ -324,6 +326,43 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
+         * Returns the active email verification token for a user email. This endpoint is intended only for automated tests and is only available in development.
+         * @summary Get verification token for tests (dev only)
+         * @param {string} email User email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authTestVerificationTokenGet: async (email: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'email' is not null or undefined
+            assertParamExists('authTestVerificationTokenGet', 'email', email)
+            const localVarPath = `/auth/test/verification-token`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Verify user email using token
          * @summary Verify email
          * @param {ModelsEmailVerificationRequest} request Email verification request
@@ -471,6 +510,19 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the active email verification token for a user email. This endpoint is intended only for automated tests and is only available in development.
+         * @summary Get verification token for tests (dev only)
+         * @param {string} email User email
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authTestVerificationTokenGet(email: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardResponseMapStringString>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authTestVerificationTokenGet(email, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthenticationApi.authTestVerificationTokenGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Verify user email using token
          * @summary Verify email
          * @param {ModelsEmailVerificationRequest} request Email verification request
@@ -572,6 +624,16 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.authResendVerificationPost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the active email verification token for a user email. This endpoint is intended only for automated tests and is only available in development.
+         * @summary Get verification token for tests (dev only)
+         * @param {AuthenticationApiAuthTestVerificationTokenGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authTestVerificationTokenGet(requestParameters: AuthenticationApiAuthTestVerificationTokenGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardResponseMapStringString> {
+            return localVarFp.authTestVerificationTokenGet(requestParameters.email, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Verify user email using token
          * @summary Verify email
          * @param {AuthenticationApiAuthVerifyEmailPostRequest} requestParameters Request parameters.
@@ -652,6 +714,16 @@ export interface AuthenticationApiAuthResendVerificationPostRequest {
      * Resend email verification request
      */
     readonly request: ModelsResendVerificationRequest
+}
+
+/**
+ * Request parameters for authTestVerificationTokenGet operation in AuthenticationApi.
+ */
+export interface AuthenticationApiAuthTestVerificationTokenGetRequest {
+    /**
+     * User email
+     */
+    readonly email: string
 }
 
 /**
@@ -753,6 +825,17 @@ export class AuthenticationApi extends BaseAPI {
      */
     public authResendVerificationPost(requestParameters: AuthenticationApiAuthResendVerificationPostRequest, options?: RawAxiosRequestConfig) {
         return AuthenticationApiFp(this.configuration).authResendVerificationPost(requestParameters.request, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the active email verification token for a user email. This endpoint is intended only for automated tests and is only available in development.
+     * @summary Get verification token for tests (dev only)
+     * @param {AuthenticationApiAuthTestVerificationTokenGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public authTestVerificationTokenGet(requestParameters: AuthenticationApiAuthTestVerificationTokenGetRequest, options?: RawAxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).authTestVerificationTokenGet(requestParameters.email, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

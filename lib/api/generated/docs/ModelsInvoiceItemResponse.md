@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **gig_title** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **invoice_id** | **string** |  | [optional] [default to undefined]
+**number_of_videos** | **number** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -27,6 +28,7 @@ const instance: ModelsInvoiceItemResponse = {
     gig_title,
     id,
     invoice_id,
+    number_of_videos,
     updated_at,
 };
 ```

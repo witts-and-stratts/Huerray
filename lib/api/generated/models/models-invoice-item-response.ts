@@ -25,6 +25,7 @@ export interface ModelsInvoiceItemResponse {
     'gig_title'?: string;
     'id'?: string;
     'invoice_id'?: string;
+    'number_of_videos'?: number;
     'updated_at'?: string;
 }
 

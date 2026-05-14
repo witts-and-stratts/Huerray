@@ -59,6 +59,7 @@ interface UsersTableProps {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
+  onUserTypeChange?: ( value: string | undefined ) => void;
   isSearchPending?: boolean;
 }
 
@@ -71,6 +72,7 @@ export function UsersTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   onSearchChange,
+  onUserTypeChange,
   isSearchPending = false,
 }: UsersTableProps ) {
   const isNotFoundError = isApiNotFoundError( error );
@@ -98,7 +100,11 @@ export function UsersTable( {
   const globalFilter = internalGlobalFilter;
   const hasActiveSearch = globalFilter.trim().length > 0;
   const hasCommittedSearch = committedSearchValue.trim().length > 0;
-  const showTableControls = sourceUsers.length > 0 || hasActiveSearch || hasSearched || hasCommittedSearch || isSearchPending;
+  const hasActiveColumnFilters = columnFilters.length > 0;
+  const hasActiveUserTypeFilter = columnFilters.some( ( filter ) => filter.id === 'user_type_filter' );
+  const showTableControls = sourceUsers.length > 0 || hasActiveSearch || hasActiveColumnFilters || hasSearched || hasCommittedSearch || isSearchPending;
+  const showBackgroundLoadingOverlay = showContentLoading && !hasActiveSearch && !hasActiveColumnFilters;
+  const isFilteringAvailableUsers = isFetching && hasActiveUserTypeFilter;
   const setGlobalFilter = React.useCallback( ( updater: Updater<string> ) => {
     setHasSearched( true );
     setInternalGlobalFilter( ( currentValue ) =>
@@ -190,17 +196,19 @@ export function UsersTable( {
               statuses={ statuses }
               onSearchInputChange={ setGlobalFilter }
               onSearchChange={ handleSearchChange }
+              onUserTypeChange={ onUserTypeChange }
             />
           ) }
           <ScrollArea className="dt-scroll-area">
             <UsersView
               table={ table }
+              isFilteringAvailableUsers={ isFilteringAvailableUsers && table.getRowModel().rows.length === 0 }
               onViewDetails={ ( user ) => {
                 setSelectedUser( user );
                 setIsSheetOpen( true );
               } }
             />
-            { showContentLoading && table.getRowModel().rows.length === 0 && (
+            { showBackgroundLoadingOverlay && table.getRowModel().rows.length === 0 && (
               <DataTableSkeleton showToolbar={ false } className="dt-content-loading-overlay" />
             ) }
           </ScrollArea>

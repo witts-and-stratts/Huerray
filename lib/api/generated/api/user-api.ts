@@ -187,7 +187,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @throws {RequiredError}
          */
         usersProfileGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/profile`;
+            const localVarPath = `/users/profile`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -654,6 +654,6 @@ export class UserApi extends BaseAPI {
 export const UsersSearchGetUserTypeEnum = {
     Creator: 'creator',
     BrandUser: 'brand_user',
-    Admin: 'admin'
+    AdminUser: 'admin_user'
 } as const;
 export type UsersSearchGetUserTypeEnum = typeof UsersSearchGetUserTypeEnum[keyof typeof UsersSearchGetUserTypeEnum];

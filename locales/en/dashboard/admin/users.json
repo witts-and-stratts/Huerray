@@ -121,6 +121,7 @@
   "usersColumns": {},
   "usersTableToolbar": {},
   "usersTableView": {
+    "filteringAvailableUsers": "Filtering available users",
     "noUsersFound": "No users found."
   },
   "usersTable": {},

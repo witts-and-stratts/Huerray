@@ -6,10 +6,11 @@ import { TableviewWrapper } from "@/components/table-view-wrapper";
 interface UsersViewProps {
   table: Table<ModelsUserResponse>;
   onViewDetails: ( user: ModelsUserResponse ) => void;
+  isFilteringAvailableUsers?: boolean;
 }
 
-export function UsersView( { table }: UsersViewProps ) {
+export function UsersView( { table, isFilteringAvailableUsers = false }: UsersViewProps ) {
   return <TableviewWrapper>
-    <UsersTableView table={ table } />
+    <UsersTableView table={ table } isFilteringAvailableUsers={ isFilteringAvailableUsers } />
   </TableviewWrapper>;
 }

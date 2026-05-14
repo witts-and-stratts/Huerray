@@ -348,7 +348,7 @@ const configuration = new Configuration();
 const apiInstance = new UserApi(configuration);
 
 let q: string; //Search query (name, username, email, phone) (optional) (default to undefined)
-let userType: 'creator' | 'brand_user' | 'admin'; //User type filter (optional) (default to undefined)
+let userType: 'creator' | 'brand_user' | 'admin_user'; //User type filter (optional) (default to undefined)
 let status: string; //User status filter (optional) (default to undefined)
 let page: number; //Page number (optional) (default to 1)
 let limit: number; //Items per page (optional) (default to 10)
@@ -367,7 +367,7 @@ const { status, data } = await apiInstance.usersSearchGet(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **q** | [**string**] | Search query (name, username, email, phone) | (optional) defaults to undefined|
-| **userType** | [**&#39;creator&#39; | &#39;brand_user&#39; | &#39;admin&#39;**]**Array<&#39;creator&#39; &#124; &#39;brand_user&#39; &#124; &#39;admin&#39;>** | User type filter | (optional) defaults to undefined|
+| **userType** | [**&#39;creator&#39; | &#39;brand_user&#39; | &#39;admin_user&#39;**]**Array<&#39;creator&#39; &#124; &#39;brand_user&#39; &#124; &#39;admin_user&#39;>** | User type filter | (optional) defaults to undefined|
 | **status** | [**string**] | User status filter | (optional) defaults to undefined|
 | **page** | [**number**] | Page number | (optional) defaults to 1|
 | **limit** | [**number**] | Items per page | (optional) defaults to 10|

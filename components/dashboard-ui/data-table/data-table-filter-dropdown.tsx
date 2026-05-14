@@ -23,6 +23,8 @@ interface DataTableFilterDropdownProps<TData> {
   options: string[];
   title?: string;
   labelFn?: ( value: string ) => string;
+  onValueChange?: ( value: string[] | undefined ) => void;
+  selectionMode?: 'multiple' | 'single';
 }
 
 export function DataTableFilterDropdown<TData>( {
@@ -31,6 +33,8 @@ export function DataTableFilterDropdown<TData>( {
   options,
   title,
   labelFn,
+  onValueChange,
+  selectionMode = 'multiple',
 }: DataTableFilterDropdownProps<TData> ) {
   const column = table.getColumn( columnId );
   const filterValue = column?.getFilterValue() as string[] | undefined;
@@ -52,6 +56,7 @@ export function DataTableFilterDropdown<TData>( {
             e.stopPropagation();
             if ( !column ) return;
             column.setFilterValue( undefined );
+            onValueChange?.( undefined );
           } }
         >
           { t( 'search.select_all' ) }
@@ -70,6 +75,13 @@ export function DataTableFilterDropdown<TData>( {
                 if ( !column ) return;
 
                 const currentFilters = ( column.getFilterValue() as string[] ) ?? [];
+                if ( selectionMode === 'single' ) {
+                  const nextValue = value ? [ option ] : undefined;
+                  column.setFilterValue( nextValue );
+                  onValueChange?.( nextValue );
+                  return;
+                }
+
                 const nextFilters = new Set( currentFilters );
 
                 if ( value ) {
@@ -78,7 +90,9 @@ export function DataTableFilterDropdown<TData>( {
                   nextFilters.delete( option );
                 }
 
-                column.setFilterValue( nextFilters.size > 0 ? Array.from( nextFilters ) : undefined );
+                const nextValue = nextFilters.size > 0 ? Array.from( nextFilters ) : undefined;
+                column.setFilterValue( nextValue );
+                onValueChange?.( nextValue );
               } }
             >
               { labelFn ? labelFn( option ) : option.replace( /_/g, ' ' ) }

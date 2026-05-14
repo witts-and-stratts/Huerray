@@ -64,6 +64,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authRefreshPost**](docs/AuthenticationApi.md#authrefreshpost) | **POST** /auth/refresh | Refresh access token
 *AuthenticationApi* | [**authRegisterPost**](docs/AuthenticationApi.md#authregisterpost) | **POST** /auth/register | Register a new user
 *AuthenticationApi* | [**authResendVerificationPost**](docs/AuthenticationApi.md#authresendverificationpost) | **POST** /auth/resend-verification | Resend email verification
+*AuthenticationApi* | [**authTestVerificationTokenGet**](docs/AuthenticationApi.md#authtestverificationtokenget) | **GET** /auth/test/verification-token | Get verification token for tests (dev only)
 *AuthenticationApi* | [**authVerifyEmailPost**](docs/AuthenticationApi.md#authverifyemailpost) | **POST** /auth/verify-email | Verify email
 *BrandApi* | [**brandsGet**](docs/BrandApi.md#brandsget) | **GET** /brands | Get user brands
 *BrandApi* | [**brandsGigsGet**](docs/BrandApi.md#brandsgigsget) | **GET** /brands/gigs | Search gigs for brand
@@ -320,6 +321,7 @@ Class | Method | HTTP request | Description
  - [ModelsStandardPlatformAnalyticsResponse](docs/ModelsStandardPlatformAnalyticsResponse.md)
  - [ModelsStandardResponseAny](docs/ModelsStandardResponseAny.md)
  - [ModelsStandardResponseArrayModelsCommentResponse](docs/ModelsStandardResponseArrayModelsCommentResponse.md)
+ - [ModelsStandardResponseMapStringString](docs/ModelsStandardResponseMapStringString.md)
  - [ModelsStandardResponseModelsCommentResponse](docs/ModelsStandardResponseModelsCommentResponse.md)
  - [ModelsStandardUserResponse](docs/ModelsStandardUserResponse.md)
  - [ModelsStandardVideoSubmissionResponse](docs/ModelsStandardVideoSubmissionResponse.md)

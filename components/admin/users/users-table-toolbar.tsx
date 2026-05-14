@@ -16,6 +16,7 @@ interface UsersTableToolbarProps<TData> {
   statuses: string[];
   onSearchInputChange?: ( value: string ) => void;
   onSearchChange?: ( value: string ) => void;
+  onUserTypeChange?: ( value: string | undefined ) => void;
 }
 
 export function UsersTableToolbar<TData>( {
@@ -23,6 +24,7 @@ export function UsersTableToolbar<TData>( {
   statuses,
   onSearchInputChange,
   onSearchChange,
+  onUserTypeChange,
 }: UsersTableToolbarProps<TData> ) {
   const t = useTranslations( 'dashboard.admin' );
   const getFilterLabel = useFilterLabel();
@@ -42,9 +44,11 @@ export function UsersTableToolbar<TData>( {
         <DataTableFilterDropdown
           table={ table }
           columnId='user_type_filter'
-          options={ [ 'Brand_user', 'Creator', 'Admin_user' ] }
+          options={ [ 'brand_user', 'creator', 'admin_user' ] }
           title={ t( 'filters.userType' ) }
           labelFn={ getFilterLabel }
+          selectionMode='single'
+          onValueChange={ ( value ) => onUserTypeChange?.( value?.[ 0 ] ) }
         />
         <DataTableFilterDropdown
           table={ table }

@@ -126,6 +126,7 @@ export * from './models-standard-payment-response';
 export * from './models-standard-platform-analytics-response';
 export * from './models-standard-response-any';
 export * from './models-standard-response-array-models-comment-response';
+export * from './models-standard-response-map-string-string';
 export * from './models-standard-response-models-comment-response';
 export * from './models-standard-user-response';
 export * from './models-standard-video-submission-response';

@@ -12,6 +12,7 @@ All URIs are relative to */api/v1*
 |[**authRefreshPost**](#authrefreshpost) | **POST** /auth/refresh | Refresh access token|
 |[**authRegisterPost**](#authregisterpost) | **POST** /auth/register | Register a new user|
 |[**authResendVerificationPost**](#authresendverificationpost) | **POST** /auth/resend-verification | Resend email verification|
+|[**authTestVerificationTokenGet**](#authtestverificationtokenget) | **GET** /auth/test/verification-token | Get verification token for tests (dev only)|
 |[**authVerifyEmailPost**](#authverifyemailpost) | **POST** /auth/verify-email | Verify email|
 
 # **authChangePasswordPost**
@@ -440,6 +441,59 @@ No authorization required
 |-------------|-------------|------------------|
 |**200** | Email verification resent successfully |  -  |
 |**400** | Bad request |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authTestVerificationTokenGet**
+> ModelsStandardResponseMapStringString authTestVerificationTokenGet()
+
+Returns the active email verification token for a user email. This endpoint is intended only for automated tests and is only available in development.
+
+### Example
+
+```typescript
+import {
+    AuthenticationApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new AuthenticationApi(configuration);
+
+let email: string; //User email (default to undefined)
+
+const { status, data } = await apiInstance.authTestVerificationTokenGet(
+    email
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **email** | [**string**] | User email | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardResponseMapStringString**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Verification token fetched successfully |  -  |
+|**400** | Bad request |  -  |
+|**404** | Not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
