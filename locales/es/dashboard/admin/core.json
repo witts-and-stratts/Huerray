@@ -2,6 +2,7 @@
   "welcome": "Bienvenido de nuevo, Admin.",
   "overview": "Visión general del sistema",
   "description": "Visión general de la plataforma y supervisión de su funcionamiento",
+  "actions": "Acciones",
   "analyticsPage": {
     "title": "Plataforma de análisis",
     "description": "Realice un seguimiento de los usuarios, la canalización de contenidos, los ingresos, los envíos de vídeos y el rendimiento de la asistencia.",

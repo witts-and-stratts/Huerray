@@ -1,0 +1,324 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link [ref=e3] [cursor=pointer]:
+      - /url: /en
+      - img [ref=e4]
+    - navigation [ref=e58]:
+      - link "For Creators" [ref=e59] [cursor=pointer]:
+        - /url: /en/creators
+      - link "For Brands" [ref=e60] [cursor=pointer]:
+        - /url: /en/brands
+      - link "Pricing" [ref=e61] [cursor=pointer]:
+        - /url: /en/pricing
+    - generic [ref=e62]:
+      - button "User menu" [ref=e63] [cursor=pointer]:
+        - generic [ref=e64]: 
+        - generic [ref=e65]: 
+      - button "Select language" [ref=e67] [cursor=pointer]:
+        - generic [ref=e69]: 
+  - main [ref=e70]:
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - link "Back to blog" [ref=e74] [cursor=pointer]:
+          - /url: /en/blog
+        - generic [ref=e75]: /May 6, 2026
+      - link "Marketing & Insights" [ref=e77] [cursor=pointer]:
+        - /url: /en/blog/categories/marketing-and-insights
+      - heading "Domino’s, creator meals, and the rise of participatory menus" [level=1] [ref=e78]
+      - paragraph [ref=e79]: Food brands are inviting creators and athletes to turn customization into a campaign mechanic.
+      - generic [ref=e80]:
+        - generic [ref=e81]: 8 min read
+        - generic [ref=e82]: /Updated May 15, 2026
+      - generic [ref=e83]:
+        - img "Norina" [ref=e84]
+        - generic [ref=e86]: By Norina
+    - img "Domino’s, creator meals, and the rise of participatory menus" [ref=e89]
+    - generic [ref=e91]:
+      - complementary "Table of contents" [ref=e92]:
+        - generic [ref=e93]: Table of contents
+        - navigation [ref=e94]:
+          - link "The context behind the campaign" [ref=e95] [cursor=pointer]:
+            - /url: "#the-context-behind-the-campaign"
+          - link "Signals to watch" [ref=e96] [cursor=pointer]:
+            - /url: "#signals-to-watch"
+          - link "How to brief creators" [ref=e97] [cursor=pointer]:
+            - /url: "#how-to-brief-creators"
+          - link "Measurement framework" [ref=e98] [cursor=pointer]:
+            - /url: "#measurement-framework"
+          - link "Takeaway" [ref=e99] [cursor=pointer]:
+            - /url: "#takeaway"
+      - article [ref=e100]:
+        - generic [ref=e101]:
+          - paragraph [ref=e102]: "Domino’s, creator meals, and the rise of participatory menus is more than a headline trend. It shows how creator marketing now works as an operating system: a way to test ideas, explain context, and turn audience attention into behavior that brands can measure."
+          - paragraph [ref=e103]: The strongest campaigns in this space start by naming the audience clearly. For this topic, the audience includes local diners, franchise teams, and food creators. Each group needs a different reason to believe, which means the creative cannot rely on one generic message.
+          - blockquote [ref=e104]: The best creator work does not make the brand louder. It makes the decision easier for the audience.
+          - heading "The context behind the campaign" [level=2] [ref=e105]
+          - paragraph [ref=e106]: "Creator-led strategy works because it brings the brand into real moments: menu launches, limited drops, and neighborhood recommendations. Those scenes give the campaign a setting, a problem, and a reason for the product or message to appear naturally."
+          - 'figure "A visual planning reference for the restaurant campaign angle discussed in this article. Credit: Huerray editorial" [ref=e107]':
+            - img "Domino’s, creator meals, and the rise of participatory menus editorial campaign image" [ref=e108]
+            - generic [ref=e109]:
+              - text: A visual planning reference for the restaurant campaign angle discussed in this article.
+              - generic [ref=e110]: "Credit: Huerray editorial"
+          - heading "Signals to watch" [level=2] [ref=e111]
+          - paragraph [ref=e112]: The useful signals are rarely just likes. Teams should look for proof that the audience understands the idea, can repeat it in their own language, and knows what action comes next.
+          - list [ref=e113]:
+            - listitem [ref=e114]: "Creative signal: comments that mention a specific use case instead of a generic compliment."
+            - listitem [ref=e115]: "Distribution signal: saves, shares, and rewatches from people outside the creator's core audience."
+            - listitem [ref=e116]: "Commercial signal: store visits, saved posts, and repeat creator mentions."
+          - figure "A sample video module showing how long-form analysis or campaign context can sit inside the article body." [ref=e117]:
+            - iframe [ref=e119]:
+              - generic [active] [ref=f3e1]:
+                - generic "YouTube Video Player" [ref=f3e3]
+                - generic [ref=f3e5]:
+                  - generic:
+                    - generic:
+                      - button "Play video" [ref=f3e10] [cursor=pointer]
+                      - button "Hide player controls" [ref=f3e12] [cursor=pointer]
+                      - generic [ref=f3e14]:
+                        - generic [ref=f3e19]:
+                          - generic [ref=f3e20]:
+                            - 'link "YouTube Developers Live: Embedded Web Player Customization" [ref=f3e21] [cursor=pointer]':
+                              - /url: https://www.youtube.com/watch?v=M7lc1UVf-VE
+                            - link "Google for Developers" [ref=f3e22] [cursor=pointer]:
+                              - /url: /channel/UC_x5XG1OV2P6uZZ5FSM9Ttw
+                              - generic [ref=f3e23]: Google for Developers
+                          - generic [ref=f3e24]:
+                            - button [ref=f3e25] [cursor=pointer]
+                            - generic [ref=f3e27]:
+                              - generic: Google for Developers
+                              - generic: 2.63m subscribers
+                        - generic [ref=f3e28]:
+                          - button "Copy link" [ref=f3e31] [cursor=pointer]:
+                            - generic [ref=f3e35]:
+                              - img
+                          - link "Watch on YouTube" [ref=f3e42] [cursor=pointer]:
+                            - /url: https://www.youtube.com/watch?v=M7lc1UVf-VE
+                            - generic [ref=f3e45]:
+                              - text: Watch on
+                              - img [ref=f3e47]:
+                                - generic [ref=f3e49]:
+                                  - img
+            - generic [ref=e120]: A sample video module showing how long-form analysis or campaign context can sit inside the article body.
+          - heading "How to brief creators" [level=2] [ref=e121]
+          - paragraph [ref=e122]: A stronger brief should separate the message from the format. Give creators the mandatory facts, the audience problem, the product truth, and the boundaries. Then let them choose the hook, scene, pacing, and proof that fit their channel.
+          - complementary [ref=e123]:
+            - strong [ref=e124]: Planning note
+            - paragraph [ref=e125]: For restaurant campaigns, the best brief usually starts with the audience situation before it lists deliverables.
+          - figure "Use a social embed to show the type of creator post, community reaction, or platform behavior that supports the analysis in \"Domino’s, creator meals, and the rise of participatory menus\"." [ref=e126]:
+            - generic [ref=e127]:
+              - generic [ref=e129]:
+                - img
+                - text: TikTok
+              - link "Open post" [ref=e130] [cursor=pointer]:
+                - /url: https://www.tiktok.com/@huerray
+                - text: Open post
+                - img
+            - generic [ref=e131]: Use a social embed to show the type of creator post, community reaction, or platform behavior that supports the analysis in "Domino’s, creator meals, and the rise of participatory menus".
+          - heading "Measurement framework" [level=2] [ref=e132]
+          - paragraph [ref=e133]: Treat the article's campaign idea as a learning system. The first wave should test angles, the second should scale the strongest signals, and the third should turn high-performing creator assets into paid, owned, and sales enablement material.
+          - list [ref=e134]:
+            - listitem [ref=e135]: "Pre-launch: collect creator hypotheses, sample hooks, and expected objections."
+            - listitem [ref=e136]: "Launch: track creative-level performance instead of only campaign-level averages."
+            - listitem [ref=e137]: "Post-launch: identify which assets deserve licensing, paid amplification, or landing-page placement."
+          - separator [ref=e138]
+          - heading "Takeaway" [level=2] [ref=e139]
+          - paragraph [ref=e140]: "The practical lesson is simple: make the creator's job more strategic. When the creator understands the audience tension, the channel role, and the business goal, the content has a much better chance of becoming useful beyond a single post."
+          - complementary [ref=e141]:
+            - generic [ref=e142]:
+              - strong [ref=e143]: Plan a creator campaign
+              - paragraph [ref=e144]: Use Huerray to structure creator briefs, source UGC, and turn campaign learning into reusable creative.
+            - link "Plan a creator campaign" [ref=e145] [cursor=pointer]:
+              - /url: https://huerray.com/en/brand
+        - generic [ref=e146]:
+          - link "#food marketing" [ref=e147] [cursor=pointer]:
+            - /url: /en/blog/tags/food%20marketing
+          - link "#ugc" [ref=e148] [cursor=pointer]:
+            - /url: /en/blog/tags/ugc
+          - link "#campaign mechanics" [ref=e149] [cursor=pointer]:
+            - /url: /en/blog/tags/campaign%20mechanics
+      - complementary "Share" [ref=e150]:
+        - generic [ref=e151]: Share
+        - link "LinkedIn" [ref=e152] [cursor=pointer]:
+          - /url: https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fhuerray.com%2Fen%2Fblog%2Fdominos-creator-meals-participatory-menus
+        - link "X" [ref=e153] [cursor=pointer]:
+          - /url: https://twitter.com/intent/tweet?url=https%3A%2F%2Fhuerray.com%2Fen%2Fblog%2Fdominos-creator-meals-participatory-menus&text=Domino%E2%80%99s%2C%20creator%20meals%2C%20and%20the%20rise%20of%20participatory%20menus
+    - generic [ref=e155]:
+      - heading "Related articles" [level=2] [ref=e156]
+      - generic [ref=e157]:
+        - article [ref=e158]:
+          - link "How creator teams can build an always-on launch room" [ref=e159] [cursor=pointer]:
+            - /url: /en/blog/creator-teams-always-on-launch-room
+            - img "How creator teams can build an always-on launch room" [ref=e160]
+          - generic [ref=e161]:
+            - heading "How creator teams can build an always-on launch room" [level=3] [ref=e162]:
+              - link "How creator teams can build an always-on launch room" [ref=e163] [cursor=pointer]:
+                - /url: /en/blog/creator-teams-always-on-launch-room
+            - paragraph [ref=e164]: A practical look at how brands can organize creators, feedback, and paid amplification into a single launch rhythm.
+            - generic [ref=e165]:
+              - link "Marketing & Insights" [ref=e167] [cursor=pointer]:
+                - /url: /en/blog/categories/marketing-and-insights
+              - generic [ref=e168]:
+                - generic [ref=e169]: May 14, 2026
+                - generic [ref=e170]: /7 min read
+                - generic [ref=e171]: /By Norina
+        - article [ref=e172]:
+          - link "The new economics of UGC testing" [ref=e173] [cursor=pointer]:
+            - /url: /en/blog/new-economics-ugc-testing
+            - img "The new economics of UGC testing" [ref=e174]
+          - generic [ref=e175]:
+            - heading "The new economics of UGC testing" [level=3] [ref=e176]:
+              - link "The new economics of UGC testing" [ref=e177] [cursor=pointer]:
+                - /url: /en/blog/new-economics-ugc-testing
+            - paragraph [ref=e178]: Testing creator content works best when brands separate learning velocity from production volume.
+            - generic [ref=e179]:
+              - link "Marketing & Insights" [ref=e181] [cursor=pointer]:
+                - /url: /en/blog/categories/marketing-and-insights
+              - generic [ref=e182]:
+                - generic [ref=e183]: May 13, 2026
+                - generic [ref=e184]: /8 min read
+                - generic [ref=e185]: /By Norina
+        - article [ref=e186]:
+          - link "What brands should ask before licensing creator content" [ref=e187] [cursor=pointer]:
+            - /url: /en/blog/questions-before-licensing-creator-content
+            - img "What brands should ask before licensing creator content" [ref=e188]
+          - generic [ref=e189]:
+            - heading "What brands should ask before licensing creator content" [level=3] [ref=e190]:
+              - link "What brands should ask before licensing creator content" [ref=e191] [cursor=pointer]:
+                - /url: /en/blog/questions-before-licensing-creator-content
+            - paragraph [ref=e192]: A concise checklist for getting usage rights, paid media terms, and edit permissions right before launch.
+            - generic [ref=e193]:
+              - link "Marketing & Insights" [ref=e195] [cursor=pointer]:
+                - /url: /en/blog/categories/marketing-and-insights
+              - generic [ref=e196]:
+                - generic [ref=e197]: May 12, 2026
+                - generic [ref=e198]: /9 min read
+                - generic [ref=e199]: /By Norina
+        - article [ref=e200]:
+          - link "Why creator-led restaurant campaigns are becoming cultural events" [ref=e201] [cursor=pointer]:
+            - /url: /en/blog/creator-led-restaurant-campaigns-cultural-events
+            - img "Why creator-led restaurant campaigns are becoming cultural events" [ref=e202]
+          - generic [ref=e203]:
+            - heading "Why creator-led restaurant campaigns are becoming cultural events" [level=3] [ref=e204]:
+              - link "Why creator-led restaurant campaigns are becoming cultural events" [ref=e205] [cursor=pointer]:
+                - /url: /en/blog/creator-led-restaurant-campaigns-cultural-events
+            - paragraph [ref=e206]: Restaurant brands are using creators to turn menu launches, stunts, and local moments into content people want to follow.
+            - generic [ref=e207]:
+              - link "Marketing & Insights" [ref=e209] [cursor=pointer]:
+                - /url: /en/blog/categories/marketing-and-insights
+              - generic [ref=e210]:
+                - generic [ref=e211]: May 11, 2026
+                - generic [ref=e212]: /10 min read
+                - generic [ref=e213]: /By Norina
+        - article [ref=e214]:
+          - link "What Khaby Lame’s Olympic role says about global creator trust" [ref=e215] [cursor=pointer]:
+            - /url: /en/blog/khaby-lame-olympic-role-global-creator-trust
+            - img "What Khaby Lame’s Olympic role says about global creator trust" [ref=e216]
+          - generic [ref=e217]:
+            - heading "What Khaby Lame’s Olympic role says about global creator trust" [level=3] [ref=e218]:
+              - link "What Khaby Lame’s Olympic role says about global creator trust" [ref=e219] [cursor=pointer]:
+                - /url: /en/blog/khaby-lame-olympic-role-global-creator-trust
+            - paragraph [ref=e220]: Large institutions are turning to creators when they need reach, simplicity, and cross-border recognition.
+            - generic [ref=e221]:
+              - link "Marketing & Insights" [ref=e223] [cursor=pointer]:
+                - /url: /en/blog/categories/marketing-and-insights
+              - generic [ref=e224]:
+                - generic [ref=e225]: May 10, 2026
+                - generic [ref=e226]: /7 min read
+                - generic [ref=e227]: /By Norina
+        - article [ref=e228]:
+          - link "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [ref=e229] [cursor=pointer]:
+            - /url: /en/blog/chili-s-taps-creators-to-put-fast-food-on-trial-barbie-goes-to-coachella-with-creators-and-david
+            - img "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [ref=e230]
+          - generic [ref=e231]:
+            - heading "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [level=3] [ref=e232]:
+              - link "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [ref=e233] [cursor=pointer]:
+                - /url: /en/blog/chili-s-taps-creators-to-put-fast-food-on-trial-barbie-goes-to-coachella-with-creators-and-david
+            - paragraph [ref=e234]: Chili's handed the creative reins to Trisha Paytas for its 'Food Court' campaign, signaling that legacy restaurant brands are treating creators as campaign leads, not add-ons. YouTuber
+            - generic [ref=e235]:
+              - link "Marketing & Insights" [ref=e237] [cursor=pointer]:
+                - /url: /en/blog/categories/marketing-and-insights
+              - generic [ref=e238]:
+                - generic [ref=e239]: May 10, 2026
+                - generic [ref=e240]: /8 min read
+                - generic [ref=e241]: /By Norina
+  - contentinfo [ref=e242]:
+    - generic [ref=e243]:
+      - heading "Ready for your first UGC video?" [level=2] [ref=e244]
+      - button "Register now" [ref=e245]:
+        - link "Register now" [ref=e246] [cursor=pointer]:
+          - /url: /signup
+    - generic [ref=e247]:
+      - generic [ref=e248]:
+        - generic [ref=e249]:
+          - heading "Services" [level=4] [ref=e250]
+          - list [ref=e251]:
+            - listitem [ref=e252]:
+              - link "Prices" [ref=e253] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e254]:
+              - link "Managed Service" [ref=e255] [cursor=pointer]:
+                - /url: /managed-services
+        - generic [ref=e256]:
+          - heading "FAQ" [level=4] [ref=e257]
+          - list [ref=e258]:
+            - listitem [ref=e259]:
+              - link "FAQ Brands" [ref=e260] [cursor=pointer]:
+                - /url: /brands-faq
+            - listitem [ref=e261]:
+              - link "FAQ Creators" [ref=e262] [cursor=pointer]:
+                - /url: /creators-faq
+        - generic [ref=e263]:
+          - heading "Platform" [level=4] [ref=e264]
+          - list [ref=e265]:
+            - listitem [ref=e266]:
+              - link "About Huerray" [ref=e267] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e268]:
+              - link "Blog" [ref=e269] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e270]:
+              - link "Careers" [ref=e271] [cursor=pointer]:
+                - /url: /careers
+            - listitem [ref=e272]:
+              - link "Site Notice" [ref=e273] [cursor=pointer]:
+                - /url: site-notice
+            - listitem [ref=e274]:
+              - link "Privacy Policy" [ref=e275] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e276]:
+              - link "T&C – Creators" [ref=e277] [cursor=pointer]:
+                - /url: /creator-terms
+            - listitem [ref=e278]:
+              - link "T&C – Brands" [ref=e279] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e280]:
+        - heading "Signup for updates" [level=3] [ref=e281]
+        - generic [ref=e282]:
+          - textbox "Email address" [ref=e283]
+          - button "Submit" [ref=e284]:
+            - generic [ref=e285]: 
+    - generic [ref=e287]:
+      - generic [ref=e288]:
+        - img "Huerray" [ref=e289]
+        - paragraph [ref=e290]: © 2026 Huerray. All rights reserved
+      - generic [ref=e291]:
+        - button "Select language" [ref=e292] [cursor=pointer]:
+          - generic [ref=e294]: English
+          - generic [ref=e295]: 
+        - generic [ref=e296]:
+          - link "Facebook" [ref=e297] [cursor=pointer]:
+            - /url: https://www.facebook.com/profile.php?id=61577485322627&mibextid=wwXIfr&rdid=16XIHv5v2uXCkiGV#
+            - generic [ref=e298]: 
+          - link "X" [ref=e299] [cursor=pointer]:
+            - /url: https://x.com/huerray_de
+            - generic [ref=e300]: 
+          - link "Instagram" [ref=e301] [cursor=pointer]:
+            - /url: https://www.instagram.com/huerray_de/
+            - generic [ref=e302]: 
+          - link "TikTok" [ref=e303] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@huerray
+            - generic [ref=e304]: 
+  - img
+  - button "Open Next.js Dev Tools" [ref=e310] [cursor=pointer]:
+    - img [ref=e311]
+  - alert [ref=e314]

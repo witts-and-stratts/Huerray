@@ -2,6 +2,7 @@
   "welcome": "Welcome back, Admin!",
   "overview": "System overview",
   "description": "Platform overview and operational monitoring",
+  "actions": "Actions",
   "analyticsPage": {
     "title": "Platform Analytics",
     "description": "Track users, content pipeline, revenue, video submissions, and support performance.",

@@ -8,6 +8,8 @@ import {
 } from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
 
+import {BlogSocialEmbedPreview} from '../components/BlogSocialEmbedPreview'
+
 const codeLanguages = [
   {title: 'TypeScript', value: 'typescript'},
   {title: 'JavaScript', value: 'javascript'},
@@ -175,14 +177,12 @@ export const blogSocialEmbedType = defineType({
   preview: {
     select: {
       platform: 'platform',
-      subtitle: 'url',
+      url: 'url',
+      caption: 'caption',
     },
-    prepare({platform, subtitle}) {
-      return {
-        title: platform ? `${platform} post` : 'Social post',
-        subtitle,
-      }
-    },
+  },
+  components: {
+    preview: BlogSocialEmbedPreview,
   },
 })
 

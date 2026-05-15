@@ -19,6 +19,7 @@ export interface ModelsCaseUserSummary {
     'first_name'?: string;
     'id'?: string;
     'last_name'?: string;
+    'profile_id'?: string;
     'user_type'?: string;
 }
 
