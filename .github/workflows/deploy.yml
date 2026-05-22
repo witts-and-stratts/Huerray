@@ -88,9 +88,6 @@ jobs:
           rsync -az --delete \
             --exclude '.git' \
             --exclude '.github' \
-            --exclude 'logs/' \
-            --exclude 'uploads/' \
-            --exclude 'invoices/' \
             --filter="P .${DEPLOY_APP_NAME}.active-color" \
             ./ "${DEPLOY_USER}@${DEPLOY_HOST}:${RESOLVED_DEPLOY_PATH}/"
 
@@ -134,6 +131,7 @@ jobs:
             echo "  ls -la deploy/scripts >&2 || true"
             echo "  exit 1"
             echo "fi"
+            echo "chmod +x \"\${SCRIPT_DIR}/deploy_blue_green.sh\""
             echo "./\"\${SCRIPT_DIR}/deploy_blue_green.sh\""
           } | ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "bash -se"
 
