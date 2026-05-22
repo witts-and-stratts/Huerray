@@ -17,7 +17,7 @@ jobs:
   deploy:
     if: github.ref_name == 'main' || github.ref_name == 'develop'
     runs-on: ubuntu-latest
-    environment: ${{ github.ref_name == 'main' && 'production' || 'develop' }}
+    environment: ${{ github.ref_name == 'main' && 'live' || 'develop' }}
     env:
       # Deployment target (environment-scoped vars/secrets)
       DEPLOY_HOST: ${{ vars.HETZNER_HOST }}
