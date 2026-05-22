@@ -19,7 +19,7 @@ GREEN_PORT="${GREEN_PORT:-28080}"
 HEALTH_PATH="${HEALTH_PATH:-/health}"
 HEALTH_RETRIES="${HEALTH_RETRIES:-60}"
 HEALTH_RETRY_DELAY="${HEALTH_RETRY_DELAY:-2}"
-CADDY_UPSTREAM_FILE="${CADDY_UPSTREAM_FILE:-/etc/caddy/upstreams/huerray_upstream.caddy}"
+CADDY_UPSTREAM_FILE="${CADDY_UPSTREAM_FILE:-/etc/caddy/conf.d/huerray-web_upstream.caddy}"
 CADDY_RELOAD_CMD="${CADDY_RELOAD_CMD:-systemctl reload caddy}"
 DRAIN_SECONDS="${DRAIN_SECONDS:-5}"
 APP_HOST="${APP_HOST:-}"
@@ -143,10 +143,23 @@ ${caddy_host} {
 }
 EOF
 
-if [[ -w "${CADDY_UPSTREAM_FILE}" ]] || [[ ! -e "${CADDY_UPSTREAM_FILE}" && -w "$(dirname "${CADDY_UPSTREAM_FILE}")" ]]; then
+# Ensure parent directory exists
+CADDY_DIR="$(dirname "${CADDY_UPSTREAM_FILE}")"
+if [[ ! -d "${CADDY_DIR}" ]]; then
+  if ! sudo mkdir -p "${CADDY_DIR}"; then
+    echo "Failed to create Caddy config directory: ${CADDY_DIR}"
+    rm -f "${TEMP_UPSTREAM_FILE}"
+    exit 1
+  fi
+fi
+
+# Move temp file to final destination
+if [[ -w "${CADDY_DIR}" ]]; then
+  mv "${TEMP_UPSTREAM_FILE}" "${CADDY_UPSTREAM_FILE}"
+elif command -v sudo >/dev/null 2>&1; then
   sudo mv "${TEMP_UPSTREAM_FILE}" "${CADDY_UPSTREAM_FILE}"
 else
-  echo "Cannot write Caddy upstream file ${CADDY_UPSTREAM_FILE}; no permission and sudo is unavailable"
+  echo "Cannot write to Caddy config directory: ${CADDY_DIR}"
   rm -f "${TEMP_UPSTREAM_FILE}"
   exit 1
 fi
