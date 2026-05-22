@@ -110,20 +110,24 @@ fi
 
 echo "Switching Caddy upstream to ${target_color} on port ${target_port}"
 
-# APP_HOST is required and should match the host served by Caddy.
-caddy_host="${APP_HOST}"
+# APP_HOST is required and should match the host(s) served by Caddy.
+# Can be comma-separated for multiple hosts (e.g., "stellar.huerray.de, huerray.de")
+caddy_hosts="${APP_HOST}"
 
-if [[ -z "${caddy_host}" ]]; then
-  echo "Missing Caddy host. Set APP_HOST."
+if [[ -z "${caddy_hosts}" ]]; then
+  echo "Missing Caddy host(s). Set APP_HOST."
   exit 1
 fi
+
+# Trim leading/trailing whitespace and normalize comma-separated hosts
+caddy_hosts="$(echo "${caddy_hosts}" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
 
 # Use a temp file in the deploy user's home directory
 TEMP_UPSTREAM_FILE="${HOME}/.tmp-${DEPLOY_APP_NAME}-upstream.conf"
 
 # Always write the upstream file from a template.
 cat > "${TEMP_UPSTREAM_FILE}" <<EOF
-${caddy_host} {
+${caddy_hosts} {
 
     reverse_proxy 127.0.0.1:${target_port}
 
