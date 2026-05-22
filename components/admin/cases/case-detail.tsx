@@ -57,10 +57,12 @@ function getEntityHref(
 }
 
 function getReporterHref( reporter: ModelsCaseUserSummary | undefined, role: UserRole | undefined ): string | null {
-  if ( role !== 'admin' || !reporter?.id ) return null;
+  if ( role !== 'admin' ) return null;
+  const reporterProfileId = reporter?.profile_id || reporter?.id;
+  if ( !reporterProfileId ) return null;
   const userType = reporter.user_type?.toLowerCase();
-  if ( userType === 'brand' || userType === 'brand_user' ) return `/admin/brands/${ reporter.id }`;
-  if ( userType === 'creator' ) return `/admin/creators/${ reporter.id }`;
+  if ( userType === 'brand' || userType === 'brand_user' ) return `/admin/brands/${ reporterProfileId }`;
+  if ( userType === 'creator' ) return `/admin/creators/${ reporterProfileId }`;
   return null;
 }
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **first_name** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **last_name** | **string** |  | [optional] [default to undefined]
+**profile_id** | **string** |  | [optional] [default to undefined]
 **user_type** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -21,6 +22,7 @@ const instance: ModelsCaseUserSummary = {
     first_name,
     id,
     last_name,
+    profile_id,
     user_type,
 };
 ```

@@ -1,0 +1,611 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link [ref=e3] [cursor=pointer]:
+      - /url: /en
+      - img [ref=e4]
+    - generic [ref=e58]:
+      - generic "Loading user menu" [ref=e59] [cursor=pointer]:
+        - generic [ref=e60]: 
+      - button "Select language" [ref=e62] [cursor=pointer]:
+        - generic [ref=e64]: 
+      - button "Toggle menu" [ref=e65]
+  - main [ref=e69]:
+    - generic [ref=e72]:
+      - generic [ref=e73]: Blog
+      - heading "Marketing & Insights" [level=1] [ref=e74]
+      - paragraph [ref=e75]: 34 articles in Marketing & Insights.
+      - link "Back to blog" [ref=e77] [cursor=pointer]:
+        - /url: /en/blog
+    - generic [ref=e79]:
+      - heading "Latest articles" [level=2] [ref=e81]
+      - generic [ref=e82]:
+        - article [ref=e83]:
+          - link "How creator teams can build an always-on launch room" [ref=e84] [cursor=pointer]:
+            - /url: /en/blog/creator-teams-always-on-launch-room
+            - img "How creator teams can build an always-on launch room" [ref=e85]
+          - generic [ref=e86]:
+            - heading "How creator teams can build an always-on launch room" [level=3] [ref=e87]:
+              - link "How creator teams can build an always-on launch room" [ref=e88] [cursor=pointer]:
+                - /url: /en/blog/creator-teams-always-on-launch-room
+            - paragraph [ref=e89]: A practical look at how brands can organize creators, feedback, and paid amplification into a single launch rhythm.
+            - generic [ref=e90]:
+              - generic [ref=e92]: Marketing & Insights
+              - generic [ref=e93]:
+                - generic [ref=e94]: May 14, 2026
+                - generic [ref=e95]: /7 min read
+                - generic [ref=e96]: /By Norina
+        - article [ref=e97]:
+          - link "The new economics of UGC testing" [ref=e98] [cursor=pointer]:
+            - /url: /en/blog/new-economics-ugc-testing
+            - img "The new economics of UGC testing" [ref=e99]
+          - generic [ref=e100]:
+            - heading "The new economics of UGC testing" [level=3] [ref=e101]:
+              - link "The new economics of UGC testing" [ref=e102] [cursor=pointer]:
+                - /url: /en/blog/new-economics-ugc-testing
+            - paragraph [ref=e103]: Testing creator content works best when brands separate learning velocity from production volume.
+            - generic [ref=e104]:
+              - generic [ref=e106]: Marketing & Insights
+              - generic [ref=e107]:
+                - generic [ref=e108]: May 13, 2026
+                - generic [ref=e109]: /8 min read
+                - generic [ref=e110]: /By Norina
+        - article [ref=e111]:
+          - link "What brands should ask before licensing creator content" [ref=e112] [cursor=pointer]:
+            - /url: /en/blog/questions-before-licensing-creator-content
+            - img "What brands should ask before licensing creator content" [ref=e113]
+          - generic [ref=e114]:
+            - heading "What brands should ask before licensing creator content" [level=3] [ref=e115]:
+              - link "What brands should ask before licensing creator content" [ref=e116] [cursor=pointer]:
+                - /url: /en/blog/questions-before-licensing-creator-content
+            - paragraph [ref=e117]: A concise checklist for getting usage rights, paid media terms, and edit permissions right before launch.
+            - generic [ref=e118]:
+              - generic [ref=e120]: Marketing & Insights
+              - generic [ref=e121]:
+                - generic [ref=e122]: May 12, 2026
+                - generic [ref=e123]: /9 min read
+                - generic [ref=e124]: /By Norina
+        - article [ref=e125]:
+          - link "Why creator-led restaurant campaigns are becoming cultural events" [ref=e126] [cursor=pointer]:
+            - /url: /en/blog/creator-led-restaurant-campaigns-cultural-events
+            - img "Why creator-led restaurant campaigns are becoming cultural events" [ref=e127]
+          - generic [ref=e128]:
+            - heading "Why creator-led restaurant campaigns are becoming cultural events" [level=3] [ref=e129]:
+              - link "Why creator-led restaurant campaigns are becoming cultural events" [ref=e130] [cursor=pointer]:
+                - /url: /en/blog/creator-led-restaurant-campaigns-cultural-events
+            - paragraph [ref=e131]: Restaurant brands are using creators to turn menu launches, stunts, and local moments into content people want to follow.
+            - generic [ref=e132]:
+              - generic [ref=e134]: Marketing & Insights
+              - generic [ref=e135]:
+                - generic [ref=e136]: May 11, 2026
+                - generic [ref=e137]: /10 min read
+                - generic [ref=e138]: /By Norina
+        - article [ref=e139]:
+          - link "What Khaby Lame’s Olympic role says about global creator trust" [ref=e140] [cursor=pointer]:
+            - /url: /en/blog/khaby-lame-olympic-role-global-creator-trust
+            - img "What Khaby Lame’s Olympic role says about global creator trust" [ref=e141]
+          - generic [ref=e142]:
+            - heading "What Khaby Lame’s Olympic role says about global creator trust" [level=3] [ref=e143]:
+              - link "What Khaby Lame’s Olympic role says about global creator trust" [ref=e144] [cursor=pointer]:
+                - /url: /en/blog/khaby-lame-olympic-role-global-creator-trust
+            - paragraph [ref=e145]: Large institutions are turning to creators when they need reach, simplicity, and cross-border recognition.
+            - generic [ref=e146]:
+              - generic [ref=e148]: Marketing & Insights
+              - generic [ref=e149]:
+                - generic [ref=e150]: May 10, 2026
+                - generic [ref=e151]: /7 min read
+                - generic [ref=e152]: /By Norina
+        - article [ref=e153]:
+          - link "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [ref=e154] [cursor=pointer]:
+            - /url: /en/blog/chili-s-taps-creators-to-put-fast-food-on-trial-barbie-goes-to-coachella-with-creators-and-david
+            - img "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [ref=e155]
+          - generic [ref=e156]:
+            - heading "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [level=3] [ref=e157]:
+              - link "Chili's taps creators to put fast food on trial, Barbie goes to Coachella with creators, and David's Bridal rebuilds around them." [ref=e158] [cursor=pointer]:
+                - /url: /en/blog/chili-s-taps-creators-to-put-fast-food-on-trial-barbie-goes-to-coachella-with-creators-and-david
+            - paragraph [ref=e159]: Chili's handed the creative reins to Trisha Paytas for its 'Food Court' campaign, signaling that legacy restaurant brands are treating creators as campaign leads, not add-ons. YouTuber
+            - generic [ref=e160]:
+              - generic [ref=e162]: Marketing & Insights
+              - generic [ref=e163]:
+                - generic [ref=e164]: May 10, 2026
+                - generic [ref=e165]: /8 min read
+                - generic [ref=e166]: /By Norina
+        - article [ref=e167]:
+          - link "Why Pinterest belongs in more creator media plans" [ref=e168] [cursor=pointer]:
+            - /url: /en/blog/why-pinterest-belongs-in-creator-media-plans
+            - img "Why Pinterest belongs in more creator media plans" [ref=e169]
+          - generic [ref=e170]:
+            - heading "Why Pinterest belongs in more creator media plans" [level=3] [ref=e171]:
+              - link "Why Pinterest belongs in more creator media plans" [ref=e172] [cursor=pointer]:
+                - /url: /en/blog/why-pinterest-belongs-in-creator-media-plans
+            - paragraph [ref=e173]: Pinterest is often treated as a search layer, but it can also help creator content last longer and show up closer to purchase intent.
+            - generic [ref=e174]:
+              - generic [ref=e176]: Marketing & Insights
+              - generic [ref=e177]:
+                - generic [ref=e178]: May 9, 2026
+                - generic [ref=e179]: /9 min read
+                - generic [ref=e180]: /By Norina
+        - article [ref=e181]:
+          - 'link "Gen Z visual strategy: design as a performance channel" [ref=e182] [cursor=pointer]':
+            - /url: /en/blog/gen-z-visual-strategy-design-performance-channel
+            - 'img "Gen Z visual strategy: design as a performance channel" [ref=e183]'
+          - generic [ref=e184]:
+            - 'heading "Gen Z visual strategy: design as a performance channel" [level=3] [ref=e185]':
+              - 'link "Gen Z visual strategy: design as a performance channel" [ref=e186] [cursor=pointer]':
+                - /url: /en/blog/gen-z-visual-strategy-design-performance-channel
+            - paragraph [ref=e187]: For Gen Z audiences, design signals trust, fluency, and cultural awareness before the caption has time to do any work.
+            - generic [ref=e188]:
+              - generic [ref=e190]: Marketing & Insights
+              - generic [ref=e191]:
+                - generic [ref=e192]: May 8, 2026
+                - generic [ref=e193]: /10 min read
+                - generic [ref=e194]: /By Norina
+        - article [ref=e195]:
+          - link "How brand deals actually work for emerging creators" [ref=e196] [cursor=pointer]:
+            - /url: /en/blog/how-brand-deals-work-emerging-creators
+            - img "How brand deals actually work for emerging creators" [ref=e197]
+          - generic [ref=e198]:
+            - heading "How brand deals actually work for emerging creators" [level=3] [ref=e199]:
+              - link "How brand deals actually work for emerging creators" [ref=e200] [cursor=pointer]:
+                - /url: /en/blog/how-brand-deals-work-emerging-creators
+            - paragraph [ref=e201]: A practical explainer on matching, selection, negotiation, approvals, and what creators can do to become easier to hire.
+            - generic [ref=e202]:
+              - generic [ref=e204]: Marketing & Insights
+              - generic [ref=e205]:
+                - generic [ref=e206]: May 7, 2026
+                - generic [ref=e207]: /7 min read
+                - generic [ref=e208]: /By Norina
+        - article [ref=e209]:
+          - link "Domino’s, creator meals, and the rise of participatory menus" [ref=e210] [cursor=pointer]:
+            - /url: /en/blog/dominos-creator-meals-participatory-menus
+            - img "Domino’s, creator meals, and the rise of participatory menus" [ref=e211]
+          - generic [ref=e212]:
+            - heading "Domino’s, creator meals, and the rise of participatory menus" [level=3] [ref=e213]:
+              - link "Domino’s, creator meals, and the rise of participatory menus" [ref=e214] [cursor=pointer]:
+                - /url: /en/blog/dominos-creator-meals-participatory-menus
+            - paragraph [ref=e215]: Food brands are inviting creators and athletes to turn customization into a campaign mechanic.
+            - generic [ref=e216]:
+              - generic [ref=e218]: Marketing & Insights
+              - generic [ref=e219]:
+                - generic [ref=e220]: May 6, 2026
+                - generic [ref=e221]: /8 min read
+                - generic [ref=e222]: /By Norina
+        - article [ref=e223]:
+          - link "Micro-creator programs are becoming retail loyalty engines" [ref=e224] [cursor=pointer]:
+            - /url: /en/blog/micro-creator-programs-retail-loyalty-engines
+            - img "Micro-creator programs are becoming retail loyalty engines" [ref=e225]
+          - generic [ref=e226]:
+            - heading "Micro-creator programs are becoming retail loyalty engines" [level=3] [ref=e227]:
+              - link "Micro-creator programs are becoming retail loyalty engines" [ref=e228] [cursor=pointer]:
+                - /url: /en/blog/micro-creator-programs-retail-loyalty-engines
+            - paragraph [ref=e229]: Retailers are using micro-creators to turn product discovery into repeatable community participation.
+            - generic [ref=e230]:
+              - generic [ref=e232]: Marketing & Insights
+              - generic [ref=e233]:
+                - generic [ref=e234]: May 5, 2026
+                - generic [ref=e235]: /9 min read
+                - generic [ref=e236]: /By Norina
+        - article [ref=e237]:
+          - link "The nostalgia wave and why 2016 keeps showing up in feeds" [ref=e238] [cursor=pointer]:
+            - /url: /en/blog/nostalgia-wave-2016-feeds
+            - img "The nostalgia wave and why 2016 keeps showing up in feeds" [ref=e239]
+          - generic [ref=e240]:
+            - heading "The nostalgia wave and why 2016 keeps showing up in feeds" [level=3] [ref=e241]:
+              - link "The nostalgia wave and why 2016 keeps showing up in feeds" [ref=e242] [cursor=pointer]:
+                - /url: /en/blog/nostalgia-wave-2016-feeds
+            - paragraph [ref=e243]: Creators are helping brands turn pre-2020 internet references into a familiar but refreshed campaign language.
+            - generic [ref=e244]:
+              - generic [ref=e246]: Marketing & Insights
+              - generic [ref=e247]:
+                - generic [ref=e248]: May 4, 2026
+                - generic [ref=e249]: /10 min read
+                - generic [ref=e250]: /By Norina
+        - article [ref=e251]:
+          - link "How The Sandbox brings brands closer to fan creators" [ref=e252] [cursor=pointer]:
+            - /url: /en/blog/sandbox-brands-fan-creators
+            - img "How The Sandbox brings brands closer to fan creators" [ref=e253]
+          - generic [ref=e254]:
+            - heading "How The Sandbox brings brands closer to fan creators" [level=3] [ref=e255]:
+              - link "How The Sandbox brings brands closer to fan creators" [ref=e256] [cursor=pointer]:
+                - /url: /en/blog/sandbox-brands-fan-creators
+            - paragraph [ref=e257]: Virtual worlds can give fans tools to build with a brand rather than simply watch it advertise.
+            - generic [ref=e258]:
+              - generic [ref=e260]: Marketing & Insights
+              - generic [ref=e261]:
+                - generic [ref=e262]: May 3, 2026
+                - generic [ref=e263]: /7 min read
+                - generic [ref=e264]: /By Norina
+        - article [ref=e265]:
+          - link "NIL, high school athletes, and the new drop culture" [ref=e266] [cursor=pointer]:
+            - /url: /en/blog/nil-high-school-athletes-drop-culture
+            - img "NIL, high school athletes, and the new drop culture" [ref=e267]
+          - generic [ref=e268]:
+            - heading "NIL, high school athletes, and the new drop culture" [level=3] [ref=e269]:
+              - link "NIL, high school athletes, and the new drop culture" [ref=e270] [cursor=pointer]:
+                - /url: /en/blog/nil-high-school-athletes-drop-culture
+            - paragraph [ref=e271]: Sports brands are finding new energy by connecting young athletes, limited releases, and community pride.
+            - generic [ref=e272]:
+              - generic [ref=e274]: Marketing & Insights
+              - generic [ref=e275]:
+                - generic [ref=e276]: May 2, 2026
+                - generic [ref=e277]: /8 min read
+                - generic [ref=e278]: /By Norina
+        - article [ref=e279]:
+          - link "How bike brands can court Olympians, creators, and casual riders" [ref=e280] [cursor=pointer]:
+            - /url: /en/blog/bike-brands-olympians-creators-casual-riders
+            - img "How bike brands can court Olympians, creators, and casual riders" [ref=e281]
+          - generic [ref=e282]:
+            - heading "How bike brands can court Olympians, creators, and casual riders" [level=3] [ref=e283]:
+              - link "How bike brands can court Olympians, creators, and casual riders" [ref=e284] [cursor=pointer]:
+                - /url: /en/blog/bike-brands-olympians-creators-casual-riders
+            - paragraph [ref=e285]: Cycling campaigns can connect elite performance with everyday mobility when creators show the full spectrum of riders.
+            - generic [ref=e286]:
+              - generic [ref=e288]: Marketing & Insights
+              - generic [ref=e289]:
+                - generic [ref=e290]: May 1, 2026
+                - generic [ref=e291]: /9 min read
+                - generic [ref=e292]: /By Norina
+        - article [ref=e293]:
+          - link "Why Lime-style mobility brands need local creator proof" [ref=e294] [cursor=pointer]:
+            - /url: /en/blog/mobility-brands-local-creator-proof
+            - img "Why Lime-style mobility brands need local creator proof" [ref=e295]
+          - generic [ref=e296]:
+            - heading "Why Lime-style mobility brands need local creator proof" [level=3] [ref=e297]:
+              - link "Why Lime-style mobility brands need local creator proof" [ref=e298] [cursor=pointer]:
+                - /url: /en/blog/mobility-brands-local-creator-proof
+            - paragraph [ref=e299]: Mobility companies can stand out by showing how real people use shared transport in real neighborhoods.
+            - generic [ref=e300]:
+              - generic [ref=e302]: Marketing & Insights
+              - generic [ref=e303]:
+                - generic [ref=e304]: Apr 30, 2026
+                - generic [ref=e305]: /10 min read
+                - generic [ref=e306]: /By Norina
+        - article [ref=e307]:
+          - link "Doritos and the creator-made Super Bowl spot" [ref=e308] [cursor=pointer]:
+            - /url: /en/blog/doritos-creator-made-super-bowl-spot
+            - img "Doritos and the creator-made Super Bowl spot" [ref=e309]
+          - generic [ref=e310]:
+            - heading "Doritos and the creator-made Super Bowl spot" [level=3] [ref=e311]:
+              - link "Doritos and the creator-made Super Bowl spot" [ref=e312] [cursor=pointer]:
+                - /url: /en/blog/doritos-creator-made-super-bowl-spot
+            - paragraph [ref=e313]: Fan-made ad formats still work when brands give creators a clear stage and a meaningful constraint.
+            - generic [ref=e314]:
+              - generic [ref=e316]: Marketing & Insights
+              - generic [ref=e317]:
+                - generic [ref=e318]: Apr 29, 2026
+                - generic [ref=e319]: /7 min read
+                - generic [ref=e320]: /By Norina
+        - article [ref=e321]:
+          - link "How hydration brands turn a universal problem into creator content" [ref=e322] [cursor=pointer]:
+            - /url: /en/blog/hydration-brands-universal-problem-creator-content
+            - img "How hydration brands turn a universal problem into creator content" [ref=e323]
+          - generic [ref=e324]:
+            - heading "How hydration brands turn a universal problem into creator content" [level=3] [ref=e325]:
+              - link "How hydration brands turn a universal problem into creator content" [ref=e326] [cursor=pointer]:
+                - /url: /en/blog/hydration-brands-universal-problem-creator-content
+            - paragraph [ref=e327]: Wellness products perform better when creators anchor the benefit in daily situations rather than abstract claims.
+            - generic [ref=e328]:
+              - generic [ref=e330]: Marketing & Insights
+              - generic [ref=e331]:
+                - generic [ref=e332]: Apr 28, 2026
+                - generic [ref=e333]: /8 min read
+                - generic [ref=e334]: /By Norina
+        - article [ref=e335]:
+          - link "Ray-Ban Meta and the practical side of wearable creator tech" [ref=e336] [cursor=pointer]:
+            - /url: /en/blog/ray-ban-meta-wearable-creator-tech
+            - img "Ray-Ban Meta and the practical side of wearable creator tech" [ref=e337]
+          - generic [ref=e338]:
+            - heading "Ray-Ban Meta and the practical side of wearable creator tech" [level=3] [ref=e339]:
+              - link "Ray-Ban Meta and the practical side of wearable creator tech" [ref=e340] [cursor=pointer]:
+                - /url: /en/blog/ray-ban-meta-wearable-creator-tech
+            - paragraph [ref=e341]: Smart glasses marketing works when creators show useful contexts instead of leaning only on novelty.
+            - generic [ref=e342]:
+              - generic [ref=e344]: Marketing & Insights
+              - generic [ref=e345]:
+                - generic [ref=e346]: Apr 27, 2026
+                - generic [ref=e347]: /9 min read
+                - generic [ref=e348]: /By Norina
+        - article [ref=e349]:
+          - link "How Notion recruits creators to make productivity feel aspirational" [ref=e350] [cursor=pointer]:
+            - /url: /en/blog/notion-creators-productivity-aspirational
+            - img "How Notion recruits creators to make productivity feel aspirational" [ref=e351]
+          - generic [ref=e352]:
+            - heading "How Notion recruits creators to make productivity feel aspirational" [level=3] [ref=e353]:
+              - link "How Notion recruits creators to make productivity feel aspirational" [ref=e354] [cursor=pointer]:
+                - /url: /en/blog/notion-creators-productivity-aspirational
+            - paragraph [ref=e355]: Productivity tools can use creators to show identity, workflow, and personal systems rather than only features.
+            - generic [ref=e356]:
+              - generic [ref=e358]: Marketing & Insights
+              - generic [ref=e359]:
+                - generic [ref=e360]: Apr 26, 2026
+                - generic [ref=e361]: /10 min read
+                - generic [ref=e362]: /By Norina
+        - article [ref=e363]:
+          - link "How modern media companies blend legacy reach and creator influence" [ref=e364] [cursor=pointer]:
+            - /url: /en/blog/media-companies-legacy-reach-creator-influence
+            - img "How modern media companies blend legacy reach and creator influence" [ref=e365]
+          - generic [ref=e366]:
+            - heading "How modern media companies blend legacy reach and creator influence" [level=3] [ref=e367]:
+              - link "How modern media companies blend legacy reach and creator influence" [ref=e368] [cursor=pointer]:
+                - /url: /en/blog/media-companies-legacy-reach-creator-influence
+            - paragraph [ref=e369]: Media brands can use creators to make big events feel personal without losing the value of institutional scale.
+            - generic [ref=e370]:
+              - generic [ref=e372]: Marketing & Insights
+              - generic [ref=e373]:
+                - generic [ref=e374]: Apr 25, 2026
+                - generic [ref=e375]: /7 min read
+                - generic [ref=e376]: /By Norina
+        - article [ref=e377]:
+          - link "How healthcare startups can make dreaded routines feel less cold" [ref=e378] [cursor=pointer]:
+            - /url: /en/blog/healthcare-startups-dreaded-routines-less-cold
+            - img "How healthcare startups can make dreaded routines feel less cold" [ref=e379]
+          - generic [ref=e380]:
+            - heading "How healthcare startups can make dreaded routines feel less cold" [level=3] [ref=e381]:
+              - link "How healthcare startups can make dreaded routines feel less cold" [ref=e382] [cursor=pointer]:
+                - /url: /en/blog/healthcare-startups-dreaded-routines-less-cold
+            - paragraph [ref=e383]: Healthcare brands can use creators to make intimidating services feel human, practical, and less abstract.
+            - generic [ref=e384]:
+              - generic [ref=e386]: Marketing & Insights
+              - generic [ref=e387]:
+                - generic [ref=e388]: Apr 24, 2026
+                - generic [ref=e389]: /8 min read
+                - generic [ref=e390]: /By Norina
+        - article [ref=e391]:
+          - link "Why sports networks are embracing creator-safe content programs" [ref=e392] [cursor=pointer]:
+            - /url: /en/blog/sports-networks-creator-safe-content-programs
+            - img "Why sports networks are embracing creator-safe content programs" [ref=e393]
+          - generic [ref=e394]:
+            - heading "Why sports networks are embracing creator-safe content programs" [level=3] [ref=e395]:
+              - link "Why sports networks are embracing creator-safe content programs" [ref=e396] [cursor=pointer]:
+                - /url: /en/blog/sports-networks-creator-safe-content-programs
+            - paragraph [ref=e397]: Sports publishers can help creators participate by clarifying clips, rights, and remix boundaries.
+            - generic [ref=e398]:
+              - generic [ref=e400]: Marketing & Insights
+              - generic [ref=e401]:
+                - generic [ref=e402]: Apr 23, 2026
+                - generic [ref=e403]: /9 min read
+                - generic [ref=e404]: /By Norina
+        - article [ref=e405]:
+          - link "How Uber-style brands segment an audience that includes everyone" [ref=e406] [cursor=pointer]:
+            - /url: /en/blog/uber-style-brands-segment-everyone-audience
+            - img "How Uber-style brands segment an audience that includes everyone" [ref=e407]
+          - generic [ref=e408]:
+            - heading "How Uber-style brands segment an audience that includes everyone" [level=3] [ref=e409]:
+              - link "How Uber-style brands segment an audience that includes everyone" [ref=e410] [cursor=pointer]:
+                - /url: /en/blog/uber-style-brands-segment-everyone-audience
+            - paragraph [ref=e411]: Mass-market brands need creator strategies that separate use cases without fragmenting the brand.
+            - generic [ref=e412]:
+              - generic [ref=e414]: Marketing & Insights
+              - generic [ref=e415]:
+                - generic [ref=e416]: Apr 22, 2026
+                - generic [ref=e417]: /10 min read
+                - generic [ref=e418]: /By Norina
+        - article [ref=e419]:
+          - link "How nonprofits can pair personal stories with factual action" [ref=e420] [cursor=pointer]:
+            - /url: /en/blog/nonprofits-personal-stories-factual-action
+            - img "How nonprofits can pair personal stories with factual action" [ref=e421]
+          - generic [ref=e422]:
+            - heading "How nonprofits can pair personal stories with factual action" [level=3] [ref=e423]:
+              - link "How nonprofits can pair personal stories with factual action" [ref=e424] [cursor=pointer]:
+                - /url: /en/blog/nonprofits-personal-stories-factual-action
+            - paragraph [ref=e425]: Cause campaigns work when creators bring lived experience and the organization supplies useful context.
+            - generic [ref=e426]:
+              - generic [ref=e428]: Marketing & Insights
+              - generic [ref=e429]:
+                - generic [ref=e430]: Apr 21, 2026
+                - generic [ref=e431]: /7 min read
+                - generic [ref=e432]: /By Norina
+        - article [ref=e433]:
+          - link "More men want beauty content, but brand language is lagging" [ref=e434] [cursor=pointer]:
+            - /url: /en/blog/men-beauty-content-brand-language-lagging
+            - img "More men want beauty content, but brand language is lagging" [ref=e435]
+          - generic [ref=e436]:
+            - heading "More men want beauty content, but brand language is lagging" [level=3] [ref=e437]:
+              - link "More men want beauty content, but brand language is lagging" [ref=e438] [cursor=pointer]:
+                - /url: /en/blog/men-beauty-content-brand-language-lagging
+            - paragraph [ref=e439]: Beauty brands can reach men more effectively by moving beyond novelty and showing practical, identity-safe routines.
+            - generic [ref=e440]:
+              - generic [ref=e442]: Marketing & Insights
+              - generic [ref=e443]:
+                - generic [ref=e444]: Apr 20, 2026
+                - generic [ref=e445]: /8 min read
+                - generic [ref=e446]: /By Norina
+        - article [ref=e447]:
+          - link "Why instant film brands still need creators in a digital world" [ref=e448] [cursor=pointer]:
+            - /url: /en/blog/instant-film-brands-creators-digital-world
+            - img "Why instant film brands still need creators in a digital world" [ref=e449]
+          - generic [ref=e450]:
+            - heading "Why instant film brands still need creators in a digital world" [level=3] [ref=e451]:
+              - link "Why instant film brands still need creators in a digital world" [ref=e452] [cursor=pointer]:
+                - /url: /en/blog/instant-film-brands-creators-digital-world
+            - paragraph [ref=e453]: Analog products can use creators to turn unpredictability and physical memory into a modern advantage.
+            - generic [ref=e454]:
+              - generic [ref=e456]: Marketing & Insights
+              - generic [ref=e457]:
+                - generic [ref=e458]: Apr 19, 2026
+                - generic [ref=e459]: /9 min read
+                - generic [ref=e460]: /By Norina
+        - article [ref=e461]:
+          - link "What VidCon reveals about the creator economy’s split audiences" [ref=e462] [cursor=pointer]:
+            - /url: /en/blog/vidcon-creator-economy-split-audiences
+            - img "What VidCon reveals about the creator economy’s split audiences" [ref=e463]
+          - generic [ref=e464]:
+            - heading "What VidCon reveals about the creator economy’s split audiences" [level=3] [ref=e465]:
+              - link "What VidCon reveals about the creator economy’s split audiences" [ref=e466] [cursor=pointer]:
+                - /url: /en/blog/vidcon-creator-economy-split-audiences
+            - paragraph [ref=e467]: Creator events now serve fans, creators, and marketers at once, which makes programming strategy more complex.
+            - generic [ref=e468]:
+              - generic [ref=e470]: Marketing & Insights
+              - generic [ref=e471]:
+                - generic [ref=e472]: Apr 18, 2026
+                - generic [ref=e473]: /10 min read
+                - generic [ref=e474]: /By Norina
+        - article [ref=e475]:
+          - link "Accessibility creators are changing what hospitality campaigns can prove" [ref=e476] [cursor=pointer]:
+            - /url: /en/blog/accessibility-creators-hospitality-campaigns
+            - img "Accessibility creators are changing what hospitality campaigns can prove" [ref=e477]
+          - generic [ref=e478]:
+            - heading "Accessibility creators are changing what hospitality campaigns can prove" [level=3] [ref=e479]:
+              - link "Accessibility creators are changing what hospitality campaigns can prove" [ref=e480] [cursor=pointer]:
+                - /url: /en/blog/accessibility-creators-hospitality-campaigns
+            - paragraph [ref=e481]: Travel and hospitality brands can build trust by letting accessibility creators evaluate real experiences.
+            - generic [ref=e482]:
+              - generic [ref=e484]: Marketing & Insights
+              - generic [ref=e485]:
+                - generic [ref=e486]: Apr 17, 2026
+                - generic [ref=e487]: /7 min read
+                - generic [ref=e488]: /By Norina
+        - article [ref=e489]:
+          - link "Gaming brands can maintain fan engagement during long product waits" [ref=e490] [cursor=pointer]:
+            - /url: /en/blog/gaming-brands-fan-engagement-product-waits
+            - img "Gaming brands can maintain fan engagement during long product waits" [ref=e491]
+          - generic [ref=e492]:
+            - heading "Gaming brands can maintain fan engagement during long product waits" [level=3] [ref=e493]:
+              - link "Gaming brands can maintain fan engagement during long product waits" [ref=e494] [cursor=pointer]:
+                - /url: /en/blog/gaming-brands-fan-engagement-product-waits
+            - paragraph [ref=e495]: Creators can help gaming communities stay engaged when the next release is still months away.
+            - generic [ref=e496]:
+              - generic [ref=e498]: Marketing & Insights
+              - generic [ref=e499]:
+                - generic [ref=e500]: Apr 16, 2026
+                - generic [ref=e501]: /8 min read
+                - generic [ref=e502]: /By Norina
+        - article [ref=e503]:
+          - link "When creators make restaurants go viral, what happens next?" [ref=e504] [cursor=pointer]:
+            - /url: /en/blog/when-creators-make-restaurants-go-viral-what-next
+            - img "When creators make restaurants go viral, what happens next?" [ref=e505]
+          - generic [ref=e506]:
+            - heading "When creators make restaurants go viral, what happens next?" [level=3] [ref=e507]:
+              - link "When creators make restaurants go viral, what happens next?" [ref=e508] [cursor=pointer]:
+                - /url: /en/blog/when-creators-make-restaurants-go-viral-what-next
+            - paragraph [ref=e509]: Viral restaurant moments can create operational stress, so brands need a plan for the demand after the post.
+            - generic [ref=e510]:
+              - generic [ref=e512]: Marketing & Insights
+              - generic [ref=e513]:
+                - generic [ref=e514]: Apr 15, 2026
+                - generic [ref=e515]: /9 min read
+                - generic [ref=e516]: /By Norina
+        - article [ref=e517]:
+          - link "Content freedom is becoming a creator negotiation point" [ref=e518] [cursor=pointer]:
+            - /url: /en/blog/content-freedom-creator-negotiation-point
+            - img "Content freedom is becoming a creator negotiation point" [ref=e519]
+          - generic [ref=e520]:
+            - heading "Content freedom is becoming a creator negotiation point" [level=3] [ref=e521]:
+              - link "Content freedom is becoming a creator negotiation point" [ref=e522] [cursor=pointer]:
+                - /url: /en/blog/content-freedom-creator-negotiation-point
+            - paragraph [ref=e523]: Creators increasingly ask for room to adapt brand messages to the format their audience already trusts.
+            - generic [ref=e524]:
+              - generic [ref=e526]: Marketing & Insights
+              - generic [ref=e527]:
+                - generic [ref=e528]: Apr 14, 2026
+                - generic [ref=e529]: /10 min read
+                - generic [ref=e530]: /By Norina
+        - article [ref=e531]:
+          - link "AI campaigns work better when grounded in real stories" [ref=e532] [cursor=pointer]:
+            - /url: /en/blog/ai-campaigns-grounded-in-real-stories
+            - img "AI campaigns work better when grounded in real stories" [ref=e533]
+          - generic [ref=e534]:
+            - heading "AI campaigns work better when grounded in real stories" [level=3] [ref=e535]:
+              - link "AI campaigns work better when grounded in real stories" [ref=e536] [cursor=pointer]:
+                - /url: /en/blog/ai-campaigns-grounded-in-real-stories
+            - paragraph [ref=e537]: AI marketing can feel abstract unless creators and customers show the lived problem the technology helps solve.
+            - generic [ref=e538]:
+              - generic [ref=e540]: Marketing & Insights
+              - generic [ref=e541]:
+                - generic [ref=e542]: Apr 13, 2026
+                - generic [ref=e543]: /7 min read
+                - generic [ref=e544]: /By Norina
+        - article [ref=e545]:
+          - link "Small-town charm and the local creator opportunity" [ref=e546] [cursor=pointer]:
+            - /url: /en/blog/small-town-charm-local-creator-opportunity
+            - img "Small-town charm and the local creator opportunity" [ref=e547]
+          - generic [ref=e548]:
+            - heading "Small-town charm and the local creator opportunity" [level=3] [ref=e549]:
+              - link "Small-town charm and the local creator opportunity" [ref=e550] [cursor=pointer]:
+                - /url: /en/blog/small-town-charm-local-creator-opportunity
+            - paragraph [ref=e551]: Restaurant and retail brands can use local creators to make growth feel personal rather than generic.
+            - generic [ref=e552]:
+              - generic [ref=e554]: Marketing & Insights
+              - generic [ref=e555]:
+                - generic [ref=e556]: Apr 12, 2026
+                - generic [ref=e557]: /8 min read
+                - generic [ref=e558]: /By Norina
+  - contentinfo [ref=e559]:
+    - generic [ref=e560]:
+      - heading "Ready for your first UGC video?" [level=2] [ref=e561]
+      - button "Register now" [ref=e562]:
+        - link "Register now" [ref=e563] [cursor=pointer]:
+          - /url: /signup
+    - generic [ref=e564]:
+      - generic [ref=e565]:
+        - generic [ref=e566]:
+          - heading "Services" [level=4] [ref=e567]
+          - list [ref=e568]:
+            - listitem [ref=e569]:
+              - link "Prices" [ref=e570] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e571]:
+              - link "Managed Service" [ref=e572] [cursor=pointer]:
+                - /url: /managed-services
+        - generic [ref=e573]:
+          - heading "FAQ" [level=4] [ref=e574]
+          - list [ref=e575]:
+            - listitem [ref=e576]:
+              - link "FAQ Brands" [ref=e577] [cursor=pointer]:
+                - /url: /brands-faq
+            - listitem [ref=e578]:
+              - link "FAQ Creators" [ref=e579] [cursor=pointer]:
+                - /url: /creators-faq
+        - generic [ref=e580]:
+          - heading "Platform" [level=4] [ref=e581]
+          - list [ref=e582]:
+            - listitem [ref=e583]:
+              - link "About Huerray" [ref=e584] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e585]:
+              - link "Blog" [ref=e586] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e587]:
+              - link "Careers" [ref=e588] [cursor=pointer]:
+                - /url: /careers
+            - listitem [ref=e589]:
+              - link "Site Notice" [ref=e590] [cursor=pointer]:
+                - /url: site-notice
+            - listitem [ref=e591]:
+              - link "Privacy Policy" [ref=e592] [cursor=pointer]:
+                - /url: /privacy-policy
+            - listitem [ref=e593]:
+              - link "T&C – Creators" [ref=e594] [cursor=pointer]:
+                - /url: /creator-terms
+            - listitem [ref=e595]:
+              - link "T&C – Brands" [ref=e596] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e597]:
+        - heading "Signup for updates" [level=3] [ref=e598]
+        - generic [ref=e599]:
+          - textbox "Email address" [ref=e600]
+          - button "Submit" [ref=e601]:
+            - generic [ref=e602]: 
+    - generic [ref=e604]:
+      - generic [ref=e605]:
+        - img "Huerray" [ref=e606]
+        - paragraph [ref=e607]: © 2026 Huerray. All rights reserved
+      - generic [ref=e608]:
+        - button "Select language" [ref=e609] [cursor=pointer]:
+          - generic [ref=e611]: English
+          - generic [ref=e612]: 
+        - generic [ref=e613]:
+          - link "Facebook" [ref=e614] [cursor=pointer]:
+            - /url: https://www.facebook.com/profile.php?id=61577485322627&mibextid=wwXIfr&rdid=16XIHv5v2uXCkiGV#
+            - generic [ref=e615]: 
+          - link "X" [ref=e616] [cursor=pointer]:
+            - /url: https://x.com/huerray_de
+            - generic [ref=e617]: 
+          - link "Instagram" [ref=e618] [cursor=pointer]:
+            - /url: https://www.instagram.com/huerray_de/
+            - generic [ref=e619]: 
+          - link "TikTok" [ref=e620] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@huerray
+            - generic [ref=e621]: 
+  - img
+  - button "Open Next.js Dev Tools" [ref=e627] [cursor=pointer]:
+    - img [ref=e628]

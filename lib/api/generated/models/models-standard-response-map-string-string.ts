@@ -13,13 +13,14 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsErrorInfo } from './models-error-info';
 
-export interface ModelsCaseUserSummary {
-    'email'?: string;
-    'first_name'?: string;
-    'id'?: string;
-    'last_name'?: string;
-    'profile_id'?: string;
-    'user_type'?: string;
+export interface ModelsStandardResponseMapStringString {
+    'data'?: { [key: string]: string; };
+    'error'?: ModelsErrorInfo;
+    'message'?: string;
+    'success'?: boolean;
 }
 

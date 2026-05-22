@@ -2,6 +2,7 @@
   "welcome": "Bienvenue, Admin !",
   "overview": "Vue d'ensemble du système",
   "description": "Vue d'ensemble de la plateforme et suivi opérationnel",
+  "actions": "Actions",
   "analyticsPage": {
     "title": "Analyse de la plate-forme",
     "description": "Suivez les utilisateurs, le pipeline de contenu, les revenus, les soumissions de vidéos et les performances du support.",

@@ -12,6 +12,7 @@ export const BLOG_INDEX_QUERY = defineQuery(/* groq */ `
     featured,
     readingTimeMinutes,
     mainImage,
+    tags,
     author->{
       _id,
       name,
@@ -37,6 +38,7 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
     featured,
     readingTimeMinutes,
     mainImage,
+    tags,
     author->{
       _id,
       name,
@@ -56,6 +58,58 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
       publishedAt,
       readingTimeMinutes,
       mainImage,
+      tags,
+      author->{
+        _id,
+        name,
+        image
+      },
+      categories[]->{
+        _id,
+        title,
+        slug
+      }
+    },
+    "automaticRelatedPosts": *[
+      _type == "blog" &&
+      defined(slug.current) &&
+      status == "published" &&
+      _id != ^._id &&
+      count(categories[]._ref[@ in ^.categories[]._ref]) > 0
+    ] | order(coalesce(publishedAt, _createdAt) desc)[0...6] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      readingTimeMinutes,
+      mainImage,
+      tags,
+      author->{
+        _id,
+        name,
+        image
+      },
+      categories[]->{
+        _id,
+        title,
+        slug
+      }
+    },
+    "latestRelatedPosts": *[
+      _type == "blog" &&
+      defined(slug.current) &&
+      status == "published" &&
+      _id != ^._id
+    ] | order(coalesce(publishedAt, _createdAt) desc)[0...6] {
+      _id,
+      title,
+      slug,
+      excerpt,
+      publishedAt,
+      readingTimeMinutes,
+      mainImage,
+      tags,
       author->{
         _id,
         name,
@@ -75,6 +129,76 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
   }
 `)
 
+export const BLOG_TAG_QUERY = defineQuery(/* groq */ `
+  *[_type == "blog" && defined(slug.current) && status == "published" && $tag in tags[]]
+  | order(featured desc, coalesce(publishedAt, _createdAt) desc) {
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    updatedAt,
+    featured,
+    readingTimeMinutes,
+    mainImage,
+    tags,
+    author->{
+      _id,
+      name,
+      image
+    },
+    categories[]->{
+      _id,
+      title,
+      slug
+    }
+  }
+`)
+
+export const BLOG_TAGS_QUERY = defineQuery(/* groq */ `
+  array::unique(*[_type == "blog" && defined(slug.current) && status == "published" && defined(tags)].tags[])
+`)
+
+export const BLOG_CATEGORY_QUERY = defineQuery(/* groq */ `
+  *[_type == "blog" && defined(slug.current) && status == "published" && $category in categories[]->slug.current]
+  | order(featured desc, coalesce(publishedAt, _createdAt) desc) {
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishedAt,
+    updatedAt,
+    featured,
+    readingTimeMinutes,
+    mainImage,
+    tags,
+    author->{
+      _id,
+      name,
+      image
+    },
+    categories[]->{
+      _id,
+      title,
+      slug
+    }
+  }
+`)
+
+export const BLOG_CATEGORIES_QUERY = defineQuery(/* groq */ `
+  *[
+    _type == "category" &&
+    defined(slug.current) &&
+    count(*[_type == "blog" && status == "published" && defined(slug.current) && references(^._id)]) > 0
+  ] | order(title.en asc) {
+    _id,
+    title,
+    slug,
+    description,
+    "count": count(*[_type == "blog" && status == "published" && defined(slug.current) && references(^._id)])
+  }
+`)
+
 export const BLOG_SLUGS_QUERY = defineQuery(/* groq */ `
   *[_type == "blog" && defined(slug.current) && status == "published"]{
     "slug": slug.current
@@ -89,6 +213,11 @@ export type BlogCategory = {
   slug?: {
     current?: string
   }
+}
+
+export type BlogCategoryListItem = BlogCategory & {
+  description?: LocalizedString
+  count?: number
 }
 
 export type BlogAuthor = {
@@ -110,6 +239,7 @@ export type BlogSummary = {
   featured?: boolean
   readingTimeMinutes?: number
   mainImage?: unknown
+  tags?: string[]
   author?: BlogAuthor
   categories?: BlogCategory[]
 }
@@ -118,6 +248,8 @@ export type BlogPost = BlogSummary & {
   body?: Record<string, unknown>
   updatedAt?: string
   relatedPosts?: BlogSummary[]
+  automaticRelatedPosts?: BlogSummary[]
+  latestRelatedPosts?: BlogSummary[]
   seoTitle?: LocalizedString
   seoDescription?: LocalizedString
   openGraphImage?: unknown

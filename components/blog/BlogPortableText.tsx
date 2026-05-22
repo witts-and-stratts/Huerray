@@ -1,16 +1,54 @@
-import {CodeIcon, EarthGlobeIcon, LinkIcon, PlayIcon} from '@sanity/icons'
+import {CodeIcon, PlayIcon} from '@sanity/icons'
 import {PortableText, type PortableTextComponents} from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type {ReactNode} from 'react'
 
+import {BlogSocialEmbed} from '@/components/blog/BlogSocialEmbed'
 import {Button} from '@/components/ui/button'
-import {Badge} from '@/components/ui/badge'
 import {cn} from '@/lib/utils'
 import {urlFor} from '@/sanity/lib/image'
 
 type BlogPortableTextProps = {
   value?: unknown
+}
+
+export type PortableTextHeading = {
+  id: string
+  text: string
+}
+
+export function getPortableTextPlainText(value: any): string {
+  if (!value?._type || value._type !== 'block' || !Array.isArray(value.children)) {
+    return ''
+  }
+
+  return value.children
+    .map((child: {text?: string}) => child.text ?? '')
+    .join('')
+    .trim()
+}
+
+export function getPortableTextHeadingId(value: any): string {
+  const text = getPortableTextPlainText(value)
+
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+}
+
+export function getPortableTextHeadings(value?: unknown): PortableTextHeading[] {
+  if (!Array.isArray(value)) return []
+
+  return value
+    .filter((block) => block?._type === 'block' && block?.style === 'h2')
+    .map((block) => ({
+      id: getPortableTextHeadingId(block),
+      text: getPortableTextPlainText(block),
+    }))
+    .filter((heading) => heading.id && heading.text)
 }
 
 function getVideoEmbedUrl(rawUrl?: string) {
@@ -101,30 +139,6 @@ function BlogVideoEmbed({value}: {value?: {title?: string; url?: string; caption
   )
 }
 
-function BlogSocialEmbed({value}: {value?: {platform?: string; url?: string; caption?: string}}) {
-  if (!value?.url) return null
-
-  return (
-    <figure className="blog-rich-text__embed">
-      <div className="blog-rich-text__social-card">
-        <div className="blog-rich-text__social-header">
-          <Badge variant="pill" className="blog-rich-text__badge">
-            <EarthGlobeIcon className="size-4" />
-            {value.platform || 'Social post'}
-          </Badge>
-        </div>
-        {value.caption && <p className="blog-rich-text__social-caption">{value.caption}</p>}
-        <Button asChild variant="outline" className="blog-rich-text__social-button">
-          <Link href={value.url} target="_blank" rel="noreferrer noopener">
-            Open post
-            <LinkIcon className="size-4" />
-          </Link>
-        </Button>
-      </div>
-    </figure>
-  )
-}
-
 function BlogCallout({value}: {value?: {tone?: string; title?: string; message?: string}}) {
   if (!value?.message) return null
 
@@ -187,8 +201,16 @@ function BlogSeparator() {
 const blogPortableTextComponents: PortableTextComponents = {
   block: {
     normal: ({children}) => <p className="blog-rich-text__paragraph">{children}</p>,
-    h2: ({children}) => <h2 className="blog-rich-text__heading blog-rich-text__heading--2">{children}</h2>,
-    h3: ({children}) => <h3 className="blog-rich-text__heading blog-rich-text__heading--3">{children}</h3>,
+    h2: ({children, value}) => (
+      <h2 id={getPortableTextHeadingId(value)} className="blog-rich-text__heading blog-rich-text__heading--2">
+        {children}
+      </h2>
+    ),
+    h3: ({children, value}) => (
+      <h3 id={getPortableTextHeadingId(value)} className="blog-rich-text__heading blog-rich-text__heading--3">
+        {children}
+      </h3>
+    ),
     h4: ({children}) => <h4 className="blog-rich-text__heading blog-rich-text__heading--4">{children}</h4>,
     h5: ({children}) => <h5 className="blog-rich-text__heading blog-rich-text__heading--5">{children}</h5>,
     blockquote: ({children}) => <blockquote className="blog-rich-text__blockquote">{children}</blockquote>,
@@ -215,7 +237,7 @@ const blogPortableTextComponents: PortableTextComponents = {
   types: {
     image: PortableTextImage,
     blogVideoEmbed: BlogVideoEmbed,
-    blogSocialEmbed: BlogSocialEmbed,
+    blogSocialEmbed: ({value}) => <BlogSocialEmbed value={value} />,
     blogCallout: BlogCallout,
     blogCta: BlogCta,
     blogCodeBlock: BlogCodeBlock,

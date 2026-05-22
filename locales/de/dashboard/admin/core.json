@@ -2,6 +2,7 @@
   "welcome": "Willkommen zurück, Admin!",
   "overview": "System-Übersicht",
   "description": "Plattformübersicht und Betriebsüberwachung",
+  "actions": "Aktionen",
   "analyticsPage": {
     "title": "Plattform-Analytik",
     "description": "Verfolgen Sie Nutzer, Content-Pipeline, Umsatz, Videoeinsendungen und Supportleistung.",
