@@ -144,8 +144,6 @@ ${caddy_host} {
 EOF
 
 if [[ -w "${CADDY_UPSTREAM_FILE}" ]] || [[ ! -e "${CADDY_UPSTREAM_FILE}" && -w "$(dirname "${CADDY_UPSTREAM_FILE}")" ]]; then
-  mv "${TEMP_UPSTREAM_FILE}" "${CADDY_UPSTREAM_FILE}"
-elif command -v sudo >/dev/null 2>&1; then
   sudo mv "${TEMP_UPSTREAM_FILE}" "${CADDY_UPSTREAM_FILE}"
 else
   echo "Cannot write Caddy upstream file ${CADDY_UPSTREAM_FILE}; no permission and sudo is unavailable"
