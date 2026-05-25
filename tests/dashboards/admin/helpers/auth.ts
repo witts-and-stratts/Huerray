@@ -27,13 +27,13 @@ export async function loginIfRedirected(page: Page, identifier: string, password
   await loginAs(page, identifier, password);
 }
 
-/** Signs up a brand user and lands on the brand dashboard. */
+/** Signs up a brand user. The signup form shows a toast on success rather than
+ * navigating; callers should follow up by verifying the user's email and
+ * navigating to /brand explicitly. */
 export async function signUpBrand(page: Page, email: string, password: string) {
-  const username = `brand_e2e_${Date.now()}`;
   await page.goto('/en/signup?role=brand');
   await page.getByLabel(/First Name/i).first().fill('Test');
   await page.getByLabel(/Last Name/i).first().fill('Brand');
-  await page.getByLabel(/Username/i).first().fill(username);
   await page.getByLabel(/Email/i).first().fill(email);
   await page.getByLabel(/^Password/i).first().fill(password);
   await page.getByLabel(/Confirm Password/i).first().fill(password);
@@ -42,13 +42,11 @@ export async function signUpBrand(page: Page, email: string, password: string) {
   await submit.click();
 }
 
-/** Signs up a creator user and lands on the creator dashboard. */
+/** Signs up a creator user. */
 export async function signUpCreator(page: Page, email: string, password: string) {
-  const username = `creator_e2e_${Date.now()}`;
   await page.goto('/en/signup?role=creator');
   await page.getByLabel(/First Name/i).first().fill('Test');
   await page.getByLabel(/Last Name/i).first().fill('Creator');
-  await page.getByLabel(/Username/i).first().fill(username);
   await page.getByLabel(/Email/i).first().fill(email);
   await page.getByLabel(/^Password/i).first().fill(password);
   await page.getByLabel(/Confirm Password/i).first().fill(password);

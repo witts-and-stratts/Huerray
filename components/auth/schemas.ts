@@ -19,7 +19,7 @@ export const createAdminSchema = ( t: ( key: string ) => string ) => createBaseS
 } ) );
 
 export const createBrandSchema = ( t: ( key: string ) => string ) => createBaseSignupSchema( t ).and( z.object( {
-  username: z.string().min( 1, t( "usernameRequired" ) ),
+  username: z.string().optional(),
 } ) );
 
 export const createForgotPasswordSchema = ( t: ( key: string ) => string ) => z.object( {

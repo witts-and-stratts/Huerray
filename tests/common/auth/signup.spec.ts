@@ -1,72 +1,82 @@
 import { test, expect } from '@playwright/test';
+import { verifyUserEmail } from '../helpers/verification';
 
 test.describe('Common - Authentication Signup', () => {
+  const baseTimestamp = Date.now();
 
-  const timestamp = Date.now();
-  
-  test('Brand user can sign up successfully', async ({ page }) => {
-    await page.goto('/signup');
+  async function expectSignupSucceeded(page: import('@playwright/test').Page) {
+    // Success path: signup form stores user info in the `userData` cookie via
+    // the AuthProvider. Failure path: a "Registration error" toast is shown.
+    // Whichever happens first decides the outcome.
+    await expect
+      .poll(
+        async () => {
+          const cookies = await page.context().cookies();
+          if (cookies.some((c) => c.name === 'userData')) return 'success';
+          const errorToast = await page
+            .locator('[data-sonner-toast][data-type="error"], [role="status"] :text("error")')
+            .count();
+          if (errorToast > 0) return 'error';
+          return 'pending';
+        },
+        { timeout: 20_000, message: 'signup did not complete' },
+      )
+      .toBe('success');
+  }
 
-    // Assuming we have a role selector or tabs
-    const brandTab = page.getByText('Brand', { exact: true });
-    if (await brandTab.count() > 0 && await brandTab.first().isVisible()) {
-      await brandTab.first().click();
-    }
+  test('Brand user can sign up successfully', async ({ page, request }) => {
+    const timestamp = baseTimestamp + Math.floor(Math.random() * 1000);
+    const email = `brand-${timestamp}@test.huerray.de`;
 
-    // Fill in signup form
-    // Note: the locators reflect standard type & name properties found in Radix/Tanstack based forms
-    await page.getByLabel(/First Name/i).or(page.locator('input[name="firstName"]')).fill('Test');
-    await page.getByLabel(/Last Name/i).or(page.locator('input[name="lastName"]')).fill('Brand');
-    await page.getByLabel(/Username/i).or(page.locator('input[name="username"]')).fill(`branduser${timestamp}`);
-    await page.getByLabel(/Email/i).or(page.locator('input[name="email"]')).or(page.locator('input[type="email"]')).fill(`brand-${timestamp}@test.huerray.de`);
-    await page.getByLabel(/^Password/i).or(page.locator('input[name="password"]')).first().fill('TestPwd123!@#');
-    await page.getByLabel(/Confirm Password/i).or(page.locator('input[name="confirmPassword"]')).fill('TestPwd123!@#');
-    
-    // Accept terms if checkbox exists
+    await page.goto('/signup?role=brand');
+
+    // Fill in signup form. The form uses TanStack form bindings; targeting by
+    // label keeps the locator stable across markup tweaks.
+    await page.getByLabel(/First Name/i).first().fill('Test');
+    await page.getByLabel(/Last Name/i).first().fill('Brand');
+    await page.getByLabel(/Email/i).first().fill(email);
+    await page.getByLabel(/^Password/i).first().fill('TestPwd123!@#');
+    await page.getByLabel(/Confirm Password/i).first().fill('TestPwd123!@#');
+
     const termsCheckbox = page.locator('input[type="checkbox"]');
-    if (await termsCheckbox.count() > 0) {
+    if ((await termsCheckbox.count()) > 0) {
       await termsCheckbox.first().check();
     }
 
-    // Force blur to ensure validation fires
-    await page.locator('body').click();
-    await page.waitForTimeout(500);
-
-    // Submit
-    const submitBtn = page.locator('button[type="submit"]');
+    const submitBtn = page.locator('button[type="submit"]').first();
+    await expect(submitBtn).toBeEnabled({ timeout: 10_000 });
     await submitBtn.click();
 
-    // Verification - either hits a verification page or goes to dashboard
-    await expect(page).toHaveURL(/.*(verify-email|brand|dashboard).*/, { timeout: 15000 });
+    await expectSignupSucceeded(page);
+
+    // Mark the email as verified using the dev-only test endpoint so the
+    // freshly-registered user can complete the verification flow on demand.
+    await verifyUserEmail(request, email);
   });
 
-  test('Creator user can sign up successfully', async ({ page }) => {
-    await page.goto('/signup');
+  test('Creator user can sign up successfully', async ({ page, request }) => {
+    const timestamp = baseTimestamp + Math.floor(Math.random() * 1000) + 1;
+    const email = `creator-${timestamp}@test.huerray.de`;
 
-    // Assume standard tabs for signup types
-    const creatorTab = page.getByText('Creator', { exact: true });
-    if (await creatorTab.count() > 0 && await creatorTab.first().isVisible()) {
-      await creatorTab.first().click();
-    }
+    await page.goto('/signup?role=creator');
 
-    await page.getByLabel(/First Name/i).or(page.locator('input[name="firstName"]')).fill('Test');
-    await page.getByLabel(/Last Name/i).or(page.locator('input[name="lastName"]')).fill('Creator');
-    await page.getByLabel(/Email/i).or(page.locator('input[name="email"]')).or(page.locator('input[type="email"]')).fill(`creator-${timestamp}@test.huerray.de`);
-    await page.getByLabel(/^Password/i).or(page.locator('input[name="password"]')).first().fill('TestPwd123!@#');
-    await page.getByLabel(/Confirm Password/i).or(page.locator('input[name="confirmPassword"]')).fill('TestPwd123!@#');
+    await page.getByLabel(/First Name/i).first().fill('Test');
+    await page.getByLabel(/Last Name/i).first().fill('Creator');
+    await page.getByLabel(/Email/i).first().fill(email);
+    await page.getByLabel(/^Password/i).first().fill('TestPwd123!@#');
+    await page.getByLabel(/Confirm Password/i).first().fill('TestPwd123!@#');
 
     const termsCheckbox = page.locator('input[type="checkbox"]');
-    if (await termsCheckbox.count() > 0) {
+    if ((await termsCheckbox.count()) > 0) {
       await termsCheckbox.first().check();
     }
 
-    // Force blur to ensure validation fires
-    await page.locator('body').click();
-    await page.waitForTimeout(500);
+    const submitBtn = page.locator('button[type="submit"]').first();
+    await expect(submitBtn).toBeEnabled({ timeout: 10_000 });
+    await submitBtn.click();
 
-    await page.locator('button[type="submit"]').click();
+    await expectSignupSucceeded(page);
 
-    await expect(page).toHaveURL(/.*(verify-email|creator|dashboard).*/, { timeout: 15000 });
+    await verifyUserEmail(request, email);
   });
-
 });

@@ -1,7 +1,11 @@
 import { test, expect } from '@playwright/test';
 import path from 'path';
 import { Page } from '@playwright/test';
+import { verifyUserEmail } from '../../../common/helpers/verification';
 
+// Signing up + verifying + dashboard hydration easily exceeds Playwright's
+// default 30s test timeout when the existing-user login attempt also waits.
+test.setTimeout(120_000);
 
 export const BRAND_AUTH_FILE = path.join(__dirname, '../../../.auth/brand.json');
 
@@ -26,7 +30,7 @@ async function login(page: Page, identifier: string, password: string) {
 
 async function loginSucceeded(page: Page) {
   try {
-    await page.waitForURL(/.*(brand|dashboard).*/, { timeout: 10000 });
+    await page.waitForURL(/\/(?:[a-z]{2}\/)?(brand|dashboard)/, { timeout: 10000 });
     return true;
   } catch {
     return false;
@@ -34,14 +38,10 @@ async function loginSucceeded(page: Page) {
 }
 
 async function createBrandUser(page: Page, email: string, password: string) {
-  const timestamp = Date.now();
-  const username = `branduser${timestamp}`;
-
   await page.goto('/signup?role=brand');
 
   await page.getByLabel(/First Name/i).first().fill('Test');
   await page.getByLabel(/Last Name/i).first().fill('Brand');
-  await page.getByLabel(/Username/i).first().fill(username);
   await page.getByLabel(/Email/i).first().fill(email);
   await page.getByLabel(/^Password/i).first().fill(password);
   await page.getByLabel(/Confirm Password/i).first().fill(password);
@@ -50,21 +50,38 @@ async function createBrandUser(page: Page, email: string, password: string) {
   await expect(submitButton).toBeEnabled({ timeout: 10000 });
   await submitButton.click();
 
-  await expect(page).toHaveURL(/.*(brand|dashboard).*/, { timeout: 20000 });
+  // The signup form does not navigate on its own — it stores the new user in
+  // the `userData` cookie via AuthProvider and surfaces a success toast.
+  // Waiting on that cookie is the most reliable success signal.
+  await expect
+    .poll(
+      async () => {
+        const cookies = await page.context().cookies();
+        return cookies.some((c) => c.name === 'userData');
+      },
+      { timeout: 20_000, message: 'signup did not set the userData cookie' },
+    )
+    .toBe(true);
 }
 
-test('authenticate as brand user', async ({ page }) => {
+test('authenticate as brand user', async ({ page, request }) => {
   await login(page, DEFAULT_USER, DEFAULT_PASSWORD);
 
   if (!(await loginSucceeded(page))) {
-    try {
-      await createBrandUser(page, DEFAULT_USER, DEFAULT_PASSWORD);
-    } catch {
-      await createBrandUser(page, `brand-e2e+${Date.now()}@test.huerray.de`, DEFAULT_PASSWORD);
-    }
+    // Always use a unique email when falling back to signup — the configured
+    // DEFAULT_USER may already be registered from a previous run.
+    const activeEmail = `brand-e2e+${Date.now()}@test.huerray.de`;
+    await createBrandUser(page, activeEmail, DEFAULT_PASSWORD);
+
+    // Mark the user's email as verified using the dev-only test endpoint.
+    await verifyUserEmail(request, activeEmail);
+
+    // Navigate to the dashboard explicitly — the signup form shows a toast
+    // rather than auto-redirecting.
+    await page.goto('/brand');
   }
 
-  await expect(page).toHaveURL(/.*(brand|dashboard).*/, { timeout: 20000 });
+  await expect(page).toHaveURL(/\/(?:[a-z]{2}\/)?(brand|dashboard)/, { timeout: 20000 });
 
   // Wait for the dashboard to fully render before saving state — prevents
   // tests from loading storageState mid-render and seeing stale dashboard content.

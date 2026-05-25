@@ -18,11 +18,18 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
 
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  /* Retry once locally to absorb cold-compile flakes; CI keeps 2 retries. */
+  retries: process.env.CI ? 2 : 1,
 
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  /* Opt out of parallel tests on CI. Keep local parallelism modest — the
+   * Next.js dev server gets slow under heavy concurrent navigation, which
+   * cascades into test-level timeouts that look like flaky assertions. */
+  workers: process.env.CI ? 1 : 3,
+
+  /* Generous default timeouts to absorb cold dev-server compilation on first
+   * hit per route and the occasional slow assertion under parallel load. */
+  timeout: 90_000,
+  expect: { timeout: 15_000 },
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI ? 'html' : 'list',

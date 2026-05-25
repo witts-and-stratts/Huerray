@@ -98,7 +98,10 @@ test.describe('Dashboards - Brand Landing Page', () => {
   });
 
   test('sidebar navigation links are present', async ({ page }) => {
-    const sidebarLinks = [/campaigns/i, /creators/i, /analytics/i, /settings/i];
+    // Settings lives in the user-dropdown menu rather than the sidebar — see
+    // brandNavigationData in lib/dashboard/navigation-data.ts. The sidebar
+    // exposes Profile (links to /brand/profile) instead.
+    const sidebarLinks = [/campaigns/i, /creators/i, /analytics/i, /profile/i];
 
     for (const linkText of sidebarLinks) {
       const link = page

@@ -10,6 +10,7 @@
  *   5. "Create Campaign" button navigation
  */
 import { test, expect, type Page } from '@playwright/test';
+import { waitForTableOrEmpty } from '../../../common/helpers/dashboard';
 
 const BRAND_USER = process.env.BRAND_E2E_USER ?? 'brand-e2e@test.huerray.de';
 const BRAND_PASSWORD = process.env.BRAND_E2E_PASSWORD ?? 'TestPwd123!@#';
@@ -56,20 +57,12 @@ test.describe('Dashboards - Brand Campaigns List', () => {
   });
 
   test('campaigns table renders with expected column headers', async ({ page }) => {
-    // Wait for table to appear (may be loading)
-    const table = page.locator('table').or(page.locator('[role="table"]'));
-    const hasCampaigns = await table.count() > 0;
+    const state = await waitForTableOrEmpty(page);
 
-    if (!hasCampaigns) {
-      // Empty state is acceptable — just verify it renders something meaningful
-      const emptyState = page
-        .getByText(/no campaigns|get started|create your first/i)
-        .or(page.locator('[class*="empty"]'));
-      await expect(emptyState.first()).toBeVisible({ timeout: 15000 });
+    if (state === 'empty') {
+      // Empty state is acceptable — getting here means it rendered something.
       return;
     }
-
-    await expect(table.first()).toBeVisible({ timeout: 15000 });
 
     // Check for at least one expected column header
     const nameHeader = page
