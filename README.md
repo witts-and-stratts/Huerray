@@ -46,3 +46,57 @@ Add `SANITY_REVALIDATE_SECRET` to the runtime environment, then create a Sanity 
 - Projection: `{ "_id": _id, "_type": _type, "audience": audience }`
 
 This currently revalidates the cached FAQ and Help Center queries used by the admin, creator, and brand help pages.
+
+## Deployment Runbook (Hetzner Blue/Green)
+
+This repository deploys with GitHub Actions via `.github/workflows/deploy.yml` and executes `deploy/scripts/deploy_blue_green.sh` on the target server.
+
+### Required GitHub Environment Variables
+
+Set these in the GitHub environment (`production` for `main`, `develop` for `develop`):
+
+- `HETZNER_HOST`
+- `HETZNER_USER`
+- `HETZNER_PORT` (optional, defaults to `22`)
+- `HETZNER_DEPLOY_PATH` (optional, defaults to `/opt/huerray-web`)
+- `DEPLOY_APP_NAME` (optional, defaults to `huerray-web`)
+- `APP_HOST` (required Caddy host, example `stellar.huerray.de`)
+- `NEXT_PUBLIC_API_BASE_URL`
+- `NEXT_PUBLIC_API_TIMEOUT`
+- `NEXT_PUBLIC_NOTIFICATIONS_REFETCH_INTERVAL`
+- `NEXT_PUBLIC_PROFILE_REFRESH_INTERVAL`
+- `NEXT_PUBLIC_SANITY_DATASET`
+- `NEXT_PUBLIC_SANITY_PROJECT_ID`
+- `BLUE_PORT` (optional, defaults to `18080`)
+- `GREEN_PORT` (optional, defaults to `28080`)
+- `HEALTH_PATH` (optional, defaults to `/health`)
+- `CADDY_UPSTREAM_FILE` (optional)
+- `CADDY_RELOAD_CMD` (optional)
+- `DRAIN_SECONDS` (optional)
+
+### Required GitHub Environment Secrets
+
+- `HETZNER_SSH_KEY`
+- `SANITY_REVALIDATE_SECRET`
+
+### Optional GitHub Environment Secrets (for testing/develop environments)
+
+- `E2E_ADMIN_USERNAME`
+- `E2E_ADMIN_PASSWORD`
+- `E2E_BRAND_USERNAME`
+- `E2E_BRAND_PASSWORD`
+- `E2E_CREATOR_USERNAME`
+- `E2E_CREATOR_PASSWORD`
+
+### How the rollout works
+
+1. Workflow syncs the repository to the server path.
+2. Script builds and starts either `app_blue` or `app_green` from `docker-compose.yml`.
+3. Script waits for `http://127.0.0.1:<blue|green-port>/health`.
+4. On success, Caddy upstream is switched to the new color.
+5. Old color is drained, then stopped.
+
+### Build-time vs runtime environment variables
+
+- Build-time (Docker build): all `NEXT_PUBLIC_*` values are injected so Next.js build output and client bundle are environment-correct.
+- Runtime (container environment): `NEXT_PUBLIC_*` and `SANITY_REVALIDATE_SECRET` are set for server-side runtime usage, including `/api/revalidate`.

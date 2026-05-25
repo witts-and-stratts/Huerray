@@ -1,128 +1,142 @@
-name: build and deploy
+name: deploy hetzner
 
 on:
   push:
     branches:
-    - main
-    - develop
+      - main
+      - develop
   workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
 
 permissions:
-  id-token: write
   contents: read
 
-env:
-  AWS_REGION: eu-west-1
-  AWS_IAM_ROLE_ARN: arn:aws:iam::719837702058:role/github-pipeline
-
 jobs:
-  build-dev:
-    if: github.ref_name == 'develop'
+  deploy:
+    if: github.ref_name == 'main' || github.ref_name == 'develop'
     runs-on: ubuntu-latest
-    steps:
-    - name: Get AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        audience: sts.amazonaws.com
-        aws-region: ${{ env.AWS_REGION }}
-        role-to-assume: ${{ env.AWS_IAM_ROLE_ARN }}
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v4
-    - name: Login to ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
-    - name: Get repository name
-      id: repo-name
-      run: |
-        echo "repo-name=thrypes-se/$(echo $GITHUB_REPOSITORY | cut -f2 -d/)" >> "$GITHUB_OUTPUT"
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        push: true
-        tags: ${{ steps.login-ecr.outputs.registry }}/${{ steps.repo-name.outputs.repo-name }}:dev-${{ github.sha }}
+    environment: ${{ github.ref_name == 'main' && 'live' || 'develop' }}
+    env:
+      # Deployment target (environment-scoped vars/secrets)
+      DEPLOY_HOST: ${{ vars.HETZNER_HOST }}
+      DEPLOY_USER: ${{ vars.HETZNER_USER }}
+      DEPLOY_PORT: ${{ vars.HETZNER_PORT }}
+      DEPLOY_PATH: ${{ vars.HETZNER_DEPLOY_PATH }}
+      DEPLOY_SSH_KEY: ${{ secrets.HETZNER_SSH_KEY }}
+      DEPLOY_APP_NAME: ${{ vars.DEPLOY_APP_NAME || 'huerray-web' }}
 
-  deploy-dev:
-    if: github.ref_name == 'develop'
-    needs: build-dev
-    runs-on: ubuntu-latest
-    steps:
-    - name: Get AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        audience: sts.amazonaws.com
-        aws-region: ${{ env.AWS_REGION }}
-        role-to-assume: ${{ env.AWS_IAM_ROLE_ARN }}
-    - uses: actions/checkout@v4
-    - uses: dkershner6/aws-ssm-getparameters-action@7d9b886c53d80ccd3c56fae27e5855e3be91aab4
-      with:
-        parameterPairs: |
-          infra-github-terraform-modules-ssh-key = TF_MODULE_GIT_SSH_KEY
-    - uses: webfactory/ssh-agent@a6f90b1f127823b31d4d4a8d96047790581349bd
-      with:
-        ssh-private-key: ${{ env.TF_MODULE_GIT_SSH_KEY }}
-    - uses: hashicorp/setup-terraform@v3
-    - name: Terraform Apply
-      id: tf-apply
-      working-directory: terraform/dev
-      run: |
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        terraform init
-        terraform apply -no-color -auto-approve -var 'service_version=dev-${{ github.sha }}'
+      # Deployment/runtime infrastructure variables (vars)
+      APP_HOST: ${{ vars.APP_HOST }}
 
-  build-live:
-    if: github.ref_name == 'main'
-    runs-on: ubuntu-latest
-    steps:
-    - name: Get AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        audience: sts.amazonaws.com
-        aws-region: ${{ env.AWS_REGION }}
-        role-to-assume: ${{ env.AWS_IAM_ROLE_ARN }}
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v4
-    - name: Login to ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
-    - name: Get repository name
-      id: repo-name
-      run: |
-        echo "repo-name=thrypes-se/$(echo $GITHUB_REPOSITORY | cut -f2 -d/)" >> "$GITHUB_OUTPUT"
-    - name: Build and push
-      uses: docker/build-push-action@v6
-      with:
-        build-args: |
-          ENVIRONMENT=live
-        push: true
-        tags: ${{ steps.login-ecr.outputs.registry }}/${{ steps.repo-name.outputs.repo-name }}:live-${{ github.sha }}
+      # Application runtime configuration from .env.live
+      NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+      NEXT_PUBLIC_API_TIMEOUT: ${{ vars.NEXT_PUBLIC_API_TIMEOUT }}
+      NEXT_PUBLIC_NOTIFICATIONS_REFETCH_INTERVAL: ${{ vars.NEXT_PUBLIC_NOTIFICATIONS_REFETCH_INTERVAL }}
+      NEXT_PUBLIC_PROFILE_REFRESH_INTERVAL: ${{ vars.NEXT_PUBLIC_PROFILE_REFRESH_INTERVAL }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      SANITY_REVALIDATE_SECRET: ${{ secrets.SANITY_REVALIDATE_SECRET }}
 
-  deploy-live:
-    if: github.ref_name == 'main'
-    needs: build-live
-    runs-on: ubuntu-latest
+      # Optional E2E testing credentials (for staging/develop environments)
+      E2E_ADMIN_USERNAME: ${{ secrets.E2E_ADMIN_USERNAME || '' }}
+      E2E_ADMIN_PASSWORD: ${{ secrets.E2E_ADMIN_PASSWORD || '' }}
+      E2E_BRAND_USERNAME: ${{ secrets.E2E_BRAND_USERNAME || '' }}
+      E2E_BRAND_PASSWORD: ${{ secrets.E2E_BRAND_PASSWORD || '' }}
+      E2E_CREATOR_USERNAME: ${{ secrets.E2E_CREATOR_USERNAME || '' }}
+      E2E_CREATOR_PASSWORD: ${{ secrets.E2E_CREATOR_PASSWORD || '' }}
     steps:
-    - name: Get AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        audience: sts.amazonaws.com
-        aws-region: ${{ env.AWS_REGION }}
-        role-to-assume: ${{ env.AWS_IAM_ROLE_ARN }}
-    - uses: actions/checkout@v4
-    - uses: dkershner6/aws-ssm-getparameters-action@7d9b886c53d80ccd3c56fae27e5855e3be91aab4
-      with:
-        parameterPairs: |
-          infra-github-terraform-modules-ssh-key = TF_MODULE_GIT_SSH_KEY
-    - uses: webfactory/ssh-agent@a6f90b1f127823b31d4d4a8d96047790581349bd
-      with:
-        ssh-private-key: ${{ env.TF_MODULE_GIT_SSH_KEY }}
-    - uses: hashicorp/setup-terraform@v3
-    - name: Terraform Apply
-      id: tf-apply
-      working-directory: terraform/live
-      run: |
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        terraform init
-        terraform apply -no-color -auto-approve -var 'service_version=live-${{ github.sha }}'
+      - uses: actions/checkout@v4
+
+      - name: Validate deploy inputs
+        run: |
+          set -euo pipefail
+          : "${DEPLOY_HOST:?Missing variable HETZNER_HOST}"
+          : "${DEPLOY_USER:?Missing variable HETZNER_USER}"
+          : "${DEPLOY_SSH_KEY:?Missing secret HETZNER_SSH_KEY}"
+          : "${APP_HOST:?Missing variable APP_HOST}"
+          : "${NEXT_PUBLIC_API_BASE_URL:?Missing variable NEXT_PUBLIC_API_BASE_URL}"
+          : "${NEXT_PUBLIC_SANITY_DATASET:?Missing variable NEXT_PUBLIC_SANITY_DATASET}"
+          : "${NEXT_PUBLIC_SANITY_PROJECT_ID:?Missing variable NEXT_PUBLIC_SANITY_PROJECT_ID}"
+          : "${SANITY_REVALIDATE_SECRET:?Missing secret SANITY_REVALIDATE_SECRET}"
+          if [[ -z "${DEPLOY_PORT}" ]]; then
+            echo "DEPLOY_PORT=22" >> "$GITHUB_ENV"
+          fi
+          if [[ -z "${DEPLOY_PATH}" ]]; then
+            echo "DEPLOY_PATH=/opt/huerray-web" >> "$GITHUB_ENV"
+          fi
+
+      - name: Install Deployment Dependencies
+        run: sudo apt-get update && sudo apt-get install -y rsync openssh-client
+
+      - name: Setup SSH
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${DEPLOY_SSH_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "${DEPLOY_PORT}" -H "${DEPLOY_HOST}" >> ~/.ssh/known_hosts
+
+      - name: Sync repository to server
+        run: |
+          set -euo pipefail
+          printf -v deploy_path_q '%q' "${DEPLOY_PATH}"
+          RESOLVED_DEPLOY_PATH="$(ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "set -euo pipefail; DEPLOY_PATH=${deploy_path_q}; if [[ \"\$DEPLOY_PATH\" == '~' ]]; then DEPLOY_PATH=\"\$HOME\"; elif [[ \"\${DEPLOY_PATH:0:2}\" == '~/' ]]; then DEPLOY_PATH=\"\$HOME/\${DEPLOY_PATH:2}\"; fi; mkdir -p \"\$DEPLOY_PATH\"; printf '%s' \"\$DEPLOY_PATH\"")"
+          echo "DEPLOY_PATH=${RESOLVED_DEPLOY_PATH}" >> "$GITHUB_ENV"
+          rsync -az --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            --filter="P .${DEPLOY_APP_NAME}.active-color" \
+            ./ "${DEPLOY_USER}@${DEPLOY_HOST}:${RESOLVED_DEPLOY_PATH}/"
+
+      - name: Deploy with Blue/Green Cutover
+        run: |
+          set -euo pipefail
+
+          export APP_HOST="${APP_HOST}"
+          export BLUE_PORT="${{ vars.BLUE_PORT || '18080' }}"
+          export GREEN_PORT="${{ vars.GREEN_PORT || '28080' }}"
+          export HEALTH_PATH="${{ vars.HEALTH_PATH || '/health' }}"
+          export CADDY_UPSTREAM_FILE="${{ vars.CADDY_UPSTREAM_FILE || '/etc/caddy/upstreams/huerray_upstream.caddy' }}"
+          export CADDY_RELOAD_CMD="${{ vars.CADDY_RELOAD_CMD || 'sudo systemctl reload caddy' }}"
+          export DRAIN_SECONDS="${{ vars.DRAIN_SECONDS || '5' }}"
+
+          vars=(
+            DEPLOY_PATH DEPLOY_APP_NAME APP_HOST
+            NEXT_PUBLIC_API_BASE_URL NEXT_PUBLIC_API_TIMEOUT
+            NEXT_PUBLIC_NOTIFICATIONS_REFETCH_INTERVAL NEXT_PUBLIC_PROFILE_REFRESH_INTERVAL
+            NEXT_PUBLIC_SANITY_DATASET NEXT_PUBLIC_SANITY_PROJECT_ID SANITY_REVALIDATE_SECRET
+            E2E_ADMIN_USERNAME E2E_ADMIN_PASSWORD E2E_BRAND_USERNAME E2E_BRAND_PASSWORD E2E_CREATOR_USERNAME E2E_CREATOR_PASSWORD
+            BLUE_PORT GREEN_PORT HEALTH_PATH CADDY_UPSTREAM_FILE CADDY_RELOAD_CMD DRAIN_SECONDS
+          )
+
+          remote_exports=""
+          for key in "${vars[@]}"; do
+            value="${!key-}"
+            printf -v escaped '%q' "${value}"
+            remote_exports+="export ${key}=${escaped}"$'\n'
+          done
+
+          {
+            echo "set -euo pipefail"
+            printf '%s' "${remote_exports}"
+            echo "cd \"\$DEPLOY_PATH\""
+            echo "SCRIPT_DIR='deploy/scripts'"
+            echo "if [[ ! -f \"\${SCRIPT_DIR}/deploy_blue_green.sh\" ]]; then"
+            echo "  echo 'Missing deploy script under deploy/scripts in DEPLOY_PATH' >&2"
+            echo "  pwd >&2"
+            echo "  ls -la deploy >&2 || true"
+            echo "  ls -la deploy/scripts >&2 || true"
+            echo "  exit 1"
+            echo "fi"
+            echo "chmod +x \"\${SCRIPT_DIR}/deploy_blue_green.sh\""
+            echo "./\"\${SCRIPT_DIR}/deploy_blue_green.sh\""
+          } | ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "bash -se"
+
+      - name: Sanitize Deployment Runtime
+        if: always()
+        run: |
+          rm -f ~/.ssh/id_ed25519
+          rm -f ~/.ssh/known_hosts
