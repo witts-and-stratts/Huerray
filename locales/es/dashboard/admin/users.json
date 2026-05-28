@@ -88,7 +88,12 @@
     "viewDetails": "Ver detalles",
     "resendEmailVerification": "Reenviar verificación de correo electrónico",
     "initiatePasswordReset": "Iniciar restablecimiento de contraseña",
-    "deleteUser": "Borrar usuario"
+    "deleteUser": "Borrar usuario",
+    "deleteUserTitle": "Eliminar usuario",
+    "deleteUserConfirm": "¿Está seguro de que desea eliminar a {name}? Esta acción no se puede deshacer.",
+    "deleteUserSuccess": "Usuario eliminado correctamente",
+    "deleteUserError": "Error al eliminar el usuario",
+    "deleting": "Eliminando..."
   },
   "userCard": {},
   "userDetailsSheet": {

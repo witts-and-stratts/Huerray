@@ -493,16 +493,17 @@ export function ContactAuthFields( { form }: FieldsProps ) {
 interface FormActionsProps extends FieldsProps {
   isLoading: boolean;
   selectedRoleInfo: { title: string; };
+  disabled?: boolean;
 }
 
-export function FormActions( { form, isLoading, selectedRoleInfo }: FormActionsProps ) {
+export function FormActions( { form, isLoading, selectedRoleInfo, disabled }: FormActionsProps ) {
   const t = useTranslations( 'auth.signup.actions' );
   return (
     <Field>
       <form.Subscribe
         selector={ ( state: any ) => [ state.canSubmit, state.isSubmitting ] }
         children={ ( [ canSubmit, isSubmitting ]: [ boolean, boolean ] ) => (
-          <Button type="submit" className="signup-form__submit" disabled={ !canSubmit || isSubmitting || isLoading }>
+          <Button type="submit" className="signup-form__submit" disabled={ !canSubmit || isSubmitting || isLoading || disabled }>
             { isSubmitting || isLoading ? t( 'submitting' ) : t( 'submit' ) }
           </Button>
         ) }

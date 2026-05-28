@@ -88,7 +88,12 @@
     "viewDetails": "View details",
     "resendEmailVerification": "Resend Email Verification",
     "initiatePasswordReset": "Initiate Password Reset",
-    "deleteUser": "Delete user"
+    "deleteUser": "Delete user",
+    "deleteUserTitle": "Delete User",
+    "deleteUserConfirm": "Are you sure you want to delete {name}? This action cannot be undone.",
+    "deleteUserSuccess": "User deleted successfully",
+    "deleteUserError": "Failed to delete user",
+    "deleting": "Deleting..."
   },
   "userCard": {},
   "userDetailsSheet": {

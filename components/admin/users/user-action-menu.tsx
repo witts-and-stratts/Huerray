@@ -10,6 +10,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { UserStatusDialog } from "./user-status-dialog";
 import { useTranslations } from "next-intl";
+import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
+import { useDeleteUser } from "@/lib/api/hooks/users";
 
 interface UserActionMenuProps {
   user: ModelsUserResponse;
@@ -20,8 +22,14 @@ interface UserActionMenuProps {
 export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenuProps ) {
   const menuT = useTranslations( 'dashboard.admin.userActionMenu' );
   const t = useTranslations( 'dashboard.admin.userStatus' );
+  const userFallbackT = useTranslations( 'dashboard.common' );
+  const userName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || user.username || userFallbackT( 'cards.userFallback' );
+
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const [ pendingStatus, setPendingStatus ] = useState<"approved" | "rejected">( "approved" );
+  const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
+
+  const { mutate: deleteUser, isPending: isDeleting } = useDeleteUser();
 
   const handleStatusAction = ( status: "approved" | "rejected" ) => {
     if ( !user.id ) {
@@ -30,6 +38,22 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
     }
     setPendingStatus( status );
     setIsStatusDialogOpen( true );
+  };
+
+  const handleDeleteUser = () => {
+    if ( !user.id ) {
+      toast.error( menuT( 'deleteUserError' ) );
+      return;
+    }
+    deleteUser( user.id, {
+      onSuccess: () => {
+        toast.success( menuT( 'deleteUserSuccess' ) );
+        setIsDeleteDialogOpen( false );
+      },
+      onError: () => {
+        toast.error( menuT( 'deleteUserError' ) );
+      }
+    } );
   };
 
   const handleCopyId = () => {
@@ -91,7 +115,7 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
     },
     {
       label: menuT( 'deleteUser' ),
-      action: () => { console.log( "Delete user clicked" ); }, // Placeholder as per original
+      action: () => setIsDeleteDialogOpen( true ),
       variant: "destructive",
       className: "text-red-600",
     }
@@ -109,6 +133,17 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
         onOpenChange={ setIsStatusDialogOpen }
         user={ user }
         initialStatus={ pendingStatus }
+      />
+      <ConfirmDialog
+        open={ isDeleteDialogOpen }
+        onOpenChange={ setIsDeleteDialogOpen }
+        title={ menuT( 'deleteUserTitle' ) }
+        description={ menuT( 'deleteUserConfirm', { name: userName } ) }
+        confirmLabel={ menuT( 'deleteUser' ) }
+        onConfirm={ handleDeleteUser }
+        isLoading={ isDeleting }
+        loadingText={ menuT( 'deleting' ) }
+        variant="destructive"
       />
     </>
   );

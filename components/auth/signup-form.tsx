@@ -31,8 +31,9 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useRef } from "react";
 import { toast } from "sonner";
+import { Turnstile, TurnstileRef } from "@/components/auth/turnstile";
 import '@/app/styles/signup.css';
 
 interface SignupFormProps extends React.ComponentProps<"div"> {
@@ -79,6 +80,8 @@ export function SignupForm( {
 
   const [ isLoading, setIsLoading ] = useState( false );
   const [ error, setError ] = useState<string | null>( null );
+  const [ turnstileToken, setTurnstileToken ] = useState<string | null>( null );
+  const turnstileRef = useRef<TurnstileRef>( null );
 
   const authApi = new AuthenticationApi( undefined, undefined, apiClient );
   const handleBack = useCallback( () => updateRole( null ), [ updateRole ] );
@@ -99,6 +102,15 @@ export function SignupForm( {
       onChange: signupSchema as any,
     },
     onSubmit: async ( { value }: { value: any; } ) => {
+      if ( !turnstileToken ) {
+        const turnstileMsg = 'Please complete the security check.';
+        setError( turnstileMsg );
+        toast.error( t( 'toast.errorTitle' ), {
+          description: turnstileMsg,
+          richColors: true,
+        } );
+        return;
+      }
       setError( null );
       setIsLoading( true );
 
@@ -117,6 +129,10 @@ export function SignupForm( {
             verify_password: value.confirmPassword,
             user_type: userType,
           }
+        }, {
+          headers: {
+            'x-turnstile-token': turnstileToken,
+          },
         } );
 
 
@@ -167,6 +183,10 @@ export function SignupForm( {
           } );
         }
       } catch ( err: any ) {
+        // Reset Turnstile on registration failure so user can try again
+        turnstileRef.current?.reset();
+        setTurnstileToken( null );
+
         const errorMessage = err.response?.data?.message || err.message || t( 'toast.errorDefault' );
         const fullError = `${ errorMessage }; ${ err.response?.data?.error?.message || '' }`;
         setError( fullError );
@@ -238,8 +258,15 @@ export function SignupForm( {
 
             <input type="hidden" name="role" value={ selectedRole } />
 
+            <Turnstile 
+              ref={ turnstileRef } 
+              onSuccess={ setTurnstileToken } 
+              onExpire={ () => setTurnstileToken( null ) } 
+              onError={ () => setTurnstileToken( null ) } 
+            />
+
             <div className="signup-form__actions">
-              <FormActions form={ form } isLoading={ isLoading } selectedRoleInfo={ { title: t( `titles.${ selectedRole }` ) } } />
+              <FormActions form={ form } isLoading={ isLoading } selectedRoleInfo={ { title: t( `titles.${ selectedRole }` ) } } disabled={ !turnstileToken } />
             </div>
 
           </form>

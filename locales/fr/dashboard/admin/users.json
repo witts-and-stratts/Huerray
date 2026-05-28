@@ -88,7 +88,12 @@
     "viewDetails": "Voir les détails",
     "resendEmailVerification": "Renvoi de l'e-mail de vérification",
     "initiatePasswordReset": "Initier la réinitialisation du mot de passe",
-    "deleteUser": "Supprimer un utilisateur"
+    "deleteUser": "Supprimer un utilisateur",
+    "deleteUserTitle": "Supprimer l'utilisateur",
+    "deleteUserConfirm": "Êtes-vous sûr de vouloir supprimer {name} ? Cette action ne peut pas être annulée.",
+    "deleteUserSuccess": "Utilisateur supprimé avec succès",
+    "deleteUserError": "Échec de la suppression de l'utilisateur",
+    "deleting": "Suppression..."
   },
   "userCard": {},
   "userDetailsSheet": {

@@ -17,7 +17,7 @@ export const config = {
   name: 'default',
   title: 'Huerray',
   subtitle: 'Content Management System',
-  basePath: '/admin/studio',
+  basePath: '/admin',
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder

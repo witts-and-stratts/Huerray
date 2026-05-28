@@ -31,8 +31,9 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useRef } from 'react';
 import { z } from 'zod/v4';
+import { Turnstile, TurnstileRef } from '@/components/auth/turnstile';
 
 type LoginFormValues = {
   identifier: string;
@@ -159,6 +160,8 @@ export function LoginForm( {
   const clearPersistedData = useClearPersistedData();
   const [ isLoading, setIsLoading ] = useState( false );
   const [ formError, setFormError ] = useState<string | null>( null );
+  const [ turnstileToken, setTurnstileToken ] = useState<string | null>( null );
+  const turnstileRef = useRef<TurnstileRef>( null );
 
   const authApi = useMemo( () => new AuthenticationApi( undefined, undefined, apiClient ), [] );
 
@@ -178,6 +181,10 @@ export function LoginForm( {
       onChange: loginSchema,
     },
     onSubmit: async ( { value } ) => {
+      if ( !turnstileToken ) {
+        setFormError( 'Please complete the security check.' );
+        return;
+      }
       setFormError( null );
       setIsLoading( true );
 
@@ -186,6 +193,10 @@ export function LoginForm( {
           credentials: {
             username: value.identifier,
             password: value.password,
+          },
+        }, {
+          headers: {
+            'x-turnstile-token': turnstileToken,
           },
         } );
 
@@ -218,6 +229,10 @@ export function LoginForm( {
         const redirectTo = searchParams.get( 'redirect' );
         window.location.href = redirectTo || DASHBOARD_PATHS[ userRole ];
       } catch ( err ) {
+        // Reset Turnstile on login failure so user can try again
+        turnstileRef.current?.reset();
+        setTurnstileToken( null );
+
         const axiosError = err as AxiosError<ApiErrorResponse>;
         const errorMessage =
           axiosError.response?.data?.message ||
@@ -292,13 +307,20 @@ export function LoginForm( {
                 children={ ( field ) => <RememberMeField field={ field } t={ t } /> }
               />
 
+              <Turnstile 
+                ref={ turnstileRef } 
+                onSuccess={ setTurnstileToken } 
+                onExpire={ () => setTurnstileToken( null ) } 
+                onError={ () => setTurnstileToken( null ) } 
+              />
+
               <Field>
                 <form.Subscribe
                   selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
                   children={ ( [ canSubmit, isSubmitting ] ) => {
                     const isPending = isSubmitting || isLoading;
                     return (
-                      <Button type='submit' className='w-full' disabled={ !canSubmit || isPending }>
+                      <Button type='submit' className='w-full' disabled={ !canSubmit || isPending || !turnstileToken }>
                         { isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" /> }
                         { isPending ? t( 'submittingButton' ) : t( 'submitButton' ) }
                       </Button>
