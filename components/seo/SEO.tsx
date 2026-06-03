@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { locales } from '@/i18n';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de';
 const DEV_URL = 'http://localhost:3000';
 const SITE_NAME = 'Huerray';
 const TWITTER_URL = 'https://x.com/@huerray';

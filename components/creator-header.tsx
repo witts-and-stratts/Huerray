@@ -130,7 +130,7 @@ export function CreatorHeader() {
                   </Avatar>
                   <div className="hidden flex-col items-start text-left md:flex">
                     <span className="text-sm font-medium">Creator User</span>
-                    <span className="text-xs text-muted-foreground">creator@huerray.com</span>
+                    <span className="text-xs text-muted-foreground">creator@huerray.de</span>
                   </div>
                 </Button>
               </DropdownMenuTrigger>
