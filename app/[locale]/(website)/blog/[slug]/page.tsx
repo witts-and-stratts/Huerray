@@ -102,7 +102,7 @@ export default async function BlogPostPage({params}: Props) {
   }, []).slice(0, 6)
   const authorImage = post.author?.image ? urlFor(post.author.image as any).width(96).height(96).fit('crop').url() : null
   const heroImage = post.mainImage ? urlFor(post.mainImage as any).width(1600).height(1100).fit('crop').url() : null
-  const articleUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.com'}/${locale}/blog/${slug}`
+  const articleUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'}/${locale}/blog/${slug}`
 
   return (
     <>

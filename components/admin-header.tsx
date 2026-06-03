@@ -134,7 +134,7 @@ export function AdminHeader() {
                   </Avatar>
                   <div className="hidden flex-col items-start text-left md:flex">
                     <span className="text-sm font-medium">{ ta( 'welcome' ).split( ',' )[ 1 ] || 'Admin' }</span>
-                    <span className="text-xs text-muted-foreground">admin@huerray.com</span>
+                    <span className="text-xs text-muted-foreground">admin@huerray.de</span>
                   </div>
                 </Button>
               </DropdownMenuTrigger>
