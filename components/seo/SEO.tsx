@@ -2,9 +2,8 @@ import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import { locales } from '@/i18n';
+import { getSiteUrl } from '@/lib/site-url';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de';
-const DEV_URL = 'http://localhost:3000';
 const SITE_NAME = 'Huerray';
 const TWITTER_URL = 'https://x.com/@huerray';
 const TWITTER_HANDLE = '@huerray';
@@ -23,8 +22,7 @@ interface SeoProps {
   noIndex?: boolean;
 }
 
-const baseUrl =
-  process.env.NODE_ENV === 'development' ? DEV_URL : SITE_URL;
+const baseUrl = getSiteUrl();
 const defaultImageUrl = `${ baseUrl }/images/og-image.png`;
 
 function normalizeText(value?: string): string | undefined {
@@ -111,7 +109,7 @@ export default async function generateSEO(
   };
 
   return {
-    metadataBase: new URL( SITE_URL ),
+    metadataBase: new URL( baseUrl ),
     title: fullTitle,
     description: description,
     alternates,
@@ -171,7 +169,7 @@ export default async function generateSEO(
     creator: 'The Huerray Team',
     publisher: 'Huerray',
     authors: [
-      { name: SITE_NAME, url: SITE_URL },
+      { name: SITE_NAME, url: baseUrl },
     ],
     keywords: keywords,
     robots: overrides?.noIndex ? { index: false, follow: false } : 'index, follow',
