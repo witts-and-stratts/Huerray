@@ -1,11 +1,10 @@
 import type { MetadataRoute } from 'next'
 
 import { locales } from '@/i18n'
-import { getSiteUrl } from '@/lib/site-url'
 import { client } from '@/sanity/lib/client'
 import { BLOG_INDEX_QUERY, type BlogSummary } from '@/sanity/lib/blog'
 
-const SITE_URL = getSiteUrl()
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'
 const DEFAULT_LOCALE = locales[0]
 
 type BlogSitemapPost = Pick<BlogSummary, '_id' | 'slug' | 'publishedAt'> & {
