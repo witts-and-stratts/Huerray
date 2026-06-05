@@ -4,37 +4,33 @@ import { Button } from '@/components/dashboard-ui/button';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { Input } from '@/components/dashboard-ui/input';
 import { Label } from '@/components/dashboard-ui/label';
-import { useRole } from '@/contexts/role-context';
 import { apiClient } from '@/lib/api/client';
-import { ModelsUserResponse } from '@/lib/api/generated';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
-import { useBrand } from '@/lib/api/hooks';
-import { useUser, useUserProfile } from '@/lib/api/hooks/users';
-import { useAuth } from '@/lib/auth/auth-context';
-import { Loader2, Mail, X } from 'lucide-react';
+import { useUserProfile, usersKeys } from '@/lib/api/hooks/users';
+import {
+  broadcastEmailVerified,
+  useEmailVerification,
+} from '@/lib/auth/email-verification-context';
+import { useQueryClient } from '@tanstack/react-query';
+import { Loader2, Mail } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 
 export function EmailVerificationBanner() {
   const t = useTranslations( 'auth.emailVerificationBanner' );
-  const [ user, setUser ] = useState<ModelsUserResponse | null>( null );
-  const role = useRole();
-  const [ dismissed, setDismissed ] = useState( false );
+  const { user, isVerified } = useEmailVerification();
+  const queryClient = useQueryClient();
   const [ isResending, setIsResending ] = useState( false );
   const [ isDialogOpen, setIsDialogOpen ] = useState( false );
   const [ verificationCode, setVerificationCode ] = useState( '' );
   const [ isVerifying, setIsVerifying ] = useState( false );
-  const { data, error } = useUserProfile();
 
-  useEffect( function getUser() {
-    console.log( "Data", data );
-    setUser( data as any );
-  }, [ data ] );
-
-  // Don't show if user is not logged in, email is already verified, or banner was dismissed
-  if ( !user || user.email_verified || dismissed ) {
+  // Don't show if user is not logged in or email is already verified.
+  // The banner is intentionally non-dismissable while unverified, because the
+  // rest of the page is locked until verification completes.
+  if ( !user || isVerified ) {
     return null;
   }
 
@@ -70,8 +66,11 @@ export function EmailVerificationBanner() {
       const authApi = new AuthenticationApi( undefined, undefined, apiClient );
       await authApi.authVerifyEmailPost( { request: { token: verificationCode.trim() } } );
 
-      // Update user state to reflect verified email
-      setUser( { ...user, email_verified: true } );
+      // Refresh the shared profile (unlocks the page) and notify other tabs.
+      await queryClient.invalidateQueries( {
+        queryKey: [ ...usersKeys.all, 'profile' ],
+      } );
+      broadcastEmailVerified();
 
       toast.success( t( 'toast.verifiedTitle' ), {
         description: t( 'toast.verifiedDescription' ),
@@ -126,15 +125,6 @@ export function EmailVerificationBanner() {
             >
               { isResending && <Loader2 className="mr-2 h-3 w-3 animate-spin" /> }
               { t( 'resendEmail' ) }
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={ () => setDismissed( true ) }
-              className="text-amber-600 hover:text-amber-800 hover:bg-amber-100"
-              aria-label={ t( 'dismiss' ) }
-            >
-              <X className="h-4 w-4" />
             </Button>
           </div>
         </motion.div>

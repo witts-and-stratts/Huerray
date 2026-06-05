@@ -12,6 +12,7 @@ import { SuperField } from '@/components/dashboard-ui/super-field';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
 import { apiClient } from '@/lib/api/client';
 import { useAuth } from '@/lib/auth/auth-context';
+import { broadcastEmailVerified } from '@/lib/auth/email-verification-context';
 
 type State = 'loading' | 'success' | 'error';
 
@@ -34,6 +35,8 @@ export function VerifyEmail( { token }: { token: string; } ) {
   const [ isRetrying, setIsRetrying ] = useState( false );
 
   const onVerified = () => {
+    // Notify any open dashboard tab in this browser to unlock immediately.
+    broadcastEmailVerified();
     const currentUser = userRef.current;
     if ( currentUser ) {
       setUser( { ...currentUser, emailVerified: true } );

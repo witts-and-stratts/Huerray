@@ -23,6 +23,7 @@ import { apiClient } from "@/lib/api/client";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { ModelsRegisterRequestUserTypeEnum } from "@/lib/api/generated/models/models-register-request";
 import { useAuth } from "@/lib/auth/auth-context";
+import { useClearPersistedData } from "@/lib/hooks/use-clear-persisted-data";
 import { cn } from "@/lib/dashboard-utils";
 import { useForm } from '@tanstack/react-form';
 import Cookies from 'js-cookie';
@@ -60,6 +61,7 @@ export function SignupForm( {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { setUser } = useAuth();
+  const clearPersistedData = useClearPersistedData();
   const t = useTranslations( 'auth.signup' );
   const tValidation = useTranslations( 'auth.validation' );
 
@@ -139,6 +141,10 @@ export function SignupForm( {
 
         // Cast to access properties
         const responseData = response.data?.data as any;
+
+        // Clear all persisted data from any previous session before
+        // establishing the new one.
+        await clearPersistedData();
 
         // Store auth tokens as cookies for middleware auth checks
         if ( responseData?.access_token ) {

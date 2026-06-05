@@ -66,7 +66,11 @@
     "errorStateRequired": "L'État/Province est requis",
     "errorStreetRequired": "La rue est nécessaire",
     "errorCityRequired": "La ville est requise",
-    "errorPostalCodeRequired": "Le code postal est requis"
+    "errorPostalCodeRequired": "Le code postal est requis",
+    "errorWebsiteRequired": "L'URL du site web est requise",
+    "errorCategoryRequired": "La catégorie d'activité est requise",
+    "errorCompanySizeRequired": "La taille de l'entreprise est requise",
+    "errorRegistrationRequired": "Le numéro d'enregistrement est requis"
   },
   "completeProfile": {
     "title": "Complétez votre profil de marque",

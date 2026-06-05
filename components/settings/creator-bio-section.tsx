@@ -24,7 +24,7 @@ export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSetting
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 max-w-5xl m-px max-md:m-2">
       <Card className="md:col-span-3 py-4">
         <CardHeader>
-          <CardTitle>{ t( 'title' ) }</CardTitle>
+          <CardTitle>{ t( 'title' ) }<span className="text-destructive ml-1">*</span></CardTitle>
           <CardDescription>{ t( 'description' ) }</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -65,7 +65,7 @@ export function CreatorBioSection( { form }: { form: ReactFormApi<CreatorSetting
 
       <Card className="md:col-span-2 py-4">
         <CardHeader>
-          <CardTitle>{ t( 'applicationVideoTitle' ) }</CardTitle>
+          <CardTitle>{ t( 'applicationVideoTitle' ) }<span className="text-destructive ml-1">*</span></CardTitle>
           <CardDescription>{ t( 'applicationVideoDescription' ) }</CardDescription>
         </CardHeader>
         <CardContent>

@@ -5,7 +5,8 @@
 import '@/app/styles/components/complete-profile.css';
 import { Tabs, TabsList, TabsTab, TabsPanel, TabsPanels } from '@/components/animate-ui/components/base/tabs';
 import { Button } from '@/components/dashboard-ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import {
   FieldGroup
 } from '@/components/dashboard-ui/field';
@@ -35,6 +36,19 @@ const formatEnumLabel = ( value: string ) => {
     .split( /[_\- ]+/ )
     .map( ( word ) => word.charAt( 0 ).toUpperCase() + word.slice( 1 ).toLowerCase() )
     .join( " " );
+};
+
+// Allow users to omit the scheme (e.g. "example.com"); default to https://.
+const ensureUrlScheme = ( value: string ) =>
+  /^https?:\/\//i.test( value.trim() ) ? value.trim() : `https://${ value.trim() }`;
+
+const isValidWebsiteUrl = ( value: string ) => {
+  try {
+    new URL( ensureUrlScheme( value ) );
+    return true;
+  } catch {
+    return false;
+  }
 };
 
 export default function BrandCompleteProfilePage() {
@@ -97,11 +111,13 @@ export default function BrandCompleteProfilePage() {
 
   const brandProfileSchema = useMemo( () => z.object( {
     companyName: z.string().min( 1, createProfileFormT( 'errorCompanyRequired' ) ),
-    websiteUrl: z.string().url( createProfileFormT( 'errorInvalidUrl' ) ),
+    websiteUrl: z.string()
+      .min( 1, createProfileFormT( 'errorWebsiteRequired' ) )
+      .refine( isValidWebsiteUrl, createProfileFormT( 'errorInvalidUrl' ) ),
     companyDescription: z.string(),
-    category: z.enum( UtilsBrandCategory ).optional(),
-    companySize: z.enum( UtilsCompanySize ).optional(),
-    registrationNumber: z.string(),
+    category: z.enum( UtilsBrandCategory, { error: createProfileFormT( 'errorCategoryRequired' ) } ),
+    companySize: z.enum( UtilsCompanySize, { error: createProfileFormT( 'errorCompanySizeRequired' ) } ),
+    registrationNumber: z.string().min( 1, createProfileFormT( 'errorRegistrationRequired' ) ),
     city: z.string().min( 1, createProfileFormT( 'errorCityRequired' ) ),
     country: z.string(),
     building_number: z.string(),
@@ -140,7 +156,7 @@ export default function BrandCompleteProfilePage() {
 
         const updateRequest: ModelsBrandRequest = {
           company_name: value.companyName,
-          website_url: value.websiteUrl,
+          website_url: value.websiteUrl ? ensureUrlScheme( value.websiteUrl ) : value.websiteUrl,
           company_description: value.companyDescription,
           category: value.category as UtilsBrandCategory,
           company_size: value.companySize as UtilsCompanySize,
@@ -281,8 +297,9 @@ export default function BrandCompleteProfilePage() {
                   </div>
                 </CardHeader>
                 <CardContent className="complete-profile__inner-card-content">
-                  <form onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
-                    <TabsPanels>
+                  <ScrollArea className="complete-profile__inner-card-scroll">
+                    <form className="flex flex-col min-h-full pr-3 max-md:pr-2" onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
+                      <TabsPanels>
                       <TabsPanel value="company" keepMounted>
                         <Card className="m-px">
                           <CardContent>
@@ -316,11 +333,13 @@ export default function BrandCompleteProfilePage() {
                                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                                     onBlur={ field.handleBlur }
                                     error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
                                   />
                                 ) }
                               />
                               <form.Field
                                 name="category"
+                                validators={ { onBlur: brandProfileSchema.shape.category } }
                                 children={ ( field ) => (
                                   <SuperField
                                     name={ field.name }
@@ -330,11 +349,14 @@ export default function BrandCompleteProfilePage() {
                                     value={ field.state.value }
                                     onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsBrandCategory ) }
                                     options={ Object.values( UtilsBrandCategory ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
                                   />
                                 ) }
                               />
                               <form.Field
                                 name="companySize"
+                                validators={ { onBlur: brandProfileSchema.shape.companySize } }
                                 children={ ( field ) => (
                                   <SuperField
                                     name={ field.name }
@@ -342,7 +364,10 @@ export default function BrandCompleteProfilePage() {
                                     label={ createProfileFormT( 'companySize' ) }
                                     value={ field.state.value }
                                     onValueChange={ ( val: string | null ) => field.handleChange( val as UtilsCompanySize ) }
+                                    onBlur={ field.handleBlur }
                                     options={ Object.values( UtilsCompanySize ).map( val => ( { label: formatEnumLabel( val ), value: val } ) ) }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
                                   />
                                 ) }
                               />
@@ -360,6 +385,7 @@ export default function BrandCompleteProfilePage() {
                               />
                               <form.Field
                                 name="registrationNumber"
+                                validators={ { onBlur: brandProfileSchema.shape.registrationNumber } }
                                 children={ ( field ) => (
                                   <SuperField
                                     name={ field.name }
@@ -367,6 +393,9 @@ export default function BrandCompleteProfilePage() {
                                     type="text"
                                     value={ field.state.value }
                                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
                                   />
                                 ) }
                               />
@@ -538,37 +567,42 @@ export default function BrandCompleteProfilePage() {
                           </Card>
                         </div>
                       </TabsPanel>
-                    </TabsPanels>
-                  </form>
+                      </TabsPanels>
+
+                      <div className="complete-profile__inner-card-footer">
+                        <div className="complete-profile__footer-actions">
+                          <div>
+                            { activeTab !== 'company' && (
+                              <Button type="button" variant="outline" onClick={ prevTab } size="lg">
+                                { completeProfileT( 'back' ) }
+                              </Button>
+                            ) }
+                          </div>
+                          <div>
+                            { activeTab === 'company' ? (
+                              <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
+                                { completeProfileT( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
+                              </Button>
+                            ) : (
+                              <form.Subscribe
+                                selector={ ( state ) => [ state.isSubmitting, state.values ] as const }
+                                children={ ( [ isSubmitting, values ] ) => {
+                                  const isValid = brandProfileSchema.safeParse( values ).success;
+                                  return (
+                                    <Button type="submit" size="lg" disabled={ isSubmitting || isSaving || !isValid } className="gap-2" onClick={ () => form.handleSubmit() }>
+                                      { isSubmitting || isSaving ? completeProfileT( 'creatingProfile' ) : completeProfileT( 'completeProfile' ) }
+                                      { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
+                                    </Button>
+                                  );
+                                } }
+                              />
+                            ) }
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </ScrollArea>
                 </CardContent>
-                <CardFooter className="complete-profile__inner-card-footer">
-                  <div className="complete-profile__footer-actions">
-                    <div>
-                      { activeTab !== 'company' && (
-                        <Button type="button" variant="outline" onClick={ prevTab } size="lg">
-                          { completeProfileT( 'back' ) }
-                        </Button>
-                      ) }
-                    </div>
-                    <div>
-                      { activeTab === 'company' ? (
-                        <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                          { completeProfileT( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
-                        </Button>
-                      ) : (
-                        <form.Subscribe
-                          selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
-                          children={ ( [ , isSubmitting ] ) => (
-                            <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2" onClick={ () => form.handleSubmit() }>
-                              { isSubmitting || isSaving ? completeProfileT( 'creatingProfile' ) : completeProfileT( 'completeProfile' ) }
-                              { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
-                            </Button>
-                          ) }
-                        />
-                      ) }
-                    </div>
-                  </div>
-                </CardFooter>
               </Card>
             </Tabs>
           </CardContent>

@@ -50,6 +50,10 @@ export const SearchableSelect = ( {
 }: SearchableSelectProps ) => {
   const [ open, setOpen ] = useState( false );
   const [ width, setWidth ] = useState( 0 );
+  // Sentinel that matches no option, so cmdk does not auto-highlight the first
+  // item on open. Only hover / arrow keys (cmdk data-selected) set a real value.
+  const NO_HIGHLIGHT = '__none__';
+  const [ highlighted, setHighlighted ] = useState( NO_HIGHLIGHT );
   const triggerRef = useRef<HTMLDivElement>( null );
   const t = useTranslations( 'dashboard.common' );
 
@@ -68,6 +72,11 @@ export const SearchableSelect = ( {
   useEffect( () => {
     if ( open && triggerRef.current ) {
       setWidth( triggerRef.current.offsetWidth );
+    }
+    // Reset the active option on open so nothing is highlighted until the user
+    // hovers or uses the arrow keys.
+    if ( open ) {
+      setHighlighted( NO_HIGHLIGHT );
     }
   }, [ open ] );
   const handleResize = useEffectEvent( () => {
@@ -110,7 +119,7 @@ export const SearchableSelect = ( {
         align="start"
         style={ { width: width ? `${ width }px` : undefined } }
       >
-        <Command>
+        <Command value={ highlighted } onValueChange={ setHighlighted }>
           <CommandInput placeholder={ placeholder || "Search..." } className="h-9" />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
@@ -130,7 +139,9 @@ export const SearchableSelect = ( {
                     } }
                     disabled={ optDisabled }
                     className={ cn(
-                      "data-selected:bg-accent data-selected:text-accent-foreground relative flex cursor-default select-none rounded-sm text-sm outline-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 bg-background",
+                      "relative flex cursor-default select-none rounded-sm text-sm outline-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 bg-background data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground",
+                      // Highlight the currently selected option, plus hover / arrow-key (data-selected).
+                      value === optValue && "bg-accent text-accent-foreground",
                       renderOption
                         ? "p-0 overflow-hidden w-full [&>svg:last-child]:!hidden"
                         : "items-center py-1.5 pl-2 pr-8"

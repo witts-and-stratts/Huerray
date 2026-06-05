@@ -48,6 +48,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                   <SuperField
                     name={ field.name }
                     label={ t( 'dateOfBirth' ) }
+                    required
                     type="datepicker"
                     value={ field.state.value }
                     maxDate={ latestAllowedDateOfBirth }
@@ -69,6 +70,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                   <SuperField
                     name={ field.name }
                     label={ t( 'gender' ) }
+                    required
                     type="select"
                     value={ field.state.value }
                     onValueChange={ ( val: any ) => field.handleChange( val ) }
@@ -85,6 +87,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                   <SuperField
                     name={ field.name }
                     label={ t( 'phoneNumber' ) }
+                    required
                     type="tel"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -113,6 +116,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                     <SuperField
                       name={ field.name }
                       label={ label }
+                      required
                       type="text"
                       value={ field.state.value }
                       onChange={ ( e: any ) => field.handleChange( e.target.value ) }
@@ -130,6 +134,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                   <SuperField
                     name={ field.name }
                     label={ t( 'country' ) }
+                    required
                     type="country"
                     value={ field.state.value }
                     onValueChange={ ( val: any ) => field.handleChange( val || '' ) }
