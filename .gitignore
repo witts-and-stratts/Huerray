@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.*
+
+# node v8 compile cache
+node-compile-cache/
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
