@@ -66,6 +66,7 @@
     "errorStateRequired": "Estado/Provincia obligatorio",
     "errorStreetRequired": "Se requiere calle",
     "errorCityRequired": "Se requiere la ciudad",
+    "errorCountryRequired": "El país es obligatorio",
     "errorPostalCodeRequired": "Código postal obligatorio",
     "errorWebsiteRequired": "La URL del sitio web es obligatoria",
     "errorCategoryRequired": "La categoría del sector es obligatoria",

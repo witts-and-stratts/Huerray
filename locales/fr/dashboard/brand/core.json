@@ -66,6 +66,7 @@
     "errorStateRequired": "L'État/Province est requis",
     "errorStreetRequired": "La rue est nécessaire",
     "errorCityRequired": "La ville est requise",
+    "errorCountryRequired": "Le pays est requis",
     "errorPostalCodeRequired": "Le code postal est requis",
     "errorWebsiteRequired": "L'URL du site web est requise",
     "errorCategoryRequired": "La catégorie d'activité est requise",
