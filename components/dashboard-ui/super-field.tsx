@@ -203,7 +203,7 @@ export const SuperField = forwardRef<
             { label && (
               <FieldLabel htmlFor={ fieldId } className={ cn( "cursor-pointer", labelClassName ) }>
                 { label }
-                { required && <span className='text-destructive -ml-1'>*</span> }
+                { required && <span className='text-destructive ml-1'>*</span> }
               </FieldLabel>
             ) }
             { description && (
@@ -228,7 +228,7 @@ export const SuperField = forwardRef<
             <div className="flex items-center justify-between">
               <FieldLabel htmlFor={ fieldId } className={ labelClassName }>
                 { label }
-                { required && <span className='text-destructive -ml-1'>*</span> }
+                { required && <span className='text-destructive ml-1'>*</span> }
               </FieldLabel>
               { headerExtra }
             </div>
