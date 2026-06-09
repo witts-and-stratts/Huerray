@@ -5,7 +5,8 @@
 import '@/app/styles/components/complete-profile.css';
 import { Tabs, TabsList, TabsTab, TabsPanel } from '@/components/animate-ui/components/base/tabs';
 import { Button } from '@/components/dashboard-ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { CreatorBioSection } from '@/components/settings/creator-bio-section';
 import { CreatorProfileSection } from '@/components/settings/creator-profile-section';
@@ -104,7 +105,7 @@ export default function CompleteProfilePage() {
       profileImageUrl: '',
     } as CreatorSettings,
     validators: {
-      onChange: creatorSettingsSchema,
+      onSubmit: creatorSettingsSchema,
     },
     onSubmit: async ( { value } ) => {
       setIsSaving( true );
@@ -268,54 +269,60 @@ export default function CompleteProfilePage() {
                   </div>
                 </CardHeader>
                 <CardContent className="complete-profile__inner-card-content">
-                  <form onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
-                    <TabsPanel value="profile" keepMounted>
-                      <div className="space-y-6">
-                        <CreatorProfileSection form={ form } />
-                      </div>
-                    </TabsPanel>
+                  <ScrollArea className="complete-profile__inner-card-scroll">
+                    <form className="flex flex-col min-h-full pr-3 max-md:pr-2" onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
+                      <TabsPanel value="profile" keepMounted>
+                        <div className="space-y-6">
+                          <CreatorProfileSection form={ form } />
+                        </div>
+                      </TabsPanel>
 
-                    <TabsPanel value="social" keepMounted>
-                      <div className="space-y-8">
-                        <CreatorSocialSection form={ form } />
-                      </div>
-                    </TabsPanel>
+                      <TabsPanel value="social" keepMounted>
+                        <div className="space-y-8">
+                          <CreatorSocialSection form={ form } />
+                        </div>
+                      </TabsPanel>
 
-                    <TabsPanel value="bio" keepMounted>
-                      <div className="space-y-8">
-                        <CreatorBioSection form={ form } />
+                      <TabsPanel value="bio" keepMounted>
+                        <div className="space-y-8">
+                          <CreatorBioSection form={ form } />
+                        </div>
+                      </TabsPanel>
+
+                      <div className="complete-profile__inner-card-footer">
+                        <div className="complete-profile__footer-actions">
+                          <div>
+                            { activeTab !== 'profile' && (
+                              <Button type="button" variant="outline" onClick={ prevTab } size="lg">
+                                { t( 'back' ) }
+                              </Button>
+                            ) }
+                          </div>
+                          <div>
+                            { activeTab !== 'bio' ? (
+                              <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
+                                { t( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
+                              </Button>
+                            ) : (
+                              <form.Subscribe
+                                selector={ ( state ) => [ state.isSubmitting, state.values ] as const }
+                                children={ ( [ isSubmitting, values ] ) => {
+                                  const isValid = creatorSettingsSchema.safeParse( values ).success;
+                                  return (
+                                    <Button type="submit" size="lg" disabled={ isSubmitting || isSaving || !isValid } className="gap-2" onClick={ () => form.handleSubmit() }>
+                                      { isSubmitting || isSaving ? t( 'creatingProfile' ) : t( 'completeProfile' ) }
+                                      { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
+                                    </Button>
+                                  );
+                                } }
+                              />
+                            ) }
+                          </div>
+                        </div>
                       </div>
-                    </TabsPanel>
-                  </form>
+                    </form>
+                  </ScrollArea>
                 </CardContent>
-                <CardFooter className="complete-profile__inner-card-footer">
-                  <div className="complete-profile__footer-actions">
-                    <div>
-                      { activeTab !== 'profile' && (
-                        <Button type="button" variant="outline" onClick={ prevTab } size="lg">
-                          { t( 'back' ) }
-                        </Button>
-                      ) }
-                    </div>
-                    <div>
-                      { activeTab !== 'bio' ? (
-                        <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                          { t( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
-                        </Button>
-                      ) : (
-                        <form.Subscribe
-                          selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
-                          children={ ( [ , isSubmitting ] ) => (
-                            <Button type="submit" size="lg" disabled={ isSubmitting || isSaving } className="gap-2" onClick={ () => form.handleSubmit() }>
-                              { isSubmitting || isSaving ? t( 'creatingProfile' ) : t( 'completeProfile' ) }
-                              { !isSubmitting && !isSaving && <Check className="w-4 h-4" /> }
-                            </Button>
-                          ) }
-                        />
-                      ) }
-                    </div>
-                  </div>
-                </CardFooter>
               </Card>
             </Tabs>
           </CardContent>

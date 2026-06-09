@@ -66,7 +66,11 @@
     "errorStateRequired": "Staat/Provinz ist erforderlich",
     "errorStreetRequired": "Straße ist erforderlich",
     "errorCityRequired": "Stadt ist erforderlich",
-    "errorPostalCodeRequired": "Postleitzahl ist erforderlich"
+    "errorPostalCodeRequired": "Postleitzahl ist erforderlich",
+    "errorWebsiteRequired": "Website-URL ist erforderlich",
+    "errorCategoryRequired": "Branchenkategorie ist erforderlich",
+    "errorCompanySizeRequired": "Unternehmensgröße ist erforderlich",
+    "errorRegistrationRequired": "Registrierungsnummer ist erforderlich"
   },
   "completeProfile": {
     "title": "Vervollständigen Sie Ihr Markenprofil",

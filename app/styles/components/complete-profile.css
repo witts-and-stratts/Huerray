@@ -55,11 +55,15 @@
   }
 
   .complete-profile__inner-card-content {
-    @apply flex-1 min-h-0 overflow-y-auto max-md:px-0;
+    @apply flex-1 min-h-0 max-md:px-0;
+  }
+
+  .complete-profile__inner-card-scroll {
+    @apply h-full;
   }
 
   .complete-profile__inner-card-footer {
-    @apply shrink-0 border-t pt-4;
+    @apply mt-auto pt-4 border-t;
   }
 
   .complete-profile__footer-actions {

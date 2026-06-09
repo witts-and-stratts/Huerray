@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import type { ModelsBrandResponse } from '@/lib/api/generated/models';
 import { useTranslations } from 'next-intl';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface BrandProfileSnapshotBlockProps {
   brand: ModelsBrandResponse | null;
@@ -25,7 +26,7 @@ export function BrandProfileSnapshotBlock( { brand, fallbackName, fallbackEmail 
       <CardContent className="space-y-2">
         <div className="rounded-lg border border-border/60 bg-white p-4">
           <Avatar className="size-24 border border-border/60 bg-white mx-auto">
-            <AvatarImage src={ brandAvatar } alt={ brandName } />
+            <AvatarImage src={ imgpresets.avatar( brandAvatar ) } alt={ brandName } />
             <AvatarFallback className="text-xl">{ brandName.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
           </Avatar>
         </div>

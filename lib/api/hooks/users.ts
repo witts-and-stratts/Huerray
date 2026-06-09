@@ -137,7 +137,9 @@ export function useUpdateUserById() {
   } );
 }
 
-export function useUserProfile() {
+export function useUserProfile(
+  options?: Omit<UseQueryOptions<ModelsUserResponse, ApiError>, 'queryKey' | 'queryFn'>
+) {
   return useQuery<ModelsUserResponse, ApiError>({
     queryKey: [...usersKeys.all, 'profile'],
     queryFn: async () => {
@@ -145,6 +147,7 @@ export function useUserProfile() {
       const raw = response.data as any;
       return raw.data || raw;
     },
+    ...options,
   });
 }
 

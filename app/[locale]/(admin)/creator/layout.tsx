@@ -2,8 +2,10 @@
 
 import { CreatorAuthGuard } from '@/components/auth/creator-auth-guard';
 import { EmailVerificationBanner } from '@/components/auth/email-verification-banner';
+import { EmailVerificationGate } from '@/components/auth/email-verification-gate';
 import { ProfileStatusBanner } from '@/components/auth/profile-status-banner';
 import { DashboardHeader } from '@/components/dashboard-header';
+import { EmailVerificationProvider } from '@/lib/auth/email-verification-context';
 import {
   SidebarInset,
   SidebarProvider,
@@ -29,11 +31,15 @@ export default function CreatorAdminLayout( {
       <CreatorAuthGuard>
         <RoleProvider>
           <PathProvider basePath={ `/${locale}/creator` }>
-            <div className="bg-background min-h-screen flex flex-col">
-              <EmailVerificationBanner />
-              <ProfileStatusBanner role="creator" />
-              { children }
-            </div>
+            <EmailVerificationProvider>
+              <div className="bg-background min-h-screen flex flex-col">
+                <EmailVerificationBanner />
+                <ProfileStatusBanner role="creator" />
+                <EmailVerificationGate className="flex-1 flex flex-col">
+                  { children }
+                </EmailVerificationGate>
+              </div>
+            </EmailVerificationProvider>
           </PathProvider>
         </RoleProvider>
       </CreatorAuthGuard>
@@ -45,16 +51,18 @@ export default function CreatorAdminLayout( {
       <CreatorAuthGuard>
         <RoleProvider>
           <PathProvider basePath={ `/${locale}/creator` }>
-            <CreatorSidebar />
-            <SidebarInset>
-              <EmailVerificationBanner />
-              <ProfileStatusBanner role="creator" />
-              <DashboardHeader />
-              <div className="flex-1 overflow-y-auto min-h-0 flex flex-col">
-                <CreatorBreadcrumbs />
-                { children }
-              </div>
-            </SidebarInset>
+            <EmailVerificationProvider>
+              <CreatorSidebar />
+              <SidebarInset>
+                <EmailVerificationBanner />
+                <ProfileStatusBanner role="creator" />
+                <DashboardHeader />
+                <EmailVerificationGate className="flex-1 overflow-y-auto min-h-0 flex flex-col">
+                  <CreatorBreadcrumbs />
+                  { children }
+                </EmailVerificationGate>
+              </SidebarInset>
+            </EmailVerificationProvider>
           </PathProvider>
         </RoleProvider>
       </CreatorAuthGuard>

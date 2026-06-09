@@ -23,6 +23,7 @@ import { apiClient } from "@/lib/api/client";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { ModelsRegisterRequestUserTypeEnum } from "@/lib/api/generated/models/models-register-request";
 import { useAuth } from "@/lib/auth/auth-context";
+import { useClearPersistedData } from "@/lib/hooks/use-clear-persisted-data";
 import { cn } from "@/lib/dashboard-utils";
 import { useForm } from '@tanstack/react-form';
 import Cookies from 'js-cookie';
@@ -60,6 +61,7 @@ export function SignupForm( {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { setUser } = useAuth();
+  const clearPersistedData = useClearPersistedData();
   const t = useTranslations( 'auth.signup' );
   const tValidation = useTranslations( 'auth.validation' );
 
@@ -115,6 +117,18 @@ export function SignupForm( {
       setIsLoading( true );
 
       try {
+        // Invalidate any lingering session server-side before registering.
+        // The backend session is an httpOnly cookie that clearPersistedData()
+        // cannot remove, so without this a stale session (e.g. a previous
+        // creator whose logout failed) would still be sent on the new
+        // brand's requests, leaking the prior user's data and triggering
+        // permission errors. Best-effort: ignore failures (no active session).
+        try {
+          await authApi.authLogoutPost();
+        } catch {
+          // No active session to clear — safe to proceed with registration.
+        }
+
         const userType = selectedRole === 'brand'
           ? ModelsRegisterRequestUserTypeEnum.BrandUser
           : ModelsRegisterRequestUserTypeEnum.Creator;
@@ -139,6 +153,10 @@ export function SignupForm( {
 
         // Cast to access properties
         const responseData = response.data?.data as any;
+
+        // Clear all persisted data from any previous session before
+        // establishing the new one.
+        await clearPersistedData();
 
         // Store auth tokens as cookies for middleware auth checks
         if ( responseData?.access_token ) {
@@ -171,7 +189,10 @@ export function SignupForm( {
           toast.success( t( 'toast.successTitle' ), {
             action: {
               label: t( 'toast.continue' ),
-              onClick: () => router.push( dashboardPath ),
+              // Full reload (not router.push) so in-memory React Query and
+              // Redux state are rebuilt fresh under the new session, matching
+              // the login flow. SPA navigation would carry over stale caches.
+              onClick: () => { window.location.href = dashboardPath; },
             },
             cancel: {
               label: t( 'toast.cancel' ),

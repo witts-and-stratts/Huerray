@@ -1,7 +1,17 @@
 node_modules
 .next
+node-compile-cache
 Dockerfile
 .dockerignore
 .git
 .gitignore
 .env*
+.agent
+.gemini
+.vscode
+.playwright-mcp
+playwright-report
+test-results
+tests
+.yarn
+.yarnrc

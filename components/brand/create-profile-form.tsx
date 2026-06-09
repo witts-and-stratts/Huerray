@@ -46,9 +46,9 @@ export function CreateProfileForm() {
     companyDescription: z.string(),
     category: z.nativeEnum( UtilsBrandCategory ),
     companySize: z.nativeEnum( UtilsCompanySize ),
-    registrationNumber: z.string(),
-    city: z.string(),
-    country: z.string(),
+    registrationNumber: z.string().min( 1, 'Registration number is required' ),
+    city: z.string().min( 1, 'City is required' ),
+    country: z.nativeEnum( UtilsCountryCode ),
     building_number: z.string(),
     preferredContactEmail: z.email().or( z.literal( '' ) ),
     preferredContactPhone: z.string(),
@@ -76,6 +76,9 @@ export function CreateProfileForm() {
       vatId: '',
       postalCode: '',
     },
+    validators: {
+      onChange: brandProfileSchema as any,
+    },
     onSubmit: async ( { value } ) => {
       setIsSaving( true );
       try {
@@ -89,7 +92,7 @@ export function CreateProfileForm() {
           company_size: value.companySize as UtilsCompanySize,
           registration_number: value.registrationNumber || '',
           city: value.city || '',
-          country: ( value.country as UtilsCountryCode ) || UtilsCountryCode.CountryUS,
+          country: value.country as UtilsCountryCode,
           number: value.building_number || '',
           preferred_contact_email: value.preferredContactEmail || '',
           preferred_contact_phone: value.preferredContactPhone || '',
@@ -237,6 +240,7 @@ export function CreateProfileForm() {
                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                   onBlur={ field.handleBlur }
                   error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                  required
                 />
               ) }
             />
@@ -295,6 +299,7 @@ export function CreateProfileForm() {
                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                   onBlur={ field.handleBlur }
                   error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                  required
                 />
               ) }
             />
@@ -346,6 +351,7 @@ export function CreateProfileForm() {
                   type="country"
                   onValueChange={ ( val ) => field.handleChange( val || "" ) }
                   error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                  required
                 />
               ) }
             />

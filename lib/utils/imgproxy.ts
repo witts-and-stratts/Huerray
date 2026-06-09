@@ -3,6 +3,45 @@ import { config } from "../config";
 const CDN_BASE_URL =
   process.env.NEXT_PUBLIC_CDN_BASE_URL ?? 'https://cdn.huerray.de';
 
+/**
+ * imgproxy fetches the original image from the URL in its `plain/` segment,
+ * so that URL MUST be absolute (scheme + host). `config.api.baseUrl` is often
+ * a relative proxy path (e.g. "/api/v1"), which is fine for the app's own
+ * fetches but useless to the CDN — so resolve an explicit backend origin here.
+ */
+const BACKEND_ORIGIN = (() => {
+  const explicit = process.env.NEXT_PUBLIC_IMAGE_ORIGIN;
+  if ( explicit ) return explicit.replace( /\/$/, '' );
+  try {
+    return new URL( config.api.baseUrl, 'https://backend.huerray.de' ).origin;
+  } catch {
+    return 'https://backend.huerray.de';
+  }
+})();
+
+/** The API path prefix (e.g. "/api/v1"), used to avoid doubling it. */
+const API_PREFIX = (() => {
+  try {
+    return new URL( config.api.baseUrl, BACKEND_ORIGIN ).pathname.replace( /\/+$/, '' );
+  } catch {
+    return '';
+  }
+})();
+
+/**
+ * Turn a backend image reference into an absolute URL imgproxy can fetch.
+ * Handles full URLs, prefix-included paths ("/api/v1/uploads/…") and
+ * prefix-less paths ("/uploads/…") without duplicating the API prefix.
+ */
+function toAbsoluteSource( src: string ): string {
+  if ( src.startsWith( 'http' ) ) return src;
+  let path = src.startsWith( '/' ) ? src : `/${ src }`;
+  if ( API_PREFIX && !path.startsWith( `${ API_PREFIX }/` ) ) {
+    path = `${ API_PREFIX }${ path }`;
+  }
+  return `${ BACKEND_ORIGIN }${ path }`;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Types                                                             */
 /* ------------------------------------------------------------------ */
@@ -105,10 +144,9 @@ export function imgproxyUrl(src: string, opts: ImgproxyOptions = {}): string {
     blur,
   } = opts;
 
-  // If the source is a relative path, prepend the API base URL.
-  const sourceUrl = src?.startsWith('http')
-    ? src
-    : `${config.api.baseUrl}${src?.startsWith('/') ? '' : '/'}${src}`;
+  // Resolve to an absolute URL (with backend host) that imgproxy can fetch,
+  // without duplicating the API prefix the backend already includes.
+  const sourceUrl = toAbsoluteSource( src );
 
   // Build the processing-options path segments.
   const parts: string[] = [

@@ -66,7 +66,11 @@
     "errorStateRequired": "State/Province is required",
     "errorStreetRequired": "Street is required",
     "errorCityRequired": "City is required",
-    "errorPostalCodeRequired": "Postal code is required"
+    "errorPostalCodeRequired": "Postal code is required",
+    "errorWebsiteRequired": "Website URL is required",
+    "errorCategoryRequired": "Industry category is required",
+    "errorCompanySizeRequired": "Company size is required",
+    "errorRegistrationRequired": "Registration number is required"
   },
   "completeProfile": {
     "title": "Complete Your Brand Profile",

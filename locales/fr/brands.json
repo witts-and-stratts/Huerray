@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Collaborer avec les meilleurs créateurs",
-    "subtitle": "Travaillez avec des marques et des entreprises réelles. Commencez à gagner de l'argent pour ce que vous aimez.",
+    "subtitle": "Travaillez avec de vrais créateurs passionnés par leur métier. Trouvez rapidement le match idéal pour votre marque.",
     "buttonText": "Commencer"
   },
   "scroller": {
@@ -130,6 +130,6 @@
   },
   "seo": {
     "title": "Collaborer avec les meilleurs créateurs",
-    "description": "Travaillez avec des marques et des entreprises réelles. Commencez à gagner de l'argent pour ce que vous aimez."
+    "description": "Travaillez avec de vrais créateurs passionnés par leur métier. Trouvez rapidement le match idéal pour votre marque."
   }
 }
