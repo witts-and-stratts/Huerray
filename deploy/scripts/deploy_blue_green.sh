@@ -129,6 +129,9 @@ TEMP_UPSTREAM_FILE="${HOME}/.tmp-${DEPLOY_APP_NAME}-upstream.conf"
 cat > "${TEMP_UPSTREAM_FILE}" <<EOF
 ${caddy_hosts} {
 
+    @http protocol http
+    redir @http https://{host}{uri} permanent
+
     reverse_proxy 127.0.0.1:${target_port}
 
     encode gzip
