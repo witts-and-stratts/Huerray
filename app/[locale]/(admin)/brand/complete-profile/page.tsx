@@ -119,7 +119,7 @@ export default function BrandCompleteProfilePage() {
     companySize: z.enum( UtilsCompanySize, { error: createProfileFormT( 'errorCompanySizeRequired' ) } ),
     registrationNumber: z.string().min( 1, createProfileFormT( 'errorRegistrationRequired' ) ),
     city: z.string().min( 1, createProfileFormT( 'errorCityRequired' ) ),
-    country: z.string(),
+    country: z.string().min( 1, createProfileFormT( 'errorCountryRequired' ) ),
     building_number: z.string(),
     preferredContactEmail: z.email().or( z.literal( '' ) ),
     preferredContactPhone: z.string(),
@@ -162,7 +162,7 @@ export default function BrandCompleteProfilePage() {
           company_size: value.companySize as UtilsCompanySize,
           registration_number: value.registrationNumber || '',
           city: value.city || '',
-          country: ( value.country as any ) || 'US',
+          country: value.country as any,
           number: value.building_number || '',
           preferred_contact_email: value.preferredContactEmail || '',
           preferred_contact_phone: value.preferredContactPhone || '',
@@ -481,6 +481,7 @@ export default function BrandCompleteProfilePage() {
                               />
                               <form.Field
                                 name="country"
+                                validators={ { onBlur: brandProfileSchema.shape.country } }
                                 children={ ( field ) => (
                                   <SuperField
                                     name={ field.name }
@@ -489,6 +490,9 @@ export default function BrandCompleteProfilePage() {
                                     type="country"
                                     placeholder={ createProfileFormT( 'country' ) }
                                     onValueChange={ ( val: string | null ) => field.handleChange( val || "" ) }
+                                    onBlur={ field.handleBlur }
+                                    error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                                    required
                                   />
                                 ) }
                               />
