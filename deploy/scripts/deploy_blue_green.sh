@@ -129,6 +129,10 @@ TEMP_UPSTREAM_FILE="${HOME}/.tmp-${DEPLOY_APP_NAME}-upstream.conf"
 cat > "${TEMP_UPSTREAM_FILE}" <<EOF
 ${caddy_hosts} {
 
+    tls {
+        dns cloudflare {env.CF_API_TOKEN_THRYPES}
+    }
+
     @http protocol http
     redir @http https://{host}{uri} permanent
 
