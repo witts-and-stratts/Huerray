@@ -129,7 +129,7 @@ TEMP_UPSTREAM_FILE="${HOME}/.tmp-${DEPLOY_APP_NAME}-upstream.conf"
 cat > "${TEMP_UPSTREAM_FILE}" <<EOF
 ${caddy_hosts} {
 
-     tls {
+    tls {
         dns cloudflare {env.CF_API_TOKEN_THRYPES}
     }
 
