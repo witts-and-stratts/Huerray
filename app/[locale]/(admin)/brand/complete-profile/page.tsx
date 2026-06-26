@@ -117,7 +117,7 @@ export default function BrandCompleteProfilePage() {
     companyDescription: z.string(),
     category: z.enum( UtilsBrandCategory, { error: createProfileFormT( 'errorCategoryRequired' ) } ),
     companySize: z.enum( UtilsCompanySize, { error: createProfileFormT( 'errorCompanySizeRequired' ) } ),
-    registrationNumber: z.string().min( 1, createProfileFormT( 'errorRegistrationRequired' ) ),
+    registrationNumber: z.string(),
     city: z.string().min( 1, createProfileFormT( 'errorCityRequired' ) ),
     country: z.string().min( 1, createProfileFormT( 'errorCountryRequired' ) ),
     building_number: z.string(),
