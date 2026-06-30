@@ -5,26 +5,32 @@
 #cc-main {
   --cc-font-family: var(--body-font-family, inherit);
   --cc-modal-border-radius: 1rem;
-  --cc-btn-border-radius: 0.5rem;
+  --cc-btn-border-radius: 999px;
+  --cc-modal-margin: 1.25rem;
 
   /* Background & text */
   --cc-bg: #ffffff;
-  --cc-color: #28313a;
+  --cc-primary-color: #161c22;
   --cc-secondary-color: #505d6f;
 
-  /* Primary button — brand orange */
-  --cc-btn-primary-bg: #fa6b0c;
-  --cc-btn-primary-text: #ffffff;
-  --cc-btn-primary-hover-bg: #e05e0a;
-  --cc-btn-primary-hover-text: #ffffff;
+  /* Primary button — brand gradient (dark-burgundy -> orange) */
+  --cc-btn-primary-bg: linear-gradient(to right, #9c1e5a, #fa6b0c);
+  --cc-btn-primary-color: #ffffff;
+  --cc-btn-primary-border-color: transparent;
+  --cc-btn-primary-hover-bg: linear-gradient(to right, #7e1848, #d65d0a);
+  --cc-btn-primary-hover-color: #ffffff;
+  --cc-btn-primary-hover-border-color: transparent;
 
-  /* Secondary button — outlined */
+  /* Secondary button — outlined, matches button--outline */
   --cc-btn-secondary-bg: transparent;
-  --cc-btn-secondary-text: #28313a;
-  --cc-btn-secondary-border-color: #28313a;
-  --cc-btn-secondary-hover-bg: #28313a;
-  --cc-btn-secondary-hover-text: #ffffff;
-  --cc-btn-secondary-hover-border-color: #28313a;
+  --cc-btn-secondary-color: #28313a;
+  --cc-btn-secondary-border-color: #bbc8d8;
+  --cc-btn-secondary-hover-bg: #161c22;
+  --cc-btn-secondary-hover-color: #ffffff;
+  --cc-btn-secondary-hover-border-color: #161c22;
+
+  /* Links — brand orange */
+  --cc-link-color: #fa6b0c;
 
   /* Toggle — brand orange when on */
   --cc-toggle-on-bg: #fa6b0c;
@@ -33,56 +39,56 @@
   --cc-toggle-on-knob-bg: #ffffff;
   --cc-toggle-off-knob-bg: #ffffff;
   --cc-toggle-readonly-knob-bg: #98adc5;
+  --cc-toggle-enabled-icon-color: #ffffff;
+  --cc-toggle-disabled-icon-color: #ffffff;
 
-  /* Separator & checkbox */
+  /* Category accordion blocks */
   --cc-separator-border-color: #dde3eb;
-  --cc-checkbox-on-bg: #fa6b0c;
-  --cc-checkbox-on-border-color: #fa6b0c;
-  --cc-checkbox-off-bg: transparent;
-  --cc-checkbox-off-border-color: #bbc8d8;
-
-  /* Overlay */
-  --cc-overlay-bg: rgba(22, 28, 34, 0.6);
-
-  /* Section header accent */
+  --cc-section-category-border: #dde3eb;
   --cc-cookie-category-block-bg: #f7f9fb;
   --cc-cookie-category-block-border: #dde3eb;
   --cc-cookie-category-block-hover-bg: #eef1f5;
   --cc-cookie-category-block-hover-border: #bbc8d8;
-  --cc-cookie-category-expanded-block-hover-bg: #eef1f5;
   --cc-cookie-category-expanded-block-bg: #f7f9fb;
+  --cc-cookie-category-expanded-block-hover-bg: #eef1f5;
+
+  /* Overlay */
+  --cc-overlay-bg: rgba(22, 28, 34, 0.6);
 }
 
-/* Consent modal — shadow and positioning polish */
+/* Consent modal — shadow polish to match site card elevation */
 #cc-main .cm {
   box-shadow: 0 8px 32px rgba(22, 28, 34, 0.12), 0 2px 8px rgba(22, 28, 34, 0.08);
-  max-width: 400px;
 }
 
 /* Consent modal title — use heading font if available */
-#cc-main .cm__title {
+#cc-main .cm__title,
+#cc-main .pm__title {
   font-family: var(--font-heading, inherit);
-  font-size: 1.125rem;
   font-weight: 700;
   color: #161c22;
 }
 
+/* Buttons — pill shape with brand hover lift, matches .button:active translate */
+#cc-main .cm__btn,
+#cc-main .pm__btn {
+  font-weight: 600;
+  transition: filter 0.2s ease, transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+#cc-main .cm__btn:active,
+#cc-main .pm__btn:active {
+  transform: translateY(2px);
+}
+
 /* Footer link styling */
 #cc-main .cc__link {
-  color: #fa6b0c;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 #cc-main .cc__link:hover {
-  color: #e05e0a;
-}
-
-/* Preferences modal title */
-#cc-main .pm__title {
-  font-family: var(--font-heading, inherit);
-  font-weight: 700;
-  color: #161c22;
+  filter: brightness(0.85);
 }
 
 /* Reduce motion */

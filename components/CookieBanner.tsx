@@ -73,7 +73,7 @@ export function CookieBanner() {
               acceptAllBtn: t('consentModal.acceptAllBtn'),
               acceptNecessaryBtn: t('consentModal.acceptNecessaryBtn'),
               showPreferencesBtn: t('consentModal.showPreferencesBtn'),
-              footer: t('consentModal.footer', { privacyUrl }),
+              footer: t.raw('consentModal.footer').replace('{privacyUrl}', privacyUrl),
             },
             preferencesModal: {
               title: t('preferencesModal.title'),
@@ -104,7 +104,7 @@ export function CookieBanner() {
                 },
                 {
                   title: t('preferencesModal.sections.more.title'),
-                  description: t('preferencesModal.sections.more.description', { privacyUrl }),
+                  description: t.raw('preferencesModal.sections.more.description').replace('{privacyUrl}', privacyUrl),
                 },
               ],
             },
