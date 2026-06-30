@@ -156,7 +156,10 @@ export function SignupForm( {
           },
         } );
 
-
+        if ( selectedRole === 'creator' ) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push( { event: 'creator_signup_complete', user_type: 'creator' } );
+        }
 
         // Cast to access properties
         const responseData = response.data?.data as any;
@@ -190,11 +193,6 @@ export function SignupForm( {
         } );
 
         if ( response.data ) {
-          if ( selectedRole === 'creator' ) {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push( { event: 'creator_signup_complete', user_type: 'creator' } );
-          }
-
           // Route to the appropriate dashboard based on the selected role
           const dashboardPath = selectedRole === 'brand' ? "/brand" : "/creator";
 
