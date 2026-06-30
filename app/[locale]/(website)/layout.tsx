@@ -7,6 +7,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Locale, locales } from '@/i18n';
 import { AuthProvider } from '@/lib/auth/auth-context';
+import { CookieBanner } from '@/components/CookieBanner';
 import '@/styles/globals.css';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
@@ -46,6 +47,12 @@ export default async function LocaleLayout( {
   return (
     <html lang={ locale }>
       <head>
+        {/* Google Consent Mode v2 — must fire before GTM initializes */}
+        <script
+          dangerouslySetInnerHTML={ {
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});`,
+          } }
+        />
         <meta name='application-name' content='Huerray' />
         <link rel='icon' type='image/x-icon' href='favicon.ico' />
         <link
@@ -162,6 +169,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <AuthProvider>
             { children }
           </AuthProvider>
+          <CookieBanner />
         </NextIntlClientProvider>
         <svg
           xmlns='http://www.w3.org/2000/svg'
