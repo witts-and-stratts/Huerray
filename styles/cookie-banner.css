@@ -1,0 +1,94 @@
+/* vanilla-cookieconsent base styles */
+@import 'vanilla-cookieconsent/dist/cookieconsent.css';
+
+/* Brand overrides for cookie consent */
+#cc-main {
+  --cc-font-family: var(--body-font-family, inherit);
+  --cc-modal-border-radius: 1rem;
+  --cc-btn-border-radius: 0.5rem;
+
+  /* Background & text */
+  --cc-bg: #ffffff;
+  --cc-color: #28313a;
+  --cc-secondary-color: #505d6f;
+
+  /* Primary button — brand orange */
+  --cc-btn-primary-bg: #fa6b0c;
+  --cc-btn-primary-text: #ffffff;
+  --cc-btn-primary-hover-bg: #e05e0a;
+  --cc-btn-primary-hover-text: #ffffff;
+
+  /* Secondary button — outlined */
+  --cc-btn-secondary-bg: transparent;
+  --cc-btn-secondary-text: #28313a;
+  --cc-btn-secondary-border-color: #28313a;
+  --cc-btn-secondary-hover-bg: #28313a;
+  --cc-btn-secondary-hover-text: #ffffff;
+  --cc-btn-secondary-hover-border-color: #28313a;
+
+  /* Toggle — brand orange when on */
+  --cc-toggle-on-bg: #fa6b0c;
+  --cc-toggle-off-bg: #bbc8d8;
+  --cc-toggle-readonly-bg: #dde3eb;
+  --cc-toggle-on-knob-bg: #ffffff;
+  --cc-toggle-off-knob-bg: #ffffff;
+  --cc-toggle-readonly-knob-bg: #98adc5;
+
+  /* Separator & checkbox */
+  --cc-separator-border-color: #dde3eb;
+  --cc-checkbox-on-bg: #fa6b0c;
+  --cc-checkbox-on-border-color: #fa6b0c;
+  --cc-checkbox-off-bg: transparent;
+  --cc-checkbox-off-border-color: #bbc8d8;
+
+  /* Overlay */
+  --cc-overlay-bg: rgba(22, 28, 34, 0.6);
+
+  /* Section header accent */
+  --cc-cookie-category-block-bg: #f7f9fb;
+  --cc-cookie-category-block-border: #dde3eb;
+  --cc-cookie-category-block-hover-bg: #eef1f5;
+  --cc-cookie-category-block-hover-border: #bbc8d8;
+  --cc-cookie-category-expanded-block-hover-bg: #eef1f5;
+  --cc-cookie-category-expanded-block-bg: #f7f9fb;
+}
+
+/* Consent modal — shadow and positioning polish */
+#cc-main .cm {
+  box-shadow: 0 8px 32px rgba(22, 28, 34, 0.12), 0 2px 8px rgba(22, 28, 34, 0.08);
+  max-width: 400px;
+}
+
+/* Consent modal title — use heading font if available */
+#cc-main .cm__title {
+  font-family: var(--font-heading, inherit);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #161c22;
+}
+
+/* Footer link styling */
+#cc-main .cc__link {
+  color: #fa6b0c;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#cc-main .cc__link:hover {
+  color: #e05e0a;
+}
+
+/* Preferences modal title */
+#cc-main .pm__title {
+  font-family: var(--font-heading, inherit);
+  font-weight: 700;
+  color: #161c22;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  #cc-main * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "consentModal": {
+    "title": "Wir schätzen Ihre Privatsphäre",
+    "description": "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, den Website-Traffic zu analysieren und Inhalte zu personalisieren. Sie können unten wählen, welche Cookies Sie akzeptieren möchten.",
+    "acceptAllBtn": "Alle akzeptieren",
+    "acceptNecessaryBtn": "Alle ablehnen",
+    "showPreferencesBtn": "Einstellungen verwalten",
+    "footer": "<a href=\"{privacyUrl}\" class=\"cc__link\">Datenschutzerklärung</a>"
+  },
+  "preferencesModal": {
+    "title": "Cookie-Einstellungen",
+    "acceptAllBtn": "Alle akzeptieren",
+    "acceptNecessaryBtn": "Alle ablehnen",
+    "savePreferencesBtn": "Einstellungen speichern",
+    "closeIconLabel": "Schließen",
+    "serviceCounterLabel": "Dienst|Dienste",
+    "sections": {
+      "intro": {
+        "title": "Cookie-Nutzung",
+        "description": "Wir verwenden verschiedene Arten von Cookies, um unsere Website zu betreiben und Ihr Erlebnis zu verbessern. Sie können wählen, welche optionalen Cookies Sie zulassen möchten."
+      },
+      "necessary": {
+        "title": "Unbedingt erforderlich",
+        "description": "Diese Cookies sind für das Funktionieren der Website erforderlich und können nicht deaktiviert werden. Sie werden in der Regel als Reaktion auf von Ihnen durchgeführte Aktionen gesetzt, z. B. beim Anmelden oder beim Ausfüllen von Formularen."
+      },
+      "analytics": {
+        "title": "Analyse",
+        "description": "Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem sie Informationen anonym erfassen und melden. So können wir Leistung und Inhalte verbessern."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Diese Cookies verfolgen Ihre Surfaktivitäten, um relevante Werbung zu schalten und die Wirksamkeit unserer Marketingkampagnen zu messen."
+      },
+      "more": {
+        "title": "Weitere Informationen",
+        "description": "Vollständige Details zu den von uns verwendeten Cookies finden Sie in unserer <a href=\"{privacyUrl}\" class=\"cc__link\">Datenschutzerklärung</a>."
+      }
+    }
+  }
+}
