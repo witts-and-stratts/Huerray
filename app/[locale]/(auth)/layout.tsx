@@ -14,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s - Huerray",
     },
     description: "Sign in to your Huerray account",
+    robots: { index: false, follow: false },
   };
 }
 
