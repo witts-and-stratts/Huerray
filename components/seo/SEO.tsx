@@ -47,6 +47,32 @@ function toLocalizedPath(locale: string, pathname?: string): string {
  * @param namespace - The translation namespace (e.g., 'home', 'about', 'career')
  * @param overrides - Optional overrides for title, description, etc.
  */
+export function generateOrganizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${ SITE_URL }/images/huerray-logo.png`,
+    sameAs: [TWITTER_URL],
+  };
+}
+
+export function generateWebSiteJsonLd( lang: string ) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: lang,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      logo: `${ SITE_URL }/images/huerray-logo.png`,
+    },
+  };
+}
+
 export default async function generateSEO(
   lang: string,
   namespace: string,
@@ -94,22 +120,6 @@ export default async function generateSEO(
       }
     : undefined;
 
-  const jsonLdScript = {
-    __html: JSON.stringify( {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: fullTitle,
-      description: description,
-      url: url,
-      inLanguage: lang,
-      publisher: {
-        '@type': 'Organization',
-        name: SITE_NAME,
-        logo: `${ baseUrl }/images/logo.png`,
-      },
-    } ),
-  };
-
   return {
     metadataBase: new URL( SITE_URL ),
     title: fullTitle,
@@ -149,9 +159,6 @@ export default async function generateSEO(
       ],
       siteName: SITE_NAME,
       locale: locale === 'en' ? 'en_US' : `${ locale }_${ locale.toUpperCase() }`,
-    },
-    other: {
-      jsonld: jsonLdScript.__html,
     },
     twitter: {
       site: TWITTER_URL,
