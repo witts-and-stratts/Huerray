@@ -4,17 +4,9 @@ import { useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import * as CookieConsent from 'vanilla-cookieconsent';
 
-declare global {
-  interface Window {
-    dataLayer: unknown[];
-  }
-}
-
 function gtag(...args: unknown[]) {
   window.dataLayer = window.dataLayer || [];
-  // vanilla-cookieconsent consent mode requires the `arguments` object
-  // eslint-disable-next-line prefer-rest-params
-  window.dataLayer.push(arguments);
+  window.dataLayer.push(args as unknown as Record<string, unknown>);
 }
 
 function updateGtmConsent() {
