@@ -25,6 +25,10 @@ export function CookieBanner() {
 
   useEffect(() => {
     CookieConsent.run({
+      // Default `hideFromBots: true` keys off `navigator.webdriver`, which also
+      // matches real users on automation-based browsers (QA tooling, tag
+      // debuggers), silently skipping the banner and all consent propagation.
+      hideFromBots: false,
       guiOptions: {
         consentModal: {
           layout: 'box',
