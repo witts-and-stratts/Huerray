@@ -7,9 +7,16 @@ import * as CookieConsent from 'vanilla-cookieconsent';
 function gtag(...args: unknown[]) {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(args as unknown as Record<string, unknown>);
+  // eslint-disable-next-line no-console
+  console.log('[consent-debug] dataLayer.push', args);
 }
 
 function updateGtmConsent() {
+  // eslint-disable-next-line no-console
+  console.log('[consent-debug] updateGtmConsent called', {
+    analytics: CookieConsent.acceptedCategory('analytics'),
+    marketing: CookieConsent.acceptedCategory('marketing'),
+  });
   gtag('consent', 'update', {
     analytics_storage: CookieConsent.acceptedCategory('analytics') ? 'granted' : 'denied',
     ad_storage: CookieConsent.acceptedCategory('marketing') ? 'granted' : 'denied',
@@ -117,10 +124,14 @@ export function CookieBanner() {
       },
 
       onConsent: () => {
+        // eslint-disable-next-line no-console
+        console.log('[consent-debug] onConsent fired');
         updateGtmConsent();
       },
 
       onChange: () => {
+        // eslint-disable-next-line no-console
+        console.log('[consent-debug] onChange fired');
         updateGtmConsent();
       },
     });
