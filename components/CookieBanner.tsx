@@ -8,7 +8,9 @@ import * as CookieConsent from 'vanilla-cookieconsent';
 // command parser pattern-matches on that exact shape from Google's official
 // snippet. A real array built from rest params is structurally different and
 // gets silently ignored by the consent engine, even though it looks
-// equivalent when inspected by index.
+// equivalent when inspected by index. The overload below keeps call sites
+// type-checked while the zero-param implementation preserves `arguments`.
+function gtag(command: string, action: string, params: Record<string, unknown>): void;
 // eslint-disable-next-line prefer-rest-params
 function gtag() {
   window.dataLayer = window.dataLayer || [];
