@@ -4,9 +4,16 @@ import { useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import * as CookieConsent from 'vanilla-cookieconsent';
 
-function gtag(...args: unknown[]) {
+// Must push the `arguments` object itself (not a real array) — GTM's consent
+// command parser pattern-matches on that exact shape from Google's official
+// snippet. A real array built from rest params is structurally different and
+// gets silently ignored by the consent engine, even though it looks
+// equivalent when inspected by index.
+// eslint-disable-next-line prefer-rest-params
+function gtag() {
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(args as unknown as Record<string, unknown>);
+  // eslint-disable-next-line prefer-rest-params
+  window.dataLayer.push(arguments as unknown as Record<string, unknown>);
 }
 
 function updateGtmConsent() {
@@ -16,15 +23,7 @@ function updateGtmConsent() {
     ad_user_data: CookieConsent.acceptedCategory('marketing') ? 'granted' : 'denied',
     ad_personalization: CookieConsent.acceptedCategory('marketing') ? 'granted' : 'denied',
   });
-  // Consent-gated tags whose "All Pages" trigger already resolved as blocked
-  // (e.g. the user took longer than wait_for_update to decide) never get a
-  // second chance to fire. This custom event gives them a trigger to bind to
-  // so they still fire once consent is actually granted. Deferred to the next
-  // tick because GTM applies the consent update above asynchronously
-  // internally — firing this in the same tick can race ahead of it.
-  setTimeout(() => {
-    window.dataLayer.push({ event: 'consent_update' });
-  }, 0);
+  window.dataLayer.push({ event: 'consent_update' });
 }
 
 export function CookieBanner() {
