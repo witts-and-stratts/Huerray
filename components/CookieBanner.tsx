@@ -16,6 +16,11 @@ function updateGtmConsent() {
     ad_user_data: CookieConsent.acceptedCategory('marketing') ? 'granted' : 'denied',
     ad_personalization: CookieConsent.acceptedCategory('marketing') ? 'granted' : 'denied',
   });
+  // Consent-gated tags whose "All Pages" trigger already resolved as blocked
+  // (e.g. the user took longer than wait_for_update to decide) never get a
+  // second chance to fire. This custom event gives them a trigger to bind to
+  // so they still fire once consent is actually granted.
+  window.dataLayer.push({ event: 'consent_update' });
 }
 
 export function CookieBanner() {
