@@ -4,9 +4,18 @@ import { useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import * as CookieConsent from 'vanilla-cookieconsent';
 
-function gtag(...args: unknown[]) {
+// Must push the `arguments` object itself (not a real array) — GTM's consent
+// command parser pattern-matches on that exact shape from Google's official
+// snippet. A real array built from rest params is structurally different and
+// gets silently ignored by the consent engine, even though it looks
+// equivalent when inspected by index. The overload below keeps call sites
+// type-checked while the zero-param implementation preserves `arguments`.
+function gtag(command: string, action: string, params: Record<string, unknown>): void;
+// eslint-disable-next-line prefer-rest-params
+function gtag() {
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(args as unknown as Record<string, unknown>);
+  // eslint-disable-next-line prefer-rest-params
+  window.dataLayer.push(arguments as unknown as Record<string, unknown>);
 }
 
 function updateGtmConsent() {
@@ -16,6 +25,7 @@ function updateGtmConsent() {
     ad_user_data: CookieConsent.acceptedCategory('marketing') ? 'granted' : 'denied',
     ad_personalization: CookieConsent.acceptedCategory('marketing') ? 'granted' : 'denied',
   });
+  window.dataLayer.push({ event: 'consent_update' });
 }
 
 export function CookieBanner() {
