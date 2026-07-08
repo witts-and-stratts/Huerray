@@ -19,8 +19,12 @@ function updateGtmConsent() {
   // Consent-gated tags whose "All Pages" trigger already resolved as blocked
   // (e.g. the user took longer than wait_for_update to decide) never get a
   // second chance to fire. This custom event gives them a trigger to bind to
-  // so they still fire once consent is actually granted.
-  window.dataLayer.push({ event: 'consent_update' });
+  // so they still fire once consent is actually granted. Deferred to the next
+  // tick because GTM applies the consent update above asynchronously
+  // internally — firing this in the same tick can race ahead of it.
+  setTimeout(() => {
+    window.dataLayer.push({ event: 'consent_update' });
+  }, 0);
 }
 
 export function CookieBanner() {
