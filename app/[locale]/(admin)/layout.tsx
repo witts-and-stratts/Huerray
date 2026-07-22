@@ -1,5 +1,7 @@
 import '@/app/styles/dashboard-globals.css';
 import { Toaster } from '@/components/dashboard-ui/sonner';
+import { GoogleTagManager, GtmConsentDefault } from '@/components/GoogleTagManager';
+import { CookieBanner } from '@/components/CookieBanner';
 import { QueryProvider } from '@/lib/api/query-provider';
 import { AuthProvider } from '@/lib/auth/auth-context';
 import { cn } from '@/lib/dashboard-utils';
@@ -34,7 +36,11 @@ export default async function AdminLayout( {
 
   return (
     <html lang={ locale } suppressHydrationWarning>
+      <head>
+        <GtmConsentDefault />
+      </head>
       <body className={ cn( 'h-screen! overflow-y-hidden!', inter.className ) } suppressHydrationWarning>
+        <GoogleTagManager />
         <NextIntlClientProvider messages={ messages }>
           <AuthProvider>
             <StoreProvider>
@@ -44,6 +50,7 @@ export default async function AdminLayout( {
               </QueryProvider>
             </StoreProvider>
           </AuthProvider>
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>
