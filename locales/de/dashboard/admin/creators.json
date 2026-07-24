@@ -68,7 +68,12 @@
     "confirmFirstNamePlaceholder": "Vornamen eingeben",
     "updatingProfileType": "Aktualisieren...",
     "madeAiToast": "{name} ist jetzt ein AI Creator",
-    "madeHumanToast": "{name} ist jetzt ein menschlicher Creator"
+    "madeHumanToast": "{name} ist jetzt ein menschlicher Creator",
+    "confirmDeleteTitle": "Creator löschen?",
+    "confirmDeleteDesc": "{name} wird endgültig gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleting": "Wird gelöscht...",
+    "deletedToast": "{name} erfolgreich gelöscht",
+    "deleteErrorToast": "Löschen des Creators fehlgeschlagen"
   },
   "creatorDashboard": {
     "title": "Creators Dashboard",

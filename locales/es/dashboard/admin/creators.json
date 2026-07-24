@@ -68,7 +68,12 @@
     "confirmFirstNamePlaceholder": "Introduzca el nombre",
     "updatingProfileType": "Actualizando...",
     "madeAiToast": "{name} es ahora un creador de IA",
-    "madeHumanToast": "{name} es ahora un creador humano"
+    "madeHumanToast": "{name} es ahora un creador humano",
+    "confirmDeleteTitle": "¿Eliminar creador?",
+    "confirmDeleteDesc": "{name} se eliminará permanentemente. Esta acción no se puede deshacer.",
+    "deleting": "Eliminando...",
+    "deletedToast": "{name} eliminado correctamente",
+    "deleteErrorToast": "Error al eliminar el creador"
   },
   "creatorDashboard": {
     "title": "Panel de control del creador",

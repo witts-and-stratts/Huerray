@@ -68,7 +68,12 @@
     "confirmFirstNamePlaceholder": "Saisir le prénom",
     "updatingProfileType": "Mise à jour...",
     "madeAiToast": "{name} est désormais un créateur d'IA",
-    "madeHumanToast": "{name} est maintenant un créateur humain"
+    "madeHumanToast": "{name} est maintenant un créateur humain",
+    "confirmDeleteTitle": "Supprimer le créateur ?",
+    "confirmDeleteDesc": "{name} sera définitivement supprimé. Cette action est irréversible.",
+    "deleting": "Suppression...",
+    "deletedToast": "{name} supprimé avec succès",
+    "deleteErrorToast": "Échec de la suppression du créateur"
   },
   "creatorDashboard": {
     "title": "Tableau de bord du créateur",
