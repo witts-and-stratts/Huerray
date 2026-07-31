@@ -33,7 +33,7 @@ const API_PREFIX = (() => {
  * Handles full URLs, prefix-included paths ("/api/v1/uploads/…") and
  * prefix-less paths ("/uploads/…") without duplicating the API prefix.
  */
-function toAbsoluteSource( src: string ): string {
+export function toAbsoluteSource( src: string ): string {
   if ( src.startsWith( 'http' ) ) return src;
   let path = src.startsWith( '/' ) ? src : `/${ src }`;
   if ( API_PREFIX && !path.startsWith( `${ API_PREFIX }/` ) ) {

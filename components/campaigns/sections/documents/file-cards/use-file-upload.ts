@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { apiClient, apiConfiguration, BASE_URL } from '@/lib/api/client';
+import { apiClient, apiConfiguration } from '@/lib/api/client';
 import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
+import { toAbsoluteSource } from '@/lib/utils/imgproxy';
 import { useEffect, useState } from 'react';
 import { UploadedFile } from '../types';
 
@@ -39,10 +40,7 @@ export function useFileUpload(
         const uploaded = response.data.data[ 0 ] as any;
 
         if ( uploaded?.url ) {
-          const fullUrl = uploaded.url.startsWith( 'http' )
-            ? uploaded.url
-            : `${ BASE_URL.replace( '/api/v1', '' ) }${ uploaded.url }`;
-          onUploadSuccess( item.id, fullUrl );
+          onUploadSuccess( item.id, toAbsoluteSource( uploaded.url ) );
         } else {
           onUploadError( item.id, new Error( 'No file url returned' ), item.name );
         }

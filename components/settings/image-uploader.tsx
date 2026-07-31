@@ -4,9 +4,9 @@ import { Button } from '@/components/dashboard-ui/button';
 import { Dropzone } from '@/components/ui/shadcn-io/dropzone';
 import { MediaPreview } from '@/components/campaigns/media-preview';
 import { UploadApi } from '@/lib/api/generated/api/upload-api';
-import { BASE_URL, apiClient } from '@/lib/api/client';
+import { apiClient } from '@/lib/api/client';
 import { cn } from '@/lib/utils';
-import { imgpresets } from '@/lib/utils/imgproxy';
+import { imgpresets, toAbsoluteSource } from '@/lib/utils/imgproxy';
 import { Trash2, UploadIcon, ZoomIn, Loader2 } from 'lucide-react';
 import { useCallback, useState, ReactNode, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
@@ -83,25 +83,17 @@ export function ImageUploader( {
       const files = Array.isArray( data.data ) ? data.data : [ data.data ];
       const uploadedFile = files[ 0 ];
 
-      if ( uploadedFile ) {
-        let fullUrl = '';
-        if ( uploadedFile.url ) {
-          fullUrl = uploadedFile.url.startsWith( 'http' )
-            ? uploadedFile.url
-            : `${ BASE_URL.replace( '/api/v1', '' ) }${ uploadedFile.url }`;
-        } else if ( uploadedFile.filename ) {
-          // Fallback if url is missing but filename is present
-          fullUrl = `${ BASE_URL }/uploads/preview/images/${ uploadedFile.filename }`;
-        }
-
-        if ( fullUrl ) {
-          lastUploadedUrlRef.current = fullUrl;
-          onChange( fullUrl );
-          toast.success( t( 'imageUploadedSuccessfully' ) );
-          // Once successfully uploaded and parent updated, we can potentially clear local previewUrl 
-          // and let parent value take over, but keeping previewUrl is fine too.
-        }
+      if ( !uploadedFile?.url ) {
+        // The /uploads/preview/images/:filename endpoint returns JSON metadata
+        // (not image bytes) and requires auth, so it can never work as an <img>
+        // src — treat a missing url as a failed upload rather than falling back to it.
+        throw new Error( 'No file url returned' );
       }
+
+      const fullUrl = toAbsoluteSource( uploadedFile.url );
+      lastUploadedUrlRef.current = fullUrl;
+      onChange( fullUrl );
+      toast.success( t( 'imageUploadedSuccessfully' ) );
 
     } catch ( error: any ) {
       console.error( t( 'uploadFailedLog' ), error );
