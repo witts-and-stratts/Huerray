@@ -170,7 +170,8 @@ ${caddy_hosts} {
     }
 }
 
-${www_redirect_blocks}EOF
+${www_redirect_blocks}
+EOF
 
 # Ensure parent directory exists
 CADDY_DIR="$(dirname "${CADDY_UPSTREAM_FILE}")"
