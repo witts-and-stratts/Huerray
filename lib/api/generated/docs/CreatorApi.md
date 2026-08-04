@@ -9,6 +9,7 @@ All URIs are relative to */api/v1*
 |[**creatorsBankDetailsGet**](#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details|
 |[**creatorsBankDetailsPut**](#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details|
 |[**creatorsIdBankDetailsGet**](#creatorsidbankdetailsget) | **GET** /creators/{id}/bank-details | Get creator bank details by creator ID (Admin only)|
+|[**creatorsIdDelete**](#creatorsiddelete) | **DELETE** /creators/{id} | Delete creator (Admin only)|
 |[**creatorsIdGet**](#creatorsidget) | **GET** /creators/{id} | Get creator by ID|
 |[**creatorsIdProfilePut**](#creatorsidprofileput) | **PUT** /creators/{id}/profile | Admin update creator profile|
 |[**creatorsIdProfileStatusPut**](#creatorsidprofilestatusput) | **PUT** /creators/{id}/profile-status | Update creator profile status|
@@ -267,6 +268,60 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Bank details retrieved successfully |  -  |
+|**401** | Unauthorized |  -  |
+|**404** | Creator profile not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **creatorsIdDelete**
+> ModelsStandardGenericResponse creatorsIdDelete()
+
+Delete a creator profile by ID
+
+### Example
+
+```typescript
+import {
+    CreatorApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CreatorApi(configuration);
+
+let id: string; //Creator Profile ID (default to undefined)
+
+const { status, data } = await apiInstance.creatorsIdDelete(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Creator Profile ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGenericResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Creator profile deleted successfully |  -  |
+|**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**404** | Creator profile not found |  -  |
 

@@ -60,6 +60,8 @@ interface UsersTableProps {
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
   onUserTypeChange?: ( value: string | undefined ) => void;
+  withoutProfile?: boolean;
+  onWithoutProfileChange?: ( value: boolean ) => void;
   isSearchPending?: boolean;
 }
 
@@ -73,6 +75,8 @@ export function UsersTable( {
   rowCount,
   onSearchChange,
   onUserTypeChange,
+  withoutProfile,
+  onWithoutProfileChange,
   isSearchPending = false,
 }: UsersTableProps ) {
   const isNotFoundError = isApiNotFoundError( error );
@@ -197,6 +201,8 @@ export function UsersTable( {
               onSearchInputChange={ setGlobalFilter }
               onSearchChange={ handleSearchChange }
               onUserTypeChange={ onUserTypeChange }
+              withoutProfile={ withoutProfile }
+              onWithoutProfileChange={ onWithoutProfileChange }
             />
           ) }
           <ScrollArea className="dt-scroll-area">
