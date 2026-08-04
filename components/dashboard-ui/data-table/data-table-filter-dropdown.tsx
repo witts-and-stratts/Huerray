@@ -17,6 +17,14 @@ import {
 import { cn } from '@/lib/dashboard-utils';
 import { useTranslations } from 'next-intl';
 
+interface DataTableFilterExtraOption {
+  id: string;
+  label: string;
+  checked: boolean;
+  disabled?: boolean;
+  onCheckedChange: ( checked: boolean ) => void;
+}
+
 interface DataTableFilterDropdownProps<TData> {
   table: Table<TData>;
   columnId: string;
@@ -25,6 +33,8 @@ interface DataTableFilterDropdownProps<TData> {
   labelFn?: ( value: string ) => string;
   onValueChange?: ( value: string[] | undefined ) => void;
   selectionMode?: 'multiple' | 'single';
+  /** Extra checkboxes rendered below the option list, controlled independently of the column filter. */
+  extraOptions?: DataTableFilterExtraOption[];
 }
 
 export function DataTableFilterDropdown<TData>( {
@@ -35,6 +45,7 @@ export function DataTableFilterDropdown<TData>( {
   labelFn,
   onValueChange,
   selectionMode = 'multiple',
+  extraOptions = [],
 }: DataTableFilterDropdownProps<TData> ) {
   const column = table.getColumn( columnId );
   const filterValue = column?.getFilterValue() as string[] | undefined;
@@ -99,6 +110,22 @@ export function DataTableFilterDropdown<TData>( {
             </DropdownMenuCheckboxItem>
           );
         } ) }
+        { extraOptions.length > 0 && (
+          <>
+            <DropdownMenuSeparator />
+            { extraOptions.map( ( extraOption ) => (
+              <DropdownMenuCheckboxItem
+                key={ extraOption.id }
+                closeOnClick={ false }
+                disabled={ extraOption.disabled }
+                checked={ extraOption.checked }
+                onCheckedChange={ extraOption.onCheckedChange }
+              >
+                { extraOption.label }
+              </DropdownMenuCheckboxItem>
+            ) ) }
+          </>
+        ) }
       </DropdownMenuContent>
     </DropdownMenu>
   );

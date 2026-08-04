@@ -17,6 +17,8 @@ interface UsersTableToolbarProps<TData> {
   onSearchInputChange?: ( value: string ) => void;
   onSearchChange?: ( value: string ) => void;
   onUserTypeChange?: ( value: string | undefined ) => void;
+  withoutProfile?: boolean;
+  onWithoutProfileChange?: ( value: boolean ) => void;
 }
 
 export function UsersTableToolbar<TData>( {
@@ -25,9 +27,13 @@ export function UsersTableToolbar<TData>( {
   onSearchInputChange,
   onSearchChange,
   onUserTypeChange,
+  withoutProfile = false,
+  onWithoutProfileChange,
 }: UsersTableToolbarProps<TData> ) {
   const t = useTranslations( 'dashboard.admin' );
   const getFilterLabel = useFilterLabel();
+  const selectedUserType = ( table.getColumn( 'user_type_filter' )?.getFilterValue() as string[] | undefined )?.[ 0 ];
+  const isWithoutProfileApplicable = selectedUserType === 'brand_user' || selectedUserType === 'creator';
   return (
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
@@ -49,6 +55,13 @@ export function UsersTableToolbar<TData>( {
           labelFn={ getFilterLabel }
           selectionMode='single'
           onValueChange={ ( value ) => onUserTypeChange?.( value?.[ 0 ] ) }
+          extraOptions={ [ {
+            id: 'without_profile',
+            label: t( 'filters.withoutProfile' ),
+            checked: isWithoutProfileApplicable && withoutProfile,
+            disabled: !isWithoutProfileApplicable,
+            onCheckedChange: ( checked ) => onWithoutProfileChange?.( checked ),
+          } ] }
         />
         <DataTableFilterDropdown
           table={ table }

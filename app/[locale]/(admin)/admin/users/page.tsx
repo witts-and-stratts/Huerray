@@ -18,6 +18,7 @@ export default function UsersPage() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-users' );
   const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
   const [ userTypeFilter, setUserTypeFilter ] = React.useState<UsersSearchGetUserTypeEnum | undefined>();
+  const [ withoutProfileFilter, setWithoutProfileFilter ] = React.useState( false );
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {
@@ -26,13 +27,22 @@ export default function UsersPage() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue, userTypeFilter, setPagination ] );
+  }, [ deferredSearchValue, userTypeFilter, withoutProfileFilter, setPagination ] );
+
+  const handleUserTypeChange = ( value: UsersSearchGetUserTypeEnum | undefined ) => {
+    setUserTypeFilter( value );
+    // "without profile" only applies to brand/creator users; drop it when it no longer applies.
+    if ( value !== 'brand_user' && value !== 'creator' ) {
+      setWithoutProfileFilter( false );
+    }
+  };
 
   const { data: response, isLoading, isFetching, error } = useUsers( {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
     q: deferredSearchValue || undefined,
     userType: userTypeFilter,
+    withoutProfile: withoutProfileFilter,
   } );
 
   const [ sheetOpen, setSheetOpen ] = React.useState( false );
@@ -59,7 +69,9 @@ export default function UsersPage() {
         onPaginationChange={ setPagination }
         rowCount={ response?.data?.pagination?.total }
         onSearchChange={ setSearchValue }
-        onUserTypeChange={ ( value ) => setUserTypeFilter( value as UsersSearchGetUserTypeEnum | undefined ) }
+        onUserTypeChange={ ( value ) => handleUserTypeChange( value as UsersSearchGetUserTypeEnum | undefined ) }
+        withoutProfile={ withoutProfileFilter }
+        onWithoutProfileChange={ setWithoutProfileFilter }
         isSearchPending={ isSearchPending }
       />
     </>

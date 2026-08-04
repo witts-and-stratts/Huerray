@@ -251,12 +251,13 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} [q] Search query (name, username, email, phone)
          * @param {UsersSearchGetUserTypeEnum} [userType] User type filter
          * @param {string} [status] User status filter
+         * @param {boolean} [withoutProfile] Filter to brand/creator users who have not yet created their profile
          * @param {number} [page] Page number
          * @param {number} [limit] Items per page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersSearchGet: async (q?: string, userType?: UsersSearchGetUserTypeEnum, status?: string, page?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usersSearchGet: async (q?: string, userType?: UsersSearchGetUserTypeEnum, status?: string, withoutProfile?: boolean, page?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/users/search`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -279,6 +280,10 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (status !== undefined) {
                 localVarQueryParameter['status'] = status;
+            }
+
+            if (withoutProfile !== undefined) {
+                localVarQueryParameter['without_profile'] = withoutProfile;
             }
 
             if (page !== undefined) {
@@ -393,13 +398,14 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {string} [q] Search query (name, username, email, phone)
          * @param {UsersSearchGetUserTypeEnum} [userType] User type filter
          * @param {string} [status] User status filter
+         * @param {boolean} [withoutProfile] Filter to brand/creator users who have not yet created their profile
          * @param {number} [page] Page number
          * @param {number} [limit] Items per page
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersSearchGet(q?: string, userType?: UsersSearchGetUserTypeEnum, status?: string, page?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedUserResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersSearchGet(q, userType, status, page, limit, options);
+        async usersSearchGet(q?: string, userType?: UsersSearchGetUserTypeEnum, status?: string, withoutProfile?: boolean, page?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsPaginatedUserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersSearchGet(q, userType, status, withoutProfile, page, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UserApi.usersSearchGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -480,7 +486,7 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @throws {RequiredError}
          */
         usersSearchGet(requestParameters: UserApiUsersSearchGetRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ModelsPaginatedUserResponse> {
-            return localVarFp.usersSearchGet(requestParameters.q, requestParameters.userType, requestParameters.status, requestParameters.page, requestParameters.limit, options).then((request) => request(axios, basePath));
+            return localVarFp.usersSearchGet(requestParameters.q, requestParameters.userType, requestParameters.status, requestParameters.withoutProfile, requestParameters.page, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -558,6 +564,11 @@ export interface UserApiUsersSearchGetRequest {
      * User status filter
      */
     readonly status?: string
+
+    /**
+     * Filter to brand/creator users who have not yet created their profile
+     */
+    readonly withoutProfile?: boolean
 
     /**
      * Page number
@@ -647,7 +658,7 @@ export class UserApi extends BaseAPI {
      * @throws {RequiredError}
      */
     public usersSearchGet(requestParameters: UserApiUsersSearchGetRequest = {}, options?: RawAxiosRequestConfig) {
-        return UserApiFp(this.configuration).usersSearchGet(requestParameters.q, requestParameters.userType, requestParameters.status, requestParameters.page, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
+        return UserApiFp(this.configuration).usersSearchGet(requestParameters.q, requestParameters.userType, requestParameters.status, requestParameters.withoutProfile, requestParameters.page, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
