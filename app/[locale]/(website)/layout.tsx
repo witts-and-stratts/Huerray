@@ -8,6 +8,7 @@ import { Locale, locales } from '@/i18n';
 import { AuthProvider } from '@/lib/auth/auth-context';
 import { CookieBanner } from '@/components/CookieBanner';
 import { GoogleTagManager, GtmConsentDefault } from '@/components/GoogleTagManager';
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import '@/styles/globals.css';
 
 const inter = Inter( { subsets: [ 'latin' ] } );

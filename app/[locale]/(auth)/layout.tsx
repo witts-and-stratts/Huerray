@@ -6,6 +6,7 @@ import { AuthProvider } from "@/lib/auth/auth-context";
 import StoreProvider from "@/lib/redux/store-provider";
 import { GoogleTagManager, GtmConsentDefault } from "@/components/GoogleTagManager";
 import { CookieBanner } from "@/components/CookieBanner";
+import "vanilla-cookieconsent/dist/cookieconsent.css";
 import "@/app/styles/dashboard-globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {

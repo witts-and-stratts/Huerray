@@ -1,3 +1,4 @@
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import '@/app/styles/dashboard-globals.css';
 import { Toaster } from '@/components/dashboard-ui/sonner';
 import { GoogleTagManager, GtmConsentDefault } from '@/components/GoogleTagManager';
