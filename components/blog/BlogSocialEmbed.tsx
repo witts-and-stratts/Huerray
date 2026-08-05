@@ -29,8 +29,12 @@ function getTweetId(url: string) {
 }
 
 function getInstagramPath(url: string) {
-  const match = url.match(/\/(p|reel|tv)\/([A-Za-z0-9_-]+)/)
-  return match ? `${match[1]}/${match[2]}` : null
+  // Instagram's "Copy link" on the Reels tab yields `/reels/CODE/` (plural),
+  // but the embed endpoint only understands the singular `/reel/CODE/`.
+  const match = url.match(/\/(p|reels?|tv)\/([A-Za-z0-9_-]+)/)
+  if (!match) return null
+  const type = match[1] === 'reels' ? 'reel' : match[1]
+  return `${type}/${match[2]}`
 }
 
 function getTikTokId(url: string) {

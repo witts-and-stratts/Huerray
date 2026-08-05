@@ -1,6 +1,3 @@
-/* vanilla-cookieconsent base styles */
-@import 'vanilla-cookieconsent/dist/cookieconsent.css';
-
 /* Brand overrides for cookie consent */
 #cc-main {
   --cc-font-family: var(--body-font-family, inherit);
