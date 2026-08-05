@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
+import { generateOrganizationJsonLd, generateWebSiteJsonLd } from '@/components/seo/SEO';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Locale, locales } from '@/i18n';
 import { AuthProvider } from '@/lib/auth/auth-context';
+import { CookieBanner } from '@/components/CookieBanner';
+import { GoogleTagManager, GtmConsentDefault } from '@/components/GoogleTagManager';
 import '@/styles/globals.css';
 
 const inter = Inter( { subsets: [ 'latin' ] } );
@@ -44,6 +47,7 @@ export default async function LocaleLayout( {
   return (
     <html lang={ locale }>
       <head>
+        <GtmConsentDefault />
         <meta name='application-name' content='Huerray' />
         <link rel='icon' type='image/x-icon' href='favicon.ico' />
         <link
@@ -127,12 +131,22 @@ export default async function LocaleLayout( {
           href='apple-touch-icon-152x152.png'
         />
         <link rel='manifest' href='/site.webmanifest' />
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={ { __html: JSON.stringify( generateOrganizationJsonLd() ) } }
+        />
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={ { __html: JSON.stringify( generateWebSiteJsonLd( locale ) ) } }
+        />
       </head>
       <body className={ inter.className }>
+        <GoogleTagManager />
         <NextIntlClientProvider messages={ messages }>
           <AuthProvider>
             { children }
           </AuthProvider>
+          <CookieBanner />
         </NextIntlClientProvider>
         <svg
           xmlns='http://www.w3.org/2000/svg'

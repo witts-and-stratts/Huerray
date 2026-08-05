@@ -122,12 +122,36 @@ fi
 # Trim leading/trailing whitespace and normalize comma-separated hosts
 caddy_hosts="$(echo "${caddy_hosts}" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
 
+# Build a "www.<host> -> https://<host>" redirect block for each host in caddy_hosts
+www_redirect_blocks=""
+IFS=',' read -ra caddy_host_arr <<< "${caddy_hosts}"
+for caddy_host in "${caddy_host_arr[@]}"; do
+  caddy_host="$(echo "${caddy_host}" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
+  [[ -z "${caddy_host}" ]] && continue
+  www_redirect_blocks+="www.${caddy_host} {
+    tls {
+        dns cloudflare {env.CF_API_TOKEN_THRYPES}
+    }
+
+    redir https://${caddy_host}{uri} permanent
+}
+
+"
+done
+
 # Use a temp file in the deploy user's home directory
 TEMP_UPSTREAM_FILE="${HOME}/.tmp-${DEPLOY_APP_NAME}-upstream.conf"
 
 # Always write the upstream file from a template.
 cat > "${TEMP_UPSTREAM_FILE}" <<EOF
 ${caddy_hosts} {
+
+    tls {
+        dns cloudflare {env.CF_API_TOKEN_THRYPES}
+    }
+
+    @http protocol http
+    redir @http https://{host}{uri} permanent
 
     reverse_proxy 127.0.0.1:${target_port}
 
@@ -145,6 +169,8 @@ ${caddy_hosts} {
         format json
     }
 }
+
+${www_redirect_blocks}
 EOF
 
 # Ensure parent directory exists

@@ -68,7 +68,12 @@
     "confirmFirstNamePlaceholder": "Enter first name",
     "updatingProfileType": "Updating...",
     "madeAiToast": "{name} is now an AI creator",
-    "madeHumanToast": "{name} is now a human creator"
+    "madeHumanToast": "{name} is now a human creator",
+    "confirmDeleteTitle": "Delete creator?",
+    "confirmDeleteDesc": "{name} will be permanently deleted. This action cannot be undone.",
+    "deleting": "Deleting...",
+    "deletedToast": "{name} deleted successfully",
+    "deleteErrorToast": "Failed to delete creator"
   },
   "creatorDashboard": {
     "title": "Creator Dashboard",

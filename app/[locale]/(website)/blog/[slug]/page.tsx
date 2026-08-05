@@ -115,8 +115,33 @@ export default async function BlogPostPage({params}: Props) {
   const heroImage = post.mainImage ? urlFor(post.mainImage as any).width(1600).height(1100).fit('crop').url() : null
   const articleUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'}/${locale}/blog/${slug}`
 
+  const blogPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: excerpt || undefined,
+    url: articleUrl,
+    datePublished: post.publishedAt ?? undefined,
+    dateModified: post.updatedAt ?? post.publishedAt ?? undefined,
+    inLanguage: locale,
+    image: heroImage ?? undefined,
+    author: post.author?.name
+      ? { '@type': 'Person', name: post.author.name }
+      : { '@type': 'Organization', name: 'Huerray' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Huerray',
+      logo: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'}/images/huerray-logo.png`,
+    },
+    keywords: tags.length > 0 ? tags.join(', ') : undefined,
+  }
+
   return (
     <>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
       <Header />
       <main className="body-content blog-post">
         <section className="blog-post__hero">

@@ -142,6 +142,7 @@
     "sex": "Sex",
     "size": "Size",
     "userType": "User Type",
+    "withoutProfile": "Without profile",
     "age": "Age",
     "contentType": "Content Type",
     "min": "Min",

@@ -32,7 +32,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useState, useRef } from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { toast } from "sonner";
 import { Turnstile, TurnstileRef } from "@/components/auth/turnstile";
 import '@/app/styles/signup.css';
@@ -87,6 +87,13 @@ export function SignupForm( {
 
   const authApi = new AuthenticationApi( undefined, undefined, apiClient );
   const handleBack = useCallback( () => updateRole( null ), [ updateRole ] );
+
+  useEffect( () => {
+    if ( selectedRole === 'creator' ) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push( { event: 'creator_signup_started', user_type: 'creator' } );
+    }
+  }, [ selectedRole ] );
 
   // Determine the schema based on selected role
   const signupSchema = useMemo( () => {
@@ -149,7 +156,10 @@ export function SignupForm( {
           },
         } );
 
-
+        if ( selectedRole === 'creator' ) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push( { event: 'creator_signup_complete', user_type: 'creator' } );
+        }
 
         // Cast to access properties
         const responseData = response.data?.data as any;

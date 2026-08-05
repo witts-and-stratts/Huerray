@@ -3,6 +3,7 @@
 @import '../../styles/colors.css';
 @import '../../styles/language-selector.css';
 @import '../../styles/tokens/loaders.css';
+@import '../../styles/cookie-banner.css';
 
 @import './components/button.css';
 @import './components/button-group.css';

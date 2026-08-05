@@ -7,7 +7,7 @@ import {
 } from "@/components/dashboard-ui/action-menu";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { SuperField } from "@/components/dashboard-ui/super-field";
-import { useUpdateCreatorContentType, useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
+import { useDeleteCreator, useUpdateCreatorContentType, useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
 import { ModelsCreatorResponse, UtilsContentType, UtilsCreatorStatus } from "@/lib/api/generated/models";
 import { Copy } from "lucide-react";
 import { ReactNode, useState } from "react";
@@ -31,12 +31,14 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
   const tc = useTranslations( 'dashboard.common' );
   const updateStatus = useUpdateCreatorProfileStatus();
   const updateContentType = useUpdateCreatorContentType();
+  const deleteCreator = useDeleteCreator();
   const [ pendingAction, setPendingAction ] = useState<{
     status: CreatorActionStatus;
     comments: string;
   } | null>( null );
   const [ pendingProfileType, setPendingProfileType ] = useState<CreatorProfileType | null>( null );
   const [ firstNameInput, setFirstNameInput ] = useState( "" );
+  const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
 
   const handleStatusAction = ( status: CreatorActionStatus ) => {
     if ( !creator.id ) {
@@ -134,6 +136,25 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
     );
   };
 
+  const handleDeleteCreator = () => {
+    if ( !creator.id ) {
+      toast.error( t( 'creatorStatus.missingId' ) );
+      return;
+    }
+
+    deleteCreator.mutate( creator.id, {
+      onSuccess: () => {
+        const creatorName = creator.first_name || tc( 'cards.creatorFallback' );
+        setIsDeleteDialogOpen( false );
+        toast.success( t( 'creatorStatus.deletedToast', { name: creatorName } ) );
+      },
+      onError: () => {
+        setIsDeleteDialogOpen( false );
+        toast.error( t( 'creatorStatus.deleteErrorToast' ) );
+      },
+    } );
+  };
+
   const actions: MenuAction<ModelsCreatorResponse>[] = [
     {
       label: t( 'creatorStatus.copyId' ),
@@ -177,7 +198,13 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
     },
     {
       label: t( 'creatorStatus.deleteCreator' ),
-      action: () => { console.log( "Delete creator clicked" ); }, // Placeholder as per original
+      action: () => {
+        if ( !creator.id ) {
+          toast.error( t( 'creatorStatus.missingId' ) );
+          return;
+        }
+        setIsDeleteDialogOpen( true );
+      },
       variant: "destructive",
       allowedRoles: [ 'admin' ],
       className: "text-red-600",
@@ -275,6 +302,17 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
           onChange={ ( e ) => setFirstNameInput( e.target.value ) }
         />
       </ConfirmDialog>
+      <ConfirmDialog
+        open={ isDeleteDialogOpen }
+        onOpenChange={ setIsDeleteDialogOpen }
+        title={ t( 'creatorStatus.confirmDeleteTitle' ) }
+        description={ t( 'creatorStatus.confirmDeleteDesc', { name: creator.first_name || t( 'creatorStatus.thisCreator' ) } ) }
+        confirmLabel={ t( 'creatorStatus.deleteCreator' ) }
+        variant="destructive"
+        onConfirm={ handleDeleteCreator }
+        isLoading={ deleteCreator.isPending }
+        loadingText={ t( 'creatorStatus.deleting' ) }
+      />
     </>
   );
 }

@@ -24,24 +24,30 @@ export function useUsers(
     q,
     userType,
     status,
+    withoutProfile,
     page = 1,
     limit = 10
   }: {
     q?: string;
     userType?: UsersSearchGetUserTypeEnum | 'admin_user';
     status?: string;
+    withoutProfile?: boolean;
     page?: number;
     limit?: number;
   } = {},
   options?: Omit<UseQueryOptions<any, ApiError>, 'queryKey' | 'queryFn'>
 ) {
+  // Backend ignores this filter for admin users; keep the query key/request consistent with that.
+  const effectiveWithoutProfile = userType === 'admin_user' ? undefined : withoutProfile;
+
   return useQuery<any, ApiError>({
-    queryKey: usersKeys.list({ q, userType, status, page, limit }),
+    queryKey: usersKeys.list({ q, userType, status, withoutProfile: effectiveWithoutProfile, page, limit }),
     queryFn: async () => {
       const response = await userApi.usersSearchGet({
         q,
         userType: userType as UsersSearchGetUserTypeEnum | undefined,
         status,
+        withoutProfile: effectiveWithoutProfile,
         page,
         limit
       });

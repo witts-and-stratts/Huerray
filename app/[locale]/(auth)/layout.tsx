@@ -4,6 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { QueryProvider } from "@/lib/api/query-provider";
 import { AuthProvider } from "@/lib/auth/auth-context";
 import StoreProvider from "@/lib/redux/store-provider";
+import { GoogleTagManager, GtmConsentDefault } from "@/components/GoogleTagManager";
+import { CookieBanner } from "@/components/CookieBanner";
 import "@/app/styles/dashboard-globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -14,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s - Huerray",
     },
     description: "Sign in to your Huerray account",
+    robots: { index: false, follow: false },
   };
 }
 
@@ -31,7 +34,11 @@ export default async function AuthLayout( {
 
   return (
     <html lang={ locale } suppressHydrationWarning>
+      <head>
+        <GtmConsentDefault />
+      </head>
       <body>
+        <GoogleTagManager />
         <NextIntlClientProvider messages={ messages }>
           <AuthProvider>
             <StoreProvider>
@@ -41,6 +48,7 @@ export default async function AuthLayout( {
               </QueryProvider>
             </StoreProvider>
           </AuthProvider>
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>

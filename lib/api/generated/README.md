@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
 *CreatorApi* | [**creatorsBankDetailsGet**](docs/CreatorApi.md#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details
 *CreatorApi* | [**creatorsBankDetailsPut**](docs/CreatorApi.md#creatorsbankdetailsput) | **PUT** /creators/bank-details | Update creator bank details
 *CreatorApi* | [**creatorsIdBankDetailsGet**](docs/CreatorApi.md#creatorsidbankdetailsget) | **GET** /creators/{id}/bank-details | Get creator bank details by creator ID (Admin only)
+*CreatorApi* | [**creatorsIdDelete**](docs/CreatorApi.md#creatorsiddelete) | **DELETE** /creators/{id} | Delete creator (Admin only)
 *CreatorApi* | [**creatorsIdGet**](docs/CreatorApi.md#creatorsidget) | **GET** /creators/{id} | Get creator by ID
 *CreatorApi* | [**creatorsIdProfilePut**](docs/CreatorApi.md#creatorsidprofileput) | **PUT** /creators/{id}/profile | Admin update creator profile
 *CreatorApi* | [**creatorsIdProfileStatusPut**](docs/CreatorApi.md#creatorsidprofilestatusput) | **PUT** /creators/{id}/profile-status | Update creator profile status

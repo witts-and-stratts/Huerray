@@ -3,6 +3,7 @@ import { ArrowUpRight, MapPin } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
+import { imgpresets } from '@/lib/utils/imgproxy';
 
 interface CreatorProfileSnapshotBlockProps {
   name: string;
@@ -28,7 +29,7 @@ export function CreatorProfileSnapshotBlock( {
       <CardContent className="space-y-3">
         <div className="rounded-lg border border-border/60 bg-white p-4 text-center">
           <Avatar className="mx-auto size-20 border border-border/60">
-            <AvatarImage src={ avatar || '' } alt={ name } />
+            <AvatarImage src={ avatar ? imgpresets.avatar( avatar ) : '' } alt={ name } />
             <AvatarFallback>{ name.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
           </Avatar>
           <p className="mt-3 text-sm font-medium">{ name }</p>

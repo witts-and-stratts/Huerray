@@ -1,0 +1,40 @@
+{
+  "consentModal": {
+    "title": "Nous respectons votre vie privée",
+    "description": "Nous utilisons des cookies pour améliorer votre expérience de navigation, analyser le trafic du site et personnaliser le contenu. Vous pouvez choisir ci-dessous quels cookies accepter.",
+    "acceptAllBtn": "Tout accepter",
+    "acceptNecessaryBtn": "Tout refuser",
+    "showPreferencesBtn": "Gérer les préférences",
+    "footer": "<a href=\"{privacyUrl}\" class=\"cc__link\">Politique de confidentialité</a>"
+  },
+  "preferencesModal": {
+    "title": "Préférences des cookies",
+    "acceptAllBtn": "Tout accepter",
+    "acceptNecessaryBtn": "Tout refuser",
+    "savePreferencesBtn": "Enregistrer les préférences",
+    "closeIconLabel": "Fermer",
+    "serviceCounterLabel": "Service|Services",
+    "sections": {
+      "intro": {
+        "title": "Utilisation des cookies",
+        "description": "Nous utilisons différents types de cookies pour faire fonctionner notre site web et améliorer votre expérience. Vous pouvez choisir les cookies optionnels que vous souhaitez autoriser."
+      },
+      "necessary": {
+        "title": "Strictement nécessaires",
+        "description": "Ces cookies sont indispensables au fonctionnement du site et ne peuvent pas être désactivés. Ils sont généralement définis en réponse à des actions que vous effectuez, telles que la connexion ou le remplissage de formulaires."
+      },
+      "analytics": {
+        "title": "Analytiques",
+        "description": "Ces cookies nous aident à comprendre comment les visiteurs interagissent avec notre site en collectant et en signalant des informations de manière anonyme, nous permettant d'améliorer les performances et le contenu."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Ces cookies suivent votre activité de navigation pour diffuser des publicités pertinentes et mesurer l'efficacité de nos campagnes marketing."
+      },
+      "more": {
+        "title": "Plus d'informations",
+        "description": "Pour plus de détails sur les cookies que nous utilisons, veuillez lire notre <a href=\"{privacyUrl}\" class=\"cc__link\">Politique de confidentialité</a>."
+      }
+    }
+  }
+}

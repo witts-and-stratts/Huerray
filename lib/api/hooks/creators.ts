@@ -261,6 +261,23 @@ export function useUpdateCreatorContentType() {
     },
   });
 }
+/**
+ * Hook to delete a creator by ID
+ */
+export function useDeleteCreator() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ( id: string ) => {
+      const response = await apiClient.delete( `/creators/${ id }` );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries( { queryKey: creatorsKeys.all } );
+    },
+  } );
+}
+
 export function useCreators(
   {
     q,

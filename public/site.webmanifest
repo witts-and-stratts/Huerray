@@ -1,7 +1,7 @@
 {
   "name": "Huerray",
   "short_name": "Huerray",
-  "description": "",
+  "description": "Connect with authentic creators for impactful user-generated content",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFFFFF",
