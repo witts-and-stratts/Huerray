@@ -111,6 +111,19 @@ export function TranslationInput( props: ObjectInputProps ) {
     (fieldProps: any) => {
       const fieldName = fieldProps?.name;
 
+      // `renderField` is inherited by every nested field in the form tree (e.g. the
+      // fields inside a Video Embed / Callout / CTA block in the Portable Text editor).
+      // Only the language fields owned by *this* input may be filtered by the tab —
+      // everything deeper must fall through to the default renderer, otherwise those
+      // nested editors render blank.
+      const isLanguageField = supportedLanguages.some((lang) => lang.id === fieldName);
+      const isDirectChild =
+        Array.isArray(fieldProps?.path) && fieldProps.path.length === (props.path?.length ?? 0) + 1;
+
+      if (!isLanguageField || !isDirectChild) {
+        return renderField(fieldProps);
+      }
+
       // Only render the field if it matches the active tab
       if (fieldName !== activeTab) {
         return null;
@@ -177,7 +190,7 @@ export function TranslationInput( props: ObjectInputProps ) {
 
       return renderField(fieldPropsWithNoTitle);
     },
-    [renderField, handleTranslate, isTranslating, activeTab]
+    [renderField, handleTranslate, isTranslating, activeTab, props.path]
   );
 
   return (
