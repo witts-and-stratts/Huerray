@@ -88,7 +88,8 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const { id } = row.original;
   const { data: applicationsData } = useGigApplications( id ?? '' );
   const applications = ( applicationsData?.data ?? [] ) as ModelsGigApplicationResponse[];
-  const [ selected, setSelected ] = React.useState<ModelsGigApplicationResponse | null>( null );
+  const [ selectedId, setSelectedId ] = React.useState<string | null>( null );
+  const selected = applications.find( app => app.id === selectedId ) ?? null;
 
   const people = applications.map( app => ( {
     first_name: app.creator?.first_name ?? '',
@@ -102,7 +103,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
         <AnimatePresence>
           <AvatarCollage
             people={ people }
-            onPersonClick={ ( i ) => setSelected( applications[ i ] ) }
+            onPersonClick={ ( i ) => setSelectedId( applications[ i ]?.id ?? null ) }
             title={ t( 'applications' ) }
           />
         </AnimatePresence>
@@ -110,7 +111,7 @@ const ApplicationsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
       <ApplicationDetailsSheet
         application={ selected }
         open={ !!selected }
-        onOpenChange={ ( open ) => !open && setSelected( null ) }
+        onOpenChange={ ( open ) => !open && setSelectedId( null ) }
       />
     </>
   );
