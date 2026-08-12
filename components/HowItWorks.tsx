@@ -45,7 +45,7 @@ export function HowItWorks() {
         <div className='md:col-span-6 relative max-md:order-1'>
           <Image
             src='/images/content/how-it-works.webp'
-            alt='How It Works'
+            alt='Collage of creator content examples'
             width={2000}
             height={2000}
           />

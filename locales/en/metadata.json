@@ -91,6 +91,12 @@
     "blogPublished": "Published",
     "blogBy": "By",
     "blogReadTime": "min read",
-    "blogUpdated": "Updated"
+    "blogUpdated": "Updated",
+    "notFoundTitle": "Page not found",
+    "notFoundHeading": "This page doesn't exist",
+    "notFoundBody": "The page you're looking for may have been moved or no longer exists.",
+    "notFoundHomeLink": "Back to homepage",
+    "notFoundBrandsLink": "For brands",
+    "notFoundCreatorsLink": "For creators"
   }
 }

@@ -11,6 +11,7 @@ import {Button} from '@/components/ui/button'
 import type {Locale} from '@/i18n'
 import {client} from '@/sanity/lib/client'
 import {BLOG_TAG_QUERY, BLOG_TAGS_QUERY, type BlogSummary} from '@/sanity/lib/blog'
+import generateSEO from '@/components/seo/SEO'
 
 type Props = {
   params: Promise<{locale: Locale; tag: string}>
@@ -31,10 +32,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const decodedTag = decodeTag(tag)
   const t = await getTranslations({locale, namespace: 'metadata'})
 
-  return {
-    title: `#${decodedTag} | ${t('website.blog')} | Huerray`,
+  return generateSEO(locale, 'metadata', {
+    title: `#${decodedTag} | ${t('website.blog')}`,
     description: `${t('website.blogDescription')} #${decodedTag}`,
-  }
+    pathname: `/blog/tags/${encodeURIComponent(decodedTag)}`,
+  })
 }
 
 export default async function BlogTagPage({params}: Props) {

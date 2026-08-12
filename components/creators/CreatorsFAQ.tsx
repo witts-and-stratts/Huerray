@@ -1,12 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 import { FAQs } from '../ui/FAQs';
+import { generateFAQPageJsonLd } from '@/components/seo/SEO';
 
 export function CreatorsFAQ() {
   const t = useTranslations( 'creators.faq' );
-  const [ openIndex, setOpenIndex ] = useState<number | null>( null );
 
   const faqs = [
     { question: t( 'q1.question' ), answer: t( 'q1.answer' ) },
@@ -29,6 +28,10 @@ export function CreatorsFAQ() {
 
         <FAQs faqs={ faqs } />
       </div>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={ { __html: JSON.stringify( generateFAQPageJsonLd( faqs ) ) } }
+      />
     </section>
   );
 }

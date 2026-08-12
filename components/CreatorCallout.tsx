@@ -19,7 +19,7 @@ export function CreatorCallout() {
         </Button>
       </div>
       <div className='creator-callout__photo'>
-        <Image src='/images/creators/main-girl-2.webp' alt='Creator' fill className='object-cover' />
+        <Image src='/images/creators/main-girl-2.webp' alt='Creator with drink' fill className='object-cover' />
       </div>
     </section>
   );

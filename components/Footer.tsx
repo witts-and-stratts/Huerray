@@ -32,10 +32,10 @@ export function Footer( { className }: { className?: string; } ) {
       { label: t( 'links.aboutHuerray' ), href: '/about' },
       { label: t( 'links.blog' ), href: '/blog' },
       { label: 'Careers', href: '/careers' },
-      { label: t( 'links.siteNotice' ), href: 'site-notice' },
+      { label: t( 'links.siteNotice' ), href: '/site-notice' },
       { label: t( 'links.privacyPolicy' ), href: '/privacy-policy' },
       { label: t( 'links.tcCreators' ), href: '/creator-terms' },
-      { label: t( 'links.tcBrands' ), href: '#' },
+      { label: t( 'links.tcBrands' ), href: '/terms-and-conditions' },
     ],
   };
 

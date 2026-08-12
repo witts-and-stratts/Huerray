@@ -64,16 +64,24 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   })
 
   if (imageSource) {
+    const postImage = {
+      url: urlFor(imageSource as any).width(1200).height(630).fit('crop').url(),
+      width: 1200,
+      height: 630,
+      alt: title,
+    }
+
     metadata.openGraph = {
+      ...metadata.openGraph,
       title,
       description,
-      images: [
-        {
-          url: urlFor(imageSource as any).width(1200).height(630).fit('crop').url(),
-          width: 1200,
-          height: 630,
-        },
-      ],
+      images: [postImage],
+    }
+    metadata.twitter = {
+      ...metadata.twitter,
+      title,
+      description,
+      images: [postImage],
     }
   }
 

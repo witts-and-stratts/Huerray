@@ -20,7 +20,7 @@ export function BrandsContentObjective() {
         {/* Left - Image Collage */ }
         <div className='section-card__image flex flex-col gap-4'>
           <Image
-            src='/images/brands/content-objective/ff36e4040fea432abfe66356bcfa58ee12e20e25.webp'
+            src='/images/brands/content-objective/creator-content.webp'
             alt='Creator content'
             width={ 545 }
             height={ 282 }
@@ -39,7 +39,7 @@ export function BrandsContentObjective() {
             <div className='rounded-[64px] overflow-hidden col-span-2'>
               <Image
                 src='/images/brands/content-objective/woman-yellow.webp'
-                alt='Creator'
+                alt='Creator wearing yellow'
                 width={ 262 }
                 height={ 172 }
                 className='object-cover w-full h-full'

@@ -81,7 +81,7 @@ export function CreatorsScroller( {
               <div className='creators-scroller__avatar'>
                 <Image
                   src={ imgSrc }
-                  alt='Creator'
+                  alt=''
                   width={ 280 }
                   height={ 315 }
                   className='creators-scroller__image'
@@ -89,7 +89,7 @@ export function CreatorsScroller( {
                 { deco && (
                   <Image
                     src={ `/images/${ deco[ 0 ] }` }
-                    alt='Decoration'
+                    alt=''
                     width={ 180 }
                     height={ 180 }
                     className={ cn(

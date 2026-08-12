@@ -10,9 +10,9 @@ export function AboutWhy() {
     <section className="section-card section-card--spaced section-card--light mt-10">
       <div className="section-card__container">
         <div className="section-card__content">
-          <h2 className="about-why__pill">
+          <p className="about-why__pill">
             { t( 'pill' ) }
-          </h2>
+          </p>
           <h2 className="about-why__title gradient-text">
             { t( 'title' ) }
           </h2>

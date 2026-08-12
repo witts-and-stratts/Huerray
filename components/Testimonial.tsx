@@ -10,9 +10,9 @@ export function Testimonial() {
     <section className='px-2 md:px-10 py-20 relative text-center'>
       <div className='mx-auto rounded-4xl p-8 md:p-16 relative bg-burgundy-50 flex flex-col gap-10 border-4 border-white border-t-0 border-l-0'>
         <p className='h6 font-bold text-dark-burgundy'>{t('company')}</p>
-        <p className='h6 md:max-w-3/4 mx-auto text-slate'>
+        <blockquote className='h6 md:max-w-3/4 mx-auto text-slate'>
           &ldquo;{t('quote')}&rdquo;
-        </p>
+        </blockquote>
         <div className='flex flex-col items-center gap-4'>
           <Avatar className='w-16 h-16'>
             <AvatarImage
@@ -22,9 +22,9 @@ export function Testimonial() {
             <AvatarFallback>JN</AvatarFallback>
           </Avatar>
           <div>
-            <p className='font-secondary font-normal text-base'>
+            <cite className='font-secondary font-normal text-base not-italic'>
               {t('author')}
-            </p>
+            </cite>
           </div>
         </div>
       </div>

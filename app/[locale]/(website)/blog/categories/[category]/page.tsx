@@ -17,6 +17,7 @@ import {
   type BlogCategoryListItem,
   type BlogSummary,
 } from '@/sanity/lib/blog'
+import generateSEO from '@/components/seo/SEO'
 
 type Props = {
   params: Promise<{locale: Locale; category: string}>
@@ -41,10 +42,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const title = getLocalizedValue<string>(current?.title, locale, decodedCategory) ?? decodedCategory
   const description = getLocalizedValue<string>(current?.description, locale, t('website.blogDescription'))
 
-  return {
-    title: `${title} | ${t('website.blog')} | Huerray`,
+  return generateSEO(locale, 'metadata', {
+    title: `${title} | ${t('website.blog')}`,
     description,
-  }
+    pathname: `/blog/categories/${encodeURIComponent(decodedCategory)}`,
+  })
 }
 
 export default async function BlogCategoryPage({params}: Props) {

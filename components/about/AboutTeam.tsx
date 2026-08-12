@@ -19,11 +19,16 @@ export function AboutTeam() {
       bio: t( 'members.1.bio' ),
       image: '/images/team/norina.jpg'
     },
+    {
+      name: t( 'members.2.name' ),
+      bio: t( 'members.2.bio' ),
+      image: '/svg/avatar-male.svg'
+    },
   ];
 
   return (
     <section className="about-team">
-      <h3 className="about-team__subtitle">{ t( 'subtitle' ) }</h3>
+      <p className="about-team__subtitle">{ t( 'subtitle' ) }</p>
       <h2 className="about-team__title">
         { t( 'title' ) }
       </h2>

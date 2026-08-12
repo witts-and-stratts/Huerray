@@ -315,6 +315,7 @@ export function ContentObjectives() {
                 >
                   <AnimatedSlide
                     images={ images }
+                    category={ category }
                     index={ i }
                     currentImageIndex={ imageIndex }
                     onImageChange={ () => {

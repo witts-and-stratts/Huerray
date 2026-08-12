@@ -13,8 +13,8 @@ export function CreatorsSection() {
     <section className='creators-section'>
       <div className='creators-section__container'>
         <div className='creators-section__content'>
-          <h2 className='creators-section__label'>{ t( 'label' ) }</h2>
-          <h3 className='creators-section__title'>{ t( 'title' ) }</h3>
+          <p className='creators-section__label'>{ t( 'label' ) }</p>
+          <h2 className='creators-section__title'>{ t( 'title' ) }</h2>
           <p className='creators-section__description text-white!'>
             { t( 'description' ) }
           </p>
@@ -29,7 +29,7 @@ export function CreatorsSection() {
           <div className='creators-section__main-image'>
             <Image
               src='/images/creators/main-girl.webp'
-              alt='Creator'
+              alt='Creator smiling at the camera'
               width={ 500 }
               height={ 500 }
             />
@@ -38,7 +38,7 @@ export function CreatorsSection() {
           <div className='creators-section__secondary-image'>
             <Image
               src='/images/creators/makeup-girl.webp'
-              alt='Creator'
+              alt='Creator applying makeup'
               width={ 177 }
               height={ 153 }
             />
@@ -48,7 +48,7 @@ export function CreatorsSection() {
             <div className='creators-section__payment-avatar'>
               <Image
                 src='/images/creators/payment-avatar.webp'
-                alt='Avatar'
+                alt=''
                 width={ 93 }
                 height={ 93 }
               />
@@ -63,7 +63,7 @@ export function CreatorsSection() {
           <div className='creators-section__teaser-card'>
             <Image
               src={ '/images/creators/sample-teaser.svg' }
-              alt='Teaser'
+              alt=''
               width={ 246 }
               height={ 150 }
             />

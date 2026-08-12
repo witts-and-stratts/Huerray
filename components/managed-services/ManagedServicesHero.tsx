@@ -45,7 +45,7 @@ export function ManagedServicesHero() {
               <div className='brands-hero__main-image'>
                 <Image
                   src='/images/creators/main-girl.webp'
-                  alt='Creator'
+                  alt='Creator smiling at the camera'
                   width={ 700 }
                   height={ 700 }
                   priority
@@ -54,7 +54,7 @@ export function ManagedServicesHero() {
               <div className='brands-hero__secondary-image'>
                 <Image
                   src='/images/creators/creator-in-swimming-pool.webp'
-                  alt='Creator'
+                  alt='Creator in a swimming pool'
                   width={ 800 }
                   height={ 600 }
                 />
@@ -64,7 +64,7 @@ export function ManagedServicesHero() {
               <div className='brands-hero__circle-image'>
                 <Image
                   src='/images/creators/couple-vacation-creators.webp'
-                  alt='Creator'
+                  alt='Creators on vacation'
                   width={ 400 }
                   height={ 400 }
                 />
@@ -72,7 +72,7 @@ export function ManagedServicesHero() {
               <div className='brands-hero__tall-image'>
                 <Image
                   src='/images/creators/making-presentation-new-facial-cream.webp'
-                  alt='Creator'
+                  alt='Creator presenting a facial cream product'
                   width={ 400 }
                   height={ 600 }
                 />

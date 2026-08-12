@@ -34,15 +34,15 @@ export function BrandsExpertSupport() {
           <div className='flex flex-col gap-6 justify-end content-end'>
             <div className='flex gap-4 items-end'>
               <Image
-                src='/images/brands/expert-support/42bdc11cc7775a1b800fd5480be693158f9a2f40.webp'
-                alt='Creator'
+                src='/images/brands/expert-support/creator-working-on-campaign.webp'
+                alt='Creator working on a campaign'
                 width={ 223 }
                 height={ 170 }
                 className='h-1/2 rounded-4xl'
               />
               <Image
-                src='/images/brands/expert-support/185f2fd7ea251a00b874bee58763148aa815fa3b.webp'
-                alt='Creator'
+                src='/images/brands/expert-support/creator-reviewing-content.webp'
+                alt='Creator reviewing content with the Huerray team'
                 width={ 362 }
                 height={ 276 }
                 className='section-card__img w-2/3'
@@ -50,8 +50,8 @@ export function BrandsExpertSupport() {
             </div>
             <div className='relative'>
               <Image
-                src='/images/brands/expert-support/b746afa7d90f4c22913780f492525bf4cb291ea3.webp'
-                alt='Creator'
+                src='/images/brands/expert-support/creator-delivering-content.webp'
+                alt='Creator delivering finished content'
                 width={ 435 }
                 height={ 312 }
                 className='section-card__img w-2/3! aspect-5/4! float-end'

@@ -43,7 +43,7 @@ export function ManagedServicesFeatures() {
                     <div key={ j } className='relative flex-1 overflow-hidden'>
                       <Image
                         src={ src }
-                        alt='Creator'
+                        alt={ `${ item.title } example ${ j + 1 }` }
                         fill
                         className='object-cover'
                       />
