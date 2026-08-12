@@ -66,9 +66,10 @@ export function Hero() {
                     <Image
                       key={ `col1-${ index }` }
                       src={ src }
-                      alt='Creator'
+                      alt=''
                       width={ 229 }
                       height={ 285 }
+                      priority={ index === 0 }
                     />
                   ) ) }
               </div>
@@ -84,9 +85,10 @@ export function Hero() {
                     <Image
                       key={ `col2-${ index }` }
                       src={ src }
-                      alt='Creator'
+                      alt=''
                       width={ 229 }
                       height={ 285 }
+                      priority={ index === 0 }
                     />
                   ) ) }
               </div>

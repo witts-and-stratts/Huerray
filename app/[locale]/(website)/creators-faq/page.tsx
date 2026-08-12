@@ -3,7 +3,7 @@ import { Header } from '@/components/Header';
 import { FAQs } from '@/components/ui/FAQs';
 import type { Locale } from '@/i18n';
 import { getTranslations } from 'next-intl/server';
-import generateSEO from '@/components/seo/SEO';
+import generateSEO, { generateFAQPageJsonLd } from '@/components/seo/SEO';
 
 type Props = {
   params: Promise<{ locale: Locale; }>;
@@ -24,9 +24,14 @@ export default async function CreatorsFAQ( { params }: Props ) {
   const { locale } = await params;
   const t = await getTranslations( { locale, namespace: 'creators-faq' } );
   const sections = t.raw( 'sections' ) as FAQSection[];
+  const allFaqs = sections.flatMap( ( section ) => section.faqs );
 
   return (
     <>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={ { __html: JSON.stringify( generateFAQPageJsonLd( allFaqs ) ) } }
+      />
       <Header />
       <main className='relative z-30 bg-white overflow-y-hidden'>
         <div className="padded-container md:pb-10 border-b border-b-gray-200 text-center bg-orange-50/50 py-30 rounded-tl-4xl rounded-tr-4xl">

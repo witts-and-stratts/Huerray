@@ -39,7 +39,7 @@ export function BrandsContentObjective() {
             <div className='rounded-[64px] overflow-hidden col-span-2'>
               <Image
                 src='/images/brands/content-objective/woman-yellow.webp'
-                alt='Creator'
+                alt='Creator wearing yellow'
                 width={ 262 }
                 height={ 172 }
                 className='object-cover w-full h-full'

@@ -34,7 +34,7 @@ export function BrandsStopAssuming() {
         <div className='section-card__image'>
           <Image
             src='/images/brands/stop-assuming/720fff0e9e69deca65f0dd3975902e605144008a.webp'
-            alt='Professional'
+            alt='Brand marketer reviewing campaign performance'
             width={ 545 }
             height={ 634 }
             className='aspect-8/9! object-cover rounded-[128px]'

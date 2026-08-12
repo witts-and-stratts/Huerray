@@ -19,11 +19,11 @@ export function AboutWhatWeDo() {
 
   return (
     <section className='section-card section-card--spaced section-card--pink overflow-visible! mb-20'>
-      <h2 className='h3 gradient-text'>{ t( 'pill' ) }</h2>
+      <p className='h3 gradient-text'>{ t( 'pill' ) }</p>
 
-      <h3 className='text-h3 font-secondary mt-20 gradient-text'>
+      <h2 className='text-h3 font-secondary mt-20 gradient-text'>
         { t( 'title' ) }
-      </h3>
+      </h2>
 
       <p className='text-h5 text-dark-burgundy md:max-w-7/10 mt-4'>
         { t( 'description' ) }
@@ -47,7 +47,7 @@ export function AboutWhatWeDo() {
         <div className='col-span-7'>
           <Image
             src='/images/what-wedo-collage.webp'
-            alt={ t( 'imageAlt' ) }
+            alt='Collage of brand and creator collaboration content'
             width={ 800 }
             height={ 800 }
             className='max-md:scale-120 md:w-[40000px]! mx:max-w-auto! translate-x-[20%]'

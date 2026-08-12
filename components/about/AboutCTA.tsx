@@ -23,7 +23,7 @@ export function AboutCTA() {
         </Link>
       </Button>
 
-      <PlatformLogos title="" />
+      <PlatformLogos />
     </section>
   );
 }

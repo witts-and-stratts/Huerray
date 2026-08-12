@@ -8,13 +8,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
+        // Auth pages (/login, /signup, etc.) are intentionally NOT disallowed
+        // here even though they're marked noindex via metadata — a crawler
+        // needs to be able to fetch a page to see its noindex tag. Disallowing
+        // it too would risk a stale, description-less listing sticking around
+        // forever if it was ever indexed before. The private dashboard trees
+        // below are large, effectively infinite authenticated surfaces where
+        // saving crawl budget outweighs that concern, so they stay blocked.
         disallow: [
-          '/*/login',
-          '/*/signup',
-          '/*/forgot-password',
-          '/*/reset-password',
-          '/*/verify-email',
-          '/*/newsletter-unsubscribe',
           '/*/admin/',
           '/*/creator/',
           '/*/brand/',

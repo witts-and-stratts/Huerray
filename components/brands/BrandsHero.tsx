@@ -54,7 +54,7 @@ export function BrandsHero() {
 
           <Image
             src='/images/confetti.svg'
-            alt='Confetti Decoration'
+            alt=''
             width={ 1000 }
             height={ 1000 }
             className='brands-hero__decoration'
@@ -76,6 +76,7 @@ export function BrandsHero() {
                   width={ 700 }
                   height={ 700 }
                   className='creators-section__img'
+                  priority
                 />
               </div>
               <div className='brands-hero__secondary-image'>

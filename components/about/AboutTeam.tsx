@@ -23,7 +23,7 @@ export function AboutTeam() {
 
   return (
     <section className="about-team">
-      <h3 className="about-team__subtitle">{ t( 'subtitle' ) }</h3>
+      <p className="about-team__subtitle">{ t( 'subtitle' ) }</p>
       <h2 className="about-team__title">
         { t( 'title' ) }
       </h2>

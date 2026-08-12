@@ -35,7 +35,7 @@ export function CreatorsHero() {
 
           <Image
             src='/images/confetti.svg'
-            alt='Confetti Decoration'
+            alt=''
             width={ 1000 }
             height={ 1000 }
             className='creators-hero__decoration'
@@ -48,9 +48,10 @@ export function CreatorsHero() {
             <div className='creators-hero__main-image'>
               <Image
                 src='/images/creators/main-girl.webp'
-                alt='Creator'
+                alt='Creator smiling at the camera'
                 width={ 800 }
                 height={ 800 }
+                priority
               />
             </div>
             {/* Mini callout card - "No follower minimum" */ }
@@ -62,7 +63,7 @@ export function CreatorsHero() {
             <div className='creators-hero__secondary-image'>
               <Image
                 src='/images/creators/makeup-girl.webp'
-                alt='Creator'
+                alt='Creator applying makeup'
                 width={ 177 }
                 height={ 153 }
               />
@@ -72,7 +73,7 @@ export function CreatorsHero() {
               <div className='creators-hero__payment-avatar'>
                 <Image
                   src='/images/creators/payment-avatar.webp'
-                  alt='Avatar'
+                  alt=''
                   width={ 93 }
                   height={ 93 }
                 />
@@ -87,7 +88,7 @@ export function CreatorsHero() {
             <div className='creators-hero__teaser-card'>
               <Image
                 src={ '/images/creators/sample-teaser.svg' }
-                alt='Teaser'
+                alt=''
                 width={ 246 }
                 height={ 150 }
               />

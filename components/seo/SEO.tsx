@@ -25,7 +25,7 @@ interface SeoProps {
 
 const baseUrl =
   process.env.NODE_ENV === 'development' ? DEV_URL : SITE_URL;
-const defaultImageUrl = `${ baseUrl }/images/og-image.png`;
+const defaultImageUrl = `${ baseUrl }/og-image.png`;
 
 function normalizeText(value?: string): string | undefined {
   if (!value) return undefined;
@@ -55,6 +55,21 @@ export function generateOrganizationJsonLd() {
     url: SITE_URL,
     logo: `${ SITE_URL }/images/huerray-logo.png`,
     sameAs: [TWITTER_URL],
+  };
+}
+
+export function generateFAQPageJsonLd( faqs: { question: string; answer: string; }[] ) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map( ( faq ) => ( {
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    } ) ),
   };
 }
 
@@ -128,16 +143,16 @@ export default async function generateSEO(
     applicationName: SITE_NAME,
     icons: {
       icon: `${ baseUrl }/favicon.ico`,
-      shortcut: `${ baseUrl }/images/favicons/favicon-32x32.png`,
-      apple: `${ baseUrl }/images/favicons/apple-touch-icon.png`,
+      shortcut: `${ baseUrl }/favicon-32x32.png`,
+      apple: `${ baseUrl }/apple-touch-icon-180x180.png`,
       other: [
         {
-          url: `${ baseUrl }/images/favicons/android-chrome-512x512.png`,
+          url: `${ baseUrl }/android-chrome-512x512.png`,
           type: 'image/png',
           sizes: '512x512',
         },
         {
-          url: `${ baseUrl }/images/favicons/android-chrome-192x192.png`,
+          url: `${ baseUrl }/android-chrome-192x192.png`,
           type: 'image/png',
           sizes: '192x192',
         },

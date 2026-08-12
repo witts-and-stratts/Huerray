@@ -77,9 +77,9 @@ export function PricingCards() {
             <source src='/videos/ai-generated-content.webm' type='video/webm' />
           </video>
           <div className='pricing-extra__video-overlay'>
-            <h3 className='pricing-extra__video-subtitle'>
+            <p className='pricing-extra__video-subtitle'>
               { tExtra( 'ai.subtitle' ) }
-            </h3>
+            </p>
             <h2 className='pricing-extra__video-title'>{ tExtra( 'ai.title' ) }</h2>
             <div className='pricing-extra__video-price-wrapper'>
               <span>{ tExtra( 'ai.priceLabel' ) }</span>
@@ -99,9 +99,9 @@ export function PricingCards() {
         <div className='pricing-extra__enterprise-wrapper'>
           <div className='pricing-card pricing-card--highlight bg-orange-way'>
             <Badge variant='pill'>{ tExtra( 'enterprise.badge' ) }</Badge>
-            <h1 className='pricing-card__title'>
+            <h3 className='pricing-card__title'>
               { tExtra( 'enterprise.title' ) }
-            </h1>
+            </h3>
             <div className='pricing-card__features'>
               <h6 className='pricing-extra__enterprise-description'>
                 { tExtra( 'enterprise.description' ) }

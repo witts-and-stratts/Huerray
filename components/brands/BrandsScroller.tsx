@@ -8,18 +8,19 @@ import '@/styles/creators-scroller.css';
 import '@splidejs/react-splide/css';
 import { cn } from '@/lib/utils';
 
-const creators: Array<[ string, [ string, string ]?]> = [
-  [ '/images/creators/expressive-young-girl-posing-indoor.webp' ],
-  [ '/images/creators/medium-shot-woman-with-tasty-kombucha.webp' ],
+const creators: Array<[ string, string, [ string, string ]?]> = [
+  [ '/images/creators/expressive-young-girl-posing-indoor.webp', 'Creator posing indoors' ],
+  [ '/images/creators/medium-shot-woman-with-tasty-kombucha.webp', 'Creator holding a kombucha drink' ],
   [
     '/images/creators/front-view-male-courier-yellow-uniform-cape-with-round-delivery-bowl-his-hands-light-pink-background.webp',
+    'Creator dressed as a delivery courier',
   ],
-  [ '/images/creators/best-friends-couple-stylish-girls-posing-white.webp' ],
-  [ '/images/creators/woman-training-outdoors.webp' ],
-  [ '/images/creators/making-presentation-new-facial-cream.webp' ],
-  [ '/images/creators/man-applying-anti-aging-treatment.webp' ],
-  [ '/images/creators/side-view-smiley-women-with-smartphone.webp' ],
-  [ '/images/creators/smiling-young-couple-looking-into-cardboard-box.webp' ],
+  [ '/images/creators/best-friends-couple-stylish-girls-posing-white.webp', 'Two creators posing together' ],
+  [ '/images/creators/woman-training-outdoors.webp', 'Creator training outdoors' ],
+  [ '/images/creators/making-presentation-new-facial-cream.webp', 'Creator presenting a skincare product' ],
+  [ '/images/creators/man-applying-anti-aging-treatment.webp', 'Creator applying a skincare treatment' ],
+  [ '/images/creators/side-view-smiley-women-with-smartphone.webp', 'Creator filming content on a smartphone' ],
+  [ '/images/creators/smiling-young-couple-looking-into-cardboard-box.webp', 'Creators unboxing a delivery' ],
 ];
 
 export function BrandsScroller() {
@@ -67,13 +68,13 @@ export function BrandsScroller() {
           extensions={ { AutoScroll } }
         >
           { creators.map( ( image, index ) => {
-            const [ imgSrc, deco ] = image;
+            const [ imgSrc, alt, deco ] = image;
             return (
               <SplideSlide key={ index }>
                 <div className='creators-scroller__avatar'>
                   <Image
                     src={ imgSrc }
-                    alt='Creator'
+                    alt={ alt }
                     width={ 280 }
                     height={ 315 }
                     className='creators-scroller__image'
@@ -81,7 +82,7 @@ export function BrandsScroller() {
                   { deco && (
                     <Image
                       src={ `/images/${ deco[ 0 ] }` }
-                      alt='Decoration'
+                      alt=''
                       width={ 180 }
                       height={ 180 }
                       className={ cn(

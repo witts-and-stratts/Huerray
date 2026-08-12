@@ -27,12 +27,12 @@ export function BrandsCTA() {
   return (
     <section className='creators-cta'>
       <div className='creators-cta__container'>
-        <h2 className='creators-cta__subtitle'>
+        <p className='creators-cta__subtitle'>
           { t( 'subtitle' ) }
-        </h2>
-        <h3 className='gradient-text creators-cta__title'>
+        </p>
+        <h2 className='gradient-text creators-cta__title'>
           { t( 'title' ) }
-        </h3>
+        </h2>
         <div className='hero__actions justify-center'>
           <Link href="/signup?role=brand" title={ tCommon( 'button.startCampaign' ) }>
             <Button variant='gradient'>

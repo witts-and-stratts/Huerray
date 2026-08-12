@@ -2,10 +2,24 @@ import type { MetadataRoute } from 'next'
 
 import { locales } from '@/i18n'
 import { client } from '@/sanity/lib/client'
-import { BLOG_INDEX_QUERY, type BlogSummary } from '@/sanity/lib/blog'
+import {
+  BLOG_CATEGORIES_QUERY,
+  BLOG_INDEX_QUERY,
+  BLOG_TAGS_QUERY,
+  type BlogCategoryListItem,
+  type BlogSummary,
+} from '@/sanity/lib/blog'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'
 const DEFAULT_LOCALE = locales[0]
+
+// Sitemap entries require a lastModified value (Next's serializer doesn't
+// handle it being omitted, despite the type marking it optional). Since we
+// don't track a real per-page "last changed" date for static marketing
+// pages, we compute this once at module load rather than calling `new
+// Date()` on every request/revalidation — it stays stable for the life of
+// this server instance instead of always claiming "changed today".
+const BUILD_TIME = new Date()
 
 type BlogSitemapPost = Pick<BlogSummary, '_id' | 'slug' | 'publishedAt'> & {
   updatedAt?: string
@@ -38,7 +52,11 @@ const STATIC_ROUTES: Array<{ path: string; changeFrequency: MetadataRoute.Sitema
 ]
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = (await client.fetch(BLOG_INDEX_QUERY)) as BlogSitemapPost[]
+  const [posts, tags, categories] = await Promise.all([
+    client.fetch(BLOG_INDEX_QUERY) as Promise<BlogSitemapPost[]>,
+    client.fetch(BLOG_TAGS_QUERY) as Promise<string[]>,
+    client.fetch(BLOG_CATEGORIES_QUERY) as Promise<BlogCategoryListItem[]>,
+  ])
 
   const blogIndexLastModified = posts.length
     ? new Date(
@@ -46,12 +64,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           ...posts.map((post) => getLastModified(post).getTime()),
         ),
       )
-    : new Date()
+    : BUILD_TIME
 
   const sitemap: MetadataRoute.Sitemap = [
+    // Static marketing pages use BUILD_TIME (not a fresh `new Date()` per
+    // request) since we don't track a real per-page "last changed" date —
+    // see the BUILD_TIME comment above for why.
     ...STATIC_ROUTES.map(({ path, changeFrequency, priority }) => ({
       url: `${SITE_URL}/${DEFAULT_LOCALE}${path}`,
-      lastModified: new Date(),
+      lastModified: BUILD_TIME,
       changeFrequency,
       priority,
       alternates: {
@@ -79,6 +100,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
       alternates: {
         languages: buildLocaleAlternates(`/blog/${post.slug.current}`),
+      },
+    })
+  }
+
+  for (const tag of tags) {
+    if (!tag) continue
+
+    sitemap.push({
+      url: `${SITE_URL}/${DEFAULT_LOCALE}/blog/tags/${encodeURIComponent(tag)}`,
+      lastModified: BUILD_TIME,
+      changeFrequency: 'weekly',
+      priority: 0.4,
+      alternates: {
+        languages: buildLocaleAlternates(`/blog/tags/${encodeURIComponent(tag)}`),
+      },
+    })
+  }
+
+  for (const category of categories) {
+    const slug = category.slug?.current
+    if (!slug) continue
+
+    sitemap.push({
+      url: `${SITE_URL}/${DEFAULT_LOCALE}/blog/categories/${encodeURIComponent(slug)}`,
+      lastModified: BUILD_TIME,
+      changeFrequency: 'weekly',
+      priority: 0.4,
+      alternates: {
+        languages: buildLocaleAlternates(`/blog/categories/${encodeURIComponent(slug)}`),
       },
     })
   }

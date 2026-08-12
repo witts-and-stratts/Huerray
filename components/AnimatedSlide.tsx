@@ -11,6 +11,7 @@ interface AnimatedSlideProps {
   onImageChange: () => void;
   onAnimationEnd?: () => void;
   className?: string;
+  category: string;
 }
 
 export function AnimatedSlide({
@@ -20,6 +21,7 @@ export function AnimatedSlide({
   onImageChange,
   onAnimationEnd,
   className = '',
+  category,
 }: AnimatedSlideProps) {
   const [previousImageIndex, setPreviousImageIndex] =
     useState(currentImageIndex);
@@ -61,7 +63,7 @@ export function AnimatedSlide({
       <div className='w-full h-full absolute inset-0'>
         <Image
           src={images[previousImageIndex]}
-          alt={`Content ${index + 1}`}
+          alt={`${category} example ${index + 1}`}
           width={229}
           height={285}
           className='w-full h-full object-cover'
@@ -90,7 +92,7 @@ export function AnimatedSlide({
           >
             <Image
               src={images[currentImageIndex]}
-              alt={`Content ${index + 1}`}
+              alt={`${category} example ${index + 1}`}
               width={229}
               height={285}
               className='w-full h-full object-cover'

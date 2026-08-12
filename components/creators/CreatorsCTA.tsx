@@ -12,11 +12,11 @@ export function CreatorsCTA() {
   return (
     <section className='creators-cta'>
       <div className='creators-cta__container'>
-        <h2 className='creators-cta__subtitle'>{ t( 'subtitle' ) }</h2>
+        <p className='creators-cta__subtitle'>{ t( 'subtitle' ) }</p>
 
         <CreatorsScroller />
 
-        <h3 className='gradient-text creators-cta__title px-10 text-balance'>{ t( 'title' ) }</h3>
+        <h2 className='gradient-text creators-cta__title px-10 text-balance'>{ t( 'title' ) }</h2>
         <Link href="/signup?role=creator" title={ tCommon( 'button.createFreeProfile' ) }>
           <Button variant='hero' size='xl' className='bg-dark-burgundy min-w-200'>
             { tCommon( 'button.createFreeProfile' ) }

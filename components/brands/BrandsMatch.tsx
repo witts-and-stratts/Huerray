@@ -52,7 +52,7 @@ export function BrandsMatch() {
         <div className='section-card__image'>
           <Image
             src='/images/brands/7d276a19cd69b3c1a8c1f90f9d7393131ea00d7e.webp'
-            alt='Creator'
+            alt='Creator matched with a brand'
             width={ 545 }
             height={ 634 }
             className='aspect-4/5! object-cover w-full h-full rounded-[128px]'
