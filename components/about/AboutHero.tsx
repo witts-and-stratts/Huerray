@@ -23,7 +23,7 @@ export function AboutHero() {
           <div className="about-hero__images">
             <div className="about-hero__main-column">
               <Image
-                src="/images/about/28060ca24f97badeac0a79aa1e519e59cd2f957a.webp"
+                src="/images/about/main-creator.webp"
                 alt="Main creator"
                 width={ 700 }
                 height={ 700 }
@@ -32,14 +32,14 @@ export function AboutHero() {
             </div>
             <div className="about-hero__side-column">
               <Image
-                src="/images/about/15164edd8d903dd9c6ac790fe7b93b7d1ce68751.webp"
+                src="/images/about/creator-content.webp"
                 alt="Creator content"
                 width={ 400 }
                 height={ 400 }
                 className="about-hero__tall-image"
               />
               <Image
-                src="/images/about/2b4fcd641a40b38ac8c0c0baee83f57ee33e4134.webp"
+                src="/images/about/creator-portrait.webp"
                 alt="Creator portrait"
                 width={ 400 }
                 height={ 300 }

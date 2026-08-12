@@ -33,7 +33,7 @@ export function BrandsStopAssuming() {
         {/* Right - Image with Performance Chart */ }
         <div className='section-card__image'>
           <Image
-            src='/images/brands/stop-assuming/720fff0e9e69deca65f0dd3975902e605144008a.webp'
+            src='/images/brands/stop-assuming/marketer-reviewing-performance.webp'
             alt='Brand marketer reviewing campaign performance'
             width={ 545 }
             height={ 634 }

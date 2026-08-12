@@ -25,12 +25,22 @@ export function CareerOpportunities( { openPositions }: CareerOpportunitiesProps
   const locale = useLocale();
   const [ activeOpportunity, setActiveOpportunity ] = useState<OpenPosition | null>( null );
 
+  // Only 3 static placeholder jobs exist in the translation files (used as a
+  // fallback when Sanity has no data at all). Once Sanity returns more open
+  // positions than that, indices beyond 2 have no matching translation key —
+  // t.has() guards against calling t() on a key that doesn't exist, which
+  // next-intl throws on.
+  const jobFallback = ( index: number, field: 'category' | 'title' | 'location' ) => {
+    const key = `jobs.${ index }.${ field }`;
+    return t.has( key ) ? t( key ) : '';
+  };
+
   const opportunities = openPositions?.map( ( position, index ) => ( {
     key: position._id || `${ index }`,
     position,
-    category: getLocalizedValue( position.department, locale, t( `jobs.${ index }.category` ) ),
-    title: getLocalizedValue( position.title, locale, t( `jobs.${ index }.title` ) ),
-    location: getLocalizedValue( position.location, locale, t( `jobs.${ index }.location` ) ),
+    category: getLocalizedValue( position.department, locale, jobFallback( index, 'category' ) ),
+    title: getLocalizedValue( position.title, locale, jobFallback( index, 'title' ) ),
+    location: getLocalizedValue( position.location, locale, jobFallback( index, 'location' ) ),
     applyUrl: position.applyUrl ?? '#',
   } ) ) ?? [
       {

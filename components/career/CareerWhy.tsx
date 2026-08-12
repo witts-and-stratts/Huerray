@@ -28,7 +28,7 @@ export function CareerWhy() {
           </div>
           <div className="career-why__image-wrapper">
             <Image
-              src="/images/7d276a19cd69b3c1a8c1f90f9d7393131ea00d7e.webp"
+              src="/images/why-huerray.webp"
               alt={ t( 'imageAlt' ) }
               width={ 400 }
               height={ 400 }
