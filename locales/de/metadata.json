@@ -91,6 +91,12 @@
     "blogPublished": "Veröffentlicht",
     "blogBy": "Von",
     "blogReadTime": "Lesezeit:",
-    "blogUpdated": "Aktualisiert"
+    "blogUpdated": "Aktualisiert",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundHeading": "Diese Seite gibt es nicht",
+    "notFoundBody": "Die gesuchte Seite wurde möglicherweise verschoben oder existiert nicht mehr.",
+    "notFoundHomeLink": "Zurück zur Startseite",
+    "notFoundBrandsLink": "Für Marken",
+    "notFoundCreatorsLink": "Für Creators"
   }
 }

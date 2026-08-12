@@ -11,7 +11,6 @@ import {
 } from '@/sanity/lib/blog'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'
-const DEFAULT_LOCALE = locales[0]
 
 // Sitemap entries require a lastModified value (Next's serializer doesn't
 // handle it being omitted, despite the type marking it optional). Since we
@@ -33,6 +32,33 @@ function buildLocaleAlternates(pathname: string) {
 
 function getLastModified(post: BlogSitemapPost): Date {
   return new Date(post.updatedAt ?? post.publishedAt ?? Date.now())
+}
+
+type LocalizedEntryMeta = {
+  lastModified: Date
+  changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']
+  priority: number
+}
+
+// Every locale gets its own first-class sitemap entry (self-canonical, with
+// the full hreflang alternates map including itself) rather than only the
+// default locale being listed and de/fr/es existing solely as alternates
+// nested inside it — each localized URL is a real, independently
+// submittable page.
+function pushLocalizedEntries(
+  sitemap: MetadataRoute.Sitemap,
+  pathname: string,
+  meta: LocalizedEntryMeta,
+) {
+  const alternates = { languages: buildLocaleAlternates(pathname) }
+
+  for (const locale of locales) {
+    sitemap.push({
+      url: `${SITE_URL}/${locale}${pathname}`,
+      ...meta,
+      alternates,
+    })
+  }
 }
 
 const STATIC_ROUTES: Array<{ path: string; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']; priority: number }> = [
@@ -66,55 +92,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       )
     : BUILD_TIME
 
-  const sitemap: MetadataRoute.Sitemap = [
-    // Static marketing pages use BUILD_TIME (not a fresh `new Date()` per
-    // request) since we don't track a real per-page "last changed" date —
-    // see the BUILD_TIME comment above for why.
-    ...STATIC_ROUTES.map(({ path, changeFrequency, priority }) => ({
-      url: `${SITE_URL}/${DEFAULT_LOCALE}${path}`,
-      lastModified: BUILD_TIME,
-      changeFrequency,
-      priority,
-      alternates: {
-        languages: buildLocaleAlternates(path || '/'),
-      },
-    })),
-    {
-      url: `${SITE_URL}/${DEFAULT_LOCALE}/blog`,
-      lastModified: blogIndexLastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-      alternates: {
-        languages: buildLocaleAlternates('/blog'),
-      },
-    },
-  ]
+  const sitemap: MetadataRoute.Sitemap = []
+
+  for (const { path, changeFrequency, priority } of STATIC_ROUTES) {
+    pushLocalizedEntries(sitemap, path, { lastModified: BUILD_TIME, changeFrequency, priority })
+  }
+
+  pushLocalizedEntries(sitemap, '/blog', {
+    lastModified: blogIndexLastModified,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  })
 
   for (const post of posts) {
     if (!post.slug?.current) continue
 
-    sitemap.push({
-      url: `${SITE_URL}/${DEFAULT_LOCALE}/blog/${post.slug.current}`,
+    pushLocalizedEntries(sitemap, `/blog/${post.slug.current}`, {
       lastModified: getLastModified(post),
       changeFrequency: 'monthly',
       priority: 0.6,
-      alternates: {
-        languages: buildLocaleAlternates(`/blog/${post.slug.current}`),
-      },
     })
   }
 
   for (const tag of tags) {
     if (!tag) continue
 
-    sitemap.push({
-      url: `${SITE_URL}/${DEFAULT_LOCALE}/blog/tags/${encodeURIComponent(tag)}`,
+    pushLocalizedEntries(sitemap, `/blog/tags/${encodeURIComponent(tag)}`, {
       lastModified: BUILD_TIME,
       changeFrequency: 'weekly',
       priority: 0.4,
-      alternates: {
-        languages: buildLocaleAlternates(`/blog/tags/${encodeURIComponent(tag)}`),
-      },
     })
   }
 
@@ -122,14 +128,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const slug = category.slug?.current
     if (!slug) continue
 
-    sitemap.push({
-      url: `${SITE_URL}/${DEFAULT_LOCALE}/blog/categories/${encodeURIComponent(slug)}`,
+    pushLocalizedEntries(sitemap, `/blog/categories/${encodeURIComponent(slug)}`, {
       lastModified: BUILD_TIME,
       changeFrequency: 'weekly',
       priority: 0.4,
-      alternates: {
-        languages: buildLocaleAlternates(`/blog/categories/${encodeURIComponent(slug)}`),
-      },
     })
   }
 

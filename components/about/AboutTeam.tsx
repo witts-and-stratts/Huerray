@@ -19,6 +19,11 @@ export function AboutTeam() {
       bio: t( 'members.1.bio' ),
       image: '/images/team/norina.jpg'
     },
+    {
+      name: t( 'members.2.name' ),
+      bio: t( 'members.2.bio' ),
+      image: '/svg/avatar-male.svg'
+    },
   ];
 
   return (

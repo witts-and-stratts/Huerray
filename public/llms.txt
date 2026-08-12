@@ -1,0 +1,30 @@
+# Huerray
+
+> Huerray connects brands with Black, brown and diverse creators to produce culturally relevant user-generated content (UGC) for ads, social media and e-commerce — with clear briefs, agreed usage rights, and no subscriptions or platform fees.
+
+Huerray is a UGC platform. Brands submit a campaign brief, get matched with vetted creators whose identity, perspective and content style fit their audience, and receive licensed content (product shots, testimonial videos, unboxing videos, lifestyle shots, and more) ready for paid social, organic social and e-commerce. Creators keep full creative control over how they bring a brief to life, get paid per accepted piece of content, and are never required to post on their own channels unless a brief explicitly asks for it. Huerray operates primarily in Germany, Austria and Switzerland (DACH).
+
+## For brands
+
+- [Brands overview](https://huerray.de/en/brands): how brand campaigns work, matching, content objectives, and dedicated support.
+- [Pricing](https://huerray.de/en/pricing): per-format UGC pricing, AI-generated video pricing, and enterprise plans.
+- [Managed services](https://huerray.de/en/managed-services): fully-managed campaign production for brands who want a hands-off approach.
+- [Brands FAQ](https://huerray.de/en/brands-faq): detailed answers on getting started, production timelines, briefs, payment and content rights.
+
+## For creators
+
+- [Creators overview](https://huerray.de/en/creators): how to join, get matched with brands, and get paid.
+- [Creators FAQ](https://huerray.de/en/creators-faq): detailed answers on onboarding, submissions, deadlines, payment and content rights.
+
+## Company
+
+- [About Huerray](https://huerray.de/en/about): the company's mission and founding story.
+- [Blog](https://huerray.de/en/blog): articles on UGC strategy, creator marketing and platform updates.
+
+## Legal
+
+- [Privacy policy](https://huerray.de/en/privacy-policy)
+- [Terms and conditions](https://huerray.de/en/terms-and-conditions)
+- [Creator terms](https://huerray.de/en/creator-terms)
+
+This site is also available in German, French and Spanish — replace `/en/` with `/de/`, `/fr/` or `/es/` in any URL above.
