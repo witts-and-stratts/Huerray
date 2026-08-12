@@ -1,26 +1,34 @@
 {
   "hero": {
-    "title": "Zusammenarbeit mit Spitzencreator",
-    "subtitle": "Arbeiten Sie mit echten Creators zusammen, die ihre Arbeit mit Leidenschaft ausüben. Finden Sie in kürzester Zeit das passende Match für Ihre Marke.",
-    "buttonText": "Jetzt Creator finden"
+    "title": "Inhalte von Creators, die genau die Zielgruppe widerspiegeln, die Sie erreichen möchten.",
+    "subtitle": "Arbeiten Sie mit schwarzen, braunen und vielfältigen Creatoren zusammen, um kulturell relevante Nutzerinhalte (UGC) für Werbung, Social Media und E-Commerce zu produzieren – mit klaren Vorgaben, vereinbarten Nutzungsrechten und Unterstützung, wann immer Sie diese benötigen.",
+    "buttonText": "Jetzt Creator finden",
+    "briefCardEyebrow": "Ihr Kampagnenbriefing",
+    "briefCardTitle": "Das Publikum steht an erster Stelle. Die Perspektive wird berücksichtigt.",
+    "briefCardNote": "Klare Leistungen · Klare Rechte"
+  },
+  "intro": {
+    "eyebrow": "Die Art der Darstellung beeinflusst, wer sich von Ihrer Marke angesprochen fühlt.",
+    "title": "Erreichen Sie mehr Menschen mit Inhalten, die echte Menschen widerspiegeln."
   },
   "scroller": {
     "title": "Die richtigen Creators für Ihre Marke"
   },
   "match": {
     "pill": "Matching",
-    "title": "Matching mit den richtigen Creators für Ihre Marke",
-    "description": "Mit unserem Matching-Verfahren werden 92 % der Creators in der ersten Runde akzeptiert.",
+    "title": "Finden Sie Creators, die zu Ihrer Zielgruppe passen – nicht nur zu Ihrer Kategorie.",
+    "description": "Wählen Sie Creatoren aus, deren Identität, Perspektive und Stil zu den Menschen passen, die Sie erreichen möchten.",
     "listItems": {
-      "item1": "Geprüftes Netzwerk aktiver und verfügbarer Creators",
-      "item2": "Diverses Netzwerk an kreativen Talenten für authentische und relevante Inhalte"
+      "item1": "Vielfältige, freiwillig angelegte Creator-Profile",
+      "item2": "Matching basierend auf dem Briefing und der kreativen Eignung",
+      "item3": "Keine Abonnement- oder Plattformgebühren"
     },
     "paymentMade": "Geleistete Zahlung"
   },
   "contentObjective": {
     "pill": "Hochwertiger Content",
     "title": "Content für jedes Ziel",
-    "description": "Creators produzieren qualitativ hochwertige Inhalte, deren Output an Ihre Ziele und Anforderungen angepasst ist.",
+    "description": "Erstellen Sie Inhalte für die entscheidenden Momente entlang der gesamten Customer Journey.",
     "listItems": {
       "item1": "Egal, ob Sie einen Werbespot für Beauty-Produkte, einen authentischen Testbericht für die Automobilbranche oder eine emotionale Präsentation von Babyprodukten benötigen, Sie finden genau die Creators, die zu Ihrer Marke und Ihrem Content passen.",
       "item2": "Von klassischem UGC bis hin zu spezialisierten Formaten können Sie flexibel die Inhalte auswählen, die Ihre Marketingziele am besten unterstützen",
@@ -35,6 +43,27 @@
       "item1": "Zu viel zu tun? Lassen Sie uns das Hin und Her mit Creators regeln",
       "item2": "Kampagnen werden vorab geprüft, sodass Sie nur relevante und abgestimmte Anfragen erhalten",
       "item3": "Wir begleiten Ihre Kampagnen aktiv und behalten Ergebnisse und Timings im Blick, damit Sie keinen wichtigen Moment verpassen"
+    }
+  },
+  "support": {
+    "eyebrow": "Support auf Expertenlevel",
+    "title": "Umfassende Unterstützung vom Auftrag bis zur Auslieferung.",
+    "description": "Entscheiden Sie sich für die Zusammenarbeit im Selbstbedienungsmodus oder lassen Sie HUERRAY Sie bei den zeitaufwändigen Teilen der Produktion unterstützen.",
+    "step1": {
+      "title": "Den Auftrag formulieren",
+      "description": "Legen Sie Zielgruppe, Format, Zeitplan, zu liefernde Ergebnisse und Verwendungszweck fest, bevor sich die Creators bewerben."
+    },
+    "step2": {
+      "title": "Wählen Sie die richtige Passform aus",
+      "description": "Sehen Sie sich die Profile der Creators an und wählen Sie die Perspektiven aus, die in die Kampagne passen."
+    },
+    "step3": {
+      "title": "Erstellen und überprüfen",
+      "description": "Formulieren Sie Ihr Feedback klar und deutlich, ohne dabei den persönlichen Stil des Creators zu verfälschen."
+    },
+    "step4": {
+      "title": "Verwertbare Vermögenswerte erhalten",
+      "description": "Lassen Sie genehmigte Inhalte für die im Briefing vereinbarten Kanäle vorbereiten."
     }
   },
   "beyondFeed": {
@@ -64,8 +93,8 @@
     "contentPerformance": "Inhalt Leistung"
   },
   "cta": {
-    "subtitle": "Schließen Sie sich führenden Marken an",
-    "title": "Treten Sie dem Netzwerk bei. Finden Sie Ihre nächsten Markenbotschafter",
+    "subtitle": "Ich bin bereit, wenn du es bist",
+    "title": "Die nächste Kampagne sollte besser zu den Menschen passen, für die sie bestimmt ist.",
     "buttonText": "Jetzt Creator finden"
   },
   "industry": {
@@ -130,6 +159,6 @@
   },
   "seo": {
     "title": "Zusammenarbeit mit Spitzencreator",
-    "description": "Arbeiten Sie mit echten Creators zusammen, die ihre Arbeit mit Leidenschaft ausüben. Finden Sie in kürzester Zeit das passende Match für Ihre Marke."
+    "description": "Arbeiten Sie mit echten Creatoren zusammen, die ihr Handwerk mit Leidenschaft ausüben. Finden Sie im Handumdrehen den passenden Partner für Ihre Marke."
   }
 }

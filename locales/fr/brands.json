@@ -1,26 +1,34 @@
 {
   "hero": {
-    "title": "Collaborer avec les meilleurs créateurs",
-    "subtitle": "Travaillez avec de vrais créateurs passionnés par leur métier. Trouvez rapidement le match idéal pour votre marque.",
-    "buttonText": "Commencer"
+    "title": "Du contenu créé par des créateurs qui reflète le public que vous souhaitez toucher.",
+    "subtitle": "Collaborez avec des créateurs noirs, métis et issus de la diversité pour produire du contenu généré par les utilisateurs (UGC) adapté à la culture locale, destiné aux publicités, aux réseaux sociaux et au commerce en ligne — avec des briefs clairs, des droits d'utilisation clairement définis et un accompagnement lorsque vous en avez besoin.",
+    "buttonText": "Commencer",
+    "briefCardEyebrow": "Le cahier des charges de votre campagne",
+    "briefCardTitle": "Le public avant tout. Une vision globale.",
+    "briefCardNote": "Des livrables clairs · Des droits clairs"
+  },
+  "intro": {
+    "eyebrow": "La représentation détermine qui se sent interpellé par votre marque.",
+    "title": "Touchez davantage de personnes grâce à un contenu qui reflète davantage la réalité des gens."
   },
   "scroller": {
     "title": "Correspondance avec des créateurs expérimentés"
   },
   "match": {
     "pill": "Correspondance",
-    "title": "Trouver les créateurs qui conviennent à votre marque",
-    "description": "Grâce à notre processus de mise en correspondance, 92 % des créateurs sont approuvés dès le premier tour.",
+    "title": "Trouvez des créateurs qui correspondent à votre public — et pas seulement à votre catégorie.",
+    "description": "Sélectionnez des créateurs de contenu dont l'identité, le point de vue et le style de contenu correspondent au public que vous souhaitez toucher.",
     "listItems": {
-      "item1": "Un réseau de créateurs vérifiés et entièrement opt-in",
-      "item2": "Un vaste réseau de créateurs divers issus de communautés sous-représentées et de catégories de niche"
+      "item1": "Profils de créateurs variés, ayant donné leur accord",
+      "item2": "Sélection en fonction du cahier des charges et de l'adéquation créative",
+      "item3": "Aucun abonnement ni frais d'utilisation de la plateforme"
     },
     "paymentMade": "Paiement effectué"
   },
   "contentObjective": {
     "pill": "Contenu de qualité",
     "title": "Un contenu pour chaque objectif",
-    "description": "Les créateurs produisent un contenu de haute qualité, avec une gamme de résultats adaptée à vos objectifs et à vos besoins.",
+    "description": "Créez du contenu adapté aux moments clés du parcours client.",
     "listItems": {
       "item1": "Qu'il s'agisse d'une publicité pour un produit de beauté, d'une critique automobile ou d'une présentation de produits pour bébés, vous trouverez le contenu spécialisé du créateur.",
       "item2": "De l'UGC au contenu spécialisé, vous pouvez choisir en fonction de vos objectifs.",
@@ -35,6 +43,27 @@
       "item1": "Trop occupé ? Nous nous chargeons des échanges avec les créateurs",
       "item2": "Examens de la campagne avant votre approbation, afin de ne pas avoir à passer par des demandes qui ne sont pas alignées.",
       "item3": "Nous gérons les campagnes en direct et les livrables pour vous, afin que vous ne manquiez pas votre date de lancement."
+    }
+  },
+  "support": {
+    "eyebrow": "Assistance dédiée",
+    "title": "Un accompagnement clair, de la conception à la livraison.",
+    "description": "Optez pour une collaboration en libre-service ou confiez à HUERRAY les étapes de la production qui prennent du temps.",
+    "step1": {
+      "title": "Définir le cahier des charges",
+      "description": "Définissez le public cible, le format, le calendrier, les livrables et les modalités d'utilisation avant que les créateurs ne postulent."
+    },
+    "step2": {
+      "title": "Choisissez la taille qui vous convient",
+      "description": "Consultez les profils des créateurs et sélectionnez les points de vue qui s'inscrivent dans la campagne."
+    },
+    "step3": {
+      "title": "Créer et relire",
+      "description": "Veillez à ce que vos commentaires soient clairs sans pour autant dénaturer le style propre à l'auteur."
+    },
+    "step4": {
+      "title": "Recevoir des actifs exploitables",
+      "description": "Faites préparer du contenu validé pour les canaux convenus dans le brief."
     }
   },
   "beyondFeed": {
@@ -64,8 +93,8 @@
     "contentPerformance": "Performance du contenu"
   },
   "cta": {
-    "subtitle": "Rejoignez des milliers de marques qui obtiennent un contenu impressionnant",
-    "title": "Rejoignez le réseau. Trouvez vos prochains ambassadeurs de marque",
+    "subtitle": "Je suis prêt quand tu l'es",
+    "title": "Faites en sorte que la prochaine campagne reflète davantage les personnes auxquelles elle s'adresse.",
     "buttonText": "Commencer"
   },
   "industry": {
@@ -130,6 +159,6 @@
   },
   "seo": {
     "title": "Collaborer avec les meilleurs créateurs",
-    "description": "Travaillez avec de vrais créateurs passionnés par leur métier. Trouvez rapidement le match idéal pour votre marque."
+    "description": "Collaborez avec de véritables créateurs passionnés par leur métier. Trouvez en un clin d'œil le partenaire idéal pour votre marque."
   }
 }

@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,12 +17,20 @@ export function CreatorsHero() {
         <div className='hero__container'>
           <div className='hero__content'>
             <h1 className='gradient-text hero__title'>{ t( 'title' ) }</h1>
-            <h2 className='hero__subtitle'>{ t( 'subtitle' ) }</h2>
-            <Link href="/signup?role=creator" title={ t( 'buttonText' ) }>
-              <Button variant='hero' size='xl'>
-                { t( 'buttonText' ) }
-              </Button>
-            </Link>
+            <p className='hero__description'>{ t( 'subtitle' ) }</p>
+            <div className='hero__actions'>
+              <Link href='/signup?role=creator' title={ tCommon( 'button.createFreeProfile' ) }>
+                <Button variant='gradient'>
+                  { tCommon( 'button.createFreeProfile' ) }
+                  <ArrowRight className='size-4' />
+                </Button>
+              </Link>
+              <Link href='#how-creators' title={ t( 'secondaryButtonText' ) }>
+                <Button variant='outlineBrand'>
+                  { t( 'secondaryButtonText' ) }
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <Image
@@ -43,6 +52,11 @@ export function CreatorsHero() {
                 width={ 800 }
                 height={ 800 }
               />
+            </div>
+            {/* Mini callout card - "No follower minimum" */ }
+            <div className='creators-hero__mini-card'>
+              <b>{ t( 'miniCardTitle' ) }</b>
+              <span>{ t( 'miniCardText' ) }</span>
             </div>
             {/* Makeup girl image - top right */ }
             <div className='creators-hero__secondary-image'>

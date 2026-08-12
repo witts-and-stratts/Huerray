@@ -79,11 +79,11 @@
   },
   "summaryCard": {
     "title": "Ungelesene Benachrichtigungen",
-    "description": "Anzahl ungelesener Nachrichten und aktuelle ausstehende Einträge",
-    "unreadTotal": "Ungelesen gesamt",
-    "newToday": "{count, plural, =0 {Keine neuen Benachrichtigungen heute} other {+# heute}}",
+    "description": "Anzahl der ungelesenen Nachrichten im Posteingang und die neuesten ausstehenden Elemente",
+    "unreadTotal": "Gesamtzahl der ungelesenen Nachrichten",
+    "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
     "loading": "Ungelesene Benachrichtigungen werden geladen...",
-    "error": "Ungelesene Benachrichtigungen konnten nicht geladen werden.",
+    "error": "Ungelesene Benachrichtigungen können nicht geladen werden.",
     "viewAll": "Alle Benachrichtigungen anzeigen"
   },
   "compose": {

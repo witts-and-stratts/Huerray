@@ -3,7 +3,11 @@
     "registerNow": "Register now",
     "getStarted": "Get started",
     "learnMore": "Learn more",
-    "joinForFree": "Join for Free"
+    "joinForFree": "Join for Free",
+    "startCampaign": "Start a campaign",
+    "joinAsCreator": "Join as a creator",
+    "createFreeProfile": "Create my free profile",
+    "bookACall": "Book a free call"
   },
   "from": "from",
   "actions": "Actions"

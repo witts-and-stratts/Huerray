@@ -3,7 +3,14 @@
     "title": "Monetarisieren Sie Ihr Talent für das, was Sie lieben",
     "subtitle": "Arbeiten Sie mit Marken und echten Unternehmen. Verdienen Sie Geld für das, was Sie lieben.",
     "buttonText": "Werden Sie ein Creator",
-    "paymentMade": "Geleistete Zahlung"
+    "paymentMade": "Geleistete Zahlung",
+    "secondaryButtonText": "So funktioniert es",
+    "miniCardTitle": "Keine Mindestanzahl an Followern",
+    "miniCardText": "Deine Inhalte sind der Mehrwert."
+  },
+  "intro": {
+    "eyebrow": "Es gibt nicht nur eine einzige Art, auszusehen, zu sprechen oder kreativ zu sein.",
+    "title": "Du bist genau die Person, nach der Marken gesucht haben."
   },
   "categories": {
     "fashion": "Mode",
@@ -33,9 +40,30 @@
     "description": "Unser Team und unsere Technologie unterstützen Sie bei der Zusammenarbeit mit Marken, so dass Sie sich auf die Erstellung von Content konzentrieren können."
   },
   "paid": {
-    "pill": "Zahlungen",
-    "title": "Pünktlich bezahlt werden, jedes Mal",
-    "description": "Sie erhalten automatische Zahlungen, wenn die Kunden Ihren Content freigeben. Ohne Aufwand für Sie."
+    "pill": "Transparenter Prozess",
+    "title": "Genau wissen, was einen erwartet",
+    "description": "Informieren Sie sich im Voraus über Fristen, Vergütung und Anforderungen an die Veröffentlichung und lassen Sie sich dann automatisch bezahlen, sobald Ihre Inhalte freigegeben wurden."
+  },
+  "howItWorks": {
+    "eyebrow": "So funktioniert es",
+    "title": "Vom kostenlosen Profil zu kostenpflichtigen Aufträgen.",
+    "description": "HUERRAY hilft Marken dabei, die Perspektive zu finden, die ihnen fehlt – und bietet Creatoren einen klaren Weg in die Kampagne.",
+    "step1": {
+      "title": "Erstellen Sie Ihr kostenloses Profil",
+      "description": "Fügen Sie Beispiele für nutzergenerierte Inhalte (UGC), Kategorien und die Details hinzu, die Ihre Sichtweise einzigartig machen."
+    },
+    "step2": {
+      "title": "Wählen Sie passende Slips aus",
+      "description": "Prüfen Sie die Marke, die zu erbringenden Leistungen, die Vergütung, die Rechte sowie etwaige Anforderungen hinsichtlich der Veröffentlichung."
+    },
+    "step3": {
+      "title": "Schreibe in deinem eigenen Stil",
+      "description": "Setzen Sie die Idee um und halten Sie dabei die vereinbarten Kernpunkte der Kampagne ein."
+    },
+    "step4": {
+      "title": "Liefern und bezahlt werden",
+      "description": "Laden Sie die Inhalte hoch, schließen Sie den Freigabeprozess ab und erhalten Sie die Zahlung gemäß den vereinbarten Bedingungen."
+    }
   },
   "benefits": {
     "heading": "Warum Creators sich für Huerray entscheiden",
@@ -65,13 +93,13 @@
     }
   },
   "testimonial": {
-    "quote": "Huerray setzt sich für seine Creators ein ... sorgt für faire Bezahlung und bietet uns ständig Zugang zu Markenkooperationen, die zu unserem Lifestyle passen.",
+    "quote": "HUERRAY setzt sich für Creators ein – es sorgt für faire Bezahlung und ermöglicht ihnen Zugang zu Markenkooperationen, die zu ihrem Lifestyle passen.",
     "author": "Baron McHennie - @baron_mchennie"
   },
   "cta": {
     "buttonText": "Werden Sie ein Creator",
-    "subtitle": "Schließen Sie sich Tausenden von Creators an",
-    "title": "Monetarisieren Sie Ihr Talent"
+    "subtitle": "Werde Teil von HUERRAY",
+    "title": "Deine Sichtweise ist der Wert."
   },
   "faq": {
     "heading": "FAQs",

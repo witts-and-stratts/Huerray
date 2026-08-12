@@ -3,7 +3,11 @@
     "registerNow": "Regístrese ahora",
     "getStarted": "Empezar",
     "learnMore": "Más información",
-    "joinForFree": "Únase gratis"
+    "joinForFree": "Únase gratis",
+    "startCampaign": "Iniciar una campaña",
+    "joinAsCreator": "Únete como creador",
+    "createFreeProfile": "Crear mi perfil gratuito",
+    "bookACall": "Reserva una llamada gratuita"
   },
   "from": "de",
   "actions": "Acciones"

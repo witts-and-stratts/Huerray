@@ -1,12 +1,29 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { getCalApi } from '@calcom/embed-react';
 import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export function BrandsHero() {
   const t = useTranslations( 'brands.hero' );
+  const tCommon = useTranslations( 'common' );
+
+  useEffect( () => {
+    ( async function () {
+      const cal = await getCalApi( { namespace: 'brand-discovery-call' } );
+      cal( 'init', {
+        origin: 'https://www.cal.eu',
+      } );
+      cal( 'ui', {
+        hideEventTypeDetails: false,
+        layout: 'month_view',
+      } );
+    } )();
+  }, [] );
 
   return (
     <div className='hero brands-hero creators-hero'>
@@ -15,12 +32,24 @@ export function BrandsHero() {
         <div className='hero__container'>
           <div className='hero__content'>
             <h1 className='gradient-text hero__title'>{ t( 'title' ) }</h1>
-            <h2 className='hero__subtitle'>{ t( 'subtitle' ) }</h2>
-            <Link href="/signup?role=brand" title={ t( 'buttonText' ) } className='cursor-pointer'>
-              <Button variant='hero' size='xl'>
-                { t( 'buttonText' ) }
+            <p className='hero__description'>{ t( 'subtitle' ) }</p>
+            <div className='hero__actions'>
+              <Link href='/signup?role=brand' title={ tCommon( 'button.startCampaign' ) }>
+                <Button variant='gradient'>
+                  { tCommon( 'button.startCampaign' ) }
+                  <ArrowRight className='size-4' />
+                </Button>
+              </Link>
+              <Button
+                variant='outlineBrand'
+                data-cal-link='huerray/brand-discovery-call'
+                data-cal-namespace='brand-discovery-call'
+                data-cal-origin='https://www.cal.eu'
+                title={ tCommon( 'button.bookACall' ) }
+              >
+                { tCommon( 'button.bookACall' ) }
               </Button>
-            </Link>
+            </div>
           </div>
 
           <Image
@@ -33,6 +62,12 @@ export function BrandsHero() {
 
           {/* Hero Image Grid */ }
           <div className='brands-hero__images'>
+            {/* Campaign brief mini-card */ }
+            <div className='brands-hero__brief-card'>
+              <span>{ t( 'briefCardEyebrow' ) }</span>
+              <b>{ t( 'briefCardTitle' ) }</b>
+              <small>{ t( 'briefCardNote' ) }</small>
+            </div>
             <div className='brands-hero__main-column'>
               <div className='brands-hero__main-image'>
                 <Image

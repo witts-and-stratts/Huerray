@@ -27,6 +27,7 @@ export function HowItWorks() {
 
   return (
     <section className='px-4 lg:px-10 py-20 bg-goldenrod-50/40 mx-4 lg:mx-10 rounded-3xl mt-40'>
+      <h2 className='text-center mb-12 text-h3 font-heading gradient-text'>{t('title')}</h2>
       <div className='grid md:grid-cols-12 mx-auto'>
         <div className='md:col-span-6 space-y-8 md:pr-10 max-md:order-2 max-md:mt-10'>
           {howItWorksData.map((item, index) => (

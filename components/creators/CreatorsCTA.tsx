@@ -17,9 +17,9 @@ export function CreatorsCTA() {
         <CreatorsScroller />
 
         <h3 className='gradient-text creators-cta__title px-10 text-balance'>{ t( 'title' ) }</h3>
-        <Link href="/signup?role=creator" title={ t( 'buttonText' ) }>
+        <Link href="/signup?role=creator" title={ tCommon( 'button.createFreeProfile' ) }>
           <Button variant='hero' size='xl' className='bg-dark-burgundy min-w-200'>
-            { tCommon( 'button.getStarted' ) }
+            { tCommon( 'button.createFreeProfile' ) }
           </Button>
         </Link>
       </div>

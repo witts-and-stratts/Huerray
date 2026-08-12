@@ -5,9 +5,9 @@
     "createCampaign": "Kampagne erstellen",
     "viewCampaigns": "Kampagnen ansehen",
     "emptyBanner": {
-      "title": "Starte UGC mit den besten Creator:innen, die zu deiner Marke passen.",
-      "subtitle": "Starte deine erste Kampagne und verbinde dich mit authentischen Creator:innen, die deine Marke zum Leben erwecken.",
-      "cta": "Erste Kampagne erstellen"
+      "title": "Beginnen Sie mit der Erstellung von UGC zusammen mit den besten Creators, die zu Ihrer Marke passen.",
+      "subtitle": "Starten Sie Ihre erste Kampagne und vernetzen Sie sich mit authentischen Creators, die bereit sind, Ihre Marke zum Leben zu erwecken.",
+      "cta": "Erstellen Sie Ihre erste Kampagne"
     },
     "analytics": {
       "title": "Markenanalytik",
@@ -67,11 +67,11 @@
     "actionCenter": {
       "description": "Gemeinsame Aktionen für Kampagnenmaßnahmen",
       "title": "Ungelesene Benachrichtigungen",
-      "summaryDescription": "Ungelesene Posteingänge und die neuesten ausstehenden Elemente",
-      "unreadTotal": "Ungelesen gesamt",
-      "newToday": "{count, plural, =0 {Heute keine neuen Benachrichtigungen} other {+# heute}}",
+      "summaryDescription": "Anzahl der ungelesenen Nachrichten im Posteingang und die neuesten ausstehenden Elemente",
+      "unreadTotal": "Gesamtzahl der ungelesenen Nachrichten",
+      "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
       "loading": "Ungelesene Benachrichtigungen werden geladen...",
-      "error": "Ungelesene Benachrichtigungen konnten nicht geladen werden.",
+      "error": "Ungelesene Benachrichtigungen können nicht geladen werden.",
       "viewAll": "Alle Benachrichtigungen anzeigen",
       "createCampaign": {
         "label": "Kampagne erstellen",
@@ -87,9 +87,9 @@
       }
     },
     "campaignStatsLabels": {
-      "total": "Gesamt",
+      "total": "Insgesamt",
       "active": "Aktiv",
-      "totalGigs": "Gigs insgesamt",
+      "totalGigs": "Gigs gesamt",
       "totalSpend": "Gesamtausgaben"
     },
     "kpiOverview": {
@@ -194,39 +194,39 @@
       "untitledCampaign": "Unbenannte Kampagne",
       "updated": "Aktualisiert",
       "tabs": {
-        "recent": "Neueste",
-        "stats": "Statistik"
+        "recent": "Aktuell",
+        "stats": "Statistiken"
       },
       "stats": {
-        "total": "Gesamt",
+        "total": "Insgesamt",
         "active": "Aktiv",
-        "finished": "Abgeschlossen",
+        "finished": "Fertige",
         "draft": "Entwurf"
       }
     },
     "recentSubmissions": {
       "title": "Einreichungen",
-      "description": "Letzte Creator-Einreichungen aus Ihren Kampagnen",
-      "emptyState": "Noch keine Einreichungen.",
-      "loading": "Einreichungen werden geladen...",
-      "error": "Einreichungen konnten nicht geladen werden",
+      "description": "Neueste Beiträge von Creators aus all Ihren Kampagnen",
+      "emptyState": "Noch keine Einsendungen.",
+      "loading": "Einreichungen laden...",
+      "error": "Das Laden der Einsendungen ist fehlgeschlagen",
       "tabs": {
-        "recent": "Neueste",
-        "stats": "Statistik"
+        "recent": "Aktuell",
+        "stats": "Statistiken"
       },
       "stats": {
-        "total": "Gesamt",
-        "pending": "Ausstehend",
+        "total": "Insgesamt",
+        "pending": "Anhängig",
         "approved": "Genehmigt"
       }
     },
     "recentApplications": {
-      "title": "Neueste Bewerbungen",
-      "description": "Creator, die sich kürzlich auf Ihre Kampagnen beworben haben",
+      "title": "Aktuelle Bewerbungen",
+      "description": "Creators, die sich kürzlich für Ihre Kampagnen beworben haben",
       "emptyState": "Noch keine Bewerbungen.",
-      "loading": "Bewerbungen werden geladen...",
+      "loading": "Anwendungen werden geladen...",
       "dialogTitle": "Bewerber",
-      "summary": "{creators} Creator · {applications} Bewerbungen"
+      "summary": "{creators} Creator · {applications} Anwendungen"
     },
     "recentGigs": {
       "title": "Neueste Auftritte",

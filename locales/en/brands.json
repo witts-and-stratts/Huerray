@@ -1,26 +1,34 @@
 {
   "hero": {
-    "title": "Collaborate with top creators",
-    "subtitle": "Work with real creators who are passionate about their craft. Get a match made for your brand in no time.",
-    "buttonText": "Get Started"
+    "title": "Creator content that reflects the people you want to reach.",
+    "subtitle": "Work with Black, brown and diverse creators to produce culturally relevant UGC for ads, social and e-commerce — with clear briefs, agreed usage rights and support when you need it.",
+    "buttonText": "Get Started",
+    "briefCardEyebrow": "Your campaign brief",
+    "briefCardTitle": "Audience first. Perspective included.",
+    "briefCardNote": "Clear deliverables · Clear rights"
+  },
+  "intro": {
+    "eyebrow": "Representation changes who feels addressed by your brand.",
+    "title": "Reach more people with content that reflects more real people."
   },
   "scroller": {
     "title": "Match with experienced creators"
   },
   "match": {
     "pill": "Matching",
-    "title": "Match with the right creators for your brand",
-    "description": "Our matching process means 92% of creator matches are approved in the first round.",
+    "title": "Find creators who fit your audience — not just your category.",
+    "description": "Review creators whose identity, perspective and content style make sense for the people you want to reach.",
     "listItems": {
-      "item1": "Fully opted-in and verified network of creators",
-      "item2": "A large network of diverse creators from underrepresented communities and niche categories"
+      "item1": "Diverse, opted-in creator profiles",
+      "item2": "Matching based on the brief and creative fit",
+      "item3": "No subscription or platform fee"
     },
     "paymentMade": "Payment made"
   },
   "contentObjective": {
     "pill": "Quality Content",
     "title": "Content for every objective",
-    "description": "Creators produce high-quality content, with a range of output that is adapted to match your goals and requirements.",
+    "description": "Commission content for the moments that matter across your customer journey.",
     "listItems": {
       "item1": "Whether it's a beauty commercial, review for automotive or showcase of baby products, you will find the specialised creator content",
       "item2": "From UGC to specialised content, you can pick based on your goals",
@@ -35,6 +43,27 @@
       "item1": "Too busy? Let us handle back and forth with creators",
       "item2": "Campaign reviews before your approval, so you don't have to go through request that are not aligned",
       "item3": "We manage live campaigns and deliverables for you, so you don't miss your launch date"
+    }
+  },
+  "support": {
+    "eyebrow": "Dedicated support",
+    "title": "Clear support from brief to delivery.",
+    "description": "Choose self-serve collaboration or let HUERRAY support the parts of production that take time.",
+    "step1": {
+      "title": "Shape the brief",
+      "description": "Define audience, format, timeline, deliverables and usage before creators apply."
+    },
+    "step2": {
+      "title": "Select the right fit",
+      "description": "Review creator profiles and choose the perspectives that belong in the campaign."
+    },
+    "step3": {
+      "title": "Create and review",
+      "description": "Keep feedback clear without removing the creator's native voice."
+    },
+    "step4": {
+      "title": "Receive usable assets",
+      "description": "Get approved content prepared for the channels agreed in the brief."
     }
   },
   "beyondFeed": {
@@ -64,8 +93,8 @@
     "contentPerformance": "Content Performance"
   },
   "cta": {
-    "subtitle": "Join thousands of brands getting awesome content",
-    "title": "Join the Network. Find your next brand ambassadors",
+    "subtitle": "Ready when you are",
+    "title": "Make the next campaign look more like the people it is for.",
     "buttonText": "Get started"
   },
   "industry": {

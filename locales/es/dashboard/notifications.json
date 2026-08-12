@@ -79,9 +79,9 @@
   },
   "summaryCard": {
     "title": "Notificaciones no leídas",
-    "description": "Recuento de la bandeja de entrada no leída y últimos pendientes",
-    "unreadTotal": "Total no leídas",
-    "newToday": "{count, plural, =0 {Sin nuevas notificaciones hoy} other {+# hoy}}",
+    "description": "Número de mensajes no leídos en la bandeja de entrada y elementos pendientes más recientes",
+    "unreadTotal": "Total de mensajes no leídos",
+    "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
     "loading": "Cargando notificaciones no leídas...",
     "error": "No se pueden cargar las notificaciones no leídas.",
     "viewAll": "Ver todas las notificaciones"

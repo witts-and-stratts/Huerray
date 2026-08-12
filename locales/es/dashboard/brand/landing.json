@@ -5,9 +5,9 @@
     "createCampaign": "Crear campaña",
     "viewCampaigns": "Ver campañas",
     "emptyBanner": {
-      "title": "Empieza a crear UGC con los mejores creadores que se adaptan a tu marca.",
-      "subtitle": "Lanza tu primera campaña y conecta con creadores auténticos listos para dar vida a tu marca.",
-      "cta": "Crear tu primera campaña"
+      "title": "Empieza a crear contenido generado por los usuarios (UGC) con los mejores creadores que mejor se adapten a tu marca.",
+      "subtitle": "Lanza tu primera campaña y entra en contacto con creadores auténticos dispuestos a dar vida a tu marca.",
+      "cta": "Crea tu primera campaña"
     },
     "analytics": {
       "title": "Análisis de marcas",
@@ -66,12 +66,12 @@
     },
     "actionCenter": {
       "description": "Acciones comunes para las operaciones de campaña",
-      "title": "Notificaciones sin leer",
-      "summaryDescription": "Recuento de la bandeja de entrada sin leer y últimos elementos pendientes",
-      "unreadTotal": "Total sin leer",
-      "newToday": "{count, plural, =0 {No hay nuevas notificaciones hoy} other {+# hoy}}",
-      "loading": "Cargando notificaciones sin leer...",
-      "error": "No se pueden cargar las notificaciones sin leer.",
+      "title": "Notificaciones no leídas",
+      "summaryDescription": "Número de mensajes no leídos en la bandeja de entrada y elementos pendientes más recientes",
+      "unreadTotal": "Total de mensajes no leídos",
+      "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
+      "loading": "Cargando notificaciones no leídas...",
+      "error": "No se pueden cargar las notificaciones no leídas.",
       "viewAll": "Ver todas las notificaciones",
       "createCampaign": {
         "label": "Crear campaña",
@@ -88,8 +88,8 @@
     },
     "campaignStatsLabels": {
       "total": "Total",
-      "active": "Activas",
-      "totalGigs": "Total de gigs",
+      "active": "Activo",
+      "totalGigs": "Total de gigas",
       "totalSpend": "Gasto total"
     },
     "kpiOverview": {
@@ -199,34 +199,34 @@
       },
       "stats": {
         "total": "Total",
-        "active": "Activas",
-        "finished": "Finalizadas",
+        "active": "Activo",
+        "finished": "Terminado",
         "draft": "Borrador"
       }
     },
     "recentSubmissions": {
       "title": "Envíos",
-      "description": "Últimos envíos de creadores en tus campañas",
-      "emptyState": "Aún no hay envíos.",
+      "description": "Últimas aportaciones de los creadores en todas tus campañas",
+      "emptyState": "Aún no se han presentado propuestas.",
       "loading": "Cargando envíos...",
-      "error": "Error al cargar los envíos",
+      "error": "No se han podido cargar las propuestas",
       "tabs": {
         "recent": "Recientes",
         "stats": "Estadísticas"
       },
       "stats": {
         "total": "Total",
-        "pending": "Pendientes",
-        "approved": "Aprobados"
+        "pending": "Pendiente",
+        "approved": "Aprobado"
       }
     },
     "recentApplications": {
-      "title": "Postulaciones recientes",
-      "description": "Creadores que postularon recientemente a tus campañas",
-      "emptyState": "Aún no hay postulaciones.",
-      "loading": "Cargando postulaciones...",
-      "dialogTitle": "Postulantes",
-      "summary": "{creators} creadores · {applications} postulaciones"
+      "title": "Solicitudes recientes",
+      "description": "Creadores que se han presentado recientemente a tus campañas",
+      "emptyState": "Aún no hay solicitudes.",
+      "loading": "Cargando aplicaciones...",
+      "dialogTitle": "Solicitantes",
+      "summary": "{creators} creadores · {applications} aplicaciones"
     },
     "recentGigs": {
       "title": "Actuaciones recientes",

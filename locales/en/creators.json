@@ -3,7 +3,14 @@
     "title": "Get paid for doing what you love",
     "subtitle": "Work with brands & real companies. Start earning cash for what you love.",
     "buttonText": "Become a Creator",
-    "paymentMade": "Payment made"
+    "paymentMade": "Payment made",
+    "secondaryButtonText": "See how it works",
+    "miniCardTitle": "No follower minimum",
+    "miniCardText": "Your content is the value."
+  },
+  "intro": {
+    "eyebrow": "There is no single way to look, speak or create.",
+    "title": "You are exactly who brands came to find."
   },
   "categories": {
     "fashion": "Fashion",
@@ -33,9 +40,30 @@
     "description": "Our team and technology helps manage the experience with brands, so you can focus on creating the best content."
   },
   "paid": {
-    "pill": "Payments",
-    "title": "Get paid on time, everytime",
-    "description": "You get automatic payments when the clients approve your creation. No question asked."
+    "pill": "Clear Process",
+    "title": "Know exactly what to expect",
+    "description": "See deadlines, compensation and posting requirements upfront, then get paid automatically once your content is approved."
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "From free profile to paid Gigs.",
+    "description": "HUERRAY helps brands find the perspective they are missing — and gives creators a clear path into the campaign.",
+    "step1": {
+      "title": "Create your free profile",
+      "description": "Add sample UGC, categories and the details that make your perspective distinct."
+    },
+    "step2": {
+      "title": "Choose fitting briefs",
+      "description": "Review the brand, deliverables, compensation, rights and any posting requirement."
+    },
+    "step3": {
+      "title": "Create in your voice",
+      "description": "Bring the idea to life while following the agreed campaign essentials."
+    },
+    "step4": {
+      "title": "Deliver and get paid",
+      "description": "Upload the content, complete the approval process and receive payment under the agreed terms."
+    }
   },
   "benefits": {
     "heading": "Why creators choose Huerray",
@@ -65,13 +93,13 @@
     }
   },
   "testimonial": {
-    "quote": "Huerray advocates for their creators...from making sure that we get paid fairly to constantly giving us brand opportunities that matches our lifestyle",
+    "quote": "HUERRAY advocates for creators — from making sure that we get paid fairly to giving us brand opportunities that match our lifestyle.",
     "author": "Baron McHennie – @baron_mchennie"
   },
   "cta": {
     "buttonText": "Become a Creator",
-    "subtitle": "Join thousands of creators",
-    "title": "Get paid to do what you love"
+    "subtitle": "Join HUERRAY",
+    "title": "Your point of view is the value."
   },
   "faq": {
     "heading": "FAQs",

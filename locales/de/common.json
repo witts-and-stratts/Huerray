@@ -3,7 +3,11 @@
     "registerNow": "Jetzt anmelden",
     "getStarted": "Jetzt Creator finden",
     "learnMore": "Mehr erfahren",
-    "joinForFree": "Kostenlos starten"
+    "joinForFree": "Kostenlos starten",
+    "startCampaign": "Eine Kampagne starten",
+    "joinAsCreator": "Als Creator beitreten",
+    "createFreeProfile": "Mein kostenloses Profil erstellen",
+    "bookACall": "Kostenloser Call vereinbaren"
   },
   "from": "von",
   "actions": "Aktionen"

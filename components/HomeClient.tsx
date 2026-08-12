@@ -1,33 +1,34 @@
 // 'use client';
 
 import { Hero } from '@/components/Hero';
-import { HowItWorks } from '@/components/HowItWorks';
-import { ContentObjectives } from '@/components/ContentObjectives';
-import { Testimonial } from '@/components/Testimonial';
-import { PlatformLogos } from '@/components/PlatformLogos';
+import { Intro } from '@/components/Intro';
 import { CreatorVideos } from '@/components/CreatorVideos';
+import { CreatorMatch } from '@/components/CreatorMatch';
 import { CreatorsSection } from '@/components/CreatorsSection';
+import { ContentObjectives } from '@/components/ContentObjectives';
+import { HowItWorks } from '@/components/HowItWorks';
+import { Testimonial } from '@/components/Testimonial';
+import { CreatorCallout } from '@/components/CreatorCallout';
+import { FinalCta } from '@/components/FinalCta';
 import { Footer } from '@/components/Footer';
-import { useTranslations } from 'next-intl';
 
 export function HomeClient() {
-  const t = useTranslations('home');
-
   return (
     <>
       <main className='body-content'>
         <Hero />
-        <section>
-          <h2 className='h4 text-bright-fuchsia font-regular py-5xl px-4 lg:px-10 text-center max-w-[800px] mx-auto'>
-            {t('tagline')}
-          </h2>
-        </section>
 
-        {/* Platform Logos Section */}
-        <PlatformLogos />
+        {/* Intro Section */}
+        <Intro />
 
         {/* Match with Creators Section */}
         <CreatorVideos />
+
+        {/* Creator Match Tiles */}
+        <CreatorMatch />
+
+        {/* Creators Section */}
+        <CreatorsSection />
 
         {/* Content for Every Objective */}
         <ContentObjectives />
@@ -38,10 +39,14 @@ export function HomeClient() {
         {/* Testimonial Section */}
         <Testimonial />
 
-        {/* Creators Section */}
+        {/* Creator Callout Section */}
+        <CreatorCallout />
       </main>
+
+      {/* Final CTA */}
+      <FinalCta />
+
       {/* Footer */}
-      <CreatorsSection />
       <Footer />
     </>
   );

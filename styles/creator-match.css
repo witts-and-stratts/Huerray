@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+.creator-match {
+  @apply px-4 lg:px-10 py-16 lg:py-20 bg-white;
+}
+
+.creator-match__title {
+  @apply text-center mb-10 text-h3 font-heading;
+}
+
+.creator-match__strip {
+  @apply grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 max-w-[1200px] mx-auto;
+}
+
+.creator-match__tile {
+  @apply relative aspect-3/4 rounded-2xl md:rounded-4xl overflow-hidden;
+}
+
+.creator-match__tag {
+  @apply absolute left-3 bottom-3 md:left-4 md:bottom-4 inline-flex items-center rounded-full bg-white/90 backdrop-blur-sm text-dark-burgundy text-xs md:text-sm font-medium px-3 py-1;
+}

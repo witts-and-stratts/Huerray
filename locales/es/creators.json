@@ -3,7 +3,14 @@
     "title": "Cobra por hacer lo que te gusta",
     "subtitle": "Trabaja con marcas y empresas reales. Empieza a ganar dinero por lo que te gusta.",
     "buttonText": "Conviértete en creador",
-    "paymentMade": "Pago efectuado"
+    "paymentMade": "Pago efectuado",
+    "secondaryButtonText": "Descubre cómo funciona",
+    "miniCardTitle": "No hay un número mínimo de seguidores",
+    "miniCardText": "Tu contenido es lo que aporta valor."
+  },
+  "intro": {
+    "eyebrow": "No hay una única forma de verse, de hablar o de crear.",
+    "title": "Eres exactamente la persona que las marcas venían a buscar."
   },
   "categories": {
     "fashion": "Moda",
@@ -33,9 +40,30 @@
     "description": "Nuestro equipo y nuestra tecnología ayudan a gestionar la experiencia con las marcas, para que usted pueda centrarse en crear los mejores contenidos."
   },
   "paid": {
-    "pill": "Pagos",
-    "title": "Cobre siempre a tiempo",
-    "description": "Recibes pagos automáticos cuando los clientes aprueban tu creación. Sin preguntas."
+    "pill": "Proceso claro",
+    "title": "Saber exactamente qué esperar",
+    "description": "Consulta desde el principio los plazos, la remuneración y los requisitos de publicación, y luego recibe el pago automáticamente una vez que se apruebe tu contenido."
+  },
+  "howItWorks": {
+    "eyebrow": "Cómo funciona",
+    "title": "Desde el perfil gratuito hasta los trabajos de pago.",
+    "description": "HUERRAY ayuda a las marcas a encontrar la perspectiva que les falta y ofrece a los creadores una vía clara para participar en la campaña.",
+    "step1": {
+      "title": "Crea tu perfil gratuito",
+      "description": "Añade ejemplos de contenido generado por los usuarios (UGC), categorías y los detalles que hacen que tu punto de vista sea único."
+    },
+    "step2": {
+      "title": "Elige unos calzoncillos que te queden bien",
+      "description": "Revisa la marca, los resultados esperados, la remuneración, los derechos y cualquier requisito de publicación."
+    },
+    "step3": {
+      "title": "Crea con tu propia voz",
+      "description": "Da vida a la idea respetando los elementos fundamentales de la campaña acordados."
+    },
+    "step4": {
+      "title": "Realiza la entrega y cobra",
+      "description": "Sube el contenido, completa el proceso de aprobación y recibe el pago según las condiciones acordadas."
+    }
   },
   "benefits": {
     "heading": "Por qué los creadores eligen Huerray",
@@ -65,13 +93,13 @@
     }
   },
   "testimonial": {
-    "quote": "Huerray defiende a sus creadores... desde asegurarse de que recibimos una remuneración justa hasta ofrecernos constantemente oportunidades de marca que se ajusten a nuestro estilo de vida.",
+    "quote": "HUERRAY defiende los intereses de los creadores: desde garantizar que recibamos una remuneración justa hasta ofrecernos oportunidades con marcas que se adapten a nuestro estilo de vida.",
     "author": "Barón McHennie - @baron_mchennie"
   },
   "cta": {
     "buttonText": "Conviértete en creador",
-    "subtitle": "Únete a miles de creadores",
-    "title": "Cobra por hacer lo que te gusta"
+    "subtitle": "Únete a HUERRAY",
+    "title": "Tu punto de vista es lo que le da valor."
   },
   "faq": {
     "heading": "Preguntas frecuentes",

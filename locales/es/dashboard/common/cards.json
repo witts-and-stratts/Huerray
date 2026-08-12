@@ -18,6 +18,6 @@
     "applications": "Aplicaciones",
     "invitations": "Invitaciones",
     "videoCount": "{count, plural, =1 {# video} other {# videos}}",
-    "actionCenterTitle": "Centro de acciones"
+    "actionCenterTitle": "Centro de Acción"
   }
 }

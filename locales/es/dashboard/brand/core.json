@@ -66,12 +66,12 @@
     "errorStateRequired": "Estado/Provincia obligatorio",
     "errorStreetRequired": "Se requiere calle",
     "errorCityRequired": "Se requiere la ciudad",
-    "errorCountryRequired": "El país es obligatorio",
+    "errorCountryRequired": "País obligatorio",
     "errorPostalCodeRequired": "Código postal obligatorio",
-    "errorWebsiteRequired": "La URL del sitio web es obligatoria",
-    "errorCategoryRequired": "La categoría del sector es obligatoria",
-    "errorCompanySizeRequired": "El tamaño de la empresa es obligatorio",
-    "errorRegistrationRequired": "El número de registro es obligatorio"
+    "errorWebsiteRequired": "Es obligatorio introducir la URL del sitio web",
+    "errorCategoryRequired": "Es obligatorio indicar la categoría del sector",
+    "errorCompanySizeRequired": "Se requiere el tamaño de la empresa",
+    "errorRegistrationRequired": "Número de registro obligatorio"
   },
   "completeProfile": {
     "title": "Complete su perfil de marca",

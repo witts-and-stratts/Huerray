@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -36,13 +37,21 @@ export function Hero() {
         <div className='hero__container'>
           <div className='hero__content'>
             <h1 className='gradient-text hero__title'>{ t( 'title' ) }</h1>
-            <h2 className='hero__subtitle'>{ t( 'subtitle' ) }</h2>
             <p className='hero__description'>{ t( 'description' ) }</p>
-            <Button variant='hero' size='xl'>
-              <Link href="/signup" title={ tCommon( 'button.getStarted' ) }>
-                { tCommon( 'button.getStarted' ) }
+            <div className='hero__actions'>
+              <Link href='/signup?role=brand' title={ tCommon( 'button.startCampaign' ) }>
+                <Button variant='gradient'>
+                  { tCommon( 'button.startCampaign' ) }
+                  <ArrowRight className='size-4' />
+                </Button>
               </Link>
-            </Button>
+              <Link href='/signup?role=creator' title={ tCommon( 'button.joinAsCreator' ) }>
+                <Button variant='outlineBrand'>
+                  { tCommon( 'button.joinAsCreator' ) }
+                </Button>
+              </Link>
+            </div>
+            <small className='hero__note'>{ t( 'note' ) }</small>
           </div>
 
           {/* Hero Image Grid - Horizontal rows on mobile, vertical columns on desktop */ }
