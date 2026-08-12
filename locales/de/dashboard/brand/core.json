@@ -68,8 +68,8 @@
     "errorCityRequired": "Stadt ist erforderlich",
     "errorCountryRequired": "Land ist erforderlich",
     "errorPostalCodeRequired": "Postleitzahl ist erforderlich",
-    "errorWebsiteRequired": "Website-URL ist erforderlich",
-    "errorCategoryRequired": "Branchenkategorie ist erforderlich",
+    "errorWebsiteRequired": "Die Website-URL ist erforderlich",
+    "errorCategoryRequired": "Die Angabe der Branchenkategorie ist erforderlich",
     "errorCompanySizeRequired": "Unternehmensgröße ist erforderlich",
     "errorRegistrationRequired": "Registrierungsnummer ist erforderlich"
   },

@@ -1,7 +1,7 @@
 {
   "consentModal": {
-    "title": "Valoramos su privacidad",
-    "description": "Utilizamos cookies para mejorar su experiencia de navegación, analizar el tráfico del sitio y personalizar el contenido. Puede elegir a continuación qué cookies aceptar.",
+    "title": "Valoramos tu privacidad",
+    "description": "Utilizamos cookies para mejorar tu experiencia de navegación, analizar el tráfico del sitio web y personalizar el contenido. A continuación puedes elegir qué cookies deseas aceptar.",
     "acceptAllBtn": "Aceptar todo",
     "acceptNecessaryBtn": "Rechazar todo",
     "showPreferencesBtn": "Gestionar preferencias",
@@ -17,23 +17,23 @@
     "sections": {
       "intro": {
         "title": "Uso de cookies",
-        "description": "Utilizamos diferentes tipos de cookies para que nuestro sitio web funcione correctamente y para mejorar su experiencia. Puede elegir qué cookies opcionales desea permitir."
+        "description": "Utilizamos diferentes tipos de cookies para que nuestra página web funcione correctamente y para mejorar tu experiencia. Puedes elegir qué cookies opcionales deseas permitir."
       },
       "necessary": {
         "title": "Estrictamente necesarias",
-        "description": "Estas cookies son necesarias para el funcionamiento del sitio web y no se pueden desactivar. Generalmente se establecen como respuesta a acciones que usted realiza, como iniciar sesión o rellenar formularios."
+        "description": "Estas cookies son necesarias para el funcionamiento de la página web y no se pueden desactivar. Normalmente se instalan en respuesta a acciones que realizas, como iniciar sesión o rellenar formularios."
       },
       "analytics": {
-        "title": "Analíticas",
-        "description": "Estas cookies nos ayudan a entender cómo interactúan los visitantes con nuestro sitio web mediante la recopilación e informe de información de forma anónima, lo que nos permite mejorar el rendimiento y el contenido."
+        "title": "Analítica",
+        "description": "Estas cookies nos ayudan a comprender cómo interactúan los visitantes con nuestra página web, ya que recopilan y facilitan información de forma anónima, lo que nos permite mejorar el rendimiento y el contenido."
       },
       "marketing": {
         "title": "Marketing",
-        "description": "Estas cookies rastrean su actividad de navegación para ofrecer publicidad relevante y medir la efectividad de nuestras campañas de marketing."
+        "description": "Estas cookies registran tu actividad de navegación para ayudarnos a ofrecerte publicidad relevante y medir la eficacia de nuestras campañas de marketing."
       },
       "more": {
         "title": "Más información",
-        "description": "Para obtener detalles completos sobre las cookies que utilizamos, lea nuestra <a href=\"{privacyUrl}\" class=\"cc__link\">Política de privacidad</a>."
+        "description": "Para obtener información detallada sobre las cookies que utilizamos, consulta nuestra <a href=\"{privacyUrl}\" class=\"cc__link\">Política de privacidad</a>."
       }
     }
   }

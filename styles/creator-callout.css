@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+.creator-callout {
+  @apply grid md:grid-cols-2 items-center gap-10 px-4 lg:px-10 py-8 lg:py-16 text-white bg-orange rounded-4xl md:rounded-[60px] mx-4 lg:mx-10;
+}
+
+.creator-callout__eyebrow {
+  @apply text-sm font-semibold uppercase tracking-wide mb-3 text-white/90;
+}
+
+.creator-callout__title {
+  @apply text-h2 font-heading mb-4;
+}
+
+.creator-callout__description {
+  @apply text-h6 text-white/90 max-w-[480px] mb-6;
+}
+
+.creator-callout__photo {
+  @apply relative aspect-4/3 rounded-[40px] md:rounded-[80px] overflow-hidden;
+}

@@ -89,9 +89,9 @@
     "resendEmailVerification": "Renvoi de l'e-mail de vérification",
     "initiatePasswordReset": "Initier la réinitialisation du mot de passe",
     "deleteUser": "Supprimer un utilisateur",
-    "deleteUserTitle": "Supprimer l'utilisateur",
+    "deleteUserTitle": "Supprimer un utilisateur",
     "deleteUserConfirm": "Êtes-vous sûr de vouloir supprimer {name} ? Cette action ne peut pas être annulée.",
-    "deleteUserSuccess": "Utilisateur supprimé avec succès",
+    "deleteUserSuccess": "L'utilisateur a été supprimé avec succès",
     "deleteUserError": "Échec de la suppression de l'utilisateur",
     "deleting": "Suppression..."
   },
@@ -126,7 +126,7 @@
   "usersColumns": {},
   "usersTableToolbar": {},
   "usersTableView": {
-    "filteringAvailableUsers": "Filtrage des utilisateurs disponibles",
+    "filteringAvailableUsers": "Filtrer les utilisateurs disponibles",
     "noUsersFound": "Aucun utilisateur n'a été trouvé."
   },
   "usersTable": {},

@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+.intro {
+  @apply px-4 lg:px-10 pt-5xl pb-0 text-center;
+}
+
+.intro__title {
+  @apply text-h2 font-heading max-w-[620px] mx-auto mb-4;
+}
+
+.intro__description {
+  @apply text-h5 text-bright-fuchsia font-regular max-w-[700px] mx-auto;
+}

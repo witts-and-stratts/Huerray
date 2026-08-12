@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+.brands-support {
+  @apply px-4 lg:px-10 py-20 md:py-28;
+}
+
+.brands-support__intro {
+  @apply max-w-[620px] mx-auto text-center mb-12 md:mb-16;
+}
+
+.brands-support__eyebrow {
+  @apply inline-flex items-center justify-center px-6 py-1 rounded-full text-sm font-medium mb-4 bg-burgundy-50 text-dark-burgundy border border-burgundy-50;
+}
+
+.brands-support__title {
+  @apply text-h2 font-heading mb-4;
+}
+
+.brands-support__description {
+  @apply text-h6 text-slate-700 font-light;
+}
+
+.brands-support__steps {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 max-w-7xl mx-auto;
+}
+
+.brands-support__step {
+  @apply space-y-3;
+}
+
+.brands-support__step-number {
+  @apply block text-h4 font-heading text-orange;
+}
+
+.brands-support__step-title {
+  @apply text-h6 font-secondary font-semibold text-deep-maroon;
+}
+
+.brands-support__step-description {
+  @apply text-sm text-slate-600 font-light;
+}

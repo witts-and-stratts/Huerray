@@ -55,3 +55,19 @@
     @apply w-full h-full object-cover;
   }
 }
+
+.brands-hero__brief-card {
+  @apply absolute left-0 bottom-8 -translate-x-4 md:-translate-x-10 bg-white rounded-2xl shadow-lg px-5 py-4 max-w-[220px] z-20 max-md:hidden;
+}
+
+.brands-hero__brief-card span {
+  @apply block text-xs text-slate-500 mb-1;
+}
+
+.brands-hero__brief-card b {
+  @apply block text-sm font-semibold text-deep-maroon mb-1 leading-snug;
+}
+
+.brands-hero__brief-card small {
+  @apply block text-xs text-slate-600;
+}

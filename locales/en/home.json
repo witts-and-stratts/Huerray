@@ -1,31 +1,35 @@
 {
-  "tagline": "Huerray brings creators and brands together to create the perfect content for social media, ecommerce, ads and more",
   "hero": {
-    "title": "Authentic UGC Video Content that Converts",
-    "subtitle": "Collaborate with real vetted creators who make scroll-stopping videos for TikTok, Reels, and Ads",
-    "description": "No Subscriptions. No Platform costs.\nJust UGC that drives sales"
+    "title": "UGC that looks like the world your brand sells to.",
+    "description": "Work with Black, brown and diverse creators to produce culturally relevant content for ads, social and e-commerce — without subscriptions or platform fees.",
+    "note": "Real creators. Clear briefs. Content ready to use."
+  },
+  "intro": {
+    "title": "Reach more people with content that reflects more real people.",
+    "description": "Huerray brings creators and brands together to create the perfect content for social media, ecommerce, ads and more"
   },
   "howItWorks": {
+    "title": "A simple way to create content with real perspective",
     "step1": {
       "title": "Find & connect with creators who fit your brand",
-      "description": "Customise and post your brief, tailoring the details such as length, format and video editing along the way"
+      "description": "Share your brief and discover creators whose identity, voice and style make sense for your audience."
     },
     "step2": {
-      "title": "Commission attractive, original photos & videos",
-      "description": "Receive applications from top creators. Select your preferred creators according to criteria that fits your brand content or campaign requirements"
+      "title": "Commission original photos & videos",
+      "description": "Select the creators and formats that fit your campaign — with clear deliverables, timelines and expectations."
     },
     "step3": {
       "title": "Send & receive feedback",
-      "description": "Use the in-built communication feature to exchange feedback with your creators, ask them questions about their deliverables, make adjustments where needed or refine your requirements"
+      "description": "Collaborate directly and keep the creator's perspective intact through the approval process."
     },
     "step4": {
-      "title": "100% licensing rights to all content created",
-      "description": "Use your generated content. Your UGC will be delivered within 7 days. You can then start implementing it into your campaign"
+      "title": "Put approved content to work",
+      "description": "Receive content ready for ads, social or e-commerce, with agreed usage rights."
     }
   },
   "contentObjectives": {
     "title": "Content for every objective",
-    "subtitle": "Creators produce high-quality content all the time—from lo-fi to hi-fi. Creators have range, and adapt their production to match your goals",
+    "subtitle": "From lo-fi product moments to polished campaign assets — creators adapt the format, story and production to match your goals.",
     "categories": {
       "product_shots": "Product Shots",
       "testimonial_videos": "Testimonial Videos",
@@ -36,7 +40,17 @@
     }
   },
   "creatorVideos": {
-    "title": "Match with experienced creators"
+    "title": "Match with creators your audience recognises"
+  },
+  "creatorMatch": {
+    "title": "Creators for every category",
+    "categories": {
+      "beauty": "Beauty",
+      "food": "Food",
+      "fitness": "Fitness",
+      "lifestyle": "Lifestyle",
+      "product": "Product"
+    }
   },
   "testimonial": {
     "company": "Intelligencia Media",
@@ -48,11 +62,21 @@
     "title": "Get paid to do what you love",
     "description": "Find collaborations that gets you excited. Work with brands that fit your content style, with special autonomy over every campaign you produce"
   },
+  "creatorCallout": {
+    "eyebrow": "For creators",
+    "title": "Your perspective belongs in paid campaigns.",
+    "description": "Create a free profile, show brands what makes your point of view distinct and choose the briefs that fit you. No follower minimum. No posting unless the brief says so.",
+    "button": "Create my free profile"
+  },
+  "finalCta": {
+    "title": "Ready to make content that reflects real people?",
+    "description": "Start a campaign or join the creator community."
+  },
   "platformLogos": {
     "title": "Available to be used on"
   },
   "seo": {
-    "title": "Authentic UGC Video Content that Converts",
-    "description": "Collaborate with real vetted creators who make scroll-stopping videos for TikTok, Reels, and Ads"
+    "title": "UGC that looks like the world your brand sells to.",
+    "description": "Work with Black, brown and diverse creators to produce culturally relevant content for ads, social and e-commerce."
   }
 }

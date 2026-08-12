@@ -1,31 +1,35 @@
 {
-  "tagline": "Huerray reúne a creadores y marcas para crear el contenido perfecto para redes sociales, comercio electrónico, anuncios y mucho más.",
   "hero": {
     "title": "Auténtico contenido de vídeo UGC que convierte",
-    "subtitle": "Colabora con verdaderos creadores que hacen vídeos para TikTok, Reels y Ads.",
-    "description": "Sin suscripciones. Sin costes de plataforma.\nSólo CGU que impulsa las ventas"
+    "description": "Colabora con creadores negros, de origen latino y de diversos orígenes para producir contenidos culturalmente relevantes para publicidad, redes sociales y comercio electrónico, sin suscripciones ni comisiones de las plataformas.",
+    "note": "Creadores de verdad. Briefings claros. Contenido listo para usar."
+  },
+  "intro": {
+    "title": "Llega a más gente con contenidos que reflejen a personas más reales.",
+    "description": "Huerray reúne a creadores y marcas para crear el contenido perfecto para redes sociales, comercio electrónico, anuncios y mucho más."
   },
   "howItWorks": {
+    "title": "Una forma sencilla de crear contenido con perspectiva real",
     "step1": {
       "title": "Encuentra y conecta con creadores que encajen con tu marca",
-      "description": "Personalice y publique sus instrucciones, adaptando detalles como la duración, el formato y la edición de vídeo."
+      "description": "Comparte tu briefing y descubre a creadores cuya identidad, voz y estilo encajen con tu público."
     },
     "step2": {
-      "title": "Encargar fotos y vídeos atractivos y originales",
-      "description": "Reciba solicitudes de los mejores creadores. Selecciona a tus creadores preferidos según los criterios que se ajusten a los requisitos del contenido de tu marca o campaña."
+      "title": "Encarga fotos y vídeos originales",
+      "description": "Elige los creadores y los formatos que mejor se adapten a tu campaña, con objetivos, plazos y expectativas bien definidos."
     },
     "step3": {
       "title": "Enviar y recibir comentarios",
-      "description": "Utiliza la función de comunicación incorporada para intercambiar opiniones con tus creadores, hacerles preguntas sobre sus entregas, realizar ajustes cuando sea necesario o afinar tus requisitos."
+      "description": "Colabora directamente y mantén intacta la perspectiva del creador a lo largo del proceso de aprobación."
     },
     "step4": {
-      "title": "100% de derechos de licencia sobre todos los contenidos creados",
-      "description": "Utiliza el contenido que has generado. Su contenido generado por el usuario se entregará en un plazo de 7 días. A continuación, puede empezar a implementarlo en su campaña"
+      "title": "Aprovecha el contenido aprobado",
+      "description": "Recibe contenidos listos para su uso en publicidad, redes sociales o comercio electrónico, con los derechos de uso acordados."
     }
   },
   "contentObjectives": {
     "title": "Contenidos para cada objetivo",
-    "subtitle": "Los creadores producen contenidos de alta calidad todo el tiempo, desde lo-fi hasta hi-fi. Los creadores tienen variedad y adaptan su producción a tus objetivos.",
+    "subtitle": "Desde vídeos de productos de estilo «lo-fi» hasta materiales publicitarios muy cuidados: los creadores adaptan el formato, la historia y la producción para que se ajusten a tus objetivos.",
     "categories": {
       "product_shots": "Fotos de productos",
       "testimonial_videos": "Vídeos testimoniales",
@@ -36,7 +40,17 @@
     }
   },
   "creatorVideos": {
-    "title": "Emparejarse con creadores experimentados"
+    "title": "Colabora con creadores que tu público conozca"
+  },
+  "creatorMatch": {
+    "title": "Creadores para todas las categorías",
+    "categories": {
+      "beauty": "Belleza",
+      "food": "Alimentación",
+      "fitness": "Fitness",
+      "lifestyle": "Estilo de vida",
+      "product": "Producto"
+    }
   },
   "testimonial": {
     "company": "Medios de comunicación inteligentes",
@@ -47,6 +61,16 @@
     "label": "Creadores",
     "title": "Cobra por hacer lo que te gusta",
     "description": "Encuentra colaboraciones que te entusiasmen. Trabaja con marcas que encajen con tu estilo de contenidos, con especial autonomía sobre cada campaña que produzcas."
+  },
+  "creatorCallout": {
+    "eyebrow": "Para creadores",
+    "title": "Tu punto de vista encaja mejor en las campañas de pago.",
+    "description": "Crea un perfil gratuito, muestra a las marcas qué hace que tu punto de vista sea único y elige las propuestas que mejor se adapten a ti. No hay un número mínimo de seguidores. No es necesario publicar nada a menos que así lo indique la propuesta.",
+    "button": "Crear mi perfil gratuito"
+  },
+  "finalCta": {
+    "title": "¿Estás listo para crear contenidos que reflejen la realidad de las personas?",
+    "description": "Inicia una campaña o únete a la comunidad de creadores."
   },
   "platformLogos": {
     "title": "Disponible para su uso en"

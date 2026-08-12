@@ -90,10 +90,10 @@
     "initiatePasswordReset": "Iniciar restablecimiento de contraseña",
     "deleteUser": "Borrar usuario",
     "deleteUserTitle": "Eliminar usuario",
-    "deleteUserConfirm": "¿Está seguro de que desea eliminar a {name}? Esta acción no se puede deshacer.",
-    "deleteUserSuccess": "Usuario eliminado correctamente",
-    "deleteUserError": "Error al eliminar el usuario",
-    "deleting": "Eliminando..."
+    "deleteUserConfirm": "¿Estás seguro de que quieres eliminar {name}? Esta acción no se puede deshacer.",
+    "deleteUserSuccess": "El usuario se ha eliminado correctamente",
+    "deleteUserError": "No se ha podido eliminar el usuario",
+    "deleting": "Borrar..."
   },
   "userCard": {},
   "userDetailsSheet": {
@@ -126,7 +126,7 @@
   "usersColumns": {},
   "usersTableToolbar": {},
   "usersTableView": {
-    "filteringAvailableUsers": "Filtrando usuarios disponibles",
+    "filteringAvailableUsers": "Filtrar usuarios disponibles",
     "noUsersFound": "No se han encontrado usuarios."
   },
   "usersTable": {},

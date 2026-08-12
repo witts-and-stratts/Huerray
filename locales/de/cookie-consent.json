@@ -1,7 +1,7 @@
 {
   "consentModal": {
-    "title": "Wir schätzen Ihre Privatsphäre",
-    "description": "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, den Website-Traffic zu analysieren und Inhalte zu personalisieren. Sie können unten wählen, welche Cookies Sie akzeptieren möchten.",
+    "title": "Der Schutz Ihrer Privatsphäre ist uns wichtig",
+    "description": "Wir verwenden Cookies, um Ihr Nutzererlebnis zu verbessern, den Website-Traffic zu analysieren und Inhalte individuell anzupassen. Nachstehend können Sie auswählen, welche Cookies Sie akzeptieren möchten.",
     "acceptAllBtn": "Alle akzeptieren",
     "acceptNecessaryBtn": "Alle ablehnen",
     "showPreferencesBtn": "Einstellungen verwalten",
@@ -12,28 +12,28 @@
     "acceptAllBtn": "Alle akzeptieren",
     "acceptNecessaryBtn": "Alle ablehnen",
     "savePreferencesBtn": "Einstellungen speichern",
-    "closeIconLabel": "Schließen",
-    "serviceCounterLabel": "Dienst|Dienste",
+    "closeIconLabel": "Schließen Sie",
+    "serviceCounterLabel": "Service|Dienstleistungen",
     "sections": {
       "intro": {
-        "title": "Cookie-Nutzung",
-        "description": "Wir verwenden verschiedene Arten von Cookies, um unsere Website zu betreiben und Ihr Erlebnis zu verbessern. Sie können wählen, welche optionalen Cookies Sie zulassen möchten."
+        "title": "Verwendung von Cookies",
+        "description": "Wir verwenden verschiedene Arten von Cookies, um den Betrieb unserer Website zu gewährleisten und Ihr Nutzererlebnis zu verbessern. Sie können selbst entscheiden, welche optionalen Cookies Sie zulassen möchten."
       },
       "necessary": {
         "title": "Unbedingt erforderlich",
-        "description": "Diese Cookies sind für das Funktionieren der Website erforderlich und können nicht deaktiviert werden. Sie werden in der Regel als Reaktion auf von Ihnen durchgeführte Aktionen gesetzt, z. B. beim Anmelden oder beim Ausfüllen von Formularen."
+        "description": "Diese Cookies sind für das Funktionieren der Website erforderlich und können nicht deaktiviert werden. Sie werden in der Regel als Reaktion auf Ihre Aktionen gesetzt, beispielsweise beim Einloggen oder beim Ausfüllen von Formularen."
       },
       "analytics": {
-        "title": "Analyse",
-        "description": "Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem sie Informationen anonym erfassen und melden. So können wir Leistung und Inhalte verbessern."
+        "title": "Analytik",
+        "description": "Diese Cookies helfen uns dabei, zu verstehen, wie Besucher mit unserer Website interagieren, indem sie anonym Informationen erfassen und auswerten. So können wir die Leistung und den Inhalt unserer Website verbessern."
       },
       "marketing": {
         "title": "Marketing",
-        "description": "Diese Cookies verfolgen Ihre Surfaktivitäten, um relevante Werbung zu schalten und die Wirksamkeit unserer Marketingkampagnen zu messen."
+        "description": "Diese Cookies erfassen Ihr Surfverhalten, um Ihnen relevante Werbung anzuzeigen und die Messbarkeit unserer Marketingkampagnen zu erhöhen."
       },
       "more": {
         "title": "Weitere Informationen",
-        "description": "Vollständige Details zu den von uns verwendeten Cookies finden Sie in unserer <a href=\"{privacyUrl}\" class=\"cc__link\">Datenschutzerklärung</a>."
+        "description": "Ausführliche Informationen zu den von uns verwendeten Cookies finden Sie in unserer <a href=\"{privacyUrl}\" class=\"cc__link\">Datenschutzerklärung</a>."
       }
     }
   }

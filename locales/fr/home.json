@@ -1,31 +1,35 @@
 {
-  "tagline": "Huerray réunit les créateurs et les marques pour créer le contenu idéal pour les médias sociaux, le commerce électronique, les publicités et bien plus encore.",
   "hero": {
     "title": "Un contenu vidéo UGC authentique qui convertit",
-    "subtitle": "Collaborez avec de vrais créateurs approuvés qui réalisent des vidéos qui arrêtent le défilement pour TikTok, Reels et Ads.",
-    "description": "Pas d'abonnement. Pas de coûts de plateforme.\nJuste de l'UGC qui génère des ventes"
+    "description": "Collaborez avec des créateurs noirs, métis et issus de la diversité pour produire du contenu adapté à la culture locale destiné aux publicités, aux réseaux sociaux et au commerce en ligne — sans abonnement ni frais de plateforme.",
+    "note": "De véritables créateurs. Des briefs clairs. Du contenu prêt à l'emploi."
+  },
+  "intro": {
+    "title": "Touchez davantage de personnes grâce à un contenu qui reflète davantage la réalité des gens.",
+    "description": "Huerray réunit les créateurs et les marques pour créer le contenu idéal pour les médias sociaux, le commerce électronique, les publicités et bien plus encore."
   },
   "howItWorks": {
+    "title": "Une méthode simple pour créer du contenu avec une véritable perspective",
     "step1": {
       "title": "Trouver et se connecter avec des créateurs qui correspondent à votre marque",
-      "description": "Personnalisez et publiez votre briefing, en adaptant les détails tels que la durée, le format et le montage vidéo."
+      "description": "Partagez votre brief et découvrez des créateurs dont l'identité, la voix et le style correspondent à votre public."
     },
     "step2": {
-      "title": "Commander des photos et des vidéos attrayantes et originales",
-      "description": "Recevez les candidatures des meilleurs créateurs. Sélectionnez vos créateurs préférés en fonction de critères correspondant au contenu de votre marque ou aux exigences de votre campagne."
+      "title": "Commander des photos et des vidéos originales",
+      "description": "Choisissez les créateurs et les formats adaptés à votre campagne, en définissant clairement les livrables, les délais et les attentes."
     },
     "step3": {
       "title": "Envoyer et recevoir un retour d'information",
-      "description": "Utilisez la fonction de communication intégrée pour échanger des informations avec vos créateurs, leur poser des questions sur les produits livrés, apporter des ajustements si nécessaire ou affiner vos exigences."
+      "description": "Collaborez directement et préservez le point de vue du créateur tout au long du processus de validation."
     },
     "step4": {
-      "title": "100 % des droits de licence sur tous les contenus créés",
-      "description": "Utilisez votre contenu généré. Votre CGU sera livré dans les 7 jours. Vous pourrez alors commencer à le mettre en œuvre dans votre campagne"
+      "title": "Tirez parti des contenus validés",
+      "description": "Recevez du contenu prêt à l'emploi pour la publicité, les réseaux sociaux ou le commerce en ligne, assorti de droits d'utilisation convenus."
     }
   },
   "contentObjectives": {
     "title": "Un contenu pour chaque objectif",
-    "subtitle": "Les créateurs produisent en permanence des contenus de haute qualité, qu'ils soient de qualité médiocre ou supérieure. Les créateurs ont de l'envergure et adaptent leur production à vos objectifs.",
+    "subtitle": "Des vidéos de produits au style « lo-fi » aux supports de campagne soignés, les créateurs adaptent le format, le scénario et la production en fonction de vos objectifs.",
     "categories": {
       "product_shots": "Photos de produits",
       "testimonial_videos": "Vidéos de témoignages",
@@ -36,7 +40,17 @@
     }
   },
   "creatorVideos": {
-    "title": "Correspondance avec des créateurs expérimentés"
+    "title": "Collaborez avec des créateurs que votre public connaît bien"
+  },
+  "creatorMatch": {
+    "title": "Des créateurs pour toutes les catégories",
+    "categories": {
+      "beauty": "Beauté",
+      "food": "Alimentation",
+      "fitness": "Fitness",
+      "lifestyle": "Mode de vie",
+      "product": "Produit"
+    }
   },
   "testimonial": {
     "company": "Intelligencia Media",
@@ -47,6 +61,16 @@
     "label": "Créateurs",
     "title": "Être payé pour faire ce que l'on aime",
     "description": "Trouvez des collaborations qui vous enthousiasment. Travaillez avec des marques qui correspondent à votre style de contenu, en bénéficiant d'une autonomie particulière sur chaque campagne que vous produisez."
+  },
+  "creatorCallout": {
+    "eyebrow": "Pour les créateurs",
+    "title": "Votre point de vue a sa place dans les campagnes payantes.",
+    "description": "Créez un profil gratuit, montrez aux marques ce qui rend votre point de vue unique et choisissez les briefs qui vous correspondent. Aucun nombre minimum d'abonnés requis. Aucune publication n'est obligatoire, sauf indication contraire dans le brief.",
+    "button": "Créer mon profil gratuit"
+  },
+  "finalCta": {
+    "title": "Prêt à créer du contenu qui met en avant de vraies personnes ?",
+    "description": "Lancez une campagne ou rejoignez la communauté des créateurs."
   },
   "platformLogos": {
     "title": "Disponible pour être utilisé sur"

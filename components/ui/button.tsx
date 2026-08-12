@@ -15,6 +15,8 @@ const buttonVariants = cva('button', {
       link: 'button--link',
       hero: 'button--hero',
       heroAlt: 'button--hero-alt',
+      gradient: 'button--gradient',
+      outlineBrand: 'button--outline-brand',
     },
     size: {
       default: 'button--size-default',

@@ -90,10 +90,10 @@
     "initiatePasswordReset": "Passwortrücksetzung einleiten",
     "deleteUser": "Benutzer löschen",
     "deleteUserTitle": "Benutzer löschen",
-    "deleteUserConfirm": "Sind Sie sicher, dass Sie {name} löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleteUserConfirm": "Möchten Sie {name} wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
     "deleteUserSuccess": "Benutzer erfolgreich gelöscht",
-    "deleteUserError": "Benutzer konnte nicht gelöscht werden",
-    "deleting": "Wird gelöscht..."
+    "deleteUserError": "Das Löschen des Benutzers ist fehlgeschlagen",
+    "deleting": "Löschen..."
   },
   "userCard": {},
   "userDetailsSheet": {
@@ -126,7 +126,7 @@
   "usersColumns": {},
   "usersTableToolbar": {},
   "usersTableView": {
-    "filteringAvailableUsers": "Verfügbare Benutzer werden gefiltert",
+    "filteringAvailableUsers": "Verfügbare Benutzer filtern",
     "noUsersFound": "Keine Benutzer gefunden."
   },
   "usersTable": {},

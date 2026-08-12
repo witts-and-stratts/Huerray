@@ -5,9 +5,9 @@
     "createCampaign": "Créer une campagne",
     "viewCampaigns": "Voir les campagnes",
     "emptyBanner": {
-      "title": "Lancez-vous dans l'UGC avec les meilleurs créateurs qui correspondent à votre marque.",
-      "subtitle": "Lancez votre première campagne et connectez-vous avec des créateurs authentiques prêts à donner vie à votre marque.",
-      "cta": "Créer votre première campagne"
+      "title": "Commencez à créer du contenu généré par les utilisateurs (UGC) avec les meilleurs créateurs qui correspondent à votre marque.",
+      "subtitle": "Lancez votre première campagne et entrez en contact avec des créateurs authentiques, prêts à donner vie à votre marque.",
+      "cta": "Créez votre première campagne"
     },
     "analytics": {
       "title": "Analyse de la marque",
@@ -67,9 +67,9 @@
     "actionCenter": {
       "description": "Actions communes pour les opérations de campagne",
       "title": "Notifications non lues",
-      "summaryDescription": "Nombre de messages non lus et derniers éléments en attente",
-      "unreadTotal": "Total non lu",
-      "newToday": "{count, plural, =0 {Aucune nouvelle notification aujourd'hui} other {+# aujourd'hui}}",
+      "summaryDescription": "Nombre de messages non lus dans la boîte de réception et derniers éléments en attente",
+      "unreadTotal": "Total des messages non lus",
+      "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
       "loading": "Chargement des notifications non lues...",
       "error": "Impossible de charger les notifications non lues.",
       "viewAll": "Voir toutes les notifications",
@@ -89,7 +89,7 @@
     "campaignStatsLabels": {
       "total": "Total",
       "active": "Actif",
-      "totalGigs": "Total des missions",
+      "totalGigs": "Nombre total de gigaoctets",
       "totalSpend": "Dépenses totales"
     },
     "kpiOverview": {
@@ -194,39 +194,39 @@
       "untitledCampaign": "Campagne sans titre",
       "updated": "Mise à jour",
       "tabs": {
-        "recent": "Récentes",
+        "recent": "Récents",
         "stats": "Statistiques"
       },
       "stats": {
         "total": "Total",
-        "active": "Actives",
-        "finished": "Terminées",
-        "draft": "Brouillon"
+        "active": "Actif",
+        "finished": "Fini",
+        "draft": "Projet"
       }
     },
     "recentSubmissions": {
       "title": "Soumissions",
-      "description": "Dernières soumissions des créateurs sur vos campagnes",
+      "description": "Dernières contributions des créateurs pour l'ensemble de vos campagnes",
       "emptyState": "Aucune soumission pour l'instant.",
       "loading": "Chargement des soumissions...",
       "error": "Échec du chargement des soumissions",
       "tabs": {
-        "recent": "Récentes",
+        "recent": "Récents",
         "stats": "Statistiques"
       },
       "stats": {
         "total": "Total",
         "pending": "En attente",
-        "approved": "Approuvées"
+        "approved": "Approuvé"
       }
     },
     "recentApplications": {
       "title": "Candidatures récentes",
-      "description": "Créateurs ayant récemment postulé à vos campagnes",
-      "emptyState": "Aucune candidature pour l'instant.",
-      "loading": "Chargement des candidatures...",
+      "description": "Les créateurs qui ont récemment postulé à vos campagnes",
+      "emptyState": "Aucune candidature n'a encore été déposée.",
+      "loading": "Chargement des applications...",
       "dialogTitle": "Candidats",
-      "summary": "{creators} créateurs · {applications} candidatures"
+      "summary": "{creators} créateurs · {applications} applications"
     },
     "recentGigs": {
       "title": "Événements récents",

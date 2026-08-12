@@ -79,9 +79,9 @@
   },
   "summaryCard": {
     "title": "Notifications non lues",
-    "description": "Nombre de messages non lus et derniers éléments en attente",
-    "unreadTotal": "Total non lues",
-    "newToday": "{count, plural, =0 {Aucune nouvelle notification aujourd''hui} other {+# aujourd''hui}}",
+    "description": "Nombre de messages non lus dans la boîte de réception et derniers éléments en attente",
+    "unreadTotal": "Total des messages non lus",
+    "newToday": "{count, plural, =0 {No new notifications today} other {+# today}}",
     "loading": "Chargement des notifications non lues...",
     "error": "Impossible de charger les notifications non lues.",
     "viewAll": "Voir toutes les notifications"

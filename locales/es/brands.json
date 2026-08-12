@@ -1,26 +1,34 @@
 {
   "hero": {
-    "title": "Colabora con los mejores creadores",
-    "subtitle": "Trabaja con creadores reales apasionados por lo que hacen. Encuentra en poco tiempo la combinación perfecta para tu marca.",
-    "buttonText": "Comenzar"
+    "title": "Contenido de creadores que refleje a las personas a las que quieres llegar.",
+    "subtitle": "Colabora con creadores negros, de piel morena y de diversos orígenes para producir contenido generado por los usuarios (UGC) culturalmente relevante para anuncios, redes sociales y comercio electrónico, con instrucciones claras, derechos de uso acordados y apoyo cuando lo necesites.",
+    "buttonText": "Comenzar",
+    "briefCardEyebrow": "El resumen de tu campaña",
+    "briefCardTitle": "Lo primero es el público. Con una perspectiva propia.",
+    "briefCardNote": "Resultados claros · Derechos claros"
+  },
+  "intro": {
+    "eyebrow": "La representación influye en quiénes se sienten identificados con tu marca.",
+    "title": "Llega a más gente con contenidos que reflejen a personas más reales."
   },
   "scroller": {
     "title": "Emparejarse con creadores experimentados"
   },
   "match": {
     "pill": "A juego",
-    "title": "Conéctese con los creadores adecuados para su marca",
-    "description": "Gracias a nuestro proceso de emparejamiento, el 92% de los creadores son aprobados en la primera ronda.",
+    "title": "Busca creadores que se adapten a tu público, no solo a tu categoría.",
+    "description": "Busca a los autores de reseñas cuya identidad, perspectiva y estilo de contenido se adapten al público al que quieres llegar.",
     "listItems": {
-      "item1": "Red de creadores totalmente verificada y con derecho de participación",
-      "item2": "Una amplia red de creadores diversos procedentes de comunidades infrarrepresentadas y categorías nicho"
+      "item1": "Perfiles de creadores diversos y que han dado su consentimiento",
+      "item2": "Selección basada en el briefing y la compatibilidad creativa",
+      "item3": "Sin cuota de suscripción ni de plataforma"
     },
     "paymentMade": "Pago efectuado"
   },
   "contentObjective": {
     "pill": "Contenido de calidad",
     "title": "Contenidos para cada objetivo",
-    "description": "Los creadores producen contenidos de alta calidad, con una gama de salida adaptada a sus objetivos y necesidades.",
+    "description": "Crea contenidos a medida para los momentos clave a lo largo del recorrido del cliente.",
     "listItems": {
       "item1": "Tanto si se trata de un anuncio de belleza, como de una revisión para automoción o un escaparate de productos para bebés, encontrará el contenido especializado para creadores",
       "item2": "Desde contenidos UGC a contenidos especializados, puedes elegir en función de tus objetivos",
@@ -35,6 +43,27 @@
       "item1": "¿Demasiado ocupado? Deja que nos encarguemos de las idas y venidas con los creadores",
       "item2": "Revisiones de la campaña antes de su aprobación, para que no tenga que pasar por solicitudes que no están alineadas",
       "item3": "Gestionamos las campañas en directo y los entregables por usted, para que no pierda su fecha de lanzamiento"
+    }
+  },
+  "support": {
+    "eyebrow": "Asistencia especializada",
+    "title": "Un apoyo claro desde la fase de planificación hasta la entrega.",
+    "description": "Elige la colaboración en modo autoservicio o deja que HUERRAY se encargue de las partes del proceso de producción que requieren más tiempo.",
+    "step1": {
+      "title": "Elaborar el pliego de condiciones",
+      "description": "Define el público objetivo, el formato, el calendario, los resultados esperados y el uso antes de que los creadores presenten su candidatura."
+    },
+    "step2": {
+      "title": "Elige la talla adecuada",
+      "description": "Revisa los perfiles de los creadores y elige las perspectivas que deben incluirse en la campaña."
+    },
+    "step3": {
+      "title": "Crear y revisar",
+      "description": "Haz que los comentarios sean claros sin que el autor pierda su estilo propio."
+    },
+    "step4": {
+      "title": "Recibir activos utilizables",
+      "description": "Prepara el contenido aprobado para los canales acordados en el briefing."
     }
   },
   "beyondFeed": {
@@ -64,8 +93,8 @@
     "contentPerformance": "Rendimiento de los contenidos"
   },
   "cta": {
-    "subtitle": "Únete a miles de marcas que obtienen contenidos increíbles",
-    "title": "Únase a la red. Encuentre a sus próximos embajadores de marca",
+    "subtitle": "Cuando tú estés listo",
+    "title": "Haz que la próxima campaña se parezca más a las personas a las que va dirigida.",
     "buttonText": "Empezar"
   },
   "industry": {
@@ -130,6 +159,6 @@
   },
   "seo": {
     "title": "Colabora con los mejores creadores",
-    "description": "Trabaja con creadores reales apasionados por lo que hacen. Encuentra en poco tiempo la combinación perfecta para tu marca."
+    "description": "Colabora con creadores auténticos que sienten pasión por su trabajo. Encuentra al colaborador ideal para tu marca en un abrir y cerrar de ojos."
   }
 }

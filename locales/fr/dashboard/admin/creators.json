@@ -69,8 +69,8 @@
     "updatingProfileType": "Mise à jour...",
     "madeAiToast": "{name} est désormais un créateur d'IA",
     "madeHumanToast": "{name} est maintenant un créateur humain",
-    "confirmDeleteTitle": "Supprimer le créateur ?",
-    "confirmDeleteDesc": "{name} sera définitivement supprimé. Cette action est irréversible.",
+    "confirmDeleteTitle": "Supprimer l'auteur ?",
+    "confirmDeleteDesc": "{name} sera définitivement supprimé. Cette action ne peut pas être annulée.",
     "deleting": "Suppression...",
     "deletedToast": "{name} supprimé avec succès",
     "deleteErrorToast": "Échec de la suppression du créateur"

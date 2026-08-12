@@ -2,11 +2,9 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { FooterSignupForm } from '@/components/FooterSignupForm';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 
 const socialLinks = [
   { name: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/profile.php?id=61577485322627&mibextid=wwXIfr&rdid=16XIHv5v2uXCkiGV#' },
@@ -43,15 +41,7 @@ export function Footer( { className }: { className?: string; } ) {
 
   return (
     <footer className={ cn( 'footer', className ) }>
-      {/* Left: CTA */ }
-      <div className='footer__cta'>
-        <h2 className='footer__cta-title gradient-text'>{ t( 'cta.title' ) }</h2>
-        <Button variant='heroAlt' className='min-w-70'>
-          <Link href="/signup" title={ t( 'cta.button' ) } className='flex-1'>{ t( 'cta.button' ) }</Link>
-        </Button>
-      </div>
-
-      {/* Right: Navigation  */ }
+      {/* Navigation  */ }
       <div className='footer__links'>
         {/* Navigation Links */ }
         <div className='footer__links-grid'>

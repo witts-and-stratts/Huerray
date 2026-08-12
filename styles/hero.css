@@ -21,12 +21,16 @@
   @apply mb-2 pt-10 md:pt-60 text-h1;
 }
 
-.hero__subtitle {
-  @apply mb-6 text-h4 font-regular text-deep-maroon subpixel-antialiased;
+.hero__description {
+  @apply mb-6 text-h5 text-deep-maroon font-regular subpixel-antialiased max-w-[560px];
 }
 
-.hero__description {
-  @apply mb-4;
+.hero__actions {
+  @apply flex flex-wrap items-center gap-4;
+}
+
+.hero__note {
+  @apply block mt-4 text-sm text-slate-700;
 }
 
 /* Image Grid */
