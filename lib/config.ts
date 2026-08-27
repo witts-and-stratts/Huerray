@@ -15,4 +15,17 @@ export const config = {
     /** Auth-guard background profile refresh interval in ms (default 30 min) */
     profileRefreshInterval: Number(process.env.NEXT_PUBLIC_PROFILE_REFRESH_INTERVAL ?? 60 * 5 * 30 * 1000),
   },
+  seo: {
+    // The only hostnames search engines are allowed to index. Every other
+    // host this app gets deployed to (dev.huerray.de, stellar.huerray.de,
+    // preview URLs, localhost, ...) must stay out of search results so it
+    // doesn't compete with production as duplicate content. Checked at
+    // request time (middleware.ts, app/robots.ts) rather than baked into a
+    // build, since the same standalone build is deployed to every host.
+    productionHosts: new Set(['huerray.de', 'www.huerray.de']),
+  },
 } as const;
+
+export function isProductionHost(host: string | null | undefined): boolean {
+  return config.seo.productionHosts.has((host ?? '').split(':')[0]);
+}

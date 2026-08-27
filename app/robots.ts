@@ -1,4 +1,6 @@
 import type { MetadataRoute } from 'next'
+import { headers } from 'next/headers'
+import { isProductionHost } from '@/lib/config'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'
 
@@ -30,7 +32,21 @@ const AI_CRAWLERS = [
   'CCBot',
 ]
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  // Non-production deployments (dev.huerray.de, stellar.huerray.de, preview
+  // URLs, ...) get a blanket disallow instead of the real rules below, on
+  // top of the noindex header middleware.ts adds to every response there —
+  // this keeps crawlers that do respect robots.txt from wasting budget on
+  // a duplicate site, in addition to the header stopping indexing outright.
+  if (!isProductionHost((await headers()).get('host'))) {
+    return {
+      rules: {
+        userAgent: '*',
+        disallow: '/',
+      },
+    }
+  }
+
   return {
     rules: [
       {
