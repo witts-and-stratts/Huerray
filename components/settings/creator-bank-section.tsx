@@ -130,6 +130,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
+                required
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
@@ -146,6 +147,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 type="country"
                 onValueChange={ ( val: any ) => field.handleChange( val || "" ) }
+                required
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
