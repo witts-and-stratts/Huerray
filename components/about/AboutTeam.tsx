@@ -22,7 +22,7 @@ export function AboutTeam() {
     {
       name: t( 'members.2.name' ),
       bio: t( 'members.2.bio' ),
-      image: '/svg/avatar-male.svg'
+      image: '/images/team/desmond_placeholder.webp'
     },
   ];
 

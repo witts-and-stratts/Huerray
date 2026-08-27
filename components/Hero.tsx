@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
 import { ArrowRight } from 'lucide-react';
@@ -28,6 +28,7 @@ const heroColumn2Images = [
 export function Hero() {
   const tCommon = useTranslations( 'common' );
   const t = useTranslations( 'home.hero' );
+  const locale = useLocale();
 
   return (
     <div className='hero'>
@@ -39,13 +40,13 @@ export function Hero() {
             <h1 className='gradient-text hero__title'>{ t( 'title' ) }</h1>
             <p className='hero__description'>{ t( 'description' ) }</p>
             <div className='hero__actions'>
-              <Link href='/signup?role=brand' title={ tCommon( 'button.startCampaign' ) }>
+              <Link href={ `/${ locale }/signup?role=brand` } title={ tCommon( 'button.startCampaign' ) }>
                 <Button variant='gradient'>
                   { tCommon( 'button.startCampaign' ) }
                   <ArrowRight className='size-4' />
                 </Button>
               </Link>
-              <Link href='/signup?role=creator' title={ tCommon( 'button.joinAsCreator' ) }>
+              <Link href={ `/${ locale }/signup?role=creator` } title={ tCommon( 'button.joinAsCreator' ) }>
                 <Button variant='outlineBrand'>
                   { tCommon( 'button.joinAsCreator' ) }
                 </Button>

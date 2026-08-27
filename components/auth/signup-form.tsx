@@ -86,7 +86,7 @@ export function SignupForm( {
   const turnstileRef = useRef<TurnstileRef>( null );
 
   const authApi = new AuthenticationApi( undefined, undefined, apiClient );
-  const handleBack = useCallback( () => updateRole( null ), [ updateRole ] );
+  const handleBack = useCallback( () => router.back(), [ router ] );
 
   useEffect( () => {
     if ( selectedRole === 'creator' ) {

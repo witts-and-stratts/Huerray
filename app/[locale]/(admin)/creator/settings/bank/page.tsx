@@ -25,6 +25,8 @@ export default function CreatorBankSettingsPage() {
     bankAccountNameRequired: t( 'bankAccountNameRequired' ),
     bankAccountNumberRequired: t( 'bankAccountNumberRequired' ),
     bankRoutingNumberRequired: t( 'bankRoutingNumberRequired' ),
+    taxIdRequired: t( 'taxIdRequired' ),
+    taxCountryRequired: t( 'taxCountryRequired' ),
   } ), [ t ] );
   const formatUpdateErrorMessage = ( error: string ) => (
     t.has( 'errorUpdateFailedWithError' )

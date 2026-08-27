@@ -155,6 +155,8 @@
     "bankNameRequired": "Le nom de la banque est requis",
     "bankAccountNameRequired": "Le nom du titulaire du compte est requis",
     "bankAccountNumberRequired": "Le numéro de compte est requis",
-    "bankRoutingNumberRequired": "Le numéro de routage ou le code SWIFT est requis"
+    "bankRoutingNumberRequired": "Le numéro de routage ou le code SWIFT est requis",
+    "taxIdRequired": "Le numéro d'identification fiscale est requis",
+    "taxCountryRequired": "Le pays fiscal est requis"
   }
 }

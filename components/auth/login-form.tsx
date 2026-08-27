@@ -189,6 +189,18 @@ export function LoginForm( {
       setIsLoading( true );
 
       try {
+        // Invalidate any lingering session server-side before logging in.
+        // The backend session is an httpOnly cookie that clearPersistedData()
+        // cannot remove, so without this a stale session (e.g. a previous
+        // role whose logout failed) would still be sent on the new
+        // login's requests, causing a clash between the two sessions.
+        // Best-effort: ignore failures (no active session).
+        try {
+          await authApi.authLogoutPost();
+        } catch {
+          // No active session to clear — safe to proceed with login.
+        }
+
         const response = await authApi.authLoginPost( {
           credentials: {
             username: value.identifier,

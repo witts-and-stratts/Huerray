@@ -2,12 +2,13 @@
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 export function CreatorsSection() {
   const t = useTranslations( 'home.creatorsSection' );
   const tCommon = useTranslations( 'common' );
+  const locale = useLocale();
 
   return (
     <section className='creators-section'>
@@ -19,7 +20,7 @@ export function CreatorsSection() {
             { t( 'description' ) }
           </p>
           <Button variant='hero' size='lg' className='min-w-80 mt-8'>
-            <Link href="/signup?role=creator" title={ tCommon( 'button.joinForFree' ) }>{ tCommon( 'button.joinForFree' ) }</Link>
+            <Link href={ `/${ locale }/signup?role=creator` } title={ tCommon( 'button.joinForFree' ) }>{ tCommon( 'button.joinForFree' ) }</Link>
           </Button>
         </div>
 

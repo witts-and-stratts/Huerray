@@ -41,6 +41,7 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
               <form.Field
                 name="dateOfBirth"
                 validators={ {
+                  onChange: creatorSettingsSchema.shape.dateOfBirth,
                   onBlur: creatorSettingsSchema.shape.dateOfBirth,
                   onSubmit: creatorSettingsSchema.shape.dateOfBirth,
                 } }

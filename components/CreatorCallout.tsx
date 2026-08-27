@@ -2,11 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 export function CreatorCallout() {
   const t = useTranslations( 'home.creatorCallout' );
+  const locale = useLocale();
 
   return (
     <section className='creator-callout'>
@@ -15,7 +16,7 @@ export function CreatorCallout() {
         <h2 className='creator-callout__title'>{ t( 'title' ) }</h2>
         <p className='creator-callout__description'>{ t( 'description' ) }</p>
         <Button variant='hero' size='lg' className='min-w-70' asChild>
-          <Link href='/signup?role=creator' title={ t( 'button' ) }>{ t( 'button' ) }</Link>
+          <Link href={ `/${ locale }/signup?role=creator` } title={ t( 'button' ) }>{ t( 'button' ) }</Link>
         </Button>
       </div>
       <div className='creator-callout__photo'>
