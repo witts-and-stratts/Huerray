@@ -33,6 +33,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
   const [ sheetOpen, setSheetOpen ] = useState( false );
   const [ selectedCreator, setSelectedCreator ] = useState<ModelsCreatorResponse | null>( null );
   const [ creatorSheetOpen, setCreatorSheetOpen ] = useState( false );
+  const [ selectedIsAccepted, setSelectedIsAccepted ] = useState( false );
   const [ selectionOpen, setSelectionOpen ] = useState( false );
   const [ inviteSheetOpen, setInviteSheetOpen ] = useState( false );
   const [ selectedGigId, setSelectedGigId ] = useState<string>( '' );
@@ -48,8 +49,9 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
     setSheetOpen( true );
   };
 
-  const handleViewCreatorDetails = ( creator: ModelsCreatorResponse ) => {
+  const handleViewCreatorDetails = ( creator: ModelsCreatorResponse, invitationStatus?: string ) => {
     setSelectedCreator( creator );
+    setSelectedIsAccepted( invitationStatus === 'accepted' );
     setCreatorSheetOpen( true );
   };
 
@@ -108,7 +110,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
               key={ invitation.id }
               invitation={ invitation }
               onViewDetails={ handleViewDetails }
-              onViewCreatorDetails={ handleViewCreatorDetails }
+              onViewCreatorDetails={ ( creator ) => handleViewCreatorDetails( creator, invitation.status ) }
             />
           );
         } ) }
@@ -126,6 +128,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
         creator={ selectedCreator }
         open={ creatorSheetOpen }
         onOpenChange={ setCreatorSheetOpen }
+        revealAddress={ selectedIsAccepted }
       />
 
       <GigSelectionDialog

@@ -26,14 +26,16 @@ export function GigApplicationsInvitationsSection( { gigId, campaignId }: GigApp
   const { data: invitationsData, isLoading: invitationsLoading, error: invitationsError } = useGigInvitations( gigId );
   const [ selectedCreator, setSelectedCreator ] = useState<ModelsCreatorResponse | null>( null );
   const [ creatorSheetOpen, setCreatorSheetOpen ] = useState( false );
+  const [ selectedIsAccepted, setSelectedIsAccepted ] = useState( false );
   const [ inviteOpen, setInviteOpen ] = useState( false );
 
   const isLoading = applicationsLoading || invitationsLoading;
   const error = applicationsError || invitationsError;
 
-  const handleViewCreatorDetails = ( creator?: ModelsCreatorResponse ) => {
+  const handleViewCreatorDetails = ( creator?: ModelsCreatorResponse, status?: string ) => {
     if ( !creator ) return;
     setSelectedCreator( creator );
+    setSelectedIsAccepted( status === 'accepted' );
     setCreatorSheetOpen( true );
   };
 
@@ -71,7 +73,7 @@ export function GigApplicationsInvitationsSection( { gigId, campaignId }: GigApp
               <ApplicationCard
                 key={ application.id }
                 application={ application }
-                onClick={ () => handleViewCreatorDetails( application.creator ) }
+                onClick={ () => handleViewCreatorDetails( application.creator, application.status ) }
               />
             ) ) }
           </div>
@@ -98,7 +100,7 @@ export function GigApplicationsInvitationsSection( { gigId, campaignId }: GigApp
                 key={ invitation.id }
                 invitation={ invitation }
                 onViewDetails={ () => { } }
-                onViewCreatorDetails={ handleViewCreatorDetails }
+                onViewCreatorDetails={ ( creator ) => handleViewCreatorDetails( creator, invitation.status ) }
               />
             ) ) }
           </div>
@@ -109,6 +111,7 @@ export function GigApplicationsInvitationsSection( { gigId, campaignId }: GigApp
         creator={ selectedCreator }
         open={ creatorSheetOpen }
         onOpenChange={ setCreatorSheetOpen }
+        revealAddress={ selectedIsAccepted }
       />
 
       { campaignId && (

@@ -134,6 +134,7 @@ export function GigCreatorsSection( { gigId }: GigCreatorsSectionProps ) {
         creator={ selectedCreator }
         open={ detailsOpen }
         onOpenChange={ setDetailsOpen }
+        revealAddress
       />
 
       <StartConversationDialog

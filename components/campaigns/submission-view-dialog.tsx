@@ -199,6 +199,7 @@ const CreatorTrigger = memo( ( { creatorProfile }: { creatorProfile: ModelsVideo
           creator={ creatorProfile as any }
           open={ sheetOpen }
           onOpenChange={ setSheetOpen }
+          revealAddress
         />
       ) }
     </>
