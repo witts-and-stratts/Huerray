@@ -14,7 +14,7 @@
 
 
 
-export interface ModelsCommentEditRequest {
-    'comment': string;
+export interface ModelsPostConversationMessageRequest {
+    'message': string;
 }
 

@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback } from '@/components/dashboard-ui/avatar';
 import { Button } from '@/components/dashboard-ui/button';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { useAuth } from '@/lib/auth/auth-context';
-import type { ModelsCommentResponse, UtilsEntityType } from '@/lib/api/generated/models';
+import type { ModelsConversationMessageResponse, UtilsEntityType } from '@/lib/api/generated/models';
 import { UtilsEntityType as EntityType } from '@/lib/api/generated/models/utils-entity-type';
 import { useAddComment, useMultipleComments } from '@/lib/api/hooks/comments';
 import { cn } from '@/lib/dashboard-utils';
@@ -37,19 +37,19 @@ function getInitials( firstName?: string, lastName?: string ) {
 type MessageGroup = {
   senderId: string;
   entityType: string;
-  commenter: ModelsCommentResponse[ 'commenter' ];
-  messages: ModelsCommentResponse[];
+  sender: ModelsConversationMessageResponse[ 'sender' ];
+  messages: ModelsConversationMessageResponse[];
 };
 
-function groupMessages( messages: ModelsCommentResponse[] ): MessageGroup[] {
+function groupMessages( messages: ModelsConversationMessageResponse[] ): MessageGroup[] {
   const groups: MessageGroup[] = [];
 
   for ( const msg of messages ) {
     const last = groups[ groups.length - 1 ];
-    if ( last && last.senderId === msg.commenter_id && last.entityType === msg.entity_type ) {
+    if ( last && last.senderId === msg.sender_id && last.entityType === msg.entity_type ) {
       last.messages.push( msg );
     } else {
-      groups.push( { senderId: msg.commenter_id ?? '', entityType: msg.entity_type ?? '', commenter: msg.commenter, messages: [ msg ] } );
+      groups.push( { senderId: msg.sender_id ?? '', entityType: msg.entity_type ?? '', sender: msg.sender, messages: [ msg ] } );
     }
   }
 
@@ -69,11 +69,11 @@ const MessageGroupItem = memo( ( {
 } ) => {
   const formatTimeAgo = useTimeAgo();
   const isOwn = group.senderId === user?.id;
-  const firstName = group.commenter?.first_name ?? '';
-  const lastName = group.commenter?.last_name ?? '';
+  const firstName = group.sender?.first_name ?? '';
+  const lastName = group.sender?.last_name ?? '';
   const fullName = `${ firstName } ${ lastName }`.trim()
-    || group.commenter?.username
-    || group.commenter?.email
+    || group.sender?.username
+    || group.sender?.email
     || 'Unknown';
 
   const isAdminApproval = group.entityType === EntityType.EntityTypeAdminCampaignApproval;
@@ -136,7 +136,7 @@ const MessageGroupItem = memo( ( {
                 transition={ { duration: 0.3, ease: 'easeOut', delay: mi * 0.01 } }
                 exit={ { opacity: 0, y: 10 } }
               >
-                { msg.comment }
+                { msg.message }
               </motion.div>
             );
           } ) }
@@ -183,7 +183,7 @@ const CommentInput = memo( ( {
     if ( !trimmed || !targetId || !targetType ) return;
 
     addComment.mutate(
-      { comment: trimmed, entity_id: targetId, entity_type: targetType },
+      { message: trimmed, entity_id: targetId, entity_type: targetType },
       {
         onSuccess: () => setText( '' ),
         onError: () => toast.error( 'Failed to send comment' ),
@@ -262,7 +262,7 @@ export function CommentsThread( { entities, postTo, disableComment = false, size
     results.forEach( ( r ) => r.refetch() );
   };
 
-  const comments: ModelsCommentResponse[] = useMemo( () => {
+  const comments: ModelsConversationMessageResponse[] = useMemo( () => {
     return results
       .flatMap( ( r ) => r.data?.data ?? [] )
       .sort( ( a, b ) => new Date( a.created_at ?? 0 ).getTime() - new Date( b.created_at ?? 0 ).getTime() );

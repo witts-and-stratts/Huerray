@@ -704,7 +704,8 @@ export const CasesGetRelatedEntityTypeEnum = {
     EntityGig: 'Gig',
     EntityVideoSubmission: 'VideoSubmission',
     EntityPayment: 'Payment',
-    EntityInvoice: 'Invoice'
+    EntityInvoice: 'Invoice',
+    EntityConversation: 'Conversation'
 } as const;
 export type CasesGetRelatedEntityTypeEnum = typeof CasesGetRelatedEntityTypeEnum[keyof typeof CasesGetRelatedEntityTypeEnum];
 export const CasesGetStatusEnum = {

@@ -11,6 +11,7 @@
     "editCampaign": "Editar campaña",
     "newGig": "Nuevo Gig",
     "editGig": "Editar Gig",
+    "gigDetails": "Detalles del Gig",
     "cases": "Tickets de asistencia",
     "caseDetails": "Detalles del caso",
     "creators": "Creadores",
@@ -21,6 +22,7 @@
     "newsletter": "Boletín",
     "payouts": "Pagos",
     "notifications": "Notificaciones",
+    "messages": "Mensajes",
     "settings": "Ajustes",
     "securitySettings": "Ajustes de seguridad",
     "help": "Centro de ayuda"

@@ -20,6 +20,7 @@ import {
 } from '@/components/dashboard-ui/empty';
 import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 interface CampaignGigsSectionProps {
   campaignId: string;
@@ -31,10 +32,21 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   const t = useTranslations( 'dashboard.admin.gigForm' );
   const { data: gigsResponse, isLoading } = useGigsByCampaign( campaignId, role );
   const gigs = ( gigsResponse?.data || [] ) as ModelsGigResponse[];
+  const router = useRouter();
 
   const [ selectedGig, setSelectedGig ] = useState<ModelsGigResponse | null>( null );
   const [ selectedTab, setSelectedTab ] = useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = useState<ModelsGigResponse | null>( null );
+
+  // Admins get the full gig details page; brand keeps the quick-view sheet.
+  const handleViewGig = ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
+    if ( role === 'admin' && basePath && gig.id ) {
+      router.push( `${ basePath }/campaigns/${ campaignId }/gigs/${ gig.id }` );
+      return;
+    }
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  };
 
   if ( isLoading ) {
     return (
@@ -74,7 +86,7 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
             <GigCard
               key={ gig.id }
               gig={ gig }
-              onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
+              onViewGig={ handleViewGig }
             />
           ) ) }
         </div>

@@ -1,7 +1,10 @@
 /**
  * Comments Query & Mutation Hooks
  *
- * Custom hooks for managing comments using Tanstack Query.
+ * Custom hooks for managing entity-scoped comment threads, backed by the
+ * Conversations API (the backend's former dedicated /comments endpoint was
+ * retired in favor of /conversations/messages, which resolves-or-creates a
+ * conversation per entity ref under the hood).
  */
 
 import {
@@ -12,17 +15,17 @@ import {
   type UseQueryResult,
   type UseMutationResult,
 } from '@tanstack/react-query';
-import { CommentsApi } from '../generated/api';
+import { ConversationsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import type {
-  ModelsCommentRequest,
-  ModelsStandardResponseArrayModelsCommentResponse,
-  ModelsStandardResponseModelsCommentResponse,
+  ModelsPostMessageRequest,
+  ModelsStandardResponseArrayModelsConversationMessageResponse,
+  ModelsStandardResponseModelsConversationMessageResponse,
   ModelsStandardResponseAny,
 } from '../generated/models';
 import type { ApiError } from './types';
 
-const commentsApi = new CommentsApi( apiConfiguration, undefined, apiClient );
+const conversationsApi = new ConversationsApi( apiConfiguration, undefined, apiClient );
 
 export const commentsKeys = {
   all: [ 'comments' ] as const,
@@ -33,11 +36,11 @@ export const commentsKeys = {
 export function useComments(
   entityType: string,
   entityId: string,
-): UseQueryResult<ModelsStandardResponseArrayModelsCommentResponse, ApiError> {
+): UseQueryResult<ModelsStandardResponseArrayModelsConversationMessageResponse, ApiError> {
   return useQuery( {
     queryKey: commentsKeys.entity( entityType, entityId ),
     queryFn: async () => {
-      const response = await commentsApi.commentsGet( { entityType, entityId } );
+      const response = await conversationsApi.conversationsMessagesGet( { entityType, entityId } );
       return response.data;
     },
     enabled: !!entityId,
@@ -49,7 +52,7 @@ export function useMultipleComments( entities: Array<{ entityType: string; entit
     queries: entities.map( ( { entityType, entityId } ) => ( {
       queryKey: commentsKeys.entity( entityType, entityId ),
       queryFn: async () => {
-        const response = await commentsApi.commentsGet( { entityType, entityId } );
+        const response = await conversationsApi.conversationsMessagesGet( { entityType, entityId } );
         return response.data;
       },
       enabled: !!entityId,
@@ -69,15 +72,15 @@ export function useSubmissionComments( submissionId?: string ) {
 }
 
 export function useAddComment(): UseMutationResult<
-  ModelsStandardResponseModelsCommentResponse,
+  ModelsStandardResponseModelsConversationMessageResponse,
   ApiError,
-  ModelsCommentRequest
+  ModelsPostMessageRequest
 > {
   const queryClient = useQueryClient();
 
   return useMutation( {
     mutationFn: async ( request ) => {
-      const response = await commentsApi.commentsPost( { request } );
+      const response = await conversationsApi.conversationsMessagesPost( { request } );
       return response.data;
     },
     onSuccess: ( _, variables ) => {
@@ -97,7 +100,7 @@ export function useDeleteComment(): UseMutationResult<
 
   return useMutation( {
     mutationFn: async ( { id } ) => {
-      const response = await commentsApi.commentsIdDelete( { id } );
+      const response = await conversationsApi.conversationsMessagesMessageIdDelete( { messageId: id } );
       return response.data;
     },
     onSuccess: ( _, variables ) => {

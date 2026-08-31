@@ -15,13 +15,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UtilsEntityType } from './utils-entity-type';
+import type { ModelsConversationMessageResponse } from './models-conversation-message-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ModelsErrorInfo } from './models-error-info';
 
-export interface ModelsCommentRequest {
-    'comment': string;
-    'entity_id': string;
-    'entity_type': UtilsEntityType;
+export interface ModelsStandardResponseArrayModelsConversationMessageResponse {
+    'data'?: Array<ModelsConversationMessageResponse>;
+    'error'?: ModelsErrorInfo;
+    'message'?: string;
+    'success'?: boolean;
 }
-
-
 

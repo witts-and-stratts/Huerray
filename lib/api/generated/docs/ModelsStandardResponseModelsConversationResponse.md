@@ -1,11 +1,11 @@
-# ModelsStandardResponseModelsCommentResponse
+# ModelsStandardResponseModelsConversationResponse
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**ModelsCommentResponse**](ModelsCommentResponse.md) |  | [optional] [default to undefined]
+**data** | [**ModelsConversationResponse**](ModelsConversationResponse.md) |  | [optional] [default to undefined]
 **error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **success** | **boolean** |  | [optional] [default to undefined]
@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ModelsStandardResponseModelsCommentResponse } from 'huerray-api';
+import { ModelsStandardResponseModelsConversationResponse } from 'huerray-api';
 
-const instance: ModelsStandardResponseModelsCommentResponse = {
+const instance: ModelsStandardResponseModelsConversationResponse = {
     data,
     error,
     message,

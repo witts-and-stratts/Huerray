@@ -1,23 +1,23 @@
-# ModelsCommentRequest
+# ModelsPostMessageRequest
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**comment** | **string** |  | [default to undefined]
 **entity_id** | **string** |  | [default to undefined]
 **entity_type** | [**UtilsEntityType**](UtilsEntityType.md) |  | [default to undefined]
+**message** | **string** |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { ModelsCommentRequest } from 'huerray-api';
+import { ModelsPostMessageRequest } from 'huerray-api';
 
-const instance: ModelsCommentRequest = {
-    comment,
+const instance: ModelsPostMessageRequest = {
     entity_id,
     entity_type,
+    message,
 };
 ```
 

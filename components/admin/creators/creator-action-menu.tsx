@@ -7,9 +7,12 @@ import {
 } from "@/components/dashboard-ui/action-menu";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { SuperField } from "@/components/dashboard-ui/super-field";
+import { StartConversationDialog } from "@/components/conversations/start-conversation-dialog";
 import { useDeleteCreator, useUpdateCreatorContentType, useUpdateCreatorProfileStatus } from "@/lib/api/hooks/creators";
 import { ModelsCreatorResponse, UtilsContentType, UtilsCreatorStatus } from "@/lib/api/generated/models";
-import { Copy } from "lucide-react";
+import { UtilsEntityType } from "@/lib/api/generated/models/utils-entity-type";
+import { imgpresets } from "@/lib/utils/imgproxy";
+import { Copy, MessageCircle } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
@@ -39,6 +42,7 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
   const [ pendingProfileType, setPendingProfileType ] = useState<CreatorProfileType | null>( null );
   const [ firstNameInput, setFirstNameInput ] = useState( "" );
   const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
+  const [ isMessageDialogOpen, setIsMessageDialogOpen ] = useState( false );
 
   const handleStatusAction = ( status: CreatorActionStatus ) => {
     if ( !creator.id ) {
@@ -164,8 +168,14 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
     ...( onViewDetails ? [ {
       label: tc( 'sheets.details' ),
       action: () => onViewDetails( creator ),
-      separator: true,
     } ] : [] ),
+    {
+      label: t( 'creatorStatus.messageCreator' ),
+      icon: MessageCircle,
+      action: () => setIsMessageDialogOpen( true ),
+      allowedRoles: [ 'admin' ],
+      separator: true,
+    },
     {
       label: t( 'creatorStatus.approve' ),
       action: () => handleStatusAction( "approved" ),
@@ -312,6 +322,14 @@ export function CreatorActionMenu( { creator, onViewDetails, trigger }: CreatorA
         onConfirm={ handleDeleteCreator }
         isLoading={ deleteCreator.isPending }
         loadingText={ t( 'creatorStatus.deleting' ) }
+      />
+      <StartConversationDialog
+        entityType={ UtilsEntityType.EntityTypeCreator }
+        entityId={ creator.id }
+        name={ `${ creator.first_name || '' } ${ creator.last_name || '' }`.trim() || creator.email || tc( 'cards.creatorFallback' ) }
+        avatarUrl={ creator.profile_image?.asset ? imgpresets.avatar( creator.profile_image.asset ) : undefined }
+        open={ isMessageDialogOpen }
+        onOpenChange={ setIsMessageDialogOpen }
       />
     </>
   );

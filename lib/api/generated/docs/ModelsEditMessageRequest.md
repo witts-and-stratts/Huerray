@@ -1,19 +1,19 @@
-# ModelsCommentEditRequest
+# ModelsEditMessageRequest
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**comment** | **string** |  | [default to undefined]
+**message** | **string** |  | [default to undefined]
 
 ## Example
 
 ```typescript
-import { ModelsCommentEditRequest } from 'huerray-api';
+import { ModelsEditMessageRequest } from 'huerray-api';
 
-const instance: ModelsCommentEditRequest = {
-    comment,
+const instance: ModelsEditMessageRequest = {
+    message,
 };
 ```
 

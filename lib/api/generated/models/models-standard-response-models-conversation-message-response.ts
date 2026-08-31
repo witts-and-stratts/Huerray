@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsCommentResponse } from './models-comment-response';
+import type { ModelsConversationMessageResponse } from './models-conversation-message-response';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ModelsErrorInfo } from './models-error-info';
 
-export interface ModelsStandardResponseArrayModelsCommentResponse {
-    'data'?: Array<ModelsCommentResponse>;
+export interface ModelsStandardResponseModelsConversationMessageResponse {
+    'data'?: ModelsConversationMessageResponse;
     'error'?: ModelsErrorInfo;
     'message'?: string;
     'success'?: boolean;

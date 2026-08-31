@@ -24,7 +24,8 @@ export const UtilsNotificationEntityType = {
     EntityGig: 'Gig',
     EntityVideoSubmission: 'VideoSubmission',
     EntityPayment: 'Payment',
-    EntityInvoice: 'Invoice'
+    EntityInvoice: 'Invoice',
+    EntityConversation: 'Conversation'
 } as const;
 
 export type UtilsNotificationEntityType = typeof UtilsNotificationEntityType[keyof typeof UtilsNotificationEntityType];

@@ -98,10 +98,17 @@ Class | Method | HTTP request | Description
 *CasesApi* | [**casesIdMessagesPost**](docs/CasesApi.md#casesidmessagespost) | **POST** /cases/{id}/messages | Add message to case
 *CasesApi* | [**casesIdStatusPut**](docs/CasesApi.md#casesidstatusput) | **PUT** /cases/{id}/status | Update case status
 *CasesApi* | [**casesPost**](docs/CasesApi.md#casespost) | **POST** /cases | Create a new case
-*CommentsApi* | [**commentsGet**](docs/CommentsApi.md#commentsget) | **GET** /comments | Get comments for an entity
-*CommentsApi* | [**commentsIdDelete**](docs/CommentsApi.md#commentsiddelete) | **DELETE** /comments/{id} | Delete a comment
-*CommentsApi* | [**commentsIdPut**](docs/CommentsApi.md#commentsidput) | **PUT** /comments/{id} | Update a comment
-*CommentsApi* | [**commentsPost**](docs/CommentsApi.md#commentspost) | **POST** /comments | Add a new comment
+*ConversationsApi* | [**conversationsByEntityGet**](docs/ConversationsApi.md#conversationsbyentityget) | **GET** /conversations/by-entity | Resolve the conversation for an entity
+*ConversationsApi* | [**conversationsGet**](docs/ConversationsApi.md#conversationsget) | **GET** /conversations | List conversations
+*ConversationsApi* | [**conversationsIdGet**](docs/ConversationsApi.md#conversationsidget) | **GET** /conversations/{id} | Get a conversation
+*ConversationsApi* | [**conversationsIdMessagesGet**](docs/ConversationsApi.md#conversationsidmessagesget) | **GET** /conversations/{id}/messages | Get all messages in a conversation
+*ConversationsApi* | [**conversationsIdMessagesPost**](docs/ConversationsApi.md#conversationsidmessagespost) | **POST** /conversations/{id}/messages | Post a message to a conversation
+*ConversationsApi* | [**conversationsIdParticipantsPost**](docs/ConversationsApi.md#conversationsidparticipantspost) | **POST** /conversations/{id}/participants | Add participants to a conversation
+*ConversationsApi* | [**conversationsIdParticipantsUserIdDelete**](docs/ConversationsApi.md#conversationsidparticipantsuseriddelete) | **DELETE** /conversations/{id}/participants/{userId} | Remove a participant from a conversation
+*ConversationsApi* | [**conversationsMessagesGet**](docs/ConversationsApi.md#conversationsmessagesget) | **GET** /conversations/messages | Get the messages for an entity\&#39;s conversation
+*ConversationsApi* | [**conversationsMessagesMessageIdDelete**](docs/ConversationsApi.md#conversationsmessagesmessageiddelete) | **DELETE** /conversations/messages/{messageId} | Delete a message (admin only)
+*ConversationsApi* | [**conversationsMessagesMessageIdPut**](docs/ConversationsApi.md#conversationsmessagesmessageidput) | **PUT** /conversations/messages/{messageId} | Update a message (admin only)
+*ConversationsApi* | [**conversationsMessagesPost**](docs/ConversationsApi.md#conversationsmessagespost) | **POST** /conversations/messages | Post a message to an entity\&#39;s conversation
 *CreatorApi* | [**creatorsActiveGigsGet**](docs/CreatorApi.md#creatorsactivegigsget) | **GET** /creators/active-gigs | Get active gigs for the logged-in creator
 *CreatorApi* | [**creatorsApplicationsGet**](docs/CreatorApi.md#creatorsapplicationsget) | **GET** /creators/applications | Get creator applications
 *CreatorApi* | [**creatorsBankDetailsGet**](docs/CreatorApi.md#creatorsbankdetailsget) | **GET** /creators/bank-details | Get creator bank details
@@ -194,6 +201,7 @@ Class | Method | HTTP request | Description
 
 ### Documentation For Models
 
+ - [ModelsAddParticipantsRequest](docs/ModelsAddParticipantsRequest.md)
  - [ModelsAdminCampaignApprovalRequest](docs/ModelsAdminCampaignApprovalRequest.md)
  - [ModelsAdminUpdateCreatorProfileRequest](docs/ModelsAdminUpdateCreatorProfileRequest.md)
  - [ModelsAnalyticsTimeSeriesData](docs/ModelsAnalyticsTimeSeriesData.md)
@@ -215,10 +223,10 @@ Class | Method | HTTP request | Description
  - [ModelsCaseResponse](docs/ModelsCaseResponse.md)
  - [ModelsCaseUserSummary](docs/ModelsCaseUserSummary.md)
  - [ModelsChangePasswordRequest](docs/ModelsChangePasswordRequest.md)
- - [ModelsCommentEditRequest](docs/ModelsCommentEditRequest.md)
- - [ModelsCommentRequest](docs/ModelsCommentRequest.md)
- - [ModelsCommentResponse](docs/ModelsCommentResponse.md)
  - [ModelsContentMedia](docs/ModelsContentMedia.md)
+ - [ModelsConversationMessageResponse](docs/ModelsConversationMessageResponse.md)
+ - [ModelsConversationParticipantResponse](docs/ModelsConversationParticipantResponse.md)
+ - [ModelsConversationResponse](docs/ModelsConversationResponse.md)
  - [ModelsCreateAdminRequest](docs/ModelsCreateAdminRequest.md)
  - [ModelsCreateCampaignRequest](docs/ModelsCreateCampaignRequest.md)
  - [ModelsCreateCaseMessageRequest](docs/ModelsCreateCaseMessageRequest.md)
@@ -235,6 +243,7 @@ Class | Method | HTTP request | Description
  - [ModelsCreatorResponse](docs/ModelsCreatorResponse.md)
  - [ModelsCreatorStatusUpdateRequest](docs/ModelsCreatorStatusUpdateRequest.md)
  - [ModelsCreatorStatusUpdateResponse](docs/ModelsCreatorStatusUpdateResponse.md)
+ - [ModelsEditMessageRequest](docs/ModelsEditMessageRequest.md)
  - [ModelsEditUserRequest](docs/ModelsEditUserRequest.md)
  - [ModelsEmailVerificationRequest](docs/ModelsEmailVerificationRequest.md)
  - [ModelsErrorInfo](docs/ModelsErrorInfo.md)
@@ -276,6 +285,7 @@ Class | Method | HTTP request | Description
  - [ModelsPaginatedNewsletterSubscriptionResponse](docs/ModelsPaginatedNewsletterSubscriptionResponse.md)
  - [ModelsPaginatedPaymentItemResponse](docs/ModelsPaginatedPaymentItemResponse.md)
  - [ModelsPaginatedPaymentResponse](docs/ModelsPaginatedPaymentResponse.md)
+ - [ModelsPaginatedResponseArrayModelsConversationResponse](docs/ModelsPaginatedResponseArrayModelsConversationResponse.md)
  - [ModelsPaginatedUserResponse](docs/ModelsPaginatedUserResponse.md)
  - [ModelsPaginatedVideoSubmissionResponse](docs/ModelsPaginatedVideoSubmissionResponse.md)
  - [ModelsPagination](docs/ModelsPagination.md)
@@ -284,6 +294,8 @@ Class | Method | HTTP request | Description
  - [ModelsPaymentItemResponse](docs/ModelsPaymentItemResponse.md)
  - [ModelsPaymentResponse](docs/ModelsPaymentResponse.md)
  - [ModelsPlatformAnalyticsResponse](docs/ModelsPlatformAnalyticsResponse.md)
+ - [ModelsPostConversationMessageRequest](docs/ModelsPostConversationMessageRequest.md)
+ - [ModelsPostMessageRequest](docs/ModelsPostMessageRequest.md)
  - [ModelsRefreshTokenRequest](docs/ModelsRefreshTokenRequest.md)
  - [ModelsRegisterRequest](docs/ModelsRegisterRequest.md)
  - [ModelsResendVerificationRequest](docs/ModelsResendVerificationRequest.md)
@@ -321,9 +333,10 @@ Class | Method | HTTP request | Description
  - [ModelsStandardPaymentResponse](docs/ModelsStandardPaymentResponse.md)
  - [ModelsStandardPlatformAnalyticsResponse](docs/ModelsStandardPlatformAnalyticsResponse.md)
  - [ModelsStandardResponseAny](docs/ModelsStandardResponseAny.md)
- - [ModelsStandardResponseArrayModelsCommentResponse](docs/ModelsStandardResponseArrayModelsCommentResponse.md)
+ - [ModelsStandardResponseArrayModelsConversationMessageResponse](docs/ModelsStandardResponseArrayModelsConversationMessageResponse.md)
  - [ModelsStandardResponseMapStringString](docs/ModelsStandardResponseMapStringString.md)
- - [ModelsStandardResponseModelsCommentResponse](docs/ModelsStandardResponseModelsCommentResponse.md)
+ - [ModelsStandardResponseModelsConversationMessageResponse](docs/ModelsStandardResponseModelsConversationMessageResponse.md)
+ - [ModelsStandardResponseModelsConversationResponse](docs/ModelsStandardResponseModelsConversationResponse.md)
  - [ModelsStandardUserResponse](docs/ModelsStandardUserResponse.md)
  - [ModelsStandardVideoSubmissionResponse](docs/ModelsStandardVideoSubmissionResponse.md)
  - [ModelsStandardVideoSubmissionResponses](docs/ModelsStandardVideoSubmissionResponses.md)

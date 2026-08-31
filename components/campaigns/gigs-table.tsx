@@ -53,6 +53,9 @@ import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker
 import { useTranslations } from 'next-intl';
 import { ScrollArea } from '../dashboard-ui/scroll-area';
 import { isApiNotFoundError } from '@/lib/api/error-utils';
+import { useRole } from '@/contexts/role-context';
+import { useRouter } from 'next/navigation';
+import { useBasePath } from '@/lib/providers/path-provider';
 
 export interface GigsTableProps {
   data: ModelsGigResponse[];
@@ -117,6 +120,19 @@ export function GigsTable( {
   const [ selectedGig, setSelectedGig ] = React.useState<ModelsGigResponse | null>( null );
   const [ selectedTab, setSelectedTab ] = React.useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = React.useState<ModelsGigResponse | null>( null );
+  const role = useRole();
+  const router = useRouter();
+  const basePath = useBasePath();
+
+  // Admins get the full gig details page; brand/creator keep the quick-view sheet.
+  const handleViewGig = React.useCallback( ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
+    if ( role === 'admin' && gig.campaign_id && gig.id ) {
+      router.push( `${ basePath }/campaigns/${ gig.campaign_id }/gigs/${ gig.id }` );
+      return;
+    }
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  }, [ role, router, basePath ] );
   const [ hasSearched, setHasSearched ] = React.useState( false );
   const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;
@@ -164,8 +180,8 @@ export function GigsTable( {
   }, [ filteredData ] );
 
   const columns = React.useMemo(
-    () => getColumns( t, ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); }, ( gig ) => setEditingGig( gig ) ),
-    []
+    () => getColumns( t, handleViewGig, ( gig ) => setEditingGig( gig ) ),
+    [ handleViewGig ]
   );
 
   const table = useReactTable( {
@@ -229,7 +245,7 @@ export function GigsTable( {
               <GigsView
                 table={ table }
                 view={ view }
-                onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
+                onViewGig={ handleViewGig }
                 onCreateSubmission={ onCreateSubmission }
                 actionButtons={ actionButtons }
                 isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }

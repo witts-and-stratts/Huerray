@@ -229,6 +229,11 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       icon: Task02Icon,
     },
     {
+      title: withFallback( t, "admin.messages", "Messages" ),
+      url: "/admin/messages",
+      icon: MailIcon,
+    },
+    {
       title: withFallback( t, "admin.invoices", "Invoices" ),
       url: "/admin/invoices",
       icon: FileScriptIcon,
