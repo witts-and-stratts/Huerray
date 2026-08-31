@@ -168,15 +168,23 @@ export function SignupForm( {
         // establishing the new one.
         await clearPersistedData();
 
-        // Store auth tokens as cookies for middleware auth checks
+        // Store auth tokens as cookies for middleware auth checks.
+        // `path` must be explicit and match the removal calls in
+        // lib/api/client.ts / use-clear-persisted-data.ts exactly — this
+        // form lives under a locale-prefixed route (e.g. "/en/signup"), so
+        // without an explicit path the browser defaults it to "/en"
+        // instead of "/", and later `Cookies.remove(name, { path: '/' })`
+        // calls silently fail to match and clear it.
         if ( responseData?.access_token ) {
           Cookies.set( 'authToken', responseData.access_token, {
+            path: '/',
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
           } );
         }
         if ( responseData?.refresh_token ) {
           Cookies.set( 'refreshToken', responseData.refresh_token, {
+            path: '/',
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
           } );
