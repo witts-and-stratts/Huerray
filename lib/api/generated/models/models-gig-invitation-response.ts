@@ -18,9 +18,6 @@
 import type { ModelsCreatorResponse } from './models-creator-response';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsGigCreatorResponse } from './models-gig-creator-response';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { ModelsGigInvitationBrandResponse } from './models-gig-invitation-brand-response';
 
 export interface ModelsGigInvitationResponse {
@@ -28,7 +25,10 @@ export interface ModelsGigInvitationResponse {
     'brand_id'?: string;
     'creator'?: ModelsCreatorResponse;
     'creator_id'?: string;
-    'gig'?: ModelsGigCreatorResponse;
+    /**
+     * Gig is role-shaped: GigCreatorResponse (with compensation) for creators, GigBrandResponse (with gig_cost) for brands, GigResponse (both) for admins.
+     */
+    'gig'?: object;
     'gig_id'?: string;
     'id'?: string;
     'invited_at'?: string;

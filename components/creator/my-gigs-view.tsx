@@ -6,6 +6,7 @@ import { useCreatorInvitations } from '@/lib/api/hooks/gigs';
 import { GigsTable } from '@/components/campaigns/gigs-table';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
 import { ModelsGigCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
+import type { InvitationGig } from '@/lib/types/invitation-gig';
 import { useTranslations } from 'next-intl';
 import { CreateSubmissionSheet } from '@/components/creator/create-submission-sheet';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -55,7 +56,10 @@ export function MyGigsView() {
       .forEach( ( a ) => { if ( a.gig?.id ) gigMap.set( a.gig.id, a.gig ); } );
     ( ( invitationsQuery.data?.data || [] ) as ModelsGigInvitationResponse[] )
       .filter( ( i ) => i.status === 'accepted' )
-      .forEach( ( i ) => { if ( i.gig?.id ) gigMap.set( i.gig.id, i.gig ); } );
+      .forEach( ( i ) => {
+        const gig = i.gig as InvitationGig | undefined;
+        if ( gig?.id ) gigMap.set( gig.id, gig );
+      } );
     return Array.from( gigMap.values() );
   }, [ applicationsQuery.data, invitationsQuery.data ] );
 

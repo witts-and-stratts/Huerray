@@ -84,7 +84,7 @@ export function ApplicationActionMenu( {
         align={ align }
         trigger={
           trigger || (
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 hover:text-white">
               <span className="sr-only">{ t( 'openMenu' ) }</span>
               <MoreVertical className="size-5" strokeWidth={ 1 } />
             </Button>

@@ -16,6 +16,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { Clock01Icon, InformationCircleIcon, PlayIcon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ComponentProps, memo, useCallback, useMemo, useState } from 'react';
+import { useRole } from '@/contexts/role-context';
 import { RoleGuard } from '../auth/role-guard';
 import { BrandAvatar } from './brand-avatar';
 import { BrandHoverCard } from './brand-hover-card';
@@ -290,6 +291,7 @@ CreatorSubmissionButton.displayName = 'CreatorSubmissionButton';
 
 export const GigCard = memo( function GigCard( { gig, onViewGig, onOpenSheet, onCreateSubmission }: GigCardProps ) {
   const [ selectedSubmission, setSelectedSubmission ] = useState<ModelsVideoSubmissionResponse | null>( null );
+  const role = useRole();
 
   const formatCurrency = useFormatCurrency();
   const formattedCompensation = formatCurrency( gig.compensation?.value ?? 0, gig.compensation?.currency || 'EUR' );
@@ -300,8 +302,12 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onOpenSheet, on
     [ gig.campaign ]
   );
 
-  const rewardAmount = gig.compensation?.value ?? gig.gig_cost?.value;
-  const formattedReward = gig.compensation?.value ? formattedCompensation : formattedGigCost;
+  // Brands must never see creator compensation — the block below is
+  // labeled "Gig Cost" for brand and "Reward" for everyone else, so the
+  // value shown must match: gig_cost for brand, compensation otherwise.
+  const isBrand = role === 'brand';
+  const rewardAmount = isBrand ? gig.gig_cost?.value : gig.compensation?.value;
+  const formattedReward = isBrand ? formattedGigCost : formattedCompensation;
 
   const handleSelectSubmission = useCallback( ( sub: ModelsVideoSubmissionResponse ) => setSelectedSubmission( sub ), [] );
   const handleCloseSubmission = useCallback( ( open: boolean ) => { if ( !open ) setSelectedSubmission( null ); }, [] );

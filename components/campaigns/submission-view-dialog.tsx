@@ -240,12 +240,16 @@ const SubmissionDetailsSection = memo( ( { submission, locale, open }: { submiss
               { ( submission.status || 'unknown' ).replace( /_/g, ' ' ) }
             </Badge> } />
 
-            { gig?.compensation?.value &&
-              <Row label='Compensation' value={ <>{ formatCurrency( gig?.compensation?.value, 'EUR', locale ) }</> } />
-            }
-            { gig?.gig_cost?.value &&
-              <Row label='Gig Cost' value={ <>{ formatCurrency( gig?.gig_cost?.value, 'EUR', locale ) }</> } />
-            }
+            { gig?.compensation?.value && (
+              <RoleGuard excludedRoles={ [ 'brand' ] }>
+                <Row label='Compensation' value={ <>{ formatCurrency( gig?.compensation?.value, 'EUR', locale ) }</> } />
+              </RoleGuard>
+            ) }
+            { gig?.gig_cost?.value && (
+              <RoleGuard excludedRoles={ [ 'creator' ] }>
+                <Row label='Gig Cost' value={ <>{ formatCurrency( gig?.gig_cost?.value, 'EUR', locale ) }</> } />
+              </RoleGuard>
+            ) }
           </div>
         ) }
       </div>

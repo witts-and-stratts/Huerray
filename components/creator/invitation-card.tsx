@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRole } from '@/contexts/role-context';
 import { ModelsBrandResponse, ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
+import type { InvitationGig } from '@/lib/types/invitation-gig';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency } from '@/lib/hooks/format';
@@ -140,7 +141,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
   const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
   const t = useTranslations( 'dashboard.creator' );
 
-  const gig = invitation.gig;
+  const gig = invitation.gig as InvitationGig | undefined;
   const invitationBrand = getInvitationBrand( invitation );
   const gigTitle = gig?.title || t( 'common.untitledGig' );
   const requirementsTitle = t( 'requirements.title' );
@@ -310,15 +311,26 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
 
 function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResponse; } ) {
   const t = useTranslations( 'dashboard.creator' );
-  const gig = invitation.gig;
+  const commonT = useTranslations( 'dashboard.creator.common' );
+  const role = useRole();
+  const gig = invitation.gig as InvitationGig | undefined;
   const invitationBrand = getInvitationBrand( invitation );
   const requirementsTitle = t( 'requirements.title' );
   const contentGuidelinesTitle = t( 'campaign.campaignBriefTitle' );
   const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
-  const compensation = gig?.compensation?.value;
   const formatCurrency = useFormatCurrency();
-  const formattedCompensation = formatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
+  // Brands must never see creator compensation — the backend now shapes
+  // this invitation's nested `gig` per viewer role (ModelsGigBrandResponse
+  // for brand, with gig_cost instead of compensation), so show the value
+  // that actually belongs to the viewer rather than omitting money
+  // entirely for brand.
+  const compensationValue = gig?.compensation?.value;
+  const gigCostValue = gig?.gig_cost?.value;
+  const formattedCompensation = formatCurrency( compensationValue ?? 0, gig?.compensation?.currency || 'EUR' );
+  const formattedGigCost = formatCurrency( gigCostValue ?? 0, gig?.gig_cost?.currency || 'EUR' );
+  const showCompensation = role !== 'brand' && !!compensationValue;
+  const showGigCost = role === 'brand' && !!gigCostValue;
 
   const campaign = gig?.campaign;
   const coverImage = campaign?.product_image?.asset || campaign?.campaign_images?.[ 0 ]?.asset;
@@ -457,11 +469,20 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
               </WrappedCard>
             ) }
 
-            { compensation && (
+            { showCompensation && (
               <div className="flex items-center gap-2 justify-between">
-                <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Compensation</span>
+                <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">{ commonT( 'reward' ) }</span>
                 <span className="inline-flex items-center gap-1 text-lg text-foreground/80 rounded-full px-2.5 py-1 font-primary text-primary">
                   { formattedCompensation }
+                </span>
+              </div>
+            ) }
+
+            { showGigCost && (
+              <div className="flex items-center gap-2 justify-between">
+                <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">{ commonT( 'gigCost' ) }</span>
+                <span className="inline-flex items-center gap-1 text-lg text-foreground/80 rounded-full px-2.5 py-1 font-primary text-primary">
+                  { formattedGigCost }
                 </span>
               </div>
             ) }
@@ -489,7 +510,7 @@ function AdminBrandInvitationCard( { invitation, onViewDetails, onViewCreatorDet
   const creatorName = `${ invitation.creator?.first_name || '' } ${ invitation.creator?.last_name || '' }`.trim() || invitation.creator?.email || t( 'common.invitedCreator' );
 
   const profileImage = invitation.creator?.profile_image?.asset;
-  const gigTitle = invitation.gig?.title || t( 'common.untitledGig' );
+  const gigTitle = ( invitation.gig as InvitationGig | undefined )?.title || t( 'common.untitledGig' );
 
   const handleCardClick = () => {
     if ( creator && onViewCreatorDetails ) {

@@ -19,6 +19,7 @@ All URIs are relative to */api/v1*
 # **conversationsByEntityGet**
 > ModelsStandardResponseModelsConversationResponse conversationsByEntityGet()
 
+Returns the entity\'s conversation. If the caller may access it but no conversation has been started yet, returns 200 with an empty conversation body (blank id, no participants). 403 only if the caller may not access this entity\'s conversation at all.
 
 ### Example
 
@@ -67,7 +68,6 @@ No authorization required
 |-------------|-------------|------------------|
 |**200** | OK |  -  |
 |**403** | Forbidden |  -  |
-|**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -408,7 +408,7 @@ No authorization required
 # **conversationsMessagesGet**
 > ModelsStandardResponseArrayModelsConversationMessageResponse conversationsMessagesGet()
 
-Resolves the conversation for an entity ref and returns all of its messages, oldest first.
+Resolves the conversation for an entity ref and returns its messages, oldest first. A fine-grained tag (admin_campaign_approval, brand_campaign_decision, ...) returns only messages carrying that tag; a base type (brand, campaign, creator, video_submission, gig) returns the whole conversation.
 
 ### Example
 

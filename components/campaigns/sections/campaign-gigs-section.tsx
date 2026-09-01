@@ -44,7 +44,9 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   const handleViewGig = ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
     if ( basePath && gig.id ) {
       const hash = tab === 'submissions' ? '#submissions' : '';
-      router.push( `${ basePath }/campaigns/${ campaignId }/gigs/${ gig.id }${ hash }` );
+      // ?from=gigs tells the gig details page's breadcrumb to link back to
+      // this same Gigs tab.
+      router.push( `${ basePath }/campaigns/${ campaignId }/gigs/${ gig.id }?from=gigs${ hash }` );
       return;
     }
     setSelectedGig( gig );

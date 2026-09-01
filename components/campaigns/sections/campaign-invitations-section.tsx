@@ -2,6 +2,7 @@
 'use no memo';
 
 import type { ModelsCreatorResponse, ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import type { InvitationGig } from '@/lib/types/invitation-gig';
 import { useCampaignInvitations } from '@/lib/api/hooks/campaigns';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
@@ -46,10 +47,13 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
   };
 
   const handleViewDetails = ( invitation: ModelsGigInvitationResponse ) => {
-    const gigId = invitation.gig?.id || invitation.gig_id;
-    const invitationCampaignId = invitation.gig?.campaign_id || invitation.gig?.campaign?.id || campaignId;
+    const gig = invitation.gig as InvitationGig | undefined;
+    const gigId = gig?.id || invitation.gig_id;
+    const invitationCampaignId = gig?.campaign_id || gig?.campaign?.id || campaignId;
     if ( !gigId ) return;
-    router.push( `${ basePath }/campaigns/${ invitationCampaignId }/gigs/${ gigId }` );
+    // ?from=invitations tells the gig details page's breadcrumb to link
+    // back to this same Invitations tab, not the campaign's default tab.
+    router.push( `${ basePath }/campaigns/${ invitationCampaignId }/gigs/${ gigId }?from=invitations` );
   };
 
   const handleViewCreatorDetails = ( creator: ModelsCreatorResponse, invitationStatus?: string ) => {

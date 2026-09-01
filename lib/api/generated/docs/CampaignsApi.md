@@ -298,7 +298,7 @@ No authorization required
 # **campaignsIdInvitationsGet**
 > ModelsStandardGigInvitationResponse campaignsIdInvitationsGet()
 
-Get all invitations for all gigs in a specific campaign
+Get all invitations for all gigs in a specific campaign. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
 
 ### Example
 

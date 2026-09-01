@@ -74,7 +74,7 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
         actions={ actions }
         data={ invitation }
         trigger={
-          trigger || <Button variant="ghost" size="icon" className="h-8 w-8">
+          trigger || <Button variant="ghost" size="icon" className="h-8 w-8 text-white hover:bg-white/20 hover:text-white">
             <MoreVertical className="h-4 w-4" />
             <span className="sr-only">{ t( 'openMenu' ) }</span>
           </Button>

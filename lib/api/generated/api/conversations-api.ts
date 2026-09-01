@@ -45,7 +45,7 @@ import type { ModelsStandardResponseModelsConversationResponse } from '../models
 export const ConversationsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Returns the entity\'s conversation. If the caller may access it but no conversation has been started yet, returns 200 with an empty conversation body (blank id, no participants). 403 only if the caller may not access this entity\'s conversation at all.
          * @summary Resolve the conversation for an entity
          * @param {string} entityType Entity type
          * @param {string} entityId Entity ID (UUID)
@@ -323,7 +323,7 @@ export const ConversationsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Resolves the conversation for an entity ref and returns all of its messages, oldest first.
+         * Resolves the conversation for an entity ref and returns its messages, oldest first. A fine-grained tag (admin_campaign_approval, brand_campaign_decision, ...) returns only messages carrying that tag; a base type (brand, campaign, creator, video_submission, gig) returns the whole conversation.
          * @summary Get the messages for an entity\'s conversation
          * @param {string} entityType Entity type (brand, campaign, creator, video_submission, admin_campaign_approval, ...)
          * @param {string} entityId Entity ID (UUID)
@@ -484,7 +484,7 @@ export const ConversationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ConversationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Returns the entity\'s conversation. If the caller may access it but no conversation has been started yet, returns 200 with an empty conversation body (blank id, no participants). 403 only if the caller may not access this entity\'s conversation at all.
          * @summary Resolve the conversation for an entity
          * @param {string} entityType Entity type
          * @param {string} entityId Entity ID (UUID)
@@ -582,7 +582,7 @@ export const ConversationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Resolves the conversation for an entity ref and returns all of its messages, oldest first.
+         * Resolves the conversation for an entity ref and returns its messages, oldest first. A fine-grained tag (admin_campaign_approval, brand_campaign_decision, ...) returns only messages carrying that tag; a base type (brand, campaign, creator, video_submission, gig) returns the whole conversation.
          * @summary Get the messages for an entity\'s conversation
          * @param {string} entityType Entity type (brand, campaign, creator, video_submission, admin_campaign_approval, ...)
          * @param {string} entityId Entity ID (UUID)
@@ -645,7 +645,7 @@ export const ConversationsApiFactory = function (configuration?: Configuration, 
     const localVarFp = ConversationsApiFp(configuration)
     return {
         /**
-         * 
+         * Returns the entity\'s conversation. If the caller may access it but no conversation has been started yet, returns 200 with an empty conversation body (blank id, no participants). 403 only if the caller may not access this entity\'s conversation at all.
          * @summary Resolve the conversation for an entity
          * @param {ConversationsApiConversationsByEntityGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -715,7 +715,7 @@ export const ConversationsApiFactory = function (configuration?: Configuration, 
             return localVarFp.conversationsIdParticipantsUserIdDelete(requestParameters.id, requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Resolves the conversation for an entity ref and returns all of its messages, oldest first.
+         * Resolves the conversation for an entity ref and returns its messages, oldest first. A fine-grained tag (admin_campaign_approval, brand_campaign_decision, ...) returns only messages carrying that tag; a base type (brand, campaign, creator, video_submission, gig) returns the whole conversation.
          * @summary Get the messages for an entity\'s conversation
          * @param {ConversationsApiConversationsMessagesGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -917,7 +917,7 @@ export interface ConversationsApiConversationsMessagesPostRequest {
  */
 export class ConversationsApi extends BaseAPI {
     /**
-     * 
+     * Returns the entity\'s conversation. If the caller may access it but no conversation has been started yet, returns 200 with an empty conversation body (blank id, no participants). 403 only if the caller may not access this entity\'s conversation at all.
      * @summary Resolve the conversation for an entity
      * @param {ConversationsApiConversationsByEntityGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -994,7 +994,7 @@ export class ConversationsApi extends BaseAPI {
     }
 
     /**
-     * Resolves the conversation for an entity ref and returns all of its messages, oldest first.
+     * Resolves the conversation for an entity ref and returns its messages, oldest first. A fine-grained tag (admin_campaign_approval, brand_campaign_decision, ...) returns only messages carrying that tag; a base type (brand, campaign, creator, video_submission, gig) returns the whole conversation.
      * @summary Get the messages for an entity\'s conversation
      * @param {ConversationsApiConversationsMessagesGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

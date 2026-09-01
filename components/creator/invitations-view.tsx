@@ -5,6 +5,7 @@ import { SubHeader } from '@/components/subheader';
 import { InvitationCard } from './invitation-card';
 import { Loader2, MessageSquare } from 'lucide-react';
 import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import type { InvitationGig } from '@/lib/types/invitation-gig';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useBasePath } from '@/lib/providers/path-provider';
@@ -20,7 +21,7 @@ export function InvitationsView() {
   const invitations = ( data?.data || [] ) as ModelsGigInvitationResponse[];
 
   const handleOpenGig = ( invitation: ModelsGigInvitationResponse ) => {
-    const gigId = invitation.gig?.id || invitation.gig_id;
+    const gigId = ( invitation.gig as InvitationGig | undefined )?.id || invitation.gig_id;
     if ( !gigId ) return;
     router.push( `${ basePath }/gigs/${ gigId }` );
   };

@@ -236,7 +236,7 @@ export const CampaignsApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Get all invitations for all gigs in a specific campaign
+         * Get all invitations for all gigs in a specific campaign. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
          * @summary Get gig invitations by campaign
          * @param {string} id Campaign ID
          * @param {*} [options] Override http request option.
@@ -643,7 +643,7 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get all invitations for all gigs in a specific campaign
+         * Get all invitations for all gigs in a specific campaign. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
          * @summary Get gig invitations by campaign
          * @param {string} id Campaign ID
          * @param {*} [options] Override http request option.
@@ -811,7 +811,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
             return localVarFp.campaignsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get all invitations for all gigs in a specific campaign
+         * Get all invitations for all gigs in a specific campaign. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
          * @summary Get gig invitations by campaign
          * @param {CampaignsApiCampaignsIdInvitationsGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1117,7 +1117,7 @@ export class CampaignsApi extends BaseAPI {
     }
 
     /**
-     * Get all invitations for all gigs in a specific campaign
+     * Get all invitations for all gigs in a specific campaign. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
      * @summary Get gig invitations by campaign
      * @param {CampaignsApiCampaignsIdInvitationsGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

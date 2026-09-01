@@ -3,6 +3,7 @@
 import { Activity, useCallback, useEffect, useEffectEvent, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { useSearchParams } from 'next/navigation';
 
 import { Badge } from '@/components/dashboard-ui/badge';
 import { SubHeader, SubHeaderTabs } from '@/components/subheader';
@@ -55,6 +56,12 @@ export function GigDetailsPageView( { gig }: GigDetailsPageViewProps ) {
   const isCreator = role === 'creator';
   const gigId = gig.id ?? '';
   const campaignId = gig.campaign_id ?? gig.campaign?.id ?? '';
+  const searchParams = useSearchParams();
+  // Which campaign tab to land back on via the breadcrumb — set by whatever
+  // linked here (e.g. campaign-invitations-section.tsx passes ?from=invitations).
+  // Defaults to the Gigs tab, since that's where "view gig" is reached from
+  // in every other case (the standalone gigs list, gig cards, etc.).
+  const campaignReturnTab = searchParams.get( 'from' ) === 'invitations' ? 'invitations' : 'gigs';
 
   const [ activeTab, setActiveTab ] = useState<TabValue>( getTabFromHash );
   const onHashChange = useEffectEvent( () => {
@@ -118,7 +125,7 @@ export function GigDetailsPageView( { gig }: GigDetailsPageViewProps ) {
     ]
     : [
       { label: 'Campaigns', href: `${ basePath }/campaigns` },
-      ...( campaignId ? [ { label: campaignName, href: `${ basePath }/campaigns/${ campaignId }` } ] : [] ),
+      ...( campaignId ? [ { label: campaignName, href: `${ basePath }/campaigns/${ campaignId }#${ campaignReturnTab }` } ] : [] ),
       { label: gig.title ?? 'Gig' },
     ];
 
