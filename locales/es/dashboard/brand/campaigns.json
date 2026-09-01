@@ -139,6 +139,7 @@
     "noSubmissionsYet": "Aún no se han presentado propuestas",
     "noSubmissionsYetDescription": "Los vídeos enviados para esta campaña aparecerán aquí.",
     "errorLoadingInvitations": "Error al cargar las invitaciones",
+    "errorLoadingApplications": "Error al cargar las solicitudes",
     "inviteCreators": "Invitar a creadores",
     "campaignDecisionSubmitted": "Decisión de campaña presentada con éxito",
     "campaignDecisionAccepted": "Decisión de campaña aceptada.",

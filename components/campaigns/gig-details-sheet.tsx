@@ -27,7 +27,8 @@ import type { ModelsCampaignResponse } from '@/lib/api/generated/models/models-c
 import type { ModelsContentMedia } from '@/lib/api/generated/models/models-content-media';
 import type { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models/models-video-submission-response';
 import { useCreatorApplications } from '@/lib/api/hooks/creators';
-import { useApplyToGig, useCreatorInvitations, useRespondToInvitation } from '@/lib/api/hooks/gigs';
+import { useApplyToGig, useCreatorInvitations, useGigApplications, useRespondToInvitation } from '@/lib/api/hooks/gigs';
+import type { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import { formatDate } from '@/lib/utils';
@@ -38,6 +39,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import { toast } from 'sonner';
 import { Row } from '../admin/creators/creator-details-sheet';
+import { EmptyApplications } from '../admin/empty-states/empty-applications';
 import { EmptySubmission } from '../admin/empty-states/empty-submissions';
 import { RoleGuard } from '../auth/role-guard';
 import { Card, CardContent } from '../dashboard-ui/card';
@@ -45,6 +47,7 @@ import { Content } from '../dashboard-ui/content';
 import { ExpandableContent } from '../dashboard-ui/expandable-content';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
 import { SentenceCase } from '../text-case';
+import { ApplicationCard } from './application-card';
 import { BrandAvatar } from './brand-avatar';
 import { BrandHoverCard } from './brand-hover-card';
 import { GigActionMenu } from './gig-action-menu';
@@ -53,7 +56,7 @@ import { SubmissionCard } from './submission-card';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Tab = 'details' | 'campaign' | 'submissions' | 'guidelines';
+type Tab = 'details' | 'campaign' | 'applications' | 'submissions' | 'guidelines';
 
 export interface GigDetailsSheetProps {
   gig: ModelsGigResponse | null;
@@ -344,6 +347,56 @@ function GigCampaignTab( { campaign, imageItems, documentItems, videoItems, hasA
           </AnimTabs>
         </WrappedCard>
       ) }
+    </TabsPanel>
+  );
+}
+
+// ─── Applications tab (brand/admin only) ───────────────────────────────────────
+
+interface GigApplicationsTabProps {
+  gigId: string;
+}
+
+function GigApplicationsTab( { gigId }: GigApplicationsTabProps ) {
+  const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  const { data, isLoading, error } = useGigApplications( gigId, { enabled: !!gigId } );
+  const applications = ( data?.data ?? [] ) as ModelsGigApplicationResponse[];
+
+  if ( isLoading ) {
+    return (
+      <TabsPanel value="applications" className="pt-0 flex-1 h-full">
+        <div className="flex justify-center items-center p-8">
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+        </div>
+      </TabsPanel>
+    );
+  }
+
+  if ( error ) {
+    return (
+      <TabsPanel value="applications" className="pt-0 flex-1 h-full">
+        <div className="p-4 text-red-500 bg-red-50 rounded-md border border-red-200 text-sm">
+          { t( 'errorLoadingApplications' ) }: { error.message }
+        </div>
+      </TabsPanel>
+    );
+  }
+
+  if ( applications.length === 0 ) {
+    return (
+      <TabsPanel value="applications" className="pt-0 flex-1 h-full">
+        <EmptyApplications fill />
+      </TabsPanel>
+    );
+  }
+
+  return (
+    <TabsPanel value="applications" className="pt-0 flex-1 h-full">
+      <div className="grid grid-cols-2 gap-3 m-1">
+        { applications.map( ( application ) => (
+          <ApplicationCard key={ application.id } application={ application } />
+        ) ) }
+      </div>
     </TabsPanel>
   );
 }
@@ -753,6 +806,9 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
             <AnimTabsList variant="default" className="w-full">
               <TabsTab value="details" className="text-xs font-normal">{ t( 'details' ) }</TabsTab>
               { campaign && <TabsTab value="campaign" className="text-xs font-normal">{ campaignT( 'title' ) }</TabsTab> }
+              <RoleGuard allowedRoles={ [ 'brand', 'admin' ] }>
+                <TabsTab value="applications" className="text-xs font-normal">{ campaignActionsT( 'applications' ) }</TabsTab>
+              </RoleGuard>
               <TabsTab value="submissions" className="text-xs font-normal">
                 <RoleGuard allowedRoles={ [ 'creator' ] }>My Submissions</RoleGuard>
                 <RoleGuard excludedRoles={ [ 'creator' ] }>{ campaignActionsT( 'submissions' ) }</RoleGuard>
@@ -779,6 +835,10 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
                   onPreview={ handlePreview }
                 />
               ) }
+
+              <RoleGuard allowedRoles={ [ 'brand', 'admin' ] }>
+                <GigApplicationsTab gigId={ gig.id ?? '' } />
+              </RoleGuard>
 
               <GigSubmissionsTab
                 submissions={ submissions }
