@@ -50,7 +50,12 @@ export function CreatorBreadcrumbs() {
 
   // Single-item = root dashboard; settings pages manage their own breadcrumbs via SubHeader
   if ( breadcrumbs.length <= 1 ) return null;
-  const isExcluded = pathname?.includes( '/creator/settings' ) || pathname?.includes( '/creator/account' ) || pathname?.includes( '/creator/profile' );
+  // A gig details route (/creator/gigs/{gigId}) has a raw id as its last path
+  // segment — title-casing it would show the guid instead of the gig's name.
+  // That page renders its own breadcrumbs (with the actual gig title) via
+  // SubHeader, same as the settings/account/profile pages below.
+  const isGigDetailsRoute = /\/creator\/gigs\/(?!active$|my-gigs$)[^/]+$/.test( pathname ?? '' );
+  const isExcluded = pathname?.includes( '/creator/settings' ) || pathname?.includes( '/creator/account' ) || pathname?.includes( '/creator/profile' ) || isGigDetailsRoute;
   if ( isExcluded ) return null;
 
   return (
