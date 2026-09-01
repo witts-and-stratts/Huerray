@@ -22,11 +22,11 @@ import { Textarea } from '../dashboard-ui/textarea';
 import { TextCapitalize } from '../text-case';
 import { InvitationActionMenu } from './invitation-action-menu';
 import { BrandHoverCard } from '../campaigns/brand-hover-card';
-import { GigDetailsSheet } from '../campaigns/gig-details-sheet';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '../dashboard-ui/hover-card';
 import { Separator } from '../dashboard-ui/separator';
 import { Card } from '../dashboard-ui/card';
 import { WrappedCard } from '../dashboard-ui/wrapped-card';
+import { GigDetailsSheet } from '../campaigns/gig-details-sheet';
 
 type StatusIcon = ComponentProps<typeof HugeiconsIcon>[ 'icon' ];
 

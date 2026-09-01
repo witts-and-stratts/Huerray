@@ -20,9 +20,11 @@ import { useBasePath } from '@/lib/providers/path-provider';
 
 interface GigCampaignSectionProps {
   campaign: ModelsCampaignResponse;
+  /** Creators have no campaign details route to link to — omit the link for them. */
+  showCampaignLink?: boolean;
 }
 
-export function GigCampaignSection( { campaign }: GigCampaignSectionProps ) {
+export function GigCampaignSection( { campaign, showCampaignLink = true }: GigCampaignSectionProps ) {
   const summaryT = useTranslations( 'dashboard.brand.newCampaignPage.summary' );
   const gigsT = useTranslations( 'dashboard.brand.gigsPage' );
   const basePath = useBasePath();
@@ -47,7 +49,7 @@ export function GigCampaignSection( { campaign }: GigCampaignSectionProps ) {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-primary text-primary">{ campaign.campaign_name }</h3>
-        { campaign.id && (
+        { showCampaignLink && campaign.id && (
           <Button variant="outline" size="sm" className="font-regular">
             <Link href={ `${ basePath }/campaigns/${ campaign.id }` }>View Full Campaign</Link>
           </Button>

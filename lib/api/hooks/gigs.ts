@@ -17,7 +17,7 @@ import {
 import { GigsApi } from '../generated/api';
 import { apiClient, apiConfiguration } from '../client';
 import { campaignsKeys } from './campaigns';
-import { creatorsKeys } from './creators';
+import { creatorsKeys, useCreatorApplications } from './creators';
 import type {
   ModelsStandardGenericResponse,
   ModelsPaginatedGigResponse,
@@ -30,6 +30,7 @@ import type {
   ModelsStandardGigApplicationResponse,
   ModelsStandardGigApplicationResponses,
   ModelsGigInvitationRequest,
+  ModelsGigInvitationResponse,
   ModelsStandardGigInvitationResponse,
   ModelsGigInvitationResponseRequest,
   ModelsUpdateGigApplicationRequest,
@@ -342,4 +343,39 @@ export function useCreatorInvitations(
     },
     ...options,
   } );
+}
+
+/**
+ * Derives the authenticated creator's own participation state for a
+ * specific gig (their invitation, if any, and their application, if any),
+ * from the creator's own invitations/applications lists. Shared by the
+ * gig details page's action buttons (Apply / Accept / Decline / Create
+ * Submission) and its Comments tab, which only lets a creator post once
+ * they're participating in the gig.
+ */
+export function useCreatorGigStatus( gigId: string, options?: { enabled?: boolean; } ) {
+  const enabled = options?.enabled ?? true;
+  const { data: invitationsData, isLoading: isInvitationsLoading } = useCreatorInvitations( { enabled } );
+  const { data: applicationsData, isLoading: isApplicationsLoading } = useCreatorApplications( { enabled } );
+
+  const invitations = ( invitationsData?.data || [] ) as ModelsGigInvitationResponse[];
+  const gigInvitation = invitations.find( ( inv ) => inv.gig_id === gigId );
+
+  const applications = applicationsData?.data || [];
+  const gigApplication = applications.find( ( app ) => app.gig_id === gigId );
+
+  const invitationId = gigInvitation?.id;
+  const invitationStatus = gigInvitation?.status;
+  const hasAcceptedApplication = gigApplication?.status === 'accepted';
+  const hasAppliedPending = !invitationId && gigApplication?.status === 'pending';
+  const isParticipating = hasAcceptedApplication || invitationStatus === 'accepted';
+
+  return {
+    invitationId,
+    invitationStatus,
+    gigApplication,
+    hasAppliedPending,
+    isParticipating,
+    isLoading: isInvitationsLoading || isApplicationsLoading,
+  };
 }

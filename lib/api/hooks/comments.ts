@@ -36,6 +36,7 @@ export const commentsKeys = {
 export function useComments(
   entityType: string,
   entityId: string,
+  options?: { enabled?: boolean; },
 ): UseQueryResult<ModelsStandardResponseArrayModelsConversationMessageResponse, ApiError> {
   return useQuery( {
     queryKey: commentsKeys.entity( entityType, entityId ),
@@ -43,7 +44,7 @@ export function useComments(
       const response = await conversationsApi.conversationsMessagesGet( { entityType, entityId } );
       return response.data;
     },
-    enabled: !!entityId,
+    enabled: !!entityId && ( options?.enabled ?? true ),
   } );
 }
 

@@ -124,15 +124,39 @@ export function GigsTable( {
   const router = useRouter();
   const basePath = useBasePath();
 
-  // Admins get the full gig details page; brand/creator keep the quick-view sheet.
+  // "View Gig" (the explicit action, from the dropdown menu or an actions-
+  // column button) always opens the full gig details page — creators route
+  // to their flat /gigs/{id} path (no campaigns route to nest under);
+  // admin/brand route nested under the campaign. The quick-view sheet is
+  // kept as a fallback when a gig has no campaign_id to route to.
   const handleViewGig = React.useCallback( ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
-    if ( role === 'admin' && gig.campaign_id && gig.id ) {
-      router.push( `${ basePath }/campaigns/${ gig.campaign_id }/gigs/${ gig.id }` );
-      return;
+    if ( gig.id ) {
+      const hash = tab === 'submissions' ? '#submissions' : '';
+      if ( role === 'creator' ) {
+        router.push( `${ basePath }/gigs/${ gig.id }${ hash }` );
+        return;
+      }
+      if ( gig.campaign_id ) {
+        router.push( `${ basePath }/campaigns/${ gig.campaign_id }/gigs/${ gig.id }${ hash }` );
+        return;
+      }
     }
     setSelectedGig( gig );
     setSelectedTab( tab ?? 'details' );
   }, [ role, router, basePath ] );
+
+  // Clicking the gig's title/cover (as opposed to the explicit "View Gig"
+  // action) opens the quick-view sheet for admin/brand, same as before —
+  // creators have no sheet in their flow anymore (their actions all live on
+  // the full page now), so it navigates for them too.
+  const handleOpenSheet = React.useCallback( ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
+    if ( role === 'creator' ) {
+      handleViewGig( gig, tab );
+      return;
+    }
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  }, [ role, handleViewGig ] );
   const [ hasSearched, setHasSearched ] = React.useState( false );
   const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;
@@ -180,8 +204,8 @@ export function GigsTable( {
   }, [ filteredData ] );
 
   const columns = React.useMemo(
-    () => getColumns( t, handleViewGig, ( gig ) => setEditingGig( gig ) ),
-    [ handleViewGig ]
+    () => getColumns( t, handleViewGig, ( gig ) => setEditingGig( gig ), handleOpenSheet ),
+    [ handleViewGig, handleOpenSheet ]
   );
 
   const table = useReactTable( {
@@ -246,6 +270,7 @@ export function GigsTable( {
                 table={ table }
                 view={ view }
                 onViewGig={ handleViewGig }
+                onOpenSheet={ handleOpenSheet }
                 onCreateSubmission={ onCreateSubmission }
                 actionButtons={ actionButtons }
                 isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }

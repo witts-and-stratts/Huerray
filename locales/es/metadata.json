@@ -30,6 +30,7 @@
   "creator": {
     "dashboard": "Panel de control del creador",
     "gigs": "Mis conciertos",
+    "gigDetails": "Detalles del Gig",
     "cases": "Tickets de asistencia",
     "caseDetails": "Detalles del caso",
     "earnings": "Ganancias",

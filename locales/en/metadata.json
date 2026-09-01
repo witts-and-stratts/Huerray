@@ -30,6 +30,7 @@
   "creator": {
     "dashboard": "Creator Dashboard",
     "gigs": "My Gigs",
+    "gigDetails": "Gig Details",
     "cases": "Support Tickets",
     "caseDetails": "Case Details",
     "earnings": "Earnings",

@@ -31,6 +31,8 @@ import { useTranslations } from 'next-intl';
 export interface GigCardProps {
   gig: ModelsGigResponse;
   onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
+  /** Clicking the gig title — opens the quick-view sheet (falls back to onViewGig if omitted). */
+  onOpenSheet?: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 
@@ -115,16 +117,17 @@ interface GigCardHeaderProps {
   gig: ModelsGigResponse;
   coverImage: string | undefined;
   onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
+  onOpenSheet: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onSelectSubmission: ( sub: ModelsVideoSubmissionResponse ) => void;
 }
 
-const GigCardHeader = memo( ( { gig, coverImage, onViewGig, onSelectSubmission }: GigCardHeaderProps ) => (
+const GigCardHeader = memo( ( { gig, coverImage, onViewGig, onOpenSheet, onSelectSubmission }: GigCardHeaderProps ) => (
   <div className="flex items-start px-4 pt-4 pb-0 gap-3">
     {/* Title + description */ }
     <div className="flex flex-col flex-1 min-w-0">
       <h3
         className="card__title cursor-pointer hover:underline truncate"
-        onClick={ () => onViewGig( gig ) }
+        onClick={ () => onOpenSheet( gig ) }
       >
         { gig.title }
       </h3>
@@ -285,7 +288,7 @@ CreatorSubmissionButton.displayName = 'CreatorSubmissionButton';
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) {
+export const GigCard = memo( function GigCard( { gig, onViewGig, onOpenSheet, onCreateSubmission }: GigCardProps ) {
   const [ selectedSubmission, setSelectedSubmission ] = useState<ModelsVideoSubmissionResponse | null>( null );
 
   const formatCurrency = useFormatCurrency();
@@ -311,6 +314,7 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmiss
           gig={ gig }
           coverImage={ coverImage }
           onViewGig={ onViewGig }
+          onOpenSheet={ onOpenSheet ?? onViewGig }
           onSelectSubmission={ handleSelectSubmission }
         />
 

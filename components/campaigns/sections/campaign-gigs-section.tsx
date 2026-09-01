@@ -38,12 +38,20 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   const [ selectedTab, setSelectedTab ] = useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = useState<ModelsGigResponse | null>( null );
 
-  // Admins get the full gig details page; brand keeps the quick-view sheet.
+  // "View Gig" (the explicit action) opens the full gig details page.
+  // Clicking the gig title itself keeps opening the quick-view sheet, same
+  // as before.
   const handleViewGig = ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
-    if ( role === 'admin' && basePath && gig.id ) {
-      router.push( `${ basePath }/campaigns/${ campaignId }/gigs/${ gig.id }` );
+    if ( basePath && gig.id ) {
+      const hash = tab === 'submissions' ? '#submissions' : '';
+      router.push( `${ basePath }/campaigns/${ campaignId }/gigs/${ gig.id }${ hash }` );
       return;
     }
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  };
+
+  const handleOpenSheet = ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
     setSelectedGig( gig );
     setSelectedTab( tab ?? 'details' );
   };
@@ -87,6 +95,7 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
               key={ gig.id }
               gig={ gig }
               onViewGig={ handleViewGig }
+              onOpenSheet={ handleOpenSheet }
             />
           ) ) }
         </div>
