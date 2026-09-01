@@ -132,6 +132,7 @@ function CardShell( {
 // ─── Creator view — shows Gig details ─────────────────────────────────────────
 
 function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardProps ) {
+  const [ gigSheetOpen, setGigSheetOpen ] = useState( false );
   const [ showAcceptDialog, setShowAcceptDialog ] = useState( false );
   const [ showRejectDialog, setShowRejectDialog ] = useState( false );
   const [ acceptComment, setAcceptComment ] = useState( '' );
@@ -179,7 +180,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
     <>
       <CardShell
         backgroundImage={ coverImage ? imgpresets.card( coverImage ) : undefined }
-        onClick={ () => onViewDetails( invitation ) }
+        onClick={ () => setGigSheetOpen( true ) }
       >
         {/* Top row */ }
         <div className="absolute top-3 left-3 right-3 flex items-start justify-between" onClick={ e => e.stopPropagation() }>
@@ -249,6 +250,14 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
           ) }
         </div>
       </CardShell>
+
+      <GigDetailsSheet
+        gig={ invitation.gig as ModelsGigResponse ?? null }
+        open={ gigSheetOpen }
+        onOpenChange={ setGigSheetOpen }
+        invitationId={ invitation.id }
+        invitationStatus={ invitation.status }
+      />
 
       <ConfirmDialog
         open={ showAcceptDialog }

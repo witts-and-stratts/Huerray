@@ -146,17 +146,13 @@ export function GigsTable( {
   }, [ role, router, basePath ] );
 
   // Clicking the gig's title/cover (as opposed to the explicit "View Gig"
-  // action) opens the quick-view sheet for admin/brand, same as before —
-  // creators have no sheet in their flow anymore (their actions all live on
-  // the full page now), so it navigates for them too.
+  // action) opens the quick-view sheet — same for every role. The sheet
+  // already has full apply/accept-decline/create-submission support for
+  // creators built in, so this is a safe "quick peek" for everyone.
   const handleOpenSheet = React.useCallback( ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
-    if ( role === 'creator' ) {
-      handleViewGig( gig, tab );
-      return;
-    }
     setSelectedGig( gig );
     setSelectedTab( tab ?? 'details' );
-  }, [ role, handleViewGig ] );
+  }, [] );
   const [ hasSearched, setHasSearched ] = React.useState( false );
   const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;

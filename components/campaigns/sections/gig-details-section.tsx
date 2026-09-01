@@ -7,7 +7,9 @@ import { Content } from '@/components/dashboard-ui/content';
 import { Separator } from '@/components/dashboard-ui/separator';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
 import { Row } from '@/components/admin/creators/creator-details-sheet';
+import { useRole } from '@/contexts/role-context';
 import type { ModelsGigResponse } from '@/lib/api/generated/models';
+import { useFormatCurrency } from '@/lib/hooks/format';
 
 interface GigDetailsSectionProps {
   gig: ModelsGigResponse;
@@ -16,10 +18,35 @@ interface GigDetailsSectionProps {
 /** Full gig requirements/guidelines — same content as the gig preview sheet's Details tab. */
 export function GigDetailsSection( { gig }: GigDetailsSectionProps ) {
   const t = useTranslations( 'dashboard.brand.gigsPage' );
+  const commonT = useTranslations( 'dashboard.creator.common' );
+  const role = useRole();
+  const formatCurrency = useFormatCurrency();
   const { gender_requirement: genderRequirement, age_min: ageMin, age_max: ageMax, ambience, requirements, content_guidelines: contentGuidelines } = gig;
+
+  // Brands see the gig cost (what they pay); creators see the compensation
+  // (what they earn); admins see both — same split as the gig preview
+  // sheet's footer.
+  const compensationValue = gig.compensation?.value;
+  const gigCostValue = gig.gig_cost?.value;
+  const formattedCompensation = formatCurrency( compensationValue ?? 0, gig.compensation?.currency || 'EUR' );
+  const formattedGigCost = formatCurrency( gigCostValue ?? 0, gig.gig_cost?.currency || 'EUR' );
+  const showCompensation = role !== 'brand' && !!compensationValue;
+  const showGigCost = role !== 'creator' && !!gigCostValue;
 
   return (
     <div className="flex flex-col gap-3">
+      { ( showCompensation || showGigCost ) && (
+        <WrappedCard title="Payment">
+          { showCompensation && (
+            <Row label={ commonT( 'reward' ) } value={ <span className="text-lg font-primary text-primary leading-none">{ formattedCompensation }</span> } />
+          ) }
+          { showCompensation && showGigCost && <Separator /> }
+          { showGigCost && (
+            <Row label={ commonT( 'gigCost' ) } value={ <span className="text-lg font-primary text-primary leading-none">{ formattedGigCost }</span> } />
+          ) }
+        </WrappedCard>
+      ) }
+
       <WrappedCard title={ t( 'creatorRequirements' ) }>
         <div className="flex items-start gap-3 py-2">
           { /* Gender */ }
