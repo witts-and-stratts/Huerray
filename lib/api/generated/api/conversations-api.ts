@@ -440,7 +440,7 @@ export const ConversationsApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Creates the conversation if needed and appends a message tagged with entity_type.
+         * Creates the conversation if needed and appends a message tagged with entity_type. A brand posting with entity_type=creator opens/continues a private thread with that creator (not visible to other creators); a gig message reaches the brand plus every creator who accepted the gig.
          * @summary Post a message to an entity\'s conversation
          * @param {ModelsPostMessageRequest} request Message
          * @param {*} [options] Override http request option.
@@ -623,7 +623,7 @@ export const ConversationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates the conversation if needed and appends a message tagged with entity_type.
+         * Creates the conversation if needed and appends a message tagged with entity_type. A brand posting with entity_type=creator opens/continues a private thread with that creator (not visible to other creators); a gig message reaches the brand plus every creator who accepted the gig.
          * @summary Post a message to an entity\'s conversation
          * @param {ModelsPostMessageRequest} request Message
          * @param {*} [options] Override http request option.
@@ -745,7 +745,7 @@ export const ConversationsApiFactory = function (configuration?: Configuration, 
             return localVarFp.conversationsMessagesMessageIdPut(requestParameters.messageId, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates the conversation if needed and appends a message tagged with entity_type.
+         * Creates the conversation if needed and appends a message tagged with entity_type. A brand posting with entity_type=creator opens/continues a private thread with that creator (not visible to other creators); a gig message reaches the brand plus every creator who accepted the gig.
          * @summary Post a message to an entity\'s conversation
          * @param {ConversationsApiConversationsMessagesPostRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1027,7 +1027,7 @@ export class ConversationsApi extends BaseAPI {
     }
 
     /**
-     * Creates the conversation if needed and appends a message tagged with entity_type.
+     * Creates the conversation if needed and appends a message tagged with entity_type. A brand posting with entity_type=creator opens/continues a private thread with that creator (not visible to other creators); a gig message reaches the brand plus every creator who accepted the gig.
      * @summary Post a message to an entity\'s conversation
      * @param {ConversationsApiConversationsMessagesPostRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

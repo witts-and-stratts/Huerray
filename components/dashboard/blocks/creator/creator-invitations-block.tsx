@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useCreatorInvitations } from '@/lib/api/hooks/gigs';
 import type { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
-import type { InvitationGig } from '@/lib/types/invitation-gig';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { InvitationCard } from '@/components/creator/invitation-card';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { useBasePath } from '@/lib/providers/path-provider';
@@ -41,7 +41,7 @@ export function CreatorInvitationsBlock() {
   const recentInvitations = invitations.slice( 0, 4 );
 
   const handleOpenGig = ( invitation: ModelsGigInvitationResponse ) => {
-    const gigId = ( invitation.gig as InvitationGig | undefined )?.id || invitation.gig_id;
+    const gigId = ( invitation.gig as RoleShapedGig | undefined )?.id || invitation.gig_id;
     if ( !gigId ) return;
     router.push( `${ basePath }/gigs/${ gigId }` );
   };

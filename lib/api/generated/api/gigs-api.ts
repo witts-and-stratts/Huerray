@@ -130,7 +130,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * Get all applications for a specific gig
+         * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig applications
          * @param {string} id Gig ID
          * @param {*} [options] Override http request option.
@@ -682,7 +682,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get all applications for a specific gig
+         * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig applications
          * @param {string} id Gig ID
          * @param {*} [options] Override http request option.
@@ -888,7 +888,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.gigsCampaignsCampaignIdGet(requestParameters.campaignId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get all applications for a specific gig
+         * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig applications
          * @param {GigsApiGigsIdApplicationsGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1227,7 +1227,7 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
-     * Get all applications for a specific gig
+     * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
      * @summary Get gig applications
      * @param {GigsApiGigsIdApplicationsGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

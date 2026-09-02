@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **last_message** | [**ModelsConversationMessageResponse**](ModelsConversationMessageResponse.md) |  | [optional] [default to undefined]
 **message_count** | **number** |  | [optional] [default to undefined]
 **participants** | [**Array&lt;ModelsConversationParticipantResponse&gt;**](ModelsConversationParticipantResponse.md) |  | [optional] [default to undefined]
+**scope_id** | **string** |  | [optional] [default to undefined]
 **updated_at** | **string** |  | [optional] [default to undefined]
 
 ## Example
@@ -27,6 +28,7 @@ const instance: ModelsConversationResponse = {
     last_message,
     message_count,
     participants,
+    scope_id,
     updated_at,
 };
 ```

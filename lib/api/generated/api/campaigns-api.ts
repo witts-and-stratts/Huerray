@@ -51,7 +51,7 @@ import type { ModelsUpdateCampaignRequest } from '../models';
 export const CampaignsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Get all applications for a campaign\'s gigs
+         * Get all applications for a campaign\'s gigs. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
          * @summary Get campaign applications
          * @param {string} id Campaign ID
          * @param {*} [options] Override http request option.
@@ -575,7 +575,7 @@ export const CampaignsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CampaignsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Get all applications for a campaign\'s gigs
+         * Get all applications for a campaign\'s gigs. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
          * @summary Get campaign applications
          * @param {string} id Campaign ID
          * @param {*} [options] Override http request option.
@@ -761,7 +761,7 @@ export const CampaignsApiFactory = function (configuration?: Configuration, base
     const localVarFp = CampaignsApiFp(configuration)
     return {
         /**
-         * Get all applications for a campaign\'s gigs
+         * Get all applications for a campaign\'s gigs. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
          * @summary Get campaign applications
          * @param {CampaignsApiCampaignsIdApplicationsGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1062,7 +1062,7 @@ export interface CampaignsApiCampaignsSearchGetRequest {
  */
 export class CampaignsApi extends BaseAPI {
     /**
-     * Get all applications for a campaign\'s gigs
+     * Get all applications for a campaign\'s gigs. The embedded gig is role-shaped: brands see gig_cost, admins see both gig_cost and compensation.
      * @summary Get campaign applications
      * @param {CampaignsApiCampaignsIdApplicationsGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

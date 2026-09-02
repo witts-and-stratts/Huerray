@@ -136,7 +136,7 @@ No authorization required
 # **gigsIdApplicationsGet**
 > ModelsStandardGigApplicationResponses gigsIdApplicationsGet()
 
-Get all applications for a specific gig
+Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
 
 ### Example
 

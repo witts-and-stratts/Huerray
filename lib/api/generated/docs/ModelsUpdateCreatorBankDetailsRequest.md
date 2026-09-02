@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bank_account_name** | **string** | Bank &amp; Tax Details | [default to undefined]
 **bank_account_number** | **string** |  | [default to undefined]
-**bank_address** | **string** |  | [default to undefined]
+**bank_address** | **string** |  | [optional] [default to undefined]
 **bank_name** | **string** |  | [default to undefined]
 **bank_routing_number** | **string** |  | [default to undefined]
 **tax_country** | [**UtilsCountryCode**](UtilsCountryCode.md) |  | [default to undefined]

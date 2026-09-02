@@ -23,7 +23,7 @@ export interface ModelsUpdateCreatorBankDetailsRequest {
      */
     'bank_account_name': string;
     'bank_account_number': string;
-    'bank_address': string;
+    'bank_address'?: string;
     'bank_name': string;
     'bank_routing_number': string;
     'tax_country': UtilsCountryCode;

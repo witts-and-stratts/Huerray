@@ -2,7 +2,7 @@
 'use no memo';
 
 import type { ModelsCreatorResponse, ModelsGigInvitationResponse } from '@/lib/api/generated/models';
-import type { InvitationGig } from '@/lib/types/invitation-gig';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { useCampaignInvitations } from '@/lib/api/hooks/campaigns';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
@@ -47,7 +47,7 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
   };
 
   const handleViewDetails = ( invitation: ModelsGigInvitationResponse ) => {
-    const gig = invitation.gig as InvitationGig | undefined;
+    const gig = invitation.gig as RoleShapedGig | undefined;
     const gigId = gig?.id || invitation.gig_id;
     const invitationCampaignId = gig?.campaign_id || gig?.campaign?.id || campaignId;
     if ( !gigId ) return;

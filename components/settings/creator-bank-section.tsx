@@ -27,7 +27,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ field.state.meta.isTouched && field.state.meta.errors.length ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
           />
@@ -46,7 +46,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ field.state.meta.isTouched && field.state.meta.errors.length ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
           />
@@ -65,7 +65,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ field.state.meta.isTouched && field.state.meta.errors.length ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
           />
@@ -84,7 +84,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ field.state.meta.isTouched && field.state.meta.errors.length ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
           />
@@ -103,7 +103,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                   value={ field.state.value }
                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                   onBlur={ field.handleBlur }
-                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                  error={ field.state.meta.isTouched && field.state.meta.errors.length ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
                 />
               ) }
             />
@@ -131,7 +131,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ field.state.meta.isTouched && field.state.meta.errors.length ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
           />
@@ -150,7 +150,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onValueChange={ ( val: any ) => field.handleChange( val || "" ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ field.state.meta.isTouched && field.state.meta.errors.length ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
             ) }
           />

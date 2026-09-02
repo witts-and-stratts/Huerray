@@ -28,6 +28,7 @@ export interface ModelsConversationResponse {
     'last_message'?: ModelsConversationMessageResponse;
     'message_count'?: number;
     'participants'?: Array<ModelsConversationParticipantResponse>;
+    'scope_id'?: string;
     'updated_at'?: string;
 }
 

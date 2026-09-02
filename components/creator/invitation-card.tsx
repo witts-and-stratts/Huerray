@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRole } from '@/contexts/role-context';
 import { ModelsBrandResponse, ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
-import type { InvitationGig } from '@/lib/types/invitation-gig';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency } from '@/lib/hooks/format';
@@ -141,7 +141,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
   const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
   const t = useTranslations( 'dashboard.creator' );
 
-  const gig = invitation.gig as InvitationGig | undefined;
+  const gig = invitation.gig as RoleShapedGig | undefined;
   const invitationBrand = getInvitationBrand( invitation );
   const gigTitle = gig?.title || t( 'common.untitledGig' );
   const requirementsTitle = t( 'requirements.title' );
@@ -313,7 +313,7 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
   const t = useTranslations( 'dashboard.creator' );
   const commonT = useTranslations( 'dashboard.creator.common' );
   const role = useRole();
-  const gig = invitation.gig as InvitationGig | undefined;
+  const gig = invitation.gig as RoleShapedGig | undefined;
   const invitationBrand = getInvitationBrand( invitation );
   const requirementsTitle = t( 'requirements.title' );
   const contentGuidelinesTitle = t( 'campaign.campaignBriefTitle' );
@@ -510,7 +510,7 @@ function AdminBrandInvitationCard( { invitation, onViewDetails, onViewCreatorDet
   const creatorName = `${ invitation.creator?.first_name || '' } ${ invitation.creator?.last_name || '' }`.trim() || invitation.creator?.email || t( 'common.invitedCreator' );
 
   const profileImage = invitation.creator?.profile_image?.asset;
-  const gigTitle = ( invitation.gig as InvitationGig | undefined )?.title || t( 'common.untitledGig' );
+  const gigTitle = ( invitation.gig as RoleShapedGig | undefined )?.title || t( 'common.untitledGig' );
 
   const handleCardClick = () => {
     if ( creator && onViewCreatorDetails ) {

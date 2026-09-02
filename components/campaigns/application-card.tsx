@@ -17,6 +17,7 @@ import { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
 import { UtilsGigApplicationStatus } from '@/lib/api/generated/models/utils-gig-application-status';
 import { useUpdateApplicationStatus } from '@/lib/api/hooks/gigs';
 import { useRole } from '@/contexts/role-context';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { ApplicationActionMenu } from './application-action-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
 import { Button } from '@/components/dashboard-ui/button';
@@ -112,7 +113,7 @@ export function ApplicationCard( { application, onClick }: ApplicationCardProps 
   const [ acceptDialogOpen, setAcceptDialogOpen ] = useState( false );
   const [ declineDialogOpen, setDeclineDialogOpen ] = useState( false );
   const creator = application.creator;
-  const gig = application.gig;
+  const gig = application.gig as RoleShapedGig | undefined;
 
   const creatorName = `${ creator?.first_name || '' } ${ creator?.last_name || '' }`.trim() || creator?.email || 'Unknown';
   const creatorInitials = creatorName.slice( 0, 2 ).toUpperCase();

@@ -567,7 +567,7 @@ No authorization required
 # **conversationsMessagesPost**
 > ModelsStandardResponseModelsConversationMessageResponse conversationsMessagesPost(request)
 
-Creates the conversation if needed and appends a message tagged with entity_type.
+Creates the conversation if needed and appends a message tagged with entity_type. A brand posting with entity_type=creator opens/continues a private thread with that creator (not visible to other creators); a gig message reaches the brand plus every creator who accepted the gig.
 
 ### Example
 
