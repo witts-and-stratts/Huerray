@@ -27,6 +27,7 @@ import type { UtilsContentType } from './utils-content-type';
 import type { UtilsCountryCode } from './utils-country-code';
 
 export interface ModelsCreatorResponse {
+    'age'?: number;
     'application_video'?: ModelsContentMedia;
     /**
      * Bank & Tax Details

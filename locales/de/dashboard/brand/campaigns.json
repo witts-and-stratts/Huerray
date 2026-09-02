@@ -139,6 +139,7 @@
     "noSubmissionsYet": "Noch keine Einreichungen",
     "noSubmissionsYetDescription": "Die für diese Kampagne eingereichten Videos werden hier veröffentlicht.",
     "errorLoadingInvitations": "Fehler beim Laden von Einladungen",
+    "errorLoadingApplications": "Fehler beim Laden der Bewerbungen",
     "inviteCreators": "Creators einladen",
     "campaignDecisionSubmitted": "Kampagnenentscheidung erfolgreich eingereicht",
     "campaignDecisionAccepted": "Entscheidung der Kampagne angenommen.",

@@ -7,7 +7,7 @@ import { EmptyApplications } from '@/components/admin/empty-states/empty-applica
 import { ApplicationCard } from '@/components/campaigns/application-card';
 import { Button } from '@/components/dashboard-ui/button';
 import { Skeleton } from '@/components/dashboard-ui/skeleton';
-import { ModelsCreatorResponse } from '@/lib/api/generated/models';
+import { ModelsCreatorResponse, ModelsGigApplicationResponse } from '@/lib/api/generated/models';
 import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
 
 interface CampaignApplicationsSectionProps {
@@ -43,10 +43,12 @@ export function CampaignApplicationsSection( { campaignId }: CampaignApplication
   const { data: applicationsData, isLoading, error, refetch } = useCampaignApplications( campaignId );
   const [ selectedCreator, setSelectedCreator ] = useState<ModelsCreatorResponse | null>( null );
   const [ creatorSheetOpen, setCreatorSheetOpen ] = useState( false );
+  const [ selectedIsAccepted, setSelectedIsAccepted ] = useState( false );
 
-  const handleViewCreatorDetails = ( creator: ModelsCreatorResponse | undefined ) => {
-    if ( !creator ) return;
-    setSelectedCreator( creator );
+  const handleViewCreatorDetails = ( application: ModelsGigApplicationResponse ) => {
+    if ( !application.creator ) return;
+    setSelectedCreator( application.creator );
+    setSelectedIsAccepted( application.status === 'accepted' );
     setCreatorSheetOpen( true );
   };
 
@@ -91,7 +93,7 @@ export function CampaignApplicationsSection( { campaignId }: CampaignApplication
           <ApplicationCard
             key={ application.id }
             application={ application }
-            onClick={ () => handleViewCreatorDetails( application.creator ) }
+            onClick={ () => handleViewCreatorDetails( application ) }
           />
         ) ) }
       </div>
@@ -100,6 +102,7 @@ export function CampaignApplicationsSection( { campaignId }: CampaignApplication
         creator={ selectedCreator }
         open={ creatorSheetOpen }
         onOpenChange={ setCreatorSheetOpen }
+        revealAddress={ selectedIsAccepted }
       />
     </div>
   );

@@ -22,6 +22,8 @@ interface GigsViewProps {
   table: TanstackTable<ModelsGigResponse>;
   view: 'table' | 'cards';
   onViewGig: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void;
+  /** Clicking the gig title/cover on a tile — opens the quick-view sheet (falls back to onViewGig if omitted). */
+  onOpenSheet?: ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => void;
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
   actionButtons?: React.ReactNode;
   isLoading?: boolean;
@@ -33,6 +35,7 @@ export function GigsView( {
   table,
   view,
   onViewGig,
+  onOpenSheet,
   onCreateSubmission,
   actionButtons,
   isLoading = false,
@@ -71,7 +74,7 @@ export function GigsView( {
       ) : view === 'table' ? (
         <GigsTableView table={ table } />
       ) : (
-        <GigsCardsView table={ table } onViewGig={ onViewGig } onCreateSubmission={ onCreateSubmission } />
+        <GigsCardsView table={ table } onViewGig={ onViewGig } onOpenSheet={ onOpenSheet } onCreateSubmission={ onCreateSubmission } />
       ) }
     </TableviewWrapper>
   );

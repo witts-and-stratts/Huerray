@@ -16,6 +16,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { Clock01Icon, InformationCircleIcon, PlayIcon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ComponentProps, memo, useCallback, useMemo, useState } from 'react';
+import { useRole } from '@/contexts/role-context';
 import { RoleGuard } from '../auth/role-guard';
 import { BrandAvatar } from './brand-avatar';
 import { BrandHoverCard } from './brand-hover-card';
@@ -31,6 +32,8 @@ import { useTranslations } from 'next-intl';
 export interface GigCardProps {
   gig: ModelsGigResponse;
   onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
+  /** Clicking the gig title — opens the quick-view sheet (falls back to onViewGig if omitted). */
+  onOpenSheet?: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 
@@ -115,16 +118,17 @@ interface GigCardHeaderProps {
   gig: ModelsGigResponse;
   coverImage: string | undefined;
   onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
+  onOpenSheet: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onSelectSubmission: ( sub: ModelsVideoSubmissionResponse ) => void;
 }
 
-const GigCardHeader = memo( ( { gig, coverImage, onViewGig, onSelectSubmission }: GigCardHeaderProps ) => (
+const GigCardHeader = memo( ( { gig, coverImage, onViewGig, onOpenSheet, onSelectSubmission }: GigCardHeaderProps ) => (
   <div className="flex items-start px-4 pt-4 pb-0 gap-3">
     {/* Title + description */ }
     <div className="flex flex-col flex-1 min-w-0">
       <h3
         className="card__title cursor-pointer hover:underline truncate"
-        onClick={ () => onViewGig( gig ) }
+        onClick={ () => onOpenSheet( gig ) }
       >
         { gig.title }
       </h3>
@@ -285,8 +289,9 @@ CreatorSubmissionButton.displayName = 'CreatorSubmissionButton';
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmission }: GigCardProps ) {
+export const GigCard = memo( function GigCard( { gig, onViewGig, onOpenSheet, onCreateSubmission }: GigCardProps ) {
   const [ selectedSubmission, setSelectedSubmission ] = useState<ModelsVideoSubmissionResponse | null>( null );
+  const role = useRole();
 
   const formatCurrency = useFormatCurrency();
   const formattedCompensation = formatCurrency( gig.compensation?.value ?? 0, gig.compensation?.currency || 'EUR' );
@@ -297,8 +302,12 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmiss
     [ gig.campaign ]
   );
 
-  const rewardAmount = gig.compensation?.value ?? gig.gig_cost?.value;
-  const formattedReward = gig.compensation?.value ? formattedCompensation : formattedGigCost;
+  // Brands must never see creator compensation — the block below is
+  // labeled "Gig Cost" for brand and "Reward" for everyone else, so the
+  // value shown must match: gig_cost for brand, compensation otherwise.
+  const isBrand = role === 'brand';
+  const rewardAmount = isBrand ? gig.gig_cost?.value : gig.compensation?.value;
+  const formattedReward = isBrand ? formattedGigCost : formattedCompensation;
 
   const handleSelectSubmission = useCallback( ( sub: ModelsVideoSubmissionResponse ) => setSelectedSubmission( sub ), [] );
   const handleCloseSubmission = useCallback( ( open: boolean ) => { if ( !open ) setSelectedSubmission( null ); }, [] );
@@ -311,6 +320,7 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onCreateSubmiss
           gig={ gig }
           coverImage={ coverImage }
           onViewGig={ onViewGig }
+          onOpenSheet={ onOpenSheet ?? onViewGig }
           onSelectSubmission={ handleSelectSubmission }
         />
 

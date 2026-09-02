@@ -20,6 +20,7 @@ import {
 } from '@/components/dashboard-ui/empty';
 import { EmptyGigs } from '@/components/admin/empty-states/empty-gigs';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 interface CampaignGigsSectionProps {
   campaignId: string;
@@ -31,10 +32,31 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
   const t = useTranslations( 'dashboard.admin.gigForm' );
   const { data: gigsResponse, isLoading } = useGigsByCampaign( campaignId, role );
   const gigs = ( gigsResponse?.data || [] ) as ModelsGigResponse[];
+  const router = useRouter();
 
   const [ selectedGig, setSelectedGig ] = useState<ModelsGigResponse | null>( null );
   const [ selectedTab, setSelectedTab ] = useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = useState<ModelsGigResponse | null>( null );
+
+  // "View Gig" (the explicit action) opens the full gig details page.
+  // Clicking the gig title itself keeps opening the quick-view sheet, same
+  // as before.
+  const handleViewGig = ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
+    if ( basePath && gig.id ) {
+      const hash = tab === 'submissions' ? '#submissions' : '';
+      // ?from=gigs tells the gig details page's breadcrumb to link back to
+      // this same Gigs tab.
+      router.push( `${ basePath }/campaigns/${ campaignId }/gigs/${ gig.id }?from=gigs${ hash }` );
+      return;
+    }
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  };
+
+  const handleOpenSheet = ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  };
 
   if ( isLoading ) {
     return (
@@ -74,7 +96,8 @@ export function CampaignGigsSection( { campaignId, role = 'admin', basePath }: C
             <GigCard
               key={ gig.id }
               gig={ gig }
-              onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
+              onViewGig={ handleViewGig }
+              onOpenSheet={ handleOpenSheet }
             />
           ) ) }
         </div>

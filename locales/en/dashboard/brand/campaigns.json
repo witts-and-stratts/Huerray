@@ -139,6 +139,7 @@
     "noSubmissionsYet": "No submissions yet",
     "noSubmissionsYetDescription": "Video submissions for this campaign will appear here.",
     "errorLoadingInvitations": "Error loading invitations",
+    "errorLoadingApplications": "Error loading applications",
     "inviteCreators": "Invite Creators",
     "campaignDecisionSubmitted": "Campaign decision submitted successfully",
     "campaignDecisionAccepted": "Campaign decision accepted.",

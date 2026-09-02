@@ -25,9 +25,10 @@ import { ChevronDown } from 'lucide-react';
 import { RoleGuard } from '@/components/auth/role-guard';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
 import { cn } from '@/lib/dashboard-utils';
+import { CreatorConversationPanel } from '@/components/conversations/creator-conversation-panel';
 
 
-export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onApproveProfile, onRejectProfile }: CreatorDetailsSheetProps ) {
+export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onApproveProfile, onRejectProfile, initialTab }: CreatorDetailsSheetProps ) {
   const c = creator as any;
   let {
     email,
@@ -51,7 +52,11 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
 
   const t = useTranslations( 'dashboard.admin' );
   const tc = useTranslations( 'dashboard.common' );
-  const [ activeTab, setActiveTab ] = React.useState( 'overview' );
+  const [ activeTab, setActiveTab ] = React.useState( initialTab ?? 'overview' );
+
+  React.useEffect( () => {
+    if ( open ) setActiveTab( initialTab ?? 'overview' );
+  }, [ open, initialTab ] );
 
   const { data: bankDetails } = useCreatorBankDetails( id! );
   const joinedLabel = useFormatDate( created_at || '' );
@@ -76,6 +81,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
             <TabsTrigger value="bio" className="tab-trigger">{ t( 'creatorDetails.tabBio' ) }</TabsTrigger>
             <TabsTrigger value="bank" className="tab-trigger">{ t( 'creatorDetails.tabBank' ) }</TabsTrigger>
             <TabsTrigger value="user" className="tab-trigger">{ t( 'creatorDetails.tabUser' ) }</TabsTrigger>
+            <TabsTrigger value="messages" className="tab-trigger">{ t( 'creatorDetails.tabMessages' ) }</TabsTrigger>
           </TabsList>
 
           {/* Overview */ }
@@ -196,6 +202,13 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
                 <Separator />
                 <Row label={ t( 'creatorDetails.updatedLabel' ) } value={ userDetails?.updated_at ? userUpdatedLabel : tc( 'sheets.na' ) } />
               </WrappedCard>
+            </div>
+          </Activity>
+
+          {/* Messages — the ongoing conversation with this creator */ }
+          <Activity mode={ activeTab === 'messages' ? 'visible' : 'hidden' }>
+            <div className="pt-4 h-[420px] flex flex-col">
+              { id && <CreatorConversationPanel creatorId={ id } size="sm" /> }
             </div>
           </Activity>
         </Tabs>

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **brand_id** | **string** |  | [optional] [default to undefined]
 **creator** | [**ModelsCreatorResponse**](ModelsCreatorResponse.md) |  | [optional] [default to undefined]
 **creator_id** | **string** |  | [optional] [default to undefined]
-**gig** | [**ModelsGigCreatorResponse**](ModelsGigCreatorResponse.md) |  | [optional] [default to undefined]
+**gig** | **object** | Gig is role-shaped: GigCreatorResponse (with compensation) for creators, GigBrandResponse (with gig_cost) for brands, GigResponse (both) for admins. | [optional] [default to undefined]
 **gig_id** | **string** |  | [optional] [default to undefined]
 **id** | **string** |  | [optional] [default to undefined]
 **invited_at** | **string** |  | [optional] [default to undefined]

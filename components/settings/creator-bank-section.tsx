@@ -8,6 +8,21 @@ import { creatorBankSchema } from './creator-bank-schema';
 import { Separator } from '../dashboard-ui/separator';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/dashboard-ui/card';
 
+/**
+ * TanStack Form's per-cause errorMap (onChange/onBlur/onSubmit) doesn't
+ * self-reconcile across causes — e.g. blurring an empty Tax Country sets
+ * its `onBlur` error, and then selecting a value only clears the
+ * `onChange` entry, leaving the stale `onBlur` "required" message in
+ * `field.state.meta.errors` forever (until the field blurs again). Validate
+ * directly against the field's current value instead, so the displayed
+ * error always matches what's actually in the field right now.
+ */
+function fieldError( field: any, schema: { safeParse: ( value: unknown ) => { success: boolean; error?: { issues: { message: string; }[]; }; }; } ): string | undefined {
+  if ( !field.state.meta.isTouched ) return undefined;
+  const result = schema.safeParse( field.state.value );
+  return result.success ? undefined : result.error?.issues[ 0 ]?.message;
+}
+
 export function CreatorBankSection( { form }: { form: any; } ) {
   return (
     <Card className='max-w-5xl'>
@@ -27,7 +42,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ fieldError( field, creatorBankSchema.shape.bankName ) }
               />
             ) }
           />
@@ -46,7 +61,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ fieldError( field, creatorBankSchema.shape.bankAccountName ) }
               />
             ) }
           />
@@ -65,7 +80,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ fieldError( field, creatorBankSchema.shape.bankAccountNumber ) }
               />
             ) }
           />
@@ -84,7 +99,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ fieldError( field, creatorBankSchema.shape.bankRoutingNumber ) }
               />
             ) }
           />
@@ -103,7 +118,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                   value={ field.state.value }
                   onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                   onBlur={ field.handleBlur }
-                  error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                  error={ fieldError( field, creatorBankSchema.shape.bankAddress ) }
                 />
               ) }
             />
@@ -131,13 +146,14 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                 onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ fieldError( field, creatorBankSchema.shape.taxId ) }
               />
             ) }
           />
           <form.Field
             name="taxCountry"
             validators={ {
+              onChange: creatorBankSchema.shape.taxCountry,
               onBlur: creatorBankSchema.shape.taxCountry,
             } }
             children={ ( field: any ) => (
@@ -147,8 +163,9 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 type="country"
                 onValueChange={ ( val: any ) => field.handleChange( val || "" ) }
+                onBlur={ field.handleBlur }
                 required
-                error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
+                error={ fieldError( field, creatorBankSchema.shape.taxCountry ) }
               />
             ) }
           />

@@ -168,6 +168,11 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
       icon: WalletDone01Icon,
     },
     {
+      title: withFallback( t, "creator.messages", "Messages" ),
+      url: "/creator/messages",
+      icon: MailIcon,
+    },
+    {
       title: withFallback( t, "creator.profile", "My Profile" ),
       url: "/creator/profile",
       icon: ImageUpload01Icon,
@@ -227,6 +232,11 @@ export const adminNavigationData = ( t?: NavigationTranslator ): Omit<SidebarNav
       title: withFallback( t, "admin.gigs", "Gigs" ),
       url: "/admin/gigs",
       icon: Task02Icon,
+    },
+    {
+      title: withFallback( t, "admin.messages", "Messages" ),
+      url: "/admin/messages",
+      icon: MailIcon,
     },
     {
       title: withFallback( t, "admin.invoices", "Invoices" ),

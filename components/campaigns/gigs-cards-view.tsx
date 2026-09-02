@@ -10,10 +10,11 @@ import { ComponentProps } from 'react';
 interface GigsCardsProps {
   table: Table<ModelsGigResponse>;
   onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
+  onOpenSheet?: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ];
   onCreateSubmission?: ( gig: ModelsGigResponse ) => void;
 }
 
-export function GigsCardsView( { table, onViewGig, onCreateSubmission }: GigsCardsProps ) {
+export function GigsCardsView( { table, onViewGig, onOpenSheet, onCreateSubmission }: GigsCardsProps ) {
   const rows = table.getRowModel().rows;
 
   return (
@@ -32,6 +33,7 @@ export function GigsCardsView( { table, onViewGig, onCreateSubmission }: GigsCar
             <GigCard
               gig={ row.original }
               onViewGig={ onViewGig }
+              onOpenSheet={ onOpenSheet }
               onCreateSubmission={ onCreateSubmission }
             />
           </motion.div>

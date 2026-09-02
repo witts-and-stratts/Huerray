@@ -15,15 +15,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsCommentResponse } from './models-comment-response';
+import type { ModelsConversationResponse } from './models-conversation-response';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsErrorInfo } from './models-error-info';
+import type { ModelsPagination } from './models-pagination';
 
-export interface ModelsStandardResponseModelsCommentResponse {
-    'data'?: ModelsCommentResponse;
-    'error'?: ModelsErrorInfo;
+export interface ModelsPaginatedResponseArrayModelsConversationResponse {
+    'data'?: Array<ModelsConversationResponse>;
     'message'?: string;
+    'pagination'?: ModelsPagination;
     'success'?: boolean;
 }
 

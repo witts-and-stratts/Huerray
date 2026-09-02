@@ -11,6 +11,7 @@
     "editCampaign": "Modifier la campagne",
     "newGig": "Nouveau projet",
     "editGig": "Edit Gig",
+    "gigDetails": "Détails du Gig",
     "cases": "Tickets de soutien",
     "caseDetails": "Détails de l'affaire",
     "creators": "Créateurs",
@@ -21,6 +22,7 @@
     "newsletter": "Bulletin d'information",
     "payouts": "Paiements",
     "notifications": "Notifications",
+    "messages": "Messages",
     "settings": "Paramètres",
     "securitySettings": "Paramètres de sécurité",
     "help": "Centre d'aide"
@@ -28,9 +30,11 @@
   "creator": {
     "dashboard": "Tableau de bord du créateur",
     "gigs": "Mes concerts",
+    "gigDetails": "Détails du Gig",
     "cases": "Tickets de soutien",
     "caseDetails": "Détails de l'affaire",
     "earnings": "Les revenus",
+    "messages": "Messages",
     "invitations": "Invitations",
     "profile": "Profil",
     "completeProfile": "Profil complet",

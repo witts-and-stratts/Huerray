@@ -7,6 +7,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { useCampaignInvitations } from '@/lib/api/hooks/campaigns';
 import type { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { getCountryDisplay } from '../campaign-overview-utils';
 import { InvitationStatusBadge } from './status-badges';
 import { WorkflowListSkeleton } from './skeletons';
@@ -77,7 +78,7 @@ export function InvitationsTabContent( { campaignId, isActive, onViewAllInvitati
                       { `${ invitation.creator?.first_name || '' } ${ invitation.creator?.last_name || '' }`.trim() || invitation.creator?.email || t( 'labels.creator' ) }
                     </p>
                     <p className="truncate text-[11px] text-muted-foreground">
-                      { invitation.gig?.title || t( 'labels.campaignInvitation' ) }
+                      { ( invitation.gig as RoleShapedGig | undefined )?.title || t( 'labels.campaignInvitation' ) }
                     </p>
                   </div>
                 </div>

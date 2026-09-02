@@ -53,6 +53,9 @@ import { type DateRange } from '@/components/dashboard-ui/superfield/date-picker
 import { useTranslations } from 'next-intl';
 import { ScrollArea } from '../dashboard-ui/scroll-area';
 import { isApiNotFoundError } from '@/lib/api/error-utils';
+import { useRole } from '@/contexts/role-context';
+import { useRouter } from 'next/navigation';
+import { useBasePath } from '@/lib/providers/path-provider';
 
 export interface GigsTableProps {
   data: ModelsGigResponse[];
@@ -117,6 +120,39 @@ export function GigsTable( {
   const [ selectedGig, setSelectedGig ] = React.useState<ModelsGigResponse | null>( null );
   const [ selectedTab, setSelectedTab ] = React.useState<'details' | 'guidelines' | 'submissions'>( 'details' );
   const [ editingGig, setEditingGig ] = React.useState<ModelsGigResponse | null>( null );
+  const role = useRole();
+  const router = useRouter();
+  const basePath = useBasePath();
+
+  // "View Gig" (the explicit action, from the dropdown menu or an actions-
+  // column button) always opens the full gig details page — creators route
+  // to their flat /gigs/{id} path (no campaigns route to nest under);
+  // admin/brand route nested under the campaign. The quick-view sheet is
+  // kept as a fallback when a gig has no campaign_id to route to.
+  const handleViewGig = React.useCallback( ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
+    if ( gig.id ) {
+      const hash = tab === 'submissions' ? '#submissions' : '';
+      if ( role === 'creator' ) {
+        router.push( `${ basePath }/gigs/${ gig.id }${ hash }` );
+        return;
+      }
+      if ( gig.campaign_id ) {
+        router.push( `${ basePath }/campaigns/${ gig.campaign_id }/gigs/${ gig.id }${ hash }` );
+        return;
+      }
+    }
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  }, [ role, router, basePath ] );
+
+  // Clicking the gig's title/cover (as opposed to the explicit "View Gig"
+  // action) opens the quick-view sheet — same for every role. The sheet
+  // already has full apply/accept-decline/create-submission support for
+  // creators built in, so this is a safe "quick peek" for everyone.
+  const handleOpenSheet = React.useCallback( ( gig: ModelsGigResponse, tab?: 'details' | 'guidelines' | 'submissions' ) => {
+    setSelectedGig( gig );
+    setSelectedTab( tab ?? 'details' );
+  }, [] );
   const [ hasSearched, setHasSearched ] = React.useState( false );
   const [ committedSearchValue, setCommittedSearchValue ] = React.useState( '' );
   const globalFilter = internalGlobalFilter;
@@ -164,8 +200,8 @@ export function GigsTable( {
   }, [ filteredData ] );
 
   const columns = React.useMemo(
-    () => getColumns( t, ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); }, ( gig ) => setEditingGig( gig ) ),
-    []
+    () => getColumns( t, handleViewGig, ( gig ) => setEditingGig( gig ), handleOpenSheet ),
+    [ handleViewGig, handleOpenSheet ]
   );
 
   const table = useReactTable( {
@@ -229,7 +265,8 @@ export function GigsTable( {
               <GigsView
                 table={ table }
                 view={ view }
-                onViewGig={ ( gig, tab ) => { setSelectedGig( gig ); setSelectedTab( tab ?? 'details' ); } }
+                onViewGig={ handleViewGig }
+                onOpenSheet={ handleOpenSheet }
                 onCreateSubmission={ onCreateSubmission }
                 actionButtons={ actionButtons }
                 isLoading={ showContentLoading && table.getRowModel().rows.length === 0 }

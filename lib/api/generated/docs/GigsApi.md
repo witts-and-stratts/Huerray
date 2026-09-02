@@ -136,7 +136,7 @@ No authorization required
 # **gigsIdApplicationsGet**
 > ModelsStandardGigApplicationResponses gigsIdApplicationsGet()
 
-Get all applications for a specific gig
+Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
 
 ### Example
 
@@ -362,7 +362,7 @@ No authorization required
 # **gigsIdInvitationsGet**
 > ModelsStandardGigInvitationResponse gigsIdInvitationsGet()
 
-Get all invitations for a specific gig with role-based access
+Get all invitations for a specific gig with role-based access. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
 
 ### Example
 
@@ -418,7 +418,7 @@ No authorization required
 # **gigsIdInvitePost**
 > ModelsStandardGigInvitationResponse gigsIdInvitePost(invitation)
 
-Brand invites a creator to apply for a gig
+Brand invites a creator to apply for a gig. The embedded gig is role-shaped (brand sees gig_cost, not compensation).
 
 ### Example
 

@@ -130,7 +130,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * Get all applications for a specific gig
+         * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig applications
          * @param {string} id Gig ID
          * @param {*} [options] Override http request option.
@@ -271,7 +271,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * Get all invitations for a specific gig with role-based access
+         * Get all invitations for a specific gig with role-based access. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig invitations
          * @param {string} id Gig ID
          * @param {*} [options] Override http request option.
@@ -305,7 +305,7 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
-         * Brand invites a creator to apply for a gig
+         * Brand invites a creator to apply for a gig. The embedded gig is role-shaped (brand sees gig_cost, not compensation).
          * @summary Invite creator to gig
          * @param {string} id Gig ID
          * @param {ModelsGigInvitationRequest} invitation Invitation data
@@ -682,7 +682,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get all applications for a specific gig
+         * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig applications
          * @param {string} id Gig ID
          * @param {*} [options] Override http request option.
@@ -735,7 +735,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get all invitations for a specific gig with role-based access
+         * Get all invitations for a specific gig with role-based access. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig invitations
          * @param {string} id Gig ID
          * @param {*} [options] Override http request option.
@@ -748,7 +748,7 @@ export const GigsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Brand invites a creator to apply for a gig
+         * Brand invites a creator to apply for a gig. The embedded gig is role-shaped (brand sees gig_cost, not compensation).
          * @summary Invite creator to gig
          * @param {string} id Gig ID
          * @param {ModelsGigInvitationRequest} invitation Invitation data
@@ -888,7 +888,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.gigsCampaignsCampaignIdGet(requestParameters.campaignId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get all applications for a specific gig
+         * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig applications
          * @param {GigsApiGigsIdApplicationsGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -928,7 +928,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.gigsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get all invitations for a specific gig with role-based access
+         * Get all invitations for a specific gig with role-based access. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
          * @summary Get gig invitations
          * @param {GigsApiGigsIdInvitationsGetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -938,7 +938,7 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.gigsIdInvitationsGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Brand invites a creator to apply for a gig
+         * Brand invites a creator to apply for a gig. The embedded gig is role-shaped (brand sees gig_cost, not compensation).
          * @summary Invite creator to gig
          * @param {GigsApiGigsIdInvitePostRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1227,7 +1227,7 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
-     * Get all applications for a specific gig
+     * Get all applications for a specific gig. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
      * @summary Get gig applications
      * @param {GigsApiGigsIdApplicationsGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1271,7 +1271,7 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
-     * Get all invitations for a specific gig with role-based access
+     * Get all invitations for a specific gig with role-based access. The embedded gig is role-shaped: creators see compensation, brands see gig_cost, admins see both.
      * @summary Get gig invitations
      * @param {GigsApiGigsIdInvitationsGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1282,7 +1282,7 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
-     * Brand invites a creator to apply for a gig
+     * Brand invites a creator to apply for a gig. The embedded gig is role-shaped (brand sees gig_cost, not compensation).
      * @summary Invite creator to gig
      * @param {GigsApiGigsIdInvitePostRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

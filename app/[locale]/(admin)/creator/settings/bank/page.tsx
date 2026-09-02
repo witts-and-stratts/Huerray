@@ -45,6 +45,14 @@ export default function CreatorBankSettingsPage() {
       bankAddress: '',
     } as CreatorBankSettings,
     validators: {
+      // canSubmit is derived partly from the form's own aggregated error
+      // map, which is only recomputed on whichever events are registered
+      // here. Without `onChange`, selecting a value on a dropdown-driven
+      // field (e.g. Tax Country, which updates via onValueChange and never
+      // blurs) leaves the form-level error map — and therefore the Save
+      // button's disabled state — stuck on whatever it was the last time a
+      // field blurred, even after every field is actually valid.
+      onChange: bankSchema,
       onBlur: bankSchema,
       onSubmit: bankSchema,
     },
@@ -69,13 +77,19 @@ export default function CreatorBankSettingsPage() {
 
   useEffect( () => {
     if ( !bankDetails ) return;
-    form.setFieldValue( 'bankName', bankDetails.bank_name || '' );
-    form.setFieldValue( 'bankAccountNumber', bankDetails.bank_account_number || '' );
-    form.setFieldValue( 'bankRoutingNumber', bankDetails.bank_routing_number || '' );
-    form.setFieldValue( 'taxId', bankDetails.tax_id || '' );
-    form.setFieldValue( 'taxCountry', bankDetails.tax_residence_country || '' );
-    form.setFieldValue( 'bankAccountName', bankDetails.bank_account_name || '' );
-    form.setFieldValue( 'bankAddress', bankDetails.bank_address || '' );
+    // dontUpdateMeta + dontValidate: hydrating from the fetched record
+    // shouldn't mark fields "touched" or run the form-level schema against
+    // a value where later fields haven't been set yet — that transient,
+    // partially-empty state would otherwise surface "required" errors on
+    // fields the user hasn't even seen yet.
+    const hydrateOpts = { dontUpdateMeta: true, dontValidate: true };
+    form.setFieldValue( 'bankName', bankDetails.bank_name || '', hydrateOpts );
+    form.setFieldValue( 'bankAccountNumber', bankDetails.bank_account_number || '', hydrateOpts );
+    form.setFieldValue( 'bankRoutingNumber', bankDetails.bank_routing_number || '', hydrateOpts );
+    form.setFieldValue( 'taxId', bankDetails.tax_id || '', hydrateOpts );
+    form.setFieldValue( 'taxCountry', bankDetails.tax_residence_country || '', hydrateOpts );
+    form.setFieldValue( 'bankAccountName', bankDetails.bank_account_name || '', hydrateOpts );
+    form.setFieldValue( 'bankAddress', bankDetails.bank_address || '', hydrateOpts );
   }, [ bankDetails ] );
 
   const handleFormSubmit = useCallback( ( e: React.FormEvent ) => {

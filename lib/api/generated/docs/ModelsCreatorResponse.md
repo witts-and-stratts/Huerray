@@ -5,6 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**age** | **number** |  | [optional] [default to undefined]
 **application_video** | [**ModelsContentMedia**](ModelsContentMedia.md) |  | [optional] [default to undefined]
 **bank_account_name** | **string** | Bank &amp; Tax Details | [optional] [default to undefined]
 **bank_account_number** | **string** |  | [optional] [default to undefined]
@@ -44,6 +45,7 @@ Name | Type | Description | Notes
 import { ModelsCreatorResponse } from 'huerray-api';
 
 const instance: ModelsCreatorResponse = {
+    age,
     application_video,
     bank_account_name,
     bank_account_number,

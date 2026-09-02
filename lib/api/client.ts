@@ -6,10 +6,10 @@
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import Cookies from 'js-cookie';
 import { Configuration } from './generated';
 import { toast } from 'sonner';
 import { config } from '@/lib/config';
+import { clearAllCookies } from '@/lib/utils/clear-all-cookies';
 
 export const BASE_URL = config.api.baseUrl;
 
@@ -17,9 +17,7 @@ export const BASE_URL = config.api.baseUrl;
 const handleAuthFailure = () => {
   if (typeof window !== 'undefined') {
     // Clear client-side user data
-    Cookies.remove('userData', { path: '/' });
-    Cookies.remove('authToken', { path: '/' });
-    Cookies.remove('refreshToken', { path: '/' });
+    clearAllCookies();
 
     const currentPath = window.location.pathname;
     // Checks for paths starting with /login, /signup, /auth OR /[locale]/login, /[locale]/signup, etc.

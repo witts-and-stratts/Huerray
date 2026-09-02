@@ -1,14 +1,14 @@
 'use client';
 'use no memo';
 
-import type { ModelsCreatorResponse, ModelsGigInvitationResponse, ModelsGigResponse } from '@/lib/api/generated/models';
+import type { ModelsCreatorResponse, ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { useCampaignInvitations } from '@/lib/api/hooks/campaigns';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 
 import { CreatorDetailsSheet } from '@/components/admin/creators/creator-details-sheet';
 import { EmptyInvitations } from '@/components/admin/empty-states/empty-invitations';
-import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
 import { GigSelectionDialog } from '@/components/campaigns/gig-selection-dialog';
 import { InviteCreatorsDialog } from '@/components/campaigns/invite-creators-dialog';
 import { InvitationCard } from '@/components/creator/invitation-card';
@@ -16,6 +16,8 @@ import { Button } from '@/components/dashboard-ui/button';
 import { useRole } from '@/contexts/role-context';
 import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useBasePath } from '@/lib/providers/path-provider';
 
 interface CampaignInvitationsSectionProps {
   campaignId: string;
@@ -27,12 +29,13 @@ interface CampaignInvitationsSectionProps {
 export function CampaignInvitationsSection( { campaignId, campaignStatus, campaignContentType }: CampaignInvitationsSectionProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
   const role = useRole();
+  const router = useRouter();
+  const basePath = useBasePath();
   const isAiCampaign = campaignContentType === UtilsContentType.ContentTypeAIGenerated;
   const { data: invitationsData, isLoading, error } = useCampaignInvitations( campaignId );
-  const [ selectedInvitation, setSelectedInvitation ] = useState<ModelsGigInvitationResponse | null>( null );
-  const [ sheetOpen, setSheetOpen ] = useState( false );
   const [ selectedCreator, setSelectedCreator ] = useState<ModelsCreatorResponse | null>( null );
   const [ creatorSheetOpen, setCreatorSheetOpen ] = useState( false );
+  const [ selectedIsAccepted, setSelectedIsAccepted ] = useState( false );
   const [ selectionOpen, setSelectionOpen ] = useState( false );
   const [ inviteSheetOpen, setInviteSheetOpen ] = useState( false );
   const [ selectedGigId, setSelectedGigId ] = useState<string>( '' );
@@ -44,12 +47,18 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
   };
 
   const handleViewDetails = ( invitation: ModelsGigInvitationResponse ) => {
-    setSelectedInvitation( invitation );
-    setSheetOpen( true );
+    const gig = invitation.gig as RoleShapedGig | undefined;
+    const gigId = gig?.id || invitation.gig_id;
+    const invitationCampaignId = gig?.campaign_id || gig?.campaign?.id || campaignId;
+    if ( !gigId ) return;
+    // ?from=invitations tells the gig details page's breadcrumb to link
+    // back to this same Invitations tab, not the campaign's default tab.
+    router.push( `${ basePath }/campaigns/${ invitationCampaignId }/gigs/${ gigId }?from=invitations` );
   };
 
-  const handleViewCreatorDetails = ( creator: ModelsCreatorResponse ) => {
+  const handleViewCreatorDetails = ( creator: ModelsCreatorResponse, invitationStatus?: string ) => {
     setSelectedCreator( creator );
+    setSelectedIsAccepted( invitationStatus === 'accepted' );
     setCreatorSheetOpen( true );
   };
 
@@ -108,24 +117,17 @@ export function CampaignInvitationsSection( { campaignId, campaignStatus, campai
               key={ invitation.id }
               invitation={ invitation }
               onViewDetails={ handleViewDetails }
-              onViewCreatorDetails={ handleViewCreatorDetails }
+              onViewCreatorDetails={ ( creator ) => handleViewCreatorDetails( creator, invitation.status ) }
             />
           );
         } ) }
       </div>
 
-      <GigDetailsSheet
-        gig={ ( selectedInvitation?.gig as unknown as ModelsGigResponse ) || null }
-        open={ sheetOpen }
-        onOpenChange={ setSheetOpen }
-        invitationId={ selectedInvitation?.id }
-        invitationStatus={ selectedInvitation?.status }
-      />
-
       <CreatorDetailsSheet
         creator={ selectedCreator }
         open={ creatorSheetOpen }
         onOpenChange={ setCreatorSheetOpen }
+        revealAddress={ selectedIsAccepted }
       />
 
       <GigSelectionDialog

@@ -2,10 +2,8 @@
 
 import { usePersistor } from "@/lib/redux/store-provider";
 import { useQueryClient } from "@tanstack/react-query";
-import Cookies from "js-cookie";
+import { clearAllCookies } from "@/lib/utils/clear-all-cookies";
 import { useCallback } from "react";
-
-const AUTH_COOKIES = [ "userData", "authToken", "refreshToken" ];
 
 // App-level preferences that should survive the wipe. Everything else in
 // web storage is treated as previous-session data and removed.
@@ -59,7 +57,7 @@ export function useClearPersistedData() {
     // 4. Cache Storage (service worker / fetch caches), if any.
     await clearCacheStorage();
 
-    // 5. Remove auth cookies from the previous session.
-    AUTH_COOKIES.forEach( ( name ) => Cookies.remove( name, { path: "/" } ) );
+    // 5. Remove every cookie left over from the previous session.
+    clearAllCookies();
   }, [ persistor, queryClient ] );
 }

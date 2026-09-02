@@ -31,7 +31,7 @@ import { useTranslations } from 'next-intl';
 
 // ─── Details Cell ─────────────────────────────────────────────────────────────
 
-const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ]; } ) => {
+const DetailsCell = ( { row, onOpenSheet }: { row: Row<ModelsGigResponse>; onOpenSheet: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ]; } ) => {
   const { title, gig_status, posting_start_date, posting_end_date } = row.original;
   const coverImage = row.original.campaign?.product_image?.asset ?? row.original.campaign?.campaign_images?.[ 0 ]?.asset;
 
@@ -47,7 +47,7 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
               src={ imgpresets.card( coverImage ) }
               alt={ title ?? 'Gig cover' }
               className="dt-table__avatar object-cover"
-              onClick={ () => onViewGig( row.original ) }
+              onClick={ () => onOpenSheet( row.original ) }
             />
           ) }
         </div>
@@ -64,7 +64,7 @@ const DetailsCell = ( { row, onViewGig }: { row: Row<ModelsGigResponse>; onViewG
         <div>
           <h4
             className='dt-table__col-title'
-            onClick={ () => onViewGig( row.original ) }
+            onClick={ () => onOpenSheet( row.original ) }
           >
             { title }
           </h4>
@@ -292,6 +292,7 @@ export const getColumns = (
   t: ( key: string, values?: Record<string, any> ) => string,
   onViewGig: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ],
   onEditGig?: ( gig: ModelsGigResponse ) => void,
+  onOpenSheet?: ComponentProps<typeof GigActionMenu>[ 'onViewGig' ],
 ): ColumnDef<ModelsGigResponse>[] => [
     {
       id: 'select',
@@ -365,7 +366,7 @@ export const getColumns = (
       accessorKey: 'details',
       header: () => <span className='font-regular pl-4'>{ t( 'details' ) }</span>,
       cell: ( { row } ) => <>
-        <DetailsCell row={ row } onViewGig={ onViewGig } />
+        <DetailsCell row={ row } onOpenSheet={ onOpenSheet ?? onViewGig } />
       </>,
     },
     {

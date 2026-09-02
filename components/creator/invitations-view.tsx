@@ -4,32 +4,27 @@ import { useCreatorInvitations } from '@/lib/api/hooks/gigs';
 import { SubHeader } from '@/components/subheader';
 import { InvitationCard } from './invitation-card';
 import { Loader2, MessageSquare } from 'lucide-react';
-import { useState } from 'react';
-import { GigDetailsSheet } from '@/components/campaigns/gig-details-sheet';
 import { ModelsGigInvitationResponse } from '@/lib/api/generated/models';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useBasePath } from '@/lib/providers/path-provider';
 
 import { InvitationsSkeleton } from './invitations-skeleton';
 
 export function InvitationsView() {
   const t = useTranslations( 'dashboard.creator.invitations' );
   const { data, isLoading, error } = useCreatorInvitations();
-  const [ selectedGig, setSelectedGig ] = useState<ModelsGigInvitationResponse | null>( null );
-  const [ sheetOpen, setSheetOpen ] = useState( false );
+  const router = useRouter();
+  const basePath = useBasePath();
 
   const invitations = ( data?.data || [] ) as ModelsGigInvitationResponse[];
 
   const handleOpenGig = ( invitation: ModelsGigInvitationResponse ) => {
-    setSelectedGig( invitation );
-    setSheetOpen( true );
+    const gigId = ( invitation.gig as RoleShapedGig | undefined )?.id || invitation.gig_id;
+    if ( !gigId ) return;
+    router.push( `${ basePath }/gigs/${ gigId }` );
   };
-
-  const selectedGigForSheet = selectedGig ? {
-    ...selectedGig.gig,
-    brand: selectedGig.gig?.brand || ( selectedGig as ModelsGigInvitationResponse & { brand?: unknown; } ).brand,
-    brand_name: selectedGig.gig?.brand_name || ( selectedGig as ModelsGigInvitationResponse & { brand?: { company_name?: string; }; } ).brand?.company_name,
-    brand_logo_url: selectedGig.gig?.brand_logo_url || ( selectedGig as ModelsGigInvitationResponse & { brand?: { profile_photo?: { asset?: string; }; }; } ).brand?.profile_photo?.asset,
-  } : null;
 
   if ( isLoading ) {
     return <InvitationsSkeleton />;
@@ -78,15 +73,6 @@ export function InvitationsView() {
           </div>
         ) }
       </div>
-
-
-      <GigDetailsSheet
-        gig={ selectedGigForSheet as any }
-        open={ sheetOpen }
-        onOpenChange={ setSheetOpen }
-        invitationId={ selectedGig?.id }
-        invitationStatus={ selectedGig?.status }
-      />
     </div>
   );
 }

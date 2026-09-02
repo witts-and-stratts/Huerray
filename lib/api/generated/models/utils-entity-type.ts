@@ -19,10 +19,12 @@ export const UtilsEntityType = {
     EntityTypeBrand: 'brand',
     EntityTypeCampaign: 'campaign',
     EntityTypeCreator: 'creator',
+    EntityTypeVideoSubmission: 'video_submission',
     EntityTypeAdminCampaignApproval: 'admin_campaign_approval',
     EntityTypeBrandCampaignDecision: 'brand_campaign_decision',
     EntityTypeVideoSubmissionStatusUpdate: 'video_submission_status_update',
-    EntityTypeBrandVideoDecision: 'brand_video_decision'
+    EntityTypeBrandVideoDecision: 'brand_video_decision',
+    EntityTypeGig: 'gig'
 } as const;
 
 export type UtilsEntityType = typeof UtilsEntityType[keyof typeof UtilsEntityType];

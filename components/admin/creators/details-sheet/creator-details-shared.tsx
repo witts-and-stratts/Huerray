@@ -13,6 +13,16 @@ export interface CreatorDetailsSheetProps {
   onOpenChange: ( open: boolean ) => void;
   onApproveProfile?: ( creator: ModelsCreatorResponse ) => void;
   onRejectProfile?: ( creator: ModelsCreatorResponse ) => void;
+  /**
+   * Whether the viewer has earned the right to see this creator's shipping
+   * address (street/city/state/zipcode) — true once the creator has an
+   * accepted application or invitation with the viewer's campaign/gig, so a
+   * brand can ship product. Admins always see the full address regardless
+   * of this flag.
+   */
+  revealAddress?: boolean;
+  /** Which tab to open on ('messages' to land directly on the conversation — e.g. from a "Message Creator" action). Admin view only; brand's view isn't tabbed. */
+  initialTab?: 'overview' | 'bio' | 'bank' | 'user' | 'messages';
 }
 
 export const Row = ( { label, value }: { label: string; value: ReactNode; } ) => (

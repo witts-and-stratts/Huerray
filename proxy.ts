@@ -2,6 +2,7 @@ import createMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { locales, defaultLocale } from './i18n';
+import { isProductionHost } from './lib/config';
 
 // Helper function to get user data from cookie
 function getUserDataFromCookie(request: NextRequest): { role: 'brand' | 'creator' | 'admin' } | null {
@@ -38,7 +39,26 @@ function getPreferredLocale(request: NextRequest, hasLocalePrefix: boolean, path
   return defaultLocale;
 }
 
+// Non-production deployments (dev.huerray.de, stellar.huerray.de, preview
+// URLs, ...) must never be indexed — a crawled duplicate of the marketing
+// site would dilute production's SEO. A response header is used rather
+// than relying only on robots.txt or per-page metadata, because it applies
+// uniformly to every route regardless of what an individual page
+// declares, and because a robots.txt disallow only stops crawling — it
+// doesn't stop an already-linked URL from being indexed without a
+// snippet.
+function withRobotsHeader( response: NextResponse, request: NextRequest ): NextResponse {
+  if ( !isProductionHost( request.headers.get( 'host' ) ) ) {
+    response.headers.set( 'X-Robots-Tag', 'noindex, nofollow' );
+  }
+  return response;
+}
+
 export default function middleware(request: NextRequest) {
+  return withRobotsHeader( handleRequest( request ), request );
+}
+
+function handleRequest(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Extract locale from path — only treat the first segment as a locale if it

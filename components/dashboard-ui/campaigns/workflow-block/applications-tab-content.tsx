@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/a
 import { Button } from '@/components/dashboard-ui/button';
 import { useCampaignApplications } from '@/lib/api/hooks/campaigns';
 import type { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { getCountryDisplay } from '../campaign-overview-utils';
 import { ApplicationStatusBadge } from './status-badges';
 import { WorkflowListSkeleton } from './skeletons';
@@ -75,7 +76,7 @@ export function ApplicationsTabContent( { campaignId, isActive }: ApplicationsTa
                     || t( 'labels.unknownApplicant' ) }
                 </p>
                 <p className="truncate text-[11px] text-muted-foreground">
-                  { application.gig?.title || t( 'labels.campaignApplication' ) }
+                  { ( application.gig as RoleShapedGig | undefined )?.title || t( 'labels.campaignApplication' ) }
                 </p>
               </div>
             </div>

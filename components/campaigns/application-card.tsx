@@ -1,6 +1,7 @@
 "use client";
 
 import type { ComponentProps } from 'react';
+import { useState } from 'react';
 import {
   Cancel01Icon,
   CheckmarkCircle01Icon,
@@ -10,15 +11,22 @@ import {
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { VideoIcon } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { ModelsGigApplicationResponse } from '@/lib/api/generated/models';
+import { UtilsGigApplicationStatus } from '@/lib/api/generated/models/utils-gig-application-status';
+import { useUpdateApplicationStatus } from '@/lib/api/hooks/gigs';
+import { useRole } from '@/contexts/role-context';
+import type { RoleShapedGig } from '@/lib/types/role-shaped-gig';
 import { ApplicationActionMenu } from './application-action-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
+import { Button } from '@/components/dashboard-ui/button';
+import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
 import { Separator } from '@/components/dashboard-ui/separator';
 import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import { imgpresets } from '@/lib/utils/imgproxy';
-import { TextCapitalize } from '../text-case';
+import { SentenceCase, TextCapitalize } from '../text-case';
 import { useTranslations } from 'next-intl';
 import { RoleGuard } from '../auth/role-guard';
 
@@ -99,8 +107,13 @@ interface ApplicationCardProps {
 
 export function ApplicationCard( { application, onClick }: ApplicationCardProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
+  const actionsT = useTranslations( 'dashboard.brand.campaignsPage.actions' );
+  const role = useRole();
+  const updateStatus = useUpdateApplicationStatus();
+  const [ acceptDialogOpen, setAcceptDialogOpen ] = useState( false );
+  const [ declineDialogOpen, setDeclineDialogOpen ] = useState( false );
   const creator = application.creator;
-  const gig = application.gig;
+  const gig = application.gig as RoleShapedGig | undefined;
 
   const creatorName = `${ creator?.first_name || '' } ${ creator?.last_name || '' }`.trim() || creator?.email || 'Unknown';
   const creatorInitials = creatorName.slice( 0, 2 ).toUpperCase();
@@ -116,7 +129,37 @@ export function ApplicationCard( { application, onClick }: ApplicationCardProps 
     ? Intl.DateTimeFormat( 'en-US', { month: 'short', day: 'numeric', year: 'numeric' } ).format( new Date( application.applied_at ) )
     : null;
 
+  const isPending = application.status === 'pending';
+  const canRespond = role === 'brand' && isPending;
+
+  const handleUpdateStatus = ( status: UtilsGigApplicationStatus ) => {
+    if ( !application.id ) return;
+
+    updateStatus.mutate(
+      { applicationId: application.id, request: { application_status: status } },
+      {
+        onSuccess: () => {
+          toast.success(
+            status === UtilsGigApplicationStatus.ApplicationStatusAccepted
+              ? actionsT( 'applicationAccepted' )
+              : actionsT( 'applicationDeclined' ),
+            { richColors: true }
+          );
+          setAcceptDialogOpen( false );
+          setDeclineDialogOpen( false );
+        },
+        onError: ( error: any ) => {
+          toast.error( actionsT( 'applicationStatusUpdateFailed' ), {
+            description: <SentenceCase>{ error.response?.data?.error?.message! }</SentenceCase>,
+            richColors: true,
+          } );
+        },
+      }
+    );
+  };
+
   return (
+    <>
     <CardShell
       backgroundImage={ profileImage ? imgpresets.card( profileImage ) : undefined }
       fallbackGradient="from-slate-700/80 via-slate-600/50 to-slate-500/30"
@@ -196,7 +239,54 @@ export function ApplicationCard( { application, onClick }: ApplicationCardProps 
         { appliedDate && (
           <p className="text-white/40 text-xs">{ t( 'applied' ) } { appliedDate }</p>
         ) }
+
+        { /* CTA */ }
+        { canRespond && (
+          <div className="mt-1 flex gap-2" onClick={ e => e.stopPropagation() }>
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex-1 min-w-0 font-normal border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
+              onClick={ () => setDeclineDialogOpen( true ) }
+              disabled={ updateStatus.isPending }
+            >
+              <span className="truncate">{ actionsT( 'decline' ) }</span>
+            </Button>
+            <Button
+              size="sm"
+              className="flex-1 min-w-0"
+              onClick={ () => setAcceptDialogOpen( true ) }
+              disabled={ updateStatus.isPending }
+            >
+              <span className="truncate">{ actionsT( 'accept' ) }</span>
+            </Button>
+          </div>
+        ) }
       </div>
     </CardShell>
+
+    <ConfirmDialog
+      open={ acceptDialogOpen }
+      onOpenChange={ setAcceptDialogOpen }
+      title={ actionsT( 'acceptApplicationTitle' ) }
+      description={ actionsT( 'acceptApplicationDescription' ) }
+      confirmLabel={ actionsT( 'accept' ) }
+      onConfirm={ () => handleUpdateStatus( UtilsGigApplicationStatus.ApplicationStatusAccepted ) }
+      isLoading={ updateStatus.isPending }
+      loadingText={ actionsT( 'accepting' ) }
+    />
+
+    <ConfirmDialog
+      open={ declineDialogOpen }
+      onOpenChange={ setDeclineDialogOpen }
+      title={ actionsT( 'declineApplicationTitle' ) }
+      description={ actionsT( 'declineApplicationDescription' ) }
+      confirmLabel={ actionsT( 'decline' ) }
+      onConfirm={ () => handleUpdateStatus( UtilsGigApplicationStatus.ApplicationStatusDeclined ) }
+      isLoading={ updateStatus.isPending }
+      loadingText={ actionsT( 'declining' ) }
+      variant="destructive"
+    />
+    </>
   );
 }

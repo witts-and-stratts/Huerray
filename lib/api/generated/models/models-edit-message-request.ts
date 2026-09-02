@@ -13,18 +13,8 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ModelsUserResponse } from './models-user-response';
 
-export interface ModelsCommentResponse {
-    'comment'?: string;
-    'commenter'?: ModelsUserResponse;
-    'commenter_id'?: string;
-    'created_at'?: string;
-    'entity_id'?: string;
-    'entity_type'?: string;
-    'id'?: string;
-    'updated_at'?: string;
+export interface ModelsEditMessageRequest {
+    'message': string;
 }
 
