@@ -168,6 +168,11 @@ export const creatorNavigationData = ( t?: NavigationTranslator ): Omit<SidebarN
       icon: WalletDone01Icon,
     },
     {
+      title: withFallback( t, "creator.messages", "Messages" ),
+      url: "/creator/messages",
+      icon: MailIcon,
+    },
+    {
       title: withFallback( t, "creator.profile", "My Profile" ),
       url: "/creator/profile",
       icon: ImageUpload01Icon,

@@ -1,22 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { Loader2, Send } from 'lucide-react';
-import { toast } from 'sonner';
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/avatar';
-import { Button } from '@/components/dashboard-ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/dashboard-ui/dialog';
-import { SuperField } from '@/components/dashboard-ui/super-field';
+import { CommentsThread } from '@/components/dashboard-ui/comments-thread';
 import type { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
-import { useStartConversation } from '@/lib/api/hooks/conversations';
 
 export interface StartConversationDialogProps {
   entityType: UtilsEntityType;
@@ -31,9 +24,13 @@ export interface StartConversationDialogProps {
 }
 
 /**
- * Generic "start a conversation" composer for any entity ref (creator,
- * brand, ...). Resolves-or-creates the conversation and posts the first
- * message in one call.
+ * The conversation with any entity ref (creator, brand, ...) — shows the
+ * full history so far and lets you continue it, backed by the same
+ * entity-scoped Conversations API as gig/campaign/submission comments
+ * (see CommentsThread). The first message sent here resolves-or-creates
+ * the conversation, so this same component naturally covers both
+ * "starting" a new conversation and "continuing" an existing one — reopen
+ * it later and the prior messages are right there.
  */
 export function StartConversationDialog( {
   entityType,
@@ -44,71 +41,32 @@ export function StartConversationDialog( {
   onOpenChange,
   onSent,
 }: StartConversationDialogProps ) {
-  const [ message, setMessage ] = useState( '' );
-  const startConversation = useStartConversation();
-
-  const handleOpenChange = ( next: boolean ) => {
-    if ( !next ) setMessage( '' );
-    onOpenChange( next );
-  };
-
-  const handleSend = () => {
-    const trimmed = message.trim();
-    if ( !trimmed || !entityId ) return;
-
-    startConversation.mutate(
-      { entity_type: entityType, entity_id: entityId, message: trimmed },
-      {
-        onSuccess: ( response ) => {
-          toast.success( `Message sent to ${ name }` );
-          handleOpenChange( false );
-          onSent?.( response.data?.conversation_id );
-        },
-        onError: () => toast.error( 'Failed to send message' ),
-      }
-    );
-  };
-
   return (
-    <Dialog open={ open } onOpenChange={ handleOpenChange }>
-      <DialogContent className="max-w-[440px]">
-        <DialogHeader>
+    <Dialog open={ open } onOpenChange={ onOpenChange }>
+      <DialogContent className="max-w-[440px] h-[540px] flex flex-col gap-0 p-0 overflow-hidden">
+        <DialogHeader className="p-4 pb-3 border-b shrink-0">
           <div className="flex items-center gap-3">
             <Avatar className="size-10">
               { avatarUrl && <AvatarImage src={ avatarUrl } alt={ name } /> }
               <AvatarFallback>{ name.slice( 0, 2 ).toUpperCase() }</AvatarFallback>
             </Avatar>
             <div className="min-w-0">
-              <DialogTitle className="dialog__title truncate">Message { name }</DialogTitle>
-              <DialogDescription className="font-regular">Start a conversation</DialogDescription>
+              <DialogTitle className="dialog__title truncate">{ name }</DialogTitle>
+              <DialogDescription className="font-regular">Conversation</DialogDescription>
             </div>
           </div>
         </DialogHeader>
 
-        <SuperField
-          type="textarea"
-          value={ message }
-          onValueChange={ setMessage }
-          placeholder="Write your message…"
-          rows={ 4 }
-        />
-
-        <DialogFooter>
-          <Button variant="outline" onClick={ () => handleOpenChange( false ) }>Cancel</Button>
-          <Button onClick={ handleSend } disabled={ !message.trim() || !entityId || startConversation.isPending }>
-            { startConversation.isPending ? (
-              <>
-                <Loader2 className="mr-2 size-4 animate-spin" />
-                Sending…
-              </>
-            ) : (
-              <>
-                <Send className="mr-2 size-4" />
-                Send Message
-              </>
-            ) }
-          </Button>
-        </DialogFooter>
+        <div className="flex-1 min-h-0 p-3">
+          { entityId && (
+            <CommentsThread
+              entities={ [ { entityType, entityId } ] }
+              size="sm"
+              className="border-0 bg-transparent"
+              onSent={ ( message ) => onSent?.( message.conversation_id ) }
+            />
+          ) }
+        </div>
       </DialogContent>
     </Dialog>
   );

@@ -27,6 +27,8 @@ export interface CommentsThreadProps {
   disableComment?: boolean;
   size?: 'default' | 'sm';
   className?: string;
+  /** Called after a message successfully posts — e.g. to react to a conversation being created for the first time. */
+  onSent?: ( message: ModelsConversationMessageResponse ) => void;
 }
 
 function getInitials( firstName?: string, lastName?: string ) {
@@ -160,12 +162,14 @@ const CommentInput = memo( ( {
   targetId,
   targetType,
   size,
-  disableComment
+  disableComment,
+  onSent,
 }: {
   targetId: string | undefined,
   targetType: UtilsEntityType | undefined,
   size: 'default' | 'sm',
   disableComment: boolean;
+  onSent?: ( message: ModelsConversationMessageResponse ) => void;
 } ) => {
   const addComment = useAddComment();
   const [ text, setText ] = useState( '' );
@@ -185,7 +189,10 @@ const CommentInput = memo( ( {
     addComment.mutate(
       { message: trimmed, entity_id: targetId, entity_type: targetType },
       {
-        onSuccess: () => setText( '' ),
+        onSuccess: ( response ) => {
+          setText( '' );
+          if ( response.data ) onSent?.( response.data );
+        },
         onError: () => toast.error( 'Failed to send comment' ),
       },
     );
@@ -250,7 +257,7 @@ const MessageGroup = memo( ( { group, user, size }: { group: MessageGroup[]; use
 } );
 MessageGroup.displayName = 'MessageGroup';
 
-export function CommentsThread( { entities, postTo, disableComment = false, size = 'default', className }: CommentsThreadProps ) {
+export function CommentsThread( { entities, postTo, disableComment = false, size = 'default', className, onSent }: CommentsThreadProps ) {
   const { user } = useAuth();
   const results = useMultipleComments( entities );
   const messagesEndRef = useRef<HTMLDivElement>( null );
@@ -321,6 +328,7 @@ export function CommentsThread( { entities, postTo, disableComment = false, size
         targetType={ target?.entityType }
         size={ size }
         disableComment={ disableComment }
+        onSent={ onSent }
       />
     </div>
   );

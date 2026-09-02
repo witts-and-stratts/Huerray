@@ -14,6 +14,7 @@ import { CreatorSheetHeader } from './creator-sheet-header';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { Content } from '@/components/dashboard-ui/content';
 import { useTranslations } from "next-intl";
+import { CreatorConversationPanel } from '@/components/conversations/creator-conversation-panel';
 
 export function BrandCreatorDetailsSheet( { creator, open, onOpenChange, revealAddress }: CreatorDetailsSheetProps ) {
   const c = creator as any;
@@ -51,6 +52,12 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange, revealA
         <CreatorSheetHeader creator={ creator! } />
         {/* ── Brand View (Merged & Streamlined) ── */ }
         <div className="px-6 flex flex-col gap-4 p-3 md:pb-6">
+          { creator?.id && (
+            <WrappedCard title={ t( 'creatorDetails.tabMessages' ) } contentClass="p-0 border-0 bg-transparent h-[320px] flex flex-col">
+              <CreatorConversationPanel creatorId={ creator.id } size="sm" />
+            </WrappedCard>
+          ) }
+
           { revealAddress && (
             <WrappedCard title={ tc( 'sheets.address' ) }>
               { fullAddress ? (

@@ -8,6 +8,10 @@
     "viewMyGigs": "Meine Gigs ansehen",
     "creatorFallback": "Creator"
   },
+  "messagesPage": {
+    "title": "Nachrichten",
+    "description": "Unterhaltungen mit den Marken, mit denen du zusammenarbeitest."
+  },
   "analyticsPage": {
     "title": "Analytik",
     "description": "Verfolgen Sie Bewerbungen, Einladungen, Auftritte, Einnahmen, Videoeinsendungen und Support.",

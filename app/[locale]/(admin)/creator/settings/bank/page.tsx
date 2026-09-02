@@ -45,6 +45,14 @@ export default function CreatorBankSettingsPage() {
       bankAddress: '',
     } as CreatorBankSettings,
     validators: {
+      // canSubmit is derived partly from the form's own aggregated error
+      // map, which is only recomputed on whichever events are registered
+      // here. Without `onChange`, selecting a value on a dropdown-driven
+      // field (e.g. Tax Country, which updates via onValueChange and never
+      // blurs) leaves the form-level error map — and therefore the Save
+      // button's disabled state — stuck on whatever it was the last time a
+      // field blurred, even after every field is actually valid.
+      onChange: bankSchema,
       onBlur: bankSchema,
       onSubmit: bankSchema,
     },

@@ -8,6 +8,10 @@
     "viewMyGigs": "View My Gigs",
     "creatorFallback": "Creator"
   },
+  "messagesPage": {
+    "title": "Messages",
+    "description": "Conversations with the brands you're working with."
+  },
   "analyticsPage": {
     "title": "Analytics",
     "description": "Track applications, invitations, gigs, earnings, video submissions, and support.",
