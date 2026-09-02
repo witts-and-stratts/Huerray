@@ -66,7 +66,10 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
 
               <form.Field
                 name="gender"
-                validators={ { onBlur: creatorSettingsSchema.shape.gender } }
+                validators={ {
+                  onChange: creatorSettingsSchema.shape.gender,
+                  onBlur: creatorSettingsSchema.shape.gender,
+                } }
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }
@@ -130,7 +133,10 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
 
               <form.Field
                 name="country"
-                validators={ { onBlur: creatorSettingsSchema.shape.country } }
+                validators={ {
+                  onChange: creatorSettingsSchema.shape.country,
+                  onBlur: creatorSettingsSchema.shape.country,
+                } }
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }

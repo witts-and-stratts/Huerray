@@ -138,6 +138,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
           <form.Field
             name="taxCountry"
             validators={ {
+              onChange: creatorBankSchema.shape.taxCountry,
               onBlur: creatorBankSchema.shape.taxCountry,
             } }
             children={ ( field: any ) => (
@@ -147,6 +148,7 @@ export function CreatorBankSection( { form }: { form: any; } ) {
                 value={ field.state.value }
                 type="country"
                 onValueChange={ ( val: any ) => field.handleChange( val || "" ) }
+                onBlur={ field.handleBlur }
                 required
                 error={ field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message || String( e ) ).join( ', ' ) : undefined }
               />
