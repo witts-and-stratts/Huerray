@@ -15,6 +15,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import { Content } from '@/components/dashboard-ui/content';
 import { useTranslations } from "next-intl";
 import { CreatorConversationPanel } from '@/components/conversations/creator-conversation-panel';
+import { ProtectedVideo } from '@/components/dashboard-ui/protected-video';
 
 export function BrandCreatorDetailsSheet( { creator, open, onOpenChange, revealAddress }: CreatorDetailsSheetProps ) {
   const c = creator as any;
@@ -80,7 +81,7 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange, revealA
 
           <WrappedCard title={ t( 'creatorDashboard.blocks.bio' ) }>
             { displayVideo && (
-              <video src={ displayVideo } poster={ optimizedVideoPoster } controls className="w-full aspect-video rounded-md mb-4" />
+              <ProtectedVideo src={ displayVideo } poster={ optimizedVideoPoster } controls className="w-full aspect-video" containerClassName="w-full rounded-md mb-4" />
             ) }
             <ExpandableContent maxHeightClass="max-h-24">
               <Content content={ displayBio || tc( 'sheets.noBioAvailable' ) } />

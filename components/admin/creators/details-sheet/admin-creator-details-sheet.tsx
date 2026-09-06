@@ -20,6 +20,7 @@ import { useFormatDate } from '@/lib/hooks/format';
 import { CopyText } from '@/components/dashboard-ui/copy-text';
 import { useTranslations } from 'next-intl';
 import { CreatorActionMenu } from '../creator-action-menu';
+import { ProtectedVideo } from '@/components/dashboard-ui/protected-video';
 import { Button } from '@/components/dashboard-ui/button';
 import { ChevronDown } from 'lucide-react';
 import { RoleGuard } from '@/components/auth/role-guard';
@@ -137,7 +138,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
             <div className="pt-4 flex flex-col gap-4">
               { displayVideo && (
                 <WrappedCard title={ t( 'creatorDetails.applicationVideo' ) }>
-                  <video src={ displayVideo } controls className="w-full aspect-video" poster={ videoPoster } />
+                  <ProtectedVideo src={ displayVideo } controls className="w-full aspect-video" containerClassName="w-full" poster={ videoPoster } />
                 </WrappedCard>
               ) }
               <WrappedCard title={ tc( 'sheets.bio' ) }>

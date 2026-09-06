@@ -7,6 +7,7 @@ import { MessageSquare } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { VideoWatermark } from '@/components/dashboard-ui/protected-video';
 
 interface OverlayVideoPlayerProps {
   videoUrl?: string;
@@ -17,6 +18,8 @@ interface OverlayVideoPlayerProps {
   onCommentClick?: () => void;
   poster?: string;
   fullHeight?: boolean;
+  /** Harden the player + show the watermark. Disable once the brand has accepted. */
+  isProtected?: boolean;
 }
 
 export function OverlayVideoPlayer( {
@@ -28,6 +31,7 @@ export function OverlayVideoPlayer( {
   onCommentClick,
   poster,
   fullHeight = false,
+  isProtected = true,
 }: OverlayVideoPlayerProps ) {
   const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   const videoRef = useRef<HTMLVideoElement>( null );
@@ -59,12 +63,17 @@ export function OverlayVideoPlayer( {
         src={ videoUrl }
         preload="metadata"
         playsInline
+        controlsList={ isProtected ? "nodownload noplaybackrate noremoteplayback" : undefined }
+        disablePictureInPicture={ isProtected }
+        draggable={ isProtected ? false : undefined }
+        onContextMenu={ isProtected ? ( e ) => e.preventDefault() : undefined }
         className={ cn( "submission-video-player__media", fullHeight && "submission-video-player__media--full-height" ) }
         onPlay={ () => setIsPlaying( true ) }
         onPause={ () => setIsPlaying( false ) }
         onClick={ togglePlayback }
         poster={ poster }
       />
+      { isProtected && <VideoWatermark opacity={ compact ? 0.1 : 0.13 } /> }
       <AnimatePresence>
         <motion.button
           key="playback"

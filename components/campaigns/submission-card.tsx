@@ -90,6 +90,7 @@ export function SubmissionCard( {
           onCommentClick={ handleCommentClick }
           poster={ videoPoster }
           fullHeight={ fullHeight }
+          isProtected={ status !== 'accepted' }
         />
 
         <div className="submission-card__overlay" />

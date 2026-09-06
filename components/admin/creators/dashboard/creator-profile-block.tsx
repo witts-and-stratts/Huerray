@@ -12,6 +12,7 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { EmailStatusBadge } from '@/components/dashboard-ui/status-badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/dashboard-ui/tabs';
 import { WrappedCard } from '@/components/dashboard-ui/wrapped-card';
+import { ProtectedVideo } from '@/components/dashboard-ui/protected-video';
 import type { ModelsCreatorResponse } from '@/lib/api/generated/models';
 import { useCreatorBankDetails, useOwnBankDetails } from '@/lib/api/hooks/creators';
 import { useUser, useUserProfile } from '@/lib/api/hooks/users';
@@ -241,11 +242,12 @@ export function CreatorProfileBlock( { creator, creatorName, creatorAvatar, chil
             <TabsContent value="bio" className="space-y-3">
               { creator?.application_video?.asset && (
                 <WrappedCard title={ t( 'creatorProfileBlock.applicationVideo' ) }>
-                  <video
+                  <ProtectedVideo
                     src={ creator.application_video.asset }
                     poster={ creator.application_video.thumbnail }
                     controls
-                    className="w-full rounded-md"
+                    className="w-full"
+                    containerClassName="w-full rounded-md"
                   />
                 </WrappedCard>
               ) }
