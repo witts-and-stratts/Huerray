@@ -14,7 +14,8 @@ import {
   useSubmitVideoSubmission,
   useDeleteVideoSubmission,
 } from '@/lib/api/hooks/video-submissions';
-import { Check, ExternalLink, MoreVertical, Pencil, Trash2, Undo2, X } from 'lucide-react';
+import { Check, Download, ExternalLink, MoreVertical, Pencil, Trash2, Undo2, X } from 'lucide-react';
+import { downloadFile } from '@/lib/utils/download';
 import { ReactNode, useState } from 'react';
 import { toast } from 'sonner';
 import { SubmissionViewDialog } from './submission-view-dialog';
@@ -167,6 +168,27 @@ export function SubmissionActionMenu( { submission, trigger, showViewAction = tr
       condition: ( current: ModelsVideoSubmissionResponse ) => !!current.video?.asset,
       action: () => handleViewSubmission(),
     } ] : [] ),
+    {
+      label: t( 'downloadVideo' ),
+      icon: Download,
+      condition: ( current ) =>
+        !!current.video?.asset &&
+        ( current.status || '' ).toLowerCase() === UtilsVideoSubmissionStatus.VideoSubmissionStatusAccepted,
+      action: async ( current ) => {
+        if ( !current.video?.asset ) return;
+        const toastId = toast.loading( t( 'downloadingVideo' ) );
+        try {
+          const outcome = await downloadFile( current.video.asset, current.video_filename );
+          if ( outcome === 'opened-in-tab' ) {
+            toast.info( t( 'videoOpenedInTab' ), { id: toastId } );
+          } else {
+            toast.success( t( 'videoDownloadStarted' ), { id: toastId } );
+          }
+        } catch {
+          toast.error( t( 'videoDownloadFailed' ), { id: toastId } );
+        }
+      },
+    },
     {
       label: t( 'acceptSubmission' ),
       icon: Check,

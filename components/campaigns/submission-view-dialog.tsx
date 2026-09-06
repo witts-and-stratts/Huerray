@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { ModelsVideoSubmissionResponse } from '@/lib/api/generated/models';
 import { useGig } from '@/lib/api/hooks/gigs';
 import { formatCurrency, formatDate } from '@/lib/utils/format';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { memo, ReactNode, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { TextCapitalize } from '../text-case';
@@ -17,7 +17,9 @@ import { Button } from '@/components/dashboard-ui/button';
 import { useUpdateVideoSubmissionStatus, useVideoSubmissionDecision, useVideoSubmission } from '@/lib/api/hooks/video-submissions';
 import { UtilsVideoSubmissionStatus, ModelsBrandVideoDecisionRequestStatusEnum } from '@/lib/api/generated/models';
 import { toast } from 'sonner';
-import { ChevronDown, Loader2 } from 'lucide-react';
+import { ChevronDown, Download, Loader2 } from 'lucide-react';
+import { downloadFile } from '@/lib/utils/download';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 import { ConfirmDialog } from '../dashboard-ui/confirm-dialog';
 import { SuperField } from '../dashboard-ui/super-field';
 import { ExpandableContent } from '../dashboard-ui/expandable-content';
@@ -30,6 +32,7 @@ import { cn } from '@/lib/dashboard-utils';
 import { motion } from 'motion/react';
 import { SubmissionActionMenu } from './submission-action-menu';
 import { ButtonGroup } from '@/components/dashboard-ui/button-group';
+import { VideoWatermark } from '@/components/dashboard-ui/protected-video';
 
 interface SubmissionViewDialogProps {
   open: boolean;
@@ -74,9 +77,11 @@ function Row( { label, value }: { label: string, value: ReactNode; } ) {
 interface SubmissionVideoProps {
   videoUrl: string;
   poster?: string;
+  /** When true, harden the player + show the watermark. Disable once accepted. */
+  isProtected?: boolean;
 }
 
-const SubmissionVideo = memo( ( { videoUrl, poster }: SubmissionVideoProps ) => {
+const SubmissionVideo = memo( ( { videoUrl, poster, isProtected = true }: SubmissionVideoProps ) => {
   const containerRef = useRef<HTMLDivElement>( null );
   const [ measuredHeight, setMeasuredHeight ] = useState<number | null>( null );
 
@@ -98,7 +103,7 @@ const SubmissionVideo = memo( ( { videoUrl, poster }: SubmissionVideoProps ) => 
   return (
     <motion.div
       ref={ containerRef }
-      className="w-full bg-black shrink-0 overflow-hidden"
+      className="relative w-full bg-black shrink-0 overflow-hidden"
       initial={ { opacity: 0, height: 0 } }
       animate={ { opacity: 1, height: measuredHeight ?? 'auto' } }
       exit={ { opacity: 0, height: 0 } }
@@ -107,11 +112,16 @@ const SubmissionVideo = memo( ( { videoUrl, poster }: SubmissionVideoProps ) => 
       <video
         src={ videoUrl }
         controls
+        controlsList={ isProtected ? "nodownload noplaybackrate noremoteplayback" : undefined }
+        disablePictureInPicture={ isProtected }
+        draggable={ isProtected ? false : undefined }
+        onContextMenu={ isProtected ? ( e ) => e.preventDefault() : undefined }
         preload="metadata"
         className="w-full h-full md:min-h-[500px] max-h-[60vh] md:object-cover"
         onLoadedMetadata={ handleLoadedMetadata }
         poster={ optimisedPoster }
       />
+      { isProtected && <VideoWatermark /> }
     </motion.div>
   );
 } );
@@ -453,6 +463,7 @@ SubmissionCommentsPanel.displayName = 'SubmissionCommentsPanel';
 
 export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, initialCommentsOpen = false }: SubmissionViewDialogProps ) => {
   const locale = useLocale();
+  const tActions = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   const [ isCommentsOpen, setIsCommentsOpen ] = useState( initialCommentsOpen );
   const {
     data: submissionResponse,
@@ -484,12 +495,33 @@ export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, in
     setIsCommentsOpen( prev => !prev );
   }, [] );
 
+  const isAccepted = ( latestSubmission.status || '' ).toLowerCase() === UtilsVideoSubmissionStatus.VideoSubmissionStatusAccepted;
+  const videoAsset = latestSubmission.video?.asset;
+  const [ isDownloading, setIsDownloading ] = useState( false );
+
+  const handleDownload = useCallback( async () => {
+    if ( !videoAsset ) return;
+    setIsDownloading( true );
+    try {
+      const outcome = await downloadFile( videoAsset, latestSubmission.video_filename );
+      if ( outcome === 'opened-in-tab' ) toast.info( tActions( 'videoOpenedInTab' ) );
+    } catch {
+      toast.error( tActions( 'videoDownloadFailed' ) );
+    } finally {
+      setIsDownloading( false );
+    }
+  }, [ videoAsset, latestSubmission.video_filename, tActions ] );
+
   return (
     <Dialog open={ open } onOpenChange={ onOpenChange }>
       <DialogContent className="p-0 gap-0 overflow-hidden max-w-6xl! min-w-[300px] w-[95vw] bg-burgundy-50/80 max-h-[90vh] flex flex-row">
         <div className={ cn( "flex flex-col transition-all duration-300 ease-in-out w-full min-h-0", isCommentsOpen && "md:pr-[416px]" ) }>
           <div className="flex-1 overflow-y-auto">
-            <SubmissionVideo videoUrl={ latestSubmission.video?.asset || '' } poster={ latestSubmission.video?.thumbnail || '' } />
+            <SubmissionVideo
+              videoUrl={ latestSubmission.video?.asset || '' }
+              poster={ latestSubmission.video?.thumbnail || '' }
+              isProtected={ !isAccepted }
+            />
 
             <div className="p-4 border-t bg-muted/20 space-y-4 flex-1">
               { isSubmissionFetching && (
@@ -514,7 +546,7 @@ export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, in
             </div>
           </div>
 
-          <DialogFooter className="px-4 py-4 shrink-0 border-t bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur sm:justify-start">
+          <DialogFooter className="px-4 py-4 shrink-0 border-t bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur sm:justify-start gap-2">
             <SubmissionActionMenu
               submission={ latestSubmission }
               showViewAction={ false }
@@ -529,6 +561,26 @@ export const SubmissionViewDialog = memo( ( { open, onOpenChange, submission, in
                 </ButtonGroup>
               }
             />
+
+            { isAccepted && videoAsset && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon-sm"
+                    className="self-start shrink-0"
+                    onClick={ handleDownload }
+                    disabled={ isDownloading }
+                    aria-label={ tActions( 'downloadVideo' ) }
+                  >
+                    { isDownloading
+                      ? <Loader2 className="size-4 animate-spin" />
+                      : <Download className="size-4" /> }
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>{ tActions( 'downloadVideoHint' ) }</TooltipContent>
+              </Tooltip>
+            ) }
           </DialogFooter>
         </div>
 
