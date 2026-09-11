@@ -23,7 +23,8 @@
       "createSubmission": "Einreichung erstellen",
       "viewSubmission": "Ansicht Einreichung",
       "openMenu": "Menü öffnen",
-      "viewSubmissions": "Einreichungen ansehen"
+      "viewSubmissions": "Einreichungen ansehen",
+      "expire": "Einladung ablaufen lassen"
     },
     "dialogs": {
       "acceptTitle": "Einladung annehmen",
@@ -35,12 +36,17 @@
       "declineCommentPlaceholder": "Erklären Sie, warum Sie ablehnen",
       "declining": "Rückläufig...",
       "rejectTitle": "Einladung ablehnen",
-      "rejectDesc": "Sind Sie sicher, dass Sie diese Einladung ablehnen wollen? Diese Aktion kann nicht rückgängig gemacht werden."
+      "rejectDesc": "Sind Sie sicher, dass Sie diese Einladung ablehnen wollen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "expireTitle": "Einladung ablaufen lassen",
+      "expireDesc": "Möchten Sie diese angenommene Einladung wirklich ablaufen lassen? Der Platz des Erstellers wird freigegeben, sodass sich andere Ersteller bewerben können. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "expiring": "Läuft ab..."
     },
     "toasts": {
       "accepted": "Einladung erfolgreich angenommen",
       "declined": "Einladung erfolgreich abgelehnt",
-      "error": "Aktualisierung des Einladungsstatus fehlgeschlagen"
+      "error": "Aktualisierung des Einladungsstatus fehlgeschlagen",
+      "expired": "Einladung erfolgreich abgelaufen",
+      "expireError": "Ablaufen der Einladung fehlgeschlagen"
     }
   }
 }

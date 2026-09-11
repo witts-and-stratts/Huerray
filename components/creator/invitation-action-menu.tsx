@@ -6,7 +6,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { Eye, MoreVertical } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
-import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
+import { useExpireGigInvitation, useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
@@ -22,8 +22,10 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
   const tToasts = useTranslations( 'dashboard.creator.invitations.toasts' );
   const [ showAcceptDialog, setShowAcceptDialog ] = useState( false );
   const [ showRejectDialog, setShowRejectDialog ] = useState( false );
+  const [ showExpireDialog, setShowExpireDialog ] = useState( false );
 
   const { mutate: respondToInvitation, isPending: isResponding } = useRespondToInvitation();
+  const { mutate: expireInvitation, isPending: isExpiring } = useExpireGigInvitation();
 
   const handleRespond = ( status: 'accepted' | 'declined' ) => {
     if ( !invitation.id ) return;
@@ -45,6 +47,23 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
   };
 
   const isPending = invitation.status === 'pending';
+  const isAccepted = invitation.status === 'accepted';
+
+  const handleExpire = () => {
+    if ( !invitation.id ) return;
+
+    expireInvitation( { invitationId: invitation.id }, {
+      onSuccess: () => {
+        toast.success( tToasts( 'expired' ) );
+        setShowExpireDialog( false );
+      },
+      onError: ( error ) => {
+        toast.error( tToasts( 'expireError' ) );
+        console.error( error );
+      }
+    } );
+  };
+
   const actions: MenuAction<ModelsGigInvitationResponse>[] = [
     ...( onViewDetails ? [ {
       label: t( 'view' ),
@@ -65,6 +84,15 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
       condition: () => isPending,
       action: () => setShowAcceptDialog( true ),
       allowedRoles: [ 'creator' ]
+    },
+    {
+      label: t( 'expire' ),
+      condition: () => isAccepted,
+      separator: true,
+      variant: "destructive",
+      className: "text-destructive focus:text-destructive",
+      action: () => setShowExpireDialog( true ),
+      allowedRoles: [ 'admin' ]
     },
   ];
 
@@ -102,6 +130,18 @@ export function InvitationActionMenu( { invitation, onViewDetails, trigger }: In
         onConfirm={ () => handleRespond( 'declined' ) }
         isLoading={ isResponding }
         loadingText={ tDialogs( 'declining' ) }
+        variant="destructive"
+      />
+
+      <ConfirmDialog
+        open={ showExpireDialog }
+        onOpenChange={ setShowExpireDialog }
+        title={ tDialogs( 'expireTitle' ) }
+        description={ tDialogs( 'expireDesc' ) }
+        confirmLabel={ t( 'expire' ) }
+        onConfirm={ handleExpire }
+        isLoading={ isExpiring }
+        loadingText={ tDialogs( 'expiring' ) }
         variant="destructive"
       />
     </>

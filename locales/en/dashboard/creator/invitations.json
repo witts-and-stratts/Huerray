@@ -23,7 +23,8 @@
       "createSubmission": "Create Submission",
       "viewSubmission": "View Submission",
       "openMenu": "Open menu",
-      "viewSubmissions": "View Submissions"
+      "viewSubmissions": "View Submissions",
+      "expire": "Expire Invitation"
     },
     "dialogs": {
       "acceptTitle": "Accept Invitation",
@@ -35,12 +36,17 @@
       "declineCommentPlaceholder": "Explain why you're declining",
       "declining": "Declining...",
       "rejectTitle": "Reject Invitation",
-      "rejectDesc": "Are you sure you want to reject this invitation? This action cannot be undone."
+      "rejectDesc": "Are you sure you want to reject this invitation? This action cannot be undone.",
+      "expireTitle": "Expire Invitation",
+      "expireDesc": "Are you sure you want to expire this accepted invitation? The creator's spot will be freed up so other creators can apply. This action cannot be undone.",
+      "expiring": "Expiring..."
     },
     "toasts": {
       "accepted": "Invitation accepted successfully",
       "declined": "Invitation declined successfully",
-      "error": "Failed to update invitation status"
+      "error": "Failed to update invitation status",
+      "expired": "Invitation expired successfully",
+      "expireError": "Failed to expire invitation"
     }
   }
 }
