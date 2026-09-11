@@ -330,6 +330,52 @@ export function useUpdateApplicationStatus(
 }
 
 /**
+ * Hook for an admin to expire a previously accepted gig application, freeing
+ * the gig up for other creators to apply.
+ */
+export function useExpireGigApplication(
+  options?: UseMutationOptions<ModelsStandardGigApplicationResponse, ApiError, { applicationId: string }>
+): UseMutationResult<ModelsStandardGigApplicationResponse, ApiError, { applicationId: string }> {
+  const queryClient = useQueryClient();
+
+  return useMutation( {
+    mutationFn: async ( { applicationId } ) => {
+      const response = await gigsApi.gigsApplicationsApplicationIdExpirePut( { applicationId } );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries( { queryKey: gigsKeys.all } );
+      queryClient.invalidateQueries( { queryKey: campaignsKeys.details() } );
+      queryClient.invalidateQueries( { queryKey: creatorsKeys.all } );
+    },
+    ...options,
+  } );
+}
+
+/**
+ * Hook for an admin to expire a previously accepted gig invitation, freeing
+ * the gig up for other creators to apply.
+ */
+export function useExpireGigInvitation(
+  options?: UseMutationOptions<ModelsStandardGigInvitationResponse, ApiError, { invitationId: string }>
+): UseMutationResult<ModelsStandardGigInvitationResponse, ApiError, { invitationId: string }> {
+  const queryClient = useQueryClient();
+
+  return useMutation( {
+    mutationFn: async ( { invitationId } ) => {
+      const response = await gigsApi.gigsInvitationsInvitationIdExpirePut( { invitationId } );
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries( { queryKey: gigsKeys.all } );
+      queryClient.invalidateQueries( { queryKey: campaignsKeys.details() } );
+      queryClient.invalidateQueries( { queryKey: creatorsKeys.all } );
+    },
+    ...options,
+  } );
+}
+
+/**
  * Hook to fetch all invitations for the authenticated creator
  */
 export function useCreatorInvitations(

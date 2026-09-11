@@ -5,7 +5,7 @@ import { UtilsGigApplicationStatus } from '@/lib/api/generated/models/utils-gig-
 import { ActionMenu, MenuAction } from '@/components/dashboard-ui/action-menu';
 import { Button } from '@/components/dashboard-ui/button';
 import { ConfirmDialog } from '@/components/dashboard-ui/confirm-dialog';
-import { useUpdateApplicationStatus } from '@/lib/api/hooks/gigs';
+import { useExpireGigApplication, useUpdateApplicationStatus } from '@/lib/api/hooks/gigs';
 import { MoreVertical } from 'lucide-react';
 import React, { ReactNode } from 'react';
 import { toast } from 'sonner';
@@ -25,8 +25,10 @@ export function ApplicationActionMenu( {
 }: ApplicationActionMenuProps ) {
   const t = useTranslations( 'dashboard.brand.campaignsPage.actions' );
   const updateStatus = useUpdateApplicationStatus();
+  const expireApplication = useExpireGigApplication();
   const [ acceptDialogOpen, setAcceptDialogOpen ] = React.useState( false );
   const [ declineDialogOpen, setDeclineDialogOpen ] = React.useState( false );
+  const [ expireDialogOpen, setExpireDialogOpen ] = React.useState( false );
 
   const handleUpdateStatus = ( status: UtilsGigApplicationStatus ) => {
     if ( !application.id ) return;
@@ -59,6 +61,27 @@ export function ApplicationActionMenu( {
   };
 
   const isPending = application.status === 'pending';
+  const isAccepted = application.status === 'accepted';
+
+  const handleExpire = () => {
+    if ( !application.id ) return;
+
+    expireApplication.mutate(
+      { applicationId: application.id },
+      {
+        onSuccess: () => {
+          toast.success( t( 'applicationExpired' ), { richColors: true } );
+          setExpireDialogOpen( false );
+        },
+        onError: ( error: any ) => {
+          toast.error( t( 'applicationExpireFailed' ), {
+            description: <SentenceCase>{ error.response?.data?.error?.message! }</SentenceCase>,
+            richColors: true,
+          } );
+        },
+      }
+    );
+  };
 
   const actions: MenuAction<ModelsGigApplicationResponse>[] = [
     {
@@ -72,6 +95,13 @@ export function ApplicationActionMenu( {
       action: () => setDeclineDialogOpen( true ),
       condition: () => isPending,
       allowedRoles: [ "brand" ],
+      className: "text-destructive focus:text-destructive",
+    },
+    {
+      label: t( 'expireApplication' ),
+      action: () => setExpireDialogOpen( true ),
+      condition: () => isAccepted,
+      allowedRoles: [ "admin" ],
       className: "text-destructive focus:text-destructive",
     },
   ];
@@ -112,6 +142,18 @@ export function ApplicationActionMenu( {
         onConfirm={ () => handleUpdateStatus( UtilsGigApplicationStatus.ApplicationStatusDeclined ) }
         isLoading={ updateStatus.isPending }
         loadingText={ t( 'declining' ) }
+        variant="destructive"
+      />
+
+      <ConfirmDialog
+        open={ expireDialogOpen }
+        onOpenChange={ setExpireDialogOpen }
+        title={ t( 'expireApplicationTitle' ) }
+        description={ t( 'expireApplicationDescription' ) }
+        confirmLabel={ t( 'expireApplication' ) }
+        onConfirm={ handleExpire }
+        isLoading={ expireApplication.isPending }
+        loadingText={ t( 'expiringApplication' ) }
         variant="destructive"
       />
     </>

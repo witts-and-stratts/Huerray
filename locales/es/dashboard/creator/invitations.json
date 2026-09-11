@@ -23,7 +23,8 @@
       "createSubmission": "Crear envío",
       "viewSubmission": "Ver presentación",
       "openMenu": "Abrir menú",
-      "viewSubmissions": "Ver envíos"
+      "viewSubmissions": "Ver envíos",
+      "expire": "Caducar invitación"
     },
     "dialogs": {
       "acceptTitle": "Aceptar invitación",
@@ -35,12 +36,17 @@
       "declineCommentPlaceholder": "Explique por qué declina",
       "declining": "En declive...",
       "rejectTitle": "Rechazar invitación",
-      "rejectDesc": "¿Estás seguro de que quieres rechazar esta invitación? Esta acción no se puede deshacer."
+      "rejectDesc": "¿Estás seguro de que quieres rechazar esta invitación? Esta acción no se puede deshacer.",
+      "expireTitle": "Caducar invitación",
+      "expireDesc": "¿Estás seguro de que quieres caducar esta invitación aceptada? Se liberará el puesto del creador para que otros creadores puedan aplicar. Esta acción no se puede deshacer.",
+      "expiring": "Caducando..."
     },
     "toasts": {
       "accepted": "Invitación aceptada con éxito",
       "declined": "Invitación rechazada con éxito",
-      "error": "Error al actualizar el estado de la invitación"
+      "error": "Error al actualizar el estado de la invitación",
+      "expired": "Invitación caducada con éxito",
+      "expireError": "Error al caducar la invitación"
     }
   }
 }
