@@ -29,6 +29,7 @@ export function CreatorVideoBlock( { creator }: CreatorVideoBlockProps ) {
             className='min-h-60 w-full'
             poster={ poster }
             containerClassName="w-full rounded-lg border border-border/60 bg-black shadow-inner"
+            protected={ false }
           />
         ) : (
           <div className="flex aspect-video w-full flex-col items-center justify-center rounded-lg border border-dashed border-border/60 bg-muted/20 text-muted-foreground gap-3">

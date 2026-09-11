@@ -11,6 +11,7 @@ import { MessageSquare } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { TextCapitalize } from '../text-case';
 import { SubmissionActionMenu } from './submission-action-menu';
 import { SubmissionViewDialog } from './submission-view-dialog';
@@ -43,7 +44,11 @@ export function SubmissionCard( {
   const [ isHovering, setIsHovering ] = useState( false );
   const [ expandOpen, setExpandOpen ] = useState( false );
   const [ expandCommentsOpen, setExpandCommentsOpen ] = useState( false );
-  const showControl = overlayDetailsMode === 'always' || isHovering;
+  const isMobile = useIsMobile();
+  // Touch devices have no hover state, so hover-gated controls/details would
+  // otherwise be permanently invisible and untappable — fall back to always
+  // showing them below the mobile breakpoint.
+  const showControl = overlayDetailsMode === 'always' || isMobile || isHovering;
   const isMiniLayout = layout === 'mini';
   const handleExpand = onExpand ?? ( () => setExpandOpen( true ) );
 

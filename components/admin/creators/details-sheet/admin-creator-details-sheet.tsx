@@ -138,7 +138,7 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
             <div className="pt-4 flex flex-col gap-4">
               { displayVideo && (
                 <WrappedCard title={ t( 'creatorDetails.applicationVideo' ) }>
-                  <ProtectedVideo src={ displayVideo } controls className="w-full aspect-video" containerClassName="w-full" poster={ videoPoster } />
+                  <ProtectedVideo src={ displayVideo } controls className="w-full aspect-video" containerClassName="w-full" poster={ videoPoster } protected={ false } />
                 </WrappedCard>
               ) }
               <WrappedCard title={ tc( 'sheets.bio' ) }>

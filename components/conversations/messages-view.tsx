@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { ChevronLeft, ChevronRight, Loader2, MessageSquarePlus, Search, Users } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Loader2, MessageSquarePlus, Search, Users } from 'lucide-react';
 
 import { Button } from '@/components/dashboard-ui/button';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
@@ -14,6 +14,7 @@ import { NewConversationDialog } from '@/components/conversations/new-conversati
 import { useAuth } from '@/lib/auth/auth-context';
 import { useConversation, useConversations } from '@/lib/api/hooks/conversations';
 import { keepPreviousData } from '@tanstack/react-query';
+import { cn } from '@/lib/dashboard-utils';
 
 export function MessagesView() {
   const { user } = useAuth();
@@ -55,7 +56,10 @@ export function MessagesView() {
       <div className="flex flex-1 overflow-hidden min-h-0">
 
         {/* Left panel — conversation list */ }
-        <div className="flex flex-col w-full md:w-80 xl:w-96 shrink-0 border-r border-border/60 overflow-hidden">
+        <div className={ cn(
+          'flex-col w-full md:w-80 xl:w-96 shrink-0 border-r border-border/60 overflow-hidden',
+          selectedId ? 'hidden md:flex' : 'flex'
+        ) }>
           <div className="flex items-center justify-between gap-2 px-3 pt-3 pb-2 shrink-0">
             <h2 className="text-sm font-medium">Messages</h2>
             <Button size="sm" className="font-regular" onClick={ () => setNewConversationOpen( true ) }>
@@ -134,7 +138,10 @@ export function MessagesView() {
         </div>
 
         {/* Right panel — thread */ }
-        <div className="hidden md:flex flex-col flex-1 overflow-hidden bg-background w-full">
+        <div className={ cn(
+          'flex-col flex-1 overflow-hidden bg-background w-full',
+          selectedId ? 'flex' : 'hidden md:flex'
+        ) }>
           { !selectedConversation ? (
             <div className="flex-1 flex items-center justify-center text-sm text-muted-foreground">
               Select a conversation to view messages
@@ -142,7 +149,18 @@ export function MessagesView() {
           ) : (
             <div className="flex flex-col flex-1 min-h-0 p-4 gap-3">
               <div className="flex items-center justify-between gap-2 shrink-0">
-                <ParticipantAvatars participants={ selectedConversation.participants ?? [] } size="default" />
+                <div className="flex items-center gap-2 min-w-0">
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    className="md:hidden shrink-0"
+                    onClick={ () => setSelectedId( null ) }
+                    aria-label="Back to conversations"
+                  >
+                    <ArrowLeft className="size-4" />
+                  </Button>
+                  <ParticipantAvatars participants={ selectedConversation.participants ?? [] } size="default" />
+                </div>
                 <Button variant="outline" size="sm" className="font-regular" onClick={ () => setManageParticipantsOpen( true ) }>
                   <Users className="size-3.5" />
                   Participants

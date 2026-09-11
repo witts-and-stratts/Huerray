@@ -248,6 +248,7 @@ export function CreatorProfileBlock( { creator, creatorName, creatorAvatar, chil
                     controls
                     className="w-full"
                     containerClassName="w-full rounded-md"
+                    protected={ false }
                   />
                 </WrappedCard>
               ) }

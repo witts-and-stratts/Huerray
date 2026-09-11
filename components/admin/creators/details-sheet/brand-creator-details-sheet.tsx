@@ -81,7 +81,7 @@ export function BrandCreatorDetailsSheet( { creator, open, onOpenChange, revealA
 
           <WrappedCard title={ t( 'creatorDashboard.blocks.bio' ) }>
             { displayVideo && (
-              <ProtectedVideo src={ displayVideo } poster={ optimizedVideoPoster } controls className="w-full aspect-video" containerClassName="w-full rounded-md mb-4" />
+              <ProtectedVideo src={ displayVideo } poster={ optimizedVideoPoster } controls className="w-full aspect-video" containerClassName="w-full rounded-md mb-4" protected={ false } />
             ) }
             <ExpandableContent maxHeightClass="max-h-24">
               <Content content={ displayBio || tc( 'sheets.noBioAvailable' ) } />

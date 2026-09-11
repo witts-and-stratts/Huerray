@@ -1,8 +1,9 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 
+import { Button } from '@/components/dashboard-ui/button';
 import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { ConversationRow } from '@/components/conversations/conversation-row';
 import { ConversationThread } from '@/components/conversations/conversation-thread';
@@ -10,6 +11,7 @@ import { ParticipantAvatars } from '@/components/conversations/conversation-part
 import { useAuth } from '@/lib/auth/auth-context';
 import { useConversation, useConversations } from '@/lib/api/hooks/conversations';
 import { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
+import { cn } from '@/lib/dashboard-utils';
 
 interface CreatorMessagesViewProps {
   /** The creator PROFILE id (ModelsCreatorResponse.id), not the user id. */
@@ -41,7 +43,10 @@ export function CreatorMessagesView( { creatorId }: CreatorMessagesViewProps ) {
   return (
     <div className="flex flex-1 min-h-0 overflow-hidden border rounded-xl bg-background/70">
       {/* Left panel — thread list */ }
-      <div className="flex flex-col w-full md:w-80 shrink-0 border-r border-border/60 overflow-hidden">
+      <div className={ cn(
+        'flex-col w-full md:w-80 shrink-0 border-r border-border/60 overflow-hidden',
+        selectedId ? 'hidden md:flex' : 'flex'
+      ) }>
         <div className="px-3 pt-3 pb-2 shrink-0">
           <h2 className="text-sm font-medium">Messages</h2>
         </div>
@@ -72,7 +77,10 @@ export function CreatorMessagesView( { creatorId }: CreatorMessagesViewProps ) {
       </div>
 
       {/* Right panel — thread */ }
-      <div className="hidden md:flex flex-col flex-1 overflow-hidden bg-background w-full">
+      <div className={ cn(
+        'flex-col flex-1 overflow-hidden bg-background w-full',
+        selectedId ? 'flex' : 'hidden md:flex'
+      ) }>
         { !selectedConversation ? (
           <div className="flex-1 flex items-center justify-center text-sm text-muted-foreground">
             Select a conversation to view messages
@@ -80,6 +88,15 @@ export function CreatorMessagesView( { creatorId }: CreatorMessagesViewProps ) {
         ) : (
           <div className="flex flex-col flex-1 min-h-0 p-4 gap-3">
             <div className="flex items-center gap-2 shrink-0">
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="md:hidden shrink-0"
+                onClick={ () => setSelectedId( null ) }
+                aria-label="Back to conversations"
+              >
+                <ArrowLeft className="size-4" />
+              </Button>
               <ParticipantAvatars participants={ selectedConversation.participants ?? [] } size="default" />
             </div>
             <ConversationThread conversationId={ selectedConversation.id ?? '' } className="flex-1" />
