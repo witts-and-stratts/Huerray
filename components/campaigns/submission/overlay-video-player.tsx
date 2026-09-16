@@ -3,7 +3,7 @@
 import { cn } from '@/lib/dashboard-utils';
 import { PauseCircleFreeIcons, PlayCircle02FreeIcons, SquareArrowExpandIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { MessageSquare } from 'lucide-react';
+import { MessageSquare, RefreshCw } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
@@ -36,6 +36,7 @@ export function OverlayVideoPlayer( {
   const t = useTranslations( 'dashboard.brand.submissionsPage.actions' );
   const videoRef = useRef<HTMLVideoElement>( null );
   const [ isPlaying, setIsPlaying ] = useState( false );
+  const [ hasError, setHasError ] = useState( false );
   const togglePlayback = () => {
     const node = videoRef.current;
     if ( !node ) return;
@@ -46,6 +47,21 @@ export function OverlayVideoPlayer( {
     }
 
     node.pause();
+  };
+
+  const handleExpand = () => {
+    // Stop the tile's playback before handing off to the expanded view so
+    // the two <video> elements never play simultaneously.
+    videoRef.current?.pause();
+    onExpand?.();
+  };
+
+  const handleRetry = () => {
+    const node = videoRef.current;
+    setHasError( false );
+    // Reassigning src (rather than just calling load()) forces the browser
+    // to re-issue the range request from scratch after a failed load.
+    node?.load();
   };
 
   if ( !videoUrl ) {
@@ -70,10 +86,18 @@ export function OverlayVideoPlayer( {
         className={ cn( "submission-video-player__media", fullHeight && "submission-video-player__media--full-height" ) }
         onPlay={ () => setIsPlaying( true ) }
         onPause={ () => setIsPlaying( false ) }
+        onError={ () => setHasError( true ) }
         onClick={ togglePlayback }
         poster={ poster }
       />
       { isProtected && <VideoWatermark opacity={ compact ? 0.1 : 0.13 } /> }
+      { hasError && (
+        <div className="submission-video-player__error">
+          <button type="button" onClick={ handleRetry } className="submission-video-player__retry" aria-label={ t( 'retryVideo' ) }>
+            <RefreshCw className="size-5" />
+          </button>
+        </div>
+      ) }
       <AnimatePresence>
         <motion.button
           key="playback"
@@ -99,7 +123,7 @@ export function OverlayVideoPlayer( {
           <motion.button
             key="expand"
             type="button"
-            onClick={ onExpand }
+            onClick={ handleExpand }
             className={ cn(
               "submission-video-player__expand",
               compact ? "submission-video-player__expand--compact" : "submission-video-player__expand--standard",

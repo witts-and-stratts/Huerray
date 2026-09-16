@@ -74,6 +74,14 @@
     @apply flex h-56 w-full items-center justify-center bg-muted/20 text-xs text-muted-foreground;
   }
 
+  .submission-video-player__error {
+    @apply absolute inset-0 z-10 flex items-center justify-center bg-black/60;
+  }
+
+  .submission-video-player__retry {
+    @apply inline-flex items-center justify-center rounded-full bg-black/40 p-3 text-white transition-colors hover:bg-black/60;
+  }
+
   .submission-video-player__control {
     @apply absolute z-10 inline-flex items-center justify-center rounded-full text-white;
   }

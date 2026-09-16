@@ -5,6 +5,7 @@
       "pauseVideo": "Pause video",
       "playVideo": "Play video",
       "expandVideo": "Expand video",
+      "retryVideo": "Retry loading video",
       "submittingForApproval": "Submitting for approval...",
       "submissionSentForApproval": "Submission sent for approval",
       "submitForApprovalFailed": "Failed to submit for approval",
