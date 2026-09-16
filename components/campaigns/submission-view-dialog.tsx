@@ -17,7 +17,7 @@ import { Button } from '@/components/dashboard-ui/button';
 import { useUpdateVideoSubmissionStatus, useVideoSubmissionDecision, useVideoSubmission } from '@/lib/api/hooks/video-submissions';
 import { UtilsVideoSubmissionStatus, ModelsBrandVideoDecisionRequestStatusEnum } from '@/lib/api/generated/models';
 import { toast } from 'sonner';
-import { ChevronDown, Download, Loader2 } from 'lucide-react';
+import { ChevronDown, Download, Loader2, RefreshCw } from 'lucide-react';
 import { downloadFile } from '@/lib/utils/download';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/dashboard-ui/tooltip';
 import { ConfirmDialog } from '../dashboard-ui/confirm-dialog';
@@ -83,7 +83,9 @@ interface SubmissionVideoProps {
 
 const SubmissionVideo = memo( ( { videoUrl, poster, isProtected = true }: SubmissionVideoProps ) => {
   const containerRef = useRef<HTMLDivElement>( null );
+  const videoRef = useRef<HTMLVideoElement>( null );
   const [ measuredHeight, setMeasuredHeight ] = useState<number | null>( null );
+  const [ hasError, setHasError ] = useState( false );
 
   const handleLoadedMetadata = useCallback( () => {
     if ( containerRef.current ) {
@@ -93,6 +95,13 @@ const SubmissionVideo = memo( ( { videoUrl, poster, isProtected = true }: Submis
       const rect = el.getBoundingClientRect();
       setMeasuredHeight( rect.height );
     }
+  }, [] );
+
+  const handleRetry = useCallback( () => {
+    setHasError( false );
+    // Reassigning src (rather than just calling load()) forces the browser
+    // to re-issue the range request from scratch after a failed load.
+    videoRef.current?.load();
   }, [] );
 
   const optimisedPoster = useMemo( () => {
@@ -110,6 +119,7 @@ const SubmissionVideo = memo( ( { videoUrl, poster, isProtected = true }: Submis
       transition={ { duration: 0.5, ease: [ 0.25, 0.1, 0.25, 1 ] } }
     >
       <video
+        ref={ videoRef }
         src={ videoUrl }
         controls
         controlsList={ isProtected ? "nodownload noplaybackrate noremoteplayback" : undefined }
@@ -119,9 +129,17 @@ const SubmissionVideo = memo( ( { videoUrl, poster, isProtected = true }: Submis
         preload="metadata"
         className="w-full h-full md:min-h-[500px] max-h-[60vh] md:object-cover"
         onLoadedMetadata={ handleLoadedMetadata }
+        onError={ () => setHasError( true ) }
         poster={ optimisedPoster }
       />
       { isProtected && <VideoWatermark /> }
+      { hasError && (
+        <div className="submission-video-player__error">
+          <button type="button" onClick={ handleRetry } className="submission-video-player__retry" aria-label="Retry loading video">
+            <RefreshCw className="size-5" />
+          </button>
+        </div>
+      ) }
     </motion.div>
   );
 } );
