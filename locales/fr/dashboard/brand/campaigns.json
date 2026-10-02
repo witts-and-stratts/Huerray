@@ -212,6 +212,13 @@
     "sendForApprovalFailed": "N'a pas envoyé la campagne pour approbation",
     "fallbackVideoName": "Vidéo",
     "fallbackDocumentName": "Document",
+    "liveEditConfirm": {
+      "title": "Modifier une campagne en cours ?",
+      "description": "Cette campagne est déjà en cours et des créateurs y travaillent peut-être. Les modifications enregistrées s'appliqueront immédiatement. Voulez-vous vraiment continuer ?",
+      "cancelLabel": "Annuler",
+      "confirmLabel": "Oui, enregistrer les modifications",
+      "loading": "Enregistrement..."
+    },
     "confirm": {
       "title": "Envoyer pour approbation ?",
       "description": "Votre campagne a été sauvegardée avec succès. Souhaitez-vous la soumettre maintenant pour approbation ?",

@@ -212,6 +212,13 @@
     "sendForApprovalFailed": "Kampagne wurde nicht zur Genehmigung gesendet",
     "fallbackVideoName": "Video",
     "fallbackDocumentName": "Dokument",
+    "liveEditConfirm": {
+      "title": "Laufende Kampagne bearbeiten?",
+      "description": "Diese Kampagne ist bereits aktiv und Creator arbeiten möglicherweise daran. Gespeicherte Änderungen gelten sofort. Möchten Sie fortfahren?",
+      "cancelLabel": "Abbrechen",
+      "confirmLabel": "Ja, Änderungen speichern",
+      "loading": "Speichern..."
+    },
     "confirm": {
       "title": "Zur Genehmigung senden?",
       "description": "Ihre Kampagne wurde erfolgreich gespeichert. Möchten Sie sie jetzt zur Genehmigung vorlegen?",

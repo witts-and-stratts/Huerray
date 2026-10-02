@@ -212,6 +212,13 @@
     "sendForApprovalFailed": "Failed to send campaign for approval",
     "fallbackVideoName": "Video",
     "fallbackDocumentName": "Document",
+    "liveEditConfirm": {
+      "title": "Edit a live campaign?",
+      "description": "This campaign is already live and creators may be working on it. Changes you save will apply immediately. Are you sure you want to continue?",
+      "cancelLabel": "Cancel",
+      "confirmLabel": "Yes, save changes",
+      "loading": "Saving..."
+    },
     "confirm": {
       "title": "Send for approval?",
       "description": "Your campaign has been successfully saved. Would you like to submit it for approval now?",

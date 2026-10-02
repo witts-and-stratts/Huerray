@@ -35,6 +35,9 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 import type { UploadedFile } from '@/components/campaigns/sections/documents/types';
 import { useTranslations } from 'next-intl';
 import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
+import { UtilsCampaignStatus } from '@/lib/api/generated/models';
+import { useRole } from '@/contexts/role-context';
+import { useBasePath } from '@/lib/providers/path-provider';
 
 interface EditCampaignPageProps {
   params: Promise<{
@@ -51,7 +54,17 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
   const updateCampaign = useUpdateCampaign();
   const submitCampaign = useSubmitCampaign();
 
+  const role = useRole();
+  const basePath = useBasePath();
+  const isAdmin = role === 'admin';
+
   const [ showSubmitConfirm, setShowSubmitConfirm ] = useState( false );
+  // Admin edits of a live campaign are held here until the admin confirms
+  const [ pendingSave, setPendingSave ] = useState<{
+    values: CreateCampaignSchema;
+    fileItems: CampaignFileItems;
+    resolve: () => void;
+  } | null>( null );
 
   if ( isLoading ) {
     return <div className="p-8 text-center text-muted-foreground">{ t( 'loading' ) }</div>;
@@ -88,7 +101,33 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
     videos: campaign.sample_videos?.map( i => i.asset ).filter( ( x ): x is string => typeof x === 'string' ) || [],
   };
 
-  const handleSubmit = async ( values: CreateCampaignSchema, fileItems: CampaignFileItems, _intent: 'draft' | 'publish' ) => {
+  const isLiveCampaign = campaign.campaign_status === UtilsCampaignStatus.CampaignStatusGigsApproved
+    || campaign.campaign_status === UtilsCampaignStatus.CampaignStatusRunning;
+
+  const handleSubmit = ( values: CreateCampaignSchema, fileItems: CampaignFileItems, _intent: 'draft' | 'publish' ) => {
+    if ( isAdmin && isLiveCampaign ) {
+      return new Promise<void>( ( resolve ) => setPendingSave( { values, fileItems, resolve } ) );
+    }
+    return saveCampaign( values, fileItems );
+  };
+
+  const handleConfirmLiveEdit = async () => {
+    if ( !pendingSave ) return;
+    const { values, fileItems, resolve } = pendingSave;
+    try {
+      await saveCampaign( values, fileItems );
+    } finally {
+      setPendingSave( null );
+      resolve();
+    }
+  };
+
+  const handleCancelLiveEdit = () => {
+    pendingSave?.resolve();
+    setPendingSave( null );
+  };
+
+  const saveCampaign = async ( values: CreateCampaignSchema, fileItems: CampaignFileItems ) => {
     const documentItems = fileItems.documents.filter( d => d.status === 'success' );
     const videoItems = fileItems.videos.filter( v => v.status === 'success' );
 
@@ -128,7 +167,11 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
         }
       } );
       toast.success( t( 'updatedSuccess' ) );
-      setShowSubmitConfirm( true );
+      if ( isAdmin ) {
+        router.push( `${ basePath }/campaigns/${ resolvedParams.id }` );
+      } else {
+        setShowSubmitConfirm( true );
+      }
     } catch ( e ) {
       toast.error( t( 'updateFailed' ) );
       console.error( e );
@@ -198,6 +241,20 @@ export default function EditCampaignPage( { params }: EditCampaignPageProps ) {
         isLoading={ submitCampaign.isPending }
         loadingText={ t( 'confirm.loading' ) }
         variant="default"
+      />
+
+      <ConfirmDialog
+        open={ !!pendingSave }
+        onOpenChange={ ( open ) => !open && handleCancelLiveEdit() }
+        title={ t( 'liveEditConfirm.title' ) }
+        description={ t( 'liveEditConfirm.description' ) }
+        cancelLabel={ t( 'liveEditConfirm.cancelLabel' ) }
+        confirmLabel={ t( 'liveEditConfirm.confirmLabel' ) }
+        onCancel={ handleCancelLiveEdit }
+        onConfirm={ handleConfirmLiveEdit }
+        isLoading={ updateCampaign.isPending }
+        loadingText={ t( 'liveEditConfirm.loading' ) }
+        variant="destructive"
       />
     </div>
   );
