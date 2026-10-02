@@ -121,6 +121,7 @@ Class | Method | HTTP request | Description
 *CreatorApi* | [**creatorsMatchingGigsGet**](docs/CreatorApi.md#creatorsmatchinggigsget) | **GET** /creators/matching-gigs | Get matching gigs
 *CreatorApi* | [**creatorsPaymentItemsSearchGet**](docs/CreatorApi.md#creatorspaymentitemssearchget) | **GET** /creators/payment-items/search | Search creator\&#39;s payment items
 *CreatorApi* | [**creatorsPaymentsIdGet**](docs/CreatorApi.md#creatorspaymentsidget) | **GET** /creators/payments/{id} | Get creator\&#39;s payment by ID
+*CreatorApi* | [**creatorsPaymentsIdPdfGet**](docs/CreatorApi.md#creatorspaymentsidpdfget) | **GET** /creators/payments/{id}/pdf | Get creator\&#39;s payment as PDF
 *CreatorApi* | [**creatorsPaymentsSearchGet**](docs/CreatorApi.md#creatorspaymentssearchget) | **GET** /creators/payments/search | Search creator\&#39;s payments
 *CreatorApi* | [**creatorsProfileDraftPost**](docs/CreatorApi.md#creatorsprofiledraftpost) | **POST** /creators/profile/draft | Save creator profile as draft
 *CreatorApi* | [**creatorsProfileGet**](docs/CreatorApi.md#creatorsprofileget) | **GET** /creators/profile | Get creator profile
@@ -130,6 +131,7 @@ Class | Method | HTTP request | Description
 *CreatorApi* | [**creatorsSearchGet**](docs/CreatorApi.md#creatorssearchget) | **GET** /creators/search | Search creators
 *CreatorApi* | [**creatorsSearchGigsGet**](docs/CreatorApi.md#creatorssearchgigsget) | **GET** /creators/search/gigs | Search gigs for creator
 *CreatorApi* | [**creatorsSearchVideoSubmissionsGet**](docs/CreatorApi.md#creatorssearchvideosubmissionsget) | **GET** /creators/search/video-submissions | Search video submissions for creator
+*GigsApi* | [**gigsApplicationsApplicationIdExpirePut**](docs/GigsApi.md#gigsapplicationsapplicationidexpireput) | **PUT** /gigs/applications/{applicationId}/expire | Expire an accepted gig application
 *GigsApi* | [**gigsApplicationsApplicationIdStatusPut**](docs/GigsApi.md#gigsapplicationsapplicationidstatusput) | **PUT** /gigs/applications/{applicationId}/status | Update application status
 *GigsApi* | [**gigsCampaignsCampaignIdGet**](docs/GigsApi.md#gigscampaignscampaignidget) | **GET** /gigs/campaigns/{campaign_id} | Get gigs by campaign
 *GigsApi* | [**gigsIdApplicationsGet**](docs/GigsApi.md#gigsidapplicationsget) | **GET** /gigs/{id}/applications | Get gig applications
@@ -141,6 +143,7 @@ Class | Method | HTTP request | Description
 *GigsApi* | [**gigsIdPut**](docs/GigsApi.md#gigsidput) | **PUT** /gigs/{id} | Update gig
 *GigsApi* | [**gigsIdStatusPut**](docs/GigsApi.md#gigsidstatusput) | **PUT** /gigs/{id}/status | Update gig status
 *GigsApi* | [**gigsInvitationsGet**](docs/GigsApi.md#gigsinvitationsget) | **GET** /gigs/invitations | Get creator invitations
+*GigsApi* | [**gigsInvitationsInvitationIdExpirePut**](docs/GigsApi.md#gigsinvitationsinvitationidexpireput) | **PUT** /gigs/invitations/{invitationId}/expire | Expire an accepted gig invitation
 *GigsApi* | [**gigsInvitationsInvitationIdRespondPut**](docs/GigsApi.md#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to gig invitation
 *GigsApi* | [**gigsPost**](docs/GigsApi.md#gigspost) | **POST** /gigs | Create a new gig
 *GigsApi* | [**gigsSearchGet**](docs/GigsApi.md#gigssearchget) | **GET** /gigs/search | Search gigs
@@ -161,6 +164,7 @@ Class | Method | HTTP request | Description
 *NotificationsApi* | [**notificationsStatsGet**](docs/NotificationsApi.md#notificationsstatsget) | **GET** /notifications/stats | Get notification statistics
 *PaymentApi* | [**paymentsIdDelete**](docs/PaymentApi.md#paymentsiddelete) | **DELETE** /payments/{id} | Delete payment by ID
 *PaymentApi* | [**paymentsIdGet**](docs/PaymentApi.md#paymentsidget) | **GET** /payments/{id} | Get payment by ID
+*PaymentApi* | [**paymentsIdPdfGet**](docs/PaymentApi.md#paymentsidpdfget) | **GET** /payments/{id}/pdf | Get payment as PDF
 *PaymentApi* | [**paymentsIdPut**](docs/PaymentApi.md#paymentsidput) | **PUT** /payments/{id} | Update payment
 *PaymentApi* | [**paymentsIdStatusPut**](docs/PaymentApi.md#paymentsidstatusput) | **PUT** /payments/{id}/status | Update payment status
 *PaymentApi* | [**paymentsPost**](docs/PaymentApi.md#paymentspost) | **POST** /payments | Create payment batch

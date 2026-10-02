@@ -299,3 +299,20 @@ export function useCreatorPayment(
     ...options,
   } );
 }
+
+export function useDownloadPaymentPdf(
+  options?: UseMutationOptions<Blob, ApiError, { id: string; isAdmin: boolean }>
+) {
+  return useMutation( {
+    mutationFn: async ( { id, isAdmin } ) => {
+      const path = isAdmin ? `/payments/${ id }/pdf` : `/creators/payments/${ id }/pdf`;
+      const response = await apiClient.get<Blob>( path, {
+        responseType: 'blob',
+        headers: { Accept: 'application/pdf' },
+      } );
+
+      return response.data;
+    },
+    ...options,
+  } );
+}

@@ -4,6 +4,7 @@ All URIs are relative to */api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
+|[**gigsApplicationsApplicationIdExpirePut**](#gigsapplicationsapplicationidexpireput) | **PUT** /gigs/applications/{applicationId}/expire | Expire an accepted gig application|
 |[**gigsApplicationsApplicationIdStatusPut**](#gigsapplicationsapplicationidstatusput) | **PUT** /gigs/applications/{applicationId}/status | Update application status|
 |[**gigsCampaignsCampaignIdGet**](#gigscampaignscampaignidget) | **GET** /gigs/campaigns/{campaign_id} | Get gigs by campaign|
 |[**gigsIdApplicationsGet**](#gigsidapplicationsget) | **GET** /gigs/{id}/applications | Get gig applications|
@@ -15,9 +16,65 @@ All URIs are relative to */api/v1*
 |[**gigsIdPut**](#gigsidput) | **PUT** /gigs/{id} | Update gig|
 |[**gigsIdStatusPut**](#gigsidstatusput) | **PUT** /gigs/{id}/status | Update gig status|
 |[**gigsInvitationsGet**](#gigsinvitationsget) | **GET** /gigs/invitations | Get creator invitations|
+|[**gigsInvitationsInvitationIdExpirePut**](#gigsinvitationsinvitationidexpireput) | **PUT** /gigs/invitations/{invitationId}/expire | Expire an accepted gig invitation|
 |[**gigsInvitationsInvitationIdRespondPut**](#gigsinvitationsinvitationidrespondput) | **PUT** /gigs/invitations/{invitationId}/respond | Respond to gig invitation|
 |[**gigsPost**](#gigspost) | **POST** /gigs | Create a new gig|
 |[**gigsSearchGet**](#gigssearchget) | **GET** /gigs/search | Search gigs|
+
+# **gigsApplicationsApplicationIdExpirePut**
+> ModelsStandardGigApplicationResponse gigsApplicationsApplicationIdExpirePut()
+
+Admin manually expires a previously accepted gig application; if no other creators remain accepted, the gig reverts to open (Admin only)
+
+### Example
+
+```typescript
+import {
+    GigsApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new GigsApi(configuration);
+
+let applicationId: string; //Application ID (default to undefined)
+
+const { status, data } = await apiInstance.gigsApplicationsApplicationIdExpirePut(
+    applicationId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **applicationId** | [**string**] | Application ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGigApplicationResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Application expired successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | Forbidden |  -  |
+|**422** | UnprocessableEntity |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gigsApplicationsApplicationIdStatusPut**
 > ModelsStandardGigApplicationResponse gigsApplicationsApplicationIdStatusPut(request)
@@ -638,6 +695,61 @@ No authorization required
 |**200** | Invitations retrieved successfully |  -  |
 |**401** | Unauthorized |  -  |
 |**404** | Creator profile not found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **gigsInvitationsInvitationIdExpirePut**
+> ModelsStandardGigInvitationResponse gigsInvitationsInvitationIdExpirePut()
+
+Admin manually expires a previously accepted gig invitation; if no other creators remain accepted, the gig reverts to open (Admin only)
+
+### Example
+
+```typescript
+import {
+    GigsApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new GigsApi(configuration);
+
+let invitationId: string; //Invitation ID (default to undefined)
+
+const { status, data } = await apiInstance.gigsInvitationsInvitationIdExpirePut(
+    invitationId
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **invitationId** | [**string**] | Invitation ID | defaults to undefined|
+
+
+### Return type
+
+**ModelsStandardGigInvitationResponse**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Invitation expired successfully |  -  |
+|**400** | Bad request |  -  |
+|**401** | Unauthorized |  -  |
+|**403** | Forbidden |  -  |
+|**422** | UnprocessableEntity |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

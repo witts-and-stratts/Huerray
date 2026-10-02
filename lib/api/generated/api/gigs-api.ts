@@ -57,6 +57,40 @@ import type { ModelsUpdateGigRequest } from '../models';
 export const GigsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Admin manually expires a previously accepted gig application; if no other creators remain accepted, the gig reverts to open (Admin only)
+         * @summary Expire an accepted gig application
+         * @param {string} applicationId Application ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gigsApplicationsApplicationIdExpirePut: async (applicationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'applicationId' is not null or undefined
+            assertParamExists('gigsApplicationsApplicationIdExpirePut', 'applicationId', applicationId)
+            const localVarPath = `/gigs/applications/{applicationId}/expire`
+                .replace(`{${"applicationId"}}`, encodeURIComponent(String(applicationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Brand updates the status of a gig application
          * @summary Update application status
          * @param {string} applicationId Application ID
@@ -89,40 +123,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Admin manually expires a previously accepted gig application; if no other creators remain accepted, the gig reverts to open (Admin only)
-         * @summary Expire an accepted gig application
-         * @param {string} applicationId Application ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        gigsApplicationsApplicationIdExpirePut: async (applicationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'applicationId' is not null or undefined
-            assertParamExists('gigsApplicationsApplicationIdExpirePut', 'applicationId', applicationId)
-            const localVarPath = `/gigs/applications/{applicationId}/expire`
-                .replace(`{${"applicationId"}}`, encodeURIComponent(String(applicationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -486,6 +486,40 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
+         * Admin manually expires a previously accepted gig invitation; if no other creators remain accepted, the gig reverts to open (Admin only)
+         * @summary Expire an accepted gig invitation
+         * @param {string} invitationId Invitation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gigsInvitationsInvitationIdExpirePut: async (invitationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'invitationId' is not null or undefined
+            assertParamExists('gigsInvitationsInvitationIdExpirePut', 'invitationId', invitationId)
+            const localVarPath = `/gigs/invitations/{invitationId}/expire`
+                .replace(`{${"invitationId"}}`, encodeURIComponent(String(invitationId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Creator accepts or declines a gig invitation
          * @summary Respond to gig invitation
          * @param {string} invitationId Invitation ID
@@ -518,40 +552,6 @@ export const GigsApiAxiosParamCreator = function (configuration?: Configuration)
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Admin manually expires a previously accepted gig invitation; if no other creators remain accepted, the gig reverts to open (Admin only)
-         * @summary Expire an accepted gig invitation
-         * @param {string} invitationId Invitation ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        gigsInvitationsInvitationIdExpirePut: async (invitationId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'invitationId' is not null or undefined
-            assertParamExists('gigsInvitationsInvitationIdExpirePut', 'invitationId', invitationId)
-            const localVarPath = `/gigs/invitations/{invitationId}/expire`
-                .replace(`{${"invitationId"}}`, encodeURIComponent(String(invitationId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -723,6 +723,19 @@ export const GigsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = GigsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Admin manually expires a previously accepted gig application; if no other creators remain accepted, the gig reverts to open (Admin only)
+         * @summary Expire an accepted gig application
+         * @param {string} applicationId Application ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gigsApplicationsApplicationIdExpirePut(applicationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsApplicationsApplicationIdExpirePut(applicationId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsApplicationsApplicationIdExpirePut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Brand updates the status of a gig application
          * @summary Update application status
          * @param {string} applicationId Application ID
@@ -734,19 +747,6 @@ export const GigsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsApplicationsApplicationIdStatusPut(applicationId, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsApplicationsApplicationIdStatusPut']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Admin manually expires a previously accepted gig application; if no other creators remain accepted, the gig reverts to open (Admin only)
-         * @summary Expire an accepted gig application
-         * @param {string} applicationId Application ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async gigsApplicationsApplicationIdExpirePut(applicationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigApplicationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsApplicationsApplicationIdExpirePut(applicationId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsApplicationsApplicationIdExpirePut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -883,6 +883,19 @@ export const GigsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Admin manually expires a previously accepted gig invitation; if no other creators remain accepted, the gig reverts to open (Admin only)
+         * @summary Expire an accepted gig invitation
+         * @param {string} invitationId Invitation ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async gigsInvitationsInvitationIdExpirePut(invitationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsInvitationIdExpirePut(invitationId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsInvitationsInvitationIdExpirePut']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Creator accepts or declines a gig invitation
          * @summary Respond to gig invitation
          * @param {string} invitationId Invitation ID
@@ -894,19 +907,6 @@ export const GigsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsInvitationIdRespondPut(invitationId, request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsInvitationsInvitationIdRespondPut']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Admin manually expires a previously accepted gig invitation; if no other creators remain accepted, the gig reverts to open (Admin only)
-         * @summary Expire an accepted gig invitation
-         * @param {string} invitationId Invitation ID
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async gigsInvitationsInvitationIdExpirePut(invitationId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardGigInvitationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.gigsInvitationsInvitationIdExpirePut(invitationId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GigsApi.gigsInvitationsInvitationIdExpirePut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -962,16 +962,6 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
     const localVarFp = GigsApiFp(configuration)
     return {
         /**
-         * Brand updates the status of a gig application
-         * @summary Update application status
-         * @param {GigsApiGigsApplicationsApplicationIdStatusPutRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponse> {
-            return localVarFp.gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.request, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Admin manually expires a previously accepted gig application; if no other creators remain accepted, the gig reverts to open (Admin only)
          * @summary Expire an accepted gig application
          * @param {GigsApiGigsApplicationsApplicationIdExpirePutRequest} requestParameters Request parameters.
@@ -980,6 +970,16 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          */
         gigsApplicationsApplicationIdExpirePut(requestParameters: GigsApiGigsApplicationsApplicationIdExpirePutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponse> {
             return localVarFp.gigsApplicationsApplicationIdExpirePut(requestParameters.applicationId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Brand updates the status of a gig application
+         * @summary Update application status
+         * @param {GigsApiGigsApplicationsApplicationIdStatusPutRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigApplicationResponse> {
+            return localVarFp.gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
          * Get all gigs for a specific campaign
@@ -1081,16 +1081,6 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.gigsInvitationsGet(options).then((request) => request(axios, basePath));
         },
         /**
-         * Creator accepts or declines a gig invitation
-         * @summary Respond to gig invitation
-         * @param {GigsApiGigsInvitationsInvitationIdRespondPutRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
-            return localVarFp.gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.request, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Admin manually expires a previously accepted gig invitation; if no other creators remain accepted, the gig reverts to open (Admin only)
          * @summary Expire an accepted gig invitation
          * @param {GigsApiGigsInvitationsInvitationIdExpirePutRequest} requestParameters Request parameters.
@@ -1099,6 +1089,16 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
          */
         gigsInvitationsInvitationIdExpirePut(requestParameters: GigsApiGigsInvitationsInvitationIdExpirePutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
             return localVarFp.gigsInvitationsInvitationIdExpirePut(requestParameters.invitationId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Creator accepts or declines a gig invitation
+         * @summary Respond to gig invitation
+         * @param {GigsApiGigsInvitationsInvitationIdRespondPutRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardGigInvitationResponse> {
+            return localVarFp.gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
          * Create a new gig for a campaign
@@ -1124,6 +1124,16 @@ export const GigsApiFactory = function (configuration?: Configuration, basePath?
 };
 
 /**
+ * Request parameters for gigsApplicationsApplicationIdExpirePut operation in GigsApi.
+ */
+export interface GigsApiGigsApplicationsApplicationIdExpirePutRequest {
+    /**
+     * Application ID
+     */
+    readonly applicationId: string
+}
+
+/**
  * Request parameters for gigsApplicationsApplicationIdStatusPut operation in GigsApi.
  */
 export interface GigsApiGigsApplicationsApplicationIdStatusPutRequest {
@@ -1136,16 +1146,6 @@ export interface GigsApiGigsApplicationsApplicationIdStatusPutRequest {
      * Status update request
      */
     readonly request: ModelsUpdateGigApplicationRequest
-}
-
-/**
- * Request parameters for gigsApplicationsApplicationIdExpirePut operation in GigsApi.
- */
-export interface GigsApiGigsApplicationsApplicationIdExpirePutRequest {
-    /**
-     * Application ID
-     */
-    readonly applicationId: string
 }
 
 /**
@@ -1259,6 +1259,16 @@ export interface GigsApiGigsIdStatusPutRequest {
 }
 
 /**
+ * Request parameters for gigsInvitationsInvitationIdExpirePut operation in GigsApi.
+ */
+export interface GigsApiGigsInvitationsInvitationIdExpirePutRequest {
+    /**
+     * Invitation ID
+     */
+    readonly invitationId: string
+}
+
+/**
  * Request parameters for gigsInvitationsInvitationIdRespondPut operation in GigsApi.
  */
 export interface GigsApiGigsInvitationsInvitationIdRespondPutRequest {
@@ -1271,16 +1281,6 @@ export interface GigsApiGigsInvitationsInvitationIdRespondPutRequest {
      * Invitation response
      */
     readonly request: ModelsGigInvitationResponseRequest
-}
-
-/**
- * Request parameters for gigsInvitationsInvitationIdExpirePut operation in GigsApi.
- */
-export interface GigsApiGigsInvitationsInvitationIdExpirePutRequest {
-    /**
-     * Invitation ID
-     */
-    readonly invitationId: string
 }
 
 /**
@@ -1339,17 +1339,6 @@ export interface GigsApiGigsSearchGetRequest {
  */
 export class GigsApi extends BaseAPI {
     /**
-     * Brand updates the status of a gig application
-     * @summary Update application status
-     * @param {GigsApiGigsApplicationsApplicationIdStatusPutRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig) {
-        return GigsApiFp(this.configuration).gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Admin manually expires a previously accepted gig application; if no other creators remain accepted, the gig reverts to open (Admin only)
      * @summary Expire an accepted gig application
      * @param {GigsApiGigsApplicationsApplicationIdExpirePutRequest} requestParameters Request parameters.
@@ -1358,6 +1347,17 @@ export class GigsApi extends BaseAPI {
      */
     public gigsApplicationsApplicationIdExpirePut(requestParameters: GigsApiGigsApplicationsApplicationIdExpirePutRequest, options?: RawAxiosRequestConfig) {
         return GigsApiFp(this.configuration).gigsApplicationsApplicationIdExpirePut(requestParameters.applicationId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Brand updates the status of a gig application
+     * @summary Update application status
+     * @param {GigsApiGigsApplicationsApplicationIdStatusPutRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public gigsApplicationsApplicationIdStatusPut(requestParameters: GigsApiGigsApplicationsApplicationIdStatusPutRequest, options?: RawAxiosRequestConfig) {
+        return GigsApiFp(this.configuration).gigsApplicationsApplicationIdStatusPut(requestParameters.applicationId, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1470,17 +1470,6 @@ export class GigsApi extends BaseAPI {
     }
 
     /**
-     * Creator accepts or declines a gig invitation
-     * @summary Respond to gig invitation
-     * @param {GigsApiGigsInvitationsInvitationIdRespondPutRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig) {
-        return GigsApiFp(this.configuration).gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Admin manually expires a previously accepted gig invitation; if no other creators remain accepted, the gig reverts to open (Admin only)
      * @summary Expire an accepted gig invitation
      * @param {GigsApiGigsInvitationsInvitationIdExpirePutRequest} requestParameters Request parameters.
@@ -1489,6 +1478,17 @@ export class GigsApi extends BaseAPI {
      */
     public gigsInvitationsInvitationIdExpirePut(requestParameters: GigsApiGigsInvitationsInvitationIdExpirePutRequest, options?: RawAxiosRequestConfig) {
         return GigsApiFp(this.configuration).gigsInvitationsInvitationIdExpirePut(requestParameters.invitationId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creator accepts or declines a gig invitation
+     * @summary Respond to gig invitation
+     * @param {GigsApiGigsInvitationsInvitationIdRespondPutRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public gigsInvitationsInvitationIdRespondPut(requestParameters: GigsApiGigsInvitationsInvitationIdRespondPutRequest, options?: RawAxiosRequestConfig) {
+        return GigsApiFp(this.configuration).gigsInvitationsInvitationIdRespondPut(requestParameters.invitationId, requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

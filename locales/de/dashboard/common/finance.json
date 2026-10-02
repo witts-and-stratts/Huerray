@@ -41,6 +41,9 @@
       "cancelled": "Abgesagt"
     },
     "actions": {
+      "downloadPdf": "PDF herunterladen",
+      "downloadingPdf": "PDF wird heruntergeladen...",
+      "downloadPdfError": "Zahlungs-PDF konnte nicht heruntergeladen werden",
       "view": "Siehe",
       "setStatus": "Status einstellen",
       "setStatusDescription": "Aktualisieren Sie den Zahlungsstatus und alle damit verbundenen Auszahlungsdetails.",
