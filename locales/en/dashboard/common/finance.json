@@ -41,6 +41,9 @@
       "cancelled": "Cancelled"
     },
     "actions": {
+      "downloadPdf": "Download PDF",
+      "downloadingPdf": "Downloading PDF...",
+      "downloadPdfError": "Failed to download payment PDF",
       "view": "View",
       "setStatus": "Set status",
       "setStatusDescription": "Update the payment status and any related payout details.",

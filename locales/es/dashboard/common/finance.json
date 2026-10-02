@@ -41,6 +41,9 @@
       "cancelled": "Cancelado"
     },
     "actions": {
+      "downloadPdf": "Descargar PDF",
+      "downloadingPdf": "Descargando PDF...",
+      "downloadPdfError": "Error al descargar el PDF del pago",
       "view": "Ver",
       "setStatus": "Establecer estado",
       "setStatusDescription": "Actualice el estado del pago y cualquier detalle relacionado con el mismo.",

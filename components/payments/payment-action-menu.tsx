@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { ChevronDown, Pencil, Trash2 } from "lucide-react";
+import { ChevronDown, Download, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { ActionMenu, type MenuAction } from "@/components/dashboard-ui/action-menu";
@@ -14,7 +14,7 @@ import {
   ModelsUpdatePaymentRequest,
   ModelsUpdatePaymentStatusRequest,
 } from "@/lib/api/generated/models";
-import { useDeletePayment, useUpdatePayment, useUpdatePaymentStatus } from "@/lib/api/hooks/payments";
+import { useDeletePayment, useDownloadPaymentPdf, useUpdatePayment, useUpdatePaymentStatus } from "@/lib/api/hooks/payments";
 import { useTranslations } from "next-intl";
 
 import { PaymentDetailsSheet } from "./payment-details-sheet";
@@ -89,6 +89,22 @@ export function PaymentActionMenu( {
     },
   } );
 
+  const { mutate: downloadPdf, isPending: isPdfPending } = useDownloadPaymentPdf( {
+    onSuccess: ( blob ) => {
+      const objectUrl = URL.createObjectURL( blob );
+      const link = document.createElement( "a" );
+      link.href = objectUrl;
+      link.download = `payment-${ paymentLabel || 'document' }.pdf`;
+      document.body.appendChild( link );
+      link.click();
+      link.remove();
+      URL.revokeObjectURL( objectUrl );
+    },
+    onError: () => {
+      toast.error( t( 'payments.actions.downloadPdfError' ) );
+    },
+  } );
+
   const handleMissingId = () => {
     if ( paymentId ) return false;
     toast.error( t( 'payments.actions.missingPaymentId' ) );
@@ -131,6 +147,15 @@ export function PaymentActionMenu( {
   };
 
   const actions: MenuAction<ModelsPaymentResponse>[] = [
+    {
+      label: isPdfPending ? t( 'payments.actions.downloadingPdf' ) : t( 'payments.actions.downloadPdf' ),
+      icon: Download,
+      disabled: isPdfPending,
+      action: () => {
+        if ( handleMissingId() ) return;
+        downloadPdf( { id: paymentId, isAdmin: !!isAdmin } );
+      },
+    },
     ...( isAdmin ? [
       {
         label: t( 'payments.actions.setStatus' ),

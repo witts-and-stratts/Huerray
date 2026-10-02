@@ -16,6 +16,7 @@ All URIs are relative to */api/v1*
 |[**creatorsMatchingGigsGet**](#creatorsmatchinggigsget) | **GET** /creators/matching-gigs | Get matching gigs|
 |[**creatorsPaymentItemsSearchGet**](#creatorspaymentitemssearchget) | **GET** /creators/payment-items/search | Search creator\&#39;s payment items|
 |[**creatorsPaymentsIdGet**](#creatorspaymentsidget) | **GET** /creators/payments/{id} | Get creator\&#39;s payment by ID|
+|[**creatorsPaymentsIdPdfGet**](#creatorspaymentsidpdfget) | **GET** /creators/payments/{id}/pdf | Get creator\&#39;s payment as PDF|
 |[**creatorsPaymentsSearchGet**](#creatorspaymentssearchget) | **GET** /creators/payments/search | Search creator\&#39;s payments|
 |[**creatorsProfileDraftPost**](#creatorsprofiledraftpost) | **POST** /creators/profile/draft | Save creator profile as draft|
 |[**creatorsProfileGet**](#creatorsprofileget) | **GET** /creators/profile | Get creator profile|
@@ -122,7 +123,7 @@ No authorization required
 # **creatorsBankDetailsGet**
 > ModelsStandardCreatorBankTaxDetailsResponse creatorsBankDetailsGet()
 
-Get bank and tax details for the creator (limited info for security)
+Get the authenticated creator\'s own full bank and tax details.
 
 ### Example
 
@@ -690,6 +691,59 @@ No authorization required
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
 |**403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **creatorsPaymentsIdPdfGet**
+> File creatorsPaymentsIdPdfGet()
+
+Creator downloads their own payment statement as a PDF file
+
+### Example
+
+```typescript
+import {
+    CreatorApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new CreatorApi(configuration);
+
+let id: string; //Payment ID (default to undefined)
+
+const { status, data } = await apiInstance.creatorsPaymentsIdPdfGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Payment ID | defaults to undefined|
+
+
+### Return type
+
+**File**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/pdf
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment PDF |  -  |
+|**403** | Forbidden |  -  |
+|**404** | Payment not found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

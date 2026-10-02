@@ -6,6 +6,7 @@ All URIs are relative to */api/v1*
 |------------- | ------------- | -------------|
 |[**paymentsIdDelete**](#paymentsiddelete) | **DELETE** /payments/{id} | Delete payment by ID|
 |[**paymentsIdGet**](#paymentsidget) | **GET** /payments/{id} | Get payment by ID|
+|[**paymentsIdPdfGet**](#paymentsidpdfget) | **GET** /payments/{id}/pdf | Get payment as PDF|
 |[**paymentsIdPut**](#paymentsidput) | **PUT** /payments/{id} | Update payment|
 |[**paymentsIdStatusPut**](#paymentsidstatusput) | **PUT** /payments/{id}/status | Update payment status|
 |[**paymentsPost**](#paymentspost) | **POST** /payments | Create payment batch|
@@ -115,6 +116,59 @@ No authorization required
 |**200** | Payment retrieved successfully |  -  |
 |**400** | Bad request |  -  |
 |**401** | Unauthorized |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **paymentsIdPdfGet**
+> File paymentsIdPdfGet()
+
+Admin generates and streams a payment statement as a PDF file
+
+### Example
+
+```typescript
+import {
+    PaymentApi,
+    Configuration
+} from 'huerray-api';
+
+const configuration = new Configuration();
+const apiInstance = new PaymentApi(configuration);
+
+let id: string; //Payment ID (default to undefined)
+
+const { status, data } = await apiInstance.paymentsIdPdfGet(
+    id
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **id** | [**string**] | Payment ID | defaults to undefined|
+
+
+### Return type
+
+**File**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/pdf
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Payment PDF |  -  |
+|**404** | Payment not found |  -  |
+|**500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

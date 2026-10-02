@@ -109,6 +109,40 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Admin generates and streams a payment statement as a PDF file
+         * @summary Get payment as PDF
+         * @param {string} id Payment ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentsIdPdfGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('paymentsIdPdfGet', 'id', id)
+            const localVarPath = `/payments/{id}/pdf`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Accept'] = 'application/pdf';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Admin updates a payment\'s details and adds or removes payment items
          * @summary Update payment
          * @param {string} id Payment ID
@@ -322,6 +356,19 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Admin generates and streams a payment statement as a PDF file
+         * @summary Get payment as PDF
+         * @param {string} id Payment ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async paymentsIdPdfGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.paymentsIdPdfGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.paymentsIdPdfGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Admin updates a payment\'s details and adds or removes payment items
          * @summary Update payment
          * @param {string} id Payment ID
@@ -411,6 +458,16 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.paymentsIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Admin generates and streams a payment statement as a PDF file
+         * @summary Get payment as PDF
+         * @param {PaymentApiPaymentsIdPdfGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        paymentsIdPdfGet(requestParameters: PaymentApiPaymentsIdPdfGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<File> {
+            return localVarFp.paymentsIdPdfGet(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Admin updates a payment\'s details and adds or removes payment items
          * @summary Update payment
          * @param {PaymentApiPaymentsIdPutRequest} requestParameters Request parameters.
@@ -467,6 +524,16 @@ export interface PaymentApiPaymentsIdDeleteRequest {
  * Request parameters for paymentsIdGet operation in PaymentApi.
  */
 export interface PaymentApiPaymentsIdGetRequest {
+    /**
+     * Payment ID
+     */
+    readonly id: string
+}
+
+/**
+ * Request parameters for paymentsIdPdfGet operation in PaymentApi.
+ */
+export interface PaymentApiPaymentsIdPdfGetRequest {
     /**
      * Payment ID
      */
@@ -556,6 +623,17 @@ export class PaymentApi extends BaseAPI {
      */
     public paymentsIdGet(requestParameters: PaymentApiPaymentsIdGetRequest, options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).paymentsIdGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Admin generates and streams a payment statement as a PDF file
+     * @summary Get payment as PDF
+     * @param {PaymentApiPaymentsIdPdfGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public paymentsIdPdfGet(requestParameters: PaymentApiPaymentsIdPdfGetRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).paymentsIdPdfGet(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

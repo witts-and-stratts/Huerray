@@ -41,6 +41,9 @@
       "cancelled": "Annulé"
     },
     "actions": {
+      "downloadPdf": "Télécharger le PDF",
+      "downloadingPdf": "Téléchargement du PDF...",
+      "downloadPdfError": "Échec du téléchargement du PDF du paiement",
       "view": "Voir",
       "setStatus": "Définir l'état",
       "setStatusDescription": "Mettre à jour le statut du paiement et tous les détails relatifs au paiement.",
