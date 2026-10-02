@@ -12,7 +12,7 @@ import {
 } from '@/lib/api/generated/models';
 import { UtilsContentType } from '@/lib/api/generated/models/utils-content-type';
 import { useAdminCampaignApproval, useCampaignApplications, useCampaignInvitations, useCampaignSubmissions, useSubmitCampaign, useUpdateCampaignStatus } from '@/lib/api/hooks/campaigns';
-import { useMultipleComments } from '@/lib/api/hooks/comments';
+import { dedupeMessages, useMultipleComments } from '@/lib/api/hooks/comments';
 import { useGigsByCampaign } from '@/lib/api/hooks/gigs';
 import { UtilsEntityType } from '@/lib/api/generated/models/utils-entity-type';
 import { ApiError } from '@/lib/api/hooks/types';
@@ -126,7 +126,7 @@ export function CampaignDetailsView( { campaign }: CampaignDetailsViewProps ) {
   const openGigCount = gigsData?.data?.filter( ( g: any ) => g.gig_status === 'open' ).length ?? 0;
   const inProgressGigCount = gigsData?.data?.filter( ( g: any ) => g.gig_status === 'in_progress' ).length ?? 0;
   const invitationCount = Array.isArray( invitationsData?.data ) ? invitationsData.data.length : 0;
-  const commentCount = commentsResults.reduce( ( sum, r ) => sum + ( r.data?.data?.length ?? 0 ), 0 );
+  const commentCount = dedupeMessages( commentsResults.flatMap( ( r ) => r.data?.data ?? [] ) ).length;
 
   // Quick action dialog state
   const [ approveDialogOpen, setApproveDialogOpen ] = useState( false );
