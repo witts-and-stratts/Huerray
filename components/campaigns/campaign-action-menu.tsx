@@ -277,6 +277,11 @@ export function CampaignActionMenu( {
       condition: () => !isCompleted && ( campaignStatus === "draft" || campaignStatus === "returned" ),
     },
     {
+      label: t( 'edit' ),
+      action: () => router.push( `${ basePath }/campaigns/${ campaign.id }/edit` ),
+      allowedRoles: [ "admin" ],
+    },
+    {
       label: t( 'publishCampaign' ),
       action: () => setPublishDialogOpen( true ),
       allowedRoles: [ "brand" ],

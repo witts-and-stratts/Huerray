@@ -6,7 +6,7 @@ import { ScrollArea } from '@/components/dashboard-ui/scroll-area';
 import { useAuth } from '@/lib/auth/auth-context';
 import type { ModelsConversationMessageResponse, UtilsEntityType } from '@/lib/api/generated/models';
 import { UtilsEntityType as EntityType } from '@/lib/api/generated/models/utils-entity-type';
-import { useAddComment, useMultipleComments } from '@/lib/api/hooks/comments';
+import { dedupeMessages, useAddComment, useMultipleComments } from '@/lib/api/hooks/comments';
 import { cn } from '@/lib/dashboard-utils';
 import { Loader2, RefreshCw, Send, ShieldCheck } from 'lucide-react';
 import { KeyboardEvent, memo, useEffect, useMemo, useRef, useState } from 'react';
@@ -270,8 +270,7 @@ export function CommentsThread( { entities, postTo, disableComment = false, size
   };
 
   const comments: ModelsConversationMessageResponse[] = useMemo( () => {
-    return results
-      .flatMap( ( r ) => r.data?.data ?? [] )
+    return dedupeMessages( results.flatMap( ( r ) => r.data?.data ?? [] ) )
       .sort( ( a, b ) => new Date( a.created_at ?? 0 ).getTime() - new Date( b.created_at ?? 0 ).getTime() );
   }, [ results ] );
 

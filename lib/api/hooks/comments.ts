@@ -63,6 +63,29 @@ export function useMultipleComments( entities: Array<{ entityType: string; entit
 
 import { UtilsEntityType } from '../generated/models/utils-entity-type';
 
+/**
+ * Merges messages from several entity queries, dropping duplicates (the same
+ * message can be returned by more than one entity endpoint). When duplicates
+ * differ in entity type, the more specific (non-campaign) one is kept so
+ * labels such as "Admin Approval" survive.
+ */
+export function dedupeMessages<T extends { id?: string; entity_type?: string }>( messages: T[] ): T[] {
+  const byId = new Map<string, T>();
+  const result: T[] = [];
+  for ( const msg of messages ) {
+    if ( !msg.id ) { result.push( msg ); continue; }
+    const existing = byId.get( msg.id );
+    if ( !existing ) {
+      byId.set( msg.id, msg );
+      result.push( msg );
+    } else if ( existing.entity_type === UtilsEntityType.EntityTypeCampaign && msg.entity_type !== existing.entity_type ) {
+      result[ result.indexOf( existing ) ] = msg;
+      byId.set( msg.id, msg );
+    }
+  }
+  return result;
+}
+
 export function useSubmissionComments( submissionId?: string ) {
   const entities = submissionId ? [
     { entityType: UtilsEntityType.EntityTypeVideoSubmissionStatusUpdate, entityId: submissionId },
