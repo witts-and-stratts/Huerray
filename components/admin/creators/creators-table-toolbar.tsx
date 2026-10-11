@@ -36,7 +36,7 @@ interface AgeRangeFilterProps<TData> {
   table: Table<TData>;
 }
 
-function CountryFilter<TData>( { table, countries }: { table: Table<TData>; countries: string[]; } ) {
+function CountryFilter<TData>( { table, countries, single = false }: { table: Table<TData>; countries: string[]; single?: boolean; } ) {
   const t = useTranslations( 'dashboard.admin' );
   const column = table.getColumn( 'country' );
   const filterValue = column?.getFilterValue() as string[] | undefined;
@@ -56,7 +56,7 @@ function CountryFilter<TData>( { table, countries }: { table: Table<TData>; coun
           className='focus:bg-accent gap-2 rounded-sm px-2 py-1.5 relative flex cursor-default items-center outline-hidden select-none hover:bg-accent text-xs text-primary'
           onClick={ ( e ) => {
             e.stopPropagation();
-            column?.setFilterValue( countries.length > 0 ? [ ...countries ] : undefined );
+            column?.setFilterValue( !single && countries.length > 0 ? [ ...countries ] : undefined );
           } }
         >
           { t( 'filters.selectAll' ) }
@@ -70,6 +70,10 @@ function CountryFilter<TData>( { table, countries }: { table: Table<TData>; coun
               key={ code }
               checked={ Array.isArray( filterValue ) && filterValue.includes( code ) }
               onCheckedChange={ ( value ) => {
+                if ( single ) {
+                  column?.setFilterValue( value ? [ code ] : undefined );
+                  return;
+                }
                 const current = ( column?.getFilterValue() as string[] ) ?? [];
                 const next = new Set( current );
                 value ? next.add( code ) : next.delete( code );
@@ -157,7 +161,7 @@ function AgeRangeFilter<TData>( { table }: AgeRangeFilterProps<TData> ) {
 
 const CONTENT_TYPE_OPTIONS = ['human-generated', 'ai-generated'];
 
-function ContentTypeFilter<TData>( { table }: { table: Table<TData>; } ) {
+function ContentTypeFilter<TData>( { table, single = false }: { table: Table<TData>; single?: boolean; } ) {
   const column = table.getColumn( 'content_type' );
   const filterValue = column?.getFilterValue() as string[] | undefined;
   const isActive = Array.isArray( filterValue ) && filterValue.length > 0;
@@ -178,6 +182,10 @@ function ContentTypeFilter<TData>( { table }: { table: Table<TData>; } ) {
             key={ option }
             checked={ Array.isArray( filterValue ) && filterValue.includes( option ) }
             onCheckedChange={ ( value ) => {
+              if ( single ) {
+                column?.setFilterValue( value ? [ option ] : undefined );
+                return;
+              }
               const current = ( column?.getFilterValue() as string[] ) ?? [];
               const next = new Set( current );
               value ? next.add( option ) : next.delete( option );
@@ -225,6 +233,8 @@ interface CreatorFilterControlsProps<TData> {
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
   showContentTypeFilter: boolean;
+  showStatusFilter: boolean;
+  singleSelect: boolean;
   labels: {
     status: string;
     sex: string;
@@ -241,28 +251,34 @@ const CreatorFilterControls = React.memo( function CreatorFilterControls<TData>(
   view,
   setView,
   showContentTypeFilter,
+  showStatusFilter,
+  singleSelect,
   labels,
   labelFn,
 }: CreatorFilterControlsProps<TData> ) {
   return (
     <div className='flex items-center gap-2 max-w-full overflow-x-auto'>
       <DataTableViewToggle view={ view } setView={ setView } />
-      <DataTableFilterDropdown
-        table={ table }
-        columnId='creator_status'
-        options={ statuses }
-        title={ labels.status }
-        labelFn={ labelFn }
-      />
-      <CountryFilter table={ table } countries={ countries } />
+      { showStatusFilter && (
+        <DataTableFilterDropdown
+          table={ table }
+          columnId='creator_status'
+          options={ statuses }
+          title={ labels.status }
+          labelFn={ labelFn }
+          selectionMode={ singleSelect ? 'single' : 'multiple' }
+        />
+      ) }
+      <CountryFilter table={ table } countries={ countries } single={ singleSelect } />
       <DataTableFilterDropdown
         table={ table }
         columnId='gender'
         options={ genders }
         title={ labels.sex }
         labelFn={ labelFn }
+        selectionMode={ singleSelect ? 'single' : 'multiple' }
       />
-      { showContentTypeFilter && <ContentTypeFilter table={ table } /> }
+      { showContentTypeFilter && <ContentTypeFilter table={ table } single={ singleSelect } /> }
       <AgeRangeFilter table={ table } />
       <DataTableViewOptions
         table={ table }
@@ -280,6 +296,9 @@ interface CreatorsTableToolbarProps<TData> {
   view: 'table' | 'cards';
   setView: ( view: 'table' | 'cards' ) => void;
   showContentTypeFilter?: boolean;
+  showStatusFilter?: boolean;
+  /** Backend filters accept one value each, so dropdowns allow a single selection. */
+  singleSelectFilters?: boolean;
   onSearchInputChange?: ( value: string ) => void;
   onSearchChange?: ( value: string ) => void;
 }
@@ -289,6 +308,8 @@ export function CreatorsTableToolbar<TData>( {
   view,
   setView,
   showContentTypeFilter = true,
+  showStatusFilter = true,
+  singleSelectFilters = false,
   onSearchInputChange,
   onSearchChange,
 }: CreatorsTableToolbarProps<TData> ) {
@@ -315,6 +336,8 @@ export function CreatorsTableToolbar<TData>( {
         view={ view }
         setView={ setView }
         showContentTypeFilter={ showContentTypeFilter }
+        showStatusFilter={ showStatusFilter }
+        singleSelect={ singleSelectFilters }
         labels={ labels }
         labelFn={ getFilterLabel }
       />

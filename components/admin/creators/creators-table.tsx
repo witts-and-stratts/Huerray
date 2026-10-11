@@ -70,8 +70,10 @@ interface CreatorsTableProps {
   onPaginationChange?: ( updater: Updater<PaginationState> ) => void;
   rowCount?: number;
   defaultContentTypeFilter?: string[];
-  onContentTypeFilterChange?: ( value?: string[] ) => void;
+  /** Server-side mode only: called whenever the column filters change so the page can refetch. */
+  onColumnFiltersChange?: ( filters: ColumnFiltersState ) => void;
   showContentTypeFilter?: boolean;
+  showStatusFilter?: boolean;
   onSearchChange?: ( value: string ) => void;
   isSearchPending?: boolean;
 }
@@ -85,8 +87,9 @@ export function CreatorsTable( {
   onPaginationChange: externalOnPaginationChange,
   rowCount,
   defaultContentTypeFilter,
-  onContentTypeFilterChange,
+  onColumnFiltersChange,
   showContentTypeFilter = true,
+  showStatusFilter = true,
   onSearchChange,
   isSearchPending = false,
 }: CreatorsTableProps ) {
@@ -128,7 +131,8 @@ export function CreatorsTable( {
     () => isNotFoundError ? [] : creators,
     [ creators, isNotFoundError ]
   );
-  const showTableControls = sourceCreators.length > 0 || hasActiveSearch || hasSearched;
+  const hasActiveFilters = columnFilters.some( ( filter ) => filter.id !== 'content_type' || !defaultContentTypeFilter?.length );
+  const showTableControls = sourceCreators.length > 0 || hasActiveSearch || hasSearched || hasActiveFilters;
   const globalFilterRef = React.useRef( globalFilter );
 
   React.useEffect( () => {
@@ -209,6 +213,7 @@ export function CreatorsTable( {
     onPaginationChange: setPagination,
     ...( isServerSide && {
       manualPagination: true,
+      manualFiltering: true,
       rowCount: rowCount ?? 0,
     } ),
     state: {
@@ -222,14 +227,8 @@ export function CreatorsTable( {
   } );
 
   React.useEffect( () => {
-    if ( !onContentTypeFilterChange ) return;
-    const contentTypeFilter = columnFilters.find( ( filter ) => filter.id === 'content_type' );
-    if ( Array.isArray( contentTypeFilter?.value ) ) {
-      onContentTypeFilterChange( contentTypeFilter.value as string[] );
-      return;
-    }
-    onContentTypeFilterChange( undefined );
-  }, [ columnFilters, onContentTypeFilterChange ] );
+    onColumnFiltersChange?.( columnFilters );
+  }, [ columnFilters, onColumnFiltersChange ] );
 
   return (
     <>
@@ -261,6 +260,8 @@ export function CreatorsTable( {
                 view={ view }
                 setView={ setView }
                 showContentTypeFilter={ showContentTypeFilter }
+                showStatusFilter={ showStatusFilter }
+                singleSelectFilters={ isServerSide }
                 onSearchInputChange={ setGlobalFilter }
                 onSearchChange={ handleSearchChange }
               />
@@ -275,7 +276,7 @@ export function CreatorsTable( {
                 } }
                 onApproveProfile={ handleOnApproveProfile }
                 onRejectProfile={ handleOnRejectProfile }
-                showCreatorEmptyState={ sourceCreators.length === 0 && !hasActiveSearch && !hasCommittedSearch && !isFetching && !isSearchPending }
+                showCreatorEmptyState={ sourceCreators.length === 0 && !hasActiveSearch && !hasCommittedSearch && !hasActiveFilters && !isFetching && !isSearchPending }
               />
               { showContentLoading && table.getRowModel().rows.length === 0 && (
                 <DataTableSkeleton showToolbar={ false } className="dt-content-loading-overlay" />
