@@ -3,6 +3,7 @@
 import { CreatorsTable } from "@/components/admin/creators/creators-table";
 import { SubHeader } from "@/components/subheader";
 import { useCreators } from "@/lib/api/hooks/creators";
+import { useCreatorServerFilters } from "@/lib/hooks/use-creator-server-filters";
 import { useDeferredTableSearch } from "@/lib/hooks/use-deferred-table-search";
 import { usePersistedPagination } from "@/lib/hooks/use-persisted-pagination";
 import { useTranslations } from "next-intl";
@@ -12,6 +13,7 @@ export default function CreatorsPage() {
   const t = useTranslations( 'dashboard.admin' );
   const { pagination, setPagination } = usePersistedPagination( 'admin-creators' );
   const { setSearchValue, deferredSearchValue, isSearchPending } = useDeferredTableSearch();
+  const { params: filterParams, paramsKey: filtersKey, onColumnFiltersChange } = useCreatorServerFilters();
   const hasMountedRef = React.useRef( false );
 
   React.useEffect( () => {
@@ -20,12 +22,13 @@ export default function CreatorsPage() {
       return;
     }
     setPagination( ( current ) => ( current.pageIndex === 0 ? current : { ...current, pageIndex: 0 } ) );
-  }, [ deferredSearchValue ] );
+  }, [ deferredSearchValue, filtersKey ] );
 
   const { data: response, isLoading, isFetching, error } = useCreators( {
     page: pagination.pageIndex + 1,
     limit: pagination.pageSize,
     q: deferredSearchValue || undefined,
+    ...filterParams,
   } );
 
   const creators = React.useMemo( () => {
@@ -48,6 +51,7 @@ export default function CreatorsPage() {
         onPaginationChange={ setPagination }
         rowCount={ response?.pagination?.total }
         onSearchChange={ setSearchValue }
+        onColumnFiltersChange={ onColumnFiltersChange }
         isSearchPending={ isSearchPending }
       />
     </div>
