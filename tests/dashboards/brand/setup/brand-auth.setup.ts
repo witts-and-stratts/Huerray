@@ -50,8 +50,8 @@ async function createBrandUser(page: Page, email: string, password: string) {
   await expect(submitButton).toBeEnabled({ timeout: 10000 });
   await submitButton.click();
 
-  // The signup form does not navigate on its own — it stores the new user in
-  // the `userData` cookie via AuthProvider and surfaces a success toast.
+  // The signup form stores the new user in the `userData` cookie via
+  // AuthProvider and then sends them to the email verification screen.
   // Waiting on that cookie is the most reliable success signal.
   await expect
     .poll(
@@ -76,9 +76,9 @@ test('authenticate as brand user', async ({ page, request }) => {
     // Mark the user's email as verified using the dev-only test endpoint.
     await verifyUserEmail(request, activeEmail);
 
-    // Navigate to the dashboard explicitly — the signup form shows a toast
-    // rather than auto-redirecting.
-    await page.goto('/brand');
+    // The verification screen polls the profile and forwards the user to the
+    // dashboard once the email is verified.
+    await page.waitForURL(/\/(?:[a-z]{2}\/)?brand/, { timeout: 30000 });
   }
 
   await expect(page).toHaveURL(/\/(?:[a-z]{2}\/)?(brand|dashboard)/, { timeout: 20000 });

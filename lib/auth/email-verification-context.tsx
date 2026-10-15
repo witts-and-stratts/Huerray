@@ -50,6 +50,18 @@ export function broadcastEmailVerified() {
   }
 }
 
+/** Subscribe to "email verified" broadcasts from other tabs. Returns an unsubscribe function. */
+export function subscribeEmailVerified( onVerified: () => void ) {
+  if ( typeof window === 'undefined' || !( 'BroadcastChannel' in window ) ) {
+    return () => { };
+  }
+  const bc = new BroadcastChannel( VERIFY_CHANNEL );
+  bc.onmessage = ( event ) => {
+    if ( event.data === 'verified' ) onVerified();
+  };
+  return () => bc.close();
+}
+
 export function EmailVerificationProvider( {
   children,
 }: {
