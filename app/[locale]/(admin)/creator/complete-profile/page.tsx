@@ -25,6 +25,12 @@ import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
+const TAB_REQUIRED_FIELDS: Record<string, ( keyof CreatorSettings )[]> = {
+  profile: [ 'dateOfBirth', 'gender', 'phoneNumber', 'street', 'city', 'state', 'zipcode', 'country', 'profileImageUrl' ],
+  social: [ 'portfolio' ],
+  bio: [ 'bio', 'applicationVideo' ],
+};
+
 export default function CompleteProfilePage() {
   const t = useTranslations( 'dashboard.creator.completeProfilePage' );
   const router = useRouter();
@@ -106,6 +112,14 @@ export default function CompleteProfilePage() {
     } as CreatorSettings,
     validators: {
       onSubmit: creatorSettingsSchema,
+    },
+    listeners: {
+      // Errors raised on blur would otherwise linger after the value is corrected.
+      onChange: ( { fieldApi } ) => {
+        if ( fieldApi.state.meta.errors.length > 0 ) {
+          fieldApi.validate( 'blur' );
+        }
+      },
     },
     onSubmit: async ( { value } ) => {
       setIsSaving( true );
@@ -212,7 +226,20 @@ export default function CompleteProfilePage() {
     { value: 'bio', label: t( 'tabs.bio' ) },
   ];
 
+  const isTabComplete = ( tab: string, values: CreatorSettings ) => {
+    const fields = TAB_REQUIRED_FIELDS[ tab ] ?? [];
+    const shape = Object.fromEntries( fields.map( ( field ) => [ field, true as const ] ) );
+    return creatorSettingsSchema.pick( shape as any ).safeParse( values ).success;
+  };
+
+  // A tab is reachable only when every tab before it is complete.
+  const isTabReachable = ( tabValue: string, values: CreatorSettings ) => {
+    const targetIndex = tabs.findIndex( ( tab ) => tab.value === tabValue );
+    return tabs.slice( 0, targetIndex ).every( ( tab ) => isTabComplete( tab.value, values ) );
+  };
+
   const handleTabChange = ( value: string ) => {
+    if ( !isTabReachable( value, form.state.values ) ) return;
     setActiveTab( value );
     window.scrollTo( 0, 0 );
   };
@@ -261,11 +288,23 @@ export default function CompleteProfilePage() {
               <Card className="complete-profile__inner-card">
                 <CardHeader className="complete-profile__inner-card-header">
                   <div className="flex justify-center w-full">
-                    <TabsList className="grid w-full grid-cols-3">
-                      { tabs.map( ( tab ) => (
-                        <TabsTab key={ tab.value } value={ tab.value } className="max-md:text-xs">{ tab.label }</TabsTab>
-                      ) ) }
-                    </TabsList>
+                    <form.Subscribe
+                      selector={ ( state ) => state.values }
+                      children={ ( values ) => (
+                        <TabsList className="grid w-full grid-cols-3">
+                          { tabs.map( ( tab ) => (
+                            <TabsTab
+                              key={ tab.value }
+                              value={ tab.value }
+                              disabled={ !isTabReachable( tab.value, values ) }
+                              className="max-md:text-xs"
+                            >
+                              { tab.label }
+                            </TabsTab>
+                          ) ) }
+                        </TabsList>
+                      ) }
+                    />
                   </div>
                 </CardHeader>
                 <CardContent className="complete-profile__inner-card-content">
@@ -273,7 +312,7 @@ export default function CompleteProfilePage() {
                     <form className="flex flex-col min-h-full pr-3 max-md:pr-2" onSubmit={ ( e ) => { e.preventDefault(); form.handleSubmit(); } }>
                       <TabsPanel value="profile" keepMounted>
                         <div className="space-y-6">
-                          <CreatorProfileSection form={ form } />
+                          <CreatorProfileSection form={ form } requireProfileImage />
                         </div>
                       </TabsPanel>
 
@@ -300,9 +339,22 @@ export default function CompleteProfilePage() {
                           </div>
                           <div>
                             { activeTab !== 'bio' ? (
-                              <Button type="button" onClick={ nextTab } size="lg" className="gap-2">
-                                { t( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
-                              </Button>
+                              <form.Subscribe
+                                selector={ ( state ) => state.values }
+                                children={ ( values ) => {
+                                  const canProceed = isTabComplete( activeTab, values );
+                                  return (
+                                    <div className="flex flex-col items-end gap-1">
+                                      <Button type="button" onClick={ nextTab } size="lg" className="gap-2" disabled={ !canProceed }>
+                                        { t( 'nextStep' ) } <ChevronRight className="w-4 h-4" />
+                                      </Button>
+                                      { !canProceed && (
+                                        <p className="text-xs text-muted-foreground">{ t( 'completeRequiredFields' ) }</p>
+                                      ) }
+                                    </div>
+                                  );
+                                } }
+                              />
                             ) : (
                               <form.Subscribe
                                 selector={ ( state ) => [ state.isSubmitting, state.values ] as const }

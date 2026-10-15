@@ -4,6 +4,7 @@
     "description": "Permítanos prepararle para empezar a trabajar con marcas.",
     "back": "Volver",
     "nextStep": "Siguiente paso",
+    "completeRequiredFields": "Completa todos los campos obligatorios para continuar.",
     "creatingProfile": "Crear perfil...",
     "completeProfile": "Perfil completo",
     "successCreated": "¡Perfil creado con éxito!",

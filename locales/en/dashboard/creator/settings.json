@@ -16,6 +16,7 @@
       "country": "Country",
       "dropImage": "Drop your image here",
       "uploadProfileImage": "Upload Profile Image",
+      "profileImage": "Profile picture",
       "uploadHint": "Drag and drop or click to upload",
       "uploadSpecs": "PNG, JPG, GIF up to 5MB"
     },

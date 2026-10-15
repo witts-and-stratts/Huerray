@@ -45,7 +45,6 @@ interface SignupFormProps extends React.ComponentProps<"div"> {
 const defaultValues = {
   firstName: "",
   lastName: "",
-  middleName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -146,7 +145,6 @@ export function SignupForm( {
             email: value.email,
             first_name: value.firstName,
             last_name: value.lastName,
-            middle_name: value.middleName || undefined,
             password: value.password,
             verify_password: value.confirmPassword,
             user_type: userType,

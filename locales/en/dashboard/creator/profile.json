@@ -4,6 +4,7 @@
     "description": "Let us get you set up to start working with brands.",
     "back": "Back",
     "nextStep": "Next Step",
+    "completeRequiredFields": "Complete all required fields to continue.",
     "creatingProfile": "Creating Profile...",
     "completeProfile": "Complete Profile",
     "successCreated": "Profile created successfully!",

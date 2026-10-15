@@ -11,11 +11,11 @@ import { useTranslations } from 'next-intl';
 
 function toFieldError( errors: any[] | undefined ): string | undefined {
   return errors?.length
-    ? errors.map( ( e ) => e.message || String( e ) ).join( ', ' )
+    ? Array.from( new Set( errors.map( ( e ) => e.message || String( e ) ) ) ).join( ', ' )
     : undefined;
 }
 
-export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSettings>; } ) {
+export function CreatorProfileSection( { form, requireProfileImage = false }: { form: ReactFormApi<CreatorSettings>; requireProfileImage?: boolean; } ) {
   const t = useTranslations( 'dashboard.creator.settings.profile' );
   const latestAllowedDateOfBirth = new Date();
   latestAllowedDateOfBirth.setFullYear( latestAllowedDateOfBirth.getFullYear() - 18 );
@@ -161,8 +161,18 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
           children={ ( gender: any ) => (
             <form.Field
               name="profileImageUrl"
+              validators={ requireProfileImage ? {
+                onChange: creatorSettingsSchema.shape.profileImageUrl,
+                onBlur: creatorSettingsSchema.shape.profileImageUrl,
+              } : undefined }
               children={ ( field: any ) => (
-                <ImageUploader
+                <div className="space-y-2">
+                  { requireProfileImage && (
+                    <p className="text-sm font-medium">
+                      { t( 'profileImage' ) }<span className="text-destructive ml-1">*</span>
+                    </p>
+                  ) }
+                  <ImageUploader
                   value={ field.state.value }
                   onChange={ ( url ) => field.handleChange( url ) }
                   renderDefault={ ( isDragActive ) => (
@@ -182,6 +192,12 @@ export function CreatorProfileSection( { form }: { form: ReactFormApi<CreatorSet
                     </>
                   ) }
                 />
+                  { requireProfileImage && toFieldError( field.state.meta.errors ) && (
+                    <p role="alert" className="text-sm text-destructive text-center">
+                      { toFieldError( field.state.meta.errors ) }
+                    </p>
+                  ) }
+                </div>
               ) }
             />
           ) }

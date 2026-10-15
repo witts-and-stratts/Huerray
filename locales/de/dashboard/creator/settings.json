@@ -16,6 +16,7 @@
       "country": "Land",
       "dropImage": "Ihr Bild hier ablegen",
       "uploadProfileImage": "Profilbild hochladen",
+      "profileImage": "Profilbild",
       "uploadHint": "Ziehen und Ablegen oder Klicken zum Hochladen",
       "uploadSpecs": "PNG, JPG, GIF bis zu 5 MB"
     },

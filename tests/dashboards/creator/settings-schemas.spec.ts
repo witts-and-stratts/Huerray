@@ -19,7 +19,7 @@ const validCreatorSettings = {
   portfolio: '',
   applicationVideo: 'https://example.com/video.mp4',
   applicationVideoThumbnail: '',
-  profileImageUrl: '',
+  profileImageUrl: 'https://example.com/profile.png',
   bankName: '',
   bankAccountNumber: '',
   bankRoutingNumber: '',
@@ -32,6 +32,15 @@ const validCreatorSettings = {
 test.describe('Dashboards - Creator Settings Schema', () => {
   test('creator settings accept a complete adult creator profile', () => {
     expect(creatorSettingsSchema.safeParse(validCreatorSettings).success).toBe(true);
+  });
+
+  test('creator settings require a profile picture', () => {
+    const result = creatorSettingsSchema.safeParse({ ...validCreatorSettings, profileImageUrl: '' });
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      expect(result.error.issues.map((issue) => issue.path.join('.'))).toContain('profileImageUrl');
+    }
   });
 
   test('creator settings reject minors, invalid dates, and missing application video', () => {

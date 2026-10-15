@@ -18,6 +18,7 @@ export type CreatorSettingsMessages = {
   zipcodeRequired: string;
   countryRequired: string;
   applicationVideoRequired: string;
+  profileImageRequired: string;
   creatorMustBeAdult: string;
   portfolioInvalidUrl?: string;
 };
@@ -106,7 +107,7 @@ export const getCreatorSettingsSchema = ( messages: CreatorSettingsMessages ) =>
   ),
   applicationVideo: z.string().min( 1, messages.applicationVideoRequired ),
   applicationVideoThumbnail: z.string().optional(),
-  profileImageUrl: z.string().optional(),
+  profileImageUrl: z.string().min( 1, messages.profileImageRequired ),
 
   // Bank
   bankName: z.string().optional(),
@@ -129,6 +130,7 @@ export const creatorSettingsSchema = getCreatorSettingsSchema( {
   zipcodeRequired: 'Zipcode is required',
   countryRequired: 'Country is required',
   applicationVideoRequired: 'Application video is required',
+  profileImageRequired: 'Profile picture is required',
   creatorMustBeAdult: 'Creators must be at least 18 years old',
   portfolioInvalidUrl: 'Please enter valid portfolio URLs',
 } );

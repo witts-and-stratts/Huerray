@@ -15,7 +15,7 @@ import { CheckCircle2, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 const CODE_LENGTH = 6;
@@ -38,7 +38,6 @@ export function VerifyEmailCode() {
   const [ isVerified, setIsVerified ] = useState( false );
   const [ error, setError ] = useState<string | null>( null );
   const [ cooldown, setCooldown ] = useState( RESEND_COOLDOWN_SECONDS );
-  const hasRedirected = useRef( false );
 
   const { data: profile, refetch: refetchProfile } = useUserProfile( {
     enabled: !!user && !isVerified,
@@ -59,17 +58,20 @@ export function VerifyEmailCode() {
   }, [ cooldown ] );
 
   const alreadyVerified = !!profile?.email_verified || !!user?.emailVerified;
+  const dashboardPath = user ? DASHBOARD_PATHS[ user.role ] : null;
 
   useEffect( () => {
-    if ( !user || !alreadyVerified || hasRedirected.current ) return;
-    hasRedirected.current = true;
+    if ( !user || !alreadyVerified || isVerified ) return;
     setIsVerified( true );
     setUser( { ...user, emailVerified: true } );
-    const dashboardPath = DASHBOARD_PATHS[ user.role ];
+  }, [ alreadyVerified, isVerified, user, setUser ] );
+
+  useEffect( () => {
+    if ( !isVerified || !dashboardPath ) return;
     // Full reload so React Query and Redux state are rebuilt under the verified session.
     const timer = setTimeout( () => { window.location.href = dashboardPath; }, REDIRECT_DELAY );
     return () => clearTimeout( timer );
-  }, [ alreadyVerified, user, setUser ] );
+  }, [ isVerified, dashboardPath ] );
 
   async function verifyCode( token: string ) {
     if ( token.length !== CODE_LENGTH || isVerifying ) return;
