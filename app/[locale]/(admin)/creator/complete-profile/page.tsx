@@ -26,7 +26,7 @@ import { toast } from 'sonner';
 import { useTranslations } from 'next-intl';
 
 const TAB_REQUIRED_FIELDS: Record<string, ( keyof CreatorSettings )[]> = {
-  profile: [ 'dateOfBirth', 'gender', 'phoneNumber', 'street', 'city', 'state', 'zipcode', 'country', 'profileImageUrl' ],
+  profile: [ 'dateOfBirth', 'gender', 'street', 'city', 'state', 'zipcode', 'country', 'profileImageUrl' ],
   social: [ 'portfolio' ],
   bio: [ 'bio', 'applicationVideo' ],
 };

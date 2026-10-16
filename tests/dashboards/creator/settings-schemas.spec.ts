@@ -34,6 +34,10 @@ test.describe('Dashboards - Creator Settings Schema', () => {
     expect(creatorSettingsSchema.safeParse(validCreatorSettings).success).toBe(true);
   });
 
+  test('creator settings treat the phone number as optional', () => {
+    expect(creatorSettingsSchema.safeParse({ ...validCreatorSettings, phoneNumber: '' }).success).toBe(true);
+  });
+
   test('creator settings require a profile picture', () => {
     const result = creatorSettingsSchema.safeParse({ ...validCreatorSettings, profileImageUrl: '' });
 

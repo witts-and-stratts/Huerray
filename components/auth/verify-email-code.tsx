@@ -5,12 +5,16 @@ import { Button } from '@/components/dashboard-ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { apiClient } from '@/lib/api/client';
 import { AuthenticationApi } from '@/lib/api/generated/api/authentication-api';
-import { useUserProfile } from '@/lib/api/hooks/users';
+import type { ModelsUserResponse } from '@/lib/api/generated/models';
+import { UserApi } from '@/lib/api/generated/api/user-api';
+import { usersKeys } from '@/lib/api/hooks/users';
 import { useAuth } from '@/lib/auth/auth-context';
 import { broadcastEmailVerified, subscribeEmailVerified } from '@/lib/auth/email-verification-context';
 import { saveSignupDraft } from '@/lib/auth/signup-draft';
 import { DASHBOARD_PATHS } from '@/lib/constants';
 import { useClearPersistedData } from '@/lib/hooks/use-clear-persisted-data';
+import { useQuery } from '@tanstack/react-query';
+import type { RawAxiosRequestConfig } from 'axios';
 import { CheckCircle2, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -24,6 +28,7 @@ const PROFILE_POLL_INTERVAL = 5_000;
 const REDIRECT_DELAY = 1_500;
 
 const authApi = new AuthenticationApi( undefined, undefined, apiClient );
+const userApi = new UserApi( undefined, undefined, apiClient );
 
 export function VerifyEmailCode() {
   const router = useRouter();
@@ -35,19 +40,29 @@ export function VerifyEmailCode() {
   const [ isVerifying, setIsVerifying ] = useState( false );
   const [ isResending, setIsResending ] = useState( false );
   const [ isChangingEmail, setIsChangingEmail ] = useState( false );
-  const [ isVerified, setIsVerified ] = useState( false );
+  const [ destination, setDestination ] = useState<'dashboard' | 'login' | null>( null );
   const [ error, setError ] = useState<string | null>( null );
   const [ cooldown, setCooldown ] = useState( RESEND_COOLDOWN_SECONDS );
+  const isVerified = destination !== null;
 
-  const { data: profile, refetch: refetchProfile } = useUserProfile( {
+  // Registration normally starts a session, but it can be missing (blocked or
+  // expired cookies). A 401 here must not trigger the global logout redirect.
+  const { data: profile, refetch: refetchProfile } = useQuery( {
+    queryKey: [ ...usersKeys.all, 'profile', 'verification-check' ],
+    queryFn: async () => {
+      const response = await userApi.usersProfileGet( { skipAuthRedirect: true } as RawAxiosRequestConfig );
+      const raw = response.data as { data?: ModelsUserResponse; };
+      return ( raw.data || raw ) as ModelsUserResponse;
+    },
     enabled: !!user && !isVerified,
-    refetchInterval: PROFILE_POLL_INTERVAL,
+    retry: false,
+    refetchInterval: ( query ) => query.state.status === 'error' ? false : PROFILE_POLL_INTERVAL,
     refetchOnWindowFocus: true,
   } );
 
   useEffect( () => {
-    if ( !user ) router.replace( '/login' );
-  }, [ user, router ] );
+    if ( !user && !isVerified ) router.replace( '/login' );
+  }, [ user, isVerified, router ] );
 
   useEffect( () => subscribeEmailVerified( () => { refetchProfile(); } ), [ refetchProfile ] );
 
@@ -57,21 +72,24 @@ export function VerifyEmailCode() {
     return () => clearTimeout( timer );
   }, [ cooldown ] );
 
-  const alreadyVerified = !!profile?.email_verified || !!user?.emailVerified;
-  const dashboardPath = user ? DASHBOARD_PATHS[ user.role ] : null;
-
+  // A session exists and the profile says verified (verified on another device or tab).
   useEffect( () => {
-    if ( !user || !alreadyVerified || isVerified ) return;
-    setIsVerified( true );
+    if ( !user || destination || !profile?.email_verified ) return;
+    setDestination( 'dashboard' );
     setUser( { ...user, emailVerified: true } );
-  }, [ alreadyVerified, isVerified, user, setUser ] );
+  }, [ profile?.email_verified, destination, user, setUser ] );
 
   useEffect( () => {
-    if ( !isVerified || !dashboardPath ) return;
-    // Full reload so React Query and Redux state are rebuilt under the verified session.
-    const timer = setTimeout( () => { window.location.href = dashboardPath; }, REDIRECT_DELAY );
+    if ( !destination || !user ) return;
+    const target = destination === 'dashboard' ? DASHBOARD_PATHS[ user.role ] : '/login?verified=1';
+    const timer = setTimeout( () => {
+      // Without a session the pending signup cookie must not look like a signed-in user.
+      if ( destination === 'login' ) setUser( null );
+      // Full reload so React Query and Redux state are rebuilt under the verified session.
+      window.location.href = target;
+    }, REDIRECT_DELAY );
     return () => clearTimeout( timer );
-  }, [ isVerified, dashboardPath ] );
+  }, [ destination, user, setUser ] );
 
   async function verifyCode( token: string ) {
     if ( token.length !== CODE_LENGTH || isVerifying ) return;
@@ -81,8 +99,10 @@ export function VerifyEmailCode() {
     try {
       await authApi.authVerifyEmailPost( { request: { token } } );
       broadcastEmailVerified();
-      await refetchProfile();
-      if ( user ) setUser( { ...user, emailVerified: true } );
+      const { data: latest } = await refetchProfile();
+      if ( latest?.email_verified ) return;
+      // No session (new signup): the account is verified, but the user still has to sign in.
+      setDestination( 'login' );
     } catch ( err: any ) {
       setError( err?.response?.data?.message || err?.message || t( 'invalidCode' ) );
     } finally {
@@ -154,7 +174,7 @@ export function VerifyEmailCode() {
                 <CheckCircle2 className="size-10 text-emerald-500" strokeWidth={ 1 } />
               </div>
               <CardTitle className="text-2xl font-primary">{ t( 'success.title' ) }</CardTitle>
-              <CardDescription>{ t( 'success.description' ) }</CardDescription>
+              <CardDescription>{ t( destination === 'login' ? 'success.signInDescription' : 'success.description' ) }</CardDescription>
             </>
           ) : (
             <>
@@ -211,6 +231,17 @@ export function VerifyEmailCode() {
                   disabled={ cooldown > 0 || isResending }
                 >
                   { cooldown > 0 ? t( 'resendIn', { seconds: cooldown } ) : t( 'resend' ) }
+                </Button>
+              </div>
+              <div className="flex items-center gap-1">
+                <span>{ t( 'verifiedElsewhere' ) }</span>
+                <Button
+                  type="button"
+                  variant="link"
+                  className="h-auto p-0"
+                  onClick={ () => { setUser( null ); window.location.href = '/login?verified=1'; } }
+                >
+                  { t( 'signIn' ) }
                 </Button>
               </div>
               <div className="flex items-center gap-1">

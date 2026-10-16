@@ -11,7 +11,6 @@ export type CreatorSettingsMessages = {
   bioRequired: string;
   dateOfBirthRequired: string;
   genderRequired: string;
-  phoneNumberRequired: string;
   streetRequired: string;
   cityRequired: string;
   stateRequired: string;
@@ -89,7 +88,7 @@ export const getCreatorSettingsSchema = ( messages: CreatorSettingsMessages ) =>
     messages.creatorMustBeAdult
   ),
   gender: z.string().min( 1, messages.genderRequired ),
-  phoneNumber: z.string().min( 1, messages.phoneNumberRequired ),
+  phoneNumber: z.string().optional(),
   street: z.string().min( 1, messages.streetRequired ),
   city: z.string().min( 1, messages.cityRequired ),
   state: z.string().min( 1, messages.stateRequired ),
@@ -123,7 +122,6 @@ export const creatorSettingsSchema = getCreatorSettingsSchema( {
   bioRequired: 'Bio is required',
   dateOfBirthRequired: 'Date of birth is required',
   genderRequired: 'Gender is required',
-  phoneNumberRequired: 'Phone number is required',
   streetRequired: 'Street is required',
   cityRequired: 'City is required',
   stateRequired: 'State/Province is required',

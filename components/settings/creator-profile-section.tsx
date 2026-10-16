@@ -86,12 +86,10 @@ export function CreatorProfileSection( { form, requireProfileImage = false }: { 
 
               <form.Field
                 name="phoneNumber"
-                validators={ { onBlur: creatorSettingsSchema.shape.phoneNumber } }
                 children={ ( field: any ) => (
                   <SuperField
                     name={ field.name }
                     label={ t( 'phoneNumber' ) }
-                    required
                     type="tel"
                     value={ field.state.value }
                     onChange={ ( e: any ) => field.handleChange( e.target.value ) }
