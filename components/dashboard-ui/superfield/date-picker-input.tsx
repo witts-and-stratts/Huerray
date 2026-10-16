@@ -156,6 +156,11 @@ export const DatePickerInput = ( {
     const newValue = e.target.value;
     setInputValue( newValue );
     if ( mode !== 'range' ) {
+      if ( !newValue.trim() ) {
+        lastEmittedRef.current = undefined;
+        onChange?.( undefined );
+        return;
+      }
       const date = new Date( newValue );
       if ( isValidDate( date ) ) {
         lastEmittedRef.current = date;

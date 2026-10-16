@@ -297,6 +297,13 @@ export function LoginForm( {
               </p>
             </div>
           ) }
+          { searchParams.get( 'verified' ) === '1' && (
+            <div className='mb-4 p-3 bg-green-50 border border-green-200 rounded-md'>
+              <p className='text-sm text-green-600'>
+                ✓ { t( 'verifiedNotice' ) }
+              </p>
+            </div>
+          ) }
           { formError && (
             <div className='mb-4 p-3 bg-red-50 border border-red-200 rounded-md'>
               <p className='text-sm text-red-600'>{ formError }</p>

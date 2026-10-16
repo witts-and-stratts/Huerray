@@ -11,13 +11,13 @@ export type CreatorSettingsMessages = {
   bioRequired: string;
   dateOfBirthRequired: string;
   genderRequired: string;
-  phoneNumberRequired: string;
   streetRequired: string;
   cityRequired: string;
   stateRequired: string;
   zipcodeRequired: string;
   countryRequired: string;
   applicationVideoRequired: string;
+  profileImageRequired: string;
   creatorMustBeAdult: string;
   portfolioInvalidUrl?: string;
 };
@@ -88,7 +88,7 @@ export const getCreatorSettingsSchema = ( messages: CreatorSettingsMessages ) =>
     messages.creatorMustBeAdult
   ),
   gender: z.string().min( 1, messages.genderRequired ),
-  phoneNumber: z.string().min( 1, messages.phoneNumberRequired ),
+  phoneNumber: z.string().optional(),
   street: z.string().min( 1, messages.streetRequired ),
   city: z.string().min( 1, messages.cityRequired ),
   state: z.string().min( 1, messages.stateRequired ),
@@ -106,7 +106,7 @@ export const getCreatorSettingsSchema = ( messages: CreatorSettingsMessages ) =>
   ),
   applicationVideo: z.string().min( 1, messages.applicationVideoRequired ),
   applicationVideoThumbnail: z.string().optional(),
-  profileImageUrl: z.string().optional(),
+  profileImageUrl: z.string().min( 1, messages.profileImageRequired ),
 
   // Bank
   bankName: z.string().optional(),
@@ -122,13 +122,13 @@ export const creatorSettingsSchema = getCreatorSettingsSchema( {
   bioRequired: 'Bio is required',
   dateOfBirthRequired: 'Date of birth is required',
   genderRequired: 'Gender is required',
-  phoneNumberRequired: 'Phone number is required',
   streetRequired: 'Street is required',
   cityRequired: 'City is required',
   stateRequired: 'State/Province is required',
   zipcodeRequired: 'Zipcode is required',
   countryRequired: 'Country is required',
   applicationVideoRequired: 'Application video is required',
+  profileImageRequired: 'Profile picture is required',
   creatorMustBeAdult: 'Creators must be at least 18 years old',
   portfolioInvalidUrl: 'Please enter valid portfolio URLs',
 } );

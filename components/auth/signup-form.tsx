@@ -23,6 +23,7 @@ import { apiClient } from "@/lib/api/client";
 import { AuthenticationApi } from "@/lib/api/generated/api/authentication-api";
 import { ModelsRegisterRequestUserTypeEnum } from "@/lib/api/generated/models/models-register-request";
 import { useAuth } from "@/lib/auth/auth-context";
+import { consumeSignupDraft } from "@/lib/auth/signup-draft";
 import { useClearPersistedData } from "@/lib/hooks/use-clear-persisted-data";
 import { cn } from "@/lib/dashboard-utils";
 import { useForm } from '@tanstack/react-form';
@@ -44,7 +45,6 @@ interface SignupFormProps extends React.ComponentProps<"div"> {
 const defaultValues = {
   firstName: "",
   lastName: "",
-  middleName: "",
   email: "",
   password: "",
   confirmPassword: "",
@@ -145,7 +145,6 @@ export function SignupForm( {
             email: value.email,
             first_name: value.firstName,
             last_name: value.lastName,
-            middle_name: value.middleName || undefined,
             password: value.password,
             verify_password: value.confirmPassword,
             user_type: userType,
@@ -190,7 +189,8 @@ export function SignupForm( {
           } );
         }
 
-        // Store user data
+        // Store user data. The account stays locked to the verification
+        // screen until the email is confirmed.
         setUser( {
           id: responseData?.user?.id || '',
           email: value.email,
@@ -198,28 +198,15 @@ export function SignupForm( {
           lastName: value.lastName,
           role: selectedRole as 'brand' | 'creator',
           avatar: responseData?.user?.avatar_url,
+          emailVerified: false,
         } );
 
         if ( response.data ) {
-          // Route to the appropriate dashboard based on the selected role
-          const dashboardPath = selectedRole === 'brand' ? "/brand" : "/creator";
-
-          toast.success( t( 'toast.successTitle' ), {
-            action: {
-              label: t( 'toast.continue' ),
-              // Full reload (not router.push) so in-memory React Query and
-              // Redux state are rebuilt fresh under the new session, matching
-              // the login flow. SPA navigation would carry over stale caches.
-              onClick: () => { window.location.href = dashboardPath; },
-            },
-            cancel: {
-              label: t( 'toast.cancel' ),
-              onClick: () => toast.dismiss(),
-            },
-            dismissible: false,
-            duration: Infinity,
-            richColors: true,
-          } );
+          // Full reload (not router.push) so in-memory React Query and
+          // Redux state are rebuilt fresh under the new session, matching
+          // the login flow. SPA navigation would carry over stale caches.
+          window.location.href = '/verify-email';
+          return;
         }
       } catch ( err: any ) {
         // Reset Turnstile on registration failure so user can try again
@@ -240,6 +227,14 @@ export function SignupForm( {
       }
     },
   } );
+
+  useEffect( () => {
+    const draft = consumeSignupDraft();
+    if ( !draft ) return;
+    form.setFieldValue( 'firstName', draft.firstName );
+    form.setFieldValue( 'lastName', draft.lastName );
+    form.setFieldValue( 'email', draft.email );
+  }, [ form ] );
 
   if ( !selectedRole ) {
     return (

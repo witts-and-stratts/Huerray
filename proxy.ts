@@ -5,7 +5,7 @@ import { locales, defaultLocale } from './i18n';
 import { isProductionHost } from './lib/config';
 
 // Helper function to get user data from cookie
-function getUserDataFromCookie(request: NextRequest): { role: 'brand' | 'creator' | 'admin' } | null {
+function getUserDataFromCookie(request: NextRequest): { role: 'brand' | 'creator' | 'admin'; emailVerified?: boolean } | null {
   try {
     const userDataCookie = request.cookies.get('userData');
     if (!userDataCookie) return null;
@@ -102,6 +102,11 @@ function handleRequest(request: NextRequest) {
       const loginUrl = new URL(`/${locale}/login`, request.url);
       loginUrl.searchParams.set('redirect', pathWithoutLocale);
       return NextResponse.redirect(loginUrl);
+    }
+
+    // Brands and creators cannot reach any dashboard page until their email is verified
+    if (userData.role !== 'admin' && userData.emailVerified === false) {
+      return NextResponse.redirect(new URL(`/${locale}/verify-email`, request.url));
     }
 
     // Role-based access control

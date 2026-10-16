@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { VerifyEmail } from '@/components/auth/verify-email';
+import { VerifyEmailCode } from '@/components/auth/verify-email-code';
 import { LanguageSelector } from '@/components/LanguageSelector';
-import { redirect } from 'next/navigation';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations( 'metadata' );
@@ -18,14 +18,10 @@ export default async function VerifyEmailPage( {
 } ) {
   const { token } = await searchParams;
 
-  if ( !token ) {
-    redirect( '/login' );
-  }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 p-4 relative">
       <div className="absolute top-4 right-4 z-300"><LanguageSelector showLabel={ false } /></div>
-      <VerifyEmail token={ token } />
+      { token ? <VerifyEmail token={ token } /> : <VerifyEmailCode /> }
     </div>
   );
 }

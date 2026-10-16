@@ -13,7 +13,6 @@ const t = (key: string) => key;
 const validSignup = {
   firstName: 'Ada',
   lastName: 'Lovelace',
-  middleName: '',
   email: 'ada@example.com',
   password: 'StrongPass123',
   confirmPassword: 'StrongPass123',
@@ -24,6 +23,16 @@ test.describe('Common - Auth Schemas', () => {
     const result = createBaseSignupSchema(t).safeParse(validSignup);
 
     expect(result.success).toBe(true);
+  });
+
+  test('base signup schema enforces the backend password length limits', () => {
+    const withPassword = (password: string) =>
+      createBaseSignupSchema(t).safeParse({ ...validSignup, password, confirmPassword: password });
+
+    expect(withPassword('a'.repeat(9)).success).toBe(false);
+    expect(withPassword('a'.repeat(10)).success).toBe(true);
+    expect(withPassword('a'.repeat(72)).success).toBe(true);
+    expect(withPassword('a'.repeat(73)).success).toBe(false);
   });
 
   test('base signup schema rejects invalid email, short password, and mismatched confirmation', () => {

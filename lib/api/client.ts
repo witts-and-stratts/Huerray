@@ -52,7 +52,8 @@ export const createApiClient = (): AxiosInstance => {
       const isAuthEndpoint = originalRequestUrl.includes('/auth/');
 
       // For authenticated endpoints, a 401 means session is invalid -> log out user.
-      if (error.response?.status === 401 && !isAuthEndpoint) {
+      const skipAuthRedirect = (error.config as { skipAuthRedirect?: boolean } | undefined)?.skipAuthRedirect;
+      if (error.response?.status === 401 && !isAuthEndpoint && !skipAuthRedirect) {
         if (typeof window !== 'undefined') {
           const method = (error.config?.method || 'GET').toUpperCase();
           const baseURL = error.config?.baseURL || BASE_URL;

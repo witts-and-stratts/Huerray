@@ -16,6 +16,7 @@
       "country": "Pays",
       "dropImage": "Déposez votre image ici",
       "uploadProfileImage": "Télécharger l'image du profil",
+      "profileImage": "Photo de profil",
       "uploadHint": "Glisser-déposer ou cliquer pour télécharger",
       "uploadSpecs": "PNG, JPG, GIF jusqu'à 5MB"
     },

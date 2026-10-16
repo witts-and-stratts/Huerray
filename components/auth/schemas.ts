@@ -1,11 +1,16 @@
 import { z } from 'zod/v4';
 
+// Mirrors the backend register rule (min=10); bcrypt rejects passwords over 72 bytes.
+export const PASSWORD_MIN_LENGTH = 10;
+export const PASSWORD_MAX_LENGTH = 72;
+
 export const createBaseSignupSchema = ( t: ( key: string ) => string ) => z.object( {
   firstName: z.string().min( 1, t( "firstNameRequired" ) ),
   lastName: z.string().min( 1, t( "lastNameRequired" ) ),
-  middleName: z.string().optional(),
   email: z.email( t( "emailInvalid" ) ),
-  password: z.string(t("passwordRequired")).min( 8, t( "passwordMin" ) ),
+  password: z.string(t("passwordRequired"))
+    .min( PASSWORD_MIN_LENGTH, t( "passwordMinSignup" ) )
+    .max( PASSWORD_MAX_LENGTH, t( "passwordMaxSignup" ) ),
   confirmPassword: z.string(t("confirmPasswordRequired")),
 } ).refine( ( data ) => data.password === data.confirmPassword, {
   message: t( "passwordsDoNotMatch" ),

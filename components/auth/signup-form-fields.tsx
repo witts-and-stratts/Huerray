@@ -13,6 +13,7 @@ import {
   FieldDescription,
   FieldGroup,
 } from "@/components/dashboard-ui/field";
+import { PASSWORD_MIN_LENGTH } from "@/components/auth/schemas";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import { UtilsBrandCategory } from "@/lib/api/generated/models/utils-brand-category";
 import { UtilsCompanySize } from "@/lib/api/generated/models/utils-company-size";
@@ -120,22 +121,6 @@ export function CommonFields( { form }: FieldsProps ) {
             error={ field.state.meta.isTouched && field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message ).join( ", " ) : undefined }
             required
             label={ t( 'firstName.label' ) }
-          />
-        ) }
-      />
-      <form.Field
-        name="middleName"
-        children={ ( field: any ) => (
-          <SuperField
-            id="middle-name"
-            name={ field.name }
-            type="text"
-            placeholder={ t( 'middleName.placeholder' ) }
-            value={ field.state.value }
-            onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => field.handleChange( e.target.value ) }
-            onBlur={ field.handleBlur }
-            error={ field.state.meta.isTouched && field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message ).join( ", " ) : undefined }
-            label={ t( 'middleName.label' ) }
           />
         ) }
       />
@@ -465,6 +450,7 @@ export function ContactAuthFields( { form }: FieldsProps ) {
             error={ field.state.meta.isTouched && field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message ).join( ", " ) : undefined }
             required
             label={ t( 'password.label' ) }
+            description={ t( 'password.hint', { min: PASSWORD_MIN_LENGTH } ) }
           />
         ) }
       />

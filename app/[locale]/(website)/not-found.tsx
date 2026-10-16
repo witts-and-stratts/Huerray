@@ -22,7 +22,7 @@ export default async function NotFound() {
   return (
     <>
       <Header />
-      <main className='body-content'>
+      <main className='body-content -mt-20 pt-20 md:-mt-30 md:pt-30'>
         <section className='px-4 lg:px-10 py-32 md:py-40 text-center'>
           <p className='text-h1 font-heading gradient-text mb-4'>404</p>
           <h1 className='text-h3 font-heading mb-4'>{ t( 'notFoundHeading' ) }</h1>
