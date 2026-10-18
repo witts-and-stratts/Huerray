@@ -12,6 +12,14 @@ import { UserStatusDialog } from "./user-status-dialog";
 import { useTranslations } from "next-intl";
 import { ConfirmDialog } from "@/components/dashboard-ui/confirm-dialog";
 import { useDeleteUser } from "@/lib/api/hooks/users";
+import { getAvailableUserStatusActions, type UserStatusAction } from "@/lib/admin/user-status";
+
+const STATUS_ACTION_LABEL_KEYS: Record<UserStatusAction, string> = {
+  approved: "approve",
+  active: "reactivate",
+  suspended: "suspend",
+  rejected: "reject",
+};
 
 interface UserActionMenuProps {
   user: ModelsUserResponse;
@@ -26,12 +34,12 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
   const userName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || user.username || userFallbackT( 'cards.userFallback' );
 
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
-  const [ pendingStatus, setPendingStatus ] = useState<"approved" | "rejected">( "approved" );
+  const [ pendingStatus, setPendingStatus ] = useState<UserStatusAction>( "approved" );
   const [ isDeleteDialogOpen, setIsDeleteDialogOpen ] = useState( false );
 
   const { mutate: deleteUser, isPending: isDeleting } = useDeleteUser();
 
-  const handleStatusAction = ( status: "approved" | "rejected" ) => {
+  const handleStatusAction = ( status: UserStatusAction ) => {
     if ( !user.id ) {
       toast.error( "User profile not found" );
       return;
@@ -103,16 +111,12 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
     //   action: handleInitiatePasswordReset,
     //   condition: () => !!user.email,
     // },
-    {
-      label: t( 'approve' ),
-      action: () => handleStatusAction( "approved" ),
-      condition: ( current ) => current.user_status !== "approved",
-    },
-    {
-      label: t( 'reject' ),
-      action: () => handleStatusAction( "rejected" ),
-      condition: ( current ) => current.user_status !== "rejected",
-    },
+    ...getAvailableUserStatusActions( user.user_status ).map( ( status, index ): MenuAction<ModelsUserResponse> => ( {
+      label: t( STATUS_ACTION_LABEL_KEYS[ status ] ),
+      action: () => handleStatusAction( status ),
+      separator: index === 0,
+      variant: status === "suspended" || status === "rejected" ? "destructive" : undefined,
+    } ) ),
     {
       label: menuT( 'deleteUser' ),
       action: () => setIsDeleteDialogOpen( true ),

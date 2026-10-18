@@ -41,6 +41,16 @@
     "rejecting": "Ablehnen...",
     "approvedToast": "{name} erfolgreich genehmigt",
     "rejectedToast": "{name} abgelehnt",
+    "suspend": "Sperren",
+    "reactivate": "Reaktivieren",
+    "confirmSuspendTitle": "Benutzer sperren?",
+    "confirmSuspendDesc": "{name} wird sofort abgemeldet und hat bis zur Reaktivierung keinen Zugriff mehr auf die Plattform.",
+    "confirmReactivateTitle": "Benutzer reaktivieren?",
+    "confirmReactivateDesc": "{name} erhält wieder Zugriff auf die Plattform.",
+    "suspending": "Wird gesperrt...",
+    "reactivating": "Wird reaktiviert...",
+    "suspendedToast": "{name} gesperrt",
+    "reactivatedToast": "{name} reaktiviert",
     "thisUser": "Dieser Benutzer"
   },
   "createUser": {
