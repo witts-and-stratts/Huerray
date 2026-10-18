@@ -14,9 +14,9 @@ export function ManagedServicesCTA() {
           variant='heroAlt'
           size='xl'
           className='bg-dark-burgundy w-100'
-          data-cal-link='huerray/book-a-free-call'
+          data-cal-link='huerray-eu/book-a-free-call'
           data-cal-namespace='enterprise-booking'
-          data-cal-origin='https://www.cal.eu'
+          data-cal-origin='https://cal.com'
         >
           { t( 'buttonText' ) }
         </Button>
