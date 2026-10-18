@@ -41,6 +41,16 @@
     "rejecting": "Rechazando...",
     "approvedToast": "{name} aprobado con éxito",
     "rejectedToast": "{name} rechazado",
+    "suspend": "Suspender",
+    "reactivate": "Reactivar",
+    "confirmSuspendTitle": "¿Suspender al usuario?",
+    "confirmSuspendDesc": "{name} cerrará sesión de inmediato y no podrá acceder a la plataforma hasta que se reactive.",
+    "confirmReactivateTitle": "¿Reactivar al usuario?",
+    "confirmReactivateDesc": "{name} recuperará el acceso a la plataforma.",
+    "suspending": "Suspendiendo...",
+    "reactivating": "Reactivando...",
+    "suspendedToast": "{name} suspendido",
+    "reactivatedToast": "{name} reactivado",
     "thisUser": "Este usuario"
   },
   "createUser": {

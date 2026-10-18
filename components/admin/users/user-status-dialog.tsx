@@ -12,6 +12,7 @@ import {
 } from "@/components/dashboard-ui/dialog";
 import { SuperField } from "@/components/dashboard-ui/super-field";
 import { useUpdateUserStatus } from "@/lib/api/hooks/users";
+import type { UserStatusAction } from "@/lib/admin/user-status";
 import { useForm } from "@tanstack/react-form";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
@@ -23,12 +24,26 @@ interface UserStatusDialogProps {
   open: boolean;
   onOpenChange: ( open: boolean ) => void;
   user: ModelsUserResponse;
-  initialStatus?: "approved" | "rejected";
+  initialStatus?: UserStatusAction;
   onSuccess?: () => void;
 }
 
+const STATUS_COPY: Record<UserStatusAction, {
+  title: string;
+  description: string;
+  submit: string;
+  submitting: string;
+  toast: string;
+  destructive: boolean;
+}> = {
+  approved: { title: "confirmApproveTitle", description: "confirmApproveDesc", submit: "approve", submitting: "approving", toast: "approvedToast", destructive: false },
+  active: { title: "confirmReactivateTitle", description: "confirmReactivateDesc", submit: "reactivate", submitting: "reactivating", toast: "reactivatedToast", destructive: false },
+  suspended: { title: "confirmSuspendTitle", description: "confirmSuspendDesc", submit: "suspend", submitting: "suspending", toast: "suspendedToast", destructive: true },
+  rejected: { title: "confirmRejectTitle", description: "confirmRejectDesc", submit: "reject", submitting: "rejecting", toast: "rejectedToast", destructive: true },
+};
+
 const statusSchema = z.object( {
-  status: z.enum( [ "approved", "rejected" ] ),
+  status: z.enum( [ "approved", "rejected", "suspended", "active" ] ),
   comment: z.string(),
 } );
 
@@ -43,10 +58,8 @@ export function UserStatusDialog( {
   const tc = useTranslations( 'dashboard.common' );
   const { mutateAsync: updateStatus, isPending } = useUpdateUserStatus();
 
-  const resolveUserStatusMessage = ( key: string, fallback: string, values?: Record<string, string> ) => (
-    t.has( key ) ? t( key, values ) : fallback
-  );
-
+  const copy = STATUS_COPY[ initialStatus ];
+  const displayName = user.first_name || user.username || t( 'thisUser' );
 
   const form = useForm( {
     defaultValues: {
@@ -69,7 +82,7 @@ export function UserStatusDialog( {
           user: user, // Pass full user object for API reconstruction
         } );
         const userName = user.first_name || user.username || t( 'thisUser' );
-        toast.success( value.status === "approved" ? t( 'approvedToast', { name: userName } ) : t( 'rejectedToast', { name: userName } ), {
+        toast.success( t( STATUS_COPY[ value.status ].toast, { name: userName } ), {
           richColors: true,
         } );
         onOpenChange( false );
@@ -105,22 +118,10 @@ export function UserStatusDialog( {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className='font-primary text-h5 font-normal text-primary!'>
-            { initialStatus === "approved"
-              ? resolveUserStatusMessage( 'confirmApproveTitle', 'Approve user profile?' )
-              : resolveUserStatusMessage( 'confirmRejectTitle', 'Reject user profile?' ) }
+            { t( copy.title ) }
           </DialogTitle>
           <DialogDescription>
-            { initialStatus === "approved"
-              ? resolveUserStatusMessage(
-                'confirmApproveDesc',
-                `${ user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }'s profile will be approved and they will be notified.`,
-                { name: user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }
-              )
-              : resolveUserStatusMessage(
-                'confirmRejectDesc',
-                `${ user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }'s profile will be rejected and they will be notified.`,
-                { name: user.first_name || user.username || resolveUserStatusMessage( 'thisUser', 'This user' ) }
-              ) }
+            { t( copy.description, { name: displayName } ) }
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={ handleSubmit } className="grid gap-4 py-4">
@@ -146,13 +147,13 @@ export function UserStatusDialog( {
             <form.Subscribe
               selector={ ( state ) => [ state.canSubmit, state.isSubmitting ] }
               children={ ( [ canSubmit, isSubmitting ] ) => (
-                <Button type="submit" disabled={ !canSubmit || isSubmitting || isPending }>
+                <Button
+                  type="submit"
+                  variant={ copy.destructive ? "destructive" : "default" }
+                  disabled={ !canSubmit || isSubmitting || isPending }
+                >
                   { ( isSubmitting || isPending ) && <Loader2 className="mr-2 size-4 animate-spin" /> }
-                  { isPending
-                    ? ( initialStatus === "approved"
-                      ? resolveUserStatusMessage( 'approving', 'Approving...' )
-                      : resolveUserStatusMessage( 'rejecting', 'Rejecting...' ) )
-                    : ( initialStatus === "approved" ? t( 'approve' ) : t( 'reject' ) ) }
+                  { isPending ? t( copy.submitting ) : t( copy.submit ) }
                 </Button>
               ) }
             />
