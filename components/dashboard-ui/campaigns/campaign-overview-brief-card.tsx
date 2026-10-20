@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/dashboard-ui/a
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/dashboard-ui/card';
 import { WrappedCard } from '../wrapped-card';
 import { Badge } from '@/components/ui/badge';
-import { stripTags } from '@/lib/utils';
 import { SentenceCase } from '@/components/text-case';
 import { BrandHoverCard } from '@/components/campaigns/brand-hover-card';
 import { Content } from '../content';
@@ -53,7 +52,9 @@ export function CampaignBriefCard( { campaign, keywordList }: CampaignBriefCardP
             <p className="font-regular capitalize"><Badge variant={ 'outline' }><SentenceCase>{ campaign.category?.replaceAll( "_", " " ) ?? "" }</SentenceCase></Badge></p>
           </WrappedCard>
           <WrappedCard title='Tone of Voice' variant='flush'>
-            <p className="font-regular capitalize">{ stripTags( campaign.tone_of_voice!, [ 'p', ] ) || 'N/A' }</p>
+            { campaign.tone_of_voice
+              ? <Content content={ campaign.tone_of_voice } />
+              : <p className="font-regular">N/A</p> }
           </WrappedCard>
         </div>
 
