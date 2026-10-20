@@ -17,7 +17,7 @@ export function PricingCards() {
     ( async function () {
       const cal = await getCalApi( { namespace: 'enterprise-booking' } );
       cal( 'init', {
-        origin: 'https://www.cal.eu',
+        origin: 'https://cal.com',
       } );
       cal( 'ui', {
         hideEventTypeDetails: false,
@@ -119,9 +119,9 @@ export function PricingCards() {
             <Button
               variant='hero'
               className='w-full rounded-full py-6 text-lg font-medium'
-              data-cal-link='huerray/book-a-free-call'
+              data-cal-link='huerray-eu/book-a-free-call'
               data-cal-namespace='enterprise-booking'
-              data-cal-origin='https://www.cal.eu'
+              data-cal-origin='https://cal.com'
             >
               { tExtra( 'enterprise.buttonText' ) }
             </Button>

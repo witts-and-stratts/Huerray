@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 
 async function mockCalEmbed(page: Page) {
   await page.route(
-    /https:\/\/(app\.cal\.com|www\.cal\.eu)\/embed\/embed\.js/,
+    /https:\/\/(cal\.com|www\.cal\.eu)\/embed\/embed\.js/,
     async (route) => {
       await route.fulfill({
         contentType: 'application/javascript',
@@ -21,7 +21,7 @@ async function mockCalEmbed(page: Page) {
           function openCalModal(trigger) {
             const calLink = trigger.dataset.calLink;
             const namespace = trigger.dataset.calNamespace || '';
-            const origin = trigger.dataset.calOrigin || 'https://app.cal.com';
+            const origin = trigger.dataset.calOrigin || 'https://cal.com';
             const popup = document.createElement('cal-modal-box');
             const frame = document.createElement('iframe');
 
@@ -83,9 +83,9 @@ test.describe('Website - Pricing Page', () => {
 
     const bookCallButton = page.getByRole('button', { name: /Book A Call/i });
     await expect(bookCallButton).toBeVisible();
-    await expect(bookCallButton).toHaveAttribute('data-cal-link', 'huerray/book-a-free-call');
+    await expect(bookCallButton).toHaveAttribute('data-cal-link', 'huerray-eu/book-a-free-call');
     await expect(bookCallButton).toHaveAttribute('data-cal-namespace', 'enterprise-booking');
-    await expect(bookCallButton).toHaveAttribute('data-cal-origin', 'https://www.cal.eu');
+    await expect(bookCallButton).toHaveAttribute('data-cal-origin', 'https://cal.com');
 
     await bookCallButton.scrollIntoViewIfNeeded();
     await bookCallButton.click();
@@ -100,7 +100,7 @@ test.describe('Website - Pricing Page', () => {
     await expect(calFrame).toHaveAttribute('name', 'cal-embed=enterprise-booking');
     await expect(calFrame).toHaveAttribute(
       'src',
-      /https:\/\/www\.cal\.eu\/huerray\/book-a-free-call\/embed\?.*embed=enterprise-booking/
+      /https:\/\/cal\.com\/huerray-eu\/book-a-free-call\/embed\?.*embed=enterprise-booking/
     );
   });
 });

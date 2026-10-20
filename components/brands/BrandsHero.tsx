@@ -16,7 +16,7 @@ export function BrandsHero() {
     ( async function () {
       const cal = await getCalApi( { namespace: 'brand-discovery-call' } );
       cal( 'init', {
-        origin: 'https://www.cal.eu',
+        origin: 'https://cal.com',
       } );
       cal( 'ui', {
         hideEventTypeDetails: false,
@@ -42,9 +42,9 @@ export function BrandsHero() {
               </Link>
               <Button
                 variant='outlineBrand'
-                data-cal-link='huerray/brand-discovery-call'
+                data-cal-link='huerray-eu/brand-discovery-call'
                 data-cal-namespace='brand-discovery-call'
-                data-cal-origin='https://www.cal.eu'
+                data-cal-origin='https://cal.com'
                 title={ tCommon( 'button.bookACall' ) }
               >
                 { tCommon( 'button.bookACall' ) }

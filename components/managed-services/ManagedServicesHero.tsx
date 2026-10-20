@@ -13,7 +13,7 @@ export function ManagedServicesHero() {
     ( async function () {
       const cal = await getCalApi( { namespace: 'enterprise-booking' } );
       cal( 'init', {
-        origin: 'https://www.cal.eu',
+        origin: 'https://cal.com',
       } );
       cal( 'ui', {
         hideEventTypeDetails: false,
@@ -32,9 +32,9 @@ export function ManagedServicesHero() {
             <Button
               variant='hero'
               size='xl'
-              data-cal-link='huerray/book-a-free-call'
+              data-cal-link='huerray-eu/book-a-free-call'
               data-cal-namespace='enterprise-booking'
-              data-cal-origin='https://www.cal.eu'
+              data-cal-origin='https://cal.com'
             >
               { t( 'buttonText' ) }
             </Button>
