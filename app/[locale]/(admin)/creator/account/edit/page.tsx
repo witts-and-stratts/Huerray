@@ -31,7 +31,6 @@ export default function CreatorBasicInfoEditPage() {
       middle_name: '',
       email: '',
       phone_number: '',
-      username: '',
     },
     onSubmit: async ( { value } ) => {
       try {
@@ -41,7 +40,6 @@ export default function CreatorBasicInfoEditPage() {
           middle_name: value.middle_name || undefined,
           email: value.email,
           phone_number: value.phone_number || undefined,
-          username: value.username || undefined,
         } );
 
         // Sync auth context cookie with updated name/email
@@ -70,7 +68,6 @@ export default function CreatorBasicInfoEditPage() {
       form.setFieldValue( 'middle_name', profile.middle_name || '' );
       form.setFieldValue( 'email', profile.email || '' );
       form.setFieldValue( 'phone_number', profile.phone_number || '' );
-      form.setFieldValue( 'username', profile.username || '' );
     } else if ( !isLoading && user ) {
       form.setFieldValue( 'first_name', user.firstName || '' );
       form.setFieldValue( 'last_name', user.lastName || '' );
@@ -86,7 +83,6 @@ export default function CreatorBasicInfoEditPage() {
     form.setFieldValue( 'middle_name', ( source as any ).middle_name || '' );
     form.setFieldValue( 'email', ( source as any ).email || '' );
     form.setFieldValue( 'phone_number', ( source as any ).phone_number || '' );
-    form.setFieldValue( 'username', ( source as any ).username || '' );
     toast.info( t( 'changesDiscarded' ) );
   }, [ profile, user, form ] );
 
@@ -187,22 +183,6 @@ export default function CreatorBasicInfoEditPage() {
                       onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                       onBlur={ field.handleBlur }
                       placeholder={ t( 'middleNamePlaceholder' ) }
-                    />
-                  ) }
-                />
-
-                <form.Field
-                  name="username"
-                  children={ ( field ) => (
-                    <SuperField
-                      name={ field.name }
-                      label={ t( 'username' ) }
-                      type="text"
-                      disabled
-                      value={ field.state.value }
-                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                      onBlur={ field.handleBlur }
-                      placeholder={ t( 'usernamePlaceholder' ) }
                     />
                   ) }
                 />

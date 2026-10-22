@@ -38,7 +38,7 @@ export function UsersTableToolbar<TData>( {
     <div className='dt-toolbar'>
       <div className='flex flex-1 items-center space-x-2'>
         <DataTableSearch
-          columnId='username'
+          columnId='email'
           placeholder={ t( 'filters.searchUsers' ) }
           onInputChange={ onSearchInputChange }
           onValueChange={ onSearchChange }

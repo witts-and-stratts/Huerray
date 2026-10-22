@@ -109,7 +109,6 @@ export function useUpdateUserStatus() {
         email: user.email || '',
         first_name: user.first_name || '',
         last_name: user.last_name || '',
-        username: user.username || '',
         user_type: userType,
         user_status: status,
         middle_name: user.middle_name,

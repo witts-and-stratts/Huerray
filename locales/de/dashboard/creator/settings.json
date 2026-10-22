@@ -140,8 +140,6 @@
     "lastNamePlaceholder": "Nachname eingeben",
     "middleName": "Mittlerer Name",
     "middleNamePlaceholder": "Mittleren Namen eingeben (optional)",
-    "username": "Benutzername",
-    "usernamePlaceholder": "Benutzernamen eingeben",
     "contactInformationTitle": "Kontaktinformationen",
     "contactInformationDescription": "Ihre E-Mail und Telefonnummer."
   },

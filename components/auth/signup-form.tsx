@@ -48,7 +48,6 @@ const defaultValues = {
   email: "",
   password: "",
   confirmPassword: "",
-  username: "",
 };
 
 

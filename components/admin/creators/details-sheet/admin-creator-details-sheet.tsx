@@ -175,11 +175,6 @@ export function AdminCreatorDetailsSheet( { creator, open, onOpenChange, onAppro
           <Activity mode={ activeTab === 'user' ? 'visible' : 'hidden' }>
             <div className="pt-4 space-y-3">
               <WrappedCard title={ t( 'creatorDetails.accountSection' ) }>
-                <Row label={ t( 'creatorDetails.username' ) } value={
-                  <CopyText text={ userDetails?.username || tc( 'sheets.na' ) } iconSide='left'>
-                    <span className='font-normal'>{ userDetails?.username || tc( 'sheets.na' ) }</span>
-                  </CopyText> } />
-                <Separator />
                 <Row label={ tc( 'sheets.email' ) } value={
                   <CopyText text={ userDetails?.email || tc( 'sheets.na' ) } iconSide='left'>
                     <span className='font-normal'>{ userDetails?.email || tc( 'sheets.na' ) }</span>

@@ -14,8 +14,7 @@ const DEFAULT_USER = process.env.E2E_BRAND_USERNAME ?? 'brand-e2e@test.huerray.d
 
 async function fillLoginForm(page: Page, identifier: string, password: string) {
   const identifierInput = page
-    .getByLabel(/Email or Username/i)
-    .or(page.getByLabel(/Username or Email/i))
+    .getByLabel(/^Email$/i)
     .or(page.locator('input[name="identifier"]'));
 
   await identifierInput.first().fill(identifier);

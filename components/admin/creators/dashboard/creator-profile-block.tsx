@@ -87,7 +87,7 @@ function UserTab( { userId, useProfileEndpoint }: { userId: string; useProfileEn
   }
 
   const {
-    first_name, last_name, username, email,
+    first_name, last_name, email,
     user_type, user_status, email_verified, id,
   } = userDetails;
 
@@ -104,13 +104,7 @@ function UserTab( { userId, useProfileEndpoint }: { userId: string; useProfileEn
             className={ email_verified ? 'border-green-400/40 text-green-600' : 'border-amber-400/40 text-amber-600' }
           />
         </div>
-        <Row label={ tc( 'sheets.details' ).split( ' ' )[ 0 ] } value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || username || tc( 'sheets.na' ) } />
-        <Row label={ t( 'userDetails.username' ) } value={
-          <CopyText text={ username! }
-            iconSide="left"
-            copyMessage={ t( 'creatorStatus.idCopied' ) } clamp={ true }>
-            { username ? `@${ username }` : tc( 'sheets.na' ) }
-          </CopyText> } />
+        <Row label={ tc( 'sheets.details' ).split( ' ' )[ 0 ] } value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || email || tc( 'sheets.na' ) } />
         <Row label={ tc( 'sheets.type' ) } value={ toLabel( user_type ) } />
         <Row label={ tc( 'sheets.email' ) }
           value={

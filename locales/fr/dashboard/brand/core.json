@@ -16,7 +16,7 @@
     "title": "Inviter les créateurs",
     "description": "Recherchez des créateurs et invitez-les à postuler à votre concert.",
     "findCreators": "Trouver des créateurs",
-    "searchPlaceholder": "Recherche par nom ou par nom d'utilisateur",
+    "searchPlaceholder": "Recherche par nom ou par e-mail",
     "noCreatorsFound": "Aucun créateur n'a été trouvé",
     "noMatchingCreators": "Pas de créateurs correspondants",
     "adjustSearch": "Essayez d'ajuster vos termes de recherche ou vérifiez l'orthographe.",

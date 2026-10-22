@@ -31,7 +31,7 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
   const menuT = useTranslations( 'dashboard.admin.userActionMenu' );
   const t = useTranslations( 'dashboard.admin.userStatus' );
   const userFallbackT = useTranslations( 'dashboard.common' );
-  const userName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || user.username || userFallbackT( 'cards.userFallback' );
+  const userName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || userFallbackT( 'cards.userFallback' );
 
   const [ isStatusDialogOpen, setIsStatusDialogOpen ] = useState( false );
   const [ pendingStatus, setPendingStatus ] = useState<UserStatusAction>( "approved" );
@@ -73,17 +73,6 @@ export function UserActionMenu( { user, onViewDetails, trigger }: UserActionMenu
     {
       label: menuT( 'copyId' ),
       action: handleCopyId,
-    },
-    {
-      label: menuT( 'copyUsername' ),
-      action: () => {
-        if ( user.username ) {
-          navigator.clipboard.writeText( user.username );
-          toast.success( menuT( 'usernameCopied' ) );
-        } else {
-          toast.error( menuT( 'noUsernameAvailable' ) );
-        }
-      },
     },
     {
       label: menuT( 'copyEmail' ),

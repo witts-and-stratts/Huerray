@@ -152,7 +152,7 @@ export function useHelpCenterData( role: HelpRole, relatedEntityType: UtilsNotif
   } );
   
   const creatorSearchQuery = selectedRecord
-    ? [ selectedRecord.first_name, selectedRecord.last_name ].filter( Boolean ).join( ' ' ) || selectedRecord.username || relatedEntityIdForQuery
+    ? [ selectedRecord.first_name, selectedRecord.last_name ].filter( Boolean ).join( ' ' ) || selectedRecord.email || relatedEntityIdForQuery
     : relatedEntityIdForQuery;
 
   const creatorQuery = useCreator( relatedEntityIdForQuery, {

@@ -21,10 +21,6 @@ export interface ModelsRegisterRequest {
     'middle_name'?: string;
     'password': string;
     'user_type': ModelsRegisterRequestUserTypeEnum;
-    /**
-     * Made optional
-     */
-    'username'?: string;
     'verify_password': string;
 }
 

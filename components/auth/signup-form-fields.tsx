@@ -145,29 +145,6 @@ export function CommonFields( { form }: FieldsProps ) {
   );
 }
 
-export function AdminFields( { form }: FieldsProps ) {
-  const t = useTranslations( 'auth.signup.fields' );
-  return (
-    <form.Field
-      name="username"
-      children={ ( field: any ) => (
-        <SuperField
-          id="username"
-          name={ field.name }
-          type="text"
-          placeholder={ t( 'username.placeholder' ) }
-          value={ field.state.value }
-          onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => field.handleChange( e.target.value ) }
-          onBlur={ field.handleBlur }
-          error={ field.state.meta.isTouched && field.state.meta.errors ? field.state.meta.errors.map( ( e: any ) => e.message ).join( ", " ) : undefined }
-          required
-          label={ t( 'username.label' ) }
-        />
-      ) }
-    />
-  );
-}
-
 export function BrandFields( { form }: FieldsProps ) {
   const t = useTranslations( 'auth.signup.fields' );
   return (

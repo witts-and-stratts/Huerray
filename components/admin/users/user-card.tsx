@@ -15,7 +15,7 @@ interface UserCardProps {
 
 export function UserCard( { user, onViewDetails }: UserCardProps ) {
   const t = useTranslations( 'dashboard.common' );
-  const fullName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || user.username || t( 'cards.userFallback' );
+  const fullName = `${ user.first_name || "" } ${ user.last_name || "" }`.trim() || user.email || t( 'cards.userFallback' );
   const initials = fullName
     .split( " " )
     .map( ( part ) => part.charAt( 0 ) || "" )

@@ -19,7 +19,7 @@ export function ConversationRow( { conversation, isSelected, currentUserId, onCl
   const displayParticipants = others.length > 0 ? others : ( conversation.participants ?? [] );
 
   const title = displayParticipants
-    .map( ( p ) => `${ p.user?.first_name || '' } ${ p.user?.last_name || '' }`.trim() || p.user?.email || p.user?.username || 'Unknown' )
+    .map( ( p ) => `${ p.user?.first_name || '' } ${ p.user?.last_name || '' }`.trim() || p.user?.email || 'Unknown' )
     .join( ', ' ) || 'Conversation';
 
   const initials = title.slice( 0, 2 ).toUpperCase();

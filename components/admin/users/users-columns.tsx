@@ -6,12 +6,11 @@ import { ArrowUpDown, ChevronDown } from "lucide-react";
 import { Button } from "@/components/dashboard-ui/button";
 import { ButtonGroup } from "@/components/dashboard-ui/button-group";
 import { Checkbox } from "@/components/dashboard-ui/checkbox";
-import { Badge } from "@/components/dashboard-ui/badge";
 import { UserActionMenu } from "./user-action-menu";
 import { UserStatusBadge } from "./user-status-badge";
 import { UserInfoBlock } from "./user-info-block";
+import { UserTypeBadge } from "./user-type-badge";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
-import { CopyText } from "@/components/dashboard-ui/copy-text";
 import { cn } from "@/lib/dashboard-utils";
 import { EmailStatusBadge } from "@/components/dashboard-ui/status-badge";
 import { useTranslations } from "next-intl";
@@ -68,31 +67,6 @@ export const getColumns = ( { onViewDetails, t, tc }: GetColumnsProps & { t: any
       enableHiding: false,
     },
     {
-      accessorKey: "user_type",
-      size: 36,
-      header: () => <span className={ 'font-regular' }></span>,
-      cell: ( { row } ) => {
-        const type = row.getValue( "user_type" ) as string;
-        const formattedType = type
-          ? type.replace( /_user$/i, '' ).replace( /_/g, ' ' )
-          : 'User';
-
-        const dotColors: Record<string, string> = {
-          'brand': 'bg-blue-500',
-          'creator': 'bg-pink-500',
-          'admin': 'bg-purple-500',
-        };
-
-        const dotColor = dotColors[ formattedType.toLowerCase() ] || 'bg-gray-400';
-
-        return (
-          <div title={ formattedType } className="flex items-center mt-2 ml-4">
-            <span className={ cn( "size-2.5 rounded-full", dotColor ) } />
-          </div>
-        );
-      },
-    },
-    {
       id: "user_type_filter",
       accessorFn: ( row ) => row.user_type ?? '',
       enableHiding: false,
@@ -108,7 +82,7 @@ export const getColumns = ( { onViewDetails, t, tc }: GetColumnsProps & { t: any
     },
     {
       id: "name", // Custom column for complex user info
-      accessorFn: ( row ) => `${ row.first_name || '' } ${ row.last_name || '' }`.trim() || row.username || 'Unknown',
+      accessorFn: ( row ) => `${ row.first_name || '' } ${ row.last_name || '' }`.trim() || row.email || 'Unknown',
       header: ( { column } ) => {
         return (
           <Button
@@ -130,39 +104,9 @@ export const getColumns = ( { onViewDetails, t, tc }: GetColumnsProps & { t: any
       },
     },
     {
-      accessorKey: "username",
-      header: ( { column } ) => {
-        return (
-          <Button
-            variant="ghost"
-            className={ 'font-regular pl-0' }
-            onClick={ () => column.toggleSorting( column.getIsSorted() === "asc" ) }
-          >
-            { t( 'userDetails.username' ) }
-            <ArrowUpDown className="ml-2 size-4" strokeWidth={ 1 } />
-          </Button>
-        );
-      },
-      cell: ( { row } ) => {
-        const username = row.getValue( "username" ) as string;
-        if ( !username ) return <div className="text-muted-foreground">-</div>;
-
-        return (
-          <Badge
-            variant="outline"
-            className="font-normal cursor-pointer w-fit hover:text-foreground transition-colors pr-1.5 overflow-visible"
-          >
-            <CopyText
-              text={ username }
-              copyMessage={ t( 'userActionMenu.usernameCopied' ) }
-              iconSide="left"
-              iconClassName={ '-left-8' }
-            >
-              { username }
-            </CopyText>
-          </Badge>
-        );
-      },
+      accessorKey: "user_type",
+      header: () => <span className={ 'font-regular' }>{ t( 'usersPage.columns.type' ) }</span>,
+      cell: ( { row } ) => <UserTypeBadge type={ row.getValue( "user_type" ) as string } />,
     },
 
     {

@@ -12,13 +12,12 @@ export interface UserData {
   user_type?: string;
   userType?: string;
   role?: string;
-  username?: string;
 }
 
 export function getUserRole( userData: UserData ): UserRole {
   const rawType = userData.user_type || userData.userType || userData.role;
 
-  if ( rawType === 'admin' || rawType === 'admin_user' || userData.username === 'admin' ) {
+  if ( rawType === 'admin' || rawType === 'admin_user' ) {
     return 'admin';
   }
   if ( rawType === 'creator' ) {

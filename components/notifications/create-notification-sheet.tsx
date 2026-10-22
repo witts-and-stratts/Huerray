@@ -243,7 +243,6 @@ export function CreateNotificationSheet( { open, onOpenChange }: CreateNotificat
     first_name?: string;
     last_name?: string;
     email?: string;
-    username?: string;
     user_type?: string;
   }>, [ usersResponse ] );
 
@@ -270,7 +269,7 @@ export function CreateNotificationSheet( { open, onOpenChange }: CreateNotificat
       case UtilsNotificationEntityType.EntityUser:
         return users.map( ( user ) => ( {
           value: user.id || "",
-          label: [ user.first_name, user.last_name ].filter( Boolean ).join( " " ) || user.email || user.username || user.id || "—",
+          label: [ user.first_name, user.last_name ].filter( Boolean ).join( " " ) || user.email || user.id || "—",
         } ) );
       case UtilsNotificationEntityType.EntityCampaign:
         return campaigns.map( ( campaign ) => ( {
@@ -351,7 +350,7 @@ export function CreateNotificationSheet( { open, onOpenChange }: CreateNotificat
   const userOptions = useMemo<SelectOption[]>( () =>
     users.map( ( user ) => ( {
       value: user.id || "",
-      label: [ user.first_name, user.last_name ].filter( Boolean ).join( " " ) || user.email || user.username || user.id || "—",
+      label: [ user.first_name, user.last_name ].filter( Boolean ).join( " " ) || user.email || user.id || "—",
     } ) ),
     [ users ]
   );
@@ -456,7 +455,7 @@ export function CreateNotificationSheet( { open, onOpenChange }: CreateNotificat
     if ( !user ) return undefined;
 
     return {
-      name: [ user.first_name, user.last_name ].filter( Boolean ).join( " " ) || user.email || user.username || user.id,
+      name: [ user.first_name, user.last_name ].filter( Boolean ).join( " " ) || user.email || user.id,
       subtitle: formatUserTypeLabel( user.user_type ),
     };
   };

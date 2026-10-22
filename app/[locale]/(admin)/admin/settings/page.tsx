@@ -30,7 +30,6 @@ export default function AdminSettingsPage() {
       middle_name: '',
       email: '',
       phone_number: '',
-      username: '',
     },
     onSubmit: async ( { value } ) => {
       try {
@@ -40,7 +39,6 @@ export default function AdminSettingsPage() {
           last_name: value.last_name,
           middle_name: value.middle_name || undefined,
           phone_number: value.phone_number || undefined,
-          username: value.username || undefined,
         };
 
         const updated = await updateUser( request );
@@ -75,7 +73,6 @@ export default function AdminSettingsPage() {
       form.setFieldValue( 'middle_name', profile.middle_name || '' );
       form.setFieldValue( 'email', profile.email || '' );
       form.setFieldValue( 'phone_number', profile.phone_number || '' );
-      form.setFieldValue( 'username', profile.username || '' );
       return;
     }
 
@@ -95,7 +92,6 @@ export default function AdminSettingsPage() {
     form.setFieldValue( 'middle_name', ( source as any ).middle_name || '' );
     form.setFieldValue( 'email', ( source as any ).email || '' );
     form.setFieldValue( 'phone_number', ( source as any ).phone_number || '' );
-    form.setFieldValue( 'username', ( source as any ).username || '' );
 
     toast.info( t( 'accountEditPage.changesDiscarded' ) );
   }, [ profile, user, form, t ] );
@@ -206,21 +202,6 @@ export default function AdminSettingsPage() {
                       onChange={ ( e: any ) => field.handleChange( e.target.value ) }
                       onBlur={ field.handleBlur }
                       placeholder={ t( 'accountEditPage.middleNamePlaceholder' ) }
-                    />
-                  ) }
-                />
-                <form.Field
-                  name="username"
-                  children={ ( field ) => (
-                    <SuperField
-                      name={ field.name }
-                      label={ t( 'accountEditPage.username' ) }
-                      type="text"
-                      disabled
-                      value={ field.state.value }
-                      onChange={ ( e: any ) => field.handleChange( e.target.value ) }
-                      onBlur={ field.handleBlur }
-                      placeholder={ t( 'accountEditPage.usernamePlaceholder' ) }
                     />
                   ) }
                 />

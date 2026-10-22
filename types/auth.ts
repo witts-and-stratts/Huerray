@@ -6,7 +6,6 @@ export interface AuthUser {
   first_name: string;
   middle_name: string;
   last_name: string;
-  username: string;
   email: string;
   user_type: UserType;
   user_status: UserStatus;

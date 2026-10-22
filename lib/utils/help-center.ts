@@ -73,7 +73,6 @@ export function getRelatedEntitySummary( entity: unknown, fallbackId: string ) {
     'payment_id',
     'case_number',
     'video_filename',
-    'username',
     'creator_name',
     'email',
   ] ) || personName || creatorName || fallbackId;

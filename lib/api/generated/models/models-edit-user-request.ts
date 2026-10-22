@@ -22,7 +22,6 @@ export interface ModelsEditUserRequest {
     'phone_number'?: string;
     'user_status': string;
     'user_type': ModelsEditUserRequestUserTypeEnum;
-    'username': string;
 }
 
 export const ModelsEditUserRequestUserTypeEnum = {

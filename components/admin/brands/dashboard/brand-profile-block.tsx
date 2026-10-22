@@ -46,7 +46,7 @@ function UserTab( { user }: { user: ModelsUserResponse; } ) {
   const updatedLabel = useFormatDate( user.updated_at || '' );
 
   const {
-    first_name, last_name, username, email,
+    first_name, last_name, email,
     user_type, user_status, email_verified, id,
   } = user;
 
@@ -63,12 +63,7 @@ function UserTab( { user }: { user: ModelsUserResponse; } ) {
             className={ email_verified ? 'border-green-400/40 text-green-600' : 'border-amber-400/40 text-amber-600' }
           />
         </div>
-        <Row label={ t( 'brandProfileBlock.name' ) } value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || username || t( 'brandProfileBlock.na' ) } />
-        <Row label={ t( 'brandProfileBlock.username' ) } value={
-          <CopyText text={ username! } iconSide="left" copyMessage={ t( 'brandProfileBlock.usernameCopied' ) } clamp={ true }>
-            { username ? `@${ username }` : t( 'brandProfileBlock.na' ) }
-          </CopyText>
-        } />
+        <Row label={ t( 'brandProfileBlock.name' ) } value={ [ first_name, last_name ].filter( Boolean ).join( ' ' ) || email || t( 'brandProfileBlock.na' ) } />
         <Row label={ t( 'brandProfileBlock.type' ) } value={ toLabel( user_type ) } />
         <Row label={ t( 'brandProfileBlock.email' ) } value={
           <CopyText text={ email! } iconSide="left" clamp={ true }>
