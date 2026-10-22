@@ -4,7 +4,7 @@ test.describe('Dashboards - Creator Profile Updates', () => {
 
   test('Creator can navigate to settings and update profile', async ({ page }) => {
     await page.goto('/login');
-    const identifierInput = page.getByLabel(/Username or Email/i).or(page.locator('input[name="identifier"]'));
+    const identifierInput = page.getByLabel(/^Email$/i).or(page.locator('input[name="identifier"]'));
     if (await identifierInput.count() > 0) {
       await identifierInput.fill('creator-e2e@test.huerray.de');
       await page.getByLabel(/Password/i).first().fill('TestPwd123!@#');

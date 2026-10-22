@@ -59,7 +59,7 @@ export function UserStatusDialog( {
   const { mutateAsync: updateStatus, isPending } = useUpdateUserStatus();
 
   const copy = STATUS_COPY[ initialStatus ];
-  const displayName = user.first_name || user.username || t( 'thisUser' );
+  const displayName = user.first_name || user.email || t( 'thisUser' );
 
   const form = useForm( {
     defaultValues: {
@@ -81,7 +81,7 @@ export function UserStatusDialog( {
           status: value.status,
           user: user, // Pass full user object for API reconstruction
         } );
-        const userName = user.first_name || user.username || t( 'thisUser' );
+        const userName = user.first_name || user.email || t( 'thisUser' );
         toast.success( t( STATUS_COPY[ value.status ].toast, { name: userName } ), {
           richColors: true,
         } );

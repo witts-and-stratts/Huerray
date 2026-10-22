@@ -180,7 +180,7 @@ Profile best practices:
 
 Creator account settings may include:
 
-- Account details: Name, email, username, and contact information.
+- Account details: Name, email, and contact information.
 - Profile settings: Creator-facing profile fields and portfolio information.
 - Bank settings: Payout details.
 - Security: Password changes and authentication settings.

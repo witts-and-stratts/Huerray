@@ -15,7 +15,7 @@ export const BRAND_PASSWORD = process.env.E2E_BRAND_PASSWORD ?? 'randompassword'
 export async function loginAs(page: Page, identifier: string, password: string) {
   await page.goto('/en/login');
   await page
-    .getByLabel(/Email or Username|Username or Email/i)
+    .getByLabel(/^Email$/i)
     .first()
     .fill(identifier);
   await page.getByLabel(/Password/i).first().fill(password);

@@ -3,6 +3,7 @@ import { Badge } from "@/components/dashboard-ui/badge";
 import { ModelsUserResponse } from "@/lib/api/generated/models";
 import { cn } from "@/lib/dashboard-utils";
 import { UserActionMenu } from "./user-action-menu";
+import { UserTypeBadge } from "./user-type-badge";
 import { Check, X } from "lucide-react";
 import { memo } from "react";
 import { CopyText } from "@/components/dashboard-ui/copy-text";
@@ -16,7 +17,7 @@ interface UserHeaderProps {
 }
 
 const UserHeader = memo( ( { user, showEmail, onViewDetails, showActions, showType }: UserHeaderProps ) => {
-  const fullName = `${ user.first_name || '' } ${ user.last_name || '' }`.trim() || user.username || 'Unknown';
+  const fullName = `${ user.first_name || '' } ${ user.last_name || '' }`.trim() || user.email || 'Unknown';
 
   return (
     <div className="flex gap-4 justify-between">
@@ -48,29 +49,7 @@ const UserHeader = memo( ( { user, showEmail, onViewDetails, showActions, showTy
           ) } */}
 
           {/* ... Type rendering code remains same ... */ }
-          { showType && <div className="mt-2">
-            { ( () => {
-              const type = user.user_type;
-              const formattedType = type
-                ? type.replace( /_user$/i, '' ).replace( /_/g, ' ' )
-                : 'User';
-
-              const typeColors: Record<string, string> = {
-                'brand': 'bg-blue-100 text-blue-700 border-blue-200',
-                'creator': 'bg-pink-100 text-pink-700 border-pink-200',
-                'admin': 'bg-purple-100 text-purple-700 border-purple-200',
-                'default': 'bg-gray-100 text-gray-700 border-gray-200'
-              };
-
-              const colorClass = typeColors[ formattedType.toLowerCase() ] || typeColors.default;
-
-              return (
-                <Badge variant="outline" className={ cn( `capitalize font-normal w-fit`, colorClass ) }>
-                  { formattedType }
-                </Badge>
-              );
-            } )() }
-          </div> }
+          { showType && <UserTypeBadge type={ user.user_type } className="mt-2" /> }
         </div>
       </div>
       { showActions && <div className='flex shrink-0 -mr-3 -mt-1'>

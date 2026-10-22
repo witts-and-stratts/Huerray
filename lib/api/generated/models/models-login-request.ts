@@ -15,10 +15,7 @@
 
 
 export interface ModelsLoginRequest {
+    'email': string;
     'password': string;
-    /**
-     * Can be username or email
-     */
-    'username': string;
 }
 

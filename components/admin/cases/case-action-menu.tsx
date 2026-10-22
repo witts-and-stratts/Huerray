@@ -49,7 +49,6 @@ export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMen
         value: admin.id!,
         label: `${ admin.first_name || '' } ${ admin.last_name || '' }`.trim()
           || admin.email
-          || admin.username
           || admin.id!,
       } ) ),
     [ adminUsers ]
@@ -65,9 +64,8 @@ export function CaseActionMenu( { case_, onViewDetails, trigger }: CaseActionMen
     return {
       name: `${ admin.first_name || '' } ${ admin.last_name || '' }`.trim()
         || admin.email
-        || admin.username
         || admin.id,
-      subtitle: admin.email || admin.username || undefined,
+      subtitle: admin.email || undefined,
     };
   }, [ adminUsers ] );
 

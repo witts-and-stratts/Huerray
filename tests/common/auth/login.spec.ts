@@ -5,7 +5,7 @@ test.describe('Common - Authentication Login', () => {
   test('Shows error with invalid credentials', async ({ page }) => {
     await page.goto('/login');
 
-    const identifierInput = page.getByLabel(/Username or Email/i).or(page.locator('input[name="identifier"]'));
+    const identifierInput = page.getByLabel(/^Email$/i).or(page.locator('input[name="identifier"]'));
     await identifierInput.fill('invalid-user@test.huerray.de');
 
     const passwordInput = page.getByLabel(/Password/i).or(page.locator('input[name="password"]')).first();
@@ -23,7 +23,7 @@ test.describe('Common - Authentication Login', () => {
   // If we had a seeded user, it would look like this:
   // test('Successfully logs in and redirects to dashboard', async ({ page }) => {
   //   await page.goto('/login');
-  //   await page.getByLabel(/Username or Email/i).fill('seeded-brand@test.com');
+  //   await page.getByLabel(/^Email$/i).fill('seeded-brand@test.com');
   //   await page.getByLabel(/Password/i).first().fill('SeededPwd123!');
   //   await page.locator('button[type="submit"]').click();
   //   await expect(page).toHaveURL(/.*dashboard.*/, { timeout: 15000 });

@@ -16,7 +16,7 @@
     "title": "Invite Creators",
     "description": "Search for creators and invite them to apply to your gig.",
     "findCreators": "Find Creators",
-    "searchPlaceholder": "Search by name or username",
+    "searchPlaceholder": "Search by name or email",
     "noCreatorsFound": "No creators found",
     "noMatchingCreators": "No matching creators",
     "adjustSearch": "Try adjusting your search terms or check the spelling.",

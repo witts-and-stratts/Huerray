@@ -19,7 +19,7 @@ async function loginIfNeeded(page: Page) {
   if (!/\/login(?:$|\?)/.test(page.url())) return;
 
   await page
-    .getByLabel(/Email or Username|Username or Email/i)
+    .getByLabel(/^Email$/i)
     .first()
     .fill(BRAND_USER);
   await page.getByLabel(/Password/i).first().fill(BRAND_PASSWORD);

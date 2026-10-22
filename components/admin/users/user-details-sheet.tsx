@@ -54,7 +54,6 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
   const {
     first_name,
     last_name,
-    username,
     email,
     phone_number,
     user_type,
@@ -65,7 +64,7 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
     id,
   } = profile || {};
 
-  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || username || t( 'userDetailsSheet.unknown' );
+  const fullName = `${ first_name || '' } ${ last_name || '' }`.trim() || email || t( 'userDetailsSheet.unknown' );
   const userTypeLabel = useMessage( user_type || '' );
   const joinedLabel = useFormatDate( created_at || '' );
   const updatedLabel = useFormatDate( updated_at || '' );
@@ -134,17 +133,6 @@ export function UserDetailsSheet( { user, open, onOpenChange }: UserDetailsSheet
                     email ? (
                       <CopyText text={ email } iconSide='left' copyMessage={ t( 'userDetailsSheet.emailCopied' ) }>
                         <span className="truncate">{ email }</span>
-                      </CopyText>
-                    ) : t( 'userDetailsSheet.na' )
-                  }
-                />
-                <Separator />
-                <Row
-                  label={ t( 'userDetailsSheet.username' ) }
-                  value={
-                    username ? (
-                      <CopyText text={ username } iconSide='left' copyMessage={ t( 'userDetailsSheet.usernameCopied' ) }>
-                        @{ username }
                       </CopyText>
                     ) : t( 'userDetailsSheet.na' )
                   }

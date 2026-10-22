@@ -9,7 +9,7 @@ test.describe('Dashboards - Brand Profile Updates', () => {
   test('Brand can navigate to settings and update profile details', async ({ page }) => {
     // 1. Starting from login if no global state is configured
     await page.goto('/login');
-    const identifierInput = page.getByLabel(/Username or Email/i).or(page.locator('input[name="identifier"]'));
+    const identifierInput = page.getByLabel(/^Email$/i).or(page.locator('input[name="identifier"]'));
     if (await identifierInput.count() > 0) {
       // Mock credentials for the flow
       await identifierInput.fill('brand-e2e@test.huerray.de');

@@ -6,7 +6,6 @@ test.describe('Common - Auth Utilities', () => {
   test('maps backend user role variants to dashboard roles', () => {
     expect(getUserRole({ user_type: 'admin' })).toBe('admin');
     expect(getUserRole({ user_type: 'admin_user' })).toBe('admin');
-    expect(getUserRole({ username: 'admin' })).toBe('admin');
     expect(getUserRole({ userType: 'creator' })).toBe('creator');
     expect(getUserRole({ role: 'brand' })).toBe('brand');
     expect(getUserRole({})).toBe('brand');

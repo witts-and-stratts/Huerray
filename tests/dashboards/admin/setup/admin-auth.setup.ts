@@ -29,7 +29,7 @@ async function resolveAdminCreds(
 ): Promise<AdminCreds | null> {
   const tryLogin = async (creds: AdminCreds) => {
     const resp = await request.post(`${API_BASE_URL}/auth/login`, {
-      data: { username: creds.username, password: creds.password },
+      data: { email: creds.username, password: creds.password },
       failOnStatusCode: false,
     });
     return resp.ok();
@@ -58,7 +58,6 @@ async function resolveAdminCreds(
       last_name: 'Admin',
       password: provisioned.password,
       verify_password: provisioned.password,
-      username: `e2eadmin${ts}`,
     },
     failOnStatusCode: false,
   });

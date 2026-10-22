@@ -74,7 +74,6 @@ const MessageGroupItem = memo( ( {
   const firstName = group.sender?.first_name ?? '';
   const lastName = group.sender?.last_name ?? '';
   const fullName = `${ firstName } ${ lastName }`.trim()
-    || group.sender?.username
     || group.sender?.email
     || 'Unknown';
 

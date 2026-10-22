@@ -23,7 +23,6 @@
     "taxCountry": "País fiscal",
     "taxId": "NIF",
     "accountSection": "Cuenta",
-    "username": "Nombre de usuario",
     "emailVerified": "Correo electrónico verificado",
     "emailUnverified": "Correo electrónico no verificado",
     "systemSection": "Sistema",

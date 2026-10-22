@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test';
 import {
-  createAdminSchema,
   createBaseSignupSchema,
   createBrandSchema,
   createCreatorSchema,
@@ -52,17 +51,9 @@ test.describe('Common - Auth Schemas', () => {
     }
   });
 
-  test('admin signup requires username while brand and creator signups treat it as optional', () => {
-    // The brand signup form does not surface a username field — username is
-    // collected later via the dashboard. Schema validates without it.
+  test('brand and creator signups validate without a username', () => {
     expect(createBrandSchema(t).safeParse(validSignup).success).toBe(true);
     expect(createCreatorSchema(t).safeParse(validSignup).success).toBe(true);
-
-    // The dedicated admin signup form does collect a username.
-    expect(createAdminSchema(t).safeParse(validSignup).success).toBe(false);
-
-    expect(createBrandSchema(t).safeParse({ ...validSignup, username: 'brand-user' }).success).toBe(true);
-    expect(createAdminSchema(t).safeParse({ ...validSignup, username: 'admin-user' }).success).toBe(true);
   });
 
   test('forgot password schema requires a valid email', () => {

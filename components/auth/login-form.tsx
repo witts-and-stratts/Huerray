@@ -85,9 +85,9 @@ function IdentifierField( { field, t }: FieldComponentProps<string> ) {
     <SuperField
       id='identifier'
       name={ field.name }
-      label={ t( 'usernameOrEmailLabel' ) }
-      type='text'
-      placeholder={ t( 'usernameOrEmailPlaceholder' ) }
+      label={ t( 'emailLabel' ) }
+      type='email'
+      placeholder={ t( 'emailPlaceholder' ) }
       value={ field.state.value }
       onChange={ ( e: React.ChangeEvent<HTMLInputElement> ) => field.handleChange( e.target.value ) }
       onBlur={ field.handleBlur }
@@ -166,7 +166,7 @@ export function LoginForm( {
   const authApi = useMemo( () => new AuthenticationApi( undefined, undefined, apiClient ), [] );
 
   const loginSchema = useMemo( () => z.object( {
-    identifier: z.string().min( 1, tValidation( 'usernameRequired' ) ),
+    identifier: z.string().email( tValidation( 'emailInvalid' ) ),
     password: z.string().min( 1, tValidation( 'passwordRequired' ) ),
     rememberMe: z.boolean(),
   } ), [ tValidation ] );
@@ -203,7 +203,7 @@ export function LoginForm( {
 
         const response = await authApi.authLoginPost( {
           credentials: {
-            username: value.identifier,
+            email: value.identifier,
             password: value.password,
           },
         }, {

@@ -20,6 +20,5 @@ export interface ModelsUpdateUserRequest {
     'last_name'?: string;
     'middle_name'?: string;
     'phone_number'?: string;
-    'username'?: string;
 }
 

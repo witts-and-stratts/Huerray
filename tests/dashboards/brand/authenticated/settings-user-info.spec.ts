@@ -4,9 +4,8 @@
  * These tests run authenticated as a brand user (via storageState from brand-setup).
  * They cover the /brand/settings/user-information page:
  *   1. Page loads with first name, last name, email pre-populated
- *   2. Username field is read-only
- *   3. Editing first name and saving shows a success toast
- *   4. Discarding changes reverts field values
+ *   2. Editing first name and saving shows a success toast
+ *   3. Discarding changes reverts field values
  */
 import { test, expect, type Page } from '@playwright/test';
 
@@ -17,7 +16,7 @@ async function loginIfNeeded(page: Page) {
   if (!/\/login(?:$|\?)/.test(page.url())) return;
 
   await page
-    .getByLabel(/Email or Username|Username or Email/i)
+    .getByLabel(/^Email$/i)
     .first()
     .fill(BRAND_USER);
   await page.getByLabel(/Password/i).first().fill(BRAND_PASSWORD);
@@ -76,27 +75,6 @@ test.describe('Dashboards - Brand Settings User Information', () => {
     if (emailValue.length > 0) {
       expect(emailValue).toContain('@');
     }
-  });
-
-  test('username field is read-only', async ({ page }) => {
-    const usernameField = page
-      .getByLabel(/username/i)
-      .or(page.locator('input[name="username"]'))
-      .first();
-
-    if (await usernameField.count() === 0) {
-      test.skip(true, 'No username field found; skipping read-only test.');
-      return;
-    }
-
-    await expect(usernameField).toBeVisible({ timeout: 10000 });
-
-    const isReadOnly =
-      (await usernameField.getAttribute('readonly')) !== null ||
-      (await usernameField.getAttribute('disabled')) !== null ||
-      (await usernameField.isEditable()) === false;
-
-    expect(isReadOnly).toBeTruthy();
   });
 
   test('editing first name and saving shows a success toast', async ({ page }) => {

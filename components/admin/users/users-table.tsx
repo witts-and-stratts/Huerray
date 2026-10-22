@@ -40,7 +40,6 @@ const userGlobalFilter: FilterFn<ModelsUserResponse> = ( row, _columnId, filterV
     u.last_name,
     u.middle_name,
     u.email,
-    u.username,
     u.user_status,
     u.user_type,
     u.phone_number,
@@ -146,7 +145,7 @@ export function UsersTable( {
   const table = useReactTable( {
     data: sourceUsers,
     columns,
-    getRowId: ( row, index ) => row.id || row.username || row.email || `user-${ index }`,
+    getRowId: ( row, index ) => row.id || row.email || `user-${ index }`,
     initialState: {
       columnPinning: {
         left: [ 'select', 'user_type', 'name' ],

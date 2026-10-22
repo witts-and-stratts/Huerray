@@ -188,7 +188,7 @@ const MessageGroupItem = memo( ( {
   const isOwn = group.senderId === currentUserId;
   const firstName = group.sender?.first_name ?? '';
   const lastName = group.sender?.last_name ?? '';
-  const fullName = `${ firstName } ${ lastName }`.trim() || group.sender?.username || group.sender?.email || 'Unknown';
+  const fullName = `${ firstName } ${ lastName }`.trim() || group.sender?.email || 'Unknown';
 
   return (
     <div className={ cn( 'flex gap-2', isOwn ? 'flex-row-reverse' : 'flex-row' ) }>

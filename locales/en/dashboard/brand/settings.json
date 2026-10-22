@@ -87,8 +87,6 @@
       "lastNamePlaceholder": "Enter last name",
       "middleName": "Middle Name",
       "middleNamePlaceholder": "Enter middle name (optional)",
-      "username": "Username",
-      "usernamePlaceholder": "Enter username",
       "contactInformationTitle": "Contact Information",
       "contactInformationDescription": "Your email and phone number.",
       "email": "Email",

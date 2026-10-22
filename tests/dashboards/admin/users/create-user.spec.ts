@@ -50,7 +50,6 @@ test.describe('Admin – Create User', () => {
 
     await expect(dialog.getByLabel(/first name/i).first()).toBeVisible({ timeout: 5000 });
     await expect(dialog.getByLabel(/last name/i).first()).toBeVisible({ timeout: 5000 });
-    await expect(dialog.getByLabel(/username/i).first()).toBeVisible({ timeout: 5000 });
     await expect(dialog.getByLabel(/email/i).first()).toBeVisible({ timeout: 5000 });
     await expect(dialog.getByLabel(/^password/i).first()).toBeVisible({ timeout: 5000 });
     await expect(dialog.getByLabel(/verify password|confirm password/i).first()).toBeVisible({ timeout: 5000 });
@@ -72,7 +71,6 @@ test.describe('Admin – Create User', () => {
 
     await dialog.getByLabel(/first name/i).first().fill('Test');
     await dialog.getByLabel(/last name/i).first().fill('User');
-    await dialog.getByLabel(/username/i).first().fill('testuser_e2e');
     await dialog.getByLabel(/email/i).first().fill('test-e2e@example.com');
     await dialog.getByLabel(/^password/i).first().fill('Password123!');
     await dialog.getByLabel(/verify password|confirm password/i).first().fill('Different999!');
@@ -91,7 +89,6 @@ test.describe('Admin – Create User', () => {
     const ts = Date.now();
     await dialog.getByLabel(/first name/i).first().fill('E2E');
     await dialog.getByLabel(/last name/i).first().fill('Test');
-    await dialog.getByLabel(/username/i).first().fill(`e2e_user_${ts}`);
     await dialog.getByLabel(/email/i).first().fill(`e2e.user.${ts}@test.huerray.de`);
     await dialog.getByLabel(/^password/i).first().fill('SecurePass123!');
     await dialog.getByLabel(/verify password|confirm password/i).first().fill('SecurePass123!');

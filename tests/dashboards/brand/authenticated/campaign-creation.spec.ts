@@ -31,7 +31,7 @@ async function loginIfNeeded(page: Page) {
   }
 
   await page
-    .getByLabel(/Email or Username|Username or Email/i)
+    .getByLabel(/^Email$/i)
     .first()
     .fill(BRAND_USER);
   await page.getByLabel(/Password/i).first().fill(BRAND_PASSWORD);

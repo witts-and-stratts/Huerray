@@ -31,7 +31,6 @@ export function CreateUserSheet( { open, onOpenChange }: CreateUserSheetProps ) 
   const createUserSchema = z.object( {
     first_name: z.string().min( 1, t( 'validation.firstNameRequired' ) ),
     last_name: z.string().min( 1, t( 'validation.lastNameRequired' ) ),
-    username: z.string().min( 3, t( 'validation.usernameMin' ) ),
     email: z.string().email( t( 'validation.invalidEmail' ) ),
     password: z.string().min( 8, t( 'validation.passwordMin' ) ),
     verify_password: z.string().min( 8, t( 'validation.verifyPasswordMin' ) ),
@@ -52,7 +51,6 @@ export function CreateUserSheet( { open, onOpenChange }: CreateUserSheetProps ) 
     defaultValues: {
       first_name: "",
       last_name: "",
-      username: "",
       email: "",
       password: "",
       verify_password: "",
@@ -107,14 +105,6 @@ export function CreateUserSheet( { open, onOpenChange }: CreateUserSheetProps ) 
                 error={ errors.last_name?.message }
               />
             </div>
-
-            <SuperField
-              type="text"
-              label={ t( 'usernameLabel' ) }
-              placeholder={ t( 'usernamePlaceholder' ) }
-              { ...register( "username" ) }
-              error={ errors.username?.message }
-            />
 
             <SuperField
               type="email"

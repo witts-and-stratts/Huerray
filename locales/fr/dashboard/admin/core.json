@@ -85,8 +85,6 @@
     "lastNamePlaceholder": "Saisir le nom de famille",
     "middleName": "Deuxième prénom",
     "middleNamePlaceholder": "Saisir le deuxième prénom (facultatif)",
-    "username": "Nom d'utilisateur",
-    "usernamePlaceholder": "Saisir le nom d'utilisateur",
     "contactInformationTitle": "Informations sur le contact",
     "contactInformationDescription": "Votre adresse électronique et votre numéro de téléphone.",
     "email": "Adresse électronique",

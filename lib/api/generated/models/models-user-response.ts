@@ -26,6 +26,5 @@ export interface ModelsUserResponse {
     'updated_at'?: string;
     'user_status'?: string;
     'user_type'?: string;
-    'username'?: string;
 }
 

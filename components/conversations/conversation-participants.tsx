@@ -24,7 +24,7 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 
 function participantName( participant: ModelsConversationParticipantResponse ): string {
   const user = participant.user;
-  return `${ user?.first_name || '' } ${ user?.last_name || '' }`.trim() || user?.email || user?.username || 'Unknown';
+  return `${ user?.first_name || '' } ${ user?.last_name || '' }`.trim() || user?.email || 'Unknown';
 }
 
 interface ParticipantAvatarsProps {
