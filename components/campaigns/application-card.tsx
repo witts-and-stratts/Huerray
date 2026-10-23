@@ -26,6 +26,7 @@ import { Separator } from '@/components/dashboard-ui/separator';
 import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { getCreatorVideoCount } from '@/lib/utils/gig';
 import { SentenceCase, TextCapitalize } from '../text-case';
 import { useTranslations } from 'next-intl';
 import { RoleGuard } from '../auth/role-guard';
@@ -119,7 +120,7 @@ export function ApplicationCard( { application, onClick }: ApplicationCardProps 
   const creatorInitials = creatorName.slice( 0, 2 ).toUpperCase();
   const profileImage = creator?.profile_image?.asset;
   const gigTitle = gig?.title || 'Untitled Gig';
-  const numberOfVideos = gig?.number_of_videos;
+  const numberOfVideos = getCreatorVideoCount( gig, role );
   const durationSeconds = gig?.video_duration_in_seconds;
   const compensation = gig?.compensation?.value;
   const formatCurrency = useFormatCurrency();

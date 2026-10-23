@@ -13,6 +13,7 @@ import { useDelayedLoading } from '@/lib/hooks/use-delayed-loading';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import { formatDate } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { getCreatorVideoCount } from '@/lib/utils/gig';
 import { Clock01Icon, InformationCircleIcon, PlayIcon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ComponentProps, memo, useCallback, useMemo, useState } from 'react';
@@ -328,7 +329,7 @@ export const GigCard = memo( function GigCard( { gig, onViewGig, onOpenSheet, on
           {/* ── Task / Reward two-column block ── */ }
           <div className="grid grid-cols-2 gap-3">
             <GigTaskBlock
-              numberOfVideos={ gig.number_of_videos }
+              numberOfVideos={ getCreatorVideoCount( gig, role ) }
               videoDuration={ gig.video_duration_in_seconds }
             />
             { rewardAmount ? (

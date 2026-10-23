@@ -15,6 +15,8 @@ import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency, useFormatDate } from '@/lib/hooks/format';
 import { formatDate } from '@/lib/utils';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { getCreatorVideoCount } from '@/lib/utils/gig';
+import { useRole } from '@/contexts/role-context';
 import { Clock01Icon, Video01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ComponentProps } from 'react';
@@ -195,7 +197,9 @@ const SubmissionsCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
 
 const TaskCell = ( { row }: { row: Row<ModelsGigResponse>; } ) => {
   const t = useTranslations( 'dashboard.brand.campaignsPage' );
-  const { number_of_videos, video_duration_in_seconds } = row.original;
+  const role = useRole();
+  const { video_duration_in_seconds } = row.original;
+  const number_of_videos = getCreatorVideoCount( row.original, role );
   return (
     <div className="flex gap-3">
       { number_of_videos != null && (

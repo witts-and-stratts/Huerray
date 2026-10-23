@@ -9,6 +9,7 @@ import { Skeleton } from '@/components/dashboard-ui/skeleton';
 import { useActiveGigs } from '@/lib/api/hooks/creators';
 import type { ModelsGigCreatorResponse } from '@/lib/api/generated/models';
 import { toMoney } from '@/lib/utils';
+import { getCreatorVideoCount } from '@/lib/utils/gig';
 
 function toDate( value?: string ) {
   if ( !value ) return 'N/A';
@@ -19,8 +20,9 @@ function toDate( value?: string ) {
 
 function projectedGigEarning( gig: ModelsGigCreatorResponse ) {
   if ( !gig.compensation?.value ) return 0;
-  if ( typeof gig.number_of_videos === 'number' && gig.number_of_videos > 0 ) {
-    return ( gig.compensation?.value ?? 0 ) * gig.number_of_videos;
+  const videoCount = getCreatorVideoCount( gig, 'creator' );
+  if ( typeof videoCount === 'number' && videoCount > 0 ) {
+    return ( gig.compensation?.value ?? 0 ) * videoCount;
   }
   return gig.compensation?.value ?? 0;
 }

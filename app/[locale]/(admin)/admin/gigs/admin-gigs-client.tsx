@@ -3,9 +3,11 @@
 import * as React from 'react';
 import { useGigs } from '@/lib/api/hooks/gigs';
 import { GigsTable } from '@/components/campaigns/gigs-table';
-import { ModelsGigResponse } from '@/lib/api/generated';
+import { ModelsGigResponse, UtilsGigStatus } from '@/lib/api/generated';
 import { useDeferredTableSearch } from '@/lib/hooks/use-deferred-table-search';
 import { usePersistedPagination } from '@/lib/hooks/use-persisted-pagination';
+
+const DEFAULT_STATUSES: string[] = [ UtilsGigStatus.GigStatusOpen, UtilsGigStatus.GigStatusInProgress ];
 
 export function AdminGigsClient() {
   const { pagination, setPagination } = usePersistedPagination( 'admin-gigs' );
@@ -42,6 +44,7 @@ export function AdminGigsClient() {
       rowCount={ gigsData?.pagination?.total }
       onSearchChange={ setSearchValue }
       isSearchPending={ isSearchPending }
+      defaultStatuses={ DEFAULT_STATUSES }
     />
   );
 }
