@@ -13,6 +13,7 @@ import { useRespondToInvitation } from '@/lib/api/hooks/gigs';
 import { cn } from '@/lib/dashboard-utils';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import { imgpresets } from '@/lib/utils/imgproxy';
+import { getCreatorVideoCount } from '@/lib/utils/gig';
 import { ArrowRight, Calendar, VideoIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '../dashboard-ui/avatar';
@@ -154,7 +155,7 @@ function CreatorInvitationCard( { invitation, onViewDetails }: InvitationCardPro
   const compensation = gig?.compensation?.value;
   const formatCurrency = useFormatCurrency();
   const formattedCompensation = formatCurrency( compensation ?? 0, gig?.compensation?.currency || 'EUR' );
-  const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
+  const numberOfVideos = getCreatorVideoCount( gig, 'creator' ) ?? invitation.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
 
   const handleRespond = ( status: 'accepted' | 'declined' ) => {
@@ -317,7 +318,7 @@ function GigInfoHoverCard( { invitation }: { invitation: ModelsGigInvitationResp
   const invitationBrand = getInvitationBrand( invitation );
   const requirementsTitle = t( 'requirements.title' );
   const contentGuidelinesTitle = t( 'campaign.campaignBriefTitle' );
-  const numberOfVideos = gig?.number_of_videos ?? invitation.number_of_videos;
+  const numberOfVideos = getCreatorVideoCount( gig, role ) ?? invitation.number_of_videos;
   const durationSeconds = gig?.video_duration_in_seconds;
   const formatCurrency = useFormatCurrency();
   // Brands must never see creator compensation — the backend now shapes

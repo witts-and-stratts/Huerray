@@ -21,6 +21,7 @@ import { BrandAvatar } from '@/components/campaigns/brand-avatar';
 import { GigStatusBadge } from '@/components/campaigns/gig-status-badge';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { formatDate } from '@/lib/utils';
+import { getCreatorVideoCount } from '@/lib/utils/gig';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import type { ModelsGigResponse } from '@/lib/api/generated';
 import { useForm } from '@tanstack/react-form';
@@ -76,6 +77,7 @@ function GigContextCard( { gig }: { gig: ModelsGigResponse; } ) {
       : gig.campaign?.campaign_images?.[ 0 ]?.asset;
 
   const brand = gig.campaign?.brand;
+  const videoCount = getCreatorVideoCount( gig, 'creator' );
 
   return (
     <div className="relative mx-1">
@@ -87,10 +89,10 @@ function GigContextCard( { gig }: { gig: ModelsGigResponse; } ) {
               { gig.title }
             </p>
             <div className="flex flex-wrap gap-2 items-center text-sm">
-              { gig.number_of_videos && (
+              { videoCount && (
                 <div className="flex items-center gap-1.5">
                   <VideoIcon className="size-4 shrink-0" strokeWidth={ 1 } />
-                  { gig.number_of_videos } video{ gig.number_of_videos > 1 ? 's' : '' }
+                  { videoCount } video{ videoCount > 1 ? 's' : '' }
                   { gig.video_duration_in_seconds ? ` · ${ gig.video_duration_in_seconds }s` : '' }
                 </div>
               ) }

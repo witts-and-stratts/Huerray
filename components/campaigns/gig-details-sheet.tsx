@@ -31,6 +31,7 @@ import { useApplyToGig, useCreatorInvitations, useRespondToInvitation } from '@/
 import { useVideoSubmissionsByGig } from '@/lib/api/hooks/video-submissions';
 import { useFormatCurrency } from '@/lib/hooks/format';
 import { formatDate } from '@/lib/utils';
+import { getCreatorVideoCount } from '@/lib/utils/gig';
 import { imgpresets } from '@/lib/utils/imgproxy';
 import { ArrowRight, ChevronDown, Globe, Loader2, Plus, VideoIcon } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
@@ -717,9 +718,9 @@ export function GigDetailsSheet( { gig, open, onOpenChange, invitationId, invita
 
   if ( !gig ) return null;
 
-  const { title, gig_status, posting_end_date, compensation: compensationMoney, number_of_videos, video_duration_in_seconds, requirements, content_guidelines, ambience, gender_requirement, age_min, age_max } = gig;
+  const { title, gig_status, posting_end_date, compensation: compensationMoney, video_duration_in_seconds, requirements, content_guidelines, ambience, gender_requirement, age_min, age_max } = gig;
 
-  const displayedNumberOfVideos = isCreator && gig.enforce_unique_creator_submission === true ? 1 : number_of_videos;
+  const displayedNumberOfVideos = getCreatorVideoCount( gig, isCreator ? 'creator' : undefined );
 
   return (
     <>

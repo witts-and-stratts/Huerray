@@ -74,6 +74,8 @@ export interface GigsTableProps {
   rowCount?: number;
   onSearchChange?: ( value: string ) => void;
   isSearchPending?: boolean;
+  /** Statuses pre-selected in the status filter on first render. Users can still clear or change it. */
+  defaultStatuses?: string[];
 }
 
 export function GigsTable( {
@@ -93,6 +95,7 @@ export function GigsTable( {
   rowCount,
   onSearchChange,
   isSearchPending = false,
+  defaultStatuses,
 }: GigsTableProps ) {
   const isNotFoundError = isApiNotFoundError( error );
   const sourceData = React.useMemo(
@@ -110,7 +113,9 @@ export function GigsTable( {
   const pagination = isServerSide ? externalPagination : internalPagination;
   const setPagination = isServerSide ? externalOnPaginationChange : setInternalPagination;
   const [ sorting, setSorting ] = React.useState<SortingState>( [] );
-  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>( [] );
+  const [ columnFilters, setColumnFilters ] = React.useState<ColumnFiltersState>(
+    () => defaultStatuses?.length ? [ { id: 'gig_status', value: defaultStatuses } ] : []
+  );
   const [ columnVisibility, setColumnVisibility ] = React.useState<VisibilityState>( {} );
   const [ rowSelection, setRowSelection ] = React.useState( {} );
   const [ internalGlobalFilter, setInternalGlobalFilter ] = React.useState( '' );
