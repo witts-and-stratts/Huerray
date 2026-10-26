@@ -1,4 +1,4 @@
-# ModelsVideoSubmissionUploadResponse
+# ModelsVideoUploadResponse
 
 
 ## Properties
@@ -14,9 +14,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ModelsVideoSubmissionUploadResponse } from 'huerray-api';
+import { ModelsVideoUploadResponse } from 'huerray-api';
 
-const instance: ModelsVideoSubmissionUploadResponse = {
+const instance: ModelsVideoUploadResponse = {
     content_type,
     file_size,
     filename,

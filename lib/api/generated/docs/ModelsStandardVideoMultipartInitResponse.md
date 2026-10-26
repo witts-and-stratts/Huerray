@@ -1,11 +1,11 @@
-# ModelsStandardApplicationVideoUploadResponse
+# ModelsStandardVideoMultipartInitResponse
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**ModelsApplicationVideoUploadResponse**](ModelsApplicationVideoUploadResponse.md) |  | [optional] [default to undefined]
+**data** | [**ModelsVideoMultipartInitResponse**](ModelsVideoMultipartInitResponse.md) |  | [optional] [default to undefined]
 **error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **success** | **boolean** |  | [optional] [default to undefined]
@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ModelsStandardApplicationVideoUploadResponse } from 'huerray-api';
+import { ModelsStandardVideoMultipartInitResponse } from 'huerray-api';
 
-const instance: ModelsStandardApplicationVideoUploadResponse = {
+const instance: ModelsStandardVideoMultipartInitResponse = {
     data,
     error,
     message,

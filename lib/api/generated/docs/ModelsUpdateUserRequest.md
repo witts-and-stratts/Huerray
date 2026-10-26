@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **last_name** | **string** |  | [optional] [default to undefined]
 **middle_name** | **string** |  | [optional] [default to undefined]
 **phone_number** | **string** |  | [optional] [default to undefined]
-**username** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -23,7 +22,6 @@ const instance: ModelsUpdateUserRequest = {
     last_name,
     middle_name,
     phone_number,
-    username,
 };
 ```
 

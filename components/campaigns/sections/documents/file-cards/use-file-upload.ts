@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { apiClient, apiConfiguration } from '@/lib/api/client';
-import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
 import { toAbsoluteSource } from '@/lib/utils/imgproxy';
 import { useEffect, useState } from 'react';
 import { UploadedFile } from '../types';
 
-type UploadApiFn = (
-  api: ReturnType<typeof UploadApiFactory>,
+/** Uploads the file, reporting progress as 0-100, and resolves with the uploaded file's url. */
+type UploadFn = (
   file: File,
-  onProgress: ( e: any ) => void,
+  onProgress: ( percent: number ) => void,
   signal: AbortSignal,
-) => Promise<any>;
+) => Promise<string | undefined>;
+
+export const toPercent = ( e: { loaded: number; total?: number; } ) => Math.round( ( e.loaded * 100 ) / ( e.total || 100 ) );
 
 export function useFileUpload(
   item: UploadedFile,
   isOverlay: boolean | undefined,
   onUploadSuccess: ( id: string, url: string ) => void,
   onUploadError: ( id: string, error: any, name?: string ) => void,
-  uploadFn: UploadApiFn,
+  uploadFn: UploadFn,
 ): number {
   const [ progress, setProgress ] = useState( 0 );
 
@@ -29,18 +29,16 @@ export function useFileUpload(
 
     ( async () => {
       try {
-        const api = UploadApiFactory( apiConfiguration, undefined, apiClient );
         let localMaxProgress = 0;
-        const onProgress = ( e: any ) => {
-          localMaxProgress = Math.max( localMaxProgress, Math.round( ( e.loaded * 100 ) / ( e.total || 100 ) ) );
+        const onProgress = ( percent: number ) => {
+          localMaxProgress = Math.max( localMaxProgress, percent );
           setProgress( localMaxProgress );
         };
 
-        const response = await uploadFn( api, item.file!, onProgress, controller.signal );
-        const uploaded = response.data.data[ 0 ] as any;
+        const url = await uploadFn( item.file!, onProgress, controller.signal );
 
-        if ( uploaded?.url ) {
-          onUploadSuccess( item.id, toAbsoluteSource( uploaded.url ) );
+        if ( url ) {
+          onUploadSuccess( item.id, toAbsoluteSource( url ) );
         } else {
           onUploadError( item.id, new Error( 'No file url returned' ), item.name );
         }

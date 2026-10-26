@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
 import { apiClient, apiConfiguration, BASE_URL } from '@/lib/api/client';
-import { ModelsUploadsImagePost200Response } from '@/lib/api/models/models-uploads-image-post200-response';
+import { uploadVideoMultipart, VideoUploadPurpose } from '@/lib/api/video-upload';
 import { VideoFileIcon } from '../campaigns/sections/documents/video-file-icon';
 import { ALL_FORMATS, BlobSource, CanvasSink, Input } from 'mediabunny';
 import { imgpresets } from '@/lib/utils/imgproxy';
@@ -63,40 +63,20 @@ function useVideoUpload( { onSuccess, onThumbnailReady }: UseVideoUploadOptions 
     setUploadError( false );
 
     try {
-      const uploadApi = UploadApiFactory( apiConfiguration, undefined, apiClient );
-      let localMaxProgress = 0;
+      const uploadedVideo = await uploadVideoMultipart( {
+        file,
+        purpose: VideoUploadPurpose.Application,
+        onProgress: setUploadProgress,
+      } );
 
-      const response = await uploadApi.uploadsVideosPost( { videos: file }, {
-        headers: { 'Content-Type': undefined } as any,
-        onUploadProgress: ( e: any ) => {
-          const pct = Math.round( ( e.loaded * 100 ) / ( e.total || 100 ) );
-          localMaxProgress = Math.max( localMaxProgress, pct );
-          setUploadProgress( localMaxProgress );
-        },
-        timeout: 3_600_000,
-      } ) as unknown as ModelsUploadsImagePost200Response;
-
-      const uploadedFile = ( ( response.data as any )?.data as any[] )?.[ 0 ];
-
-      if ( !uploadedFile ) {
-        toast.error( t( 'uploadResponseInvalid' ) );
-        setUploadError( true );
-        return;
-      }
-
-      const raw: string = uploadedFile.url ?? '';
+      const raw = uploadedVideo.video_url ?? '';
       const fullUrl = raw.startsWith( 'http' ) ? raw : `${ BASE_URL.replace( '/api/v1', '' ) }${ raw }`;
 
-      if ( fullUrl ) {
-        onSuccess( fullUrl );
-        toast.success( t( 'videoUploadedSuccessfully' ) );
-        generateAndUploadThumbnail( file ).then( ( thumbUrl ) => {
-          if ( thumbUrl ) onThumbnailReady?.( thumbUrl );
-        } );
-      } else {
-        toast.error( t( 'uploadVerificationFailed' ) );
-        setUploadError( true );
-      }
+      onSuccess( fullUrl );
+      toast.success( t( 'videoUploadedSuccessfully' ) );
+      generateAndUploadThumbnail( file ).then( ( thumbUrl ) => {
+        if ( thumbUrl ) onThumbnailReady?.( thumbUrl );
+      } );
     } catch ( error: any ) {
       const msg = error.response?.data?.message || error.message || t( 'failedToUploadVideo' );
       toast.error( msg );

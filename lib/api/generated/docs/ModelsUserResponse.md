@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **updated_at** | **string** |  | [optional] [default to undefined]
 **user_status** | **string** |  | [optional] [default to undefined]
 **user_type** | **string** |  | [optional] [default to undefined]
-**username** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -35,7 +34,6 @@ const instance: ModelsUserResponse = {
     updated_at,
     user_status,
     user_type,
-    username,
 };
 ```
 

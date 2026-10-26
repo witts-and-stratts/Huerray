@@ -1,11 +1,11 @@
-# ModelsStandardVideoSubmissionUploadResponse
+# ModelsStandardVideoUploadResponse
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**ModelsVideoSubmissionUploadResponse**](ModelsVideoSubmissionUploadResponse.md) |  | [optional] [default to undefined]
+**data** | [**ModelsVideoUploadResponse**](ModelsVideoUploadResponse.md) |  | [optional] [default to undefined]
 **error** | [**ModelsErrorInfo**](ModelsErrorInfo.md) |  | [optional] [default to undefined]
 **message** | **string** |  | [optional] [default to undefined]
 **success** | **boolean** |  | [optional] [default to undefined]
@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { ModelsStandardVideoSubmissionUploadResponse } from 'huerray-api';
+import { ModelsStandardVideoUploadResponse } from 'huerray-api';
 
-const instance: ModelsStandardVideoSubmissionUploadResponse = {
+const instance: ModelsStandardVideoUploadResponse = {
     data,
     error,
     message,

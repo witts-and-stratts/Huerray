@@ -175,14 +175,14 @@ Class | Method | HTTP request | Description
 *SystemApi* | [**healthGet**](docs/SystemApi.md#healthget) | **GET** /health | Health check
 *TranslationApi* | [**translationLanguagesGet**](docs/TranslationApi.md#translationlanguagesget) | **GET** /translation/languages | Get supported languages from DeepL API
 *TranslationApi* | [**translationTranslatePost**](docs/TranslationApi.md#translationtranslatepost) | **POST** /translation/translate | Translate text using DeepL API
-*UploadApi* | [**uploadsApplicationVideoPost**](docs/UploadApi.md#uploadsapplicationvideopost) | **POST** /uploads/application-video | Upload application video
 *UploadApi* | [**uploadsDocumentsPost**](docs/UploadApi.md#uploadsdocumentspost) | **POST** /uploads/documents | Upload documents
 *UploadApi* | [**uploadsImagesPost**](docs/UploadApi.md#uploadsimagespost) | **POST** /uploads/images | Upload images
 *UploadApi* | [**uploadsPreviewDocumentsFilenameGet**](docs/UploadApi.md#uploadspreviewdocumentsfilenameget) | **GET** /uploads/preview/documents/{filename} | Preview a document
 *UploadApi* | [**uploadsPreviewImagesFilenameGet**](docs/UploadApi.md#uploadspreviewimagesfilenameget) | **GET** /uploads/preview/images/{filename} | Preview an image
 *UploadApi* | [**uploadsPreviewVideosFilenameGet**](docs/UploadApi.md#uploadspreviewvideosfilenameget) | **GET** /uploads/preview/videos/{filename} | Preview a video
-*UploadApi* | [**uploadsVideoSubmissionPost**](docs/UploadApi.md#uploadsvideosubmissionpost) | **POST** /uploads/video-submission | Upload video submission
-*UploadApi* | [**uploadsVideosPost**](docs/UploadApi.md#uploadsvideospost) | **POST** /uploads/videos | Upload videos
+*UploadApi* | [**uploadsVideoMultipartAbortPost**](docs/UploadApi.md#uploadsvideomultipartabortpost) | **POST** /uploads/video-multipart/abort | Cancel a direct video upload
+*UploadApi* | [**uploadsVideoMultipartCompletePost**](docs/UploadApi.md#uploadsvideomultipartcompletepost) | **POST** /uploads/video-multipart/complete | Finish a direct video upload
+*UploadApi* | [**uploadsVideoMultipartInitPost**](docs/UploadApi.md#uploadsvideomultipartinitpost) | **POST** /uploads/video-multipart/init | Start a direct video upload
 *UserApi* | [**usersIdDelete**](docs/UserApi.md#usersiddelete) | **DELETE** /users/{id} | Delete user profile
 *UserApi* | [**usersIdGet**](docs/UserApi.md#usersidget) | **GET** /users/{id} | Get user by ID
 *UserApi* | [**usersIdPut**](docs/UserApi.md#usersidput) | **PUT** /users/{id} | Edit user details
@@ -210,7 +210,6 @@ Class | Method | HTTP request | Description
  - [ModelsAdminUpdateCreatorProfileRequest](docs/ModelsAdminUpdateCreatorProfileRequest.md)
  - [ModelsAnalyticsTimeSeriesData](docs/ModelsAnalyticsTimeSeriesData.md)
  - [ModelsAnalyticsTimeSeriesResponse](docs/ModelsAnalyticsTimeSeriesResponse.md)
- - [ModelsApplicationVideoUploadResponse](docs/ModelsApplicationVideoUploadResponse.md)
  - [ModelsAssignCaseRequest](docs/ModelsAssignCaseRequest.md)
  - [ModelsAuthResponse](docs/ModelsAuthResponse.md)
  - [ModelsBrandAnalyticsResponse](docs/ModelsBrandAnalyticsResponse.md)
@@ -272,6 +271,7 @@ Class | Method | HTTP request | Description
  - [ModelsLoginRequest](docs/ModelsLoginRequest.md)
  - [ModelsMessage](docs/ModelsMessage.md)
  - [ModelsMoney](docs/ModelsMoney.md)
+ - [ModelsMultipartPartURL](docs/ModelsMultipartPartURL.md)
  - [ModelsNewsletterSignupRequest](docs/ModelsNewsletterSignupRequest.md)
  - [ModelsNewsletterSignupResponse](docs/ModelsNewsletterSignupResponse.md)
  - [ModelsNewsletterSubscriptionResponse](docs/ModelsNewsletterSubscriptionResponse.md)
@@ -304,7 +304,6 @@ Class | Method | HTTP request | Description
  - [ModelsRegisterRequest](docs/ModelsRegisterRequest.md)
  - [ModelsResendVerificationRequest](docs/ModelsResendVerificationRequest.md)
  - [ModelsStandardAnalyticsTimeSeriesResponse](docs/ModelsStandardAnalyticsTimeSeriesResponse.md)
- - [ModelsStandardApplicationVideoUploadResponse](docs/ModelsStandardApplicationVideoUploadResponse.md)
  - [ModelsStandardAuthResponse](docs/ModelsStandardAuthResponse.md)
  - [ModelsStandardBrandAnalyticsResponse](docs/ModelsStandardBrandAnalyticsResponse.md)
  - [ModelsStandardBrandResponse](docs/ModelsStandardBrandResponse.md)
@@ -342,9 +341,10 @@ Class | Method | HTTP request | Description
  - [ModelsStandardResponseModelsConversationMessageResponse](docs/ModelsStandardResponseModelsConversationMessageResponse.md)
  - [ModelsStandardResponseModelsConversationResponse](docs/ModelsStandardResponseModelsConversationResponse.md)
  - [ModelsStandardUserResponse](docs/ModelsStandardUserResponse.md)
+ - [ModelsStandardVideoMultipartInitResponse](docs/ModelsStandardVideoMultipartInitResponse.md)
  - [ModelsStandardVideoSubmissionResponse](docs/ModelsStandardVideoSubmissionResponse.md)
  - [ModelsStandardVideoSubmissionResponses](docs/ModelsStandardVideoSubmissionResponses.md)
- - [ModelsStandardVideoSubmissionUploadResponse](docs/ModelsStandardVideoSubmissionUploadResponse.md)
+ - [ModelsStandardVideoUploadResponse](docs/ModelsStandardVideoUploadResponse.md)
  - [ModelsUpdateCampaignRequest](docs/ModelsUpdateCampaignRequest.md)
  - [ModelsUpdateCaseStatusRequest](docs/ModelsUpdateCaseStatusRequest.md)
  - [ModelsUpdateCreatorBankDetailsRequest](docs/ModelsUpdateCreatorBankDetailsRequest.md)
@@ -357,9 +357,13 @@ Class | Method | HTTP request | Description
  - [ModelsUpdateUserRequest](docs/ModelsUpdateUserRequest.md)
  - [ModelsUpdateVideoSubmissionRequest](docs/ModelsUpdateVideoSubmissionRequest.md)
  - [ModelsUserResponse](docs/ModelsUserResponse.md)
+ - [ModelsVideoMultipartAbortRequest](docs/ModelsVideoMultipartAbortRequest.md)
+ - [ModelsVideoMultipartCompleteRequest](docs/ModelsVideoMultipartCompleteRequest.md)
+ - [ModelsVideoMultipartInitRequest](docs/ModelsVideoMultipartInitRequest.md)
+ - [ModelsVideoMultipartInitResponse](docs/ModelsVideoMultipartInitResponse.md)
  - [ModelsVideoSubmissionResponse](docs/ModelsVideoSubmissionResponse.md)
  - [ModelsVideoSubmissionStatusUpdateRequest](docs/ModelsVideoSubmissionStatusUpdateRequest.md)
- - [ModelsVideoSubmissionUploadResponse](docs/ModelsVideoSubmissionUploadResponse.md)
+ - [ModelsVideoUploadResponse](docs/ModelsVideoUploadResponse.md)
  - [ServiceLanguage](docs/ServiceLanguage.md)
  - [ServiceLanguagesResponse](docs/ServiceLanguagesResponse.md)
  - [ServiceStandardLanguagesResponse](docs/ServiceStandardLanguagesResponse.md)

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
+import { uploadVideoMultipart, VideoUploadPurpose } from '@/lib/api/video-upload';
 import { PlayCircle } from 'lucide-react';
 import { memo, useCallback } from 'react';
 import { BaseFileCard } from './base-file-card';
@@ -10,9 +9,10 @@ import { imgpresets } from '@/lib/utils/imgproxy';
 export const FileCardVideo = memo( ( props: FileCardProps ) => {
   const { item, onUploadSuccess, onUploadError, isOverlay, showTitle } = props;
 
-  const uploadFn = useCallback( ( api: ReturnType<typeof UploadApiFactory>, file: File, onProgress: ( e: any ) => void, signal: AbortSignal ) =>
-    api.uploadsVideosPost( { videos: file }, { headers: { 'Content-Type': undefined } as any, onUploadProgress: onProgress, signal, timeout: 3600000 } ),
-    [] );
+  const uploadFn = useCallback( async ( file: File, onProgress: ( percent: number ) => void, signal: AbortSignal ) => {
+    const video = await uploadVideoMultipart( { file, purpose: VideoUploadPurpose.CampaignSample, onProgress, signal } );
+    return video.video_url;
+  }, [] );
 
   const progress = useFileUpload( item, isOverlay, onUploadSuccess, onUploadError, uploadFn );
   const posterUrl = item.thumbnail ? imgpresets.card( item.thumbnail ) : item.preview ?? undefined;

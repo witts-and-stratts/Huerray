@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**email** | **string** |  | [default to undefined]
 **password** | **string** |  | [default to undefined]
-**username** | **string** | Can be username or email | [default to undefined]
 
 ## Example
 
@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 import { ModelsLoginRequest } from 'huerray-api';
 
 const instance: ModelsLoginRequest = {
+    email,
     password,
-    username,
 };
 ```
 

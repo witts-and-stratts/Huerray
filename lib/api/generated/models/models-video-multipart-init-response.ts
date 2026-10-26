@@ -15,15 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsErrorInfo } from './models-error-info';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ModelsVideoSubmissionUploadResponse } from './models-video-submission-upload-response';
+import type { ModelsMultipartPartURL } from './models-multipart-part-url';
 
-export interface ModelsStandardVideoSubmissionUploadResponse {
-    'data'?: ModelsVideoSubmissionUploadResponse;
-    'error'?: ModelsErrorInfo;
-    'message'?: string;
-    'success'?: boolean;
+export interface ModelsVideoMultipartInitResponse {
+    'expires_at'?: string;
+    'filename'?: string;
+    'part_size'?: number;
+    'parts'?: Array<ModelsMultipartPartURL>;
+    'upload_id'?: string;
 }
 

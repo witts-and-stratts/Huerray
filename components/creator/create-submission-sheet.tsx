@@ -29,7 +29,7 @@ import { Loader2, Upload, VideoIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod/v4';
-import { SentenceCase, TextCapitalize } from '../text-case';
+import { SentenceCase } from '../text-case';
 import { useTranslations } from 'next-intl';
 
 // ─── Schema ───────────────────────────────────────────────────────────────────
@@ -266,6 +266,7 @@ export function CreateSubmissionSheet( {
                 { ( field ) => (
                   <>
                     <VideoDropzone
+                      gigId={ gigId }
                       value={ field.state.value }
                       videoAspect
                       showTitle={ false }

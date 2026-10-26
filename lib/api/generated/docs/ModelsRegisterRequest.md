@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **middle_name** | **string** |  | [optional] [default to undefined]
 **password** | **string** |  | [default to undefined]
 **user_type** | **string** |  | [default to undefined]
-**username** | **string** | Made optional | [optional] [default to undefined]
 **verify_password** | **string** |  | [default to undefined]
 
 ## Example
@@ -26,7 +25,6 @@ const instance: ModelsRegisterRequest = {
     middle_name,
     password,
     user_type,
-    username,
     verify_password,
 };
 ```

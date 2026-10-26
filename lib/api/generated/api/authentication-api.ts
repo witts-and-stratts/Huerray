@@ -86,7 +86,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Authenticate user with username/email and password
+         * Authenticate user with email and password
          * @summary User login
          * @param {ModelsLoginRequest} credentials User login credentials
          * @param {*} [options] Override http request option.
@@ -420,7 +420,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Authenticate user with username/email and password
+         * Authenticate user with email and password
          * @summary User login
          * @param {ModelsLoginRequest} credentials User login credentials
          * @param {*} [options] Override http request option.
@@ -555,7 +555,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.authChangePasswordPost(requestParameters.password, options).then((request) => request(axios, basePath));
         },
         /**
-         * Authenticate user with username/email and password
+         * Authenticate user with email and password
          * @summary User login
          * @param {AuthenticationApiAuthLoginPostRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -752,7 +752,7 @@ export class AuthenticationApi extends BaseAPI {
     }
 
     /**
-     * Authenticate user with username/email and password
+     * Authenticate user with email and password
      * @summary User login
      * @param {AuthenticationApiAuthLoginPostRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

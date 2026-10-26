@@ -248,7 +248,7 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * Search users with advanced filters (unrestricted for admins, restricted for others)
          * @summary Search users
-         * @param {string} [q] Search query (name, username, email, phone)
+         * @param {string} [q] Search query (name, email, phone)
          * @param {UsersSearchGetUserTypeEnum} [userType] User type filter
          * @param {string} [status] User status filter
          * @param {boolean} [withoutProfile] Filter to brand/creator users who have not yet created their profile
@@ -395,7 +395,7 @@ export const UserApiFp = function(configuration?: Configuration) {
         /**
          * Search users with advanced filters (unrestricted for admins, restricted for others)
          * @summary Search users
-         * @param {string} [q] Search query (name, username, email, phone)
+         * @param {string} [q] Search query (name, email, phone)
          * @param {UsersSearchGetUserTypeEnum} [userType] User type filter
          * @param {string} [status] User status filter
          * @param {boolean} [withoutProfile] Filter to brand/creator users who have not yet created their profile
@@ -551,7 +551,7 @@ export interface UserApiUsersProfilePutRequest {
  */
 export interface UserApiUsersSearchGetRequest {
     /**
-     * Search query (name, username, email, phone)
+     * Search query (name, email, phone)
      */
     readonly q?: string
 
