@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsApplicationVideoUploadResponse } from './models-application-video-upload-response';
+import type { ModelsErrorInfo } from './models-error-info';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ModelsErrorInfo } from './models-error-info';
+import type { ModelsVideoUploadResponse } from './models-video-upload-response';
 
-export interface ModelsStandardApplicationVideoUploadResponse {
-    'data'?: ModelsApplicationVideoUploadResponse;
+export interface ModelsStandardVideoUploadResponse {
+    'data'?: ModelsVideoUploadResponse;
     'error'?: ModelsErrorInfo;
     'message'?: string;
     'success'?: boolean;

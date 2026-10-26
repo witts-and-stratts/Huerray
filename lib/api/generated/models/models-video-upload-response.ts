@@ -14,7 +14,7 @@
 
 
 
-export interface ModelsVideoSubmissionUploadResponse {
+export interface ModelsVideoUploadResponse {
     'content_type'?: string;
     'file_size'?: number;
     'filename'?: string;

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiClient, apiConfiguration, BASE_URL } from '@/lib/api/client';
+import { uploadVideoMultipart, VideoUploadPurpose } from '@/lib/api/video-upload';
 import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
 import { BaseFileCard } from '@/components/campaigns/sections/documents/file-cards/base-file-card';
 import { FileCardProps } from '@/components/campaigns/sections/documents/file-cards/file-card-types';
@@ -24,11 +25,12 @@ function dataUrlToFile( dataUrl: string, filename: string ): File {
 }
 
 interface FileCardVideoSubmissionProps extends Omit<FileCardProps, 'onUploadSuccess'> {
+  gigId: string;
   onUploadSuccess: ( id: string, data: VideoUploadResponseData ) => void;
 }
 
 export const FileCardVideoSubmission = memo( ( props: FileCardVideoSubmissionProps ) => {
-  const { item, onUploadSuccess, onUploadError, isOverlay, ...rest } = props;
+  const { item, gigId, onUploadSuccess, onUploadError, isOverlay, ...rest } = props;
   const [ progress, setProgress ] = useState( 0 );
 
   // Store callbacks in refs so they never appear as useEffect deps.
@@ -61,22 +63,17 @@ export const FileCardVideoSubmission = memo( ( props: FileCardVideoSubmissionPro
             setProgress( combinedProgress );
           };
 
-          const onVideoProgress = ( progressEvent: any ) => {
-            const pct = Math.round( ( progressEvent.loaded * 100 ) / ( progressEvent.total || 100 ) );
-            videoProgress = Math.max( videoProgress, pct );
-            updateProgress();
-          };
-
-          // Upload video to /uploads/videos
-          const videoUploadPromise = uploadApi.uploadsVideosPost(
-            { videos: item.file! },
-            {
-              headers: { 'Content-Type': 'multipart/form-data' },
-              onUploadProgress: onVideoProgress,
-              timeout: 3600000, // 1 hour
-              signal: controller.signal,
-            }
-          );
+          // Upload video directly to storage in parts (init -> PUT parts -> complete)
+          const videoUploadPromise = uploadVideoMultipart( {
+            file: item.file!,
+            purpose: VideoUploadPurpose.Submission,
+            gigId,
+            onProgress: ( pct ) => {
+              videoProgress = Math.max( videoProgress, pct );
+              updateProgress();
+            },
+            signal: controller.signal,
+          } );
 
           // Upload thumbnail to /uploads/images (only if preview is a data URL from mediabunny)
           const thumbnailUploadPromise = item.preview?.startsWith( 'data:' )
@@ -94,31 +91,21 @@ export const FileCardVideoSubmission = memo( ( props: FileCardVideoSubmissionPro
             )
             : Promise.resolve( null );
 
-          const [ videoResponse, thumbResponse ] = await Promise.all( [ videoUploadPromise, thumbnailUploadPromise ] );
+          const [ uploadedVideo, thumbResponse ] = await Promise.all( [ videoUploadPromise, thumbnailUploadPromise ] );
 
           if ( controller.signal.aborted ) return;
 
-          const videoData = videoResponse.data;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const videoFiles = Array.isArray( ( videoData as any ).data ) ? ( videoData as any ).data : [ videoData.data ];
-          const uploadedVideo = videoFiles[ 0 ];
+          const thumbRaw = ( thumbResponse?.data as any )?.data;
+          const thumbFile = Array.isArray( thumbRaw ) ? thumbRaw[ 0 ] : thumbRaw;
 
-          if ( videoData.success && uploadedVideo?.url ) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const thumbRaw = ( thumbResponse?.data as any )?.data;
-            const thumbFile = Array.isArray( thumbRaw ) ? thumbRaw[ 0 ] : thumbRaw;
-
-            onUploadSuccessRef.current( item.id, {
-              filename: uploadedVideo.filename || item.name,
-              video_url: resolveUploadUrl( uploadedVideo.url ),
-              thumbnail_url: thumbFile?.url ? resolveUploadUrl( thumbFile.url ) : undefined,
-              file_size: uploadedVideo.size || item.file?.size || 0,
-              content_type: uploadedVideo.content_type || item.type,
-              original_name: item.name,
-            } );
-          } else {
-            onUploadErrorRef.current( item.id, new Error( videoData.message || 'No file url returned' ), item.name );
-          }
+          onUploadSuccessRef.current( item.id, {
+            filename: uploadedVideo.filename || item.name,
+            video_url: resolveUploadUrl( uploadedVideo.video_url ?? '' ),
+            thumbnail_url: thumbFile?.url ? resolveUploadUrl( thumbFile.url ) : undefined,
+            file_size: uploadedVideo.file_size || item.file?.size || 0,
+            content_type: uploadedVideo.content_type || item.type,
+            original_name: item.name,
+          } );
 
         } catch ( error: any ) {
           if ( error?.name === 'CanceledError' || error?.name === 'AbortError' || controller.signal.aborted ) return;
@@ -134,7 +121,7 @@ export const FileCardVideoSubmission = memo( ( props: FileCardVideoSubmissionPro
     // Callbacks are intentionally excluded — they live in refs updated above.
     // Only the identity of the file being uploaded should trigger a new upload.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ item.status, item.file, item.url, item.id, item.name, item.type, item.preview, isOverlay ] );
+  }, [ item.status, item.file, item.url, item.id, item.name, item.type, item.preview, isOverlay, gigId ] );
 
   return (
     <BaseFileCard { ...rest } item={ item } onRemove={ props.onRemove } onRetry={ props.onRetry } onPreview={ props.onPreview } onUploadSuccess={ () => { } } onUploadError={ onUploadError } isOverlay={ isOverlay } progress={ progress } showTitle={ props.showTitle } aspect={ props.aspect } onSelect={ ( id ) => props.onSelect?.( id, false ) }>

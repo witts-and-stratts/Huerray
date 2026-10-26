@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **phone_number** | **string** |  | [optional] [default to undefined]
 **user_status** | **string** |  | [default to undefined]
 **user_type** | **string** |  | [default to undefined]
-**username** | **string** |  | [default to undefined]
 
 ## Example
 
@@ -27,7 +26,6 @@ const instance: ModelsEditUserRequest = {
     phone_number,
     user_status,
     user_type,
-    username,
 };
 ```
 

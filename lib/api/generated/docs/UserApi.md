@@ -347,7 +347,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new UserApi(configuration);
 
-let q: string; //Search query (name, username, email, phone) (optional) (default to undefined)
+let q: string; //Search query (name, email, phone) (optional) (default to undefined)
 let userType: 'creator' | 'brand_user' | 'admin_user'; //User type filter (optional) (default to undefined)
 let status: string; //User status filter (optional) (default to undefined)
 let withoutProfile: boolean; //Filter to brand/creator users who have not yet created their profile (optional) (default to undefined)
@@ -368,7 +368,7 @@ const { status, data } = await apiInstance.usersSearchGet(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **q** | [**string**] | Search query (name, username, email, phone) | (optional) defaults to undefined|
+| **q** | [**string**] | Search query (name, email, phone) | (optional) defaults to undefined|
 | **userType** | [**&#39;creator&#39; | &#39;brand_user&#39; | &#39;admin_user&#39;**]**Array<&#39;creator&#39; &#124; &#39;brand_user&#39; &#124; &#39;admin_user&#39;>** | User type filter | (optional) defaults to undefined|
 | **status** | [**string**] | User status filter | (optional) defaults to undefined|
 | **withoutProfile** | [**boolean**] | Filter to brand/creator users who have not yet created their profile | (optional) defaults to undefined|

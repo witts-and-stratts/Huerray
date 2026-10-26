@@ -22,60 +22,26 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { ModelsStandardApplicationVideoUploadResponse } from '../models';
-// @ts-ignore
 import type { ModelsStandardErrorResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardFilePreviewResponse } from '../models';
 // @ts-ignore
 import type { ModelsStandardFileUploadResponse } from '../models';
 // @ts-ignore
-import type { ModelsStandardVideoSubmissionUploadResponse } from '../models';
+import type { ModelsStandardVideoMultipartInitResponse } from '../models';
+// @ts-ignore
+import type { ModelsStandardVideoUploadResponse } from '../models';
+// @ts-ignore
+import type { ModelsVideoMultipartAbortRequest } from '../models';
+// @ts-ignore
+import type { ModelsVideoMultipartCompleteRequest } from '../models';
+// @ts-ignore
+import type { ModelsVideoMultipartInitRequest } from '../models';
 /**
  * UploadApi - axios parameter creator
  */
 export const UploadApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * Upload an application video with unique naming for creator profile
-         * @summary Upload application video
-         * @param {File} video Video file
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsApplicationVideoPost: async (video: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'video' is not null or undefined
-            assertParamExists('uploadsApplicationVideoPost', 'video', video)
-            const localVarPath = `/uploads/application-video`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-
-            if (video !== undefined) { 
-                localVarFormParams.append('video', video as any);
-            }
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Upload one or more PDF files
          * @summary Upload documents
@@ -259,19 +225,16 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Upload a video file for a gig submission with unique naming
-         * @summary Upload video submission
-         * @param {string} gigId Gig ID
-         * @param {File} video Video file
+         * Discards an unfinished direct upload and the parts stored so far.
+         * @summary Cancel a direct video upload
+         * @param {ModelsVideoMultipartAbortRequest} request Upload to cancel
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideoSubmissionPost: async (gigId: string, video: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'gigId' is not null or undefined
-            assertParamExists('uploadsVideoSubmissionPost', 'gigId', gigId)
-            // verify required parameter 'video' is not null or undefined
-            assertParamExists('uploadsVideoSubmissionPost', 'video', video)
-            const localVarPath = `/uploads/video-submission`;
+        uploadsVideoMultipartAbortPost: async (request: ModelsVideoMultipartAbortRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('uploadsVideoMultipartAbortPost', 'request', request)
+            const localVarPath = `/uploads/video-multipart/abort`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -282,23 +245,14 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
-
-            if (gigId !== undefined) { 
-                localVarFormParams.append('gig_id', gigId as any);
-            }
-
-            if (video !== undefined) { 
-                localVarFormParams.append('video', video as any);
-            }
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -306,16 +260,16 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Upload one or more video files
-         * @summary Upload videos
-         * @param {File} videos Video files
+         * Assembles the uploaded parts into the video and validates it. Returns the same data as the regular video upload endpoints.
+         * @summary Finish a direct video upload
+         * @param {ModelsVideoMultipartCompleteRequest} request Upload to complete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideosPost: async (videos: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'videos' is not null or undefined
-            assertParamExists('uploadsVideosPost', 'videos', videos)
-            const localVarPath = `/uploads/videos`;
+        uploadsVideoMultipartCompletePost: async (request: ModelsVideoMultipartCompleteRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('uploadsVideoMultipartCompletePost', 'request', request)
+            const localVarPath = `/uploads/video-multipart/complete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -326,19 +280,49 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
-
-            if (videos !== undefined) { 
-                localVarFormParams.append('videos', videos as any);
-            }
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            localVarHeaderParameter['Content-Type'] = 'application/json';
             localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * The only way to upload videos. Purpose \"submission\" and \"application\" are for creators, \"campaign_sample\" is for brands; admins may use any. Starts a multipart upload straight to storage and returns presigned URLs. PUT each part\'s bytes to its URL (parts can be sent in parallel and retried individually), then call the complete endpoint. Responds 501 when storage isn\'t configured for direct uploads.
+         * @summary Start a direct video upload
+         * @param {ModelsVideoMultipartInitRequest} request Upload details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadsVideoMultipartInitPost: async (request: ModelsVideoMultipartInitRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'request' is not null or undefined
+            assertParamExists('uploadsVideoMultipartInitPost', 'request', request)
+            const localVarPath = `/uploads/video-multipart/init`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(request, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -354,19 +338,6 @@ export const UploadApiAxiosParamCreator = function (configuration?: Configuratio
 export const UploadApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = UploadApiAxiosParamCreator(configuration)
     return {
-        /**
-         * Upload an application video with unique naming for creator profile
-         * @summary Upload application video
-         * @param {File} video Video file
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async uploadsApplicationVideoPost(video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardApplicationVideoUploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsApplicationVideoPost(video, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsApplicationVideoPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
         /**
          * Upload one or more PDF files
          * @summary Upload documents
@@ -433,30 +404,42 @@ export const UploadApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Upload a video file for a gig submission with unique naming
-         * @summary Upload video submission
-         * @param {string} gigId Gig ID
-         * @param {File} video Video file
+         * Discards an unfinished direct upload and the parts stored so far.
+         * @summary Cancel a direct video upload
+         * @param {ModelsVideoMultipartAbortRequest} request Upload to cancel
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsVideoSubmissionPost(gigId: string, video: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoSubmissionUploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideoSubmissionPost(gigId, video, options);
+        async uploadsVideoMultipartAbortPost(request: ModelsVideoMultipartAbortRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideoMultipartAbortPost(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideoSubmissionPost']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideoMultipartAbortPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Upload one or more video files
-         * @summary Upload videos
-         * @param {File} videos Video files
+         * Assembles the uploaded parts into the video and validates it. Returns the same data as the regular video upload endpoints.
+         * @summary Finish a direct video upload
+         * @param {ModelsVideoMultipartCompleteRequest} request Upload to complete
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadsVideosPost(videos: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardFileUploadResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideosPost(videos, options);
+        async uploadsVideoMultipartCompletePost(request: ModelsVideoMultipartCompleteRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoUploadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideoMultipartCompletePost(request, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideosPost']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideoMultipartCompletePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * The only way to upload videos. Purpose \"submission\" and \"application\" are for creators, \"campaign_sample\" is for brands; admins may use any. Starts a multipart upload straight to storage and returns presigned URLs. PUT each part\'s bytes to its URL (parts can be sent in parallel and retried individually), then call the complete endpoint. Responds 501 when storage isn\'t configured for direct uploads.
+         * @summary Start a direct video upload
+         * @param {ModelsVideoMultipartInitRequest} request Upload details
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadsVideoMultipartInitPost(request: ModelsVideoMultipartInitRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ModelsStandardVideoMultipartInitResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadsVideoMultipartInitPost(request, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UploadApi.uploadsVideoMultipartInitPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -468,16 +451,6 @@ export const UploadApiFp = function(configuration?: Configuration) {
 export const UploadApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = UploadApiFp(configuration)
     return {
-        /**
-         * Upload an application video with unique naming for creator profile
-         * @summary Upload application video
-         * @param {UploadApiUploadsApplicationVideoPostRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        uploadsApplicationVideoPost(requestParameters: UploadApiUploadsApplicationVideoPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardApplicationVideoUploadResponse> {
-            return localVarFp.uploadsApplicationVideoPost(requestParameters.video, options).then((request) => request(axios, basePath));
-        },
         /**
          * Upload one or more PDF files
          * @summary Upload documents
@@ -529,37 +502,37 @@ export const UploadApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.uploadsPreviewVideosFilenameGet(requestParameters.filename, options).then((request) => request(axios, basePath));
         },
         /**
-         * Upload a video file for a gig submission with unique naming
-         * @summary Upload video submission
-         * @param {UploadApiUploadsVideoSubmissionPostRequest} requestParameters Request parameters.
+         * Discards an unfinished direct upload and the parts stored so far.
+         * @summary Cancel a direct video upload
+         * @param {UploadApiUploadsVideoMultipartAbortPostRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideoSubmissionPost(requestParameters: UploadApiUploadsVideoSubmissionPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoSubmissionUploadResponse> {
-            return localVarFp.uploadsVideoSubmissionPost(requestParameters.gigId, requestParameters.video, options).then((request) => request(axios, basePath));
+        uploadsVideoMultipartAbortPost(requestParameters: UploadApiUploadsVideoMultipartAbortPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.uploadsVideoMultipartAbortPost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
         /**
-         * Upload one or more video files
-         * @summary Upload videos
-         * @param {UploadApiUploadsVideosPostRequest} requestParameters Request parameters.
+         * Assembles the uploaded parts into the video and validates it. Returns the same data as the regular video upload endpoints.
+         * @summary Finish a direct video upload
+         * @param {UploadApiUploadsVideoMultipartCompletePostRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadsVideosPost(requestParameters: UploadApiUploadsVideosPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardFileUploadResponse> {
-            return localVarFp.uploadsVideosPost(requestParameters.videos, options).then((request) => request(axios, basePath));
+        uploadsVideoMultipartCompletePost(requestParameters: UploadApiUploadsVideoMultipartCompletePostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoUploadResponse> {
+            return localVarFp.uploadsVideoMultipartCompletePost(requestParameters.request, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * The only way to upload videos. Purpose \"submission\" and \"application\" are for creators, \"campaign_sample\" is for brands; admins may use any. Starts a multipart upload straight to storage and returns presigned URLs. PUT each part\'s bytes to its URL (parts can be sent in parallel and retried individually), then call the complete endpoint. Responds 501 when storage isn\'t configured for direct uploads.
+         * @summary Start a direct video upload
+         * @param {UploadApiUploadsVideoMultipartInitPostRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadsVideoMultipartInitPost(requestParameters: UploadApiUploadsVideoMultipartInitPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ModelsStandardVideoMultipartInitResponse> {
+            return localVarFp.uploadsVideoMultipartInitPost(requestParameters.request, options).then((request) => request(axios, basePath));
         },
     };
 };
-
-/**
- * Request parameters for uploadsApplicationVideoPost operation in UploadApi.
- */
-export interface UploadApiUploadsApplicationVideoPostRequest {
-    /**
-     * Video file
-     */
-    readonly video: File
-}
 
 /**
  * Request parameters for uploadsDocumentsPost operation in UploadApi.
@@ -612,45 +585,39 @@ export interface UploadApiUploadsPreviewVideosFilenameGetRequest {
 }
 
 /**
- * Request parameters for uploadsVideoSubmissionPost operation in UploadApi.
+ * Request parameters for uploadsVideoMultipartAbortPost operation in UploadApi.
  */
-export interface UploadApiUploadsVideoSubmissionPostRequest {
+export interface UploadApiUploadsVideoMultipartAbortPostRequest {
     /**
-     * Gig ID
+     * Upload to cancel
      */
-    readonly gigId: string
-
-    /**
-     * Video file
-     */
-    readonly video: File
+    readonly request: ModelsVideoMultipartAbortRequest
 }
 
 /**
- * Request parameters for uploadsVideosPost operation in UploadApi.
+ * Request parameters for uploadsVideoMultipartCompletePost operation in UploadApi.
  */
-export interface UploadApiUploadsVideosPostRequest {
+export interface UploadApiUploadsVideoMultipartCompletePostRequest {
     /**
-     * Video files
+     * Upload to complete
      */
-    readonly videos: File
+    readonly request: ModelsVideoMultipartCompleteRequest
+}
+
+/**
+ * Request parameters for uploadsVideoMultipartInitPost operation in UploadApi.
+ */
+export interface UploadApiUploadsVideoMultipartInitPostRequest {
+    /**
+     * Upload details
+     */
+    readonly request: ModelsVideoMultipartInitRequest
 }
 
 /**
  * UploadApi - object-oriented interface
  */
 export class UploadApi extends BaseAPI {
-    /**
-     * Upload an application video with unique naming for creator profile
-     * @summary Upload application video
-     * @param {UploadApiUploadsApplicationVideoPostRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public uploadsApplicationVideoPost(requestParameters: UploadApiUploadsApplicationVideoPostRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsApplicationVideoPost(requestParameters.video, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * Upload one or more PDF files
      * @summary Upload documents
@@ -707,25 +674,36 @@ export class UploadApi extends BaseAPI {
     }
 
     /**
-     * Upload a video file for a gig submission with unique naming
-     * @summary Upload video submission
-     * @param {UploadApiUploadsVideoSubmissionPostRequest} requestParameters Request parameters.
+     * Discards an unfinished direct upload and the parts stored so far.
+     * @summary Cancel a direct video upload
+     * @param {UploadApiUploadsVideoMultipartAbortPostRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public uploadsVideoSubmissionPost(requestParameters: UploadApiUploadsVideoSubmissionPostRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsVideoSubmissionPost(requestParameters.gigId, requestParameters.video, options).then((request) => request(this.axios, this.basePath));
+    public uploadsVideoMultipartAbortPost(requestParameters: UploadApiUploadsVideoMultipartAbortPostRequest, options?: RawAxiosRequestConfig) {
+        return UploadApiFp(this.configuration).uploadsVideoMultipartAbortPost(requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Upload one or more video files
-     * @summary Upload videos
-     * @param {UploadApiUploadsVideosPostRequest} requestParameters Request parameters.
+     * Assembles the uploaded parts into the video and validates it. Returns the same data as the regular video upload endpoints.
+     * @summary Finish a direct video upload
+     * @param {UploadApiUploadsVideoMultipartCompletePostRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public uploadsVideosPost(requestParameters: UploadApiUploadsVideosPostRequest, options?: RawAxiosRequestConfig) {
-        return UploadApiFp(this.configuration).uploadsVideosPost(requestParameters.videos, options).then((request) => request(this.axios, this.basePath));
+    public uploadsVideoMultipartCompletePost(requestParameters: UploadApiUploadsVideoMultipartCompletePostRequest, options?: RawAxiosRequestConfig) {
+        return UploadApiFp(this.configuration).uploadsVideoMultipartCompletePost(requestParameters.request, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * The only way to upload videos. Purpose \"submission\" and \"application\" are for creators, \"campaign_sample\" is for brands; admins may use any. Starts a multipart upload straight to storage and returns presigned URLs. PUT each part\'s bytes to its URL (parts can be sent in parallel and retried individually), then call the complete endpoint. Responds 501 when storage isn\'t configured for direct uploads.
+     * @summary Start a direct video upload
+     * @param {UploadApiUploadsVideoMultipartInitPostRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public uploadsVideoMultipartInitPost(requestParameters: UploadApiUploadsVideoMultipartInitPostRequest, options?: RawAxiosRequestConfig) {
+        return UploadApiFp(this.configuration).uploadsVideoMultipartInitPost(requestParameters.request, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

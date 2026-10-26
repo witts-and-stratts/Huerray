@@ -12,6 +12,7 @@ import { PreviewDialog } from '@/components/campaigns/sections/documents/preview
 import { useTranslations } from 'next-intl';
 
 interface VideoDropzoneProps {
+  gigId: string;
   value?: File | null;
   onChange: ( file: File | null ) => void;
   onUploadSuccess?: ( data: VideoUploadResponseData ) => void;
@@ -20,7 +21,7 @@ interface VideoDropzoneProps {
   showTitle?: boolean;
 }
 
-export function VideoDropzone( { value, onChange, onUploadSuccess, className, videoAspect, showTitle = true }: VideoDropzoneProps ) {
+export function VideoDropzone( { gigId, value, onChange, onUploadSuccess, className, videoAspect, showTitle = true }: VideoDropzoneProps ) {
   const t = useTranslations( 'dashboard.creator.submissions' );
   const [ fileItem, setFileItem ] = useState<UploadedFile | null>( null );
   const [ previewItem, setPreviewItem ] = useState<UploadedFile | null>( null );
@@ -130,6 +131,7 @@ export function VideoDropzone( { value, onChange, onUploadSuccess, className, vi
       ) : (
         <div className="w-full">
           <FileCardVideoSubmission
+            gigId={ gigId }
             item={ fileItem }
             onRemove={ handleRemove }
             onUploadSuccess={ handleUploadSuccess }

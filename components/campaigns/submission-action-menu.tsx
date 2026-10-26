@@ -338,6 +338,7 @@ export function SubmissionActionMenu( { submission, trigger, showViewAction = tr
 
       <SubmissionUpdateDialog
         open={ isUpdateSubmissionOpen }
+        gigId={ submission.gig_id ?? '' }
         onOpenChange={ setIsUpdateSubmissionOpen }
         title={ title }
         description={ description }

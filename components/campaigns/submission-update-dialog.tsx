@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 
 interface SubmissionUpdateDialogProps {
   open: boolean;
+  gigId: string;
   onOpenChange: ( open: boolean ) => void;
   title: string;
   description: string;
@@ -25,6 +26,7 @@ interface SubmissionUpdateDialogProps {
 
 export function SubmissionUpdateDialog( {
   open,
+  gigId,
   onOpenChange,
   title,
   description,
@@ -73,6 +75,7 @@ export function SubmissionUpdateDialog( {
         <div className="space-y-2">
           <Label htmlFor="video">{ t( 'videoFile' ) }</Label>
           <VideoDropzone
+            gigId={ gigId }
             value={ videoFile }
             videoAspect
             onChange={ onVideoChange }

@@ -14,11 +14,10 @@
 
 
 
-export interface ModelsApplicationVideoUploadResponse {
-    'content_type'?: string;
-    'file_size'?: number;
-    'filename'?: string;
+export interface ModelsVideoMultipartCompleteRequest {
+    'file_size': number;
+    'filename': string;
     'original_name'?: string;
-    'video_url'?: string;
+    'upload_id': string;
 }
 

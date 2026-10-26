@@ -73,7 +73,7 @@ No authorization required
 # **authLoginPost**
 > ModelsStandardAuthResponse authLoginPost(credentials)
 
-Authenticate user with username/email and password
+Authenticate user with email and password
 
 ### Example
 

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { apiClient, apiConfiguration } from '@/lib/api/client';
 import { UploadApiFactory } from '@/lib/api/generated/api/upload-api';
 import { File01Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
@@ -8,7 +9,7 @@ import { Loader2 } from 'lucide-react';
 import { PdfFileIcon } from '../pdf-file-icon';
 import { BaseFileCard } from './base-file-card';
 import { FileCardProps } from './file-card-types';
-import { useFileUpload } from './use-file-upload';
+import { toPercent, useFileUpload } from './use-file-upload';
 import { useAnimateActivity } from '@/components/ui/animate-activity';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${ pdfjs.version }/build/pdf.worker.min.mjs`;
@@ -18,9 +19,12 @@ export const pdfCoverCache = new Map<string, string>();
 export const FileCardDocument = memo( ( props: FileCardProps ) => {
   const { item, onUploadSuccess, onUploadError, isOverlay, showTitle } = props;
 
-  const uploadFn = useCallback( ( api: ReturnType<typeof UploadApiFactory>, file: File, onProgress: ( e: any ) => void, signal: AbortSignal ) =>
-    api.uploadsDocumentsPost( { documents: file }, { headers: { 'Content-Type': undefined } as any, onUploadProgress: onProgress, signal } ),
-    [] );
+  const uploadFn = useCallback( async ( file: File, onProgress: ( percent: number ) => void, signal: AbortSignal ) => {
+    const api = UploadApiFactory( apiConfiguration, undefined, apiClient );
+    const response = await api.uploadsDocumentsPost( { documents: file }, { headers: { 'Content-Type': undefined } as any, onUploadProgress: ( e ) => onProgress( toPercent( e ) ), signal } );
+    // The spec types `data` as a single object, but the backend returns an array of uploaded files.
+    return ( response.data.data as unknown as Array<{ url?: string; }> | undefined )?.[ 0 ]?.url;
+  }, [] );
 
   const progress = useFileUpload( item, isOverlay, onUploadSuccess, onUploadError, uploadFn );
 
