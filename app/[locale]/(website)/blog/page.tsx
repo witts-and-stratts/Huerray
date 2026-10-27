@@ -74,13 +74,13 @@ export default async function BlogPage({params}: Props) {
           </div>
         </section>
 
-        <section id="latest" className="blog-index__section">
-          <div className="blog-index__container">
-            <div className="blog-section__header">
-              <h2>{t('website.blogLatest')}</h2>
-            </div>
+        {leadPosts.length > 0 && (
+          <section id="latest" className="blog-index__section">
+            <div className="blog-index__container">
+              <div className="blog-section__header">
+                <h2>{t('website.blogLatest')}</h2>
+              </div>
 
-            {leadPosts.length > 0 ? (
               <div className="blog-index__grid">
                 {leadPosts.map((post) => (
                   <BlogCard
@@ -93,11 +93,9 @@ export default async function BlogPage({params}: Props) {
                   />
                 ))}
               </div>
-            ) : (
-              <div className="blog-index__empty">{t('website.blogNoPosts')}</div>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         {morePosts.length > 0 && (
           <section className="blog-index__section blog-index__section--compact">

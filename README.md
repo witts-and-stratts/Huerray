@@ -47,6 +47,12 @@ Add `SANITY_REVALIDATE_SECRET` to the runtime environment, then create a Sanity 
 
 This currently revalidates the cached FAQ and Help Center queries used by the admin, creator, and brand help pages.
 
+## Blog publishing
+
+Blog articles appear on the website when they have a slug, their custom **Settings → Status** is **Published**, and the document has been published in Sanity. Set **Published at** before publishing. To edit an existing article, select **Draft** in Studio; the **Published** view is read-only. Publish again to make edits live. Blog pages revalidate every five minutes.
+
+The social sharing image is optional and falls back to the main image when no usable asset is uploaded. Missing or invalid images are omitted or replaced by the card placeholder. Translation fallbacks ignore Sanity metadata, and missing category or related-post references are skipped.
+
 ## Deployment Runbook (Hetzner Blue/Green)
 
 This repository deploys with GitHub Actions via `.github/workflows/deploy.yml` and executes `deploy/scripts/deploy_blue_green.sh` on the target server.

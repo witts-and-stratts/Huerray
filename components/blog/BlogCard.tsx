@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { formatDate } from '@/lib/utils/format';
 import { getLocalizedValue, type BlogSummary } from '@/sanity/lib/blog';
-import { urlFor } from '@/sanity/lib/image';
+import { getSanityImageUrl } from '@/sanity/lib/image';
 
 type BlogCardProps = {
   post: BlogSummary;
@@ -28,14 +28,9 @@ export function BlogCard({
   const href = slug ? `/${locale}/blog/${slug}` : `/${locale}/blog`;
   const title = getLocalizedValue<string>(post.title, locale, 'Untitled');
   const excerpt = getLocalizedValue<string>(post.excerpt, locale, '');
-  const image = post.mainImage
-    ? urlFor(post.mainImage as any)
-        .width(featured ? 1600 : 1200)
-        .height(featured ? 900 : 750)
-        .fit('crop')
-        .url()
-    : null;
+  const image = getSanityImageUrl(post.mainImage, featured ? 1600 : 1200, featured ? 900 : 750);
   const categoryEntries = (post.categories ?? [])
+    .filter((category) => category != null)
     .map((category) => ({
       id: category._id,
       label: getLocalizedValue<string>(category.title, locale),
@@ -124,7 +119,7 @@ export function BlogCard({
       </Link>
 
       <div className='blog-card__body'>
-        { featured || latest && <Meta /> }
+        { (featured || latest) && <Meta /> }
         <h3
           className={cn(
             'blog-card__title group-hover:text-dark-burgundy',

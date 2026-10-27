@@ -31,7 +31,13 @@ function buildLocaleAlternates(pathname: string) {
 }
 
 function getLastModified(post: BlogSitemapPost): Date {
-  return new Date(post.updatedAt ?? post.publishedAt ?? Date.now())
+  for (const value of [post.updatedAt, post.publishedAt]) {
+    if (!value) continue
+    const date = new Date(value)
+    if (!Number.isNaN(date.getTime())) return date
+  }
+
+  return BUILD_TIME
 }
 
 type LocalizedEntryMeta = {

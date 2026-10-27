@@ -241,15 +241,15 @@ export type BlogSummary = {
   mainImage?: unknown
   tags?: string[]
   author?: BlogAuthor
-  categories?: BlogCategory[]
+  categories?: (BlogCategory | null)[]
 }
 
 export type BlogPost = BlogSummary & {
   body?: Record<string, unknown>
   updatedAt?: string
-  relatedPosts?: BlogSummary[]
-  automaticRelatedPosts?: BlogSummary[]
-  latestRelatedPosts?: BlogSummary[]
+  relatedPosts?: (BlogSummary | null)[]
+  automaticRelatedPosts?: (BlogSummary | null)[]
+  latestRelatedPosts?: (BlogSummary | null)[]
   seoTitle?: LocalizedString
   seoDescription?: LocalizedString
   openGraphImage?: unknown
@@ -266,6 +266,13 @@ export function getLocalizedValue<T>(
   locale: string,
   fallback?: T,
 ): T | undefined {
-  if (!value) return fallback
-  return value[locale] ?? value.en ?? Object.values(value).find((item) => item !== undefined) ?? fallback
+  if (!value || typeof value !== 'object') return fallback
+
+  const translations = Object.entries(value)
+    .filter(([key]) => !key.startsWith('_'))
+  const isPresent = (item: T | undefined): item is T =>
+    item != null && item !== ''
+
+  return [value[locale], value.en, ...translations.map(([, item]) => item)]
+    .find(isPresent) ?? fallback
 }

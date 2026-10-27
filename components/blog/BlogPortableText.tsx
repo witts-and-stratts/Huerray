@@ -7,7 +7,7 @@ import type {ReactNode} from 'react'
 import {BlogSocialEmbed} from '@/components/blog/BlogSocialEmbed'
 import {Button} from '@/components/ui/button'
 import {cn} from '@/lib/utils'
-import {urlFor} from '@/sanity/lib/image'
+import {getSanityImageUrl} from '@/sanity/lib/image'
 
 type BlogPortableTextProps = {
   value?: unknown
@@ -24,6 +24,7 @@ export function getPortableTextPlainText(value: any): string {
   }
 
   return value.children
+    .filter((child: {text?: string} | null) => typeof child?.text === 'string')
     .map((child: {text?: string}) => child.text ?? '')
     .join('')
     .trim()
@@ -80,9 +81,8 @@ function getVideoEmbedUrl(rawUrl?: string) {
 }
 
 function PortableTextImage({value}: {value?: any}) {
-  if (!value?.asset) return null
-
-  const src = urlFor(value).width(1600).height(1100).fit('crop').url()
+  const src = getSanityImageUrl(value, 1600, 1100)
+  if (!src) return null
 
   return (
     <figure className="blog-rich-text__figure">
@@ -246,11 +246,14 @@ const blogPortableTextComponents: PortableTextComponents = {
 }
 
 export function BlogPortableText({value}: BlogPortableTextProps) {
-  if (!value) return null
+  if (!Array.isArray(value)) return null
+
+  const blocks = value.filter((block) => block && typeof block._type === 'string')
+  if (blocks.length === 0) return null
 
   return (
     <div className="blog-rich-text">
-      <PortableText value={value as any} components={blogPortableTextComponents} />
+      <PortableText value={blocks} components={blogPortableTextComponents} />
     </div>
   )
 }

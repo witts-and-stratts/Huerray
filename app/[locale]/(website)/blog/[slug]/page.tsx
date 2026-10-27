@@ -19,7 +19,7 @@ import {
   type BlogPost,
   type BlogSummary,
 } from '@/sanity/lib/blog'
-import {urlFor} from '@/sanity/lib/image'
+import {getSanityImageUrl} from '@/sanity/lib/image'
 import type {Locale} from '@/i18n'
 import generateSEO from '@/components/seo/SEO'
 
@@ -53,7 +53,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 
   const title = getLocalizedValue<string>(post.seoTitle, locale, getLocalizedValue<string>(post.title, locale, 'Huerray')) ?? 'Huerray'
   const description = getLocalizedValue<string>(post.seoDescription, locale, getLocalizedValue<string>(post.excerpt, locale, t('website.blogDescription'))) ?? t('website.blogDescription')
-  const imageSource = post.openGraphImage ?? post.mainImage
+  const postImageUrl = getSanityImageUrl(post.openGraphImage, 1200, 630)
+    ?? getSanityImageUrl(post.mainImage, 1200, 630)
 
   const metadata = await generateSEO(locale, 'metadata', {
     title,
@@ -63,9 +64,9 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     noIndex: post.noIndex,
   })
 
-  if (imageSource) {
+  if (postImageUrl) {
     const postImage = {
-      url: urlFor(imageSource as any).width(1200).height(630).fit('crop').url(),
+      url: postImageUrl,
       width: 1200,
       height: 630,
       alt: title,
@@ -100,6 +101,7 @@ export default async function BlogPostPage({params}: Props) {
   const body = getLocalizedValue<unknown[]>(post.body as Record<string, unknown[]>, locale, []) as unknown[]
   const tableOfContents = getPortableTextHeadings(body)
   const categories = (post.categories ?? [])
+    .filter((category) => category != null)
     .map((category) => ({
       id: category._id,
       title: getLocalizedValue<string>(category.title, locale),
@@ -115,12 +117,12 @@ export default async function BlogPostPage({params}: Props) {
     ...(post.automaticRelatedPosts ?? []),
     ...(post.latestRelatedPosts ?? []),
   ].reduce<BlogSummary[]>((items, relatedPost) => {
-    if (!relatedPost.slug?.current || relatedPost._id === post._id) return items
+    if (!relatedPost?.slug?.current || relatedPost._id === post._id) return items
     if (items.some((item) => item._id === relatedPost._id)) return items
     return [...items, relatedPost]
   }, []).slice(0, 6)
-  const authorImage = post.author?.image ? urlFor(post.author.image as any).width(96).height(96).fit('crop').url() : null
-  const heroImage = post.mainImage ? urlFor(post.mainImage as any).width(1600).height(1100).fit('crop').url() : null
+  const authorImage = getSanityImageUrl(post.author?.image, 96, 96)
+  const heroImage = getSanityImageUrl(post.mainImage, 1600, 1100)
   const articleUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://huerray.de'}/${locale}/blog/${slug}`
 
   const blogPostingJsonLd = {
@@ -148,7 +150,7 @@ export default async function BlogPostPage({params}: Props) {
     <>
       <script
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd).replace(/</g, '\\u003c') }}
       />
       <Header />
       <main className="body-content blog-post">
